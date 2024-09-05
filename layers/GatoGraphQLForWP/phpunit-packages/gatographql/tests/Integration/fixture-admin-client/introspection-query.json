@@ -11,39 +11,6 @@
       "types": [
         {
           "kind": "OBJECT",
-          "name": "CategoryDoesNotExistErrorPayload",
-          "description": "Error payload for: \"The requested category does not exist\"",
-          "fields": [
-            {
-              "name": "message",
-              "description": "Error message",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "String!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "ErrorPayload",
-              "ofType": null
-            }
-          ],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
           "name": "CategoryTermDoesNotExistErrorPayload",
           "description": "Error payload for: \"The requested category does not exist\"",
           "fields": [
@@ -1155,9 +1122,13 @@
               "description": "Category taxonomy",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "CategoryTaxonomyEnumString",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "CategoryTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "CategoryTaxonomyEnumString",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1359,13 +1330,9 @@
                   "name": "taxonomy",
                   "description": "Category taxonomy",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -1428,13 +1395,9 @@
                   "name": "taxonomy",
                   "description": "Category taxonomy",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -1469,13 +1432,9 @@
                   "name": "taxonomy",
                   "description": "Category taxonomy",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -1737,6 +1696,18 @@
               "deprecationReason": null
             },
             {
+              "name": "featuredImage",
+              "description": "Featured image from the custom post",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Media",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "globalID",
               "description": "The object's globally unique identifier",
               "args": [],
@@ -1755,6 +1726,22 @@
             {
               "name": "hasComments",
               "description": "Does the custom post have comments?",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "hasFeaturedImage",
+              "description": "Does the custom post have a featured image?",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -2053,13 +2040,9 @@
                   "name": "taxonomy",
                   "description": "Tag taxonomy",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -2094,13 +2077,9 @@
                   "name": "taxonomy",
                   "description": "Tag taxonomy",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -2163,13 +2142,9 @@
                   "name": "taxonomy",
                   "description": "Tag taxonomy",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -2310,6 +2285,11 @@
             {
               "kind": "INTERFACE",
               "name": "WithAuthor",
+              "ofType": null
+            },
+            {
+              "kind": "INTERFACE",
+              "name": "WithFeaturedImage",
               "ofType": null
             },
             {
@@ -2636,9 +2616,13 @@
               "description": "Tag taxonomy",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "TagTaxonomyEnumString",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "TagTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "TagTaxonomyEnumString",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2772,6 +2756,39 @@
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
           "description": "Error payload for: \"The logged-in user has no permission to assign terms to a taxonomy\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
+          "description": "Error payload for: \"The logged-in user has no permission to delete a taxonomy term\"",
           "fields": [
             {
               "name": "message",
@@ -4118,7 +4135,7 @@
               "args": [
                 {
                   "name": "inputs",
-                  "description": "Input to create or update a category term",
+                  "description": "Input to create a category term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "[RootCreateGenericCategoryInput!]!",
@@ -4179,7 +4196,7 @@
               "args": [
                 {
                   "name": "input",
-                  "description": "Input to create or update a category term",
+                  "description": "Input to create a category term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "RootCreateGenericCategoryInput!",
@@ -4762,7 +4779,7 @@
               "args": [
                 {
                   "name": "input",
-                  "description": "Input to create or update a tag term",
+                  "description": "Input to create a tag term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "RootCreateGenericTagInput!",
@@ -4793,7 +4810,7 @@
               "args": [
                 {
                   "name": "inputs",
-                  "description": "Input to create or update a tag term",
+                  "description": "Input to create a tag term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "[RootCreateGenericTagInput!]!",
@@ -5448,6 +5465,98 @@
               "deprecationReason": null
             },
             {
+              "name": "setCategoriesOnCustomPost",
+              "description": "Set categories on a custom post",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to set categories on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetCategoriesOnCustomPostInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetCategoriesOnCustomPostInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootSetCategoriesOnCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetCategoriesOnCustomPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "setCategoriesOnCustomPosts",
+              "description": "Set categories on a custom post in bulk",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set categories on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetCategoriesOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetCategoriesOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetCategoriesOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetCategoriesOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetCategoriesOnCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetCategoriesOnCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetCategoriesOnCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetCategoriesOnCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "setCategoriesOnPost",
               "description": "Set categories on a post",
               "args": [
@@ -5632,6 +5741,98 @@
               "deprecationReason": null
             },
             {
+              "name": "setTagsOnCustomPost",
+              "description": "Set tags on a custom post",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to set tags on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetTagsOnCustomPostInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetTagsOnCustomPostInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootSetTagsOnCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetTagsOnCustomPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "setTagsOnCustomPosts",
+              "description": "Set tags on a custom post in bulk",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set tags on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetTagsOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetTagsOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetTagsOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetTagsOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetTagsOnCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetTagsOnCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetTagsOnCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetTagsOnCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "setTagsOnPost",
               "description": "Set tags on a post",
               "args": [
@@ -5729,7 +5930,7 @@
               "args": [
                 {
                   "name": "inputs",
-                  "description": "Input to create or update a category term",
+                  "description": "Input to update a category term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "[RootUpdateGenericCategoryInput!]!",
@@ -5790,7 +5991,7 @@
               "args": [
                 {
                   "name": "input",
-                  "description": "Input to create or update a category term",
+                  "description": "Input to update a category term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "RootUpdateGenericCategoryInput!",
@@ -6373,7 +6574,7 @@
               "args": [
                 {
                   "name": "input",
-                  "description": "Input to create or update a tag term",
+                  "description": "Input to update a tag term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "RootUpdateGenericTagInput!",
@@ -6404,7 +6605,7 @@
               "args": [
                 {
                   "name": "inputs",
-                  "description": "Input to create or update a tag term",
+                  "description": "Input to update a tag term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "[RootUpdateGenericTagInput!]!",
@@ -7518,6 +7719,20 @@
               "description": "Categories added to this post",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Post category taxonomy",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "PostCategoryTaxonomyEnumString!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "PostCategoryTaxonomyEnumString",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "\"category\""
+                },
+                {
                   "name": "filter",
                   "description": "Input to filter categories from a custom post",
                   "type": {
@@ -7573,6 +7788,20 @@
               "description": "Number of categories added to this post",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Post category taxonomy",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "PostCategoryTaxonomyEnumString!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "PostCategoryTaxonomyEnumString",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "\"category\""
+                },
+                {
                   "name": "filter",
                   "description": "Input to filter categories from a custom post",
                   "type": {
@@ -7599,6 +7828,20 @@
               "name": "categoryNames",
               "description": "Names of the categories added to this post",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Post category taxonomy",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "PostCategoryTaxonomyEnumString!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "PostCategoryTaxonomyEnumString",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "\"category\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter categories from a custom post",
@@ -8230,6 +8473,20 @@
               "description": "Number of tags added to this post",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Post tag taxonomy",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "PostTagTaxonomyEnumString!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "PostTagTaxonomyEnumString",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
+                {
                   "name": "filter",
                   "description": "Input to filter tags from a custom post",
                   "type": {
@@ -8256,6 +8513,20 @@
               "name": "tagNames",
               "description": "Names of the tags added to this post",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Post tag taxonomy",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "PostTagTaxonomyEnumString!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "PostTagTaxonomyEnumString",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter tags from a custom post",
@@ -8311,6 +8582,20 @@
               "name": "tags",
               "description": "Tags added to this post",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Post tag taxonomy",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "PostTagTaxonomyEnumString!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "PostTagTaxonomyEnumString",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter tags from a custom post",
@@ -8879,6 +9164,22 @@
               "deprecationReason": null
             },
             {
+              "name": "taxonomy",
+              "description": "Category taxonomy",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostCategoryTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "PostCategoryTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "url",
               "description": "Category URL",
               "args": [],
@@ -9191,6 +9492,22 @@
               "deprecationReason": null
             },
             {
+              "name": "taxonomy",
+              "description": "Tag taxonomy",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostTagTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "PostTagTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "url",
               "description": "Tag URL",
               "args": [],
@@ -9286,13 +9603,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the category",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -9355,13 +9668,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the category",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -9396,13 +9705,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the category",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -9437,13 +9742,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the category",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -9833,6 +10134,22 @@
                       "ofType": null
                     }
                   }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "isGutenbergEditorEnabled",
+              "description": "Is the Gutenberg editor enabled? (i.e. the \"Classic Editor\" plugin is not enabled)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
                 }
               },
               "isDeprecated": false,
@@ -11021,6 +11338,16 @@
               "description": "Post categories",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post category",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"category\""
+                },
+                {
                   "name": "filter",
                   "description": "Input to filter categories",
                   "type": {
@@ -11076,8 +11403,18 @@
               "description": "Retrieve a single post category",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post category",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"category\""
+                },
+                {
                   "name": "by",
-                  "description": "Oneof input to specify the property and data to fetch a category",
+                  "description": "Parameter by which to select the post category",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "PostCategoryByFilterInput!",
@@ -11102,6 +11439,16 @@
               "name": "postCategoryCount",
               "description": "Number of post categories",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post category",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"category\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter categories",
@@ -11129,6 +11476,16 @@
               "name": "postCategoryNames",
               "description": "Names of the post categories",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post category",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"category\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter categories",
@@ -11212,8 +11569,18 @@
               "description": "Retrieve a single post tag",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post tag",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostTagTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
+                {
                   "name": "by",
-                  "description": "Oneof input to specify the property and data to fetch a tag",
+                  "description": "Parameter by which to select the post tag",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "PostTagByFilterInput!",
@@ -11238,6 +11605,16 @@
               "name": "postTagCount",
               "description": "Number of post tags",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post tag",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostTagTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter tags",
@@ -11265,6 +11642,16 @@
               "name": "postTagNames",
               "description": "Names of the post tags",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post tag",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostTagTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter tags",
@@ -11320,6 +11707,16 @@
               "name": "postTags",
               "description": "Post tags",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post tag",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostTagTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter tags",
@@ -11540,19 +11937,15 @@
             },
             {
               "name": "tag",
-              "description": "Retrieve a single post tag",
+              "description": "Retrieve a single tag",
               "args": [
                 {
                   "name": "taxonomy",
                   "description": "Taxonomy of the tag",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -11581,19 +11974,15 @@
             },
             {
               "name": "tagCount",
-              "description": "Number of post tags",
+              "description": "Number of tags",
               "args": [
                 {
                   "name": "taxonomy",
                   "description": "Taxonomy of the tag",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -11622,19 +12011,15 @@
             },
             {
               "name": "tagNames",
-              "description": "Names of the post tags",
+              "description": "Names of the tags",
               "args": [
                 {
                   "name": "taxonomy",
                   "description": "Taxonomy of the tag",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -11697,13 +12082,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the tag",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -12008,13 +12389,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the category",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -12077,13 +12454,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the category",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -12118,13 +12491,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the category",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -12159,13 +12528,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the category",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "CategoryTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "CategoryTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "CategoryTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -12357,7 +12722,7 @@
               "args": [
                 {
                   "name": "inputs",
-                  "description": "Input to create or update a category term",
+                  "description": "Input to create a category term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "[RootCreateGenericCategoryInput!]!",
@@ -12418,7 +12783,7 @@
               "args": [
                 {
                   "name": "input",
-                  "description": "Input to create or update a category term",
+                  "description": "Input to create a category term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "RootCreateGenericCategoryInput!",
@@ -13001,7 +13366,7 @@
               "args": [
                 {
                   "name": "input",
-                  "description": "Input to create or update a tag term",
+                  "description": "Input to create a tag term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "RootCreateGenericTagInput!",
@@ -13032,7 +13397,7 @@
               "args": [
                 {
                   "name": "inputs",
-                  "description": "Input to create or update a tag term",
+                  "description": "Input to create a tag term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "[RootCreateGenericTagInput!]!",
@@ -13659,6 +14024,22 @@
                       "ofType": null
                     }
                   }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "isGutenbergEditorEnabled",
+              "description": "Is the Gutenberg editor enabled? (i.e. the \"Classic Editor\" plugin is not enabled)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
                 }
               },
               "isDeprecated": false,
@@ -14894,6 +15275,16 @@
               "description": "Post categories",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post category",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"category\""
+                },
+                {
                   "name": "filter",
                   "description": "Input to filter categories",
                   "type": {
@@ -14949,8 +15340,18 @@
               "description": "Retrieve a single post category",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post category",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"category\""
+                },
+                {
                   "name": "by",
-                  "description": "Oneof input to specify the property and data to fetch a category",
+                  "description": "Parameter by which to select the post category",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "PostCategoryByFilterInput!",
@@ -14975,6 +15376,16 @@
               "name": "postCategoryCount",
               "description": "Number of post categories",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post category",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"category\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter categories",
@@ -15002,6 +15413,16 @@
               "name": "postCategoryNames",
               "description": "Names of the post categories",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post category",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"category\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter categories",
@@ -15085,8 +15506,18 @@
               "description": "Retrieve a single post tag",
               "args": [
                 {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post tag",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostTagTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
+                {
                   "name": "by",
-                  "description": "Oneof input to specify the property and data to fetch a tag",
+                  "description": "Parameter by which to select the post tag",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "PostTagByFilterInput!",
@@ -15111,6 +15542,16 @@
               "name": "postTagCount",
               "description": "Number of post tags",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post tag",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostTagTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter tags",
@@ -15138,6 +15579,16 @@
               "name": "postTagNames",
               "description": "Names of the post tags",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post tag",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostTagTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter tags",
@@ -15193,6 +15644,16 @@
               "name": "postTags",
               "description": "Post tags",
               "args": [
+                {
+                  "name": "taxonomy",
+                  "description": "Taxonomy of the post tag",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "PostTagTaxonomyEnumString",
+                    "ofType": null
+                  },
+                  "defaultValue": "\"post_tag\""
+                },
                 {
                   "name": "filter",
                   "description": "Input to filter tags",
@@ -15548,6 +16009,98 @@
               "deprecationReason": null
             },
             {
+              "name": "setCategoriesOnCustomPost",
+              "description": "Set categories on a custom post",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to set categories on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetCategoriesOnCustomPostInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetCategoriesOnCustomPostInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootSetCategoriesOnCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetCategoriesOnCustomPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "setCategoriesOnCustomPosts",
+              "description": "Set categories on a custom post in bulk",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set categories on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetCategoriesOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetCategoriesOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetCategoriesOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetCategoriesOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetCategoriesOnCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetCategoriesOnCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetCategoriesOnCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetCategoriesOnCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "setCategoriesOnPost",
               "description": "Set categories on a post",
               "args": [
@@ -15732,6 +16285,98 @@
               "deprecationReason": null
             },
             {
+              "name": "setTagsOnCustomPost",
+              "description": "Set tags on a custom post",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to set tags on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetTagsOnCustomPostInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootSetTagsOnCustomPostInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootSetTagsOnCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootSetTagsOnCustomPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "setTagsOnCustomPosts",
+              "description": "Set tags on a custom post in bulk",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set tags on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetTagsOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetTagsOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetTagsOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetTagsOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetTagsOnCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetTagsOnCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetTagsOnCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetTagsOnCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "setTagsOnPost",
               "description": "Set tags on a post",
               "args": [
@@ -15873,19 +16518,15 @@
             },
             {
               "name": "tag",
-              "description": "Retrieve a single post tag",
+              "description": "Retrieve a single tag",
               "args": [
                 {
                   "name": "taxonomy",
                   "description": "Taxonomy of the tag",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -15914,19 +16555,15 @@
             },
             {
               "name": "tagCount",
-              "description": "Number of post tags",
+              "description": "Number of tags",
               "args": [
                 {
                   "name": "taxonomy",
                   "description": "Taxonomy of the tag",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -15955,19 +16592,15 @@
             },
             {
               "name": "tagNames",
-              "description": "Names of the post tags",
+              "description": "Names of the tags",
               "args": [
                 {
                   "name": "taxonomy",
                   "description": "Taxonomy of the tag",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -16030,13 +16663,9 @@
                   "name": "taxonomy",
                   "description": "Taxonomy of the tag",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": "TagTaxonomyEnumString!",
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "TagTaxonomyEnumString",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "TagTaxonomyEnumString",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -16097,7 +16726,7 @@
               "args": [
                 {
                   "name": "inputs",
-                  "description": "Input to create or update a category term",
+                  "description": "Input to update a category term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "[RootUpdateGenericCategoryInput!]!",
@@ -16158,7 +16787,7 @@
               "args": [
                 {
                   "name": "input",
-                  "description": "Input to create or update a category term",
+                  "description": "Input to update a category term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "RootUpdateGenericCategoryInput!",
@@ -16741,7 +17370,7 @@
               "args": [
                 {
                   "name": "input",
-                  "description": "Input to create or update a tag term",
+                  "description": "Input to update a tag term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "RootUpdateGenericTagInput!",
@@ -16772,7 +17401,7 @@
               "args": [
                 {
                   "name": "inputs",
-                  "description": "Input to create or update a tag term",
+                  "description": "Input to update a tag term",
                   "type": {
                     "kind": "NON_NULL",
                     "name": "[RootUpdateGenericTagInput!]!",
@@ -18061,6 +18690,77 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootSetCategoriesOnCustomPostMutationPayload",
+          "description": "Payload of setting categories on a custom post",
+          "fields": [
+            {
+              "name": "customPost",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericCustomPost",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "customPostID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootSetCategoriesOnCustomPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootSetCategoriesOnPostMutationPayload",
           "description": "Payload of setting categories on a post",
           "fields": [
@@ -18172,6 +18872,77 @@
                   "ofType": {
                     "kind": "UNION",
                     "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetTagsOnCustomPostMutationPayload",
+          "description": "Payload of setting tags on a custom post",
+          "fields": [
+            {
+              "name": "customPost",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericCustomPost",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "customPostID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootSetTagsOnCustomPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
                     "ofType": null
                   }
                 }
@@ -18842,7 +19613,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "TagDoesNotExistErrorPayload",
+          "name": "TagTermDoesNotExistErrorPayload",
           "description": "Error payload for: \"The requested tag does not exist\"",
           "fields": [
             {
@@ -18875,8 +19646,8 @@
         },
         {
           "kind": "OBJECT",
-          "name": "TagTermDoesNotExistErrorPayload",
-          "description": "Error payload for: \"The requested tag does not exist\"",
+          "name": "TaxonomyIsNotValidErrorPayload",
+          "description": "Error payload for: \"The requested taxonomy does not exist\"",
           "fields": [
             {
               "name": "message",
@@ -21386,7 +22157,7 @@
         {
           "kind": "SCALAR",
           "name": "CategoryTaxonomyEnumString",
-          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`.",
+          "description": "Category taxonomies (available for querying via the API), with possible values: `\"additional-dummy-category\"`, `\"additional-post-category\"`, `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -21495,6 +22266,26 @@
         },
         {
           "kind": "SCALAR",
+          "name": "PostCategoryTaxonomyEnumString",
+          "description": "Post category taxonomies (available for querying via the API), with possible values: `\"additional-post-category\"`, `\"category\"`.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
+          "name": "PostTagTaxonomyEnumString",
+          "description": "Post tag taxonomies (available for querying via the API), with possible values: `\"additional-post-tag\"`, `\"post_tag\"`.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
           "name": "String",
           "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
           "fields": null,
@@ -21506,7 +22297,7 @@
         {
           "kind": "SCALAR",
           "name": "TagTaxonomyEnumString",
-          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`.",
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"additional-dummy-tag\"`, `\"additional-post-tag\"`, `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -22241,11 +23032,6 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "CategoryDoesNotExistErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "CategoryTermDoesNotExistErrorPayload",
               "ofType": null
             },
@@ -22306,6 +23092,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
@@ -22356,12 +23147,12 @@
             },
             {
               "kind": "OBJECT",
-              "name": "TagDoesNotExistErrorPayload",
+              "name": "TagTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
-              "name": "TagTermDoesNotExistErrorPayload",
+              "name": "TaxonomyIsNotValidErrorPayload",
               "ofType": null
             },
             {
@@ -22797,6 +23588,11 @@
           "interfaces": [],
           "enumValues": null,
           "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericCustomPost",
+              "ofType": null
+            },
             {
               "kind": "OBJECT",
               "name": "Page",
@@ -24663,6 +25459,20 @@
                 "ofType": null
               },
               "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "Category taxonomy",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostCategoryTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "PostCategoryTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "\"category\""
             }
           ],
           "interfaces": null,
@@ -24694,6 +25504,20 @@
                 "ofType": null
               },
               "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "Tag taxonomy",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostTagTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "PostTagTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "\"post_tag\""
             }
           ],
           "interfaces": null,
@@ -25995,6 +26819,16 @@
               "defaultValue": null
             },
             {
+              "name": "categoriesBy",
+              "description": "The categories to set, of type 'GenericCategory'",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CategoriesByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "contentAs",
               "description": "The content of the custom post",
               "type": {
@@ -26059,6 +26893,16 @@
               "defaultValue": null
             },
             {
+              "name": "tagsBy",
+              "description": "The tags to set, of type 'GenericTag'",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "TagsByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "title",
               "description": "The title of the custom post",
               "type": {
@@ -26076,7 +26920,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootCreateGenericCategoryInput",
-          "description": "Input to create or update a category term",
+          "description": "Input to create a category term",
           "fields": null,
           "inputFields": [
             {
@@ -26125,7 +26969,7 @@
             },
             {
               "name": "taxonomy",
-              "description": "The taxonomy",
+              "description": "The taxonomy of the category",
               "type": {
                 "kind": "NON_NULL",
                 "name": "CategoryTaxonomyEnumString!",
@@ -26145,7 +26989,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootCreateGenericTagInput",
-          "description": "Input to create or update a tag term",
+          "description": "Input to create a tag term",
           "fields": null,
           "inputFields": [
             {
@@ -26194,7 +27038,7 @@
             },
             {
               "name": "taxonomy",
-              "description": "The taxonomy",
+              "description": "The taxonomy of the tag",
               "type": {
                 "kind": "NON_NULL",
                 "name": "TagTaxonomyEnumString!",
@@ -26446,6 +27290,20 @@
                 "ofType": null
               },
               "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy of the category",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostCategoryTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "PostCategoryTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "\"category\""
             }
           ],
           "interfaces": null,
@@ -26602,6 +27460,20 @@
                 "ofType": null
               },
               "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy of the tag",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "PostTagTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "PostTagTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "\"post_tag\""
             }
           ],
           "interfaces": null,
@@ -26809,7 +27681,7 @@
             },
             {
               "name": "taxonomy",
-              "description": "The taxonomy",
+              "description": "Category taxonomies (available for querying via the API), with possible values: `\"additional-dummy-category\"`, `\"additional-post-category\"`, `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`.",
               "type": {
                 "kind": "SCALAR",
                 "name": "CategoryTaxonomyEnumString",
@@ -26844,7 +27716,7 @@
             },
             {
               "name": "taxonomy",
-              "description": "The taxonomy",
+              "description": "Tag taxonomies (available for querying via the API), with possible values: `\"additional-dummy-tag\"`, `\"additional-post-tag\"`, `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`.",
               "type": {
                 "kind": "SCALAR",
                 "name": "TagTaxonomyEnumString",
@@ -26876,6 +27748,16 @@
                 }
               },
               "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "Post category taxonomies (available for querying via the API), with possible values: `\"additional-post-category\"`, `\"category\"`.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "PostCategoryTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": null
             }
           ],
           "interfaces": null,
@@ -26899,6 +27781,16 @@
                   "name": "ID",
                   "ofType": null
                 }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "Post tag taxonomies (available for querying via the API), with possible values: `\"additional-post-tag\"`, `\"post_tag\"`.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "PostTagTaxonomyEnumString",
+                "ofType": null
               },
               "defaultValue": null
             }
@@ -28660,6 +29552,69 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootSetCategoriesOnCustomPostInput",
+          "description": "Input to set categories on a custom post",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "append",
+              "description": "Append the categories to the existing ones?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
+            },
+            {
+              "name": "categoriesBy",
+              "description": "The categories to set, of type 'GenericCategory'",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "CategoriesByInput!",
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CategoriesByInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the custom post",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The category taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "CategoryTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootSetCategoriesOnPostInput",
           "description": "Input to set categories on a custom post",
           "fields": null,
@@ -28742,6 +29697,69 @@
                   "name": "MediaItemByInput",
                   "ofType": null
                 }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootSetTagsOnCustomPostInput",
+          "description": "Input to set tags on a custom post",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "append",
+              "description": "Append the tags to the existing ones?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
+            },
+            {
+              "name": "id",
+              "description": "The ID of the custom post",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "tagsBy",
+              "description": "The tags to set, of type 'GenericTag'",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "TagsByInput!",
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TagsByInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The tag taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "TagTaxonomyEnumString",
+                "ofType": null
               },
               "defaultValue": null
             }
@@ -28927,6 +29945,16 @@
               "defaultValue": null
             },
             {
+              "name": "categoriesBy",
+              "description": "The categories to set, of type 'GenericCategory'",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CategoriesByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "contentAs",
               "description": "The content of the custom post",
               "type": {
@@ -29005,6 +30033,16 @@
               "defaultValue": null
             },
             {
+              "name": "tagsBy",
+              "description": "The tags to set, of type 'GenericTag'",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "TagsByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "title",
               "description": "The title of the custom post",
               "type": {
@@ -29022,7 +30060,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootUpdateGenericCategoryInput",
-          "description": "Input to create or update a category term",
+          "description": "Input to update a category term",
           "fields": null,
           "inputFields": [
             {
@@ -29081,7 +30119,7 @@
             },
             {
               "name": "taxonomy",
-              "description": "The taxonomy",
+              "description": "The taxonomy of the category",
               "type": {
                 "kind": "SCALAR",
                 "name": "CategoryTaxonomyEnumString",
@@ -29097,7 +30135,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootUpdateGenericTagInput",
-          "description": "Input to create or update a tag term",
+          "description": "Input to update a tag term",
           "fields": null,
           "inputFields": [
             {
@@ -29156,7 +30194,7 @@
             },
             {
               "name": "taxonomy",
-              "description": "The taxonomy",
+              "description": "The taxonomy of the tag",
               "type": {
                 "kind": "SCALAR",
                 "name": "TagTaxonomyEnumString",
@@ -29428,6 +30466,16 @@
                 "ofType": null
               },
               "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "PostCategoryTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": "\"category\""
             }
           ],
           "interfaces": null,
@@ -29608,6 +30656,16 @@
                 "ofType": null
               },
               "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "PostTagTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": "\"post_tag\""
             }
           ],
           "interfaces": null,
@@ -31828,7 +32886,17 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -31849,6 +32917,16 @@
             {
               "kind": "OBJECT",
               "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxonomyIsNotValidErrorPayload",
               "ofType": null
             },
             {
@@ -32053,11 +33131,6 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
@@ -32074,7 +33147,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "CategoryDoesNotExistErrorPayload",
+              "name": "CategoryTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -32109,7 +33182,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "TagDoesNotExistErrorPayload",
+              "name": "TagTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -32176,6 +33249,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
               "ofType": null
             },
@@ -32198,6 +33276,11 @@
             {
               "kind": "OBJECT",
               "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -32238,7 +33321,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -32264,7 +33347,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -32420,7 +33503,7 @@
         },
         {
           "kind": "UNION",
-          "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
+          "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when setting categories on a custom post",
           "fields": null,
           "inputFields": null,
@@ -32429,7 +33512,58 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "CategoryDoesNotExistErrorPayload",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxonomyIsNotValidErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when setting categories on a post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -32517,7 +33651,7 @@
         },
         {
           "kind": "UNION",
-          "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
+          "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when setting tags on a custom post",
           "fields": null,
           "inputFields": null,
@@ -32551,7 +33685,58 @@
             },
             {
               "kind": "OBJECT",
-              "name": "TagDoesNotExistErrorPayload",
+              "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxonomyIsNotValidErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when setting tags on a post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -32572,12 +33757,22 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "CustomPostDoesNotExistErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
               "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -32598,6 +33793,16 @@
             {
               "kind": "OBJECT",
               "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxonomyIsNotValidErrorPayload",
               "ofType": null
             },
             {
@@ -32802,11 +34007,6 @@
             },
             {
               "kind": "OBJECT",
-              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
@@ -32823,7 +34023,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "CategoryDoesNotExistErrorPayload",
+              "name": "CategoryTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -32863,7 +34063,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "TagDoesNotExistErrorPayload",
+              "name": "TagTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {

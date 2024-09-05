@@ -4,10 +4,6 @@
       "types": [
         {
           "kind": "OBJECT",
-          "name": "CategoryDoesNotExistErrorPayload"
-        },
-        {
-          "kind": "OBJECT",
           "name": "CategoryTermDoesNotExistErrorPayload"
         },
         {
@@ -73,6 +69,10 @@
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -224,11 +224,19 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootSetCategoriesOnCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootSetCategoriesOnPostMutationPayload"
         },
         {
           "kind": "OBJECT",
           "name": "RootSetFeaturedImageOnCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetTagsOnCustomPostMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -268,11 +276,11 @@
         },
         {
           "kind": "OBJECT",
-          "name": "TagDoesNotExistErrorPayload"
+          "name": "TagTermDoesNotExistErrorPayload"
         },
         {
           "kind": "OBJECT",
-          "name": "TagTermDoesNotExistErrorPayload"
+          "name": "TaxonomyIsNotValidErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -405,6 +413,14 @@
         {
           "kind": "SCALAR",
           "name": "Numeric"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "PostCategoryTaxonomyEnumString"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "PostTagTaxonomyEnumString"
         },
         {
           "kind": "SCALAR",
@@ -812,11 +828,19 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootSetCategoriesOnCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootSetCategoriesOnPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
           "name": "RootSetFeaturedImageOnCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootSetTagsOnCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -1084,11 +1108,19 @@
         },
         {
           "kind": "UNION",
+          "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
           "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",

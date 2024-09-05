@@ -16,6 +16,8 @@
         "name": "TagTaxonomyEnumString",
         "extensions": {
           "possibleValues": [
+            "additional-dummy-tag",
+            "additional-post-tag",
             "dummy-tag",
             "dummy-tag-two",
             "post_tag"

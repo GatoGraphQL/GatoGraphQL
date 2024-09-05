@@ -85,42 +85,50 @@
         "postCategories": [
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 1,
                 "name": "Uncategorized"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 2,
                 "name": "Advanced"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 3,
                 "name": "Blog"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 4,
                 "name": "Resource"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 5,
                 "name": "Never used"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 6,
                 "name": "Special topic"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 7,
                 "name": "Most special topic"
             }
         ],
         "postCategory": {
             "__typename": "PostCategory",
+            "taxonomy": "category",
             "id": 1,
             "name": "Uncategorized"
         },

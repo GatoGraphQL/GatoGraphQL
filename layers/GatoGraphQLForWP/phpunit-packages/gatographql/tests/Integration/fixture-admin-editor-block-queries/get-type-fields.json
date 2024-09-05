@@ -3,17 +3,6 @@
     "__schema": {
       "types": [
         {
-          "name": "CategoryDoesNotExistErrorPayload",
-          "namespacedName": "CategoryDoesNotExistErrorPayload",
-          "fields": [
-            {
-              "name": "message"
-            }
-          ],
-          "kind": "OBJECT",
-          "description": "Error payload for: \"The requested category does not exist\""
-        },
-        {
           "name": "CategoryTermDoesNotExistErrorPayload",
           "namespacedName": "CategoryTermDoesNotExistErrorPayload",
           "fields": [
@@ -304,10 +293,16 @@
               "name": "excerpt"
             },
             {
+              "name": "featuredImage"
+            },
+            {
               "name": "globalID"
             },
             {
               "name": "hasComments"
+            },
+            {
+              "name": "hasFeaturedImage"
             },
             {
               "name": "id"
@@ -469,6 +464,17 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The logged-in user has no permission to assign terms to a taxonomy\""
+        },
+        {
+          "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to delete a taxonomy term\""
         },
         {
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
@@ -835,6 +841,12 @@
               "name": "replyComments"
             },
             {
+              "name": "setCategoriesOnCustomPost"
+            },
+            {
+              "name": "setCategoriesOnCustomPosts"
+            },
+            {
               "name": "setCategoriesOnPost"
             },
             {
@@ -845,6 +857,12 @@
             },
             {
               "name": "setFeaturedImageOnCustomPosts"
+            },
+            {
+              "name": "setTagsOnCustomPost"
+            },
+            {
+              "name": "setTagsOnCustomPosts"
             },
             {
               "name": "setTagsOnPost"
@@ -1212,6 +1230,9 @@
               "name": "slugPath"
             },
             {
+              "name": "taxonomy"
+            },
+            {
               "name": "url"
             },
             {
@@ -1257,6 +1278,9 @@
             },
             {
               "name": "slug"
+            },
+            {
+              "name": "taxonomy"
             },
             {
               "name": "url"
@@ -1313,6 +1337,9 @@
             },
             {
               "name": "imageSizeNames"
+            },
+            {
+              "name": "isGutenbergEditorEnabled"
             },
             {
               "name": "isUserLoggedIn"
@@ -1605,6 +1632,9 @@
               "name": "imageSizeNames"
             },
             {
+              "name": "isGutenbergEditorEnabled"
+            },
+            {
               "name": "isUserLoggedIn"
             },
             {
@@ -1755,6 +1785,12 @@
               "name": "self"
             },
             {
+              "name": "setCategoriesOnCustomPost"
+            },
+            {
+              "name": "setCategoriesOnCustomPosts"
+            },
+            {
               "name": "setCategoriesOnPost"
             },
             {
@@ -1765,6 +1801,12 @@
             },
             {
               "name": "setFeaturedImageOnCustomPosts"
+            },
+            {
+              "name": "setTagsOnCustomPost"
+            },
+            {
+              "name": "setTagsOnCustomPosts"
             },
             {
               "name": "setTagsOnPost"
@@ -2171,6 +2213,26 @@
           "description": "Payload of replying to a comment"
         },
         {
+          "name": "RootSetCategoriesOnCustomPostMutationPayload",
+          "namespacedName": "RootSetCategoriesOnCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of setting categories on a custom post"
+        },
+        {
           "name": "RootSetCategoriesOnPostMutationPayload",
           "namespacedName": "RootSetCategoriesOnPostMutationPayload",
           "fields": [
@@ -2209,6 +2271,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of setting the featured image to a custom post"
+        },
+        {
+          "name": "RootSetTagsOnCustomPostMutationPayload",
+          "namespacedName": "RootSetTagsOnCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of setting tags on a custom post"
         },
         {
           "name": "RootSetTagsOnPostMutationPayload",
@@ -2391,17 +2473,6 @@
           "description": "Payload of executing an update mutation on a post tag term"
         },
         {
-          "name": "TagDoesNotExistErrorPayload",
-          "namespacedName": "TagDoesNotExistErrorPayload",
-          "fields": [
-            {
-              "name": "message"
-            }
-          ],
-          "kind": "OBJECT",
-          "description": "Error payload for: \"The requested tag does not exist\""
-        },
-        {
           "name": "TagTermDoesNotExistErrorPayload",
           "namespacedName": "TagTermDoesNotExistErrorPayload",
           "fields": [
@@ -2411,6 +2482,17 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The requested tag does not exist\""
+        },
+        {
+          "name": "TaxonomyIsNotValidErrorPayload",
+          "namespacedName": "TaxonomyIsNotValidErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested taxonomy does not exist\""
         },
         {
           "name": "User",
@@ -2933,7 +3015,7 @@
           "namespacedName": "CategoryTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`."
+          "description": "Category taxonomies (available for querying via the API), with possible values: `\"additional-dummy-category\"`, `\"additional-post-category\"`, `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`."
         },
         {
           "name": "CustomPostEnumString",
@@ -3006,6 +3088,20 @@
           "description": "Wildcard type representing any of the numeric types (Int or Float)"
         },
         {
+          "name": "PostCategoryTaxonomyEnumString",
+          "namespacedName": "PostCategoryTaxonomyEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Post category taxonomies (available for querying via the API), with possible values: `\"additional-post-category\"`, `\"category\"`."
+        },
+        {
+          "name": "PostTagTaxonomyEnumString",
+          "namespacedName": "PostTagTaxonomyEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Post tag taxonomies (available for querying via the API), with possible values: `\"additional-post-tag\"`, `\"post_tag\"`."
+        },
+        {
           "name": "String",
           "namespacedName": "String",
           "fields": null,
@@ -3017,7 +3113,7 @@
           "namespacedName": "TagTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`."
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"additional-dummy-tag\"`, `\"additional-post-tag\"`, `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`."
         },
         {
           "name": "URL",
@@ -3662,14 +3758,14 @@
           "namespacedName": "RootCreateGenericCategoryInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to create or update a category term"
+          "description": "Input to create a category term"
         },
         {
           "name": "RootCreateGenericTagInput",
           "namespacedName": "RootCreateGenericTagInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to create or update a tag term"
+          "description": "Input to create a tag term"
         },
         {
           "name": "RootCreateMediaItemInput",
@@ -3847,6 +3943,13 @@
           "description": "Input to add a comment to a custom post"
         },
         {
+          "name": "RootSetCategoriesOnCustomPostInput",
+          "namespacedName": "RootSetCategoriesOnCustomPostInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to set categories on a custom post"
+        },
+        {
           "name": "RootSetCategoriesOnPostInput",
           "namespacedName": "RootSetCategoriesOnPostInput",
           "fields": null,
@@ -3859,6 +3962,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set the featured image on a custom post"
+        },
+        {
+          "name": "RootSetTagsOnCustomPostInput",
+          "namespacedName": "RootSetTagsOnCustomPostInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to set tags on a custom post"
         },
         {
           "name": "RootSetTagsOnPostInput",
@@ -3886,14 +3996,14 @@
           "namespacedName": "RootUpdateGenericCategoryInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to create or update a category term"
+          "description": "Input to update a category term"
         },
         {
           "name": "RootUpdateGenericTagInput",
           "namespacedName": "RootUpdateGenericTagInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to create or update a tag term"
+          "description": "Input to update a tag term"
         },
         {
           "name": "RootUpdateMediaItemInput",
@@ -4323,11 +4433,18 @@
           "description": "Union of 'Error Payload' types when replying to a comment"
         },
         {
+          "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting categories on a custom post"
+        },
+        {
           "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
           "namespacedName": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
-          "description": "Union of 'Error Payload' types when setting categories on a custom post"
+          "description": "Union of 'Error Payload' types when setting categories on a post"
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
@@ -4337,11 +4454,18 @@
           "description": "Union of 'Error Payload' types when setting a featured image to a custom post"
         },
         {
+          "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting tags on a custom post"
+        },
+        {
           "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
           "namespacedName": "RootSetTagsOnPostMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
-          "description": "Union of 'Error Payload' types when setting tags on a custom post"
+          "description": "Union of 'Error Payload' types when setting tags on a post"
         },
         {
           "name": "RootUpdateCustomPostMutationErrorPayloadUnion",

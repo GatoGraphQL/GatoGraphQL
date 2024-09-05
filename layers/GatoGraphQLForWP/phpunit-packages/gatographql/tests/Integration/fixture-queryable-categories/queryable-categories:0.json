@@ -3,42 +3,50 @@
         "postCategories": [
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 1,
                 "name": "Uncategorized"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 2,
                 "name": "Advanced"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 3,
                 "name": "Blog"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 4,
                 "name": "Resource"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 5,
                 "name": "Never used"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 6,
                 "name": "Special topic"
             },
             {
                 "__typename": "PostCategory",
+                "taxonomy": "category",
                 "id": 7,
                 "name": "Most special topic"
             }
         ],
         "postCategory": {
             "__typename": "PostCategory",
+            "taxonomy": "category",
             "id": 1,
             "name": "Uncategorized"
         },
@@ -55,47 +63,56 @@
         "dummyCategories": [
             {
                 "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
                 "id": 19,
                 "name": "Absolute Brilliance"
             },
             {
                 "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
                 "id": 23,
                 "name": "Brontosaurus"
             },
             {
                 "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
                 "id": 24,
                 "name": "Capullo"
             },
             {
                 "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
                 "id": 30,
                 "name": "Nostradamus"
             },
             {
                 "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
                 "id": 31,
                 "name": "Nostradamus"
             },
             {
                 "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
                 "id": 32,
                 "name": "Perestroika"
             },
             {
                 "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
                 "id": 37,
                 "name": "Unexpected Randomness"
             },
             {
                 "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
                 "id": 40,
                 "name": "World Cup"
             }
         ],
         "dummyCategory": {
             "__typename": "GenericCategory",
+            "taxonomy": "dummy-category",
             "id": 19,
             "name": "Absolute Brilliance"
         },
