@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver;
 use PoPCMSSchema\PostMutations\Constants\PostCRUDHookNames;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
@@ -35,51 +34,59 @@ abstract class AbstractCreateOrUpdatePostMutationResolver extends AbstractCreate
         return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 
-    protected function validateCreateUpdateErrors(
+    protected function triggerValidateCreateOrUpdateHook(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        parent::triggerValidateCreateOrUpdateHook(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         App::doAction(
             PostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        parent::validateCreateUpdateErrors(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
     }
 
-    protected function validateCreate(
+    protected function triggerValidateCreateHook(
+        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        parent::triggerValidateCreateHook(
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         App::doAction(
             PostCRUDHookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        parent::validateCreate(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
+            $customPostType,
         );
     }
 
-    protected function validateUpdate(
+    protected function triggerValidateUpdateHook(
+        string|int $customPostID,
+        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        parent::triggerValidateUpdateHook(
+            $customPostID,
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         App::doAction(
             PostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        parent::validateUpdate(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
+            $customPostType,
         );
     }
 
@@ -120,15 +127,13 @@ abstract class AbstractCreateOrUpdatePostMutationResolver extends AbstractCreate
         );
     }
 
-    /**
-     * @return string|int The ID of the updated entity
-     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
-     */
-    protected function update(
+    protected function triggerExecuteCreateOrUpdateHook(
+        string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): string|int {
-        $customPostID = parent::update(
+    ): void {
+        parent::triggerExecuteCreateOrUpdateHook(
+            $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -139,42 +144,43 @@ abstract class AbstractCreateOrUpdatePostMutationResolver extends AbstractCreate
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+    }
+
+    protected function triggerExecuteUpdateHook(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        parent::triggerExecuteUpdateHook(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         App::doAction(
             PostCRUDHookNames::EXECUTE_UPDATE,
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        return $customPostID;
     }
 
-    /**
-     * @return string|int The ID of the created entity
-     * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
-     */
-    protected function create(
+    protected function triggerExecuteCreateHook(
+        string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): string|int {
-        $customPostID = parent::create(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        App::doAction(
-            PostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+    ): void {
+        parent::triggerExecuteCreateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+
         App::doAction(
             PostCRUDHookNames::EXECUTE_CREATE,
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        return $customPostID;
     }
 }

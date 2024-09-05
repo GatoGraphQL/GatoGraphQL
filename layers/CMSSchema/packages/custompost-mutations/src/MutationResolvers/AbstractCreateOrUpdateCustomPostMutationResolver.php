@@ -137,6 +137,16 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
+        $this->triggerValidateCreateOrUpdateHook(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function triggerValidateCreateOrUpdateHook(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         App::doAction(
             CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
@@ -161,6 +171,18 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
+        $this->triggerValidateCreateHook(
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function triggerValidateCreateHook(
+        string $customPostType,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         App::doAction(
             CustomPostCRUDHookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
@@ -198,6 +220,20 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
         /** @var string */
         $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        $this->triggerValidateUpdateHook(
+            $customPostID,
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function triggerValidateUpdateHook(
+        string|int $customPostID,
+        string $customPostType,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         App::doAction(
             CustomPostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
@@ -327,20 +363,44 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->additionals($customPostID, $fieldDataAccessor);
         $this->updateAdditionals($customPostID, $fieldDataAccessor);
 
-        App::doAction(
-            CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+        $this->triggerExecuteCreateOrUpdateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-        App::doAction(
-            CustomPostCRUDHookNames::EXECUTE_UPDATE,
+        $this->triggerExecuteUpdateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
         return $customPostID;
+    }
+
+    protected function triggerExecuteCreateOrUpdateHook(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        App::doAction(
+            CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function triggerExecuteUpdateHook(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        App::doAction(
+            CustomPostCRUDHookNames::EXECUTE_UPDATE,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     /**
@@ -370,19 +430,30 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->additionals($customPostID, $fieldDataAccessor);
         $this->createAdditionals($customPostID, $fieldDataAccessor);
 
-        App::doAction(
-            CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+        $this->triggerExecuteCreateOrUpdateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-        App::doAction(
-            CustomPostCRUDHookNames::EXECUTE_CREATE,
+        $this->triggerExecuteCreateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
         return $customPostID;
+    }
+
+    protected function triggerExecuteCreateHook(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        App::doAction(
+            CustomPostCRUDHookNames::EXECUTE_CREATE,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 }
