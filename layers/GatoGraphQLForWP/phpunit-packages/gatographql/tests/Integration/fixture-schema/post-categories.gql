@@ -200,8 +200,8 @@ fragment PostCategoryData on PostCategory {
     id
     title
   }
-  postCountWithoutTaxonomy: postCount(filter: { taxonomy: null })
-  postsWithoutTaxonomy: posts(filter: { taxonomy: null }) {
+  postCountWithoutTaxonomy: postCount(filter: { categories: { taxonomy: null } })
+  postsWithoutTaxonomy: posts(filter: { categories: { taxonomy: null } }) {
     id
     title
   }

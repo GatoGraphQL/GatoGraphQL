@@ -171,8 +171,8 @@ fragment PostTagData on PostTag {
     id
     title
   }
-  postCountWithoutTaxonomy: postCount(filter: { taxonomy: null })
-  postsWithoutTaxonomy: posts(filter: { taxonomy: null }) {
+  postCountWithoutTaxonomy: postCount(filter: { tags: { taxonomy: null } })
+  postsWithoutTaxonomy: posts(filter: { tags: { taxonomy: null } }) {
     id
     title
   }
