@@ -11,6 +11,7 @@ use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackIt
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
+use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
@@ -135,6 +136,12 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         ) {
             [
                 MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E1,
+            ] => new UserIsNotLoggedInErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new TaxonomyIsNotValidErrorPayload(
                 $feedbackItemResolution->getMessage(),
@@ -228,6 +235,14 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
             [
                 $taxonomyTermSlug,
             ]
+        );
+    }
+
+    protected function getUserNotLoggedInError(): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E1,
         );
     }
 }
