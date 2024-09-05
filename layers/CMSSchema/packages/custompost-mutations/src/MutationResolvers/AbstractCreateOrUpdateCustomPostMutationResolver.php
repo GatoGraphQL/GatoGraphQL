@@ -363,7 +363,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->additionals($customPostID, $fieldDataAccessor);
         $this->updateAdditionals($customPostID, $fieldDataAccessor);
 
-        $this->triggerUpdateHook(
+        $this->triggerExecuteUpdateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -372,7 +372,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         return $customPostID;
     }
 
-    protected function triggerUpdateHook(
+    protected function triggerExecuteUpdateHook(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -418,7 +418,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->additionals($customPostID, $fieldDataAccessor);
         $this->createAdditionals($customPostID, $fieldDataAccessor);
 
-        $this->triggerCreateHook(
+        $this->triggerExecuteCreateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -427,7 +427,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         return $customPostID;
     }
 
-    protected function triggerCreateHook(
+    protected function triggerExecuteCreateHook(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

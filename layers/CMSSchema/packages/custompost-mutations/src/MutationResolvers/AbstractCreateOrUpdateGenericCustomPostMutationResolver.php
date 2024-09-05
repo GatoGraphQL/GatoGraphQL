@@ -109,13 +109,13 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
             $fieldDataAccessor,
         );
     }
-
-    protected function triggerUpdateHook(
+    
+    protected function triggerExecuteUpdateHook(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        parent::triggerUpdateHook(
+        parent::triggerExecuteUpdateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -135,12 +135,12 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
         );
     }
 
-    protected function triggerCreateHook(
+    protected function triggerExecuteCreateHook(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        parent::triggerCreateHook(
+        parent::triggerExecuteCreateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
