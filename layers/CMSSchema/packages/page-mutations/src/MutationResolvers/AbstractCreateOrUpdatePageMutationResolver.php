@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PageMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver;
 use PoPCMSSchema\PageMutations\Constants\PageCRUDHookNames;
@@ -126,19 +127,22 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
         );
     }
 
-    protected function validateCreate(
+    protected function triggerValidateCreateHook(
+        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        App::doAction(
-            PageCRUDHookNames::VALIDATE_CREATE,
+        parent::triggerValidateCreateHook(
+            $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        parent::validateCreate(
+        App::doAction(
+            PageCRUDHookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
+            $customPostType,
         );
     }
 
