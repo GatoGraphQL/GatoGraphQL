@@ -55,6 +55,7 @@
         __typename
         id
         name
+        taxonomy
       }
     }
   }
@@ -254,6 +255,7 @@ fragment CustomPostData on CustomPost {
     ...on Tag {
       id
       name
+      taxonomy
     }
   }
 }

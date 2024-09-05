@@ -55,6 +55,7 @@
         __typename
         id
         name
+        taxonomy
         slug
         slugPath
       }
@@ -246,6 +247,7 @@ fragment CustomPostData on CustomPost {
     ...on Category {
       id
       name
+      taxonomy
     }
   }
 }
