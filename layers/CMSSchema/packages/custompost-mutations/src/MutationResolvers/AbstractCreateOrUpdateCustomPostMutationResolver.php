@@ -109,13 +109,6 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
-        App::doAction(
-            CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $this->validateIsUserLoggedIn(
@@ -139,24 +132,40 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        App::doAction(
+            CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function validateCreate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
-        App::doAction(
-            CustomPostCRUDHookNames::VALIDATE_CREATE,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        
         $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
         $this->validateCanLoggedInUserEditCustomPostType(
             $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        App::doAction(
+            CustomPostCRUDHookNames::VALIDATE_CREATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+            $customPostType,
         );
     }
 
@@ -164,13 +173,6 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
-        App::doAction(
-            CustomPostCRUDHookNames::VALIDATE_UPDATE,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
@@ -186,6 +188,16 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
         $this->validateCanLoggedInUserEditCustomPost(
             $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        App::doAction(
+            CustomPostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
