@@ -72,13 +72,13 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $this->getValidateCreateHookName(),
             $this->maybeValidateCategories(...),
             10,
-            2
+            3
         );
         App::addAction(
             $this->getValidateUpdateHookName(),
             $this->maybeValidateCategories(...),
             10,
-            2
+            3
         );
         App::addAction(
             $this->getExecuteCreateOrUpdateHookName(),
@@ -106,6 +106,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     public function maybeValidateCategories(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        string $customPostType,
     ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
