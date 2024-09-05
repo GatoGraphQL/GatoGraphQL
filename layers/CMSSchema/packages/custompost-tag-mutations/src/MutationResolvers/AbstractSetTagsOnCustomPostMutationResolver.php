@@ -183,6 +183,17 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             return;
         }
 
+        $this->validateCustomPostTypeIsNotEmpty(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        /** @var string */
         $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
         $this->validateSetTagsOnCustomPost(
             $customPostType,

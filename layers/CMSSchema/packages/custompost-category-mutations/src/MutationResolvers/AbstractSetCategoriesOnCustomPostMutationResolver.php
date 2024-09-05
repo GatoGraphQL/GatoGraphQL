@@ -183,6 +183,17 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             return;
         }
 
+        $this->validateCustomPostTypeIsNotEmpty(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        /** @var string */
         $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
         $this->validateSetCategoriesOnCustomPost(
             $customPostType,

@@ -154,6 +154,29 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
 
     abstract protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface;
 
+    protected function validateCustomPostTypeIsNotEmpty(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        if ($customPostType !== null) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E11,
+                    [
+                        $customPostID,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
+        );
+    }
+
     /**
      * Retrieve the taxonomy passed via the `taxonomy` input.
      * If that's not possible (eg: on `createCustomPost:input.categoriesBy`),
