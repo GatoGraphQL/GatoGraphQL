@@ -202,12 +202,12 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
         );
     }
 
-    protected function triggerExecuteUpdateHook(
+    protected function triggerExecuteCreateOrUpdateHook(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        parent::triggerExecuteUpdateHook(
+        parent::triggerExecuteCreateOrUpdateHook(
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -219,6 +219,19 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+    }
+
+    protected function triggerExecuteUpdateHook(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        parent::triggerExecuteUpdateHook(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         App::doAction(
             PageCRUDHookNames::EXECUTE_UPDATE,
             $customPostID,
@@ -238,12 +251,6 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        App::doAction(
-            PageCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
-            $customPostID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
         App::doAction(
             PageCRUDHookNames::EXECUTE_CREATE,
             $customPostID,
