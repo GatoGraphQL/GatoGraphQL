@@ -8,7 +8,10 @@ use GuzzleHttp\RequestOptions;
 
 class ApplicationPasswordQueryExecutionFixtureWebserverRequestTest extends AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase
 {
-    use ApplicationPasswordQueryExecutionFixtureWebserverRequestTestTrait;
+    protected static function getFixtureFolder(): string
+    {
+        return __DIR__ . '/fixture-application-password';
+    }
 
     protected static function getEndpoint(): string
     {
