@@ -207,13 +207,13 @@
   }
 
   postTagCount: tagCount(taxonomy: post_tag)
-  postTagNames: tagNames(taxonomy: post_tag)
+  postTagNames: tagNames(taxonomy: post_tag, pagination: { limit: 20 })
 
   dummyTagCount: tagCount(taxonomy: "dummy-tag")
-  dummyTagNames: tagNames(taxonomy: "dummy-tag")
+  dummyTagNames: tagNames(taxonomy: "dummy-tag", pagination: { limit: 20 })
 
   allTagCount: tagCount
-  allTagNames: tagNames
+  allTagNames: tagNames(pagination: { limit: 20 })
 }
 
 fragment TagData on Tag {

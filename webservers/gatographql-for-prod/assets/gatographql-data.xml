@@ -348,6 +348,13 @@
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Brazil]]></wp:term_name>
 	</wp:term>
+	<wp:term>
+		<wp:term_id>49</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-post-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[diving]]></wp:term_slug>
+		<wp:term_parent><![CDATA[swimming]]></wp:term_parent>
+		<wp:term_name><![CDATA[Diving]]></wp:term_name>
+	</wp:term>
 		
 			
 	<generator>https://wordpress.org/?v=6.0</generator>
@@ -1776,6 +1783,7 @@ video/mp4
 		<category domain="category" nicename="resource"><![CDATA[Resource]]></category>
 		<category domain="post_tag" nicename="security"><![CDATA[security]]></category>
 		<category domain="additional-post-category" nicename="swimming"><![CDATA[Swimming]]></category>
+		<category domain="additional-post-category" nicename="diving"><![CDATA[Diving]]></category>
 		<category domain="additional-post-tag" nicename="racing-cars"><![CDATA[Racing cars]]></category>
   <category domain="post_format" nicename="post-format-chat"><![CDATA[Chat]]></category>
 						<wp:postmeta>

@@ -156,10 +156,10 @@
   }
   
   postCategoryCount
-  postCategoryNames
+  postCategoryNames(pagination: { limit: 20 })
   
   allPostCategoryCount: postCategoryCount(taxonomy: null)
-  allPostCategoryNames: postCategoryNames(taxonomy: null)
+  allPostCategoryNames: postCategoryNames(taxonomy: null, pagination: { limit: 20 })
 
   postsByCategoryByNonExistingID: postCategory(by: { id: 8888 }) {
     ...PostCategoryData

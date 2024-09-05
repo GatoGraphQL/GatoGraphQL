@@ -1136,7 +1136,8 @@
             "ideas",
             "GraphQL",
             "features",
-            "Also never used"
+            "Also never used",
+            "advanced"
         ],
         "allPostTagCount": 13,
         "allPostTagNames": [
@@ -1149,7 +1150,10 @@
             "plugin",
             "ideas",
             "Horses",
-            "GraphQL"
+            "GraphQL",
+            "features",
+            "Also never used",
+            "advanced"
         ],
         "postsByTagByNonExistingID": null,
         "postsByTagByNonExistingSlug": null,

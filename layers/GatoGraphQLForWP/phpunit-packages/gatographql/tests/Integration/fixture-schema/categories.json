@@ -2705,6 +2705,48 @@
                 "slugPath": "europe",
                 "url": "https:\/\/gatographql.lndo.site\/additional-dummy-category\/europe\/",
                 "urlPath": "\/additional-dummy-category\/europe\/"
+            },
+            {
+                "__typename": "PostCategory",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 2,
+                                "name": "Advanced",
+                                "taxonomy": "category"
+                            },
+                            {
+                                "__typename": "PostCategory",
+                                "id": 3,
+                                "name": "Blog",
+                                "taxonomy": "category"
+                            },
+                            {
+                                "__typename": "PostCategory",
+                                "id": 4,
+                                "name": "Resource",
+                                "taxonomy": "category"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "additional-post-category",
+                "count": 1,
+                "description": "",
+                "id": 49,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Diving",
+                "slug": "diving",
+                "slugPath": "swimming\/diving",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
+                "urlPath": "\/additional-post-category\/diving\/"
             }
         ],
         "customPosts": [
@@ -3524,30 +3566,6 @@
                 ]
             },
             {
-                "id": 1634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 32
-                    }
-                ]
-            },
-            {
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 32
-                    }
-                ]
-            },
-            {
                 "id": 1656,
                 "title": "Dummy CPT with non-existing block",
                 "categories": [
@@ -3562,6 +3580,30 @@
             {
                 "id": 1658,
                 "title": "Dummy CPT with no content",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 32
+                    }
+                ]
+            },
+            {
+                "id": 1634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 32
+                    }
+                ]
+            },
+            {
+                "id": 1654,
+                "title": "Dummy CPT with blocks",
                 "categories": [
                     {
                         "id": 19
@@ -4223,7 +4265,7 @@
             "Brontosaurus",
             "Absolute Brilliance"
         ],
-        "allCategoryCount": 19,
+        "allCategoryCount": 20,
         "allCategoryNames": [
             "World Cup",
             "Unexpected Randomness",
@@ -4234,7 +4276,17 @@
             "Perestroika",
             "Nostradamus",
             "Nostradamus",
-            "Never used"
+            "Never used",
+            "Most special topic",
+            "Foosball",
+            "Europe",
+            "Diving",
+            "Capullo",
+            "Brontosaurus",
+            "Blog",
+            "Asia",
+            "Advanced",
+            "Absolute Brilliance"
         ]
     }
 }

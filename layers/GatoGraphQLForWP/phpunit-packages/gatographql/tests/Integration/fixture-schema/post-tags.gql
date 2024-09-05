@@ -135,10 +135,10 @@
   }
   
   postTagCount
-  postTagNames
+  postTagNames(pagination: { limit: 20 })
   
   allPostTagCount: postTagCount(taxonomy: null)
-  allPostTagNames: postTagNames(taxonomy: null)
+  allPostTagNames: postTagNames(taxonomy: null, pagination: { limit: 20 })
 
   postsByTagByNonExistingID: postTag(by: { id: 8888 }) {
     ...PostTagData
