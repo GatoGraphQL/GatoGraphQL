@@ -55,12 +55,6 @@
         ...PostCategoryData
       }
     }
-    allCategories: categories(taxonomy: null) {
-      ...PostCategoryData
-      children {
-        ...PostCategoryData
-      }
-    }
     categoriesByExcludeIDs: categories(filter: { excludeIDs: [2] }) {
       id
     }
