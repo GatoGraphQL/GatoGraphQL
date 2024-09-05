@@ -140,7 +140,7 @@ class MutationResolverHookSet extends AbstractHookSet
         }
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-        
+
         $this->validateIsUserLoggedIn(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

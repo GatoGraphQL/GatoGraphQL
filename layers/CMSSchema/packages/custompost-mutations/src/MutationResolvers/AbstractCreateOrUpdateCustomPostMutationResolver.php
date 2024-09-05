@@ -149,7 +149,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-        
+
         $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
         $this->validateCanLoggedInUserEditCustomPostType(
             $customPostType,
