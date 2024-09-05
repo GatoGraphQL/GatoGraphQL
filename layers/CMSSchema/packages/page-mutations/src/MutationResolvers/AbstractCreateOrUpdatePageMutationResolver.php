@@ -204,15 +204,13 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
         );
     }
 
-    /**
-     * @return string|int The ID of the updated entity
-     * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
-     */
-    protected function update(
+    protected function triggerUpdateHook(
+        string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): string|int {
-        $customPostID = parent::update(
+    ): void {
+        parent::triggerUpdateHook(
+            $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -229,8 +227,6 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        return $customPostID;
     }
 
     /**
