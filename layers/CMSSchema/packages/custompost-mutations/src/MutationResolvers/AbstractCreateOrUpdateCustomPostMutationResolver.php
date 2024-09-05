@@ -418,6 +418,20 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->additionals($customPostID, $fieldDataAccessor);
         $this->createAdditionals($customPostID, $fieldDataAccessor);
 
+        $this->triggerCreateHook(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        return $customPostID;
+    }
+
+    protected function triggerCreateHook(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         App::doAction(
             CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,
@@ -430,7 +444,5 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        return $customPostID;
     }
 }

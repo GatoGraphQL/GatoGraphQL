@@ -137,15 +137,13 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
         );
     }
 
-    /**
-     * @return string|int The ID of the created entity
-     * @throws CustomPostCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
-     */
-    protected function create(
+    protected function triggerCreateHook(
+        string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): string|int {
-        $customPostID = parent::create(
+    ): void {
+        parent::triggerCreateHook(
+            $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -162,7 +160,5 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        return $customPostID;
     }
 }
