@@ -3,9 +3,6 @@
     "__schema": {
       "types": [
         {
-          "name": "CategoryDoesNotExistErrorPayload"
-        },
-        {
           "name": "CategoryTermDoesNotExistErrorPayload"
         },
         {
@@ -55,6 +52,9 @@
         },
         {
           "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload"
+        },
+        {
+          "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload"
         },
         {
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
@@ -168,10 +168,16 @@
           "name": "RootReplyCommentMutationPayload"
         },
         {
+          "name": "RootSetCategoriesOnCustomPostMutationPayload"
+        },
+        {
           "name": "RootSetCategoriesOnPostMutationPayload"
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostMutationPayload"
+        },
+        {
+          "name": "RootSetTagsOnCustomPostMutationPayload"
         },
         {
           "name": "RootSetTagsOnPostMutationPayload"
@@ -201,10 +207,10 @@
           "name": "RootUpdatePostTagTermMutationPayload"
         },
         {
-          "name": "TagDoesNotExistErrorPayload"
+          "name": "TagTermDoesNotExistErrorPayload"
         },
         {
-          "name": "TagTermDoesNotExistErrorPayload"
+          "name": "TaxonomyIsNotValidErrorPayload"
         },
         {
           "name": "User"
@@ -304,6 +310,12 @@
         },
         {
           "name": "Numeric"
+        },
+        {
+          "name": "PostCategoryTaxonomyEnumString"
+        },
+        {
+          "name": "PostTagTaxonomyEnumString"
         },
         {
           "name": "String"
@@ -609,10 +621,16 @@
           "name": "RootReplyCommentInput"
         },
         {
+          "name": "RootSetCategoriesOnCustomPostInput"
+        },
+        {
           "name": "RootSetCategoriesOnPostInput"
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostInput"
+        },
+        {
+          "name": "RootSetTagsOnCustomPostInput"
         },
         {
           "name": "RootSetTagsOnPostInput"
@@ -813,10 +831,16 @@
           "name": "RootReplyCommentMutationErrorPayloadUnion"
         },
         {
+          "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion"
+        },
+        {
           "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion"
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion"
         },
         {
           "name": "RootSetTagsOnPostMutationErrorPayloadUnion"

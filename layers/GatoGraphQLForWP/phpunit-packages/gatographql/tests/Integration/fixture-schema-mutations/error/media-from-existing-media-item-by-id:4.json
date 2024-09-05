@@ -8,8 +8,8 @@
             "status": "FAILURE",
             "errors": [
                 {
-                    "__typename": "UserHasNoPermissionToUploadFilesErrorPayload",
-                    "message": "You don't have permission to upload files"
+                    "__typename": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+                    "message": "You don't have permission to edit media items"
                 }
             ],
             "mediaItem": null
@@ -19,8 +19,8 @@
                 "status": "FAILURE",
                 "errors": [
                     {
-                        "__typename": "UserHasNoPermissionToUploadFilesErrorPayload",
-                        "message": "You don't have permission to upload files"
+                        "__typename": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+                        "message": "You don't have permission to edit media items"
                     }
                 ],
                 "mediaItem": null
@@ -29,8 +29,8 @@
                 "status": "FAILURE",
                 "errors": [
                     {
-                        "__typename": "UserHasNoPermissionToUploadFilesErrorPayload",
-                        "message": "You don't have permission to upload files"
+                        "__typename": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+                        "message": "You don't have permission to edit media items"
                     }
                 ],
                 "mediaItem": null
@@ -41,8 +41,8 @@
                 "status": "FAILURE",
                 "errors": [
                     {
-                        "__typename": "UserHasNoPermissionToUploadFilesErrorPayload",
-                        "message": "You don't have permission to upload files"
+                        "__typename": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+                        "message": "You don't have permission to edit media items"
                     }
                 ],
                 "mediaItem": null

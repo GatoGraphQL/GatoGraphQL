@@ -46,6 +46,9 @@
                         "name": "imageSizeNames"
                     },
                     {
+                        "name": "isGutenbergEditorEnabled"
+                    },
+                    {
                         "name": "isUserLoggedIn"
                     },
                     {

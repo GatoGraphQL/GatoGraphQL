@@ -6,11 +6,11 @@ query {
     ...MediaItemData
   }
 
-  mediaItemsByAuthorIDs: mediaItems(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { author: { ids: 2 }, mimeTypes: "*" }) {
+  mediaItemsByAuthorIDs: mediaItems(pagination: { limit: 2 }, sort: { by: ID, order: ASC }, filter: { author: { ids: 2 }, mimeTypes: "*" }) {
     id
     title
   }
-  mediaItemsByAuthorSlug: mediaItems(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { author: { slug: "blogger" }, mimeTypes: "*" }) {
+  mediaItemsByAuthorSlug: mediaItems(pagination: { limit: 2 }, sort: { by: ID, order: ASC }, filter: { author: { slug: "blogger" }, mimeTypes: "*" }) {
     id
     title
   }
@@ -48,7 +48,7 @@ query {
     title
     date
   }
-  mediaItemsSortedDESC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: DESC }, filter: { dateQuery: { before: "2024-01-01" } }) {
+  mediaItemsSortedDESC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: DESC }, filter: { dateQuery: { before: "2023-01-01" } }) {
     id
     title
     date

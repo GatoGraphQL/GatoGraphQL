@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'dummy-tag-two', 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'additional-dummy-tag', 'additional-post-tag', 'dummy-tag', 'dummy-tag-two', 'post_tag')",
       "locations": [
         {
           "line": 20,
@@ -21,7 +21,7 @@
       }
     },
     {
-      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'dummy-tag-two', 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'additional-dummy-tag', 'additional-post-tag', 'dummy-tag', 'dummy-tag-two', 'post_tag')",
       "locations": [
         {
           "line": 23,
@@ -41,7 +41,7 @@
       }
     },
     {
-      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'dummy-tag-two', 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'additional-dummy-tag', 'additional-post-tag', 'dummy-tag', 'dummy-tag-two', 'post_tag')",
       "locations": [
         {
           "line": 26,
@@ -61,7 +61,7 @@
       }
     },
     {
-      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'dummy-tag-two', 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'additional-dummy-tag', 'additional-post-tag', 'dummy-tag', 'dummy-tag-two', 'post_tag')",
       "locations": [
         {
           "line": 30,
@@ -85,57 +85,68 @@
     "postTags": [
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 18,
         "name": "zoroastro"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 17,
         "name": "xcel"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 15,
         "name": "wordpress"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 14,
         "name": "Security"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 13,
         "name": "release"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 12,
         "name": "plugin"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 11,
         "name": "ideas"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 10,
         "name": "GraphQL"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 9,
         "name": "features"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 16,
         "name": "Also never used"
       }
     ],
     "postTag": {
       "__typename": "PostTag",
+      "taxonomy": "post_tag",
       "id": 15,
       "name": "wordpress"
     },
@@ -155,37 +166,44 @@
     "dummyTags": [
       {
         "__typename": "GenericTag",
+        "taxonomy": "dummy-tag",
         "id": 36,
         "name": "Tango"
       },
       {
         "__typename": "GenericTag",
+        "taxonomy": "dummy-tag",
         "id": 34,
         "name": "Rock"
       },
       {
         "__typename": "GenericTag",
+        "taxonomy": "dummy-tag",
         "id": 29,
         "name": "Jazz"
       },
       {
         "__typename": "GenericTag",
+        "taxonomy": "dummy-tag",
         "id": 28,
         "name": "Hip Hop"
       },
       {
         "__typename": "GenericTag",
+        "taxonomy": "dummy-tag",
         "id": 27,
         "name": "Heavy metal"
       },
       {
         "__typename": "GenericTag",
+        "taxonomy": "dummy-tag",
         "id": 25,
         "name": "Classical"
       }
     ],
     "dummyTag": {
       "__typename": "GenericTag",
+      "taxonomy": "dummy-tag",
       "id": 36,
       "name": "Tango"
     },
