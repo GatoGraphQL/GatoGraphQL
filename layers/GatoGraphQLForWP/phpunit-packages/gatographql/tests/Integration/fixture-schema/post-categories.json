@@ -663,7 +663,7 @@
                         "taxonomy": "additional-post-category",
                         "childCount": 0,
                         "childNames": [],
-                        "count": 0,
+                        "count": 1,
                         "description": "",
                         "id": 49,
                         "metaValue": null,
@@ -672,8 +672,13 @@
                         "parent": {
                             "id": 41
                         },
-                        "postCount": 0,
-                        "posts": [],
+                        "postCount": 1,
+                        "posts": [
+                            {
+                                "id": 1125,
+                                "title": "Public or Private API mode, for extra security"
+                            }
+                        ],
                         "slug": "diving",
                         "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
                         "urlPath": "\/additional-post-category\/diving\/"
@@ -707,7 +712,7 @@
                 "taxonomy": "additional-post-category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 0,
+                "count": 1,
                 "description": "",
                 "id": 49,
                 "metaValue": null,
@@ -716,8 +721,13 @@
                 "parent": {
                     "id": 41
                 },
-                "postCount": 0,
-                "posts": [],
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
                 "slug": "diving",
                 "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
                 "urlPath": "\/additional-post-category\/diving\/",
@@ -788,7 +798,7 @@
                         "taxonomy": "additional-post-category",
                         "childCount": 0,
                         "childNames": [],
-                        "count": 0,
+                        "count": 1,
                         "description": "",
                         "id": 49,
                         "metaValue": null,
@@ -797,8 +807,13 @@
                         "parent": {
                             "id": 41
                         },
-                        "postCount": 0,
-                        "posts": [],
+                        "postCount": 1,
+                        "posts": [
+                            {
+                                "id": 1125,
+                                "title": "Public or Private API mode, for extra security"
+                            }
+                        ],
                         "slug": "diving",
                         "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
                         "urlPath": "\/additional-post-category\/diving\/"
@@ -1001,7 +1016,7 @@
                 "taxonomy": "additional-post-category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 0,
+                "count": 1,
                 "description": "",
                 "id": 49,
                 "metaValue": null,
@@ -1010,8 +1025,13 @@
                 "parent": {
                     "id": 41
                 },
-                "postCount": 0,
-                "posts": [],
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
                 "slug": "diving",
                 "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
                 "urlPath": "\/additional-post-category\/diving\/",
@@ -1368,7 +1388,7 @@
                             "taxonomy": "additional-post-category",
                             "childCount": 0,
                             "childNames": [],
-                            "count": 0,
+                            "count": 1,
                             "description": "",
                             "id": 49,
                             "metaValue": null,
@@ -1377,13 +1397,43 @@
                             "parent": {
                                 "id": 41
                             },
-                            "postCount": 0,
-                            "posts": [],
+                            "postCount": 1,
+                            "posts": [
+                                {
+                                    "id": 1125,
+                                    "title": "Public or Private API mode, for extra security"
+                                }
+                            ],
                             "slug": "diving",
                             "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
                             "urlPath": "\/additional-post-category\/diving\/"
                         }
                     ]
+                },
+                {
+                    "taxonomy": "additional-post-category",
+                    "childCount": 0,
+                    "childNames": [],
+                    "count": 1,
+                    "description": "",
+                    "id": 49,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Diving",
+                    "parent": {
+                        "id": 41
+                    },
+                    "postCount": 1,
+                    "posts": [
+                        {
+                            "id": 1125,
+                            "title": "Public or Private API mode, for extra security"
+                        }
+                    ],
+                    "slug": "diving",
+                    "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
+                    "urlPath": "\/additional-post-category\/diving\/",
+                    "children": []
                 }
             ],
             "categoriesByExcludeIDs": [

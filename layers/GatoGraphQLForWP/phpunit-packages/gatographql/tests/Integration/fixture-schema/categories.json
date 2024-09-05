@@ -2708,10 +2708,36 @@
             },
             {
                 "__typename": "PostCategory",
-                "postCount": 0,
-                "posts": [],
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 2,
+                                "name": "Advanced",
+                                "taxonomy": "category"
+                            },
+                            {
+                                "__typename": "PostCategory",
+                                "id": 3,
+                                "name": "Blog",
+                                "taxonomy": "category"
+                            },
+                            {
+                                "__typename": "PostCategory",
+                                "id": 4,
+                                "name": "Resource",
+                                "taxonomy": "category"
+                            }
+                        ]
+                    }
+                ],
                 "taxonomy": "additional-post-category",
-                "count": 0,
+                "count": 1,
                 "description": "",
                 "id": 49,
                 "metaValue": null,
@@ -4250,7 +4276,17 @@
             "Perestroika",
             "Nostradamus",
             "Nostradamus",
-            "Never used"
+            "Never used",
+            "Most special topic",
+            "Foosball",
+            "Europe",
+            "Diving",
+            "Capullo",
+            "Brontosaurus",
+            "Blog",
+            "Asia",
+            "Advanced",
+            "Absolute Brilliance"
         ]
     }
 }
