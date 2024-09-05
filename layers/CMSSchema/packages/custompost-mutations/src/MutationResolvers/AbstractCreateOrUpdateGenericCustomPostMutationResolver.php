@@ -54,19 +54,24 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
         );
     }
 
-    protected function validateUpdate(
+    protected function triggerValidateUpdateHook(
+        string|int $customPostID,
+        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        App::doAction(
-            GenericCustomPostCRUDHookNames::VALIDATE_UPDATE,
+        parent::triggerValidateUpdateHook(
+            $customPostID,
+            $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        parent::validateUpdate(
+        App::doAction(
+            GenericCustomPostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
+            $customPostType,
         );
     }
 

@@ -71,19 +71,24 @@ abstract class AbstractCreateOrUpdatePostMutationResolver extends AbstractCreate
         );
     }
 
-    protected function validateUpdate(
+    protected function triggerValidateUpdateHook(
+        string|int $customPostID,
+        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        App::doAction(
-            PostCRUDHookNames::VALIDATE_UPDATE,
+        parent::triggerValidateUpdateHook(
+            $customPostID,
+            $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        parent::validateUpdate(
+        App::doAction(
+            PostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
+            $customPostType,
         );
     }
 

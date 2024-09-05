@@ -220,6 +220,20 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
         /** @var string */
         $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        $this->triggerValidateUpdateHook(
+            $customPostID,
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function triggerValidateUpdateHook(
+        string|int $customPostID,
+        string $customPostType,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         App::doAction(
             CustomPostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
