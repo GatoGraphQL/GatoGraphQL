@@ -111,17 +111,17 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
         );
     }
 
-    protected function validateCreateUpdateErrors(
+    protected function triggerValidateCreateOrUpdateHook(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        App::doAction(
-            PageCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
+        parent::triggerValidateCreateOrUpdateHook(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        parent::validateCreateUpdateErrors(
+        App::doAction(
+            PageCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

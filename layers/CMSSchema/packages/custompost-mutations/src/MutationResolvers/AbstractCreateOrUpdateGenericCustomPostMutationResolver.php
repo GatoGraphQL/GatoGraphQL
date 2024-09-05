@@ -19,17 +19,17 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
         return '';
     }
 
-    protected function validateCreateUpdateErrors(
+    protected function triggerValidateCreateOrUpdateHook(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        App::doAction(
-            GenericCustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
+        parent::triggerValidateCreateOrUpdateHook(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        parent::validateCreateUpdateErrors(
+        App::doAction(
+            GenericCustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

@@ -137,6 +137,16 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
+        $this->triggerValidateCreateOrUpdateHook(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function triggerValidateCreateOrUpdateHook(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         App::doAction(
             CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
