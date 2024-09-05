@@ -128,7 +128,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $this->setCategoriesOnCustomPostOrAddError(
+        $this->setCategoriesOnCustomPost(
             $customPostID,
             $append,
             $fieldDataAccessor,
@@ -175,6 +175,17 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
         $this->validateCanLoggedInUserEditCustomPost(
             $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        $this->validateSetCategoriesOnCustomPost(
+            $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

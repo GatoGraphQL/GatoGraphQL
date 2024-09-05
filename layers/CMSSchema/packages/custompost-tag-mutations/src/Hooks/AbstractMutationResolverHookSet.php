@@ -112,7 +112,19 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $this->validateIsUserLoggedIn(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->validateSetTagsOnCustomPost(
+            $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -142,7 +154,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        $this->setTagsOnCustomPostOrAddError(
+        $this->setTagsOnCustomPost(
             $customPostID,
             false,
             $fieldDataAccessor,

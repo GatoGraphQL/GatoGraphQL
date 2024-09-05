@@ -161,43 +161,27 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      *
      * @param array<string|int> $taxonomyTermIDs
      */
-    protected function validateTaxonomyIsRegisteredForCustomPost(
-        string|int $customPostID,
+    protected function validateTaxonomyIsRegisteredForCustomPostType(
+        string $customPostType,
         string $taxonomyName,
         array $taxonomyTermIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
-        if ($customPostType === null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E11,
-                        [
-                            $customPostID,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
+        $taxonomyNames = $this->getTaxonomyTermTypeAPI()->getCustomPostTypeTaxonomyNames($customPostType);
+        if (in_array($taxonomyName, $taxonomyNames)) {
             return;
         }
-
-        $taxonomyNames = $this->getTaxonomyTermTypeAPI()->getCustomPostTypeTaxonomyNames($customPostType);
-        if (!in_array($taxonomyName, $taxonomyNames)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $this->getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
-                        $customPostType,
-                        $taxonomyName,
-                        $taxonomyTermIDs,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                $this->getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
+                    $customPostType,
+                    $taxonomyName,
+                    $taxonomyTermIDs,
+                ),
+                $fieldDataAccessor->getField(),
+            )
+        );
     }
 
     /**
