@@ -160,6 +160,10 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         $this->validateCanLoggedInUserEditCustomPosts(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
