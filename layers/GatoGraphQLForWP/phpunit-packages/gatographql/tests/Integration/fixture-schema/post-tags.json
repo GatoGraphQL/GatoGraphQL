@@ -2,6 +2,7 @@
     "data": {
         "postTags": [
             {
+                "taxonomy": "post_tag",
                 "count": 0,
                 "description": "",
                 "id": 18,
@@ -15,6 +16,7 @@
                 "urlPath": "\/tag\/zoroastro\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 0,
                 "description": "",
                 "id": 17,
@@ -28,6 +30,7 @@
                 "urlPath": "\/tag\/xcel\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 2,
                 "description": "",
                 "id": 15,
@@ -50,6 +53,7 @@
                 "urlPath": "\/tag\/wordpress\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 1,
                 "description": "",
                 "id": 14,
@@ -68,6 +72,7 @@
                 "urlPath": "\/tag\/security\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 1,
                 "description": "",
                 "id": 13,
@@ -86,6 +91,7 @@
                 "urlPath": "\/tag\/release\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 3,
                 "description": "",
                 "id": 12,
@@ -112,6 +118,7 @@
                 "urlPath": "\/tag\/plugin\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 1,
                 "description": "",
                 "id": 11,
@@ -130,6 +137,7 @@
                 "urlPath": "\/tag\/ideas\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 1,
                 "description": "",
                 "id": 10,
@@ -148,6 +156,7 @@
                 "urlPath": "\/tag\/graphql\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 4,
                 "description": "",
                 "id": 9,
@@ -178,6 +187,7 @@
                 "urlPath": "\/tag\/features\/"
             },
             {
+                "taxonomy": "post_tag",
                 "count": 0,
                 "description": "",
                 "id": 16,
@@ -189,6 +199,441 @@
                 "slug": "also-never-used",
                 "url": "https:\/\/gatographql.lndo.site\/tag\/also-never-used\/",
                 "urlPath": "\/tag\/also-never-used\/"
+            }
+        ],
+        "postTagsWithTaxonomy": [
+            {
+                "taxonomy": "post_tag",
+                "count": 0,
+                "description": "",
+                "id": 18,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "zoroastro",
+                "postCount": 0,
+                "posts": [],
+                "slug": "zoroastro",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/zoroastro\/",
+                "urlPath": "\/tag\/zoroastro\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 0,
+                "description": "",
+                "id": 17,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "xcel",
+                "postCount": 0,
+                "posts": [],
+                "slug": "xcel",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/xcel\/",
+                "urlPath": "\/tag\/xcel\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 2,
+                "description": "",
+                "id": 15,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "wordpress",
+                "postCount": 2,
+                "posts": [
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "slug": "wordpress",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/wordpress\/",
+                "urlPath": "\/tag\/wordpress\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 14,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Security",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
+                "slug": "security",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/security\/",
+                "urlPath": "\/tag\/security\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 13,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "release",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    }
+                ],
+                "slug": "release",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/release\/",
+                "urlPath": "\/tag\/release\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 3,
+                "description": "",
+                "id": 12,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "plugin",
+                "postCount": 3,
+                "posts": [
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    },
+                    {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    }
+                ],
+                "slug": "plugin",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/plugin\/",
+                "urlPath": "\/tag\/plugin\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 11,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "ideas",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1121,
+                        "title": "Customize the schema for each client"
+                    }
+                ],
+                "slug": "ideas",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/ideas\/",
+                "urlPath": "\/tag\/ideas\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 10,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "GraphQL",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "slug": "graphql",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/graphql\/",
+                "urlPath": "\/tag\/graphql\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 4,
+                "description": "",
+                "id": 9,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "features",
+                "postCount": 4,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 1121,
+                        "title": "Customize the schema for each client"
+                    },
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "slug": "features",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/features\/",
+                "urlPath": "\/tag\/features\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 0,
+                "description": "",
+                "id": 16,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Also never used",
+                "postCount": 0,
+                "posts": [],
+                "slug": "also-never-used",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/also-never-used\/",
+                "urlPath": "\/tag\/also-never-used\/"
+            }
+        ],
+        "additionalPostTags": [
+            {
+                "taxonomy": "additional-post-tag",
+                "count": 1,
+                "description": "",
+                "id": 43,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Racing cars",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
+                "slug": "racing-cars",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-tag\/racing-cars\/",
+                "urlPath": "\/additional-post-tag\/racing-cars\/"
+            },
+            {
+                "taxonomy": "additional-post-tag",
+                "count": 1,
+                "description": "",
+                "id": 44,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Horses",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    }
+                ],
+                "slug": "horses",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-tag\/horses\/",
+                "urlPath": "\/additional-post-tag\/horses\/"
+            }
+        ],
+        "allPostTags": [
+            {
+                "taxonomy": "post_tag",
+                "count": 0,
+                "description": "",
+                "id": 18,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "zoroastro",
+                "postCount": 0,
+                "posts": [],
+                "slug": "zoroastro",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/zoroastro\/",
+                "urlPath": "\/tag\/zoroastro\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 0,
+                "description": "",
+                "id": 17,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "xcel",
+                "postCount": 0,
+                "posts": [],
+                "slug": "xcel",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/xcel\/",
+                "urlPath": "\/tag\/xcel\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 2,
+                "description": "",
+                "id": 15,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "wordpress",
+                "postCount": 2,
+                "posts": [
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "slug": "wordpress",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/wordpress\/",
+                "urlPath": "\/tag\/wordpress\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 14,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Security",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
+                "slug": "security",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/security\/",
+                "urlPath": "\/tag\/security\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 13,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "release",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    }
+                ],
+                "slug": "release",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/release\/",
+                "urlPath": "\/tag\/release\/"
+            },
+            {
+                "taxonomy": "additional-post-tag",
+                "count": 1,
+                "description": "",
+                "id": 43,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Racing cars",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
+                "slug": "racing-cars",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-tag\/racing-cars\/",
+                "urlPath": "\/additional-post-tag\/racing-cars\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 3,
+                "description": "",
+                "id": 12,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "plugin",
+                "postCount": 3,
+                "posts": [
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    },
+                    {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    }
+                ],
+                "slug": "plugin",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/plugin\/",
+                "urlPath": "\/tag\/plugin\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 11,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "ideas",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1121,
+                        "title": "Customize the schema for each client"
+                    }
+                ],
+                "slug": "ideas",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/ideas\/",
+                "urlPath": "\/tag\/ideas\/"
+            },
+            {
+                "taxonomy": "additional-post-tag",
+                "count": 1,
+                "description": "",
+                "id": 44,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Horses",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    }
+                ],
+                "slug": "horses",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-tag\/horses\/",
+                "urlPath": "\/additional-post-tag\/horses\/"
+            },
+            {
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 10,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "GraphQL",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    }
+                ],
+                "slug": "graphql",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/graphql\/",
+                "urlPath": "\/tag\/graphql\/"
             }
         ],
         "nonEmptyPostTags": [
@@ -228,6 +673,7 @@
         "post": {
             "tags": [
                 {
+                    "taxonomy": "post_tag",
                     "count": 1,
                     "description": "",
                     "id": 14,
@@ -246,6 +692,7 @@
                     "urlPath": "\/tag\/security\/"
                 },
                 {
+                    "taxonomy": "post_tag",
                     "count": 4,
                     "description": "",
                     "id": 9,
@@ -276,6 +723,27 @@
                     "urlPath": "\/tag\/features\/"
                 }
             ],
+            "additionalTags": [
+                {
+                    "taxonomy": "additional-post-tag",
+                    "count": 1,
+                    "description": "",
+                    "id": 43,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Racing cars",
+                    "postCount": 1,
+                    "posts": [
+                        {
+                            "id": 1125,
+                            "title": "Public or Private API mode, for extra security"
+                        }
+                    ],
+                    "slug": "racing-cars",
+                    "url": "https:\/\/gatographql.lndo.site\/additional-post-tag\/racing-cars\/",
+                    "urlPath": "\/additional-post-tag\/racing-cars\/"
+                }
+            ],
             "tagsByExcludeIDs": [
                 {
                     "id": 14
@@ -284,6 +752,7 @@
                     "id": 9
                 }
             ],
+            "emptyTagsByIds": [],
             "tagsByIds": [],
             "tagsByMetaQuery": [
                 {
@@ -325,6 +794,53 @@
             ]
         },
         "postsByTagIDs": [
+            {
+                "id": 1125,
+                "title": "Public or Private API mode, for extra security",
+                "tags": [
+                    {
+                        "id": 14
+                    },
+                    {
+                        "id": 9
+                    }
+                ]
+            },
+            {
+                "id": 1119,
+                "title": "Nested mutations are a must have",
+                "tags": [
+                    {
+                        "id": 15
+                    },
+                    {
+                        "id": 12
+                    },
+                    {
+                        "id": 9
+                    }
+                ]
+            },
+            {
+                "id": 1116,
+                "title": "Working on flat chain syntax next",
+                "tags": [
+                    {
+                        "id": 15
+                    },
+                    {
+                        "id": 12
+                    },
+                    {
+                        "id": 10
+                    },
+                    {
+                        "id": 9
+                    }
+                ]
+            }
+        ],
+        "postsByTagIDsWithTaxonomy": [
             {
                 "id": 1125,
                 "title": "Public or Private API mode, for extra security",
@@ -467,6 +983,53 @@
                 ]
             }
         ],
+        "postsByTagSlugsWithTaxonomy": [
+            {
+                "id": 1119,
+                "title": "Nested mutations are a must have",
+                "tags": [
+                    {
+                        "slug": "wordpress"
+                    },
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
+            {
+                "id": 1116,
+                "title": "Working on flat chain syntax next",
+                "tags": [
+                    {
+                        "slug": "wordpress"
+                    },
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "graphql"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
+            {
+                "id": 1113,
+                "title": "Released v0.6, check it out",
+                "tags": [
+                    {
+                        "slug": "release"
+                    },
+                    {
+                        "slug": "plugin"
+                    }
+                ]
+            }
+        ],
         "postsExcludeByTagSlugs": [
             {
                 "id": 1140,
@@ -517,6 +1080,7 @@
             }
         ],
         "postsByTagByID": {
+            "taxonomy": "post_tag",
             "count": 2,
             "description": "",
             "id": 15,
@@ -539,6 +1103,7 @@
             "urlPath": "\/tag\/wordpress\/"
         },
         "postsByTagBySlug": {
+            "taxonomy": "post_tag",
             "count": 2,
             "description": "",
             "id": 15,
@@ -572,6 +1137,19 @@
             "GraphQL",
             "features",
             "Also never used"
+        ],
+        "allPostTagCount": 13,
+        "allPostTagNames": [
+            "zoroastro",
+            "xcel",
+            "wordpress",
+            "Security",
+            "release",
+            "Racing cars",
+            "plugin",
+            "ideas",
+            "Horses",
+            "GraphQL"
         ],
         "postsByTagByNonExistingID": null,
         "postsByTagByNonExistingSlug": null,
