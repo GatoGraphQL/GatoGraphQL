@@ -9,9 +9,13 @@ use PoPCMSSchema\CustomPostMutations\Constants\GenericCustomPostCRUDHookNames;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {
-    protected function getValidateCreateOrUpdateHookName(): string
+    protected function getValidateCreateHookName(): string
     {
-        return GenericCustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE;
+        return GenericCustomPostCRUDHookNames::VALIDATE_CREATE;
+    }
+    protected function getValidateUpdateHookName(): string
+    {
+        return GenericCustomPostCRUDHookNames::VALIDATE_UPDATE;
     }
     protected function getExecuteCreateOrUpdateHookName(): string
     {
