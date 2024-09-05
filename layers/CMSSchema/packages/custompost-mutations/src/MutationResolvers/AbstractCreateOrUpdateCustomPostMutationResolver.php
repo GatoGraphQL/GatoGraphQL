@@ -200,6 +200,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             CustomPostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
+            $customPostID,
         );
     }
 
