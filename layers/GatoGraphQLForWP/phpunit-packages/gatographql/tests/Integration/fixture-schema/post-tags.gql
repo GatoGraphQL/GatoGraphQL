@@ -27,9 +27,6 @@
     additionalTags: tags(taxonomy: "additional-post-tag") {
       ...PostTagData
     }
-    allTags: tags(taxonomy: null) {
-      ...PostTagData
-    }
     tagsByExcludeIDs: tags(filter: { excludeIDs: [5] }) {
       id
     }
@@ -78,8 +75,7 @@
 
   postsByTagIDsWithTaxonomy: posts(
     filter: {
-      tags: { includeBy: { ids: [15, 14] } }
-      taxonomy: post_tag
+      tags: { includeBy: { ids: [15, 14] }, taxonomy: post_tag }
     }
   ) {
     id
@@ -111,8 +107,7 @@
 
   postsByTagSlugsWithTaxonomy: posts(
     filter: {
-      tags: { includeBy: { slugs: ["release", "plugin"] } }
-      taxonomy: post_tag
+      tags: { includeBy: { slugs: ["release", "plugin"] }, taxonomy: post_tag }
     }
   ) {
     id

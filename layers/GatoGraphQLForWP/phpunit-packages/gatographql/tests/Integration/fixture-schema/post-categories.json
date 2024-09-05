@@ -2,6 +2,7 @@
     "data": {
         "postCategories": [
             {
+                "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
                 "count": 4,
@@ -36,6 +37,7 @@
                 "children": []
             },
             {
+                "taxonomy": "category",
                 "childCount": 1,
                 "childNames": [
                     "Most special topic"
@@ -65,6 +67,7 @@
                 "urlPath": "\/category\/blog\/resource\/special-topic\/",
                 "children": [
                     {
+                        "taxonomy": "category",
                         "childCount": 0,
                         "childNames": [],
                         "count": 1,
@@ -90,6 +93,7 @@
                 ]
             },
             {
+                "taxonomy": "category",
                 "childCount": 1,
                 "childNames": [
                     "Special topic"
@@ -127,6 +131,7 @@
                 "urlPath": "\/category\/blog\/resource\/",
                 "children": [
                     {
+                        "taxonomy": "category",
                         "childCount": 1,
                         "childNames": [
                             "Most special topic"
@@ -158,6 +163,7 @@
                 ]
             },
             {
+                "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
                 "count": 0,
@@ -175,6 +181,7 @@
                 "children": []
             },
             {
+                "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
                 "count": 1,
@@ -199,6 +206,7 @@
                 "children": []
             },
             {
+                "taxonomy": "category",
                 "childCount": 1,
                 "childNames": [
                     "Resource"
@@ -238,6 +246,7 @@
                 "urlPath": "\/category\/blog\/",
                 "children": [
                     {
+                        "taxonomy": "category",
                         "childCount": 1,
                         "childNames": [
                             "Special topic"
@@ -277,6 +286,735 @@
                 ]
             },
             {
+                "taxonomy": "category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 3,
+                "description": "",
+                "id": 2,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Advanced",
+                "parent": null,
+                "postCount": 3,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    },
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    }
+                ],
+                "slug": "advanced",
+                "url": "https:\/\/gatographql.lndo.site\/category\/advanced\/",
+                "urlPath": "\/category\/advanced\/",
+                "children": []
+            }
+        ],
+        "postCategoriesWithTaxonomy": [
+            {
+                "taxonomy": "category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 4,
+                "description": "",
+                "id": 1,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Uncategorized",
+                "parent": null,
+                "postCount": 4,
+                "posts": [
+                    {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
+                    {
+                        "id": 1121,
+                        "title": "Customize the schema for each client"
+                    },
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    },
+                    {
+                        "id": 1,
+                        "title": "Hello world!"
+                    }
+                ],
+                "slug": "uncategorized",
+                "url": "https:\/\/gatographql.lndo.site\/category\/uncategorized\/",
+                "urlPath": "\/category\/uncategorized\/",
+                "children": []
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 1,
+                "childNames": [
+                    "Most special topic"
+                ],
+                "count": 1,
+                "description": "",
+                "id": 6,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Special topic",
+                "parent": {
+                    "id": 4
+                },
+                "postCount": 2,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    },
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    }
+                ],
+                "slug": "special-topic",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                "urlPath": "\/category\/blog\/resource\/special-topic\/",
+                "children": [
+                    {
+                        "taxonomy": "category",
+                        "childCount": 0,
+                        "childNames": [],
+                        "count": 1,
+                        "description": "",
+                        "id": 7,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Most special topic",
+                        "parent": {
+                            "id": 6
+                        },
+                        "postCount": 1,
+                        "posts": [
+                            {
+                                "id": 1128,
+                                "title": "HTTP caching improves performance"
+                            }
+                        ],
+                        "slug": "most-special-topic",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                        "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/"
+                    }
+                ]
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 1,
+                "childNames": [
+                    "Special topic"
+                ],
+                "count": 2,
+                "description": "",
+                "id": 4,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Resource",
+                "parent": {
+                    "id": 3
+                },
+                "postCount": 4,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    },
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    },
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    }
+                ],
+                "slug": "resource",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
+                "urlPath": "\/category\/blog\/resource\/",
+                "children": [
+                    {
+                        "taxonomy": "category",
+                        "childCount": 1,
+                        "childNames": [
+                            "Most special topic"
+                        ],
+                        "count": 1,
+                        "description": "",
+                        "id": 6,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Special topic",
+                        "parent": {
+                            "id": 4
+                        },
+                        "postCount": 2,
+                        "posts": [
+                            {
+                                "id": 1128,
+                                "title": "HTTP caching improves performance"
+                            },
+                            {
+                                "id": 1123,
+                                "title": "GraphQL or REST? Why not both?"
+                            }
+                        ],
+                        "slug": "special-topic",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                        "urlPath": "\/category\/blog\/resource\/special-topic\/"
+                    }
+                ]
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 0,
+                "description": "",
+                "id": 5,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Never used",
+                "parent": null,
+                "postCount": 0,
+                "posts": [],
+                "slug": "never-used",
+                "url": "https:\/\/gatographql.lndo.site\/category\/never-used\/",
+                "urlPath": "\/category\/never-used\/",
+                "children": []
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 1,
+                "description": "",
+                "id": 7,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Most special topic",
+                "parent": {
+                    "id": 6
+                },
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    }
+                ],
+                "slug": "most-special-topic",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                "children": []
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 1,
+                "childNames": [
+                    "Resource"
+                ],
+                "count": 3,
+                "description": "",
+                "id": 3,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Blog",
+                "parent": null,
+                "postCount": 5,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    },
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    },
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    }
+                ],
+                "slug": "blog",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/",
+                "urlPath": "\/category\/blog\/",
+                "children": [
+                    {
+                        "taxonomy": "category",
+                        "childCount": 1,
+                        "childNames": [
+                            "Special topic"
+                        ],
+                        "count": 2,
+                        "description": "",
+                        "id": 4,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Resource",
+                        "parent": {
+                            "id": 3
+                        },
+                        "postCount": 4,
+                        "posts": [
+                            {
+                                "id": 1128,
+                                "title": "HTTP caching improves performance"
+                            },
+                            {
+                                "id": 1125,
+                                "title": "Public or Private API mode, for extra security"
+                            },
+                            {
+                                "id": 1123,
+                                "title": "GraphQL or REST? Why not both?"
+                            },
+                            {
+                                "id": 1119,
+                                "title": "Nested mutations are a must have"
+                            }
+                        ],
+                        "slug": "resource",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
+                        "urlPath": "\/category\/blog\/resource\/"
+                    }
+                ]
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 3,
+                "description": "",
+                "id": 2,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Advanced",
+                "parent": null,
+                "postCount": 3,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    },
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    }
+                ],
+                "slug": "advanced",
+                "url": "https:\/\/gatographql.lndo.site\/category\/advanced\/",
+                "urlPath": "\/category\/advanced\/",
+                "children": []
+            }
+        ],
+        "additionalPostCategories": [
+            {
+                "taxonomy": "additional-post-category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 1,
+                "description": "",
+                "id": 41,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Swimming",
+                "parent": null,
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
+                "slug": "swimming",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/swimming\/",
+                "urlPath": "\/additional-post-category\/swimming\/",
+                "children": []
+            },
+            {
+                "taxonomy": "additional-post-category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 1,
+                "description": "",
+                "id": 42,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Foosball",
+                "parent": null,
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    }
+                ],
+                "slug": "foosball",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/foosball\/",
+                "urlPath": "\/additional-post-category\/foosball\/",
+                "children": []
+            }
+        ],
+        "allPostCategories": [
+            {
+                "taxonomy": "category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 4,
+                "description": "",
+                "id": 1,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Uncategorized",
+                "parent": null,
+                "postCount": 4,
+                "posts": [
+                    {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
+                    {
+                        "id": 1121,
+                        "title": "Customize the schema for each client"
+                    },
+                    {
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next"
+                    },
+                    {
+                        "id": 1,
+                        "title": "Hello world!"
+                    }
+                ],
+                "slug": "uncategorized",
+                "url": "https:\/\/gatographql.lndo.site\/category\/uncategorized\/",
+                "urlPath": "\/category\/uncategorized\/",
+                "children": []
+            },
+            {
+                "taxonomy": "additional-post-category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 1,
+                "description": "",
+                "id": 41,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Swimming",
+                "parent": null,
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    }
+                ],
+                "slug": "swimming",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/swimming\/",
+                "urlPath": "\/additional-post-category\/swimming\/",
+                "children": []
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 1,
+                "childNames": [
+                    "Most special topic"
+                ],
+                "count": 1,
+                "description": "",
+                "id": 6,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Special topic",
+                "parent": {
+                    "id": 4
+                },
+                "postCount": 2,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    },
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    }
+                ],
+                "slug": "special-topic",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                "urlPath": "\/category\/blog\/resource\/special-topic\/",
+                "children": [
+                    {
+                        "taxonomy": "category",
+                        "childCount": 0,
+                        "childNames": [],
+                        "count": 1,
+                        "description": "",
+                        "id": 7,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Most special topic",
+                        "parent": {
+                            "id": 6
+                        },
+                        "postCount": 1,
+                        "posts": [
+                            {
+                                "id": 1128,
+                                "title": "HTTP caching improves performance"
+                            }
+                        ],
+                        "slug": "most-special-topic",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                        "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/"
+                    }
+                ]
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 1,
+                "childNames": [
+                    "Special topic"
+                ],
+                "count": 2,
+                "description": "",
+                "id": 4,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Resource",
+                "parent": {
+                    "id": 3
+                },
+                "postCount": 4,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    },
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    },
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    }
+                ],
+                "slug": "resource",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
+                "urlPath": "\/category\/blog\/resource\/",
+                "children": [
+                    {
+                        "taxonomy": "category",
+                        "childCount": 1,
+                        "childNames": [
+                            "Most special topic"
+                        ],
+                        "count": 1,
+                        "description": "",
+                        "id": 6,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Special topic",
+                        "parent": {
+                            "id": 4
+                        },
+                        "postCount": 2,
+                        "posts": [
+                            {
+                                "id": 1128,
+                                "title": "HTTP caching improves performance"
+                            },
+                            {
+                                "id": 1123,
+                                "title": "GraphQL or REST? Why not both?"
+                            }
+                        ],
+                        "slug": "special-topic",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                        "urlPath": "\/category\/blog\/resource\/special-topic\/"
+                    }
+                ]
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 0,
+                "description": "",
+                "id": 5,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Never used",
+                "parent": null,
+                "postCount": 0,
+                "posts": [],
+                "slug": "never-used",
+                "url": "https:\/\/gatographql.lndo.site\/category\/never-used\/",
+                "urlPath": "\/category\/never-used\/",
+                "children": []
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 1,
+                "description": "",
+                "id": 7,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Most special topic",
+                "parent": {
+                    "id": 6
+                },
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    }
+                ],
+                "slug": "most-special-topic",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                "children": []
+            },
+            {
+                "taxonomy": "additional-post-category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 1,
+                "description": "",
+                "id": 42,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Foosball",
+                "parent": null,
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    }
+                ],
+                "slug": "foosball",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/foosball\/",
+                "urlPath": "\/additional-post-category\/foosball\/",
+                "children": []
+            },
+            {
+                "taxonomy": "category",
+                "childCount": 1,
+                "childNames": [
+                    "Resource"
+                ],
+                "count": 3,
+                "description": "",
+                "id": 3,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Blog",
+                "parent": null,
+                "postCount": 5,
+                "posts": [
+                    {
+                        "id": 1128,
+                        "title": "HTTP caching improves performance"
+                    },
+                    {
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?"
+                    },
+                    {
+                        "id": 1119,
+                        "title": "Nested mutations are a must have"
+                    },
+                    {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    }
+                ],
+                "slug": "blog",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/",
+                "urlPath": "\/category\/blog\/",
+                "children": [
+                    {
+                        "taxonomy": "category",
+                        "childCount": 1,
+                        "childNames": [
+                            "Special topic"
+                        ],
+                        "count": 2,
+                        "description": "",
+                        "id": 4,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Resource",
+                        "parent": {
+                            "id": 3
+                        },
+                        "postCount": 4,
+                        "posts": [
+                            {
+                                "id": 1128,
+                                "title": "HTTP caching improves performance"
+                            },
+                            {
+                                "id": 1125,
+                                "title": "Public or Private API mode, for extra security"
+                            },
+                            {
+                                "id": 1123,
+                                "title": "GraphQL or REST? Why not both?"
+                            },
+                            {
+                                "id": 1119,
+                                "title": "Nested mutations are a must have"
+                            }
+                        ],
+                        "slug": "resource",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
+                        "urlPath": "\/category\/blog\/resource\/"
+                    }
+                ]
+            },
+            {
+                "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
                 "count": 3,
@@ -336,6 +1074,7 @@
         "post": {
             "categories": [
                 {
+                    "taxonomy": "category",
                     "childCount": 1,
                     "childNames": [
                         "Special topic"
@@ -373,6 +1112,7 @@
                     "urlPath": "\/category\/blog\/resource\/",
                     "children": [
                         {
+                            "taxonomy": "category",
                             "childCount": 1,
                             "childNames": [
                                 "Most special topic"
@@ -404,6 +1144,7 @@
                     ]
                 },
                 {
+                    "taxonomy": "category",
                     "childCount": 1,
                     "childNames": [
                         "Resource"
@@ -443,6 +1184,7 @@
                     "urlPath": "\/category\/blog\/",
                     "children": [
                         {
+                            "taxonomy": "category",
                             "childCount": 1,
                             "childNames": [
                                 "Special topic"
@@ -482,6 +1224,7 @@
                     ]
                 },
                 {
+                    "taxonomy": "category",
                     "childCount": 0,
                     "childNames": [],
                     "count": 3,
@@ -512,6 +1255,31 @@
                     "children": []
                 }
             ],
+            "additionalCategories": [
+                {
+                    "taxonomy": "additional-post-category",
+                    "childCount": 0,
+                    "childNames": [],
+                    "count": 1,
+                    "description": "",
+                    "id": 41,
+                    "metaValue": null,
+                    "metaValues": null,
+                    "name": "Swimming",
+                    "parent": null,
+                    "postCount": 1,
+                    "posts": [
+                        {
+                            "id": 1125,
+                            "title": "Public or Private API mode, for extra security"
+                        }
+                    ],
+                    "slug": "swimming",
+                    "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/swimming\/",
+                    "urlPath": "\/additional-post-category\/swimming\/",
+                    "children": []
+                }
+            ],
             "categoriesByExcludeIDs": [
                 {
                     "id": 4
@@ -520,6 +1288,7 @@
                     "id": 3
                 }
             ],
+            "emptyCategoriesByIds": [],
             "categoriesByIds": [
                 {
                     "id": 2
@@ -581,6 +1350,95 @@
             ]
         },
         "postsByCategoryIDs": [
+            {
+                "id": 1140,
+                "title": "Welcome to a single post full of blocks!",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 1128,
+                "title": "HTTP caching improves performance",
+                "categories": [
+                    {
+                        "id": 7
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 1125,
+                "title": "Public or Private API mode, for extra security",
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 1123,
+                "title": "GraphQL or REST? Why not both?",
+                "categories": [
+                    {
+                        "id": 6
+                    }
+                ]
+            },
+            {
+                "id": 1121,
+                "title": "Customize the schema for each client",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 1119,
+                "title": "Nested mutations are a must have",
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 1116,
+                "title": "Working on flat chain syntax next",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "Hello world!",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            }
+        ],
+        "postsByCategoryIDsWithTaxonomy": [
             {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
@@ -733,6 +1591,59 @@
                 ]
             }
         ],
+        "postsByCategorySlugsWithTaxonomy": [
+            {
+                "id": 1128,
+                "title": "HTTP caching improves performance",
+                "categories": [
+                    {
+                        "id": 7
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 1125,
+                "title": "Public or Private API mode, for extra security",
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 1123,
+                "title": "GraphQL or REST? Why not both?",
+                "categories": [
+                    {
+                        "id": 6
+                    }
+                ]
+            },
+            {
+                "id": 1119,
+                "title": "Nested mutations are a must have",
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            }
+        ],
         "postsExcludeByCategorySlugs": [
             {
                 "id": 1140,
@@ -781,6 +1692,7 @@
             }
         ],
         "postsByCategoryByID": {
+            "taxonomy": "category",
             "childCount": 0,
             "childNames": [],
             "count": 4,
@@ -814,6 +1726,7 @@
             "urlPath": "\/category\/uncategorized\/"
         },
         "postsByCategoryBySlug": {
+            "taxonomy": "category",
             "childCount": 1,
             "childNames": [
                 "Special topic"
@@ -857,6 +1770,18 @@
             "Resource",
             "Never used",
             "Most special topic",
+            "Blog",
+            "Advanced"
+        ],
+        "allPostCategoryCount": 9,
+        "allPostCategoryNames": [
+            "Uncategorized",
+            "Swimming",
+            "Special topic",
+            "Resource",
+            "Never used",
+            "Most special topic",
+            "Foosball",
             "Blog",
             "Advanced"
         ],

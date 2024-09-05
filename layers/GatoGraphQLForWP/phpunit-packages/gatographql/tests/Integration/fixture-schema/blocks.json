@@ -192,69 +192,6 @@
                 "id": 1619,
                 "code": "PoP\/ComponentModel@e1"
             }
-        },
-        {
-            "message": "Error parsing post ID 1658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
-            "locations": [
-                {
-                    "line": 302,
-                    "column": 7
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "blocks { ... }",
-                    "...on GenericCustomPost { ... }",
-                    "noContent: customPost(by: {id: 1658}) { ... }",
-                    "query { ... }"
-                ],
-                "type": "GenericCustomPost",
-                "field": "blocks { ... }",
-                "id": 1658,
-                "code": "PoP\/ComponentModel@e1"
-            }
-        },
-        {
-            "message": "Error parsing post ID 1658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
-            "locations": [
-                {
-                    "line": 305,
-                    "column": 7
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "blockDataItems",
-                    "...on GenericCustomPost { ... }",
-                    "noContent: customPost(by: {id: 1658}) { ... }",
-                    "query { ... }"
-                ],
-                "type": "GenericCustomPost",
-                "field": "blockDataItems",
-                "id": 1658,
-                "code": "PoP\/ComponentModel@e1"
-            }
-        },
-        {
-            "message": "Error parsing post ID 1658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
-            "locations": [
-                {
-                    "line": 306,
-                    "column": 7
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "blockFlattenedDataItems",
-                    "...on GenericCustomPost { ... }",
-                    "noContent: customPost(by: {id: 1658}) { ... }",
-                    "query { ... }"
-                ],
-                "type": "GenericCustomPost",
-                "field": "blockFlattenedDataItems",
-                "id": 1658,
-                "code": "PoP\/ComponentModel@e1"
-            }
         }
     ],
     "data": {
@@ -6949,9 +6886,9 @@
             "title": "Dummy CPT with no content",
             "rawContent": "",
             "customPostType": "dummy-cpt",
-            "blocks": null,
-            "blockDataItems": null,
-            "blockFlattenedDataItems": null
+            "blocks": [],
+            "blockDataItems": [],
+            "blockFlattenedDataItems": []
         },
         "serverSideRegisteredBlocks": {
             "__typename": "GenericCustomPost",

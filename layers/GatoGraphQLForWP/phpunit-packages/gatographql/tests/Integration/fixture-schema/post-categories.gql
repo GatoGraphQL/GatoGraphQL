@@ -45,12 +45,6 @@
         ...PostCategoryData
       }
     }
-    allCategories: categories(taxonomy: null) {
-      ...PostCategoryData
-      children {
-        ...PostCategoryData
-      }
-    }
     categoriesByExcludeIDs: categories(filter: { excludeIDs: [2] }) {
       id
     }
@@ -102,8 +96,7 @@
 
   postsByCategoryIDsWithTaxonomy: posts(
     filter: {
-      categories: { includeBy: { ids: [1, 4] } }
-      taxonomy: category
+      categories: { includeBy: { ids: [1, 4] }, taxonomy: category }
     }
   ) {
     id
@@ -135,8 +128,7 @@
 
   postsByCategorySlugsWithTaxonomy: posts(
     filter: {
-      categories: { includeBy: { slugs: ["resource"] } }
-      taxonomy: category
+      categories: { includeBy: { slugs: ["resource"] }, taxonomy: category }
     }
   ) {
     id
