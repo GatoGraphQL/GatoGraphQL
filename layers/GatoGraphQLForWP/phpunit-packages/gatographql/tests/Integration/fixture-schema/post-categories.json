@@ -637,8 +637,10 @@
         "additionalPostCategories": [
             {
                 "taxonomy": "additional-post-category",
-                "childCount": 0,
-                "childNames": [],
+                "childCount": 1,
+                "childNames": [
+                    "Diving"
+                ],
                 "count": 1,
                 "description": "",
                 "id": 41,
@@ -656,7 +658,27 @@
                 "slug": "swimming",
                 "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/swimming\/",
                 "urlPath": "\/additional-post-category\/swimming\/",
-                "children": []
+                "children": [
+                    {
+                        "taxonomy": "additional-post-category",
+                        "childCount": 0,
+                        "childNames": [],
+                        "count": 0,
+                        "description": "",
+                        "id": 49,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Diving",
+                        "parent": {
+                            "id": 41
+                        },
+                        "postCount": 0,
+                        "posts": [],
+                        "slug": "diving",
+                        "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
+                        "urlPath": "\/additional-post-category\/diving\/"
+                    }
+                ]
             },
             {
                 "taxonomy": "additional-post-category",
@@ -679,6 +701,26 @@
                 "slug": "foosball",
                 "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/foosball\/",
                 "urlPath": "\/additional-post-category\/foosball\/",
+                "children": []
+            },
+            {
+                "taxonomy": "additional-post-category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 0,
+                "description": "",
+                "id": 49,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Diving",
+                "parent": {
+                    "id": 41
+                },
+                "postCount": 0,
+                "posts": [],
+                "slug": "diving",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
+                "urlPath": "\/additional-post-category\/diving\/",
                 "children": []
             }
         ],
@@ -720,8 +762,10 @@
             },
             {
                 "taxonomy": "additional-post-category",
-                "childCount": 0,
-                "childNames": [],
+                "childCount": 1,
+                "childNames": [
+                    "Diving"
+                ],
                 "count": 1,
                 "description": "",
                 "id": 41,
@@ -739,7 +783,27 @@
                 "slug": "swimming",
                 "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/swimming\/",
                 "urlPath": "\/additional-post-category\/swimming\/",
-                "children": []
+                "children": [
+                    {
+                        "taxonomy": "additional-post-category",
+                        "childCount": 0,
+                        "childNames": [],
+                        "count": 0,
+                        "description": "",
+                        "id": 49,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Diving",
+                        "parent": {
+                            "id": 41
+                        },
+                        "postCount": 0,
+                        "posts": [],
+                        "slug": "diving",
+                        "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
+                        "urlPath": "\/additional-post-category\/diving\/"
+                    }
+                ]
             },
             {
                 "taxonomy": "category",
@@ -931,6 +995,26 @@
                 "slug": "foosball",
                 "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/foosball\/",
                 "urlPath": "\/additional-post-category\/foosball\/",
+                "children": []
+            },
+            {
+                "taxonomy": "additional-post-category",
+                "childCount": 0,
+                "childNames": [],
+                "count": 0,
+                "description": "",
+                "id": 49,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Diving",
+                "parent": {
+                    "id": 41
+                },
+                "postCount": 0,
+                "posts": [],
+                "slug": "diving",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
+                "urlPath": "\/additional-post-category\/diving\/",
                 "children": []
             },
             {
@@ -1258,8 +1342,10 @@
             "additionalCategories": [
                 {
                     "taxonomy": "additional-post-category",
-                    "childCount": 0,
-                    "childNames": [],
+                    "childCount": 1,
+                    "childNames": [
+                        "Diving"
+                    ],
                     "count": 1,
                     "description": "",
                     "id": 41,
@@ -1277,7 +1363,27 @@
                     "slug": "swimming",
                     "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/swimming\/",
                     "urlPath": "\/additional-post-category\/swimming\/",
-                    "children": []
+                    "children": [
+                        {
+                            "taxonomy": "additional-post-category",
+                            "childCount": 0,
+                            "childNames": [],
+                            "count": 0,
+                            "description": "",
+                            "id": 49,
+                            "metaValue": null,
+                            "metaValues": null,
+                            "name": "Diving",
+                            "parent": {
+                                "id": 41
+                            },
+                            "postCount": 0,
+                            "posts": [],
+                            "slug": "diving",
+                            "url": "https:\/\/gatographql.lndo.site\/additional-post-category\/diving\/",
+                            "urlPath": "\/additional-post-category\/diving\/"
+                        }
+                    ]
                 }
             ],
             "categoriesByExcludeIDs": [
@@ -1773,7 +1879,7 @@
             "Blog",
             "Advanced"
         ],
-        "allPostCategoryCount": 9,
+        "allPostCategoryCount": 10,
         "allPostCategoryNames": [
             "Uncategorized",
             "Swimming",
@@ -1782,6 +1888,7 @@
             "Never used",
             "Most special topic",
             "Foosball",
+            "Diving",
             "Blog",
             "Advanced"
         ],
