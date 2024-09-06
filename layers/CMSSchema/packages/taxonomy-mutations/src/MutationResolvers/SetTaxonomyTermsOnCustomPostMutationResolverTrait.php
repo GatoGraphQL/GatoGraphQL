@@ -99,6 +99,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * @return array<string,array<string|int>>|null
      */
     protected function getTaxonomyToTaxonomyTermsBySlug(
+        bool $isHierarchical,
         array $taxonomyTermSlugs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

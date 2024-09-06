@@ -117,6 +117,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         if (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
             $categorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
             return $this->getTaxonomyToTaxonomyTermsBySlug(
+                true,
                 $categorySlugs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
