@@ -84,10 +84,14 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         bool $isHierarchical,
         string $taxonomyName,
     ): bool {
-        if ($isHierarchical) {
-            return $this->getTaxonomyTermTypeAPI()->isTaxonomyHierarchical($taxonomyName);
+        $isTaxonomyHierarchical = $this->getTaxonomyTermTypeAPI()->isTaxonomyHierarchical($taxonomyName);
+        if ($isTaxonomyHierarchical === null) {
+            return false;
         }
-        return !$this->getTaxonomyTermTypeAPI()->isTaxonomyHierarchical($taxonomyName);
+        if ($isHierarchical) {
+            return $isTaxonomyHierarchical;
+        }
+        return !$isTaxonomyHierarchical;
     }
 
     /**
