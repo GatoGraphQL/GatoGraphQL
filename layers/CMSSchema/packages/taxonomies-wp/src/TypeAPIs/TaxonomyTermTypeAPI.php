@@ -31,10 +31,10 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         $taxonomyTermExists = term_exists($taxonomyTermIDOrSlug, $taxonomy ?? '');
         return $taxonomyTermExists !==  null;
     }
-    public function getTaxonomyTermID(string $taxonomyTermSlug, string $taxonomy = ''): string|int|null
+    public function getTaxonomyTermID(string $taxonomyTermSlug, ?string $taxonomy = null): string|int|null
     {
         /** @var array<string,string|int>|string|int|null */
-        $taxonomyTerm = term_exists($taxonomyTermSlug, $taxonomy);
+        $taxonomyTerm = term_exists($taxonomyTermSlug, $taxonomy ?? '');
         if ($taxonomyTerm === null) {
             return null;
         }
