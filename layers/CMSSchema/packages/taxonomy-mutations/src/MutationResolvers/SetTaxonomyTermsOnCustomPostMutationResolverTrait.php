@@ -88,10 +88,8 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         if ($isTaxonomyHierarchical === null) {
             return false;
         }
-        if ($isHierarchical) {
-            return $isTaxonomyHierarchical;
-        }
-        return !$isTaxonomyHierarchical;
+        return ($isHierarchical && $isTaxonomyHierarchical)
+            || (!$isHierarchical && !$isTaxonomyHierarchical);
     }
 
     /**
