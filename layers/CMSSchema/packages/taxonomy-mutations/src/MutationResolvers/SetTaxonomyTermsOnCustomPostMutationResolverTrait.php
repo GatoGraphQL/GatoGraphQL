@@ -164,7 +164,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
                 );
                 continue;
             }
-            
+
             $taxonomyToTaxonomyTermsIDs[$taxonomyName] ??= [];
             $taxonomyToTaxonomyTermsIDs[$taxonomyName][] = $taxonomyTermID;
         }

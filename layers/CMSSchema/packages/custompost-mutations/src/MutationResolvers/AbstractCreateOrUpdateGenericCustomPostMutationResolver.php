@@ -110,7 +110,7 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
             $fieldDataAccessor,
         );
     }
-    
+
     protected function triggerExecuteCreateOrUpdateHook(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -129,7 +129,7 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
-    
+
     protected function triggerExecuteUpdateHook(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,

@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolver
 {
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
-    
+
     final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
     {
         $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
@@ -27,7 +27,7 @@ class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldReso
         }
         return $this->taxonomyTermTypeAPI;
     }
-    
+
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
      */
