@@ -92,6 +92,7 @@ Several persisted queries have been added:
 
 - Add `featuredImage` field on `GenericCustomPost` ([#2806](https://github.com/GatoGraphQL/GatoGraphQL/pull/2806))
 - On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content ([#2814](https://github.com/GatoGraphQL/GatoGraphQL/pull/2814))
+- Fixed: Pass mandatory `attrs` field when creating persisted query blocks ([#3adde2e](https://github.com/GatoGraphQL/GatoGraphQL/commit/3adde2ecffc5e0f60ba7e6bdc75300ddc4a7f3f8))
 
 ## [PRO] Improvements
 

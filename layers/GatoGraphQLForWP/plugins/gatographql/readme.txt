@@ -304,6 +304,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Made taxonomy input not mandatory on `Root.tags/categories` and `CustomPost.tags/categories` fields (#2827)
 * Fixed: Add `featuredImage` field on `GenericCustomPost` (#2806)
 * Fixed: On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content (#2814)
+* Fixed: Pass mandatory `attrs` field when creating persisted query blocks (#3adde2e)
 * [PRO] Updated mapped WordPress hooks for automation
 
 = 4.2.0 =
