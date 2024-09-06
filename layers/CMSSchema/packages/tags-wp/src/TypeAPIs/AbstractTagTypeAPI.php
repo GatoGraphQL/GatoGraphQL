@@ -49,7 +49,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 
     protected function getTaxonomyTermFromObjectOrID(
         string|int|WP_Term $taxonomyTermObjectOrID,
-        string $taxonomy = '',
+        ?string $taxonomy = null,
     ): ?WP_Term {
         $taxonomyTerm = parent::getTaxonomyTermFromObjectOrID(
             $taxonomyTermObjectOrID,

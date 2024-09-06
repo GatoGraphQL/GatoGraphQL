@@ -59,10 +59,10 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         return $taxonomyTerm->taxonomy;
     }
 
-    public function getTaxonomyTerm(int|string $taxonomyTermID, string $taxonomy = ''): object|null
+    public function getTaxonomyTerm(int|string $taxonomyTermID, ?string $taxonomy = null): object|null
     {
         /** @var WP_Term|WP_Error|null */
-        $taxonomyTerm = get_term((int) $taxonomyTermID, $taxonomy);
+        $taxonomyTerm = get_term((int) $taxonomyTermID, $taxonomy ?? '');
         if ($taxonomyTerm instanceof WP_Error) {
             return null;
         }

@@ -174,7 +174,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 
     protected function getTaxonomyTermFromObjectOrID(
         string|int|WP_Term $taxonomyTermObjectOrID,
-        string $taxonomy = '',
+        ?string $taxonomy = null,
     ): ?WP_Term {
         $taxonomyTerm = parent::getTaxonomyTermFromObjectOrID(
             $taxonomyTermObjectOrID,
