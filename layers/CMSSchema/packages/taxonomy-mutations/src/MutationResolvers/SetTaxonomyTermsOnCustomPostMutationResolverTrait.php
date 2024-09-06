@@ -60,7 +60,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
         foreach ($taxonomyTermIDs as $taxonomyTermID) {
             $taxonomyName = $taxonomyTermTypeAPI->getTaxonomyTermTaxonomy($taxonomyTermID);
-            if ($taxonomyName === null) {
+            if ($taxonomyName === null || !$this->isTaxonomySameHierarchical($isHierarchical, $taxonomyName)) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         $this->getTaxonomyTermDoesNotExistError($taxonomyName, $taxonomyTermID),
@@ -78,6 +78,16 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         }
 
         return $taxonomyToTaxonomyTermsIDs;
+    }
+
+    protected function isTaxonomySameHierarchical(
+        bool $isHierarchical,
+        string $taxonomyName,
+    ): bool {
+        if ($isHierarchical) {
+            return $this->getTaxonomyTermTypeAPI()->isTaxonomyHierarchical($taxonomyName);
+        }
+        return !$this->getTaxonomyTermTypeAPI()->isTaxonomyHierarchical($taxonomyName);
     }
 
     /**
