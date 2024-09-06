@@ -25,6 +25,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * @return array<string,array<string|int>>|null
      */
     protected function getTaxonomyToTaxonomyTermsByID(
+        bool $isHierarchical,
         array $taxonomyTermIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

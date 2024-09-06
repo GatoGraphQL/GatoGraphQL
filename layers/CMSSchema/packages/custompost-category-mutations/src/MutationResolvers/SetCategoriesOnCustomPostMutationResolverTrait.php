@@ -108,6 +108,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             $categoryIDs = $categoriesBy->{MutationInputProperties::IDS};
             return $this->getTaxonomyToTaxonomyTermsByID(
+                true,
                 $categoryIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
