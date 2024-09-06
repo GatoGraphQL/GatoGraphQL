@@ -198,7 +198,7 @@ trait SetTagsOnCustomPostMutationResolverTrait
     {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E4,
+            MutationErrorFeedbackItemProvider::E1,
         );
     }
 
