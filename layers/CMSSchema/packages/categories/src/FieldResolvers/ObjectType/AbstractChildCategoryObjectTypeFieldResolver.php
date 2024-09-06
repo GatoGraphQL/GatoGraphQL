@@ -176,7 +176,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $category = $object;
-        $categoryTypeAPI = $this->getCategoryTypeAPI();
         $query = array_merge(
             $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
             [
@@ -185,11 +184,11 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         );
         switch ($fieldDataAccessor->getFieldName()) {
             case 'children':
-                return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'childNames':
-                return $categoryTypeAPI->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $this->getCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'childCount':
-                return $categoryTypeAPI->getCategoryCount($query);
+                return $this->getCategoryTypeAPI()->getCategoryCount($query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

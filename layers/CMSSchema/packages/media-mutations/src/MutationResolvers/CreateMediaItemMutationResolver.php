@@ -77,7 +77,7 @@ class CreateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
             $url = $from->{MutationInputProperties::URL};
             return $this->getMediaTypeMutationAPI()->createMediaItemFromURL(
                 $url->{MutationInputProperties::SOURCE},
-                $url->{MutationInputProperties::FILENAME},
+                $url->{MutationInputProperties::FILENAME} ?? null,
                 $mediaItemData,
             );
         }

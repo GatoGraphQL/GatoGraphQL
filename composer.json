@@ -19,7 +19,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
-        "leoloso/faker": "^1.1",
+        "leoloso/faker": "^1.2",
         "masterminds/html5": "^2.7",
         "michelf/php-markdown": "^1.9",
         "psr/cache": "^3.0",

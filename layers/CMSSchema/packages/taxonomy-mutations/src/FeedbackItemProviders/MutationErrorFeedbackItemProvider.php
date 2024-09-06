@@ -20,6 +20,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E9 = 'e9';
     public final const E10 = 'e10';
     public final const E11 = 'e11';
+    public final const E12 = 'e12';
 
     /**
      * @return string[]
@@ -38,6 +39,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E9,
             self::E10,
             self::E11,
+            self::E12,
         ];
     }
 
@@ -49,12 +51,13 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3 => $this->__('Your user doesn\'t have permission for deleting taxonomy term with ID \'%s\'.', 'taxonomy-mutations'),
             self::E4 => $this->__('The taxonomy ID is missing', 'taxonomy-mutations'),
             self::E5 => $this->__('There is no taxonomy with name \'%s\'', 'taxonomy-mutations'),
-            self::E6 => $this->__('There is no taxonomy term with ID \'%s\'', 'taxonomy-mutations'),
+            self::E6 => $this->__('There is no term with ID \'%s\'', 'taxonomy-mutations'),
             self::E7 => $this->__('On taxonomy \'%s\', there is no term with ID \'%s\'', 'taxonomy-mutations'),
-            self::E8 => $this->__('There is no taxonomy term with slug \'%s\'', 'taxonomy-mutations'),
+            self::E8 => $this->__('There is no term with slug \'%s\'', 'taxonomy-mutations'),
             self::E9 => $this->__('On taxonomy \'%s\', there is no term with slug \'%s\'', 'taxonomy-mutations'),
             self::E10 => $this->__('Your user doesn\'t have permission to assign terms to taxonomy \'%s\'.', 'taxonomy-mutations'),
             self::E11 => $this->__('There is no custom post type registered for ID \'%s\'.', 'taxonomy-mutations'),
+            self::E12 => $this->__('Taxonomy \'%s\' (for terms with ID(s) \'%s\') is not valid for custom post type \'%s\'', 'taxonomy-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

@@ -57,3 +57,6 @@ services:
 
     GatoGraphQL\GatoGraphQL\Hooks\:
         resource: '../src/Hooks/*'
+
+    GatoGraphQL\GatoGraphQL\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

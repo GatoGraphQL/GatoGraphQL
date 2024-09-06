@@ -10,15 +10,18 @@ use PoP\ComponentModel\App;
 
 trait CategoryObjectTypeResolverPickerTrait
 {
-    abstract public function getCategoryTaxonomy(): string;
+    /**
+     * @return string[]
+     */
+    abstract public function getCategoryTaxonomies(): array;
 
     public function isServiceEnabled(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return in_array(
-            $this->getCategoryTaxonomy(),
+        return array_intersect(
+            $this->getCategoryTaxonomies(),
             $moduleConfiguration->getQueryableCategoryTaxonomies()
-        );
+        ) !== [];
     }
 }

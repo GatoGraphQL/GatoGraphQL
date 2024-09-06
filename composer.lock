@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74c013c7d272af8a47008772a960d906",
+    "content-hash": "f2cadff4e15494fc5ae9615e5c1e4a23",
     "packages": [
         {
             "name": "antecedent/patchwork",
@@ -974,16 +974,16 @@
         },
         {
             "name": "leoloso/faker",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/BrainFaker.git",
-                "reference": "ca961eaa976e26e2bbbed093647cdaefb16b919a"
+                "reference": "0c5e428ead182e4870ad74cacba79c0bbc1fb21e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/ca961eaa976e26e2bbbed093647cdaefb16b919a",
-                "reference": "ca961eaa976e26e2bbbed093647cdaefb16b919a",
+                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/0c5e428ead182e4870ad74cacba79c0bbc1fb21e",
+                "reference": "0c5e428ead182e4870ad74cacba79c0bbc1fb21e",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1038,7 @@
                 "issues": "https://github.com/Brain-WP/BrainFaker/issues",
                 "source": "https://github.com/Brain-WP/BrainFaker"
             },
-            "time": "2024-08-20T05:14:09+00:00"
+            "time": "2024-09-02T12:13:02+00:00"
         },
         {
             "name": "masterminds/html5",

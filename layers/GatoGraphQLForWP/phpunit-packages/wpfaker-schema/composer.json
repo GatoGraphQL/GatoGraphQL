@@ -155,7 +155,7 @@
     "require": {
         "php": "^8.1",
         "getpop/engine": "^4.3",
-        "leoloso/faker": "^1.1",
+        "leoloso/faker": "^1.2",
         "pop-backbone/wp-data-parser": "^4.3"
     },
     "require-dev": {

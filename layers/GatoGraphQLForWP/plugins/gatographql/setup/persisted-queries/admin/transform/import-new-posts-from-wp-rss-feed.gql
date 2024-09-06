@@ -1,0 +1,167 @@
+########################################################################
+# 
+# Variables:
+#   - url: The URL of the WordPress post archive's RSS feed
+#   - timeDeltaInSeconds: Time delta in seconds from when to consider a post as a new post. Default is `86400` seconds (i.e. one day)
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This query imports all the new posts from a WordPress RSS feed, using the title,
+# content and excerpt of the post.
+#
+# The new posts are those created in the last 24 hs (configurable via variable).
+# Execute this persisted query with a daily WP-Cron automation task to automatically
+# import all new posts from the other site.
+#
+# Variable `$url` receives the URL of the WordPress post archive's RSS feed.
+# It usually is the post archive URL + `"/feed/rss/?withoutcomments=1"`.
+# Eg:
+#
+#   https://wordpress.com/blog/feed/rss/?withoutcomments=1
+#
+# Variable `$timeDeltaInSeconds` indicates from when to consider a post as a new post.
+# By default it's `86400` seconds (i.e. one day).
+#
+########################################################################
+query GetTime(
+  $timeDeltaInSeconds: Int! = 86400
+) {
+  now: _time
+  
+  newPostsStartTime: _intSubtract(
+    from: $__now
+    subtract: $timeDeltaInSeconds,
+  )
+    @export(as: "newPostsStartTime")
+}
+
+query GetPostsFromRSSFeedAndExportData(
+  $url: URL!
+)
+  @depends(on: "GetTime")
+{
+  _sendHTTPRequest(input: {
+    url: $url,
+    method: GET
+  }) {
+    body
+    rssJSON: _strDecodeXMLAsJSON(
+      xml: $__body
+      alwaysArrayTagNames: [
+        "item",
+      ],
+    )
+      @export(as: "rssJSON")
+  }
+}
+
+query CreatePostInputsFromRSSFeed
+  @depends(on: "GetPostsFromRSSFeedAndExportData")
+{
+  items: _objectProperty(
+    object: $rssJSON,
+    by: { path: "rss.channel.item" }
+  )
+  inputs: _echo(value: $__items)
+    @underEachArrayItem(
+      passValueOnwardsAs: "item"
+      affectDirectivesUnderPos: [1, 2, 3, 4, 6]
+    )
+      @applyField(
+        name: "_objectProperty"
+        arguments: {
+          object: $item
+          by: { key: "pubDate" }
+        }
+        passOnwardsAs: "dateAsString"
+      )
+      @applyField(
+        name: "_strToTime",
+        arguments: {
+          string: $dateAsString
+        },
+        passOnwardsAs: "date"
+      )
+      @applyField(
+        name: "_greaterThanOrEquals",
+        arguments: {
+          value1: $date,
+          value2: $newPostsStartTime
+        },
+        passOnwardsAs: "isNewPost"
+      )
+      @unless(
+        condition: $isNewPost
+      )
+        @setNull
+      @if(
+        condition: $isNewPost
+        affectDirectivesUnderPos: [1, 2, 3, 4]
+      )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $item
+            by: { key: "title" }
+          }
+          passOnwardsAs: "title"
+        )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $item
+            by: { key: "content:encoded" }
+          }
+          passOnwardsAs: "content"
+        )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $item
+            by: { key: "description" }
+          }
+          passOnwardsAs: "excerpt"
+        )
+        @applyField(
+          name: "_echo",
+          arguments: {
+            value: {
+              status: draft,
+              contentAs: {
+                html: $content
+              },
+              excerpt: $excerpt
+              title: $title
+            }
+          },
+          setResultInResponse: true
+        )
+    @arrayFilter
+    @export(as: "inputs")
+}
+
+mutation ImportNewPostsFromWordPressRSSFeed
+  @depends(on: "CreatePostInputsFromRSSFeed")
+{
+  createPosts(inputs: $inputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      slug
+      date
+      status
+
+      content
+      excerpt
+      title
+    }
+  }
+}

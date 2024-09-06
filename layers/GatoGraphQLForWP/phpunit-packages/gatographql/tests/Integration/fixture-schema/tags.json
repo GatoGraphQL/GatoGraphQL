@@ -3,7 +3,6 @@
         "tags": [
             {
                 "__typename": "GenericTag",
-                "taxonomy": "dummy-tag",
                 "customPostCount": 7,
                 "customPosts": [
                     {
@@ -14,7 +13,8 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -26,17 +26,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -48,22 +51,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -75,22 +82,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -102,12 +113,14 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -119,17 +132,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -141,26 +157,31 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     }
                 ],
+                "taxonomy": "dummy-tag",
                 "count": 7,
                 "description": "",
                 "id": 25,
@@ -173,7 +194,6 @@
             },
             {
                 "__typename": "GenericTag",
-                "taxonomy": "dummy-tag",
                 "customPostCount": 6,
                 "customPosts": [
                     {
@@ -184,17 +204,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 47,
+                                "name": "Argentina",
+                                "taxonomy": "additional-dummy-tag"
                             }
                         ]
                     },
@@ -206,17 +235,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -228,17 +260,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -250,22 +285,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -277,22 +316,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -304,26 +347,31 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     }
                 ],
+                "taxonomy": "dummy-tag",
                 "count": 6,
                 "description": "",
                 "id": 27,
@@ -336,7 +384,6 @@
             },
             {
                 "__typename": "GenericTag",
-                "taxonomy": "dummy-tag",
                 "customPostCount": 10,
                 "customPosts": [
                     {
@@ -347,17 +394,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 48,
+                                "name": "Brazil",
+                                "taxonomy": "additional-dummy-tag"
                             }
                         ]
                     },
@@ -369,22 +425,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -396,12 +456,14 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -413,22 +475,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -440,12 +506,14 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -457,17 +525,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -479,22 +550,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -506,12 +581,14 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -523,12 +600,14 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -540,16 +619,19 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     }
                 ],
+                "taxonomy": "dummy-tag",
                 "count": 10,
                 "description": "",
                 "id": 28,
@@ -562,7 +644,6 @@
             },
             {
                 "__typename": "GenericTag",
-                "taxonomy": "dummy-tag",
                 "customPostCount": 7,
                 "customPosts": [
                     {
@@ -573,17 +654,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 47,
+                                "name": "Argentina",
+                                "taxonomy": "additional-dummy-tag"
                             }
                         ]
                     },
@@ -595,17 +685,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 48,
+                                "name": "Brazil",
+                                "taxonomy": "additional-dummy-tag"
                             }
                         ]
                     },
@@ -617,17 +716,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -639,22 +741,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -666,17 +772,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -688,22 +797,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -715,26 +828,31 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     }
                 ],
+                "taxonomy": "dummy-tag",
                 "count": 7,
                 "description": "",
                 "id": 29,
@@ -747,7 +865,6 @@
             },
             {
                 "__typename": "GenericTag",
-                "taxonomy": "dummy-tag",
                 "customPostCount": 10,
                 "customPosts": [
                     {
@@ -758,17 +875,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 48,
+                                "name": "Brazil",
+                                "taxonomy": "additional-dummy-tag"
                             }
                         ]
                     },
@@ -780,22 +906,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -807,12 +937,14 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -824,22 +956,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -851,17 +987,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -873,12 +1012,14 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -890,17 +1031,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -912,22 +1056,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -939,22 +1087,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -966,26 +1118,31 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     }
                 ],
+                "taxonomy": "dummy-tag",
                 "count": 10,
                 "description": "",
                 "id": 34,
@@ -998,7 +1155,6 @@
             },
             {
                 "__typename": "GenericTag",
-                "taxonomy": "dummy-tag",
                 "customPostCount": 12,
                 "customPosts": [
                     {
@@ -1009,17 +1165,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 47,
+                                "name": "Argentina",
+                                "taxonomy": "additional-dummy-tag"
                             }
                         ]
                     },
@@ -1031,17 +1196,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -1053,7 +1221,8 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -1065,22 +1234,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -1092,17 +1265,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -1114,12 +1290,14 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -1131,17 +1309,20 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 25,
-                                "name": "Classical"
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -1153,22 +1334,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -1180,22 +1365,26 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 27,
-                                "name": "Heavy metal"
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 29,
-                                "name": "Jazz"
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 34,
-                                "name": "Rock"
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     },
@@ -1207,16 +1396,19 @@
                             {
                                 "__typename": "GenericTag",
                                 "id": 28,
-                                "name": "Hip Hop"
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
                             },
                             {
                                 "__typename": "GenericTag",
                                 "id": 36,
-                                "name": "Tango"
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
                             }
                         ]
                     }
                 ],
+                "taxonomy": "dummy-tag",
                 "count": 12,
                 "description": "",
                 "id": 36,
@@ -1226,6 +1418,2053 @@
                 "slug": "tango",
                 "url": "https:\/\/gatographql.lndo.site\/dummy-tag\/tango\/",
                 "urlPath": "\/dummy-tag\/tango\/"
+            }
+        ],
+        "tagsWithoutTaxonomy": [
+            {
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1121,
+                        "title": "Customize the schema for each client",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 8,
+                                "name": "advanced",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 11,
+                                "name": "ideas",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 8,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "advanced",
+                "slug": "advanced",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/advanced\/",
+                "urlPath": "\/tag\/advanced\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 4,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 10,
+                                "name": "GraphQL",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 15,
+                                "name": "wordpress",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1119,
+                        "title": "Nested mutations are a must have",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 15,
+                                "name": "wordpress",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1121,
+                        "title": "Customize the schema for each client",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 8,
+                                "name": "advanced",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 11,
+                                "name": "ideas",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 14,
+                                "name": "Security",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "post_tag",
+                "count": 4,
+                "description": "",
+                "id": 9,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "features",
+                "slug": "features",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/features\/",
+                "urlPath": "\/tag\/features\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 10,
+                                "name": "GraphQL",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 15,
+                                "name": "wordpress",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 10,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "GraphQL",
+                "slug": "graphql",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/graphql\/",
+                "urlPath": "\/tag\/graphql\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1121,
+                        "title": "Customize the schema for each client",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 8,
+                                "name": "advanced",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 11,
+                                "name": "ideas",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 11,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "ideas",
+                "slug": "ideas",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/ideas\/",
+                "urlPath": "\/tag\/ideas\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 3,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1113,
+                        "title": "Released v0.6, check it out",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 13,
+                                "name": "release",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 10,
+                                "name": "GraphQL",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 15,
+                                "name": "wordpress",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1119,
+                        "title": "Nested mutations are a must have",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 15,
+                                "name": "wordpress",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "post_tag",
+                "count": 3,
+                "description": "",
+                "id": 12,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "plugin",
+                "slug": "plugin",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/plugin\/",
+                "urlPath": "\/tag\/plugin\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1113,
+                        "title": "Released v0.6, check it out",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 13,
+                                "name": "release",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 13,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "release",
+                "slug": "release",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/release\/",
+                "urlPath": "\/tag\/release\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 14,
+                                "name": "Security",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "post_tag",
+                "count": 1,
+                "description": "",
+                "id": 14,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Security",
+                "slug": "security",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/security\/",
+                "urlPath": "\/tag\/security\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 2,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1116,
+                        "title": "Working on flat chain syntax next",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 10,
+                                "name": "GraphQL",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 15,
+                                "name": "wordpress",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1119,
+                        "title": "Nested mutations are a must have",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 15,
+                                "name": "wordpress",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "post_tag",
+                "count": 2,
+                "description": "",
+                "id": 15,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "wordpress",
+                "slug": "wordpress",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/wordpress\/",
+                "urlPath": "\/tag\/wordpress\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 0,
+                "posts": [],
+                "taxonomy": "post_tag",
+                "count": 0,
+                "description": "",
+                "id": 16,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Also never used",
+                "slug": "also-never-used",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/also-never-used\/",
+                "urlPath": "\/tag\/also-never-used\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 0,
+                "posts": [],
+                "taxonomy": "post_tag",
+                "count": 0,
+                "description": "",
+                "id": 17,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "xcel",
+                "slug": "xcel",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/xcel\/",
+                "urlPath": "\/tag\/xcel\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 0,
+                "posts": [],
+                "taxonomy": "post_tag",
+                "count": 0,
+                "description": "",
+                "id": 18,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "zoroastro",
+                "slug": "zoroastro",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/zoroastro\/",
+                "urlPath": "\/tag\/zoroastro\/"
+            },
+            {
+                "__typename": "GenericTag",
+                "customPostCount": 7,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1619,
+                        "title": "Error debitis nulla vel est",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1620,
+                        "title": "Dignissimos sed dolore aut",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1627,
+                        "title": "Quis voluptatum tempore veniam est sit",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1630,
+                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1636,
+                        "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1639,
+                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1649,
+                        "title": "Nulla numquam totam eaque",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "dummy-tag",
+                "count": 7,
+                "description": "",
+                "id": 25,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Classical",
+                "slug": "classical",
+                "url": "https:\/\/gatographql.lndo.site\/dummy-tag\/classical\/",
+                "urlPath": "\/dummy-tag\/classical\/"
+            },
+            {
+                "__typename": "GenericTag",
+                "customPostCount": 6,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1613,
+                        "title": "Dolor facilis repellat pariatur veniam at",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 47,
+                                "name": "Argentina",
+                                "taxonomy": "additional-dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1631,
+                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1639,
+                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1644,
+                        "title": "Impedit eaque numquam quas inventore",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1648,
+                        "title": "Nostrum consequatur non fugit vel",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1649,
+                        "title": "Nulla numquam totam eaque",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "dummy-tag",
+                "count": 6,
+                "description": "",
+                "id": 27,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Heavy metal",
+                "slug": "heavy-metal",
+                "url": "https:\/\/gatographql.lndo.site\/dummy-tag\/heavy-metal\/",
+                "urlPath": "\/dummy-tag\/heavy-metal\/"
+            },
+            {
+                "__typename": "GenericTag",
+                "customPostCount": 10,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1616,
+                        "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 48,
+                                "name": "Brazil",
+                                "taxonomy": "additional-dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1627,
+                        "title": "Quis voluptatum tempore veniam est sit",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1629,
+                        "title": "Qui ea incidunt qui",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1630,
+                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1634,
+                        "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1641,
+                        "title": "Impedit necessitatibus dolor est",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1644,
+                        "title": "Impedit eaque numquam quas inventore",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1654,
+                        "title": "Dummy CPT with blocks",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1656,
+                        "title": "Dummy CPT with non-existing block",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1658,
+                        "title": "Dummy CPT with no content",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "dummy-tag",
+                "count": 10,
+                "description": "",
+                "id": 28,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Hip Hop",
+                "slug": "hip-hop",
+                "url": "https:\/\/gatographql.lndo.site\/dummy-tag\/hip-hop\/",
+                "urlPath": "\/dummy-tag\/hip-hop\/"
+            },
+            {
+                "__typename": "GenericTag",
+                "customPostCount": 7,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1613,
+                        "title": "Dolor facilis repellat pariatur veniam at",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 47,
+                                "name": "Argentina",
+                                "taxonomy": "additional-dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1616,
+                        "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 48,
+                                "name": "Brazil",
+                                "taxonomy": "additional-dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1620,
+                        "title": "Dignissimos sed dolore aut",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1627,
+                        "title": "Quis voluptatum tempore veniam est sit",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1641,
+                        "title": "Impedit necessitatibus dolor est",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1648,
+                        "title": "Nostrum consequatur non fugit vel",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1649,
+                        "title": "Nulla numquam totam eaque",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "dummy-tag",
+                "count": 7,
+                "description": "",
+                "id": 29,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Jazz",
+                "slug": "jazz",
+                "url": "https:\/\/gatographql.lndo.site\/dummy-tag\/jazz\/",
+                "urlPath": "\/dummy-tag\/jazz\/"
+            },
+            {
+                "__typename": "GenericTag",
+                "customPostCount": 10,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1616,
+                        "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 48,
+                                "name": "Brazil",
+                                "taxonomy": "additional-dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1627,
+                        "title": "Quis voluptatum tempore veniam est sit",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1629,
+                        "title": "Qui ea incidunt qui",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1630,
+                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1631,
+                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1636,
+                        "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1641,
+                        "title": "Impedit necessitatibus dolor est",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1644,
+                        "title": "Impedit eaque numquam quas inventore",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1648,
+                        "title": "Nostrum consequatur non fugit vel",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1649,
+                        "title": "Nulla numquam totam eaque",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "dummy-tag",
+                "count": 10,
+                "description": "",
+                "id": 34,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Rock",
+                "slug": "rock",
+                "url": "https:\/\/gatographql.lndo.site\/dummy-tag\/rock\/",
+                "urlPath": "\/dummy-tag\/rock\/"
+            },
+            {
+                "__typename": "GenericTag",
+                "customPostCount": 12,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1613,
+                        "title": "Dolor facilis repellat pariatur veniam at",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 47,
+                                "name": "Argentina",
+                                "taxonomy": "additional-dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1620,
+                        "title": "Dignissimos sed dolore aut",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1622,
+                        "title": "Dolore ex et deleniti mollitia",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1630,
+                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1631,
+                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1634,
+                        "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1639,
+                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 25,
+                                "name": "Classical",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1644,
+                        "title": "Impedit eaque numquam quas inventore",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1648,
+                        "title": "Nostrum consequatur non fugit vel",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 34,
+                                "name": "Rock",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1654,
+                        "title": "Dummy CPT with blocks",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Hip Hop",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "dummy-tag",
+                "count": 12,
+                "description": "",
+                "id": 36,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Tango",
+                "slug": "tango",
+                "url": "https:\/\/gatographql.lndo.site\/dummy-tag\/tango\/",
+                "urlPath": "\/dummy-tag\/tango\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1125,
+                        "title": "Public or Private API mode, for extra security",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 14,
+                                "name": "Security",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "additional-post-tag",
+                "count": 1,
+                "description": "",
+                "id": 43,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Racing cars",
+                "slug": "racing-cars",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-tag\/racing-cars\/",
+                "urlPath": "\/additional-post-tag\/racing-cars\/"
+            },
+            {
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
+                    {
+                        "__typename": "Post",
+                        "id": 1123,
+                        "title": "GraphQL or REST? Why not both?",
+                        "tags": []
+                    }
+                ],
+                "taxonomy": "additional-post-tag",
+                "count": 1,
+                "description": "",
+                "id": 44,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Horses",
+                "slug": "horses",
+                "url": "https:\/\/gatographql.lndo.site\/additional-post-tag\/horses\/",
+                "urlPath": "\/additional-post-tag\/horses\/"
+            },
+            {
+                "__typename": "GenericTag",
+                "customPostCount": 1,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1613,
+                        "title": "Dolor facilis repellat pariatur veniam at",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 27,
+                                "name": "Heavy metal",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Jazz",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 36,
+                                "name": "Tango",
+                                "taxonomy": "dummy-tag"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 47,
+                                "name": "Argentina",
+                                "taxonomy": "additional-dummy-tag"
+                            }
+                        ]
+                    }
+                ],
+                "taxonomy": "additional-dummy-tag",
+                "count": 1,
+                "description": "",
+                "id": 47,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Argentina",
+                "slug": "argentina",
+                "url": "https:\/\/gatographql.lndo.site\/additional-dummy-tag\/argentina\/",
+                "urlPath": "\/additional-dummy-tag\/argentina\/"
             }
         ],
         "customPosts": [
@@ -1245,12 +3484,14 @@
                     {
                         "__typename": "PostTag",
                         "id": 13,
-                        "name": "release"
+                        "name": "release",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 12,
-                        "name": "plugin"
+                        "name": "plugin",
+                        "taxonomy": "post_tag"
                     }
                 ]
             },
@@ -1263,22 +3504,26 @@
                     {
                         "__typename": "PostTag",
                         "id": 15,
-                        "name": "wordpress"
+                        "name": "wordpress",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 12,
-                        "name": "plugin"
+                        "name": "plugin",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 10,
-                        "name": "GraphQL"
+                        "name": "GraphQL",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 9,
-                        "name": "features"
+                        "name": "features",
+                        "taxonomy": "post_tag"
                     }
                 ]
             },
@@ -1291,17 +3536,20 @@
                     {
                         "__typename": "PostTag",
                         "id": 15,
-                        "name": "wordpress"
+                        "name": "wordpress",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 12,
-                        "name": "plugin"
+                        "name": "plugin",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 9,
-                        "name": "features"
+                        "name": "features",
+                        "taxonomy": "post_tag"
                     }
                 ]
             },
@@ -1314,17 +3562,20 @@
                     {
                         "__typename": "PostTag",
                         "id": 11,
-                        "name": "ideas"
+                        "name": "ideas",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 9,
-                        "name": "features"
+                        "name": "features",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 8,
-                        "name": "advanced"
+                        "name": "advanced",
+                        "taxonomy": "post_tag"
                     }
                 ]
             },
@@ -1344,12 +3595,14 @@
                     {
                         "__typename": "PostTag",
                         "id": 14,
-                        "name": "Security"
+                        "name": "Security",
+                        "taxonomy": "post_tag"
                     },
                     {
                         "__typename": "PostTag",
                         "id": 9,
-                        "name": "features"
+                        "name": "features",
+                        "taxonomy": "post_tag"
                     }
                 ]
             },
@@ -1391,6 +3644,32 @@
                         "name": "Tango",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 27,
+                        "name": "Heavy metal",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Jazz",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 47,
+                        "name": "Argentina",
+                        "taxonomy": "additional-dummy-tag"
+                    }
                 ]
             },
             {
@@ -1417,6 +3696,32 @@
                         "name": "Rock",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Jazz",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 48,
+                        "name": "Brazil",
+                        "taxonomy": "additional-dummy-tag"
+                    }
                 ]
             },
             {
@@ -1425,6 +3730,14 @@
                 "title": "Error debitis nulla vel est",
                 "customPostType": "dummy-cpt",
                 "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 25,
+                        "name": "Classical",
+                        "taxonomy": "dummy-tag"
+                    }
+                ],
+                "tagsWithoutTaxonomy": [
                     {
                         "__typename": "GenericTag",
                         "id": 25,
@@ -1457,6 +3770,26 @@
                         "name": "Tango",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 25,
+                        "name": "Classical",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Jazz",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1471,6 +3804,14 @@
                         "name": "Tango",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1479,6 +3820,32 @@
                 "title": "Quis voluptatum tempore veniam est sit",
                 "customPostType": "dummy-cpt",
                 "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 25,
+                        "name": "Classical",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Jazz",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    }
+                ],
+                "tagsWithoutTaxonomy": [
                     {
                         "__typename": "GenericTag",
                         "id": 25,
@@ -1523,6 +3890,20 @@
                         "name": "Rock",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1531,6 +3912,32 @@
                 "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
                 "customPostType": "dummy-cpt",
                 "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 25,
+                        "name": "Classical",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
+                ],
+                "tagsWithoutTaxonomy": [
                     {
                         "__typename": "GenericTag",
                         "id": 25,
@@ -1581,6 +3988,26 @@
                         "name": "Tango",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 27,
+                        "name": "Heavy metal",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1589,6 +4016,20 @@
                 "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "customPostType": "dummy-cpt",
                 "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
+                ],
+                "tagsWithoutTaxonomy": [
                     {
                         "__typename": "GenericTag",
                         "id": 28,
@@ -1621,6 +4062,20 @@
                         "name": "Rock",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 25,
+                        "name": "Classical",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1629,6 +4084,26 @@
                 "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
                 "customPostType": "dummy-cpt",
                 "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 25,
+                        "name": "Classical",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 27,
+                        "name": "Heavy metal",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
+                ],
+                "tagsWithoutTaxonomy": [
                     {
                         "__typename": "GenericTag",
                         "id": 25,
@@ -1673,6 +4148,26 @@
                         "name": "Rock",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Jazz",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1681,6 +4176,32 @@
                 "title": "Impedit eaque numquam quas inventore",
                 "customPostType": "dummy-cpt",
                 "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 27,
+                        "name": "Heavy metal",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
+                ],
+                "tagsWithoutTaxonomy": [
                     {
                         "__typename": "GenericTag",
                         "id": 27,
@@ -1737,6 +4258,32 @@
                         "name": "Tango",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 27,
+                        "name": "Heavy metal",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Jazz",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1745,6 +4292,32 @@
                 "title": "Nulla numquam totam eaque",
                 "customPostType": "dummy-cpt",
                 "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 25,
+                        "name": "Classical",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 27,
+                        "name": "Heavy metal",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 29,
+                        "name": "Jazz",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 34,
+                        "name": "Rock",
+                        "taxonomy": "dummy-tag"
+                    }
+                ],
+                "tagsWithoutTaxonomy": [
                     {
                         "__typename": "GenericTag",
                         "id": 25,
@@ -1789,6 +4362,20 @@
                         "name": "Tango",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1797,6 +4384,20 @@
                 "title": "Dummy CPT with non-existing block",
                 "customPostType": "dummy-cpt",
                 "tags": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
+                ],
+                "tagsWithoutTaxonomy": [
                     {
                         "__typename": "GenericTag",
                         "id": 28,
@@ -1829,6 +4430,20 @@
                         "name": "Tango",
                         "taxonomy": "dummy-tag"
                     }
+                ],
+                "tagsWithoutTaxonomy": [
+                    {
+                        "__typename": "GenericTag",
+                        "id": 28,
+                        "name": "Hip Hop",
+                        "taxonomy": "dummy-tag"
+                    },
+                    {
+                        "__typename": "GenericTag",
+                        "id": 36,
+                        "name": "Tango",
+                        "taxonomy": "dummy-tag"
+                    }
                 ]
             },
             {
@@ -1836,14 +4451,16 @@
                 "id": 1660,
                 "title": "Dummy CPT with non server-side-registered block",
                 "customPostType": "dummy-cpt",
-                "tags": []
+                "tags": [],
+                "tagsWithoutTaxonomy": []
             },
             {
                 "__typename": "GenericCustomPost",
                 "id": 1680,
                 "title": "Dummy CPT with server-side-registered block",
                 "customPostType": "dummy-cpt",
-                "tags": []
+                "tags": [],
+                "tagsWithoutTaxonomy": []
             }
         ],
         "customPostsByTagIDs": [
@@ -2517,6 +5134,52 @@
                 "title": "Dummy CPT with server-side-registered block",
                 "tags": []
             }
+        ],
+        "postTagCount": 11,
+        "postTagNames": [
+            "zoroastro",
+            "xcel",
+            "wordpress",
+            "Security",
+            "release",
+            "plugin",
+            "ideas",
+            "GraphQL",
+            "features",
+            "Also never used",
+            "advanced"
+        ],
+        "dummyTagCount": 6,
+        "dummyTagNames": [
+            "Tango",
+            "Rock",
+            "Jazz",
+            "Hip Hop",
+            "Heavy metal",
+            "Classical"
+        ],
+        "allTagCount": 21,
+        "allTagNames": [
+            "zoroastro",
+            "xcel",
+            "wordpress",
+            "Tango",
+            "Security",
+            "Rock",
+            "release",
+            "Racing cars",
+            "plugin",
+            "Jazz",
+            "ideas",
+            "Horses",
+            "Hip Hop",
+            "Heavy metal",
+            "GraphQL",
+            "features",
+            "Classical",
+            "Brazil",
+            "Argentina",
+            "Also never used"
         ]
     }
 }

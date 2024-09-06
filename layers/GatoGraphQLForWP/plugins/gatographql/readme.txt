@@ -294,6 +294,14 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
 * Added mutations to assign custom tags/categories to custom posts (#2803)
 * Added Settings option to enable/disable logs (#2813)
+* Application password failed authentication: Show error in GraphQL response (#2817)
+* Added predefined persisted queries:
+  * [PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT (#2818)
+  * [PRO] Import new posts from WordPress RSS feed (#2819)
+  * [PRO] Import HTML from URLs as new posts in WordPress (#2822)
+* Support additional taxonomies for mutations on post tags/categories (not only `post_tag` and `category`) (#2823)
+* Added taxonomy field also to `PostTag` and `PostCategory` types (#2824)
+* Made taxonomy input not mandatory on `Root.tags/categories` and `CustomPost.tags/categories` fields (#2827)
 * Fixed: Add `featuredImage` field on `GenericCustomPost` (#2806)
 * Fixed: On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content (#2814)
 * [PRO] Updated mapped WordPress hooks for automation

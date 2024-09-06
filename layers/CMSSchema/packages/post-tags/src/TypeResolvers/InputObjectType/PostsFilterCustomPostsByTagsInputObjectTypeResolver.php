@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTags\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\AbstractFixedTaxonomyFilterCustomPostsByTagsInputObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\EnumType\PostTagTaxonomyEnumStringScalarTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\AbstractFilterCustomPostsByTagsInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-class PostsFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractFixedTaxonomyFilterCustomPostsByTagsInputObjectTypeResolver
+class PostsFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractFilterCustomPostsByTagsInputObjectTypeResolver
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
+    private ?PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
@@ -24,14 +27,36 @@ class PostsFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractFixedT
         }
         return $this->postTagTypeAPI;
     }
+    final public function setPostTagTaxonomyEnumStringScalarTypeResolver(PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getPostTagTaxonomyEnumStringScalarTypeResolver(): PostTagTaxonomyEnumStringScalarTypeResolver
+    {
+        if ($this->postTagTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var PostTagTaxonomyEnumStringScalarTypeResolver */
+            $postTagTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(PostTagTaxonomyEnumStringScalarTypeResolver::class);
+            $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->postTagTaxonomyEnumStringScalarTypeResolver;
+    }
 
     public function getTypeName(): string
     {
         return 'FilterPostsByTagsInput';
     }
 
-    protected function getTagTaxonomyName(): string
+    protected function getTagTaxonomyFilterInput(): InputTypeResolverInterface
     {
-        return $this->getPostTagTypeAPI()->getPostTagTaxonomyName();
+        return $this->getPostTagTaxonomyEnumStringScalarTypeResolver();
+    }
+
+    protected function getTagTaxonomyFilterDefaultValue(): mixed
+    {
+        $postTagTaxonomyName = $this->getPostTagTypeAPI()->getPostTagTaxonomyName();
+        if (!in_array($postTagTaxonomyName, $this->getPostTagTaxonomyEnumStringScalarTypeResolver()->getConsolidatedPossibleValues())) {
+            return null;
+        }
+        return $postTagTaxonomyName;
     }
 }

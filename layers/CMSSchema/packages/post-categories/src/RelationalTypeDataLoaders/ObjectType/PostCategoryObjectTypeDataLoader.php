@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostCategories\RelationalTypeDataLoaders\ObjectType;
 
 use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\AbstractCategoryObjectTypeDataLoader;
-use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
@@ -42,7 +42,7 @@ class PostCategoryObjectTypeDataLoader extends AbstractCategoryObjectTypeDataLoa
         return $this->postCategoryObjectTypeResolver;
     }
 
-    public function getCategoryListTypeAPI(): CategoryListTypeAPIInterface
+    public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
         return $this->getPostCategoryTypeAPI();
     }

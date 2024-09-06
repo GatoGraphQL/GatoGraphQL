@@ -149,6 +149,34 @@ class Plugin
     protected function registerTestingTaxonomies(): void
     {
         \register_taxonomy(
+            'additional-post-tag',
+            [
+                'post',
+            ],
+            $this->getTaxonomyArgs(
+                false,
+                __('Additional Post Tag'),
+                __('Additional Post Tags'),
+                __('additional post tag'),
+                __('additional post tags'),
+            )
+        );
+
+        \register_taxonomy(
+            'additional-post-category',
+            [
+                'post',
+            ],
+            $this->getTaxonomyArgs(
+                true,
+                __('Additional Post Category'),
+                __('Additional Post Categories'),
+                __('additional post category'),
+                __('additional post categories'),
+            )
+        );
+
+        \register_taxonomy(
             'dummy-tag',
             [],
             $this->getTaxonomyArgs(
@@ -157,6 +185,18 @@ class Plugin
                 __('Dummy Tags'),
                 __('dummy tag'),
                 __('dummy tags'),
+            )
+        );
+
+        \register_taxonomy(
+            'additional-dummy-tag',
+            [],
+            $this->getTaxonomyArgs(
+                false,
+                __('Additional dummy Tag'),
+                __('Additional dummy Tags'),
+                __('additional dummy tag'),
+                __('additional dummy tags'),
             )
         );
 
@@ -185,6 +225,18 @@ class Plugin
         );
 
         \register_taxonomy(
+            'additional-dummy-category',
+            [],
+            $this->getTaxonomyArgs(
+                true,
+                __('Additional dummy Category'),
+                __('Additional dummy Categories'),
+                __('additional dummy category'),
+                __('additional dummy categories'),
+            )
+        );
+
+        \register_taxonomy(
             'dummy-category-two',
             [],
             $this->getTaxonomyArgs(
@@ -202,6 +254,8 @@ class Plugin
                 [
                     'dummy-tag',
                     'dummy-category',
+                    'additional-dummy-tag',
+                    'additional-dummy-category',
                 ],
                 __('Dummy CPT'),
                 __('Dummy CPTs'),

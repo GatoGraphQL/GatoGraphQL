@@ -6,6 +6,27 @@
     }
   }
 
+  postCategoriesWithTaxonomy: postCategories(taxonomy: category) {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
+  additionalPostCategories: postCategories(taxonomy: "additional-post-category") {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
+  allPostCategories: postCategories(taxonomy: null) {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
   nonEmptyPostCategories: postCategories(filter: {hideEmpty: true}) {
     id
     name
@@ -13,6 +34,12 @@
 
   post(by:{ id: 1125 }) {
     categories {
+      ...PostCategoryData
+      children {
+        ...PostCategoryData
+      }
+    }
+    additionalCategories: categories(taxonomy: "additional-post-category") {
       ...PostCategoryData
       children {
         ...PostCategoryData
@@ -67,6 +94,18 @@
     }
   }
 
+  postsByCategoryIDsWithTaxonomy: posts(
+    filter: {
+      categories: { includeBy: { ids: [1, 4] }, taxonomy: category }
+    }
+  ) {
+    id
+    title
+    categories {
+      id
+    }
+  }
+
   postsExcludeByCategoryIDs: posts(
     filter: { categories: { excludeBy: { ids: [1, 4] } } }
   ) {
@@ -79,6 +118,18 @@
 
   postsByCategorySlugs: posts(
     filter: { categories: { includeBy: { slugs: ["resource"] } } }
+  ) {
+    id
+    title
+    categories {
+      id
+    }
+  }
+
+  postsByCategorySlugsWithTaxonomy: posts(
+    filter: {
+      categories: { includeBy: { slugs: ["resource"] }, taxonomy: category }
+    }
   ) {
     id
     title
@@ -105,7 +156,10 @@
   }
   
   postCategoryCount
-  postCategoryNames
+  postCategoryNames(pagination: { limit: 20 })
+  
+  allPostCategoryCount: postCategoryCount(taxonomy: null)
+  allPostCategoryNames: postCategoryNames(taxonomy: null, pagination: { limit: 20 })
 
   postsByCategoryByNonExistingID: postCategory(by: { id: 8888 }) {
     ...PostCategoryData
@@ -123,6 +177,7 @@
 }
 
 fragment PostCategoryData on PostCategory {
+  taxonomy
   childCount
   childNames
   count

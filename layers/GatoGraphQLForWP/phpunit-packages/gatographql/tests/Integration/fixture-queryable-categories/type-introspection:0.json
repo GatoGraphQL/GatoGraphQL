@@ -16,6 +16,8 @@
                 "name": "CategoryTaxonomyEnumString",
                 "extensions": {
                     "possibleValues": [
+                        "additional-dummy-category",
+                        "additional-post-category",
                         "category",
                         "dummy-category",
                         "dummy-category-two"

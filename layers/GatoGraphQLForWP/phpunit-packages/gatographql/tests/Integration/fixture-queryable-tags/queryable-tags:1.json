@@ -85,57 +85,68 @@
     "postTags": [
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 18,
         "name": "zoroastro"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 17,
         "name": "xcel"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 15,
         "name": "wordpress"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 14,
         "name": "Security"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 13,
         "name": "release"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 12,
         "name": "plugin"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 11,
         "name": "ideas"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 10,
         "name": "GraphQL"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 9,
         "name": "features"
       },
       {
         "__typename": "PostTag",
+        "taxonomy": "post_tag",
         "id": 16,
         "name": "Also never used"
       }
     ],
     "postTag": {
       "__typename": "PostTag",
+      "taxonomy": "post_tag",
       "id": 15,
       "name": "wordpress"
     },
@@ -158,26 +169,25 @@
     "dummyTagNames": null,
     "postFormats": [
       {
-        "__typename": "GenericTag",
-        "id": 43,
+        "__typename": "PostTag",
+        "taxonomy": "post_format",
+        "id": 52,
         "name": "Link"
       },
       {
-        "__typename": "GenericTag",
-        "id": 42,
+        "__typename": "PostTag",
+        "taxonomy": "post_format",
+        "id": 51,
         "name": "Chat"
       },
       {
-        "__typename": "GenericTag",
-        "id": 41,
+        "__typename": "PostTag",
+        "taxonomy": "post_format",
+        "id": 50,
         "name": "Aside"
       }
     ],
-    "postFormat": {
-      "__typename": "GenericTag",
-      "id": 43,
-      "name": "Link"
-    },
+    "postFormat": null,
     "postFormatCount": 3,
     "postFormatNames": [
       "",

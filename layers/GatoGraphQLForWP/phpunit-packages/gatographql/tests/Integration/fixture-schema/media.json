@@ -2,6 +2,7 @@
     "data": {
         "defaultMediaItems": [
             {
+                "parentCustomPost": null,
                 "altText": "",
                 "author": {
                     "id": 2,
@@ -24,6 +25,7 @@
                 "width": 520
             },
             {
+                "parentCustomPost": null,
                 "altText": "",
                 "author": {
                     "id": 2,
@@ -46,6 +48,10 @@
                 "width": 500
             },
             {
+                "parentCustomPost": {
+                    "id": 1140,
+                    "title": "Welcome to a single post full of blocks!"
+                },
                 "altText": "",
                 "author": {
                     "id": 4,
@@ -70,6 +76,7 @@
         ],
         "anyMimeTypeMediaItems": [
             {
+                "parentCustomPost": null,
                 "altText": "",
                 "author": {
                     "id": 2,
@@ -92,6 +99,7 @@
                 "width": 520
             },
             {
+                "parentCustomPost": null,
                 "altText": "",
                 "author": {
                     "id": 2,
@@ -114,6 +122,7 @@
                 "width": 500
             },
             {
+                "parentCustomPost": null,
                 "altText": "",
                 "author": {
                     "id": 5,
@@ -138,74 +147,71 @@
         ],
         "mediaItemsByAuthorIDs": [
             {
-                "id": 1362,
-                "title": "graphql-api-search-results"
-            },
-            {
                 "id": 1361,
                 "title": "graphql-api-header"
+            },
+            {
+                "id": 1362,
+                "title": "graphql-api-search-results"
             }
         ],
         "mediaItemsByAuthorSlug": [
             {
-                "id": 1362,
-                "title": "graphql-api-search-results"
-            },
-            {
                 "id": 1361,
                 "title": "graphql-api-header"
+            },
+            {
+                "id": 1362,
+                "title": "graphql-api-search-results"
             }
         ],
         "mediaItemsByDateQuery": [
             {
-                "id": 1362,
-                "title": "graphql-api-search-results"
-            },
-            {
                 "id": 1361,
                 "title": "graphql-api-header"
+            },
+            {
+                "id": 1362,
+                "title": "graphql-api-search-results"
             }
         ],
         "mediaItemsByExcludeAuthorIDs": [
             {
+                "id": 1363,
+                "title": "LICENSE"
+            },
+            {
                 "id": 1380,
                 "title": "Funny-Dog"
             },
             {
                 "id": 1382,
                 "title": "Funny-Dog-again"
-            },
-            {
-                "id": 1363,
-                "title": "LICENSE"
             }
         ],
         "mediaItemsByExcludeIDs": [
             {
-                "id": 1380,
-                "title": "Funny-Dog"
-            },
-            {
-                "id": 1382,
-                "title": "Funny-Dog-again"
-            },
-            {
-                "id": 1363,
-                "title": "LICENSE"
-            },
-            {
                 "id": 1362,
                 "title": "graphql-api-search-results"
-            }
-        ],
-        "mediaItemsByIds": [
+            },
             {
                 "id": 1363,
                 "title": "LICENSE"
             },
+            {
+                "id": 1380,
+                "title": "Funny-Dog"
+            }
+        ],
+        "emptyMediaItemsByIds": [],
+        "mediaItemsByIds": [
             {
                 "id": 1361,
                 "title": "graphql-api-header"
+            },
+            {
+                "id": 1363,
+                "title": "LICENSE"
             }
         ],
         "mediaItemsByMimeTypes": [
@@ -216,12 +222,12 @@
         ],
         "mediaItemsBySearch": [
             {
-                "id": 1362,
-                "title": "graphql-api-search-results"
-            },
-            {
                 "id": 1361,
                 "title": "graphql-api-header"
+            },
+            {
+                "id": 1362,
+                "title": "graphql-api-search-results"
             }
         ],
         "mediaItemsSortedASC": [
@@ -242,11 +248,6 @@
             }
         ],
         "mediaItemsSortedDESC": [
-            {
-                "id": 1380,
-                "title": "Funny-Dog",
-                "date": "2023-06-15T04:24:00+00:00"
-            },
             {
                 "id": 1382,
                 "title": "Funny-Dog-again",

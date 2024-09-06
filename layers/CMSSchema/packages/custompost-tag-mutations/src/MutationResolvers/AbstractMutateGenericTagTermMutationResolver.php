@@ -8,8 +8,4 @@ use PoPCMSSchema\TagMutations\MutationResolvers\AbstractMutateTagTermMutationRes
 
 abstract class AbstractMutateGenericTagTermMutationResolver extends AbstractMutateTagTermMutationResolver
 {
-    public function getTaxonomyName(): string
-    {
-        return '';
-    }
 }

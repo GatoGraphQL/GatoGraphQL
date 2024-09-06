@@ -1,0 +1,195 @@
+########################################################################
+# 
+# Variables:
+#   - url: The URL of the WordPress single post's RSS feed
+#   - openAIAPIKey: API key to connect to Open AI
+#   - systemMessage: ChatGPT's system role message
+#   - prompt: ChatGPT's user role message
+#   - model: Open AI's model to use. Default: "gpt-3.5-turbo-instruct"`
+#   - temperature: Level of fuzziness. Default: `0.7`
+#   - maxTokens: Maximum number of tokens for ChatGPT content generation. Default: `50`
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This query fetches the post data from a WordPress RSS feed (including
+# the title, content and excerpt), rewrites the content using ChatGPT,
+# and stores it on the local WordPress site.
+#
+# If the author with that username exists locally, it uses it, otherwise
+# it replaces it with the one defined via variable `$defaultAuthorUsername`.
+#
+# Variable `$url` receives the URL of the WordPress single post's RSS feed.
+# It usually is the blog post URL + `"/feed/rss/?withoutcomments=1"`.
+# Eg:
+#
+#   https://wordpress.com/blog/2024/07/16/wordpress-6-6/feed/rss/?withoutcomments=1
+#
+# To connect to the OpenAI API, you must provide variables `$openAIAPIKey` with the API key.
+#
+# You can optionally provide the system message and prompt to rewrite the post's content.
+# If not provided, the following values are used:
+#
+# - System message (`$systemMessage`): "You are an English Content rewriter and a grammar checker"
+# - Prompt (`$prompt`): "Please rewrite the following English text (contained within HTML),
+#                       by changing the simple A0-level words and sentences with more beautiful
+#                       and elegant upper-level English words and sentences, while maintaining
+#                       the original meaning: "
+#
+# (The content string is appended at the end of the prompt.)
+#
+# In addition, you can override the default value for variables: `$model`
+# (`"gpt-3.5-turbo-instruct"`) and `$temperature` (`0.7`), and be aware to provide `$maxTokens`
+# with a suitable number for the length of the content (`50` by default).
+#
+########################################################################
+query GetPostFromRSSFeed(
+  $url: URL!
+) {
+  _sendHTTPRequest(input: {
+    url: $url,
+    method: GET
+  }) {
+    body
+    rssJSON: _strDecodeXMLAsJSON(
+      xml: $__body
+    )
+
+    # Fields to be imported
+    authorUsername: _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.dc:creator"
+      }
+    )
+      @export(as: "authorUsername")
+
+    content:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.content:encoded"
+      }
+    )
+      @export(as: "content")
+
+    excerpt:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.description"
+      }
+    )
+      @export(as: "excerpt")
+
+    title:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.title"
+      }
+    )
+      @export(as: "title")
+  }
+}
+
+query RewriteContentWithChatGPT(
+  $openAIAPIKey: String!
+  $systemMessage: String! = "You are an English Content rewriter and a grammar checker"
+  $prompt: String! = "Please rewrite the following English text (contained within HTML), by changing the simple A0-level words and sentences with more beautiful and elegant upper-level English words and sentences, while maintaining the original meaning: "
+  $model: String! = "gpt-3.5-turbo-instruct"
+  $temperature: Float! = 0.7
+  $maxTokens: Int! = 50
+)
+  @depends(on: "GetPostFromRSSFeed")
+{
+  promptWithContent: _strAppend(
+    after: $prompt
+    append: $content  
+  )
+  openAIResponse: _sendJSONObjectItemHTTPRequest(input: {
+    url: "https://api.openai.com/v1/chat/completions",
+    method: POST,
+    options: {
+      auth: {
+        password: $openAIAPIKey
+      },
+      json: {
+        model: $model,
+        temperature: $temperature,
+        max_tokens: $maxTokens,
+        messages: [
+          {
+            role: "system",
+            content: $systemMessage
+          },
+          {
+            role: "user",
+            content: $__promptWithContent
+          }
+        ]
+      }
+    }
+  })
+    @underJSONObjectProperty(by: { key: "choices" })
+      @underArrayItem(index: 0)
+        @underJSONObjectProperty(by: { path: "message.content" })
+          @export(as: "rewrittenContent")
+}
+
+# If the author's username exists in this site, keep it
+# Otherwise, use the default one
+query CheckAuthorExistsOrChange(
+  $defaultAuthorUsername: String! = "admin"
+)
+  @depends(on: "RewriteContentWithChatGPT")
+{
+  existingUserByUsername: user(by: { username: $authorUsername })
+  {
+    id
+    username
+  }
+  userExists: _notNull(value: $__existingUserByUsername)
+  username: _if(
+    condition: $__userExists,
+    then: $authorUsername,
+    else: $defaultAuthorUsername
+  )
+    @export(as: "existingAuthorUsername")
+}
+
+mutation ImportPostFromWordPressRSSFeedAndRewriteContent
+  @depends(on: "CheckAuthorExistsOrChange")
+{
+  createPost(input: {
+    status: draft,
+    authorBy: {
+      username: $existingAuthorUsername
+    },
+    contentAs: {
+      html: $rewrittenContent
+    },
+    excerpt: $excerpt
+    title: $title
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      slug
+      date
+      status
+
+      author {
+        id
+        username
+      }
+      content
+      excerpt
+      title
+    }
+  }
+}

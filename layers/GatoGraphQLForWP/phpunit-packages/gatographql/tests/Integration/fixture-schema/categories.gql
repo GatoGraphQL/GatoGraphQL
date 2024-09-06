@@ -7,14 +7,22 @@
     ...GenericCategoryData
     ...CategoryData
   }
+
+  categoriesWithoutTaxonomy: categories(
+    sort: { by: ID, order: ASC }
+    pagination: { limit: 20 }
+  ) {
+    __typename
+    ...PostCategoryData
+    ...GenericCategoryData
+    ...CategoryData
+  }
   
   customPosts(
     filter: {
       customPostTypes: ["post","dummy-cpt"]
     }
-    pagination: {
-      limit: 30
-    }
+    pagination: { limit: 30 }
     sort: { by: ID, order: ASC }
   ) {
     __typename
@@ -33,12 +41,21 @@
         name
         taxonomy
       }
+      categoriesWithoutTaxonomy: categories(
+        sort: { by: ID, order: ASC }
+      ) {
+        __typename
+        id
+        name
+        taxonomy
+      }
     }
     ...on Post {
       categories {
         __typename
         id
         name
+        taxonomy
         slug
         slugPath
       }
@@ -54,6 +71,7 @@
         taxonomy: "dummy-category"
       }
     }
+    sort: { by: ID, order: ASC }
   ) {
     id
     title
@@ -169,7 +187,7 @@
     ...CategoryData
   }
   postCategoryCount: categoryCount(taxonomy: category)
-  postCategoryNames: categoryNames(taxonomy: category)
+  postCategoryNames: categoryNames(taxonomy: category, pagination: { limit: 20 })
 
   dummyCategories: categories(
     taxonomy: "dummy-category"
@@ -184,10 +202,14 @@
     ...CategoryData
   }
   dummyCategoryCount: categoryCount(taxonomy: "dummy-category")
-  dummyCategoryNames: categoryNames(taxonomy: "dummy-category")
+  dummyCategoryNames: categoryNames(taxonomy: "dummy-category", pagination: { limit: 20 })
+
+  allCategoryCount: categoryCount
+  allCategoryNames: categoryNames(pagination: { limit: 20 })
 }
 
 fragment CategoryData on Category {
+  taxonomy
   count
   description
   id
@@ -201,9 +223,16 @@ fragment CategoryData on Category {
 }
 
 fragment GenericCategoryData on GenericCategory {
-  taxonomy   
   customPostCount
   customPosts(sort: {by: ID, order: ASC}) {
+    __typename
+    ...CustomPostData
+  }
+}
+
+fragment PostCategoryData on PostCategory {
+  postCount
+  posts(sort: {by: ID, order: ASC}) {
     __typename
     ...CustomPostData
   }
@@ -213,13 +242,13 @@ fragment CustomPostData on CustomPost {
   id
   title
   categories(
-    taxonomy: "dummy-category"
     sort: { by: ID, order: ASC }
   ) {
     __typename
     ...on Category {
       id
       name
+      taxonomy
     }
   }
 }

@@ -14,4 +14,9 @@ class PostCategoryTermUpdateInputObjectTypeResolver extends AbstractCreateOrUpda
     {
         return 'PostCategoryUpdateInput';
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return false;
+    }
 }

@@ -1,0 +1,13 @@
+{
+    "errors": [
+        {
+            "message": "Application Password authentication error: The provided password is an invalid application password.",
+            "extensions": {
+                "code": "GatoGraphQL\/GatoGraphQL@e1"
+            }
+        }
+    ],
+    "data": {
+        "me": null
+    }
+}

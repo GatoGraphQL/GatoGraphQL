@@ -68,6 +68,10 @@ class FakerWordPressDataSeeder
                 foreach ($postTaxonomyTermDataEntries as $postCategoryDataEntry) {
                     $termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] = ($termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] ?? 0) + 1;
                 }
+                // Initialize mock functions
+                $wpFaker->taxonomy([
+                    'name' => $taxonomy,
+                ]);
             }
             $postTypes[] = $postDataEntry['post_type'];
             /**

@@ -3,6 +3,18 @@
     ...PostTagData
   }
 
+  postTagsWithTaxonomy: postTags(taxonomy: post_tag) {
+    ...PostTagData
+  }
+
+  additionalPostTags: postTags(taxonomy: "additional-post-tag") {
+    ...PostTagData
+  }
+
+  allPostTags: postTags(taxonomy: null) {
+    ...PostTagData
+  }
+
   nonEmptyPostTags: postTags(filter: {hideEmpty: true}) {
     id
     name
@@ -10,6 +22,9 @@
 
   post(by:{ id: 1125 }) {
     tags {
+      ...PostTagData
+    }
+    additionalTags: tags(taxonomy: "additional-post-tag") {
       ...PostTagData
     }
     tagsByExcludeIDs: tags(filter: { excludeIDs: [5] }) {
@@ -58,6 +73,18 @@
     }
   }
 
+  postsByTagIDsWithTaxonomy: posts(
+    filter: {
+      tags: { includeBy: { ids: [15, 14] }, taxonomy: post_tag }
+    }
+  ) {
+    id
+    title
+    tags {
+      id
+    }
+  }
+
   postsExcludeByTagIDs: posts(
     filter: { tags: { excludeBy: { ids: [15, 14] } } }
   ) {
@@ -70,6 +97,18 @@
 
   postsByTagSlugs: posts(
     filter: { tags: { includeBy: { slugs: ["release", "plugin"] } } }
+  ) {
+    id
+    title
+    tags {
+      slug
+    }
+  }
+
+  postsByTagSlugsWithTaxonomy: posts(
+    filter: {
+      tags: { includeBy: { slugs: ["release", "plugin"] }, taxonomy: post_tag }
+    }
   ) {
     id
     title
@@ -96,7 +135,10 @@
   }
   
   postTagCount
-  postTagNames
+  postTagNames(pagination: { limit: 20 })
+  
+  allPostTagCount: postTagCount(taxonomy: null)
+  allPostTagNames: postTagNames(taxonomy: null, pagination: { limit: 20 })
 
   postsByTagByNonExistingID: postTag(by: { id: 8888 }) {
     ...PostTagData
@@ -114,6 +156,7 @@
 }
 
 fragment PostTagData on PostTag {
+  taxonomy
   count
   description
   id

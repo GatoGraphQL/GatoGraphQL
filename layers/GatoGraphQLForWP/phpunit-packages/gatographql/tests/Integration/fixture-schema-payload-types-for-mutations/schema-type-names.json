@@ -24,6 +24,9 @@
           "name": "GenericTag"
         },
         {
+          "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload"
+        },
+        {
           "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload"
         },
         {
@@ -181,6 +184,12 @@
         },
         {
           "name": "Numeric"
+        },
+        {
+          "name": "PostCategoryTaxonomyEnumString"
+        },
+        {
+          "name": "PostTagTaxonomyEnumString"
         },
         {
           "name": "String"
@@ -486,10 +495,16 @@
           "name": "RootReplyCommentInput"
         },
         {
+          "name": "RootSetCategoriesOnCustomPostInput"
+        },
+        {
           "name": "RootSetCategoriesOnPostInput"
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostInput"
+        },
+        {
+          "name": "RootSetTagsOnCustomPostInput"
         },
         {
           "name": "RootSetTagsOnPostInput"

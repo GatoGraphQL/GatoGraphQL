@@ -6,7 +6,10 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class ApplicationPasswordPrivateEndpointQueryExecutionFixtureWebserverRequestTest extends AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase
 {
-    use ApplicationPasswordQueryExecutionFixtureWebserverRequestTestTrait;
+    protected static function getFixtureFolder(): string
+    {
+        return __DIR__ . '/fixture-application-password-private';
+    }
 
     protected static function getEndpoint(): string
     {

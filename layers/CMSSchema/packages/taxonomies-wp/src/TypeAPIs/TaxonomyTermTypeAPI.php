@@ -26,24 +26,27 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->taxonomy;
     }
-    public function taxonomyTermExists(int|string $taxonomyTermIDOrSlug, string $taxonomy = ''): bool
+    public function taxonomyTermExists(int|string $taxonomyTermIDOrSlug, ?string $taxonomy = null): bool
     {
-        $taxonomyTermExists = term_exists($taxonomyTermIDOrSlug, $taxonomy);
+        $taxonomyTermExists = term_exists($taxonomyTermIDOrSlug, $taxonomy ?? '');
         return $taxonomyTermExists !==  null;
     }
-    public function getTaxonomyTermID(int|string $taxonomyTermIDOrSlug, string $taxonomy = ''): string|int|null
+    public function getTaxonomyTermID(string $taxonomyTermSlug, ?string $taxonomy = null): string|int|null
     {
         /** @var array<string,string|int>|string|int|null */
-        $taxonomyTerm = term_exists($taxonomyTermIDOrSlug, $taxonomy);
+        $taxonomyTerm = term_exists($taxonomyTermSlug, $taxonomy ?? '');
         if ($taxonomyTerm === null) {
             return null;
         }
+
+        /**
+         * Must cast the ID to integer, to avoid a string "34"
+         * from being inserted as a new term.
+         */
         if (is_array($taxonomyTerm)) {
-            /** @var string|int */
-            return $taxonomyTerm['term_id'];
+            return (int) $taxonomyTerm['term_id'];
         }
-        /** @var string|int */
-        return $taxonomyTerm;
+        return (int) $taxonomyTerm;
     }
 
     public function getTaxonomyTermTaxonomy(int|string $taxonomyTermID): string|null
@@ -56,10 +59,10 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         return $taxonomyTerm->taxonomy;
     }
 
-    public function getTaxonomyTerm(int|string $taxonomyTermID, string $taxonomy = ''): object|null
+    public function getTaxonomyTerm(int|string $taxonomyTermID, ?string $taxonomy = null): object|null
     {
         /** @var WP_Term|WP_Error|null */
-        $taxonomyTerm = get_term((int) $taxonomyTermID, $taxonomy);
+        $taxonomyTerm = get_term((int) $taxonomyTermID, $taxonomy ?? '');
         if ($taxonomyTerm instanceof WP_Error) {
             return null;
         }

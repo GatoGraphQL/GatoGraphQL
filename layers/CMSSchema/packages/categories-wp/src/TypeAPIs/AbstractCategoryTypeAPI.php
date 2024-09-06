@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoriesWP\TypeAPIs;
 
-use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
@@ -16,7 +15,7 @@ use function get_categories;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implements CategoryTypeAPIInterface, CategoryListTypeAPIInterface
+abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
@@ -29,7 +28,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             return false;
         }
         /** @var WP_Term $object */
-        return $object->taxonomy === $this->getCategoryTaxonomyName();
+        return $this->isCategoryTaxonomy($object);
     }
 
     protected function isHierarchical(): bool
@@ -45,10 +44,15 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 
     public function getCategory(string|int $categoryID): ?object
     {
-        return $this->getTaxonomyTerm(
-            $categoryID,
-            $this->getCategoryTaxonomyName(),
-        );
+        $category = $this->getTaxonomyTerm($categoryID);
+        if ($category === null) {
+            return null;
+        }
+        /** @var WP_Term $category */
+        if (!$this->isCategoryTaxonomy($category)) {
+            return null;
+        }
+        return $category;
     }
 
     public function categoryExists(int|string $id): bool
@@ -56,7 +60,15 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         return $this->getCategory($id) !== null;
     }
 
-    abstract protected function getCategoryTaxonomyName(): string;
+    /**
+     * @return string[]
+     */
+    abstract protected function getCategoryTaxonomyNames(): array;
+
+    protected function isCategoryTaxonomy(WP_Term $taxonomyTerm): bool
+    {
+        return in_array($taxonomyTerm->taxonomy, $this->getCategoryTaxonomyNames());
+    }
 
     /**
      * @param string|int|WP_Post $customPostObjectOrID
@@ -71,7 +83,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+            $query['taxonomy'] = $this->getCategoryTaxonomyNames();
         }
 
         /** @var array<string|int>|object[] */
@@ -79,7 +91,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             $customPostObjectOrID,
             $query,
             $options,
-        );
+        ) ?? [];
     }
     /**
      * @param array<string,mixed> $query
@@ -92,7 +104,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+            $query['taxonomy'] = $this->getCategoryTaxonomyNames();
         }
 
         /** @var string|int|WP_Post $customPostObjectOrID */
@@ -140,7 +152,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+            $query['taxonomy'] = $this->getCategoryTaxonomyNames();
         }
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
@@ -160,93 +172,18 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         return $this->convertTaxonomyTermsQuery($query, $options);
     }
 
-    public function getCategoryURL(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermURL(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
+    protected function getTaxonomyTermFromObjectOrID(
+        string|int|WP_Term $taxonomyTermObjectOrID,
+        ?string $taxonomy = null,
+    ): ?WP_Term {
+        $taxonomyTerm = parent::getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
         );
-    }
-
-    public function getCategoryURLPath(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermURLPath(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermFromObjectOrID(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategorySlug(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermSlug(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategorySlugPath(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermSlugPath(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategoryName(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermName(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermParentID(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    /**
-     * @return array<string|int>|null
-     */
-    public function getCategoryChildIDs(string|int|object $catObjectOrID): ?array
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermChildIDs($this->getCategoryTaxonomyName(), $catObjectOrID);
-    }
-
-    public function getCategoryDescription(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermDescription(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermItemCount(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
+        if ($taxonomyTerm === null) {
+            return $taxonomyTerm;
+        }
+        /** @var WP_Term $taxonomyTerm */
+        return $this->isCategoryTaxonomy($taxonomyTerm) ? $taxonomyTerm : null;
     }
 }

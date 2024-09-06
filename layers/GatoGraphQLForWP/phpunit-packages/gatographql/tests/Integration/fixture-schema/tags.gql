@@ -7,14 +7,22 @@
     ...GenericTagData
     ...TagData
   }
+
+  tagsWithoutTaxonomy: tags(
+    sort: { by: ID, order: ASC }
+    pagination: { limit: 20 }
+  ) {
+    __typename
+    ...PostTagData
+    ...GenericTagData
+    ...TagData
+  }
   
   customPosts(
     filter: {
       customPostTypes: ["post","dummy-cpt"]
     }
-    pagination: {
-      limit: 30
-    }
+    pagination: { limit: 30 }
     sort: { by: ID, order: ASC }
   ) {
     __typename
@@ -33,12 +41,21 @@
         name
         taxonomy
       }
+      tagsWithoutTaxonomy: tags(
+        sort: { by: ID, order: ASC }
+      ) {
+        __typename
+        id
+        name
+        taxonomy
+      }
     }
     ...on Post {
       tags {
         __typename
         id
         name
+        taxonomy
       }
     }
   }
@@ -188,9 +205,19 @@
       }
     }
   }
+
+  postTagCount: tagCount(taxonomy: post_tag)
+  postTagNames: tagNames(taxonomy: post_tag, pagination: { limit: 20 })
+
+  dummyTagCount: tagCount(taxonomy: "dummy-tag")
+  dummyTagNames: tagNames(taxonomy: "dummy-tag", pagination: { limit: 20 })
+
+  allTagCount: tagCount
+  allTagNames: tagNames(pagination: { limit: 20 })
 }
 
 fragment TagData on Tag {
+  taxonomy
   count
   description
   id
@@ -203,9 +230,16 @@ fragment TagData on Tag {
 }
 
 fragment GenericTagData on GenericTag {
-  taxonomy   
   customPostCount
   customPosts(sort: { by: ID, order: ASC }) {
+    __typename
+    ...CustomPostData
+  }
+}
+
+fragment PostTagData on PostTag {
+  postCount
+  posts(sort: { by: ID, order: ASC }) {
     __typename
     ...CustomPostData
   }
@@ -215,13 +249,13 @@ fragment CustomPostData on CustomPost {
   id
   title
   tags(
-    taxonomy: "dummy-tag"
     sort: { by: ID, order: ASC }
   ) {
     __typename
     ...on Tag {
       id
       name
+      taxonomy
     }
   }
 }

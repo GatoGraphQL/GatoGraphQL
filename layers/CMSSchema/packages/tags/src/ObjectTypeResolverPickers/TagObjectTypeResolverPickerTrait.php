@@ -10,15 +10,18 @@ use PoP\ComponentModel\App;
 
 trait TagObjectTypeResolverPickerTrait
 {
-    abstract public function getTagTaxonomy(): string;
+    /**
+     * @return string[]
+     */
+    abstract public function getTagTaxonomies(): array;
 
     public function isServiceEnabled(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return in_array(
-            $this->getTagTaxonomy(),
+        return array_intersect(
+            $this->getTagTaxonomies(),
             $moduleConfiguration->getQueryableTagTaxonomies()
-        );
+        ) !== [];
     }
 }

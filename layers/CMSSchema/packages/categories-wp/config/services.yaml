@@ -13,6 +13,6 @@ services:
     PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface:
         class: \PoPCMSSchema\CategoriesWP\TypeAPIs\QueryableCategoryTypeAPI
 
-    PoPCMSSchema\Categories\TypeAPIs\QueryableTaxonomyCategoryListTypeAPIInterface:
-        class: \PoPCMSSchema\CategoriesWP\TypeAPIs\QueryableTaxonomyCategoryListTypeAPI
+    PoPCMSSchema\Categories\TypeAPIs\UniversalCategoryTypeAPIInterface:
+        class: \PoPCMSSchema\CategoriesWP\TypeAPIs\UniversalCategoryTypeAPI
 

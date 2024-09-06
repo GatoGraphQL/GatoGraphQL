@@ -47,6 +47,9 @@ The same behavior applies for all fields that accept the `filter.ids` input:
 - Added field `isGutenbergEditorEnabled` ([#2801](https://github.com/GatoGraphQL/GatoGraphQL/pull/2801))
 - Use `isGutenbergEditorEnabled` in predefined persisted queries ([#2802](https://github.com/GatoGraphQL/GatoGraphQL/pull/2802))
 - Added mutations to assign custom tags/categories to custom posts ([#2803](https://github.com/GatoGraphQL/GatoGraphQL/pull/2803))
+- Support additional taxonomies for mutations on post tags/categories (not only `post_tag` and `category`) ([#2823](https://github.com/GatoGraphQL/GatoGraphQL/pull/2823))
+- Added taxonomy field also to `PostTag` and `PostCategory` types ([#2824](https://github.com/GatoGraphQL/GatoGraphQL/pull/2824))
+- Made taxonomy input not mandatory on `Root.tags/categories` and `CustomPost.tags/categories` fields ([#2827](https://github.com/GatoGraphQL/GatoGraphQL/pull/2827))
 
 ### Added Settings option to enable/disable logs ([#2813](https://github.com/GatoGraphQL/GatoGraphQL/pull/2813))
 
@@ -59,6 +62,31 @@ A new option **Enable Logs?** in **Settings > Plugin Configuration > General** h
 ![Enable Logs? option in Settings](https://github.com/user-attachments/assets/fc523bc0-ccec-4ff0-8d22-b4ccc81563bb "Enable Logs? option in Settings")
 
 </div>
+
+### Application password failed authentication: Show error in GraphQL response ([#2817](https://github.com/GatoGraphQL/GatoGraphQL/pull/2817))
+
+If using Application passwords to authenticate the user against the GraphQL endpoint, and the authentication fails, the error message is now shown in the GraphQL response:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Application Password authentication error: The provided password is an invalid application password."
+    }
+  ],
+  "data": {
+    "me": null
+  }
+}
+```
+
+### Added predefined persisted queries
+
+Several persisted queries have been added:
+
+- [PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT ([#2818](https://github.com/GatoGraphQL/GatoGraphQL/pull/2818))
+- [PRO] Import new posts from WordPress RSS feed ([#2819](https://github.com/GatoGraphQL/GatoGraphQL/pull/2819))
+- [PRO] Import HTML from URLs as new posts in WordPress ([#2822](https://github.com/GatoGraphQL/GatoGraphQL/pull/2822))
 
 ## Fixed
 

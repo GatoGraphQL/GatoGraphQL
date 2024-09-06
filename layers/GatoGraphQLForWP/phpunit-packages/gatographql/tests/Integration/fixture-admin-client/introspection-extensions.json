@@ -6,27 +6,6 @@
             },
             "types": [
                 {
-                    "name": "CategoryDoesNotExistErrorPayload",
-                    "extensions": {
-                        "elementName": "CategoryDoesNotExistErrorPayload",
-                        "namespacedName": "CategoryDoesNotExistErrorPayload",
-                        "possibleValues": null,
-                        "isOneOf": false
-                    },
-                    "fields": [
-                        {
-                            "name": "message",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        }
-                    ],
-                    "inputFields": null,
-                    "enumValues": null
-                },
-                {
                     "name": "CategoryTermDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "CategoryTermDoesNotExistErrorPayload",
@@ -937,6 +916,14 @@
                             "args": []
                         },
                         {
+                            "name": "featuredImage",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "globalID",
                             "extensions": {
                                 "isMutation": false,
@@ -946,6 +933,14 @@
                         },
                         {
                             "name": "hasComments",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "hasFeaturedImage",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -1461,6 +1456,27 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
                         "namespacedName": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -2743,6 +2759,42 @@
                             ]
                         },
                         {
+                            "name": "setCategoriesOnCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "setCategoriesOnCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "setCategoriesOnPost",
                             "extensions": {
                                 "isMutation": true,
@@ -2795,6 +2847,42 @@
                         },
                         {
                             "name": "setFeaturedImageOnCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "setTagsOnCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "setTagsOnCustomPosts",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -3676,6 +3764,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -3703,6 +3797,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -3717,6 +3817,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -4032,6 +4138,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -4046,6 +4158,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -4073,6 +4191,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -4352,6 +4476,14 @@
                             "args": []
                         },
                         {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "url",
                             "extensions": {
                                 "isMutation": false,
@@ -4502,6 +4634,14 @@
                         },
                         {
                             "name": "slug",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "taxonomy",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -4803,6 +4943,14 @@
                         },
                         {
                             "name": "imageSizeNames",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "isGutenbergEditorEnabled",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -5399,6 +5547,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -5426,6 +5580,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "by",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -5441,6 +5601,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -5455,6 +5621,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -5498,6 +5670,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "by",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -5513,6 +5691,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -5527,6 +5711,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -5554,6 +5744,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -6568,6 +6764,14 @@
                             "args": []
                         },
                         {
+                            "name": "isGutenbergEditorEnabled",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "isUserLoggedIn",
                             "extensions": {
                                 "isMutation": false,
@@ -7180,6 +7384,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -7207,6 +7417,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "by",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -7222,6 +7438,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -7236,6 +7458,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -7279,6 +7507,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "by",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -7294,6 +7528,12 @@
                             },
                             "args": [
                                 {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
                                     "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
@@ -7308,6 +7548,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -7335,6 +7581,12 @@
                                 "isSensitiveDataElement": false
                             },
                             "args": [
+                                {
+                                    "name": "taxonomy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -7479,6 +7731,42 @@
                             "args": []
                         },
                         {
+                            "name": "setCategoriesOnCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "setCategoriesOnCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "setCategoriesOnPost",
                             "extensions": {
                                 "isMutation": true,
@@ -7531,6 +7819,42 @@
                         },
                         {
                             "name": "setFeaturedImageOnCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "setTagsOnCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "setTagsOnCustomPosts",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -8769,6 +9093,51 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootSetCategoriesOnCustomPostMutationPayload",
+                    "extensions": {
+                        "elementName": "RootSetCategoriesOnCustomPostMutationPayload",
+                        "namespacedName": "RootSetCategoriesOnCustomPostMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "customPost",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "customPostID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootSetCategoriesOnPostMutationPayload",
                     "extensions": {
                         "elementName": "RootSetCategoriesOnPostMutationPayload",
@@ -8818,6 +9187,51 @@
                     "extensions": {
                         "elementName": "RootSetFeaturedImageOnCustomPostMutationPayload",
                         "namespacedName": "RootSetFeaturedImageOnCustomPostMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "customPost",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "customPostID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootSetTagsOnCustomPostMutationPayload",
+                    "extensions": {
+                        "elementName": "RootSetTagsOnCustomPostMutationPayload",
+                        "namespacedName": "RootSetTagsOnCustomPostMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -9264,10 +9678,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "TagDoesNotExistErrorPayload",
+                    "name": "TagTermDoesNotExistErrorPayload",
                     "extensions": {
-                        "elementName": "TagDoesNotExistErrorPayload",
-                        "namespacedName": "TagDoesNotExistErrorPayload",
+                        "elementName": "TagTermDoesNotExistErrorPayload",
+                        "namespacedName": "TagTermDoesNotExistErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -9285,10 +9699,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "TagTermDoesNotExistErrorPayload",
+                    "name": "TaxonomyIsNotValidErrorPayload",
                     "extensions": {
-                        "elementName": "TagTermDoesNotExistErrorPayload",
-                        "namespacedName": "TagTermDoesNotExistErrorPayload",
+                        "elementName": "TaxonomyIsNotValidErrorPayload",
+                        "namespacedName": "TaxonomyIsNotValidErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -10650,6 +11064,8 @@
                         "elementName": "CategoryTaxonomyEnumString",
                         "namespacedName": "CategoryTaxonomyEnumString",
                         "possibleValues": [
+                            "additional-dummy-category",
+                            "additional-post-category",
                             "category",
                             "dummy-category",
                             "dummy-category-two"
@@ -10789,6 +11205,36 @@
                     "enumValues": null
                 },
                 {
+                    "name": "PostCategoryTaxonomyEnumString",
+                    "extensions": {
+                        "elementName": "PostCategoryTaxonomyEnumString",
+                        "namespacedName": "PostCategoryTaxonomyEnumString",
+                        "possibleValues": [
+                            "additional-post-category",
+                            "category"
+                        ],
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "PostTagTaxonomyEnumString",
+                    "extensions": {
+                        "elementName": "PostTagTaxonomyEnumString",
+                        "namespacedName": "PostTagTaxonomyEnumString",
+                        "possibleValues": [
+                            "additional-post-tag",
+                            "post_tag"
+                        ],
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "String",
                     "extensions": {
                         "elementName": "String",
@@ -10806,6 +11252,8 @@
                         "elementName": "TagTaxonomyEnumString",
                         "namespacedName": "TagTaxonomyEnumString",
                         "possibleValues": [
+                            "additional-dummy-tag",
+                            "additional-post-tag",
                             "dummy-tag",
                             "dummy-tag-two",
                             "post_tag"
@@ -12453,6 +12901,12 @@
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
                         }
                     ],
                     "enumValues": null
@@ -12475,6 +12929,12 @@
                         },
                         {
                             "name": "includeBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -13285,6 +13745,12 @@
                             }
                         },
                         {
+                            "name": "categoriesBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "contentAs",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -13316,6 +13782,12 @@
                         },
                         {
                             "name": "status",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "tagsBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -13570,6 +14042,12 @@
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
                         }
                     ],
                     "enumValues": null
@@ -13671,6 +14149,12 @@
                         },
                         {
                             "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -13828,6 +14312,12 @@
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
                         }
                     ],
                     "enumValues": null
@@ -13844,6 +14334,12 @@
                     "inputFields": [
                         {
                             "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -14689,6 +15185,43 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootSetCategoriesOnCustomPostInput",
+                    "extensions": {
+                        "elementName": "RootSetCategoriesOnCustomPostInput",
+                        "namespacedName": "RootSetCategoriesOnCustomPostInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "append",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "categoriesBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootSetCategoriesOnPostInput",
                     "extensions": {
                         "elementName": "RootSetCategoriesOnPostInput",
@@ -14737,6 +15270,43 @@
                         },
                         {
                             "name": "mediaItemBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootSetTagsOnCustomPostInput",
+                    "extensions": {
+                        "elementName": "RootSetTagsOnCustomPostInput",
+                        "namespacedName": "RootSetTagsOnCustomPostInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "append",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "tagsBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -14841,6 +15411,12 @@
                             }
                         },
                         {
+                            "name": "categoriesBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "contentAs",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -14878,6 +15454,12 @@
                         },
                         {
                             "name": "status",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "tagsBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -15156,6 +15738,12 @@
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
                         }
                     ],
                     "enumValues": null
@@ -15269,6 +15857,12 @@
                         },
                         {
                             "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -17215,6 +17809,18 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
@@ -17231,6 +17837,18 @@
                     "extensions": {
                         "elementName": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
                         "namespacedName": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },

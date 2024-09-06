@@ -171,17 +171,16 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $categoryTypeAPI = $this->getCategoryTypeAPI();
         $customPost = $object;
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'categories':
-                return $categoryTypeAPI->getCustomPostCategories($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getCategoryTypeAPI()->getCustomPostCategories($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'categoryNames':
-                return $categoryTypeAPI->getCustomPostCategories($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $this->getCategoryTypeAPI()->getCustomPostCategories($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'categoryCount':
                 /** @var int */
-                return $categoryTypeAPI->getCustomPostCategoryCount($customPost, $query);
+                return $this->getCategoryTypeAPI()->getCustomPostCategoryCount($customPost, $query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
