@@ -533,12 +533,15 @@ class Plugin extends AbstractMainPlugin
         return [
             [
                 'blockName' => $customEndpointOptionsBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $endpointGraphiQLBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $endpointVoyagerBlock->getBlockFullName(),
+                'attrs' => [],
             ]
         ];
     }
@@ -561,12 +564,15 @@ class Plugin extends AbstractMainPlugin
         return [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                'attrs' => [],
             ]
         ];
     }
@@ -595,9 +601,11 @@ class Plugin extends AbstractMainPlugin
             ],
             [
                 'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                'attrs' => [],
             ]
         ];
     }
@@ -627,9 +635,11 @@ class Plugin extends AbstractMainPlugin
             ],
             [
                 'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                'attrs' => [],
             ]
         ];
     }
@@ -1431,22 +1441,23 @@ class Plugin extends AbstractMainPlugin
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
 
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_GUTENBERG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CUSTOMPOSTS_FOR_POLYLANG_GUTENBERG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('[PRO] Translate posts for Polylang (Gutenberg)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate custom posts for Polylang (Gutenberg)', 'gatographql'),
                     'post_excerpt' => \__('Translate a block-based post to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/translate-posts-for-polylang-gutenberg',
+                                    'admin/transform/translate-customposts-for-polylang-gutenberg',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_POLYLANG_AND_GUTENBERG,
                                 ),
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
@@ -1454,26 +1465,26 @@ class Plugin extends AbstractMainPlugin
                                 ),
                             ],
                         ],
-                        ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_CLASSIC_EDITOR;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CUSTOMPOSTS_FOR_POLYLANG_CLASSIC_EDITOR;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('[PRO] Translate posts for Polylang (Classic editor)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate custom posts for Polylang (Classic editor)', 'gatographql'),
                     'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/translate-posts-for-polylang-classic-editor',
+                                    'admin/transform/translate-customposts-for-polylang-classic-editor',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_POLYLANG_AND_CLASSIC_EDITOR,
                                 ),
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
@@ -1487,7 +1498,7 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_FEATUREDIMAGE_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CUSTOMPOST_FEATUREDIMAGE_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -1500,7 +1511,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/sync-featuredimage-for-polylang',
+                                    'admin/transform/sync-custompost-featuredimage-for-polylang',
                                     VirtualTutorialLessons::SYNCHRONIZING_FEATUREDIMAGE_FOR_POLYLANG,
                                 ),
                             ],
@@ -1835,20 +1846,20 @@ class Plugin extends AbstractMainPlugin
         /**
          * Create the Persisted Queries
          */
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_POSTS_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CUSTOMPOSTS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('[PRO] Create missing translation posts for Polylang', 'gatographql'),
-                    'post_excerpt' => \__('Given a post, duplicate it into all the other languages defined in Polylang for which there is no translation post yet', 'gatographql'),
+                    'post_title' => \__('[PRO] Create missing translation custom posts for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Given a custom post, duplicate it into all the other languages defined in Polylang for which there is no translation post yet', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/create-missing-translation-posts-for-polylang',
+                                    'admin/transform/create-missing-translation-customposts-for-polylang',
                                     VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_POSTS_FOR_POLYLANG,
                                 ),
                             ],
@@ -2080,7 +2091,7 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_TAGS_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CUSTOMPOST_TAGS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -2093,7 +2104,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/sync-tags-for-polylang',
+                                    'admin/transform/sync-custompost-tags-for-polylang',
                                     VirtualTutorialLessons::SYNCHRONIZING_TAGS_FOR_POLYLANG,
                                 ),
                             ],
@@ -2104,7 +2115,7 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CATEGORIES_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CUSTOMPOST_CATEGORIES_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -2117,7 +2128,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/sync-categories-for-polylang',
+                                    'admin/transform/sync-custompost-categories-for-polylang',
                                     VirtualTutorialLessons::SYNCHRONIZING_CATEGORIES_FOR_POLYLANG,
                                 ),
                             ],

@@ -147,11 +147,14 @@ query ExportOriginMediaItemParent
   @include(if: $hasOriginMediaItemParentCustomPost)
 {
   originMediaItemParentCustomPost: customPost(by: { id: $originMediaItemParentCustomPostID }) {
-    id
+    __typename
+    ...on CustomPost {
+      id
 
-    
-    polylangTranslationLanguageIDs
-      @export(as: "mediaItemParentCustomPostTranslationLanguages")
+      
+      polylangTranslationLanguageIDs
+        @export(as: "mediaItemParentCustomPostTranslationLanguages")
+    }
   }
 }
 

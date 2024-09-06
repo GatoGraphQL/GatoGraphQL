@@ -1,0 +1,288 @@
+########################################################################
+# 
+# Variables:
+#   - customPostId: The custom post with the origin language, from where to trigger the updates
+#   - tagTaxonomy: The taxonomy of the tags. Default is `post_tag`
+#   - statusToUpdate: The status that the translation posts must have to be updated. It is `any` by default
+#   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the update when the origin post has the default language of the site. It is `true` by default.
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query is an integration for Polylang.
+#
+# It takes an origin post, queries its tags,
+# and updates its translation posts with the corresponding
+# tags for the corresponding language,
+# as set-up via Polylang. If some tag does not
+# have a translation, that tag is removed.
+#
+# By default, the origin post must have the default language
+# of the site, or the update will not be executed.
+# To trigger the update from any language, pass variable
+# `$triggerUpdateFromDefaultLanguageOnly` with `false`.
+#
+########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyString: _echo(value: null)
+    @export(as: "fromLanguage")
+    @remove
+
+  emptyBool: _echo(value: false)
+    @export(as: "executeUpdate")
+    @export(as: "hasOriginCustomPostTranslationPosts")
+    @remove
+  
+  emptyArray: _echo(value: [])
+    @export(as: "originCustomPostTranslationPostIds")
+    @export(as: "originCustomPostTagIDs")
+    @remove
+  
+  emptyJSON: _echo(value: {})
+    @export(as: "tagIDTranslationLanguageIDs")
+    @remove
+}
+
+query ExportDataFromOriginCustomPost(
+  $customPostId: ID!
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
+)
+  @depends(on: "InitializeVariables")
+{
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
+
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
+  originCustomPost: customPost(by: { id: $customPostId }, status: any) {
+    __typename
+    ...on CustomPost {
+      id
+      
+      polylangLanguage {
+        code @export(as: "fromLanguage")
+      }
+      
+      polylangTranslationLanguageIDs
+        @remove
+      customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+        @export(as: "customPostIDTranslationLanguageIDs")
+
+      hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+        @export(as: "hasOriginCustomPostTranslationPosts")
+    }
+    ...on Post {
+      tags @export(as: "originCustomPostTagIDs") {
+        ...TagData
+      }
+    }
+    ...on GenericCustomPost {
+      tags(taxonomy: $tagTaxonomy) @export(as: "originCustomPostTagIDs") {
+        ...TagData
+      }
+    }
+  }
+}
+
+query ExportTranslationCustomPostLanguages(
+  $statusToUpdate: CustomPostStatusEnum! = any
+)
+  @depends(on: "ExportDataFromOriginCustomPost")
+  @include(if: $hasOriginCustomPostTranslationPosts)
+{
+  originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
+    @export(as: "originCustomPostTranslationPostIds")
+  translationCustomPostLanguages: customPosts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
+    __typename
+    ...on CustomPost {
+      id
+
+      polylangLanguage @export(
+        as: "translationCustomPostLanguages"
+        type: DICTIONARY
+      ) {
+        code
+      }
+    }
+  }
+}
+
+query FilterTranslationCustomPostsToUpdate(
+  $statusToUpdate: CustomPostStatusEnum! = any
+  $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
+)
+  @depends(on: "ExportTranslationCustomPostLanguages")
+  @include(if: $hasOriginCustomPostTranslationPosts)
+{
+  translationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
+    __typename
+    ...on CustomPost {
+      id
+      polylangLanguageCode: _objectProperty(
+        object: $translationCustomPostLanguages,
+        by: { key: $__id }
+      )
+      polylangLanguage: _objectProperty(
+        object: $languageLocaleCodes,
+        by: { key: $__polylangLanguageCode }
+      )
+
+      translationCustomPostTagIDs: _echo(value: $__polylangLanguage)
+        @passOnwards(as: "lang")
+        @applyField(
+          name: "_echo"
+          arguments: { value: $originCustomPostTagIDs }
+          setResultInResponse: true
+        )
+        @underEachArrayItem(
+          passValueOnwardsAs: "tagID"
+          affectDirectivesUnderPos: [1, 2]
+        )
+          @applyField(
+            name: "_objectProperty"
+            arguments: {
+              object: $tagIDTranslationLanguageIDs,
+              by: { key: $tagID }
+            }
+            passOnwardsAs: "tagTranslationLanguageIDs"
+          )
+          @applyField(
+            name: "_objectProperty"
+            arguments: {
+              object: $tagTranslationLanguageIDs,
+              by: { key: $lang },
+              failIfNonExistingKeyOrPath: false
+            }
+            setResultInResponse: true
+          )
+        @arrayFilter
+        @export(
+          as: "translationCustomPostTagIDs",
+          type: DICTIONARY
+        )
+        @remove
+    }
+  }
+
+  hasTranslationCustomPosts: _notEmpty(value: $__translationCustomPosts)
+
+  originCustomPostHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  canTriggerUpdateFromOriginPost: _if(
+    condition: $triggerUpdateFromDefaultLanguageOnly,
+    then: $__originCustomPostHasDefaultLanguage,
+    else: true
+  )
+
+  executeUpdate: _and(values: [
+    $__hasTranslationCustomPosts,
+    $__canTriggerUpdateFromOriginPost
+  ])
+    @export(as: "executeUpdate")
+}
+
+mutation UpdateTagsForTranslationCustomPosts(
+  $statusToUpdate: CustomPostStatusEnum! = any
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
+)
+  @depends(on: "FilterTranslationCustomPostsToUpdate")
+  @include(if: $executeUpdate)
+{
+  updateTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
+    __typename
+    ...on CustomPost {
+      polylangLanguage {
+        code
+      }
+    }
+    ...on Post {
+      id
+      tagIDs: _objectProperty(
+        object: $translationCustomPostTagIDs,
+        by: { key: $__id }
+      )
+      setTags(input: {
+        tagsBy: {
+          ids: $__tagIDs
+        },
+        append: false
+      }) {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
+        }
+        post {
+          tags {
+            id
+            name
+            polylangLanguage {
+              code
+            }
+          }
+        }
+      }
+    }
+    ...on GenericCustomPost {
+      id
+      tagIDs: _objectProperty(
+        object: $translationCustomPostTagIDs,
+        by: { key: $__id }
+      )
+      setTags(input: {
+        taxonomy: $tagTaxonomy
+        tagsBy: {
+          ids: $__tagIDs
+        },
+        append: false
+      }) {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
+        }
+        customPost {
+          __typename
+          ...on CustomPost {
+            tags(taxonomy: $tagTaxonomy) {
+              id
+              name
+              polylangLanguage {
+                code
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment TagData on Tag {
+  id
+  name
+  polylangLanguage {
+    code
+  }
+  polylangTranslationLanguageIDs
+    @export(
+      as: "tagIDTranslationLanguageIDs",
+      type: DICTIONARY
+    )
+}

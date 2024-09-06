@@ -1,8 +1,8 @@
 ########################################################################
 # 
 # Variables:
-#   - postId: The post with the origin language, from where all translations will be made
-#   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
+#   - customPostId: The custom post with the origin language, from where all translations will be made
+#   - statusToUpdate: The status the translation custom posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
 #   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
@@ -73,8 +73,8 @@ query InitializeVariables
     @remove
 
   emptyBool: _echo(value: false)
-    @export(as: "hasOriginPost")
-    @export(as: "hasTranslationPosts")
+    @export(as: "hasOriginCustomPost")
+    @export(as: "hasTranslationCustomPosts")
     @export(as: "executeTranslation")
     @remove
   
@@ -154,8 +154,8 @@ query InitializeVariables
     @remove
 }
 
-query ExportOriginPost(
-  $postId: ID!
+query ExportOriginCustomPost(
+  $customPostId: ID!
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
 )
@@ -173,277 +173,279 @@ query ExportOriginPost(
     )
   }
 
-  originPost: post(by: { id: $postId }, status: any) {
-    id
+  originCustomPost: customPost(by: { id: $customPostId }, status: any) {
+    __typename
+    ...on CustomPost {
+      id
 
 
-    polylangLanguage {
-      code @export(as: "fromLanguage")
-    }
-    
+      polylangLanguage {
+        code @export(as: "fromLanguage")
+      }
+      
 
-    polylangTranslationLanguageIDs(filter: {
-      includeLanguages: $includeLanguagesToTranslate
-      excludeLanguages: $excludeLanguagesToTranslate
-    })
-      @remove
-    postIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
-      @export(as: "postIDTranslationLanguageIDs")
+      polylangTranslationLanguageIDs(filter: {
+        includeLanguages: $includeLanguagesToTranslate
+        excludeLanguages: $excludeLanguagesToTranslate
+      })
+        @remove
+      customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+        @export(as: "customPostIDTranslationLanguageIDs")
 
-    hasTranslationPosts: _notEmpty(value: $__postIDTranslationLanguageIDs)
-      @export(as: "hasTranslationPosts")
+      hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+        @export(as: "hasTranslationCustomPosts")
 
 
-    rawTitle
-      @export(as: "originRawTitle")
-    rawContent
-      @export(as: "originRawContent")
-    rawExcerpt
-      @export(as: "originRawExcerpt")
-    
+      rawTitle
+        @export(as: "originRawTitle")
+      rawContent
+        @export(as: "originRawContent")
+      rawExcerpt
+        @export(as: "originRawExcerpt")
+      
 
-    originCoreHeading: blockFlattenedDataItems(
-      filterBy: { include: "core/heading" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreHeadingContentItems"
-          )
-    
-
-    originCoreParagraph: blockFlattenedDataItems(
-      filterBy: { include: "core/paragraph" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreParagraphContentItems"
-          )
-    
-
-    originCoreImage: blockFlattenedDataItems(
-      filterBy: { include: "core/image" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { key: "attributes" }
-          affectDirectivesUnderPos: [1, 3]
-        )
+      originCoreHeading: blockFlattenedDataItems(
+        filterBy: { include: "core/heading" }
+      )
+        @underEachArrayItem
           @underJSONObjectProperty(
-            by: { key: "alt" }
+            by: { path: "attributes.content" }
             failIfNonExistingKeyOrPath: false
           )
             @export(
-              as: "originCoreImageAltItems"
+              as: "originCoreHeadingContentItems"
             )
-    
+      
+
+      originCoreParagraph: blockFlattenedDataItems(
+        filterBy: { include: "core/paragraph" }
+      )
+        @underEachArrayItem
           @underJSONObjectProperty(
-            by: { key: "caption" }
+            by: { path: "attributes.content" }
             failIfNonExistingKeyOrPath: false
           )
             @export(
-              as: "originCoreImageCaptionItems"
+              as: "originCoreParagraphContentItems"
             )
+      
 
-    
-    originCoreButton: blockFlattenedDataItems(
-      filterBy: { include: "core/button" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.text" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreButtonTextItems"
-          )
-    
-
-    originCoreTable: blockFlattenedDataItems(
-      filterBy: { include: "core/table" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { key: "attributes" }
-          affectDirectivesUnderPos: [1, 3]
-        )
+      originCoreImage: blockFlattenedDataItems(
+        filterBy: { include: "core/image" }
+      )
+        @underEachArrayItem
           @underJSONObjectProperty(
-            by: { key: "caption" }
-            failIfNonExistingKeyOrPath: false
+            by: { key: "attributes" }
+            affectDirectivesUnderPos: [1, 3]
           )
-            @export(
-              as: "originCoreTableCaptionItems"
+            @underJSONObjectProperty(
+              by: { key: "alt" }
+              failIfNonExistingKeyOrPath: false
             )
-    
-          @underJSONObjectProperty(
-            by: { key: "body" }
-            failIfNonExistingKeyOrPath: false
-          )
-            @underEachArrayItem
-              @underJSONObjectProperty(
-                by: { key: "cells" }
+              @export(
+                as: "originCoreImageAltItems"
               )
-                @underEachArrayItem
-                  @underJSONObjectProperty(
-                    by: { key: "content" }
-                  )
-                    @export(
-                      as: "originCoreTableBodyCellsContentItems"
+      
+            @underJSONObjectProperty(
+              by: { key: "caption" }
+              failIfNonExistingKeyOrPath: false
+            )
+              @export(
+                as: "originCoreImageCaptionItems"
+              )
+
+      
+      originCoreButton: blockFlattenedDataItems(
+        filterBy: { include: "core/button" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { path: "attributes.text" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreButtonTextItems"
+            )
+      
+
+      originCoreTable: blockFlattenedDataItems(
+        filterBy: { include: "core/table" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { key: "attributes" }
+            affectDirectivesUnderPos: [1, 3]
+          )
+            @underJSONObjectProperty(
+              by: { key: "caption" }
+              failIfNonExistingKeyOrPath: false
+            )
+              @export(
+                as: "originCoreTableCaptionItems"
+              )
+      
+            @underJSONObjectProperty(
+              by: { key: "body" }
+              failIfNonExistingKeyOrPath: false
+            )
+              @underEachArrayItem
+                @underJSONObjectProperty(
+                  by: { key: "cells" }
+                )
+                  @underEachArrayItem
+                    @underJSONObjectProperty(
+                      by: { key: "content" }
                     )
+                      @export(
+                        as: "originCoreTableBodyCellsContentItems"
+                      )
 
-    
-    originCoreListItem: blockFlattenedDataItems(
-      filterBy: { include: "core/list-item" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreListItemContentItems"
-          )
-    
-
-    originCoreCover: blockFlattenedDataItems(
-      filterBy: { include: "core/cover" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.alt" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreCoverAltItems"
-          )
-    
-
-    originCoreMediaText: blockFlattenedDataItems(
-      filterBy: { include: "core/media-text" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.mediaAlt" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreMediaTextAltItems"
-          )
-    
-
-    originCoreVerse: blockFlattenedDataItems(
-      filterBy: { include: "core/verse" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreVerseContentItems"
-          )
-    
-
-    originCoreQuote: blockFlattenedDataItems(
-      filterBy: { include: "core/quote" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.citation" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreQuoteCitationItems"
-          )
-    
-
-    originCorePullquote: blockFlattenedDataItems(
-      filterBy: { include: "core/pullquote" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { key: "attributes" }
-          affectDirectivesUnderPos: [1, 3]
-        )
+      
+      originCoreListItem: blockFlattenedDataItems(
+        filterBy: { include: "core/list-item" }
+      )
+        @underEachArrayItem
           @underJSONObjectProperty(
-            by: { key: "citation" }
+            by: { path: "attributes.content" }
             failIfNonExistingKeyOrPath: false
           )
             @export(
-              as: "originCorePullquoteCitationItems"
+              as: "originCoreListItemContentItems"
             )
-    
+      
+
+      originCoreCover: blockFlattenedDataItems(
+        filterBy: { include: "core/cover" }
+      )
+        @underEachArrayItem
           @underJSONObjectProperty(
-            by: { key: "value" }
+            by: { path: "attributes.alt" }
             failIfNonExistingKeyOrPath: false
           )
             @export(
-              as: "originCorePullquoteValueItems"
+              as: "originCoreCoverAltItems"
             )
-    
+      
 
-    originCoreAudio: blockFlattenedDataItems(
-      filterBy: { include: "core/audio" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.caption" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreAudioCaptionItems"
+      originCoreMediaText: blockFlattenedDataItems(
+        filterBy: { include: "core/media-text" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { path: "attributes.mediaAlt" }
+            failIfNonExistingKeyOrPath: false
           )
-    
+            @export(
+              as: "originCoreMediaTextAltItems"
+            )
+      
 
-    originCoreVideo: blockFlattenedDataItems(
-      filterBy: { include: "core/video" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.caption" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreVideoCaptionItems"
+      originCoreVerse: blockFlattenedDataItems(
+        filterBy: { include: "core/verse" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { path: "attributes.content" }
+            failIfNonExistingKeyOrPath: false
           )
-    
+            @export(
+              as: "originCoreVerseContentItems"
+            )
+      
 
-    originCorePreformatted: blockFlattenedDataItems(
-      filterBy: { include: "core/preformatted" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCorePreformattedContentItems"
+      originCoreQuote: blockFlattenedDataItems(
+        filterBy: { include: "core/quote" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { path: "attributes.citation" }
+            failIfNonExistingKeyOrPath: false
           )
-    
+            @export(
+              as: "originCoreQuoteCitationItems"
+            )
+      
 
-    originCoreEmbed: blockFlattenedDataItems(
-      filterBy: { include: "core/embed" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.caption" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreEmbedCaptionItems"
+      originCorePullquote: blockFlattenedDataItems(
+        filterBy: { include: "core/pullquote" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { key: "attributes" }
+            affectDirectivesUnderPos: [1, 3]
           )
+            @underJSONObjectProperty(
+              by: { key: "citation" }
+              failIfNonExistingKeyOrPath: false
+            )
+              @export(
+                as: "originCorePullquoteCitationItems"
+              )
+      
+            @underJSONObjectProperty(
+              by: { key: "value" }
+              failIfNonExistingKeyOrPath: false
+            )
+              @export(
+                as: "originCorePullquoteValueItems"
+              )
+      
+
+      originCoreAudio: blockFlattenedDataItems(
+        filterBy: { include: "core/audio" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { path: "attributes.caption" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreAudioCaptionItems"
+            )
+      
+
+      originCoreVideo: blockFlattenedDataItems(
+        filterBy: { include: "core/video" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { path: "attributes.caption" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreVideoCaptionItems"
+            )
+      
+
+      originCorePreformatted: blockFlattenedDataItems(
+        filterBy: { include: "core/preformatted" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { path: "attributes.content" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCorePreformattedContentItems"
+            )
+      
+
+      originCoreEmbed: blockFlattenedDataItems(
+        filterBy: { include: "core/embed" }
+      )
+        @underEachArrayItem
+          @underJSONObjectProperty(
+            by: { path: "attributes.caption" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreEmbedCaptionItems"
+            )
+    }
   }
 
-  hasOriginPost: _notNull(value: $__originPost)
-    @export(as: "hasOriginPost")
+  hasOriginCustomPost: _notNull(value: $__originCustomPost)
+    @export(as: "hasOriginCustomPost")
 }
 
 query InitializeTranslationVariables(
@@ -451,734 +453,742 @@ query InitializeTranslationVariables(
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
-  @depends(on: "ExportOriginPost")
-  @include(if: $hasOriginPost)
-  @include(if: $hasTranslationPosts)
+  @depends(on: "ExportOriginCustomPost")
+  @include(if: $hasOriginCustomPost)
+  @include(if: $hasTranslationCustomPosts)
 {
-  translationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
-    @export(as: "translationPostIds")
-  emptyTranslationPostVars: posts(filter: { ids: $__translationPostIds, status: $statusToUpdate } ) {
-    id
-    emptyArray: _echo(value: [])
-      @export(
-        as: "rawTitle"
-        type: DICTIONARY
-      )
-      @export(
-        as: "rawContent"
-        type: DICTIONARY
-      )
-      @export(
-        as: "rawExcerpt"
-        type: DICTIONARY
-      )
+  translationCustomPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
+    @export(as: "translationCustomPostIds")
+  emptyTranslationCustomPostVars: customPosts(filter: { ids: $__translationCustomPostIds, status: $statusToUpdate } ) {
+    __typename
+    ...on CustomPost {
+      id
+      emptyArray: _echo(value: [])
+        @export(
+          as: "rawTitle"
+          type: DICTIONARY
+        )
+        @export(
+          as: "rawContent"
+          type: DICTIONARY
+        )
+        @export(
+          as: "rawExcerpt"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "translationPostLanguages"
-        type: DICTIONARY
-      )
-      
-      @export(
-        as: "coreHeadingContentItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreHeadingContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreHeadingContentReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "translationPostLanguages"
+          type: DICTIONARY
+        )
+        
+        @export(
+          as: "coreHeadingContentItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreHeadingContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreHeadingContentReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreParagraphContentItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreParagraphContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreParagraphContentReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreParagraphContentItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreParagraphContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreParagraphContentReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreImageAltItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreImageAltReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreImageAltReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreImageAltItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreImageAltReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreImageAltReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreImageCaptionItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreImageCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreImageCaptionReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreImageCaptionItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreImageCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreImageCaptionReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreButtonTextItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreButtonTextReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreButtonTextReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreButtonTextItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreButtonTextReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreButtonTextReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreTableCaptionItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreTableCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreTableCaptionReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreTableCaptionItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreTableCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreTableCaptionReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreTableBodyCellsContentItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreTableBodyCellsContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreTableBodyCellsContentReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreTableBodyCellsContentItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreTableBodyCellsContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreTableBodyCellsContentReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreListItemContentItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreListItemContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreListItemContentReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreListItemContentItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreListItemContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreListItemContentReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreCoverAltItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreCoverAltReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreCoverAltReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreCoverAltItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreCoverAltReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreCoverAltReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreMediaTextAltItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreMediaTextAltReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreMediaTextAltReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreMediaTextAltItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreMediaTextAltReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreMediaTextAltReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreVerseContentItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreVerseContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreVerseContentReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreVerseContentItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreVerseContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreVerseContentReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreQuoteCitationItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreQuoteCitationReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreQuoteCitationReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreQuoteCitationItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreQuoteCitationReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreQuoteCitationReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "corePullquoteCitationItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "corePullquoteCitationReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "corePullquoteCitationReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "corePullquoteCitationItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "corePullquoteCitationReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "corePullquoteCitationReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "corePullquoteValueItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "corePullquoteValueReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "corePullquoteValueReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "corePullquoteValueItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "corePullquoteValueReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "corePullquoteValueReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreAudioCaptionItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreAudioCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreAudioCaptionReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreAudioCaptionItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreAudioCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreAudioCaptionReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreVideoCaptionItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreVideoCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreVideoCaptionReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreVideoCaptionItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreVideoCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreVideoCaptionReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "corePreformattedContentItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "corePreformattedContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "corePreformattedContentReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "corePreformattedContentItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "corePreformattedContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "corePreformattedContentReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @export(
-        as: "coreEmbedCaptionItems"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreEmbedCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @export(
-        as: "coreEmbedCaptionReplacementsTo"
-        type: DICTIONARY
-      )
+        @export(
+          as: "coreEmbedCaptionItems"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreEmbedCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @export(
+          as: "coreEmbedCaptionReplacementsTo"
+          type: DICTIONARY
+        )
 
-      @remove
+        @remove
+    }
   }
 
-  hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
+  hasTranslationCustomPosts: _notEmpty(value: $__emptyTranslationCustomPostVars)
 
-  originPostHasDefaultLanguage: _equals(
+  originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
   )
 
   isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
 
-  originPostHasSpecificLanguage: _equals(
+  originCustomPostHasSpecificLanguage: _equals(
     value1: $translateFromLanguage,
     value2: $fromLanguage
   )
 
   canTranslateOriginPostFromSpecificLanguage: _if(
     condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
+    then: $__originCustomPostHasSpecificLanguage,
     else: true
   )
 
   canTranslateOriginPost: _if(
     condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
+    then: $__originCustomPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
 
   executeTranslation: _and(values: [
-    $__hasTranslationPosts,
+    $__hasTranslationCustomPosts,
     $__canTranslateOriginPost
   ])
     @export(as: "executeTranslation")
 }
 
-query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
+query FetchData(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+)
   @depends(on: "InitializeTranslationVariables")
   @include(if: $executeTranslation)
 {
-  posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
-    id
+  customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate } ) {
+    __typename
+    ...on CustomPost {
+      id
 
 
-    rawTitle: _echo(value: $originRawTitle)
-      @export(
-        as: "rawTitle",
+      rawTitle: _echo(value: $originRawTitle)
+        @export(
+          as: "rawTitle",
+          type: DICTIONARY
+        )
+        @remove
+      rawContent: _echo(value: $originRawContent)
+        @export(
+          as: "rawContent",
+          type: DICTIONARY
+        )
+        @remove
+      rawExcerpt: _echo(value: $originRawExcerpt)
+        @export(
+          as: "rawExcerpt",
+          type: DICTIONARY
+        )
+        @remove
+
+
+      polylangLanguage @export(
+        as: "translationPostLanguages"
         type: DICTIONARY
-      )
-      @remove
-    rawContent: _echo(value: $originRawContent)
-      @export(
-        as: "rawContent",
-        type: DICTIONARY
-      )
-      @remove
-    rawExcerpt: _echo(value: $originRawExcerpt)
-      @export(
-        as: "rawExcerpt",
-        type: DICTIONARY
-      )
-      @remove
+      ) {
+        code
+      }
 
 
-    polylangLanguage @export(
-      as: "translationPostLanguages"
-      type: DICTIONARY
-    ) {
-      code
+      coreHeadingContentItems: _echo(value: $originCoreHeadingContentItems)
+        @export(
+          as: "coreHeadingContentItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreHeadingContentReplacementsFrom: _echo(value: $originCoreHeadingContentReplacementsFrom)
+        @export(
+          as: "coreHeadingContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreHeadingContentReplacementsTo: _echo(value: $originCoreHeadingContentReplacementsTo)
+        @export(
+          as: "coreHeadingContentReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreParagraphContentItems: _echo(value: $originCoreParagraphContentItems)
+        @export(
+          as: "coreParagraphContentItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreParagraphContentReplacementsFrom: _echo(value: $originCoreParagraphContentReplacementsFrom)
+        @export(
+          as: "coreParagraphContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreParagraphContentReplacementsTo: _echo(value: $originCoreParagraphContentReplacementsTo)
+        @export(
+          as: "coreParagraphContentReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreImageAltItems: _echo(value: $originCoreImageAltItems)
+        @export(
+          as: "coreImageAltItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreImageAltReplacementsFrom: _echo(value: $originCoreImageAltReplacementsFrom)
+        @export(
+          as: "coreImageAltReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreImageAltReplacementsTo: _echo(value: $originCoreImageAltReplacementsTo)
+        @export(
+          as: "coreImageAltReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreImageCaptionItems: _echo(value: $originCoreImageCaptionItems)
+        @export(
+          as: "coreImageCaptionItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreImageCaptionReplacementsFrom: _echo(value: $originCoreImageCaptionReplacementsFrom)
+        @export(
+          as: "coreImageCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreImageCaptionReplacementsTo: _echo(value: $originCoreImageCaptionReplacementsTo)
+        @export(
+          as: "coreImageCaptionReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreButtonTextItems: _echo(value: $originCoreButtonTextItems)
+        @export(
+          as: "coreButtonTextItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreButtonTextReplacementsFrom: _echo(value: $originCoreButtonTextReplacementsFrom)
+        @export(
+          as: "coreButtonTextReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreButtonTextReplacementsTo: _echo(value: $originCoreButtonTextReplacementsTo)
+        @export(
+          as: "coreButtonTextReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreTableCaptionItems: _echo(value: $originCoreTableCaptionItems)
+        @export(
+          as: "coreTableCaptionItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreTableCaptionReplacementsFrom: _echo(value: $originCoreTableCaptionReplacementsFrom)
+        @export(
+          as: "coreTableCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreTableCaptionReplacementsTo: _echo(value: $originCoreTableCaptionReplacementsTo)
+        @export(
+          as: "coreTableCaptionReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreTableBodyCellsContentItems: _echo(value: $originCoreTableBodyCellsContentItems)
+        @export(
+          as: "coreTableBodyCellsContentItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreTableBodyCellsContentReplacementsFrom: _echo(value: $originCoreTableBodyCellsContentReplacementsFrom)
+        @export(
+          as: "coreTableBodyCellsContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreTableBodyCellsContentReplacementsTo: _echo(value: $originCoreTableBodyCellsContentReplacementsTo)
+        @export(
+          as: "coreTableBodyCellsContentReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreListItemContentItems: _echo(value: $originCoreListItemContentItems)
+        @export(
+          as: "coreListItemContentItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreListItemContentReplacementsFrom: _echo(value: $originCoreListItemContentReplacementsFrom)
+        @export(
+          as: "coreListItemContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreListItemContentReplacementsTo: _echo(value: $originCoreListItemContentReplacementsTo)
+        @export(
+          as: "coreListItemContentReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreCoverAltItems: _echo(value: $originCoreCoverAltItems)
+        @export(
+          as: "coreCoverAltItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreCoverAltReplacementsFrom: _echo(value: $originCoreCoverAltReplacementsFrom)
+        @export(
+          as: "coreCoverAltReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreCoverAltReplacementsTo: _echo(value: $originCoreCoverAltReplacementsTo)
+        @export(
+          as: "coreCoverAltReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreMediaTextAltItems: _echo(value: $originCoreMediaTextAltItems)
+        @export(
+          as: "coreMediaTextAltItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreMediaTextAltReplacementsFrom: _echo(value: $originCoreMediaTextAltReplacementsFrom)
+        @export(
+          as: "coreMediaTextAltReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreMediaTextAltReplacementsTo: _echo(value: $originCoreMediaTextAltReplacementsTo)
+        @export(
+          as: "coreMediaTextAltReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreVerseContentItems: _echo(value: $originCoreVerseContentItems)
+        @export(
+          as: "coreVerseContentItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreVerseContentReplacementsFrom: _echo(value: $originCoreVerseContentReplacementsFrom)
+        @export(
+          as: "coreVerseContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreVerseContentReplacementsTo: _echo(value: $originCoreVerseContentReplacementsTo)
+        @export(
+          as: "coreVerseContentReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreQuoteCitationItems: _echo(value: $originCoreQuoteCitationItems)
+        @export(
+          as: "coreQuoteCitationItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreQuoteCitationReplacementsFrom: _echo(value: $originCoreQuoteCitationReplacementsFrom)
+        @export(
+          as: "coreQuoteCitationReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreQuoteCitationReplacementsTo: _echo(value: $originCoreQuoteCitationReplacementsTo)
+        @export(
+          as: "coreQuoteCitationReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      corePullquoteCitationItems: _echo(value: $originCorePullquoteCitationItems)
+        @export(
+          as: "corePullquoteCitationItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      corePullquoteCitationReplacementsFrom: _echo(value: $originCorePullquoteCitationReplacementsFrom)
+        @export(
+          as: "corePullquoteCitationReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      corePullquoteCitationReplacementsTo: _echo(value: $originCorePullquoteCitationReplacementsTo)
+        @export(
+          as: "corePullquoteCitationReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      corePullquoteValueItems: _echo(value: $originCorePullquoteValueItems)
+        @export(
+          as: "corePullquoteValueItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      corePullquoteValueReplacementsFrom: _echo(value: $originCorePullquoteValueReplacementsFrom)
+        @export(
+          as: "corePullquoteValueReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      corePullquoteValueReplacementsTo: _echo(value: $originCorePullquoteValueReplacementsTo)
+        @export(
+          as: "corePullquoteValueReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreAudioCaptionItems: _echo(value: $originCoreAudioCaptionItems)
+        @export(
+          as: "coreAudioCaptionItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreAudioCaptionReplacementsFrom: _echo(value: $originCoreAudioCaptionReplacementsFrom)
+        @export(
+          as: "coreAudioCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreAudioCaptionReplacementsTo: _echo(value: $originCoreAudioCaptionReplacementsTo)
+        @export(
+          as: "coreAudioCaptionReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreVideoCaptionItems: _echo(value: $originCoreVideoCaptionItems)
+        @export(
+          as: "coreVideoCaptionItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreVideoCaptionReplacementsFrom: _echo(value: $originCoreVideoCaptionReplacementsFrom)
+        @export(
+          as: "coreVideoCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreVideoCaptionReplacementsTo: _echo(value: $originCoreVideoCaptionReplacementsTo)
+        @export(
+          as: "coreVideoCaptionReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      corePreformattedContentItems: _echo(value: $originCorePreformattedContentItems)
+        @export(
+          as: "corePreformattedContentItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      corePreformattedContentReplacementsFrom: _echo(value: $originCorePreformattedContentReplacementsFrom)
+        @export(
+          as: "corePreformattedContentReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      corePreformattedContentReplacementsTo: _echo(value: $originCorePreformattedContentReplacementsTo)
+        @export(
+          as: "corePreformattedContentReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
+
+      coreEmbedCaptionItems: _echo(value: $originCoreEmbedCaptionItems)
+        @export(
+          as: "coreEmbedCaptionItems"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreEmbedCaptionReplacementsFrom: _echo(value: $originCoreEmbedCaptionReplacementsFrom)
+        @export(
+          as: "coreEmbedCaptionReplacementsFrom"
+          type: DICTIONARY
+        )
+        @remove
+        
+      coreEmbedCaptionReplacementsTo: _echo(value: $originCoreEmbedCaptionReplacementsTo)
+        @export(
+          as: "coreEmbedCaptionReplacementsTo"
+          type: DICTIONARY
+        )
+        @remove
+        
     }
-
-
-    coreHeadingContentItems: _echo(value: $originCoreHeadingContentItems)
-      @export(
-        as: "coreHeadingContentItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreHeadingContentReplacementsFrom: _echo(value: $originCoreHeadingContentReplacementsFrom)
-      @export(
-        as: "coreHeadingContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreHeadingContentReplacementsTo: _echo(value: $originCoreHeadingContentReplacementsTo)
-      @export(
-        as: "coreHeadingContentReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreParagraphContentItems: _echo(value: $originCoreParagraphContentItems)
-      @export(
-        as: "coreParagraphContentItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreParagraphContentReplacementsFrom: _echo(value: $originCoreParagraphContentReplacementsFrom)
-      @export(
-        as: "coreParagraphContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreParagraphContentReplacementsTo: _echo(value: $originCoreParagraphContentReplacementsTo)
-      @export(
-        as: "coreParagraphContentReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreImageAltItems: _echo(value: $originCoreImageAltItems)
-      @export(
-        as: "coreImageAltItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreImageAltReplacementsFrom: _echo(value: $originCoreImageAltReplacementsFrom)
-      @export(
-        as: "coreImageAltReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreImageAltReplacementsTo: _echo(value: $originCoreImageAltReplacementsTo)
-      @export(
-        as: "coreImageAltReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreImageCaptionItems: _echo(value: $originCoreImageCaptionItems)
-      @export(
-        as: "coreImageCaptionItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreImageCaptionReplacementsFrom: _echo(value: $originCoreImageCaptionReplacementsFrom)
-      @export(
-        as: "coreImageCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreImageCaptionReplacementsTo: _echo(value: $originCoreImageCaptionReplacementsTo)
-      @export(
-        as: "coreImageCaptionReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreButtonTextItems: _echo(value: $originCoreButtonTextItems)
-      @export(
-        as: "coreButtonTextItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreButtonTextReplacementsFrom: _echo(value: $originCoreButtonTextReplacementsFrom)
-      @export(
-        as: "coreButtonTextReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreButtonTextReplacementsTo: _echo(value: $originCoreButtonTextReplacementsTo)
-      @export(
-        as: "coreButtonTextReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreTableCaptionItems: _echo(value: $originCoreTableCaptionItems)
-      @export(
-        as: "coreTableCaptionItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreTableCaptionReplacementsFrom: _echo(value: $originCoreTableCaptionReplacementsFrom)
-      @export(
-        as: "coreTableCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreTableCaptionReplacementsTo: _echo(value: $originCoreTableCaptionReplacementsTo)
-      @export(
-        as: "coreTableCaptionReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreTableBodyCellsContentItems: _echo(value: $originCoreTableBodyCellsContentItems)
-      @export(
-        as: "coreTableBodyCellsContentItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreTableBodyCellsContentReplacementsFrom: _echo(value: $originCoreTableBodyCellsContentReplacementsFrom)
-      @export(
-        as: "coreTableBodyCellsContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreTableBodyCellsContentReplacementsTo: _echo(value: $originCoreTableBodyCellsContentReplacementsTo)
-      @export(
-        as: "coreTableBodyCellsContentReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreListItemContentItems: _echo(value: $originCoreListItemContentItems)
-      @export(
-        as: "coreListItemContentItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreListItemContentReplacementsFrom: _echo(value: $originCoreListItemContentReplacementsFrom)
-      @export(
-        as: "coreListItemContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreListItemContentReplacementsTo: _echo(value: $originCoreListItemContentReplacementsTo)
-      @export(
-        as: "coreListItemContentReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreCoverAltItems: _echo(value: $originCoreCoverAltItems)
-      @export(
-        as: "coreCoverAltItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreCoverAltReplacementsFrom: _echo(value: $originCoreCoverAltReplacementsFrom)
-      @export(
-        as: "coreCoverAltReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreCoverAltReplacementsTo: _echo(value: $originCoreCoverAltReplacementsTo)
-      @export(
-        as: "coreCoverAltReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreMediaTextAltItems: _echo(value: $originCoreMediaTextAltItems)
-      @export(
-        as: "coreMediaTextAltItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreMediaTextAltReplacementsFrom: _echo(value: $originCoreMediaTextAltReplacementsFrom)
-      @export(
-        as: "coreMediaTextAltReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreMediaTextAltReplacementsTo: _echo(value: $originCoreMediaTextAltReplacementsTo)
-      @export(
-        as: "coreMediaTextAltReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreVerseContentItems: _echo(value: $originCoreVerseContentItems)
-      @export(
-        as: "coreVerseContentItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreVerseContentReplacementsFrom: _echo(value: $originCoreVerseContentReplacementsFrom)
-      @export(
-        as: "coreVerseContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreVerseContentReplacementsTo: _echo(value: $originCoreVerseContentReplacementsTo)
-      @export(
-        as: "coreVerseContentReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreQuoteCitationItems: _echo(value: $originCoreQuoteCitationItems)
-      @export(
-        as: "coreQuoteCitationItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreQuoteCitationReplacementsFrom: _echo(value: $originCoreQuoteCitationReplacementsFrom)
-      @export(
-        as: "coreQuoteCitationReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreQuoteCitationReplacementsTo: _echo(value: $originCoreQuoteCitationReplacementsTo)
-      @export(
-        as: "coreQuoteCitationReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    corePullquoteCitationItems: _echo(value: $originCorePullquoteCitationItems)
-      @export(
-        as: "corePullquoteCitationItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    corePullquoteCitationReplacementsFrom: _echo(value: $originCorePullquoteCitationReplacementsFrom)
-      @export(
-        as: "corePullquoteCitationReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    corePullquoteCitationReplacementsTo: _echo(value: $originCorePullquoteCitationReplacementsTo)
-      @export(
-        as: "corePullquoteCitationReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    corePullquoteValueItems: _echo(value: $originCorePullquoteValueItems)
-      @export(
-        as: "corePullquoteValueItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    corePullquoteValueReplacementsFrom: _echo(value: $originCorePullquoteValueReplacementsFrom)
-      @export(
-        as: "corePullquoteValueReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    corePullquoteValueReplacementsTo: _echo(value: $originCorePullquoteValueReplacementsTo)
-      @export(
-        as: "corePullquoteValueReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreAudioCaptionItems: _echo(value: $originCoreAudioCaptionItems)
-      @export(
-        as: "coreAudioCaptionItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreAudioCaptionReplacementsFrom: _echo(value: $originCoreAudioCaptionReplacementsFrom)
-      @export(
-        as: "coreAudioCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreAudioCaptionReplacementsTo: _echo(value: $originCoreAudioCaptionReplacementsTo)
-      @export(
-        as: "coreAudioCaptionReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreVideoCaptionItems: _echo(value: $originCoreVideoCaptionItems)
-      @export(
-        as: "coreVideoCaptionItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreVideoCaptionReplacementsFrom: _echo(value: $originCoreVideoCaptionReplacementsFrom)
-      @export(
-        as: "coreVideoCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreVideoCaptionReplacementsTo: _echo(value: $originCoreVideoCaptionReplacementsTo)
-      @export(
-        as: "coreVideoCaptionReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    corePreformattedContentItems: _echo(value: $originCorePreformattedContentItems)
-      @export(
-        as: "corePreformattedContentItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    corePreformattedContentReplacementsFrom: _echo(value: $originCorePreformattedContentReplacementsFrom)
-      @export(
-        as: "corePreformattedContentReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    corePreformattedContentReplacementsTo: _echo(value: $originCorePreformattedContentReplacementsTo)
-      @export(
-        as: "corePreformattedContentReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
-
-    coreEmbedCaptionItems: _echo(value: $originCoreEmbedCaptionItems)
-      @export(
-        as: "coreEmbedCaptionItems"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreEmbedCaptionReplacementsFrom: _echo(value: $originCoreEmbedCaptionReplacementsFrom)
-      @export(
-        as: "coreEmbedCaptionReplacementsFrom"
-        type: DICTIONARY
-      )
-      @remove
-      
-    coreEmbedCaptionReplacementsTo: _echo(value: $originCoreEmbedCaptionReplacementsTo)
-      @export(
-        as: "coreEmbedCaptionReplacementsTo"
-        type: DICTIONARY
-      )
-      @remove
-      
   }
 }
 
@@ -1324,14 +1334,14 @@ query TransformData(
     @underEachJSONObjectProperty
       @underJSONObjectProperty(by: { key: "to" })
         @underEachJSONObjectProperty(
-          passKeyOnwardsAs: "postId"
+          passKeyOnwardsAs: "itemCustomPostId"
           affectDirectivesUnderPos: [1, 2, 3, 4]
         )
           @applyField(
             name: "_objectProperty",
             arguments: {
               object: $translationPostLanguages,
-              by: { key: $postId }
+              by: { key: $itemCustomPostId }
             },
             passOnwardsAs: "toLanguageLocale"
           )
@@ -1984,7 +1994,7 @@ query ExecuteRegexReplacements
 {
   transformedRawContent: _echo(value: $rawContent)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+      passKeyOnwardsAs: "customPostID"
       affectDirectivesUnderPos: [
         1, 2,
         6, 7,
@@ -2010,7 +2020,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreHeadingContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2023,7 +2033,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreHeadingContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreHeadingContentReplacementsFrom"
@@ -2033,7 +2043,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreHeadingContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreHeadingContentReplacementsTo"
@@ -2049,7 +2059,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreParagraphContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2062,7 +2072,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreParagraphContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreParagraphContentReplacementsFrom"
@@ -2072,7 +2082,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreParagraphContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreParagraphContentReplacementsTo"
@@ -2088,7 +2098,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreImageAltReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2101,7 +2111,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreImageAltReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreImageAltReplacementsFrom"
@@ -2111,7 +2121,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreImageAltReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreImageAltReplacementsTo"
@@ -2127,7 +2137,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreImageCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2140,7 +2150,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreImageCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreImageCaptionReplacementsFrom"
@@ -2150,7 +2160,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreImageCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreImageCaptionReplacementsTo"
@@ -2166,7 +2176,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreButtonTextReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2179,7 +2189,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreButtonTextReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreButtonTextReplacementsFrom"
@@ -2189,7 +2199,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreButtonTextReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreButtonTextReplacementsTo"
@@ -2205,7 +2215,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreTableCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2218,7 +2228,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreTableCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreTableCaptionReplacementsFrom"
@@ -2228,7 +2238,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreTableCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreTableCaptionReplacementsTo"
@@ -2244,7 +2254,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreTableBodyCellsContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2257,7 +2267,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreTableBodyCellsContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreTableBodyCellsContentReplacementsFrom"
@@ -2267,7 +2277,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreTableBodyCellsContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreTableBodyCellsContentReplacementsTo"
@@ -2283,7 +2293,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreListItemContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2296,7 +2306,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreListItemContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreListItemContentReplacementsFrom"
@@ -2306,7 +2316,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreListItemContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreListItemContentReplacementsTo"
@@ -2322,7 +2332,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreCoverAltReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2335,7 +2345,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreCoverAltReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreCoverAltReplacementsFrom"
@@ -2345,7 +2355,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreCoverAltReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreCoverAltReplacementsTo"
@@ -2361,7 +2371,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreMediaTextAltReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2374,7 +2384,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreMediaTextAltReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreMediaTextAltReplacementsFrom"
@@ -2384,7 +2394,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreMediaTextAltReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreMediaTextAltReplacementsTo"
@@ -2400,7 +2410,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreVerseContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2413,7 +2423,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreVerseContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreVerseContentReplacementsFrom"
@@ -2423,7 +2433,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreVerseContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreVerseContentReplacementsTo"
@@ -2439,7 +2449,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreQuoteCitationReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2452,7 +2462,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreQuoteCitationReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreQuoteCitationReplacementsFrom"
@@ -2462,7 +2472,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreQuoteCitationReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreQuoteCitationReplacementsTo"
@@ -2478,7 +2488,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $corePullquoteCitationReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2491,7 +2501,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePullquoteCitationReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePullquoteCitationReplacementsFrom"
@@ -2501,7 +2511,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePullquoteCitationReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePullquoteCitationReplacementsTo"
@@ -2517,7 +2527,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $corePullquoteValueReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2530,7 +2540,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePullquoteValueReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePullquoteValueReplacementsFrom"
@@ -2540,7 +2550,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePullquoteValueReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePullquoteValueReplacementsTo"
@@ -2556,7 +2566,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreAudioCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2569,7 +2579,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreAudioCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreAudioCaptionReplacementsFrom"
@@ -2579,7 +2589,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreAudioCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreAudioCaptionReplacementsTo"
@@ -2595,7 +2605,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreVideoCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2608,7 +2618,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreVideoCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreVideoCaptionReplacementsFrom"
@@ -2618,7 +2628,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreVideoCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreVideoCaptionReplacementsTo"
@@ -2634,7 +2644,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $corePreformattedContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2647,7 +2657,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePreformattedContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePreformattedContentReplacementsFrom"
@@ -2657,7 +2667,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePreformattedContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePreformattedContentReplacementsTo"
@@ -2673,7 +2683,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreEmbedCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2686,7 +2696,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreEmbedCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreEmbedCaptionReplacementsFrom"
@@ -2696,7 +2706,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreEmbedCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreEmbedCaptionReplacementsTo"
@@ -2716,14 +2726,14 @@ query PrepareMetaReplacements
 {
   transformedMetaTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+      passKeyOnwardsAs: "customPostID"
       affectDirectivesUnderPos: [1, 2, 3]
     )
       @applyField(
         name: "_sprintf",
         arguments: {
           string: "metaRawTitle.to.%s",
-          values: [$postID]
+          values: [$customPostID]
         }
         passOnwardsAs: "titlePath"
       )
@@ -2749,14 +2759,14 @@ query PrepareMetaReplacements
 
   transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+      passKeyOnwardsAs: "customPostID"
       affectDirectivesUnderPos: [1, 2, 3]
     )
       @applyField(
         name: "_sprintf",
         arguments: {
           string: "metaRawExcerpt.to.%s",
-          values: [$postID]
+          values: [$customPostID]
         }
         passOnwardsAs: "rawExcerptPath"
       )
@@ -2781,7 +2791,7 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslateGutenbergPosts(
+query GenerateTranslationInputs(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $updateSlug: Boolean! = true
 )
@@ -2791,47 +2801,67 @@ mutation TranslateGutenbergPosts(
   ])
   @include(if: $executeTranslation)
 {
-  updatePosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
-    id
-    transformedRawContent: _objectProperty(
-      object: $transformedRawContent,
-      by: {
-        key: $__id
-      }
-    )
-    transformedRawTitle: _objectProperty(
-      object: $transformedRawTitle,
-      by: {
-        key: $__id
-      }
-    )
-    transformedSlug: _if(
-      condition: $updateSlug,
-      then: $__transformedRawTitle,
-      else: null
-    )
-    transformedRawExcerpt: _objectProperty(
-      object: $transformedRawExcerpt,
-      by: {
-        key: $__id
-      }
-    )
-    update(input: {
-      title: $__transformedRawTitle,
-      slug: $__transformedSlug,
-      excerpt: $__transformedRawExcerpt,
-      contentAs: {
-        html: $__transformedRawContent
-      }
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
+  updateCustomPostInputs: customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate } ) {
+    __typename
+    ...on CustomPost {
+      id
+      customPostType
+      transformedRawContent: _objectProperty(
+        object: $transformedRawContent,
+        by: {
+          key: $__id
         }
+      )
+      transformedRawTitle: _objectProperty(
+        object: $transformedRawTitle,
+        by: {
+          key: $__id
+        }
+      )
+      transformedSlug: _if(
+        condition: $updateSlug,
+        then: $__transformedRawTitle,
+        else: null
+      )
+      transformedRawExcerpt: _objectProperty(
+        object: $transformedRawExcerpt,
+        by: {
+          key: $__id
+        }
+      )
+      updateCustomPostInputs: _echo(value: {
+        id: $__id,
+        customPostType: $__customPostType,
+        title: $__transformedRawTitle,
+        slug: $__transformedSlug,
+        excerpt: $__transformedRawExcerpt,
+        contentAs: {
+          html: $__transformedRawContent
+        }
+      })
+        @export(
+          as: "updateCustomPostInputs",
+          type: LIST
+        )
+    }
+  }
+}
+
+mutation TranslateGutenbergCustomPosts
+  @depends(on: "GenerateTranslationInputs")
+  @include(if: $executeTranslation)
+{
+  updateCustomPosts(inputs: $updateCustomPostInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
       }
-      post {
+    }
+    customPost {
+      __typename
+      ...on CustomPost {
         id
         title
         rawContent

@@ -1,7 +1,7 @@
 ########################################################################
 # 
 # Variables:
-#   - postId: The post with the origin language, from where all translations will be made
+#   - customPostId: The custom post with the origin language, from where all translations will be made
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
@@ -73,14 +73,14 @@ query InitializeVariables
     @remove
 
   emptyBool: _echo(value: false)
-    @export(as: "hasOriginPost")
-    @export(as: "hasTranslationPosts")
+    @export(as: "hasOriginCustomPost")
+    @export(as: "hasTranslationCustomPosts")
     @export(as: "executeTranslation")
     @remove
 }
 
-query ExportOriginPost(
-  $postId: ID!
+query ExportOriginCustomPost(
+  $customPostId: ID!
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
 )
@@ -98,38 +98,40 @@ query ExportOriginPost(
     )
   }
 
-  originPost: post(by: { id: $postId }, status: any) {
-    id
+  originCustomPost: customPost(by: { id: $customPostId }, status: any) {
+    __typename
+    ...on CustomPost {
+      id
 
 
-    polylangLanguage {
-      code @export(as: "fromLanguage")
+      polylangLanguage {
+        code @export(as: "fromLanguage")
+      }
+      
+
+      polylangTranslationLanguageIDs(filter: {
+        includeLanguages: $includeLanguagesToTranslate
+        excludeLanguages: $excludeLanguagesToTranslate
+      })
+        @remove
+      customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+        @export(as: "customPostIDTranslationLanguageIDs")
+
+      hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+        @export(as: "hasTranslationCustomPosts")
+
+
+      rawTitle
+        @export(as: "originRawTitle")
+      rawContent
+        @export(as: "originRawContent")
+      rawExcerpt
+        @export(as: "originRawExcerpt")
     }
-    
-
-    polylangTranslationLanguageIDs(filter: {
-      includeLanguages: $includeLanguagesToTranslate
-      excludeLanguages: $excludeLanguagesToTranslate
-    })
-      @remove
-    postIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
-      @export(as: "postIDTranslationLanguageIDs")
-
-    hasTranslationPosts: _notEmpty(value: $__postIDTranslationLanguageIDs)
-      @export(as: "hasTranslationPosts")
-
-
-    rawTitle
-      @export(as: "originRawTitle")
-    rawContent
-      @export(as: "originRawContent")
-    rawExcerpt
-      @export(as: "originRawExcerpt")
   }
 
-  hasOriginPost: _notNull(value: $__originPost)
-    @export(as: "hasOriginPost")
+  hasOriginCustomPost: _notNull(value: $__originCustomPost)
+    @export(as: "hasOriginCustomPost")
 }
 
 query FetchData(
@@ -137,60 +139,63 @@ query FetchData(
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
-  @depends(on: "ExportOriginPost")
-  @include(if: $hasOriginPost)
-  @include(if: $hasTranslationPosts)
+  @depends(on: "ExportOriginCustomPost")
+  @include(if: $hasOriginCustomPost)
+  @include(if: $hasTranslationCustomPosts)
 {
-  translationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
-    @export(as: "translationPostIds")
-  translationPosts: posts(filter: { ids: $__translationPostIds, status: $statusToUpdate } ) {
-    id
+  translationCustomPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
+    @export(as: "translationCustomPostIds")
+  translationCustomPosts: customPosts(filter: { ids: $__translationCustomPostIds, status: $statusToUpdate } ) {
+    __typename
+    ...on CustomPost {
+      id
 
-    polylangLanguage @export(
-      as: "translationPostLanguages"
-      type: DICTIONARY
-    ) {
-      code
-    }
-
-    rawTitle: _echo(value: $originRawTitle)
-    rawContent: _echo(value: $originRawContent)
-    rawExcerpt: _echo(value: $originRawExcerpt)
-      @export(
-        as: "dataToTranslate",
-        affectAdditionalFieldsUnderPos: [1, 2]
+      polylangLanguage @export(
+        as: "translationPostLanguages"
         type: DICTIONARY
-      )
+      ) {
+        code
+      }
+
+      rawTitle: _echo(value: $originRawTitle)
+      rawContent: _echo(value: $originRawContent)
+      rawExcerpt: _echo(value: $originRawExcerpt)
+        @export(
+          as: "dataToTranslate",
+          affectAdditionalFieldsUnderPos: [1, 2]
+          type: DICTIONARY
+        )
+    }
   }
 
-  hasTranslationPosts: _notEmpty(value: $__translationPosts)
+  hasTranslationCustomPosts: _notEmpty(value: $__translationCustomPosts)
 
-  originPostHasDefaultLanguage: _equals(
+  originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
   )
 
   isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
 
-  originPostHasSpecificLanguage: _equals(
+  originCustomPostHasSpecificLanguage: _equals(
     value1: $translateFromLanguage,
     value2: $fromLanguage
   )
 
   canTranslateOriginPostFromSpecificLanguage: _if(
     condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
+    then: $__originCustomPostHasSpecificLanguage,
     else: true
   )
 
   canTranslateOriginPost: _if(
     condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
+    then: $__originCustomPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
 
   executeTranslation: _and(values: [
-    $__hasTranslationPosts,
+    $__hasTranslationCustomPosts,
     $__canTranslateOriginPost
   ])
     @export(as: "executeTranslation")
@@ -204,14 +209,14 @@ query TranslateData(
 {  
   translatedData: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+      passKeyOnwardsAs: "customPostID"
       affectDirectivesUnderPos: [1, 2, 3, 4]
     )
       @applyField(
         name: "_objectProperty",
         arguments: {
           object: $translationPostLanguages,
-          by: { key: $postID }
+          by: { key: $customPostID }
         },
         passOnwardsAs: "toLanguageLocale"
       )
@@ -247,7 +252,7 @@ query GenerateMutationInputs(
   @depends(on: "TranslateData")
   @include(if: $executeTranslation)
 {  
-  postInputs: _echo(value: $translatedData)
+  customPostInputs: _echo(value: $translatedData)
     @underEachJSONObjectProperty(
       passValueOnwardsAs: "postTranslatedData"
       affectDirectivesUnderPos: [1, 2, 3, 4, 5]
@@ -305,37 +310,43 @@ query GenerateMutationInputs(
         },
         setResultInResponse: true
       )
-    @export(as: "postInputs")
+    @export(as: "customPostInputs")
 }
 
-mutation TranslateClassicEditorPosts(
+mutation TranslateClassicEditorCustomPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
 )
   @depends(on: "GenerateMutationInputs")
   @include(if: $executeTranslation)
 {
-  updateTranslationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
-    id
-    postInput: _objectProperty(
-      object: $postInputs,
-      by: {
-        key: $__id
-      }
-    )
-      @remove
-    update(input: $__postInput) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
+  updateTranslationPosts: customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate } ) {
+    __typename
+    ...on CustomPost {
+      id
+      customPostInput: _objectProperty(
+        object: $customPostInputs,
+        by: {
+          key: $__id
         }
-      }
-      post {
-        id
-        title
-        rawExcerpt
-        rawContent
+      )
+        @remove
+      update(input: $__customPostInput) {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
+        }
+        customPost {
+          __typename
+          ...on CustomPost {
+            id
+            title
+            rawExcerpt
+            rawContent
+          }
+        }
       }
     }
   }

@@ -99,7 +99,6 @@ query ExportOriginTag(
     })
       @remove
     tagIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
       @export(as: "tagIDTranslationLanguageIDs")
 
     hasTranslationTags: _notEmpty(value: $__tagIDTranslationLanguageIDs)
