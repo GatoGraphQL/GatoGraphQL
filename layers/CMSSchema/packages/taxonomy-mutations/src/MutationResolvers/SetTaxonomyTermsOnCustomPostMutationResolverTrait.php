@@ -153,6 +153,16 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             }
             /** @var string */
             $taxonomyName = $taxonomyTermTypeAPI->getTaxonomyTermTaxonomy($taxonomyTermID);
+            if (!$this->isTaxonomySameHierarchical($isHierarchical, $taxonomyName)) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $this->getTaxonomyTermBySlugDoesNotExistError(null, $taxonomyTermSlug),
+                        $fieldDataAccessor->getField(),
+                    )
+                );
+                continue;
+            }
+            
             $taxonomyToTaxonomyTermsIDs[$taxonomyName] ??= [];
             $taxonomyToTaxonomyTermsIDs[$taxonomyName][] = $taxonomyTermID;
         }
