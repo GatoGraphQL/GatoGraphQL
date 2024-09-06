@@ -502,7 +502,7 @@ abstract class AbstractPlugin implements PluginInterface
      * @param array<array<string,mixed>> $blockDataItems
      * @return array<array<string,mixed>>
      */
-    protected function addInnerContentToBlockAtts(array $blockDataItems): array
+    protected function addInnerContentToBlockAttrs(array $blockDataItems): array
     {
         return array_map(
             function (array $blockDataItem): array {

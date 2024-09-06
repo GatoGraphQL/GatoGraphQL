@@ -320,7 +320,7 @@ class Plugin extends AbstractMainPlugin
             'post_name' => $slug,
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             'post_title' => $title,
-            'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($blockDataItems))
+            'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs($blockDataItems))
         ]);
         if ($schemaConfigurationCustomPostID === 0) {
             return null;
@@ -666,7 +666,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('Nested mutations', 'gatographql'),
                     'post_excerpt' => \__('Private client to execute queries that need nested mutations', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                             'attrs' => [
@@ -700,7 +700,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Duplicate post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -723,7 +723,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Replace strings in post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -749,7 +749,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Replace strings in posts', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -775,7 +775,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Regex replace strings in post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -801,7 +801,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Regex replace strings in posts', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -827,7 +827,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Add missing links in post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -850,7 +850,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Replace "http" with "https" in image sources in post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -873,7 +873,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Replace domain in posts', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -896,7 +896,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Replace post slug in posts', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -922,7 +922,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Insert block in posts', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -945,7 +945,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Remove block from posts', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -968,7 +968,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate post (Gutenberg)', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -991,7 +991,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts (Gutenberg)', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1014,7 +1014,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Import post from WordPress site', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1037,7 +1037,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Export post to WordPress site', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1060,7 +1060,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('Fetch posts by thumbnail', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1083,7 +1083,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('Fetch users by locale', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1106,7 +1106,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Fetch comments by period', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1129,7 +1129,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Fetch image URLs in blocks', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1155,7 +1155,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
                     'post_excerpt' => \__('Setup this persisted query\'s URL as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox (when creating a sandbox site), and send it straight to a Mailchimp list. More info: gatographql.com/blog/instawp-gatographql', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1189,7 +1189,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate content from URL', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1215,7 +1215,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Import post from WordPress RSS feed', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1241,7 +1241,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Fetch post links', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1264,7 +1264,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate post (Classic editor)', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1289,7 +1289,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts (Classic editor)', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1323,7 +1323,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Send email to admin about post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1348,7 +1348,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Add comments block to post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1382,7 +1382,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Generate a post\'s featured image using AI and optimize it', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1416,7 +1416,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Insert block in post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1452,7 +1452,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate custom posts for Polylang (Gutenberg)', 'gatographql'),
                     'post_excerpt' => \__('Translate a block-based post to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1479,7 +1479,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate custom posts for Polylang (Classic editor)', 'gatographql'),
                     'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1506,7 +1506,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Sync featured image for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Integration with Polylang: For a given post, update its translation posts with the corresponding featured image for each language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1544,7 +1544,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('Internal', 'gatographql'),
                     'post_excerpt' => \__('Private client with default configuration', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                             'attrs' => [
@@ -1570,7 +1570,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate and create all pages for a multilingual site (Multisite / Gutenberg)', 'gatographql'),
                     'post_excerpt' => \__('Create a multilingual site (eg: based on a WordPress multisite network): Fetch all block-based pages from the source content site, and re-create them on the given translation site with the page\'s translated content', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1594,7 +1594,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate and create all pages for a multilingual site (Multisite / Classic editor)', 'gatographql'),
                     'post_excerpt' => \__('Create a multilingual site (eg: based on a WordPress multisite network): Fetch all Classic editor pages from the source content site, and re-create them on the given translation site with the page\'s translated content', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1627,7 +1627,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Send email to users about post', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1663,7 +1663,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for MultilingualPress (Gutenberg)', 'gatographql'),
                     'post_excerpt' => \__('Translate a block-based post to all languages defined in the MultilingualPress settings, storing each translation in the corresponding site in the network for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1690,7 +1690,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for MultilingualPress (Classic editor)', 'gatographql'),
                     'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the MultilingualPress settings, storing each translation in the corresponding site in the network for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1717,7 +1717,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate Poedit file content', 'gatographql'),
                     'post_excerpt' => \__('Translate the empty strings from a Poedit file, then create a new translation Poedit file for that language, and upload it to Filestack', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1756,7 +1756,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('Bulk mutations', 'gatographql'),
                     'post_excerpt' => \__('Private client to execute queries that execute CRUD operations in bulk', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                             'attrs' => [
@@ -1788,7 +1788,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Duplicate posts', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1814,7 +1814,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Import posts from CSV', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1854,7 +1854,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Create missing translation custom posts for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Given a custom post, duplicate it into all the other languages defined in Polylang for which there is no translation post yet', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1892,7 +1892,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Create missing translation categories for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Given a category, duplicate it into all the other languages defined in Polylang for which there is no translation category yet', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1916,7 +1916,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate categories for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Translate a category to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1943,7 +1943,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Create missing translation tags for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Given a tag, duplicate it into all the other languages defined in Polylang for which there is no translation tag yet', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1967,7 +1967,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate tags for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Translate a tag to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -1994,7 +1994,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Create missing translation media for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Given a media item, duplicate it into all the other languages defined in Polylang for which there is no translation media item yet', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -2018,7 +2018,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate media for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Translate a media item to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -2045,7 +2045,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate categories for MultilingualPress', 'gatographql'),
                     'post_excerpt' => \__('Translate a category to all languages defined in the MultilingualPress settings, storing each translation in the corresponding site in the network for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -2072,7 +2072,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate tags for MultilingualPress', 'gatographql'),
                     'post_excerpt' => \__('Translate a tag to all languages defined in the MultilingualPress settings, storing each translation in the corresponding site in the network for the language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -2099,7 +2099,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Sync tags for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Integration with Polylang: For a given post, update its translation posts with the corresponding tags for each language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -2123,7 +2123,7 @@ class Plugin extends AbstractMainPlugin
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Sync categories for Polylang', 'gatographql'),
                     'post_excerpt' => \__('Integration with Polylang: For a given post, update its translation posts with the corresponding categories for each language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -2156,7 +2156,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -2179,7 +2179,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Import new posts from WordPress RSS feed', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
@@ -2202,7 +2202,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Import HTML from URLs as new posts in WordPress', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAttrs([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
