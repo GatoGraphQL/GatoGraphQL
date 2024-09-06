@@ -533,12 +533,15 @@ class Plugin extends AbstractMainPlugin
         return [
             [
                 'blockName' => $customEndpointOptionsBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $endpointGraphiQLBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $endpointVoyagerBlock->getBlockFullName(),
+                'attrs' => [],
             ]
         ];
     }
@@ -561,12 +564,15 @@ class Plugin extends AbstractMainPlugin
         return [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                'attrs' => [],
             ]
         ];
     }
@@ -595,9 +601,11 @@ class Plugin extends AbstractMainPlugin
             ],
             [
                 'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                'attrs' => [],
             ]
         ];
     }
@@ -627,9 +635,11 @@ class Plugin extends AbstractMainPlugin
             ],
             [
                 'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                'attrs' => [],
             ],
             [
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                'attrs' => [],
             ]
         ];
     }
