@@ -25,6 +25,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * @return array<string,array<string|int>>|null
      */
     protected function getTaxonomyToTaxonomyTermsByID(
+        bool $isHierarchical,
         array $taxonomyTermIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -59,10 +60,10 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
         foreach ($taxonomyTermIDs as $taxonomyTermID) {
             $taxonomyName = $taxonomyTermTypeAPI->getTaxonomyTermTaxonomy($taxonomyTermID);
-            if ($taxonomyName === null) {
+            if ($taxonomyName === null || !$this->isTaxonomySameHierarchical($isHierarchical, $taxonomyName)) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $this->getTaxonomyTermDoesNotExistError($taxonomyName, $taxonomyTermID),
+                        $this->getTaxonomyTermDoesNotExistError(null, $taxonomyTermID),
                         $fieldDataAccessor->getField(),
                     )
                 );
@@ -79,6 +80,18 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         return $taxonomyToTaxonomyTermsIDs;
     }
 
+    protected function isTaxonomySameHierarchical(
+        bool $isHierarchical,
+        string $taxonomyName,
+    ): bool {
+        $isTaxonomyHierarchical = $this->getTaxonomyTermTypeAPI()->isTaxonomyHierarchical($taxonomyName);
+        if ($isTaxonomyHierarchical === null) {
+            return false;
+        }
+        return ($isHierarchical && $isTaxonomyHierarchical)
+            || (!$isHierarchical && !$isTaxonomyHierarchical);
+    }
+
     /**
      * Retrieve the taxonomy from the queried entities.
      * If the taxonomy is explicitly provided, validate that the
@@ -88,6 +101,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * @return array<string,array<string|int>>|null
      */
     protected function getTaxonomyToTaxonomyTermsBySlug(
+        bool $isHierarchical,
         array $taxonomyTermSlugs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -141,6 +155,16 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             }
             /** @var string */
             $taxonomyName = $taxonomyTermTypeAPI->getTaxonomyTermTaxonomy($taxonomyTermID);
+            if (!$this->isTaxonomySameHierarchical($isHierarchical, $taxonomyName)) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $this->getTaxonomyTermBySlugDoesNotExistError(null, $taxonomyTermSlug),
+                        $fieldDataAccessor->getField(),
+                    )
+                );
+                continue;
+            }
+
             $taxonomyToTaxonomyTermsIDs[$taxonomyName] ??= [];
             $taxonomyToTaxonomyTermsIDs[$taxonomyName][] = $taxonomyTermID;
         }
