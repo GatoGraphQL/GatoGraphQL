@@ -63,7 +63,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             if ($taxonomyName === null || !$this->isTaxonomySameHierarchical($isHierarchical, $taxonomyName)) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        $this->getTaxonomyTermDoesNotExistError($taxonomyName, $taxonomyTermID),
+                        $this->getTaxonomyTermDoesNotExistError(null, $taxonomyTermID),
                         $fieldDataAccessor->getField(),
                     )
                 );
