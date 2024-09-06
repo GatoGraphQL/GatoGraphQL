@@ -26,9 +26,9 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->taxonomy;
     }
-    public function taxonomyTermExists(int|string $taxonomyTermIDOrSlug, string $taxonomy = ''): bool
+    public function taxonomyTermExists(int|string $taxonomyTermIDOrSlug, ?string $taxonomy = null): bool
     {
-        $taxonomyTermExists = term_exists($taxonomyTermIDOrSlug, $taxonomy);
+        $taxonomyTermExists = term_exists($taxonomyTermIDOrSlug, $taxonomy ?? '');
         return $taxonomyTermExists !==  null;
     }
     public function getTaxonomyTermID(string $taxonomyTermSlug, string $taxonomy = ''): string|int|null

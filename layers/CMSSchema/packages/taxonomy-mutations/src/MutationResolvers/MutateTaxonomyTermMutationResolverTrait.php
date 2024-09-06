@@ -102,7 +102,7 @@ trait MutateTaxonomyTermMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if ($this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID, $taxonomyName ?? '')) {
+        if ($this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID, $taxonomyName)) {
             return;
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
@@ -142,7 +142,7 @@ trait MutateTaxonomyTermMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if ($this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermSlug, $taxonomyName ?? '')) {
+        if ($this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermSlug, $taxonomyName)) {
             return;
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
