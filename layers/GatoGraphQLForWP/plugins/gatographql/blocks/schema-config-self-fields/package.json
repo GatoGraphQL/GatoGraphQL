@@ -1,6 +1,6 @@
 {
     "name": "schema-config-self-fields",
-    "version": "4.3.0-dev",
+    "version": "5.0.0",
     "description": "Configure the 'Self Fields' module in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",

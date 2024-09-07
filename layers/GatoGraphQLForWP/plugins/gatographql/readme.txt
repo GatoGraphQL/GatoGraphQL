@@ -3,7 +3,7 @@ Contributors: gatographql, leoloso
 Tags: graphql, headless, webhook, api, automator, import export, search replace, google translate, wp-cli, external api, wpgraphql, code snippets
 Requires at least: 6.1
 Tested up to: 6.6
-Stable tag: 4.2.0
+Stable tag: 5.0.0
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

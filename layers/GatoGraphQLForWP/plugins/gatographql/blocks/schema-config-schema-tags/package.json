@@ -1,6 +1,6 @@
 {
     "name": "schema-config-schema-tags",
-    "version": "4.3.0-dev",
+    "version": "5.0.0",
     "description": "Configure allowed tag taxonomies in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
