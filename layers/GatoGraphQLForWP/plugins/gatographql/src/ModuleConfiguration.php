@@ -170,6 +170,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function getGatoGraphQLShopCustomerPortalURL(): string
+    {
+        $envVariable = Environment::GATOGRAPHQL_SHOP_CUSTOMERPORTAL_URL;
+        $defaultValue = 'https://gatographql.com/shop/customer-portal';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+
     /**
      * This function is not expected to be configured,
      * but it's mainly to help identify all related
