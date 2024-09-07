@@ -164,9 +164,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/taxonomies": "^5.0",
-        "pop-cms-schema/user-roles": "^5.0",
-        "pop-cms-schema/user-state-mutations": "^5.0"
+        "pop-cms-schema/taxonomies": "^5.1",
+        "pop-cms-schema/user-roles": "^5.1",
+        "pop-cms-schema/user-state-mutations": "^5.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -192,7 +192,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.0-dev"
+            "dev-master": "5.1-dev"
         }
     },
     "config": {
