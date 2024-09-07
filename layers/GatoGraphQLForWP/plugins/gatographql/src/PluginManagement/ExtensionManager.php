@@ -168,7 +168,7 @@ class ExtensionManager extends AbstractPluginManager
                     $mainPlugin->getPluginName(),
                     $mainPluginVersionConstraint,
                     $mainPlugin->getPluginVersion(),
-                    $moduleConfiguration->getGatoGraphQLShopCustomerPortalURL()
+                    $moduleConfiguration->getGatoGraphQLShopMyOrdersURL()
                 )
             );
             return false;

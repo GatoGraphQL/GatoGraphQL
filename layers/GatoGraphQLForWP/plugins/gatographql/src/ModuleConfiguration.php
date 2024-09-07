@@ -170,10 +170,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function getGatoGraphQLShopCustomerPortalURL(): string
+    public function getGatoGraphQLShopMyOrdersURL(): string
     {
-        $envVariable = Environment::GATOGRAPHQL_SHOP_CUSTOMERPORTAL_URL;
-        $defaultValue = 'https://gatographql.com/shop/customer-portal';
+        $envVariable = Environment::GATOGRAPHQL_SHOP_MYORDERS_URL;
+        $defaultValue = 'https://gatographql.com/shop/my-orders';
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
