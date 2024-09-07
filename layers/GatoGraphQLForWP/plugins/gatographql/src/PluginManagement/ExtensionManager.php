@@ -163,12 +163,13 @@ class ExtensionManager extends AbstractPluginManager
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    __('Plugin <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The plugin has not been loaded.<br/>(If you have just updated <strong>%2$s</strong>, notice that the corresponding version for <strong>%1$s</strong> will be already available; please <a href="%5$s" target="_blank">download it</a> and install it.)', 'gatographql'),
+                    __('Plugin <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The plugin has not been loaded.<br/>(If you have just updated <strong>%2$s</strong>, notice that the corresponding version for <strong>%1$s</strong> will be already available; please <a href="%5$s" target="_blank">download it%6$s</a> and install it.)', 'gatographql'),
                     $extensionName ?? $extensionClass,
                     $mainPlugin->getPluginName(),
                     $mainPluginVersionConstraint,
                     $mainPlugin->getPluginVersion(),
-                    $moduleConfiguration->getGatoGraphQLShopMyOrdersURL()
+                    $moduleConfiguration->getGatoGraphQLShopMyOrdersURL(),
+                    HTMLCodes::OPEN_IN_NEW_WINDOW,
                 )
             );
             return false;
