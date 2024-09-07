@@ -8,8 +8,6 @@ use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
@@ -18,7 +16,6 @@ use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
-use PoP\ComponentModel\App;
 
 class ExtensionManager extends AbstractPluginManager
 {
