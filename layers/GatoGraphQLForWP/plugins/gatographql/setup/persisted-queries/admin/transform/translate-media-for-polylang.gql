@@ -54,11 +54,8 @@
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  emptyString: _echo(value: null)
-    @export(as: "fromLanguage")
-    @remove
-
   emptyBool: _echo(value: false)
+    @export(as: "hasPolylangLanguage")
     @export(as: "hasTranslationMediaItems")
     @export(as: "executeTranslation")
     @remove
@@ -89,6 +86,8 @@ query ExportOriginMediaItem(
     polylangLanguage {
       code @export(as: "fromLanguage")
     }
+    hasPolylangLanguage: _notNull(value: $__polylangLanguage)
+      @export(as: "hasPolylangLanguage")
     
 
     polylangTranslationLanguageIDs(filter: {
@@ -123,6 +122,7 @@ query FetchData(
 )
   @depends(on: "ExportOriginMediaItem")
   @include(if: $hasOriginMediaItem)
+  @include(if: $hasPolylangLanguage)
   @include(if: $hasTranslationMediaItems)
 {
   translationMediaItemIds: _objectValues(object: $mediaItemIDTranslationLanguageIDs)
