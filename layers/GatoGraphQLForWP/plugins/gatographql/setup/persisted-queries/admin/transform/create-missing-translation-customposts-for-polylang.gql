@@ -36,6 +36,7 @@ query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   emptyBool: _echo(value: false)
+    @export(as: "hasPolylangLanguage")
     @export(as: "canTranslateOriginPost")
     @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasCreatedTranslationPosts")
@@ -92,6 +93,8 @@ query ExportOriginCustomPost(
       polylangLanguage {
         code @export(as: "fromLanguage")
       }
+      hasPolylangLanguage: _notNull(value: $__polylangLanguage)
+        @export(as: "hasPolylangLanguage")
       
 
       polylangTranslationLanguageIDs(filter: {
@@ -116,6 +119,7 @@ query ExportOriginCustomPostCanBeTranslated(
 )
   @depends(on: "ExportOriginCustomPost")
   @include(if: $hasOriginCustomPost)
+  @include(if: $hasPolylangLanguage)
 {
   originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,

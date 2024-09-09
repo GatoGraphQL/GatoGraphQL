@@ -27,11 +27,8 @@
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  emptyString: _echo(value: null)
-    @export(as: "fromLanguage")
-    @remove
-
   emptyBool: _echo(value: false)
+    @export(as: "hasPolylangLanguage")
     @export(as: "executeUpdate")
     @export(as: "hasOriginCustomPostTranslationPosts")
     @remove
@@ -71,6 +68,8 @@ query ExportDataFromOriginCustomPost(
       polylangLanguage {
         code @export(as: "fromLanguage")
       }
+      hasPolylangLanguage: _notNull(value: $__polylangLanguage)
+        @export(as: "hasPolylangLanguage")
       
       polylangTranslationLanguageIDs
         @remove
@@ -97,6 +96,7 @@ query ExportTranslationCustomPostLanguages(
   $statusToUpdate: CustomPostStatusEnum! = any
 )
   @depends(on: "ExportDataFromOriginCustomPost")
+  @include(if: $hasPolylangLanguage)
   @include(if: $hasOriginCustomPostTranslationPosts)
 {
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
@@ -121,6 +121,7 @@ query FilterTranslationCustomPostsToUpdate(
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
   @depends(on: "ExportTranslationCustomPostLanguages")
+  @include(if: $hasPolylangLanguage)
   @include(if: $hasOriginCustomPostTranslationPosts)
 {
   translationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
