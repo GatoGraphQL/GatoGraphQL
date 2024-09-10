@@ -17,4 +17,5 @@ interface CustomPostTypeInterface extends ServiceInterface
      * Register the custom post type
      */
     public function registerCustomPostType(): void;
+    public function isHierarchical(): bool;
 }

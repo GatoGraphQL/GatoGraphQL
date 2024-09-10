@@ -164,10 +164,7 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
         ];
     }
 
-    /**
-     * Hierarchical
-     */
-    protected function isHierarchical(): bool
+    public function isHierarchical(): bool
     {
         return true;
     }

@@ -615,7 +615,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Hierarchical
      */
-    protected function isHierarchical(): bool
+    public function isHierarchical(): bool
     {
         return false;
     }
