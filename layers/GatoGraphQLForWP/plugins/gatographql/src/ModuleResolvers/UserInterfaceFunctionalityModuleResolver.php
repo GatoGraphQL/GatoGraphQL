@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 
 class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -18,7 +20,11 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public final const CUSTOM_ENDPOINT_OVERVIEW = Plugin::NAMESPACE . '\custom-endpoint-overview';
     public final const PERSISTED_QUERY_ENDPOINT_OVERVIEW = Plugin::NAMESPACE . '\persisted-query-endpoint-overview';
 
+    /** @var CustomPostTypeInterface[] */
+    protected ?array $enabledCustomPostTypeServices = null;
+
     private ?MarkdownContentParserInterface $markdownContentParser = null;
+    private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -32,6 +38,19 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             $this->markdownContentParser = $markdownContentParser;
         }
         return $this->markdownContentParser;
+    }
+    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
+    {
+        $this->customPostTypeRegistry = $customPostTypeRegistry;
+    }
+    final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
+    {
+        if ($this->customPostTypeRegistry === null) {
+            /** @var CustomPostTypeRegistryInterface */
+            $customPostTypeRegistry = $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+            $this->customPostTypeRegistry = $customPostTypeRegistry;
+        }
+        return $this->customPostTypeRegistry;
     }
 
     /**
@@ -105,6 +124,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function isHidden(string $module): bool
     {
         switch ($module) {
+            case self::EXCERPT_AS_DESCRIPTION:
+                return $this->getEnabledCustomPostTypeServices() === [];
             case self::WELCOME_GUIDES:
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
             case self::CUSTOM_ENDPOINT_OVERVIEW:
@@ -147,6 +168,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         return match ($module) {
             self::WELCOME_GUIDES
                 => false,
+            self::EXCERPT_AS_DESCRIPTION,
+                => $this->getEnabledCustomPostTypeServices() === [] ? false : null,
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION,
             self::CUSTOM_ENDPOINT_OVERVIEW,
             self::PERSISTED_QUERY_ENDPOINT_OVERVIEW
@@ -154,5 +177,20 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             default
                 => parent::isPredefinedEnabledOrDisabled($module),
         };
+    }
+
+    /**
+     * @return CustomPostTypeInterface[]
+     */
+    protected function getEnabledCustomPostTypeServices(): array
+    {
+        if ($this->enabledCustomPostTypeServices === null) {
+            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
+            return array_values(array_filter(
+                $customPostTypeServices,
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled()
+            ));
+        }
+        return $this->enabledCustomPostTypeServices;
     }
 }
