@@ -21,7 +21,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public final const PERSISTED_QUERY_ENDPOINT_OVERVIEW = Plugin::NAMESPACE . '\persisted-query-endpoint-overview';
 
     /** @var CustomPostTypeInterface[] */
-    protected ?array $enabledCustomPostTypeServices = null;
+    protected ?array $useExcerptAsDescriptionCustomPostTypeServices = null;
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
@@ -125,7 +125,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::EXCERPT_AS_DESCRIPTION:
-                return $this->getEnabledCustomPostTypeServices() === [];
+                return $this->getUseExcerptAsDescriptionCustomPostTypeServices() === [];
             case self::WELCOME_GUIDES:
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
             case self::CUSTOM_ENDPOINT_OVERVIEW:
@@ -169,7 +169,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::WELCOME_GUIDES
                 => false,
             self::EXCERPT_AS_DESCRIPTION,
-                => $this->getEnabledCustomPostTypeServices() === [] ? false : null,
+                => $this->getUseExcerptAsDescriptionCustomPostTypeServices() === [] ? false : null,
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION,
             self::CUSTOM_ENDPOINT_OVERVIEW,
             self::PERSISTED_QUERY_ENDPOINT_OVERVIEW
@@ -182,15 +182,15 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     /**
      * @return CustomPostTypeInterface[]
      */
-    protected function getEnabledCustomPostTypeServices(): array
+    protected function getUseExcerptAsDescriptionCustomPostTypeServices(): array
     {
-        if ($this->enabledCustomPostTypeServices === null) {
+        if ($this->useExcerptAsDescriptionCustomPostTypeServices === null) {
             $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
             return array_values(array_filter(
                 $customPostTypeServices,
-                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled()
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->useCustomPostExcerptAsDescription()
             ));
         }
-        return $this->enabledCustomPostTypeServices;
+        return $this->useExcerptAsDescriptionCustomPostTypeServices;
     }
 }
