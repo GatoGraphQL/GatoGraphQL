@@ -43,6 +43,14 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
         return $this->graphQLPersistedQueryEndpointCustomPostType;
     }
 
+    public function isServiceEnabled(): bool
+    {
+        if (!parent::isServiceEnabled()) {
+            return false;
+        }
+        return $this->getCustomPostTypes() !== [];
+    }
+
     public function getTaxonomy(): string
     {
         return 'graphql-endpoint-category';
