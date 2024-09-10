@@ -254,7 +254,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function enableSchemaConfiguration(): bool
     {
         $envVariable = Environment::ENABLE_SCHEMA_CONFIGURATION;
-        // @todo Change default to false
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
