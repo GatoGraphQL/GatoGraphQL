@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\BlockRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Registries\SchemaConfigBlockRegistryInterface;
@@ -26,6 +29,16 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCu
             $this->schemaConfigBlockRegistry = $schemaConfigBlockRegistry;
         }
         return $this->schemaConfigBlockRegistry;
+    }
+
+    public function isServiceEnabled(): bool
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+            return false;
+        }
+        return parent::isServiceEnabled();
     }
 
     /**
