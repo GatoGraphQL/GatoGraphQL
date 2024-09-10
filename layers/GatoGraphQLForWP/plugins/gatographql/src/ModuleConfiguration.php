@@ -260,6 +260,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             Environment::GATOGRAPHQL_WEBSITE_URL,
             Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL,
             Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL,
+            Environment::GATOGRAPHQL_SHOP_MYORDERS_URL,
             Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
                 => false,
             default
