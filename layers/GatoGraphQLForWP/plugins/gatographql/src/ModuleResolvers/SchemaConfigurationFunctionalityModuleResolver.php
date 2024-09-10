@@ -129,17 +129,12 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
-        if ($module === self::SCHEMA_CONFIGURATION) {
-            /**
-             * @var ModuleConfiguration
-             */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->isSchemaConfigurationModuleEnabled()) {
-                return true;
-            }
-            return null;
-        }
+        /**
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
+            self::SCHEMA_CONFIGURATION => $moduleConfiguration->isSchemaConfigurationModuleEnabled(),
             self::GLOBAL_FIELDS => true,
             self::GLOBAL_ID_FIELD => true,
             default => parent::isPredefinedEnabledOrDisabled($module),
@@ -156,14 +151,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public function isEnabledByDefault(string $module): bool
     {
-        if ($module === self::SCHEMA_CONFIGURATION) {
-            /**
-             * @var ModuleConfiguration
-             */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            return $moduleConfiguration->isSchemaConfigurationModuleEnabled();
-        }
-        return parent::isEnabledByDefault($module);
+        /**
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return match ($module) {
+            self::SCHEMA_CONFIGURATION => $moduleConfiguration->isSchemaConfigurationModuleEnabled() ?? false,
+            default => parent::isEnabledByDefault($module),
+        };
     }
 
     /**

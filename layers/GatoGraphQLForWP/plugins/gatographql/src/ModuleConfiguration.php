@@ -251,10 +251,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function isSchemaConfigurationModuleEnabled(): bool
+    public function isSchemaConfigurationModuleEnabled(): ?bool
     {
         $envVariable = Environment::IS_SCHEMA_CONFIGURATION_ENABLED;
-        $defaultValue = false;
+        $defaultValue = null;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
