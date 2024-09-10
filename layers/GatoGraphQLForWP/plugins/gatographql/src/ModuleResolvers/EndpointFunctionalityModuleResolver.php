@@ -7,10 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptionValues;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
-use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
-use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
@@ -20,54 +18,19 @@ use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\App;
-use WP_Post;
 
-class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityModuleResolver
 {
-    use ModuleResolverTrait;
-    use EndpointFunctionalityModuleResolverTrait;
-
     public final const PRIVATE_ENDPOINT = Plugin::NAMESPACE . '\private-endpoint';
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
     public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
     public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
 
-    /** @var WP_Post[]|null */
-    protected ?array $schemaConfigurationCustomPosts = null;
-
-    private ?MarkdownContentParserInterface $markdownContentParser = null;
-    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
     private ?EndpointHelpers $endpointHelpers = null;
     private ?GraphiQLMenuPage $graphiQLMenuPage = null;
     private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
     private ?TutorialMenuPage $tutorialMenuPage = null;
 
-    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
-    {
-        $this->markdownContentParser = $markdownContentParser;
-    }
-    final protected function getMarkdownContentParser(): MarkdownContentParserInterface
-    {
-        if ($this->markdownContentParser === null) {
-            /** @var MarkdownContentParserInterface */
-            $markdownContentParser = $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
-            $this->markdownContentParser = $markdownContentParser;
-        }
-        return $this->markdownContentParser;
-    }
-    final public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
-    {
-        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-    }
-    final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
-    {
-        if ($this->graphQLSchemaConfigurationCustomPostType === null) {
-            /** @var GraphQLSchemaConfigurationCustomPostType */
-            $graphQLSchemaConfigurationCustomPostType = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
-            $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-        }
-        return $this->graphQLSchemaConfigurationCustomPostType;
-    }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;
@@ -346,28 +309,5 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             ];
         }
         return $moduleSettings;
-    }
-
-    /**
-     * @return WP_Post[]
-     */
-    protected function getSchemaConfigurationCustomPosts(): array
-    {
-        if ($this->schemaConfigurationCustomPosts === null) {
-            $this->schemaConfigurationCustomPosts = $this->doGetSchemaConfigurationCustomPosts();
-        }
-
-        return $this->schemaConfigurationCustomPosts;
-    }
-
-    /**
-     * @return WP_Post[]
-     */
-    protected function doGetSchemaConfigurationCustomPosts(): array
-    {
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
-
-        return $this->getSchemaEntityListCustomPosts($graphQLSchemaConfigurationCustomPostType->getCustomPostType());
     }
 }
