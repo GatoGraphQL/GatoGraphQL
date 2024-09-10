@@ -288,6 +288,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 = 6.0.0 =
 * Breaking change: Disable the Schema Configuration module by default (#2848)
+* Breaking change: Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 
 = 5.0.0 =
 * Breaking change: Bumped minimum WordPress version to 6.1 (#2811)
