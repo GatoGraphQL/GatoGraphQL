@@ -82,7 +82,8 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
      */
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
-        if ($module === self::API_HIERARCHY
+        if (
+            $module === self::API_HIERARCHY
             && $this->getHierarchicalEndpointCustomPostTypeServices() === []
         ) {
             return false;
@@ -92,7 +93,8 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
 
     public function isHidden(string $module): bool
     {
-        if ($module === self::API_HIERARCHY
+        if (
+            $module === self::API_HIERARCHY
             && $this->getHierarchicalEndpointCustomPostTypeServices() === []
         ) {
             return true;
