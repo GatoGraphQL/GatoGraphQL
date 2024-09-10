@@ -104,7 +104,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCu
     /**
      * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
      */
-    public function usePostExcerptAsDescription(): bool
+    public function useCustomPostExcerptAsDescription(): bool
     {
         return true;
     }

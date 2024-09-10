@@ -13,7 +13,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
-- Hide API Hierarchy module if there are no endpoint CPTs enabled (#2850)
+- Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
+- Hide "Excerpt as description" module if there are no CPTs enabled (#2851)
 
 ## 5.0.0 - 07/09/2024
 
