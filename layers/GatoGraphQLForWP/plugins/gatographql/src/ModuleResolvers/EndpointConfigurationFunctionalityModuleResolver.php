@@ -60,23 +60,6 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
         ];
     }
 
-    /**
-     * @return array<string[]> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
-     */
-    public function getDependedModuleLists(string $module): array
-    {
-        switch ($module) {
-            case self::API_HIERARCHY:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                    ],
-                ];
-        }
-        return parent::getDependedModuleLists($module);
-    }
-
     public function getName(string $module): string
     {
         return match ($module) {
