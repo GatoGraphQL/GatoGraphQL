@@ -22,8 +22,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
 {
     public final const PRIVATE_ENDPOINT = Plugin::NAMESPACE . '\private-endpoint';
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
-    public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
-    public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
 
     private ?EndpointHelpers $endpointHelpers = null;
     private ?GraphiQLMenuPage $graphiQLMenuPage = null;
@@ -91,8 +89,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
         return [
             self::PRIVATE_ENDPOINT,
             self::SINGLE_ENDPOINT,
-            self::CUSTOM_ENDPOINTS,
-            self::PERSISTED_QUERIES,
         ];
     }
 
@@ -104,8 +100,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
         switch ($module) {
             case self::PRIVATE_ENDPOINT:
             case self::SINGLE_ENDPOINT:
-            case self::CUSTOM_ENDPOINTS:
-            case self::PERSISTED_QUERIES:
                 return [];
         }
         return parent::getDependedModuleLists($module);
@@ -116,8 +110,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
         return match ($module) {
             self::PRIVATE_ENDPOINT => \__('Private Endpoint', 'gatographql'),
             self::SINGLE_ENDPOINT => \__('Single Endpoint', 'gatographql'),
-            self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'gatographql'),
-            self::PERSISTED_QUERIES => \__('Persisted Queries', 'gatographql'),
             default => $module,
         };
     }
@@ -135,8 +127,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                 \__('Expose the single GraphQL endpoint under <code>%s</code>', 'gatographql'),
                 $moduleConfiguration->getGraphQLAPIEndpoint()
             ),
-            self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'gatographql'),
-            self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'gatographql'),
             default => parent::getDescription($module)
         };
     }
@@ -178,14 +168,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                 ModuleSettingOptions::PATH => 'graphql/',
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
-            self::CUSTOM_ENDPOINTS => [
-                ModuleSettingOptions::PATH => 'graphql',
-                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
-            ],
-            self::PERSISTED_QUERIES => [
-                ModuleSettingOptions::PATH => 'graphql-query',
-                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
-            ],
         ];
         return $defaultValues[$module][$option] ?? null;
     }
@@ -211,30 +193,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                 Properties::DESCRIPTION => \__('URL path to expose the single GraphQL endpoint', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
-        } elseif ($module === self::CUSTOM_ENDPOINTS) {
-            $option = ModuleSettingOptions::PATH;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Endpoint base slug', 'gatographql'),
-                Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_STRING,
-            ];
-        } elseif ($module === self::PERSISTED_QUERIES) {
-            $option = ModuleSettingOptions::PATH;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Endpoint base slug', 'gatographql'),
-                Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_STRING,
-            ];
         }
 
         // Add the Schema Configuration to all endpoints
@@ -242,8 +200,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
             in_array($module, [
                 self::PRIVATE_ENDPOINT,
                 self::SINGLE_ENDPOINT,
-                self::CUSTOM_ENDPOINTS,
-                self::PERSISTED_QUERIES,
             ]) && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
         ) {
             $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'gatographql');
@@ -266,14 +222,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 ),
                 self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'gatographql'),
-                self::CUSTOM_ENDPOINTS => sprintf(
-                    $defaultDescriptionPlaceholder,
-                    \__('Custom Endpoints', 'gatographql')
-                ),
-                self::PERSISTED_QUERIES => sprintf(
-                    $defaultDescriptionPlaceholder,
-                    \__('Persisted Queries', 'gatographql')
-                ),
                 default => '',
             };
             // Build all the possible values by fetching all the Schema Configuration posts
