@@ -112,7 +112,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_CONFIGURATION => \__('Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'gatographql'),
+            self::SCHEMA_CONFIGURATION => \__('Customize the schema accessible to different endpoints, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'gatographql'),
             self::SCHEMA_NAMESPACING => \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'gatographql'),
             self::RESPONSE_HEADERS => \__('Provide custom headers to add to the API response', 'gatographql'),
             self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'gatographql'),
