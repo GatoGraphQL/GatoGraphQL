@@ -410,8 +410,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('About Gato GraphQL', 'gatographql'),
-                __('About Gato GraphQL', 'gatographql'),
+                __('About', 'gatographql'),
+                __('About', 'gatographql'),
                 'manage_options',
                 $aboutMenuPage->getScreenID(),
                 [$aboutMenuPage, 'print']
