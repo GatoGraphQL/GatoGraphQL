@@ -161,6 +161,18 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         };
     }
 
+    public function isEnabledByDefault(string $module): bool
+    {
+        if ($module === self::SCHEMA_CONFIGURATION) {
+            /**
+             * @var ModuleConfiguration
+             */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            return $moduleConfiguration->isSchemaConfigurationModuleEnabledByDefault();
+        }
+        return parent::isEnabledByDefault($module);
+    }
+
     /**
      * Default value for an option set by the module
      */
