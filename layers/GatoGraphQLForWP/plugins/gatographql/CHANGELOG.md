@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 6.0.0 - DATE
 
+### Breaking changes
+
+- Disable the Schema Configuration module by default (#2848)
+
 ## 5.0.0 - 07/09/2024
 
 ### Breaking changes
