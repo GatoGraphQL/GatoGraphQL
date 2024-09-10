@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
@@ -126,6 +129,16 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
+        if ($module === self::SCHEMA_CONFIGURATION) {
+            /**
+             * @var ModuleConfiguration
+             */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if (!$moduleConfiguration->enableSchemaConfiguration()) {
+                return false;
+            }
+            return null;
+        }
         return match ($module) {
             self::GLOBAL_FIELDS => true,
             self::GLOBAL_ID_FIELD => true,
