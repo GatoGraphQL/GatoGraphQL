@@ -6,6 +6,9 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 
 class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -14,7 +17,11 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
 
     public final const API_HIERARCHY = Plugin::NAMESPACE . '\api-hierarchy';
 
+    /** @var GraphQLEndpointCustomPostTypeInterface[] */
+    protected ?array $hierarchicalEndpointCustomPostTypeServices = null;
+
     private ?MarkdownContentParserInterface $markdownContentParser = null;
+    private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -29,6 +36,19 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
         }
         return $this->markdownContentParser;
     }
+    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
+    {
+        $this->customPostTypeRegistry = $customPostTypeRegistry;
+    }
+    final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
+    {
+        if ($this->customPostTypeRegistry === null) {
+            /** @var CustomPostTypeRegistryInterface */
+            $customPostTypeRegistry = $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+            $this->customPostTypeRegistry = $customPostTypeRegistry;
+        }
+        return $this->customPostTypeRegistry;
+    }
 
     /**
      * @return string[]
@@ -38,23 +58,6 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
         return [
             self::API_HIERARCHY,
         ];
-    }
-
-    /**
-     * @return array<string[]> List of entries that must be satisfied, each entry is an array where at least 1 module must be satisfied
-     */
-    public function getDependedModuleLists(string $module): array
-    {
-        switch ($module) {
-            case self::API_HIERARCHY:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                    ],
-                ];
-        }
-        return parent::getDependedModuleLists($module);
     }
 
     public function getName(string $module): string
@@ -71,5 +74,48 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
             self::API_HIERARCHY => \__('Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties', 'gatographql'),
             default => parent::getDescription($module),
         };
+    }
+
+    /**
+     * If there are no endpoint CPTs enabled, the API Hierarchy
+     * module is disabled
+     */
+    public function isPredefinedEnabledOrDisabled(string $module): ?bool
+    {
+        if ($module === self::API_HIERARCHY
+            && $this->getHierarchicalEndpointCustomPostTypeServices() === []
+        ) {
+            return false;
+        }
+        return parent::isPredefinedEnabledOrDisabled($module);
+    }
+
+    public function isHidden(string $module): bool
+    {
+        if ($module === self::API_HIERARCHY
+            && $this->getHierarchicalEndpointCustomPostTypeServices() === []
+        ) {
+            return true;
+        }
+        return parent::isHidden($module);
+    }
+
+    /**
+     * @return GraphQLEndpointCustomPostTypeInterface[]
+     */
+    protected function getHierarchicalEndpointCustomPostTypeServices(): array
+    {
+        if ($this->hierarchicalEndpointCustomPostTypeServices === null) {
+            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
+            $endpointCustomPostTypeServices = array_values(array_filter(
+                $customPostTypeServices,
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
+            ));
+            $this->hierarchicalEndpointCustomPostTypeServices = array_values(array_filter(
+                $endpointCustomPostTypeServices,
+                fn (GraphQLEndpointCustomPostTypeInterface $graphQLEndpointCustomPostTypeService) => $graphQLEndpointCustomPostTypeService->isHierarchical()
+            ));
+        }
+        return $this->hierarchicalEndpointCustomPostTypeServices;
     }
 }

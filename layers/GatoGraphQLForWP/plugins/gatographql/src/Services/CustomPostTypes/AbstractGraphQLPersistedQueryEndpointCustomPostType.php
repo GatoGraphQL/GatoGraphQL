@@ -100,10 +100,7 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
         return $this->getPersistedQueryEndpointAnnotatorRegistry();
     }
 
-    /**
-     * Hierarchical
-     */
-    protected function isHierarchical(): bool
+    public function isHierarchical(): bool
     {
         return true;
     }
