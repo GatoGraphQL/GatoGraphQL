@@ -326,7 +326,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      * that hooks is executed when retrieving `Post.content` against
      * a custom endpoint!
      */
-    public function usePostExcerptAsDescription(): bool
+    public function useCustomPostExcerptAsDescription(): bool
     {
         // Use `''` instead of `null` so that the query resolution
         // works either without param or empty (?view=)
