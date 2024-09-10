@@ -148,6 +148,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public function isHidden(string $module): bool
     {
+        if ($module === self::SCHEMA_CONFIGURATION) {
+            /**
+             * @var ModuleConfiguration
+             */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            return !$moduleConfiguration->enableSchemaConfiguration();
+        }
         return match ($module) {
             self::GLOBAL_ID_FIELD => true,
             default => parent::isHidden($module),
