@@ -13,6 +13,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const AUTOMATION = Plugin::NAMESPACE . '\\extensions\\automation';
     public const CACHE_CONTROL = Plugin::NAMESPACE . '\\extensions\\cache-control';
     public const CONDITIONAL_FIELD_MANIPULATION = Plugin::NAMESPACE . '\\extensions\\conditional-field-manipulation';
+    public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\extensions\\custom-endpoints';
     public const DEPRECATION_NOTIFIER = Plugin::NAMESPACE . '\\extensions\\deprecation-notifier';
     public const EMAIL_SENDER = Plugin::NAMESPACE . '\\extensions\\email-sender';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
@@ -31,6 +32,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\\extensions\\low-level-persisted-query-editing';
     public const MULTILINGUALPRESS = Plugin::NAMESPACE . '\\extensions\\multilingualpress';
     public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\extensions\\multiple-query-execution';
+    public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\extensions\\persisted-queries';
     public const PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA = Plugin::NAMESPACE . '\\extensions\\php-constants-and-environment-variables-via-schema';
     public const PHP_FUNCTIONS_VIA_SCHEMA = Plugin::NAMESPACE . '\\extensions\\php-functions-via-schema';
     public const POLYLANG = Plugin::NAMESPACE . '\\extensions\\polylang';
