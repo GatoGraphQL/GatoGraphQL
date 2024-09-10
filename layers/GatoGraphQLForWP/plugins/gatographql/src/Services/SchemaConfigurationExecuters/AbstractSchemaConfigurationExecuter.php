@@ -42,12 +42,15 @@ abstract class AbstractSchemaConfigurationExecuter implements SchemaConfiguratio
      */
     public function isServiceEnabled(): bool
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+            return false;
+        }
+
         /**
          * Maybe do not initialize for the Internal AppThread
-         *
-         * @var ModuleConfiguration
          */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (
             !$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
             && AppHelpers::isInternalGraphQLServerAppThread()
