@@ -134,7 +134,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
              * @var ModuleConfiguration
              */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->isSchemaConfigurationModuleEnabledByDefault()) {
+            if ($moduleConfiguration->isSchemaConfigurationModuleEnabled()) {
                 return true;
             }
             return null;
@@ -161,7 +161,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
              * @var ModuleConfiguration
              */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            return $moduleConfiguration->isSchemaConfigurationModuleEnabledByDefault();
+            return $moduleConfiguration->isSchemaConfigurationModuleEnabled();
         }
         return parent::isEnabledByDefault($module);
     }
