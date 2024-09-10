@@ -6,6 +6,8 @@
 
 ## Improvements
 
+- Do not display Endpoint Categories if there are no endpoint CPTs enabled ([#2849](https://github.com/GatoGraphQL/GatoGraphQL/pull/2849))
+
 ## Fixed
 
 ## [PRO] Improvements
