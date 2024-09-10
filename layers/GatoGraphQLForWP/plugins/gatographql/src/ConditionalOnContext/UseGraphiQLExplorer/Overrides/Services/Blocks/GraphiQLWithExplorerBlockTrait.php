@@ -16,4 +16,8 @@ trait GraphiQLWithExplorerBlockTrait
     {
         return $this->getPluginURL() . '/blocks/graphiql-with-explorer/';
     }
+    /**
+     * Plugin URL
+     */
+    abstract protected function getPluginURL(): string;
 }
