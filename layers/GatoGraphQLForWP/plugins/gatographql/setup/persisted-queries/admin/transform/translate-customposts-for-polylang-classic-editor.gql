@@ -68,12 +68,9 @@ query InitializeVariables
   isGutenbergEditorEnabled
     @export(as: "isGutenbergEditorEnabled")
 
-  emptyString: _echo(value: null)
-    @export(as: "fromLanguage")
-    @remove
-
   emptyBool: _echo(value: false)
     @export(as: "hasOriginCustomPost")
+    @export(as: "hasPolylangLanguage")
     @export(as: "hasTranslationCustomPosts")
     @export(as: "executeTranslation")
     @remove
@@ -107,6 +104,8 @@ query ExportOriginCustomPost(
       polylangLanguage {
         code @export(as: "fromLanguage")
       }
+      hasPolylangLanguage: _notNull(value: $__polylangLanguage)
+        @export(as: "hasPolylangLanguage")
       
 
       polylangTranslationLanguageIDs(filter: {
@@ -141,6 +140,7 @@ query FetchData(
 )
   @depends(on: "ExportOriginCustomPost")
   @include(if: $hasOriginCustomPost)
+  @include(if: $hasPolylangLanguage)
   @include(if: $hasTranslationCustomPosts)
 {
   translationCustomPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)

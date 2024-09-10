@@ -36,6 +36,7 @@ query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   emptyBool: _echo(value: false)
+    @export(as: "hasPolylangLanguage")
     @export(as: "canTranslateOriginMediaItem")
     @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasCreatedTranslationMediaItems")
@@ -91,6 +92,8 @@ query ExportOriginMediaItem(
     polylangLanguage {
       code @export(as: "fromLanguage")
     }
+    hasPolylangLanguage: _notNull(value: $__polylangLanguage)
+      @export(as: "hasPolylangLanguage")
     
 
     polylangTranslationLanguageIDs(filter: {
@@ -114,6 +117,7 @@ query ExportOriginMediaItemCanBeTranslated(
 )
   @depends(on: "ExportOriginMediaItem")
   @include(if: $hasOriginMediaItem)
+  @include(if: $hasPolylangLanguage)
 {
   originMediaItemHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
