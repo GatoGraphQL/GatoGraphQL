@@ -96,21 +96,27 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
      */
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
-        if ($module == self::API_HIERARCHY) {
-            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
-            $endpointCustomPostTypeServices = array_values(array_filter(
-                $customPostTypeServices,
-                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
-            ));
-            $enabledHierarchicalEndpointCustomPostTypeServices = array_values(array_filter(
-                $endpointCustomPostTypeServices,
-                fn (GraphQLEndpointCustomPostTypeInterface $graphQLEndpointCustomPostTypeService) => $graphQLEndpointCustomPostTypeService->isServiceEnabled() && $graphQLEndpointCustomPostTypeService->isHierarchical()
-            ));
-            if ($enabledHierarchicalEndpointCustomPostTypeServices === []) {
-                return false;
-            }
-            return null;
+        if ($module === self::API_HIERARCHY
+            && $this->getEnabledHierarchicalEndpointCustomPostTypeServices() === []
+        ) {
+            return false;
         }
         return parent::isPredefinedEnabledOrDisabled($module);
+    }
+
+    /**
+     * @return GraphQLEndpointCustomPostTypeInterface[]
+     */
+    protected function getEnabledHierarchicalEndpointCustomPostTypeServices(): array
+    {
+        $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
+        $endpointCustomPostTypeServices = array_values(array_filter(
+            $customPostTypeServices,
+            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
+        ));
+        return array_values(array_filter(
+            $endpointCustomPostTypeServices,
+            fn (GraphQLEndpointCustomPostTypeInterface $graphQLEndpointCustomPostTypeService) => $graphQLEndpointCustomPostTypeService->isServiceEnabled() && $graphQLEndpointCustomPostTypeService->isHierarchical()
+        ));
     }
 }
