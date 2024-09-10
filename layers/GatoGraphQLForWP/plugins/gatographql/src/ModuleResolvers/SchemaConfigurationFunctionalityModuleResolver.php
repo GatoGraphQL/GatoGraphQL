@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
@@ -109,7 +112,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_CONFIGURATION => \__('Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'gatographql'),
+            self::SCHEMA_CONFIGURATION => \__('Customize the schema accessible to different endpoints, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'gatographql'),
             self::SCHEMA_NAMESPACING => \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'gatographql'),
             self::RESPONSE_HEADERS => \__('Provide custom headers to add to the API response', 'gatographql'),
             self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'gatographql'),
@@ -126,7 +129,12 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
+        /**
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
+            self::SCHEMA_CONFIGURATION => $moduleConfiguration->isSchemaConfigurationModuleEnabled(),
             self::GLOBAL_FIELDS => true,
             self::GLOBAL_ID_FIELD => true,
             default => parent::isPredefinedEnabledOrDisabled($module),
@@ -138,6 +146,18 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::GLOBAL_ID_FIELD => true,
             default => parent::isHidden($module),
+        };
+    }
+
+    public function isEnabledByDefault(string $module): bool
+    {
+        /**
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return match ($module) {
+            self::SCHEMA_CONFIGURATION => $moduleConfiguration->isSchemaConfigurationModuleEnabled() ?? false,
+            default => parent::isEnabledByDefault($module),
         };
     }
 

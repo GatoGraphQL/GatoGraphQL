@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\EndpointAnnotatorRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockHelpers;
@@ -235,8 +236,11 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             ),
             [
                 'state' => \__('State', 'gatographql'),
-                'schema-config' => \__('Schema Configuration', 'gatographql'),
             ],
+            $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
+                ? [
+                    'schema-config' => \__('Schema Configuration', 'gatographql'),
+                ] : [],
             array_slice(
                 $columns,
                 $titlePos + 1,

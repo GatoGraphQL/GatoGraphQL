@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators;
 
 use GatoGraphQL\GatoGraphQL\Constants\BlockConstants;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\Registries\FieldDirectiveResolverRegistryInterface;
@@ -238,6 +239,10 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
      */
     public function isServiceEnabled(): bool
     {
+        if (!$this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
+            return false;
+        }
+
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {
             return $this->getModuleRegistry()->isModuleEnabled($enablingModule);
