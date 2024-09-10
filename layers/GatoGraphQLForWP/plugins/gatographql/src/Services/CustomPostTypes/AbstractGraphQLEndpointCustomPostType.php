@@ -7,6 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\EndpointAnnotatorRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockHelpers;
@@ -224,6 +226,9 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     {
         $columns = parent::setTableColumns($columns);
 
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+
         // Add the enabled column after the title
         $titlePos = array_search('title', array_keys($columns));
         return array_merge(
@@ -235,8 +240,11 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             ),
             [
                 'state' => \__('State', 'gatographql'),
-                'schema-config' => \__('Schema Configuration', 'gatographql'),
             ],
+            $moduleConfiguration->enableSchemaConfiguration()
+                ? [
+                    'schema-config' => \__('Schema Configuration', 'gatographql'),
+                ] : [],
             array_slice(
                 $columns,
                 $titlePos + 1,
