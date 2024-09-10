@@ -9,6 +9,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Disable the Schema Configuration module by default (#2848)
+
+### Improvements
+
 - Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 
 ## 5.0.0 - 07/09/2024
