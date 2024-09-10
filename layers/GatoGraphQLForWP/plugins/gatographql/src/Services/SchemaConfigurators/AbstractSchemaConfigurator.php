@@ -46,7 +46,7 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
          * @var ModuleConfiguration
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+        if ($moduleConfiguration->disableSchemaConfiguration()) {
             return false;
         }
 

@@ -76,7 +76,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+        if ($moduleConfiguration->disableSchemaConfiguration()) {
             return false;
         }
         return parent::isServiceEnabled();

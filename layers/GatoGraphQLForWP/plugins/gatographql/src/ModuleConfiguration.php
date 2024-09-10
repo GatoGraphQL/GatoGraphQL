@@ -251,10 +251,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function enableSchemaConfiguration(): bool
+    public function disableSchemaConfiguration(): bool
     {
-        $envVariable = Environment::ENABLE_SCHEMA_CONFIGURATION;
-        $defaultValue = true;
+        $envVariable = Environment::DISABLE_SCHEMA_CONFIGURATION;
+        $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
@@ -287,7 +287,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL,
             Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL,
             Environment::GATOGRAPHQL_SHOP_MYORDERS_URL,
-            Environment::ENABLE_SCHEMA_CONFIGURATION,
+            Environment::DISABLE_SCHEMA_CONFIGURATION,
             Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
                 => false,
             default

@@ -21,7 +21,7 @@ abstract class AbstractEndpointSchemaConfigurator extends AbstractSchemaConfigur
          * @var ModuleConfiguration
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+        if ($moduleConfiguration->disableSchemaConfiguration()) {
             return false;
         }
         

@@ -134,7 +134,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
              * @var ModuleConfiguration
              */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if (!$moduleConfiguration->enableSchemaConfiguration()) {
+            if ($moduleConfiguration->disableSchemaConfiguration()) {
                 return false;
             }
             if ($moduleConfiguration->isSchemaConfigurationModuleEnabledByDefault()) {
@@ -156,7 +156,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
              * @var ModuleConfiguration
              */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            return !$moduleConfiguration->enableSchemaConfiguration();
+            return $moduleConfiguration->disableSchemaConfiguration();
         }
         return match ($module) {
             self::GLOBAL_ID_FIELD => true,

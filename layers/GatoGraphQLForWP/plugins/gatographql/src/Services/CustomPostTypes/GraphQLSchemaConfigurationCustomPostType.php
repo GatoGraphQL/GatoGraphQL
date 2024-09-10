@@ -35,7 +35,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCu
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+        if ($moduleConfiguration->disableSchemaConfiguration()) {
             return false;
         }
         return parent::isServiceEnabled();

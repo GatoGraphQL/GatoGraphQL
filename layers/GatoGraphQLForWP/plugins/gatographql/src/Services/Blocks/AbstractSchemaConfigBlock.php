@@ -32,7 +32,7 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+        if ($moduleConfiguration->disableSchemaConfiguration()) {
             return false;
         }
         return parent::isServiceEnabled();
