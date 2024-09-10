@@ -251,6 +251,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function enableSchemaConfiguration(): bool
+    {
+        $envVariable = Environment::ENABLE_SCHEMA_CONFIGURATION;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     /**
      * These values are pre-defined.
      */
