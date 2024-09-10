@@ -66,9 +66,13 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
             $customPostTypeServices,
             fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
         ));
+        $enabledEndpointCustomPostTypeServices = array_values(array_filter(
+            $endpointCustomPostTypeServices,
+            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled()
+        ));
         return array_map(
             fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
-            $endpointCustomPostTypeServices
+            $enabledEndpointCustomPostTypeServices
         );
     }
 }
