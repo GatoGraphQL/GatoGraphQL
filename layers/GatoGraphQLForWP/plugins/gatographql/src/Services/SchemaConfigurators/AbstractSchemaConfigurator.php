@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Registries\SchemaConfigurationExecuterRegistryInterface;
 use PoP\Root\Services\BasicServiceTrait;
@@ -39,6 +42,14 @@ abstract class AbstractSchemaConfigurator implements SchemaConfiguratorInterface
      */
     public function isServiceEnabled(): bool
     {
+        /**
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+            return false;
+        }
+
         // Only enable the service if the corresponding module is also enabled
         return $this->getModuleRegistry()->isModuleEnabled($this->getEnablingModule());
     }

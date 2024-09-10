@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\BlockCategories;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 
 class SchemaConfigurationBlockCategory extends AbstractBlockCategory
@@ -24,6 +27,16 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
             $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
         }
         return $this->graphQLSchemaConfigurationCustomPostType;
+    }
+
+    public function isServiceEnabled(): bool
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableSchemaConfiguration()) {
+            return false;
+        }
+        return parent::isServiceEnabled();
     }
 
     /**
