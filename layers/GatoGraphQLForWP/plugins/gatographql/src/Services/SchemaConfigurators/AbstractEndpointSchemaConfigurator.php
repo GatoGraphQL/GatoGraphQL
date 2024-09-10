@@ -16,7 +16,7 @@ abstract class AbstractEndpointSchemaConfigurator extends AbstractSchemaConfigur
         if (!parent::isServiceEnabled()) {
             return false;
         }
-        
+
         /**
          * Maybe do not initialize for the Internal AppThread
          *

@@ -57,7 +57,7 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
         if (!$this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             return false;
         }
-        
+
         /**
          * Maybe do not initialize for the Internal AppThread
          *
