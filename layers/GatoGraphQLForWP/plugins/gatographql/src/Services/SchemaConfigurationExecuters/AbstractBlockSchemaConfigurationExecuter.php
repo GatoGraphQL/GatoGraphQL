@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 
-use GatoGraphQL\GatoGraphQL\App;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockHelpers;
 
@@ -26,16 +23,6 @@ abstract class AbstractBlockSchemaConfigurationExecuter extends AbstractSchemaCo
             $this->blockHelpers = $blockHelpers;
         }
         return $this->blockHelpers;
-    }
-
-    public function isServiceEnabled(): bool
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSchemaConfiguration()) {
-            return false;
-        }
-        return parent::isServiceEnabled();
     }
 
     /**
