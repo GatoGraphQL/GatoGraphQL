@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\EndpointAnnotatorRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockHelpers;
@@ -241,7 +242,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             [
                 'state' => \__('State', 'gatographql'),
             ],
-            $moduleConfiguration->enableSchemaConfiguration()
+            $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
                 ? [
                     'schema-config' => \__('Schema Configuration', 'gatographql'),
                 ] : [],
