@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Services\BlockCategories\BlockCategoryInterface;
 use GatoGraphQL\GatoGraphQL\Services\BlockCategories\SchemaConfigurationBlockCategory;
 
@@ -30,11 +31,14 @@ abstract class AbstractSchemaConfigBlock extends AbstractBlock implements Schema
 
     public function isServiceEnabled(): bool
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->disableSchemaConfiguration()) {
+        if (!$this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             return false;
         }
+        // /** @var ModuleConfiguration */
+        // $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        // if ($moduleConfiguration->disableSchemaConfiguration()) {
+        //     return false;
+        // }
         return parent::isServiceEnabled();
     }
 

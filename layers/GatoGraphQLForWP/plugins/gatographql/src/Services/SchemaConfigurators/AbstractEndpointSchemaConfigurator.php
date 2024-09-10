@@ -16,18 +16,13 @@ abstract class AbstractEndpointSchemaConfigurator extends AbstractSchemaConfigur
         if (!parent::isServiceEnabled()) {
             return false;
         }
-
-        /**
-         * @var ModuleConfiguration
-         */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->disableSchemaConfiguration()) {
-            return false;
-        }
         
         /**
          * Maybe do not initialize for the Internal AppThread
+         *
+         * @var ModuleConfiguration
          */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (
             !$moduleConfiguration->useSchemaConfigurationInInternalGraphQLServer()
             && AppHelpers::isInternalGraphQLServerAppThread()

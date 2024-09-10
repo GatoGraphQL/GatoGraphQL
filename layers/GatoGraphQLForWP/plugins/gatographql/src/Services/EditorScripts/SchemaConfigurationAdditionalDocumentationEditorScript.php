@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\EditorScripts;
 
-use GatoGraphQL\GatoGraphQL\App;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\Scripts\MainPluginScriptTrait;
@@ -29,16 +26,6 @@ class SchemaConfigurationAdditionalDocumentationEditorScript extends AbstractEdi
             $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
         }
         return $this->graphQLSchemaConfigurationCustomPostType;
-    }
-
-    public function isServiceEnabled(): bool
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->disableSchemaConfiguration()) {
-            return false;
-        }
-        return parent::isServiceEnabled();
     }
 
     protected function getScriptName(): string
