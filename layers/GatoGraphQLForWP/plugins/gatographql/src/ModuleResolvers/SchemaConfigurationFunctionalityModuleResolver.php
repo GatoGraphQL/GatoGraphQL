@@ -134,9 +134,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
              * @var ModuleConfiguration
              */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->disableSchemaConfiguration()) {
-                return false;
-            }
             if ($moduleConfiguration->isSchemaConfigurationModuleEnabledByDefault()) {
                 return true;
             }
@@ -151,13 +148,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public function isHidden(string $module): bool
     {
-        if ($module === self::SCHEMA_CONFIGURATION) {
-            /**
-             * @var ModuleConfiguration
-             */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            return $moduleConfiguration->disableSchemaConfiguration();
-        }
         return match ($module) {
             self::GLOBAL_ID_FIELD => true,
             default => parent::isHidden($module),

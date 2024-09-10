@@ -242,13 +242,6 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
         if (!$this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             return false;
         }
-        // /**
-        //  * @var ModuleConfiguration
-        //  */
-        // $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        // if ($moduleConfiguration->disableSchemaConfiguration()) {
-        //     return false;
-        // }
         
         $enablingModule = $this->getEnablingModule();
         if ($enablingModule !== null) {

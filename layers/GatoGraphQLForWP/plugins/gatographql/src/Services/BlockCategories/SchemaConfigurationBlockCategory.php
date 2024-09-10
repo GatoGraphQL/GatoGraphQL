@@ -50,11 +50,6 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
         if (!$this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
             return false;
         }
-        // /** @var ModuleConfiguration */
-        // $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        // if ($moduleConfiguration->disableSchemaConfiguration()) {
-        //     return false;
-        // }
         return parent::isServiceEnabled();
     }
 
