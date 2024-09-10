@@ -17,6 +17,9 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
 
     public final const API_HIERARCHY = Plugin::NAMESPACE . '\api-hierarchy';
 
+    /** @var GraphQLEndpointCustomPostTypeInterface[] */
+    protected ?array $enabledHierarchicalEndpointCustomPostTypeServices = null;
+
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
@@ -109,14 +112,17 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
      */
     protected function getEnabledHierarchicalEndpointCustomPostTypeServices(): array
     {
-        $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
-        $endpointCustomPostTypeServices = array_values(array_filter(
-            $customPostTypeServices,
-            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
-        ));
-        return array_values(array_filter(
-            $endpointCustomPostTypeServices,
-            fn (GraphQLEndpointCustomPostTypeInterface $graphQLEndpointCustomPostTypeService) => $graphQLEndpointCustomPostTypeService->isServiceEnabled() && $graphQLEndpointCustomPostTypeService->isHierarchical()
-        ));
+        if ($this->enabledHierarchicalEndpointCustomPostTypeServices === null) {
+            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
+            $endpointCustomPostTypeServices = array_values(array_filter(
+                $customPostTypeServices,
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
+            ));
+            $this->enabledHierarchicalEndpointCustomPostTypeServices = array_values(array_filter(
+                $endpointCustomPostTypeServices,
+                fn (GraphQLEndpointCustomPostTypeInterface $graphQLEndpointCustomPostTypeService) => $graphQLEndpointCustomPostTypeService->isServiceEnabled() && $graphQLEndpointCustomPostTypeService->isHierarchical()
+            ));
+        }
+        return $this->enabledHierarchicalEndpointCustomPostTypeServices;
     }
 }
