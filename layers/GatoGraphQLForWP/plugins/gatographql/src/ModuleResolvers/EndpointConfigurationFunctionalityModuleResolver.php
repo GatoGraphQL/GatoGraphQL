@@ -90,6 +90,16 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
         return parent::isPredefinedEnabledOrDisabled($module);
     }
 
+    public function isHidden(string $module): bool
+    {
+        if ($module === self::API_HIERARCHY
+            && $this->getEnabledHierarchicalEndpointCustomPostTypeServices() === []
+        ) {
+            return true;
+        }
+        return parent::isHidden($module);
+    }
+
     /**
      * @return GraphQLEndpointCustomPostTypeInterface[]
      */
