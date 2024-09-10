@@ -13,7 +13,6 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
-use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -95,11 +94,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
             self::CUSTOM_ENDPOINTS,
             self::PERSISTED_QUERIES,
         ];
-    }
-
-    public function getSettingsCategory(string $module): string
-    {
-        return SettingsCategoryResolver::ENDPOINT_CONFIGURATION;
     }
 
     /**
