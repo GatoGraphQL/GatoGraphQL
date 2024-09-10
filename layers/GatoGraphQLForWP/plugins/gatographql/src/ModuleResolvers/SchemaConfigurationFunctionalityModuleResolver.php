@@ -137,6 +137,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             if (!$moduleConfiguration->enableSchemaConfiguration()) {
                 return false;
             }
+            if ($moduleConfiguration->isSchemaConfigurationModuleEnabledByDefault()) {
+                return true;
+            }
             return null;
         }
         return match ($module) {
