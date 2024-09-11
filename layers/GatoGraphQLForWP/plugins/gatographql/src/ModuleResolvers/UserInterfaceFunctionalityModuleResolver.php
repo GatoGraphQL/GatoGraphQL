@@ -70,14 +70,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::EXCERPT_AS_DESCRIPTION:
-                return [];
             case self::WELCOME_GUIDES:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                    ]
-                ];
+                return [];
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
                 return [
                     [
