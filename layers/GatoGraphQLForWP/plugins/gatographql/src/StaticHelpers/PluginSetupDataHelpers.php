@@ -57,33 +57,6 @@ class PluginSetupDataHelpers
     /**
      * @param string|string[] $status
      */
-    public static function getPersistedQueryEndpointID(
-        string $slug,
-        string|array $status = ['publish', 'private'],
-    ): ?int {
-        $instanceManager = InstanceManagerFacade::getInstance();
-
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
-
-        /** @var array<string|int> */
-        $persistedQueryEndpoints = \get_posts([
-            'name' => $slug,
-            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-            'post_status' => $status,
-            'numberposts' => 1,
-            'fields' => 'ids',
-        ]);
-        if (isset($persistedQueryEndpoints[0])) {
-            return (int) $persistedQueryEndpoints[0];
-        }
-
-        return null;
-    }
-
-    /**
-     * @param string|string[] $status
-     */
     public static function getCustomEndpointID(
         string $slug,
         string|array $status = ['publish', 'private'],
