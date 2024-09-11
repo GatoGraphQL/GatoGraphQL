@@ -34,6 +34,11 @@ class EndpointBlockCategory extends AbstractBlockCategory
         return $this->customPostTypeRegistry;
     }
 
+    public function isServiceEnabled(): bool
+    {
+        return $this->getGraphQLEndpointCustomPostTypeServices() !== [];
+    }
+
     /**
      * Custom Post Type for which to enable the block category
      *
