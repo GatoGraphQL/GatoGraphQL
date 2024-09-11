@@ -6,7 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\Constants;
 
 class PluginSetupDataEntrySlugs
 {
-    // @todo Review duplicated consts!
     /**
      * @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
      */

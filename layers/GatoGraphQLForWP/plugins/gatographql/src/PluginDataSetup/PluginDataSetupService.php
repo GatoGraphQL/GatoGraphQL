@@ -80,7 +80,6 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
 
     public function getBulkMutationsSchemaConfigurationCustomPostID(): ?int
     {
-
         $slug = PluginSetupDataEntrySlugs::SCHEMA_CONFIGURATION_BULK_MUTATIONS;
         $schemaConfigurationID = PluginSetupDataHelpers::getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
