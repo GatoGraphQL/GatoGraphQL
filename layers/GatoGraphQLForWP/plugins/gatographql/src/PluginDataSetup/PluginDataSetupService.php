@@ -42,7 +42,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
     /**
      * @return array<string,mixed>
      */
-    public function getNestedMutationsBlockDataItem(): array
+    protected function getNestedMutationsBlockDataItem(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var SchemaConfigMutationSchemeBlock */
@@ -59,7 +59,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
     /**
      * @param array<array<string,mixed>> $blockDataItems
      */
-    public function createSchemaConfigurationID(string $slug, string $title, array $blockDataItems): ?int
+    protected function createSchemaConfigurationID(string $slug, string $title, array $blockDataItems): ?int
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
@@ -102,7 +102,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
     /**
      * @return array<string,mixed>
      */
-    public function getUseAndQueryPayloadTypeForMutationsBlockDataItem(): array
+    protected function getUseAndQueryPayloadTypeForMutationsBlockDataItem(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var SchemaConfigPayloadTypesForMutationsBlock */
@@ -116,7 +116,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
         ];
     }
 
-    public function getAdminEndpointCategoryID(): ?int
+    protected function getAdminEndpointCategoryID(): ?int
     {
         $slug = 'admin';
         $endpointCategoryID = PluginSetupDataHelpers::getEndpointCategoryID($slug);
@@ -131,7 +131,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
         );
     }
 
-    public function createEndpointCategoryID(string $slug, string $name, string $description): ?int
+    protected function createEndpointCategoryID(string $slug, string $name, string $description): ?int
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLEndpointCategoryTaxonomy */
@@ -151,7 +151,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
         return $endpointCategoryTerm['term_id'];
     }
 
-    public function getWebhookEndpointCategoryID(): ?int
+    protected function getWebhookEndpointCategoryID(): ?int
     {
         $slug = 'webhook';
         $endpointCategoryID = PluginSetupDataHelpers::getEndpointCategoryID($slug);
