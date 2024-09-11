@@ -37,6 +37,9 @@ services:
     GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Request\PrematureRequestService
 
+    GatoGraphQL\GatoGraphQL\PluginDataSetup\PluginDataSetupServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\PluginDataSetup\PluginDataSetupService
+
     GatoGraphQL\GatoGraphQL\Services\:
         resource: ../src/Services/*
 
