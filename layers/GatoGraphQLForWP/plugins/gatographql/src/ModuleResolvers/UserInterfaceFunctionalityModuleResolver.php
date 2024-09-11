@@ -156,7 +156,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         if ($this->useExcerptAsDescriptionCustomPostTypeServices === null) {
             $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
-            return array_values(array_filter(
+            $this->useExcerptAsDescriptionCustomPostTypeServices = array_values(array_filter(
                 $customPostTypeServices,
                 fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->useCustomPostExcerptAsDescription()
             ));
