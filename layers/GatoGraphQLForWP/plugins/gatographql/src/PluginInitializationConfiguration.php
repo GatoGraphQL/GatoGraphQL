@@ -140,32 +140,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ),
                 'condition' => 'any',
             ],
-            // Custom Endpoint path
-            [
-                'class' => Module::class,
-                'envVariable' => Environment::ENDPOINT_SLUG_BASE,
-                'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
-                    $value,
-                    EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    ModuleSettingOptions::PATH
-                ),
-                'condition' => 'any',
-            ],
-            // Persisted Query path
-            [
-                'class' => Module::class,
-                'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
-                'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
-                    $value,
-                    EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                    ModuleSettingOptions::PATH
-                ),
-                'condition' => 'any',
-            ],
             // GraphiQL client slug
             [
                 'class' => GraphQLClientsForWPModule::class,

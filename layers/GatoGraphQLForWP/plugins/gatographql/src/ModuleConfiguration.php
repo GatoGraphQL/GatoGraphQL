@@ -70,34 +70,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * The slug to use as base when accessing the custom endpoint
-     */
-    public function getCustomEndpointSlugBase(): string
-    {
-        $envVariable = Environment::ENDPOINT_SLUG_BASE;
-        $defaultValue = 'graphql';
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-        );
-    }
-
-    /**
-     * The slug to use as base when accessing the persisted query
-     */
-    public function getPersistedQuerySlugBase(): string
-    {
-        $envVariable = Environment::PERSISTED_QUERY_SLUG_BASE;
-        $defaultValue = 'graphql-query';
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-        );
-    }
-
-    /**
      * If `"admin"`, only the admin can compose a GraphQL query and endpoint
      * If `"post"`, the workflow from creating posts is employed (i.e. Author role can create
      * but not publish the query, Editor role can publish it, etc)
