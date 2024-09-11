@@ -19,7 +19,7 @@ class GraphQLEndpointPathProviderRegistry implements GraphQLEndpointPathProvider
     }
 
     /**
-     * @return array<string,GraphQLEndpointPathProviderInterface>
+     * @return GraphQLEndpointPathProviderInterface[]
      */
     public function getGraphQLEndpointPathProviders(?bool $isPublic = null): array
     {
