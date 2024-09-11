@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 use GatoGraphQL\GatoGraphQL\Services\BlockCategories\BlockCategoryInterface;
-use GatoGraphQL\GatoGraphQL\Services\BlockCategories\PersistedQueryEndpointBlockCategory;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 
 /**
@@ -19,7 +18,6 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     public final const ATTRIBUTE_NAME_VARIABLES = 'variables';
 
     private ?EndpointHelpers $endpointHelpers = null;
-    private ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
 
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
@@ -34,29 +32,13 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         }
         return $this->endpointHelpers;
     }
-    final public function setPersistedQueryEndpointBlockCategory(PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory): void
-    {
-        $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
-    }
-    final protected function getPersistedQueryEndpointBlockCategory(): PersistedQueryEndpointBlockCategory
-    {
-        if ($this->persistedQueryEndpointBlockCategory === null) {
-            /** @var PersistedQueryEndpointBlockCategory */
-            $persistedQueryEndpointBlockCategory = $this->instanceManager->getInstance(PersistedQueryEndpointBlockCategory::class);
-            $this->persistedQueryEndpointBlockCategory = $persistedQueryEndpointBlockCategory;
-        }
-        return $this->persistedQueryEndpointBlockCategory;
-    }
 
     protected function getBlockName(): string
     {
         return 'graphiql';
     }
 
-    protected function getBlockCategory(): ?BlockCategoryInterface
-    {
-        return $this->getPersistedQueryEndpointBlockCategory();
-    }
+    abstract protected function getBlockCategory(): ?BlockCategoryInterface;
 
     protected function isDynamicBlock(): bool
     {
