@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\BlockCategories;
 
-use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
-use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
+use GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 
 /**
  * It comprises the endpoint and the persisted query CPTs
@@ -14,34 +15,23 @@ class EndpointBlockCategory extends AbstractBlockCategory
 {
     public final const ENDPOINT_BLOCK_CATEGORY = 'gatographql-query-exec';
 
-    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
-    private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
+    /** @var GraphQLEndpointCustomPostTypeInterface[] */
+    protected ?array $graphqlEndpointCustomPostTypeServices = null;
 
-    final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
+    private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
+
+    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
     {
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        $this->customPostTypeRegistry = $customPostTypeRegistry;
     }
-    final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
+    final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {
-        if ($this->graphQLCustomEndpointCustomPostType === null) {
-            /** @var GraphQLCustomEndpointCustomPostType */
-            $graphQLCustomEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
-            $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
+        if ($this->customPostTypeRegistry === null) {
+            /** @var CustomPostTypeRegistryInterface */
+            $customPostTypeRegistry = $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
+            $this->customPostTypeRegistry = $customPostTypeRegistry;
         }
-        return $this->graphQLCustomEndpointCustomPostType;
-    }
-    final public function setGraphQLPersistedQueryEndpointCustomPostType(GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType): void
-    {
-        $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
-    }
-    final protected function getGraphQLPersistedQueryEndpointCustomPostType(): GraphQLPersistedQueryEndpointCustomPostType
-    {
-        if ($this->graphQLPersistedQueryEndpointCustomPostType === null) {
-            /** @var GraphQLPersistedQueryEndpointCustomPostType */
-            $graphQLPersistedQueryEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
-            $this->graphQLPersistedQueryEndpointCustomPostType = $graphQLPersistedQueryEndpointCustomPostType;
-        }
-        return $this->graphQLPersistedQueryEndpointCustomPostType;
+        return $this->customPostTypeRegistry;
     }
 
     /**
@@ -51,10 +41,7 @@ class EndpointBlockCategory extends AbstractBlockCategory
      */
     public function getCustomPostTypes(): array
     {
-        return [
-            $this->getGraphQLCustomEndpointCustomPostType()->getCustomPostType(),
-            $this->getGraphQLPersistedQueryEndpointCustomPostType()->getCustomPostType(),
-        ];
+        return $this->getGraphQLEndpointCustomPostTypeServices();
     }
 
     /**
@@ -71,5 +58,20 @@ class EndpointBlockCategory extends AbstractBlockCategory
     protected function getBlockCategoryTitle(): string
     {
         return __('Query execution (endpoint/persisted query)', 'gatographql');
+    }
+
+    /**
+     * @return GraphQLEndpointCustomPostTypeInterface[]
+     */
+    protected function getGraphQLEndpointCustomPostTypeServices(): array
+    {
+        if ($this->graphqlEndpointCustomPostTypeServices === null) {
+            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
+            $this->graphqlEndpointCustomPostTypeServices = array_values(array_filter(
+                $customPostTypeServices,
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
+            ));
+        }
+        return $this->graphqlEndpointCustomPostTypeServices;
     }
 }
