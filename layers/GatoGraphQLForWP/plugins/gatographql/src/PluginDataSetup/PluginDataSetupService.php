@@ -88,7 +88,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
         }
 
         $nestedMutationsBlockDataItem = $this->getNestedMutationsBlockDataItem();
-        $useAndQueryPayloadTypeForMutationsBlockDataItem = $this->getUseAndQueryPayloadTypeForMutationseBlockDataItem();
+        $useAndQueryPayloadTypeForMutationsBlockDataItem = $this->getUseAndQueryPayloadTypeForMutationsBlockDataItem();
         return $this->createSchemaConfigurationID(
             $slug,
             \__('Bulk mutations', 'gatographql'),
@@ -102,7 +102,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
     /**
      * @return array<string,mixed>
      */
-    public function getUseAndQueryPayloadTypeForMutationseBlockDataItem(): array
+    public function getUseAndQueryPayloadTypeForMutationsBlockDataItem(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var SchemaConfigPayloadTypesForMutationsBlock */

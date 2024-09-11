@@ -23,7 +23,7 @@ interface PluginDataSetupServiceInterface
     /**
      * @return array<string,mixed>
      */
-    public function getUseAndQueryPayloadTypeForMutationseBlockDataItem(): array;
+    public function getUseAndQueryPayloadTypeForMutationsBlockDataItem(): array;
 
     public function getAdminEndpointCategoryID(): ?int;
 
