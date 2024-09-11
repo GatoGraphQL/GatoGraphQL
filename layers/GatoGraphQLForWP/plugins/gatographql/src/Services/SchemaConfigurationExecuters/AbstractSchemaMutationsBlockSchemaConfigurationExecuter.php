@@ -7,8 +7,6 @@ namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
-use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\EndpointSchemaConfigurationExecuterServiceTagInterface;
-use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use PoP\ComponentModel\App;
 use PoP\Root\Module\ModuleConfigurationHelpers;

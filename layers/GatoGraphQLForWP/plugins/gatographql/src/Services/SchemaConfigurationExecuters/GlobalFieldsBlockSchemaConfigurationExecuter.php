@@ -9,9 +9,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModu
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigGlobalFieldsBlock;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
-use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\AbstractBlockSchemaConfigurationExecuter;
-use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\EndpointSchemaConfigurationExecuterServiceTagInterface;
-use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use PoP\Root\Module\ModuleConfigurationHelpers;
