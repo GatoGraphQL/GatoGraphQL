@@ -48,8 +48,6 @@ class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPag
     protected static function getGatoGraphQLPluginCustomPostTypes(): array
     {
         return [
-            'graphql-endpoint',
-            'graphql-query',
             'graphql-schemaconfig',
         ];
     }
