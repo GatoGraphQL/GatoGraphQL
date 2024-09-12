@@ -33131,6 +33131,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
@@ -33183,6 +33188,11 @@
             {
               "kind": "OBJECT",
               "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxonomyIsNotValidErrorPayload",
               "ofType": null
             },
             {
@@ -33326,6 +33336,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
@@ -33348,6 +33363,11 @@
             {
               "kind": "OBJECT",
               "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -33588,7 +33608,17 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxonomyIsNotValidErrorPayload",
               "ofType": null
             },
             {
@@ -33731,12 +33761,22 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
               "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxonomyIsNotValidErrorPayload",
               "ofType": null
             },
             {
@@ -34007,6 +34047,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
@@ -34064,6 +34109,11 @@
             {
               "kind": "OBJECT",
               "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TaxonomyIsNotValidErrorPayload",
               "ofType": null
             },
             {
