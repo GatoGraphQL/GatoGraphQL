@@ -174,18 +174,19 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
-            $option = self::OPTION_INSTALL_PLUGIN_SETUP_DATA;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Plugin setup: Install Persisted Queries for common admin tasks?', 'gatographql'),
-                Properties::DESCRIPTION => \__('When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_BOOL,
-                Properties::CSS_STYLE => PluginStaticModuleConfiguration::canManageInstallingPluginSetupData() ? '' : 'display: none;',
-            ];
+            if (PluginStaticModuleConfiguration::canManageInstallingPluginSetupData()) {
+                $option = self::OPTION_INSTALL_PLUGIN_SETUP_DATA;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Plugin setup: Install Persisted Queries for common admin tasks?', 'gatographql'),
+                    Properties::DESCRIPTION => \__('When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?', 'gatographql'),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+            }
 
             $option = self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE;
             $moduleSettings[] = [
