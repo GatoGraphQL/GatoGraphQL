@@ -38,7 +38,7 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 
 <tr><th colspan="2"><br/>Endpoint</th></tr>
 <tr><td><a href="docs/modules/single-endpoint/en.md">Single Endpoint</a></td><td>Expose the single GraphQL endpoint under <code>/graphql/</code></td></tr>
-<tr><td><a href="docs/modules/persisted-queries/en.md">Persisted Queries</a></td><td>Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints</td></tr>
+<tr><td><a href="docs/modules/persisted-queries/en.md">Persisted Queries</a></td><td>Expose GraphQL endpoints with a predefined response, similar to REST endpoints</td></tr>
 <tr><td><a href="docs/modules/custom-endpoints/en.md">Custom Endpoints</a></td><td>Provide multiple GraphQL endpoints to target different users and applications, each exposing a custom schema</td></tr>
 <tr><td><a href="docs/modules/api-hierarchy/en.md">API Hierarchy</a></td><td>Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties</td></tr>
 <tr><th colspan="2"><br/>Schema Configuration</th></tr>
