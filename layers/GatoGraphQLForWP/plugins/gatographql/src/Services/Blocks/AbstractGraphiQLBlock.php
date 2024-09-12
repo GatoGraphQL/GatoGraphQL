@@ -38,8 +38,6 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
         return 'graphiql';
     }
 
-    abstract protected function getBlockCategory(): ?BlockCategoryInterface;
-
     protected function isDynamicBlock(): bool
     {
         return true;
