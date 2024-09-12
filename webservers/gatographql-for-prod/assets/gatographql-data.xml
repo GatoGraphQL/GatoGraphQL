@@ -370,9 +370,9 @@
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>5</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-05 02:10:47]]></wp:post_date>
@@ -402,9 +402,9 @@
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>12</wp:post_id>
 		<wp:post_date><![CDATA[2020-07-28 11:05:44]]></wp:post_date>
@@ -438,9 +438,9 @@
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[Data for the "tags" widget for the homepage]]></excerpt:encoded>
 		<wp:post_id>44</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:27:17]]></wp:post_date>
@@ -498,9 +498,9 @@
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":270} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy {"inheritQuery":true} /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy {"inheritQuery":true} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>46</wp:post_id>
 		<wp:post_date><![CDATA[2021-12-12 06:27:17]]></wp:post_date>
@@ -530,9 +530,9 @@
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>65</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
@@ -564,7 +564,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -595,7 +595,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -626,7 +626,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -660,9 +660,9 @@
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options {"isEnabled":false} /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options {"isEnabled":false} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[Group containing persisted queries for the website, applying an overarching schema configuration]]></excerpt:encoded>
 		<wp:post_id>200</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:06:20]]></wp:post_date>
@@ -688,7 +688,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/custom-endpoint-options {"isEnabled":false} /-->
+<!-- wp:gatographql-pro/custom-endpoint-options {"isEnabled":false} /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -722,7 +722,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":592} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql {"isEnabled":false} /-->
 
@@ -756,9 +756,9 @@
 
 <!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>237</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-19 07:29:37]]></wp:post_date>
@@ -792,9 +792,9 @@
 
 <!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy {"inheritQuery":true} /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy {"inheritQuery":true} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>240</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-19 07:31:42]]></wp:post_date>
@@ -822,7 +822,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":304} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -854,7 +854,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":304} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -884,7 +884,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -914,7 +914,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -944,7 +944,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":588} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -976,7 +976,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":594} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -1008,7 +1008,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":-1} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -1064,7 +1064,7 @@
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":600} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -2186,9 +2186,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>272</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-21 08:15:00]]></wp:post_date>
@@ -2218,9 +2218,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>274</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
@@ -2252,9 +2252,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>276</wp:post_id>
 		<wp:post_date><![CDATA[2019-12-12 04:51:20]]></wp:post_date>
@@ -2283,9 +2283,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>278</wp:post_id>
 		<wp:post_date><![CDATA[2019-11-12 04:51:20]]></wp:post_date>
@@ -2315,9 +2315,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options {"isEnabled":false} /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options {"isEnabled":false} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>280</wp:post_id>
 		<wp:post_date><![CDATA[2019-10-12 04:51:20]]></wp:post_date>
@@ -2347,9 +2347,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>282</wp:post_id>
 		<wp:post_date><![CDATA[2019-09-12 04:51:20]]></wp:post_date>
@@ -2380,9 +2380,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>284</wp:post_id>
 		<wp:post_date><![CDATA[2019-08-12 04:51:20]]></wp:post_date>
@@ -2413,9 +2413,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>286</wp:post_id>
 		<wp:post_date><![CDATA[2019-07-12 04:51:20]]></wp:post_date>
@@ -2446,9 +2446,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>288</wp:post_id>
 		<wp:post_date><![CDATA[2019-07-12 04:51:20]]></wp:post_date>
@@ -2478,9 +2478,9 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql-pro/persisted-query-endpoint-options /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql-pro/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>585</wp:post_id>
 		<wp:post_date><![CDATA[2022-09-21 06:55:10]]></wp:post_date>
@@ -3101,7 +3101,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":1222} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
@@ -3157,7 +3157,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":604} /-->
 
-<!-- wp:gatographql/custom-endpoint-options /-->
+<!-- wp:gatographql-pro/custom-endpoint-options /-->
 
 <!-- wp:gatographql/endpoint-graphiql /-->
 
