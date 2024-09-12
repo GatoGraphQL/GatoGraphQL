@@ -1,6 +1,0 @@
-{
-  posts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
-    id
-    title
-  }
-}
