@@ -11,7 +11,7 @@ use WP_Post;
 
 abstract class AbstractEndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
-    use ModuleResolverTrait;
+    use CommonModuleResolverTrait;
     use EndpointFunctionalityModuleResolverTrait;
 
     /** @var WP_Post[]|null */
