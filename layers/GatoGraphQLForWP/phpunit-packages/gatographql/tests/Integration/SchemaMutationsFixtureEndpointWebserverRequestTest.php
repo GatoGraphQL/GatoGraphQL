@@ -13,7 +13,7 @@ class SchemaMutationsFixtureEndpointWebserverRequestTest extends AbstractFixture
 
     protected static function getEndpoint(): string
     {
-        return 'graphql/';
+        return 'graphql';
     }
 
     /**
