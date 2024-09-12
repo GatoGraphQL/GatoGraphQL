@@ -303,54 +303,6 @@
 			
 	<generator>https://wordpress.org/?v=6.0</generator>
 					<item>
-		<title><![CDATA[Wildcard schema config]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/wildcard-schema-config/</link>
-		<pubDate>Thu, 21 Apr 2022 06:26:40 +0000</pubDate>
-		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=270</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>270</wp:post_id>
-		<wp:post_date><![CDATA[2022-04-21 06:26:40]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-04-21 06:26:40]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-04-21 06:26:40]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-04-21 06:26:40]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[wildcard-schema-config]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														</item>
-					<item>
-		<title><![CDATA[Non-payloadable mutations]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/non-payloadable-mutations/</link>
-		<pubDate>Wed, 05 Oct 2022 06:47:18 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=600</guid>
-		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-payload-types-for-mutations {"usePayloadType":"do-not-use-payload-types"} /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>600</wp:post_id>
-		<wp:post_date><![CDATA[2022-10-05 06:47:18]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-10-05 06:47:18]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-10-05 06:47:18]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-10-05 06:47:18]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[non-payloadable-mutations]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														</item>
-														<item>
 		<title><![CDATA[Hello world!]]></title>
 		<link>https://gatographql.lndo.site/hello-world/</link>
 		<pubDate>Sun, 17 Apr 2020 13:06:58 +0000</pubDate>
@@ -1362,58 +1314,6 @@ https://wordpress.org/about/
 		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
-		<title><![CDATA[Mobile app]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/mobile-app/</link>
-		<pubDate>Thu, 07 Jan 2021 07:03:47 +0000</pubDate>
-		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=193</guid>
-		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data /-->
-
-<!-- wp:gatographql/schema-config-mutation-scheme /-->
-
-<!-- wp:gatographql/schema-config-namespacing /-->
-
-<!-- wp:gatographql/schema-config-self-fields /-->
-
-<!-- wp:gatographql/schema-config-payload-types-for-mutations /-->
-
-<!-- wp:gatographql/schema-config-schema-customposts /-->
-
-<!-- wp:gatographql/schema-config-schema-tags /-->
-
-<!-- wp:gatographql/schema-config-schema-categories /-->
-
-<!-- wp:gatographql/schema-config-schema-settings /-->
-
-<!-- wp:gatographql/schema-config-schema-custompost-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-user-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-comment-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-taxonomy-meta /-->
-
-<!-- wp:gatographql/schema-config-multifield-directives /-->
-
-<!-- wp:gatographql/schema-config-composable-directives /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>193</wp:post_id>
-		<wp:post_date><![CDATA[2021-01-07 07:03:47]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2021-01-07 07:03:47]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2021-01-07 07:03:47]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2021-01-07 07:03:47]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[mobile-app]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														</item>
-					<item>
 		<title><![CDATA[Custom Styles]]></title>
 		<link>https://gatographql.lndo.site/wp-global-styles-twentytwentytwo/</link>
 		<pubDate>Mon, 18 Apr 2022 06:14:12 +0000</pubDate>
@@ -1437,58 +1337,6 @@ https://wordpress.org/about/
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 										<category domain="wp_theme" nicename="twentytwentytwo"><![CDATA[twentytwentytwo]]></category>
-						</item>
-					<item>
-		<title><![CDATA[Unrestricted schema]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/unrestricted-schema/</link>
-		<pubDate>Fri, 06 May 2022 10:21:47 +0000</pubDate>
-		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=304</guid>
-		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data {"enabledConst":"enabled"} /-->
-
-<!-- wp:gatographql/schema-config-mutation-scheme /-->
-
-<!-- wp:gatographql/schema-config-namespacing /-->
-
-<!-- wp:gatographql/schema-config-self-fields /-->
-
-<!-- wp:gatographql/schema-config-payload-types-for-mutations /-->
-
-<!-- wp:gatographql/schema-config-schema-customposts /-->
-
-<!-- wp:gatographql/schema-config-schema-tags /-->
-
-<!-- wp:gatographql/schema-config-schema-categories /-->
-
-<!-- wp:gatographql/schema-config-schema-settings /-->
-
-<!-- wp:gatographql/schema-config-schema-custompost-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-user-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-comment-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-taxonomy-meta /-->
-
-<!-- wp:gatographql/schema-config-multifield-directives /-->
-
-<!-- wp:gatographql/schema-config-composable-directives /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>304</wp:post_id>
-		<wp:post_date><![CDATA[2022-05-06 10:21:47]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-05-06 10:21:47]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-06 10:21:47]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-06 10:21:47]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[unrestricted-schema]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 														<item>
 		<title><![CDATA[graphql-api-header]]></title>
@@ -1522,58 +1370,6 @@ https://wordpress.org/about/
 		<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 		<wp:meta_value><![CDATA[a:6:{s:5:"width";i:1291;s:6:"height";i:784;s:4:"file";s:34:"2022/06/GatoGraphQL-logo.png";s:8:"filesize";i:192180;s:5:"sizes";a:4:{s:6:"medium";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-300x182.jpg";s:5:"width";i:300;s:6:"height";i:182;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:12601;}s:5:"large";a:5:{s:4:"file";s:35:"GatoGraphQL-logo-1024x622.jpg";s:5:"width";i:1024;s:6:"height";i:622;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:97030;}s:9:"thumbnail";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:6101;}s:12:"medium_large";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-768x466.jpg";s:5:"width";i:768;s:6:"height";i:466;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:60271;}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
 		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Nested mutations config]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/nested-mutations-config/</link>
-		<pubDate>Wed, 05 Oct 2022 06:47:18 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=588</guid>
-		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data /-->
-
-<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
-
-<!-- wp:gatographql/schema-config-namespacing /-->
-
-<!-- wp:gatographql/schema-config-self-fields /-->
-
-<!-- wp:gatographql/schema-config-payload-types-for-mutations /-->
-
-<!-- wp:gatographql/schema-config-schema-customposts /-->
-
-<!-- wp:gatographql/schema-config-schema-tags /-->
-
-<!-- wp:gatographql/schema-config-schema-categories /-->
-
-<!-- wp:gatographql/schema-config-schema-settings /-->
-
-<!-- wp:gatographql/schema-config-schema-custompost-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-user-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-comment-meta /-->
-
-<!-- wp:gatographql/schema-config-schema-taxonomy-meta /-->
-
-<!-- wp:gatographql/schema-config-multifield-directives /-->
-
-<!-- wp:gatographql/schema-config-composable-directives /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>588</wp:post_id>
-		<wp:post_date><![CDATA[2022-10-05 06:47:18]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-10-05 06:47:18]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-10-05 06:47:18]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-10-05 06:47:18]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[nested-mutations-config]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
 														</item><item>
 		<title><![CDATA[graphql-api-search-results]]></title>
 		<link>https://gatographql.lndo.site/graphql-api-search-results/</link>
@@ -1705,58 +1501,6 @@ https://wordpress.org/about/
 		<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
 		<wp:meta_value><![CDATA[a:6:{s:5:"width";i:1600;s:6:"height";i:1200;s:4:"file";s:27:"2022/06/Funny-Dog-again.jpg";s:8:"filesize";i:406335;s:5:"sizes";a:6:{s:6:"medium";a:5:{s:4:"file";s:27:"Funny-Dog-again-300x225.jpg";s:5:"width";i:300;s:6:"height";i:225;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:15292;}s:5:"large";a:5:{s:4:"file";s:28:"Funny-Dog-again-1024x768.jpg";s:5:"width";i:1024;s:6:"height";i:768;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:156840;}s:9:"thumbnail";a:5:{s:4:"file";s:27:"Funny-Dog-again-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:6344;}s:12:"medium_large";a:5:{s:4:"file";s:27:"Funny-Dog-again-768x576.jpg";s:5:"width";i:768;s:6:"height";i:576;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:89114;}s:9:"1536x1536";a:5:{s:4:"file";s:29:"Funny-Dog-again-1536x1152.jpg";s:5:"width";i:1536;s:6:"height";i:1152;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:335977;}s:14:"post-thumbnail";a:5:{s:4:"file";s:29:"Funny-Dog-again-1568x1176.jpg";s:5:"width";i:1568;s:6:"height";i:1176;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:348772;}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
 		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Client access]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/client-access/</link>
-		<pubDate>Tue, 21 Mar 2023 05:57:33 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=592</guid>
-		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data {"enabledConst":"disabled"} /-->
-
-<!-- wp:gatographql/schema-config-schema-customposts {"customizeConfiguration":true,"includedCustomPostTypes":["post"]} /-->
-
-<!-- wp:gatographql/schema-config-schema-custompost-meta {"customizeConfiguration":true,"entries":["/client_(.*)/"],"behavior":"allow"} /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>592</wp:post_id>
-		<wp:post_date><![CDATA[2023-03-21 05:57:33]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2023-03-21 05:57:33]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2023-03-21 05:57:33]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2023-03-21 05:57:33]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[client-access]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-														</item>
-					<item>
-		<title><![CDATA[Empty schema config]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/empty-schema-config/</link>
-		<pubDate>Tue, 21 Mar 2023 05:57:33 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=594</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>594</wp:post_id>
-		<wp:post_date><![CDATA[2023-03-21 05:57:33]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2023-03-21 05:57:33]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2023-03-21 05:57:33]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2023-03-21 05:57:33]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[empty-schema-config]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
 		<title><![CDATA[With Response Headers]]></title>
@@ -2032,32 +1776,6 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:meta_key><![CDATA[_encloseme]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Mutations: nested + return entity]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/mutations-nested-return-entity/</link>
-		<pubDate>Fri, 07 Jul 2023 08:59:59 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=1222</guid>
-		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-payload-types-for-mutations {"usePayloadType":"do-not-use-payload-types"} /-->
-
-<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1222</wp:post_id>
-		<wp:post_date><![CDATA[2023-07-07 08:59:59]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2023-07-07 08:59:59]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2023-07-07 08:59:59]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2023-07-07 08:59:59]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[mutations-nested-return-entity]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[graphql-schemaconfig]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 				</channel>
 </rss>
