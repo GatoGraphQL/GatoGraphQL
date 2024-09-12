@@ -12,7 +12,7 @@ class RequestEndpointWebserverRequestTest extends AbstractRequestEndpointWebserv
     protected static function getEndpointNamePaths(): array
     {
         return [
-            'single-endpoint' => 'graphql/',
+            'single-endpoint' => 'graphql',
         ];
     }
 }
