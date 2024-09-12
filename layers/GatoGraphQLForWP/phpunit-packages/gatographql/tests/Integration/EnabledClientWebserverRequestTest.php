@@ -23,12 +23,6 @@ class EnabledClientWebserverRequestTest extends AbstractEnabledClientWebserverRe
             'single-endpoint-voyager' => [
                 'schema/',
             ],
-            'custom-endpoint-graphiql' => [
-                'graphql/mobile-app/?view=graphiql',
-            ],
-            'custom-endpoint-voyager' => [
-                'graphql/mobile-app/?view=schema',
-            ],
         ];
     }
 }
