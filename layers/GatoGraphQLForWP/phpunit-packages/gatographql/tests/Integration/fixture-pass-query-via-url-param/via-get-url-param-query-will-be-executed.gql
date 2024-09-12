@@ -1,8 +1,0 @@
-###############################################################
-# This query will not be executed, as this test is executed via GET,
-# and because the endpoint has ?query={ self { id } }, then that
-# query will be the one that is executed
-###############################################################
-{
-  id
-}
