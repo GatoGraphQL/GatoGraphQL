@@ -4,53 +4,16 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
-use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-
 /**
  * Test that the authenticated user can access the GraphQL endpoints.
  */
-class WordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
+class WordPressAuthenticatedUserWebserverRequestTest extends AbstractWordPressAuthenticatedUserWebserverRequestTest
 {
-    use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-
     /**
-     * @return array<string,array<mixed>>
+     * @return array<string,string>
      */
-    public static function provideEndpointEntries(): array
+    protected static function getWordPressAuthenticatedUserEndpoints(): array
     {
-        $query = static::getGraphQLQuery();
-        $expectedResponseBody = static::getGraphQLExpectedResponse();
-        $entries = [];
-        foreach (WordPressAuthenticatedUserEndpoints::ENDPOINTS as $dataName => $endpoint) {
-            $entries[$dataName] = [
-                'application/json',
-                $expectedResponseBody,
-                $endpoint,
-                [],
-                $query,
-            ];
-        }
-        return $entries;
-    }
-
-    protected static function getGraphQLQuery(): string
-    {
-        return <<<GRAPHQL
-            {
-                id
-            }       
-        GRAPHQL;
-    }
-
-    protected static function getGraphQLExpectedResponse(): string
-    {
-        return <<<JSON
-            {
-                "data": {
-                    "id": "root"
-                }
-            }
-        JSON;
+        return WordPressAuthenticatedUserEndpoints::ENDPOINTS;
     }
 }
