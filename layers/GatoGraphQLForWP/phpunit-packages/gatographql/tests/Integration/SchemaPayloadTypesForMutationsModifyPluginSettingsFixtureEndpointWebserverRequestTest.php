@@ -10,14 +10,11 @@ use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractModifyPluginSettingsFi
 
 class SchemaPayloadTypesForMutationsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
+    use SchemaPayloadTypesForMutationsFixtureEndpointWebserverRequestTestTrait;
+
     protected static function getEndpoint(): string
     {
         return 'graphql/mobile-app/';
-    }
-
-    protected static function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-schema-payload-types-for-mutations';
     }
 
     protected function getSettingsKey(): string

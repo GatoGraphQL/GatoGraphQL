@@ -10,6 +10,8 @@ use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractModifyCPTBlockAttribut
 
 class SchemaPayloadTypesForMutationsWithObjectFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
 {
+    use SchemaPayloadTypesForMutationsWithObjectFieldsFixtureEndpointWebserverRequestTestTrait;
+
     public const MOBILE_APP_SCHEMA_CONFIGURATION_ID = 193;
 
     protected static function getEndpoint(): string
@@ -21,11 +23,6 @@ class SchemaPayloadTypesForMutationsWithObjectFieldsOnSchemaConfigurationCPTBloc
          * - Has the Schema Configuration "Mobile App" (with ID 193)
          */
         return 'graphql/mobile-app/';
-    }
-
-    protected static function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-schema-payload-types-for-mutations-with-object-fields';
     }
 
     /**
