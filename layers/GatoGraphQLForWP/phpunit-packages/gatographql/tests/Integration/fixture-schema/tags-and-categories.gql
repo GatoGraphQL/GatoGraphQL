@@ -3,13 +3,13 @@
     filter: {
       tags: {
         includeBy: {
-          ids: [25, 29]
+          ids: [22, 24]
         }
         taxonomy: "dummy-tag"
       }
       categories: {
         includeBy: {
-          ids: [32, 37]
+          ids: [31, 19]
         }
         taxonomy: "dummy-category"
       }
@@ -37,7 +37,7 @@
       }
       categories: {
         includeBy: {
-          ids: [32, 36]
+          ids: [31, 21]
         }
         excludeBy: {
           slugs: "world-cup"
