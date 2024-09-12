@@ -18,7 +18,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 45,
+                                "id": 37,
                                 "name": "Asia",
                                 "taxonomy": "additional-dummy-category"
                             }
@@ -31,7 +31,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             }
@@ -63,13 +63,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -82,19 +82,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -113,13 +113,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -132,7 +132,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             }
@@ -151,13 +151,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -176,7 +176,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -189,13 +189,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             }
@@ -225,7 +225,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             }
@@ -244,13 +244,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -263,19 +263,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -294,13 +294,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -313,7 +313,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             }
@@ -332,13 +332,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -351,13 +351,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             }
@@ -370,25 +370,25 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -401,19 +401,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -423,7 +423,7 @@
                 "taxonomy": "dummy-category",
                 "count": 4,
                 "description": "",
-                "id": 23,
+                "id": 20,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Brontosaurus",
@@ -449,13 +449,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -468,19 +468,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -493,7 +493,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             }
@@ -506,13 +506,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             }
@@ -525,25 +525,25 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -556,19 +556,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -578,7 +578,7 @@
                 "taxonomy": "dummy-category",
                 "count": 5,
                 "description": "",
-                "id": 24,
+                "id": 21,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Capullo",
@@ -604,13 +604,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -623,19 +623,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -648,13 +648,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             }
@@ -664,7 +664,7 @@
                 "taxonomy": "dummy-category",
                 "count": 3,
                 "description": "",
-                "id": 30,
+                "id": 26,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Nostradamus",
@@ -680,7 +680,7 @@
                 "taxonomy": "dummy-category",
                 "count": 0,
                 "description": "",
-                "id": 31,
+                "id": 27,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Nostradamus",
@@ -700,13 +700,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 46,
+                                "id": 38,
                                 "name": "Europe",
                                 "taxonomy": "additional-dummy-category"
                             }
@@ -725,13 +725,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -750,7 +750,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -763,19 +763,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -794,7 +794,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -813,7 +813,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -832,7 +832,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -842,7 +842,7 @@
                 "taxonomy": "dummy-category",
                 "count": 7,
                 "description": "",
-                "id": 32,
+                "id": 28,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Perestroika",
@@ -868,13 +868,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -887,19 +887,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -918,13 +918,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -937,25 +937,25 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -965,7 +965,7 @@
                 "taxonomy": "dummy-category",
                 "count": 4,
                 "description": "",
-                "id": 37,
+                "id": 31,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Unexpected Randomness",
@@ -985,25 +985,25 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -1016,19 +1016,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -1038,7 +1038,7 @@
                 "taxonomy": "dummy-category",
                 "count": 2,
                 "description": "",
-                "id": 40,
+                "id": 32,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "World Cup",
@@ -1533,7 +1533,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 45,
+                                "id": 37,
                                 "name": "Asia",
                                 "taxonomy": "additional-dummy-category"
                             }
@@ -1546,7 +1546,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             }
@@ -1578,13 +1578,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -1597,19 +1597,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -1628,13 +1628,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -1647,7 +1647,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             }
@@ -1666,13 +1666,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -1691,7 +1691,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -1704,13 +1704,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             }
@@ -1740,7 +1740,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             }
@@ -1759,13 +1759,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -1778,19 +1778,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -1809,13 +1809,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -1828,7 +1828,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             }
@@ -1847,13 +1847,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -1866,13 +1866,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             }
@@ -1885,25 +1885,25 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -1916,19 +1916,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -1938,7 +1938,7 @@
                 "taxonomy": "dummy-category",
                 "count": 4,
                 "description": "",
-                "id": 23,
+                "id": 20,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Brontosaurus",
@@ -1964,13 +1964,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -1983,19 +1983,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -2008,7 +2008,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             }
@@ -2021,13 +2021,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             }
@@ -2040,25 +2040,25 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -2071,19 +2071,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -2093,7 +2093,7 @@
                 "taxonomy": "dummy-category",
                 "count": 5,
                 "description": "",
-                "id": 24,
+                "id": 21,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Capullo",
@@ -2119,13 +2119,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -2138,19 +2138,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -2163,13 +2163,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             }
@@ -2179,7 +2179,7 @@
                 "taxonomy": "dummy-category",
                 "count": 3,
                 "description": "",
-                "id": 30,
+                "id": 26,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Nostradamus",
@@ -2195,7 +2195,7 @@
                 "taxonomy": "dummy-category",
                 "count": 0,
                 "description": "",
-                "id": 31,
+                "id": 27,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Nostradamus",
@@ -2215,13 +2215,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 46,
+                                "id": 38,
                                 "name": "Europe",
                                 "taxonomy": "additional-dummy-category"
                             }
@@ -2240,13 +2240,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -2265,7 +2265,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -2278,19 +2278,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -2309,7 +2309,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -2328,7 +2328,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -2347,7 +2347,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             }
@@ -2357,7 +2357,7 @@
                 "taxonomy": "dummy-category",
                 "count": 7,
                 "description": "",
-                "id": 32,
+                "id": 28,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Perestroika",
@@ -2383,13 +2383,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -2402,19 +2402,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
+                                "id": 26,
                                 "name": "Nostradamus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -2433,13 +2433,13 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             }
@@ -2452,25 +2452,25 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -2480,7 +2480,7 @@
                 "taxonomy": "dummy-category",
                 "count": 4,
                 "description": "",
-                "id": 37,
+                "id": 31,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Unexpected Randomness",
@@ -2500,25 +2500,25 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 23,
+                                "id": 20,
                                 "name": "Brontosaurus",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 37,
+                                "id": 31,
                                 "name": "Unexpected Randomness",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -2531,19 +2531,19 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 24,
+                                "id": 21,
                                 "name": "Capullo",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 40,
+                                "id": 32,
                                 "name": "World Cup",
                                 "taxonomy": "dummy-category"
                             }
@@ -2553,7 +2553,7 @@
                 "taxonomy": "dummy-category",
                 "count": 2,
                 "description": "",
-                "id": 40,
+                "id": 32,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "World Cup",
@@ -2595,7 +2595,7 @@
                 "taxonomy": "additional-post-category",
                 "count": 1,
                 "description": "",
-                "id": 41,
+                "id": 33,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Swimming",
@@ -2625,7 +2625,7 @@
                 "taxonomy": "additional-post-category",
                 "count": 1,
                 "description": "",
-                "id": 42,
+                "id": 34,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Foosball",
@@ -2651,7 +2651,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 45,
+                                "id": 37,
                                 "name": "Asia",
                                 "taxonomy": "additional-dummy-category"
                             }
@@ -2661,7 +2661,7 @@
                 "taxonomy": "additional-dummy-category",
                 "count": 1,
                 "description": "",
-                "id": 45,
+                "id": 37,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Asia",
@@ -2681,13 +2681,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
+                                "id": 28,
                                 "name": "Perestroika",
                                 "taxonomy": "dummy-category"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 46,
+                                "id": 38,
                                 "name": "Europe",
                                 "taxonomy": "additional-dummy-category"
                             }
@@ -2697,7 +2697,7 @@
                 "taxonomy": "additional-dummy-category",
                 "count": 1,
                 "description": "",
-                "id": 46,
+                "id": 38,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Europe",
@@ -2739,7 +2739,7 @@
                 "taxonomy": "additional-post-category",
                 "count": 1,
                 "description": "",
-                "id": 49,
+                "id": 41,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Diving",
@@ -2956,7 +2956,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 45,
+                        "id": 37,
                         "name": "Asia",
                         "taxonomy": "additional-dummy-category"
                     }
@@ -2970,7 +2970,7 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -2978,13 +2978,13 @@
                 "categoriesWithoutTaxonomy": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 46,
+                        "id": 38,
                         "name": "Europe",
                         "taxonomy": "additional-dummy-category"
                     }
@@ -2998,7 +2998,7 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 23,
+                        "id": 20,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     }
@@ -3006,7 +3006,7 @@
                 "categoriesWithoutTaxonomy": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 23,
+                        "id": 20,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     }
@@ -3048,13 +3048,13 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 30,
+                        "id": 26,
                         "name": "Nostradamus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 37,
+                        "id": 31,
                         "name": "Unexpected Randomness",
                         "taxonomy": "dummy-category"
                     }
@@ -3068,13 +3068,13 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 30,
+                        "id": 26,
                         "name": "Nostradamus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 37,
+                        "id": 31,
                         "name": "Unexpected Randomness",
                         "taxonomy": "dummy-category"
                     }
@@ -3088,19 +3088,19 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 30,
+                        "id": 26,
                         "name": "Nostradamus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 37,
+                        "id": 31,
                         "name": "Unexpected Randomness",
                         "taxonomy": "dummy-category"
                     }
@@ -3108,19 +3108,19 @@
                 "categoriesWithoutTaxonomy": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 30,
+                        "id": 26,
                         "name": "Nostradamus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 37,
+                        "id": 31,
                         "name": "Unexpected Randomness",
                         "taxonomy": "dummy-category"
                     }
@@ -3140,13 +3140,13 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 23,
+                        "id": 20,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3160,13 +3160,13 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 23,
+                        "id": 20,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3180,7 +3180,7 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     }
@@ -3188,7 +3188,7 @@
                 "categoriesWithoutTaxonomy": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     }
@@ -3208,13 +3208,13 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 23,
+                        "id": 20,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 37,
+                        "id": 31,
                         "name": "Unexpected Randomness",
                         "taxonomy": "dummy-category"
                     }
@@ -3228,13 +3228,13 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 23,
+                        "id": 20,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 37,
+                        "id": 31,
                         "name": "Unexpected Randomness",
                         "taxonomy": "dummy-category"
                     }
@@ -3254,7 +3254,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3268,7 +3268,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3290,13 +3290,13 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 30,
+                        "id": 26,
                         "name": "Nostradamus",
                         "taxonomy": "dummy-category"
                     }
@@ -3304,13 +3304,13 @@
                 "categoriesWithoutTaxonomy": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 30,
+                        "id": 26,
                         "name": "Nostradamus",
                         "taxonomy": "dummy-category"
                     }
@@ -3332,25 +3332,25 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 23,
+                        "id": 20,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 37,
+                        "id": 31,
                         "name": "Unexpected Randomness",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 40,
+                        "id": 32,
                         "name": "World Cup",
                         "taxonomy": "dummy-category"
                     }
@@ -3358,25 +3358,25 @@
                 "categoriesWithoutTaxonomy": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 23,
+                        "id": 20,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 37,
+                        "id": 31,
                         "name": "Unexpected Randomness",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 40,
+                        "id": 32,
                         "name": "World Cup",
                         "taxonomy": "dummy-category"
                     }
@@ -3390,19 +3390,19 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 40,
+                        "id": 32,
                         "name": "World Cup",
                         "taxonomy": "dummy-category"
                     }
@@ -3410,19 +3410,19 @@
                 "categoriesWithoutTaxonomy": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 24,
+                        "id": 21,
                         "name": "Capullo",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 40,
+                        "id": 32,
                         "name": "World Cup",
                         "taxonomy": "dummy-category"
                     }
@@ -3450,7 +3450,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3464,7 +3464,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3484,7 +3484,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3498,7 +3498,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3518,7 +3518,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3532,7 +3532,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 32,
+                        "id": 28,
                         "name": "Perestroika",
                         "taxonomy": "dummy-category"
                     }
@@ -3557,86 +3557,20 @@
         ],
         "customPostsByCategoryIDs": [
             {
-                "id": 1619,
-                "title": "Error debitis nulla vel est",
+                "id": 1644,
+                "title": "Impedit eaque numquam quas inventore",
                 "categories": [
                     {
-                        "id": 23
-                    }
-                ]
-            },
-            {
-                "id": 1634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "categories": [
+                        "id": 20
+                    },
                     {
-                        "id": 19
+                        "id": 21
+                    },
+                    {
+                        "id": 31
                     },
                     {
                         "id": 32
-                    }
-                ]
-            },
-            {
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 32
-                    }
-                ]
-            },
-            {
-                "id": 1656,
-                "title": "Dummy CPT with non-existing block",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 32
-                    }
-                ]
-            },
-            {
-                "id": 1658,
-                "title": "Dummy CPT with no content",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 32
-                    }
-                ]
-            },
-            {
-                "id": 1639,
-                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
-                "categories": [
-                    {
-                        "id": 24
-                    },
-                    {
-                        "id": 30
-                    }
-                ]
-            },
-            {
-                "id": 1622,
-                "title": "Dolore ex et deleniti mollitia",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 30
-                    },
-                    {
-                        "id": 37
                     }
                 ]
             },
@@ -3645,40 +3579,13 @@
                 "title": "Nostrum consequatur non fugit vel",
                 "categories": [
                     {
-                        "id": 24
+                        "id": 21
+                    },
+                    {
+                        "id": 28
                     },
                     {
                         "id": 32
-                    },
-                    {
-                        "id": 40
-                    }
-                ]
-            },
-            {
-                "id": 1644,
-                "title": "Impedit eaque numquam quas inventore",
-                "categories": [
-                    {
-                        "id": 23
-                    },
-                    {
-                        "id": 24
-                    },
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 40
-                    }
-                ]
-            },
-            {
-                "id": 1630,
-                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
-                "categories": [
-                    {
-                        "id": 24
                     }
                 ]
             }
@@ -3694,6 +3601,63 @@
                 "categories": []
             },
             {
+                "id": 1619,
+                "title": "Error debitis nulla vel est",
+                "categories": [
+                    {
+                        "id": 20
+                    }
+                ]
+            },
+            {
+                "id": 1634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 28
+                    }
+                ]
+            },
+            {
+                "id": 1654,
+                "title": "Dummy CPT with blocks",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 28
+                    }
+                ]
+            },
+            {
+                "id": 1656,
+                "title": "Dummy CPT with non-existing block",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 28
+                    }
+                ]
+            },
+            {
+                "id": 1658,
+                "title": "Dummy CPT with no content",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 28
+                    }
+                ]
+            },
+            {
                 "id": 1660,
                 "title": "Dummy CPT with non server-side-registered block",
                 "categories": []
@@ -3707,37 +3671,6 @@
                 "id": 1636,
                 "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
                 "categories": []
-            },
-            {
-                "id": 1641,
-                "title": "Impedit necessitatibus dolor est",
-                "categories": []
-            },
-            {
-                "id": 1613,
-                "title": "Dolor facilis repellat pariatur veniam at",
-                "categories": [
-                    {
-                        "id": 19
-                    }
-                ]
-            },
-            {
-                "id": 1620,
-                "title": "Dignissimos sed dolore aut",
-                "categories": [
-                    {
-                        "id": 19
-                    }
-                ]
-            },
-            {
-                "id": 1128,
-                "title": "HTTP caching improves performance"
-            },
-            {
-                "id": 1125,
-                "title": "Public or Private API mode, for extra security"
             }
         ],
         "customPostsByCategorySlugs": [
@@ -3746,10 +3679,10 @@
                 "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
                 "categories": [
                     {
-                        "id": 24
+                        "id": 21
                     },
                     {
-                        "id": 30
+                        "id": 26
                     }
                 ]
             },
@@ -3761,10 +3694,10 @@
                         "id": 19
                     },
                     {
-                        "id": 30
+                        "id": 26
                     },
                     {
-                        "id": 37
+                        "id": 31
                     }
                 ]
             },
@@ -3773,13 +3706,13 @@
                 "title": "Nostrum consequatur non fugit vel",
                 "categories": [
                     {
-                        "id": 24
+                        "id": 21
+                    },
+                    {
+                        "id": 28
                     },
                     {
                         "id": 32
-                    },
-                    {
-                        "id": 40
                     }
                 ]
             },
@@ -3788,16 +3721,16 @@
                 "title": "Impedit eaque numquam quas inventore",
                 "categories": [
                     {
-                        "id": 23
+                        "id": 20
                     },
                     {
-                        "id": 24
+                        "id": 21
                     },
                     {
-                        "id": 37
+                        "id": 31
                     },
                     {
-                        "id": 40
+                        "id": 32
                     }
                 ]
             },
@@ -3806,7 +3739,7 @@
                 "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
                 "categories": [
                     {
-                        "id": 24
+                        "id": 21
                     }
                 ]
             },
@@ -3815,13 +3748,13 @@
                 "title": "Quis voluptatum tempore veniam est sit",
                 "categories": [
                     {
-                        "id": 24
+                        "id": 21
                     },
                     {
-                        "id": 30
+                        "id": 26
                     },
                     {
-                        "id": 37
+                        "id": 31
                     }
                 ]
             }
@@ -3841,7 +3774,7 @@
                 "title": "Error debitis nulla vel est",
                 "categories": [
                     {
-                        "id": 23
+                        "id": 20
                     }
                 ]
             },
@@ -3853,7 +3786,7 @@
                         "id": 19
                     },
                     {
-                        "id": 32
+                        "id": 28
                     }
                 ]
             },
@@ -3865,7 +3798,7 @@
                         "id": 19
                     },
                     {
-                        "id": 32
+                        "id": 28
                     }
                 ]
             },
@@ -3877,7 +3810,7 @@
                         "id": 19
                     },
                     {
-                        "id": 32
+                        "id": 28
                     }
                 ]
             },
@@ -3889,7 +3822,7 @@
                         "id": 19
                     },
                     {
-                        "id": 32
+                        "id": 28
                     }
                 ]
             },
@@ -3920,7 +3853,7 @@
                 "title": "Error debitis nulla vel est",
                 "categories": [
                     {
-                        "id": 23
+                        "id": 20
                     }
                 ]
             },
@@ -3942,7 +3875,7 @@
                         "id": 19
                     },
                     {
-                        "id": 32
+                        "id": 28
                     }
                 ]
             },
@@ -3954,7 +3887,7 @@
                         "id": 19
                     },
                     {
-                        "id": 32
+                        "id": 28
                     }
                 ]
             },
@@ -3966,7 +3899,7 @@
                         "id": 19
                     },
                     {
-                        "id": 32
+                        "id": 28
                     }
                 ]
             },
@@ -3978,7 +3911,7 @@
                         "id": 19
                     },
                     {
-                        "id": 32
+                        "id": 28
                     }
                 ]
             },
@@ -4140,7 +4073,7 @@
                 "taxonomy": "dummy-category",
                 "count": 4,
                 "description": "",
-                "id": 23,
+                "id": 20,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Brontosaurus",
@@ -4153,7 +4086,7 @@
                 "taxonomy": "dummy-category",
                 "count": 5,
                 "description": "",
-                "id": 24,
+                "id": 21,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Capullo",
@@ -4166,7 +4099,7 @@
                 "taxonomy": "dummy-category",
                 "count": 3,
                 "description": "",
-                "id": 30,
+                "id": 26,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Nostradamus",
@@ -4179,7 +4112,7 @@
                 "taxonomy": "dummy-category",
                 "count": 0,
                 "description": "",
-                "id": 31,
+                "id": 27,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Nostradamus",
@@ -4192,7 +4125,7 @@
                 "taxonomy": "dummy-category",
                 "count": 7,
                 "description": "",
-                "id": 32,
+                "id": 28,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Perestroika",
@@ -4205,7 +4138,7 @@
                 "taxonomy": "dummy-category",
                 "count": 4,
                 "description": "",
-                "id": 37,
+                "id": 31,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Unexpected Randomness",
@@ -4218,7 +4151,7 @@
                 "taxonomy": "dummy-category",
                 "count": 2,
                 "description": "",
-                "id": 40,
+                "id": 32,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "World Cup",
@@ -4228,24 +4161,12 @@
                 "urlPath": "\/dummy-category\/world-cup\/"
             }
         ],
-        "dummyCategoryByID": {
-            "taxonomy": "dummy-category",
-            "count": 4,
-            "description": "",
-            "id": 23,
-            "metaValue": null,
-            "metaValues": null,
-            "name": "Brontosaurus",
-            "slug": "brontosaurus",
-            "slugPath": "absolute-brilliance\/brontosaurus",
-            "url": "https:\/\/gatographql.lndo.site\/dummy-category\/brontosaurus\/",
-            "urlPath": "\/dummy-category\/brontosaurus\/"
-        },
+        "dummyCategoryByID": null,
         "dummyCategoryBySlug": {
             "taxonomy": "dummy-category",
             "count": 3,
             "description": "",
-            "id": 30,
+            "id": 26,
             "metaValue": null,
             "metaValues": null,
             "name": "Nostradamus",
