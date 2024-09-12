@@ -19,7 +19,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public final const SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION = Plugin::NAMESPACE . '\schema-configuration-additional-documentation';
 
     /** @var CustomPostTypeInterface[] */
-    protected ?array $useExcerptAsDescriptionCustomPostTypeServices = null;
+    protected ?array $useExcerptAsDescriptionEnabledCustomPostTypeServices = null;
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
@@ -103,7 +103,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::EXCERPT_AS_DESCRIPTION:
-                return $this->getUseExcerptAsDescriptionCustomPostTypeServices() === [];
+                return $this->getUseExcerptAsDescriptionEnabledCustomPostTypeServices() === [];
             case self::WELCOME_GUIDES:
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
                 return true;
@@ -141,7 +141,7 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::WELCOME_GUIDES
                 => false,
             self::EXCERPT_AS_DESCRIPTION,
-                => $this->getUseExcerptAsDescriptionCustomPostTypeServices() === [] ? false : null,
+                => $this->getUseExcerptAsDescriptionEnabledCustomPostTypeServices() === [] ? false : null,
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION
                 => true,
             default
@@ -152,15 +152,15 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     /**
      * @return CustomPostTypeInterface[]
      */
-    protected function getUseExcerptAsDescriptionCustomPostTypeServices(): array
+    protected function getUseExcerptAsDescriptionEnabledCustomPostTypeServices(): array
     {
-        if ($this->useExcerptAsDescriptionCustomPostTypeServices === null) {
+        if ($this->useExcerptAsDescriptionEnabledCustomPostTypeServices === null) {
             $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
-            $this->useExcerptAsDescriptionCustomPostTypeServices = array_values(array_filter(
+            $this->useExcerptAsDescriptionEnabledCustomPostTypeServices = array_values(array_filter(
                 $customPostTypeServices,
-                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->useCustomPostExcerptAsDescription()
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled() && $customPostTypeService->useCustomPostExcerptAsDescription()
             ));
         }
-        return $this->useExcerptAsDescriptionCustomPostTypeServices;
+        return $this->useExcerptAsDescriptionEnabledCustomPostTypeServices;
     }
 }
