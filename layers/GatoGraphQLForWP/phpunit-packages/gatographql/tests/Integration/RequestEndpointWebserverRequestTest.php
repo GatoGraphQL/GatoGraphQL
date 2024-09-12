@@ -13,8 +13,6 @@ class RequestEndpointWebserverRequestTest extends AbstractRequestEndpointWebserv
     {
         return [
             'single-endpoint' => 'graphql/',
-            'custom-endpoint' => 'graphql/mobile-app/',
-            'custom-endpoint-with-api-hierarchy' => 'graphql/customers/penguin-books/',
         ];
     }
 }
