@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
+use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\SchemaConfigurationForEndpointsDefaultQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTestTrait;
+
 class SchemaConfigurationForPrivateEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractDefaultSchemaConfigurationForEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
+    use SchemaConfigurationForEndpointsDefaultQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTestTrait;
+    
     /**
      * Admin client endpoint
      */
     protected static function getEndpoint(): string
     {
         return 'wp-admin/edit.php?page=gatographql&action=execute_query';
-    }
-
-    protected static function getResponseFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-default-schema-configuration-for-endpoints';
     }
 
     protected function getModuleID(string $dataName): string
