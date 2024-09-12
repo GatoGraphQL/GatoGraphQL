@@ -6,17 +6,14 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 class DisableSchemaModulesOnPrivateEndpointTestOnNonExistingAdminEndpointsFixtureEndpointWebserverRequestTest extends AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsFixtureEndpointWebserverRequestTestCase
 {
+    use DisableSchemaModulesOnPrivateEndpointHasChangeFixtureEndpointWebserverRequestTestTrait;
+
+    /**
+     * Because it doesn't exist, the response will be treated
+     * as the default one.
+     */
     protected static function getAdminEndpointGroup(): string
     {
         return 'nonExistingGroup';
-    }
-
-    /**
-     * Because it doesn't exist, it will be treated
-     * as the default one.
-     */
-    protected static function getResponseFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-disable-schema-modules-on-private-endpoints-has-change';
     }
 }
