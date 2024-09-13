@@ -14,3 +14,5 @@
 ## Fixed
 
 ## [PRO] Improvements
+
+- If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
