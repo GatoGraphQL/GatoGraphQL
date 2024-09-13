@@ -25,7 +25,7 @@ class LandoAdapter
     {
         \add_action(
             'init',
-            function(): void {
+            function (): void {
                 $applicationStateHelperService = PrematureRequestServiceFacade::getInstance();
                 if (!$applicationStateHelperService->isPubliclyExposedGraphQLAPIRequest()) {
                     return;
