@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration\Upstream;
+namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 /**
  * This test is actually validating that all types/interfaces in the plugin
