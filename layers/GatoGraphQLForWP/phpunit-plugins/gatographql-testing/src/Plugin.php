@@ -11,6 +11,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\AddDummyCustomAdminEndpointHo
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Settings\Options;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Webserver\LandoAdapter;
 use WP_REST_Response;
 
 use function add_action;
@@ -42,6 +43,11 @@ class Plugin
          */
         new GatoGraphQLAdminEndpointsTestExecuter();
         new BulkPluginActivationDeactivationExecuter();
+
+        /**
+         * Adapt the Lando webserver
+         */
+        new LandoAdapter();
 
         /**
          * Executing `flush_rewrite_rules` at the end of the execution
