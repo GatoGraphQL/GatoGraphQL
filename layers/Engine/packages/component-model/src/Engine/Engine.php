@@ -584,6 +584,8 @@ class Engine implements EngineInterface
 
         // Keep only the data that is needed to be sent, and encode it as JSON
         $this->calculateOutputData();
+
+        App::doAction(EngineHookNames::GENERATE_DATA_END);
     }
 
     protected function formatData(): void
