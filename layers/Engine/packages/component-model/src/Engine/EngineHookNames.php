@@ -11,6 +11,7 @@ class EngineHookNames
     public final const ENGINE_ITERATION_END = __CLASS__ . ':engine-iteration-end';
     public final const ENTRY_COMPONENT_INITIALIZATION = __CLASS__ . ':entry-component-initialization';
     public final const GENERATE_DATA_BEGINNING = __CLASS__ . ':generate-data:beginning';
+    public final const GENERATE_DATA_END = __CLASS__ . ':generate-data:end';
     public final const PROCESS_AND_GENERATE_DATA_HELPER_CALCULATIONS = __CLASS__ . ':process-and-generate-data:helper-calculations';
     public final const ADD_ETAG_HEADER = __CLASS__ . ':add-etag-header';
     public final const ETAG_HEADER_COMMON_CODE = __CLASS__ . ':etag-header:common-code';
