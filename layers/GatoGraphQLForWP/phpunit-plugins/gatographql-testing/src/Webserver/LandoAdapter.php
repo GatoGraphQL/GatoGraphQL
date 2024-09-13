@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Webserver;
 
 use GatoGraphQL\GatoGraphQL\Facades\Request\PrematureRequestServiceFacade;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Engine\EngineHookNames;
 
 use function add_filter;
+use function remove_filter;
 
 /**
  * When not using Lando with a proxy, the assigned URL
@@ -27,11 +30,29 @@ class LandoAdapter
                 if (!$applicationStateHelperService->isPubliclyExposedGraphQLAPIRequest()) {
                     return;
                 }
-                
-                add_filter('option_siteurl', $this->maybeRemovePortFromLocalhostURL(...));
-                add_filter('option_home', $this->maybeRemovePortFromLocalhostURL(...));
+
+                App::addAction(
+                    EngineHookNames::GENERATE_DATA_BEGINNING,
+                    $this->addHooks(...),
+                );
+                App::addAction(
+                    EngineHookNames::GENERATE_DATA_END,
+                    $this->removeHooks(...),
+                );
             }
         );
+    }
+
+    public function addHooks(): void
+    {
+        add_filter('option_siteurl', $this->maybeRemovePortFromLocalhostURL(...));
+        add_filter('option_home', $this->maybeRemovePortFromLocalhostURL(...));
+    }
+
+    public function removeHooks(): void
+    {
+        remove_filter('option_siteurl', $this->maybeRemovePortFromLocalhostURL(...));
+        remove_filter('option_home', $this->maybeRemovePortFromLocalhostURL(...));
     }
 
     /**
