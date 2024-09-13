@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Webserver;
 
+use GatoGraphQL\GatoGraphQL\Facades\Request\PrematureRequestServiceFacade;
+
 use function add_filter;
 
 /**
@@ -18,10 +20,24 @@ class LandoAdapter
 {
     public function __construct()
     {
-        add_filter('option_siteurl', $this->maybeRemovePortFromLocalhostURL(...));
-        add_filter('option_home', $this->maybeRemovePortFromLocalhostURL(...));
+        \add_action(
+            'init',
+            function(): void {
+                $applicationStateHelperService = PrematureRequestServiceFacade::getInstance();
+                if (!$applicationStateHelperService->isPubliclyExposedGraphQLAPIRequest()) {
+                    return;
+                }
+                
+                add_filter('option_siteurl', $this->maybeRemovePortFromLocalhostURL(...));
+                add_filter('option_home', $this->maybeRemovePortFromLocalhostURL(...));
+            }
+        );
     }
 
+    /**
+     * Do it only when executing a GraphQL query, or otherwise
+     * Guzzle can't invoke the PHPUnit tests
+     */
     public function maybeRemovePortFromLocalhostURL(string $url): string
     {
         if (str_starts_with($url, 'https://localhost:')) {
