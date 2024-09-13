@@ -8,11 +8,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
 
 abstract class AbstractTreatMenuItemRawTitleAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected static function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-menuitem-raw-title-as-sensitive-data';
-    }
-
     protected function getSettingsKey(): string
     {
         return SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
