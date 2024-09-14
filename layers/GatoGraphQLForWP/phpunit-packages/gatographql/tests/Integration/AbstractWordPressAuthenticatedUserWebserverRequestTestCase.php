@@ -13,7 +13,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticatedUserWebserverR
 abstract class AbstractWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-    
+
     /**
      * @return array<string,string>
      */

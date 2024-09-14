@@ -12,7 +12,7 @@ abstract class AbstractRequestEndpointWebserverRequestTestCase extends AbstractE
      * @return array<string,string>
      */
     abstract protected static function getEndpointNamePaths(): array;
-    
+
     /**
      * Execute a GraphQL query against each of the endpoints
      * @return array<string,array<mixed>>

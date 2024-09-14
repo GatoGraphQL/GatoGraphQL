@@ -18,5 +18,5 @@ interface PluginDataSetupServiceInterface
     /**
      * @return array<string,mixed>
      */
-    public function getWebhookEndpointTaxInputData(): array;    
+    public function getWebhookEndpointTaxInputData(): array;
 }

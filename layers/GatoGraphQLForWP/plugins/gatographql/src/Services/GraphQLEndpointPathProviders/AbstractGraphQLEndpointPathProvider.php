@@ -16,7 +16,7 @@ abstract class AbstractGraphQLEndpointPathProvider extends AbstractAutomatically
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
-    
+
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;

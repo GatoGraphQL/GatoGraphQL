@@ -21,7 +21,7 @@ use PoP\Root\App;
 class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
-    
+
     public final const PRIVATE_ENDPOINT = Plugin::NAMESPACE . '\private-endpoint';
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
 

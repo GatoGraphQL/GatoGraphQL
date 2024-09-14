@@ -9,7 +9,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\SchemaConfigurationForEndpoint
 class SchemaConfigurationForPrivateEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractDefaultSchemaConfigurationForEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     use SchemaConfigurationForEndpointsDefaultQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTestTrait;
-    
+
     /**
      * Admin client endpoint
      */
