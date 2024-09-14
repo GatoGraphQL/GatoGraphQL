@@ -8,7 +8,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  * Test that, if the user is not authenticated, the GraphQL endpoints
  * cannot be accessed.
  */
-class WordPressNonAuthenticatedUserWebserverRequestTest extends AbstractWordPressNonAuthenticatedUserWebserverRequestTest
+class WordPressNonAuthenticatedUserWebserverRequestTest extends AbstractWordPressNonAuthenticatedUserWebserverRequestTestCase
 {
     /**
      * @return array<string,string>

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-class RequestEndpointWebserverRequestTest extends AbstractRequestEndpointWebserverRequestTest
+class RequestEndpointWebserverRequestTest extends AbstractRequestEndpointWebserverRequestTestCase
 {
     /**
      * @return array<string,string>

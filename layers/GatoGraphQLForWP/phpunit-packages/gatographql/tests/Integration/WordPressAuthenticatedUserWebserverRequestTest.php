@@ -7,7 +7,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 /**
  * Test that the authenticated user can access the GraphQL endpoints.
  */
-class WordPressAuthenticatedUserWebserverRequestTest extends AbstractWordPressAuthenticatedUserWebserverRequestTest
+class WordPressAuthenticatedUserWebserverRequestTest extends AbstractWordPressAuthenticatedUserWebserverRequestTestCase
 {
     /**
      * @return array<string,string>

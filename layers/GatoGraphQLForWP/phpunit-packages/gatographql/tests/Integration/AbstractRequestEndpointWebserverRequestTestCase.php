@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 
-abstract class AbstractRequestEndpointWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
+abstract class AbstractRequestEndpointWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
     /**
      * @return array<string,string>
