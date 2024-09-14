@@ -10,7 +10,7 @@ class UserMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
 {
     protected static function getEndpoint(): string
     {
-        return 'graphql/';
+        return 'graphql';
     }
 
     protected static function getFixtureFolder(): string

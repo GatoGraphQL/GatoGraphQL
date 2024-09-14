@@ -38,9 +38,6 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 
 <tr><th colspan="2"><br/>Endpoint</th></tr>
 <tr><td><a href="docs/modules/single-endpoint/en.md">Single Endpoint</a></td><td>Expose the single GraphQL endpoint under <code>/graphql/</code></td></tr>
-<tr><td><a href="docs/modules/persisted-queries/en.md">Persisted Queries</a></td><td>Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints</td></tr>
-<tr><td><a href="docs/modules/custom-endpoints/en.md">Custom Endpoints</a></td><td>Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others</td></tr>
-<tr><td><a href="docs/modules/api-hierarchy/en.md">API Hierarchy</a></td><td>Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties</td></tr>
 <tr><th colspan="2"><br/>Schema Configuration</th></tr>
 <tr><td><a href="docs/modules/schema-configuration/en.md">Schema Configuration</a></td><td>Customize the schema accessible to different endpoints, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema</td></tr>
 <tr><td><a href="docs/modules/schema-namespacing/en.md">Schema Namespacing</a></td><td>Automatically namespace types with a vendor/project name, to avoid naming collisions</td></tr>
@@ -51,8 +48,6 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 <tr><th colspan="2"><br/>Clients</th></tr>
 <tr><td><a href="docs/modules/graphiql-for-single-endpoint/en.md">GraphiQL for Single Endpoint</a></td><td>Make a public GraphiQL client available under <code>/graphiql/</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled</td></tr>
 <tr><td><a href="docs/modules/interactive-schema-for-single-endpoint/en.md">Interactive Schema for Single Endpoint</a></td><td>Make a public Interactive Schema client available under <code>/schema/</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled</td></tr>
-<tr><td><a href="docs/modules/graphiql-for-custom-endpoints/en.md">GraphiQL for Custom Endpoints</a></td><td>Enable custom endpoints to be attached their own GraphiQL client, to execute queries against them</td></tr>
-<tr><td><a href="docs/modules/interactive-schema-for-custom-endpoints/en.md">Interactive Schema for Custom Endpoints</a></td><td>Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset</td></tr>
 <tr><td><a href="docs/modules/graphiql-explorer/en.md">GraphiQL Explorer</a></td><td>Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)</td></tr>
 <tr><th colspan="2"><br/>Schema Type</th></tr>
 <tr><td><a href="docs/modules/schema-expose-sensitive-data/en.md">Expose Sensitive Data in the Schema</a></td><td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data</td></tr>

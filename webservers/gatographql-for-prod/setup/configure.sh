@@ -4,6 +4,7 @@ wp config set WP_DEBUG true --raw
 # wp config set GATOGRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR false --raw
 wp rewrite structure '/%postname%/' --hard
 wp option update uploads_use_yearmonth_folders '0'
+wp option update admin_email wordpress@example.com
 cp /app/assets/.htaccess /app/wordpress
 cp /app/assets/phpinfo.php /app/wordpress
 cp /app/assets/favicon.ico /app/wordpress

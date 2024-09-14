@@ -195,7 +195,7 @@
   ) {
     ...CategoryData
   }
-  dummyCategoryByID: category(taxonomy: "dummy-category", by: { id: 23 }) {
+  dummyCategoryByID: category(taxonomy: "dummy-category", by: { id: 20 }) {
     ...CategoryData
   }
   dummyCategoryBySlug: category(taxonomy: "dummy-category", by: { slug: "nostradamus" }) {

@@ -1,7 +1,0 @@
-query SchemaTypeNames {
-    __schema {
-        types {
-            name
-        }
-    }
-}

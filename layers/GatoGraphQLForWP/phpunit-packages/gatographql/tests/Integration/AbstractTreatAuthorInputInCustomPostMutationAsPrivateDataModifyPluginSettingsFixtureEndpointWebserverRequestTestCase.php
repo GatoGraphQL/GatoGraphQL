@@ -8,11 +8,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\MutationSchemaTypeModuleResolver;
 
 abstract class AbstractTreatAuthorInputInCustomPostMutationAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected static function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-author-input-in-custompost-mutation-as-sensitive-data';
-    }
-
     protected function getSettingsKey(): string
     {
         return MutationSchemaTypeModuleResolver::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;

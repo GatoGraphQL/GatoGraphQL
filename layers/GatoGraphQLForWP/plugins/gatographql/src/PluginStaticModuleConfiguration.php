@@ -32,4 +32,16 @@ class PluginStaticModuleConfiguration
     {
         return true;
     }
+
+    /**
+     * Since extracting persisted queries into a standalone plugin,
+     * there's no more "plugin setup data" to install, but keep
+     * the reference for future use.
+     *
+     * @since v6.0
+     */
+    public static function canManageInstallingPluginSetupData(): bool
+    {
+        return false;
+    }
 }

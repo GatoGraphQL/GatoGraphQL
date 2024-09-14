@@ -13,9 +13,6 @@ services:
     GatoGraphQL\GatoGraphQL\Registries\SchemaConfigBlockRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\SchemaConfigBlockRegistry
 
-    GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointBlockRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointBlockRegistry
-
     GatoGraphQL\GatoGraphQL\Registries\EndpointBlockRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\EndpointBlockRegistry
 
@@ -25,17 +22,8 @@ services:
     GatoGraphQL\GatoGraphQL\Registries\EndpointSchemaConfigurationExecuterRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\EndpointSchemaConfigurationExecuterRegistry
 
-    GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointSchemaConfigurationExecuterRegistry
-
     GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistry
-
-    GatoGraphQL\GatoGraphQL\Registries\CustomEndpointAnnotatorRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\CustomEndpointAnnotatorRegistry
-
-    GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistry
 
     GatoGraphQL\GatoGraphQL\Log\LoggerInterface:
         class: \GatoGraphQL\GatoGraphQL\Log\Logger
@@ -48,6 +36,12 @@ services:
 
     GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Request\PrematureRequestService
+
+    GatoGraphQL\GatoGraphQL\Registries\GraphQLEndpointPathProviderRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\GraphQLEndpointPathProviderRegistry
+
+    GatoGraphQL\GatoGraphQL\PluginDataSetup\PluginDataSetupServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\PluginDataSetup\PluginDataSetupService
 
     GatoGraphQL\GatoGraphQL\Services\:
         resource: ../src/Services/*

@@ -134,7 +134,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
-            self::SCHEMA_CONFIGURATION => $moduleConfiguration->isSchemaConfigurationModuleEnabled(),
             self::GLOBAL_FIELDS => true,
             self::GLOBAL_ID_FIELD => true,
             default => parent::isPredefinedEnabledOrDisabled($module),
@@ -156,7 +155,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
-            self::SCHEMA_CONFIGURATION => $moduleConfiguration->isSchemaConfigurationModuleEnabled() ?? false,
+            self::SCHEMA_CONFIGURATION => $moduleConfiguration->isSchemaConfigurationModuleEnabledByDefault(),
             default => parent::isEnabledByDefault($module),
         };
     }

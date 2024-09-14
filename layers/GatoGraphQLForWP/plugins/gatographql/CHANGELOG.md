@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Disable the Schema Configuration module by default (#2848)
+- Removed custom endpoints and persisted queries (#2852)
 
 ### Improvements
 

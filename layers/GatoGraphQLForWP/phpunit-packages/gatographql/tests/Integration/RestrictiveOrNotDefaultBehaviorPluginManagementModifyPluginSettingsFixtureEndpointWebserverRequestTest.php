@@ -11,7 +11,7 @@ class RestrictiveOrNotDefaultBehaviorPluginManagementModifyPluginSettingsFixture
 {
     protected static function getEndpoint(): string
     {
-        return 'graphql/mobile-app/';
+        return 'graphql';
     }
 
     protected static function getFixtureFolder(): string

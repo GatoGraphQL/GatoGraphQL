@@ -64,7 +64,7 @@
     filter: {
       tags: {
         includeBy: {
-          ids: [25, 29]
+          ids: [22, 29]
         }
         taxonomy: "dummy-tag"
       }
@@ -93,7 +93,7 @@
     filter: {
       tags: {
         excludeBy: {
-          ids: [25, 29]
+          ids: [22, 29]
         }
         taxonomy: "dummy-tag"
       }

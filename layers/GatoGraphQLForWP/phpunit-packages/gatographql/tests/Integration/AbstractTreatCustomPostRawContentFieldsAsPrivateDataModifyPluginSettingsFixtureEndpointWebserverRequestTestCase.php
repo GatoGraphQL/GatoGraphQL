@@ -8,11 +8,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
 
 abstract class AbstractTreatCustomPostRawContentFieldsAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected static function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-custom-post-raw-content-fields-as-sensitive-data';
-    }
-
     protected function getSettingsKey(): string
     {
         return SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA;

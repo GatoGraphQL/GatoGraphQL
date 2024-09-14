@@ -3,6 +3,7 @@
 ## Breaking changes
 
 - Disable the Schema Configuration module by default ([#2848](https://github.com/GatoGraphQL/GatoGraphQL/pull/2848))
+- Removed custom endpoints and persisted queries ([#2852](https://github.com/GatoGraphQL/GatoGraphQL/pull/2852))
 
 ## Improvements
 
@@ -13,3 +14,5 @@
 ## Fixed
 
 ## [PRO] Improvements
+
+- If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
