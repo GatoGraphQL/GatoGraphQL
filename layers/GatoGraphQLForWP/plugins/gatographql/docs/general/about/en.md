@@ -32,7 +32,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
   </p><p markdown=1>
 
-  **Plugin in WordPress.org:** [wordpress.org/plugins/gatographql/](https://wordpress.org/plugins/gatographql/)
+  **Plugin in WordPress.org:** [wordpress.org/plugins/gatographql](https://wordpress.org/plugins/gatographql/)
 
   </p><p markdown=1>
 
