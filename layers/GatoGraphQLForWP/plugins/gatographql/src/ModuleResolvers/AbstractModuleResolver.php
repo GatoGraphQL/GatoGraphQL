@@ -142,8 +142,9 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     /**
      * The category where to display the settings:
      *
-     * - Schema Configuration
      * - Endpoint Configuration
+     * - Schema Configuration
+     * - Schema Type Configuration
      * - Plugin Configuration
      * - Plugin Management
      */
