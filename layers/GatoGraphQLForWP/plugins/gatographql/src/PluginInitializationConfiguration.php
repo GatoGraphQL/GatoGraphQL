@@ -109,7 +109,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Hide menu page?
             [
                 'class' => Module::class,
-                'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+                'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_SCHEMA_TUTORIAL,
             ],
@@ -709,7 +709,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         return [
             [
                 'class' => Module::class,
-                'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+                'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
             ],
             [
                 'class' => Module::class,
