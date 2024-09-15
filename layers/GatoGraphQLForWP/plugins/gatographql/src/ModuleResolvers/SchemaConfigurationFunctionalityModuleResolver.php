@@ -62,16 +62,16 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         return [
             self::SCHEMA_CONFIGURATION,
-            self::SCHEMA_NAMESPACING,
+            self::SCHEMA_EXPOSE_SENSITIVE_DATA,
             self::RESPONSE_HEADERS,
+            self::MUTATIONS,
+            self::NESTED_MUTATIONS,
+            self::SCHEMA_SELF_FIELDS,
+            self::GLOBAL_ID_FIELD,
+            self::SCHEMA_NAMESPACING,
             self::GLOBAL_FIELDS,
             self::COMPOSABLE_DIRECTIVES,
             self::MULTIFIELD_DIRECTIVES,
-            self::MUTATIONS,
-            self::NESTED_MUTATIONS,
-            self::SCHEMA_EXPOSE_SENSITIVE_DATA,
-            self::SCHEMA_SELF_FIELDS,
-            self::GLOBAL_ID_FIELD,
         ];
     }
 
