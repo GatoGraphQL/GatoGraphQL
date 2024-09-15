@@ -12,11 +12,11 @@ We work really hard to deliver a plugin that enables you to retrieve, manipulate
 
 </div>
 
-## Intro video
+<!-- ## Intro video
 
 Gato GraphQL is a productivity tool for interacting with data in your WordPress site. Check the video to discover all the things you can do with it.
 
-[Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo)
+[Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo) -->
 
 ## Home Links
 
