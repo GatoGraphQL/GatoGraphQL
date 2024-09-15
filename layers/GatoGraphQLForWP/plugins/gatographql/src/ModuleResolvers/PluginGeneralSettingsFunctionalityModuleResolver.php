@@ -139,6 +139,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      */
     public function getSettings(string $module): array
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        
         $moduleSettings = parent::getSettings($module);
         if ($module === self::GENERAL) {
             $option = self::OPTION_HIDE_TUTORIAL_PAGE;
@@ -153,26 +156,28 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
-            $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
-            $relativeLogFile = str_replace(
-                constant('ABSPATH'),
-                '',
-                $logFile
-            );
-            $option = self::OPTION_ENABLE_LOGS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Enable Logs?', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Enable storing GraphQL execution logs, under file <code>%s</code>', 'gatographql'),
-                    $relativeLogFile
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
+            if ($moduleConfiguration->displayEnableLogsSettingsOption()) {
+                $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
+                $relativeLogFile = str_replace(
+                    constant('ABSPATH'),
+                    '',
+                    $logFile
+                );
+                $option = self::OPTION_ENABLE_LOGS;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Enable Logs?', 'gatographql'),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('Enable storing GraphQL execution logs, under file <code>%s</code>', 'gatographql'),
+                        $relativeLogFile
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+            }
 
             if (PluginStaticModuleConfiguration::canManageInstallingPluginSetupData()) {
                 $option = self::OPTION_INSTALL_PLUGIN_SETUP_DATA;
@@ -213,8 +218,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->enableSettingClientIPAddressServerPropertyName()) {
                 $option = self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME;
                 $moduleSettings[] = [
