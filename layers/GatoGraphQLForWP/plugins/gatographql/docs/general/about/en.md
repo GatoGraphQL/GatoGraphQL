@@ -6,7 +6,7 @@ The most powerful GraphQL server for WordPress.
 
 ### Rate Gato GraphQL
 
-We work really hard to deliver a plugin that enables you to retrieve, manipulate, and store again any piece of data on your WordPress site. It takes endless amounts of time and effort to develop, test and maintain the free Gato GraphQL plugin. Therefore if you like what you see, and find the plugin useful, we ask you nothing more than to please rate our plugin. We appreciate every star!
+We work really hard to deliver a plugin that enables accessing any piece of data on our WordPress sites. It takes plenty of time and effort to develop, test and maintain the free Gato GraphQL plugin. Therefore if you like what you see and appreciate our work, we ask you nothing more than to please rate the plugin in the directory. Thanks in advance!
 
 <a class="rating-link" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a> <a class="button" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank">Rate Plugin</a>
 
@@ -18,11 +18,11 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
 [Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo) -->
 
-## Home Links
+## Learn more about us
 
 <div style="display: flex; gap: 20px; margin-top: 10px;">
 
-<img src="../../../assets/img/logos/GatoGraphQL-logo-suki.png" style="height: 175px;">
+<img src="../../../assets/img/logos/GatoGraphQL-logo-suki.png" alt="Gato GraphQL logo" style="height: 175px;">
 
 <div>
 
@@ -51,6 +51,45 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 </div>
 
 </div>
+
+<br/>
+
+<strong>Subscribe to our newsletter</strong> to receive timely updates about Gato GraphQL:
+
+<form action="https://shop.gatographql.com/email-subscribe/external" method="POST" target="_blank">
+  <label for="field-email">Email:</label>
+  <input type="email" name="email" id="field-email" required="" aria-required="true" placeholder="john@doe.com" autocomplete="email">
+  <button type="submit" class="button">Subscribe</button>
+</form>
+
+## Release Notes
+
+New features released on each version:
+
+- **[6.0](../../release-notes/6.0/en.md)** (current)
+- [5.0](../../release-notes/5.0/en.md)
+- [4.2](../../release-notes/4.2/en.md)
+- [4.1](../../release-notes/4.1/en.md)
+- [4.0](../../release-notes/4.0/en.md)
+- [3.0](../../release-notes/3.0/en.md)
+- [2.6](../../release-notes/2.6/en.md)
+- [2.5](../../release-notes/2.5/en.md)
+- [2.4](../../release-notes/2.4/en.md)
+- [2.3](../../release-notes/2.3/en.md)
+- [2.2](../../release-notes/2.2/en.md)
+- [2.1](../../release-notes/2.1/en.md)
+- [2.0](../../release-notes/2.0/en.md)
+- [1.5](../../release-notes/1.5/en.md)
+- [1.4](../../release-notes/1.4/en.md)
+- [1.3](../../release-notes/1.3/en.md)
+- [1.2](../../release-notes/1.2/en.md)
+- [1.1](../../release-notes/1.1/en.md)
+- [1.0](../../release-notes/1.0/en.md)
+- [0.10](../../release-notes/0.10/en.md)
+- [0.9](../../release-notes/0.9/en.md)
+- [0.8](../../release-notes/0.8/en.md)
+- [0.7](../../release-notes/0.7/en.md)
+- [0.6](../../release-notes/0.6/en.md)
 
 ## Support
 
@@ -150,47 +189,3 @@ Send your message to the Gato GraphQL Support team:
 </form>
 
 </div>
-
-## Newsletter
-
-Subscribe to our newsletter and receive timely updates concerning:
-
-- New versions of Gato GraphQL
-- New extensions
-- Updated documentation
-- Announcements
-
-<form action="https://shop.gatographql.com/email-subscribe/external" method="POST" target="_blank">
-  <label for="field-email">Email:</label>
-  <input type="email" name="email" id="field-email" required="" aria-required="true" placeholder="john@doe.com" autocomplete="email">
-  <button type="submit" class="button">Subscribe</button>
-</form>
-
-## Release Notes
-
-New features released on each version:
-
-- **[6.0](../../release-notes/6.0/en.md)** (current)
-- [5.0](../../release-notes/5.0/en.md)
-- [4.2](../../release-notes/4.2/en.md)
-- [4.1](../../release-notes/4.1/en.md)
-- [4.0](../../release-notes/4.0/en.md)
-- [3.0](../../release-notes/3.0/en.md)
-- [2.6](../../release-notes/2.6/en.md)
-- [2.5](../../release-notes/2.5/en.md)
-- [2.4](../../release-notes/2.4/en.md)
-- [2.3](../../release-notes/2.3/en.md)
-- [2.2](../../release-notes/2.2/en.md)
-- [2.1](../../release-notes/2.1/en.md)
-- [2.0](../../release-notes/2.0/en.md)
-- [1.5](../../release-notes/1.5/en.md)
-- [1.4](../../release-notes/1.4/en.md)
-- [1.3](../../release-notes/1.3/en.md)
-- [1.2](../../release-notes/1.2/en.md)
-- [1.1](../../release-notes/1.1/en.md)
-- [1.0](../../release-notes/1.0/en.md)
-- [0.10](../../release-notes/0.10/en.md)
-- [0.9](../../release-notes/0.9/en.md)
-- [0.8](../../release-notes/0.8/en.md)
-- [0.7](../../release-notes/0.7/en.md)
-- [0.6](../../release-notes/0.6/en.md)
