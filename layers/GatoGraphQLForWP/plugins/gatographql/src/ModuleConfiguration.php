@@ -236,6 +236,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function displayEnableLogsSettingsOption(): bool
+    {
+        $envVariable = Environment::DISPLAY_ENABLE_LOGS_SETTINGS_OPTION;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     /**
      * These values are pre-defined.
      */
