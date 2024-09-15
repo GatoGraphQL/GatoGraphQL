@@ -324,7 +324,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
 
     protected function addArtificialRequestAnExtensionPluginItem(): bool
     {
-        return true;
+        return false;
     }
 
     /**
