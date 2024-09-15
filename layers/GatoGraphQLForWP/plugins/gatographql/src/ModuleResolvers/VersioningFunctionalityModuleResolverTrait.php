@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 
 trait VersioningFunctionalityModuleResolverTrait
 {
@@ -23,5 +24,10 @@ trait VersioningFunctionalityModuleResolverTrait
     public function getModuleType(string $module): string
     {
         return ModuleTypeResolver::VERSIONING;
+    }
+
+    public function getSettingsCategory(string $module): string
+    {
+        return SettingsCategoryResolver::SCHEMA_CONFIGURATION;
     }
 }
