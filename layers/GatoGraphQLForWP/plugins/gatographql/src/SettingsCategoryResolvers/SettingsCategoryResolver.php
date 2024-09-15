@@ -38,7 +38,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
         return match ($settingsCategory) {
             self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'gatographql'),
             self::SCHEMA_CONFIGURATION => $this->__('Schema Configuration', 'gatographql'),
-            self::SCHEMA_TYPE_CONFIGURATION => $this->__('Schema Type Configuration', 'gatographql'),
+            self::SCHEMA_TYPE_CONFIGURATION => $this->__('Schema Elements Configuration', 'gatographql'),
             self::SERVER_CONFIGURATION => $this->__('Server Configuration', 'gatographql'),
             self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'gatographql'),
             self::API_KEYS => $this->__('API Keys', 'gatographql'),

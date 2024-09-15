@@ -7,7 +7,7 @@
 - The single endpoint GraphiQL/Voyager clients are disabled default ([#2860](https://github.com/GatoGraphQL/GatoGraphQL/pull/2860))
 - The Schema Configuration module is disabled by default ([#2848](https://github.com/GatoGraphQL/GatoGraphQL/pull/2848))
 - The schema tutorial page is hidden by default ([#2856](https://github.com/GatoGraphQL/GatoGraphQL/pull/2856))
-- The settings under "Schema Type Configuration" (new item) need to be set again ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
+- The settings under "Schema Elements Configuration" (new item) need to be set again ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
 
 ## Improvements
 
@@ -16,7 +16,7 @@
 - Hide "Excerpt as description" module if there are no CPTs enabled ([#2851](https://github.com/GatoGraphQL/GatoGraphQL/pull/2851))
 - Display the "Enable Logs?" settings only when some extension is using it ([#2853](https://github.com/GatoGraphQL/GatoGraphQL/pull/2853))
 - Hide the Schema tutorial page by default ([#2854](https://github.com/GatoGraphQL/GatoGraphQL/pull/2854))
-- Reorganized the Settings, splitting "Schema Configuration" into 2 elements:  "Schema Configuration" and  "Schema Type Configuration" ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
+- Reorganized the Settings, splitting "Schema Configuration" into 2 elements:  "Schema Configuration" and  "Schema Elements Configuration" ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
 
 ## Fixed
 
