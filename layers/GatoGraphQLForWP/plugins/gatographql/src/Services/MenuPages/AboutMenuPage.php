@@ -94,7 +94,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $replacements = [];
         $textInputValueInjections = [
             'placeholder="John Doe"' => $customerName,
-            'placeholder="john@doe.com"' => $customerEmail,
+            'placeholder="your@email.com"' => $customerEmail,
         ];
         foreach ($textInputValueInjections as $search => $valueInject) {
             $replacements[$search] = sprintf(

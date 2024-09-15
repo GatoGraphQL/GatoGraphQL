@@ -78,13 +78,19 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
 <br/>
 
+<div class="notice notice-warning" markdown=1>
+
 <strong>Subscribe to our newsletter</strong> to receive timely updates about Gato GraphQL:
 
 <form action="https://shop.gatographql.com/email-subscribe/external" method="POST" target="_blank">
-  <label for="field-email">Email:</label>
-  <input type="email" name="email" id="field-email" required="" aria-required="true" placeholder="john@doe.com" autocomplete="email">
-  <button type="submit" class="button">Subscribe</button>
+  <p markdown=1>
+    <label for="field-email">Email:</label>
+    <input type="email" name="email" id="field-email" required="" aria-required="true" placeholder="your@email.com" autocomplete="email">
+    <button type="submit" class="button">Subscribe</button>
+  </p>
 </form>
+
+</div>
 
 ## Release Notes
 
@@ -154,7 +160,7 @@ Send your message to the Gato GraphQL Support team:
     id="field-email"
     required=""
     aria-required="true"
-    placeholder="john@doe.com"
+    placeholder="your@email.com"
     autocomplete="email"
   />
 
