@@ -12,7 +12,6 @@ use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
-use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
@@ -74,11 +73,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_SELF_FIELDS,
             self::GLOBAL_ID_FIELD,
         ];
-    }
-
-    public function getSettingsCategory(string $module): string
-    {
-        return SettingsCategoryResolver::SCHEMA_CONFIGURATION;
     }
 
     /**
