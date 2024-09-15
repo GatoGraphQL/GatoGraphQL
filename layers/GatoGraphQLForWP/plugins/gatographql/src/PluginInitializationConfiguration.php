@@ -106,12 +106,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::SERVER_IP_CONFIGURATION,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
             ],
-            // Hide menu page?
+            // Enable schema tutorial page?
             [
                 'class' => Module::class,
-                'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+                'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_HIDE_TUTORIAL_PAGE,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_SCHEMA_TUTORIAL,
             ],
             // Enable Logs?
             [
@@ -709,7 +709,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         return [
             [
                 'class' => Module::class,
-                'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+                'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
             ],
             [
                 'class' => Module::class,

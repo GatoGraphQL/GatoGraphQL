@@ -171,9 +171,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function hideTutorialPage(): bool
+    public function enableSchemaTutorialPage(): bool
     {
-        $envVariable = Environment::HIDE_TUTORIAL_PAGE;
+        $envVariable = Environment::ENABLE_SCHEMA_TUTORIAL_PAGE;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 

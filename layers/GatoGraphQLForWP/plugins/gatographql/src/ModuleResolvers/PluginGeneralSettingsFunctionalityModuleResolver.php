@@ -26,7 +26,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     /**
      * Setting options
      */
-    public final const OPTION_HIDE_TUTORIAL_PAGE = 'hide-tutorial-page';
+    public final const OPTION_ENABLE_SCHEMA_TUTORIAL = 'hide-tutorial-page';
     public final const OPTION_ENABLE_LOGS = 'enable-logs';
     public final const OPTION_INSTALL_PLUGIN_SETUP_DATA = 'install-plugin-setup-data';
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
@@ -119,7 +119,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         $defaultValues = [
             self::GENERAL => [
-                self::OPTION_HIDE_TUTORIAL_PAGE => true,
+                self::OPTION_ENABLE_SCHEMA_TUTORIAL => false,
                 self::OPTION_ENABLE_LOGS => false,
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
@@ -144,15 +144,15 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         
         $moduleSettings = parent::getSettings($module);
         if ($module === self::GENERAL) {
-            $option = self::OPTION_HIDE_TUTORIAL_PAGE;
+            $option = self::OPTION_ENABLE_SCHEMA_TUTORIAL;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Hide Schema tutorial page?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Hide the Schema tutorial page from the menu navigation on the left?', 'gatographql'),
+                Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
+                Properties::DESCRIPTION => \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
