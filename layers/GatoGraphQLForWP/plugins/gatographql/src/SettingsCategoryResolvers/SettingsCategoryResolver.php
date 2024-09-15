@@ -11,6 +11,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
 {
     public final const ENDPOINT_CONFIGURATION = Plugin::NAMESPACE . '\endpoint-configuration';
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
+    public final const SCHEMA_TYPE_CONFIGURATION = Plugin::NAMESPACE . '\schema-type-configuration';
     public final const SERVER_CONFIGURATION = Plugin::NAMESPACE . '\server-configuration';
     public final const PLUGIN_CONFIGURATION = Plugin::NAMESPACE . '\plugin-configuration';
     public final const API_KEYS = Plugin::NAMESPACE . '\api-keys';
@@ -24,6 +25,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
         return [
             self::ENDPOINT_CONFIGURATION,
             self::SCHEMA_CONFIGURATION,
+            self::SCHEMA_TYPE_CONFIGURATION,
             self::SERVER_CONFIGURATION,
             self::PLUGIN_CONFIGURATION,
             self::API_KEYS,
@@ -36,6 +38,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
         return match ($settingsCategory) {
             self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'gatographql'),
             self::SCHEMA_CONFIGURATION => $this->__('Schema Configuration', 'gatographql'),
+            self::SCHEMA_TYPE_CONFIGURATION => $this->__('Schema Type Configuration', 'gatographql'),
             self::SERVER_CONFIGURATION => $this->__('Server Configuration', 'gatographql'),
             self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'gatographql'),
             self::API_KEYS => $this->__('API Keys', 'gatographql'),
@@ -49,6 +52,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
         return match ($settingsCategory) {
             self::ENDPOINT_CONFIGURATION => Options::ENDPOINT_CONFIGURATION,
             self::SCHEMA_CONFIGURATION => Options::SCHEMA_CONFIGURATION,
+            self::SCHEMA_TYPE_CONFIGURATION => Options::SCHEMA_TYPE_CONFIGURATION,
             self::SERVER_CONFIGURATION => Options::SERVER_CONFIGURATION,
             self::PLUGIN_CONFIGURATION => Options::PLUGIN_CONFIGURATION,
             self::API_KEYS => Options::API_KEYS,

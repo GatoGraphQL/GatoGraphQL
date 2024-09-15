@@ -412,8 +412,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         $userSettingsManager = $this->getUserSettingsManager();
         $resetOptions = [
-            Options::SCHEMA_CONFIGURATION,
             Options::ENDPOINT_CONFIGURATION,
+            Options::SCHEMA_CONFIGURATION,
+            Options::SCHEMA_TYPE_CONFIGURATION,
             Options::SERVER_CONFIGURATION,
             Options::PLUGIN_CONFIGURATION,
         ];
