@@ -119,7 +119,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         $defaultValues = [
             self::GENERAL => [
-                self::OPTION_HIDE_TUTORIAL_PAGE => false,
+                self::OPTION_HIDE_TUTORIAL_PAGE => true,
                 self::OPTION_ENABLE_LOGS => false,
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
