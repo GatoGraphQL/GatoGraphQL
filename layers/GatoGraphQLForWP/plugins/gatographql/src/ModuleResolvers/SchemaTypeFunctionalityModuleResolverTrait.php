@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 
-trait SchemaTypeConfigurationFunctionalityModuleResolverTrait
+trait SchemaTypeFunctionalityModuleResolverTrait
 {
     /**
      * The priority to display the modules from this resolver in the Modules page.
