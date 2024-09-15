@@ -106,7 +106,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::SERVER_IP_CONFIGURATION,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
             ],
-            // Hide menu page?
+            // Enable schema tutorial page?
             [
                 'class' => Module::class,
                 'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
