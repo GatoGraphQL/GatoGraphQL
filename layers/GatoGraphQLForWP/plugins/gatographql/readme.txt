@@ -292,6 +292,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Breaking change: The single endpoint GraphiQL/Voyager clients are disabled default (#2860)
 * Breaking change: The Schema Configuration module is disabled by default (#2848)
 * Breaking change: The schema tutorial page is hidden by default (#2856)
+* Breaking change: The settings under "Schema Type Configuration" (new item) need to be set again (#2861)
 * Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 * Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
 * Hide "Excerpt as description" module if there are no CPTs enabled (#2851)
