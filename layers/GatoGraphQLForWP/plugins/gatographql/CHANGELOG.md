@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Removed custom endpoints and persisted queries (#2852)
 - The single endpoint is enabled by default (#2859)
-- Disable the Schema Configuration module by default (#2848)
+- The Schema Configuration module is disabled by default (#2848)
 - The schema tutorial page is hidden by default (#2856)
 
 ### Improvements

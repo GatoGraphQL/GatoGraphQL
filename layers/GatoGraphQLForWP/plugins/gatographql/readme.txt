@@ -289,7 +289,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 = 6.0.0 =
 * Breaking change: Removed custom endpoints and persisted queries (#2852)
 * Breaking change: The single endpoint is enabled by default (#2859)
-* Breaking change: Disable the Schema Configuration module by default (#2848)
+* Breaking change: The Schema Configuration module is disabled by default (#2848)
 * Breaking change: The schema tutorial page is hidden by default (#2856)
 * Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 * Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
