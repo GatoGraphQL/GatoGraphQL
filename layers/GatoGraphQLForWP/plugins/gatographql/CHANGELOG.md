@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
 - Hide "Excerpt as description" module if there are no CPTs enabled (#2851)
 - Display the "Enable Logs?" settings only when some extension is using it (#2853)
+- Hide the Schema tutorial page by default (#2854)
 
 ## 5.0.0 - 07/09/2024
 
