@@ -44,10 +44,12 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
   
   <p markdown=1>
 
-  **GitHub:** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
+  **Source code:** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
 
   </p>
   
+  <hr/>
+
   <p markdown=1>
 
   **Extension Starter:** [github.com/GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter)
