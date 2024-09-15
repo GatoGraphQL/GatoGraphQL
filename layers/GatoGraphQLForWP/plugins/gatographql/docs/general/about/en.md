@@ -6,7 +6,7 @@ The most powerful GraphQL server for WordPress.
 
 ### Rate Gato GraphQL
 
-We work really hard to deliver a plugin that enables you to retrieve, manipulate, and store again any piece of data on your WordPress site. It takes endless amounts of time and effort to develop, test and maintain the free Gato GraphQL plugin. Therefore if you like what you see, and find the plugin useful, we ask you nothing more than to please rate our plugin. We appreciate every star!
+We work really hard to deliver a plugin that enables accessing any piece of data on our WordPress sites. It takes plenty of time and effort to develop, test and maintain the free Gato GraphQL plugin. Therefore if you like what you see and appreciate our work, we ask you nothing more than to please rate the plugin in the directory. Thanks in advance!
 
 <a class="rating-link" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a> <a class="button" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank">Rate Plugin</a>
 
