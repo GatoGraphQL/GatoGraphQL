@@ -151,8 +151,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Hide Schema tutorial page?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Hide the Schema tutorial page from the menu navigation on the left?', 'gatographql'),
+                Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
+                Properties::DESCRIPTION => \__('Add a Schema tutorial, accessible from the menu navigation on the left', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
