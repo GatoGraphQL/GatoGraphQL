@@ -152,7 +152,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $option
                 ),
                 Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Add a Schema tutorial, accessible from the menu navigation on the left', 'gatographql'),
+                Properties::DESCRIPTION => \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
