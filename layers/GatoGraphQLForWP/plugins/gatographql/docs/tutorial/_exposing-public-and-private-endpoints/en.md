@@ -12,7 +12,7 @@ Gato GraphQL expands this notion, allowing us to expose multiple custom endpoint
 - `/clients/A`, `/clients/B` and `clients/Z`
 - any combination of them
 
-Gato GraphQL also natively supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server.
+Gato GraphQL also supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server.
 
 This tutorial lesson presents suggestions on how and when to use each endpoint.
 
