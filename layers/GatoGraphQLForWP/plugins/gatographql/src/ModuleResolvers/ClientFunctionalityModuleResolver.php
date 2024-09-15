@@ -97,6 +97,16 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
         };
     }
 
+    public function isEnabledByDefault(string $module): bool
+    {
+        return match ($module) {
+            self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
+            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT
+                => false,
+            default => parent::isEnabledByDefault($module),
+        };
+    }
+
     public function getDescription(string $module): string
     {
         /** @var GraphQLClientsForWPModuleConfiguration */
