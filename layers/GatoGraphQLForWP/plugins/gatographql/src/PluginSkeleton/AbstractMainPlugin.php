@@ -291,8 +291,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function getAllSettingsOptions(): array
     {
         return [
-            Options::SCHEMA_CONFIGURATION,
             Options::ENDPOINT_CONFIGURATION,
+            Options::SCHEMA_CONFIGURATION,
+            Options::SCHEMA_TYPE_CONFIGURATION,
             Options::SERVER_CONFIGURATION,
             Options::PLUGIN_CONFIGURATION,
             Options::API_KEYS,

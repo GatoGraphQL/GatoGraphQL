@@ -7,7 +7,6 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleResolver implements ModuleResolverInterface
@@ -142,15 +141,13 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     /**
      * The category where to display the settings:
      *
-     * - Schema Configuration
      * - Endpoint Configuration
+     * - Schema Configuration
+     * - Schema Type Configuration
      * - Plugin Configuration
      * - Plugin Management
      */
-    public function getSettingsCategory(string $module): string
-    {
-        return SettingsCategoryResolver::SCHEMA_CONFIGURATION;
-    }
+    abstract public function getSettingsCategory(string $module): string;
 
     /**
      * Indicate if the given value is valid for that option
