@@ -22,7 +22,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
 <div style="display: flex; gap: 20px; margin-top: 10px;">
 
-<img src="../../../assets/img/logos/GatoGraphQL-logo-suki.png" style="height: 175px;">
+<img src="../../../assets/img/logos/GatoGraphQL-logo-suki.png" alt="Gato GraphQL logo" style="height: 175px;">
 
 <div>
 
