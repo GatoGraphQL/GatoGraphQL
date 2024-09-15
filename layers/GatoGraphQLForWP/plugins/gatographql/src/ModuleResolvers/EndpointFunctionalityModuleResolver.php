@@ -133,14 +133,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
         };
     }
 
-    public function isEnabledByDefault(string $module): bool
-    {
-        return match ($module) {
-            self::SINGLE_ENDPOINT => false,
-            default => parent::isEnabledByDefault($module),
-        };
-    }
-
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return match ($module) {
