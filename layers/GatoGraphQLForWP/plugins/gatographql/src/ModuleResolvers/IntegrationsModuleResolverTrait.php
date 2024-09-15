@@ -28,6 +28,6 @@ trait IntegrationsModuleResolverTrait
 
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategoryResolver::SCHEMA_CONFIGURATION;
+        return SettingsCategoryResolver::SCHEMA_TYPE_CONFIGURATION;
     }
 }
