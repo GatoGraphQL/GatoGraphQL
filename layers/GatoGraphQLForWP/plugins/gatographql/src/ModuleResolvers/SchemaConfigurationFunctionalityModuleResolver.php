@@ -129,10 +129,6 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
-        /**
-         * @var ModuleConfiguration
-         */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
             self::GLOBAL_FIELDS => true,
             self::GLOBAL_ID_FIELD => true,
