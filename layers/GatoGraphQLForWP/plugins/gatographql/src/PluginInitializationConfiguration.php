@@ -111,7 +111,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => Module::class,
                 'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                'option' => PluginGeneralSettingsFunctionalityModuleResolver::ENABLE_SCHEMA_TUTORIAL_PAGE,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_SCHEMA_TUTORIAL,
             ],
             // Enable Logs?
             [
