@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 
 /**
  * Container modules to display documentation for extensions
@@ -43,6 +44,11 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
     public function getModuleType(string $module): string
     {
         return ModuleTypeResolver::EXTENSION;
+    }
+
+    public function getSettingsCategory(string $module): string
+    {
+        return SettingsCategoryResolver::PLUGIN_MANAGEMENT;
     }
 
     public function isHidden(string $module): bool
