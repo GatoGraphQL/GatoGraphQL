@@ -28,6 +28,6 @@ trait PerformanceFunctionalityModuleResolverTrait
 
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategoryResolver::PLUGIN_CONFIGURATION;
+        return SettingsCategoryResolver::SCHEMA_CONFIGURATION;
     }
 }
