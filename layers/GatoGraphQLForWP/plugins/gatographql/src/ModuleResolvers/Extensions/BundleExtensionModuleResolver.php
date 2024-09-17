@@ -22,7 +22,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\bundle-extensions\\persisted-queries';
     public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
     public const QUERY_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\query-functions';
-    public const UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS = Plugin::NAMESPACE . '\\bundle-extensions\\security';
+    public const SECURITY = Plugin::NAMESPACE . '\\bundle-extensions\\security';
     public const VERSATILE_WORDPRESS_REQUEST_API = Plugin::NAMESPACE . '\\bundle-extensions\\versatile-wordpress-request-api';
 
     /**
@@ -45,7 +45,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
                 self::QUERY_FUNCTIONS,
-                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::SECURITY,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ] : [],
         );
@@ -64,7 +64,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PERSISTED_QUERIES => sprintf($placeholder, \__('Persisted Queries', 'gatographql')),
             self::POLYLANG_INTEGRATION => sprintf($placeholder, \__('Polylang Integration', 'gatographql')),
             self::QUERY_FUNCTIONS => sprintf($placeholder, \__('Query Functions', 'gatographql')),
-            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('Security', 'gatographql')),
+            self::SECURITY => sprintf($placeholder, \__('Security', 'gatographql')),
             self::VERSATILE_WORDPRESS_REQUEST_API => sprintf($placeholder, \__('Versatile WordPress Request API', 'gatographql')),
             default => $module,
         };
@@ -82,7 +82,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
             self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
             self::QUERY_FUNCTIONS => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
-            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => \__('Grant permission to users to modify the GraphQL schema, and define Access Control Lists to manage granular access to the API based', 'gatographql'),
+            self::SECURITY => \__('Grant permission to users to modify the GraphQL schema, and define Access Control Lists to manage granular access to the API based', 'gatographql'),
             self::VERSATILE_WORDPRESS_REQUEST_API => \__('Interact with any external API and cloud service, posting and fetching data to/from them', 'gatographql'),
             default => parent::getDescription($module),
         };
@@ -263,7 +263,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => [
+            self::SECURITY => [
                 ExtensionModuleResolver::EMAIL_SENDER,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
                 ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -310,19 +310,19 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::DEPRECATION => [
                 self::PERSISTED_QUERIES,
                 self::CUSTOM_ENDPOINTS,
-                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::SECURITY,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
             self::CACHING => [
                 self::CUSTOM_ENDPOINTS,
-                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::SECURITY,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
             self::QUERY_FUNCTIONS => [
                 self::DEPRECATION,
                 self::PERSISTED_QUERIES,
                 self::CUSTOM_ENDPOINTS,
-                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::SECURITY,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
             self::PERSISTED_QUERIES => [
