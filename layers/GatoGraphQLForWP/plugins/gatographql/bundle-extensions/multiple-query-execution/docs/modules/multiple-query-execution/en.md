@@ -1,27 +1,6 @@
 # “Multiple Query Execution” Bundle
 
-If you need to expose data via a public API in your WordPress site, while being able to sleep at night (knowing that your site is safe), then you need this bundle!
-
-You will be able to:
-
-- Render your WordPress site in headless mode, using the JS framework of your choice
-- Give access to your clients to their own data
-- Power applications (mobile app, newsletter, etc) fetching data from your WordPress site
-- Create a single source of truth for all your content, editing content in a master site only, from which it is distributed to multiple downstream sites
-
-This bundle enhances your public APIs with the following qualities:
-
-**Security:** Grant access to the API to selected users only via Access Control, with granular access, field by field. Validate that the endpoint can only be accessed from a given IP. Create multiple custom endpoints for different clients, customizing access to each of them, making sure that only the relevant data is exposed to each of them.
-
-**Speed:** Cache the response of the GraphQL API via standard HTTP caching, at the browser and intermediate layers between the client and the server (such as a CDN). Avoid installing 3rd-party libraries on the client-side that slow your website down (eg: when accessed from a cheap mobile phone).
-
-**Schema Evolution:** Deprecate fields and inform your users of the changes, already within the wp-admin, without any PHP code.
-
-**Power:** Access and manipulate data with a plethora of fields and directives.
-
-**Control:** Allow teammates to create and configure endpoints.
-
-With the provided extensions in this bundle, creating and configuring public endpoints is super easy, and it only takes minutes.
+Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable.
 
 ## List of bundled extensions
 
