@@ -165,7 +165,9 @@ class ExtensionListTable extends AbstractExtensionListTable
     {
         if ($plugin['gato_extension_is_bundle']) {
             $additionalPluginCardClassnames = 'plugin-card-extension-bundle';
-            if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::PRO) {
+            if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::PRO
+                || !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+            ) {
                 $additionalPluginCardClassnames .= ' plugin-card-highlight';
             } else {
                 $additionalPluginCardClassnames .= ' plugin-card-not-highlight';
