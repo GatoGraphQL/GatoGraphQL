@@ -20,7 +20,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const DEPRECATION = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
     public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\bundle-extensions\\multiple-query-execution';
     public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\bundle-extensions\\persisted-queries';
-    public const SIMPLEST_WORDPRESS_CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
+    public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
     public const TAILORED_WORDPRESS_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\tailored-wordpress-automator';
     public const UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS = Plugin::NAMESPACE . '\\bundle-extensions\\unhindered-wordpress-email-notifications';
     public const VERSATILE_WORDPRESS_REQUEST_API = Plugin::NAMESPACE . '\\bundle-extensions\\versatile-wordpress-request-api';
@@ -43,7 +43,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::DEPRECATION,
                 self::MULTIPLE_QUERY_EXECUTION,
                 self::PERSISTED_QUERIES,
-                self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
+                self::POLYLANG_INTEGRATION,
                 self::TAILORED_WORDPRESS_AUTOMATOR,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
@@ -62,7 +62,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::DEPRECATION => sprintf($placeholder, \__('Deprecation', 'gatographql')),
             self::MULTIPLE_QUERY_EXECUTION => sprintf($placeholder, \__('Multiple Query Execution', 'gatographql')),
             self::PERSISTED_QUERIES => sprintf($placeholder, \__('Persisted Queries', 'gatographql')),
-            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Polylang Integration', 'gatographql')),
+            self::POLYLANG_INTEGRATION => sprintf($placeholder, \__('Polylang Integration', 'gatographql')),
             self::TAILORED_WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Tailored WordPress Automator', 'gatographql')),
             self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('Unhindered WordPress Email Notifications', 'gatographql')),
             self::VERSATILE_WORDPRESS_REQUEST_API => sprintf($placeholder, \__('Versatile WordPress Request API', 'gatographql')),
@@ -80,7 +80,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::DEPRECATION => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable', 'gatographql'),
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
-            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
+            self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
             self::TAILORED_WORDPRESS_AUTOMATOR => \__('Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more)', 'gatographql'),
             self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => \__('Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email', 'gatographql'),
             self::VERSATILE_WORDPRESS_REQUEST_API => \__('Interact with any external API and cloud service, posting and fetching data to/from them', 'gatographql'),
@@ -234,7 +234,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => [
+            self::POLYLANG_INTEGRATION => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
                 ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
