@@ -127,17 +127,23 @@ class ExtensionListTable extends AbstractExtensionListTable
         $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
         $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
 
+        $module = $plugin['gato_extension_module'];
         $isBundle = $plugin['gato_extension_is_bundle'];
 
         // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
-        if ($isBundle && $offerGatoGraphQLPROExtensions) {
+        if ($module === BundleExtensionModuleResolver::PRO) {
             $extensionActionLabel = sprintf(
                 '%s%s',
                 $offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
-        }
-        elseif ($isBundle && !$offerGatoGraphQLPROExtensions) {
+        } elseif ($module === BundleExtensionModuleResolver::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS) {
+            $extensionActionLabel = sprintf(
+                '%s%s',
+                \__('Get Bundle', 'gatographql'),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            );
+        } elseif ($isBundle && !$offerGatoGraphQLPROExtensions) {
             $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
         } elseif ($offerGatoGraphQLPROBundle || $offerGatoGraphQLPROFeatureBundles) {
             $extensionActionLabel = sprintf(
