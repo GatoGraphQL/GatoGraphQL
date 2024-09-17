@@ -572,4 +572,4 @@ In this query, we generate the API endpoint using the **Field to Input** feature
 - [“Deprecation” Bundle](../../../../../bundle-extensions/deprecation/docs/modules/deprecation/en.md)
 - [“Persisted Queries” Bundle](../../../../../bundle-extensions/persisted-queries/docs/modules/persisted-queries/en.md)
 - [“Query Functions” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md)
-- [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->
+- [“Schema Extensions” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->

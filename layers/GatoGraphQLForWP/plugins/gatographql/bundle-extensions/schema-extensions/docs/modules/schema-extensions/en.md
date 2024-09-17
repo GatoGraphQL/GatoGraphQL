@@ -1,12 +1,6 @@
-# “Versatile WordPress Request API” Bundle
+# “Schema Extensions” Bundle
 
-This bundle provides an HTTP client to connect your WordPress site with the wider web, fetching data from any external API, posting data to popular platforms, or interacting with any service.
-
-Read tutorial lesson [Retrieving data from an external API](https://gatographql.com/tutorial/retrieving-data-from-an-external-api/) for an example on connecting to external services.
-
-You can provide authentication methods that leave no traces behind, in any log, keeping your credentials secure.
-
-Read tutorial lesson [Not leaking credentials when connecting to services](https://gatographql.com/tutorial/not-leaking-credentials-when-connecting-to-services/) to learn how to accomplish this.
+Collection of fields and directives added to the GraphQL schema, providing useful functionality concerning sending emails, manipulating strings, connecting to external APIs, and others.
 
 ## List of bundled extensions
 

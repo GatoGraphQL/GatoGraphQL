@@ -537,4 +537,4 @@ For instance, in this query, we retrieve the IDs of the users in the website and
 - [“Persisted Queries” Bundle](../../../../../bundle-extensions/persisted-queries/docs/modules/persisted-queries/en.md)
 - [“Query Functions” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md)
 - [“Security” Bundle](../../../../../bundle-extensions/security/docs/modules/security/en.md)
-- [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->
+- [“Schema Extensions” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->

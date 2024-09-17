@@ -65,7 +65,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::POLYLANG_INTEGRATION => sprintf($placeholder, \__('Polylang Integration', 'gatographql')),
             self::QUERY_FUNCTIONS => sprintf($placeholder, \__('Query Functions', 'gatographql')),
             self::SECURITY => sprintf($placeholder, \__('Security', 'gatographql')),
-            self::VERSATILE_WORDPRESS_REQUEST_API => sprintf($placeholder, \__('Versatile WordPress Request API', 'gatographql')),
+            self::VERSATILE_WORDPRESS_REQUEST_API => sprintf($placeholder, \__('Schema Extensions', 'gatographql')),
             default => $module,
         };
     }
@@ -83,7 +83,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
             self::QUERY_FUNCTIONS => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
             self::SECURITY => \__('Grant permission to users to modify the GraphQL schema, and define Access Control Lists to manage granular access to the API based', 'gatographql'),
-            self::VERSATILE_WORDPRESS_REQUEST_API => \__('Interact with any external API and cloud service, posting and fetching data to/from them', 'gatographql'),
+            self::VERSATILE_WORDPRESS_REQUEST_API => \__('Collection of fields and directives added to the GraphQL schema, providing useful functionality concerning sending emails, manipulating strings, connecting to external APIs, and others', 'gatographql'),
             default => parent::getDescription($module),
         };
     }

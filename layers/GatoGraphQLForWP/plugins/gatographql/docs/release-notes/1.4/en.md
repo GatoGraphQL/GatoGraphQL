@@ -59,7 +59,7 @@ define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
   - “Deprecation” Bundle
   - “Persisted Queries” Bundle
   - “Security” Bundle
-  - “Versatile WordPress Request API” Bundle
+  - “Schema Extensions” Bundle
 
 ## Fixed
 

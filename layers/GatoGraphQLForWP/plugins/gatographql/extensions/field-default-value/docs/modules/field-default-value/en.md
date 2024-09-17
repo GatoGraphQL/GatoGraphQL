@@ -67,4 +67,4 @@ By using `@default`, we can then retrieve some default image:
 - [“Multiple Query Execution” Bundle](../../../../../bundle-extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
 - [“Persisted Queries” Bundle](../../../../../bundle-extensions/persisted-queries/docs/modules/persisted-queries/en.md)
 - [“Query Functions” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md)
-- [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->
+- [“Schema Extensions” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->

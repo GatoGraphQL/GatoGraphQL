@@ -293,4 +293,4 @@ query {
 - [“Polylang Integration” Bundle](../../../../../bundle-extensions/polylang-integration/docs/modules/polylang-integration/en.md)
 - [“Query Functions” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md)
 - [“Security” Bundle](../../../../../bundle-extensions/security/docs/modules/security/en.md)
-- [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->
+- [“Schema Extensions” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->

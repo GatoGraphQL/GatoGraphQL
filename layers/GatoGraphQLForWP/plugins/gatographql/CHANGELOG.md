@@ -372,7 +372,7 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
   - “Deprecation” Bundle
   - “Persisted Queries” Bundle
   - “Security” Bundle
-  - “Versatile WordPress Request API” Bundle
+  - “Schema Extensions” Bundle
 
 ### Fixed
 

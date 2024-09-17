@@ -181,4 +181,4 @@ query RetrieveGitHubActionArtifacts(
 - [“Persisted Queries” Bundle](../../../../../bundle-extensions/persisted-queries/docs/modules/persisted-queries/en.md)
 - [“Polylang Integration” Bundle](../../../../../bundle-extensions/polylang-integration/docs/modules/polylang-integration/en.md)
 - [“Query Functions” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md)
-- [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->
+- [“Schema Extensions” Bundle](../../../../../bundle-extensions/schema-extensions/docs/modules/schema-extensions/en.md) -->
