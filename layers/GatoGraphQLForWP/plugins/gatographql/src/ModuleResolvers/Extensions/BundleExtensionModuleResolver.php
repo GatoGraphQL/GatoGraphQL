@@ -17,7 +17,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const ALL_FEATURE_BUNDLED_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-feature-bundled-extensions';
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
-    public const PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
+    public const DEPRECATION = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
     public const RESPONSIBLE_WORDPRESS_PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\responsible-wordpress-public-api';
     public const SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\selective-content-import-export-and-sync-for-wordpress';
     public const SIMPLEST_WORDPRESS_CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\simplest-wordpress-content-translation';
@@ -40,7 +40,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
                 self::CACHING,
                 self::CUSTOM_ENDPOINTS,
-                self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
+                self::DEPRECATION,
                 self::RESPONSIBLE_WORDPRESS_PUBLIC_API,
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
                 self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
@@ -59,7 +59,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
             self::CACHING => sprintf($placeholder, \__('Caching', 'gatographql')),
             self::CUSTOM_ENDPOINTS => sprintf($placeholder, \__('Custom Endpoints', 'gatographql')),
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => sprintf($placeholder, \__('Deprecation', 'gatographql')),
+            self::DEPRECATION => sprintf($placeholder, \__('Deprecation', 'gatographql')),
             self::RESPONSIBLE_WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Responsible WordPress Public API', 'gatographql')),
             self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => sprintf($placeholder, \__('Selective Content Import, Export & Sync for WordPress', 'gatographql')),
             self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Simplest WordPress Content Translation', 'gatographql')),
@@ -77,7 +77,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
+            self::DEPRECATION => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
             self::RESPONSIBLE_WORDPRESS_PUBLIC_API => \__('Enhance your public APIs with additional layers of security, speed, power, schema evolution and control', 'gatographql'),
             self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => \__('Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site', 'gatographql'),
             self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => \__('Translate your content into over 130 languages using the Google Translate API, without adding extra tables or inner joins to the DB', 'gatographql'),
@@ -185,7 +185,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             ],
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
+            self::DEPRECATION => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::EMAIL_SENDER,
                 ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
@@ -307,7 +307,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
                 // @todo Complete bundled bundles here
             ],
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
+            self::DEPRECATION => [
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
                 self::CUSTOM_ENDPOINTS,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
@@ -319,7 +319,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
             self::TAILORED_WORDPRESS_AUTOMATOR => [
-                self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
+                self::DEPRECATION,
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
                 self::CUSTOM_ENDPOINTS,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
