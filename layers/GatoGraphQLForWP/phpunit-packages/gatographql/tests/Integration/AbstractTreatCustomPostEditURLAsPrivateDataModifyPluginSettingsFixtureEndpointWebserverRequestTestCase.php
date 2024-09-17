@@ -9,11 +9,6 @@ use PHPUnitForGatoGraphQL\WebserverRequests\Environment as WebserverRequestsEnvi
 
 abstract class AbstractTreatCustomPostEditURLAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected static function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-custom-post-edit-url-as-sensitive-data';
-    }
-
     protected function getSettingsKey(): string
     {
         return SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_EDIT_URL_AS_SENSITIVE_DATA;

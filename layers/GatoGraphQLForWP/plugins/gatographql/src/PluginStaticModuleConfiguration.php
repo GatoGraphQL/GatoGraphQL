@@ -23,13 +23,55 @@ class PluginStaticModuleConfiguration
     }
 
     /**
-     * Since only releasing the PRO bundle, disable generating
-     * all other bundles.
+     * Add the "Gato GraphQL PRO" bundle to the Extensions page.
      *
      * @since v2.2
      */
-    public static function offerSinglePROCommercialProduct(): bool
+    public static function offerGatoGraphQLPROBundle(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Add the "feature" Gato GraphQL PRO bundles to the Extensions page.
+     *
+     * @since v6.0
+     */
+    public static function offerGatoGraphQLPROFeatureBundles(): bool
     {
         return true;
+    }
+
+    /**
+     * Add the Gato GraphQL PRO bundle containing all the "feature"
+     * extension bundles to the Extensions page.
+     *
+     * @since v6.0
+     */
+    public static function offerGatoGraphQLPROAllFeatureExtensionBundle(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Add the Gato GraphQL PRO extensions to the Extensions page.
+     *
+     * @since v6.0
+     */
+    public static function offerGatoGraphQLPROExtensions(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Since extracting persisted queries into a standalone plugin,
+     * there's no more "plugin setup data" to install, but keep
+     * the reference for future use.
+     *
+     * @since v6.0
+     */
+    public static function canManageInstallingPluginSetupData(): bool
+    {
+        return false;
     }
 }

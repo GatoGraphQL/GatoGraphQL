@@ -171,23 +171,28 @@
       {
         "__typename": "PostTag",
         "taxonomy": "post_format",
-        "id": 52,
+        "id": 44,
         "name": "Link"
       },
       {
         "__typename": "PostTag",
         "taxonomy": "post_format",
-        "id": 51,
+        "id": 43,
         "name": "Chat"
       },
       {
         "__typename": "PostTag",
         "taxonomy": "post_format",
-        "id": 50,
+        "id": 42,
         "name": "Aside"
       }
     ],
-    "postFormat": null,
+    "postFormat": {
+      "__typename": "PostTag",
+      "taxonomy": "post_format",
+      "id": 43,
+      "name": "Chat"
+    },
     "postFormatCount": 3,
     "postFormatNames": [
       "",

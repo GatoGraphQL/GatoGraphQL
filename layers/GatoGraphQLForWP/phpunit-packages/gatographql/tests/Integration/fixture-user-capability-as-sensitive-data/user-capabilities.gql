@@ -1,8 +1,0 @@
-{
-  capabilities
-  user(by: {id: 1}) {
-    capabilities
-    hasCapability(capability: "manage_options")
-    hasAnyCapability(capabilities: ["manage_options"])
-  }
-}

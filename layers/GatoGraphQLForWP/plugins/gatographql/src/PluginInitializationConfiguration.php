@@ -106,12 +106,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::SERVER_IP_CONFIGURATION,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
             ],
-            // Hide menu page?
+            // Enable schema tutorial page?
             [
                 'class' => Module::class,
-                'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+                'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_HIDE_TUTORIAL_PAGE,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_SCHEMA_TUTORIAL,
             ],
             // Enable Logs?
             [
@@ -136,32 +136,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn ($value) => $pluginOptionsFormHandler->getURLPathSettingValue(
                     $value,
                     EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                    ModuleSettingOptions::PATH
-                ),
-                'condition' => 'any',
-            ],
-            // Custom Endpoint path
-            [
-                'class' => Module::class,
-                'envVariable' => Environment::ENDPOINT_SLUG_BASE,
-                'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
-                    $value,
-                    EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    ModuleSettingOptions::PATH
-                ),
-                'condition' => 'any',
-            ],
-            // Persisted Query path
-            [
-                'class' => Module::class,
-                'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
-                'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $pluginOptionsFormHandler->getCPTPermalinkBasePathSettingValue(
-                    $value,
-                    EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ModuleSettingOptions::PATH
                 ),
                 'condition' => 'any',
@@ -735,7 +709,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         return [
             [
                 'class' => Module::class,
-                'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+                'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
             ],
             [
                 'class' => Module::class,

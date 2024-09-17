@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
-use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
-use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
 use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
@@ -14,22 +12,8 @@ use PoP\Root\App;
 
 abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecuter implements EndpointExecuterServiceTagInterface
 {
-    private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
     private ?TemplateHelpersInterface $templateHelpers = null;
 
-    final public function setGraphQLCustomEndpointCustomPostType(GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType): void
-    {
-        $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-    }
-    final protected function getGraphQLCustomEndpointCustomPostType(): GraphQLCustomEndpointCustomPostType
-    {
-        if ($this->graphQLCustomEndpointCustomPostType === null) {
-            /** @var GraphQLCustomEndpointCustomPostType */
-            $graphQLCustomEndpointCustomPostType = $this->instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
-            $this->graphQLCustomEndpointCustomPostType = $graphQLCustomEndpointCustomPostType;
-        }
-        return $this->graphQLCustomEndpointCustomPostType;
-    }
     final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
     {
         $this->templateHelpers = $templateHelpers;
@@ -42,11 +26,6 @@ abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecute
             $this->templateHelpers = $templateHelpers;
         }
         return $this->templateHelpers;
-    }
-
-    protected function getCustomPostType(): GraphQLEndpointCustomPostTypeInterface
-    {
-        return $this->getGraphQLCustomEndpointCustomPostType();
     }
 
     public function executeEndpoint(): void

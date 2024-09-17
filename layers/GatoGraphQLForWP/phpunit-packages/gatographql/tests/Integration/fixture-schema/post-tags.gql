@@ -147,7 +147,7 @@
     ...PostTagData
   }
 
-  postsByTagByDifferentTaxonomyID: postTag(by: { id: 25 }) {
+  postsByTagByDifferentTaxonomyID: postTag(by: { id: 22 }) {
     ...PostTagData
   }
   postsByTagByDifferentTaxonomySlug: postTag(by: { slug: "classical" }) {

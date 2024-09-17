@@ -17,7 +17,7 @@ The description is shown in the table listing the entities for each Custom Post 
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted queries with description](../../images/persisted-queries-page.png "Persisted queries with description")
+![Schema configurations with description](../../images/schema-configurations-page.png "Schema configurations with description")
 
 </div>
 

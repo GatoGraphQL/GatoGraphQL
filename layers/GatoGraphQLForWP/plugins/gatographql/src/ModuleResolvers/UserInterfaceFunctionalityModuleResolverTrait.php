@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 
 trait UserInterfaceFunctionalityModuleResolverTrait
 {
@@ -23,5 +24,10 @@ trait UserInterfaceFunctionalityModuleResolverTrait
     public function getModuleType(string $module): string
     {
         return ModuleTypeResolver::USER_INTERFACE;
+    }
+
+    public function getSettingsCategory(string $module): string
+    {
+        return SettingsCategoryResolver::PLUGIN_CONFIGURATION;
     }
 }

@@ -8,11 +8,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
 
 abstract class AbstractTreatUserRoleAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
-    protected static function getFixtureFolder(): string
-    {
-        return __DIR__ . '/fixture-user-role-as-sensitive-data';
-    }
-
     protected function getSettingsKey(): string
     {
         return SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA;

@@ -242,27 +242,27 @@ class EndpointHelpers
      * GraphQL endpoint to be used in the admin, when editing Persisted Queries
      */
     public function getAdminPersistedQueryGraphQLEndpoint(
-        string|int $persistedQueryEndpointCustomPostID,
+        string|int $persistedQueryEndpointID,
     ): string {
         return \add_query_arg(
             [
-                RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointCustomPostID,
+                RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointID,
             ],
             $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PERSISTED_QUERY)
         );
     }
 
-    public function getAdminPersistedQueryCustomPostID(): ?int
+    public function getAdminPersistedQueryID(): ?string
     {
         if (App::query(RequestParams::ENDPOINT_GROUP) !== AdminGraphQLEndpointGroups::PERSISTED_QUERY) {
             return null;
         }
 
         /** @var string|null */
-        $persistedQueryID = App::query(RequestParams::PERSISTED_QUERY_ID);
-        if ($persistedQueryID === null) {
+        $persistedQueryEndpointID = App::query(RequestParams::PERSISTED_QUERY_ID);
+        if ($persistedQueryEndpointID === null) {
             return null;
         }
-        return (int) $persistedQueryID;
+        return $persistedQueryEndpointID;
     }
 }

@@ -1,7 +1,0 @@
-{  
-  users(pagination: { limit: 3 }) {
-    name
-    email
-    roleNames
-  }
-}

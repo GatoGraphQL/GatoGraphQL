@@ -17,11 +17,9 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public final const EXCERPT_AS_DESCRIPTION = Plugin::NAMESPACE . '\excerpt-as-description';
     public final const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
     public final const SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION = Plugin::NAMESPACE . '\schema-configuration-additional-documentation';
-    public final const CUSTOM_ENDPOINT_OVERVIEW = Plugin::NAMESPACE . '\custom-endpoint-overview';
-    public final const PERSISTED_QUERY_ENDPOINT_OVERVIEW = Plugin::NAMESPACE . '\persisted-query-endpoint-overview';
 
     /** @var CustomPostTypeInterface[] */
-    protected ?array $useExcerptAsDescriptionCustomPostTypeServices = null;
+    protected ?array $useExcerptAsDescriptionEnabledCustomPostTypeServices = null;
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
@@ -62,8 +60,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::EXCERPT_AS_DESCRIPTION,
             self::WELCOME_GUIDES,
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION,
-            self::CUSTOM_ENDPOINT_OVERVIEW,
-            self::PERSISTED_QUERY_ENDPOINT_OVERVIEW,
         ];
     }
 
@@ -74,30 +70,12 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::EXCERPT_AS_DESCRIPTION:
-                return [];
             case self::WELCOME_GUIDES:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                    ]
-                ];
+                return [];
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
                 return [
                     [
                         SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
-                    ],
-                ];
-            case self::CUSTOM_ENDPOINT_OVERVIEW:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                    ],
-                ];
-            case self::PERSISTED_QUERY_ENDPOINT_OVERVIEW:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                     ],
                 ];
         }
@@ -125,11 +103,9 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::EXCERPT_AS_DESCRIPTION:
-                return $this->getUseExcerptAsDescriptionCustomPostTypeServices() === [];
+                return $this->getUseExcerptAsDescriptionEnabledCustomPostTypeServices() === [];
             case self::WELCOME_GUIDES:
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
-            case self::CUSTOM_ENDPOINT_OVERVIEW:
-            case self::PERSISTED_QUERY_ENDPOINT_OVERVIEW:
                 return true;
         }
         return parent::isHidden($module);
@@ -141,8 +117,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'gatographql'),
             self::WELCOME_GUIDES => \__('Welcome Guides', 'gatographql'),
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional Gato GraphQL Documentation', 'gatographql'),
-            self::CUSTOM_ENDPOINT_OVERVIEW => \__('Custom Endpoint Overview', 'gatographql'),
-            self::PERSISTED_QUERY_ENDPOINT_OVERVIEW => \__('Persisted Query Endpoint Overview', 'gatographql'),
             default => $module,
         };
     }
@@ -157,8 +131,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                 '8.2'
             ),
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Documentation on using the Gato GraphQL', 'gatographql'),
-            self::CUSTOM_ENDPOINT_OVERVIEW => \__('Sidebar component displaying Properties for a Custom Endpoint', 'gatographql'),
-            self::PERSISTED_QUERY_ENDPOINT_OVERVIEW => \__('Sidebar component displaying Properties for a Persisted Query Endpoint', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -169,10 +141,8 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             self::WELCOME_GUIDES
                 => false,
             self::EXCERPT_AS_DESCRIPTION,
-                => $this->getUseExcerptAsDescriptionCustomPostTypeServices() === [] ? false : null,
-            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION,
-            self::CUSTOM_ENDPOINT_OVERVIEW,
-            self::PERSISTED_QUERY_ENDPOINT_OVERVIEW
+                => $this->getUseExcerptAsDescriptionEnabledCustomPostTypeServices() === [] ? false : null,
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION
                 => true,
             default
                 => parent::isPredefinedEnabledOrDisabled($module),
@@ -182,15 +152,15 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     /**
      * @return CustomPostTypeInterface[]
      */
-    protected function getUseExcerptAsDescriptionCustomPostTypeServices(): array
+    protected function getUseExcerptAsDescriptionEnabledCustomPostTypeServices(): array
     {
-        if ($this->useExcerptAsDescriptionCustomPostTypeServices === null) {
+        if ($this->useExcerptAsDescriptionEnabledCustomPostTypeServices === null) {
             $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
-            return array_values(array_filter(
+            $this->useExcerptAsDescriptionEnabledCustomPostTypeServices = array_values(array_filter(
                 $customPostTypeServices,
-                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->useCustomPostExcerptAsDescription()
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled() && $customPostTypeService->useCustomPostExcerptAsDescription()
             ));
         }
-        return $this->useExcerptAsDescriptionCustomPostTypeServices;
+        return $this->useExcerptAsDescriptionEnabledCustomPostTypeServices;
     }
 }

@@ -11,7 +11,7 @@
   dummyTags: tags(taxonomy: "dummy-tag") {
     ...TagData
   }
-  dummyTag: tag(taxonomy: "dummy-tag", by: { id: 36 }) {
+  dummyTag: tag(taxonomy: "dummy-tag", by: { id: 26 }) {
     ...TagData
   }
   dummyTagCount: tagCount(taxonomy: "dummy-tag")

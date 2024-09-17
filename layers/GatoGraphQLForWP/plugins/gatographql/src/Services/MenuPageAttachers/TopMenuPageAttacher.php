@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
@@ -97,13 +97,14 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     {
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
 
-        $isSingleEndpointEnabled = $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT);
+        $isSingleEndpointGraphiQLClientEnabled = $this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT);
+        $isSingleEndpointVoyagerEnabled = $this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT);
 
         if (
             $hookName = \add_submenu_page(
                 $this->getMenuName(),
                 __('GraphiQL', 'gatographql'),
-                $isSingleEndpointEnabled
+                $isSingleEndpointGraphiQLClientEnabled
                     ? __('🟡 GraphiQL (private)', 'gatographql')
                     : __('GraphiQL', 'gatographql'),
                 $schemaEditorAccessCapability,
@@ -118,7 +119,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $hookName = \add_submenu_page(
                 $this->getMenuName(),
                 __('GraphQL Schema', 'gatographql'),
-                $isSingleEndpointEnabled
+                $isSingleEndpointVoyagerEnabled
                     ? __('🟡 Schema (private)', 'gatographql')
                     : __('Schema', 'gatographql'),
                 $schemaEditorAccessCapability,

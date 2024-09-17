@@ -139,7 +139,10 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()) {
+        $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
+        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
+        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
+        if ($offerGatoGraphQLPROBundle && !PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()) {
             return sprintf(
                 __('<strong>%1$s</strong> includes extensions that add functionality and extend the GraphQL schema. Browse them all here, or on the <a href="%2$s" target="%3$s">Gato GraphQL website%4$s</a>.', 'gatographql'),
                 'Gato GraphQL PRO',
@@ -148,8 +151,19 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
                 HTMLCodes::OPEN_IN_NEW_WINDOW,
             );
         }
+        $headerMessage = __('Extensions add functionality and expand the GraphQL schema.', 'gatographql');
+        if ($offerGatoGraphQLPROFeatureBundles && !$offerGatoGraphQLPROExtensions) {
+            return sprintf(
+                __('%1$s Browse them on the <a href="%2$s" target="%3$s">Gato GraphQL website%4$s</a>.', 'gatographql'),
+                $headerMessage,
+                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+                '_blank',
+                HTMLCodes::OPEN_IN_NEW_WINDOW,
+            );
+        }
         return sprintf(
-            __('Extensions add functionality and expand the GraphQL schema. Browse all <a href="%1$s" target="%3$s">bundles%4$s</a> and <a href="%2$s" target="%3$s">extensions%4$s</a> on the Gato GraphQL website.', 'gatographql'),
+            __('%1$s Browse all <a href="%2$s" target="%4$s">bundles%5$s</a> and <a href="%3$s" target="%4$s">extensions%5$s</a> on the Gato GraphQL website.', 'gatographql'),
+            $headerMessage,
             $moduleConfiguration->getGatoGraphQLBundlesPageURL(),
             $moduleConfiguration->getGatoGraphQLExtensionsPageURL(),
             '_blank',

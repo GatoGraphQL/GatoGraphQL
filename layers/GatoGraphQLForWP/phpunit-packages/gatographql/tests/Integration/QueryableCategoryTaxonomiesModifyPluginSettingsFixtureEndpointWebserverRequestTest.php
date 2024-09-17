@@ -12,7 +12,7 @@ class QueryableCategoryTaxonomiesModifyPluginSettingsFixtureEndpointWebserverReq
 
     protected static function getEndpoint(): string
     {
-        return 'graphql/';
+        return 'graphql';
     }
 
     protected function getSettingsKey(): string

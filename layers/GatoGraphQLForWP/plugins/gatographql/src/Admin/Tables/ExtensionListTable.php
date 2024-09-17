@@ -46,12 +46,16 @@ class ExtensionListTable extends AbstractExtensionListTable
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(true, false, false);
         $wordPressPluginAPIUnneededRequiredEntries = $this->getWordPressPluginAPIUnneededRequiredEntries();
+        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
             $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
+            if (!$isBundleExtension && !$offerGatoGraphQLPROExtensions) {
+                continue;
+            }
             $item = [
                 'name' => $moduleResolver->getName($module),
                 'slug' => $moduleResolver->getGatoGraphQLExtensionSlug($module),
@@ -119,29 +123,44 @@ class ExtensionListTable extends AbstractExtensionListTable
      */
     public function getPluginInstallActionLabel(array $plugin): string
     {
-        $offerSinglePROCommercialProduct = PluginStaticModuleConfiguration::offerSinglePROCommercialProduct();
+        $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
+        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
+        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
+
+        $module = $plugin['gato_extension_module'];
+        $isBundle = $plugin['gato_extension_is_bundle'];
 
         // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
-        $extensionActionLabel = $plugin['gato_extension_is_bundle']
-            ? sprintf(
+        if ($module === BundleExtensionModuleResolver::PRO) {
+            $extensionActionLabel = sprintf(
                 '%s%s',
-                $offerSinglePROCommercialProduct ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
+                $offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
-            )
-            : (
-                $offerSinglePROCommercialProduct ? sprintf(
-                    '%s%s',
-                    \__('Visit on website', 'gatographql'),
-                    HTMLCodes::OPEN_IN_NEW_WINDOW
-                ) : parent::getPluginInstallActionLabel($plugin)
             );
+        } /*elseif ($module === BundleExtensionModuleResolver::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS) {
+            $extensionActionLabel = sprintf(
+                '%s%s',
+                \__('Get Bundle', 'gatographql'),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            );
+        } elseif ($isBundle && !$offerGatoGraphQLPROExtensions) {
+            $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
+        } elseif ($offerGatoGraphQLPROBundle || $offerGatoGraphQLPROFeatureBundles) {
+            $extensionActionLabel = sprintf(
+                '%s%s',
+                \__('Visit on website', 'gatographql'),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            );
+        }*/ else {
+            $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
+        }
         return sprintf(
             '
                 <span class="gatographql-extension-action-label">%s</span>
                 <span class="gatographql-extension-bundle-action-label" style="display: none;">%s</span>
             ',
             $extensionActionLabel,
-            $offerSinglePROCommercialProduct ? \__('Active (via PRO)', 'gatographql') : \__('Active (via Bundle)', 'gatographql')
+            $offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('Active (via PRO)', 'gatographql') : \__('Active (via Bundle)', 'gatographql')
         );
     }
 

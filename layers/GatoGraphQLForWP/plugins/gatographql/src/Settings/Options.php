@@ -10,13 +10,17 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 class Options
 {
     /**
+     * Option name under which to store the endpoint and client paths, defined by the user
+     */
+    public final const ENDPOINT_CONFIGURATION = 'gatographql-endpoint-configuration';
+    /**
      * Option name under which to store the "Schema Configuration" values, defined by the user
      */
     public final const SCHEMA_CONFIGURATION = 'gatographql-schema-configuration';
     /**
-     * Option name under which to store the endpoint and client paths, defined by the user
+     * Option name under which to store the "Schema Type Configuration" values, defined by the user
      */
-    public final const ENDPOINT_CONFIGURATION = 'gatographql-endpoint-configuration';
+    public final const SCHEMA_TYPE_CONFIGURATION = 'gatographql-schema-type-configuration';
     /**
      * Option name under which to store the server configuration, defined by the user
      */

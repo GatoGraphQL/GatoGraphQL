@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase;
 
 abstract class AbstractNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     /**
-     * Custom endpoint "unrestricted-schema" has no ACLs (so we get all the
-     * fields when doing introspection), and "Namespacing" as "default"
+     * The single endpoint has "Namespacing" as "default"
      */
     protected static function getEndpoint(): string
     {
-        return 'graphql/unrestricted-schema/';
+        return 'graphql';
     }
 
     protected function getSettingsKey(): string

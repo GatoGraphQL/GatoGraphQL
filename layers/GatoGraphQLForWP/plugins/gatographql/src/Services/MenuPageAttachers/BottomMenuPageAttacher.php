@@ -380,7 +380,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->hideTutorialPage()) {
+        if ($moduleConfiguration->enableSchemaTutorialPage()) {
             $tutorialMenuPage = $this->getTutorialMenuPage();
             /**
              * @var callable

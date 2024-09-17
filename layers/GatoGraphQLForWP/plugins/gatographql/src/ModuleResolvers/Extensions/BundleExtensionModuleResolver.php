@@ -32,11 +32,13 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getModulesToResolve(): array
     {
         return array_merge(
-            [
+            PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle() ? [
                 self::PRO,
-            ],
-            PluginStaticModuleConfiguration::offerSinglePROCommercialProduct() ? [] : [
+            ] : [],
+            PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle() ? [
                 self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
+            ] : [],
+            PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
                 self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE,
                 self::BETTER_WORDPRESS_WEBHOOKS,
                 self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
@@ -47,7 +49,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::TAILORED_WORDPRESS_AUTOMATOR,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
-            ],
+            ] : [],
         );
     }
 
@@ -107,12 +109,15 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 
     public function getLogoURL(string $module): string
     {
-        return match ($module) {
+        if (
+            in_array($module, [
             self::PRO,
-            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS
-                => PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png',
-            default => parent::getLogoURL($module),
-        };
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
+            ])
+        ) {
+            return PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png';
+        }
+        return parent::getLogoURL($module);
     }
 
     /**
@@ -127,6 +132,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::AUTOMATION,
                 ExtensionModuleResolver::CACHE_CONTROL,
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                ExtensionModuleResolver::CUSTOM_ENDPOINTS,
                 ExtensionModuleResolver::DEPRECATION_NOTIFIER,
                 ExtensionModuleResolver::EMAIL_SENDER,
                 ExtensionModuleResolver::EVENTS_MANAGER,
@@ -145,6 +151,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
                 ExtensionModuleResolver::MULTILINGUALPRESS,
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                ExtensionModuleResolver::PERSISTED_QUERIES,
                 ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::POLYLANG,
@@ -336,12 +343,14 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getBundledBundleExtensionModules(string $module): array
     {
         return match ($module) {
-            // "All in One Toolbox for WordPress" bundles all other bundles
-            self::PRO,
-            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => array_diff(
+            // "Gato GraphQL PRO" bundles all other bundles
+            self::PRO => array_diff(
                 $this->getModulesToResolve(),
                 [$module]
             ),
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => [
+                // @todo Complete here
+            ],
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
                 self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
             ],

@@ -167,46 +167,41 @@
       {
         "__typename": "GenericTag",
         "taxonomy": "dummy-tag",
-        "id": 36,
+        "id": 30,
         "name": "Tango"
       },
       {
         "__typename": "GenericTag",
         "taxonomy": "dummy-tag",
-        "id": 34,
+        "id": 29,
         "name": "Rock"
       },
       {
         "__typename": "GenericTag",
         "taxonomy": "dummy-tag",
-        "id": 29,
+        "id": 25,
         "name": "Jazz"
       },
       {
         "__typename": "GenericTag",
         "taxonomy": "dummy-tag",
-        "id": 28,
+        "id": 24,
         "name": "Hip Hop"
       },
       {
         "__typename": "GenericTag",
         "taxonomy": "dummy-tag",
-        "id": 27,
+        "id": 23,
         "name": "Heavy metal"
       },
       {
         "__typename": "GenericTag",
         "taxonomy": "dummy-tag",
-        "id": 25,
+        "id": 22,
         "name": "Classical"
       }
     ],
-    "dummyTag": {
-      "__typename": "GenericTag",
-      "taxonomy": "dummy-tag",
-      "id": 36,
-      "name": "Tango"
-    },
+    "dummyTag": null,
     "dummyTagCount": 6,
     "dummyTagNames": [
       "Tango",

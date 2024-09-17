@@ -24,9 +24,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     use ClientFunctionalityModuleResolverTrait;
 
     public final const GRAPHIQL_FOR_SINGLE_ENDPOINT = Plugin::NAMESPACE . '\graphiql-for-single-endpoint';
-    public final const GRAPHIQL_FOR_CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\graphiql-for-custom-endpoints';
     public final const INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT = Plugin::NAMESPACE . '\interactive-schema-for-single-endpoint';
-    public final const INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\interactive-schema-for-custom-endpoints';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -52,8 +50,6 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
         return [
             self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
             self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
-            self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS,
-            self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS,
         ];
     }
 
@@ -73,13 +69,6 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 return [
                     [
                         EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                    ],
-                ];
-            case self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS:
-            case self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS:
-                return [
-                    [
-                        EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                     ],
                 ];
         }
@@ -103,10 +92,18 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     {
         return match ($module) {
             self::GRAPHIQL_FOR_SINGLE_ENDPOINT => \__('GraphiQL for Single Endpoint', 'gatographql'),
-            self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS => \__('GraphiQL for Custom Endpoints', 'gatographql'),
             self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT => \__('Interactive Schema for Single Endpoint', 'gatographql'),
-            self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS => \__('Interactive Schema for Custom Endpoints', 'gatographql'),
             default => $module,
+        };
+    }
+
+    public function isEnabledByDefault(string $module): bool
+    {
+        return match ($module) {
+            self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
+            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT
+                => false,
+            default => parent::isEnabledByDefault($module),
         };
     }
 
@@ -120,15 +117,11 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     \__('Make a public GraphiQL client available under <code>%s</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled', 'gatographql'),
                     $moduleConfiguration->getGraphiQLClientEndpoint()
                 );
-            case self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS:
-                return \__('Enable custom endpoints to be attached their own GraphiQL client, to execute queries against them', 'gatographql');
             case self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
                     \__('Make a public Interactive Schema client available under <code>%s</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled', 'gatographql'),
                     $moduleConfiguration->getVoyagerClientEndpoint()
                 );
-            case self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS:
-                return \__('Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset', 'gatographql');
         }
         return parent::getDescription($module);
     }

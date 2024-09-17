@@ -7,67 +7,29 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptionValues;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
-use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
-use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
-use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\App;
-use WP_Post;
 
-class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
+class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityModuleResolver
 {
     use ModuleResolverTrait;
-    use EndpointFunctionalityModuleResolverTrait;
 
     public final const PRIVATE_ENDPOINT = Plugin::NAMESPACE . '\private-endpoint';
     public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
-    public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
-    public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
 
-    /** @var WP_Post[]|null */
-    protected ?array $schemaConfigurationCustomPosts = null;
-
-    private ?MarkdownContentParserInterface $markdownContentParser = null;
-    private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
     private ?EndpointHelpers $endpointHelpers = null;
     private ?GraphiQLMenuPage $graphiQLMenuPage = null;
     private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
     private ?TutorialMenuPage $tutorialMenuPage = null;
 
-    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
-    {
-        $this->markdownContentParser = $markdownContentParser;
-    }
-    final protected function getMarkdownContentParser(): MarkdownContentParserInterface
-    {
-        if ($this->markdownContentParser === null) {
-            /** @var MarkdownContentParserInterface */
-            $markdownContentParser = $this->instanceManager->getInstance(MarkdownContentParserInterface::class);
-            $this->markdownContentParser = $markdownContentParser;
-        }
-        return $this->markdownContentParser;
-    }
-    final public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
-    {
-        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-    }
-    final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
-    {
-        if ($this->graphQLSchemaConfigurationCustomPostType === null) {
-            /** @var GraphQLSchemaConfigurationCustomPostType */
-            $graphQLSchemaConfigurationCustomPostType = $this->instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
-            $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-        }
-        return $this->graphQLSchemaConfigurationCustomPostType;
-    }
     final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
     {
         $this->endpointHelpers = $endpointHelpers;
@@ -129,14 +91,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         return [
             self::PRIVATE_ENDPOINT,
             self::SINGLE_ENDPOINT,
-            self::CUSTOM_ENDPOINTS,
-            self::PERSISTED_QUERIES,
         ];
-    }
-
-    public function getSettingsCategory(string $module): string
-    {
-        return SettingsCategoryResolver::ENDPOINT_CONFIGURATION;
     }
 
     /**
@@ -147,8 +102,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         switch ($module) {
             case self::PRIVATE_ENDPOINT:
             case self::SINGLE_ENDPOINT:
-            case self::CUSTOM_ENDPOINTS:
-            case self::PERSISTED_QUERIES:
                 return [];
         }
         return parent::getDependedModuleLists($module);
@@ -159,8 +112,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         return match ($module) {
             self::PRIVATE_ENDPOINT => \__('Private Endpoint', 'gatographql'),
             self::SINGLE_ENDPOINT => \__('Single Endpoint', 'gatographql'),
-            self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'gatographql'),
-            self::PERSISTED_QUERIES => \__('Persisted Queries', 'gatographql'),
             default => $module,
         };
     }
@@ -178,17 +129,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 \__('Expose the single GraphQL endpoint under <code>%s</code>', 'gatographql'),
                 $moduleConfiguration->getGraphQLAPIEndpoint()
             ),
-            self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'gatographql'),
-            self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'gatographql'),
             default => parent::getDescription($module)
-        };
-    }
-
-    public function isEnabledByDefault(string $module): bool
-    {
-        return match ($module) {
-            self::SINGLE_ENDPOINT => false,
-            default => parent::isEnabledByDefault($module),
         };
     }
 
@@ -218,15 +159,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::SINGLE_ENDPOINT => [
-                ModuleSettingOptions::PATH => 'graphql/',
-                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
-            ],
-            self::CUSTOM_ENDPOINTS => [
                 ModuleSettingOptions::PATH => 'graphql',
-                ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
-            ],
-            self::PERSISTED_QUERIES => [
-                ModuleSettingOptions::PATH => 'graphql-query',
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
         ];
@@ -254,30 +187,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::DESCRIPTION => \__('URL path to expose the single GraphQL endpoint', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
-        } elseif ($module === self::CUSTOM_ENDPOINTS) {
-            $option = ModuleSettingOptions::PATH;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Endpoint base slug', 'gatographql'),
-                Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_STRING,
-            ];
-        } elseif ($module === self::PERSISTED_QUERIES) {
-            $option = ModuleSettingOptions::PATH;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Endpoint base slug', 'gatographql'),
-                Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_STRING,
-            ];
         }
 
         // Add the Schema Configuration to all endpoints
@@ -285,8 +194,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             in_array($module, [
                 self::PRIVATE_ENDPOINT,
                 self::SINGLE_ENDPOINT,
-                self::CUSTOM_ENDPOINTS,
-                self::PERSISTED_QUERIES,
             ]) && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
         ) {
             $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'gatographql');
@@ -309,14 +216,6 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 ),
                 self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'gatographql'),
-                self::CUSTOM_ENDPOINTS => sprintf(
-                    $defaultDescriptionPlaceholder,
-                    \__('Custom Endpoints', 'gatographql')
-                ),
-                self::PERSISTED_QUERIES => sprintf(
-                    $defaultDescriptionPlaceholder,
-                    \__('Persisted Queries', 'gatographql')
-                ),
                 default => '',
             };
             // Build all the possible values by fetching all the Schema Configuration posts
@@ -346,28 +245,5 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
             ];
         }
         return $moduleSettings;
-    }
-
-    /**
-     * @return WP_Post[]
-     */
-    protected function getSchemaConfigurationCustomPosts(): array
-    {
-        if ($this->schemaConfigurationCustomPosts === null) {
-            $this->schemaConfigurationCustomPosts = $this->doGetSchemaConfigurationCustomPosts();
-        }
-
-        return $this->schemaConfigurationCustomPosts;
-    }
-
-    /**
-     * @return WP_Post[]
-     */
-    protected function doGetSchemaConfigurationCustomPosts(): array
-    {
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        $graphQLSchemaConfigurationCustomPostType = $this->getGraphQLSchemaConfigurationCustomPostType();
-
-        return $this->getSchemaEntityListCustomPosts($graphQLSchemaConfigurationCustomPostType->getCustomPostType());
     }
 }

@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use PoP\ComponentModel\App;
 
@@ -25,7 +26,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     /**
      * Setting options
      */
-    public final const OPTION_HIDE_TUTORIAL_PAGE = 'hide-tutorial-page';
+    public final const OPTION_ENABLE_SCHEMA_TUTORIAL = 'hide-tutorial-page';
     public final const OPTION_ENABLE_LOGS = 'enable-logs';
     public final const OPTION_INSTALL_PLUGIN_SETUP_DATA = 'install-plugin-setup-data';
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
@@ -118,7 +119,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         $defaultValues = [
             self::GENERAL => [
-                self::OPTION_HIDE_TUTORIAL_PAGE => false,
+                self::OPTION_ENABLE_SCHEMA_TUTORIAL => false,
                 self::OPTION_ENABLE_LOGS => false,
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
@@ -138,52 +139,59 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      */
     public function getSettings(string $module): array
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+
         $moduleSettings = parent::getSettings($module);
         if ($module === self::GENERAL) {
-            $option = self::OPTION_HIDE_TUTORIAL_PAGE;
+            $option = self::OPTION_ENABLE_SCHEMA_TUTORIAL;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Hide Schema tutorial page?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Hide the Schema tutorial page from the menu navigation on the left?', 'gatographql'),
+                Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
+                Properties::DESCRIPTION => \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
-            $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
-            $relativeLogFile = str_replace(
-                constant('ABSPATH'),
-                '',
-                $logFile
-            );
-            $option = self::OPTION_ENABLE_LOGS;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Enable Logs?', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Enable storing GraphQL execution logs, under file <code>%s</code>', 'gatographql'),
-                    $relativeLogFile
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
+            if ($moduleConfiguration->displayEnableLogsSettingsOption()) {
+                $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
+                $relativeLogFile = str_replace(
+                    constant('ABSPATH'),
+                    '',
+                    $logFile
+                );
+                $option = self::OPTION_ENABLE_LOGS;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Enable Logs?', 'gatographql'),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('Enable storing GraphQL execution logs, under file <code>%s</code>', 'gatographql'),
+                        $relativeLogFile
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+            }
 
-            $option = self::OPTION_INSTALL_PLUGIN_SETUP_DATA;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Plugin setup: Install Persisted Queries for common admin tasks?', 'gatographql'),
-                Properties::DESCRIPTION => \__('When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
+            if (PluginStaticModuleConfiguration::canManageInstallingPluginSetupData()) {
+                $option = self::OPTION_INSTALL_PLUGIN_SETUP_DATA;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Plugin setup: Install Persisted Queries for common admin tasks?', 'gatographql'),
+                    Properties::DESCRIPTION => \__('When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?', 'gatographql'),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+            }
 
             $option = self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE;
             $moduleSettings[] = [
@@ -210,8 +218,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->enableSettingClientIPAddressServerPropertyName()) {
                 $option = self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME;
                 $moduleSettings[] = [

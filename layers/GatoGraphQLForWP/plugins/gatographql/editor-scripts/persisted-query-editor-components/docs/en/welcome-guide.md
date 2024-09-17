@@ -1,3 +1,0 @@
-# Creating Persisted Queries
-
-@todo

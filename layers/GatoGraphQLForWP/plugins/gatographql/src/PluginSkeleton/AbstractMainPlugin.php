@@ -22,7 +22,6 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\Services\DataComposers\GraphQLDocumentDataComposer;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
@@ -34,7 +33,6 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
-use RuntimeException;
 use WP_Upgrader;
 
 use function __;
@@ -206,7 +204,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     public function getPluginActionLinks(array $actions): array
     {
-        if (!PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()) {
+        if (!PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()) {
             return $actions;
         }
         /** @var ModuleConfiguration */
@@ -293,8 +291,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function getAllSettingsOptions(): array
     {
         return [
-            Options::SCHEMA_CONFIGURATION,
             Options::ENDPOINT_CONFIGURATION,
+            Options::SCHEMA_CONFIGURATION,
+            Options::SCHEMA_TYPE_CONFIGURATION,
             Options::SERVER_CONFIGURATION,
             Options::PLUGIN_CONFIGURATION,
             Options::API_KEYS,
@@ -923,76 +922,5 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 return $classes;
             }
         );
-    }
-
-    /**
-     * @param string|null $tutorialLessonSlug The slug of the tutorial lesson's .md file, same as in TutorialLessonDataProvider
-     * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the tutorial lesson)
-     */
-    protected function readSetupGraphQLPersistedQueryAndEncodeForOutput(
-        string $relativeFilePath,
-        ?string $tutorialLessonSlug = null,
-        ?array $skipExtensionModules = null
-    ): string {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLDocumentDataComposer */
-        $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
-
-        $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
-        if (
-            $tutorialLessonSlug !== null
-            && !PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()
-        ) {
-            $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
-                $graphQLPersistedQuery,
-                $tutorialLessonSlug,
-                $skipExtensionModules,
-            );
-        }
-        $graphQLPersistedQuery = $graphQLDocumentDataComposer->encodeGraphQLDocumentForOutput($graphQLPersistedQuery);
-        return $graphQLPersistedQuery;
-    }
-
-    protected function readSetupGraphQLPersistedQuery(string $relativeFilePath): string
-    {
-        $persistedQueryFile = $this->getSetupGraphQLPersistedQueryFilePath($relativeFilePath, 'gql');
-        return $this->readFile($persistedQueryFile);
-    }
-
-    protected function getSetupGraphQLPersistedQueryFilePath(
-        string $relativeFilePath,
-        string $extension,
-    ): string {
-        $rootFolder = dirname(__DIR__, 2);
-        $persistedQueriesFolder = $rootFolder . '/setup/persisted-queries';
-        return $persistedQueriesFolder . '/' . $relativeFilePath . '.' . $extension;
-    }
-
-    protected function readSetupGraphQLVariablesJSONAndEncodeForOutput(string $relativeFilePath): string
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLDocumentDataComposer */
-        $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
-
-        $graphQLVariablesJSON = $this->readSetupGraphQLVariablesJSON($relativeFilePath);
-        $graphQLVariablesJSON = $graphQLDocumentDataComposer->encodeGraphQLVariablesJSONForOutput($graphQLVariablesJSON);
-        return $graphQLVariablesJSON;
-    }
-
-    protected function readSetupGraphQLVariablesJSON(string $relativeFilePath): string
-    {
-        $persistedQueryFile = $this->getSetupGraphQLPersistedQueryFilePath($relativeFilePath, 'var.json');
-        return $this->readFile($persistedQueryFile);
-    }
-
-    protected function readFile(string $filePath): string
-    {
-        $file = file_get_contents($filePath);
-        if ($file === false) {
-            throw new RuntimeException(
-                sprintf('Loading file \'%s\' failed', $filePath)
-            );
-        }
-        return $file;
     }
 }

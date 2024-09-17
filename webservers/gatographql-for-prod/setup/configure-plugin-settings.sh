@@ -14,7 +14,15 @@ curl -i --insecure \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"state": "enabled"}' \
-  $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/modules/gatographql_gatographql_single-endpoint
+  $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/modules/gatographql_gatographql_schema-configuration
+
+# Already set as "enabled" by default
+# curl -i --insecure \
+#   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
+#   -X POST \
+#   -H "Content-Type: application/json" \
+#   -d '{"state": "enabled"}' \
+#   $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/modules/gatographql_gatographql_single-endpoint
 
 
 echo Selecting "dummy" CPT, categories and tags

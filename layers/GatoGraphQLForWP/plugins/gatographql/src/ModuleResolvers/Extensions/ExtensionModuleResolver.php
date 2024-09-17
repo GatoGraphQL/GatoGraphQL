@@ -13,6 +13,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const AUTOMATION = Plugin::NAMESPACE . '\\extensions\\automation';
     public const CACHE_CONTROL = Plugin::NAMESPACE . '\\extensions\\cache-control';
     public const CONDITIONAL_FIELD_MANIPULATION = Plugin::NAMESPACE . '\\extensions\\conditional-field-manipulation';
+    public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\extensions\\custom-endpoints';
     public const DEPRECATION_NOTIFIER = Plugin::NAMESPACE . '\\extensions\\deprecation-notifier';
     public const EMAIL_SENDER = Plugin::NAMESPACE . '\\extensions\\email-sender';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
@@ -31,6 +32,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\\extensions\\low-level-persisted-query-editing';
     public const MULTILINGUALPRESS = Plugin::NAMESPACE . '\\extensions\\multilingualpress';
     public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\extensions\\multiple-query-execution';
+    public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\extensions\\persisted-queries';
     public const PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA = Plugin::NAMESPACE . '\\extensions\\php-constants-and-environment-variables-via-schema';
     public const PHP_FUNCTIONS_VIA_SCHEMA = Plugin::NAMESPACE . '\\extensions\\php-functions-via-schema';
     public const POLYLANG = Plugin::NAMESPACE . '\\extensions\\polylang';
@@ -48,6 +50,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::AUTOMATION,
             self::CACHE_CONTROL,
             self::CONDITIONAL_FIELD_MANIPULATION,
+            self::CUSTOM_ENDPOINTS,
             self::DEPRECATION_NOTIFIER,
             self::EMAIL_SENDER,
             self::EVENTS_MANAGER,
@@ -66,6 +69,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING,
             self::MULTILINGUALPRESS,
             self::MULTIPLE_QUERY_EXECUTION,
+            self::PERSISTED_QUERIES,
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
             self::PHP_FUNCTIONS_VIA_SCHEMA,
             self::POLYLANG,
@@ -82,6 +86,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::AUTOMATION => \__('Automation', 'gatographql'),
             self::CACHE_CONTROL => \__('Cache Control', 'gatographql'),
             self::CONDITIONAL_FIELD_MANIPULATION => \__('Conditional Field Manipulation', 'gatographql'),
+            self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'gatographql'),
             self::DEPRECATION_NOTIFIER => \__('Deprecation Notifier', 'gatographql'),
             self::EMAIL_SENDER => \__('Email Sender', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
@@ -100,6 +105,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Low-Level Persisted Query Editing', 'gatographql'),
             self::MULTILINGUALPRESS => \__('MultilingualPress', 'gatographql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Multiple Query Execution', 'gatographql'),
+            self::PERSISTED_QUERIES => \__('Persisted Queries', 'gatographql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('PHP Constants and Environment Variables via Schema', 'gatographql'),
             self::PHP_FUNCTIONS_VIA_SCHEMA => \__('PHP Functions via Schema', 'gatographql'),
             self::POLYLANG => \__('Polylang', 'gatographql'),
@@ -117,6 +123,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::AUTOMATION => \__('Use GraphQL to automate tasks in your app: Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron. (The Internal GraphQL Server extension is required).', 'gatographql'),
             self::CACHE_CONTROL => \__('Provide HTTP Caching for endpoints accessed via GET, with the max-age value automatically calculated from the query.', 'gatographql'),
             self::CONDITIONAL_FIELD_MANIPULATION => \__('Apply a directive on a field only if some condition is met.', 'gatographql'),
+            self::CUSTOM_ENDPOINTS => \__('Provide multiple GraphQL endpoints to target different users and applications.', 'gatographql'),
             self::DEPRECATION_NOTIFIER => \__('Send deprecations in the response to the query (and not only when doing introspection).', 'gatographql'),
             self::EMAIL_SENDER => \__('Send emails via global mutation <code>_sendEmail</code>.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
@@ -135,6 +142,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Make normally-hidden directives (which inject some functionality into the GraphQL server) visible when editing a persisted query.', 'gatographql'),
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple queries into a single query, sharing state across them and executing them in the requested order.', 'gatographql'),
+            self::PERSISTED_QUERIES => \__('Expose GraphQL endpoints with a predefined response, similar to REST endpoints.', 'gatographql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('Query the value from an environment variable or PHP constant.', 'gatographql'),
             self::PHP_FUNCTIONS_VIA_SCHEMA => \__('Manipulate the field output using standard programming language functions available in PHP.', 'gatographql'),
             self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
