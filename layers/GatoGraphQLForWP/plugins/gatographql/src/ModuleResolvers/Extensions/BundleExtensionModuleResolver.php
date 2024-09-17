@@ -21,7 +21,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\bundle-extensions\\multiple-query-execution';
     public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\bundle-extensions\\persisted-queries';
     public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
-    public const TAILORED_WORDPRESS_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\query-functions';
+    public const QUERY_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\query-functions';
     public const UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS = Plugin::NAMESPACE . '\\bundle-extensions\\unhindered-wordpress-email-notifications';
     public const VERSATILE_WORDPRESS_REQUEST_API = Plugin::NAMESPACE . '\\bundle-extensions\\versatile-wordpress-request-api';
 
@@ -44,7 +44,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::MULTIPLE_QUERY_EXECUTION,
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
-                self::TAILORED_WORDPRESS_AUTOMATOR,
+                self::QUERY_FUNCTIONS,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ] : [],
@@ -63,7 +63,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::MULTIPLE_QUERY_EXECUTION => sprintf($placeholder, \__('Multiple Query Execution', 'gatographql')),
             self::PERSISTED_QUERIES => sprintf($placeholder, \__('Persisted Queries', 'gatographql')),
             self::POLYLANG_INTEGRATION => sprintf($placeholder, \__('Polylang Integration', 'gatographql')),
-            self::TAILORED_WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Query Functions', 'gatographql')),
+            self::QUERY_FUNCTIONS => sprintf($placeholder, \__('Query Functions', 'gatographql')),
             self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('Unhindered WordPress Email Notifications', 'gatographql')),
             self::VERSATILE_WORDPRESS_REQUEST_API => sprintf($placeholder, \__('Versatile WordPress Request API', 'gatographql')),
             default => $module,
@@ -81,7 +81,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable', 'gatographql'),
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
             self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
-            self::TAILORED_WORDPRESS_AUTOMATOR => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
+            self::QUERY_FUNCTIONS => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
             self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => \__('Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email', 'gatographql'),
             self::VERSATILE_WORDPRESS_REQUEST_API => \__('Interact with any external API and cloud service, posting and fetching data to/from them', 'gatographql'),
             default => parent::getDescription($module),
@@ -244,7 +244,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             ],
-            self::TAILORED_WORDPRESS_AUTOMATOR => [
+            self::QUERY_FUNCTIONS => [
                 ExtensionModuleResolver::AUTOMATION,
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::EMAIL_SENDER,
@@ -318,7 +318,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
-            self::TAILORED_WORDPRESS_AUTOMATOR => [
+            self::QUERY_FUNCTIONS => [
                 self::DEPRECATION,
                 self::PERSISTED_QUERIES,
                 self::CUSTOM_ENDPOINTS,
