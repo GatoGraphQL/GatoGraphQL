@@ -15,15 +15,15 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 {
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
     public const ALL_FEATURE_BUNDLED_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-feature-bundled-extensions';
-    public const BETTER_WORDPRESS_WEBHOOKS = Plugin::NAMESPACE . '\\bundle-extensions\\better-wordpress-webhooks';
-    public const EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE = Plugin::NAMESPACE . '\\bundle-extensions\\easy-wordpress-bulk-transform-and-update';
-    public const PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\private-graphql-server-for-wordpress';
-    public const RESPONSIBLE_WORDPRESS_PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\responsible-wordpress-public-api';
-    public const SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\selective-content-import-export-and-sync-for-wordpress';
-    public const SIMPLEST_WORDPRESS_CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\simplest-wordpress-content-translation';
-    public const TAILORED_WORDPRESS_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\tailored-wordpress-automator';
-    public const UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS = Plugin::NAMESPACE . '\\bundle-extensions\\unhindered-wordpress-email-notifications';
-    public const VERSATILE_WORDPRESS_REQUEST_API = Plugin::NAMESPACE . '\\bundle-extensions\\versatile-wordpress-request-api';
+    public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
+    public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
+    public const DEPRECATION = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
+    public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\bundle-extensions\\multiple-query-execution';
+    public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\bundle-extensions\\persisted-queries';
+    public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
+    public const QUERY_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\query-functions';
+    public const SECURITY = Plugin::NAMESPACE . '\\bundle-extensions\\security';
+    public const SCHEMA_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\schema-extensions';
 
     /**
      * @return string[]
@@ -38,15 +38,15 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::ALL_FEATURE_BUNDLED_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
-                self::BETTER_WORDPRESS_WEBHOOKS,
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
-                self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
-                self::RESPONSIBLE_WORDPRESS_PUBLIC_API,
-                self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
-                self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
-                self::TAILORED_WORDPRESS_AUTOMATOR,
-                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
-                self::VERSATILE_WORDPRESS_REQUEST_API,
+                self::CACHING,
+                self::CUSTOM_ENDPOINTS,
+                self::DEPRECATION,
+                self::MULTIPLE_QUERY_EXECUTION,
+                self::PERSISTED_QUERIES,
+                self::POLYLANG_INTEGRATION,
+                self::QUERY_FUNCTIONS,
+                self::SECURITY,
+                self::SCHEMA_EXTENSIONS,
             ] : [],
         );
     }
@@ -57,15 +57,15 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
-            self::BETTER_WORDPRESS_WEBHOOKS => sprintf($placeholder, \__('Better WordPress Webhooks', 'gatographql')),
-            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => sprintf($placeholder, \__('Easy WordPress Bulk Transform & Update', 'gatographql')),
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => sprintf($placeholder, \__('Private GraphQL Server for WordPress', 'gatographql')),
-            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Responsible WordPress Public API', 'gatographql')),
-            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => sprintf($placeholder, \__('Selective Content Import, Export & Sync for WordPress', 'gatographql')),
-            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Simplest WordPress Content Translation', 'gatographql')),
-            self::TAILORED_WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Tailored WordPress Automator', 'gatographql')),
-            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('Unhindered WordPress Email Notifications', 'gatographql')),
-            self::VERSATILE_WORDPRESS_REQUEST_API => sprintf($placeholder, \__('Versatile WordPress Request API', 'gatographql')),
+            self::CACHING => sprintf($placeholder, \__('Caching', 'gatographql')),
+            self::CUSTOM_ENDPOINTS => sprintf($placeholder, \__('Custom Endpoints', 'gatographql')),
+            self::DEPRECATION => sprintf($placeholder, \__('Deprecation', 'gatographql')),
+            self::MULTIPLE_QUERY_EXECUTION => sprintf($placeholder, \__('Multiple Query Execution', 'gatographql')),
+            self::PERSISTED_QUERIES => sprintf($placeholder, \__('Persisted Queries', 'gatographql')),
+            self::POLYLANG_INTEGRATION => sprintf($placeholder, \__('Polylang Integration', 'gatographql')),
+            self::QUERY_FUNCTIONS => sprintf($placeholder, \__('Query Functions', 'gatographql')),
+            self::SECURITY => sprintf($placeholder, \__('Security', 'gatographql')),
+            self::SCHEMA_EXTENSIONS => sprintf($placeholder, \__('Schema Extensions', 'gatographql')),
             default => $module,
         };
     }
@@ -75,15 +75,15 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
-            self::BETTER_WORDPRESS_WEBHOOKS => \__('Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin', 'gatographql'),
-            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => \__('Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB', 'gatographql'),
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => \__('Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint', 'gatographql'),
-            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => \__('Enhance your public APIs with additional layers of security, speed, power, schema evolution and control', 'gatographql'),
-            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => \__('Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site', 'gatographql'),
-            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => \__('Translate your content into over 130 languages using the Google Translate API, without adding extra tables or inner joins to the DB', 'gatographql'),
-            self::TAILORED_WORDPRESS_AUTOMATOR => \__('Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more)', 'gatographql'),
-            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => \__('Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email', 'gatographql'),
-            self::VERSATILE_WORDPRESS_REQUEST_API => \__('Interact with any external API and cloud service, posting and fetching data to/from them', 'gatographql'),
+            self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
+            self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
+            self::DEPRECATION => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
+            self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable', 'gatographql'),
+            self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
+            self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
+            self::QUERY_FUNCTIONS => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
+            self::SECURITY => \__('Grant permission to users to modify the GraphQL schema, and define Access Control Lists to manage granular access to the API based', 'gatographql'),
+            self::SCHEMA_EXTENSIONS => \__('Collection of fields and directives added to the GraphQL schema, providing useful functionality concerning sending emails, manipulating strings, connecting to external APIs, and others', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -155,139 +155,79 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
-                // @todo Complete bundled extensions here
-            ],
-            self::BETTER_WORDPRESS_WEBHOOKS => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                // ExtensionModuleResolver::AUTOMATION,
+                ExtensionModuleResolver::CACHE_CONTROL,
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                ExtensionModuleResolver::CUSTOM_ENDPOINTS,
+                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
                 ExtensionModuleResolver::EMAIL_SENDER,
+                // ExtensionModuleResolver::EVENTS_MANAGER,
                 ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                ExtensionModuleResolver::HTTP_CLIENT,
-                ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-            ],
-            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => [
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-            ],
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                ExtensionModuleResolver::EMAIL_SENDER,
-                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                ExtensionModuleResolver::FIELD_DEPRECATION,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
                 ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
                 ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                 ExtensionModuleResolver::FIELD_TO_INPUT,
                 ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                // ExtensionModuleResolver::GOOGLE_TRANSLATE,
                 ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
                 ExtensionModuleResolver::HTTP_CLIENT,
                 ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                // ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
+                // ExtensionModuleResolver::MULTILINGUALPRESS,
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                ExtensionModuleResolver::PERSISTED_QUERIES,
                 ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-            ],
-            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => [
-                ExtensionModuleResolver::ACCESS_CONTROL,
-                ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
-                ExtensionModuleResolver::CACHE_CONTROL,
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
-                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-                ExtensionModuleResolver::FIELD_DEPRECATION,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                ExtensionModuleResolver::POLYLANG,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
-            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => [
+            self::CACHING => [
+                ExtensionModuleResolver::CACHE_CONTROL,
+                ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
+            ],
+            self::CUSTOM_ENDPOINTS => [
+                ExtensionModuleResolver::CUSTOM_ENDPOINTS,
+            ],
+            self::DEPRECATION => [
+                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
+                ExtensionModuleResolver::FIELD_DEPRECATION,
+            ],
+            self::MULTIPLE_QUERY_EXECUTION => [
+                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+            ],
+            self::PERSISTED_QUERIES => [
+                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
+                ExtensionModuleResolver::PERSISTED_QUERIES,
+            ],
+            self::POLYLANG_INTEGRATION => [
+                ExtensionModuleResolver::POLYLANG,
+            ],
+            self::QUERY_FUNCTIONS => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
                 ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                 ExtensionModuleResolver::FIELD_TO_INPUT,
                 ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                ExtensionModuleResolver::HTTP_CLIENT,
-                ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => [
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::GOOGLE_TRANSLATE,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+            self::SECURITY => [
+                ExtensionModuleResolver::ACCESS_CONTROL,
+                ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
-            self::TAILORED_WORDPRESS_AUTOMATOR => [
-                ExtensionModuleResolver::AUTOMATION,
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+            self::SCHEMA_EXTENSIONS => [
                 ExtensionModuleResolver::EMAIL_SENDER,
-                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
-                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                 ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
                 ExtensionModuleResolver::HTTP_CLIENT,
                 ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                 ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-            ],
-            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => [
-                ExtensionModuleResolver::EMAIL_SENDER,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-            ],
-            self::VERSATILE_WORDPRESS_REQUEST_API => [
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
-                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                ExtensionModuleResolver::HTTP_CLIENT,
-                ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
             default => [],
         };
@@ -305,32 +245,40 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 [$module]
             ),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
-                // @todo Complete bundled bundles here
+                self::CACHING,
+                self::CUSTOM_ENDPOINTS,
+                self::DEPRECATION,
+                self::MULTIPLE_QUERY_EXECUTION,
+                self::PERSISTED_QUERIES,
+                self::POLYLANG_INTEGRATION,
+                self::QUERY_FUNCTIONS,
+                self::SECURITY,
+                self::SCHEMA_EXTENSIONS,
             ],
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
-                self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
-                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
-                self::VERSATILE_WORDPRESS_REQUEST_API,
+            self::DEPRECATION => [
+                self::PERSISTED_QUERIES,
+                self::CUSTOM_ENDPOINTS,
+                self::SECURITY,
+                self::SCHEMA_EXTENSIONS,
             ],
-            self::BETTER_WORDPRESS_WEBHOOKS => [
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
-                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
-                self::VERSATILE_WORDPRESS_REQUEST_API,
+            self::CACHING => [
+                self::CUSTOM_ENDPOINTS,
+                self::SECURITY,
+                self::SCHEMA_EXTENSIONS,
             ],
-            self::TAILORED_WORDPRESS_AUTOMATOR => [
-                self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
-                self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
-                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
-                self::VERSATILE_WORDPRESS_REQUEST_API,
+            self::QUERY_FUNCTIONS => [
+                self::DEPRECATION,
+                self::PERSISTED_QUERIES,
+                self::CUSTOM_ENDPOINTS,
+                self::SECURITY,
+                self::SCHEMA_EXTENSIONS,
             ],
-            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => [
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+            self::PERSISTED_QUERIES => [
+                self::CUSTOM_ENDPOINTS,
             ],
-            self::VERSATILE_WORDPRESS_REQUEST_API => [
-                self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+            self::SCHEMA_EXTENSIONS => [
+                self::PERSISTED_QUERIES,
+                self::CUSTOM_ENDPOINTS,
             ],
             default => [],
         };
