@@ -1,27 +1,6 @@
 # “Query Functions” Bundle
 
-Automate tasks in your site. The automation action is done by executing a GraphQL persisted query, triggered by:
-
-- Scheduling a WP-Cron event
-- Reacting to a WordPress hook
-- Chaining after the completion of a previous GraphQL persisted query
-
-As these GraphQL persisted queries can be set as `private`, these tasks will only be executed internally (i.e. they are not exposed to the Internet).
-
-Some automation tasks you can execute are:
-
-- When uploading an image, if it has no description, call the OpenAI API and generate a caption for that image
-- If a published post has no thumbnail, automatically create an image with generative AI using the post's title as the prompt, and set it as a post's featured image
-- Check if a newly-published post contains some mandatory block and, if not, add it
-- Post newly-uploaded images to Instagram
-- Send a daily summary of activity in the site to your email
-- Send a "happy birthday" email to your users
-- Send yourself a reminder to contact a customer, two weeks after a product was sold
-- Send a notification to users when their comment was replied to
-- Send a welcome email to new users
-- Many more...
-
-Read tutorial lesson [Sending a daily summary of activity](https://gatographql.com/tutorial/sending-a-daily-summary-of-activity/) for an example of using WP-Cron to automate sending a daily activity email to the admin.
+Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities.
 
 ## List of bundled extensions
 
