@@ -15,7 +15,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 {
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
     public const ALL_FEATURE_BUNDLED_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-feature-bundled-extensions';
-    public const AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE = Plugin::NAMESPACE . '\\bundle-extensions\\automated-content-translation-and-sync-for-wordpress-multisite';
     public const BETTER_WORDPRESS_WEBHOOKS = Plugin::NAMESPACE . '\\bundle-extensions\\better-wordpress-webhooks';
     public const EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE = Plugin::NAMESPACE . '\\bundle-extensions\\easy-wordpress-bulk-transform-and-update';
     public const PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\private-graphql-server-for-wordpress';
@@ -39,7 +38,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::ALL_FEATURE_BUNDLED_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
-                self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE,
                 self::BETTER_WORDPRESS_WEBHOOKS,
                 self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
                 self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
@@ -59,7 +57,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
-            self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => sprintf($placeholder, \__('Automated Content Translation & Sync for WordPress Multisite', 'gatographql')),
             self::BETTER_WORDPRESS_WEBHOOKS => sprintf($placeholder, \__('Better WordPress Webhooks', 'gatographql')),
             self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => sprintf($placeholder, \__('Easy WordPress Bulk Transform & Update', 'gatographql')),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => sprintf($placeholder, \__('Private GraphQL Server for WordPress', 'gatographql')),
@@ -78,7 +75,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
-            self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => \__('Automatically create a translation of a newly-published post using the Google Translate API, for every language site on a WordPress multisite', 'gatographql'),
             self::BETTER_WORDPRESS_WEBHOOKS => \__('Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin', 'gatographql'),
             self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => \__('Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB', 'gatographql'),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => \__('Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint', 'gatographql'),
@@ -160,21 +156,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             ],
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
                 // @todo Complete bundled extensions here
-            ],
-            self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
-                ExtensionModuleResolver::AUTOMATION,
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::GOOGLE_TRANSLATE,
-                ExtensionModuleResolver::HTTP_CLIENT,
-                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
             self::BETTER_WORDPRESS_WEBHOOKS => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
@@ -325,9 +306,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             ),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
                 // @todo Complete bundled bundles here
-            ],
-            self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
-                self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
             ],
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
