@@ -193,4 +193,4 @@ mutation SendEmail @depends(on: "GetEmailData") {
 - [“Caching” Bundle](../../../../../bundle-extensions/caching/docs/modules/caching/en.md)
 - [“Deprecation” Bundle](../../../../../bundle-extensions/deprecation/docs/modules/deprecation/en.md)
 - [“Query Functions” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md)
-- [“Unhindered WordPress Email Notifications” Bundle](../../../../../bundle-extensions/unhindered-wordpress-email-notifications/docs/modules/unhindered-wordpress-email-notifications/en.md) -->
+- [“Unhindered WordPress Email Notifications” Bundle](../../../../../bundle-extensions/security/docs/modules/security/en.md) -->
