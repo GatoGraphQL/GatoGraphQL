@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
 class ExtensionModuleResolver extends AbstractExtensionModuleResolver
 {
@@ -44,7 +45,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
      */
     public function getModulesToResolve(): array
     {
-        return [
+        return PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions() ? [
             self::ACCESS_CONTROL,
             self::ACCESS_CONTROL_VISITOR_IP,
             self::AUTOMATION,
@@ -75,7 +76,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::POLYLANG,
             self::RESPONSE_ERROR_TRIGGER,
             self::SCHEMA_EDITING_ACCESS,
-        ];
+        ] : [];
     }
 
     public function getName(string $module): string
