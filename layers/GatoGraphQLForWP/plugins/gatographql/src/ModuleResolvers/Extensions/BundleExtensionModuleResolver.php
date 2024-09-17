@@ -107,10 +107,12 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 
     public function getLogoURL(string $module): string
     {
-        return match ($module) {
-            self::PRO => PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png',
-            default => parent::getLogoURL($module),
-        };
+        if ($module === self::PRO
+            || ($module === self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle())
+        ) {
+            return PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png';
+        }
+        return parent::getLogoURL($module);
     }
 
     /**
@@ -341,6 +343,9 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 $this->getModulesToResolve(),
                 [$module]
             ),
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => [
+                // @todo Complete here
+            ],
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
                 self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
             ],

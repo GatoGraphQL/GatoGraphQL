@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\BundleExtensionPluginMarkdownConte
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
@@ -44,8 +43,7 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $pluginURL = $mainPlugin->getPluginURL();
-        $bundleImageFileName = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle() ? 'GatoGraphQL-logo-face.png' : 'GatoGraphQL-logo-back-long.png';
-        return $pluginURL . 'assets/img/logos/' . $bundleImageFileName;
+        return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-back-long.png';
     }
 
     public function getGatoGraphQLExtensionSlug(string $module): string
