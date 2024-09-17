@@ -153,7 +153,7 @@ class ExtensionListTable extends AbstractExtensionListTable
             );
         }*/ else {
             $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
-        }
+}
         return sprintf(
             '
                 <span class="gatographql-extension-action-label">%s</span>
