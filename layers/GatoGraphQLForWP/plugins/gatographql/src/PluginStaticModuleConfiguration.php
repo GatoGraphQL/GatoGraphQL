@@ -43,6 +43,16 @@ class PluginStaticModuleConfiguration
     }
 
     /**
+     * Add the standalone Gato GraphQL PRO extensions to the Extensions page.
+     *
+     * @since v6.0
+     */
+    public static function offerStandaloneGatoGraphQLPROExtensions(): bool
+    {
+        return true;
+    }
+
+    /**
      * Since extracting persisted queries into a standalone plugin,
      * there's no more "plugin setup data" to install, but keep
      * the reference for future use.
