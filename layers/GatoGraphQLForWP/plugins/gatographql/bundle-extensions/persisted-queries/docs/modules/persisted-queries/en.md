@@ -1,22 +1,6 @@
 # “Persisted Queries” Bundle
 
-This bundle provides functionality to import content using different formats:
-
-- JSON
-- XML
-- CSV
-
-This allows you to import posts from another WordPress site via GraphQL or the REST API, from any non-WordPress site that has an API, from a WordPress RSS feed, or from Excel or Google Sheets (or other) by first exporting their data as CSV.
-
-Read tutorial lesson [Importing a post from another WordPress site](https://gatographql.com/tutorial/importing-a-post-from-another-wordpress-site/) to see an example.
-
-You can also export data into another WordPress site, for instance to synchronize content from a master site to multiple downstream sites in a WordPress multisite.
-
-Importing/exporting data is granular and selective: Instead of generating a single database dump containing all data, you get to choose what entries are to be imported or exported, and how they are mapped between the source and destination.
-
-You can also dynamically create posts based on customized data structures: Provide a CSV file with any desired columns (eg: `"Image URL 1"`, `"Image URL 2"`, and so on), provide an HTML template containing variables for each of the columns on the CSV (eg: `${imageURL1}`, `${imageURL2}` and so on), and the post will then be created with the custom format.
-
-Both the Classic Editor and Gutenberg are supported.
+Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs.
 
 ## List of bundled extensions
 
