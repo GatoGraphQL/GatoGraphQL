@@ -33,13 +33,24 @@ class PluginStaticModuleConfiguration
     }
 
     /**
-     * Add the standalone Gato GraphQL PRO bundles to the Extensions page.
+     * Add the "feature" Gato GraphQL PRO bundles to the Extensions page.
      *
      * @since v6.0
      */
     public static function offerGatoGraphQLPROFeatureBundles(): bool
     {
         return true;
+    }
+
+    /**
+     * Add the Gato GraphQL PRO bundle containing all the "feature"
+     * extension bundles to the Extensions page.
+     *
+     * @since v6.0
+     */
+    public static function offerGatoGraphQLPROAllFeatureExtensionBundle(): bool
+    {
+        return false;
     }
 
     /**

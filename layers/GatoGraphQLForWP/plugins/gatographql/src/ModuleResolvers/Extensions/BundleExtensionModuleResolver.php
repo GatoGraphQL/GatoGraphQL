@@ -35,8 +35,10 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle() ? [
                 self::PRO,
             ] : [],
-            PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
+            PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle() ? [
                 self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
+            ] : [],
+            PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
                 self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE,
                 self::BETTER_WORDPRESS_WEBHOOKS,
                 self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
