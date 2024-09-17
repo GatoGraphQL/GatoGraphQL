@@ -108,9 +108,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getLogoURL(string $module): string
     {
         return match ($module) {
-            self::PRO,
-            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS
-                => PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png',
+            self::PRO => PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png',
             default => parent::getLogoURL($module),
         };
     }
@@ -338,9 +336,8 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getBundledBundleExtensionModules(string $module): array
     {
         return match ($module) {
-            // "All in One Toolbox for WordPress" bundles all other bundles
-            self::PRO,
-            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => array_diff(
+            // "Gato GraphQL PRO" bundles all other bundles
+            self::PRO => array_diff(
                 $this->getModulesToResolve(),
                 [$module]
             ),
