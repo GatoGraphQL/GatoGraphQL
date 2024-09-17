@@ -1,14 +1,6 @@
 # “Deprecation” Bundle
 
-Use GraphQL as a tool to internally power your application, whether for your custom blocks, themes or plugins.
-
-This bundle provides an internal GraphQL server, that makes it possible to fetch data within PHP code, without accessing any endpoint (whether public or private). This allows you to simplify your functionality, making use of GraphQL to fetch and mutate data.
-
-Read tutorial lesson [Sending a notification when there is a new post](https://gatographql.com/tutorial/sending-a-notification-when-there-is-a-new-post/) for an example invoking the internal GraphQL server.
-
-In addition, fetching data to render dynamic blocks can become DRY: The same GraphQL query can be executed for both the WordPress editor (via JS code) and the back-end when accessing the single post (via PHP code).
-
-<!-- Read tutorial lesson [DRY code for blocks in Javascript and PHP](https://gatographql.com/tutorial/dry-code-for-blocks-in-javascript-and-php/), to learn more. -->
+Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface.
 
 ## List of bundled extensions
 
