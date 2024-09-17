@@ -1,4 +1,4 @@
-# “Tailored WordPress Automator” Bundle
+# “Query Functions” Bundle
 
 Automate tasks in your site. The automation action is done by executing a GraphQL persisted query, triggered by:
 

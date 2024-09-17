@@ -362,7 +362,7 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
 - Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
 - Renamed page "Recipes" to "Tutorial", and added settings to hide it
 - Renamed existing bundles:
-  - “Application Glue & Automator” Bundle => “Tailored WordPress Automator” Bundle
+  - “Application Glue & Automator” Bundle => “Query Functions” Bundle
   - “Content Translation” Bundle => “Polylang Integration” Bundle
   - “Public API” Bundle => “Multiple Query Execution” Bundle
 - Added documentation for new bundles:

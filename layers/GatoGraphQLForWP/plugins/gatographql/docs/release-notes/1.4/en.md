@@ -49,7 +49,7 @@ define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
 ## Improvements
 
 - Renamed existing bundles:
-  - “Application Glue & Automator” Bundle => “Tailored WordPress Automator” Bundle
+  - “Application Glue & Automator” Bundle => “Query Functions” Bundle
   - “Content Translation” Bundle => “Polylang Integration” Bundle
   - “Public API” Bundle => “Multiple Query Execution” Bundle
 - Added documentation for new bundles:
