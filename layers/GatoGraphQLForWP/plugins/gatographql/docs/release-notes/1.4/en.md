@@ -56,7 +56,7 @@ define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
   - “Automated Content Translation & Sync for WordPress Multisite” Bundle
   - “Caching” Bundle
   - “Custom Endpoints” Bundle
-  - “Private GraphQL Server for WordPress” Bundle
+  - “Deprecation” Bundle
   - “Selective Content Import, Export & Sync for WordPress” Bundle
   - “Unhindered WordPress Email Notifications” Bundle
   - “Versatile WordPress Request API” Bundle

@@ -177,7 +177,7 @@ query RetrieveGitHubActionArtifacts(
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
 - [“Caching” Bundle](../../../../../bundle-extensions/caching/docs/modules/caching/en.md)
-- [“Private GraphQL Server for WordPress” Bundle](../../../../../bundle-extensions/deprecation/docs/modules/deprecation/en.md)
+- [“Deprecation” Bundle](../../../../../bundle-extensions/deprecation/docs/modules/deprecation/en.md)
 - [“Selective Content Import, Export & Sync for WordPress” Bundle](../../../../../bundle-extensions/selective-content-import-export-and-sync-for-wordpress/docs/modules/selective-content-import-export-and-sync-for-wordpress/en.md)
 - [“Simplest WordPress Content Translation” Bundle](../../../../../bundle-extensions/simplest-wordpress-content-translation/docs/modules/simplest-wordpress-content-translation/en.md)
 - [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md)

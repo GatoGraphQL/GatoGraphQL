@@ -1,4 +1,4 @@
-# “Private GraphQL Server for WordPress” Bundle
+# “Deprecation” Bundle
 
 Use GraphQL as a tool to internally power your application, whether for your custom blocks, themes or plugins.
 
