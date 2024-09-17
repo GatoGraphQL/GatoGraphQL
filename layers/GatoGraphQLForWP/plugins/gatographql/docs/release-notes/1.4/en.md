@@ -57,7 +57,7 @@ define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
   - “Caching” Bundle
   - “Custom Endpoints” Bundle
   - “Deprecation” Bundle
-  - “Selective Content Import, Export & Sync for WordPress” Bundle
+  - “Persisted Queries” Bundle
   - “Unhindered WordPress Email Notifications” Bundle
   - “Versatile WordPress Request API” Bundle
 

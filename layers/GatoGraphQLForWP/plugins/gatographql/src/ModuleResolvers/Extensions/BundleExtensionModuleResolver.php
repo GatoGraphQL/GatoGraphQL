@@ -61,7 +61,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::CUSTOM_ENDPOINTS => sprintf($placeholder, \__('Custom Endpoints', 'gatographql')),
             self::DEPRECATION => sprintf($placeholder, \__('Deprecation', 'gatographql')),
             self::MULTIPLE_QUERY_EXECUTION => sprintf($placeholder, \__('Multiple Query Execution', 'gatographql')),
-            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => sprintf($placeholder, \__('Selective Content Import, Export & Sync for WordPress', 'gatographql')),
+            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => sprintf($placeholder, \__('Persisted Queries', 'gatographql')),
             self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Simplest WordPress Content Translation', 'gatographql')),
             self::TAILORED_WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Tailored WordPress Automator', 'gatographql')),
             self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('Unhindered WordPress Email Notifications', 'gatographql')),

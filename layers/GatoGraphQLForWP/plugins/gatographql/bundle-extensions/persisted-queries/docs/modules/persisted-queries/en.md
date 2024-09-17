@@ -1,4 +1,4 @@
-# “Selective Content Import, Export & Sync for WordPress” Bundle
+# “Persisted Queries” Bundle
 
 This bundle provides functionality to import content using different formats:
 
