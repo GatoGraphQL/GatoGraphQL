@@ -28,7 +28,7 @@ class PluginStaticModuleConfiguration
      *
      * @since v2.2
      */
-    public static function offerSinglePROCommercialProduct(): bool
+    public static function offerGatoGraphQLPROBundle(): bool
     {
         return true;
     }

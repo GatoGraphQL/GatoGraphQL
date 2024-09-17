@@ -158,7 +158,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryModule = $entry[2];
         /** @var ExtensionModuleResolverInterface */
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
-        $offerSinglePROCommercialProduct = PluginStaticModuleConfiguration::offerSinglePROCommercialProduct();
+        $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
         return sprintf(
             \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gatographql'),
             $entryTitle,
@@ -166,8 +166,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             '_blank',
             \__('Open in shop', 'gatographql'),
             $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
-                ? ($offerSinglePROCommercialProduct ? \__('go PRO', 'gatographql') : \__('get bundle', 'gatographql'))
-                : ($offerSinglePROCommercialProduct ? \__('visit on website', 'gatographql') : \__('get extension', 'gatographql')),
+                ? ($offerGatoGraphQLPROBundle ? \__('go PRO', 'gatographql') : \__('get bundle', 'gatographql'))
+                : ($offerGatoGraphQLPROBundle ? \__('visit on website', 'gatographql') : \__('get extension', 'gatographql')),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }
