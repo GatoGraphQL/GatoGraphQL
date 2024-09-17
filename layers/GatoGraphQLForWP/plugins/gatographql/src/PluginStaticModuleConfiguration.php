@@ -29,7 +29,7 @@ class PluginStaticModuleConfiguration
      */
     public static function offerGatoGraphQLPROBundle(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -49,7 +49,7 @@ class PluginStaticModuleConfiguration
      */
     public static function offerGatoGraphQLPROExtensions(): bool
     {
-        return true;
+        return false;
     }
 
     /**
