@@ -1,4 +1,4 @@
-# “Unhindered WordPress Emails Notifications” Bundle
+# “Security” Bundle
 
 Grant permission to users to modify the GraphQL schema, and define Access Control Lists to manage granular access to the API based.
 
