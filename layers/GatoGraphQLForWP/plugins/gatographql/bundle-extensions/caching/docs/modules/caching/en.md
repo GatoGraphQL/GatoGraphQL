@@ -1,4 +1,4 @@
-# “Better WordPress Webhooks” Bundle
+# “Caching” Bundle
 
 Use your WordPress site to receive, process and execute some operation using the incoming data from any service, via customized webhooks published directly within the wp-admin.
 

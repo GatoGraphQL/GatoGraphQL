@@ -57,7 +57,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
-            self::BETTER_WORDPRESS_WEBHOOKS => sprintf($placeholder, \__('Better WordPress Webhooks', 'gatographql')),
+            self::BETTER_WORDPRESS_WEBHOOKS => sprintf($placeholder, \__('Caching', 'gatographql')),
             self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => sprintf($placeholder, \__('Easy WordPress Bulk Transform & Update', 'gatographql')),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => sprintf($placeholder, \__('Private GraphQL Server for WordPress', 'gatographql')),
             self::RESPONSIBLE_WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Responsible WordPress Public API', 'gatographql')),

@@ -54,7 +54,7 @@ define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
   - “Public API” Bundle => “Responsible WordPress Public API” Bundle
 - Added documentation for new bundles:
   - “Automated Content Translation & Sync for WordPress Multisite” Bundle
-  - “Better WordPress Webhooks” Bundle
+  - “Caching” Bundle
   - “Easy WordPress Bulk Transform & Update” Bundle
   - “Private GraphQL Server for WordPress” Bundle
   - “Selective Content Import, Export & Sync for WordPress” Bundle

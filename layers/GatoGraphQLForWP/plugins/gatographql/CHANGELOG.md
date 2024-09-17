@@ -367,7 +367,7 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
   - “Public API” Bundle => “Responsible WordPress Public API” Bundle
 - Added documentation for new bundles:
   - “Automated Content Translation & Sync for WordPress Multisite” Bundle
-  - “Better WordPress Webhooks” Bundle
+  - “Caching” Bundle
   - “Easy WordPress Bulk Transform & Update” Bundle
   - “Private GraphQL Server for WordPress” Bundle
   - “Selective Content Import, Export & Sync for WordPress” Bundle

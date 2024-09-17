@@ -176,7 +176,7 @@ query RetrieveGitHubActionArtifacts(
 ## Bundles including extension
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Better WordPress Webhooks” Bundle](../../../../../bundle-extensions/caching/docs/modules/caching/en.md)
+- [“Caching” Bundle](../../../../../bundle-extensions/caching/docs/modules/caching/en.md)
 - [“Private GraphQL Server for WordPress” Bundle](../../../../../bundle-extensions/private-graphql-server-for-wordpress/docs/modules/private-graphql-server-for-wordpress/en.md)
 - [“Selective Content Import, Export & Sync for WordPress” Bundle](../../../../../bundle-extensions/selective-content-import-export-and-sync-for-wordpress/docs/modules/selective-content-import-export-and-sync-for-wordpress/en.md)
 - [“Simplest WordPress Content Translation” Bundle](../../../../../bundle-extensions/simplest-wordpress-content-translation/docs/modules/simplest-wordpress-content-translation/en.md)
