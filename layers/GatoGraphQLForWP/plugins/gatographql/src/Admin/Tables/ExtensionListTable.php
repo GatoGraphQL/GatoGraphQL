@@ -120,21 +120,23 @@ class ExtensionListTable extends AbstractExtensionListTable
     public function getPluginInstallActionLabel(array $plugin): string
     {
         $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
+        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
+        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
 
         // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
-        $extensionActionLabel = $plugin['gato_extension_is_bundle']
-            ? sprintf(
+        if ($plugin['gato_extension_is_bundle']) {
+            $extensionActionLabel = sprintf(
                 '%s%s',
                 $offerGatoGraphQLPROBundle ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
-            )
-            : (
-                $offerGatoGraphQLPROBundle ? sprintf(
-                    '%s%s',
-                    \__('Visit on website', 'gatographql'),
-                    HTMLCodes::OPEN_IN_NEW_WINDOW
-                ) : parent::getPluginInstallActionLabel($plugin)
             );
+        } else {
+            $extensionActionLabel = $offerGatoGraphQLPROBundle ? sprintf(
+                '%s%s',
+                \__('Visit on website', 'gatographql'),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            ) : parent::getPluginInstallActionLabel($plugin);
+        }
         return sprintf(
             '
                 <span class="gatographql-extension-action-label">%s</span>
