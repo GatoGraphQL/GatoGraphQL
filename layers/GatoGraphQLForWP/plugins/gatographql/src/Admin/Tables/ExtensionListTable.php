@@ -123,13 +123,19 @@ class ExtensionListTable extends AbstractExtensionListTable
         $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
         $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
 
+        $isBundle = $plugin['gato_extension_is_bundle'];
+
         // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
-        if ($plugin['gato_extension_is_bundle']) {
-            $extensionActionLabel = sprintf(
-                '%s%s',
-                $offerGatoGraphQLPROBundle ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
-                HTMLCodes::OPEN_IN_NEW_WINDOW
-            );
+        if ($isBundle) {
+            if ($offerGatoGraphQLPROExtensions) {
+                $extensionActionLabel = sprintf(
+                    '%s%s',
+                    $offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
+                    HTMLCodes::OPEN_IN_NEW_WINDOW
+                );
+            } else {
+                $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
+            }
         } elseif ($offerGatoGraphQLPROBundle) {
             $extensionActionLabel = sprintf(
                 '%s%s',
