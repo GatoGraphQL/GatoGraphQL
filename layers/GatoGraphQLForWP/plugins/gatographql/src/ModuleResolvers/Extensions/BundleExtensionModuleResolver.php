@@ -305,7 +305,15 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 [$module]
             ),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
-                // @todo Complete bundled bundles here
+                self::CACHING,
+                self::CUSTOM_ENDPOINTS,
+                self::DEPRECATION,
+                self::MULTIPLE_QUERY_EXECUTION,
+                self::PERSISTED_QUERIES,
+                self::POLYLANG_INTEGRATION,
+                self::QUERY_FUNCTIONS,
+                self::SECURITY,
+                self::SCHEMA_EXTENSIONS,
             ],
             self::DEPRECATION => [
                 self::PERSISTED_QUERIES,
