@@ -1,4 +1,4 @@
-# “All in One Toolbox for WordPress” Bundle
+# “All Extensions” Bundle
 
 This bundle contains **all of Gato GraphQL extensions**, in a single plugin, allowing you to achieve all superpowers using GraphQL:
 
