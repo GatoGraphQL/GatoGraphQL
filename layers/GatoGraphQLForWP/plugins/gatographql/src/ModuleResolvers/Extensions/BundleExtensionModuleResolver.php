@@ -58,7 +58,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         $placeholder = \__('“%s” Bundle', 'gatographql');
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
-            self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All in One Toolbox for WordPress', 'gatographql')),
+            self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => sprintf($placeholder, \__('Automated Content Translation & Sync for WordPress Multisite', 'gatographql')),
             self::BETTER_WORDPRESS_WEBHOOKS => sprintf($placeholder, \__('Better WordPress Webhooks', 'gatographql')),
             self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => sprintf($placeholder, \__('Easy WordPress Bulk Transform & Update', 'gatographql')),
@@ -77,7 +77,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         return match ($module) {
             self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
-            self::ALL_FEATURE_BUNDLED_EXTENSIONS => \__('Achieve all superpowers: All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
+            self::ALL_FEATURE_BUNDLED_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => \__('Automatically create a translation of a newly-published post using the Google Translate API, for every language site on a WordPress multisite', 'gatographql'),
             self::BETTER_WORDPRESS_WEBHOOKS => \__('Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin', 'gatographql'),
             self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => \__('Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB', 'gatographql'),
@@ -159,32 +159,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
-                ExtensionModuleResolver::ACCESS_CONTROL,
-                ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
-                ExtensionModuleResolver::AUTOMATION,
-                ExtensionModuleResolver::CACHE_CONTROL,
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
-                ExtensionModuleResolver::EMAIL_SENDER,
-                ExtensionModuleResolver::EVENTS_MANAGER,
-                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-                ExtensionModuleResolver::FIELD_DEPRECATION,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
-                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                ExtensionModuleResolver::FIELD_TO_INPUT,
-                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                ExtensionModuleResolver::GOOGLE_TRANSLATE,
-                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                ExtensionModuleResolver::HTTP_CLIENT,
-                ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
-                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
+                // @todo Complete bundled extensions here
             ],
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
                 ExtensionModuleResolver::AUTOMATION,
@@ -349,7 +324,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 [$module]
             ),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
-                // @todo Complete here
+                // @todo Complete bundled bundles here
             ],
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
                 self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
