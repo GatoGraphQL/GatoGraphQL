@@ -126,17 +126,16 @@ class ExtensionListTable extends AbstractExtensionListTable
         $isBundle = $plugin['gato_extension_is_bundle'];
 
         // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
-        if ($isBundle) {
-            if ($offerGatoGraphQLPROExtensions) {
-                $extensionActionLabel = sprintf(
-                    '%s%s',
-                    $offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
-                    HTMLCodes::OPEN_IN_NEW_WINDOW
-                );
-            } else {
-                $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
-            }
-        } elseif ($offerGatoGraphQLPROBundle) {
+        if ($isBundle && $offerGatoGraphQLPROExtensions) {
+            $extensionActionLabel = sprintf(
+                '%s%s',
+                $offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
+                HTMLCodes::OPEN_IN_NEW_WINDOW
+            );
+        }
+        elseif ($isBundle && !$offerGatoGraphQLPROExtensions) {
+            $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
+        } elseif ($offerGatoGraphQLPROBundle || $offerGatoGraphQLPROFeatureBundles) {
             $extensionActionLabel = sprintf(
                 '%s%s',
                 \__('Visit on website', 'gatographql'),
@@ -151,7 +150,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 <span class="gatographql-extension-bundle-action-label" style="display: none;">%s</span>
             ',
             $extensionActionLabel,
-            $offerGatoGraphQLPROBundle ? \__('Active (via PRO)', 'gatographql') : \__('Active (via Bundle)', 'gatographql')
+            $offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('Active (via PRO)', 'gatographql') : \__('Active (via Bundle)', 'gatographql')
         );
     }
 
