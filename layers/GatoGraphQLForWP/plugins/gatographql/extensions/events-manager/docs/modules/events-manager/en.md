@@ -24,4 +24,4 @@ query {
 <!-- 
 ## Bundles including extension
 
-- [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-in-one-toolbox-for-wordpress/docs/modules/all-in-one-toolbox-for-wordpress/en.md) -->
+- [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md) -->
