@@ -913,5 +913,5 @@ query {
 - [“Persisted Queries” Bundle](../../../../../bundle-extensions/persisted-queries/docs/modules/persisted-queries/en.md)
 - [“Polylang Integration” Bundle](../../../../../bundle-extensions/polylang-integration/docs/modules/polylang-integration/en.md)
 - [“Query Functions” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md)
-- [“Unhindered WordPress Email Notifications” Bundle](../../../../../bundle-extensions/security/docs/modules/security/en.md)
+- [“Security” Bundle](../../../../../bundle-extensions/security/docs/modules/security/en.md)
 - [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/versatile-wordpress-request-api/docs/modules/versatile-wordpress-request-api/en.md) -->

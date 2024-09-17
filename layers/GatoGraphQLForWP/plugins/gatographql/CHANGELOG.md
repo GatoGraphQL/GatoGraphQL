@@ -371,7 +371,7 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
   - “Custom Endpoints” Bundle
   - “Deprecation” Bundle
   - “Persisted Queries” Bundle
-  - “Unhindered WordPress Email Notifications” Bundle
+  - “Security” Bundle
   - “Versatile WordPress Request API” Bundle
 
 ### Fixed

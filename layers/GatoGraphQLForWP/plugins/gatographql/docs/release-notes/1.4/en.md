@@ -58,7 +58,7 @@ define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
   - “Custom Endpoints” Bundle
   - “Deprecation” Bundle
   - “Persisted Queries” Bundle
-  - “Unhindered WordPress Email Notifications” Bundle
+  - “Security” Bundle
   - “Versatile WordPress Request API” Bundle
 
 ## Fixed
