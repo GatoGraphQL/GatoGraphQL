@@ -107,9 +107,10 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 
     public function getLogoURL(string $module): string
     {
-        if ($module === self::PRO
-            || ($module === self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle())
-        ) {
+        if (in_array($module, [
+            self::PRO,
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
+        ])) {
             return PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png';
         }
         return parent::getLogoURL($module);
