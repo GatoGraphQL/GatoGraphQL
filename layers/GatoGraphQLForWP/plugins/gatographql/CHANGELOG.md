@@ -364,7 +364,7 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
 - Renamed existing bundles:
   - “Application Glue & Automator” Bundle => “Tailored WordPress Automator” Bundle
   - “Content Translation” Bundle => “Simplest WordPress Content Translation” Bundle
-  - “Public API” Bundle => “Responsible WordPress Public API” Bundle
+  - “Public API” Bundle => “Multiple Query Execution” Bundle
 - Added documentation for new bundles:
   - “Automated Content Translation & Sync for WordPress Multisite” Bundle
   - “Caching” Bundle

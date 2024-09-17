@@ -1,4 +1,4 @@
-# “Responsible WordPress Public API” Bundle
+# “Multiple Query Execution” Bundle
 
 If you need to expose data via a public API in your WordPress site, while being able to sleep at night (knowing that your site is safe), then you need this bundle!
 
