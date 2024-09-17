@@ -15,7 +15,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 {
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
     public const ALL_FEATURE_BUNDLED_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-feature-bundled-extensions';
-    public const BETTER_WORDPRESS_WEBHOOKS = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
+    public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
     public const EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE = Plugin::NAMESPACE . '\\bundle-extensions\\easy-wordpress-bulk-transform-and-update';
     public const PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\private-graphql-server-for-wordpress';
     public const RESPONSIBLE_WORDPRESS_PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\responsible-wordpress-public-api';
@@ -38,7 +38,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::ALL_FEATURE_BUNDLED_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
-                self::BETTER_WORDPRESS_WEBHOOKS,
+                self::CACHING,
                 self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
                 self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
                 self::RESPONSIBLE_WORDPRESS_PUBLIC_API,
@@ -57,7 +57,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
-            self::BETTER_WORDPRESS_WEBHOOKS => sprintf($placeholder, \__('Caching', 'gatographql')),
+            self::CACHING => sprintf($placeholder, \__('Caching', 'gatographql')),
             self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => sprintf($placeholder, \__('Easy WordPress Bulk Transform & Update', 'gatographql')),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => sprintf($placeholder, \__('Private GraphQL Server for WordPress', 'gatographql')),
             self::RESPONSIBLE_WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Responsible WordPress Public API', 'gatographql')),
@@ -75,7 +75,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
-            self::BETTER_WORDPRESS_WEBHOOKS => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
+            self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => \__('Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB', 'gatographql'),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => \__('Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint', 'gatographql'),
             self::RESPONSIBLE_WORDPRESS_PUBLIC_API => \__('Enhance your public APIs with additional layers of security, speed, power, schema evolution and control', 'gatographql'),
@@ -157,7 +157,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
                 // @todo Complete bundled extensions here
             ],
-            self::BETTER_WORDPRESS_WEBHOOKS => [
+            self::CACHING => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -313,7 +313,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
-            self::BETTER_WORDPRESS_WEBHOOKS => [
+            self::CACHING => [
                 self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
