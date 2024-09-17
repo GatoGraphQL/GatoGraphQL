@@ -137,7 +137,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 $offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
-        } elseif ($module === BundleExtensionModuleResolver::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS) {
+        } /*elseif ($module === BundleExtensionModuleResolver::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS) {
             $extensionActionLabel = sprintf(
                 '%s%s',
                 \__('Get Bundle', 'gatographql'),
@@ -151,7 +151,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 \__('Visit on website', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
-        } else {
+        }*/ else {
             $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
         }
         return sprintf(
