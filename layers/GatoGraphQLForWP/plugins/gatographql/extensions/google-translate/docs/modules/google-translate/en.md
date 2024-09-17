@@ -275,4 +275,4 @@ Define environment variables:
 ## Bundles including extension
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Simplest WordPress Content Translation” Bundle](../../../../../bundle-extensions/polylang-integration/docs/modules/polylang-integration/en.md) -->
+- [“Polylang Integration” Bundle](../../../../../bundle-extensions/polylang-integration/docs/modules/polylang-integration/en.md) -->

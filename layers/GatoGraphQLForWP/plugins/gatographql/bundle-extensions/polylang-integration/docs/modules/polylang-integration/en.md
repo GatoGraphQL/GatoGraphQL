@@ -1,4 +1,4 @@
-# “Simplest WordPress Content Translation” Bundle
+# “Polylang Integration” Bundle
 
 Translate your content into over 130 languages using the [Google Translate API](https://cloud.google.com/translate/).
 
