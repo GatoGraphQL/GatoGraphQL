@@ -130,12 +130,14 @@ class ExtensionListTable extends AbstractExtensionListTable
                 $offerGatoGraphQLPROBundle ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
-        } else {
-            $extensionActionLabel = $offerGatoGraphQLPROBundle ? sprintf(
+        } elseif ($offerGatoGraphQLPROBundle) {
+            $extensionActionLabel = sprintf(
                 '%s%s',
                 \__('Visit on website', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
-            ) : parent::getPluginInstallActionLabel($plugin);
+            );
+        } else {
+            $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
         }
         return sprintf(
             '
