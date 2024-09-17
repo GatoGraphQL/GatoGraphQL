@@ -132,9 +132,14 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $moduleRegistry = $this->getModuleRegistry();
         $modules = $moduleRegistry->getAllModules(true, false, false);
         $items = [];
+        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
+                continue;
+            }
+            $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
+            if (!$isBundleExtension && !$offerGatoGraphQLPROExtensions) {
                 continue;
             }
             $items[] = [
