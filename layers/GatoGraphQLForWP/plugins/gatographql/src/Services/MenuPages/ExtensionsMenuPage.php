@@ -162,7 +162,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
             );
         }
         return sprintf(
-            __('%1$s Browse all <a href="%2$s" target="%4$s">bundles%4$s</a> and <a href="%3$s" target="%4$s">extensions%5$s</a> on the Gato GraphQL website.', 'gatographql'),
+            __('%1$s Browse all <a href="%2$s" target="%4$s">bundles%5$s</a> and <a href="%3$s" target="%4$s">extensions%5$s</a> on the Gato GraphQL website.', 'gatographql'),
             $headerMessage,
             $moduleConfiguration->getGatoGraphQLBundlesPageURL(),
             $moduleConfiguration->getGatoGraphQLExtensionsPageURL(),
