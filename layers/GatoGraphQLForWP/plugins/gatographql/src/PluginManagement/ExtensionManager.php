@@ -357,7 +357,7 @@ class ExtensionManager extends AbstractPluginManager
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
                     __('<strong>%s</strong>: %s.', 'gatographql'),
-                    PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+                    PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle() && !PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
                         ? __('Gato GraphQL PRO', 'gatographql')
                         : sprintf(
                             __('Gato GraphQL - %s', 'gatographql'),
