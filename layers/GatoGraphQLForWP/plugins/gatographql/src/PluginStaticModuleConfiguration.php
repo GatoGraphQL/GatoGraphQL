@@ -43,11 +43,11 @@ class PluginStaticModuleConfiguration
     }
 
     /**
-     * Add the standalone Gato GraphQL PRO extensions to the Extensions page.
+     * Add the Gato GraphQL PRO extensions to the Extensions page.
      *
      * @since v6.0
      */
-    public static function offerStandaloneGatoGraphQLPROExtensions(): bool
+    public static function offerGatoGraphQLPROExtensions(): bool
     {
         return true;
     }
