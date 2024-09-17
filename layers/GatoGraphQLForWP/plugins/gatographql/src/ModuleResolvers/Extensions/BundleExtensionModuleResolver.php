@@ -23,7 +23,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
     public const QUERY_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\query-functions';
     public const SECURITY = Plugin::NAMESPACE . '\\bundle-extensions\\security';
-    public const VERSATILE_WORDPRESS_REQUEST_API = Plugin::NAMESPACE . '\\bundle-extensions\\versatile-wordpress-request-api';
+    public const VERSATILE_WORDPRESS_REQUEST_API = Plugin::NAMESPACE . '\\bundle-extensions\\schema-extensions';
 
     /**
      * @return string[]
