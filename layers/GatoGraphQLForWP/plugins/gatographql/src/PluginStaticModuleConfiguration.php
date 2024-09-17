@@ -23,8 +23,7 @@ class PluginStaticModuleConfiguration
     }
 
     /**
-     * Since only releasing the PRO bundle, disable generating
-     * all other bundles.
+     * Add the "Gato GraphQL PRO" bundle to the Extensions page
      *
      * @since v2.2
      */
