@@ -18,7 +18,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
     public const DEPRECATION = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
-    public const RESPONSIBLE_WORDPRESS_PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\multiple-query-execution';
+    public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\bundle-extensions\\multiple-query-execution';
     public const SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\selective-content-import-export-and-sync-for-wordpress';
     public const SIMPLEST_WORDPRESS_CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\simplest-wordpress-content-translation';
     public const TAILORED_WORDPRESS_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\tailored-wordpress-automator';
@@ -41,7 +41,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::CACHING,
                 self::CUSTOM_ENDPOINTS,
                 self::DEPRECATION,
-                self::RESPONSIBLE_WORDPRESS_PUBLIC_API,
+                self::MULTIPLE_QUERY_EXECUTION,
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
                 self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
                 self::TAILORED_WORDPRESS_AUTOMATOR,
@@ -60,7 +60,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::CACHING => sprintf($placeholder, \__('Caching', 'gatographql')),
             self::CUSTOM_ENDPOINTS => sprintf($placeholder, \__('Custom Endpoints', 'gatographql')),
             self::DEPRECATION => sprintf($placeholder, \__('Deprecation', 'gatographql')),
-            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Multiple Query Execution', 'gatographql')),
+            self::MULTIPLE_QUERY_EXECUTION => sprintf($placeholder, \__('Multiple Query Execution', 'gatographql')),
             self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => sprintf($placeholder, \__('Selective Content Import, Export & Sync for WordPress', 'gatographql')),
             self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Simplest WordPress Content Translation', 'gatographql')),
             self::TAILORED_WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Tailored WordPress Automator', 'gatographql')),
@@ -78,7 +78,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
             self::DEPRECATION => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
-            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => \__('Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable', 'gatographql'),
+            self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable', 'gatographql'),
             self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => \__('Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site', 'gatographql'),
             self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => \__('Translate your content into over 130 languages using the Google Translate API, without adding extra tables or inner joins to the DB', 'gatographql'),
             self::TAILORED_WORDPRESS_AUTOMATOR => \__('Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more)', 'gatographql'),
@@ -203,7 +203,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => [
+            self::MULTIPLE_QUERY_EXECUTION => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                 ExtensionModuleResolver::CACHE_CONTROL,
