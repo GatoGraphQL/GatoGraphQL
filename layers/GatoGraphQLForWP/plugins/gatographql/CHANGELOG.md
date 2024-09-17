@@ -368,7 +368,7 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
 - Added documentation for new bundles:
   - “Automated Content Translation & Sync for WordPress Multisite” Bundle
   - “Caching” Bundle
-  - “Easy WordPress Bulk Transform & Update” Bundle
+  - “Custom Endpoints” Bundle
   - “Private GraphQL Server for WordPress” Bundle
   - “Selective Content Import, Export & Sync for WordPress” Bundle
   - “Unhindered WordPress Email Notifications” Bundle
