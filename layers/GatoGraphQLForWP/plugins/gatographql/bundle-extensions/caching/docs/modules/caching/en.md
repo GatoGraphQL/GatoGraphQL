@@ -1,17 +1,6 @@
 # “Caching” Bundle
 
-Use your WordPress site to receive, process and execute some operation using the incoming data from any service, via customized webhooks published directly within the wp-admin.
-
-Some examples include:
-
-- Register a newsletter subscriber from InstaWP to Mailchimp
-- Send an email when a user unsubscribes from your newsletter list in ConvertKit
-- Add metadata in your WordPress site containing information from your plugin, whenever a pull request is merged on your GitHub repo
-- Update a post referencing a document in Dropbox whenever it's updated
-
-Read tutorial lesson [Interacting with external services via webhooks](https://gatographql.com/tutorial/interacting-with-external-services-via-webhooks/) to learn more.
-
-In addition to the HTTP client extension to interact with external services, this bundle includes the Access Control extensions, to validate that your public webhooks only accept calls from the expected services.
+Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations.
 
 ## List of bundled extensions
 
