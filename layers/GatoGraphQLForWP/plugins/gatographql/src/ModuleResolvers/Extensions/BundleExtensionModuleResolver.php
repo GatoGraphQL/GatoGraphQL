@@ -16,7 +16,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
     public const ALL_FEATURE_BUNDLED_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-feature-bundled-extensions';
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
-    public const EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
+    public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
     public const PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\private-graphql-server-for-wordpress';
     public const RESPONSIBLE_WORDPRESS_PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\responsible-wordpress-public-api';
     public const SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\selective-content-import-export-and-sync-for-wordpress';
@@ -39,7 +39,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             ] : [],
             PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
                 self::CACHING,
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::CUSTOM_ENDPOINTS,
                 self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
                 self::RESPONSIBLE_WORDPRESS_PUBLIC_API,
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
@@ -58,7 +58,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
             self::CACHING => sprintf($placeholder, \__('Caching', 'gatographql')),
-            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => sprintf($placeholder, \__('Custom Endpoints', 'gatographql')),
+            self::CUSTOM_ENDPOINTS => sprintf($placeholder, \__('Custom Endpoints', 'gatographql')),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => sprintf($placeholder, \__('Private GraphQL Server for WordPress', 'gatographql')),
             self::RESPONSIBLE_WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Responsible WordPress Public API', 'gatographql')),
             self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => sprintf($placeholder, \__('Selective Content Import, Export & Sync for WordPress', 'gatographql')),
@@ -76,7 +76,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             self::ALL_FEATURE_BUNDLED_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
-            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
+            self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => \__('Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint', 'gatographql'),
             self::RESPONSIBLE_WORDPRESS_PUBLIC_API => \__('Enhance your public APIs with additional layers of security, speed, power, schema evolution and control', 'gatographql'),
             self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => \__('Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site', 'gatographql'),
@@ -175,7 +175,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => [
+            self::CUSTOM_ENDPOINTS => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -309,28 +309,28 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             ],
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::CUSTOM_ENDPOINTS,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
             self::CACHING => [
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::CUSTOM_ENDPOINTS,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
             self::TAILORED_WORDPRESS_AUTOMATOR => [
                 self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::CUSTOM_ENDPOINTS,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
             self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => [
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::CUSTOM_ENDPOINTS,
             ],
             self::VERSATILE_WORDPRESS_REQUEST_API => [
                 self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
-                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::CUSTOM_ENDPOINTS,
             ],
             default => [],
         };
