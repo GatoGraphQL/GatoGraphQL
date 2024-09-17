@@ -45,5 +45,5 @@ query {
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
 - [“Caching” Bundle](../../../../../bundle-extensions/caching/docs/modules/caching/en.md)
 - [“Deprecation” Bundle](../../../../../bundle-extensions/deprecation/docs/modules/deprecation/en.md)
-- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md)
+- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md)
 - [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/versatile-wordpress-request-api/docs/modules/versatile-wordpress-request-api/en.md) -->

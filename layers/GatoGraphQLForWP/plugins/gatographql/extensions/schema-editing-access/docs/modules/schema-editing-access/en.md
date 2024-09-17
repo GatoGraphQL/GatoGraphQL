@@ -45,4 +45,4 @@ The appropriate configuration must be selected from the dropdown in the "Plugin 
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
 - [“Multiple Query Execution” Bundle](../../../../../bundle-extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
-- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md) -->
+- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/query-functions/docs/modules/query-functions/en.md) -->
