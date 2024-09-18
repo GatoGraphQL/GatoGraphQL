@@ -1,4 +1,4 @@
-# “Multiple Query Execution” Bundle
+# Multiple Query Execution
 
 Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable.
 

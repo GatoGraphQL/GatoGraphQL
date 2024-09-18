@@ -1,4 +1,4 @@
-# “Custom Endpoints” Bundle
+# Custom Endpoints
 
 Create custom schemas, with custom access rules for different users, each available under its own endpoint.
 
