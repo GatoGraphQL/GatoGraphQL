@@ -54,14 +54,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
 
     protected function getContentToPrint(): string
     {
-        // This is crazy: passing ?module=Foo\Bar\module,
-        // and then doing $_GET['module'], returns "Foo\\Bar\\module"
-        // So parse the URL to extract the "module" param
-        /** @var array<string,mixed> */
-        $result = [];
-        parse_str(App::server('REQUEST_URI'), $result);
-        /** @var string */
-        $requestedModule = $result[RequestParams::MODULE] ?? '';
+        $requestedModule = $this->getRequestedModule() ?? '';
         if ($requestedModule === '') {
             return sprintf(
                 '<p>%s</p>',
@@ -89,6 +82,19 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             );
         }
         return $documentation;
+    }
+
+    /**
+     * This is crazy: passing ?module=Foo\Bar\module,
+     * and then doing $_GET['module'], returns "Foo\\Bar\\module"
+     * So parse the URL to extract the "module" param
+     */
+    protected function getRequestedModule(): ?string
+    {
+        /** @var array<string,mixed> */
+        $result = [];
+        parse_str(App::server('REQUEST_URI'), $result);
+        return $result[RequestParams::MODULE] ?? null;
     }
 
     protected function getModuleCannotBeEmpty(): string
