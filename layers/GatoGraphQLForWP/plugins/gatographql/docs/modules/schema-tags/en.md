@@ -10,7 +10,11 @@ Custom Post Types defined by any theme or plugin (such as `"product"`) can likew
 
 We use fields `tag` and `tags` to fetch tag data, which indicate which taxonomy they refer to via field argument `taxonomy`. The result is of the union type `TagUnion`, which includes entries from either `PostTag` or `GenericTag` (depending on the entry's taxonomy).
 
+<div class="img-width-1024" markdown=1>
+
 ![TagUnion type in the Interactive Schema](../../images/interactive-schema-tag-union.png "TagUnion type in the Interactive Schema")
+
+</div>
 
 ## Querying tags
 
@@ -72,7 +76,11 @@ The tag taxonomies that can be queried must be explicitly configured. This can b
 
 In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration? (Or use default from Settings?)" and then selecting the desired items:
 
+<div class="img-width-1024" markdown=1>
+
 ![Selecting the allowed tag taxonomies in the Schema Configuration](../../images/tags-schema-configuration-queryable-taxonomies.png "Selecting the allowed tag taxonomies in the Schema Configuration")
+
+</div>
 
 _This list contains all the "non-hierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". If your desired tag taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist._
 

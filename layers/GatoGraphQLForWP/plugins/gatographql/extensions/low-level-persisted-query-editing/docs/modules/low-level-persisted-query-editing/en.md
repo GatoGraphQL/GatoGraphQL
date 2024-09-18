@@ -12,7 +12,11 @@ In Gato GraphQL, plenty of functionality involved when resolving a query is exec
 
 For instance, Cache Control works by applying directive `@cacheControl` on the schema. This configuration is by default hidden, and carried out by the plugin through the user interface:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining a cache control policy](../../images/cache-control-entry.png "Defining a cache control policy")
+
+</div>
 
 Similarly, these directives provide Access Control for fields (and similar directives provide Access Control for directives):
 
@@ -28,11 +32,20 @@ Similarly, these directives provide Access Control for fields (and similar direc
 
 This extension `Low-Level Persisted Query Editing` makes all directives to be applied to the schema available in the GraphiQL editor when editing persisted queries, allowing to avoid the user interface and add the schema-type directives already in the persisted query.
 
+<div class="img-width-1024" markdown=1>
+
 ![Schema-type directives available in the Persisted queries editor](../../images/low-level-persisted-query-editing.png "Schema-type directives available in the Persisted queries editor")
+
+</div>
 
 As an example, defining Cache Control can then be done directly in the persisted query, by setting directive `@cacheControl` with argument `maxAge` on the field; or Access Control can be defined directly, by adding the corresponding `@validate...` directive directly on the field:
 
+<div class="img-width-1024" markdown=1>
+
 ![Schema-type directives](../../images/schema-type-directives.gif "Schema-type directives")
+
+</div>
+
 <!-- 
 ## Bundles including extension
 

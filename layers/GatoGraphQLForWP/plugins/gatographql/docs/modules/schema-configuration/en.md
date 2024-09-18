@@ -39,15 +39,27 @@ A schema configuration is a custom post type (CPT). To create a new schema confi
 
 We can optionally remove those configuration blocks which use the corresponding "Default" value from the Settings. The removed block can be added once again via the inserter menu, by clicking on the `+` button at the bottom (please notice that only one instance of each block can be inserted):
 
+<div class="img-width-1024" markdown=1>
+
 ![Removing and adding blocks in the Schema Configuration](../../images/schema-configuration-removing-and-adding-blocks.gif)
+
+</div>
 
 To configure the different elements in the schema configuration, click on corresponding input, and it becomes editable. Then select the entries that apply to the configuration. When you are done, click on "Publish":
 
+<div class="img-width-1024" markdown=1>
+
 ![Creating a new Schema Configuration](../../images/editing-schema-configuration.gif)
+
+</div>
 
 Once published, the schema configuration becomes available when editing a Custom Endpoint or Persisted Query:
 
+<div class="img-width-1024" markdown=1>
+
 ![Selecting the Schema Configuration in the Custom Endpoint](../../images/schema-configuration-in-custom-endpoint.png)
+
+</div>
 
 If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema configuration selected in the Settings for the corresponding endpoint, under tabs "Custom Endpoints" or "Persisted Queries", will be used:
 
@@ -59,7 +71,11 @@ If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema
 
 Opening the schema configuration's permalink in the browser will show its contents (as long as the user is logged-in and the user role has access to it):
 
+<div class="img-width-1024" markdown=1>
+
 ![Schema configuration's source](../../images/schema-configuration-source.png)
+
+</div>
 
 ## Editor Inputs
 

@@ -14,11 +14,19 @@ A new "Access Control List" Custom Post Type is added to the site. We can browse
 
 </div>
 
+<div class="img-width-1024" markdown=1>
+
 ![Access Control List editor](../../images/access-control-list.png "Access Control List editor")
+
+</div>
 
 In the editor, we indicate what rules must be satisfied to access what schema elements, from among operations (`query` or `mutation`), fields, global fields, and directives.
 
+<div class="img-width-1024" markdown=1>
+
 ![Creating an Access Control List](../../images/access-control.gif "Creating an Access Control List")
+
+</div>
 
 We assign the Access Control List to the desired endpoint (private endpoint, single endpoint, custom endpoints or persisted queries) via the Schema Configuration.
 

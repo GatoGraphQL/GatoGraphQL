@@ -126,7 +126,11 @@ If the user doesn't have the permission to edit posts, we will receive:
 
 As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadUnion` and `ErrorPayload` types added, the GraphQL schema will have a bigger size:
 
+<div class="img-width-1024" markdown=1>
+
 ![GraphQL schema with payload object types for mutations](../../images/mutations-using-payload-object-types.png "GraphQL schema with payload object types for mutations")
+
+</div>
 
 #### Query the mutation payload objects
 
@@ -274,7 +278,11 @@ We must notice that, as a result, the top-level `errors` entry will contain not 
 
 Because there are no additional types added, the GraphQL schema will look leaner:
 
+<div class="img-width-1024" markdown=1>
+
 ![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
+
+</div>
 
 ### Configuration
 

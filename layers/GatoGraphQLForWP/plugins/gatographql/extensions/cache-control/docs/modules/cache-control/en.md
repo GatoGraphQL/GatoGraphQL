@@ -16,7 +16,11 @@ The response's `max-age` value is automatically calculated by the GraphQL engine
 - any field or directive has `max-age` with value `0`
 - an Access Control rule must check the user state for any field or directive (in which case, the response is specific to the user, so it cannot be cached)
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining a cache control policy](../../images/cache-control.gif "Defining a cache control policy")
+
+</div>
 
 ## Cache Control Lists
 
@@ -28,18 +32,31 @@ A new "Cache Control List" Custom Post Type is added to the site. We can browse 
 
 </div>
 
+<div class="img-width-1024" markdown=1>
+
 ![Cache Control List editor](../../images/cache-control-list.png "Cache Control List editor")
 
 Every Cache Control List contains one or many entries, each of them with the following elements:
 
+</div>
+
 - The fields and directives which, if they appear on the GraphQL query, the selected max-age takes effect
 - The max-age
 
+<div class="img-width-1024" markdown=1>
+
 ![Cache Control entry](../../images/cache-control-entry.png "Cache Control entry")
+
+</div>
 
 After creating the Cache Control List, we can have the endpoint use it by editing the corresponding Schema Configuration, and selecting the item from the list under block "Cache Control Lists".
 
+<div class="img-width-640" markdown=1>
+
 ![Selecting a Cache Control List in the Schema Configuration](../../images/schema-config-cache-control-lists.png "Selecting a Cache Control List in the Schema Configuration")
+
+</div>
+
 <!-- 
 ## Bundles including extension
 

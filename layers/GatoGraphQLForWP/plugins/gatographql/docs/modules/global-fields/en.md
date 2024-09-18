@@ -74,7 +74,11 @@ We can apply function fields multiple times to perform a more complex calculatio
 
 Global fields are added to all types in the GraphQL schema, which renders its visualization unwieldy:
 
+<div class="img-width-1024" markdown=1>
+
 ![Schema with global fields exposed under all types](../../images/schema-with-global-fields-under-all-types.png "Schema with global fields exposed under all types")
+
+</div>
 
 That's why the configuration (see next section) offers to not expose the global fields (when doing introspection), by either:
 
@@ -85,7 +89,11 @@ That's why the configuration (see next section) offers to not expose the global 
 
 By default, the schema exposes global fields under the Root type only, and it is easier to visualize and browse:
 
+<div class="img-width-1024" markdown=1>
+
 ![Schema with global fields exposed under the Root type only](../../images/schema-with-global-fields-under-root-type-only.png "Schema with global fields exposed under the Root type only")
+
+</div>
 
 ## Configuration
 
@@ -103,4 +111,8 @@ To select the general level of exposure of global fields in the GraphQL schema, 
 
 To modify the exposure of global fields on different custom endpoints, select the desired option in block "Global Fields" from the corresponding Schema Configuration:
 
+<div class="img-width-1024" markdown=1>
+
 ![Editing Global Fields in the Schema Configuration](../../images/schema-config-global-fields.png "Editing Global Fields in the Schema Configuration")
+
+</div>

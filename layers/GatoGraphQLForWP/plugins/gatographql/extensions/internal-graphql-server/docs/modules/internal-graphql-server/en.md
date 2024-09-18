@@ -91,7 +91,11 @@ Please notice that class `GraphQLServer` is not ready before the WordPress core 
 
 By default, the internal GraphQL Server applies the Schema Configuration selected in the Settings page, under tab "Server Configuration > Internal GraphQL Server".
 
+<div class="img-width-1024" markdown=1>
+
 ![Configuring the Internal GraphQL Server in the Settings](../../images/settings-schema-configuration-for-internal-graphql-server.png "Configuring the Internal GraphQL Server in the Settings")
+
+</div>
 
 This configuration also applies whenever the query executed against the internal GraphQL server was triggered by some other GraphQL query while being resolved in an endpoint with a different configuration (such as the public endpoint `graphql/`).
 

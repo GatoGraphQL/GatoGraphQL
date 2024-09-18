@@ -97,7 +97,11 @@ There are 2 places where this configuration can take place, in order of priority
 
 In the Schema Configuration applied to the endpoint, select option `"Use custom configuration"` and then input the desired entries:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the entries for the Schema Configuration](../../images/http-requests-schema-configuration-entries.png "Defining the entries for the Schema Configuration")
+
+</div>
 
 Otherwise, the entries defined in the "Send HTTP Request Fields" tab from the Settings will be used:
 
