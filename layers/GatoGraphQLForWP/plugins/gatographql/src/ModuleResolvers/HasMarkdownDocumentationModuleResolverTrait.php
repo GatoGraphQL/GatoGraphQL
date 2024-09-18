@@ -62,7 +62,7 @@ trait HasMarkdownDocumentationModuleResolverTrait
         if ($isBundleExtension) {
             /** @var BundleExtensionModuleResolverInterface */
             $bundleExtensionModuleResolver = $moduleResolver;
-            $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledBundleExtensionModules($module);
+            $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($module);
             foreach ($bundleExtensionModules as $bundleExtensionModule) {
                 $markdownContent .= $this->getDocumentation($bundleExtensionModule);
             }
