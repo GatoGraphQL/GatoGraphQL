@@ -106,7 +106,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             $entryID = $this->getEntryID($entryName);
             $markdownContent .= sprintf(
                 '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
-                '#' . $entryID,
+                '#' . $navContentUniqueID . ' > #' . $entryID,
                 $entryURL,
                 $entryName === $activeEntryName ? 'nav-tab-active' : '',
                 $entryTitle,

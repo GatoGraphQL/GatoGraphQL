@@ -406,7 +406,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                 );
                 $panelTabs .= sprintf(
                     '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
-                    '#' . $headerName,
+                    '#' . $navContentUniqueID . ' > #' . $headerName,
                     $headerURL,
                     $headerName === $activeHeaderName ? 'nav-tab-active' : '',
                     $headers[$i],
