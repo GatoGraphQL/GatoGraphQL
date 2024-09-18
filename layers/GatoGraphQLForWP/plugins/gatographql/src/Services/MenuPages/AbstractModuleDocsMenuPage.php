@@ -253,6 +253,11 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                                     %6$s
                                 </a>
                             </li>
+                            <li>
+                                <a href="%4$s" aria-label="%1$s">
+                                    %7$s
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="desc column-description">
@@ -261,7 +266,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                 </div>
                 <!--div class="plugin-card-bottom">
                     <div class="column-compatibility">
-                        %7$s
+                        %8$s
                     </div>
                 </div-->
             </div>
@@ -275,6 +280,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             $internalLink,
             $externalLink,
             \__('Browse on website', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW,
+            \__('More details', 'gatographql'),
             \__('')
         );
     }
