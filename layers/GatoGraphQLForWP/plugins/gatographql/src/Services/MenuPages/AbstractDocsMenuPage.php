@@ -61,6 +61,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
             <?php echo $content_safe ?>
         </div>
         <?php
+        echo $this->getAdditionalContentToPrint();
     }
 
     /**
@@ -78,6 +79,11 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
     }
 
     abstract protected function getContentToPrint(): string;
+
+    protected function getAdditionalContentToPrint(): string
+    {
+        return '';
+    }
 
     protected function openInModalWindow(): bool
     {
