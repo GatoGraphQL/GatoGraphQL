@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrai
 use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\App;
@@ -201,12 +202,18 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         
         return sprintf(
             '
+            <h2>%s</h2>
             <div class="wp-list-table widefat gato-graphql_page_gatographql_extensions gatographql-list-table">
 			    <div id="the-list">
                     %s
                 </div>
             </div>
             ',
+            PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
+                && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+                && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
+                ? \__('Modules included in this extension', 'gatographql')
+                : \__('Modules included in this bundle', 'gatographql'),
             $documentation
         );
     }
