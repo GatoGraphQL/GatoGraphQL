@@ -17,6 +17,7 @@
 - Display the "Enable Logs?" settings only when some extension is using it ([#2853](https://github.com/GatoGraphQL/GatoGraphQL/pull/2853))
 - Hide the Schema tutorial page by default ([#2854](https://github.com/GatoGraphQL/GatoGraphQL/pull/2854))
 - Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
+- Improved documentation for extensions ([#2866](https://github.com/GatoGraphQL/GatoGraphQL/pull/2866))
 
 ## Fixed
 

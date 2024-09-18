@@ -299,6 +299,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Display the "Enable Logs?" settings only when some extension is using it (#2853)
 * Hide the Schema tutorial page by default (#2854)
 * Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" (#2861)
+* Improved documentation for extensions (#2866)
 * [PRO] If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
 
 = 5.0.0 =
