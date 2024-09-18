@@ -16,7 +16,11 @@ In addition to supporting the single endpoint, the Gato GraphQL also makes it po
 
 The custom endpoint is a Custom Post Type, and its permalink is the endpoint. An endpoint with title `"My endpoint"` and slug `my-endpoint` will be accessible under `/graphql/my-endpoint/`.
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom endpoint editor](../../images/custom-endpoint.png "Custom endpoint editor")
+
+</div>
 
 ## Clients
 
@@ -26,13 +30,21 @@ Each custom endpoint has its own set of clients to interact with:
 
 Module `GraphiQL for Custom Endpoints` must be enabled.
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom endpoint's GraphiQL client](../../images/custom-endpoint-graphiql.png "Custom endpoint's GraphiQL client")
+
+</div>
 
 ✅ An **Interactive schema client**, available under the endpoint + `?view=schema` (eg: `/graphql/my-endpoint/?view=schema`).
 
 Module `Interactive Schema for Custom Endpoints` must be enabled.
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom endpoint's Interactive schema](../../images/custom-endpoint-interactive-schema.png "Custom endpoint's Interactive schema")
+
+</div>
 
 ## Creating a Custom Endpoint
 
@@ -46,15 +58,27 @@ Clicking on the Custom Endpoints link in the menu, it displays the list of all t
 
 A custom endpoint is a custom post type (CPT). To create a new custom endpoint, click on button "Add New GraphQL endpoint", which will open the WordPress editor:
 
+<div class="img-width-1024" markdown=1>
+
 ![Creating a new Custom Endpoint](../../images/new-custom-endpoint.png)
+
+</div>
 
 When the custom endpoint is ready, publish it, and its permalink becomes its endpoint URL. Links to the endpoint (and source and clients) are shown on the "Custom Endpoint Overview" sidebar panel:
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
+
+</div>
 
 Appending `?view=source` to the permalink, it will show the endpoint's configuration (as long as the user is logged-in and the user role has access to it):
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom endpoint source](../../images/custom-endpoint-source.png)
+
+</div>
 
 By default, the custom endpoint has path `/graphql/`, and this value is configurable through the Settings:
 
@@ -70,23 +94,43 @@ Defining what elements the schema contains, and what access will users have to i
 
 So we must create a create a schema configuration, and then select it from the dropdown:
 
+<div class="img-width-630" markdown=1>
+
 ![Selecting the schema configuration](../../../../../docs/images/select-schema-configuration.png)
+
+</div>
 
 ### Organizing Custom Endpoints by Category
 
 On the sidebar panel "Endpoint categories" we can add categories to help manage the Custom Endpoint:
 
+<div class="img-width-1024" markdown=1>
+
 ![Endpoint categories when editing a Custom Endpoint](../../images/graphql-custom-endpoint-editor-with-categories.png)
+
+</div>
 
 For instance, we can create categories to manage endpoints by client, application, or any other required piece of information:
 
+<div class="img-width-1024" markdown=1>
+
 ![List of endpoint categories](../../../../../docs/images/graphql-endpoint-categories.png)
+
+</div>
 
 On the list of Custom Endpoints, we can visualize their categories and, clicking on any category link, or using the filter at the top, will only display all entries for that category:
 
+<div class="img-width-1024" markdown=1>
+
 ![List of Custom Endpoints with their categories](../../images/graphql-custom-endpoints-with-categories.png)
 
+</div>
+
+<div class="img-width-1024" markdown=1>
+
 ![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
+
+</div>
 
 ### Private endpoints
 
@@ -94,21 +138,37 @@ By setting the status of the Custom Endpoint as `private`, the endpoint can only
 
 For instance, we can create private Custom Endpoints that help manage the application, such as retrieving data to create reports with our metrics.
 
+<div class="img-width-1024" markdown=1>
+
 ![Private Custom Endpoint](../../images/private-custom-endpoint.png)
+
+</div>
 
 ### Password-protected endpoints
 
 If we create a Custom Endpoint for a specific client, we can now assign a password to it, to provide an additional level of security that only that client will access the endpoint.
 
+<div class="img-width-1024" markdown=1>
+
 ![Password-protected Custom Endpoint](../../images/password-protected-custom-endpoint.png)
+
+</div>
 
 When first accessing a password-protected endpoint (whether accessing the endpoint directly, or its GraphiQL or Interactive Schema clients), we encounter a screen requesting the password:
 
+<div class="img-width-1024" markdown=1>
+
 ![Password-protected Custom Endpoint: First access](../../images/password-protected-custom-endpoint-unauthorized.png)
+
+</div>
 
 Once the password is provided and validated, only then the user will access the intended endpoint or client:
 
+<div class="img-width-1024" markdown=1>
+
 ![Password-protected Custom Endpoint: After authorization](../../images/password-protected-custom-endpoint-authorized.png)
+
+</div>
 
 ## Editor Inputs
 
