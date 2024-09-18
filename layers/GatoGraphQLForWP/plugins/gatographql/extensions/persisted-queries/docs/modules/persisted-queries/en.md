@@ -73,7 +73,11 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 </tbody>
 </table>
 
+<div class="img-width-1024" markdown=1>
+
 ![Persisted query editor](../../images/persisted-query.png "Persisted query editor")
+
+</div>
 
 ## Executing the Persisted Query
 
@@ -81,7 +85,11 @@ Once the persisted query is published, we can execute it via its permalink.
 
 The persisted query can be executed directly in the browser, since it is accessed via `GET`, and we will obtain the requested data, in JSON format:
 
+<div class="img-width-1024" markdown=1>
+
 ![Executing a persisted in the browser](../../images/persisted-query-execution.png)
+
+</div>
 
 ## Creating a Persisted Query
 
@@ -95,19 +103,35 @@ Clicking on the Persisted Queries link in the menu, it displays the list of all 
 
 A persisted query is a custom post type (CPT). To create a new persisted query, click on button "Add New GraphQL persisted query", which will open the WordPress editor:
 
+<div class="img-width-1024" markdown=1>
+
 ![Creating a new Persisted Query](../../images/new-persisted-query.png)
+
+</div>
 
 The main input is the GraphiQL client, which comes with the Explorer by default. Clicking on the fields on the left side panel adds them to the query, and clicking on the "Run" button executes the query:
 
+<div class="img-width-1024" markdown=1>
+
 ![Writing and executing a persisted query](../../../../../docs/images/graphiql-explorer.gif)
+
+</div>
 
 When the query is ready, publish it, and its permalink becomes its endpoint. The link to the endpoint (and to the source) is shown on the "Persisted Query Endpoint Overview" sidebar panel:
 
+<div class="img-width-1024" markdown=1>
+
 ![Persisted Query Endpoint Overview](../../images/persisted-query-endpoint-overview.png)
+
+</div>
 
 Appending `?view=source` to the permalink, it will show the persisted query and its configuration (as long as the user is logged-in and the user role has access to it):
 
+<div class="img-width-1024" markdown=1>
+
 ![Persisted query source](../../images/persisted-query-source.png)
+
+</div>
 
 By default, the persisted query's endpoint has path `/graphql-query/`, and this value is configurable through the Settings:
 
@@ -123,21 +147,37 @@ Defining what elements the schema contains, and what access will users have to i
 
 So we must create a create a schema configuration, and then select it from the dropdown:
 
+<div class="img-width-630" markdown=1>
+
 ![Selecting the schema configuration](../../../../../docs/images/select-schema-configuration.png)
+
+</div>
 
 ### Organizing Persisted Queries by Category
 
 On the sidebar panel "Endpoint categories" we can add categories to help manage the Persisted Query:
 
+<div class="img-width-1024" markdown=1>
+
 ![Endpoint categories when editing a Persisted Query](../../images/graphql-persisted-query-editor-with-categories.png)
+
+</div>
 
 For instance, we can create categories to manage endpoints by client, application, or any other required piece of information:
 
+<div class="img-width-1024" markdown=1>
+
 ![List of endpoint categories](../../../../../docs/images/graphql-endpoint-categories.png)
+
+</div>
 
 On the list of Persisted Queries, we can visualize their categories and, clicking on any category link, or using the filter at the top, will only display all entries for that category:
 
+<div class="img-width-1024" markdown=1>
+
 ![List of Persisted Queries with their categories](../../images/graphql-persisted-queries-with-categories.png)
+
+</div>
 
 ### Private persisted queries
 
@@ -145,17 +185,29 @@ By setting the status of the Persisted Query as `private`, the endpoint can only
 
 For instance, we can create private Persisted Queries that help manage the application, such as retrieving data to create reports with our metrics.
 
+<div class="img-width-1024" markdown=1>
+
 ![Private Persisted Query](../../images/private-persisted-query.png)
+
+</div>
 
 ### Password-protected persisted queries
 
 If we create a Persisted Query for a specific client, we can assign a password to it, to provide an additional level of security that only that client will access the endpoint.
 
+<div class="img-width-1024" markdown=1>
+
 ![Password-protected Persisted Query](../../images/password-protected-persisted-query.png)
+
+</div>
 
 When first accessing a password-protected persisted query, we encounter a screen requesting the password:
 
+<div class="img-width-1024" markdown=1>
+
 ![Password-protected Persisted Query: First access](../../images/password-protected-persisted-query-unauthorized.png)
+
+</div>
 
 Once the password is provided and validated, only then the user will access the intended endpoint.
 
@@ -165,11 +217,19 @@ The value for each variable can be set via a URL param (with the variable name) 
 
 For instance, in this query, the number of results is controlled via variable `$limit`, with a default value of 3:
 
+<div class="img-width-1024" markdown=1>
+
 ![Using variables in persisted query](../../images/new-persisted-query-variables.png)
+
+</div>
 
 When executing this persisted query, passing `?limit=5` will execute the query returning 5 results instead:
 
+<div class="img-width-640" markdown=1>
+
 ![Overriding value for variables in persisted query](../../images/executing-persisted-query-variables.png)
+
+</div>
 
 ## Editor Inputs
 
