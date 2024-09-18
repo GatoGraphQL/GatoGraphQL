@@ -274,7 +274,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             $internalLink,
             $externalLink,
             $description,
-            \__('Browse in website', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW,
+            \__('Browse on website', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW,
             \__('')
         );
     }
