@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
@@ -278,7 +279,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string}>
+     * @return array<array{0:string,1:string,2:mixed}>
      */
     abstract protected function getEntries(): array;
 }

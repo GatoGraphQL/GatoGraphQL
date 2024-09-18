@@ -85,7 +85,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string,2:string}>
+     * @return array<array{0:string,1:string,2:string}> Value: [0] => slug, [1] => name, [2] => module
      */
     protected function getEntries(): array
     {

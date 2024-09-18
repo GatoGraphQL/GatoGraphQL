@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
@@ -117,6 +118,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         /** @var array<string,mixed> */
         $result = [];
         parse_str(App::server('REQUEST_URI'), $result);
+        /** @var string|null */
         return $result[RequestParams::MODULE] ?? null;
     }
 
@@ -173,7 +175,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($module);
         
         $documentation = '';
-        $requestedURL = $this->getRequestHelperService()->getRequestedFullURL();
+        $requestedURL = $this->getRequestHelperService()->getRequestedFullURL() ?? '';
         $bundleURL = \remove_query_arg(
             RequestParams::DOC,
             $requestedURL
