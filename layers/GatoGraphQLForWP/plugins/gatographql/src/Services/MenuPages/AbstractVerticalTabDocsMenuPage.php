@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -149,6 +150,20 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
             $isBundleExtension = $entryModuleResolver instanceof BundleExtensionModuleResolverInterface;
             if ($isBundleExtension) {
+
+                $entryContent .= sprintf(
+                    '
+                    <br/>
+                    <p><u><strong>%s</strong></u></p>
+                    ',
+                    PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
+                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
+                        ? \__('Modules included in this extension:', 'gatographql')
+                        : \__('Modules included in this bundle:', 'gatographql')
+                );
+
+
                 /** @var BundleExtensionModuleResolverInterface */
                 $bundleExtensionModuleResolver = $entryModuleResolver;
                 $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($entryModule);                
