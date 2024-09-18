@@ -194,26 +194,26 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::CUSTOM_ENDPOINTS,
             ],
             self::DEPRECATION => [
-                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
                 ExtensionModuleResolver::FIELD_DEPRECATION,
+                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
             ],
             self::MULTIPLE_QUERY_EXECUTION => [
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
             ],
             self::PERSISTED_QUERIES => [
-                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
                 ExtensionModuleResolver::PERSISTED_QUERIES,
+                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
             ],
             self::POLYLANG_INTEGRATION => [
                 ExtensionModuleResolver::POLYLANG,
             ],
             self::QUERY_FUNCTIONS => [
-                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-                ExtensionModuleResolver::FIELD_ON_FIELD,
-                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                 ExtensionModuleResolver::FIELD_TO_INPUT,
                 ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                ExtensionModuleResolver::FIELD_ON_FIELD,
+                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
             self::SECURITY => [
@@ -223,11 +223,11 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             ],
             self::SCHEMA_EXTENSIONS => [
                 ExtensionModuleResolver::EMAIL_SENDER,
-                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
                 ExtensionModuleResolver::HTTP_CLIENT,
+                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
                 ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
             ],
             default => [],
         };
