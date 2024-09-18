@@ -212,6 +212,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         
         return sprintf(
             '
+            <hr/>
             <h2>%s</h2>
             <div class="wp-list-table widefat gato-graphql_page_gatographql_extensions gatographql-list-table">
 			    <div id="the-list">
