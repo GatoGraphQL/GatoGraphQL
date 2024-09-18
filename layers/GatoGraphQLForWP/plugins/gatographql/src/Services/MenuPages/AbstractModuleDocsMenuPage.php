@@ -174,6 +174,10 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         
         $documentation = '';
         $requestedURL = $this->getRequestHelperService()->getRequestedFullURL();
+        $bundleURL = \remove_query_arg(
+            RequestParams::DOC,
+            $requestedURL
+        );
         foreach ($bundleExtensionModules as $bundleExtensionModule) {
             /**
              * The URL is the current one, plus attr to open the .md file
@@ -217,8 +221,9 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                 PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
                     && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
                     && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
-                    ? \__('Modules included in the %s extension', 'gatographql')
-                    : \__('Modules included in the %s bundle', 'gatographql'),
+                    ? \__('Modules included in the <a href="%s">%s</a> extension', 'gatographql')
+                    : \__('Modules included in the <a href="%s">%s</a> bundle', 'gatographql'),
+                $bundleURL,
                 $moduleResolver->getName($module)
             ),
             $documentation
