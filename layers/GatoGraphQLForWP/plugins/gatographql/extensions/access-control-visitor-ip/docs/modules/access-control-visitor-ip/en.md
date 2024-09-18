@@ -22,7 +22,11 @@ For instance, any of these entries match IP address `"203.23.88.100"`:
 
 And under Behavior, select if to "Allow access" or "Deny access" to the schema for those entries.
 
+<div class="img-width-600" markdown=1>
+
 ![Adding entries in the Visitor IP block](../../images/acl-rule-visitor-ip-block.png "Adding entries in the Visitor IP block")
+
+</div>
 
 When access is denied, the response will contain an error message like this one (in the public mode):
 
