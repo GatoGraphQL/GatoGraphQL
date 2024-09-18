@@ -169,11 +169,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         $bundleExtensionModuleResolver = $moduleResolver;
         $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($module);
         
-        $documentation = '
-            <div class="wp-list-table widefat gato-graphql_page_gatographql_extensions gatographql-list-table">
-			    <div id="the-list">
-        ';
-
+        $documentation = '';
         $requestedURL = $this->getRequestHelperService()->getRequestedFullURL();
         foreach ($bundleExtensionModules as $bundleExtensionModule) {
             /** @var ExtensionModuleResolverInterface */
@@ -200,13 +196,17 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                 $extensionModuleResolver->getDescription($bundleExtensionModule),
             );
         }
-
-        $documentation .= '
+        
+        return sprintf(
+            '
+            <div class="wp-list-table widefat gato-graphql_page_gatographql_extensions gatographql-list-table">
+			    <div id="the-list">
+                    %s
                 </div>
             </div>
-        ';
-        
-        return $documentation;
+            ',
+            $documentation
+        );
     }
 
     protected function getBundleExtensionItemHTML(
