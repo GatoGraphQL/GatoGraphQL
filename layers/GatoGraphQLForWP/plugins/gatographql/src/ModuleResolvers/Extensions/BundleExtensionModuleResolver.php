@@ -255,31 +255,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::SECURITY,
                 self::SCHEMA_EXTENSIONS,
             ],
-            self::DEPRECATION => [
-                self::PERSISTED_QUERIES,
-                self::CUSTOM_ENDPOINTS,
-                self::SECURITY,
-                self::SCHEMA_EXTENSIONS,
-            ],
-            self::CACHING => [
-                self::CUSTOM_ENDPOINTS,
-                self::SECURITY,
-                self::SCHEMA_EXTENSIONS,
-            ],
-            self::QUERY_FUNCTIONS => [
-                self::DEPRECATION,
-                self::PERSISTED_QUERIES,
-                self::CUSTOM_ENDPOINTS,
-                self::SECURITY,
-                self::SCHEMA_EXTENSIONS,
-            ],
-            self::PERSISTED_QUERIES => [
-                self::CUSTOM_ENDPOINTS,
-            ],
-            self::SCHEMA_EXTENSIONS => [
-                self::PERSISTED_QUERIES,
-                self::CUSTOM_ENDPOINTS,
-            ],
             default => [],
         };
     }
