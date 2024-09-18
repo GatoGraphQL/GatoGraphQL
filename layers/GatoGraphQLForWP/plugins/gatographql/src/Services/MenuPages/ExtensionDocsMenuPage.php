@@ -191,8 +191,6 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
      */
     protected function getAdditionalEntryContentToPrint(array $entry): string
     {
-        $entryContent = '';
-
         $markdownContentOptions = $this->getMarkdownContentOptions();
         $entryModule = $entry[2];
 
@@ -200,18 +198,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
         $isBundleExtension = $entryModuleResolver instanceof BundleExtensionModuleResolverInterface;
         if ($isBundleExtension) {
-            $entryContent .= sprintf(
-                '
-                <br/>
-                <p><u><strong>%s</strong></u></p>
-                ',
-                PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
-                    && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
-                    && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
-                    ? \__('Modules included in this extension:', 'gatographql')
-                    : \__('Modules included in this bundle:', 'gatographql')
-            );
-
+            $contentEntries = [];
 
             /** @var BundleExtensionModuleResolverInterface */
             $bundleExtensionModuleResolver = $entryModuleResolver;
@@ -232,10 +219,24 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
                     ]),
                     $markdownContentOptions
                 ) ?? '';
-                $entryContent .= $entryModuleContent;
+                $contentEntries[] = $entryModuleContent;
+            }
+
+            if ($contentEntries !== []) {
+                return sprintf(
+                    '
+                    <br/>
+                    <p><u><strong>%s</strong></u></p>
+                    ',
+                    PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
+                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
+                        ? \__('Modules included in this extension:', 'gatographql')
+                        : \__('Modules included in this bundle:', 'gatographql')
+                ) . implode('<br/><hr/>', $contentEntries);
             }
         }
 
-        return $entryContent;
+        return '';
     }
 }
