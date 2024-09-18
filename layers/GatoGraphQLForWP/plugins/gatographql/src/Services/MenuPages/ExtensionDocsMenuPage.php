@@ -185,4 +185,58 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         }
         return parent::useTabpanelForContent();
     }
+
+    /**
+     * @var array{0:string,1:string,2:mixed} $entry
+     */
+    protected function getAdditionalEntryContentToPrint(array $entry): string
+    {
+        $entryContent = '';
+
+        $markdownContentOptions = $this->getMarkdownContentOptions();
+        $entryModule = $entry[2];
+
+        // Add the content for the bundled extensions
+        $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
+        $isBundleExtension = $entryModuleResolver instanceof BundleExtensionModuleResolverInterface;
+        if ($isBundleExtension) {
+
+            $entryContent .= sprintf(
+                '
+                <br/>
+                <p><u><strong>%s</strong></u></p>
+                ',
+                PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
+                    && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+                    && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
+                    ? \__('Modules included in this extension:', 'gatographql')
+                    : \__('Modules included in this bundle:', 'gatographql')
+            );
+
+
+            /** @var BundleExtensionModuleResolverInterface */
+            $bundleExtensionModuleResolver = $entryModuleResolver;
+            $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($entryModule);                
+            foreach ($bundleExtensionModules as $bundleExtensionModule) {
+                /** @var ExtensionModuleResolverInterface */
+                $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleExtensionModule);
+                $entryModuleName = sprintf(
+                    '%1$s/docs/modules/%1$s',
+                    $extensionModuleResolver->getSlug($bundleExtensionModule)
+                );
+                $entryModuleContent = $this->getMarkdownContent(
+                    $entryModuleName,
+                    $this->getEntryRelativePathDir([
+                        $entryModuleName,
+                        $extensionModuleResolver->getName($bundleExtensionModule),
+                        $bundleExtensionModule,
+                    ]),
+                    $markdownContentOptions
+                ) ?? '';
+                $entryContent .= $entryModuleContent;
+            }
+        }
+
+        return $entryContent;
+    }
 }

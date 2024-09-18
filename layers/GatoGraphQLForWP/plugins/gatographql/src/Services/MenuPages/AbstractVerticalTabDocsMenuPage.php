@@ -7,9 +7,6 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
-use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -124,7 +121,6 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         foreach ($entries as $entry) {
             $entryName = $entry[0];
             $entryTitle = $entry[1];
-            $entryModule = $entry[2];
 
             $entryRelativePathDir = $this->getEntryRelativePathDir($entry);
 
@@ -147,46 +143,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                 $entryContent
             );
 
-            // Add the content for the bundled extensions
-            $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
-            $isBundleExtension = $entryModuleResolver instanceof BundleExtensionModuleResolverInterface;
-            if ($isBundleExtension) {
-
-                $entryContent .= sprintf(
-                    '
-                    <br/>
-                    <p><u><strong>%s</strong></u></p>
-                    ',
-                    PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
-                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
-                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
-                        ? \__('Modules included in this extension:', 'gatographql')
-                        : \__('Modules included in this bundle:', 'gatographql')
-                );
-
-
-                /** @var BundleExtensionModuleResolverInterface */
-                $bundleExtensionModuleResolver = $entryModuleResolver;
-                $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($entryModule);                
-                foreach ($bundleExtensionModules as $bundleExtensionModule) {
-                    /** @var ExtensionModuleResolverInterface */
-                    $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleExtensionModule);
-                    $entryModuleName = sprintf(
-                        '%1$s/docs/modules/%1$s',
-                        $extensionModuleResolver->getSlug($bundleExtensionModule)
-                    );
-                    $entryModuleContent = $this->getMarkdownContent(
-                        $entryModuleName,
-                        $this->getEntryRelativePathDir([
-                            $entryModuleName,
-                            $extensionModuleResolver->getName($bundleExtensionModule),
-                            $bundleExtensionModule,
-                        ]),
-                        $markdownContentOptions
-                    ) ?? '';
-                    $entryContent .= $entryModuleContent;
-                }
-            }
+            $entryContent .= $this->getAdditionalEntryContentToPrint($entry);
 
             $entryID = $this->getEntryID($entryName);
             $markdownContent .= sprintf(
@@ -219,6 +176,14 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         </div>
         ';
         return $markdownContent;
+    }
+
+    /**
+     * @var array{0:string,1:string,2:mixed} $entry
+     */
+    protected function getAdditionalEntryContentToPrint(array $entry): string
+    {
+        return '';
     }
 
     protected function getEntryID(string $entryName): string
