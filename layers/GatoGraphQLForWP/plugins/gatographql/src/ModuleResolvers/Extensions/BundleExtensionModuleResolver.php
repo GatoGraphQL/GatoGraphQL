@@ -223,11 +223,11 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
             self::SCHEMA_EXTENSIONS => [
-                ExtensionModuleResolver::EMAIL_SENDER,
                 ExtensionModuleResolver::HTTP_CLIENT,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
                 ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                ExtensionModuleResolver::EMAIL_SENDER,
                 ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
             ],
             default => [],
