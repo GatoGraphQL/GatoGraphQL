@@ -12,6 +12,7 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -296,6 +297,14 @@ abstract class AbstractContentParser implements ContentParserInterface
      */
     protected function tabContent(string $htmlContent): string
     {
+        /**
+         * Assign a unique ID so that, if in the Extension Docs page
+         * there are 2 bundles with the "Description" tab (so that the
+         * "description" ID will be repeated on the page), clicking
+         * on it will identify the right one.
+         */
+        $navContentUniqueID = 'nav-content-' . GeneralUtils::generateRandomString(6, false);
+
         $tag = 'h2';
         $firstTagPos = strpos($htmlContent, '<' . $tag . '>');
         // Check if there is any <h2>
@@ -400,18 +409,18 @@ abstract class AbstractContentParser implements ContentParserInterface
                     '#' . $headerName,
                     $headerURL,
                     $headerName === $activeHeaderName ? 'nav-tab-active' : '',
-                    $headers[$i]
+                    $headers[$i],
                 );
             }
 
             return
                 $contentStarter
-                . '<div class="gatographql-tabpanel">'
+                . '<div class="gatographql-tabpanel" data-tab-content-target="#' . $navContentUniqueID . ' > .tab-content' . '">'
                 .   '<div class="nav-tab-container">'
                 .     '<h2 class="nav-tab-wrapper">'
                 .       $panelTabs
                 .     '</h2>'
-                .     '<div class="nav-tab-content">'
+                .     '<div id="' . $navContentUniqueID . '" class="nav-tab-content">'
                 .       $panelContent
                 .     '</div>'
                 .   '</div>'

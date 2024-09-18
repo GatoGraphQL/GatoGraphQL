@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 {
@@ -35,10 +36,11 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             }
         }
         $class = 'wrap vertical-tabs gatographql-tabpanel';
+        $navContentUniqueID = 'nav-content-' . GeneralUtils::generateRandomString(6, false);
 
         $markdownContent = sprintf(
             '
-            <div id="%s" class="%s">
+            <div id="%s" class="%s" data-tab-content-target="%s">
                 <h1>%s</h1>
                 %s
                 <div class="nav-tab-container">
@@ -47,6 +49,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             ',
             $this->getContentID(),
             $class,
+            '#' . $navContentUniqueID . ' > .tab-content',
             $this->getPageTitle(),
             $this->getPageHeaderHTML()
         );
@@ -87,13 +90,13 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                 '#' . $entryID,
                 $entryURL,
                 $entryName === $activeEntryName ? 'nav-tab-active' : '',
-                $entryTitle
+                $entryTitle,
             );
         }
 
         $markdownContent .= '
                     </h2>
-                    <div class="nav-tab-content">
+                    <div id="' . $navContentUniqueID . '" class="nav-tab-content">
         ';
 
         foreach ($entries as $entry) {
