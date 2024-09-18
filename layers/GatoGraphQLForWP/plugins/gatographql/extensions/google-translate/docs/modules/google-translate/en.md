@@ -271,8 +271,3 @@ Define environment variables:
 - `TRANSLATION_DEFAULT_FROM_LANG_CODE`
 - `TRANSLATION_DEFAULT_TO_LANG_CODE`
  -->
-<!-- 
-## Bundles including extension
-
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Polylang Integration” Bundle](../../../../../bundle-extensions/polylang-integration/docs/modules/polylang-integration/en.md) -->
