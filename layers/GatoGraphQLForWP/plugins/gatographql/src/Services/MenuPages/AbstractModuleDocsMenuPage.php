@@ -239,7 +239,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             <div class="plugin-card plugin-card-non-installed">
                 <div class="plugin-card-top">
                     <div class="name column-name">
-                        <a href="%3$s">
+                        <a href="%4$s">
                             <h3>
                                 %1$s
                                 <img src="%2$s" class="plugin-icon" alt="">
@@ -249,14 +249,14 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                     <div class="action-links">
                         <ul class="plugin-action-buttons">
                             <li>
-                                <a class="install-now button" href="%4$s" aria-label="%1$s" target="_blank">
+                                <a class="install-now button" href="%5$s" aria-label="%1$s" target="_blank">
                                     %6$s
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="desc column-description">
-                        <p>%5$s</p>
+                        <p>%3$s</p>
                     </div>
                 </div>
                 <!--div class="plugin-card-bottom">
@@ -271,9 +271,9 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             $itemHTMLPlaceholder,
             $title,
             $logoURL,
+            $description,
             $internalLink,
             $externalLink,
-            $description,
             \__('Browse on website', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW,
             \__('')
         );
