@@ -176,7 +176,11 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                     );
                     $entryModuleContent = $this->getMarkdownContent(
                         $entryModuleName,
-                        'extensions',//$entryRelativePathDir,
+                        $this->getEntryRelativePathDir([
+                            $entryModuleName,
+                            $extensionModuleResolver->getName($bundleExtensionModule),
+                            $bundleExtensionModule,
+                        ]),
                         $markdownContentOptions
                     ) ?? '';
                     $entryContent .= $entryModuleContent;
