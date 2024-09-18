@@ -171,6 +171,10 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             return '';
         }
 
+        if (App::query(RequestParams::DOC, '') !== '') {
+            return '';
+        }
+
         /** @var BundleExtensionModuleResolverInterface */
         $bundleExtensionModuleResolver = $moduleResolver;
         $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($module);
