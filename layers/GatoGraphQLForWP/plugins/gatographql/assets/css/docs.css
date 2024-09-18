@@ -3,6 +3,14 @@ ul {
     padding-left: 15px;
 }
 
+/**
+ * When the docs display the bundles, respect the original <ul> format
+ */
+ul.plugin-action-buttons {
+    list-style: none;
+    padding-left: 0;
+}
+
 .doc-highlight,
 .doc-config-highlight,
 .extension-highlight {    
