@@ -211,7 +211,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         return sprintf(
             '%s%s',
-            \__('Browse on website', 'gatographql'),
+            \__('Website', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }

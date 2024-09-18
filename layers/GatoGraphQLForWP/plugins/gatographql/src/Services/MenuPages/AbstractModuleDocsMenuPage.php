@@ -279,7 +279,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             $description,
             $internalLink,
             $externalLink,
-            \__('Browse on website', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW,
+            \__('Website', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW,
             \__('More details', 'gatographql'),
             sprintf(
                 '<span class="compatibility-compatible">%s</span>',

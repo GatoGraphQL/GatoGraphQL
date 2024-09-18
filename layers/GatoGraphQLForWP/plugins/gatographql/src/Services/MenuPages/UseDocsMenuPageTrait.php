@@ -19,7 +19,7 @@ trait UseDocsMenuPageTrait
 
         \wp_enqueue_style(
             'gatographql-docs',
-            $mainPluginURL . 'assets/css/docs.css',
+            $mainPluginURL . 'assets/css/docs.css?a=2',
             array(),
             $mainPluginVersion
         );
