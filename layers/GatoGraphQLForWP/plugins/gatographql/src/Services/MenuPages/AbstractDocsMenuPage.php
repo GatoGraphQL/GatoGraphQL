@@ -15,6 +15,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentRetrieverTrait;
 abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
 {
     use OpenInModalMenuPageTrait;
+    use ExtensionsMenuPageTrait;
     use UseTabpanelMenuPageTrait;
     use UseCollapsibleContentMenuPageTrait;
     use PrettyprintCodePageTrait;
@@ -90,6 +91,11 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
         return false;
     }
 
+    protected function printBundleExtensions(): bool
+    {
+        return false;
+    }
+
     protected function useTabpanelForContent(): bool
     {
         return false;
@@ -128,6 +134,13 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
          */
         if ($this->openInModalWindow()) {
             $this->enqueueModalAssets();
+        }
+
+        /**
+         * Add styles to print the list of bundled extensions
+         */
+        if ($this->printBundleExtensions()) {
+            $this->enqueueExtensionAssets();
         }
 
         /**
