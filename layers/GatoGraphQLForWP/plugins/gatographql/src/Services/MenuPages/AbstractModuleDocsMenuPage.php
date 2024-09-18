@@ -153,9 +153,8 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         }
         
         $module = urldecode($requestedModule);
-        $moduleRegistry = $this->getModuleRegistry();
         try {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
         } catch (ModuleNotExistsException) {
             return '';
         }
@@ -172,22 +171,25 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         $documentation = '';
         $requestedURL = $this->getRequestHelperService()->getRequestedFullURL();
         foreach ($bundleExtensionModules as $bundleExtensionModule) {
-            /** @var ExtensionModuleResolverInterface */
-            $extensionModuleResolver = $moduleRegistry->getModuleResolver($bundleExtensionModule);
-            $doc = sprintf(
-                '../../../../../extensions/%1$s/docs/modules/%1$s',
-                $extensionModuleResolver->getSlug($bundleExtensionModule)
-            );
+            /**
+             * The URL is the current one, plus attr to open the .md file
+             * in a modal window.
+             *
+             * Example of rendering this page:
+             *
+             *   https://mysite.com/wp-admin/admin.php?page=gatographql_extensions&tab=docs&module=GatoGraphQL%5CGatoGraphQL%5Cbundle-extensions%5Cpersisted-queries
+             */
+            $doc = $this->getBundledExtensionRelativePath($bundleExtensionModule);
             $elementURLParams = [
                 RequestParams::DOC => $doc,
             ];
-
-            // The URL is the current one, plus attr to open the .md file
-            // in a modal window
             $internalLink = \add_query_arg(
                 $elementURLParams,
                 $requestedURL
             );
+            
+            /** @var ExtensionModuleResolverInterface */
+            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleExtensionModule);
             $documentation .= $this->getBundleExtensionItemHTML(
                 $extensionModuleResolver->getName($bundleExtensionModule),
                 $extensionModuleResolver->getLogoURL($bundleExtensionModule),
@@ -206,6 +208,16 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             </div>
             ',
             $documentation
+        );
+    }
+
+    protected function getBundledExtensionRelativePath(string $module): string
+    {
+        /** @var ExtensionModuleResolverInterface */
+        $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+        return sprintf(
+            '../../../../../extensions/%1$s/docs/modules/%1$s',
+            $extensionModuleResolver->getSlug($module)
         );
     }
 
