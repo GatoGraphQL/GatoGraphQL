@@ -264,11 +264,11 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                         <p>%3$s</p>
                     </div>
                 </div>
-                <!--div class="plugin-card-bottom">
+                <div class="plugin-card-bottom">
                     <div class="column-compatibility">
                         %8$s
                     </div>
-                </div-->
+                </div>
             </div>
         ';
 
@@ -281,7 +281,10 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             $externalLink,
             \__('Browse on website', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW,
             \__('More details', 'gatographql'),
-            \__('')
+            sprintf(
+                '<span class="compatibility-compatible">%s</span>',
+                \__('<strong>Compatible</strong> with your version of WordPress')
+            )
         );
     }
 }
