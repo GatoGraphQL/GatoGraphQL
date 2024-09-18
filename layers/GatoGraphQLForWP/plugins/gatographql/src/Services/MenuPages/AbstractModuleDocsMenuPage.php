@@ -157,14 +157,14 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         if ($requestedModule === '') {
             return '';
         }
-        
+
         $module = urldecode($requestedModule);
         try {
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
         } catch (ModuleNotExistsException) {
             return '';
         }
-        
+
         $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
         if (!$isBundleExtension) {
             return '';
@@ -173,7 +173,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         /** @var BundleExtensionModuleResolverInterface */
         $bundleExtensionModuleResolver = $moduleResolver;
         $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($module);
-        
+
         $documentation = '';
         $requestedURL = $this->getRequestHelperService()->getRequestedFullURL() ?? '';
         $bundleURL = \remove_query_arg(
@@ -198,7 +198,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                 $elementURLParams,
                 $requestedURL
             );
-            
+
             /** @var ExtensionModuleResolverInterface */
             $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleExtensionModule);
             $documentation .= $this->getBundleExtensionItemHTML(
@@ -209,7 +209,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                 $extensionModuleResolver->getDescription($bundleExtensionModule),
             );
         }
-        
+
         return sprintf(
             '
             <hr/>

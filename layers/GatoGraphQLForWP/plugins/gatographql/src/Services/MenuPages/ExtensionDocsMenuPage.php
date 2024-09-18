@@ -200,7 +200,6 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
         $isBundleExtension = $entryModuleResolver instanceof BundleExtensionModuleResolverInterface;
         if ($isBundleExtension) {
-
             $entryContent .= sprintf(
                 '
                 <br/>
@@ -216,7 +215,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 
             /** @var BundleExtensionModuleResolverInterface */
             $bundleExtensionModuleResolver = $entryModuleResolver;
-            $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($entryModule);                
+            $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($entryModule);
             foreach ($bundleExtensionModules as $bundleExtensionModule) {
                 /** @var ExtensionModuleResolverInterface */
                 $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleExtensionModule);
