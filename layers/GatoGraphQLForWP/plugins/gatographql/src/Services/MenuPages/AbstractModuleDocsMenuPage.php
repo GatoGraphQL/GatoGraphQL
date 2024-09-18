@@ -209,11 +209,14 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
                 </div>
             </div>
             ',
-            PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
-                && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
-                && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
-                ? \__('Modules included in this extension', 'gatographql')
-                : \__('Modules included in this bundle', 'gatographql'),
+            sprintf(
+                PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
+                    && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+                    && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle()
+                    ? \__('Modules included in the %s extension', 'gatographql')
+                    : \__('Modules included in the %s bundle', 'gatographql'),
+                $moduleResolver->getName($module)
+            ),
             $documentation
         );
     }
