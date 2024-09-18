@@ -27,9 +27,17 @@ The number of levels is unlimited, so we can also create:
 
 Children persisted queries can override variables defined in the parent query. For instance, variable `$limit` is defined in the parent, and overridden in the child:
 
+<div class="img-width-1024" markdown=1>
+
 ![Parent persisted query](../../images/parent-persisted-query.png "Parent persisted query")
 
+</div>
+
+<div class="img-width-1024" markdown=1>
+
 ![Child persisted query](../../images/child-persisted-query.png "Child persisted query")
+
+</div>
 
 ## How to use
 

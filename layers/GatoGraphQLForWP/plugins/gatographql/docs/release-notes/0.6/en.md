@@ -8,7 +8,11 @@ You can now use [GitHub Updater](https://github.com/afragen/github-updater/) to 
 
 The GraphiQL Explorer enables to code the GraphQL query by point-and-clicking on fields:
 
+<div class="img-width-1024" markdown=1>
+
 ![Writing and executing a persisted query](../../images/graphiql-explorer.gif)
+
+</div>
 
 Previously, it was only available on the GraphiQL client for creating persisted queries. It has now been also added in the other locations:
 
@@ -16,11 +20,19 @@ Previously, it was only available on the GraphiQL client for creating persisted 
 - Single endpoint public GraphiQL client
 - Custom endpoint public GraphiQL clients
 
+<div class="img-width-1024" markdown=1>
+
 ![Public client with GraphiQL Explorer](../../images/releases/v06/public-client-with-graphiql-explorer.png)
+
+</div>
 
 Enabled by default, the GraphiQL Explorer can be disabled for selected clients via the Settings:
 
+<div class="img-width-1024" markdown=1>
+
 ![Public client with GraphiQL Explorer](../../images/legacy/v06/settings-graphiql-explorer.png)
+
+</div>
 
 ## Embeddable fields
 
@@ -84,8 +96,16 @@ A new About page has been added containing:
 
 Starting from this version, immediately after updating the plugin, an admin notice will display a link to read the release notes for the new version:
 
+<div class="img-width-1024" markdown=1>
+
 ![Offering to read the release notes via an admin notice](../../images/releases/v06/admin-notice-release-notes.png)
+
+</div>
 
 When clicking on the link, the release notes are shown on a modal window:
 
+<div class="img-width-1024" markdown=1>
+
 ![Release notes in a modal window](../../images/releases/v06/release-notes-in-modal.png)
+
+</div>

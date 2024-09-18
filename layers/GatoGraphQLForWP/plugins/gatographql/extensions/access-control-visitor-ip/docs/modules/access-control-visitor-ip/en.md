@@ -6,7 +6,11 @@ Grant access to the schema based on the visitor's IP address (Access Control ext
 
 In the Access Control editor, a new rule "Visitor IP" is made available:
 
+<div class="img-width-1024" markdown=1>
+
 ![Access Control: Visitor IP rule](../../images/acl-rule-visitor-ip.png "Access Control: Visitor IP rule")
+
+</div>
 
 We configure the rule with the list of IP addresses that can either access, or are denied access to, the schema elements.
 
