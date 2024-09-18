@@ -157,8 +157,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             '_blank',
             \__('Open in shop', 'gatographql'),
             $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
-                ? ($offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('go PRO', 'gatographql') : \__('get bundle', 'gatographql'))
-                : ($offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('visit on website', 'gatographql') : \__('get extension', 'gatographql')),
+                ? ($offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('go PRO', 'gatographql') : \__('website', 'gatographql'))
+                : \__('website', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }
