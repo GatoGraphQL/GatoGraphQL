@@ -187,7 +187,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @var array{0:string,1:string,2:mixed} $entry
+     * @param array{0:string,1:string,2:mixed} $entry
      */
     protected function getAdditionalEntryContentToPrint(array $entry): string
     {
