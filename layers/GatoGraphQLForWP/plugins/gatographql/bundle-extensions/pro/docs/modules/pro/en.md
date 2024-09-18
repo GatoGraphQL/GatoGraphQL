@@ -8,7 +8,7 @@ With Gato GraphQL PRO, you can achieve all the things from the video:
 
 [Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo)
 
-## List of bundled extensions
+<!-- ## List of bundled extensions
 
 - [Access Control](../../../../../extensions/access-control/docs/modules/access-control/en.md)
 - [Access Control Visitor IP](../../../../../extensions/access-control-visitor-ip/docs/modules/access-control-visitor-ip/en.md)
@@ -39,4 +39,4 @@ With Gato GraphQL PRO, you can achieve all the things from the video:
 - [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
 - [Polylang](../../../../../extensions/polylang/docs/modules/polylang/en.md)
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
-- [Schema Editing Access](../../../../../extensions/schema-editing-access/docs/modules/schema-editing-access/en.md)
+- [Schema Editing Access](../../../../../extensions/schema-editing-access/docs/modules/schema-editing-access/en.md) -->
