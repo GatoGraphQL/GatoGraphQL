@@ -146,6 +146,12 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         );
     }
 
+    /**
+     * Display the list of bundled extensions.
+     *
+     * Only when rendering the bundle => there's no &doc=... param
+     * passed.
+     */
     protected function getAdditionalContentToPrint(): string
     {
         $requestedModule = $this->getRequestedModule() ?? '';
