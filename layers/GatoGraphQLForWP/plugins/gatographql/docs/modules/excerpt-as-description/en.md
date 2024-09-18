@@ -23,10 +23,18 @@ The description is shown in the table listing the entities for each Custom Post 
 
 The description is also displayed when visualizing the entity:
 
+<div class="img-width-1024" markdown=1>
+
 ![Persisted query source with description](../../images/persisted-query-source.png "Persisted query source with description")
+
+</div>
 
 ## How to use
 
 When editing the entity, use the excerpt field to provide a description:
 
+<div class="img-width-1024" markdown=1>
+
 ![Excerpt as description](../../images/excerpt-as-description.png "Excerpt as description")
+
+</div>
