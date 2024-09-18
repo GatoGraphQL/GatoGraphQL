@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentR
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 
 class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
@@ -17,22 +16,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     use OpenInModalTriggerMenuPageTrait;
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
 
-    private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?ExtensionsMenuPage $extensionsMenuPage = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-    final protected function getModuleRegistry(): ModuleRegistryInterface
-    {
-        if ($this->moduleRegistry === null) {
-            /** @var ModuleRegistryInterface */
-            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-            $this->moduleRegistry = $moduleRegistry;
-        }
-        return $this->moduleRegistry;
-    }
     final public function setExtensionsMenuPage(ExtensionsMenuPage $extensionsMenuPage): void
     {
         $this->extensionsMenuPage = $extensionsMenuPage;
@@ -188,5 +173,16 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $this->enqueueModalTriggerAssets();
 
         $this->enqueueResponsiveVideoContainerAssets();
+    }
+
+    /**
+     * Print the bundled extensions using a tabPanel
+     */
+    protected function useTabpanelForContent(): bool
+    {
+        if (!PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions()) {
+            return true;
+        }
+        return parent::useTabpanelForContent();
     }
 }
