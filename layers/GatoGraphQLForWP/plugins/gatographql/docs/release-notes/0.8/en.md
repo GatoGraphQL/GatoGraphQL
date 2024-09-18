@@ -300,7 +300,11 @@ Sorry for this inconvenience.
 
 In addition, you will need to click on the "Reset the template" button shown in the WordPress editor, for all entries for the 3 CPTs.
 
+<div class="img-width-1024" markdown=1>
+
 ![Reset the template in the WordPress editor](../../images/legacy/v07/reset-template.png)
+
+</div>
 
 ### Removed non-standard directives
 

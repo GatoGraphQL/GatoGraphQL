@@ -10,7 +10,11 @@ Custom Post Types defined by any theme or plugin (such as `"product"`) can likew
 
 We use fields `category` and `categories` to fetch category data, which indicate which taxonomy they refer to via field argument `taxonomy`. The result is of the union type `CategoryUnion`, which includes entries from either `PostCategory` or `GenericCategory` (depending on the entry's taxonomy).
 
+<div class="img-width-1024" markdown=1>
+
 ![CategoryUnion type in the Interactive Schema](../../images/interactive-schema-category-union.png "CategoryUnion type in the Interactive Schema")
+
+</div>
 
 ## Querying categories
 
@@ -72,7 +76,11 @@ The category taxonomies that can be queried must be explicitly configured. This 
 
 In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration? (Or use default from Settings?)" and then selecting the desired items:
 
+<div class="img-width-1024" markdown=1>
+
 ![Selecting the allowed category taxonomies in the Schema Configuration](../../images/categories-schema-configuration-queryable-taxonomies.png "Selecting the allowed category taxonomies in the Schema Configuration")
+
+</div>
 
 _This list contains all the "hierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". If your desired category taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist._
 

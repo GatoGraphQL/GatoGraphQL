@@ -8,11 +8,19 @@ This module provides the basic schema functionality for custom posts, so it must
 
 It also provides type `CustomPostUnion`, which is used whenever an entity can return custom posts.
 
+<div class="img-width-1024" markdown=1>
+
 ![`CustomPostUnion` type](../../images/interactive-schema-custompost-union.png "`CustomPostUnion` type")
+
+</div>
 
 For instance, a comment can be added to a post, but also to a page and to a CPT, hence type `Comment` has field `customPost: CustomPostUnion!` (instead of field `post: Post!`) to retrieve the entity where the comment was added.
 
+<div class="img-width-1024" markdown=1>
+
 ![`Comment` type](../../images/interactive-schema-comment.png "`Comment` type")
+
+</div>
 
 Because all Custom Posts implement interface `CustomPost`, we can retrieve data from `CustomPostUnion` using a fragment reference or an inline fragment:
 
@@ -99,7 +107,11 @@ The custom post types that can be queried must be explicitly configured. This ca
 
 In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration? (Or use default from Settings?)" and then selecting the desired items:
 
+<div class="img-width-1024" markdown=1>
+
 ![Selecting the allowed Custom Post Types in the Schema Configuration](../../images/customposts-schema-configuration-queryable-cpts.png "Selecting the allowed Custom Post Types in the Schema Configuration")
+
+</div>
 
 Otherwise, the value defined under section "Included custom post types" in the Settings page for `Schema Custom Posts` is used:
 

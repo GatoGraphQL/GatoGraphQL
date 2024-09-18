@@ -28,7 +28,11 @@ _Please notice: Because of the new blocks added, we will need to click on the "R
 
 Added documentation for modules "Tags" and "Categories", displayed when clicking on "View details" on the corresponding entries on the Modules page.
 
+<div class="img-width-1024" markdown=1>
+
 ![Documentation for "Tags" module](../../images/releases/v010/tags-doc.png)
+
+</div>
 
 ## Breaking changes
 
