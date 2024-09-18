@@ -148,9 +148,6 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
 
     /**
      * Display the list of bundled extensions.
-     *
-     * Only when rendering the bundle => there's no &doc=... param
-     * passed.
      */
     protected function getAdditionalContentToPrint(): string
     {
@@ -168,10 +165,6 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         
         $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
         if (!$isBundleExtension) {
-            return '';
-        }
-
-        if (App::query(RequestParams::DOC, '') !== '') {
             return '';
         }
 
