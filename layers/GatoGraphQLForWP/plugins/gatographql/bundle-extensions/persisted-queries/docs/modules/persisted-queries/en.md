@@ -1,4 +1,4 @@
-# “Persisted Queries” Bundle
+# Persisted Queries
 
 Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs.
 

@@ -53,19 +53,20 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 
     public function getName(string $module): string
     {
-        $placeholder = \__('“%s” Bundle', 'gatographql');
+        $bundlePlaceholder = \__('“%s” Bundle', 'gatographql');
+        $extensionPlaceholder = \__('%s', 'gatographql');
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
-            self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
-            self::CACHING => sprintf($placeholder, \__('Caching', 'gatographql')),
-            self::CUSTOM_ENDPOINTS => sprintf($placeholder, \__('Custom Endpoints', 'gatographql')),
-            self::DEPRECATION => sprintf($placeholder, \__('Deprecation', 'gatographql')),
-            self::MULTIPLE_QUERY_EXECUTION => sprintf($placeholder, \__('Multiple Query Execution', 'gatographql')),
-            self::PERSISTED_QUERIES => sprintf($placeholder, \__('Persisted Queries', 'gatographql')),
-            self::POLYLANG_INTEGRATION => sprintf($placeholder, \__('Polylang Integration', 'gatographql')),
-            self::QUERY_FUNCTIONS => sprintf($placeholder, \__('Query Functions', 'gatographql')),
-            self::SECURITY => sprintf($placeholder, \__('Security', 'gatographql')),
-            self::SCHEMA_EXTENSIONS => sprintf($placeholder, \__('Schema Extensions', 'gatographql')),
+            self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
+            self::CACHING => sprintf($extensionPlaceholder, \__('Caching', 'gatographql')),
+            self::CUSTOM_ENDPOINTS => sprintf($extensionPlaceholder, \__('Custom Endpoints', 'gatographql')),
+            self::DEPRECATION => sprintf($extensionPlaceholder, \__('Deprecation', 'gatographql')),
+            self::MULTIPLE_QUERY_EXECUTION => sprintf($extensionPlaceholder, \__('Multiple Query Execution', 'gatographql')),
+            self::PERSISTED_QUERIES => sprintf($extensionPlaceholder, \__('Persisted Queries', 'gatographql')),
+            self::POLYLANG_INTEGRATION => sprintf($extensionPlaceholder, \__('Polylang Integration', 'gatographql')),
+            self::QUERY_FUNCTIONS => sprintf($extensionPlaceholder, \__('Query Functions', 'gatographql')),
+            self::SECURITY => sprintf($extensionPlaceholder, \__('Security', 'gatographql')),
+            self::SCHEMA_EXTENSIONS => sprintf($extensionPlaceholder, \__('Schema Extensions', 'gatographql')),
             default => $module,
         };
     }

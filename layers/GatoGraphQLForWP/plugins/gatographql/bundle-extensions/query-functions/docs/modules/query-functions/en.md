@@ -1,4 +1,4 @@
-# “Query Functions” Bundle
+# Query Functions
 
 Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities.
 

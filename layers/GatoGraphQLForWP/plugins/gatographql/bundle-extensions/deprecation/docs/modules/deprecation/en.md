@@ -1,4 +1,4 @@
-# “Deprecation” Bundle
+# Deprecation
 
 Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface.
 

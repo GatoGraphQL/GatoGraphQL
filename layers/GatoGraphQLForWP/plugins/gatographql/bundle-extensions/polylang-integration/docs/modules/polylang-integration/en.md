@@ -1,4 +1,4 @@
-# “Polylang Integration” Bundle
+# Polylang Integration
 
 Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data.
 

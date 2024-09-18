@@ -1,4 +1,4 @@
-# “Caching” Bundle
+# Caching
 
 Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations.
 
