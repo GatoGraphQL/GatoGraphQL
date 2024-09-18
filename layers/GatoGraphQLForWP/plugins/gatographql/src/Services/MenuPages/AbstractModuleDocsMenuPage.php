@@ -78,11 +78,8 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             );
         }
         $hasDocumentation = $moduleResolver->hasDocumentation($module);
-        $documentation = '';
-        if ($hasDocumentation) {
-            $documentation = $moduleResolver->getDocumentation($module);
-        }
-        if (!$hasDocumentation || $documentation === null) {
+        $documentation = $hasDocumentation ? $moduleResolver->getDocumentation($module) : null;
+        if ($documentation === null) {
             return sprintf(
                 '<p>%s</p>',
                 $this->getModuleHasNoDocumentationErrorMessage(
