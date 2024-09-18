@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 
 trait HasMarkdownDocumentationModuleResolverTrait
 {
@@ -43,13 +45,30 @@ trait HasMarkdownDocumentationModuleResolverTrait
             return null;
         }
 
-        return $this->getDocumentationMarkdownContent(
+        $markdownContent = $this->getDocumentationMarkdownContent(
             $module,
             $markdownFilename,
-        ) ?? sprintf(
-            '<p>%s</p>',
-            \__('Oops, the documentation for this module is not available', 'gatographql')
         );
+        if ($markdownContent === null) {
+            return sprintf(
+                '<p>%s</p>',
+                \__('Oops, the documentation for this module is not available', 'gatographql')
+            );
+        }
+
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
+        if ($isBundleExtension) {
+            /** @var BundleExtensionModuleResolverInterface */
+            $bundleExtensionModuleResolver = $moduleResolver;
+            $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledBundleExtensionModules($module);
+            foreach ($bundleExtensionModules as $bundleExtensionModule) {
+                $markdownContent .= $this->getDocumentation($bundleExtensionModule);
+            }
+        }
+
+        return $markdownContent;
     }
 
     protected function getDocumentationMarkdownContent(
