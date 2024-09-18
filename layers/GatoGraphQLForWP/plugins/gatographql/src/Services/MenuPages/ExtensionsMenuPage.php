@@ -10,7 +10,6 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
 /**
@@ -19,6 +18,7 @@ use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 class ExtensionsMenuPage extends AbstractTableMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
+    use ExtensionsMenuPageTrait;
 
     public final const SCREEN_OPTION_NAME = 'gatographql_extensions_per_page';
 
@@ -96,25 +96,6 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 
         $this->enqueueModalTriggerAssets();
         $this->enqueueExtensionAssets();
-    }
-
-    protected function enqueueExtensionAssets(): void
-    {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
-        /**
-         * Hide the bottom part of the extension items on the table,
-         * as it contains unneeded information, and just hiding it
-         * is easier than editing the PHP code
-         */
-        \wp_enqueue_style(
-            'gatographql-extensions',
-            $mainPluginURL . 'assets/css/extensions.css',
-            array(),
-            $mainPluginVersion
-        );
     }
 
     protected function printHeader(): void

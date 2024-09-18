@@ -7,12 +7,29 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 {
     use PluginMarkdownContentRetrieverTrait;
+
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    final protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
+    }
 
     protected function useTabpanelForContent(): bool
     {
@@ -87,7 +104,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             $entryID = $this->getEntryID($entryName);
             $markdownContent .= sprintf(
                 '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
-                '#' . $entryID,
+                '#' . $navContentUniqueID . ' > #' . $entryID,
                 $entryURL,
                 $entryName === $activeEntryName ? 'nav-tab-active' : '',
                 $entryTitle,
@@ -99,6 +116,8 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                     <div id="' . $navContentUniqueID . '" class="nav-tab-content">
         ';
 
+        $markdownContentOptions = $this->getMarkdownContentOptions();
+
         foreach ($entries as $entry) {
             $entryName = $entry[0];
             $entryTitle = $entry[1];
@@ -108,7 +127,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             $entryContent = $this->getMarkdownContent(
                 $entryName,
                 $entryRelativePathDir,
-                $this->getMarkdownContentOptions()
+                $markdownContentOptions
             ) ?? sprintf(
                 '<p>%s</p>',
                 sprintf(
@@ -123,6 +142,8 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                 '<h1 style="display: none;">',
                 $entryContent
             );
+
+            $entryContent .= $this->getAdditionalEntryContentToPrint($entry);
 
             $entryID = $this->getEntryID($entryName);
             $markdownContent .= sprintf(
@@ -155,6 +176,14 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         </div>
         ';
         return $markdownContent;
+    }
+
+    /**
+     * @param array{0:string,1:string,2:mixed} $entry
+     */
+    protected function getAdditionalEntryContentToPrint(array $entry): string
+    {
+        return '';
     }
 
     protected function getEntryID(string $entryName): string
@@ -215,7 +244,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string}>
+     * @return array<array{0:string,1:string,2:mixed}>
      */
     abstract protected function getEntries(): array;
 }
