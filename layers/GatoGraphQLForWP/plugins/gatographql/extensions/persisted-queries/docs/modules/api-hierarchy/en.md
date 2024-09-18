@@ -43,11 +43,19 @@ Children persisted queries can override variables defined in the parent query. F
 
 In the custom endpoint or persisted query, in the Document settings, there is section `Page Attributes` with a dropdown of all other entities, to select as the parent:
 
+<div class="img-width-1024" markdown=1>
+
 ![API inheritance](../../images/api-inheritance.png "API inheritance")
+
+</div>
 
 When selected, in the Options of the persisted query we can choose to inherit the parent's query:
 
+<div class="img-width-1024" markdown=1>
+
 ![API inheritance](../../images/api-inheritance.gif "API inheritance")
+
+</div>
 
 Different strategies can be applied to create the API hierarchy.
 
