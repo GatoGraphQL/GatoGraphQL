@@ -236,8 +236,8 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         string $description,
     ): string {
         $itemHTMLPlaceholder = '
-            <div class="plugin-card plugin-card-gatographql-caching-bundle plugin-card-non-installed plugin-card-extension-bundle plugin-card-not-highlight">
-                <div class="plugin-card-top plugin-card-top-request-extension">
+            <div class="plugin-card plugin-card-non-installed">
+                <div class="plugin-card-top">
                     <div class="name column-name">
                         <a href="%3$s">
                             <h3>
