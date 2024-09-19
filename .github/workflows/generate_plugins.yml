@@ -225,7 +225,7 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Uncompress plugin zip contents into new folder
-                uses: montudor/action-zip@v0.1.0
+                uses: montudor/action-zip@v1.0.0
                 with:
                     args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}.zip -d build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}
 
