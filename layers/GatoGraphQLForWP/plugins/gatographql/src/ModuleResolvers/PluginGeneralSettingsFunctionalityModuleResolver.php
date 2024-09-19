@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -143,6 +144,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
         $moduleSettings = parent::getSettings($module);
+        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s @ gatographql.com' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
         if ($module === self::GENERAL) {
             $option = self::OPTION_ENABLE_SCHEMA_TUTORIAL;
             $moduleSettings[] = [
@@ -152,7 +154,14 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $option
                 ),
                 Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    sprintf(
+                        $moreInfoLabelPlaceholder,
+                        'https://gatographql.com/guides/config/enabling-the-schema-tutorial-page',
+                        \__('Enabling the Schema Tutorial page', 'gatographql')
+                    )
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
