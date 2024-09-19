@@ -31,7 +31,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: "ramsey/composer-install@v2"
+            -   uses: ramsey/composer-install@v3
 
             -   id: output_data
                 run: |
@@ -66,7 +66,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install root dependencies
-                uses: "ramsey/composer-install@v2"
+                uses: ramsey/composer-install@v3
 
             # "custom-bump-interdependency" temporarily needed because of bug:
             # https://github.com/symplify/symplify/issues/2773

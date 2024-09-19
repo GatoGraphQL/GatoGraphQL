@@ -24,14 +24,14 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: "ramsey/composer-install@v2"
+            -   uses: ramsey/composer-install@v3
 
             -   id: input_data
                 run: |
                     echo "additional_integration_test_plugins=$(vendor/bin/monorepo-builder additional-integration-test-plugins --config=config/monorepo-builder/additional-integration-test-plugins.php)" >> $GITHUB_OUTPUT
     
             -   name: Retrieve artifact URLs from GitHub workflow
-                uses: actions/github-script@v6
+                uses: actions/github-script@v7
                 id: artifact-url
                 with:
                     script: |
@@ -84,7 +84,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: "ramsey/composer-install@v2"
+            -   uses: ramsey/composer-install@v3
 
             -   name: Create InstaWP instance
                 uses: instawp/wordpress-testing-automation@main

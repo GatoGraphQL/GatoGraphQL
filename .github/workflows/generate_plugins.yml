@@ -51,7 +51,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: "ramsey/composer-install@v2"
+            -   uses: ramsey/composer-install@v3
 
             -   id: output_data
                 run: |
@@ -101,7 +101,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install root dependencies
-                uses: "ramsey/composer-install@v2"
+                uses: ramsey/composer-install@v3
 
     ###########################################################################
     # Downgrade plugin
@@ -225,7 +225,7 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Uncompress plugin zip contents into new folder
-                uses: montudor/action-zip@v0.1.0
+                uses: montudor/action-zip@v1.0.0
                 with:
                     args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}.zip -d build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}
 
@@ -251,7 +251,7 @@ jobs:
                 if: github.event_name == 'release'
 
             -   name: Upload to release
-                uses: softprops/action-gh-release@v1
+                uses: softprops/action-gh-release@v2
                 with:
                     files: build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip
                 env:
@@ -259,7 +259,7 @@ jobs:
                 if: github.event_name == 'release'
 
             -   id: previous_tag
-                uses: "WyriHaximus/github-action-get-previous-tag@master"
+                uses: WyriHaximus/github-action-get-previous-tag@master
                 if: github.event_name == 'release'
 
             -   name: Include (previously excluded) folders for DIST repo
