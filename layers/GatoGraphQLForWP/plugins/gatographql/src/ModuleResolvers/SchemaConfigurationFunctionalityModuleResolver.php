@@ -230,9 +230,15 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Response Headers', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    '%s<br/>%s',
+                    '%s<br/>%s<br/><br/><strong>More info: %s</strong>',
                     \__('Provide custom headers to add to the API response. One header per line, with format: <code>{header name}: {header value}</code>', 'gatographql'),
                     $defaultValueDesc,
+                    sprintf(
+                        '<a href="%s" target="_blank">%s%s</a>',
+                        'https://gatographql.com/guides/schema/adding-custom-headers-to-the-graphql-response-cors',
+                        \__('Adding custom headers to the GraphQL response (CORS) @ gatographql.com', 'gatographql'),
+                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,
                 Properties::IS_MULTIPLE => true,
