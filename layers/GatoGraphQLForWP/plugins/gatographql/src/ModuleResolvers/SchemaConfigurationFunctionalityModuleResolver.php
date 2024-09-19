@@ -215,8 +215,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Namespace the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Namespace types in the GraphQL schema?<br/>%s', 'gatographql'),
-                    $defaultValueDesc
+                    \__('Namespace types in the GraphQL schema?<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    $defaultValueDesc,
+                    sprintf(
+                        '<a href="%s" target="_blank">%s%s</a>',
+                        'https://gatographql.com/guides/schema/namespacing-the-schema',
+                        \__('Namespacing the schema @ gatographql.com', 'gatographql'),
+                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
