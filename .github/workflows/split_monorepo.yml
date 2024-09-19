@@ -30,7 +30,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: "ramsey/composer-install@v2"
+            -   uses: ramsey/composer-install@v3
 
             # git diff to generate matrix with modified packages only
             -   uses: technote-space/get-diff-action@v6
