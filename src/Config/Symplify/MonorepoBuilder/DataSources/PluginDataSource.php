@@ -51,8 +51,8 @@ class PluginDataSource
                 ],
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/plugins/gatographql/rector.php',
                 'scoping' => [
-                    'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-gatographql.inc.php',
-                    'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-gatographql.php',
+                    'phpscoper_config' => $this->rootDir . '/ci/scoping/plugins/gatographql/scoper.inc.php',
+                    'rector_test_config' => $this->rootDir . '/ci/scoping/plugins/gatographql/rector-test-scoping.php',
                 ],
                 'bashScripts' => [
                     'before_downgrade_code' => 'ci/downgrade/before_downgrade_code.sh',

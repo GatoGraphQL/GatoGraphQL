@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 
-require_once __DIR__ . '/rector-test-scoping-shared.php';
+require_once dirname(__DIR__, 2) . '/rector-test-scoping-shared.php';
 
 /**
  * This Rector configuration imports the fully qualified classnames
@@ -16,7 +16,7 @@ return static function (RectorConfig $rectorConfig): void {
     // Shared configuration
     doCommonContainerConfiguration($rectorConfig);
 
-    $monorepoDir = dirname(__DIR__, 2);
+    $monorepoDir = dirname(__DIR__, 3);
     $pluginDir = $monorepoDir . '/layers/GatoGraphQLForWP/plugins/gatographql';
     $autoloadFile = $pluginDir . '/vendor/scoper-autoload.php';
 
