@@ -149,7 +149,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         /** @var ExtensionModuleResolverInterface */
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
         $displayGatoGraphQLPROBundleOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
-        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
+        $displayGatoGraphQLPROFeatureBundlesOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage();
         return sprintf(
             \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gatographql'),
             $entryTitle,
@@ -157,7 +157,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             '_blank',
             \__('Open in shop', 'gatographql'),
             $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
-                ? ($displayGatoGraphQLPROBundleOnExtensionsPage && !$offerGatoGraphQLPROFeatureBundles ? \__('go PRO', 'gatographql') : \__('website', 'gatographql'))
+                ? ($displayGatoGraphQLPROBundleOnExtensionsPage && !$displayGatoGraphQLPROFeatureBundlesOnExtensionsPage ? \__('go PRO', 'gatographql') : \__('website', 'gatographql'))
                 : \__('website', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
@@ -228,7 +228,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
                     <br/>
                     <p><u><strong>%s</strong></u></p>
                     ',
-                    PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
+                    PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
                         && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
                         && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllExtensionsBundle()
                         ? \__('Modules included in this extension:', 'gatographql')

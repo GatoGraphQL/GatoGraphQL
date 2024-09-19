@@ -124,7 +124,7 @@ class ExtensionListTable extends AbstractExtensionListTable
     public function getPluginInstallActionLabel(array $plugin): string
     {
         $displayGatoGraphQLPROBundleOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
-        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
+        $displayGatoGraphQLPROFeatureBundlesOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage();
 
         $module = $plugin['gato_extension_module'];
 
@@ -132,7 +132,7 @@ class ExtensionListTable extends AbstractExtensionListTable
         if ($module === BundleExtensionModuleResolver::PRO) {
             $extensionActionLabel = sprintf(
                 '%s%s',
-                $displayGatoGraphQLPROBundleOnExtensionsPage && !$offerGatoGraphQLPROFeatureBundles ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
+                $displayGatoGraphQLPROBundleOnExtensionsPage && !$displayGatoGraphQLPROFeatureBundlesOnExtensionsPage ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
         } else {
@@ -145,7 +145,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 <span class="gatographql-extension-bundle-action-label" style="display: none;">%s</span>
             ',
             $extensionActionLabel,
-            $displayGatoGraphQLPROBundleOnExtensionsPage && !$offerGatoGraphQLPROFeatureBundles ? \__('Active (via PRO)', 'gatographql') : \__('Active (via Bundle)', 'gatographql')
+            $displayGatoGraphQLPROBundleOnExtensionsPage && !$displayGatoGraphQLPROFeatureBundlesOnExtensionsPage ? \__('Active (via PRO)', 'gatographql') : \__('Active (via Bundle)', 'gatographql')
         );
     }
 
