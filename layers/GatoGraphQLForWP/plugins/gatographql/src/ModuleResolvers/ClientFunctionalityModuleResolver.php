@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -150,6 +151,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
+        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::GRAPHIQL_FOR_SINGLE_ENDPOINT) {
             $option = ModuleSettingOptions::PATH;
@@ -160,7 +162,14 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     $option
                 ),
                 Properties::TITLE => \__('Client path', 'gatographql'),
-                Properties::DESCRIPTION => \__('URL path to access the public GraphiQL client', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('URL path to access the public GraphiQL client<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    sprintf(
+                        $moreInfoLabelPlaceholder,
+                        'https://gatographql.com/guides/config/configuring-the-graphiql-client-for-the-single-endpoint',
+                        \__('Configuring the GraphiQL client for the single endpoint', 'gatographql')
+                    )
+                ),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module === self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT) {
@@ -172,7 +181,14 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     $option
                 ),
                 Properties::TITLE => \__('Client path', 'gatographql'),
-                Properties::DESCRIPTION => \__('URL path to access the public Interactive Schema client', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('URL path to access the public Interactive Schema client<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    sprintf(
+                        $moreInfoLabelPlaceholder,
+                        'https://gatographql.com/guides/config/configuring-the-voyager-client-for-the-single-endpoint',
+                        \__('Configuring the Voyager client for the single endpoint', 'gatographql')
+                    )
+                ),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }

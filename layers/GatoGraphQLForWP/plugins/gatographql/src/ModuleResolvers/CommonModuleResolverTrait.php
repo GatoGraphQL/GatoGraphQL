@@ -24,7 +24,7 @@ trait CommonModuleResolverTrait
         return $this->getSettingsInfoContent(
             sprintf(
                 \__('%s %s', 'gatographql'),
-                \__('This is the default value for the schema configuration.', 'gatographql'),
+                \__('This configuration value is the default one for the schema configuration.', 'gatographql'),
                 $this->getCollapsible(
                     sprintf(
                         '<br/>%s<ul><li>%s</li></ul>',
