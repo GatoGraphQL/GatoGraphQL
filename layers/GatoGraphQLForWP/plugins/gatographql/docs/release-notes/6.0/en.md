@@ -18,6 +18,7 @@
 - Hide the Schema tutorial page by default ([#2854](https://github.com/GatoGraphQL/GatoGraphQL/pull/2854))
 - Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
 - Improved documentation for extensions ([#2866](https://github.com/GatoGraphQL/GatoGraphQL/pull/2866))
+- Added links to online docs on the Settings page ([#2875](https://github.com/GatoGraphQL/GatoGraphQL/pull/2875))
 
 ## Fixed
 
