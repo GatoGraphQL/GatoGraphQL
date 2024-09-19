@@ -16,7 +16,7 @@ return static function (RectorConfig $rectorConfig): void {
     // Shared configuration
     doCommonContainerConfiguration($rectorConfig);
 
-    $monorepoDir = dirname(__DIR__, 3);
+    $monorepoDir = dirname(__DIR__, 4);
     $pluginDir = $monorepoDir . '/layers/GatoGraphQLForWP/plugins/gatographql';
     $autoloadFile = $pluginDir . '/vendor/scoper-autoload.php';
 
