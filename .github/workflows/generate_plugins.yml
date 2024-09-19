@@ -251,7 +251,7 @@ jobs:
                 if: github.event_name == 'release'
 
             -   name: Upload to release
-                uses: softprops/action-gh-release@v1
+                uses: softprops/action-gh-release@v2
                 with:
                     files: build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip
                 env:
