@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\GatoGraphQLContainerConfigurationService;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\Plugins\GatoGraphQLContainerConfigurationService;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
