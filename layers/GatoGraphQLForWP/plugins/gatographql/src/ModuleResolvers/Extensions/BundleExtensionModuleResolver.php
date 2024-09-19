@@ -14,7 +14,7 @@ use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
-    public const ALL_FEATURE_BUNDLED_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-feature-bundled-extensions';
+    public const ALL_FEATURE_BUNDLED_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
     public const DEPRECATION = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
