@@ -204,6 +204,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         $moduleSettings = parent::getSettings($module);
         $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
+        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s @ gatographql.com' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::SCHEMA_NAMESPACING) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
@@ -218,10 +219,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Namespace types in the GraphQL schema?<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
                     $defaultValueDesc,
                     sprintf(
-                        '<a href="%s" target="_blank">%s%s</a>',
+                        $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/schema/namespacing-the-schema',
-                        \__('Namespacing the schema @ gatographql.com', 'gatographql'),
-                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                        \__('Namespacing the schema', 'gatographql')
                     )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -240,10 +240,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Provide custom headers to add to the API response. One header per line, with format: <code>{header name}: {header value}</code>', 'gatographql'),
                     $defaultValueDesc,
                     sprintf(
-                        '<a href="%s" target="_blank">%s%s</a>',
+                        $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/schema/adding-custom-headers-to-the-graphql-response-cors',
-                        \__('Adding custom headers to the GraphQL response (CORS) @ gatographql.com', 'gatographql'),
-                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                        \__('Adding custom headers to the GraphQL response (CORS)', 'gatographql')
                     )
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,
@@ -267,10 +266,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Under what types to expose global fields.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
                     $defaultValueDesc,
                     sprintf(
-                        '<a href="%s" target="_blank">%s%s</a>',
+                        $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/config/hiding-global-fields',
-                        \__('Hiding Global Fields @ gatographql.com', 'gatographql'),
-                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                        \__('Hiding Global Fields', 'gatographql')
                     )
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
@@ -324,10 +322,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Use payload types for mutations in the schema?<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
                     $defaultValueDesc,
                     sprintf(
-                        '<a href="%s" target="_blank">%s%s</a>',
+                        $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations',
-                        \__('Returning a payload object or the mutated entity for mutations @ gatographql.com', 'gatographql'),
-                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                        \__('Returning a payload object or the mutated entity for mutations', 'gatographql')
                     )
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
@@ -360,10 +357,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Select the mutation scheme to use in the schema.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
                     $defaultValueDesc,
                     sprintf(
-                        '<a href="%s" target="_blank">%s%s</a>',
+                        $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/schema/using-nested-mutations',
-                        \__('Using nested mutations @ gatographql.com', 'gatographql'),
-                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                        \__('Using nested mutations', 'gatographql')
                     )
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
@@ -390,10 +386,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
                     $defaultValueDesc,
                     sprintf(
-                        '<a href="%s" target="_blank">%s%s</a>',
+                        $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/schema/querying-sensitive-data-fields',
-                        \__('Querying “sensitive” data fields @ gatographql.com', 'gatographql'),
-                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                        \__('Querying “sensitive” data fields', 'gatographql')
                     )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -411,10 +406,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Expose the <code>self</code> field in the GraphQL schema, which returns an instance of the same object (for whichever type it is applied on), which can be used to adapt the shape of the GraphQL response.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
                     $defaultValueDesc,
                     sprintf(
-                        '<a href="%s" target="_blank">%s%s</a>',
+                        $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/schema/querying-self-fields',
-                        \__('Querying \'self\' fields @ gatographql.com', 'gatographql'),
-                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                        \__('Querying \'self\' fields', 'gatographql')
                     )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
