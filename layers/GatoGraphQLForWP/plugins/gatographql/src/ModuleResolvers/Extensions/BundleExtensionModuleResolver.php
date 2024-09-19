@@ -34,7 +34,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() ? [
                 self::PRO,
             ] : [],
-            PluginStaticModuleConfiguration::offerGatoGraphQLPROAllExtensionsBundle() ? [
+            PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
                 self::ALL_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage() ? [

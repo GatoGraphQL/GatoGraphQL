@@ -223,7 +223,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             sprintf(
                 PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
                     && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
-                    && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllExtensionsBundle()
+                    && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
                     ? \__('Modules included in the %s extension', 'gatographql')
                     : \__('Modules included in the %s bundle', 'gatographql'),
                 $isPrintingBundledModule
