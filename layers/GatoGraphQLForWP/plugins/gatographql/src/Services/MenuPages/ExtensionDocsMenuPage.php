@@ -148,7 +148,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryModule = $entry[2];
         /** @var ExtensionModuleResolverInterface */
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
-        $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
+        $displayGatoGraphQLPROBundleOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
         $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
         return sprintf(
             \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gatographql'),
@@ -157,7 +157,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             '_blank',
             \__('Open in shop', 'gatographql'),
             $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
-                ? ($offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('go PRO', 'gatographql') : \__('website', 'gatographql'))
+                ? ($displayGatoGraphQLPROBundleOnExtensionsPage && !$offerGatoGraphQLPROFeatureBundles ? \__('go PRO', 'gatographql') : \__('website', 'gatographql'))
                 : \__('website', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
@@ -229,7 +229,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
                     <p><u><strong>%s</strong></u></p>
                     ',
                     PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
-                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+                        && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
                         && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllExtensionsBundle()
                         ? \__('Modules included in this extension:', 'gatographql')
                         : \__('Modules included in this bundle:', 'gatographql')

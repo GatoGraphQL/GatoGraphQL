@@ -222,7 +222,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             ',
             sprintf(
                 PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
-                    && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
+                    && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
                     && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllExtensionsBundle()
                     ? \__('Modules included in the %s extension', 'gatographql')
                     : \__('Modules included in the %s bundle', 'gatographql'),

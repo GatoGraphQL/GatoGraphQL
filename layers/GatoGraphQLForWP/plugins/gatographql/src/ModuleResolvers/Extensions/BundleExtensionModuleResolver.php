@@ -31,7 +31,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getModulesToResolve(): array
     {
         return array_merge(
-            PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle() ? [
+            PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() ? [
                 self::PRO,
             ] : [],
             PluginStaticModuleConfiguration::offerGatoGraphQLPROAllExtensionsBundle() ? [
