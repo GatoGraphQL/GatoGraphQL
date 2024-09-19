@@ -55,7 +55,7 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getPageTitle(): string
     {
-        return \__('Gato GraphQL - Tutorial', 'gatographql');
+        return \__('Gato GraphQL - Schema Tutorial', 'gatographql');
     }
 
     protected function getContentID(): string
