@@ -120,10 +120,10 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
-        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
-        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
-        if ($offerGatoGraphQLPROBundle && !PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()) {
+        $displayGatoGraphQLPROBundleOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
+        $displayGatoGraphQLPROFeatureBundlesOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage();
+        $displayGatoGraphQLPROExtensionsOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage();
+        if ($displayGatoGraphQLPROBundleOnExtensionsPage && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()) {
             return sprintf(
                 __('<strong>%1$s</strong> includes extensions that add functionality and extend the GraphQL schema. Browse them all here, or on the <a href="%2$s" target="%3$s">Gato GraphQL website%4$s</a>.', 'gatographql'),
                 'Gato GraphQL PRO',
@@ -133,7 +133,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
             );
         }
         $headerMessage = __('Extensions add functionality and expand the GraphQL schema.', 'gatographql');
-        if ($offerGatoGraphQLPROFeatureBundles && !$offerGatoGraphQLPROExtensions) {
+        if ($displayGatoGraphQLPROFeatureBundlesOnExtensionsPage && !$displayGatoGraphQLPROExtensionsOnExtensionsPage) {
             return sprintf(
                 __('%1$s Browse them on the <a href="%2$s" target="%3$s">Gato GraphQL website%4$s</a>.', 'gatographql'),
                 $headerMessage,

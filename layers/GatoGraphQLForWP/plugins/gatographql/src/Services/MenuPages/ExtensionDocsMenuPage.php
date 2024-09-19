@@ -117,14 +117,14 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $moduleRegistry = $this->getModuleRegistry();
         $modules = $moduleRegistry->getAllModules(true, false, false);
         $items = [];
-        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
+        $displayGatoGraphQLPROExtensionsOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage();
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
             $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
-            if (!$isBundleExtension && !$offerGatoGraphQLPROExtensions) {
+            if (!$isBundleExtension && !$displayGatoGraphQLPROExtensionsOnExtensionsPage) {
                 continue;
             }
             $items[] = [
@@ -148,8 +148,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryModule = $entry[2];
         /** @var ExtensionModuleResolverInterface */
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
-        $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
-        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
+        $displayGatoGraphQLPROBundleOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
+        $displayGatoGraphQLPROFeatureBundlesOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage();
         return sprintf(
             \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gatographql'),
             $entryTitle,
@@ -157,7 +157,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             '_blank',
             \__('Open in shop', 'gatographql'),
             $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
-                ? ($offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('go PRO', 'gatographql') : \__('website', 'gatographql'))
+                ? ($displayGatoGraphQLPROBundleOnExtensionsPage && !$displayGatoGraphQLPROFeatureBundlesOnExtensionsPage ? \__('go PRO', 'gatographql') : \__('website', 'gatographql'))
                 : \__('website', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
@@ -180,7 +180,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
      */
     protected function useTabpanelForContent(): bool
     {
-        if (!PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions()) {
+        if (!PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage()) {
             return true;
         }
         return parent::useTabpanelForContent();
@@ -228,9 +228,9 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
                     <br/>
                     <p><u><strong>%s</strong></u></p>
                     ',
-                    PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
-                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()
-                        && !PluginStaticModuleConfiguration::offerGatoGraphQLPROAllExtensionsBundle()
+                    PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                        && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
+                        && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
                         ? \__('Modules included in this extension:', 'gatographql')
                         : \__('Modules included in this bundle:', 'gatographql')
                 ) . implode('<br/><hr/>', $contentEntries);

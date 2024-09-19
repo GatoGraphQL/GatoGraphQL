@@ -204,7 +204,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     public function getPluginActionLinks(array $actions): array
     {
-        if (!PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle()) {
+        if (!PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()) {
             return $actions;
         }
         /** @var ModuleConfiguration */
