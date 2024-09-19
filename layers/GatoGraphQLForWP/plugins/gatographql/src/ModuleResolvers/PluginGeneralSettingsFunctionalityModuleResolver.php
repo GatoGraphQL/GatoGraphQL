@@ -144,7 +144,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
         $moduleSettings = parent::getSettings($module);
-        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s @ gatographql.com' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
+        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
         if ($module === self::GENERAL) {
             $option = self::OPTION_ENABLE_SCHEMA_TUTORIAL;
             $moduleSettings[] = [

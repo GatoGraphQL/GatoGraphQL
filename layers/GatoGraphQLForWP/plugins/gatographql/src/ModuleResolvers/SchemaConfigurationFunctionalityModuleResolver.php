@@ -204,7 +204,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         $moduleSettings = parent::getSettings($module);
         $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
-        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s @ gatographql.com' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
+        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::SCHEMA_NAMESPACING) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
