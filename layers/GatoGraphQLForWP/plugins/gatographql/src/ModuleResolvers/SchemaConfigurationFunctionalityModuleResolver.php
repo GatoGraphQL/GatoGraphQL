@@ -252,14 +252,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Schema exposure.', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Under what types to expose global fields.<br/><br/><strong>More info: %s<br/><br/></strong>%s', 'gatographql'),
+                    \__('Under what types to expose global fields.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    $defaultValueDesc,
                     sprintf(
                         '<a href="%s" target="_blank">%s%s</a>',
                         'https://gatographql.com/guides/config/hiding-global-fields',
                         \__('Hiding Global Fields @ gatographql.com', 'gatographql'),
                         HTMLCodes::OPEN_IN_NEW_WINDOW
-                    ),
-                    $defaultValueDesc
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $globalFieldsSchemaExposureValues,
@@ -339,14 +339,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Mutation Scheme:', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Select the mutation scheme to use in the schema.<br/><br/><strong>More info: %s<br/><br/></strong>%s', 'gatographql'),
+                    \__('Select the mutation scheme to use in the schema.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    $defaultValueDesc,
                     sprintf(
                         '<a href="%s" target="_blank">%s%s</a>',
                         'https://gatographql.com/guides/schema/using-nested-mutations',
                         \__('Using nested mutations @ gatographql.com', 'gatographql'),
                         HTMLCodes::OPEN_IN_NEW_WINDOW
-                    ),
-                    $defaultValueDesc
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
@@ -369,14 +369,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Add “sensitive” fields to the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/><br/><strong>More info: %s<br/><br/></strong>%s', 'gatographql'),
+                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    $defaultValueDesc,
                     sprintf(
                         '<a href="%s" target="_blank">%s%s</a>',
                         'https://gatographql.com/guides/schema/querying-sensitive-data-fields',
                         \__('Querying “sensitive” data fields @ gatographql.com', 'gatographql'),
                         HTMLCodes::OPEN_IN_NEW_WINDOW
-                    ),
-                    $defaultValueDesc
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -390,14 +390,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Expose the self fields to all types in the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose the <code>self</code> field in the GraphQL schema, which returns an instance of the same object (for whichever type it is applied on), which can be used to adapt the shape of the GraphQL response.<br/><br/><strong>More info: %s<br/><br/></strong>%s', 'gatographql'),
+                    \__('Expose the <code>self</code> field in the GraphQL schema, which returns an instance of the same object (for whichever type it is applied on), which can be used to adapt the shape of the GraphQL response.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    $defaultValueDesc,
                     sprintf(
                         '<a href="%s" target="_blank">%s%s</a>',
                         'https://gatographql.com/guides/schema/querying-self-fields',
                         \__('Querying \'self\' fields @ gatographql.com', 'gatographql'),
                         HTMLCodes::OPEN_IN_NEW_WINDOW
-                    ),
-                    $defaultValueDesc
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
