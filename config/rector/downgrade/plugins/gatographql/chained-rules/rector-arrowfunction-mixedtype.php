@@ -8,7 +8,7 @@ use Rector\Config\RectorConfig;
 return static function (RectorConfig $rectorConfig): void {
     $containerConfigurationService = new GatoGraphQLArrowFnMixedTypeChainedRuleContainerConfigurationService(
         $rectorConfig,
-        dirname(__DIR__, 5)
+        dirname(__DIR__, 6)
     );
     $containerConfigurationService->configureContainer();
 };

@@ -8,7 +8,7 @@ use Rector\Config\RectorConfig;
 return static function (RectorConfig $rectorConfig): void {
     $containerConfigurationService = new GatoGraphQLContainerConfigurationService(
         $rectorConfig,
-        dirname(__DIR__, 4)
+        dirname(__DIR__, 5)
     );
     $containerConfigurationService->configureContainer();
 };
