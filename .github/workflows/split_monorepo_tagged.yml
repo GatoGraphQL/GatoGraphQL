@@ -67,7 +67,7 @@ jobs:
 
             # see https://github.com/WyriHaximus/github-action-get-previous-tag
             -   id: previous_tag
-                uses: "WyriHaximus/github-action-get-previous-tag@master"
+                uses: WyriHaximus/github-action-get-previous-tag@master
 
                 # Uses an action in the root directory
             -   name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})

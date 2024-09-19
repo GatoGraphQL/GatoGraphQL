@@ -259,7 +259,7 @@ jobs:
                 if: github.event_name == 'release'
 
             -   id: previous_tag
-                uses: "WyriHaximus/github-action-get-previous-tag@master"
+                uses: WyriHaximus/github-action-get-previous-tag@master
                 if: github.event_name == 'release'
 
             -   name: Include (previously excluded) folders for DIST repo
