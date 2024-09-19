@@ -48,7 +48,7 @@ class PluginStaticModuleConfiguration
      *
      * @since v6.0
      */
-    public static function offerGatoGraphQLPROAllFeatureExtensionBundle(): bool
+    public static function offerGatoGraphQLPROAllExtensionsBundle(): bool
     {
         return false;
     }
