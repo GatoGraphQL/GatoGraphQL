@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -356,7 +357,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Add “sensitive” fields to the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s', 'gatographql'),
+                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/><br/><strong>More info: %s<br/><br/></strong>%s', 'gatographql'),
+                    sprintf(
+                        '<a href="%s" target="_blank">%s%s</a>',
+                        'https://gatographql.com/guides/schema/querying-sensitive-data-fields',
+                        \__('Querying “sensitive” data fields @ gatographql.com', 'gatographql'),
+                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                    ),
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
