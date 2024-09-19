@@ -299,8 +299,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Enable composable directives?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Enable adding composable directives (also called "meta-directives", such as <code>@underEachArrayItem</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema.<br/>%s', 'gatographql'),
-                    $defaultValueDesc
+                    \__('Enable adding composable directives (also called "meta-directives", such as <code>@underEachArrayItem</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    $defaultValueDesc,
+                    sprintf(
+                        $moreInfoLabelPlaceholder,
+                        'https://gatographql.com/guides/schema/using-composable-directives',
+                        \__('Using composable directives', 'gatographql')
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
