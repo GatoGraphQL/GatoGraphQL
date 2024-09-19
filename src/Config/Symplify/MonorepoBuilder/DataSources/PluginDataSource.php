@@ -43,13 +43,13 @@ class PluginDataSource
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-dist',
                 'additional_rector_before_configs' => [
-                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-change-if-or-return-earlyreturn.php',
+                    $this->rootDir . '/config/rector/downgrade/plugins/gatographql/chained-rules/rector-change-if-or-return-earlyreturn.php',
                 ],
                 'additional_rector_after_configs' => [
-                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-mixedtype.php',
-                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-uniontype.php',
+                    $this->rootDir . '/config/rector/downgrade/plugins/gatographql/chained-rules/rector-arrowfunction-mixedtype.php',
+                    $this->rootDir . '/config/rector/downgrade/plugins/gatographql/chained-rules/rector-arrowfunction-uniontype.php',
                 ],
-                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/gatographql/rector.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/plugins/gatographql/rector.php',
                 'scoping' => [
                     'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-gatographql.inc.php',
                     'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-gatographql.php',
