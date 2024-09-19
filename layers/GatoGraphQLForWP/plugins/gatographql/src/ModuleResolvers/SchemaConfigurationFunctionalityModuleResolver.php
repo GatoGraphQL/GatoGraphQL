@@ -284,8 +284,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Enable multi-field directives?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Enable having a single directive be applied to multiple fields.<br/>%s', 'gatographql'),
-                    $defaultValueDesc
+                    \__('Enable having a single directive be applied to multiple fields.<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    $defaultValueDesc,
+                    sprintf(
+                        $moreInfoLabelPlaceholder,
+                        'https://gatographql.com/guides/schema/using-multi-field-directives',
+                        \__('Using multi-field directives', 'gatographql')
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
