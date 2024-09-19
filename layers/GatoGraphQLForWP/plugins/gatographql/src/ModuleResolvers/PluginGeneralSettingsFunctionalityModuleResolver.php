@@ -210,7 +210,14 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $option
                 ),
                 Properties::TITLE => \__('Display admin notice with release notes?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    sprintf(
+                        $moreInfoLabelPlaceholder,
+                        'https://gatographql.com/guides/config/displaying-the-plugins-new-features',
+                        \__('Displaying the plugin\'s new features', 'gatographql')
+                    )
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
