@@ -76,7 +76,7 @@ class PluginDataSource
                 ]),
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-testing-schema-dist',
-                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing-schema/rector.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/plugins/testing-schema/rector.php',
             ],
 
             // Gato GraphQL - Testing <= To run integration tests with InstaWP
@@ -86,7 +86,7 @@ class PluginDataSource
                 'main_file' => 'gatographql-testing.php',
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-testing-dist',
-                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing/rector.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/plugins/testing/rector.php',
             ],
         ];
 
