@@ -7,6 +7,7 @@ on:
     push:
         branches:
             - master
+            - versions/*
     pull_request: null
 
 env:

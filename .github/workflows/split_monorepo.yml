@@ -6,6 +6,7 @@ on:
         # will not be commented out (i.e. disabled) for the downstream repo
         branches:
             - master
+            - versions/*
 env:
     CHECKOUT_SUBMODULES: ""
 
