@@ -198,13 +198,13 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     ),
                     Properties::TITLE => \__('Plugin setup: Install Persisted Queries for common admin tasks?', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
-                    \__('When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?<br/><br/><strong>More info: %s</strong>', 'gatographql'),
-                    sprintf(
-                        $moreInfoLabelPlaceholder,
-                        'https://gatographql.com/guides/config/managing-plugin-setup-data',
-                        \__('Managing the plugin\'s setup data', 'gatographql')
-                    )
-                ),
+                        \__('When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                        sprintf(
+                            $moreInfoLabelPlaceholder,
+                            'https://gatographql.com/guides/config/managing-plugin-setup-data',
+                            \__('Managing the plugin\'s setup data', 'gatographql')
+                        )
+                    ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
