@@ -35,7 +35,7 @@ use Isolated\Symfony\Component\Finder\Finder;
  */
 function convertRelativeToFullPath(string $relativePath): string
 {
-    $monorepoDir = dirname(__DIR__, 2);
+    $monorepoDir = dirname(__DIR__, 4);
     $pluginDir = $monorepoDir . '/layers/GatoGraphQLForWP/plugins/gatographql';
     return $pluginDir . '/' . $relativePath;
 }

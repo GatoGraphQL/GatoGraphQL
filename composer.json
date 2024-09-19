@@ -563,7 +563,7 @@
             "@preview-src-downgrade",
             "@preview-vendor-downgrade"
         ],
-        "preview-gatographql-downgrade": "bash -x ci/downgrade/downgrade_code.sh config/rector/downgrade/gatographql/rector.php --dry-run layers/GatoGraphQLForWP/plugins/gatographql \"\" \"\" \"$(monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)\"",
+        "preview-gatographql-downgrade": "bash -x ci/downgrade/downgrade_code.sh config/rector/downgrade/plugins/gatographql/rector.php --dry-run layers/GatoGraphQLForWP/plugins/gatographql \"\" \"\" \"$(monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)\"",
         "ssh-server": [
             "Composer\\Config::disableProcessTimeout",
             "composer ssh-server -d webservers/gatographql"

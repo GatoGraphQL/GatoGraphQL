@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
+namespace PoP\PoP\Config\Rector\Downgrade\Configurators\Plugins\ChainedRules;
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\GatoGraphQLContainerConfigurationServiceTrait;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\AbstractPluginArrowFnUnionTypeChainedRuleContainerConfigurationService;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\Plugins\GatoGraphQLContainerConfigurationServiceTrait;
 
 class GatoGraphQLArrowFnUnionTypeChainedRuleContainerConfigurationService extends AbstractPluginArrowFnUnionTypeChainedRuleContainerConfigurationService
 {

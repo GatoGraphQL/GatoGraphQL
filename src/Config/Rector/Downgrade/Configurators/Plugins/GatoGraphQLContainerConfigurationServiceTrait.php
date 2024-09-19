@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
+namespace PoP\PoP\Config\Rector\Downgrade\Configurators\Plugins;
 
 trait GatoGraphQLContainerConfigurationServiceTrait
 {

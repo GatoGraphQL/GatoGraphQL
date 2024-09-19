@@ -43,16 +43,16 @@ class PluginDataSource
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-dist',
                 'additional_rector_before_configs' => [
-                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-change-if-or-return-earlyreturn.php',
+                    $this->rootDir . '/config/rector/downgrade/plugins/gatographql/chained-rules/rector-change-if-or-return-earlyreturn.php',
                 ],
                 'additional_rector_after_configs' => [
-                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-mixedtype.php',
-                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-uniontype.php',
+                    $this->rootDir . '/config/rector/downgrade/plugins/gatographql/chained-rules/rector-arrowfunction-mixedtype.php',
+                    $this->rootDir . '/config/rector/downgrade/plugins/gatographql/chained-rules/rector-arrowfunction-uniontype.php',
                 ],
-                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/gatographql/rector.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/plugins/gatographql/rector.php',
                 'scoping' => [
-                    'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-gatographql.inc.php',
-                    'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-gatographql.php',
+                    'phpscoper_config' => $this->rootDir . '/ci/scoping/plugins/gatographql/scoper.inc.php',
+                    'rector_test_config' => $this->rootDir . '/ci/scoping/plugins/gatographql/rector-test-scoping.php',
                 ],
                 'bashScripts' => [
                     'before_downgrade_code' => 'ci/downgrade/before_downgrade_code.sh',
@@ -76,7 +76,7 @@ class PluginDataSource
                 ]),
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-testing-schema-dist',
-                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing-schema/rector.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/plugins/testing-schema/rector.php',
             ],
 
             // Gato GraphQL - Testing <= To run integration tests with InstaWP
@@ -86,7 +86,7 @@ class PluginDataSource
                 'main_file' => 'gatographql-testing.php',
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-testing-dist',
-                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing/rector.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/phpunit-plugins/testing/rector.php',
             ],
         ];
 
