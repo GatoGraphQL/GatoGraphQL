@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\PoP\Config\Rector\Downgrade\Configurators\Plugins;
+namespace PoP\PoP\Config\Rector\Downgrade\Configurators\PHPUnitPlugins;
 
 trait TestingContainerConfigurationServiceTrait
 {
