@@ -46,14 +46,14 @@ class ExtensionListTable extends AbstractExtensionListTable
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(true, false, false);
         $wordPressPluginAPIUnneededRequiredEntries = $this->getWordPressPluginAPIUnneededRequiredEntries();
-        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
+        $displayGatoGraphQLPROExtensionsOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage();
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
             $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
-            if (!$isBundleExtension && !$offerGatoGraphQLPROExtensions) {
+            if (!$isBundleExtension && !$displayGatoGraphQLPROExtensionsOnExtensionsPage) {
                 continue;
             }
             $item = [
