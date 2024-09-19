@@ -222,7 +222,14 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $option
                 ),
                 Properties::TITLE => \__('Organize these settings under tabs?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied.', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    sprintf(
+                        $moreInfoLabelPlaceholder,
+                        'https://gatographql.com/guides/config/printing-the-settings-page-with-tabs-or-long-format',
+                        \__('Printing the Settings page with tabs or long format', 'gatographql')
+                    )
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
