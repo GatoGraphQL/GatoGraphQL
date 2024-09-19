@@ -14,7 +14,7 @@ use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
-    public const ALL_FEATURE_BUNDLED_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
+    public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
     public const DEPRECATION = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
@@ -35,7 +35,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::PRO,
             ] : [],
             PluginStaticModuleConfiguration::offerGatoGraphQLPROAllFeatureExtensionBundle() ? [
-                self::ALL_FEATURE_BUNDLED_EXTENSIONS,
+                self::ALL_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles() ? [
                 self::CACHING,
@@ -57,7 +57,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         $extensionPlaceholder = \__('%s', 'gatographql');
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
-            self::ALL_FEATURE_BUNDLED_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
+            self::ALL_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
             self::CACHING => sprintf($extensionPlaceholder, \__('Caching', 'gatographql')),
             self::CUSTOM_ENDPOINTS => sprintf($extensionPlaceholder, \__('Custom Endpoints', 'gatographql')),
             self::DEPRECATION => sprintf($extensionPlaceholder, \__('Deprecation', 'gatographql')),
@@ -75,7 +75,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         return match ($module) {
             self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
-            self::ALL_FEATURE_BUNDLED_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
+            self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
             self::DEPRECATION => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
@@ -109,7 +109,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         if (
             in_array($module, [
             self::PRO,
-            self::ALL_FEATURE_BUNDLED_EXTENSIONS,
+            self::ALL_EXTENSIONS,
             ])
         ) {
             return PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png';
@@ -155,7 +155,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
-            self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
+            self::ALL_EXTENSIONS => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                 // ExtensionModuleResolver::AUTOMATION,
@@ -245,7 +245,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 $this->getModulesToResolve(),
                 [$module]
             ),
-            self::ALL_FEATURE_BUNDLED_EXTENSIONS => [
+            self::ALL_EXTENSIONS => [
                 self::CACHING,
                 self::CUSTOM_ENDPOINTS,
                 self::DEPRECATION,
