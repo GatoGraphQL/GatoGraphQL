@@ -1,6 +1,6 @@
 # About Gato GraphQL
 
-The most powerful GraphQL server for WordPress.
+Powerful and flexible GraphQL server for WordPress.
 
 <div class="notice notice-info" markdown=1>
 
