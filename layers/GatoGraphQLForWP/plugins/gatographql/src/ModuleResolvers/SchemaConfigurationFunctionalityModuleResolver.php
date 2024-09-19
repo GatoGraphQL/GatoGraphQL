@@ -315,8 +315,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Use payload types for all mutations in the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Use payload types for mutations in the schema?<br/>%s', 'gatographql'),
-                    $defaultValueDesc
+                    \__('Use payload types for mutations in the schema?<br/>%s<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    $defaultValueDesc,
+                    sprintf(
+                        '<a href="%s" target="_blank">%s%s</a>',
+                        'https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations',
+                        \__('Returning a payload object or the mutated entity for mutations @ gatographql.com', 'gatographql'),
+                        HTMLCodes::OPEN_IN_NEW_WINDOW
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
