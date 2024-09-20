@@ -56,13 +56,13 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
   </p>
 
-  <hr/>
+  <!-- <hr/>
   
   <p markdown=1>
 
   **YouTube channel:** [youtube.com/@GatoGraphQL](https://www.youtube.com/@GatoGraphQL)
 
-  </p>
+  </p> -->
   
   <hr/>
 
