@@ -186,7 +186,7 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                 ),
                 Properties::TITLE => \__('Endpoint path', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('URL path to expose the single GraphQL endpoint<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    \__('URL path to expose the single GraphQL endpoint<br/><span class="more-info">%s</span>', 'gatographql'),
                     sprintf(
                         $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint',

@@ -163,7 +163,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 ),
                 Properties::TITLE => \__('Client path', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('URL path to access the public GraphiQL client<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    \__('URL path to access the public GraphiQL client<br/><span class="more-info">%s</span>', 'gatographql'),
                     sprintf(
                         $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/config/configuring-the-graphiql-client-for-the-single-endpoint',
@@ -182,7 +182,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 ),
                 Properties::TITLE => \__('Client path', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('URL path to access the public Interactive Schema client<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    \__('URL path to access the public Interactive Schema client<br/><span class="more-info">%s</span>', 'gatographql'),
                     sprintf(
                         $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/config/configuring-the-voyager-client-for-the-single-endpoint',
