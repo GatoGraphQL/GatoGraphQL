@@ -13,6 +13,7 @@ use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use PoP\ComponentModel\App;
 
@@ -23,6 +24,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
 
     public final const GENERAL = Plugin::NAMESPACE . '\general';
     public final const SERVER_IP_CONFIGURATION = Plugin::NAMESPACE . '\server-ip-configuration';
+    public final const SCHEMA_EDITING_ACCESS = Plugin::NAMESPACE . '\schema-editing-access';
 
     /**
      * Setting options
@@ -33,9 +35,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
     public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
+    public final const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?ModulesMenuPage $modulesMenuPage = null;
+    private ?UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -63,6 +67,19 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         }
         return $this->modulesMenuPage;
     }
+    final public function setUserAuthorizationSchemeRegistry(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
+    {
+        $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
+    }
+    final protected function getUserAuthorizationSchemeRegistry(): UserAuthorizationSchemeRegistryInterface
+    {
+        if ($this->userAuthorizationSchemeRegistry === null) {
+            /** @var UserAuthorizationSchemeRegistryInterface */
+            $userAuthorizationSchemeRegistry = $this->instanceManager->getInstance(UserAuthorizationSchemeRegistryInterface::class);
+            $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
+        }
+        return $this->userAuthorizationSchemeRegistry;
+    }
 
     /**
      * @return string[]
@@ -72,6 +89,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         return [
             self::GENERAL,
             self::SERVER_IP_CONFIGURATION,
+            self::SCHEMA_EDITING_ACCESS,
         ];
     }
 
@@ -100,6 +118,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         return match ($module) {
             self::GENERAL => \__('General', 'gatographql'),
             self::SERVER_IP_CONFIGURATION => \__('Server IP Configuration', 'gatographql'),
+            self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'gatographql-schema-editing-access'),
             default => $module,
         };
     }
@@ -109,6 +128,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         return match ($module) {
             self::GENERAL => \__('General options for the plugin', 'gatographql'),
             self::SERVER_IP_CONFIGURATION => \__('Configure retrieving the Client IP depending on the platform/environment', 'gatographql'),
+            self::SCHEMA_EDITING_ACCESS => \__('Grant access to users other than admins to edit the GraphQL schema', 'gatographql-schema-editing-access'),
             default => parent::getDescription($module),
         };
     }
@@ -118,6 +138,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
+        if ($module === self::SCHEMA_EDITING_ACCESS && $option === self::OPTION_EDITING_ACCESS_SCHEME) {
+            $defaultUserAuthorizationScheme = $this->getUserAuthorizationSchemeRegistry()->getDefaultUserAuthorizationScheme();
+            return $defaultUserAuthorizationScheme->getName();
+        }
+
         $defaultValues = [
             self::GENERAL => [
                 self::OPTION_ENABLE_SCHEMA_TUTORIAL => false,
@@ -273,6 +298,36 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     Properties::TYPE => Properties::TYPE_STRING,
                 ];
             }
+        } elseif ($module === self::SCHEMA_EDITING_ACCESS) {
+            $possibleValues = [];
+            foreach ($this->getUserAuthorizationSchemeRegistry()->getUserAuthorizationSchemes() as $userAuthorizationScheme) {
+                $possibleValues[$userAuthorizationScheme->getName()] = $userAuthorizationScheme->getDescription();
+            }
+            /**
+             * Write Access Scheme
+             * If `"admin"`, only the admin can compose a GraphQL query and endpoint
+             * If `"post"`, the workflow from creating posts is employed (i.e. Author role can create
+             * but not publish the query, Editor role can publish it, etc)
+             */
+            $option = self::OPTION_EDITING_ACCESS_SCHEME;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Which users can edit the schema?', 'gatographql-schema-editing-access'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Indicate which users can edit the schema (i.e. creating and updating Persisted Queries, Custom Endpoints, and others)<br/><br/><strong>More info: %s</strong>', 'gatographql-schema-editing-access'),
+                    sprintf(
+                        $moreInfoLabelPlaceholder,
+                        'https://gatographql.com/guides/config/managing-who-can-edit-the-schema',
+                        \__('Managing who can edit the schema', 'gatographql')
+                    )
+                ),
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => $possibleValues,
+            ];
         }
         return $moduleSettings;
     }
