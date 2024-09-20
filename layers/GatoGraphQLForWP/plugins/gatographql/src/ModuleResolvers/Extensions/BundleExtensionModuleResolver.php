@@ -68,7 +68,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PERSISTED_QUERIES => sprintf($extensionPlaceholder, \__('Persisted Queries', 'gatographql')),
             self::POLYLANG_INTEGRATION => sprintf($extensionPlaceholder, \__('Polylang Integration', 'gatographql')),
             self::QUERY_FUNCTIONS => sprintf($extensionPlaceholder, \__('Query Functions', 'gatographql')),
-            self::SCHEMA_EXTENSIONS => sprintf($extensionPlaceholder, \__('Schema Extensions', 'gatographql')),
+            self::SCHEMA_EXTENSIONS => sprintf($extensionPlaceholder, \__('Schema Functions', 'gatographql')),
             default => $module,
         };
     }
