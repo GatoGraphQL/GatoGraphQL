@@ -25,6 +25,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" (#2861)
 - Improved documentation for extensions (#2866)
 - Added links to online docs on the Settings page (#2875)
+- Added "Schema Editing Access" module (#2877)
 
 ## 5.0.0 - 07/09/2024
 

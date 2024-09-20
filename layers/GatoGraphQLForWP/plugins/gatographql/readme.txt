@@ -301,6 +301,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" (#2861)
 * Improved documentation for extensions (#2866)
 * Added links to online docs on the Settings page (#2875)
+* Added "Schema Editing Access" module (#2877)
 * [PRO] If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
 
 = 5.0.0 =
