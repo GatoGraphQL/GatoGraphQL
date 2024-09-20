@@ -151,7 +151,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
+        $moreInfoLabelPlaceholder = '<a href="%1$s" title="' . \__('\'%2$s\' on gatographql.com', 'gatographql') . '" target="_blank">' . \__('Help', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::GRAPHIQL_FOR_SINGLE_ENDPOINT) {
             $option = ModuleSettingOptions::PATH;
@@ -163,7 +163,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 ),
                 Properties::TITLE => \__('Client path', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('URL path to access the public GraphiQL client<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    \__('URL path to access the public GraphiQL client<br/><span class="more-info">%s</span>', 'gatographql'),
                     sprintf(
                         $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/config/configuring-the-graphiql-client-for-the-single-endpoint',
@@ -182,7 +182,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 ),
                 Properties::TITLE => \__('Client path', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('URL path to access the public Interactive Schema client<br/><br/><strong>More info: %s</strong>', 'gatographql'),
+                    \__('URL path to access the public Interactive Schema client<br/><span class="more-info">%s</span>', 'gatographql'),
                     sprintf(
                         $moreInfoLabelPlaceholder,
                         'https://gatographql.com/guides/config/configuring-the-voyager-client-for-the-single-endpoint',
