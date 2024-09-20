@@ -41,7 +41,7 @@ abstract class AbstractSchemaEditingAccessModifyPluginSettingsFixtureEndpointWeb
     abstract protected function getUserAuthorizationScheme(): UserAuthorizationSchemeInterface;
 
     /**
-     * Don't throw an Exception with the expection 500 status code
+     * Don't throw an Exception with the exception 500 status code
      */
     protected function getDifferentRequestBasicOptions(): array
     {
