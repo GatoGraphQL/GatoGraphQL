@@ -1,6 +1,6 @@
 # Security
 
-Grant permission to users to modify the GraphQL schema, and define Access Control Lists to manage granular access to the API based.
+Define Access Control Lists to manage granular access to the API for your users based.
 
 <!-- ## List of bundled extensions
 
