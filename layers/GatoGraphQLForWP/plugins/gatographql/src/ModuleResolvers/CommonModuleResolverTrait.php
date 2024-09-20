@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentPrinters\CollapsibleContentPrinterTrait;
 use WP_Post;
 
@@ -78,5 +79,10 @@ trait CommonModuleResolverTrait
             'post_type' => $customPostType,
             'post_status' => 'publish',
         ]);
+    }
+
+    protected function getHelpLabelPlaceholder(): string
+    {
+        return '<a href="%1$s" title="' . \__('\'%2$s\' on gatographql.com', 'gatographql') . '" target="_blank">' . \__('Help', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
     }
 }
