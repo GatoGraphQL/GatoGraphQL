@@ -1,4 +1,4 @@
-# Schema Extensions
+# Schema Functions
 
 Collection of fields and directives added to the GraphQL schema, providing useful functionality concerning sending emails, manipulating strings, connecting to external APIs, and others.
 

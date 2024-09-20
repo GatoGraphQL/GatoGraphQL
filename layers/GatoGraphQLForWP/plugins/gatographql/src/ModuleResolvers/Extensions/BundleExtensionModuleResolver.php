@@ -25,7 +25,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\bundle-extensions\\persisted-queries';
     public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
     public const QUERY_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\query-functions';
-    public const SCHEMA_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\schema-extensions';
+    public const SCHEMA_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\schema-functions';
 
     /**
      * @return string[]
@@ -48,7 +48,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
                 self::QUERY_FUNCTIONS,
-                self::SCHEMA_EXTENSIONS,
+                self::SCHEMA_FUNCTIONS,
             ] : [],
         );
     }
@@ -68,7 +68,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PERSISTED_QUERIES => sprintf($extensionPlaceholder, \__('Persisted Queries', 'gatographql')),
             self::POLYLANG_INTEGRATION => sprintf($extensionPlaceholder, \__('Polylang Integration', 'gatographql')),
             self::QUERY_FUNCTIONS => sprintf($extensionPlaceholder, \__('Query Functions', 'gatographql')),
-            self::SCHEMA_EXTENSIONS => sprintf($extensionPlaceholder, \__('Schema Extensions', 'gatographql')),
+            self::SCHEMA_FUNCTIONS => sprintf($extensionPlaceholder, \__('Schema Functions', 'gatographql')),
             default => $module,
         };
     }
@@ -86,7 +86,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
             self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
             self::QUERY_FUNCTIONS => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
-            self::SCHEMA_EXTENSIONS => \__('Collection of fields and directives added to the GraphQL schema, providing useful functionality concerning sending emails, manipulating strings, connecting to external APIs, and others', 'gatographql'),
+            self::SCHEMA_FUNCTIONS => \__('Collection of fields and directives added to the GraphQL schema, providing useful functionality concerning sending emails, manipulating strings, connecting to external APIs, and others', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -224,7 +224,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::SCHEMA_EXTENSIONS => [
+            self::SCHEMA_FUNCTIONS => [
                 ExtensionModuleResolver::HTTP_CLIENT,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
@@ -256,7 +256,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
                 self::QUERY_FUNCTIONS,
-                self::SCHEMA_EXTENSIONS,
+                self::SCHEMA_FUNCTIONS,
             ],
             default => [],
         };
