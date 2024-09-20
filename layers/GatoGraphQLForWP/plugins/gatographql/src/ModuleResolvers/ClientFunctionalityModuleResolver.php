@@ -151,7 +151,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $moreInfoLabelPlaceholder = '<a href="%1$s" target="_blank">%2$s' . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
+        $moreInfoLabelPlaceholder = '<a href="%1$s" title="%2$s" alt="%2$s" target="_blank">' . \__('Help', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::GRAPHIQL_FOR_SINGLE_ENDPOINT) {
             $option = ModuleSettingOptions::PATH;
