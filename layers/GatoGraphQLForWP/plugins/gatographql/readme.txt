@@ -293,6 +293,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Breaking change: The Schema Configuration module is disabled by default (#2848)
 * Breaking change: The schema tutorial page is hidden by default (#2856)
 * Breaking change: The settings under "Schema Elements Configuration" (new item) need to be set again (#2861)
+* Breaking change: If the "GraphiQL" and "Schema" pages don't appear on the menu, you need to disable/re-enable the plugin (due to the newly-added "Schema Editing Access" module, see below)
 * Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 * Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
 * Hide "Excerpt as description" module if there are no CPTs enabled (#2851)
@@ -301,6 +302,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" (#2861)
 * Improved documentation for extensions (#2866)
 * Added links to online docs on the Settings page (#2875)
+* Added "Schema Editing Access" module (#2877)
 * [PRO] If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
 
 = 5.0.0 =

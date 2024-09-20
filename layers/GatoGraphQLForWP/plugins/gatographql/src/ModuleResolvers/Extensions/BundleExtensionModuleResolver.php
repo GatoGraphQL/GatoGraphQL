@@ -16,7 +16,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
 
     public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
-    
+
     public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\bundle-extensions\\access-control';
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';

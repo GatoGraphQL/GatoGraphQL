@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - The Schema Configuration module is disabled by default (#2848)
 - The schema tutorial page is hidden by default (#2856)
 - The settings under "Schema Elements Configuration" (new item) need to be set again (#2861)
+- If the "GraphiQL" and "Schema" pages don't appear on the menu, you need to disable/re-enable the plugin (due to the newly-added "Schema Editing Access" module, see below)
 
 ### Improvements
 
@@ -25,6 +26,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" (#2861)
 - Improved documentation for extensions (#2866)
 - Added links to online docs on the Settings page (#2875)
+- Added "Schema Editing Access" module (#2877)
 
 ## 5.0.0 - 07/09/2024
 

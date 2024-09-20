@@ -8,6 +8,7 @@
 - The Schema Configuration module is disabled by default ([#2848](https://github.com/GatoGraphQL/GatoGraphQL/pull/2848))
 - The schema tutorial page is hidden by default ([#2856](https://github.com/GatoGraphQL/GatoGraphQL/pull/2856))
 - The settings under "Schema Elements Configuration" (new item) need to be set again ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
+- If the "GraphiQL" and "Schema" pages don't appear on the menu, you need to disable/re-enable the plugin (due to the newly-added "Schema Editing Access" module, see below)
 
 ## Improvements
 
@@ -19,6 +20,25 @@
 - Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
 - Improved documentation for extensions ([#2866](https://github.com/GatoGraphQL/GatoGraphQL/pull/2866))
 - Added links to online docs on the Settings page ([#2875](https://github.com/GatoGraphQL/GatoGraphQL/pull/2875))
+
+### Added "Schema Editing Access" module ([#2877](https://github.com/GatoGraphQL/GatoGraphQL/pull/2877))
+
+Grant non-admin users access to create and manage endpoints.
+
+Decide which users can access the GraphiQL and Interactive schema clients in the admin, and are able to edit the GraphQL schema, by selecting the appropriate configuration from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
+
+- `Users with capability: "manage_graphql_schema"`
+- `Users with role: "administrator"`
+- `Users with any role: "administrator", "editor"`
+- `Users with any role: "administrator", "editor", "author"`
+
+The first option (`Users with capability: "manage_graphql_schema"`) is selected by default, granting access to users with the `administrator` role only.
+
+<div class="img-width-1024" markdown=1>
+
+![Configuring the schema editing access in the Settings](../../images/settings-schema-editing-access.png "Configuring the schema editing access in the Settings")
+
+</div>
 
 ## Fixed
 

@@ -106,6 +106,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::SERVER_IP_CONFIGURATION,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
             ],
+            // Editing Access Scheme
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::EDITING_ACCESS_SCHEME,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::SCHEMA_EDITING_ACCESS,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_EDITING_ACCESS_SCHEME,
+            ],
             // Enable schema tutorial page?
             [
                 'class' => Module::class,
