@@ -1,6 +1,6 @@
 # Security
 
-Define Access Control Lists to manage granular access to the API for your users based.
+Define Access Control Lists to manage granular access to the API for your users.
 
 <!-- ## List of bundled extensions
 
