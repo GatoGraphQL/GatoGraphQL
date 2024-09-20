@@ -34,6 +34,14 @@ if (!defined('ABSPATH')) {
 // });
 
 /**
+ * Can't use Composer to load this file, as "vendor/" is loaded only
+ * in the "plugins_loaded" hook, and that's too late to register
+ * the capabilities.
+ */
+require_once __DIR__ . '/includes/schema-editing-access-capabilities.php';
+registerGatoGraphQLSchemaEditingAccessCapabilities(__FILE__);
+
+/**
  * Plugin's name and version.
  *
  * Use a stability suffix as supported by Composer.
