@@ -168,8 +168,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
         $moduleSettings = parent::getSettings($module);
-        $helpLabelPlaceholder = $this->getHelpLabelPlaceholder();
-        if ($module === self::GENERAL) {
+                if ($module === self::GENERAL) {
             $option = self::OPTION_ENABLE_SCHEMA_TUTORIAL;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -180,8 +179,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left<br/><span class="more-info">%s</span>', 'gatographql'),
-                    sprintf(
-                        $helpLabelPlaceholder,
+                    $this->getSettingsItemHelpLinkHTML(
                         'https://gatographql.com/guides/config/enabling-the-schema-tutorial-page',
                         \__('Enabling the Schema Tutorial page', 'gatographql')
                     )
@@ -223,8 +221,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     Properties::TITLE => \__('Plugin setup: Install Persisted Queries for common admin tasks?', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
                         \__('When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?<br/><span class="more-info">%s</span>', 'gatographql'),
-                        sprintf(
-                            $helpLabelPlaceholder,
+                        $this->getSettingsItemHelpLinkHTML(
                             'https://gatographql.com/guides/config/managing-plugin-setup-data',
                             \__('Managing the plugin\'s setup data', 'gatographql')
                         )
@@ -243,8 +240,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TITLE => \__('Display admin notice with release notes?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?<br/><span class="more-info">%s</span>', 'gatographql'),
-                    sprintf(
-                        $helpLabelPlaceholder,
+                    $this->getSettingsItemHelpLinkHTML(
                         'https://gatographql.com/guides/config/displaying-the-plugins-new-features',
                         \__('Displaying the plugin\'s new features', 'gatographql')
                     )
@@ -262,8 +258,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TITLE => \__('Organize these settings under tabs?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied<br/><span class="more-info">%s</span>', 'gatographql'),
-                    sprintf(
-                        $helpLabelPlaceholder,
+                    $this->getSettingsItemHelpLinkHTML(
                         'https://gatographql.com/guides/config/printing-the-settings-page-with-tabs-or-long-format',
                         \__('Printing the Settings page with tabs or long format', 'gatographql')
                     )
@@ -318,8 +313,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TITLE => \__('Which users can edit the schema?', 'gatographql-schema-editing-access'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Indicate which users can edit the schema (i.e. creating and updating Persisted Queries, Custom Endpoints, and others)<br/><span class="more-info">%s</span>', 'gatographql-schema-editing-access'),
-                    sprintf(
-                        $helpLabelPlaceholder,
+                    $this->getSettingsItemHelpLinkHTML(
                         'https://gatographql.com/guides/config/managing-who-can-edit-the-schema',
                         \__('Managing who can edit the schema', 'gatographql')
                     )

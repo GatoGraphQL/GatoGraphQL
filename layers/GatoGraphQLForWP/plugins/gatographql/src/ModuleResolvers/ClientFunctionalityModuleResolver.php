@@ -150,7 +150,6 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $helpLabelPlaceholder = $this->getHelpLabelPlaceholder();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::GRAPHIQL_FOR_SINGLE_ENDPOINT) {
             $option = ModuleSettingOptions::PATH;
@@ -163,8 +162,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 Properties::TITLE => \__('Client path', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     \__('URL path to access the public GraphiQL client<br/><span class="more-info">%s</span>', 'gatographql'),
-                    sprintf(
-                        $helpLabelPlaceholder,
+                    $this->getSettingsItemHelpLinkHTML(
                         'https://gatographql.com/guides/config/configuring-the-graphiql-client-for-the-single-endpoint',
                         \__('Configuring the GraphiQL client for the single endpoint', 'gatographql')
                     )
@@ -182,8 +180,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 Properties::TITLE => \__('Client path', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     \__('URL path to access the public Interactive Schema client<br/><span class="more-info">%s</span>', 'gatographql'),
-                    sprintf(
-                        $helpLabelPlaceholder,
+                    $this->getSettingsItemHelpLinkHTML(
                         'https://gatographql.com/guides/config/configuring-the-voyager-client-for-the-single-endpoint',
                         \__('Configuring the Voyager client for the single endpoint', 'gatographql')
                     )

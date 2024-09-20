@@ -174,7 +174,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $helpLabelPlaceholder = $this->getHelpLabelPlaceholder();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if ($module === self::SINGLE_ENDPOINT) {
             $option = ModuleSettingOptions::PATH;
@@ -187,8 +186,7 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                 Properties::TITLE => \__('Endpoint path', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     \__('URL path to expose the single GraphQL endpoint<br/><span class="more-info">%s</span>', 'gatographql'),
-                    sprintf(
-                        $helpLabelPlaceholder,
+                    $this->getSettingsItemHelpLinkHTML(
                         'https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint',
                         \__('Configuring the single endpoint', 'gatographql')
                     )
