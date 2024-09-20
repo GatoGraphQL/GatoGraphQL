@@ -14,7 +14,10 @@ use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
+
     public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
+    
+    public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\bundle-extensions\\access-control';
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
     public const DEPRECATION = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
@@ -22,7 +25,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\bundle-extensions\\persisted-queries';
     public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
     public const QUERY_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\query-functions';
-    public const SECURITY = Plugin::NAMESPACE . '\\bundle-extensions\\security';
     public const SCHEMA_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\schema-extensions';
 
     /**
@@ -38,6 +40,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::ALL_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage() ? [
+                self::ACCESS_CONTROL,
                 self::CACHING,
                 self::CUSTOM_ENDPOINTS,
                 self::DEPRECATION,
@@ -45,7 +48,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
                 self::QUERY_FUNCTIONS,
-                self::SECURITY,
                 self::SCHEMA_EXTENSIONS,
             ] : [],
         );
@@ -58,6 +60,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
+            self::ACCESS_CONTROL => sprintf($extensionPlaceholder, \__('Access Control', 'gatographql')),
             self::CACHING => sprintf($extensionPlaceholder, \__('Caching', 'gatographql')),
             self::CUSTOM_ENDPOINTS => sprintf($extensionPlaceholder, \__('Custom Endpoints', 'gatographql')),
             self::DEPRECATION => sprintf($extensionPlaceholder, \__('Deprecation', 'gatographql')),
@@ -65,7 +68,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PERSISTED_QUERIES => sprintf($extensionPlaceholder, \__('Persisted Queries', 'gatographql')),
             self::POLYLANG_INTEGRATION => sprintf($extensionPlaceholder, \__('Polylang Integration', 'gatographql')),
             self::QUERY_FUNCTIONS => sprintf($extensionPlaceholder, \__('Query Functions', 'gatographql')),
-            self::SECURITY => sprintf($extensionPlaceholder, \__('Security', 'gatographql')),
             self::SCHEMA_EXTENSIONS => sprintf($extensionPlaceholder, \__('Schema Extensions', 'gatographql')),
             default => $module,
         };
@@ -76,6 +78,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
+            self::ACCESS_CONTROL => \__('Define Access Control Lists to manage granular access to the API for your users based', 'gatographql'),
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
             self::DEPRECATION => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
@@ -83,7 +86,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
             self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
             self::QUERY_FUNCTIONS => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
-            self::SECURITY => \__('Grant permission to users to modify the GraphQL schema, and define Access Control Lists to manage granular access to the API based', 'gatographql'),
             self::SCHEMA_EXTENSIONS => \__('Collection of fields and directives added to the GraphQL schema, providing useful functionality concerning sending emails, manipulating strings, connecting to external APIs, and others', 'gatographql'),
             default => parent::getDescription($module),
         };
@@ -187,6 +189,11 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
+            self::ACCESS_CONTROL => [
+                ExtensionModuleResolver::ACCESS_CONTROL,
+                ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
+            ],
             self::CACHING => [
                 ExtensionModuleResolver::CACHE_CONTROL,
                 ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
@@ -217,11 +224,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::SECURITY => [
-                ExtensionModuleResolver::ACCESS_CONTROL,
-                ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
-                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
-            ],
             self::SCHEMA_EXTENSIONS => [
                 ExtensionModuleResolver::HTTP_CLIENT,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
@@ -246,6 +248,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 [$module]
             ),
             self::ALL_EXTENSIONS => [
+                self::ACCESS_CONTROL,
                 self::CACHING,
                 self::CUSTOM_ENDPOINTS,
                 self::DEPRECATION,
@@ -253,7 +256,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
                 self::QUERY_FUNCTIONS,
-                self::SECURITY,
                 self::SCHEMA_EXTENSIONS,
             ],
             default => [],
