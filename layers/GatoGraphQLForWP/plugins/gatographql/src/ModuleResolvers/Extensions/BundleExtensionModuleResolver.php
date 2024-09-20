@@ -60,7 +60,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
-            self::ACCESS_CONTROL => sprintf($extensionPlaceholder, \__('Security', 'gatographql')),
+            self::ACCESS_CONTROL => sprintf($extensionPlaceholder, \__('Access Control', 'gatographql')),
             self::CACHING => sprintf($extensionPlaceholder, \__('Caching', 'gatographql')),
             self::CUSTOM_ENDPOINTS => sprintf($extensionPlaceholder, \__('Custom Endpoints', 'gatographql')),
             self::DEPRECATION => sprintf($extensionPlaceholder, \__('Deprecation', 'gatographql')),
