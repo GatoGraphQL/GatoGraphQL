@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\BundleExtensionPluginMarkdownConte
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 
 /**
@@ -34,11 +33,8 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return sprintf(
-            '%s/%s/%s/',
-            $moduleConfiguration->getGatoGraphQLWebsiteURL(),
-            PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage()
-                ? 'bundles'
-                : 'extensions',
+            '%s/%s',
+            $moduleConfiguration->getGatoGraphQLBundlesPageURL(),
             $this->getSlug($module)
         );
     }
