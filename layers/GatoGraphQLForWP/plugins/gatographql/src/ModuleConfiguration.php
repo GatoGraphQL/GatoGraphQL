@@ -112,7 +112,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getGatoGraphQLBundlesPageURL(): string
     {
         $envVariable = Environment::GATOGRAPHQL_BUNDLES_PAGE_URL;
-        $defaultValue = 'https://gatographql.com/bundles/';
+        $defaultValue = PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage()
+            ? 'https://gatographql.com/bundles/'
+            : 'https://gatographql.com/extensions/';
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
