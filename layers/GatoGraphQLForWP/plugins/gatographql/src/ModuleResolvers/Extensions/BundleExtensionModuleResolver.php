@@ -101,8 +101,11 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
-            self::PRO => $moduleConfiguration->getGatoGraphQLWebsiteURL(),
-            default => parent::getWebsiteURL($module),
+            self::PRO,
+            self::ALL_EXTENSIONS =>
+                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+            default
+                => parent::getWebsiteURL($module),
         };
     }
 
