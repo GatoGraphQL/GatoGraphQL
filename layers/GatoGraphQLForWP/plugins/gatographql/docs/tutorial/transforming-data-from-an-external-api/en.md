@@ -131,7 +131,7 @@ The response is:
 
 [Composable directives](https://gatographql.com/guides/schema/using-composable-directives/) can nest one or more directives within them. When nesting more than one, we indicate this via argument `affectDirectivesUnderPos`, which contains the relative positions from that directive to its nested directives.
 
-In the GraphQL query above, directive `@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension) is a composable directive. On its first occurrence, it is nesting only one directive, and argument `affectDirectivesUnderPos` can be omitted:
+In the GraphQL query above, directive `@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/query-functions/) extension) is a composable directive. On its first occurrence, it is nesting only one directive, and argument `affectDirectivesUnderPos` can be omitted:
 
 ```graphql
     @underEachArrayItem
@@ -175,7 +175,7 @@ On its second occurrence, it is nesting the 4 directives to its right, as indica
 
 🔥 **Tips:**
 
-Directive `@applyField` (provided by the [**Field on Field**](https://gatographql.com/extensions/field-on-field/) extension) has two potential destinations for its output:
+Directive `@applyField` (provided by the [**Field on Field**](https://gatographql.com/extensions/query-functions/) extension) has two potential destinations for its output:
 
 - Providing argument `passOnwardsAs: "someVariableName"` will assign the new value to dynamic variable `$someVariableName`, from which it can be read by the upcoming nested directives:
 
@@ -287,7 +287,7 @@ The response is:
 
 This example continues on the previous one, plus also converting the format of the emails in the response.
 
-The GraphQL query below extracts the emails from the response of the API, and converts to upper case those from users whose language is English or German via the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/conditional-field-manipulation/) extension):
+The GraphQL query below extracts the emails from the response of the API, and converts to upper case those from users whose language is English or German via the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/query-functions/) extension):
 
 ```graphql
 query {

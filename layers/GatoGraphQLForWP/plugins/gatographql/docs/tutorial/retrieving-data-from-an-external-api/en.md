@@ -870,7 +870,7 @@ Back to Mailchimp's API, let's extract the list of all the email addresses from 
 }
 ```
 
-The [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension provides [composable directives](https://gatographql.com/guides/schema/using-composable-directives/) that iterate over the inner elements of arrays or objects, and apply their nested directive(s) under those elements:
+The [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/query-functions/) extension provides [composable directives](https://gatographql.com/guides/schema/using-composable-directives/) that iterate over the inner elements of arrays or objects, and apply their nested directive(s) under those elements:
 
 - `@underArrayItem`: Operate on a specific item from the array
 - `@underJSONObjectProperty`: Operate on a specific entry from the JSON object

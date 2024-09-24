@@ -190,7 +190,7 @@ mutation DuplicatePost
 }
 ```
 
-Thanks to the [**Field to Input**](https://gatographql.com/extensions/field-to-input/) extension, we can create the input object already on the first operation, and export all the required post data under a single dynamic variable:
+Thanks to the [**Field to Input**](https://gatographql.com/extensions/query-functions/) extension, we can create the input object already on the first operation, and export all the required post data under a single dynamic variable:
 
 ```graphql
 query GetPostAndExportData {

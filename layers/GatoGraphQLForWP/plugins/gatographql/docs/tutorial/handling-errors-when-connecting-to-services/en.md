@@ -268,7 +268,7 @@ We can capture this feedback from the webserver by replacing `_sendJSONObjectIte
 
 For instance, when fetching data from a non-existent resource from the WP REST API, it returns a `data.status` entry in the response and associated data.
 
-This GraphQL query captures this data, and explicitly adds an error entry with the response's error code and message, by using field `_fail` (provided by the [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension):
+This GraphQL query captures this data, and explicitly adds an error entry with the response's error code and message, by using field `_fail` (provided by the [**Response Error Trigger**](https://gatographql.com/extensions/query-functions/) extension):
 
 ```graphql
 query ExportDefaultDynamicVariables
@@ -372,7 +372,7 @@ query ExecuteSomeOperation
 
 🔥 **Tips:**
 
-The [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension provides two ways to add a custom entry under `errors`:
+The [**Response Error Trigger**](https://gatographql.com/extensions/query-functions/) extension provides two ways to add a custom entry under `errors`:
 
 - Via field `_fail`
 - Via directive `@fail`

@@ -877,7 +877,7 @@ We use the GraphQL query from the previous approach, and optimize it by:
 We deal with these elements by (respectively):
 
 - Adding directive `@configureWarningsOnExportingDuplicateVariable(enabled: false)` to the operation, which disables raising the warning
-- Adding the `@remove` directive (from the [**Field Response Removal**](https://gatographql.com/extensions/field-response-removal/) extension) to each of the fields to remove
+- Adding the `@remove` directive (from the [**Field Response Removal**](https://gatographql.com/extensions/query-functions/) extension) to each of the fields to remove
 
 This is the consolidated GraphQL query to duplicate a post:
 

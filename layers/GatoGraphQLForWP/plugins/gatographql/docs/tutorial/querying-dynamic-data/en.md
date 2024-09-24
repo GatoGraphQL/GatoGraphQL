@@ -62,7 +62,7 @@ query {
 
 🔥 **Tips:**
 
-`$__timeNow` is a variable dynamically created by the [**Field to Input**](https://gatographql.com/extensions/field-to-input/) extension, which allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
+`$__timeNow` is a variable dynamically created by the [**Field to Input**](https://gatographql.com/extensions/query-functions/) extension, which allows us to obtain the value of a field and [input it into another field](https://gatographql.com/guides/schema/using-field-to-input/) in that same operation.
 
 The field to obtain the value from is referenced using the "Variable" syntax `$`, and `__` before the field alias or name:
 

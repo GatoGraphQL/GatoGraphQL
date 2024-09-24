@@ -189,7 +189,7 @@ mutation SendEmail @depends(on: "ExportData") {
 }
 ```
 
-Alternatively, if [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) is enabled in the Schema Configuration, we can retrieve the admin email in the `mutation` operation already (and inject it into the mutation via [**Field to Input**](https://gatographql.com/extensions/field-to-input/)):
+Alternatively, if [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) is enabled in the Schema Configuration, we can retrieve the admin email in the `mutation` operation already (and inject it into the mutation via [**Field to Input**](https://gatographql.com/extensions/query-functions/)):
 
 ```graphql
 mutation SendEmail {

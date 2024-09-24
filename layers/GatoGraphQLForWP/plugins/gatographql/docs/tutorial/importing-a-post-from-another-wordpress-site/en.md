@@ -565,7 +565,7 @@ mutation ImportPost(
 
 (As we've seen on previous lessons) We use the **Field to Input** feature (with syntax `$__field`) to pass the field's resolved value to a contiguous _field_.
 
-When we need to pass the field's resolved value to a _directive_, we must instead use directive `@passOnwards` (which is similarly provided by the [**Field to Input**](https://gatographql.com/extensions/field-to-input/) extension).
+When we need to pass the field's resolved value to a _directive_, we must instead use directive `@passOnwards` (which is similarly provided by the [**Field to Input**](https://gatographql.com/extensions/query-functions/) extension).
 
 This query:
 

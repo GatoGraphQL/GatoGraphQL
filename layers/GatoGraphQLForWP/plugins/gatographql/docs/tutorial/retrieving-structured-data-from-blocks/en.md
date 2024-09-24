@@ -58,7 +58,7 @@ The response is:
 
 🔥 **Tips:**
 
-`@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension) is a [composable directive](https://gatographql.com/guides/schema/using-composable-directives/) (or "meta directive", it is a directive which can contain nested directives) that iterates over an array of elements, and applies its nested directive on each of them.
+`@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/query-functions/) extension) is a [composable directive](https://gatographql.com/guides/schema/using-composable-directives/) (or "meta directive", it is a directive which can contain nested directives) that iterates over an array of elements, and applies its nested directive on each of them.
 
 `@underEachArrayItem` helps bridge GraphQL types, as it can make a field that returns a `[String]` value, be applied a directive that receives a `String` value as input (or other combinations).
 
