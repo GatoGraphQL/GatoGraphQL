@@ -10,7 +10,7 @@ We can generalize this idea, applying it to any two data sources, combining thei
 
 🔥 **Tips:**
 
-Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) allows us to combine JSON objects that reference the same entity, into a single JSON object containing all properties.
+Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Functions Via Schema**](https://gatographql.com/extensions/schema-functions/) extension) allows us to combine JSON objects that reference the same entity, into a single JSON object containing all properties.
 
 The JSON objects in both sources can be identified as referencing the same entity because their "index" property has the same value.
 

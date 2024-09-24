@@ -64,7 +64,7 @@ mutation SendEmail @depends(on: "GetEmailData") {
 To send the email in plain text:
 
 - Use input `messageAs: { text: ... }` in the `_sendEmail` mutation
-- Remove the HTML tags from the post's content using global field `_htmlStripTags` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension)
+- Remove the HTML tags from the post's content using global field `_htmlStripTags` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/schema-functions/) extension)
 
 </div>
 

@@ -4,7 +4,7 @@ This tutorial lesson demonstrates several capabilities by Gato GraphQL to send e
 
 ## Sending emails
 
-We send emails via mutation `_sendEmail` provided by the [**Email Sender**](https://gatographql.com/extensions/email-sender/) extension.
+We send emails via mutation `_sendEmail` provided by the [**Email Sender**](https://gatographql.com/extensions/schema-functions/) extension.
 
 <div class="doc-highlight" markdown=1>
 
@@ -67,7 +67,7 @@ mutation {
 
 ## Composing the email using Markdown
 
-Field `_strConvertMarkdownToHTML` from the [**Helper Function Collection**](https://gatographql.com/extensions/helper-function-collection/) extension converts Markdown to HTML.
+Field `_strConvertMarkdownToHTML` from the [**Helper Function Collection**](https://gatographql.com/extensions/schema-functions/) extension converts Markdown to HTML.
 
 We can use this field to compose the email using Markdown:
 
@@ -112,7 +112,7 @@ mutation SendEmail @depends(on: "GetEmailData") {
 
 ## Injecting dynamic data into the email
 
-Using the function fields provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/), we can create a message template containing placeholders, and replace them with dynamic data:
+Using the function fields provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/schema-functions/), we can create a message template containing placeholders, and replace them with dynamic data:
 
 ```graphql
 query GetPostData($postID: ID!) {

@@ -12,7 +12,7 @@ Gato GraphQL provides function fields under the concept of [Global fields](https
 
 By convention, global fields in Gato GraphQL start with `_` (and normal fields do not).
 
-The [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension provides many of the most common PHP functions as global fields, including:
+The [**PHP Functions Via Schema**](https://gatographql.com/extensions/schema-functions/) extension provides many of the most common PHP functions as global fields, including:
 
 - `_arrayItem`
 - `_arrayJoin`
@@ -125,7 +125,7 @@ query {
 
 🔥 **Tips:**
 
-Field `_env` is provided via the [**PHP Constants and Environment Variables via Schema**](https://gatographql.com/extensions/php-constants-and-environment-variables-via-schema/) extension.
+Field `_env` is provided via the [**PHP Constants and Environment Variables via Schema**](https://gatographql.com/extensions/schema-functions/) extension.
 
 Via the applied Schema Configuration and plugin Settings, we can configure [which constants and environment variables can be queried](https://gatographql.com/guides/config/configuring-what-environment-variables-and-php-constants-can-be-queried/).
 

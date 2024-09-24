@@ -1,12 +1,12 @@
 # Lesson 6: Search, replace, and store again
 
-This tutorial lesson provides examples of content adaptations involving search and replace, and then storing the resource back to the DB. It requires the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension.
+This tutorial lesson provides examples of content adaptations involving search and replace, and then storing the resource back to the DB. It requires the [**PHP Functions via Schema**](https://gatographql.com/extensions/schema-functions/) extension.
 
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
 
-The [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension provides the following "search and replace" fields:
+The [**PHP Functions via Schema**](https://gatographql.com/extensions/schema-functions/) extension provides the following "search and replace" fields:
 
 - `_strReplace`: Replace a string with another string
 - `_strReplaceMultiple`: Replace a list of strings with another list of strings

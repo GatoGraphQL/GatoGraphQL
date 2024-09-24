@@ -1,6 +1,6 @@
 # Lesson 19: Retrieving data from an external API
 
-The [**HTTP Client**](https://gatographql.com/extensions/http-client/) extension allows us to execute HTTP requests against a webserver.
+The [**HTTP Client**](https://gatographql.com/extensions/schema-functions/) extension allows us to execute HTTP requests against a webserver.
 
 This tutorial lesson demonstrates how to fetch data from an external API, by:
 
@@ -19,7 +19,7 @@ curl --request GET \
 
 Let's replicate this in Gato GraphQL.
 
-We execute an HTTP request via global field `_sendHTTPRequest` (provided via the [**HTTP Client**](https://gatographql.com/extensions/http-client/) extension):
+We execute an HTTP request via global field `_sendHTTPRequest` (provided via the [**HTTP Client**](https://gatographql.com/extensions/schema-functions/) extension):
 
 ```graphql
 query {
@@ -67,7 +67,7 @@ Field `_sendHTTPRequest` returns an object of type `HTTPResponse`. After executi
 }
 ```
 
-As the content-type of the response is `application/json`, we can transform the raw body content from `String` to `JSONObject` via field `_strDecodeJSONObject` (from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension):
+As the content-type of the response is `application/json`, we can transform the raw body content from `String` to `JSONObject` via field `_strDecodeJSONObject` (from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/schema-functions/) extension):
 
 ```graphql
 query {
@@ -172,7 +172,7 @@ The body is now accessible as a JSON object:
 
 ## Connecting to a REST API
 
-[**HTTP Client**](https://gatographql.com/extensions/http-client/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
+[**HTTP Client**](https://gatographql.com/extensions/schema-functions/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
 
 - `_sendJSONObjectItemHTTPRequest`: When the content pertains a single JSON object
 - `_sendJSONObjectCollectionHTTPRequest`: When the content pertains a collection of JSON objects
@@ -432,7 +432,7 @@ Passing these variables:
 
 <!-- (As the Mailchimp API doesn't support GraphQL, we switch to a different API for this example.) -->
 
-[**HTTP Client**](https://gatographql.com/extensions/http-client/) also provides a function field to conveniently connect to GraphQL APIs.
+[**HTTP Client**](https://gatographql.com/extensions/schema-functions/) also provides a function field to conveniently connect to GraphQL APIs.
 
 Field `_sendGraphQLHTTPRequest` accepts those inputs expected by GraphQL (the query, variables and operation name), executes the GraphQL query against the provided endpoint, and converts the response to `JSONObject`.
 

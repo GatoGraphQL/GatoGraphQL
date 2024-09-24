@@ -695,7 +695,7 @@ The following approach deals with this problem.
 
 ### Duplicating the post: Third approach
 
-We can execute an additional operation at the beginning to initialize each of the dynamic variables with a `null` or empty value (via global field `_echo` from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension).
+We can execute an additional operation at the beginning to initialize each of the dynamic variables with a `null` or empty value (via global field `_echo` from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/schema-functions/) extension).
 
 Then, each dynamic variable will always be exported, at least once. When the field value is not empty, then it will be exported again, and this second value will override the first one.
 

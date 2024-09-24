@@ -320,7 +320,7 @@ query ExecuteAll
 
 In the GraphQL query above, a post will not be distributed to any downstream site whenever its meta property `"downstream_domains"` is defined with an empty array as value.
 
-This is possible because of the difference between function fields `_notNull` and `_notEmpty` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension):
+This is possible because of the difference between function fields `_notNull` and `_notEmpty` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/schema-functions/) extension):
 
 - If meta property `"downstream_domains"` is not defined, its value is `null`, and both `_notNull` and `_notEmpty` eval to `false`
 - If meta property `"downstream_domains"` is defined as an empty array, its value is `[]`, and only `_notEmpty` evals to `false`

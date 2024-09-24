@@ -1,6 +1,6 @@
 # Lesson 24: Translating content from URL
 
-We can combine the fields to execute HTTP requests (provided by the [**HTTP Client**](https://gatographql.com/extensions/http-client/) extension) with directive `@strTranslate` (provided by the [**Google Translate**](https://gatographql.com/extensions/google-translate/) extension), to translate the content from any URL.
+We can combine the fields to execute HTTP requests (provided by the [**HTTP Client**](https://gatographql.com/extensions/schema-functions/) extension) with directive `@strTranslate` (provided by the [**Google Translate**](https://gatographql.com/extensions/google-translate/) extension), to translate the content from any URL.
 
 ## GraphQL query to translate content from a URL
 

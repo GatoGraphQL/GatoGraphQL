@@ -275,7 +275,7 @@ Whereas this query:
 
 ## Improved documentation
 
-- Added documentation for new fields from the [Helper Function Collection](https://gatographql.com/extensions/helper-function-collection/) extension:
+- Added documentation for new fields from the [Helper Function Collection](https://gatographql.com/extensions/schema-functions/) extension:
   - `_strDecodeXMLAsJSON`
   - `_strParseCSV`
 

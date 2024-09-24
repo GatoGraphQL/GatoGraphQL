@@ -40,7 +40,7 @@ Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),
 
 ## Extracting the data from the payload
 
-Because the request is sent via `POST`, we must extract the data from the body of the HTTP request (which is supported via the [**HTTP Request via Schema**](https://gatographql.com/extensions/http-request-via-schema/) extension).
+Because the request is sent via `POST`, we must extract the data from the body of the HTTP request (which is supported via the [**HTTP Request via Schema**](https://gatographql.com/extensions/schema-functions/) extension).
 
 <div class="doc-highlight" markdown=1>
 
@@ -75,7 +75,7 @@ query ExtractPayloadData {
 
 🔥 **Tips:**
 
-The [**HTTP Request via Schema**](https://gatographql.com/extensions/http-request-via-schema/) extension allows us to retrieve all of the current HTTP request data, via the following fields:
+The [**HTTP Request via Schema**](https://gatographql.com/extensions/schema-functions/) extension allows us to retrieve all of the current HTTP request data, via the following fields:
 
 - `_httpRequestBody`: Body of the HTTP request
 - `_httpRequestClientHost`: Client host
