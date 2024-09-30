@@ -55,7 +55,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 
     public function getName(string $module): string
     {
-        $bundlePlaceholder = \__('“%s” Bundle', 'gatographql');
+        $bundlePlaceholder = \__('“%s” bundle', 'gatographql');
         $extensionPlaceholder = \__('%s', 'gatographql');
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),

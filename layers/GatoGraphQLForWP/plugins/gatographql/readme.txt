@@ -519,8 +519,8 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added predefined custom endpoint "Nested mutations + Entity as mutation payload type"
 * Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
 * Renamed page "Recipes" to "Tutorial", and added settings to hide it
-* Renamed existing bundles (“Application Glue & Automator” Bundle => “Tailored WordPress Automator” Bundle, “Content Translation” Bundle => “Simplest WordPress Content Translation” Bundle and “Public API” Bundle => “Responsible WordPress Public API” Bundle)
-* Added documentation for new bundles (“Automated Content Translation & Sync for WordPress Multisite” Bundle, “Better WordPress Webhooks” Bundle, “Easy WordPress Bulk Transform & Update” Bundle, “Private GraphQL Server for WordPress” Bundle, “Selective Content Import, Export & Sync for WordPress” Bundle, “Unhindered WordPress Email Notifications” Bundle and “Versatile WordPress Request API” Bundle)
+* Renamed existing bundles (“Application Glue & Automator” bundle => “Tailored WordPress Automator” bundle, “Content Translation” bundle => “Simplest WordPress Content Translation” bundle and “Public API” bundle => “Responsible WordPress Public API” bundle)
+* Added documentation for new bundles (“Automated Content Translation & Sync for WordPress Multisite” bundle, “Better WordPress Webhooks” bundle, “Easy WordPress Bulk Transform & Update” bundle, “Private GraphQL Server for WordPress” bundle, “Selective Content Import, Export & Sync for WordPress” bundle, “Unhindered WordPress Email Notifications” bundle and “Versatile WordPress Request API” bundle)
 * Fixed HTML codes were printed in select inputs in the WordPress editor, now removed
 
 = 1.3.0 =

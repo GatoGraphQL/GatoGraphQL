@@ -1,4 +1,4 @@
-# “All Extensions” Bundle
+# “All Extensions” bundle
 
 This bundle contains **all of Gato GraphQL extensions**, in a single plugin.
 
