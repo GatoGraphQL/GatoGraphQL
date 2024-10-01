@@ -61,6 +61,33 @@
     border-color: darkturquoise;
     background-color: rgb(199, 232, 184);
 }
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(1) {
+    background: linear-gradient(90deg, rgb(222, 115, 230) 0%, rgb(232, 182, 204) 33%);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(2) {
+    background: linear-gradient(90deg, rgb(153, 115, 230) 0%, rgb(204, 182, 232) 33%);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(3) {
+    background: linear-gradient(90deg, rgb(115, 140, 230) 0%, rgb(182, 196, 232) 33%);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(4) {
+    background: linear-gradient(90deg, rgb(115, 209, 230) 0%, rgb(182, 222, 232) 33%);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(5) {
+    background: linear-gradient(90deg, rgb(115, 230, 153) 0%, rgb(182, 232, 204) 33%);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(6) {
+    background: linear-gradient(90deg, rgb(230, 224, 115) 0%, rgb(230, 232, 182) 33%);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(7) {
+    background: linear-gradient(90deg, rgb(230, 188, 115) 0%, rgb(232, 215, 182) 33%);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(8) {
+    background: linear-gradient(90deg, rgb(230, 142, 115) 0%, rgb(232, 199, 182) 33%);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(9) {
+    background: linear-gradient(90deg, rgb(230, 115, 123) 0%, rgb(232, 182, 182) 33%);
+}
 .plugin-card.plugin-card-non-installed.plugin-card-highlight {
     border-color: darksalmon;
     background-color: rgb(240, 230, 140);
@@ -76,10 +103,10 @@
 .plugin-card-top-request-extension .plugin-icon {
     top: 0;
 }
-.plugin-card.plugin-card-extension-bundle.plugin-card-not-highlight .plugin-icon {
+/* .plugin-card.plugin-card-extension-bundle.plugin-card-not-highlight .plugin-icon {
     height: auto;
     top: 10px;
-}
+} */
 
 /**
  * If a bundler is installed, change the style of the bundled extensions too
