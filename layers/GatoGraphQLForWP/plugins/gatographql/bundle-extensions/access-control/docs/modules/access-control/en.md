@@ -1,4 +1,4 @@
-# Security
+# Access Control
 
 Define Access Control Lists to manage granular access to the API for your users.
 
