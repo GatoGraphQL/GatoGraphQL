@@ -103,10 +103,10 @@
 .plugin-card-top-request-extension .plugin-icon {
     top: 0;
 }
-.plugin-card.plugin-card-extension-bundle.plugin-card-not-highlight .plugin-icon {
+/* .plugin-card.plugin-card-extension-bundle.plugin-card-not-highlight .plugin-icon {
     height: auto;
     top: 10px;
-}
+} */
 
 /**
  * If a bundler is installed, change the style of the bundled extensions too
