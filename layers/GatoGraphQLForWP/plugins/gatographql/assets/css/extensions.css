@@ -60,7 +60,7 @@
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle {
     border-color: darkturquoise;
     background-color: rgb(199, 232, 184);
-    background: linear-gradient(90deg, rgba(210, 148, 233) 0%, rgb(238,174,202,1) 50%);
+    background: linear-gradient(90deg, rgb(199, 115, 230) 0%, rgb(238,174,202,1) 40%);
 }
 .plugin-card.plugin-card-non-installed.plugin-card-highlight {
     border-color: darksalmon;
