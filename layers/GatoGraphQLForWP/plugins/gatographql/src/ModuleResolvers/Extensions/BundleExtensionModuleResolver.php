@@ -116,8 +116,27 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PRO,
             self::ALL_EXTENSIONS
                 => $pluginURL . 'assets/img/logos/GatoGraphQL-logo-face.png',
+            self::ACCESS_CONTROL
+                => $pluginURL . 'assets/img/extension-logos/access-control.png',
+            self::CACHING
+                => $pluginURL . 'assets/img/extension-logos/caching.png',
+            self::CUSTOM_ENDPOINTS
+                => $pluginURL . 'assets/img/extension-logos/custom-endpoints.png',
+            self::DEPRECATION
+                => $pluginURL . 'assets/img/extension-logos/deprecation.png',
+            self::MULTIPLE_QUERY_EXECUTION
+                => $pluginURL . 'assets/img/extension-logos/multiple-query-execution.png',
+            self::PERSISTED_QUERIES
+                => $pluginURL . 'assets/img/extension-logos/persisted-queries.png',
+            self::POLYLANG_INTEGRATION
+                => $pluginURL . 'assets/img/extension-logos/polylang-integration.png',
+            self::QUERY_FUNCTIONS
+                => $pluginURL . 'assets/img/extension-logos/query-functions.png',
+            self::SCHEMA_FUNCTIONS
+                => $pluginURL . 'assets/img/extension-logos/schema-functions.png',
             default => parent::getLogoURL($module),
         };
+        return parent::getLogoURL($module);
     }
 
     /**
