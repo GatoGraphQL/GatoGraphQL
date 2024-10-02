@@ -20,7 +20,7 @@ Gato GraphQL is a GraphQL server for WordPress, that enables fetching and modify
 
 This tutorial explains how to achieve all of these objectives, one by one, by exploring all the elements from the GraphQL schema (the types, fields, directives, etc). -->
 
-This tutorial explores how to make the most out of the GraphQL schema (types, fields, and directives).
+This tutorial explores how to make the most out of the GraphQL schema (types, fields, and directives) when using the “All Extensions” bundle.
 
 Lessons are incremental, focusing on some new element from the GraphQL schema, and building upon all items introduced in the previous lessons. Hence, the lessons are better read in the given order.
 
