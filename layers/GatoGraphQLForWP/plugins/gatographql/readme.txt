@@ -8,31 +8,25 @@ Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Powerful and flexible GraphQL server for WordPress. Do headless, APIs, webhooks, import/export, search & replace, Google translate, and more.
+Powerful and flexible GraphQL server for WordPress.
 
 == Description ==
 
-Gato GraphQL is a productivity tool for interacting with data in your WordPress site. It allows you to retrieve, manipulate and store again any piece of data, in any desired way, using the GraphQL language.
+Gato GraphQL is a powerful and flexible GraphQL server for WordPress.
+
+It allows you to retrieve, manipulate and store again any piece of data, in any desired way, using the GraphQL language.
 
 Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other JS framework), power your Gutenberg blocks, fetch data for your theme, plugin or website, or expose an API for other applications.
 
-Gato GraphQL supports Persisted Queries out of the box. Persisted queries are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
-
-With persisted queries, you can have the great user experience of GraphQL, while having the security from a REST API, limiting clients and visitors to only query the data that you have defined in advance.
-
-You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
-
-[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
-
 === Architectural foundation ===
 
-Gato GraphQL is **optimized for speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
+**Speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
 
-Gato GraphQL is also **fully extensible**, so you can create your own extensions and integrations, to extend the GraphQL schema for your own CPTs and plugins.
+**Extensibility:**, You can create your own extensions and integrations, to extend the GraphQL schema for your own CPTs and plugins.
 
-Gato GraphQL is **super configurable**, to suit your specific needs, even endpoint by endpoint.
+**Customization:** You can configure the server to suit your specific needs, even endpoint by endpoint.
 
-And finally, Gato GraphQL is **forward-looking**, already providing features that have been proposed for the GraphQL spec but not yet released.
+**Bleeding edge:** The server already provides features that have been proposed for the GraphQL spec but not yet released.
 
 === Features ===
 
