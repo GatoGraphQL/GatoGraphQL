@@ -74,4 +74,12 @@ class PluginStaticModuleConfiguration
     {
         return false;
     }
+
+    /**
+     * @since v6.0
+     */
+    public static function printReferencedExtensionsInSchemaTutorialDocs(): bool
+    {
+        return false;
+    }
 }

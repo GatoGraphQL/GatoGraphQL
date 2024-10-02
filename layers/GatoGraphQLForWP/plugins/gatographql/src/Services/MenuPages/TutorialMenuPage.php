@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentR
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\TutorialLessonDataProvider;
 
@@ -135,6 +136,10 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
                     $bundleExtensionHTMLItems
                 )
             );
+        }
+
+        if (!PluginStaticModuleConfiguration::printReferencedExtensionsInSchemaTutorialDocs()) {
+            return $entryContent;
         }
 
         $messageHTML = sprintf(
