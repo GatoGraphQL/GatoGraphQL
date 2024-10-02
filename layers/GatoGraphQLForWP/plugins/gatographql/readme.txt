@@ -134,11 +134,9 @@ Gato GraphQL supports "Persisted Queries", which are also endpoints with pre-def
 
 With Gato GraphQL you can also execute tailored GraphQL queries against an endpoint, indicating what specific data you need, and fetching only that within a single request.
 
-= What's the difference between the Gato GraphQL plugin and its PRO version? =
+= What are extensions needed for? =
 
-The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL as an API, such as for building headless sites.
-
-Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP caching, sending emails, executing updates in bulk, connecting to external services, and automating tasks (among others).
+Extensions are needed to enhance the security of public APIs, add HTTP caching to speed up the application, execute multiple queries in a single request, connect to external services, send emails, and others.
 
 = Does Gato GraphQL support WordPress Multisite? =
 
