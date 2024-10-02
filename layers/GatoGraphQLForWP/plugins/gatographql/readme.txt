@@ -18,7 +18,7 @@ It allows you to retrieve, manipulate and store again any piece of data, in any 
 
 Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other JS framework), power your Gutenberg blocks, fetch data for your theme, plugin or website, or expose an API for other applications.
 
-=== Fetures ===
+=== Features ===
 
 **Speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
 
