@@ -154,7 +154,12 @@ Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gato
 
 = Does the plugin provide documentation? =
 
-The Gato GraphQL website contains extensive documentation, including [guides](https://gatographql.com/guides) on configuring and using the plugin, the [extensions reference](https://gatographql.com/extensions-reference) docs, and a [tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema.
+The Gato GraphQL website contains extensive documentation:
+
+- [Guides](https://gatographql.com/guides) on configuring and using the plugin
+- [Extensions reference](https://gatographql.com/extensions-reference) docs
+- [Queries library](https://gatographql.com/library) with examples of GraphQL queries for many use cases
+- [Schema tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema
 
 == Screenshots ==
 
