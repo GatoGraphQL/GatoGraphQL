@@ -144,18 +144,6 @@ Yes, it does. Gato GraphQL can be installed on a multisite network.
 
 In addition, Gato GraphQL provides fields on the GraphQL schema to retrieve multisite network data, allowing to use GraphQL to sync content across the multisite (for instance, to translate posts when using MultilingualPress, as described below).
 
-= How to use Gato GraphQL with Polylang? =
-
-Gato GraphQL PRO provides an integration with Polylang, allowing you to automatically translate a post's content using the Google Translate API, and store it on all translation posts, as defined and managed via Polylang.
-
-You can also synchronize the tags, categories, and featured image, querying the values from the origin post, and setting the corresponding translated values on all the translation posts.
-
-And you can set it all up via automation, so that whenever a post in the default language is published, it is automatically translated to all languages, and stored in the corresponding translation post by Polylang.
-
-Both Polylang and Polylang PRO are supported.
-
-Check out the [Gato GraphQL with Polylang demos](https://gatographql.com/demos?tag=Polylang) to learn more.
-
 = How to use Gato GraphQL with MultilingualPress? =
 
 Gato GraphQL PRO provides an integration with MultilingualPress, allowing you to translate a post's content to all languages defined in a multisite network, and store the translated content (from Google Translate) on the corresponding translation sites.
