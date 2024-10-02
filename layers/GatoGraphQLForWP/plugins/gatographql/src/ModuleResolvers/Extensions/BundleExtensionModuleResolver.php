@@ -175,7 +175,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::POLYLANG,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
             self::ALL_EXTENSIONS => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
@@ -207,12 +206,10 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::POLYLANG,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
             self::ACCESS_CONTROL => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
-                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
             self::CACHING => [
                 ExtensionModuleResolver::CACHE_CONTROL,
