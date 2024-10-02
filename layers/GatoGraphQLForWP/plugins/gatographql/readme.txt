@@ -18,7 +18,7 @@ It allows you to retrieve, manipulate and store again any piece of data, in any 
 
 Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other JS framework), power your Gutenberg blocks, fetch data for your theme, plugin or website, or expose an API for other applications.
 
-=== Architectural foundation ===
+=== Fetures ===
 
 **Speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
 
@@ -27,29 +27,6 @@ Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other J
 **Customization:** You can configure the server to suit your specific needs, even endpoint by endpoint.
 
 **Bleeding edge:** The server already provides features that have been proposed for the GraphQL spec but not yet released.
-
-=== Features ===
-
-Gato GraphQL provides [these features](https://gatographql.com/features):
-
-- **Security:** Multiple mechanisms are provided to help protect your data.
-- **Custom Endpoints:** Create and expose multiple custom GraphQL schemas under their own URL, for different users, applications, external services, or other.
-- **Persisted Queries:** GraphQL queries which are stored in the server and accessed under their own URL, thus emulating a REST endpoint.
-- **Predefined Persisted Queries:** Tackle admin tasks that are common to WordPress sites, by executing an already-installed persisted query.
-- **Public, Private & Password-Protected Endpoints:** In addition to creating and exposing public endpoints, create private endpoints, and protect a public endpoint with a password.
-- **Internal Endpoint for Blocks:** Fetch data for your Gutenberg blocks, via an internal GraphQL endpoint accessible within the wp-admin only.
-- **API Hierarchy:** Organize endpoints hierarchically, to group and expose related endpoints under a logical structure.
-- **Endpoint Management:** Organize custom endpoint and persisted queries by assigning them custom categories, similar to posts in WordPress.
-- **Schema namespacing:** Avoid conflicts in the schema, by having all type names automatically namespaced.
-- **Nested mutations:** Execute a mutation within a queried entity (similar to accessing a field), and not only on the root type in the GraphQL query.
-- **“Sensitive” data:** Decide if to expose or not private data in a public API.
-- **Global Fields:** Common fields added to all types of the GraphQL schema (while being defined only once).
-- **Composable directives:** Expose directives that augment other directives, modifying their behavior or filling a gap.
-- **Multi-Field Directives:** Have directives applied to multiple fields (instead of only one), for performance and extended use cases.
-- **'oneOf' Input Object:** Input object where exactly one of the input fields must be provided as input, or the server returns a validation error.
-- **Returning different types on mutations:** Mutation fields can be configured to return either a payload object type, or directly the mutated entity.
-- **Field and directive-based versioning:** Version fields and directives independently from the overall schema.
-- **Proactive feedback:** Use the top-level entry 'extensions' to send data concerning deprecations and warnings in the response to the query.
 
 == Go PRO ==
 
@@ -100,26 +77,6 @@ As new extensions are created, they are added to Gato GraphQL PRO.
 Gato GraphQL PRO clients have access to all **product updates** and **premium support**, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
 
 Check out the [demos section on Gato GraphQL](https://gatographql.com/demos) to watch videos demonstrating the multiple use cases for this plugin.
-
-=== Features ===
-
-Gato GraphQL PRO provides [all these features](https://gatographql.com/features#pro):
-
-- **Enhanced security:** Additional mechanisms to help protect that your data is safe, accessible only to the intended targets.
-- **Automation:** Automatically execute a GraphQL Persisted Query when some event happens on the site, creating automations via a user interface.
-- **Access Control:** Avoid visitors accessing private data from your site, by granting granular access to the schema, based on the user being logged-in or not, having a certain role or capability, and more.
-- **Public/Private Schema:** Control the desired behavior when a user without access to some field or directive in the schema attempts to access it.
-- **HTTP Caching:** Cache the GraphQL response via standard HTTP caching, with the max-age value automatically calculated.
-- **Integrations with 3rd-party plugins:** Extend the GraphQL schema to access data from popular WordPress plugins.
-- **Field Deprecation via UI:** Deprecate fields on the GraphQL schema by using a user interface, without the need to deploy any code.
-- **Multiple Query Execution:** Combine multiple queries into a single one, share state across them, and execute it in only one request.
-- **Field to Input:** Obtain the value of a field, manipulate it, and input it into another field, all within the same query.
-- **Function Fields:** Expose functionalities commonly found in programming languages (such as PHP) via GraphQL fields.
-- **Function Directives:** Expose functionalities commonly found in programming languages (such as PHP) via GraphQL directives.
-- **Helper Fields:** Set of fields added to the schema, providing commonly-used helper functionality.
-- **Environment Fields:** In your GraphQL document, query a value from an environment variable, or from a PHP constant.
-- **HTTP Client:** Execute HTTP requests against a webserver and fetch their response.
-- **Schema Editing Access:** Grant non-admin users access to the clients in the admin, and access to editing the GraphQL schema and its configuration.
 
 == Source code ==
 
