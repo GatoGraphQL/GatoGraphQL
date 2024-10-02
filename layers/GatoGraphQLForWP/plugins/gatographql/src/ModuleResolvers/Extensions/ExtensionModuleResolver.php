@@ -142,7 +142,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Make normally-hidden directives (which inject some functionality into the GraphQL server) visible when editing a persisted query.', 'gatographql'),
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple queries into a single query, sharing state across them and executing them in the requested order.', 'gatographql'),
-            self::PERSISTED_QUERIES => \__('Expose GraphQL endpoints with a predefined response, similar to REST endpoints.', 'gatographql'),
+            self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs.', 'gatographql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('Query the value from an environment variable or PHP constant.', 'gatographql'),
             self::PHP_FUNCTIONS_VIA_SCHEMA => \__('Manipulate the field output using standard programming language functions available in PHP.', 'gatographql'),
             self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
