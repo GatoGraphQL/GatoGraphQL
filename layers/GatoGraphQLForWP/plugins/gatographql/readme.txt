@@ -30,7 +30,7 @@ Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other J
 
 === Features ===
 
-Gato GraphQL provides [all these features](https://gatographql.com/features):
+Gato GraphQL provides [these features](https://gatographql.com/features):
 
 - **Security:** Multiple mechanisms are provided to help protect your data.
 - **Custom Endpoints:** Create and expose multiple custom GraphQL schemas under their own URL, for different users, applications, external services, or other.
