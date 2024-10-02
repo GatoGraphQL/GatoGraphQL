@@ -39,7 +39,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getPageTitle(): string
     {
-        return \__('Gato GraphQL - Extension Docs', 'gatographql');
+        return \__('Gato GraphQL - Extension Reference Docs', 'gatographql');
     }
 
     protected function getContentID(): string
@@ -74,7 +74,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         return sprintf(
             '<p>%s</p>',
             sprintf(
-                __('%s <a href="%s" class="button">Switch to the <strong>Extensions</strong> view</a></span>', 'gatographql'),
+                __('%s <a href="%s" class="button">Back to the <strong>Extensions</strong> page</a></span>', 'gatographql'),
                 $extensionsMenuPage->getHeaderMessage(),
                 \admin_url(sprintf(
                     'admin.php?page=%s',

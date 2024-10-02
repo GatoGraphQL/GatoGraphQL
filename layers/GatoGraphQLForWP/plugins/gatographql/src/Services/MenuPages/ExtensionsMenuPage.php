@@ -107,7 +107,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
             'admin.php?page=%s',
             $this->getExtensionDocsMenuPage()->getScreenID()
         ));
-        $label_safe = __('Switch to the <strong>Extension Docs</strong> view', 'gatographql');
+        $label_safe = __('Browse the <strong>Extension Reference Docs</strong>', 'gatographql');
         ?>
             <p>
                 <?php echo $headerMessage_safe ?>

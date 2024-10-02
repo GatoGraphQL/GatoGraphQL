@@ -354,8 +354,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             if (
                 $hookName = \add_submenu_page(
                     $menuName,
-                    __('Extension Docs', 'gatographql'),
-                    __('Extension Docs', 'gatographql'),
+                    __('Extension Reference Docs', 'gatographql'),
+                    __('Extension Reference Docs', 'gatographql'),
                     'manage_options',
                     $extensionDocsMenuPage->getScreenID(),
                     $callable
