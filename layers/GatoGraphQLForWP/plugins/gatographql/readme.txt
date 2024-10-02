@@ -126,7 +126,18 @@ Check out guide [Complementing WP-CLI](https://gatographql.com/guides/code/compl
 
 = How do I use Gato GraphQL to build headless sites? =
 
-With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org) or others) you can query the data and render the HTML.
+With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within the framework of your choice, you can query the data and render the HTML.
+
+Among others, you can fetch WordPress data and then render the HTML using any of these libraries/frameworks:
+
+- React
+- Vue
+- Next.js
+- Nuxt
+- Hugo
+- Astro
+- VitePress
+- Svelte
 
 = Can I fetch Gutenberg block data with Gato GraphQL? =
 
