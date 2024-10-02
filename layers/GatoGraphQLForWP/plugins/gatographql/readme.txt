@@ -114,6 +114,15 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Frequently Asked Questions ==
 
+= Does the plugin provide documentation? =
+
+The Gato GraphQL website contains extensive documentation:
+
+- [Guides](https://gatographql.com/guides) on configuring and using the plugin
+- [Extensions reference](https://gatographql.com/extensions-reference) docs
+- [Queries library](https://gatographql.com/library) with examples of GraphQL queries for many use cases
+- [Schema tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema
+
 = Can I extend the GraphQL schema with my custom types and fields? =
 
 Yes you can. Use the GitHub template [GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter) to create an extension, and follow the documentation there.
@@ -143,15 +152,11 @@ Among others, you can fetch WordPress data and then render the HTML using any of
 
 Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks) for an example.
 
-= What are extensions needed for? =
-
-Extensions are needed to enhance the security of public APIs, add HTTP caching to speed up the application, execute multiple queries in a single request, connect to external services, send emails, and others.
-
 = Does Gato GraphQL support WordPress Multisite? =
 
 Yes, it does. Gato GraphQL can be installed on a multisite network.
 
-In addition, Gato GraphQL provides fields on the GraphQL schema to retrieve multisite network data, allowing to use GraphQL to sync content across the multisite (for instance, to translate posts when using MultilingualPress, as described below).
+In addition, Gato GraphQL provides fields on the GraphQL schema to retrieve multisite network data, allowing to use GraphQL to sync content across the multisite.
 
 = How does Gato GraphQL compare against the WP REST API? =
 
@@ -161,6 +166,10 @@ Check out the [Gato GraphQL vs WP REST API comparison](https://gatographql.com/c
 
 Check out the [Gato GraphQL vs WPGraphQL comparison](https://gatographql.com/comparisons/gatographql-vs-wpgraphql).
 
+= What are extensions needed for? =
+
+Extensions are needed to enhance the security of public APIs, add HTTP caching to speed up the application, execute multiple queries in a single request, connect to external services, send emails, and others.
+
 = Does Gato GraphQL have a refund policy? =
 
 Yes it does. If you have purchased any Gato GraphQL product and found out that it's not the right tool to satisfy your needs, you have [30 days to ask for a refund](https://gatographql.com/refund-policy).
@@ -168,15 +177,6 @@ Yes it does. If you have purchased any Gato GraphQL product and found out that i
 = Can I try out Gato GraphQL + all extensions? =
 
 Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL + all extensions, for free, for 7 days.
-
-= Does the plugin provide documentation? =
-
-The Gato GraphQL website contains extensive documentation:
-
-- [Guides](https://gatographql.com/guides) on configuring and using the plugin
-- [Extensions reference](https://gatographql.com/extensions-reference) docs
-- [Queries library](https://gatographql.com/library) with examples of GraphQL queries for many use cases
-- [Schema tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema
 
 == Screenshots ==
 
