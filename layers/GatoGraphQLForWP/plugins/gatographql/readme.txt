@@ -126,14 +126,6 @@ With Gato GraphQL you can create an endpoint that exposes the data from your Wor
 
 Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks) for an example.
 
-= How is Gato GraphQL different than the WP REST API? =
-
-With the WP REST API, you expose data via REST endpoints, created via PHP code. Each endpoint has its own URL, and its data is pre-defined (for the corresponding resources, such as posts, users, etc).
-
-Gato GraphQL supports "Persisted Queries", which are also endpoints with pre-defined data, however these can be created and published directly within the wp-admin, using GraphQL language (and without any PHP code).
-
-With Gato GraphQL you can also execute tailored GraphQL queries against an endpoint, indicating what specific data you need, and fetching only that within a single request.
-
 = What are extensions needed for? =
 
 Extensions are needed to enhance the security of public APIs, add HTTP caching to speed up the application, execute multiple queries in a single request, connect to external services, send emails, and others.
@@ -144,41 +136,13 @@ Yes, it does. Gato GraphQL can be installed on a multisite network.
 
 In addition, Gato GraphQL provides fields on the GraphQL schema to retrieve multisite network data, allowing to use GraphQL to sync content across the multisite (for instance, to translate posts when using MultilingualPress, as described below).
 
-= How is Gato GraphQL different than WPGraphQL? =
+= How does Gato GraphQL compare against the WP REST API? =
 
-If you just need to build a headless WordPress site and deploy it as static, and you're currently using WPGraphQL, switching to Gato GraphQL will not make any difference.
+Check out the [Gato GraphQL vs WP REST API comparison](https://gatographql.com/comparisons/gatographql-vs-wp-rest-api).
 
-Otherwise, switching to Gato GraphQL provides many benefits:
+= How does Gato GraphQL compare against WPGraphQL? =
 
-The "n+1" query problem just doesn't happen, by design.
-
-When using persisted queries to expose predefined data, you can completely disable the GraphQL single endpoint, so that it is not accessible even to authenticated users.
-
-When caching the GraphQL response using standard HTTP caching, the `max-age` header is calculated automatically, from all the fields present in the GraphQL query (PRO).
-
-You can provide multiple custom endpoints, each of them customized to a specific customer or application, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as `/graphql/customers/some-customer` and `/graphql/customers/another-customer`).
-
-You can execute updates in bulk. For instance, you can delete all comments on the site, or assign a tag or category to all your posts. And you can search and replace a string, even using a regex, on hundreds of posts (PRO).
-
-You will have access to novel GraphQL features, proposed for the spec but not yet released, including nested mutations, schema namespacing and the 'oneOf' Input Object. And also dynamic variables and Multiple Query Execution (PRO).
-
-You can validate that only logged-in users, or users with a certain role or capability, or visitors from a certain IP range, can access data, on a field-by-field basis (PRO).
-
-You can compose fields, so that a foundational set of field resolvers can cover an unlimited number of use cases, and compose directives, so that a directive can be applied on an inner property from the field's value.
-
-You can expose private endpoints, accessible only within the wp-admin, to power your Gutenberg blocks. And you can access a private GraphQL server, to fetch data for your application using PHP code, without exposing any public-facing endpoint (PRO).
-
-You can use GraphQL to retrieve, modify and finally store again the content in your site, all within a single GraphQL document (PRO). For instance, you can fetch all the Gutenberg blocks in a post, extract their properties, translate those strings via Google Translate API, insert those strings back into the block, and store the post again.
-
-You can use GraphQL to import posts from another WordPress site, from an RSS feed, from a CSV, or from any REST or GraphQL API. And you can export content as JSON and CSV. (PRO)
-
-You can invoke the API of any external service via an HTTP client (PRO). For instance, you can subscribe your WordPress users to your Mailchimp email list.
-
-You can receive and process incoming data from any service via a dedicated webhook (PRO). For instance, you can capture the newsletter emails registered in an InstaWP sandbox site and send them automatically to Mailchimp.
-
-You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event via hook `draft_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that case, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
-
-And all of these additional uses cases can be achieved directly within the wp-admin, providing the GraphQL query via a user interface, without having to deploy any PHP code.
+Check out the [Gato GraphQL vs WPGraphQL comparison](https://gatographql.com/comparisons/gatographql-vs-wpgraphql).
 
 = Does Gato GraphQL PRO have a refund policy? =
 
