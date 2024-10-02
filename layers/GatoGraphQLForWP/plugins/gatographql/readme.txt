@@ -144,13 +144,13 @@ Check out the [Gato GraphQL vs WP REST API comparison](https://gatographql.com/c
 
 Check out the [Gato GraphQL vs WPGraphQL comparison](https://gatographql.com/comparisons/gatographql-vs-wpgraphql).
 
-= Does Gato GraphQL PRO have a refund policy? =
+= Does Gato GraphQL have a refund policy? =
 
-Yes it does. If you have purchased Gato GraphQL PRO and found out that it's not the right tool to satisfy your needs, you have [30 days to ask for a refund](https://gatographql.com/refund-policy).
+Yes it does. If you have purchased any Gato GraphQL product and found out that it's not the right tool to satisfy your needs, you have [30 days to ask for a refund](https://gatographql.com/refund-policy).
 
-= Can I try out Gato GraphQL PRO? =
+= Can I try out Gato GraphQL + all extensions? =
 
-Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL PRO, for free, for 7 days.
+Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL + all extensions, for free, for 7 days.
 
 = Do I need to be a developer to use Gato GraphQL? =
 
