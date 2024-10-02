@@ -30,9 +30,19 @@ Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other J
 
 == Extensions ==
 
-Extensions allow you to augment the server functionality, and extend the GraphQL schema, to satisfy your requirements.
+[Extensions](https://gatographql.com/extensions) allow you to augment the server functionality, and extend the GraphQL schema, to satisfy your requirements.
 
 You can purchase each extension separately, or get the [bundle containing all the extensions](https://gatographql.com).
+
+- [Access Control](https://gatographql.com/extensions/access-control)
+- [Caching](https://gatographql.com/extensions/caching)
+- [Custom Endpoints](https://gatographql.com/extensions/custom-endpoints)
+- [Deprecation](https://gatographql.com/extensions/deprecation)
+- [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution)
+- [Persisted Queries](https://gatographql.com/extensions/persisted-queries)
+- [Polylang Integration](https://gatographql.com/extensions/polylang-integration)
+- [Query Functions](https://gatographql.com/extensions/query-functions)
+- [Schema Functions](https://gatographql.com/extensions/schema-functions)
 
 === Access Control ===
 
