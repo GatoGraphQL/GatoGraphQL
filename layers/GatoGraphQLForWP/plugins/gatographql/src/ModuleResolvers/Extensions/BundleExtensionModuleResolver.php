@@ -117,23 +117,23 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::ALL_EXTENSIONS
                 => $pluginURL . 'assets/img/logos/GatoGraphQL-logo-face.png',
             self::ACCESS_CONTROL
-                => $pluginURL . 'assets/img/extension-logos/access-control.png',
+                => $pluginURL . 'assets/img/extension-logos/access-control.svg',
             self::CACHING
-                => $pluginURL . 'assets/img/extension-logos/caching.png',
+                => $pluginURL . 'assets/img/extension-logos/caching.svg',
             self::CUSTOM_ENDPOINTS
-                => $pluginURL . 'assets/img/extension-logos/custom-endpoints.png',
+                => $pluginURL . 'assets/img/extension-logos/custom-endpoints.svg',
             self::DEPRECATION
-                => $pluginURL . 'assets/img/extension-logos/deprecation.png',
+                => $pluginURL . 'assets/img/extension-logos/deprecation.svg',
             self::MULTIPLE_QUERY_EXECUTION
-                => $pluginURL . 'assets/img/extension-logos/multiple-query-execution.png',
+                => $pluginURL . 'assets/img/extension-logos/multiple-query-execution.svg',
             self::PERSISTED_QUERIES
-                => $pluginURL . 'assets/img/extension-logos/persisted-queries.png',
+                => $pluginURL . 'assets/img/extension-logos/persisted-queries.svg',
             self::POLYLANG_INTEGRATION
                 => $pluginURL . 'assets/img/extension-logos/polylang-integration.png',
             self::QUERY_FUNCTIONS
-                => $pluginURL . 'assets/img/extension-logos/query-functions.png',
+                => $pluginURL . 'assets/img/extension-logos/query-functions.svg',
             self::SCHEMA_FUNCTIONS
-                => $pluginURL . 'assets/img/extension-logos/schema-functions.png',
+                => $pluginURL . 'assets/img/extension-logos/schema-functions.svg',
             default => parent::getLogoURL($module),
         };
         return parent::getLogoURL($module);
