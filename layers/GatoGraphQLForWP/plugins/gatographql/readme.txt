@@ -24,16 +24,6 @@ Use Gato GraphQL to:
 
 **Speed up creating Gutenberg blocks:** Ship Gutenberg blocks faster, by avoiding creating REST controllers to feed them data.
 
-=== Features ===
-
-**Speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
-
-**Extensibility:** You can create your own extensions and integrations, to extend the GraphQL schema for your own CPTs and plugins.
-
-**Customization:** You can configure the server to suit your specific needs, even endpoint by endpoint.
-
-**Bleeding edge:** The server already provides features that have been proposed for the GraphQL spec but not yet released.
-
 == Extensions ==
 
 [Extensions](https://gatographql.com/extensions) allow you to augment the server functionality, and extend the GraphQL schema, to satisfy your requirements.
