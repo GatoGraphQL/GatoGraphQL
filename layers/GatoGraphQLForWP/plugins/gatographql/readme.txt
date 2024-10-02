@@ -22,7 +22,7 @@ Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other J
 
 **Speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
 
-**Extensibility:**, You can create your own extensions and integrations, to extend the GraphQL schema for your own CPTs and plugins.
+**Extensibility:** You can create your own extensions and integrations, to extend the GraphQL schema for your own CPTs and plugins.
 
 **Customization:** You can configure the server to suit your specific needs, even endpoint by endpoint.
 
