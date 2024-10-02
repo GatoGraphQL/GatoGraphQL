@@ -162,6 +162,37 @@ query {
 }
 ```
 
+---
+
+With **Email Sender**, the GraphQL schema is provided with global mutation `_sendEmail`.
+
+Mutation `_sendEmail` sends emails by executing WordPress `wp_mail` function. As a result, it will use the configuration defined for sending emails in WordPress (such as the SMTP provider to use).
+
+The email can be sent with content types "text" or "HTML", depending on the value of the `messageAs` input (which is a "oneof" InputObject, so that only one of its properties can be provided).
+
+```graphql
+mutation {
+  _sendEmail(
+    input: {
+      to: "target@email.com"
+      subject: "Email with text content"
+      messageAs: {
+        text: "Hello world!"
+      }
+    }
+  ) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+}
+```
+
+
 <!-- ## List of bundled extensions
 
 - [Email Sender](../../../../../extensions/email-sender/docs/modules/email-sender/en.md)
