@@ -28,55 +28,65 @@ Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other J
 
 **Bleeding edge:** The server already provides features that have been proposed for the GraphQL spec but not yet released.
 
-== Go PRO ==
+== Extensions ==
 
-Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
+Extensions allow you to augment the server functionality, and extend the GraphQL schema, to satisfy your requirements.
 
-Use Gato GraphQL PRO to:
+You can purchase each extension separately, or get the [bundle containing all the extensions](https://gatographql.com).
 
-- Expose public and private APIs
-- Complement WP-CLI to execute admin tasks
-- Update posts in bulk
-- Search/replace content for site migrations
-- Send an email/notifications when something happens (new post published, new comment added, etc)
-- Synchronize content across sites, or a multisite network
-- Insert or remove Gutenberg blocks in bulk
-- Automatically insert a mandatory block when creating a new post
-- Translate content in the site using the Google Translate API
-- Automatically translate new posts to all different languages for Polylang
-- Generate an image using OpenAI's DALL-E or Stable Diffusion, and set it as featured image
-- Send new posts to Facebook, Instagram, LinkedIn, or other social media platforms
-- Import a post from another WordPress site
-- Import all posts from a JSON or CSV file (including from Google Sheets)
-- Export all posts to a JSON or CSV file
-- Import a post from an RSS feed
-- Create posts from static html files
-- Interact with cloud services via an HTTP client
-- Convert the data from a 3rd-party API into the required format
-- Call external APIs to validate your data
-- Automate tasks and content workflows when some event happens (eg: `wp_insert_post`), like Zapier for WordPress
-- Use WP-Cron to regularly execute GraphQL queries
-- And much more...
+=== Access Control ===
 
-Gato GraphQL PRO can help you simplify your tech stack, handling the functionality from multiple plugins (so you need to install fewer plugins in your site, and remove bloat), including:
+Grant granular access to the schema (based on the user being logged-in, having some role or capability, or by IP), to manage who can access what data.
 
-- ✅ APIs
-- ✅ Automator
-- ✅ Bulk editing/Post duplicator
-- ✅ Code snippets
-- ✅ Content distribution
-- ✅ Email notifications
-- ✅ HTTP client
-- ✅ Import/export
-- ✅ Search & replace
-- ✅ Translation
-- ✅ Webhooks
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
 
-As new extensions are created, they are added to Gato GraphQL PRO.
+=== Caching ===
 
-Gato GraphQL PRO clients have access to all **product updates** and **premium support**, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
+Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations.
 
-Check out the [demos section on Gato GraphQL](https://gatographql.com/demos) to watch videos demonstrating the multiple use cases for this plugin.
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
+
+=== Custom Endpoints ===
+
+Create and expose multiple custom GraphQL schemas under their own URL, for different users, applications, external services, or other.
+
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
+
+=== Deprecation ===
+
+Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface.
+
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
+
+=== Multiple Query Execution ===
+
+Combine multiple queries into a single query, sharing state across them and executing them in the requested order.
+
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
+
+=== Persisted Queries ===
+
+Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs.
+
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
+
+=== Polylang Integration ===
+
+Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
+
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
+
+=== Query Functions ===
+
+Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities.
+
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
+
+=== Schema Functions ===
+
+The GraphQL schema is provided with fields and directives which expose functionalities from the PHP programming language.
+
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
 
 == Source code ==
 
