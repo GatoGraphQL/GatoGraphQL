@@ -152,28 +152,6 @@ Yes it does. If you have purchased any Gato GraphQL product and found out that i
 
 Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL + all extensions, for free, for 7 days.
 
-= Do I need to be a developer to use Gato GraphQL? =
-
-Gato GraphQL has been designed to be as easy to use as possible, accessible directly within the wp-admin via several user interfaces, powered by the WordPress editor.
-
-The only requirement is to learn the [GraphQL language](https://graphql.org). If you are able to learn this language, then you are able to use Gato GraphQL.
-
-= Why would I want to use Gato GraphQL to manage my WordPress site? =
-
-GraphQL is a super powerful language`, that can achieve a lot more than just building headless sites, and it's easy to learn.
-
-Gato GraphQL is a generic tool that extracts all the power from GraphQL. You provide the GraphQL query directly via the wp-admin, and dozens of use cases (normally provided by dedicated plugins) become available.
-
-Gato GraphQL is not a duplicator plugin, but you can duplicate posts with it. It is not a translation plugin, but you can translate any content, including the properties inside Gutenberg blocks. It is not an automator plugin, but you can automate your tasks, without any restriction. It is not a backup plugin, but you can import and export posts. It is not a search and replace plugin, but you can modify your posts in bulk, with a single query. And it is not webhook plugin or HTTP client, but you can both send a request to any API, and receive and process incoming requests from any service.
-
-What you can use Gato GraphQL for, literally depends on your imagination.
-
-= Are there predefined GraphQL queries for common use cases? =
-
-Gato GraphQL's [queries library](https://gatographql.com/library) contains a collection of GraphQL queries for common use cases, which you can copy/paste and customize to your needs.
-
-This library is continually growing.
-
 = Does the plugin provide documentation? =
 
 The Gato GraphQL website contains extensive documentation, including [guides](https://gatographql.com/guides) on configuring and using the plugin, the [extensions reference](https://gatographql.com/extensions-reference) docs, and a [tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema.
