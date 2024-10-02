@@ -2,9 +2,7 @@
 
 Define Access Control Lists to manage granular access to the API for your users.
 
-### Access Control Lists
-
-This extension allows us to create Access Control Lists, to manage who can access the different elements (operations, fields and directives) from the GraphQL schema, using the following rules:
+This extension allows us to create **Access Control Lists**, to manage who can access the different elements (operations, fields and directives) from the GraphQL schema, using the following rules:
 
 - Disable access
 - Grant access only if the user is logged-in or out
@@ -22,11 +20,7 @@ We indicate what rules must be satisfied to access what schema elements, from am
 
 When executing a GraphQL query, if it contains any of the selected schema elements in the Access Control List, the chosen rules are evaluated.
 
-If any rule is not satisfied, access to that operation, field or directive is denied.
-
-### Public/Private Schema Mode
-
-When access to some a field or directive is denied through Access Control, there are 2 ways for the API to behave:
+If any rule is not satisfied, access to that operation, field or directive is denied. Thanks to the **Public/Private Schema Mode**, there are 2 ways for the API to behave:
 
 **Public mode**: The fields in the schema are exposed, and when the permission is not satisfied, the user gets an error message with a description of why the permission was rejected. This behavior makes the metadata from the schema always available.
 
