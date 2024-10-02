@@ -137,8 +137,9 @@ Check out guide [Complementing WP-CLI](https://gatographql.com/guides/code/compl
 
 With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within the framework of your choice, you can query the data and render the HTML.
 
-Among others, you can fetch WordPress data and then render the HTML using any of these libraries/frameworks:
+Among others, you can use any of these libraries/frameworks:
 
+- Apollo
 - React
 - Vue
 - Next.js
