@@ -1,6 +1,6 @@
 # Lesson 15: Sending a daily summary of activity
 
-We can integrate Gato GraphQL with [WP-Cron](https://developer.wordpress.org/plugins/cron/), as to automate the execution GraphQL queries that perform admin tasks, with some time interval. (The [**Automation**](https://gatographql.com/extensions/automation/) extension is required.)
+<!-- We can integrate Gato GraphQL with [WP-Cron](https://developer.wordpress.org/plugins/cron/), as to automate the execution GraphQL queries that perform admin tasks, with some time interval. (The [**Automation**](https://gatographql.com/extensions/automation/) extension is required.) -->
 
 In this tutorial lesson, we set-up WP-Cron to, every 24 hs, execute a GraphQL query that retrieves the number of new comments added to the site, and sends these stats to the desired email account.
 
@@ -96,7 +96,7 @@ mutation SendDailyStatsByEmailNumberOfComments(
 }
 ```
 
-## Scheduling the execution of the GraphQL query via WP-Cron
+<!-- ## Scheduling the execution of the GraphQL query via WP-Cron
 
 We must schedule the WP-Cron event to execute the Gato GraphQL hook `gatographql__execute_persisted_query`, passing along the email to send the email to as argument, and the recurrence (daily).
 
@@ -140,4 +140,4 @@ The 4th argument passed to the WP-Cron event is the ID (as an int) or username (
 
 Passing this argument is typically needed when executing mutations, as most of these require a user (with the proper capabilities) to be logged-in.
 
-</div>
+</div> -->
