@@ -1,6 +1,6 @@
 # Polylang Integration
 
-Integration with the <a href="https://wordpress.org/plugins/polylang/" target="_blank">Polylang</a> plugin (and also <a href="https://polylang.pro" target="_blank">Polylang PRO</a>).
+Integration with the [Polylang](https://wordpress.org/plugins/polylang/) plugin (and also [Polylang PRO](https://polylang.pro)).
 
 When Polylang is installed in the WordPress site, fetching data using GraphQL would retrieve results for all languages. For instance, field `posts` might fetch posts in English, Spanish and French.
 
