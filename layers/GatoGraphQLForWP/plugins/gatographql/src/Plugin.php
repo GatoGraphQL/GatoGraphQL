@@ -33,7 +33,10 @@ class Plugin extends AbstractMainPlugin
     public final const NAMESPACE = __NAMESPACE__;
 
     /**
-     * Show an admin notice with a link to the latest release notes
+     * When updating the plugin:
+     *
+     * - Add a banner asking users to rate the plugin
+     * - Show an admin notice with a link to the latest release notes
      */
     public function pluginJustUpdated(string $newVersion, string $previousVersion): void
     {
