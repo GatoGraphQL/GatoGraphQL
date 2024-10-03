@@ -138,6 +138,7 @@ Among others, you can use any of these libraries/frameworks:
 - Astro
 - VitePress
 - Svelte
+- Eleventy
 
 = Can I fetch Gutenberg block data with Gato GraphQL? =
 
