@@ -60,8 +60,9 @@
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle {
     border-color: darkturquoise;
     background-color: rgb(199, 232, 184);
+    background: linear-gradient(90deg, rgb(115, 209, 230) 0%, rgb(182, 222, 232) 33%);
 }
-.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(1) {
+/* .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(1) {
     background: linear-gradient(90deg, rgb(222, 115, 230) 0%, rgb(232, 182, 204) 33%);
 }
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(2) {
@@ -90,7 +91,7 @@
 }
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(10) {
     background: linear-gradient(90deg, rgb(230, 115, 157) 0%, rgb(232, 182, 209) 33%);
-}
+} */
 .plugin-card.plugin-card-non-installed.plugin-card-highlight {
     border-color: darksalmon;
     background-color: rgb(240, 230, 140);
