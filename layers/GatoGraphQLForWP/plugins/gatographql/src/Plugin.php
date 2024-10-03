@@ -75,7 +75,7 @@ class Plugin extends AbstractMainPlugin
 
     protected function enableShowingRatePluginBannerInAdminNotice(): bool
     {
-        return true;
+        return false;
     }
 
     /**
