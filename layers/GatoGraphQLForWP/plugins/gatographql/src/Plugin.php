@@ -62,6 +62,7 @@ class Plugin extends AbstractMainPlugin
         ) {
             return;
         }
+
         // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
         $currentMinorReleaseVersion = $this->getMinorReleaseVersion($newVersion);
         $previousMinorReleaseVersion = $this->getMinorReleaseVersion($previousVersion);
