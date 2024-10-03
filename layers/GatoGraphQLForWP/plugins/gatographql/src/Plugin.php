@@ -135,7 +135,7 @@ class Plugin extends AbstractMainPlugin
                         '<img src="%s" alt="%s" style="height: 150px;">' .
                         '<div>' .
                             '<p>%s</p>' .
-                            '%s',
+                            '%s'.
                         '</div>' .
                     '</div>' .
                 '</div>',
