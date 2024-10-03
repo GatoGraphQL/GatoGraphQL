@@ -88,6 +88,9 @@
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(9) {
     background: linear-gradient(90deg, rgb(230, 115, 123) 0%, rgb(232, 182, 182) 33%);
 }
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(10) {
+    background: linear-gradient(90deg, rgb(230, 115, 157) 0%, rgb(232, 182, 209) 33%);
+}
 .plugin-card.plugin-card-non-installed.plugin-card-highlight {
     border-color: darksalmon;
     background-color: rgb(240, 230, 140);
