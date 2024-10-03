@@ -11,5 +11,5 @@ declare(strict_types=1);
  * and an included extension, are loaded.
  */
 if (!defined('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA')) {
-    define('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA', 'manage_graphql_schema');
+    define('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA', 'gatographql_manage_schema');
 }
