@@ -93,7 +93,6 @@ class Plugin extends AbstractMainPlugin
                 '</div>',
                 __('Rate Gato GraphQL', 'gatographql'),
                 __('We work really hard to deliver a plugin that enables accessing any piece of data on our WordPress sites. It takes plenty of time and effort to develop, test and maintain the free Gato GraphQL plugin. Therefore if you like what you see and appreciate our work, we ask you nothing more than to please rate the plugin in the directory. Thanks in advance!', 'gatographql'),
-                __('Rate Gato GraphQL', 'gatographql'),
                 sprintf(
                     '<a class="rating-link" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a> <a class="button" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank">%s</a>',
                     \__('Rate Plugin', 'gatographql')
