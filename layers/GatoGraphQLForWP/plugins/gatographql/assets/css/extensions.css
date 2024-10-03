@@ -95,6 +95,7 @@
 .plugin-card.plugin-card-non-installed.plugin-card-highlight {
     border-color: darksalmon;
     background-color: rgb(240, 230, 140);
+    background: linear-gradient(90deg, rgb(230, 224, 115) 0%, rgb(230, 232, 182) 33%);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.24);
 }
 
