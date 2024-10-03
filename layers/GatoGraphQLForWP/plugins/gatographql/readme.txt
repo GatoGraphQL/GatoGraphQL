@@ -2,7 +2,7 @@
 Contributors: gatographql, leoloso
 Tags: graphql, headless, webhook, api, automator, import export, search replace, google translate, wp-cli, external api, wpgraphql, code snippets
 Requires at least: 6.1
-Tested up to: 6.6
+Tested up to: 6.7
 Stable tag: 5.0.0
 Requires PHP: 8.1
 License: GPLv2 or later
@@ -199,6 +199,7 @@ Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gato
 * Breaking change: The schema tutorial page is hidden by default (#2856)
 * Breaking change: The settings under "Schema Elements Configuration" (new item) need to be set again (#2861)
 * Breaking change: If the "GraphiQL" and "Schema" pages don't appear on the menu, you need to disable/re-enable the plugin (due to the newly-added "Schema Editing Access" module, see below)
+* Tested up to WordPress 6.7 (#2887)
 * Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 * Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
 * Hide "Excerpt as description" module if there are no CPTs enabled (#2851)

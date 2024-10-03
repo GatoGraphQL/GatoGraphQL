@@ -18,6 +18,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- Tested up to WordPress 6.7 (#2887)
 - Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 - Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
 - Hide "Excerpt as description" module if there are no CPTs enabled (#2851)
