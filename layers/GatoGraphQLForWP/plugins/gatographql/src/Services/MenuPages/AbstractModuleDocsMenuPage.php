@@ -221,18 +221,22 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             </div>
             ',
             sprintf(
-                PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
-                    && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
-                    && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
-                    ? \__('%s extension reference docs', 'gatographql') /*\__('Modules included in the %s extension', 'gatographql')*/
-                    : \__('Modules included in the %s bundle', 'gatographql'),
+                // PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                //     && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
+                //     && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
+                //     ? \__('%s extension reference docs', 'gatographql') //\__('Modules included in the %s extension', 'gatographql')
+                //     : \__('Modules included in the %s bundle', 'gatographql'),
+                \__('%s reference docs', 'gatographql'),
                 $isPrintingBundledModule
                     ? sprintf(
                         '<a href="%s">%s</a>',
                         $bundleURL,
                         $moduleResolver->getName($module)
                     )
-                    : $moduleResolver->getName($module)
+                    : sprintf(
+                        \__('%s extension', 'gatographql'),
+                        $moduleResolver->getName($module)
+                    )
             ),
             $documentation
         );
