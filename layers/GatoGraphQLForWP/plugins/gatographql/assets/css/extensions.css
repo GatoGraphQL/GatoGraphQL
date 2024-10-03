@@ -74,7 +74,7 @@
     background: linear-gradient(90deg, rgb(115, 209, 230) 0%, rgb(182, 222, 232) 33%);
 }
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(5) {
-    background: linear-gradient(90deg, rgb(115, 230, 153) 0%, rgb(182, 232, 204) 33%);
+    background: linear-gradient(90deg, rgb(115, 230, 182) 0%, rgb(182, 232, 215) 33%);
 }
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(6) {
     background: linear-gradient(90deg, rgb(115, 230, 115) 0%, rgb(183, 232, 182) 33%);
