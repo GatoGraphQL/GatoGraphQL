@@ -131,9 +131,16 @@ class Plugin extends AbstractMainPlugin
             ));
             $adminNotice_safe = sprintf(
                 '<div class="notice notice-success is-dismissible">' .
-                    '<p>%s</p>' .
-                    '%s',
+                    '<div style="display: flex; gap: 20px;">' .
+                        '<img src="%s" alt="%s" style="height: 150px;">' .
+                        '<div>' .
+                            '<p>%s</p>' .
+                            '%s',
+                        '</div>' .
+                    '</div>' .
                 '</div>',
+                PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-suki.png',
+                \__('Gato GraphQL logo', 'gatographql'),
                 sprintf(
                     __('Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</code>. <strong><a href="%s" class="%s">Check out what\'s new</a></strong> | <a href="%s">Disable this admin notice in the Settings</a>', 'gatographql'),
                     $this->pluginVersion,
