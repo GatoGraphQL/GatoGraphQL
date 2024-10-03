@@ -192,13 +192,13 @@ Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gato
 == Changelog ==
 
 = 6.0.0 =
+* Action required: When updating the plugin (i.e. not installing anew), you need to deactivate and then re-activate the plugin. Until then, the "GraphiQL" and "Schema" items won't appear on the menu (due to the newly-added "Schema Editing Access" module, see below)
 * Breaking change: Removed custom endpoints and persisted queries (#2852)
 * Breaking change: The single endpoint is enabled by default (#2859)
 * Breaking change: The single endpoint GraphiQL/Voyager clients are disabled default (#2860)
 * Breaking change: The Schema Configuration module is disabled by default (#2848)
 * Breaking change: The schema tutorial page is hidden by default (#2856)
 * Breaking change: The settings under "Schema Elements Configuration" (new item) need to be set again (#2861)
-* Breaking change: If the "GraphiQL" and "Schema" pages don't appear on the menu, you need to disable/re-enable the plugin (due to the newly-added "Schema Editing Access" module, see below)
 * Tested up to WordPress 6.7 (#2887)
 * Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 * Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
