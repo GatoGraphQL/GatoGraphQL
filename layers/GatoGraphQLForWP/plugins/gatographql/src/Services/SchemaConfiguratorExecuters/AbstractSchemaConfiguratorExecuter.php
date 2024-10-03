@@ -8,7 +8,6 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurators\SchemaConfiguratorInterface;
@@ -52,12 +51,17 @@ abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyI
         return ApplicationEvents::PRE_BOOT;
     }
 
+    /**
+     * Important! Do not check if the SCHEMA_CONFIGURATION module
+     * is enabled, as to configure the schema with default Settings.
+     *
+     * That check will happen in AbstractSchemaConfigurationExecuter,
+     * where each executer can decide if to run or not.
+     *
+     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/SchemaConfigurationExecuters/AbstractSchemaConfigurationExecuter.php
+     */
     public function isServiceEnabled(): bool
     {
-        if (!$this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)) {
-            return false;
-        }
-
         /**
          * Maybe do not initialize for the Internal AppThread
          *
