@@ -45,7 +45,9 @@ class Plugin extends AbstractMainPlugin
             return;
         }
 
-        $this->showRatePluginBannerInAdminNotice();
+        if ($this->enableShowingRatePluginBannerInAdminNotice()) {
+            $this->showRatePluginBannerInAdminNotice();
+        }
 
         // Admin notice: Check if it is enabled
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
@@ -65,6 +67,11 @@ class Plugin extends AbstractMainPlugin
         }
         // All checks passed, show the release notes
         $this->showReleaseNotesInAdminNotice();
+    }
+
+    protected function enableShowingRatePluginBannerInAdminNotice(): bool
+    {
+        return true;
     }
 
     /**
