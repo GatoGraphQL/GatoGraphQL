@@ -111,7 +111,7 @@ The static methods from class `GraphQLServer` offered by the Internal GraphQL Se
 
 - `executeQuery`: Execute a GraphQL query
 - `executeQueryInFile`: Execute a GraphQL query contained in a (`.gql`) file
-- `executePersistedQuery`: Execute a persisted GraphQL query (providing its ID as an int, or slug as a string)
+- `executePersistedQuery`: Execute a persisted GraphQL query (providing its ID as an int, or slug as a string) (the **Persisted Queries** extension is required)
 
 </div>
 
