@@ -48,10 +48,6 @@ class Plugin extends AbstractMainPlugin
             return;
         }
 
-        if ($this->enableShowingRatePluginBannerInAdminNotice()) {
-            $this->showRatePluginBannerInAdminNotice();
-        }
-
         // Admin notice: Check if it is enabled
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         if (
@@ -71,6 +67,10 @@ class Plugin extends AbstractMainPlugin
         }
         // All checks passed, show the release notes
         $this->showReleaseNotesInAdminNotice();
+
+        if ($this->enableShowingRatePluginBannerInAdminNotice()) {
+            $this->showRatePluginBannerInAdminNotice();
+        }
     }
 
     protected function enableShowingRatePluginBannerInAdminNotice(): bool
