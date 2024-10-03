@@ -33,7 +33,10 @@ class Plugin extends AbstractMainPlugin
     public final const NAMESPACE = __NAMESPACE__;
 
     /**
-     * Show an admin notice with a link to the latest release notes
+     * When updating the plugin:
+     *
+     * - Add a banner asking users to rate the plugin
+     * - Show an admin notice with a link to the latest release notes
      */
     public function pluginJustUpdated(string $newVersion, string $previousVersion): void
     {
@@ -43,6 +46,10 @@ class Plugin extends AbstractMainPlugin
         // admin notice to the user then
         if (\wp_doing_ajax()) {
             return;
+        }
+
+        if ($this->enableShowingRatePluginBannerInAdminNotice()) {
+            $this->showRatePluginBannerInAdminNotice();
         }
 
         // Admin notice: Check if it is enabled
@@ -55,6 +62,7 @@ class Plugin extends AbstractMainPlugin
         ) {
             return;
         }
+
         // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
         $currentMinorReleaseVersion = $this->getMinorReleaseVersion($newVersion);
         $previousMinorReleaseVersion = $this->getMinorReleaseVersion($previousVersion);
@@ -63,6 +71,36 @@ class Plugin extends AbstractMainPlugin
         }
         // All checks passed, show the release notes
         $this->showReleaseNotesInAdminNotice();
+    }
+
+    protected function enableShowingRatePluginBannerInAdminNotice(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Add a banner asking users to rate the plugin
+     */
+    protected function showRatePluginBannerInAdminNotice(): void
+    {
+        // Add the admin notice
+        add_action('admin_notices', function (): void {
+            $adminNotice_safe = sprintf(
+                '<div class="notice notice-info is-dismissible">' .
+                    '<h3>%s</h3>' .
+                    '<p>%s</p>' .
+                    '<p>%s</p>' .
+                '</div>',
+                __('Rate Gato GraphQL', 'gatographql'),
+                __('We work really hard to deliver a plugin that enables accessing any piece of data on our WordPress sites. It takes plenty of time and effort to develop, test and maintain the free Gato GraphQL plugin. Therefore if you like what you see and appreciate our work, we ask you nothing more than to please rate the plugin in the directory. Thanks in advance!', 'gatographql'),
+                __('Rate Gato GraphQL', 'gatographql'),
+                sprintf(
+                    '<a class="rating-link" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a> <a class="button" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank">%s</a>',
+                    \__('Rate Plugin', 'gatographql')
+                ),
+            );
+            echo $adminNotice_safe;
+        });
     }
 
     /**

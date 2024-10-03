@@ -275,7 +275,7 @@ class TutorialLessonDataProvider
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
-            
+
             // # Ignore `@strTranslate` tutorial docs
             // TutorialLessons::TRANSLATING_CONTENT_FROM_URL => [
             //     \__('Lesson 24: Translating content from URL', 'gatographql'),
