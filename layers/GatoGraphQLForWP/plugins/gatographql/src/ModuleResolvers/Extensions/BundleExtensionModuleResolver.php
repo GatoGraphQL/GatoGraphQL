@@ -142,7 +142,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 => $pluginURL . 'assets/img/extension-logos/schema-functions.svg',
             default => parent::getLogoURL($module),
         };
-        return parent::getLogoURL($module);
     }
 
     /**
