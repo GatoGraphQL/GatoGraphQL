@@ -29,12 +29,12 @@ Grant non-admin users access to create and manage endpoints.
 
 Decide which users can access the GraphiQL and Interactive schema clients in the admin, and are able to edit the GraphQL schema, by selecting the appropriate configuration from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
 
-- `Users with capability: "manage_graphql_schema"`
+- `Users with capability: "gatographql_manage_graphql_schema"`
 - `Users with role: "administrator"`
 - `Users with any role: "administrator", "editor"`
 - `Users with any role: "administrator", "editor", "author"`
 
-The first option (`Users with capability: "manage_graphql_schema"`) is selected by default, granting access to users with the `administrator` role only.
+The first option (`Users with capability: "gatographql_manage_graphql_schema"`) is selected by default, granting access to users with the `administrator` role only.
 
 <div class="img-width-1024" markdown=1>
 
