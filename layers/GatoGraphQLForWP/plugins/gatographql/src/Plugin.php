@@ -151,6 +151,7 @@ class Plugin extends AbstractMainPlugin
                 $this->enableShowingRatePluginBannerInAdminNotice()
                     ? sprintf(
                         '<div>' .
+                            '<br/>' .
                             '<h4>%s</h4>' .
                             '<p>%s</p>' .
                             '<p>%s</p>' .
