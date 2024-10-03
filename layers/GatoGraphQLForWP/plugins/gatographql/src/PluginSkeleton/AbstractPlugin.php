@@ -410,7 +410,6 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function pluginJustUpdated(string $newVersion, string $previousVersion): void
     {
-
         /**
          * Taxonomies are registered on "init", hence must insert
          * data only after that.
