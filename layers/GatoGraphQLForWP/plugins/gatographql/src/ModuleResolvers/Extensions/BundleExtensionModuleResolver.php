@@ -37,9 +37,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() ? [
                 self::PRO,
             ] : [],
-            PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
-                self::ALL_EXTENSIONS,
-            ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage() ? [
                 self::ACCESS_CONTROL,
                 self::CACHING,
@@ -51,6 +48,9 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::POLYLANG_INTEGRATION,
                 self::QUERY_FUNCTIONS,
                 self::SCHEMA_FUNCTIONS,
+            ] : [],
+            PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
+                self::ALL_EXTENSIONS,
             ] : [],
         );
     }

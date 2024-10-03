@@ -89,7 +89,7 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
             '%s/%s',
             PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
                 && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
-                && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
+                // && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
                     ? $moduleConfiguration->getGatoGraphQLExtensionsReferencePageURL()
                     : $moduleConfiguration->getGatoGraphQLExtensionsPageURL(),
             $this->getSlug($module)

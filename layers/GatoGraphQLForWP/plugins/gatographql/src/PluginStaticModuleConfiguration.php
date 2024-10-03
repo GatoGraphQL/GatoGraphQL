@@ -50,7 +50,7 @@ class PluginStaticModuleConfiguration
      */
     public static function displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage(): bool
     {
-        return false;
+        return true;
     }
 
     /**

@@ -230,7 +230,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
                     ',
                     PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
                         && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
-                        && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
+                        // && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
                         ? \__('Modules included in this extension:', 'gatographql')
                         : \__('Modules included in this bundle:', 'gatographql')
                 ) . implode('<br/><hr/>', $contentEntries);
