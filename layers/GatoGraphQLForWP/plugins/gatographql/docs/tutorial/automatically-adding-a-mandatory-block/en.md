@@ -100,8 +100,7 @@ mutation MaybeInsertCommentsBlock($postId: ID!)
 }
 ```
 
-<!-- {/* Ignore Internal GraphQL Server guides */} -->
-<!-- ## Adding hook to execute Persisted Query
+## Adding hook to execute Persisted Query
 
 <div class="doc-config-highlight" markdown=1>
 
@@ -131,4 +130,4 @@ add_action(
     );
   }
 );
-``` -->
+```
