@@ -21,6 +21,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\bundle-extensions\\custom-endpoints';
     public const DEPRECATION = Plugin::NAMESPACE . '\\bundle-extensions\\deprecation';
+    public const INTERNAL_GRAPHQL_SERVER = Plugin::NAMESPACE . '\\bundle-extensions\\internal-graphql-server';
     public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\bundle-extensions\\multiple-query-execution';
     public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\bundle-extensions\\persisted-queries';
     public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
@@ -44,6 +45,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::CACHING,
                 self::CUSTOM_ENDPOINTS,
                 self::DEPRECATION,
+                self::INTERNAL_GRAPHQL_SERVER,
                 self::MULTIPLE_QUERY_EXECUTION,
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
@@ -64,6 +66,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::CACHING => sprintf($extensionPlaceholder, \__('Caching', 'gatographql')),
             self::CUSTOM_ENDPOINTS => sprintf($extensionPlaceholder, \__('Custom Endpoints', 'gatographql')),
             self::DEPRECATION => sprintf($extensionPlaceholder, \__('Deprecation', 'gatographql')),
+            self::INTERNAL_GRAPHQL_SERVER => sprintf($extensionPlaceholder, \__('Internal GraphQL Server', 'gatographql')),
             self::MULTIPLE_QUERY_EXECUTION => sprintf($extensionPlaceholder, \__('Multiple Query Execution', 'gatographql')),
             self::PERSISTED_QUERIES => sprintf($extensionPlaceholder, \__('Persisted Queries', 'gatographql')),
             self::POLYLANG_INTEGRATION => sprintf($extensionPlaceholder, \__('Polylang Integration', 'gatographql')),
@@ -82,6 +85,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
             self::DEPRECATION => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
+            self::INTERNAL_GRAPHQL_SERVER => \__('Execute GraphQL queries directly within your application, using PHP code', 'gatographql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable', 'gatographql'),
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
             self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
@@ -124,6 +128,8 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 => $pluginURL . 'assets/img/extension-logos/custom-endpoints.svg',
             self::DEPRECATION
                 => $pluginURL . 'assets/img/extension-logos/deprecation.svg',
+            self::INTERNAL_GRAPHQL_SERVER
+                => $pluginURL . 'assets/img/extension-logos/internal-graphql-server.svg',
             self::MULTIPLE_QUERY_EXECUTION
                 => $pluginURL . 'assets/img/extension-logos/multiple-query-execution.svg',
             self::PERSISTED_QUERIES
@@ -197,7 +203,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
                 ExtensionModuleResolver::HTTP_CLIENT,
                 ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                // ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
                 ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
                 // ExtensionModuleResolver::MULTILINGUALPRESS,
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -221,6 +227,9 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::DEPRECATION => [
                 ExtensionModuleResolver::FIELD_DEPRECATION,
                 ExtensionModuleResolver::DEPRECATION_NOTIFIER,
+            ],
+            self::INTERNAL_GRAPHQL_SERVER => [
+                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
             ],
             self::MULTIPLE_QUERY_EXECUTION => [
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -269,6 +278,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::CACHING,
                 self::CUSTOM_ENDPOINTS,
                 self::DEPRECATION,
+                self::INTERNAL_GRAPHQL_SERVER,
                 self::MULTIPLE_QUERY_EXECUTION,
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
