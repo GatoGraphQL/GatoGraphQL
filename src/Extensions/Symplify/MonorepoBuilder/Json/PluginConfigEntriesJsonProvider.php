@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\OptionValues;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
@@ -27,7 +28,7 @@ final class PluginConfigEntriesJsonProvider
      */
     public function providePluginConfigEntries(
         bool $scopedOnly = false,
-        array $extensionTypeFilter
+        array $extensionTypeFilter = [],
     ): array {
         /**
          * Validate that all required entries have been provided.
@@ -120,6 +121,24 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['include_folders_for_dist_repo'] ??= '';
 
             $pluginConfigEntries[] = $entryConfig;
+        }
+
+        if ($extensionTypeFilter !== []) {
+            // Remove the extensions?
+            if (!in_array(OptionValues::FILTER_EXTENSION, $extensionTypeFilter)) {
+                $pluginConfigEntries = array_filter(
+                    $pluginConfigEntries,
+                    fn (array $entry) => $entry['is_bundle']
+                );
+            }
+
+            // Remove the bundles?
+            if (!in_array(OptionValues::FILTER_BUNDLE, $extensionTypeFilter)) {
+                $pluginConfigEntries = array_filter(
+                    $pluginConfigEntries,
+                    fn (array $entry) => !$entry['is_bundle']
+                );
+            }
         }
 
         return $pluginConfigEntries;
