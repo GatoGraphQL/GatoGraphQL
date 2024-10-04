@@ -23,7 +23,7 @@ final class PluginConfigEntriesJsonProvider
     }
 
     /**
-     * @var string[] $extensionTypeFilter
+     * @param string[] $extensionTypeFilter
      * @return array<array<string,string>>
      */
     public function providePluginConfigEntries(
