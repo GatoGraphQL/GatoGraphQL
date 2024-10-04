@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\OptionValues;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
@@ -22,10 +23,13 @@ final class PluginConfigEntriesJsonProvider
     }
 
     /**
+     * @param string[] $extensionTypeFilter
      * @return array<array<string,string>>
      */
-    public function providePluginConfigEntries(bool $scopedOnly = false): array
-    {
+    public function providePluginConfigEntries(
+        bool $scopedOnly = false,
+        array $extensionTypeFilter = [],
+    ): array {
         /**
          * Validate that all required entries have been provided.
          *
@@ -117,6 +121,38 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['include_folders_for_dist_repo'] ??= '';
 
             $pluginConfigEntries[] = $entryConfig;
+        }
+
+        /**
+         * Allow to generate only bundles or extension in
+         * GitHub Actions, by passing `--filter=extension`
+         * or `--filter=bundle`.
+         *
+         * Make sure only allowed values are passed for filtering.
+         */
+        $extensionTypeFilter = array_filter(
+            $extensionTypeFilter,
+            fn (string $filterValue) => in_array($filterValue, [
+                OptionValues::EXTENSION,
+                OptionValues::BUNDLE,
+            ])
+        );
+        if ($extensionTypeFilter !== []) {
+            // Remove the extensions?
+            if (!in_array(OptionValues::EXTENSION, $extensionTypeFilter)) {
+                $pluginConfigEntries = array_values(array_filter(
+                    $pluginConfigEntries,
+                    fn (array $entry) => $entry['is_bundle']
+                ));
+            }
+
+            // Remove the bundles?
+            if (!in_array(OptionValues::BUNDLE, $extensionTypeFilter)) {
+                $pluginConfigEntries = array_values(array_filter(
+                    $pluginConfigEntries,
+                    fn (array $entry) => !$entry['is_bundle']
+                ));
+            }
         }
 
         return $pluginConfigEntries;

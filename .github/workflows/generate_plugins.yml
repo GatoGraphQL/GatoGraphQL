@@ -19,6 +19,11 @@
 #   - Folder dev-helpers/ <= not needed for the plugin
 # - Upload the .zip file as an artifact to the action (this step is possibly optional)
 # - Upload the .zip file as a release, for download
+#
+# You can filter what .zip files to generate by type, by setting variable
+# `GENERATE_PLUGINS_FILTER` with any of these values:
+#   - extension
+#   - bundle
 ####################################################################################
 name: Generate plugins
 on:
@@ -32,6 +37,7 @@ on:
 
 env:
     CHECKOUT_SUBMODULES: ""
+    GENERATE_PLUGINS_FILTER: ""
     # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
     COMPOSER_ROOT_VERSION: dev-master
 
@@ -55,7 +61,7 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json --config=config/monorepo-builder/plugin-config-entries-json.php)" >> $GITHUB_OUTPUT
+                    echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json --filter=${{ env.GENERATE_PLUGINS_FILTER }} --config=config/monorepo-builder/plugin-config-entries-json.php)" >> $GITHUB_OUTPUT
                     echo "retention_days_for_generated_plugins=$(vendor/bin/monorepo-builder env-var RETENTION_DAYS_FOR_GENERATED_PLUGINS --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "local_package_owners=$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)" >> $GITHUB_OUTPUT
                     echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
