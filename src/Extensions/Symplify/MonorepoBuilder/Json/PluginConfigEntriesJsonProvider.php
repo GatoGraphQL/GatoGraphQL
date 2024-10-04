@@ -125,7 +125,7 @@ final class PluginConfigEntriesJsonProvider
 
         if ($extensionTypeFilter !== []) {
             // Remove the extensions?
-            if (!in_array(OptionValues::FILTER_EXTENSION, $extensionTypeFilter)) {
+            if (!in_array(OptionValues::EXTENSION, $extensionTypeFilter)) {
                 $pluginConfigEntries = array_values(array_filter(
                     $pluginConfigEntries,
                     fn (array $entry) => $entry['is_bundle']
@@ -133,7 +133,7 @@ final class PluginConfigEntriesJsonProvider
             }
 
             // Remove the bundles?
-            if (!in_array(OptionValues::FILTER_BUNDLE, $extensionTypeFilter)) {
+            if (!in_array(OptionValues::BUNDLE, $extensionTypeFilter)) {
                 $pluginConfigEntries = array_values(array_filter(
                     $pluginConfigEntries,
                     fn (array $entry) => !$entry['is_bundle']

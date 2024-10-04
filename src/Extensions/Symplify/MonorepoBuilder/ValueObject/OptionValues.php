@@ -9,9 +9,9 @@ final class OptionValues
     /**
      * @var string
      */
-    public final const FILTER_EXTENSION = 'extension';
+    public final const EXTENSION = 'extension';
     /**
      * @var string
      */
-    public final const FILTER_BUNDLE = 'bundle';
+    public final const BUNDLE = 'bundle';
 }
