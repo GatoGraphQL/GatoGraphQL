@@ -42,7 +42,9 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $scopedOnly = (bool) $input->getOption(Option::SCOPED_ONLY);
-        $pluginConfigEntries = $this->pluginConfigEntriesJsonProvider->providePluginConfigEntries($scopedOnly);
+        /** @var string[] */
+        $extensionTypeFilter = $input->getOption(Option::FILTER);
+        $pluginConfigEntries = $this->pluginConfigEntriesJsonProvider->providePluginConfigEntries($scopedOnly, $extensionTypeFilter);
 
         // must be without spaces, otherwise it breaks GitHub Actions json
         $json = Json::encode($pluginConfigEntries);

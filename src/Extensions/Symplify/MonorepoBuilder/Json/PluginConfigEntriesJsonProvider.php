@@ -22,10 +22,13 @@ final class PluginConfigEntriesJsonProvider
     }
 
     /**
+     * @var string[] $extensionTypeFilter
      * @return array<array<string,string>>
      */
-    public function providePluginConfigEntries(bool $scopedOnly = false): array
-    {
+    public function providePluginConfigEntries(
+        bool $scopedOnly = false,
+        array $extensionTypeFilter
+    ): array {
         /**
          * Validate that all required entries have been provided.
          *
