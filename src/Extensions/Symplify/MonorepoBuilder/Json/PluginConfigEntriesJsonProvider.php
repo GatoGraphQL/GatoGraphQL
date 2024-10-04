@@ -123,7 +123,13 @@ final class PluginConfigEntriesJsonProvider
             $pluginConfigEntries[] = $entryConfig;
         }
 
-        // Make sure only allowed values are passed for filtering
+        /**
+         * Allow to generate only bundles or extension in
+         * GitHub Actions, by passing `--filter=extension`
+         * or `--filter=bundle`.
+         *
+         * Make sure only allowed values are passed for filtering.
+         */
         $extensionTypeFilter = array_filter(
             $extensionTypeFilter,
             fn (string $filterValue) => in_array($filterValue, [
