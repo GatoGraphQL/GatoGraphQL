@@ -126,18 +126,18 @@ final class PluginConfigEntriesJsonProvider
         if ($extensionTypeFilter !== []) {
             // Remove the extensions?
             if (!in_array(OptionValues::FILTER_EXTENSION, $extensionTypeFilter)) {
-                $pluginConfigEntries = array_filter(
+                $pluginConfigEntries = array_values(array_filter(
                     $pluginConfigEntries,
                     fn (array $entry) => $entry['is_bundle']
-                );
+                ));
             }
 
             // Remove the bundles?
             if (!in_array(OptionValues::FILTER_BUNDLE, $extensionTypeFilter)) {
-                $pluginConfigEntries = array_filter(
+                $pluginConfigEntries = array_values(array_filter(
                     $pluginConfigEntries,
                     fn (array $entry) => !$entry['is_bundle']
-                );
+                ));
             }
         }
 
