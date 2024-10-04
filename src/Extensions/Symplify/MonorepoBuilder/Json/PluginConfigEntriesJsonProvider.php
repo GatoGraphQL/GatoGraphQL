@@ -123,6 +123,14 @@ final class PluginConfigEntriesJsonProvider
             $pluginConfigEntries[] = $entryConfig;
         }
 
+        // Make sure only allowed values are passed for filtering
+        $extensionTypeFilter = array_filter(
+            $extensionTypeFilter,
+            fn (string $value) => in_array($value, [
+                OptionValues::EXTENSION,
+                OptionValues::BUNDLE,
+            ])
+        );
         if ($extensionTypeFilter !== []) {
             // Remove the extensions?
             if (!in_array(OptionValues::EXTENSION, $extensionTypeFilter)) {
