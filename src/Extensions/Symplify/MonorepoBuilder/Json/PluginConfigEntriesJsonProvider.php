@@ -126,7 +126,7 @@ final class PluginConfigEntriesJsonProvider
         // Make sure only allowed values are passed for filtering
         $extensionTypeFilter = array_filter(
             $extensionTypeFilter,
-            fn (string $value) => in_array($value, [
+            fn (string $filterValue) => in_array($filterValue, [
                 OptionValues::EXTENSION,
                 OptionValues::BUNDLE,
             ])
