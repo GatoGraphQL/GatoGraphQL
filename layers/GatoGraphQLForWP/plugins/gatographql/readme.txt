@@ -154,7 +154,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking change: The single endpoint GraphiQL/Voyager clients are disabled default (#2860)
 * Breaking change: The Schema Configuration module is disabled by default (#2848)
 * Breaking change: The schema tutorial page is hidden by default (#2856)
-* Breaking change: The settings under "Schema Elements Configuration" (new item) need to be set again (#2861)
+* Breaking change: On the settings page, the configuration for items under "Schema Elements Configuration" need to be set again (#2861)
 * Tested up to WordPress 6.7 (#2887)
 * Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 * Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)

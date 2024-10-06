@@ -9,7 +9,7 @@
 - The single endpoint GraphiQL/Voyager clients are disabled default ([#2860](https://github.com/GatoGraphQL/GatoGraphQL/pull/2860))
 - The Schema Configuration module is disabled by default ([#2848](https://github.com/GatoGraphQL/GatoGraphQL/pull/2848))
 - The schema tutorial page is hidden by default ([#2856](https://github.com/GatoGraphQL/GatoGraphQL/pull/2856))
-- The settings under "Schema Elements Configuration" (new item) need to be set again ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
+- On the settings page, the configuration for items under "Schema Elements Configuration" need to be set again ([#2861](https://github.com/GatoGraphQL/GatoGraphQL/pull/2861))
 
 ## Improvements
 
