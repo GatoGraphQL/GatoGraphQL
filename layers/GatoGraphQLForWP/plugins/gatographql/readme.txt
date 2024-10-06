@@ -26,7 +26,7 @@ Use Gato GraphQL to:
 
 == Extensions ==
 
-[Extensions](https://gatographql.com/extensions) allow you to augment the server functionality, and extend the GraphQL schema, to satisfy your requirements.
+[Extensions](https://gatographql.com/extensions) allow you to augment the server functionality, and extend the GraphQL schema.
 
 You can purchase each extension separately, or get a [bundle containing all the extensions](https://gatographql.com/pricing).
 
