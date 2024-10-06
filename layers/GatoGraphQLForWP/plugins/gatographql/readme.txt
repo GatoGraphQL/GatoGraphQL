@@ -165,7 +165,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved documentation for extensions (#2866)
 * Added links to online docs on the Settings page (#2875)
 * Added "Schema Editing Access" module (#2877)
-* [PRO] If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
+* [Extensions][Schema Functions] If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
 
 = 5.0.0 =
 * Breaking change: Bumped minimum WordPress version to 6.1 (#2811)
