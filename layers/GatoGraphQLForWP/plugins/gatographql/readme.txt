@@ -52,14 +52,6 @@ The available extensions are:
 
 [Schema Functions](https://gatographql.com/extensions/schema-functions): The GraphQL schema is provided with fields and directives which expose functionalities from the PHP programming language.
 
-== Source code ==
-
-Gato GraphQL is open source, under the GPLv2 license.
-
-The source code for the plugin is in GitHub repo [GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL).
-
-The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plugins/gatographql/blocks](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/plugins/gatographql/blocks).
-
 == Frequently Asked Questions ==
 
 = Does the plugin provide documentation? =
@@ -127,6 +119,12 @@ Yes it does. If you have purchased any Gato GraphQL product and found out that i
 = Can I try out Gato GraphQL + all extensions? =
 
 Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL + all extensions, for free, for 7 days.
+
+= Is the plugin open source? =
+
+Yes it is. The source code for the plugin is in GitHub repo [GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL).
+
+The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plugins/gatographql/blocks](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/plugins/gatographql/blocks).
 
 == Screenshots ==
 
