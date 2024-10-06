@@ -44,6 +44,6 @@ The first option (`Users with capability: "gatogql_manage_graphql_schema"`) is s
 
 ## Fixed
 
-## [PRO] Improvements
+## [Extensions] Improvements
 
-- If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
+- [Schema Functions] If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
