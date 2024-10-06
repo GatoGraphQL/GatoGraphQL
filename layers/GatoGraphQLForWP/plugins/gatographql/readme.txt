@@ -1,6 +1,6 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
-Tags: graphql, headless, webhook, api, wp-cli, decoupled, rest
+Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, astro, nextjs, Next.js
 Requires at least: 6.1
 Tested up to: 6.7
 Stable tag: 5.0.0
