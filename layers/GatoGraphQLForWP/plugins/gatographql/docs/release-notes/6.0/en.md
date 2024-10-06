@@ -1,8 +1,10 @@
 # Release Notes: 6.0
 
-## Breaking changes
+**Important! Action required:**
 
-**Action required:** When updating the plugin (i.e. not installing anew), you need to deactivate and then re-activate the plugin. Until then, the "GraphiQL" and "Schema" items won't appear on the menu (due to the newly-added "Schema Editing Access" module, see below)
+When updating the plugin (i.e. not installing anew), you need to deactivate and then re-activate the plugin. Until then, the "GraphiQL" and "Schema" items won't appear on the menu (due to the newly-added "Schema Editing Access" module, see below)
+
+## Breaking changes
 
 - Removed custom endpoints and persisted queries ([#2852](https://github.com/GatoGraphQL/GatoGraphQL/pull/2852))
 - The single endpoint is enabled by default ([#2859](https://github.com/GatoGraphQL/GatoGraphQL/pull/2859))
