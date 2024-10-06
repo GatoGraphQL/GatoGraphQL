@@ -3,6 +3,7 @@ on:
     push:
         branches:
             - master
+            - versions/*
     pull_request: null
 env:
     CHECKOUT_SUBMODULES: ""
@@ -24,7 +25,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: "ramsey/composer-install@v2"
+            -   uses: ramsey/composer-install@v3
 
             -   id: output_data
                 run: |
@@ -54,7 +55,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install Composer dependencies
-                uses: "ramsey/composer-install@v2"
+                uses: ramsey/composer-install@v3
 
             -   name: Run PHP Code Sniffer
                 run: vendor/bin/phpcs -n src ${{ needs.provide_data.outputs.package_code_paths }}

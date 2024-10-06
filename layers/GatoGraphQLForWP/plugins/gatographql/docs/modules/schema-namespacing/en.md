@@ -12,11 +12,19 @@ In the namespaced schema, types `Event` and `Location` become `EM_Event` and `EM
 
 While the schema normally looks like this:
 
+<div class="img-width-1024" markdown=1>
+
 ![Interactive schema](../../images/normal-interactive-schema.png)
+
+</div>
 
 ...its namespaced version looks like this:
 
+<div class="img-width-1024" markdown=1>
+
 ![Namespaced interactive schema](../../images/namespaced-interactive-schema.png)
+
+</div>
 
 ## How to use
 

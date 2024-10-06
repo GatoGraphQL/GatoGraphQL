@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentR
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 
 class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
@@ -17,22 +16,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     use OpenInModalTriggerMenuPageTrait;
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
 
-    private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?ExtensionsMenuPage $extensionsMenuPage = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-    final protected function getModuleRegistry(): ModuleRegistryInterface
-    {
-        if ($this->moduleRegistry === null) {
-            /** @var ModuleRegistryInterface */
-            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-            $this->moduleRegistry = $moduleRegistry;
-        }
-        return $this->moduleRegistry;
-    }
     final public function setExtensionsMenuPage(ExtensionsMenuPage $extensionsMenuPage): void
     {
         $this->extensionsMenuPage = $extensionsMenuPage;
@@ -54,7 +39,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getPageTitle(): string
     {
-        return \__('Gato GraphQL - Extension Docs', 'gatographql');
+        return \__('Gato GraphQL - Extension Reference Docs', 'gatographql');
     }
 
     protected function getContentID(): string
@@ -89,7 +74,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         return sprintf(
             '<p>%s</p>',
             sprintf(
-                __('%s <a href="%s" class="button">Switch to the <strong>Extensions</strong> view</a></span>', 'gatographql'),
+                __('%s <a href="%s" class="button">Back to the <strong>Extensions</strong> page</a></span>', 'gatographql'),
                 $extensionsMenuPage->getHeaderMessage(),
                 \admin_url(sprintf(
                     'admin.php?page=%s',
@@ -100,7 +85,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string,2:string}>
+     * @return array<array{0:string,1:string,2:string}> Value: [0] => slug, [1] => name, [2] => module
      */
     protected function getEntries(): array
     {
@@ -132,14 +117,14 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $moduleRegistry = $this->getModuleRegistry();
         $modules = $moduleRegistry->getAllModules(true, false, false);
         $items = [];
-        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
+        $displayGatoGraphQLPROExtensionsOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage();
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
             $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
-            if (!$isBundleExtension && !$offerGatoGraphQLPROExtensions) {
+            if (!$isBundleExtension && !$displayGatoGraphQLPROExtensionsOnExtensionsPage) {
                 continue;
             }
             $items[] = [
@@ -163,8 +148,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryModule = $entry[2];
         /** @var ExtensionModuleResolverInterface */
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
-        $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
-        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
+        $displayGatoGraphQLPROBundleOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
+        $displayGatoGraphQLPROFeatureBundlesOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage();
         return sprintf(
             \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gatographql'),
             $entryTitle,
@@ -172,8 +157,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             '_blank',
             \__('Open in shop', 'gatographql'),
             $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
-                ? ($offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('go PRO', 'gatographql') : \__('get bundle', 'gatographql'))
-                : ($offerGatoGraphQLPROBundle && !$offerGatoGraphQLPROFeatureBundles ? \__('visit on website', 'gatographql') : \__('get extension', 'gatographql')),
+                ? ($displayGatoGraphQLPROBundleOnExtensionsPage && !$displayGatoGraphQLPROFeatureBundlesOnExtensionsPage ? \__('go PRO', 'gatographql') : \__('website', 'gatographql'))
+                : \__('website', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }
@@ -188,5 +173,70 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $this->enqueueModalTriggerAssets();
 
         $this->enqueueResponsiveVideoContainerAssets();
+    }
+
+    /**
+     * Print the bundled extensions using a tabPanel
+     */
+    protected function useTabpanelForContent(): bool
+    {
+        if (!PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage()) {
+            return true;
+        }
+        return parent::useTabpanelForContent();
+    }
+
+    /**
+     * @param array{0:string,1:string,2:mixed} $entry
+     */
+    protected function getAdditionalEntryContentToPrint(array $entry): string
+    {
+        $markdownContentOptions = $this->getMarkdownContentOptions();
+        $entryModule = $entry[2];
+
+        // Add the content for the bundled extensions
+        $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
+        $isBundleExtension = $entryModuleResolver instanceof BundleExtensionModuleResolverInterface;
+        if ($isBundleExtension) {
+            $contentEntries = [];
+
+            /** @var BundleExtensionModuleResolverInterface */
+            $bundleExtensionModuleResolver = $entryModuleResolver;
+            $bundleExtensionModules = $bundleExtensionModuleResolver->getBundledExtensionModules($entryModule);
+            foreach ($bundleExtensionModules as $bundleExtensionModule) {
+                /** @var ExtensionModuleResolverInterface */
+                $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleExtensionModule);
+                $entryModuleName = sprintf(
+                    '%1$s/docs/modules/%1$s',
+                    $extensionModuleResolver->getSlug($bundleExtensionModule)
+                );
+                $entryModuleContent = $this->getMarkdownContent(
+                    $entryModuleName,
+                    $this->getEntryRelativePathDir([
+                        $entryModuleName,
+                        $extensionModuleResolver->getName($bundleExtensionModule),
+                        $bundleExtensionModule,
+                    ]),
+                    $markdownContentOptions
+                ) ?? '';
+                $contentEntries[] = $entryModuleContent;
+            }
+
+            if ($contentEntries !== []) {
+                return sprintf(
+                    '
+                    <br/>
+                    <p><u><strong>%s</strong></u></p>
+                    ',
+                    PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                        && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
+                        // && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
+                        ? \__('Modules included in this extension:', 'gatographql')
+                        : \__('Modules included in this bundle:', 'gatographql')
+                ) . implode('<br/><hr/>', $contentEntries);
+            }
+        }
+
+        return '';
     }
 }

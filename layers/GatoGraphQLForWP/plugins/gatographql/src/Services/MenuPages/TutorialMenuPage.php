@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentR
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\TutorialLessonDataProvider;
 
@@ -19,23 +19,9 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
 {
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
 
-    private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?TutorialLessonDataProvider $tutorialLessonDataProvider = null;
     private ?BundleExtensionAggregator $bundleExtensionAggregator = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-    final protected function getModuleRegistry(): ModuleRegistryInterface
-    {
-        if ($this->moduleRegistry === null) {
-            /** @var ModuleRegistryInterface */
-            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-            $this->moduleRegistry = $moduleRegistry;
-        }
-        return $this->moduleRegistry;
-    }
     final public function setTutorialLessonDataProvider(TutorialLessonDataProvider $tutorialLessonDataProvider): void
     {
         $this->tutorialLessonDataProvider = $tutorialLessonDataProvider;
@@ -70,7 +56,7 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getPageTitle(): string
     {
-        return \__('Gato GraphQL - Tutorial', 'gatographql');
+        return \__('Gato GraphQL - Schema Tutorial', 'gatographql');
     }
 
     protected function getContentID(): string
@@ -150,6 +136,10 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
                     $bundleExtensionHTMLItems
                 )
             );
+        }
+
+        if (!PluginStaticModuleConfiguration::printReferencedExtensionsInSchemaTutorialDocs()) {
+            return $entryContent;
         }
 
         $messageHTML = sprintf(

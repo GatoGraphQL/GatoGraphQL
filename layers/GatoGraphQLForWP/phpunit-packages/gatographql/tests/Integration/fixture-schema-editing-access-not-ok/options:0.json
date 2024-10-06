@@ -1,0 +1,8 @@
+{
+  "code": "wp_die",
+  "message": "Cannot load gatographql.",
+  "data": {
+    "status": 500
+  },
+  "additional_errors": []
+}

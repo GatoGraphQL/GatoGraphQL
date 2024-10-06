@@ -8,6 +8,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
+**Action required:** When updating the plugin (i.e. not installing anew), you need to deactivate and then re-activate the plugin. Until then, the "GraphiQL" and "Schema" items won't appear on the menu (due to the newly-added "Schema Editing Access" module, see below)
+
 - Removed custom endpoints and persisted queries (#2852)
 - The single endpoint is enabled by default (#2859)
 - The single endpoint GraphiQL/Voyager clients are disabled default (#2860)
@@ -17,12 +19,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- Tested up to WordPress 6.7 (#2887)
 - Do not display Endpoint Categories if there are no endpoint CPTs enabled (#2849)
 - Hide "API Hierarchy" module if there are no endpoint CPTs enabled (#2850)
 - Hide "Excerpt as description" module if there are no CPTs enabled (#2851)
 - Display the "Enable Logs?" settings only when some extension is using it (#2853)
 - Hide the Schema tutorial page by default (#2854)
-- Reorganized the Settings, splitting "Schema Configuration" into 2 elements:  "Schema Configuration" and  "Schema Elements Configuration" (#2861)
+- Reorganized the Settings, splitting "Schema Configuration" into 2 elements: "Schema Configuration" and  "Schema Elements Configuration" (#2861)
+- Improved documentation for extensions (#2866)
+- Added links to online docs on the Settings page (#2875)
+- Added "Schema Editing Access" module (#2877)
 
 ## 5.0.0 - 07/09/2024
 
@@ -362,17 +368,17 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
 - Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
 - Renamed page "Recipes" to "Tutorial", and added settings to hide it
 - Renamed existing bundles:
-  - “Application Glue & Automator” Bundle => “Tailored WordPress Automator” Bundle
-  - “Content Translation” Bundle => “Simplest WordPress Content Translation” Bundle
-  - “Public API” Bundle => “Responsible WordPress Public API” Bundle
+  - “Application Glue & Automator” bundle => “Tailored WordPress Automator” bundle
+  - “Content Translation” bundle => “Simplest WordPress Content Translation” bundle
+  - “Public API” bundle => “Responsible WordPress Public API” bundle
 - Added documentation for new bundles:
-  - “Automated Content Translation & Sync for WordPress Multisite” Bundle
-  - “Better WordPress Webhooks” Bundle
-  - “Easy WordPress Bulk Transform & Update” Bundle
-  - “Private GraphQL Server for WordPress” Bundle
-  - “Selective Content Import, Export & Sync for WordPress” Bundle
-  - “Unhindered WordPress Email Notifications” Bundle
-  - “Versatile WordPress Request API” Bundle
+  - “Automated Content Translation & Sync for WordPress Multisite” bundle
+  - “Better WordPress Webhooks” bundle
+  - “Easy WordPress Bulk Transform & Update” bundle
+  - “Private GraphQL Server for WordPress” bundle
+  - “Selective Content Import, Export & Sync for WordPress” bundle
+  - “Unhindered WordPress Email Notifications” bundle
+  - “Versatile WordPress Request API” bundle
 
 ### Fixed
 

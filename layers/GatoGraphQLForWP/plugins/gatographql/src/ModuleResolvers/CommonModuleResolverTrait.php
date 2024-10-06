@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentPrinters\CollapsibleContentPrinterTrait;
 use WP_Post;
 
@@ -24,7 +25,7 @@ trait CommonModuleResolverTrait
         return $this->getSettingsInfoContent(
             sprintf(
                 \__('%s %s', 'gatographql'),
-                \__('This is the default value for the schema configuration.', 'gatographql'),
+                \__('This configuration value is the default one for the schema configuration.', 'gatographql'),
                 $this->getCollapsible(
                     sprintf(
                         '<br/>%s<ul><li>%s</li></ul>',
@@ -78,5 +79,17 @@ trait CommonModuleResolverTrait
             'post_type' => $customPostType,
             'post_status' => 'publish',
         ]);
+    }
+
+    protected function getSettingsItemHelpLinkHTML(
+        string $url,
+        string $title
+    ): string {
+        $helpLabelPlaceholder = '<a href="%1$s" title="' . \__('\'%2$s\' on gatographql.com', 'gatographql') . '" target="_blank">' . \__('Help', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
+        return sprintf(
+            $helpLabelPlaceholder,
+            $url,
+            $title
+        );
     }
 }

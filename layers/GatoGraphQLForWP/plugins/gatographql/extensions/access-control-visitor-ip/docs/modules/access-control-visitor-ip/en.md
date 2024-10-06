@@ -6,7 +6,11 @@ Grant access to the schema based on the visitor's IP address (Access Control ext
 
 In the Access Control editor, a new rule "Visitor IP" is made available:
 
+<div class="img-width-1024" markdown=1>
+
 ![Access Control: Visitor IP rule](../../images/acl-rule-visitor-ip.png "Access Control: Visitor IP rule")
+
+</div>
 
 We configure the rule with the list of IP addresses that can either access, or are denied access to, the schema elements.
 
@@ -22,7 +26,11 @@ For instance, any of these entries match IP address `"203.23.88.100"`:
 
 And under Behavior, select if to "Allow access" or "Deny access" to the schema for those entries.
 
+<div class="img-width-600" markdown=1>
+
 ![Adding entries in the Visitor IP block](../../images/acl-rule-visitor-ip-block.png "Adding entries in the Visitor IP block")
+
+</div>
 
 When access is denied, the response will contain an error message like this one (in the public mode):
 
@@ -41,9 +49,3 @@ When access is denied, the response will contain an error message like this one 
   ]
 }
 ```
-<!-- 
-## Bundles including extension
-
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Better WordPress Webhooks” Bundle](../../../../../bundle-extensions/better-wordpress-webhooks/docs/modules/better-wordpress-webhooks/en.md)
-- [“Responsible WordPress Public API” Bundle](../../../../../bundle-extensions/responsible-wordpress-public-api/docs/modules/responsible-wordpress-public-api/en.md) -->

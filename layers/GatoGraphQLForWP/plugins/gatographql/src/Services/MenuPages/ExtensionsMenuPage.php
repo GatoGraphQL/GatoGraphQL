@@ -10,7 +10,6 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
 /**
@@ -19,6 +18,7 @@ use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 class ExtensionsMenuPage extends AbstractTableMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
+    use ExtensionsMenuPageTrait;
 
     public final const SCREEN_OPTION_NAME = 'gatographql_extensions_per_page';
 
@@ -98,25 +98,6 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         $this->enqueueExtensionAssets();
     }
 
-    protected function enqueueExtensionAssets(): void
-    {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
-        /**
-         * Hide the bottom part of the extension items on the table,
-         * as it contains unneeded information, and just hiding it
-         * is easier than editing the PHP code
-         */
-        \wp_enqueue_style(
-            'gatographql-extensions',
-            $mainPluginURL . 'assets/css/extensions.css',
-            array(),
-            $mainPluginVersion
-        );
-    }
-
     protected function printHeader(): void
     {
         parent::printHeader();
@@ -126,7 +107,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
             'admin.php?page=%s',
             $this->getExtensionDocsMenuPage()->getScreenID()
         ));
-        $label_safe = __('Switch to the <strong>Extension Docs</strong> view', 'gatographql');
+        $label_safe = __('Browse the <strong>Extension Reference Docs</strong>', 'gatographql');
         ?>
             <p>
                 <?php echo $headerMessage_safe ?>
@@ -139,10 +120,10 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $offerGatoGraphQLPROBundle = PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle();
-        $offerGatoGraphQLPROFeatureBundles = PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles();
-        $offerGatoGraphQLPROExtensions = PluginStaticModuleConfiguration::offerGatoGraphQLPROExtensions();
-        if ($offerGatoGraphQLPROBundle && !PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()) {
+        $displayGatoGraphQLPROBundleOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
+        $displayGatoGraphQLPROFeatureBundlesOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage();
+        $displayGatoGraphQLPROExtensionsOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROExtensionsOnExtensionsPage();
+        if ($displayGatoGraphQLPROBundleOnExtensionsPage && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()) {
             return sprintf(
                 __('<strong>%1$s</strong> includes extensions that add functionality and extend the GraphQL schema. Browse them all here, or on the <a href="%2$s" target="%3$s">Gato GraphQL website%4$s</a>.', 'gatographql'),
                 'Gato GraphQL PRO',
@@ -152,7 +133,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
             );
         }
         $headerMessage = __('Extensions add functionality and expand the GraphQL schema.', 'gatographql');
-        if ($offerGatoGraphQLPROFeatureBundles && !$offerGatoGraphQLPROExtensions) {
+        if ($displayGatoGraphQLPROFeatureBundlesOnExtensionsPage && !$displayGatoGraphQLPROExtensionsOnExtensionsPage) {
             return sprintf(
                 __('%1$s Browse them on the <a href="%2$s" target="%3$s">Gato GraphQL website%4$s</a>.', 'gatographql'),
                 $headerMessage,

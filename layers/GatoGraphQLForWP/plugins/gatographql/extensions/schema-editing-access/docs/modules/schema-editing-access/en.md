@@ -17,12 +17,12 @@ This extension `Schema Editing Access` enables to grant non-admin users access t
 
 This is achieved via two different methods:
 
-1. By assigning the custom capability `manage_graphql_schema` to the user
+1. By assigning the custom capability `gatogql_manage_graphql_schema` to the user
 2. By selecting the user roles that can edit the schema (down to the "Author" level)
 
 ## Granting access to users
 
-Assign capability `manage_graphql_schema` to any user role or any specific user that must be able to edit the schema.
+Assign capability `gatogql_manage_graphql_schema` to any user role or any specific user that must be able to edit the schema.
 
 (You can use a 3rd-party plugin to do this, such as [User Role Editor](https://wordpress.org/plugins/user-role-editor/).)
 
@@ -30,7 +30,7 @@ You can also select a group of user roles which can edit the GraphQL schema.
 
 The appropriate configuration must be selected from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
 
-- `Users with capability: "manage_graphql_schema"`
+- `Users with capability: "gatogql_manage_graphql_schema"`
 - `Users with role: "administrator"`
 - `Users with any role: "administrator", "editor"`
 - `Users with any role: "administrator", "editor", "author"`
@@ -40,9 +40,3 @@ The appropriate configuration must be selected from the dropdown in the "Plugin 
 ![Configuring the schema editing access in the Settings](../../images/settings-schema-editing-access.png "Configuring the schema editing access in the Settings")
 
 </div>
-<!-- 
-## Bundles including extension
-
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Responsible WordPress Public API” Bundle](../../../../../bundle-extensions/responsible-wordpress-public-api/docs/modules/responsible-wordpress-public-api/en.md)
-- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md) -->

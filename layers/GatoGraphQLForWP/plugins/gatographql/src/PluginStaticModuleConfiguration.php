@@ -27,7 +27,7 @@ class PluginStaticModuleConfiguration
      *
      * @since v2.2
      */
-    public static function offerGatoGraphQLPROBundle(): bool
+    public static function displayGatoGraphQLPROBundleOnExtensionsPage(): bool
     {
         return false;
     }
@@ -37,7 +37,7 @@ class PluginStaticModuleConfiguration
      *
      * @since v6.0
      */
-    public static function offerGatoGraphQLPROFeatureBundles(): bool
+    public static function displayGatoGraphQLPROFeatureBundlesOnExtensionsPage(): bool
     {
         return true;
     }
@@ -48,9 +48,9 @@ class PluginStaticModuleConfiguration
      *
      * @since v6.0
      */
-    public static function offerGatoGraphQLPROAllFeatureExtensionBundle(): bool
+    public static function displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -58,7 +58,7 @@ class PluginStaticModuleConfiguration
      *
      * @since v6.0
      */
-    public static function offerGatoGraphQLPROExtensions(): bool
+    public static function displayGatoGraphQLPROExtensionsOnExtensionsPage(): bool
     {
         return false;
     }
@@ -71,6 +71,14 @@ class PluginStaticModuleConfiguration
      * @since v6.0
      */
     public static function canManageInstallingPluginSetupData(): bool
+    {
+        return false;
+    }
+
+    /**
+     * @since v6.0
+     */
+    public static function printReferencedExtensionsInSchemaTutorialDocs(): bool
     {
         return false;
     }

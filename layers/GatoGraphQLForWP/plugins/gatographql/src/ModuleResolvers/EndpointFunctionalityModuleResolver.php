@@ -184,7 +184,13 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                     $option
                 ),
                 Properties::TITLE => \__('Endpoint path', 'gatographql'),
-                Properties::DESCRIPTION => \__('URL path to expose the single GraphQL endpoint', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('URL path to expose the single GraphQL endpoint<br/><span class="more-info">%s</span>', 'gatographql'),
+                    $this->getSettingsItemHelpLinkHTML(
+                        'https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint',
+                        \__('Configuring the single endpoint', 'gatographql')
+                    )
+                ),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }
@@ -196,7 +202,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                 self::SINGLE_ENDPOINT,
             ]) && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
         ) {
-            $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'gatographql');
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
                     \__('Schema Configuration to use in the private endpoint <code>%1$s</code>.<br/><br/>The private endpoint powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%5$s</a>.', 'gatographql'),

@@ -49,17 +49,17 @@ define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
 ## Improvements
 
 - Renamed existing bundles:
-  - “Application Glue & Automator” Bundle => “Tailored WordPress Automator” Bundle
-  - “Content Translation” Bundle => “Simplest WordPress Content Translation” Bundle
-  - “Public API” Bundle => “Responsible WordPress Public API” Bundle
+  - “Application Glue & Automator” bundle => “Tailored WordPress Automator” bundle
+  - “Content Translation” bundle => “Simplest WordPress Content Translation” bundle
+  - “Public API” bundle => “Responsible WordPress Public API” bundle
 - Added documentation for new bundles:
-  - “Automated Content Translation & Sync for WordPress Multisite” Bundle
-  - “Better WordPress Webhooks” Bundle
-  - “Easy WordPress Bulk Transform & Update” Bundle
-  - “Private GraphQL Server for WordPress” Bundle
-  - “Selective Content Import, Export & Sync for WordPress” Bundle
-  - “Unhindered WordPress Email Notifications” Bundle
-  - “Versatile WordPress Request API” Bundle
+  - “Automated Content Translation & Sync for WordPress Multisite” bundle
+  - “Better WordPress Webhooks” bundle
+  - “Easy WordPress Bulk Transform & Update” bundle
+  - “Private GraphQL Server for WordPress” bundle
+  - “Selective Content Import, Export & Sync for WordPress” bundle
+  - “Unhindered WordPress Email Notifications” bundle
+  - “Versatile WordPress Request API” bundle
 
 ## Fixed
 

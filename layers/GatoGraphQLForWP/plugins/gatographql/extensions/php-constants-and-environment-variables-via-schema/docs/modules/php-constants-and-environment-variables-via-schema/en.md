@@ -55,7 +55,11 @@ There are 2 places where this configuration can take place, in order of priority
 
 In the Schema Configuration applied to the endpoint, select option `"Use custom configuration"` and then input the desired entries:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the entries on the Schema Configuration](../../images/environment-fields-schema-configuration-entries.png "Defining the entries on the Schema Configuration")
+
+</div>
 
 Otherwise, the entries defined in the "Environment Fields" tab from the Settings will be used:
 
@@ -148,13 +152,3 @@ For instance, the following query connects to the GitHub REST API using a privat
 ```
 
 In this query, fields `githubAccessToken` and `authorizationHeader` (which contain sensitive data) are both removed from the output, and field `gitHubArtifactData` will already print the results of the API call, without leaking any of its inputs (eg: an error will print the string `"$__authorizationHeader"` instead of the variable's value).
-<!-- 
-## Bundles including extension
-
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Better WordPress Webhooks” Bundle](../../../../../bundle-extensions/better-wordpress-webhooks/docs/modules/better-wordpress-webhooks/en.md)
-- [“Private GraphQL Server for WordPress” Bundle](../../../../../bundle-extensions/private-graphql-server-for-wordpress/docs/modules/private-graphql-server-for-wordpress/en.md)
-- [“Selective Content Import, Export & Sync for WordPress” Bundle](../../../../../bundle-extensions/selective-content-import-export-and-sync-for-wordpress/docs/modules/selective-content-import-export-and-sync-for-wordpress/en.md)
-- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md)
-- [“Unhindered WordPress Email Notifications” Bundle](../../../../../bundle-extensions/unhindered-wordpress-email-notifications/docs/modules/unhindered-wordpress-email-notifications/en.md)
-- [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/versatile-wordpress-request-api/docs/modules/versatile-wordpress-request-api/en.md) -->

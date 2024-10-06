@@ -271,8 +271,3 @@ Define environment variables:
 - `TRANSLATION_DEFAULT_FROM_LANG_CODE`
 - `TRANSLATION_DEFAULT_TO_LANG_CODE`
  -->
-<!-- 
-## Bundles including extension
-
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Simplest WordPress Content Translation” Bundle](../../../../../bundle-extensions/simplest-wordpress-content-translation/docs/modules/simplest-wordpress-content-translation/en.md) -->

@@ -14,20 +14,28 @@ A new "Field Deprecation List" Custom Post Type is added to the site. We can bro
 
 </div>
 
+<div class="img-width-1024" markdown=1>
+
 ![Field Deprecation List editor](../../images/field-deprecation-list.png "Field Deprecation List editor")
+
+</div>
 
 Every Field Deprecation List contains one or many entries, each of them with the following elements:
 
 - The fields to deprecate
 - The deprecation reason (to be shown in the GraphQL response when the deprecated field is queried)
 
+<div class="img-width-1024" markdown=1>
+
 ![Field Deprecation entry](../../images/field-deprecation-entry.png "Field Deprecation entry")
+
+</div>
 
 After creating the Field Deprecation List, we can have the Custom Endpoint and Persisted Query use it by editing the corresponding Schema Configuration, and selecting the item from the list under block "Field Deprecation Lists".
 
-![Selecting a Field Deprecation List in the Schema Configuration](../../images/schema-config-field-deprecation-lists.png "Selecting a Field Deprecation List in the Schema Configuration")
-<!-- 
-## Bundles including extension
+<div class="img-width-610" markdown=1>
 
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Responsible WordPress Public API” Bundle](../../../../../bundle-extensions/responsible-wordpress-public-api/docs/modules/responsible-wordpress-public-api/en.md) -->
+![Selecting a Field Deprecation List in the Schema Configuration](../../images/schema-config-field-deprecation-lists.png "Selecting a Field Deprecation List in the Schema Configuration")
+
+</div>
+

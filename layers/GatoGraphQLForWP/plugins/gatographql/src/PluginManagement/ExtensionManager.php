@@ -277,6 +277,7 @@ class ExtensionManager extends AbstractPluginManager
     public function assertCommercialLicenseHasBeenActivated(
         string $extensionSlug,
         string $extensionProductName,
+        string $extensionName,
     ): bool {
         /**
          * Retrieve from the DB which licenses have been activated,
@@ -284,7 +285,7 @@ class ExtensionManager extends AbstractPluginManager
          */
         $commercialExtensionActivatedLicenseObjectProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
         if (!isset($commercialExtensionActivatedLicenseObjectProperties[$extensionSlug])) {
-            $this->showAdminWarningNotice($extensionProductName);
+            $this->showAdminWarningNotice($extensionName);
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
@@ -310,7 +311,7 @@ class ExtensionManager extends AbstractPluginManager
             ])
         ) {
             $this->showAdminWarningNotice(
-                $extensionProductName,
+                $extensionName,
                 __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql')
             );
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
@@ -322,7 +323,7 @@ class ExtensionManager extends AbstractPluginManager
          */
         if ($extensionCommercialExtensionActivatedLicenseObjectProperties->productName !== $extensionProductName) {
             $this->showAdminWarningNotice(
-                $extensionProductName,
+                $extensionName,
                 __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql')
             );
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
@@ -338,11 +339,11 @@ class ExtensionManager extends AbstractPluginManager
      * Unless we are in the Settings page, show a warning about activating the extension
      */
     protected function showAdminWarningNotice(
-        string $extensionProductName,
+        string $extensionName,
         ?string $messagePlaceholder = null,
     ): void {
         $messagePlaceholder ??= __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql');
-        \add_action('admin_notices', function () use ($extensionProductName, $messagePlaceholder) {
+        \add_action('admin_notices', function () use ($extensionName, $messagePlaceholder) {
             // /**
             //  * Do not print the warnings in the Settings page
             //  */
@@ -357,12 +358,9 @@ class ExtensionManager extends AbstractPluginManager
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
                     __('<strong>%s</strong>: %s.', 'gatographql'),
-                    PluginStaticModuleConfiguration::offerGatoGraphQLPROBundle() && !PluginStaticModuleConfiguration::offerGatoGraphQLPROFeatureBundles()
+                    PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
                         ? __('Gato GraphQL PRO', 'gatographql')
-                        : sprintf(
-                            __('Gato GraphQL - %s', 'gatographql'),
-                            $extensionProductName,
-                        ),
+                        : $extensionName,
                     sprintf(
                         $messagePlaceholder,
                         $activateExtensionsSettingsURL,

@@ -3,6 +3,7 @@ on:
     push:
         branches:
             - master
+            - versions/*
     pull_request: null
 env:
     CHECKOUT_SUBMODULES: ""
@@ -26,7 +27,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install Composer dependencies
-                uses: "ramsey/composer-install@v2"
+                uses: ramsey/composer-install@v3
 
             -   name: Run tests
                 run: vendor/bin/phpunit --filter='/^((?!Integration).)*$/'

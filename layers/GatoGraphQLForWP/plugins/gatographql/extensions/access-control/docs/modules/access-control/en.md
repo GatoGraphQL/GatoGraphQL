@@ -14,11 +14,19 @@ A new "Access Control List" Custom Post Type is added to the site. We can browse
 
 </div>
 
+<div class="img-width-1024" markdown=1>
+
 ![Access Control List editor](../../images/access-control-list.png "Access Control List editor")
+
+</div>
 
 In the editor, we indicate what rules must be satisfied to access what schema elements, from among operations (`query` or `mutation`), fields, global fields, and directives.
 
+<div class="img-width-1024" markdown=1>
+
 ![Creating an Access Control List](../../images/access-control.gif "Creating an Access Control List")
+
+</div>
 
 We assign the Access Control List to the desired endpoint (private endpoint, single endpoint, custom endpoints or persisted queries) via the Schema Configuration.
 
@@ -80,8 +88,3 @@ The extension provides the following Access Control rules:
 - Grant access only if the user has some role
 - Grant access only if the user has some capability
 
-<!-- ## Bundles including extension
-
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Better WordPress Webhooks” Bundle](../../../../../bundle-extensions/better-wordpress-webhooks/docs/modules/better-wordpress-webhooks/en.md)
-- [“Responsible WordPress Public API” Bundle](../../../../../bundle-extensions/responsible-wordpress-public-api/docs/modules/responsible-wordpress-public-api/en.md) -->

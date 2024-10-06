@@ -10,7 +10,7 @@ The internal GraphQL server is accessed via class `GatoGraphQL\InternalGraphQLSe
 
 - `executeQuery`: Execute a GraphQL query
 - `executeQueryInFile`: Execute a GraphQL query contained in a (`.gql`) file
-- `executePersistedQuery`: Execute a persisted GraphQL query (providing its ID as an int, or slug as a string)
+- `executePersistedQuery`: Execute a persisted GraphQL query (providing its ID as an int, or slug as a string) (the **Persisted Queries** extension is required)
 
 These are the method signatures:
 
@@ -91,7 +91,11 @@ Please notice that class `GraphQLServer` is not ready before the WordPress core 
 
 By default, the internal GraphQL Server applies the Schema Configuration selected in the Settings page, under tab "Server Configuration > Internal GraphQL Server".
 
+<div class="img-width-1024" markdown=1>
+
 ![Configuring the Internal GraphQL Server in the Settings](../../images/settings-schema-configuration-for-internal-graphql-server.png "Configuring the Internal GraphQL Server in the Settings")
+
+</div>
 
 This configuration also applies whenever the query executed against the internal GraphQL server was triggered by some other GraphQL query while being resolved in an endpoint with a different configuration (such as the public endpoint `graphql/`).
 
@@ -184,9 +188,3 @@ mutation SendEmail @depends(on: "GetEmailData") {
   }
 }
 ```
-<!-- 
-## Bundles including extension
-
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-feature-bundled-extensions/docs/modules/all-feature-bundled-extensions/en.md)
-- [“Private GraphQL Server for WordPress” Bundle](../../../../../bundle-extensions/private-graphql-server-for-wordpress/docs/modules/private-graphql-server-for-wordpress/en.md)
-- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md) -->

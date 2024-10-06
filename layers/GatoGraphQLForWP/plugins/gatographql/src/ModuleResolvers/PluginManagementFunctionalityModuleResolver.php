@@ -320,7 +320,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Environment Fields', 'gatographql'),
+                                    \__('Environment variables (extension)', 'gatographql'),
                                     \__('All environment variables and PHP constants are queryable', 'gatographql'),
                                     \__('No environment variables or PHP constants are queryable', 'gatographql'),
                                 ]
@@ -328,7 +328,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Send HTTP Request Fields', 'gatographql'),
+                                    \__('HTTP Client requests (extension)', 'gatographql'),
                                     \__('All URLs can be requested', 'gatographql'),
                                     \__('No URL can be requested', 'gatographql'),
                                 ]

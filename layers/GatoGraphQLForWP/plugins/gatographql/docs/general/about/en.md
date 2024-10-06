@@ -1,8 +1,8 @@
 # About Gato GraphQL
 
-The most powerful GraphQL server for WordPress.
+Powerful and flexible GraphQL server for WordPress.
 
-<div class="notice notice-info" markdown=1>
+<!-- <div class="notice notice-info" markdown=1>
 
 ### Rate Gato GraphQL
 
@@ -10,7 +10,7 @@ We work really hard to deliver a plugin that enables accessing any piece of data
 
 <a class="rating-link" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a> <a class="button" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank">Rate Plugin</a>
 
-</div>
+</div> -->
 
 <!-- ## Intro video
 
@@ -18,7 +18,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
 [Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo) -->
 
-## Learn more about us
+## Our channels
 
 <div style="display: flex; gap: 20px; margin-top: 10px;">
 
@@ -45,22 +45,6 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
   <p markdown=1>
 
   **Source code:** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
-
-  </p>
-  
-  <hr/>
-
-  <p markdown=1>
-
-  **Extension Starter:** [github.com/GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter)
-
-  </p>
-
-  <hr/>
-  
-  <p markdown=1>
-
-  **YouTube channel:** [youtube.com/@GatoGraphQL](https://www.youtube.com/@GatoGraphQL)
 
   </p>
   

@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\AbstractModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 
@@ -85,8 +86,12 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return sprintf(
-            '%s/extensions-reference/%s/',
-            $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+            '%s/%s',
+            PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                && !PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()
+                // && !PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage()
+                    ? $moduleConfiguration->getGatoGraphQLExtensionsReferencePageURL()
+                    : $moduleConfiguration->getGatoGraphQLExtensionsPageURL(),
             $this->getSlug($module)
         );
     }

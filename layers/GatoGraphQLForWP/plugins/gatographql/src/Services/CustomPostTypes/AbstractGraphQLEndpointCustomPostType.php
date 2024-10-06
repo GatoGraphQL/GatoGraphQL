@@ -287,8 +287,12 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     esc_html_e('(None)', 'gatographql');
                     break;
                 }
-                /** @var WP_Post */
+                /** @var WP_Post|null */
                 $schemaConfiguration = get_post($schemaConfigurationID);
+                if ($schemaConfiguration === null) {
+                    esc_html_e('(not found)', 'gatographql');
+                    break;
+                }
                 /** @var string */
                 $schemaConfigurationURL = get_edit_post_link($schemaConfigurationID);
                 ?>
