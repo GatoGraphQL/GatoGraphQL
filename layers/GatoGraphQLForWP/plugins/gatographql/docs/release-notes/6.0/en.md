@@ -42,8 +42,6 @@ The first option (`Users with capability: "gatogql_manage_graphql_schema"`) is s
 
 </div>
 
-## Fixed
-
 ## [Extensions] Improvements
 
 - [Schema Functions] If `from` email not provided in `_sendEmail` mutation, use the blog's admin email
