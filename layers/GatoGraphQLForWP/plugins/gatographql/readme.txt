@@ -14,9 +14,9 @@ Powerful and flexible GraphQL server for WordPress.
 
 Gato GraphQL is a powerful and flexible GraphQL server for WordPress.
 
-It allows you to retrieve, manipulate and store again any piece of data, in any desired way, using the GraphQL language.
+Use it to expose WordPress data via GraphQL. Access any piece of data (posts, users, comments, tags, categories, etc) from your application, and also transform and mutate data.
 
-Use Gato GraphQL to:
+The [standard use cases](https://gatographql.com) are:
 
 **Code performant apps:** Send a GraphQL query to your API and get exactly what you need, nothing more and nothing less.
 
