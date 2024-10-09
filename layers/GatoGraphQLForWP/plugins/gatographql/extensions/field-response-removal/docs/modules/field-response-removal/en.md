@@ -105,9 +105,9 @@ This query ties everything together:
 
 ```graphql
 {
-  postData: _sendJSONObjectItemHTTPRequest(
+  postData: _sendJSONObjectItemHTTPRequest(input: {
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1"
-  ) @remove
+  }) @remove
   renderedTitle: _objectProperty(
     object: $__postData,
     by: {

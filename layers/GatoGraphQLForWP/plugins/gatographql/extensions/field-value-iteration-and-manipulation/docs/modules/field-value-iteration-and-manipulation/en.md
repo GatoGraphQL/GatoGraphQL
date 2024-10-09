@@ -61,9 +61,9 @@ In the query below, we obtain a JSON object coming from the WP REST API, and we 
 
 ```graphql
 query {
-  postData: _sendJSONObjectItemHTTPRequest(
+  postData: _sendJSONObjectItemHTTPRequest(input: {
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
-  )
+  })
     @underJSONObjectProperty(by: { key: "type" })
       @strUpperCase
 }
@@ -92,9 +92,9 @@ In the query below, the WP REST API endpoint for a post provides property `"titl
 
 ```graphql
 query {
-  postData: _sendJSONObjectItemHTTPRequest(
+  postData: _sendJSONObjectItemHTTPRequest(input: {
     url: "https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
-  )
+  })
     @underJSONObjectProperty(by: { path: "title.rendered" })
       @strTitleCase
 }
