@@ -12,7 +12,7 @@ This query:
 query {
   postData: _sendJSONObjectItemHTTPRequest(input: {
     url: "https://some-wp-rest-api.com/wp-json/wp/v2/posts/1/"
-  } )
+  })
 }
 ```
 
