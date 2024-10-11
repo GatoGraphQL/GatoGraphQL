@@ -120,20 +120,38 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
                 $additionalFieldEntries[] = $rootFieldEntry;
                 continue;
             }
-            // If it has a MutationResolver for that field then add entry for MutationRoot
-            $isFieldAMutation = $rootObjectTypeResolver->isFieldAMutation($fieldName);
-            // Make sure the field has a FieldResolver. If not, ignore
-            if ($isFieldAMutation === null) {
-                continue;
-            }
-            if ($isFieldAMutation) {
-                $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
-                $additionalFieldEntries[] = $rootFieldEntry;
-                continue;
-            }
-            // It's a field for QueryRoot
+            /** 
+             * Watch out! We can't execute
+             *   $rootObjectTypeResolver->isFieldAMutation($fieldName)
+             * because that triggers the resolution of what fields are resolved by the type,
+             * then doing `DisableFieldConfigurableAccessControlForFieldsInPrivateSchemaHookSet.getConfigurationEntries`
+             * can't defined the fields to remove from the schema!
+             * 
+             * Then, use hack: Just add the fields from Root to both
+             * QueryRoot and MutationRoot. It doesn't really matter,
+             * as they'll be exclusive anyway.
+             *
+             * The code below (commented out) is the original one with the problem.
+             */
             $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
             $additionalFieldEntries[] = $rootFieldEntry;
+            $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
+            $additionalFieldEntries[] = $rootFieldEntry;
+
+            // // If it has a MutationResolver for that field then add entry for MutationRoot
+            // $isFieldAMutation = $rootObjectTypeResolver->isFieldAMutation($fieldName);
+            // // Make sure the field has a FieldResolver. If not, ignore
+            // if ($isFieldAMutation === null) {
+            //     continue;
+            // }
+            // if ($isFieldAMutation) {
+            //     $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
+            //     $additionalFieldEntries[] = $rootFieldEntry;
+            //     continue;
+            // }
+            // // It's a field for QueryRoot
+            // $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
+            // $additionalFieldEntries[] = $rootFieldEntry;
         }
 
         return $additionalFieldEntries;
