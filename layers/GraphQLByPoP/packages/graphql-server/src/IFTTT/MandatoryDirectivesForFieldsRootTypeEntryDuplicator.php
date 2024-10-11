@@ -108,10 +108,6 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         $rootObjectTypeResolver = $this->getRootObjectTypeResolver();
 
         foreach ($rootFieldEntries as $rootFieldEntry) {
-            // Check it is a Root entry
-            if ($rootFieldEntry[0] !== RootObjectTypeResolver::class) {
-                continue;
-            }
             $fieldName = $rootFieldEntry[1];
             if ($forceBothTypes || $fieldName === ConfigurationValues::ANY || in_array($fieldName, $objectTypeResolverMandatoryFields)) {
                 $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
