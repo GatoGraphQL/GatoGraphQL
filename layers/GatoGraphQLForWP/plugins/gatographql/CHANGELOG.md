@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Remove global fields from schema when disabled via ACL (#2894)
+- Global fields duplicated in schema with nested mutations enabled (#2895)
 
 ## 6.0.0 - 06/10/2024
 

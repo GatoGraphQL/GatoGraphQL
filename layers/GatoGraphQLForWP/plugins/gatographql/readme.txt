@@ -151,6 +151,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 6.0.2 =
 * Fixed: Remove global fields from schema when disabled via ACL (#2894)
+* Fixed: Global fields duplicated in schema with nested mutations enabled (#2895)
 
 = 6.0.0 =
 * Action required: When updating the plugin (i.e. not installing anew), you need to deactivate and then re-activate the plugin. Until then, the "GraphiQL" and "Schema" items won't appear on the menu (due to the newly-added "Schema Editing Access" module, see below)
