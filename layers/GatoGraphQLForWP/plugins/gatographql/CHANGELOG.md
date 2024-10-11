@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 6.0.2 - 11/10/2024
+
+### Fixed
+
+- Remove global fields from schema when disabled via ACL (#2894)
+
 ## 6.0.0 - 06/10/2024
 
 ### Breaking changes

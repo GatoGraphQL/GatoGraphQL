@@ -20,14 +20,21 @@ trait ConfigurableMandatoryDirectivesForFieldsRelationalTypeResolverDecoratorTra
      */
     public function getRelationalTypeResolverClassesToAttachTo(): array
     {
-        return array_values(array_unique(array_map(
+        $configurationEntries = $this->getConfigurationEntries();
+        $relationalTypeResolverClassesToAttachTo = array_values(array_unique(array_map(
             // The tuple has format [typeOrInterfaceTypeFieldResolverClass | "*", fieldName]
             // or [typeOrInterfaceTypeFieldResolverClass | "*", fieldName, $role]
             // or [typeOrInterfaceTypeFieldResolverClass | "*", fieldName, $capability]
             // So, in position [0], will always be the $typeOrInterfaceTypeFieldResolverClass or "*" (for any type or interface)
             fn (array $entry) => $entry[0],
-            $this->getConfigurationEntries()
+            $configurationEntries
         )));
+
+        // If attaching to "*" then that's enough, can discard all other entries
+        if (in_array(ConfigurationValues::ANY, $relationalTypeResolverClassesToAttachTo)) {
+            return [ConfigurationValues::ANY];
+        }
+        return $relationalTypeResolverClassesToAttachTo;
     }
 
     /**

@@ -45,7 +45,6 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractAfterAppBoo
             return;
         }
 
-        // If no field defined => it applies to any field
         if ($fieldNames = $this->getFieldNames()) {
             // If "*" defined => it applies to any field
             foreach ($fieldNames as $fieldName) {
@@ -66,6 +65,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractAfterAppBoo
                 );
             }
         } else {
+            // If no field defined => it applies to any field
             App::addFilter(
                 HookHelpers::getHookNameToFilterField(),
                 $this->maybeFilterFieldName(...),

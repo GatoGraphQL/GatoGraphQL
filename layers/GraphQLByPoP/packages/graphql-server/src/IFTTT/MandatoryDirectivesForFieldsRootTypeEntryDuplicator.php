@@ -80,10 +80,15 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
             return $fieldEntries;
         }
 
+        if ($fieldEntries === []) {
+            return $fieldEntries;
+        }
+
         // Duplicate the Root entries into QueryRoot and/or MutationRoot
+        $additionalRootEntriesForFields = $this->getAdditionalRootEntriesForFields($fieldEntries, $forceBothTypes);
         return array_merge(
             $fieldEntries,
-            $this->getAdditionalRootEntriesForFields($fieldEntries, $forceBothTypes)
+            $additionalRootEntriesForFields
         );
     }
 
@@ -104,8 +109,6 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
         /** Fields "id", "globalID", "self" and "__typename" belong to both QueryRoot and MutationRoot */
         $objectTypeResolverMandatoryFields = $this->getTypeResolverHelper()->getObjectTypeResolverMandatoryFields();
 
-        $rootObjectTypeResolver = $this->getRootObjectTypeResolver();
-
         foreach ($rootFieldEntries as $rootFieldEntry) {
             $fieldName = $rootFieldEntry[1];
             if ($forceBothTypes || $fieldName === ConfigurationValues::ANY || in_array($fieldName, $objectTypeResolverMandatoryFields)) {
@@ -115,20 +118,44 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
                 $additionalFieldEntries[] = $rootFieldEntry;
                 continue;
             }
-            // If it has a MutationResolver for that field then add entry for MutationRoot
-            $isFieldAMutation = $rootObjectTypeResolver->isFieldAMutation($fieldName);
-            // Make sure the field has a FieldResolver. If not, ignore
-            if ($isFieldAMutation === null) {
-                continue;
-            }
-            if ($isFieldAMutation) {
-                $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
-                $additionalFieldEntries[] = $rootFieldEntry;
-                continue;
-            }
-            // It's a field for QueryRoot
+
+            /**
+             * Watch out! We can't execute:
+             *
+             *   $rootObjectTypeResolver->isFieldAMutation($fieldName)
+             *
+             * because that triggers the resolution of what fields are resolved by the type,
+             * then doing `DisableFieldConfigurableAccessControlForFieldsInPrivateSchemaHookSet.getConfigurationEntries`
+             * can't find out what fields must be removed from the schema!
+             *
+             * Then, use a hack: Just add the fields from Root to both
+             * QueryRoot and MutationRoot. It doesn't really matter,
+             * as they'll be exclusive anyway (so that field will
+             * just not exist on the other type, and that validation
+             * will just never match to anything).
+             *
+             * The code commented out below is the original one with the problem.
+             */
             $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
             $additionalFieldEntries[] = $rootFieldEntry;
+            $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
+            $additionalFieldEntries[] = $rootFieldEntry;
+
+            // // If it has a MutationResolver for that field then add entry for MutationRoot
+            // $rootObjectTypeResolver = $this->getRootObjectTypeResolver();
+            // $isFieldAMutation = $rootObjectTypeResolver->isFieldAMutation($fieldName);
+            // // Make sure the field has a FieldResolver. If not, ignore
+            // if ($isFieldAMutation === null) {
+            //     continue;
+            // }
+            // if ($isFieldAMutation) {
+            //     $rootFieldEntry[0] = MutationRootObjectTypeResolver::class;
+            //     $additionalFieldEntries[] = $rootFieldEntry;
+            //     continue;
+            // }
+            // // It's a field for QueryRoot
+            // $rootFieldEntry[0] = QueryRootObjectTypeResolver::class;
+            // $additionalFieldEntries[] = $rootFieldEntry;
         }
 
         return $additionalFieldEntries;
@@ -144,7 +171,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     {
         return array_values(array_filter(
             $fieldEntries,
-            fn (array $fieldEntry) => $fieldEntry[0] === ConfigurationValues::ANY || $fieldEntry[0] === RootObjectTypeResolver::class
+            fn (array $fieldEntry) => $fieldEntry[0] === RootObjectTypeResolver::class
         ));
     }
 }
