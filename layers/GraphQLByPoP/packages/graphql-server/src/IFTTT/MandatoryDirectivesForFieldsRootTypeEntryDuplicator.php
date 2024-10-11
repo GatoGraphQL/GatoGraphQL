@@ -149,7 +149,7 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
     {
         return array_values(array_filter(
             $fieldEntries,
-            fn (array $fieldEntry) => $fieldEntry[0] === ConfigurationValues::ANY || $fieldEntry[0] === RootObjectTypeResolver::class
+            fn (array $fieldEntry) => $fieldEntry[0] === RootObjectTypeResolver::class
         ));
     }
 }
