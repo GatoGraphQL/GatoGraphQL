@@ -80,6 +80,10 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
             return $fieldEntries;
         }
 
+        if ($fieldEntries === []) {
+            return $fieldEntries;
+        }
+
         // Duplicate the Root entries into QueryRoot and/or MutationRoot
         $additionalRootEntriesForFields = $this->getAdditionalRootEntriesForFields($fieldEntries, $forceBothTypes);
         return array_merge(
