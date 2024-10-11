@@ -34,7 +34,8 @@ trait AttachableExtensionTrait
     public function attach(string $group): void
     {
         $attachableExtensionManager = $this->getAttachableExtensionManager();
-        foreach ($this->getClassesToAttachTo() as $attachableClass) {
+        $classesToAttachTo = $this->getClassesToAttachTo();
+        foreach ($classesToAttachTo as $attachableClass) {
             $attachableExtensionManager->attachExtensionToClass(
                 $attachableClass,
                 $group,
