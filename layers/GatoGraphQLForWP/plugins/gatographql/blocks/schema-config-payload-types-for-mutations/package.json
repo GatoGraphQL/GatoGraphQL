@@ -1,6 +1,6 @@
 {
     "name": "schema-config-payload-types-for-mutations",
-    "version": "6.1.0-dev",
+    "version": "6.0.2",
     "description": "Configure the 'Mutations' module in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
