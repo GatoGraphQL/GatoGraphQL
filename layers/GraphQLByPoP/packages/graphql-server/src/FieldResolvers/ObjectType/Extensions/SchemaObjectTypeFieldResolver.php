@@ -192,10 +192,11 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     $queryAndMutationRootTypeFields,
                     fn (Field $field) => $field->getExtensions()->isGlobal(),
                 );
-                return array_map(
+                // Global fields are added to both QueryRoot and MutationRoot, so make unique!
+                return array_values(array_unique(array_map(
                     fn (Field $field) => $field->getID(),
                     $globalFields,
-                );
+                )));
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
