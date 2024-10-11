@@ -119,15 +119,15 @@ class MandatoryDirectivesForFieldsRootTypeEntryDuplicator implements MandatoryDi
                 continue;
             }
 
-            /** 
+            /**
              * Watch out! We can't execute:
-             * 
+             *
              *   $rootObjectTypeResolver->isFieldAMutation($fieldName)
-             * 
+             *
              * because that triggers the resolution of what fields are resolved by the type,
              * then doing `DisableFieldConfigurableAccessControlForFieldsInPrivateSchemaHookSet.getConfigurationEntries`
              * can't find out what fields must be removed from the schema!
-             * 
+             *
              * Then, use a hack: Just add the fields from Root to both
              * QueryRoot and MutationRoot. It doesn't really matter,
              * as they'll be exclusive anyway (so that field will
