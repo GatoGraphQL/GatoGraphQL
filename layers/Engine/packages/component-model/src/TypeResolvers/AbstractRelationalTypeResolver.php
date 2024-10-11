@@ -938,7 +938,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         // Execute a hook, allowing to filter them out (eg: removing fieldNames from a private schema)
         return array_filter(
             $directiveNameResolvers,
-            function ($directiveName) use ($directiveNameResolvers) {
+            function (string $directiveName) use ($directiveNameResolvers) {
                 $directiveResolvers = $directiveNameResolvers[$directiveName];
                 foreach ($directiveResolvers as $directiveResolver) {
                     // Execute 2 filters: a generic one, and a specific one
