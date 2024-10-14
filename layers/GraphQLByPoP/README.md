@@ -1,12 +1,12 @@
-![GraphQL API with superpowers](https://graphql-by-pop.com/assets/superheroes.png)
+<!-- ![GraphQL API with superpowers](https://graphql-by-pop.com/assets/superheroes.png) -->
 
 # GraphQL by PoP
 
-CMS-agnostic GraphQL server in PHP. Visit the site: [graphql-by-pop.com](https://graphql-by-pop.com)
+CMS-agnostic GraphQL server in PHP.
 
-## Install
+<!-- ## Install
 
-GraphQL by PoP is currently available for WordPress. Follow [these instructions](https://graphql-by-pop.com/docs/getting-started/installation/wordpress.html) to install it.
+GraphQL by PoP is currently available for WordPress. Follow [these instructions](https://graphql-by-pop.com/docs/getting-started/installation/wordpress.html) to install it. -->
 
 ## What it is
 
@@ -95,9 +95,9 @@ No need to worry if different teams or 3rd party providers using the same names 
 
 Issues with the query are shown in the response to the query, and not just when doing introspection. Avoid your users from never finding out that your schema has been upgraded!
 
-## Documentation and Resources
+<!-- ## Documentation and Resources
 
 Please check them on [graphql-by-pop.com](https://graphql-by-pop.com/):
 
 - [Docs](https://graphql-by-pop.com/docs/)
-- [Resources](https://graphql-by-pop.com/resources/)
+- [Resources](https://graphql-by-pop.com/resources/) -->
