@@ -11,4 +11,4 @@ It is in this sense that GraphQL by PoP is CMS-agnostic: it is the "almost-final
 ## Additional resources
 
 - [GraphQL by PoP - CMS-agnosticism](https://gatographql.com/architecture/cms-agnosticism)
-- [GraphQL by PoP - Building a CMS-agnostic API](https://graphql-by-pop.com/guides/building-cms-agnostic-api.html)
+<!-- - [GraphQL by PoP - Building a CMS-agnostic API](https://graphql-by-pop.com/guides/building-cms-agnostic-api.html) -->

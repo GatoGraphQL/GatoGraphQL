@@ -19,11 +19,11 @@ Plugins can extend the GraphQL schema, to fetch their own data.
 
 ## GraphQL By PoP
 
-<p align="center"><img src="https://graphql-by-pop.com/assets/superheroes.png" width="450" /></p>
+<!-- <p align="center"><img src="https://graphql-by-pop.com/assets/superheroes.png" width="450" /></p> -->
 
 **GraphQL by PoP** is a CMS-agnostic GraphQL server in PHP.
 
-- Website: [graphql-by-pop.com](https://graphql-by-pop.com)
+<!-- - Website: [graphql-by-pop.com](https://graphql-by-pop.com) -->
 - [Source code](layers/GraphQLByPoP)
 
 ## PoP - set of PHP components
