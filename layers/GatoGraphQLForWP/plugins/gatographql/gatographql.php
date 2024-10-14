@@ -53,10 +53,12 @@ $pluginName = __('Gato GraphQL', 'gatographql');
 
 /**
  * If the plugin is already registered, print an error and halt loading
+ *
+ * @todo This doesn't work when included by a standalone plugin, check and fix
  */
-if (class_exists(Plugin::class) && !PluginApp::getMainPluginManager()->assertIsValid($pluginVersion)) {
-    return;
-}
+// if (class_exists(Plugin::class) && !PluginApp::getMainPluginManager()->assertIsValid($pluginVersion)) {
+//     return;
+// }
 
 /**
  * Validate that there is enough memory to run the plugin.
