@@ -68,7 +68,7 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 </tr>
 <tr>
     <td>✅ It provides an editor for the query (GraphiQL) that simplifies the task</td>
-    <td><s>❌ Must deal with additional complexities, such as the N+1 problem</s> 👈🏻 this issue is [resolved by the underlying engine](https://graphql-by-pop.com/docs/architecture/suppressing-n-plus-one-problem.html)</td>
+    <td><s>❌ Must deal with additional complexities, such as the N+1 problem</s> 👈🏻 this issue is [resolved by the underlying engine](https://gatographql.com/architecture/suppressing-n-plus-one-problem)</td>
 </tr>
 </tbody>
 </table>

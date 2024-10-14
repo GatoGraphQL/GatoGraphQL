@@ -669,11 +669,11 @@ Description of how the plugin is scoped:
 
 ### GraphQL by PoP documentation
 
-Gato GraphQL is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
+Gato GraphQL is powered by the CMS-agnostic GraphQL server GraphQL by PoP.
 
-Technical information on how the GraphQL server works:
+<!-- Technical information on how the GraphQL server works:
 
-- [GraphQL by PoP documentation](https://graphql-by-pop.com/docs/getting-started/intro.html).
+- [GraphQL by PoP documentation](https://graphql-by-pop.com/docs/getting-started/intro.html). -->
 
 Description of how a GraphQL server using server-side components works:
 

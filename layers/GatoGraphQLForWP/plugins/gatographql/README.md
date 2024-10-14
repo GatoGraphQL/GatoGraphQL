@@ -6,8 +6,6 @@ Transform your WordPress site into a modern GraphQL server: [gatographql.com](ht
 
 ![The interactive schema visualizer](docs/images/interactive-schema.png)
 
-This plugin is the implementation for WordPress of [GraphQL by PoP](https://graphql-by-pop.com/), a CMS-agnostic GraphQL server in PHP.
-
 ## Installing the plugin (for production)
 
 👀 Instructions: [Installing Gato GraphQL](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/docs/installing-gatographql-for-wordpress.md).
@@ -120,11 +118,11 @@ Description of how the plugin is scoped:
 
 ### GraphQL by PoP documentation
 
-Gato GraphQL is powered by the CMS-agnostic GraphQL server [GraphQL by PoP](https://graphql-by-pop.com).
+Gato GraphQL is powered by the CMS-agnostic GraphQL server GraphQL by PoP.
 
-Technical information on how the GraphQL server works:
+<!-- Technical information on how the GraphQL server works:
 
-- [GraphQL by PoP documentation](https://graphql-by-pop.com/docs/getting-started/intro.html).
+- [GraphQL by PoP documentation](https://graphql-by-pop.com/docs/getting-started/intro.html). -->
 
 Description of how a GraphQL server using server-side components works:
 

@@ -34,7 +34,7 @@ The code for some component is divided into 2 separate packages:
 
 ## Overview: Defining type and field resolvers
 
-The schema is created following the [code-first approach](https://graphql-by-pop.com/docs/architecture/code-first.html). Fields are dynamically "subscribed" to types, and may or may not be added to the schema depending on the context.
+The schema is created following the [code-first approach](https://gatographql.com/architecture/code-first). Fields are dynamically "subscribed" to types, and may or may not be added to the schema depending on the context.
 
 This is how a `User` type is satisfied:
 
