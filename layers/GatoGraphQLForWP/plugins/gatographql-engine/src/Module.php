@@ -94,18 +94,6 @@ class Module extends AbstractPluginModule
     }
 
     /**
-     * Initialize services for the system container.
-     */
-    protected function initializeSystemContainerServices(): void
-    {
-        parent::initializeSystemContainerServices();
-
-        if (\is_admin()) {
-            $this->initSystemServices(dirname(__DIR__), '/ConditionalOnContext/Admin');
-        }
-    }
-
-    /**
      * Initialize services
      *
      * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
