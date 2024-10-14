@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\Services\:
+    GatoGraphQL\GatoGraphQLEngine\ConditionalOnContext\Admin\Services\:
         resource: '../../../src/ConditionalOnContext/Admin/Services/*'

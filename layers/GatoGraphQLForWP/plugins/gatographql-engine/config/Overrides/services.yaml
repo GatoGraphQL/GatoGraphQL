@@ -6,8 +6,8 @@ services:
 
     # Override to configure the cache with dynamic values
     PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
-        class: \GatoGraphQL\GatoGraphQL\Overrides\ConfigurationCache\OperationalCacheConfigurationManager
+        class: \GatoGraphQL\GatoGraphQLEngine\Overrides\ConfigurationCache\OperationalCacheConfigurationManager
 
     # Inject "executing-graphql" into the state
     GraphQLByPoP\GraphQLEndpointForWP\State\GraphQLEndpointHandlerAppStateProvider:
-        class: \GatoGraphQL\GatoGraphQL\Overrides\State\GraphQLEndpointHandlerAppStateProvider
+        class: \GatoGraphQL\GatoGraphQLEngine\Overrides\State\GraphQLEndpointHandlerAppStateProvider

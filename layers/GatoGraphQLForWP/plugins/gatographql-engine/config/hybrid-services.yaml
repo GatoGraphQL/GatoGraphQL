@@ -4,19 +4,19 @@ services:
         autowire: true
         autoconfigure: true
 
-    GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\ModuleRegistry
+    GatoGraphQL\GatoGraphQLEngine\Registries\ModuleRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQLEngine\Registries\ModuleRegistry
 
-    GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistry
+    GatoGraphQL\GatoGraphQLEngine\Registries\SettingsCategoryRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQLEngine\Registries\SettingsCategoryRegistry
 
-    GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface:
-        class: '\GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistry'
+    GatoGraphQL\GatoGraphQLEngine\Registries\UserAuthorizationSchemeRegistryInterface:
+        class: '\GatoGraphQL\GatoGraphQLEngine\Registries\UserAuthorizationSchemeRegistry'
 
-    GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface:
-        class: \GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizer
+    GatoGraphQL\GatoGraphQLEngine\Settings\SettingsNormalizerInterface:
+        class: \GatoGraphQL\GatoGraphQLEngine\Settings\SettingsNormalizer
         
-    GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes\:
+    GatoGraphQL\GatoGraphQLEngine\Security\UserAuthorizationSchemes\:
         resource: '../src/Security/UserAuthorizationSchemes/*'
         
 
@@ -31,23 +31,23 @@ services:
     # since those services are to be excluded (i.e. if they are not
     # added in first place, it's the same result)
     ################################################################################
-    GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProviderInterface:
-        class: \GatoGraphQL\GatoGraphQL\WPDataModel\WPDataModelProvider
+    GatoGraphQL\GatoGraphQLEngine\WPDataModel\WPDataModelProviderInterface:
+        class: \GatoGraphQL\GatoGraphQLEngine\WPDataModel\WPDataModelProvider
 
-    GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistry
+    GatoGraphQL\GatoGraphQLEngine\Registries\CustomPostTypeRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQLEngine\Registries\CustomPostTypeRegistry
 
-    GatoGraphQL\GatoGraphQL\Registries\TaxonomyRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\TaxonomyRegistry
+    GatoGraphQL\GatoGraphQLEngine\Registries\TaxonomyRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQLEngine\Registries\TaxonomyRegistry
 
 
     # This service (and also ModuleRegistryInterface) is required to
     # maybe execute ModuleListTableAction in Plugin.php
     # Hence, it is defined as a Hybrid
-    GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface:
-        class: '\GatoGraphQL\GatoGraphQL\Security\UserAuthorization'
+    GatoGraphQL\GatoGraphQLEngine\Security\UserAuthorizationInterface:
+        class: '\GatoGraphQL\GatoGraphQLEngine\Security\UserAuthorization'
 
     # These services are required when storing settings in options.php
     # for which only the SystemContainer is available
-    GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\:
+    GatoGraphQL\GatoGraphQLEngine\SettingsCategoryResolvers\:
         resource: ../src/SettingsCategoryResolvers/*
