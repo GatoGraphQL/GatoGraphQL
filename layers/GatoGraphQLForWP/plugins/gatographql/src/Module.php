@@ -126,18 +126,6 @@ class Module extends AbstractPluginModule
          */
         if (\is_admin()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin');
-
-            // The WordPress editor can access the full GraphQL schema,
-            // including "admin" fields, so cache it individually.
-            // Retrieve this service from the SystemContainer
-            $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
-            /** @var EndpointHelpers */
-            $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
-            $this->initSchemaServices(
-                dirname(__DIR__),
-                !$endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint(),
-                '/ConditionalOnContext/Admin/ConditionalOnContext/PluginOwnUse'
-            );
         }
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
