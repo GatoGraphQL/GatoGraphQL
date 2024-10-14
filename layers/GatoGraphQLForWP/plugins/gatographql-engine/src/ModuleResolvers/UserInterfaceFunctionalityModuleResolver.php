@@ -15,7 +15,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     use UserInterfaceFunctionalityModuleResolverTrait;
 
     public final const EXCERPT_AS_DESCRIPTION = Plugin::NAMESPACE . '\excerpt-as-description';
-    public final const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
     public final const SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION = Plugin::NAMESPACE . '\schema-configuration-additional-documentation';
 
     /** @var CustomPostTypeInterface[] */
@@ -58,7 +57,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         return [
             self::EXCERPT_AS_DESCRIPTION,
-            self::WELCOME_GUIDES,
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION,
         ];
     }
@@ -70,7 +68,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         switch ($module) {
             case self::EXCERPT_AS_DESCRIPTION:
-            case self::WELCOME_GUIDES:
                 return [];
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
                 return [
@@ -82,29 +79,11 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
         return parent::getDependedModuleLists($module);
     }
 
-    public function areRequirementsSatisfied(string $module): bool
-    {
-        switch ($module) {
-            case self::WELCOME_GUIDES:
-                /**
-                 * WordPress 5.5 or above, or Gutenberg 8.2 or above
-                 */
-                return
-                    \is_wp_version_compatible('5.5') ||
-                    (
-                        defined('GUTENBERG_VERSION') &&
-                        \version_compare(constant('GUTENBERG_VERSION'), '8.2', '>=')
-                    );
-        }
-        return parent::areRequirementsSatisfied($module);
-    }
-
     public function isHidden(string $module): bool
     {
         switch ($module) {
             case self::EXCERPT_AS_DESCRIPTION:
                 return $this->getUseExcerptAsDescriptionEnabledCustomPostTypeServices() === [];
-            case self::WELCOME_GUIDES:
             case self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION:
                 return true;
         }
@@ -115,7 +94,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         return match ($module) {
             self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'gatographql'),
-            self::WELCOME_GUIDES => \__('Welcome Guides', 'gatographql'),
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional Gato GraphQL Documentation', 'gatographql'),
             default => $module,
         };
@@ -125,11 +103,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     {
         return match ($module) {
             self::EXCERPT_AS_DESCRIPTION => \__('Provide a description of the different entities (Custom Endpoints, Persisted Queries, and others) through their excerpt', 'gatographql'),
-            self::WELCOME_GUIDES => sprintf(
-                \__('Display welcome guides which demonstrate how to use the plugin\'s different functionalities. <em>It requires WordPress version \'%s\' or above, or Gutenberg version \'%s\' or above</em>', 'gatographql'),
-                '5.5',
-                '8.2'
-            ),
             self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Documentation on using the Gato GraphQL', 'gatographql'),
             default => parent::getDescription($module),
         };
@@ -138,14 +111,9 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return match ($module) {
-            self::WELCOME_GUIDES
-                => false,
-            self::EXCERPT_AS_DESCRIPTION,
-                => $this->getUseExcerptAsDescriptionEnabledCustomPostTypeServices() === [] ? false : null,
-            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION
-                => true,
-            default
-                => parent::isPredefinedEnabledOrDisabled($module),
+            self::EXCERPT_AS_DESCRIPTION => $this->getUseExcerptAsDescriptionEnabledCustomPostTypeServices() === [] ? false : null,
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => true,
+            default => parent::isPredefinedEnabledOrDisabled($module),
         };
     }
 
