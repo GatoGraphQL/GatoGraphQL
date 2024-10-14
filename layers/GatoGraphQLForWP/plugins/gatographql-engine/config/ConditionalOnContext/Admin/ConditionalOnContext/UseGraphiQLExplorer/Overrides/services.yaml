@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GatoGraphQL\GatoGraphQLEngine\Services\MenuPages\GraphiQLMenuPage:
+        class: '\GatoGraphQL\GatoGraphQLEngine\ConditionalOnContext\Admin\ConditionalOnContext\UseGraphiQLExplorer\Overrides\Services\MenuPages\GraphiQLMenuPage'

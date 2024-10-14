@@ -94,6 +94,18 @@ class Module extends AbstractPluginModule
     }
 
     /**
+     * Initialize services for the system container.
+     */
+    protected function initializeSystemContainerServices(): void
+    {
+        parent::initializeSystemContainerServices();
+
+        if (\is_admin()) {
+            $this->initSystemServices(dirname(__DIR__), '/ConditionalOnContext/Admin');
+        }
+    }
+
+    /**
      * Initialize services
      *
      * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
@@ -126,6 +138,17 @@ class Module extends AbstractPluginModule
                 !$endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint(),
                 '/ConditionalOnContext/Admin/ConditionalOnContext/PluginOwnUse'
             );
+        }
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
+        if (
+            \is_admin()
+            && $isGraphiQLExplorerEnabled
+        ) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
+        }
+        if ($isGraphiQLExplorerEnabled) {
+            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
         }
     }
 }
