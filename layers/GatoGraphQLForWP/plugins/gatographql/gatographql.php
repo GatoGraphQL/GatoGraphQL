@@ -112,8 +112,16 @@ registerGatoGraphQLSchemaEditingAccessCapabilities(__FILE__);
  */
 $commitHash = null;
 
-// Load Composer’s autoloader
-require_once(__DIR__ . '/vendor/autoload.php');
+/**
+ * Load Composer’s autoloader
+ *
+ * If executed within a standalone plugin, this file will not exist,
+ * and the logic will be executed by the standalone plugin.
+ */
+$gatographqlAutoloadFile = __DIR__ . '/vendor/autoload.php';
+if (file_exists($gatographqlAutoloadFile)) {
+    require_once($gatographqlAutoloadFile);
+}
 
 // Initialize the Gato GraphQL App
 PluginApp::initializePlugin();
