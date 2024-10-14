@@ -10,11 +10,3 @@ services:
     # (for that case, it will be overridden once again by another ConditionalOnContext)
     GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
         class: \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient
-
-    # Override to configure the cache with dynamic values
-    PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
-        class: \GatoGraphQL\GatoGraphQL\Overrides\ConfigurationCache\OperationalCacheConfigurationManager
-
-    # Inject "executing-graphql" into the state
-    GraphQLByPoP\GraphQLEndpointForWP\State\GraphQLEndpointHandlerAppStateProvider:
-        class: \GatoGraphQL\GatoGraphQL\Overrides\State\GraphQLEndpointHandlerAppStateProvider

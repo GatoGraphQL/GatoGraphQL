@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    # Override to configure the cache with dynamic values
+    PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Overrides\ConfigurationCache\OperationalCacheConfigurationManager
+
+    # Inject "executing-graphql" into the state
+    GraphQLByPoP\GraphQLEndpointForWP\State\GraphQLEndpointHandlerAppStateProvider:
+        class: \GatoGraphQL\GatoGraphQL\Overrides\State\GraphQLEndpointHandlerAppStateProvider

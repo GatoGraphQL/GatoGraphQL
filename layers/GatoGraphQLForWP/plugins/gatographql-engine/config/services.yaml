@@ -1,0 +1,56 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialExtensionActivationService
+
+    GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface:
+        class: \GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParser
+
+    GatoGraphQL\GatoGraphQL\Registries\SchemaConfigBlockRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\SchemaConfigBlockRegistry
+
+    GatoGraphQL\GatoGraphQL\Registries\EndpointBlockRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\EndpointBlockRegistry
+
+    GatoGraphQL\GatoGraphQL\Registries\ModuleTypeRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\ModuleTypeRegistry
+
+    GatoGraphQL\GatoGraphQL\Registries\EndpointSchemaConfigurationExecuterRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\EndpointSchemaConfigurationExecuterRegistry
+
+    GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistry
+
+    GatoGraphQL\GatoGraphQL\Log\LoggerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Log\Logger
+
+    GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Container\ContainerManager
+
+    GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationService
+
+    GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\Request\PrematureRequestService
+
+    GatoGraphQL\GatoGraphQL\Registries\GraphQLEndpointPathProviderRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\GraphQLEndpointPathProviderRegistry
+
+    GatoGraphQL\GatoGraphQL\PluginDataSetup\PluginDataSetupServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\PluginDataSetup\PluginDataSetupService
+
+    GatoGraphQL\GatoGraphQL\Services\:
+        resource: ../src/Services/*
+
+    GatoGraphQL\GatoGraphQL\State\:
+        resource: '../src/State/*'
+
+    GatoGraphQL\GatoGraphQL\Hooks\:
+        resource: '../src/Hooks/*'
+
+    GatoGraphQL\GatoGraphQL\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
