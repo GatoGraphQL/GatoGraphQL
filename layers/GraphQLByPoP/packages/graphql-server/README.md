@@ -15,9 +15,9 @@ GraphQL server in PHP, implemented through the PoP API
 
 ## Install
 
-### Installing the GraphQL server
+<!-- ### Installing the GraphQL server
 
-Follow the instructions in the [GraphQL by PoP installation page](https://graphql-by-pop.com/docs/getting-started/installation/).
+Follow the instructions in the [GraphQL by PoP installation page](https://graphql-by-pop.com/docs/getting-started/installation/). -->
 
 ### Installing the library in a PoP application
 
