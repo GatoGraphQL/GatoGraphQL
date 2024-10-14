@@ -113,6 +113,9 @@ final class PluginConfigEntriesJsonProvider
             // Transfer the "replace" entries in composer.json, from dependency packages to the root package
             $entryConfig['is_bundle'] ??= false;
             $entryConfig['exclude_replace'] ??= '';
+            
+            // Gato GraphQL vs Gato Standalone plugins
+            $entryConfig['is_standalone_plugin'] ??= false;
 
             // Hacks to be executed on the plugin
             $entryConfig['bashScripts'] ??= [];
@@ -135,26 +138,48 @@ final class PluginConfigEntriesJsonProvider
             fn (string $filterValue) => in_array($filterValue, [
                 OptionValues::EXTENSION,
                 OptionValues::BUNDLE,
+                OptionValues::STANDALONE_PLUGIN,
             ])
         );
-        if ($extensionTypeFilter !== []) {
-            // Remove the extensions?
-            if (!in_array(OptionValues::EXTENSION, $extensionTypeFilter)) {
-                $pluginConfigEntries = array_values(array_filter(
-                    $pluginConfigEntries,
-                    fn (array $entry) => $entry['is_bundle']
-                ));
-            }
-
-            // Remove the bundles?
-            if (!in_array(OptionValues::BUNDLE, $extensionTypeFilter)) {
-                $pluginConfigEntries = array_values(array_filter(
-                    $pluginConfigEntries,
-                    fn (array $entry) => !$entry['is_bundle']
-                ));
-            }
+        if ($extensionTypeFilter === []) {
+            return $pluginConfigEntries;
         }
 
-        return $pluginConfigEntries;
+        $filteredPluginConfigEntries = [];
+
+        // Keep the standalone plugins?
+        if (in_array(OptionValues::STANDALONE_PLUGIN, $extensionTypeFilter)) {
+            $filteredPluginConfigEntries = array_merge(
+                $filteredPluginConfigEntries,
+                array_values(array_filter(
+                    $pluginConfigEntries,
+                    fn (array $entry) => $entry['is_standalone_plugin']
+                ))
+            );
+        }
+
+        // Keep the bundles?
+        if (in_array(OptionValues::BUNDLE, $extensionTypeFilter)) {
+            $filteredPluginConfigEntries = array_merge(
+                $filteredPluginConfigEntries,
+                array_values(array_filter(
+                    $pluginConfigEntries,
+                    fn (array $entry) => !$entry['is_standalone_plugin'] && $entry['is_bundle']
+                ))
+            );
+        }
+
+        // Keep the extensions?
+        if (in_array(OptionValues::EXTENSION, $extensionTypeFilter)) {
+            $filteredPluginConfigEntries = array_merge(
+                $filteredPluginConfigEntries,
+                array_values(array_filter(
+                    $pluginConfigEntries,
+                    fn (array $entry) => !$entry['is_standalone_plugin'] && !$entry['is_bundle']
+                ))
+            );
+        }
+
+        return $filteredPluginConfigEntries;
     }
 }
