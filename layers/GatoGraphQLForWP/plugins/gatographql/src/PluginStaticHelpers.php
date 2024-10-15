@@ -52,7 +52,7 @@ class PluginStaticHelpers
             return true;
         }
 
-        $pluginDir = dirname(PluginApp::getMainPlugin()->getPluginDir());
+        $pluginDir = dirname(plugin_dir_path(PluginApp::getMainPlugin()->getPluginFile()));
         $pluginAbsolutePathFile = $pluginDir . '/' . $pluginFile;
         $pluginData = get_file_data($pluginAbsolutePathFile, array('Version'), 'plugin');
         $pluginVersion = $pluginData[0];
