@@ -52,13 +52,11 @@ $pluginVersion = '6.1.0-dev';
 $pluginName = __('Gato GraphQL', 'gatographql');
 
 /**
- * If the plugin is already registered, print an error and halt loading
- *
- * @todo This doesn't work when included by a standalone plugin, check and fix
+ * If the plugin is already registered, halt loading
  */
-// if (class_exists(Plugin::class) && !PluginApp::getMainPluginManager()->assertIsValid($pluginVersion)) {
-//     return;
-// }
+if (class_exists(Plugin::class)) {
+    return;
+}
 
 // Validate that there is enough memory to run the plugin
 require_once __DIR__ . '/includes/startup.php';
