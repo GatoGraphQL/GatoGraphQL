@@ -27,7 +27,6 @@ final class RemoveComposerReplaceEntriesCommand extends AbstractSymplifyCommand
 
     public function __construct(
         private ComposerReplaceEntriesRemover $composerReplaceEntriesRemover,
-        private ComposerJsonProvider $composerJsonProvider,
         private SourcesPresenceValidator $sourcesPresenceValidator
     ) {
         parent::__construct();
