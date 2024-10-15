@@ -24,6 +24,7 @@ abstract class AbstractPlugin implements PluginInterface
     protected string $pluginSlug;
     protected string $pluginName;
     protected string $pluginFolder;
+    protected string $pluginURL;
 
     public function __construct(
         protected string $pluginFile, /** The main plugin file */
@@ -31,11 +32,13 @@ abstract class AbstractPlugin implements PluginInterface
         ?string $pluginName = null,
         protected ?string $commitHash = null, /** Useful for development to regenerate the container when testing the generated plugin */
         ?string $pluginFolder = null, /** Useful to override by standalone plugins */
+        ?string $pluginURL = null, /** Useful to override by standalone plugins */
     ) {
         $this->pluginBaseName = \plugin_basename($pluginFile);
         $this->pluginSlug = dirname($this->pluginBaseName);
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
         $this->pluginFolder = $pluginFolder ?? dirname($this->pluginFile);
+        $this->pluginURL = $pluginURL ?? \plugin_dir_url($this->pluginFile);
 
         // Have the Plugin set its own info on the corresponding PluginInfo
         $this->initializeInfo();
@@ -122,7 +125,7 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function getPluginURL(): string
     {
-        return \plugin_dir_url($this->pluginFile);
+        return $this->pluginURL;
     }
 
     /**
@@ -149,7 +152,17 @@ abstract class AbstractPlugin implements PluginInterface
      */
     protected function getPluginInfoClass(): ?string
     {
-        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        return $this->getPluginInfoClassFromPluginClass(\get_called_class());
+    }
+
+    /**
+     * PluginInfo class for the Plugin
+     *
+     * @return class-string<PluginInfoInterface>|null
+     */
+    protected function getPluginInfoClassFromPluginClass(string $pluginClass): ?string
+    {
+        $classNamespace = ClassHelpers::getClassPSR4Namespace($pluginClass);
         $pluginInfoClass = $classNamespace . '\\' . $this->getPluginInfoClassName();
         if (!class_exists($pluginInfoClass)) {
             return null;
