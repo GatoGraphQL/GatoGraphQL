@@ -154,6 +154,7 @@
                 "/app/wordpress/GraphQLByPoP/": "${workspaceFolder}/layers/GraphQLByPoP/",
                 "/app/wordpress/Schema/": "${workspaceFolder}/layers/Schema/",
                 "/app/wordpress/WPSchema/": "${workspaceFolder}/layers/WPSchema/",
+                "/app/wordpress/GatoGraphQLForWP/": "${workspaceFolder}/layers/GatoGraphQLForWP/",
 
 
                 "/app/wordpress": "${workspaceFolder}/vendor/wordpress/wordpress",
