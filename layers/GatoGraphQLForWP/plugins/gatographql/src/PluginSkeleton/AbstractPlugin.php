@@ -114,7 +114,7 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function getPluginDir(): string
     {
-        return \dirname($this->pluginFile);
+        return $this->pluginFolder;
     }
 
     /**
