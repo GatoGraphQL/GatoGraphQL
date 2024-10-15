@@ -201,7 +201,8 @@ abstract class AbstractPlugin implements PluginInterface
     public function configureComponents(): void
     {
         // Set the plugin folder on the plugin's Module
-        $this->getPluginModule()->setPluginFolder($this->pluginFolder);
+        $pluginModule = $this->getPluginModule();
+        $pluginModule->setPluginFolder($this->pluginFolder);
     }
 
     /**
