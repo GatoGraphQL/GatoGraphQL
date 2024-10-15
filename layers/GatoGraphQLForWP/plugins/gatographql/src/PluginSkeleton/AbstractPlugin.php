@@ -23,16 +23,19 @@ abstract class AbstractPlugin implements PluginInterface
     protected string $pluginBaseName;
     protected string $pluginSlug;
     protected string $pluginName;
+    protected string $pluginFolder;
 
     public function __construct(
         protected string $pluginFile, /** The main plugin file */
         protected string $pluginVersion,
         ?string $pluginName = null,
         protected ?string $commitHash = null, /** Useful for development to regenerate the container when testing the generated plugin */
+        ?string $pluginFolder = null, /** Useful to override by standalone plugins */
     ) {
         $this->pluginBaseName = \plugin_basename($pluginFile);
         $this->pluginSlug = dirname($this->pluginBaseName);
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
+        $this->pluginFolder = $pluginFolder ?? dirname($this->pluginFile);
 
         // Have the Plugin set its own info on the corresponding PluginInfo
         $this->initializeInfo();
@@ -185,8 +188,7 @@ abstract class AbstractPlugin implements PluginInterface
     public function configureComponents(): void
     {
         // Set the plugin folder on the plugin's Module
-        $pluginFolder = dirname($this->pluginFile);
-        $this->getPluginModule()->setPluginFolder($pluginFolder);
+        $this->getPluginModule()->setPluginFolder($this->pluginFolder);
     }
 
     /**
