@@ -93,6 +93,8 @@ class PluginDataSource
         foreach ($pluginConfigEntries as &$pluginConfigEntry) {
             $pluginConfigEntry['version'] = MonorepoMetadata::VERSION;
             $pluginConfigEntry['dist_repo_branch'] = MonorepoMetadata::GIT_BASE_BRANCH;
+            $pluginConfigEntry['is_bundle'] = false;
+            $pluginConfigEntry['is_standalone_plugin'] = false;
         }
 
         return $pluginConfigEntries;

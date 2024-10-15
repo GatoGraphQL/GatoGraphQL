@@ -138,6 +138,20 @@ jobs:
                     vendor/bin/monorepo-builder transfer-composer-replace-entries-from-plugins-to-bundle --config=config/monorepo-builder/transfer-composer-replace-entries-from-plugins-to-bundle.php "${{ matrix.pluginConfig.path }}/composer.json" --exclude-replace="${{ matrix.pluginConfig.exclude_replace }}"
                 if: ${{ matrix.pluginConfig.is_bundle }}
 
+            ###########################################################################
+            # When building standalone plugins, the "replace" entries from the bundled
+            # extensions must be ignored, as these must also be contained within the
+            # standalone plugin (which also contains Gato GraphQL).
+            #
+            # Because standalone plugins are bundles, in the previous step the
+            # "replace" entries have been moved up from the bundled extensions
+            # to the bundle's composer.json. Now, remove them.
+            ###########################################################################
+            -   name: "Standalone plugins: Remove the 'replace' entries in composer.json (originally from the contained plugins, now in the bundle)"
+                run: |
+                    vendor/bin/monorepo-builder remove-composer-replace-entries --config=config/monorepo-builder/remove-composer-replace-entries.php "${{ matrix.pluginConfig.path }}/composer.json"
+                if: ${{ matrix.pluginConfig.is_standalone_plugin }}
+
             -   name: Install plugin dependencies, avoiding v2 platform check
                 run: |
                     composer config platform-check false --no-interaction --ansi

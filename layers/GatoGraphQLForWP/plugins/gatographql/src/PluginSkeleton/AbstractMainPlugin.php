@@ -58,6 +58,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         string $pluginVersion,
         ?string $pluginName = null,
         ?string $commitHash = null,
+        ?string $pluginFolder = null,
+        ?string $pluginURL = null,
         ?MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration = null,
     ) {
         parent::__construct(
@@ -65,6 +67,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $pluginVersion,
             $pluginName,
             $commitHash,
+            $pluginFolder,
+            $pluginURL,
         );
         $this->pluginInitializationConfiguration = $pluginInitializationConfiguration ?? $this->createInitializationConfiguration();
     }

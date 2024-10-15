@@ -32,6 +32,8 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         string $pluginVersion,
         ?string $pluginName = null,
         ?string $commitHash = null,
+        ?string $pluginFolder = null, /** Useful to override by standalone plugins */
+        ?string $pluginURL = null, /** Useful to override by standalone plugins */
         ?ExtensionInitializationConfigurationInterface $extensionInitializationConfiguration = null,
     ) {
         parent::__construct(
@@ -39,6 +41,8 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
             $pluginVersion,
             $pluginName,
             $commitHash,
+            $pluginFolder,
+            $pluginURL,
         );
         $this->extensionInitializationConfiguration = $extensionInitializationConfiguration ?? $this->maybeCreateInitializationConfiguration();
     }
