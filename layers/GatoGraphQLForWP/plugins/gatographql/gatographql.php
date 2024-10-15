@@ -62,7 +62,7 @@ $pluginName = __('Gato GraphQL', 'gatographql');
 
 // Validate that there is enough memory to run the plugin
 require_once __DIR__ . '/includes/startup.php';
-if (!checkGatoGraphQLMemoryRequirements($pluginName))) {
+if (!checkGatoGraphQLMemoryRequirements($pluginName)) {
     return;
 }
 
