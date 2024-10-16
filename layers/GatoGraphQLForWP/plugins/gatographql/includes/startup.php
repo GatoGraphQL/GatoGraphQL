@@ -57,7 +57,7 @@ if (!function_exists('maybeAdaptGatoGraphQLBundledExtensionPluginFile')) {
     function maybeAdaptGatoGraphQLBundledExtensionPluginFile(
         string $extensionFile,
         string $extensionClass,
-        string $extensionPackageOwner,
+        string $extensionPackageOwner
     ): string {
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
             return $extensionFile;
