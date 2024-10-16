@@ -42,7 +42,7 @@ if (!function_exists('checkGatoGraphQLMemoryRequirements')) {
     }
 }
 
-if (!function_exists('getGatoGraphQLBundledExtensionExpectedPluginFile')) {
+if (!function_exists('maybeAdaptGatoGraphQLBundledExtensionPluginFile')) {
     /**
      * During development, due to symlinking in Lando, __FILE__ for bundled
      * extensions doesn't point to the expected location under "vendor",
@@ -53,7 +53,7 @@ if (!function_exists('getGatoGraphQLBundledExtensionExpectedPluginFile')) {
      *
      * This function fixes the file path with the expected behavior.
      */
-    function getGatoGraphQLBundledExtensionExpectedPluginFile(
+    function maybeAdaptGatoGraphQLBundledExtensionPluginFile(
         string $extensionFile,
         string $extensionClass,
         string $extensionPackageOwner,
