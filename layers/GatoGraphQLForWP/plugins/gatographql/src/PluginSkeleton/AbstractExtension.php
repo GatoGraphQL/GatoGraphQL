@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
@@ -36,6 +37,21 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         ?string $pluginURL = null, /** Useful to override by standalone plugins */
         ?ExtensionInitializationConfigurationInterface $extensionInitializationConfiguration = null,
     ) {
+        /**
+         * During development, due to symlinking in Lando, __FILE__ for bundled
+         * extensions doesn't point to the expected location under "vendor"
+         */
+        $extensionManager = PluginApp::getExtensionManager();
+        $extensionClass = get_called_class();
+        if ($extensionManager->isExtensionBundled($extensionClass)) {
+            /** @var BundleExtensionInterface */
+            $bundlingExtension = $extensionManager->getBundlingExtensionClass($extensionClass);
+            $bundlePluginFile = $bundlingExtension->getPluginFile();
+            $extensionFileComponents = explode('/', $pluginFile);
+            $extensionFileComponentsCount = count($extensionFileComponents);
+            $pluginFile = dirname($bundlePluginFile) . '/vendor/gatographql-pro/' . $extensionFileComponents[$extensionFileComponentsCount - 2] . '/' . $extensionFileComponents[$extensionFileComponentsCount - 1];
+        }
+        
         parent::__construct(
             $pluginFile,
             $pluginVersion,
