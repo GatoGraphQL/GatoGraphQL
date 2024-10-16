@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL;
 
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInitializationConfigurationInterface;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\StandalonePluginTrait;
 
 /**
  * This class is not used by Gato GraphQL.
@@ -15,6 +16,8 @@ use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInitializationConfiguration
  */
 abstract class AbstractStandalonePlugin extends Plugin
 {
+    use StandalonePluginTrait;
+    
     public function __construct(
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
@@ -22,8 +25,8 @@ abstract class AbstractStandalonePlugin extends Plugin
         string $commitHash = null, /** Useful for development to regenerate the container when testing the generated plugin */
         ?MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration = null,
     ) {
-        $pluginFolder = \dirname($pluginFile) . '/vendor/gatographql/gatographql';
-        $pluginURL = \plugin_dir_url($pluginFile) . 'vendor/gatographql/gatographql/';
+        $pluginFolder = \dirname($pluginFile) . '/' . $this->getGatoGraphQLComposerRelativePath();
+        $pluginURL = \plugin_dir_url($pluginFile) . $this->getGatoGraphQLComposerRelativePath() . '/';
 
         parent::__construct(
             $pluginFile,
