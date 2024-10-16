@@ -151,6 +151,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 7.0.0 =
 * Breaking change: Allow to include Gato GraphQL as the engine to power another standalone plugin (#2897)
+* Added convenience class for standalone plugins (#2899)
 
 = 6.0.2 =
 * Fixed: Remove global fields from schema when disabled via ACL (#2894)
