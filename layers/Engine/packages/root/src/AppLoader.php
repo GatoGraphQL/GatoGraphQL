@@ -262,6 +262,11 @@ class AppLoader implements AppLoaderInterface
 
             // Initialize and register the Module
             $module = $moduleManager->register($moduleClass);
+            if ($registerAsModuleClasses = $module->registerAsModules()) {
+                foreach ($registerAsModuleClasses as $registerAsModuleClass) {
+                    $moduleManager->registerAs($module, $registerAsModuleClass);
+                }
+            }
 
             // Initialize all depended-upon PoP modules
             if (
