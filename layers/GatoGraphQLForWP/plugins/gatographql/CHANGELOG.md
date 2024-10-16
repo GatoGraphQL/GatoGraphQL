@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Allow to include Gato GraphQL as the engine to power another standalone plugin (#2897)
+- Added convenience class for standalone plugins (#2899)
 
 ## 6.0.2 - 11/10/2024
 
