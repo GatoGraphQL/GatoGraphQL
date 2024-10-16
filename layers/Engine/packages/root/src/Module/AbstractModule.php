@@ -363,7 +363,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Indicate if this Module must also be registered
      * under the classes of other Modules. Needed by
-     * standalone plugins to superseed
+     * standalone plugins to supersede
      * GatoGraphQL\GatoGraphQL\Module and yet be able to
      * get configuration values from that module.
      *
