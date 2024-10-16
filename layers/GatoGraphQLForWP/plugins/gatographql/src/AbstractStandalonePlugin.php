@@ -18,7 +18,7 @@ use GatoGraphQL\GatoGraphQL\PluginSkeleton\StandalonePluginTrait;
 abstract class AbstractStandalonePlugin extends Plugin
 {
     use StandalonePluginTrait;
-    
+
     public function __construct(
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
