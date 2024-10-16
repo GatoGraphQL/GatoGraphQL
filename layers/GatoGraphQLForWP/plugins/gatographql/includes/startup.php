@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Environment as RootEnvironment;
-
-declare(strict_types=1);
 
 /**
  * Make sure this function is not declared more than once
