@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractGatoGraphQLBundleExtension;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInitializationConfigurationInterface;
+use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractStandaloneGatoGraphQLExtensionBundle extends AbstractGatoGraphQLBundleExtension
 {
@@ -28,5 +29,16 @@ abstract class AbstractStandaloneGatoGraphQLExtensionBundle extends AbstractGato
             $pluginURL,
             $extensionInitializationConfiguration,
         );
+    }
+
+    /**
+     * Do not initialize any Module, as that is already
+     * done by the corresponding StandalonePlugin
+     *
+     * @return array<class-string<ModuleInterface>> List of `Module` class to initialize
+     */
+    protected function getModuleClassesToInitialize(): array
+    {
+        return [];
     }
 }
