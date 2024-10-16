@@ -72,7 +72,9 @@ if (!function_exists('maybeAdaptGatoGraphQLBundledExtensionPluginFile')) {
         $bundlePluginFile = $bundlingExtension->getPluginFile();
         $extensionFileComponents = explode('/', $extensionFile);
         $extensionFileComponentsCount = count($extensionFileComponents);
-        $extensionFile = dirname($bundlePluginFile) . '/vendor/' . $extensionPackageOwner . '/' . $extensionFileComponents[$extensionFileComponentsCount - 2] . '/' . $extensionFileComponents[$extensionFileComponentsCount - 1];
+        $extensionPluginFolderName = $extensionFileComponents[$extensionFileComponentsCount - 2];
+        $extensionPluginFileName = $extensionFileComponents[$extensionFileComponentsCount - 1];
+        $extensionFile = dirname($bundlePluginFile) . '/vendor/' . $extensionPackageOwner . '/' . $extensionPluginFolderName . '/' . $extensionPluginFileName;
         return $extensionFile;        
     }
 }
