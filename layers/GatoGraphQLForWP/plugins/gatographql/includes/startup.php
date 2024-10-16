@@ -1,6 +1,7 @@
 <?php
 
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use PoP\Root\Environment as RootEnvironment;
 
 declare(strict_types=1);
 
@@ -58,6 +59,9 @@ if (!function_exists('maybeAdaptGatoGraphQLBundledExtensionPluginFile')) {
         string $extensionClass,
         string $extensionPackageOwner,
     ): string {
+        if (!RootEnvironment::isApplicationEnvironmentDev()) {
+            return $extensionFile;
+        }
         $extensionManager = PluginApp::getExtensionManager();
         if (!$extensionManager->isExtensionBundled($extensionClass)) {
             return $extensionFile;
