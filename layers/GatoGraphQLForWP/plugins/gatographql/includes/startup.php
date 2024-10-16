@@ -1,5 +1,7 @@
 <?php
 
+use GatoGraphQL\GatoGraphQL\PluginApp;
+
 declare(strict_types=1);
 
 /**
@@ -37,5 +39,36 @@ if (!function_exists('checkGatoGraphQLMemoryRequirements')) {
             }
         }
         return true;
+    }
+}
+
+if (!function_exists('getGatoGraphQLBundledExtensionExpectedPluginFile')) {
+    /**
+     * During development, due to symlinking in Lando, __FILE__ for bundled
+     * extensions doesn't point to the expected location under "vendor",
+     * but to the symlinked path.
+     *
+     * As a consequence, the PluginDir and PluginURL is not calculated
+     * correctly, and scripts in the WordPress editor are not loaded.
+     *
+     * This function fixes the file path with the expected behavior.
+     */
+    function getGatoGraphQLBundledExtensionExpectedPluginFile(
+        string $extensionFile,
+        string $extensionClass,
+        string $extensionPackageOwner,
+    ): string {
+        $extensionManager = PluginApp::getExtensionManager();
+        if (!$extensionManager->isExtensionBundled($extensionClass)) {
+            return $extensionFile;
+        }
+
+        /** @var BundleExtensionInterface */
+        $bundlingExtension = $extensionManager->getBundlingExtensionClass($extensionClass);
+        $bundlePluginFile = $bundlingExtension->getPluginFile();
+        $extensionFileComponents = explode('/', $extensionFile);
+        $extensionFileComponentsCount = count($extensionFileComponents);
+        $extensionFile = dirname($bundlePluginFile) . '/vendor/' . $extensionPackageOwner . '/' . $extensionFileComponents[$extensionFileComponentsCount - 2] . '/' . $extensionFileComponents[$extensionFileComponentsCount - 1];
+        return $extensionFile;        
     }
 }
