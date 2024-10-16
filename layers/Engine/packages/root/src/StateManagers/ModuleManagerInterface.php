@@ -17,6 +17,13 @@ interface ModuleManagerInterface
     public function register(string $moduleClass): ModuleInterface;
 
     /**
+     * Register a module under a different class
+     *
+     * @param class-string<ModuleInterface> $moduleClass
+     */
+    public function registerAs(ModuleInterface $module, string $moduleClass): void;
+
+    /**
      * @phpstan-param class-string<ModuleInterface> $moduleClass
      * @throws ComponentNotExistsException If the class of the module does not exist or has not been initialized
      */
