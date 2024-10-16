@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractGatoGraphQLBundleExtension;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInitializationConfigurationInterface;
 
-abstract class AbstractGatoGraphQLStandaloneExtensionBundle extends AbstractGatoGraphQLBundleExtension
+abstract class AbstractStandaloneGatoGraphQLExtensionBundle extends AbstractGatoGraphQLBundleExtension
 {
     public function __construct(
         string $pluginFile, /** The main plugin file */
