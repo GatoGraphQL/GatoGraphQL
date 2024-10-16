@@ -46,6 +46,32 @@ final class FileContentReplacerSystem
     }
 
     /**
+     * @param array<string,string> $stringOrRegexPatternReplacements a string or regex pattern to search, and its replacement
+     */
+    public function replaceContent(
+        string $fileContent,
+        array $stringOrRegexPatternReplacements,
+        bool $useRegex
+    ): string {
+        foreach ($stringOrRegexPatternReplacements as $stringOrRegexPattern => $replacement) {
+            if ($useRegex) {
+                $fileContent = Strings::replace(
+                    $fileContent,
+                    $stringOrRegexPattern,
+                    $replacement
+                );
+            } else {
+                $fileContent = str_replace(
+                    $stringOrRegexPattern,
+                    $replacement,
+                    $fileContent
+                );
+            }
+        }
+        return $fileContent;
+    }
+
+    /**
      * @param SmartFileInfo[] $smartFileInfos
      * @param array<string,string> $stringOrRegexPatternReplacements a string or regex pattern to search, and its replacement
      */
