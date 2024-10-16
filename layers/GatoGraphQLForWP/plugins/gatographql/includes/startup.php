@@ -68,7 +68,7 @@ if (!function_exists('maybeAdaptGatoGraphQLBundledExtensionPluginFile')) {
         }
 
         /** @var BundleExtensionInterface */
-        $bundlingExtension = $extensionManager->getBundlingExtensionClass($extensionClass);
+        $bundlingExtension = $extensionManager->getBundlingExtension($extensionClass);
         $bundlePluginFile = $bundlingExtension->getPluginFile();
         $extensionFileComponents = explode('/', $extensionFile);
         $extensionFileComponentsCount = count($extensionFileComponents);

@@ -252,10 +252,10 @@ class ExtensionManager extends AbstractPluginManager
 
     public function isExtensionBundled(string $bundledExtensionClass): bool
     {
-        return $this->getBundlingExtensionClass($bundledExtensionClass) !== null;
+        return $this->getBundlingExtension($bundledExtensionClass) !== null;
     }
 
-    public function getBundlingExtensionClass(string $bundledExtensionClass): ?BundleExtensionInterface
+    public function getBundlingExtension(string $bundledExtensionClass): ?BundleExtensionInterface
     {
         return $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] ?? null;
     }
