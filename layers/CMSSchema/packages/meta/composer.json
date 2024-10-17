@@ -158,8 +158,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^6.1",
-        "pop-cms-schema/schema-commons": "^6.1"
+        "getpop/engine": "^7.0",
+        "pop-cms-schema/schema-commons": "^7.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",

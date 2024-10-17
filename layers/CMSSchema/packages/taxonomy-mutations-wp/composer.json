@@ -164,10 +164,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/taxonomies-wp": "^6.1",
-        "pop-cms-schema/taxonomy-mutations": "^6.1",
-        "pop-cms-schema/user-roles-wp": "^6.1",
-        "pop-cms-schema/user-state-mutations-wp": "^6.1"
+        "pop-cms-schema/taxonomies-wp": "^7.0",
+        "pop-cms-schema/taxonomy-mutations": "^7.0",
+        "pop-cms-schema/user-roles-wp": "^7.0",
+        "pop-cms-schema/user-state-mutations-wp": "^7.0"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
