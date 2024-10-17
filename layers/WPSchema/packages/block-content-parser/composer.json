@@ -158,8 +158,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/dom-crawler": "^6.1",
-        "getpop/engine-wp": "^6.1"
+        "getpop/dom-crawler": "^7.0",
+        "getpop/engine-wp": "^7.0"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",

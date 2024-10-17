@@ -158,8 +158,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/customposts": "^6.1",
-        "pop-cms-schema/queriedobject-wp": "^6.1"
+        "pop-cms-schema/customposts": "^7.0",
+        "pop-cms-schema/queriedobject-wp": "^7.0"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",

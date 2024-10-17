@@ -159,7 +159,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^6.1"
+        "getpop/component-model": "^7.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",

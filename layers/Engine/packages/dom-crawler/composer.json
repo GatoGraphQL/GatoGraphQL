@@ -159,7 +159,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^6.1",
+        "getpop/component-model": "^7.0",
         "masterminds/html5": "^2.7",
         "symfony/css-selector": "^6.0",
         "symfony/dom-crawler": "^6.0"

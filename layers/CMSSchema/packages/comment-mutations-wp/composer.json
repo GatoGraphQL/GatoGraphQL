@@ -158,9 +158,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/comment-mutations": "^6.1",
-        "pop-cms-schema/comments-wp": "^6.1",
-        "pop-cms-schema/user-state-mutations-wp": "^6.1"
+        "pop-cms-schema/comment-mutations": "^7.0",
+        "pop-cms-schema/comments-wp": "^7.0",
+        "pop-cms-schema/user-state-mutations-wp": "^7.0"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
