@@ -21,6 +21,8 @@ services:
     overrides:
       environment:
         XDEBUG_MODE: ''
+      volumes:
+        - ../_shared:/app/_shared-webserver
 env_file:
   - defaults.app.env
   - defaults.env
