@@ -54,6 +54,7 @@ class Environment
         if ($envVarValue === false) {
             return [
                 'lndo.site',
+                'localhost',
             ];
         }
         return explode(',', $envVarValue);
