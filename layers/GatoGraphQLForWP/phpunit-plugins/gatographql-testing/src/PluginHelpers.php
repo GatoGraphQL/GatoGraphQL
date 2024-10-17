@@ -18,7 +18,7 @@ class PluginHelpers
          * @var string|null
          * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
          */
-        $httpHost = $_SERVER['HTTP_HOST'] ?? null;
+        $httpHost = $_SERVER['SERVER_NAME'] ?? null;
         if ($httpHost === null) {
             return false;
         }
