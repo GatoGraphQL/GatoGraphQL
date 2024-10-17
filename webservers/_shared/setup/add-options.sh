@@ -1,6 +1,4 @@
 #!/bin/bash
 echo Adding options for Gato GraphQL Integration tests
 
-SITE_DOMAIN=$(wp option get siteurl)
-
-wp option add downstream_domains [\"$(echo $SITE_DOMAIN)\"] --format=json
+wp option add downstream_domains [\"$(wp option get siteurl)\"] --format=json
