@@ -4,7 +4,8 @@ config:
   webroot: wordpress
   php: '8.2'
   ssl: true
-  database: mariadb
+  # @todo Maybe re-enable MariaDB, sometimes giving error when doing `rebuild-server` in Lando
+  # database: mariadb
   xdebug: true
   config:
     php: ../shared/config/php.ini
