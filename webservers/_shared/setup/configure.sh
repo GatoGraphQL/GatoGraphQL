@@ -1,6 +1,4 @@
 #!/bin/bash
-wp config set WP_DEBUG true --raw
-# wp config set WP_DEBUG_DISPLAY false --raw
 # wp config set GATOGRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR false --raw
 wp rewrite structure '/%postname%/' --hard
 wp option update uploads_use_yearmonth_folders '0'
