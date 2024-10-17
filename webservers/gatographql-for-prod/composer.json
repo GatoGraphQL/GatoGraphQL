@@ -59,9 +59,9 @@
         "install-site": "lando composer install-site-within-container -- \"$(lando info | grep -E -o 'https:\/\/localhost:[0-9]+' | grep -E -o 'localhost:[0-9]+')\"",
         "install-site-within-container": "/bin/bash /app/setup/setup.sh",
         "import-data": "lando composer import-data-within-container",
-        "import-data-within-container": "/bin/bash /app/setup/import-data.sh",
+        "import-data-within-container": "/bin/bash /app/_shared-webserver/setup/import-data.sh",
         "create-users": "lando composer create-users-within-container",
-        "create-users-within-container": "/bin/bash /app/setup/create-users.sh",
+        "create-users-within-container": "/bin/bash /app/_shared-webserver/setup/create-users.sh",
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
             "lando rebuild appserver -y"
