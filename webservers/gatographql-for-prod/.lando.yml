@@ -15,6 +15,7 @@ services:
     overrides:
       volumes:
         - ../_shared:/app/_shared-webserver
+        - ../_shared-prod:/app/_shared-webserver-prod
   database:
     portforward: true
 env_file:
