@@ -7,7 +7,6 @@ namespace PoP\Root\Container;
 use Exception;
 use InvalidArgumentException;
 use PoP\Root\AppArchitecture;
-use PoP\Root\Container\Dumper\DowngradingPhpDumper;
 use PoP\Root\Environment;
 use RuntimeException;
 use Symfony\Component\Config\ConfigCache;
@@ -205,7 +204,7 @@ trait ContainerBuilderFactoryTrait
         }
 
         // Save the container to disk
-        $dumper = $this->createPHPDumper($containerBuilder);
+        $dumper = new PhpDumper($containerBuilder);
         file_put_contents(
             $this->cacheFile,
             $dumper->dump(
@@ -224,17 +223,5 @@ trait ContainerBuilderFactoryTrait
 
         // Change the permissions so it can be modified by external processes (eg: deployment)
         chmod($this->cacheFile, 0777);
-    }
-
-    /**
-     * If downgrading the PHP Code, then use the adapted
-     * DowngradingPhpDumper class, as to also downgrade
-     * the code generated for the container
-     */
-    protected function createPHPDumper(ContainerBuilder $containerBuilder): PhpDumper
-    {
-        return AppArchitecture::isDowngraded()
-            ? new DowngradingPhpDumper($containerBuilder)
-            : new PhpDumper($containerBuilder);
     }
 }
