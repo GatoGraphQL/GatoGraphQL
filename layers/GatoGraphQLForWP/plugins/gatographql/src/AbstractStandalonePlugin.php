@@ -52,4 +52,9 @@ abstract class AbstractStandalonePlugin extends Plugin
     {
         return 'StandaloneModule';
     }
+
+    protected function getPluginInitializationConfigurationClassname(): string
+    {
+        return 'StandalonePluginInitializationConfiguration';
+    }
 }
