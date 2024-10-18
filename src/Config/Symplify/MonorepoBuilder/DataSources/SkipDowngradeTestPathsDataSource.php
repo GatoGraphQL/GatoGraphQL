@@ -66,9 +66,15 @@ class SkipDowngradeTestPathsDataSource
             'vendor/symfony/polyfill-php83/bootstrap81.php',
             'vendor/symfony/service-contracts/Test/',
             'vendor/symfony/string/Slugger/AsciiSlugger.php',
-            'vendor/symfony/http-foundation/Session/Storage/Handler/MigratingSessionHandler.php',
-            'vendor/symfony/config/Definition/Builder/ExprBuilder.php',
-            'vendor/symfony/var-exporter/LazyProxyTrait.php',
+            /**
+             * For some reason, these files are not properly downgraded
+             * when using `DOWN_TO_PHP_74`, then they must be excluded.
+             * However, as currently still using `DOWN_TO_PHP_72`,
+             * we can ignore them.
+             */
+            // 'vendor/symfony/http-foundation/Session/Storage/Handler/MigratingSessionHandler.php',
+            // 'vendor/symfony/config/Definition/Builder/ExprBuilder.php',
+            // 'vendor/symfony/var-exporter/LazyProxyTrait.php',
         ];
     }
 }
