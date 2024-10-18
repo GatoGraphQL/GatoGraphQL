@@ -2,12 +2,12 @@
 # GitHub Action:
 # Whenever creating a new release of the source code,
 # also create a release of the installable plugin,
-# and downgrading it from PHP 8.1 to 7.2 to support more users.
+# and downgrading it from PHP 8.1 to 7.4 to support more users.
 ####################################################################################
 # Steps to execute:
 # - Checkout the source code
 # - Run "composer install" for development, to install dependencies for Rector
-# - Run Rector to downgrade code from PHP 8.1 to 7.2
+# - Run Rector to downgrade code from PHP 8.1 to 7.4
 # - Run "composer install" for production (required dependencies are already under vendor/)
 # - Create a .zip file, excluding:
 #   - All hidden files (.git, .gitignore, etc)
