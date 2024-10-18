@@ -19,7 +19,34 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         $this->rectorConfig->sets([
             // When this is enabled, generating the plugin in GitHub takes more than 30 min!
             // CustomDowngradeSetList::BEFORE_DOWNGRADE,
-            DowngradeLevelSetList::DOWN_TO_PHP_74,
+
+            /**
+             * Watch out! Here it should use `DOWN_TO_PHP_74` to downgrade to PHP 7.4,
+             * but there's a bug in which this code:
+             *
+             *   \set_error_handler(static fn($type, $message, $file, $line) => throw new \ErrorException($message, 0, $type, $file, $line));
+             *
+             * from file:
+             * 
+             *   vendor/symfony/cache/Traits/FilesystemCommonTrait.php
+             *
+             * is not being downgraded, then the plugin explodes.
+             *
+             * (It should become:
+             * 
+             *   \set_error_handler(static function ($type, $message, $file, $line) {
+             *     throw new \ErrorException($message, 0, $type, $file, $line);
+             *   });
+             * 
+             * )
+             *
+             * Then, for the time being, keep downgrading to PHP 7.2!
+             *
+             * @todo Upgrade Rector to v1.2 and try again
+             * @see ...
+             */
+            // DowngradeLevelSetList::DOWN_TO_PHP_74,
+            DowngradeLevelSetList::DOWN_TO_PHP_72,
         ]);
 
         /**
