@@ -27,17 +27,17 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
              *   \set_error_handler(static fn($type, $message, $file, $line) => throw new \ErrorException($message, 0, $type, $file, $line));
              *
              * from file:
-             * 
+             *
              *   vendor/symfony/cache/Traits/FilesystemCommonTrait.php
              *
              * is not being downgraded, then the plugin explodes.
              *
              * (It should become:
-             * 
+             *
              *   \set_error_handler(static function ($type, $message, $file, $line) {
              *     throw new \ErrorException($message, 0, $type, $file, $line);
              *   });
-             * 
+             *
              * )
              *
              * To avoid this problem, for the time being, use set `DOWN_TO_PHP_73`
