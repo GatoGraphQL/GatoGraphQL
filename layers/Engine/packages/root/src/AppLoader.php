@@ -262,10 +262,8 @@ class AppLoader implements AppLoaderInterface
 
             // Initialize and register the Module
             $module = $moduleManager->register($moduleClass);
-            if ($registerAsModuleClasses = $module->registerAsModules()) {
-                foreach ($registerAsModuleClasses as $registerAsModuleClass) {
-                    $moduleManager->registerAs($module, $registerAsModuleClass);
-                }
+            foreach ($module->registerAsModules() as $registerAsModuleClass) {
+                $moduleManager->registerAs($module, $registerAsModuleClass);
             }
 
             // Initialize all depended-upon PoP modules
@@ -501,6 +499,12 @@ class AppLoader implements AppLoaderInterface
                 continue;
             }
             $moduleConfiguration = $this->moduleClassConfiguration[$moduleClass] ?? [];
+            foreach ($module->registerAsModules() as $registerAsModuleClass) {
+                $moduleConfiguration = array_merge_recursive(
+                    $this->moduleClassConfiguration[$registerAsModuleClass] ?? [],
+                    $moduleConfiguration,
+                );
+            }
             $skipSchemaForModule = $this->skipSchemaForModule($module);
             /** @var array<class-string<ModuleInterface>> */
             $skipSchemaModuleClasses = $this->skipSchemaModuleClasses;
