@@ -19,7 +19,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         $this->rectorConfig->sets([
             // When this is enabled, generating the plugin in GitHub takes more than 30 min!
             // CustomDowngradeSetList::BEFORE_DOWNGRADE,
-            DowngradeLevelSetList::DOWN_TO_PHP_72,
+            DowngradeLevelSetList::DOWN_TO_PHP_74,
         ]);
 
         /**
@@ -32,7 +32,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         // $this->rectorConfig->ruleWithConfiguration(RenameClassConstFetchRector::class, [new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
-        $this->rectorConfig->phpVersion(PhpVersion::PHP_72);
+        $this->rectorConfig->phpVersion(PhpVersion::PHP_74);
 
         // Do not change the code, other than the required rules
         $this->rectorConfig->importNames(false, false);
