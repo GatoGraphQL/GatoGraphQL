@@ -1,6 +1,6 @@
 # Supported PHP features
 
-All packages in this monorepo require PHP 8.1 for development, but contain only PHP code that can be transpiled to PHP 7.2 for production.
+All packages in this monorepo require PHP 8.1 for development, but contain only PHP code that can be transpiled to PHP 7.4 for production.
 
 The list of supported PHP features is the following:
 

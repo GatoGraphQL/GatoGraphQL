@@ -2,7 +2,7 @@
 ########################################################################
 #
 # This bash script downgrades the code for the project
-# and all its dependencies to PHP 7.2
+# and all its dependencies to PHP 7.4
 #
 ########################################################################
 
