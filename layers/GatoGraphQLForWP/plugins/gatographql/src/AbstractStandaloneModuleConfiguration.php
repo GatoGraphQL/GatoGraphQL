@@ -18,7 +18,12 @@ abstract class AbstractStandaloneModuleConfiguration extends ModuleConfiguration
         /** @var array<class-string<ModuleInterface>> */
         return [
             Module::class,
-            $classNamespace . '\\StandaloneModule',
+            $classNamespace . '\\' . $this->getModuleClassname(),
         ];
+    }
+
+    protected function getModuleClassname(): string
+    {
+        return 'StandaloneModule';
     }
 }
