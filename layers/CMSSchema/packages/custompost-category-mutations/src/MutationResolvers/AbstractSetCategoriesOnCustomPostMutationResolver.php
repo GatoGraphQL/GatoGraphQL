@@ -23,7 +23,6 @@ use PoP\Root\Exception\AbstractException;
 abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends AbstractMutationResolver
 {
     use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait {
-        CreateOrUpdateCustomPostMutationResolverTrait::validateUserIsLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
         CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
         CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
         SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermDoesNotExistError insteadof MutateTaxonomyTermMutationResolverTrait;

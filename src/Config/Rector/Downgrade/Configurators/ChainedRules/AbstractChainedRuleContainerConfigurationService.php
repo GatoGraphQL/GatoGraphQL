@@ -24,7 +24,7 @@ abstract class AbstractChainedRuleContainerConfigurationService extends Abstract
             $this->rectorConfig->rule($rectorRuleClass);
         }
 
-        $this->rectorConfig->phpVersion(PhpVersion::PHP_72);
+        $this->rectorConfig->phpVersion(PhpVersion::PHP_74);
         $this->rectorConfig->importNames(false, false);
         $this->rectorConfig->importShortClasses(false);
 

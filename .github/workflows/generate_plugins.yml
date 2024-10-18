@@ -2,12 +2,12 @@
 # GitHub Action:
 # Whenever creating a new release of the source code,
 # also create a release of the installable plugin,
-# and downgrading it from PHP 8.1 to 7.2 to support more users.
+# and downgrading it from PHP 8.1 to 7.4 to support more users.
 ####################################################################################
 # Steps to execute:
 # - Checkout the source code
 # - Run "composer install" for development, to install dependencies for Rector
-# - Run Rector to downgrade code from PHP 8.1 to 7.2
+# - Run Rector to downgrade code from PHP 8.1 to 7.4
 # - Run "composer install" for production (required dependencies are already under vendor/)
 # - Create a .zip file, excluding:
 #   - All hidden files (.git, .gitignore, etc)
@@ -165,7 +165,7 @@ jobs:
                 if: ${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}
 
             # additional_rector_after_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
-            -   name: Downgrade code for production (to PHP 7.2)
+            -   name: Downgrade code for production (to PHP 7.4)
                 run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_before_configs }}" "${{ matrix.pluginConfig.additional_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
 
             # after_downgrade_code.sh => Hacks to fix the codebase whenever Rector cannot handle it
@@ -177,7 +177,7 @@ jobs:
 
             -   name: Replace PHP version in plugin main file
                 run: |
-                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' ${{ matrix.pluginConfig.main_file }}
+                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.4/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Check if readme.txt exists
@@ -188,7 +188,7 @@ jobs:
 
             -   name: Replace PHP version in plugin readme file
                 run: |
-                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' readme.txt
+                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.4/' readme.txt
                 if: steps.check_readme_exists.outputs.files_exists == 'true'
                 working-directory: ${{ matrix.pluginConfig.path }}
 

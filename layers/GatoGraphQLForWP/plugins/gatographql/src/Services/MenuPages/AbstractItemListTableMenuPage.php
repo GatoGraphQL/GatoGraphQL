@@ -9,12 +9,12 @@ use GatoGraphQL\GatoGraphQL\Admin\Tables\TableInterface;
 
 abstract class AbstractItemListTableMenuPage extends AbstractTableMenuPage
 {
-    // Commented because it doesn't work in PHP 7.2
-    // /**
-    //  * Redefine the class of the table
-    //  * @return class-string<ItemListTableInterface>
-    //  */
-    // abstract protected function getTableClass(): string;
+    /**
+     * Redefine the class of the table.
+     *
+     * @return class-string<ItemListTableInterface>
+     */
+    abstract protected function getTableClass(): string;
 
     /**
      * Redefine the class of the table.

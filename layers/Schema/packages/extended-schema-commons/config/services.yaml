@@ -7,8 +7,5 @@ services:
     PoPSchema\ExtendedSchemaCommons\HelperServices\ArrayOrJSONObjectTraversionHelperServiceInterface:
         class: \PoPSchema\ExtendedSchemaCommons\HelperServices\ArrayOrJSONObjectTraversionHelperService
 
-    PoPSchema\ExtendedSchemaCommons\HelperServices\StringFunctionHelperServiceInterface:
-        class: \PoPSchema\ExtendedSchemaCommons\HelperServices\StringFunctionHelperService
-
     PoPSchema\ExtendedSchemaCommons\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'

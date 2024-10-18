@@ -5,7 +5,7 @@ These are the several ways to install the [Gato GraphQL](../layers/GatoGraphQLFo
 ## Requirements
 
 - WordPress 5.4+
-- PHP 7.2+
+- PHP 7.4+
 
 ## Plugin
 

@@ -66,6 +66,18 @@ class SkipDowngradeTestPathsDataSource
             'vendor/symfony/polyfill-php83/bootstrap81.php',
             'vendor/symfony/service-contracts/Test/',
             'vendor/symfony/string/Slugger/AsciiSlugger.php',
+            /**
+             * For some reason, these files are not properly downgraded
+             * when using `DOWN_TO_PHP_74`, then they must be excluded.
+             * However, as currently still using `DOWN_TO_PHP_73`,
+             * we can ignore them.
+             *
+             * @todo Upgrade Rector to v1 and try again
+             * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2906
+             */
+            // 'vendor/symfony/http-foundation/Session/Storage/Handler/MigratingSessionHandler.php',
+            // 'vendor/symfony/config/Definition/Builder/ExprBuilder.php',
+            // 'vendor/symfony/var-exporter/LazyProxyTrait.php',
         ];
     }
 }

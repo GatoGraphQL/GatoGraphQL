@@ -74,7 +74,7 @@ The plugin code is transpiled via [Rector](https://github.com/rectorphp/rector/)
 Now, the PHP requirements are:
 
 - PHP 8.1+ for development
-- PHP 7.2+ for production
+- PHP 7.4+ for production
 
 This enables the plugin to make use of the latest features from PHP, while not restricting its userbase.
 

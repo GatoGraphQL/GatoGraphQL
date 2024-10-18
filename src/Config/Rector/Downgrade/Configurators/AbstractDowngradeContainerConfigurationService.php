@@ -19,7 +19,34 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         $this->rectorConfig->sets([
             // When this is enabled, generating the plugin in GitHub takes more than 30 min!
             // CustomDowngradeSetList::BEFORE_DOWNGRADE,
-            DowngradeLevelSetList::DOWN_TO_PHP_72,
+
+            /**
+             * Watch out! Here it should use `DOWN_TO_PHP_74` to downgrade to PHP 7.4,
+             * but there's a bug in which this code:
+             *
+             *   \set_error_handler(static fn($type, $message, $file, $line) => throw new \ErrorException($message, 0, $type, $file, $line));
+             *
+             * from file:
+             *
+             *   vendor/symfony/cache/Traits/FilesystemCommonTrait.php
+             *
+             * is not being downgraded, then the plugin explodes.
+             *
+             * (It should become:
+             *
+             *   \set_error_handler(static function ($type, $message, $file, $line) {
+             *     throw new \ErrorException($message, 0, $type, $file, $line);
+             *   });
+             *
+             * )
+             *
+             * To avoid this problem, for the time being, use set `DOWN_TO_PHP_73`
+             *
+             * @todo Upgrade Rector to v1 and try again
+             * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2906
+             */
+            // DowngradeLevelSetList::DOWN_TO_PHP_74,
+            DowngradeLevelSetList::DOWN_TO_PHP_73,
         ]);
 
         /**
@@ -32,7 +59,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         // $this->rectorConfig->ruleWithConfiguration(RenameClassConstFetchRector::class, [new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
-        $this->rectorConfig->phpVersion(PhpVersion::PHP_72);
+        $this->rectorConfig->phpVersion(PhpVersion::PHP_74);
 
         // Do not change the code, other than the required rules
         $this->rectorConfig->importNames(false, false);
