@@ -44,7 +44,7 @@ Requirements:
 
 Check the list of [Supported PHP features in `GatoGraphQL/GatoGraphQL`](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/docs/supported-php-features.md)
 
-### Preview downgrade to PHP 7.2
+### Preview downgrade to PHP 7.4
 
 Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
