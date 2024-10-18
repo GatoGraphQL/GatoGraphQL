@@ -155,14 +155,12 @@ return [
              */
             // Pattern to identify Symfony Polyfill bootstrap files
             // - vendor/symfony/polyfill-mbstring/bootstrap80.php
-            // - vendor/symfony/polyfill-php72/bootstrap.php
             // - etc
             $pattern = '#' . convertRelativeToFullPath('vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php') . '#';
             $symfonyPolyfillFilesWithGlobalClass = array_map(
                 convertRelativeToFullPath(...),
                 [
                     'vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-                    'vendor/symfony/polyfill-php73/Resources/stubs/JsonException.php',
                     'vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php',
                     'vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php',
                     'vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
