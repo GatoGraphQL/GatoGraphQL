@@ -47,4 +47,14 @@ abstract class AbstractStandalonePlugin extends Plugin
     {
         return $this->getPluginInfoClassFromPluginClass(Plugin::class);
     }
+
+    protected function getModuleClassname(): string
+    {
+        return 'StandaloneModule';
+    }
+
+    protected function getPluginInitializationConfigurationClassname(): string
+    {
+        return 'StandalonePluginInitializationConfiguration';
+    }
 }

@@ -327,12 +327,17 @@ abstract class AbstractModule implements ModuleInterface
     protected function getModuleConfigurationClass(): ?string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        $moduleConfigurationClass = $classNamespace . '\\ModuleConfiguration';
+        $moduleConfigurationClass = $classNamespace . '\\' . $this->getModuleConfigurationClassname();
         if (!class_exists($moduleConfigurationClass)) {
             return null;
         }
         /** @var class-string<ModuleConfigurationInterface> */
         return $moduleConfigurationClass;
+    }
+
+    protected function getModuleConfigurationClassname(): string
+    {
+        return 'ModuleConfiguration';
     }
 
     protected function initializeInfo(): void

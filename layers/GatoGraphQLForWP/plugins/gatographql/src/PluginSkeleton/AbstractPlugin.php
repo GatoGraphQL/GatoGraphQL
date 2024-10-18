@@ -224,7 +224,12 @@ abstract class AbstractPlugin implements PluginInterface
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
         /** @var class-string<ModuleInterface> */
-        return $classNamespace . '\\Module';
+        return $classNamespace . '\\' . $this->getModuleClassname();
+    }
+
+    protected function getModuleClassname(): string
+    {
+        return 'Module';
     }
 
     /**
