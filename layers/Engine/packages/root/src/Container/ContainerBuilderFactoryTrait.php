@@ -6,7 +6,6 @@ namespace PoP\Root\Container;
 
 use Exception;
 use InvalidArgumentException;
-use PoP\Root\AppArchitecture;
 use PoP\Root\Environment;
 use RuntimeException;
 use Symfony\Component\Config\ConfigCache;
