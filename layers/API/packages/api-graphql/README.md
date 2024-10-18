@@ -182,7 +182,7 @@ Adding the `versionConstraint` parameter in the <a href='https://newapi.getpop.o
 Requirements:
 
 - PHP 8.1+ for development
-- PHP 7.2+ for production
+- PHP 7.4+ for production
 
 ### Supported PHP features
 
