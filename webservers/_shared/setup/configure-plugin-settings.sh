@@ -23,6 +23,22 @@ curl -i --insecure \
 #   -H "Content-Type: application/json" \
 #   -d '{"state": "enabled"}' \
 #   $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/modules/gatographql_gatographql_single-endpoint
+
+# Enable the GraphiQL for Single Endpoint
+curl -i --insecure \
+  --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"state": "enabled"}' \
+  $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/modules/gatographql_gatographql_graphiql-for-single-endpoint
+
+# Enable the Voyager for Single Endpoint
+curl -i --insecure \
+  --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"state": "enabled"}' \
+  $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/modules/gatographql_gatographql_interactive-schema-for-single-endpoint
   
 echo Selecting "dummy" CPT, categories and tags
 
