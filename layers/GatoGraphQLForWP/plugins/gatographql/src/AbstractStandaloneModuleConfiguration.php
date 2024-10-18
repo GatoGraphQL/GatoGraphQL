@@ -10,6 +10,9 @@ use PoP\Root\Module\ModuleInterface;
 abstract class AbstractStandaloneModuleConfiguration extends ModuleConfiguration
 {
     /**
+     * The StandaloneModule must be applied the configuration
+     * for itself, and also for the upstream Module.
+     *
      * @phpstan-return array<class-string<ModuleInterface>>
      */
     protected function getModuleClasses(): array
