@@ -21,7 +21,7 @@ abstract class AbstractStandaloneGatoGraphQLExtensionBundle extends AbstractGato
     ) {
         $pluginFolder = \dirname($pluginFile) . '/' . $this->getGatoGraphQLComposerRelativePath();
         $pluginURL = \plugin_dir_url($pluginFile) . $this->getGatoGraphQLComposerRelativePath() . '/';
-
+        
         parent::__construct(
             $pluginFile,
             $pluginVersion,
@@ -31,16 +31,5 @@ abstract class AbstractStandaloneGatoGraphQLExtensionBundle extends AbstractGato
             $pluginURL,
             $extensionInitializationConfiguration,
         );
-    }
-
-    /**
-     * Do not initialize any Module, as that is already
-     * done by the corresponding StandalonePlugin
-     *
-     * @return array<class-string<ModuleInterface>> List of `Module` class to initialize
-     */
-    protected function getModuleClassesToInitialize(): array
-    {
-        return [];
     }
 }
