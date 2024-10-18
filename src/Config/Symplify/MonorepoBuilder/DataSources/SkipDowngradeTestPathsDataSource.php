@@ -73,7 +73,7 @@ class SkipDowngradeTestPathsDataSource
              * we can ignore them.
              *
              * @todo Upgrade Rector to v1 and try again
-             * @see ...
+             * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2906
              */
             // 'vendor/symfony/http-foundation/Session/Storage/Handler/MigratingSessionHandler.php',
             // 'vendor/symfony/config/Definition/Builder/ExprBuilder.php',

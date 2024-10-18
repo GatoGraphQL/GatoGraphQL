@@ -43,7 +43,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
              * To avoid this problem, for the time being, use set `DOWN_TO_PHP_73`
              *
              * @todo Upgrade Rector to v1 and try again
-             * @see ...
+             * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2906
              */
             // DowngradeLevelSetList::DOWN_TO_PHP_74,
             DowngradeLevelSetList::DOWN_TO_PHP_73,
