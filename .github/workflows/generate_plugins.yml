@@ -177,7 +177,7 @@ jobs:
 
             -   name: Replace PHP version in plugin main file
                 run: |
-                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' ${{ matrix.pluginConfig.main_file }}
+                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.4/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Check if readme.txt exists
@@ -188,7 +188,7 @@ jobs:
 
             -   name: Replace PHP version in plugin readme file
                 run: |
-                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' readme.txt
+                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.4/' readme.txt
                 if: steps.check_readme_exists.outputs.files_exists == 'true'
                 working-directory: ${{ matrix.pluginConfig.path }}
 

@@ -47,7 +47,7 @@ jobs:
 
     main:
         needs: provide_data
-        name: Downgrade code to PHP 7.2 via Rector, and execute tests
+        name: Downgrade code to PHP 7.4 via Rector, and execute tests
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout code
@@ -102,7 +102,7 @@ jobs:
                 if: github.event_name == 'push'
             ################################################################################
 
-            # Prepare for testing on PHP 7.2
+            # Prepare for testing on PHP 7.4
             -   name: Install PHP Parallel Lint
                 run: composer create-project php-parallel-lint/php-parallel-lint php-parallel-lint --ansi --no-dev
 
@@ -131,10 +131,10 @@ jobs:
                     path: build/downgraded-code.zip
                     retention-days: 1
 
-            -   name: Switch to PHP 7.2
+            -   name: Switch to PHP 7.4
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 7.2
+                    php-version: 7.4
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -142,7 +142,7 @@ jobs:
             # Test everything, including Composer dependencies which (supposedly)
             # do not require downgrading
             # Use a PHP Linter. If PHP is not valid, it will throw an error
-            -   name: Run PHP Parallel Lint on PHP 7.2
+            -   name: Run PHP Parallel Lint on PHP 7.4
                 run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude ${{ needs.provide_data.outputs.skip_downgrade_test_paths }} --exclude ${{ needs.provide_data.outputs.exclude_package_tests }}
 
 
