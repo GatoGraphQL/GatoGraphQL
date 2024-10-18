@@ -29,4 +29,9 @@ abstract class AbstractStandalonePluginModule extends Module
             Module::class,
         ];
     }
+
+    protected function getModuleConfigurationClassname(): string
+    {
+        return 'StandaloneModuleConfiguration';
+    }
 }
