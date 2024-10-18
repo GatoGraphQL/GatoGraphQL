@@ -40,13 +40,13 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
              * 
              * )
              *
-             * Then, for the time being, keep downgrading to PHP 7.2!
+             * To avoid this problem, for the time being, use set `DOWN_TO_PHP_73`
              *
-             * @todo Upgrade Rector to v1.2 and try again
+             * @todo Upgrade Rector to v1 and try again
              * @see ...
              */
             // DowngradeLevelSetList::DOWN_TO_PHP_74,
-            DowngradeLevelSetList::DOWN_TO_PHP_72,
+            DowngradeLevelSetList::DOWN_TO_PHP_73,
         ]);
 
         /**
