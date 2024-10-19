@@ -2541,6 +2541,14 @@
                         "innerBlocks": null
                     },
                     {
+                        "name": "core\/html",
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eNode 1\\u003c\/p\\u003e\\u003cp\\u003eNode 2\\u003c\/p\\u003e\"} -->\n<p>Node 1<\/p><p>Node 2<\/p>\n<!-- \/wp:html -->",
+                        "innerBlocks": null
+                    },
+                    {
                         "name": "core\/heading",
                         "attributes": {
                             "className": "has-top-margin",
@@ -2600,6 +2608,12 @@
                         "name": "core\/html",
                         "attributes": {
                             "content": "<strong>This is a HTML block.<\/strong>"
+                        }
+                    },
+                    {
+                        "name": "core\/html",
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
                         }
                     },
                     {
@@ -2668,6 +2682,14 @@
                         "name": "core\/html",
                         "attributes": {
                             "content": "<strong>This is a HTML block.<\/strong>"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/html",
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null

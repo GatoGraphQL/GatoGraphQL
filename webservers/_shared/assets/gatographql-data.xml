@@ -894,6 +894,10 @@
 <strong>This is a HTML block.</strong>
 <!-- /wp:html -->
 
+<!-- wp:html -->
+<p>Node 1</p><p>Node 2</p>
+<!-- /wp:html -->
+
 <!-- wp:heading {"className":"has-top-margin"} -->
 <h2 class="has-top-margin">Preformatted Block</h2>
 <!-- /wp:heading -->

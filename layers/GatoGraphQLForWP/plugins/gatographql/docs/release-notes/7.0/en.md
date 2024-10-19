@@ -9,4 +9,6 @@
 
 - Added convenience class for standalone plugins ([#2899](https://github.com/GatoGraphQL/GatoGraphQL/pull/2899))
 
-<!-- ## Fixed -->
+## Fixed
+
+- Fetching raw attribute sources with multiple nodes in blocks ([#2909](https://github.com/GatoGraphQL/GatoGraphQL/pull/2909))
