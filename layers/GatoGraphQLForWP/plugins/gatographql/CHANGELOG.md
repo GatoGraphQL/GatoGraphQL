@@ -15,6 +15,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added convenience class for standalone plugins (#2899)
 
+### Fixed
+
+- Fetching raw attribute sources with multiple nodes in blocks (#2909)
+
 ## 6.0.2 - 11/10/2024
 
 ### Fixed
