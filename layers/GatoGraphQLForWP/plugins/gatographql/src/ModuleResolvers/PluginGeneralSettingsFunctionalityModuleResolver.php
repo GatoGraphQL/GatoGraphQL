@@ -169,6 +169,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
 
         $moduleSettings = parent::getSettings($module);
         if ($module === self::GENERAL) {
+            $generalTabDisplayableOptionNames = $this->getGeneralTabDisplayableOptionNames();
+
             $option = self::OPTION_ENABLE_SCHEMA_TUTORIAL;
             $moduleSettings[] = [
             Properties::INPUT => $option,
@@ -330,7 +332,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      *
      * @return string[]
      */
-    public function getOptionsToDisplayInGeneralTab(): ?array
+    public function getGeneralTabDisplayableOptionNames(): ?array
     {
         return null;
     }
