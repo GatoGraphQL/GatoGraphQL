@@ -666,14 +666,14 @@ class BlockContentParser implements BlockContentParserInterface
 
         if ($crawler->count() > 0) {
             $attribute_value = trim($crawler->outerHtml());
-			// $crawler's outerHtml() will only return the HTML of the first node in this raw HTML.
-			// If the raw HTML contains multiple top-level nodes, we need to use the inner HTML of the wrapping
-			// 'body' tag. This will also preserve internal whitespace in the HTML.
-			$body_node = $crawler->closest('body');
+            // $crawler's outerHtml() will only return the HTML of the first node in this raw HTML.
+            // If the raw HTML contains multiple top-level nodes, we need to use the inner HTML of the wrapping
+            // 'body' tag. This will also preserve internal whitespace in the HTML.
+            $body_node = $crawler->closest('body');
 
-			if ($body_node && $body_node->count() > 0) {
-				$attribute_value = trim($body_node->html());
-			}
+            if ($body_node && $body_node->count() > 0) {
+                $attribute_value = trim($body_node->html());
+            }
         }
 
         return $attribute_value;
