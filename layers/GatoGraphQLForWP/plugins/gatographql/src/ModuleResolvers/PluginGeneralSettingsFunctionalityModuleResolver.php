@@ -324,4 +324,14 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         }
         return $moduleSettings;
     }
+
+    /**
+     * Allow to select what options to display in the General tab
+     *
+     * @return string[]
+     */
+    public function getOptionsToDisplayInGeneralTab(): ?array
+    {
+        return null;
+    }
 }
