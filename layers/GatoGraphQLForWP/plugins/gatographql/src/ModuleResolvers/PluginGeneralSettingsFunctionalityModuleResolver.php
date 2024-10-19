@@ -172,22 +172,24 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             $generalTabDisplayableOptionNames = $this->getGeneralTabDisplayableOptionNames();
 
             $option = self::OPTION_ENABLE_SCHEMA_TUTORIAL;
-            $moduleSettings[] = [
-            Properties::INPUT => $option,
-            Properties::NAME => $this->getSettingOptionName(
-                $module,
-                $option
-            ),
-            Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
-            Properties::DESCRIPTION => sprintf(
-                \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left<br/><span class="more-info">%s</span>', 'gatographql'),
-                $this->getSettingsItemHelpLinkHTML(
-                    'https://gatographql.com/guides/config/enabling-the-schema-tutorial-page',
-                    \__('Enabling the Schema Tutorial page', 'gatographql')
-                )
-            ),
-            Properties::TYPE => Properties::TYPE_BOOL,
-            ];
+            if ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames)) {
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left<br/><span class="more-info">%s</span>', 'gatographql'),
+                        $this->getSettingsItemHelpLinkHTML(
+                            'https://gatographql.com/guides/config/enabling-the-schema-tutorial-page',
+                            \__('Enabling the Schema Tutorial page', 'gatographql')
+                        )
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+            }
 
             $option = self::OPTION_ENABLE_LOGS;
             if ($moduleConfiguration->displayEnableLogsSettingsOption()
