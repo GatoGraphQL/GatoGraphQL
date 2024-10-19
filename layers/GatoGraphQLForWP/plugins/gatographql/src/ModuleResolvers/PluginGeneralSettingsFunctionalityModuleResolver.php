@@ -192,7 +192,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             }
 
             $option = self::OPTION_ENABLE_LOGS;
-            if ($moduleConfiguration->displayEnableLogsSettingsOption()
+            if (
+                $moduleConfiguration->displayEnableLogsSettingsOption()
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
                 $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
@@ -217,7 +218,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             }
 
             $option = self::OPTION_INSTALL_PLUGIN_SETUP_DATA;
-            if (PluginStaticModuleConfiguration::canManageInstallingPluginSetupData()
+            if (
+                PluginStaticModuleConfiguration::canManageInstallingPluginSetupData()
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
                 $moduleSettings[] = [
