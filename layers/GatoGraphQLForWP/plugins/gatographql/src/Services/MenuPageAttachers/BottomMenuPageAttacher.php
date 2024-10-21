@@ -247,7 +247,9 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * @see https://stackoverflow.com/questions/48632394/wordpress-add-custom-taxonomy-to-custom-menu
          */
         $graphQLEndpointCategoryTaxonomy = $this->getGraphQLEndpointCategoryTaxonomy();
-        if ($graphQLEndpointCategoryTaxonomy->isServiceEnabled()) {
+        if ($graphQLEndpointCategoryTaxonomy->isServiceEnabled()
+            && $this->addEndpointCategoriesToMenu()
+        ) {
             $graphQLEndpointCategoriesLabel = $graphQLEndpointCategoryTaxonomy->getTaxonomyPluralNames(true);
             $graphQLEndpointCategoriesCustomPostTypes = $graphQLEndpointCategoryTaxonomy->getCustomPostTypes();
             $graphQLEndpointCategoriesRelativePath = sprintf(
@@ -423,6 +425,11 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $aboutMenuPage->setHookName($hookName);
         }
         // }
+    }
+
+    protected function addEndpointCategoriesToMenu(): bool
+    {
+        return true;
     }
 
     /**
