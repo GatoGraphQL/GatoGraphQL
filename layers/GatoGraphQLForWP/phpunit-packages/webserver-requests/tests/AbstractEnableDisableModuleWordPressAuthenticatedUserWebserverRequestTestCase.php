@@ -51,21 +51,35 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
         $providerEntries = [];
         foreach (static::getModuleNameEntries() as $moduleName => $moduleEntry) {
             $providerEntries[$moduleName . ':enabled'] = [
-                'application/json',
+                static::getExpectedContentType(true),
                 $moduleEntry['response-enabled'],
                 $moduleEntry['endpoint'] ?? $endpoint,
                 [],
                 $moduleEntry['query'],
             ];
             $providerEntries[$moduleName . ':disabled'] = [
-                'application/json',
+                static::getExpectedContentType(false),
                 $moduleEntry['response-disabled'],
                 $moduleEntry['endpoint'] ?? $endpoint,
                 [],
                 $moduleEntry['query'],
             ];
         }
-        return $providerEntries;
+        return static::customizeProviderEndpointEntries($providerEntries);
+    }
+
+    /**
+     * @param array<string,mixed> $providerItems
+     * @return array<string,mixed>
+     */
+    protected static function customizeProviderEndpointEntries(array $providerItems): array
+    {
+        return $providerItems;
+    }
+
+    protected static function getExpectedContentType(bool $enabled): string
+    {
+        return 'application/json';
     }
 
     protected static function getEndpoint(): string
