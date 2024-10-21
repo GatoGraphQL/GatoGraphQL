@@ -11,14 +11,18 @@ use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
+    use WithSettingsPageMenuPageAttacherTrait;
+
     private ?MenuPageHelper $menuPageHelper = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?GraphiQLMenuPage $graphiQLMenuPage = null;
     private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
+    private ?SettingsMenuPage $settingsMenuPage = null;
 
     final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
@@ -85,6 +89,19 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->graphQLVoyagerMenuPage;
     }
+    final public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
+    {
+        $this->settingsMenuPage = $settingsMenuPage;
+    }
+    final protected function getSettingsMenuPage(): SettingsMenuPage
+    {
+        if ($this->settingsMenuPage === null) {
+            /** @var SettingsMenuPage */
+            $settingsMenuPage = $this->instanceManager->getInstance(SettingsMenuPage::class);
+            $this->settingsMenuPage = $settingsMenuPage;
+        }
+        return $this->settingsMenuPage;
+    }
 
     /**
      * Before adding the menus for the CPTs
@@ -97,8 +114,9 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     public function addMenuPages(): void
     {
         // If the private endpoint is not enabled, no need to add the clients
-        $isPrivateEndpointEnabled = $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
-        if (!$isPrivateEndpointEnabled) {
+        $isPrivateEndpointDisabled = !$this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
+        if ($isPrivateEndpointDisabled) {
+            $this->addSettingsMenuPage();
             return;
         }
 

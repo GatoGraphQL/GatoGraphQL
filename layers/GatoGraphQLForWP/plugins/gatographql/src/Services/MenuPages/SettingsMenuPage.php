@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -20,8 +21,8 @@ use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
-use PoP\ComponentModel\Constants\FrameworkParams;
 
+use PoP\ComponentModel\Constants\FrameworkParams;
 use function update_option;
 
 /**
@@ -131,6 +132,20 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->containerManager = $containerManager;
         }
         return $this->containerManager;
+    }
+
+    public function getScreenID(): string
+    {
+        $isPrivateEndpointDisabled = !$this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
+        if ($isPrivateEndpointDisabled) {
+            /**
+             * Override, because this is the default page, so it is invoked
+             * with the menu slug wp-admin/admin.php?page=gatographql,
+             * and not the menu page slug wp-admin/admin.php?page=gatographql_settings
+             */
+            return $this->getMenuName();
+        }
+        return parent::getScreenID();
     }
 
     public function getMenuPageSlug(): string

@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
@@ -25,6 +26,8 @@ use PoP\Root\App;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
+    use WithSettingsPageMenuPageAttacherTrait;
+
     private ?MenuPageHelper $menuPageHelper = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
@@ -365,17 +368,10 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             }
         }
 
-        if (
-            $hookName = \add_submenu_page(
-                $menuName,
-                __('Settings', 'gatographql'),
-                __('Settings', 'gatographql'),
-                'manage_options',
-                $this->getSettingsMenuPage()->getScreenID(),
-                [$this->getSettingsMenuPage(), 'print']
-            )
-        ) {
-            $this->getSettingsMenuPage()->setHookName($hookName);
+        // If the private endpoint is disabled, the Settings page becomes the default one
+        $isPrivateEndpointDisabled = !$this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
+        if (!$isPrivateEndpointDisabled) {
+            $this->addSettingsMenuPage();
         }
 
         /** @var ModuleConfiguration */
