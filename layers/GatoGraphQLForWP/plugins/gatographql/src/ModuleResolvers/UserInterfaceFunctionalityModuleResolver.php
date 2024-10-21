@@ -142,8 +142,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
                 => false,
             self::EXCERPT_AS_DESCRIPTION,
                 => $this->getUseExcerptAsDescriptionEnabledCustomPostTypeServices() === [] ? false : null,
-            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION
-                => true,
             default
                 => parent::isPredefinedEnabledOrDisabled($module),
         };
