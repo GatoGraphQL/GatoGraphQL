@@ -6,6 +6,12 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQLPRO\Integration;
 
 use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractEndpointFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase;
 
+/**
+ * Can't execute this test, because the `PRIVATE_ENDPOINT` module
+ * is always enabled.
+ *
+ * @see layers/GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php `isPredefinedEnabledOrDisabled`
+ */
 class PrivateEndpointFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointFixtureEnableDisableModuleWordPressAuthenticatedUserWebserverRequestTestCase
 {
     protected static function getFixtureFolder(): string
