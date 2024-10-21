@@ -131,7 +131,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     {
         return match ($module) {
             self::GLOBAL_FIELDS => true,
-            self::GLOBAL_ID_FIELD => true,
+            // self::GLOBAL_ID_FIELD => true,
             default => parent::isPredefinedEnabledOrDisabled($module),
         };
     }
