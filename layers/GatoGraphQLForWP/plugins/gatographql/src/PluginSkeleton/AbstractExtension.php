@@ -138,7 +138,8 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
                  */
                 \add_action(
                     PluginLifecycleHooks::INITIALIZE_EXTENSION,
-                    $this->initialize(...)
+                    $this->initialize(...),
+                    $this->getInitializeExtensionPriority()
                 );
                 \add_action(
                     PluginLifecycleHooks::CONFIGURE_EXTENSION_COMPONENTS,
@@ -158,6 +159,11 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
             },
             PluginLifecyclePriorities::SETUP_EXTENSIONS
         );
+    }
+
+    protected function getInitializeExtensionPriority(): int
+    {
+        return 10;
     }
 
     /**

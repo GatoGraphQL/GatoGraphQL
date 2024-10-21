@@ -44,4 +44,9 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
             $this->getBundledExtensionDataItems()
         );
     }
+
+    protected function getInitializeExtensionPriority(): int
+    {
+        return parent::getInitializeExtensionPriority() + 10;
+    }
 }
