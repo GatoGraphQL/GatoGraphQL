@@ -15,6 +15,7 @@ use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use PoP\ComponentModel\App;
+use PoP\Root\Environment as RootEnvironment;
 
 class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -145,7 +146,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         $defaultValues = [
             self::GENERAL => [
                 self::OPTION_ENABLE_SCHEMA_TUTORIAL => false,
-                self::OPTION_ENABLE_LOGS => false,
+                self::OPTION_ENABLE_LOGS => RootEnvironment::isApplicationEnvironmentDev(),
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
