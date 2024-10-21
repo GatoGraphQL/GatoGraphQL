@@ -150,8 +150,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
 
     protected function getResponse(): string
     {
-        return '';
-        // return \__('Click the "Execute Query" button, or press Ctrl+Enter (Command+Enter in Mac)', 'gatographql');
+        return \__('Click the "Execute Query" button, or press Ctrl+Enter (Command+Enter in Mac)', 'gatographql');
     }
 
     protected function getDefaultQuery(): string
