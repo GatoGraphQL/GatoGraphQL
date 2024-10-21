@@ -155,6 +155,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added convenience class for standalone plugins (#2899)
 * Allow to fetch posts with `auto-draft` status (#2911)
 * Fixed: Fetching raw attribute sources with multiple nodes in blocks (#2909)
+* [Extensions][Persisted Queries] Created a new "Persisted Query Endpoints" module (from "Persisted Queries"), to disable external execution of persisted queries
 
 = 6.0.2 =
 * Fixed: Remove global fields from schema when disabled via ACL (#2894)

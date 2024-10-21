@@ -13,3 +13,7 @@
 ## Fixed
 
 - Fetching raw attribute sources with multiple nodes in blocks ([#2909](https://github.com/GatoGraphQL/GatoGraphQL/pull/2909))
+
+## [Extensions] Improvements
+
+- [Persisted Queries] Created a new "Persisted Query Endpoints" module (from "Persisted Queries"), to disable external execution of persisted queries
