@@ -353,7 +353,10 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * when opening it via the Extensions page
          */
         $extensionDocsMenuPage = $this->getExtensionDocMenuPage();
-        if (App::query('page') === $extensionDocsMenuPage->getScreenID()) {
+        if (
+            $extensionDocsMenuPage->isServiceEnabled()
+            && App::query('page') === $extensionDocsMenuPage->getScreenID()
+        ) {
             /**
              * @var callable
              */
