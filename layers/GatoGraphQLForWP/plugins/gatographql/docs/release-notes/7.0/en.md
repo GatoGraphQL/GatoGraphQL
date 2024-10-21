@@ -8,6 +8,7 @@
 ## Improvements
 
 - Added convenience class for standalone plugins ([#2899](https://github.com/GatoGraphQL/GatoGraphQL/pull/2899))
+- Allow to fetch posts with `auto-draft` status ([#2911](https://github.com/GatoGraphQL/GatoGraphQL/pull/2911))
 
 ## Fixed
 
