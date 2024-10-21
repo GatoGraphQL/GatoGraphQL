@@ -153,6 +153,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking change: Bump minimum required PHP version to 7.4 (#2905)
 * Breaking change: Allow to include Gato GraphQL as the engine to power another standalone plugin (#2897)
 * Added convenience class for standalone plugins (#2899)
+* Allow to fetch posts with `auto-draft` status (#2911)
 * Fixed: Fetching raw attribute sources with multiple nodes in blocks (#2909)
 
 = 6.0.2 =

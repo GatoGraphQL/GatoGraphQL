@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Added convenience class for standalone plugins (#2899)
+- Allow to fetch posts with `auto-draft` status (#2911)
 
 ### Fixed
 
