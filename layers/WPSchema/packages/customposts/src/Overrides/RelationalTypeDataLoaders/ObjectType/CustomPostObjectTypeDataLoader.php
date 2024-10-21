@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\CustomPosts\Overrides\RelationalTypeDataLoaders\ObjectType;
 
 use PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType\CustomPostObjectTypeDataLoader as UpstreamCustomPostObjectTypeDataLoader;
-use PoPWPSchema\CustomPosts\Enums\CustomPostStatus;
+use PoPWPSchema\CustomPosts\Enums\NonEnumerableCustomPostStatus;
 
 class CustomPostObjectTypeDataLoader extends UpstreamCustomPostObjectTypeDataLoader
 {
@@ -19,7 +19,7 @@ class CustomPostObjectTypeDataLoader extends UpstreamCustomPostObjectTypeDataLoa
         $queryToRetrieveObjectsForIDs['status'] = array_merge(
             $queryToRetrieveObjectsForIDs['status'],
             [
-                CustomPostStatus::AUTO_DRAFT
+                NonEnumerableCustomPostStatus::AUTO_DRAFT
             ]
         );
         return $queryToRetrieveObjectsForIDs;
