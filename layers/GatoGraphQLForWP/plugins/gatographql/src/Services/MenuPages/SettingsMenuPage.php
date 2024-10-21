@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -131,6 +132,20 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->containerManager = $containerManager;
         }
         return $this->containerManager;
+    }
+
+    public function getScreenID(): string
+    {
+        $isPrivateEndpointDisabled = !$this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
+        if ($isPrivateEndpointDisabled) {
+            /**
+             * Override, because this is the default page, so it is invoked
+             * with the menu slug wp-admin/admin.php?page=gatographql,
+             * and not the menu page slug wp-admin/admin.php?page=gatographql_settings
+             */
+            return $this->getMenuName();
+        }
+        return parent::getScreenID();
     }
 
     public function getMenuPageSlug(): string
@@ -499,11 +514,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 break;
             }
         }
-        if ($activeCategoryID === null) {
-            /** @var string */
-            $firstSettingsCategory = key($primarySettingsCategorySettingsCategoryResolvers);
-            $activeCategoryID = $primarySettingsCategorySettingsCategoryResolvers[$firstSettingsCategory]->getID($firstSettingsCategory);
-        }
 
         $activeModule = App::query(RequestParams::MODULE);
         $class = 'wrap';
@@ -542,6 +552,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 continue;
                             }
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
+                            /**
+                             * Check this inside the foreach, so that if not all items are shown
+                             * (eg: disabled modules in Standalone plugins), then the 1st item
+                             * from the filtered elements will be used
+                             */
+                            if ($activeCategoryID === null) {
+                                $activeCategoryID = $settingsCategoryID;
+                            }
                             ?>
                                 <a
                                     href="#<?php echo \esc_attr($settingsCategoryID) ?>"

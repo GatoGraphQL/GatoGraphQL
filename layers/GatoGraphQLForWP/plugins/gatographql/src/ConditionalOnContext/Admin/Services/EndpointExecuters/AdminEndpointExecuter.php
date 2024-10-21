@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\Services\EndpointExecuters;
 
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\Services\EndpointExecuters\AdminEndpointExecuterServiceTagInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ObjectModels\NullableGraphQLQueryVariablesEntry;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\AbstractEndpointExecuter;
@@ -103,7 +104,17 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
         if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {
             return false;
         }
-        return $this->getEndpointHelpers()->isRequestingAdminGraphQLEndpoint();
+
+        /**
+         * If the Private Endpoint module is disabled,
+         * remove access to the "default" admin endpoint
+         */
+        $endpointHelpers = $this->getEndpointHelpers();
+        if ($endpointHelpers->isRequestingDefaultAdminGraphQLEndpoint()) {
+            return $this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
+        }
+
+        return $endpointHelpers->isRequestingAdminGraphQLEndpoint();
     }
 
     public function executeEndpoint(): void

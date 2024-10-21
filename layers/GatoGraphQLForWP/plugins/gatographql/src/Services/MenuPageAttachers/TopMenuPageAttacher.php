@@ -5,19 +5,24 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
+    use WithSettingsPageMenuPageAttacherTrait;
+
     private ?MenuPageHelper $menuPageHelper = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?GraphiQLMenuPage $graphiQLMenuPage = null;
     private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
+    private ?SettingsMenuPage $settingsMenuPage = null;
 
     final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
     {
@@ -84,6 +89,19 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->graphQLVoyagerMenuPage;
     }
+    final public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
+    {
+        $this->settingsMenuPage = $settingsMenuPage;
+    }
+    final protected function getSettingsMenuPage(): SettingsMenuPage
+    {
+        if ($this->settingsMenuPage === null) {
+            /** @var SettingsMenuPage */
+            $settingsMenuPage = $this->instanceManager->getInstance(SettingsMenuPage::class);
+            $this->settingsMenuPage = $settingsMenuPage;
+        }
+        return $this->settingsMenuPage;
+    }
 
     /**
      * Before adding the menus for the CPTs
@@ -95,20 +113,27 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
     public function addMenuPages(): void
     {
-        $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
+        // If the private endpoint is not enabled, no need to add the clients
+        $isPrivateEndpointDisabled = !$this->getModuleRegistry()->isModuleEnabled(EndpointFunctionalityModuleResolver::PRIVATE_ENDPOINT);
+        if ($isPrivateEndpointDisabled) {
+            $this->addSettingsMenuPage();
+            return;
+        }
 
+        $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         $isSingleEndpointGraphiQLClientEnabled = $this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT);
         $isSingleEndpointVoyagerEnabled = $this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT);
+        $menuName = $this->getMenuName();
 
         if (
             $hookName = \add_submenu_page(
-                $this->getMenuName(),
+                $menuName,
                 __('GraphiQL', 'gatographql'),
                 $isSingleEndpointGraphiQLClientEnabled
                     ? __('🟡 GraphiQL (private)', 'gatographql')
                     : __('GraphiQL', 'gatographql'),
                 $schemaEditorAccessCapability,
-                $this->getMenuName(),
+                $menuName,
                 [$this->getGraphiQLMenuPage(), 'print']
             )
         ) {
@@ -117,7 +142,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         if (
             $hookName = \add_submenu_page(
-                $this->getMenuName(),
+                $menuName,
                 __('GraphQL Schema', 'gatographql'),
                 $isSingleEndpointVoyagerEnabled
                     ? __('🟡 Schema (private)', 'gatographql')
