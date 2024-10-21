@@ -154,6 +154,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking change: Allow to include Gato GraphQL as the engine to power another standalone plugin (#2897)
 * Added convenience class for standalone plugins (#2899)
 * Allow to fetch posts with `auto-draft` status (#2911)
+* Allow disabling the private endpoint (#2913)
 * Fixed: Fetching raw attribute sources with multiple nodes in blocks (#2909)
 * [Extensions][Persisted Queries] Created a new "Persisted Query Endpoints" module (from "Persisted Queries"), to disable external execution of persisted queries
 
