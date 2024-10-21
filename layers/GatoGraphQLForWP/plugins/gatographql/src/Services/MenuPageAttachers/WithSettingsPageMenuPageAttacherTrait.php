@@ -24,7 +24,7 @@ trait WithSettingsPageMenuPageAttacherTrait
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
     }
-    
+
     abstract protected function getMenuName(): string;
     abstract protected function getSettingsMenuPage(): SettingsMenuPage;
 }

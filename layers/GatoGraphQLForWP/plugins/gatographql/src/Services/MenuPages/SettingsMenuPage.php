@@ -21,8 +21,8 @@ use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
-
 use PoP\ComponentModel\Constants\FrameworkParams;
+
 use function update_option;
 
 /**

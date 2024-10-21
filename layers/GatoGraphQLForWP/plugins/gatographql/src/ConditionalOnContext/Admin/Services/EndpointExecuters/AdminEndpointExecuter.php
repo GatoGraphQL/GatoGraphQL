@@ -104,7 +104,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
         if (!$this->getUserAuthorization()->canAccessSchemaEditor()) {
             return false;
         }
-        
+
         /**
          * If the Private Endpoint module is disabled,
          * remove access to the "default" admin endpoint
