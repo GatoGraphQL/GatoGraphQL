@@ -13,7 +13,6 @@ use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use PoP\ComponentModel\App;
 use PoP\Root\Environment as RootEnvironment;
 
@@ -38,7 +37,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public final const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
-    private ?ModulesMenuPage $modulesMenuPage = null;
     private ?UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
@@ -53,19 +51,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             $this->markdownContentParser = $markdownContentParser;
         }
         return $this->markdownContentParser;
-    }
-    final public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
-    {
-        $this->modulesMenuPage = $modulesMenuPage;
-    }
-    final protected function getModulesMenuPage(): ModulesMenuPage
-    {
-        if ($this->modulesMenuPage === null) {
-            /** @var ModulesMenuPage */
-            $modulesMenuPage = $this->instanceManager->getInstance(ModulesMenuPage::class);
-            $this->modulesMenuPage = $modulesMenuPage;
-        }
-        return $this->modulesMenuPage;
     }
     final public function setUserAuthorizationSchemeRegistry(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
     {
