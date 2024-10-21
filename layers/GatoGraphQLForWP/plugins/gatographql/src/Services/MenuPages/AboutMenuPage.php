@@ -71,7 +71,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
                 PHP_EOL,
                 [
                     'License Key: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->licenseKey,
-                    'Extension: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->productName,
+                    'Product: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->productName,
                     'Instance Name: ' . ($extensionCommercialExtensionActivatedLicenseObjectProperties->instanceName ?? ''),
                     'Instance ID: ' . ($extensionCommercialExtensionActivatedLicenseObjectProperties->instanceID ?? ''),
                     'Status: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->status,
