@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
+use PoP\Root\Services\ServiceInterface;
 
 /**
  * Menu Page
  */
-interface MenuPageInterface
+interface MenuPageInterface extends ServiceInterface
 {
     /**
      * Print the menu page HTML content
