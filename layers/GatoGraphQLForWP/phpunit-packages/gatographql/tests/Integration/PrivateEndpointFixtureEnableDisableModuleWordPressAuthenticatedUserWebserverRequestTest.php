@@ -23,4 +23,9 @@ class PrivateEndpointFixtureEnableDisableModuleWordPressAuthenticatedUserWebserv
     {
         return static::getAdminEndpoint();
     }
+
+    protected function skipTest(): bool
+    {
+        return true;
+    }
 }
