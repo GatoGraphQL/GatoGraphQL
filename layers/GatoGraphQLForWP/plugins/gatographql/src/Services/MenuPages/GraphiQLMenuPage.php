@@ -180,25 +180,6 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             #
             #   Ctrl-Enter (or press the play button above)
             #
-            query {
-              posts(pagination: { limit: 3 }) {
-                id
-                title
-                date
-                url
-                author {
-                  id
-                  name
-                  url
-                }
-                tags {
-                  name
-                }
-                featuredImage {
-                  src
-                }
-              }
-            }
             GRAPHQL;
     }
 }
