@@ -308,21 +308,23 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
 
         $modulesMenuPage = $this->getModuleMenuPage();
-        /**
-         * @var callable
-         */
-        $callable = [$modulesMenuPage, 'print'];
-        if (
-            $hookName = \add_submenu_page(
-                $menuName,
-                __('Modules', 'gatographql'),
-                __('Modules', 'gatographql'),
-                'manage_options',
-                $modulesMenuPage->getScreenID(),
-                $callable
-            )
-        ) {
-            $modulesMenuPage->setHookName($hookName);
+        if ($modulesMenuPage->isServiceEnabled()) {
+            /**
+             * @var callable
+             */
+            $callable = [$modulesMenuPage, 'print'];
+            if (
+                $hookName = \add_submenu_page(
+                    $menuName,
+                    __('Modules', 'gatographql'),
+                    __('Modules', 'gatographql'),
+                    'manage_options',
+                    $modulesMenuPage->getScreenID(),
+                    $callable
+                )
+            ) {
+                $modulesMenuPage->setHookName($hookName);
+            }
         }
 
         $extensionsMenuPage = $this->getExtensionMenuPage();

@@ -222,6 +222,7 @@ class Plugin extends AbstractMainPlugin
             /** @var ModulesMenuPage */
             $modulesMenuPage = $systemInstanceManager->getInstance(ModulesMenuPage::class);
             if (
+                $modulesMenuPage->isServiceEnabled() &&
                 (App::query('page') === $modulesMenuPage->getScreenID())
                 && !$menuPageHelper->isDocumentationScreen()
             ) {
