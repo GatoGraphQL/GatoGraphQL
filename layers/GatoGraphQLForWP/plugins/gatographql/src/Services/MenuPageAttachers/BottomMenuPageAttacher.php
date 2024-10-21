@@ -247,7 +247,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * @see https://stackoverflow.com/questions/48632394/wordpress-add-custom-taxonomy-to-custom-menu
          */
         $graphQLEndpointCategoryTaxonomy = $this->getGraphQLEndpointCategoryTaxonomy();
-        if ($graphQLEndpointCategoryTaxonomy->isServiceEnabled()
+        if (
+            $graphQLEndpointCategoryTaxonomy->isServiceEnabled()
             && $this->addEndpointCategoriesToMenu()
         ) {
             $graphQLEndpointCategoriesLabel = $graphQLEndpointCategoryTaxonomy->getTaxonomyPluralNames(true);
