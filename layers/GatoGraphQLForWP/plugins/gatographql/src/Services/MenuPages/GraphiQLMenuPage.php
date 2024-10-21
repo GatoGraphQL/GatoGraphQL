@@ -156,7 +156,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
 
     protected function getDefaultQuery(): string
     {
-        return '
+        return <<<GRAPHQL
             # Welcome to GraphiQL
             #
             # GraphiQL is an in-browser tool for writing, validating, and
@@ -181,7 +181,6 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             #
             #   Ctrl-Enter (or press the play button above)
             #
-
             query {
               posts(pagination: { limit: 3 }) {
                 id
@@ -201,7 +200,6 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
                 }
               }
             }
-
-            ';
+            GRAPHQL;
     }
 }
