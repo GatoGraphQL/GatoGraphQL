@@ -252,7 +252,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $graphQLEndpointCategoryTaxonomy->isServiceEnabled()
             && $graphQLEndpointCategoryTaxonomy->showInMenu()
-            && $this->addEndpointCategoriesToMenu()
         ) {
             $graphQLEndpointCategoriesLabel = $graphQLEndpointCategoryTaxonomy->getTaxonomyPluralNames(true);
             $graphQLEndpointCategoriesCustomPostTypes = $graphQLEndpointCategoryTaxonomy->getCustomPostTypes();
@@ -434,11 +433,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $aboutMenuPage->setHookName($hookName);
         }
         // }
-    }
-
-    protected function addEndpointCategoriesToMenu(): bool
-    {
-        return true;
     }
 
     /**
