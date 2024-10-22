@@ -541,7 +541,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 class="wrap gatographql-tabpanel"
                 data-tab-content-target="#gatographql-primary-settings-nav-tab-content > .tab-content"
             >
-                <h1><?php \esc_html_e('Gato GraphQL — Settings', 'gatographql'); ?></h1>
+                <h1><?php print(\esc_html($this->getPageTitle())); ?></h1>
                 <?php \settings_errors(); ?>
                 <div class="nav-tab-container">
                     <!-- Tabs -->
@@ -704,6 +704,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 </div>
             </div>
         <?php
+    }
+
+    protected function getPageTitle(): string
+    {
+        return \__('Gato GraphQL — Settings', 'gatographql');
     }
 
     /**
