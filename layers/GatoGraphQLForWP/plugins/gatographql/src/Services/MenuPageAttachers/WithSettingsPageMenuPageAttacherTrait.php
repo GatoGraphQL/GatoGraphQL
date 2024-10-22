@@ -13,7 +13,8 @@ trait WithSettingsPageMenuPageAttacherTrait
     protected function addSettingsMenuPage(): void
     {
         $menuName = $this->getMenuName();
-        $menuPageTitle = $this->getMenuPageTitle();
+        $settingsMenuPage = $this->getSettingsMenuPage();
+        $menuPageTitle = $settingsMenuPage->getMenuPageTitle();
         if (
             $hookName = add_submenu_page(
                 $menuName,
@@ -24,7 +25,7 @@ trait WithSettingsPageMenuPageAttacherTrait
                 [$this->getSettingsMenuPage(), 'print'],
             )
         ) {
-            $this->getSettingsMenuPage()->setHookName($hookName);
+            $settingsMenuPage->setHookName($hookName);
         }
     }
 
