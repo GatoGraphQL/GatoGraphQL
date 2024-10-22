@@ -251,6 +251,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $graphQLEndpointCategoryTaxonomy = $this->getGraphQLEndpointCategoryTaxonomy();
         if (
             $graphQLEndpointCategoryTaxonomy->isServiceEnabled()
+            && $graphQLEndpointCategoryTaxonomy->showInMenu()
             && $this->addEndpointCategoriesToMenu()
         ) {
             $graphQLEndpointCategoriesLabel = $graphQLEndpointCategoryTaxonomy->getTaxonomyPluralNames(true);
