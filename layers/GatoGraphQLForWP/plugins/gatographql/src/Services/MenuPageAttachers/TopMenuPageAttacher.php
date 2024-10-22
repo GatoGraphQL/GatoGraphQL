@@ -13,6 +13,8 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 
+use function add_submenu_page;
+
 class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
     use WithSettingsPageMenuPageAttacherTrait;
@@ -126,7 +128,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $menuName = $this->getMenuName();
 
         if (
-            $hookName = \add_submenu_page(
+            $hookName = add_submenu_page(
                 $menuName,
                 __('GraphiQL', 'gatographql'),
                 $isSingleEndpointGraphiQLClientEnabled
@@ -141,7 +143,7 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
 
         if (
-            $hookName = \add_submenu_page(
+            $hookName = add_submenu_page(
                 $menuName,
                 __('GraphQL Schema', 'gatographql'),
                 $isSingleEndpointVoyagerEnabled

@@ -6,22 +6,26 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 
+use function add_submenu_page;
+
 trait WithSettingsPageMenuPageAttacherTrait
 {
     protected function addSettingsMenuPage(): void
     {
         $menuName = $this->getMenuName();
+        $settingsMenuPage = $this->getSettingsMenuPage();
+        $menuPageTitle = $settingsMenuPage->getMenuPageTitle();
         if (
-            $hookName = \add_submenu_page(
+            $hookName = add_submenu_page(
                 $menuName,
-                __('Settings', 'gatographql'),
-                __('Settings', 'gatographql'),
+                $menuPageTitle,
+                $menuPageTitle,
                 'manage_options',
                 $this->getSettingsMenuPage()->getScreenID(),
                 [$this->getSettingsMenuPage(), 'print'],
             )
         ) {
-            $this->getSettingsMenuPage()->setHookName($hookName);
+            $settingsMenuPage->setHookName($hookName);
         }
     }
 

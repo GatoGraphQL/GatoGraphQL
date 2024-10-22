@@ -153,6 +153,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         return 'settings';
     }
 
+    public function getMenuPageTitle(): string
+    {
+        return __('Settings', 'gatographql');
+    }
+
     /**
      * Initialize the class instance
      */

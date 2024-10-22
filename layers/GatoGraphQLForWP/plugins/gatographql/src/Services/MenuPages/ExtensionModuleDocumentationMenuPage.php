@@ -27,6 +27,11 @@ class ExtensionModuleDocumentationMenuPage extends AbstractExtensionModuleDocume
         return $this->getExtensionsMenuPage()->getMenuPageSlug();
     }
 
+    public function getMenuPageTitle(): string
+    {
+        return $this->getExtensionsMenuPage()->getMenuPageTitle();
+    }
+
     public function isServiceEnabled(): bool
     {
         return $this->getExtensionsMenuPage()->isServiceEnabled();
