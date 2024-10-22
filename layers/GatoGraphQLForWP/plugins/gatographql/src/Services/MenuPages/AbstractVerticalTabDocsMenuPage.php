@@ -203,7 +203,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return sprintf(
-            \__('%s - %s', 'gatographql'),
+            \__('%s — %s', 'gatographql'),
             $moduleConfiguration->getPluginName(),
             $this->getMenuPageTitle()
         );
