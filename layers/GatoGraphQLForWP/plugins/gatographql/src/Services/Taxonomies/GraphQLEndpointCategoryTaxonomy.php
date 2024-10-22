@@ -8,12 +8,9 @@ use GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\Root\Services\StandaloneServiceTrait;
 
 class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 {
-    use StandaloneServiceTrait;
-
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
     final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void

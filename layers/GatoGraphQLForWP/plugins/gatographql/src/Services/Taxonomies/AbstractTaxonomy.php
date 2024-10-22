@@ -7,11 +7,48 @@ namespace GatoGraphQL\GatoGraphQL\Services\Taxonomies;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
+use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
 use PoP\ComponentModel\App;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\StandaloneServiceTrait;
 
 abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface
 {
+    use StandaloneServiceTrait;
+
+    private ?PluginMenu $pluginMenu = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
+
+    final public function setPluginMenu(PluginMenu $pluginMenu): void
+    {
+        $this->pluginMenu = $pluginMenu;
+    }
+    final protected function getPluginMenu(): PluginMenu
+    {
+        if ($this->pluginMenu === null) {
+            /** @var PluginMenu */
+            $pluginMenu = InstanceManagerFacade::getInstance()->getInstance(PluginMenu::class);
+            $this->pluginMenu = $pluginMenu;
+        }
+        return $this->pluginMenu;
+    }
+    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
+    {
+        $this->userAuthorization = $userAuthorization;
+    }
+    final protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = InstanceManagerFacade::getInstance()->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
+    }
+
     /**
      * Add the hook to initialize the different taxonomies
      */
@@ -26,7 +63,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
 
         \add_action(
             'init',
-            $this->initTaxonomy(...)
+            $this->initTaxonomy(...),
         );
     }
 
@@ -72,16 +109,25 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             $this->getTaxonomyName(false),
             $this->getTaxonomyPluralNames(false)
         );
-        $args = array(
-            'label' => $names_uc,
-            'labels' => $labels,
-            'hierarchical' => true,
-            'public' => true,
-            'show_ui' => true,
-            'show_in_nav_menus' => true,
-            'show_tagcloud' => false,
-            'show_in_rest' => true,
-            'show_admin_column' => $this->showAdminColumn(),
+        $securityTaxonomyArgs = [
+            'public' => $this->isPublic(),
+            'publicly_queryable' => $this->isPubliclyQueryable(),
+        ];
+        $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
+        $showInMenu = $this->showInMenu();
+        $args = array_merge(
+            $securityTaxonomyArgs,
+            [
+                'label' => $names_uc,
+                'labels' => $labels,
+                'hierarchical' => true,
+                'show_tagcloud' => false,
+                'show_in_nav_menus' => $showInMenu !== false,
+                'show_ui' => $showInMenu !== false,
+                'show_in_menu' => $showInMenu,
+                'show_in_rest' => $canAccessSchemaEditor,
+                'show_admin_column' => $this->showAdminColumn(),
+            ]
         );
         /**
          * From documentation concerning 2nd parameter ($object_type):
@@ -99,6 +145,30 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             $this->getCustomPostTypes(),
             $args
         );
+    }
+
+    protected function isPublic(): bool
+    {
+        return true;
+    }
+
+    protected function isPubliclyQueryable(): bool
+    {
+        return $this->isPublic();
+    }
+
+    public function getMenu(): MenuInterface
+    {
+        return $this->getPluginMenu();
+    }
+
+    /**
+     * Show in menu
+     */
+    public function showInMenu(): string|false
+    {
+        $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
+        return $canAccessSchemaEditor ? $this->getMenu()->getName() : false;
     }
 
     protected function showAdminColumn(): bool
