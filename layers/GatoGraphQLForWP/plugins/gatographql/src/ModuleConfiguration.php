@@ -9,6 +9,29 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
+    /**
+     * Namespace the entities to store in DB:
+     * CPT, taxonomies, etc.
+     *
+     * Useful for standalone plugins to override
+     * this value, and automatically have entities
+     * not conflict with Gato GraphQL (or other
+     * standalone plugins).
+     * 
+     * Use 7 chars to identify it, as CPTs have
+     * a max length of 20 chars.
+     */
+    public function getPluginNamespaceForDB(): string
+    {
+        $envVariable = Environment::PLUGIN_NAMESPACE_FOR_DB;
+        $defaultValue = 'graphql';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+    
     // /**
     //  * URL base for the module, pointing to gatographql.com
     //  */
