@@ -629,6 +629,14 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
 
     /**
+     * Show in menu
+     */
+    protected function showInMenu(bool $canAccessSchemaEditor): string|false
+    {
+        return $canAccessSchemaEditor ? $this->getMenu()->getName() : false;
+    }
+
+    /**
      * The position on which to add the CPT on the menu.
      * This number will be used to initialize the CPT earlier or later
      */
@@ -678,6 +686,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'publicly_queryable' => $this->isPubliclyQueryable(),
         ];
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
+        $showInMenu = $this->showInMenu($canAccessSchemaEditor);
         /** @var array<string,mixed> */
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
@@ -690,7 +699,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'show_in_admin_bar' => $this->showInAdminBar(),
                 'show_in_nav_menus' => true,
                 'show_ui' => true,
-                'show_in_menu' => $canAccessSchemaEditor ? $this->getMenu()->getName() : false,
+                'show_in_menu' => $showInMenu,
                 'show_in_rest' => $canAccessSchemaEditor,
                 'supports' => [
                     'title',
