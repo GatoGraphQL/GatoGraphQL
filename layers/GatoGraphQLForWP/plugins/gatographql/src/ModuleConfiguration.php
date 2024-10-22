@@ -280,6 +280,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     protected function enableHook(string $envVariable): bool
     {
         return match ($envVariable) {
+            Environment::PLUGIN_NAMESPACE_FOR_DB,
             Environment::GATOGRAPHQL_WEBSITE_URL,
             Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL,
             Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL,
