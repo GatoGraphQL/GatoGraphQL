@@ -24,6 +24,8 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use PoP\Root\App;
 
+use function add_submenu_page;
+
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
     use WithSettingsPageMenuPageAttacherTrait;
@@ -301,7 +303,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             /**
              * Finally add the "Endpoint Categories" link to the menu.
              */
-            \add_submenu_page(
+            add_submenu_page(
                 $menuName,
                 $graphQLEndpointCategoriesLabel,
                 $graphQLEndpointCategoriesLabel,
@@ -317,7 +319,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
              */
             $callable = [$modulesMenuPage, 'print'];
             if (
-                $hookName = \add_submenu_page(
+                $hookName = add_submenu_page(
                     $menuName,
                     __('Modules', 'gatographql'),
                     __('Modules', 'gatographql'),
@@ -337,7 +339,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
              */
             $callable = [$extensionsMenuPage, 'print'];
             if (
-                $hookName = \add_submenu_page(
+                $hookName = add_submenu_page(
                     $menuName,
                     __('Extensions', 'gatographql'),
                     __('Extensions', 'gatographql'),
@@ -365,7 +367,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
              */
             $callable = [$extensionDocsMenuPage, 'print'];
             if (
-                $hookName = \add_submenu_page(
+                $hookName = add_submenu_page(
                     $menuName,
                     __('Extension Reference Docs', 'gatographql'),
                     __('Extension Reference Docs', 'gatographql'),
@@ -393,7 +395,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
              */
             $callable = [$tutorialMenuPage, 'print'];
             if (
-                $hookName = \add_submenu_page(
+                $hookName = add_submenu_page(
                     $menuName,
                     __('Schema Tutorial', 'gatographql'),
                     __('Schema Tutorial', 'gatographql'),
@@ -414,7 +416,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $aboutMenuPage = $this->getReleaseNoteOrAboutMenuPage();
         // if (App::query('page') === $aboutMenuPage->getScreenID()) {
         if (
-            $hookName = \add_submenu_page(
+            $hookName = add_submenu_page(
                 $menuName,
                 __('About', 'gatographql'),
                 __('About', 'gatographql'),
