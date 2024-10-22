@@ -641,10 +641,10 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Show in menu
      */
-    protected function showInMenu(): string|false
+    protected function showInMenu(): ?string
     {
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
-        return $canAccessSchemaEditor ? $this->getMenu()->getName() : false;
+        return $canAccessSchemaEditor ? $this->getMenu()->getName() : null;
     }
 
     /**
@@ -708,9 +708,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'hierarchical' => $this->isAPIHierarchyModuleEnabled() && $this->isHierarchical(),
                 'exclude_from_search' => true,
                 'show_in_admin_bar' => $this->showInAdminBar(),
-                'show_in_nav_menus' => $showInMenu !== false,
-                'show_ui' => $showInMenu !== false,
-                'show_in_menu' => $showInMenu,
+                'show_in_nav_menus' => $showInMenu !== null,
+                'show_ui' => $showInMenu !== null,
+                'show_in_menu' => $showInMenu ?? false,
                 'show_in_rest' => $canAccessSchemaEditor,
                 'supports' => [
                     'title',

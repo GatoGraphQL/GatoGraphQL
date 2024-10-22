@@ -27,5 +27,5 @@ interface TaxonomyInterface
     /**
      * Show in menu
      */
-    public function showInMenu(): string|false;
+    public function showInMenu(): ?string;
 }

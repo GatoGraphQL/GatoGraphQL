@@ -122,9 +122,9 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
                 'labels' => $labels,
                 'hierarchical' => true,
                 'show_tagcloud' => false,
-                'show_in_nav_menus' => $showInMenu !== false,
-                'show_ui' => $showInMenu !== false,
-                'show_in_menu' => $showInMenu !== false,
+                'show_in_nav_menus' => $showInMenu !== null,
+                'show_ui' => $showInMenu !== null,
+                'show_in_menu' => $showInMenu !== null,
                 'show_in_rest' => $canAccessSchemaEditor,
                 'show_admin_column' => $this->showAdminColumn(),
             ]
@@ -165,10 +165,10 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     /**
      * Show in menu
      */
-    public function showInMenu(): string|false
+    public function showInMenu(): ?string
     {
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
-        return $canAccessSchemaEditor ? $this->getMenu()->getName() : false;
+        return $canAccessSchemaEditor ? $this->getMenu()->getName() : null;
     }
 
     protected function showAdminColumn(): bool
