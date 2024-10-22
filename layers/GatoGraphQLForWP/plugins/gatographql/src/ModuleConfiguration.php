@@ -24,12 +24,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getPluginNamespaceForDB(): string
     {
         $envVariable = Environment::PLUGIN_NAMESPACE_FOR_DB;
-        $defaultValue = 'graphql';
+        $defaultValue = $this->getPluginNamespaceForDBDefaultValue();
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
         );
+    }
+
+    protected function getPluginNamespaceForDBDefaultValue(): string
+    {
+        return 'graphql';
     }
 
     /**
