@@ -39,7 +39,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 
     public function getMenuPageTitle(): string
     {
-        return __('Extension docs', 'gatographql');
+        return __('Extension Reference Docs', 'gatographql');
     }
 
     public function isServiceEnabled(): bool
