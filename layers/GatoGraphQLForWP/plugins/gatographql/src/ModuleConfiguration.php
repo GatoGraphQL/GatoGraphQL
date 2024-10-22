@@ -38,6 +38,23 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
+     * Plugin name.
+     *
+     * Useful for standalone plugins to override
+     * this value.
+     */
+    public function getPluginName(): string
+    {
+        $envVariable = Environment::PLUGIN_NAME;
+        $defaultValue = \__('Gato GraphQL', 'gatographql');
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+
+    /**
      * Group the fields under the type when printing it for the user
      */
     public function groupFieldsUnderTypeForPrint(): bool
