@@ -9,6 +9,8 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface
 {
+    use TaxonomyTrait;
+
     /**
      * Add the hook to initialize the different taxonomies
      */
@@ -101,5 +103,10 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     protected function showAdminColumn(): bool
     {
         return $this->isHierarchical();
+    }
+
+    public function getTaxonomy(): string
+    {
+        return $this->getTaxonomyNamespace() . '-' . strtolower(str_replace(' ', '-', $this->getTaxonomyName(false)));
     }
 }
