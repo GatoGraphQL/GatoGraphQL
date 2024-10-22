@@ -7,6 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -196,7 +198,16 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         return false;
     }
 
-    abstract protected function getPageTitle(): string;
+    protected function getPageTitle(): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return sprintf(
+            \__('%s - %s', 'gatographql'),
+            $moduleConfiguration->getPluginName(),
+            $this->getMenuPageTitle()
+        );
+    }
 
     protected function getPageHeaderHTML(): string
     {

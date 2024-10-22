@@ -47,11 +47,6 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         return $this->getExtensionsMenuPage()->isServiceEnabled();
     }
 
-    protected function getPageTitle(): string
-    {
-        return \__('Gato GraphQL - Extension Reference Docs', 'gatographql');
-    }
-
     protected function getContentID(): string
     {
         return 'gatographql-extension-docs';

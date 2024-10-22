@@ -48,11 +48,6 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         return __('Extensions', 'gatographql');
     }
 
-    protected function getHeader(): string
-    {
-        return \__('Gato GraphQL — Extensions', 'gatographql');
-    }
-
     protected function hasViews(): bool
     {
         return false;

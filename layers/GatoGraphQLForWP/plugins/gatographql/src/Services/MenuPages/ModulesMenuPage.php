@@ -26,11 +26,6 @@ class ModulesMenuPage extends AbstractItemListTableMenuPage
         return __('Modules', 'gatographql');
     }
 
-    protected function getHeader(): string
-    {
-        return \__('Gato GraphQL — Modules', 'gatographql');
-    }
-
     protected function hasViews(): bool
     {
         return true;

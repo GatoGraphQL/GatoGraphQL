@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Admin\Tables\TableInterface;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use PoP\ComponentModel\App;
 
 /**
  * Table menu page
@@ -13,7 +16,16 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
 {
     protected ?TableInterface $tableObject;
 
-    abstract protected function getHeader(): string;
+    protected function getHeader(): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return sprintf(
+            \__('%s - %s', 'gatographql'),
+            $moduleConfiguration->getPluginName(),
+            $this->getMenuPageTitle()
+        );
+    }
 
     protected function hasViews(): bool
     {
