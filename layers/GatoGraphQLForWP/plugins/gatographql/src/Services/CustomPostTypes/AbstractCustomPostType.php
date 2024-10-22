@@ -687,7 +687,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         ];
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         $showInMenu = $this->showInMenu($canAccessSchemaEditor);
-        $isPublic = $this->isPublic();
         /** @var array<string,mixed> */
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
@@ -698,8 +697,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'hierarchical' => $this->isAPIHierarchyModuleEnabled() && $this->isHierarchical(),
                 'exclude_from_search' => true,
                 'show_in_admin_bar' => $this->showInAdminBar(),
-                'show_in_nav_menus' => $isPublic,
-                'show_ui' => $isPublic,
+                'show_in_nav_menus' => $showInMenu !== false,
+                'show_ui' => $showInMenu !== false,
                 'show_in_menu' => $showInMenu,
                 'show_in_rest' => $canAccessSchemaEditor,
                 'supports' => [
