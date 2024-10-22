@@ -23,4 +23,9 @@ interface TaxonomyInterface
     public function getCustomPostTypes(): array;
 
     public function isHierarchical(): bool;
+
+    /**
+     * Show in menu
+     */
+    public function showInMenu(): string|false;
 }
