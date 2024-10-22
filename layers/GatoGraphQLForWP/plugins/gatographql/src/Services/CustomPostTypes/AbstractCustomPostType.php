@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
@@ -31,7 +33,6 @@ use function wp_dropdown_categories;
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
     use BasicServiceTrait;
-    use CustomPostTypeTrait;
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -573,6 +574,14 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     {
         return $this->getCustomPostTypeNamespace() . '-' . strtolower(str_replace(' ', '-', $this->getCustomPostTypeName()));
     }
+
+    protected function getCustomPostTypeNamespace(): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getPluginNamespaceForDB();
+    }
+    
     /**
      * Custom Post Type plural name
      *

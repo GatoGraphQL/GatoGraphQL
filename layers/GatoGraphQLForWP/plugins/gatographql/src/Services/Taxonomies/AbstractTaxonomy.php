@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\Taxonomies;
 
 use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface
 {
-    use TaxonomyTrait;
-
     /**
      * Add the hook to initialize the different taxonomies
      */
@@ -108,5 +109,12 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     public function getTaxonomy(): string
     {
         return $this->getTaxonomyNamespace() . '-' . strtolower(str_replace(' ', '-', $this->getTaxonomyName(false)));
+    }
+
+    protected function getTaxonomyNamespace(): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getPluginNamespaceForDB();
     }
 }
