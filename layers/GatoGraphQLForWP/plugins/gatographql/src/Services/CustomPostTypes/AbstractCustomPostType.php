@@ -31,6 +31,7 @@ use function wp_dropdown_categories;
 abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedService implements CustomPostTypeInterface
 {
     use BasicServiceTrait;
+    use CustomPostTypeTrait;
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -570,7 +571,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function getCustomPostType(): string
     {
-        return strtolower(str_replace(' ', '-', $this->getCustomPostTypeName()));
+        return $this->getCustomPostTypeNamespace() . '-' . strtolower(str_replace(' ', '-', $this->getCustomPostTypeName()));
     }
     /**
      * Custom Post Type plural name
