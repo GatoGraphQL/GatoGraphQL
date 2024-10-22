@@ -124,7 +124,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
                 'show_tagcloud' => false,
                 'show_in_nav_menus' => $showInMenu !== false,
                 'show_ui' => $showInMenu !== false,
-                'show_in_menu' => $showInMenu,
+                'show_in_menu' => $showInMenu !== false,
                 'show_in_rest' => $canAccessSchemaEditor,
                 'show_admin_column' => $this->showAdminColumn(),
             ]
