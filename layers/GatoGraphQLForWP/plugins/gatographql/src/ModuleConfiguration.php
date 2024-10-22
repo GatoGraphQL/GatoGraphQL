@@ -31,22 +31,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $defaultValue,
         );
     }
-    
-    // /**
-    //  * URL base for the module, pointing to gatographql.com
-    //  */
-    // public function getModuleURLBase(): string
-    // {
-    //     // Define properties
-    //     $envVariable = Environment::MODULE_URL_BASE;
-    //     $defaultValue = 'https://gatographql.com/modules/';
-    //     // Initialize property from the environment/hook
-    //     $this->retrieveConfigurationValueOrUseDefault(
-    //         $envVariable,
-    //         $defaultValue
-    //     );
-    //     return $this->configuration[$envVariable];
-    // }
 
     /**
      * Group the fields under the type when printing it for the user
