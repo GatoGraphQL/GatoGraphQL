@@ -40,12 +40,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
 
     protected function getContentToPrint(): string
     {
-        $content = $this->getMarkdownContent(
-            'about',
-            'general',
-            $this->getMarkdownContentOptions()
-        );
-
+        $content = $this->getPageMarkdownContent();
         if ($content === null) {
             return sprintf(
                 '<p>%s</p>',
@@ -115,6 +110,15 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $content = str_replace(array_keys($replacements), array_values($replacements), $content);
 
         return $content;
+    }
+
+    protected function getPageMarkdownContent(): ?string
+    {
+        return $this->getMarkdownContent(
+            'about',
+            'general',
+            $this->getMarkdownContentOptions()
+        );
     }
 
     /**
