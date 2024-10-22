@@ -17,7 +17,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      * this value, and automatically have entities
      * not conflict with Gato GraphQL (or other
      * standalone plugins).
-     * 
+     *
      * Use 7 chars to identify it, as CPTs have
      * a max length of 20 chars.
      */

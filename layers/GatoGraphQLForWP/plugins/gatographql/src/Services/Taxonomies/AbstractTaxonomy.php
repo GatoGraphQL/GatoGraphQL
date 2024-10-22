@@ -21,7 +21,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
 
     private ?PluginMenu $pluginMenu = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
-    
+
     final public function setPluginMenu(PluginMenu $pluginMenu): void
     {
         $this->pluginMenu = $pluginMenu;
@@ -146,7 +146,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             $args
         );
     }
-    
+
     protected function isPublic(): bool
     {
         return true;

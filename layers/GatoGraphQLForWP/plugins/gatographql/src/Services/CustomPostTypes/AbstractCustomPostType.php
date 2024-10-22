@@ -581,7 +581,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getPluginNamespaceForDB();
     }
-    
+
     /**
      * Custom Post Type plural name
      *
