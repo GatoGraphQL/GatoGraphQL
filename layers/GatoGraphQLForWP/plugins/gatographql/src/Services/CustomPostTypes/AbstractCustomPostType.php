@@ -641,8 +641,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Show in menu
      */
-    protected function showInMenu(bool $canAccessSchemaEditor): string|false
+    protected function showInMenu(): string|false
     {
+        $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         return $canAccessSchemaEditor ? $this->getMenu()->getName() : false;
     }
 
@@ -696,7 +697,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'publicly_queryable' => $this->isPubliclyQueryable(),
         ];
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
-        $showInMenu = $this->showInMenu($canAccessSchemaEditor);
+        $showInMenu = $this->showInMenu();
         /** @var array<string,mixed> */
         $postTypeArgs = array_merge(
             $securityPostTypeArgs,
