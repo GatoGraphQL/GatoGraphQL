@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\UserInterfaceFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
@@ -570,8 +572,16 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function getCustomPostType(): string
     {
-        return strtolower(str_replace(' ', '-', $this->getCustomPostTypeName()));
+        return $this->getCustomPostTypeNamespace() . '-' . strtolower(str_replace(' ', '-', $this->getCustomPostTypeName()));
     }
+
+    protected function getCustomPostTypeNamespace(): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getPluginNamespaceForDB();
+    }
+    
     /**
      * Custom Post Type plural name
      *

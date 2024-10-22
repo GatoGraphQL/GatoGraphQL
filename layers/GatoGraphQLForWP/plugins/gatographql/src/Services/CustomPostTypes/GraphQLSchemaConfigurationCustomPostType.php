@@ -33,7 +33,7 @@ class GraphQLSchemaConfigurationCustomPostType extends AbstractForPluginOwnUseCu
      */
     public function getCustomPostType(): string
     {
-        return 'graphql-schemaconfig';
+        return $this->getCustomPostTypeNamespace() . '-schemaconfig';
     }
 
     /**

@@ -40,7 +40,7 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 
     public function getTaxonomy(): string
     {
-        return 'graphql-endpoint-category';
+        return $this->getTaxonomyNamespace() . '-endpoint-category';
     }
 
     public function getTaxonomyName(bool $titleCase = true): string
