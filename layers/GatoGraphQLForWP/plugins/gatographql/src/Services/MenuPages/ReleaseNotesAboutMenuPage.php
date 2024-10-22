@@ -34,6 +34,11 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
         return $this->getAboutMenuPage()->getMenuPageSlug();
     }
 
+    public function getMenuPageTitle(): string
+    {
+        return $this->getAboutMenuPage()->getMenuPageTitle();
+    }
+
     /**
      * Validate the param also
      */

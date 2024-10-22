@@ -21,4 +21,5 @@ interface MenuPageInterface extends ServiceInterface
     public function setHookName(string $hookName): void;
     public function getHookName(): ?string;
     public function getMenuPageSlug(): string;
+    public function getMenuPageTitle(): string;
 }

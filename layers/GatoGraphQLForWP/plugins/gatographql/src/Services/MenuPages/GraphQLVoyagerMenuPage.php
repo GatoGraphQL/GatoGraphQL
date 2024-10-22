@@ -56,6 +56,11 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
         return 'voyager';
     }
 
+    public function getMenuPageTitle(): string
+    {
+        return __('Schema', 'gatographql');
+    }
+
     /**
      * Enqueue the required assets and initialize the localized scripts
      */

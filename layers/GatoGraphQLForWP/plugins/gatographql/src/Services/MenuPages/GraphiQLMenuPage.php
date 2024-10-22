@@ -66,6 +66,11 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         return 'graphiql';
     }
 
+    public function getMenuPageTitle(): string
+    {
+        return __('GraphiQL', 'gatographql');
+    }
+
     /**
      * Enqueue the required assets and initialize the localized scripts
      */

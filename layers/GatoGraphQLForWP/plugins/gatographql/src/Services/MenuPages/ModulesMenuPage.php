@@ -21,6 +21,11 @@ class ModulesMenuPage extends AbstractItemListTableMenuPage
         return 'modules';
     }
 
+    public function getMenuPageTitle(): string
+    {
+        return __('Modules', 'gatographql');
+    }
+
     protected function getHeader(): string
     {
         return \__('Gato GraphQL — Modules', 'gatographql');

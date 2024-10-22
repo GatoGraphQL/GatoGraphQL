@@ -22,6 +22,11 @@ class AboutMenuPage extends AbstractDocsMenuPage
         return 'about';
     }
 
+    public function getMenuPageTitle(): string
+    {
+        return __('About', 'gatographql');
+    }
+
     protected function useTabpanelForContent(): bool
     {
         return true;
