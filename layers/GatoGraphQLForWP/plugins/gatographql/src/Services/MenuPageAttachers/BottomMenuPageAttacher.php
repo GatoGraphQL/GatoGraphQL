@@ -314,6 +314,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         $modulesMenuPage = $this->getModuleMenuPage();
         if ($modulesMenuPage->isServiceEnabled()) {
+            $modulesMenuPageTitle = $modulesMenuPage->getMenuPageTitle();
             /**
              * @var callable
              */
@@ -321,8 +322,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             if (
                 $hookName = add_submenu_page(
                     $menuName,
-                    __('Modules', 'gatographql'),
-                    __('Modules', 'gatographql'),
+                    $modulesMenuPageTitle,
+                    $modulesMenuPageTitle,
                     'manage_options',
                     $modulesMenuPage->getScreenID(),
                     $callable
@@ -334,6 +335,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         $extensionsMenuPage = $this->getExtensionMenuPage();
         if ($extensionsMenuPage->isServiceEnabled()) {
+            $extensionsMenuPageTitle = $extensionsMenuPage->getMenuPageTitle();
             /**
              * @var callable
              */
@@ -341,8 +343,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             if (
                 $hookName = add_submenu_page(
                     $menuName,
-                    __('Extensions', 'gatographql'),
-                    __('Extensions', 'gatographql'),
+                    $extensionsMenuPageTitle,
+                    $extensionsMenuPageTitle,
                     'manage_options',
                     $extensionsMenuPage->getScreenID(),
                     $callable
@@ -362,6 +364,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $extensionDocsMenuPage->isServiceEnabled()
             && App::query('page') === $extensionDocsMenuPage->getScreenID()
         ) {
+            $extensionDocsMenuPageTitle = $extensionDocsMenuPage->getMenuPageTitle();
             /**
              * @var callable
              */
@@ -369,8 +372,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             if (
                 $hookName = add_submenu_page(
                     $menuName,
-                    __('Extension Reference Docs', 'gatographql'),
-                    __('Extension Reference Docs', 'gatographql'),
+                    $extensionDocsMenuPageTitle,
+                    $extensionDocsMenuPageTitle,
                     'manage_options',
                     $extensionDocsMenuPage->getScreenID(),
                     $callable
@@ -390,6 +393,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->enableSchemaTutorialPage()) {
             $tutorialMenuPage = $this->getTutorialMenuPage();
+            $tutorialMenuPageTitle = $tutorialMenuPage->getMenuPageTitle();
             /**
              * @var callable
              */
@@ -397,8 +401,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             if (
                 $hookName = add_submenu_page(
                     $menuName,
-                    __('Schema Tutorial', 'gatographql'),
-                    __('Schema Tutorial', 'gatographql'),
+                    $tutorialMenuPageTitle,
+                    $tutorialMenuPageTitle,
                     $schemaEditorAccessCapability,
                     $tutorialMenuPage->getScreenID(),
                     $callable
@@ -414,12 +418,13 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
          * to display the release notes on the modal window
          */
         $aboutMenuPage = $this->getReleaseNoteOrAboutMenuPage();
+        $aboutMenuPageTitle = $aboutMenuPage->getMenuPageTitle();
         // if (App::query('page') === $aboutMenuPage->getScreenID()) {
         if (
             $hookName = add_submenu_page(
                 $menuName,
-                __('About', 'gatographql'),
-                __('About', 'gatographql'),
+                $aboutMenuPageTitle,
+                $aboutMenuPageTitle,
                 'manage_options',
                 $aboutMenuPage->getScreenID(),
                 [$aboutMenuPage, 'print']
