@@ -70,7 +70,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
 <br/>
 
-<div class="notice notice-warning" markdown=1>
+<div class="notice notice-warning inline" markdown=1>
 
 <strong>Subscribe to our newsletter</strong> to receive timely updates about Gato GraphQL:
 

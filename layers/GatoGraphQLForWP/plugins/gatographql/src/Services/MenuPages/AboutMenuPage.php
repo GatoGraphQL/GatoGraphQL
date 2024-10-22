@@ -114,7 +114,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         }
         $content = str_replace(array_keys($replacements), array_values($replacements), $content);
 
-        return $content;
+        return sprintf('<div class="wrap" markdown=1>%s</div>', $content);
     }
 
     protected function getPageMarkdownContent(): ?string
