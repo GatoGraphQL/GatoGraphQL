@@ -170,7 +170,10 @@ class ExtensionManager extends AbstractPluginManager
                      * because it otherwise throws "`App::$appThread`
                      * no initialized" error
                      */
-                    'https://gatographql.com/shop/my-orders',
+                    sprintf(
+                        '%s/shop/my-orders',
+                        $mainPlugin->getPluginWebsiteURL()
+                    ),
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 )
             );
