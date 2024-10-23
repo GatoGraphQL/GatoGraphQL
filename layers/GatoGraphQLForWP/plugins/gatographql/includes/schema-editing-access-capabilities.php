@@ -10,10 +10,10 @@ require_once __DIR__ . '/capabilities.php';
  * and the Bundle installed).
  */
 if (!function_exists('registerGatoGraphQLSchemaEditingAccessCapabilities')) {
-    function registerGatoGraphQLSchemaEditingAccessCapabilities(string $file): void
-    {
-        $capability = constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA');
-
+    function registerGatoGraphQLSchemaEditingAccessCapabilities(
+        string $file,
+        string $capability
+    ): void {
         /**
          * This method cannot be invoked from within "plugins_loaded",
          * then place it here.

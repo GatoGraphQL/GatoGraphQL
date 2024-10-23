@@ -70,7 +70,10 @@ if (!checkGatoGraphQLMemoryRequirements($pluginName)) {
  * the capabilities.
  */
 require_once __DIR__ . '/includes/schema-editing-access-capabilities.php';
-registerGatoGraphQLSchemaEditingAccessCapabilities(__FILE__);
+registerGatoGraphQLSchemaEditingAccessCapabilities(
+    __FILE__,
+    constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA')
+);
 
 /**
  * The commit hash is added to the plugin version 
