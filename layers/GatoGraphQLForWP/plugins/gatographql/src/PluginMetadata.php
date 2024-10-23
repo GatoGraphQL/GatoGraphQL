@@ -10,6 +10,7 @@ final class PluginMetadata
     final public const DOCS_GITHUB_REPO_OWNER = 'GatoGraphQL';
     final public const DOCS_GITHUB_REPO_NAME = 'GatoGraphQL';
 
+    final public const PLUGIN_NAMESPACE = 'gatographql';
     final public const WPCONFIG_CONST_NAMESPACE = 'GATOGRAPHQL';
     final public const WPCONTENT_FOLDER_NAME = 'gatographql';
 }
