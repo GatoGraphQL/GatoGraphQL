@@ -47,7 +47,8 @@ class PluginEnvironment
             $baseCacheDir = constant('WP_CONTENT_DIR');
         }
 
-        return $baseCacheDir . \DIRECTORY_SEPARATOR . $mainPlugin->getPluginWPContentFolderName();
+        $dirName = $mainPlugin->getPluginWPContentFolderName();
+        return $baseCacheDir . \DIRECTORY_SEPARATOR . $dirName;
     }
 
     /**
