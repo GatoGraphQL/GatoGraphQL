@@ -95,7 +95,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      */
     public function getPluginWPConfigConstantNamespace(): string
     {
-        return PluginApp::getMainPluginManager()->getPlugin()->getPluginWPConfigConstantNamespace();
+        return PluginApp::getMainPlugin()->getPluginWPConfigConstantNamespace();
     }
 
     /**

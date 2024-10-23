@@ -526,4 +526,9 @@ abstract class AbstractPlugin implements PluginInterface
     {
         return PluginMetadata::WPCONFIG_CONST_NAMESPACE;
     }
+    
+    public function getPluginWPContentFolderName(): string
+    {
+        return PluginMetadata::WPCONTENT_FOLDER_NAME;
+    }
 }
