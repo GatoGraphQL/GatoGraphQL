@@ -119,7 +119,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::ACTIVATE_EXTENSIONS => \__('Activate Bundles and Extensions from the Gato GraphQL Shop', 'gatographql'),
+            self::ACTIVATE_EXTENSIONS => sprintf(
+                \__('Activate Bundles and Extensions from the %s', 'gatographql'),
+                $this->getGatoGraphQLShopName()
+            ),
             self::RESET_SETTINGS => \__('Restore the Gato GraphQL Settings to default values', 'gatographql'),
             default => parent::getDescription($module),
         };
@@ -172,7 +175,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     Properties::TITLE => \__('Activate Extension Licenses', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
-                        \__('Enter the license keys for the products purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
+                        sprintf(
+                            \__('Enter the license keys for the products purchased on the %s, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
+                            $this->getGatoGraphQLShopName()
+                        ),
                         $this->getCollapsible(
                             sprintf(
                                 '%s%s',
@@ -228,7 +234,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         'activate-extensions'
                     ),
                     Properties::TITLE => \__('Activate Extension Licenses', 'gatographql'),
-                    Properties::DESCRIPTION => \__('<em>There are no Bundles or Extensions from the Gato GraphQL Shop installed</em>', 'gatographql'),
+                    Properties::DESCRIPTION => sprintf(
+                        \__('<em>There are no Bundles or Extensions from the %s installed</em>', 'gatographql'),
+                        $this->getGatoGraphQLShopName()
+                    ),
                     Properties::TYPE => Properties::TYPE_NULL,
                 ];
             }
@@ -391,5 +400,13 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             ];
         }
         return $moduleSettings;
+    }
+
+    protected function getGatoGraphQLShopName(): string
+    {
+        return sprintf(
+            \__('%s Shop', 'gatographql'),
+            PluginApp::getMainPlugin()->getPluginName()
+        );
     }
 }
