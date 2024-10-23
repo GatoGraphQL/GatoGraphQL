@@ -52,6 +52,11 @@ class PluginEnvironment
      * If the cache dir is provided by either environment variable
      * or constant in wp-config.php, use it.
      * Otherwise, set the default to wp-content/gatographql/cache
+     *
+     * This method is invoked when initializing the plugin, before
+     * the main Plugin class is registered. Then, the folder cannot
+     * be inject via the Plugin, and the static "gatographql" must
+     * always be used.
      */
     public static function getCacheDir(): string
     {
