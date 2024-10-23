@@ -10,7 +10,7 @@ class OptionNamespacer implements OptionNamespacerInterface
 {
     public function namespaceOption(string $option): string
     {
-        $namespace = PluginApp::getMainPlugin()->getPluginWPConfigConstantNamespace();
+        $namespace = PluginApp::getMainPlugin()->getPluginName();
         return $namespace . '-' . $option;
     }
 }
