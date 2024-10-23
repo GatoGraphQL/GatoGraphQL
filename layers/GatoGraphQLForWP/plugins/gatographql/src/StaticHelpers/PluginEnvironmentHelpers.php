@@ -14,7 +14,7 @@ class PluginEnvironmentHelpers
         string $namespace,
         string $envVariable,
     ): mixed {
-        return constant(self::getWPConfigConstantName($envVariable, $namespace));
+        return constant(self::getWPConfigConstantName($namespace, $envVariable));
     }
 
     /**
@@ -25,7 +25,7 @@ class PluginEnvironmentHelpers
         string $namespace,
         string $envVariable,
     ): bool {
-        return defined(self::getWPConfigConstantName($envVariable, $namespace));
+        return defined(self::getWPConfigConstantName($namespace, $envVariable));
     }
 
     /**
