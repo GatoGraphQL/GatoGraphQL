@@ -9,7 +9,7 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginEnvironmentHelpers;
 class PluginEnvironment
 {
     public final const DISABLE_CONTAINER_CACHING = 'DISABLE_CONTAINER_CACHING';
-    public final const CACHE_DIR = 'CACHE_DIR';
+    public final const CONTAINER_CACHE_DIR = 'CONTAINER_CACHE_DIR';
     public final const SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR = 'SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR';
 
     /**
@@ -37,10 +37,10 @@ class PluginEnvironment
     public static function getGatoGraphQLDynamicFileStorageDir(): string
     {
         $baseCacheDir = null;
-        if (getenv(self::CACHE_DIR) !== false) {
-            $baseCacheDir = rtrim(getenv(self::CACHE_DIR), '/');
-        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginMetadata::WPCONFIG_CONST_NAMESPACE, self::CACHE_DIR)) {
-            $baseCacheDir = rtrim(PluginEnvironmentHelpers::getWPConfigConstantValue(PluginMetadata::WPCONFIG_CONST_NAMESPACE, self::CACHE_DIR), '/');
+        if (getenv(self::CONTAINER_CACHE_DIR) !== false) {
+            $baseCacheDir = rtrim(getenv(self::CONTAINER_CACHE_DIR), '/');
+        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginMetadata::WPCONFIG_CONST_NAMESPACE, self::CONTAINER_CACHE_DIR)) {
+            $baseCacheDir = rtrim(PluginEnvironmentHelpers::getWPConfigConstantValue(PluginMetadata::WPCONFIG_CONST_NAMESPACE, self::CONTAINER_CACHE_DIR), '/');
         } else {
             $baseCacheDir = constant('WP_CONTENT_DIR');
         }

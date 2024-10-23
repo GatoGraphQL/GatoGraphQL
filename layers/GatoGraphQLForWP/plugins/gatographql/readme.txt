@@ -152,6 +152,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 7.0.0 =
 * Breaking change: Bump minimum required PHP version to 7.4 (#2905)
 * Breaking change: Allow to include Gato GraphQL as the engine to power another standalone plugin (#2897)
+* Breaking change: Renamed env var `CACHE_DIR` to `CONTAINER_CACHE_DIR` (#2923)
 * Added convenience class for standalone plugins (#2899)
 * Allow to fetch posts with `auto-draft` status (#2911)
 * Allow disabling the private endpoint (#2913)
