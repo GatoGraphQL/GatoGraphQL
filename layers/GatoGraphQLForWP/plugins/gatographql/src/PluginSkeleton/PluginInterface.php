@@ -109,6 +109,8 @@ interface PluginInterface
      */
     public function getPluginNamespaceForDB(): string;
 
+    public function getPluginWebsiteURL(): string;
+
     public function getPluginWPConfigConstantNamespace(): string;
 
     public function getPluginWPContentFolderName(): string;
