@@ -60,7 +60,8 @@ class PluginEnvironment
      */
     public static function getCacheDir(): string
     {
-        return static::getGatoGraphQLDynamicFileStorageDir(PluginMetadata::WPCONTENT_FOLDER_NAME) . \DIRECTORY_SEPARATOR . 'cache';
+        $dirName = PluginMetadata::WPCONTENT_FOLDER_NAME;
+        return static::getGatoGraphQLDynamicFileStorageDir($dirName) . \DIRECTORY_SEPARATOR . 'cache';
 
         // This is under wp-content/plugins/gatographql/cache
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
