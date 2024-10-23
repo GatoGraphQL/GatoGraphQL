@@ -8,6 +8,7 @@ use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\PluginMetadata;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInfoInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
@@ -516,5 +517,13 @@ abstract class AbstractPlugin implements PluginInterface
     protected function getPluginSetupDataVersionCallbacks(): array
     {
         return [];
+    }
+
+    /**
+     * Allow to override for standalone plugins
+     */
+    public function getPluginWPConfigConstantNamespace(): string
+    {
+        return PluginMetadata::WPCONFIG_CONST_NAMESPACE;
     }
 }

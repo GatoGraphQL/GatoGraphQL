@@ -84,4 +84,6 @@ interface PluginInterface
      * PluginInfo class for the Plugin
      */
     public function getInfo(): ?PluginInfoInterface;
+
+    public function getPluginWPConfigConstantNamespace(): string;
 }
