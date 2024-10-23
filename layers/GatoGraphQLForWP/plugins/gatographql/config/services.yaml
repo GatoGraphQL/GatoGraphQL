@@ -28,6 +28,9 @@ services:
     GatoGraphQL\GatoGraphQL\Log\LoggerInterface:
         class: \GatoGraphQL\GatoGraphQL\Log\Logger
 
+    GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Settings\OptionNamespacer
+
     GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface:
         class: \GatoGraphQL\GatoGraphQL\Container\ContainerManager
 
