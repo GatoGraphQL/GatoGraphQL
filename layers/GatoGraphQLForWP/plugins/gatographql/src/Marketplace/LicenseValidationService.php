@@ -81,10 +81,10 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         array $submittedLicenseKeys,
         ?string $formSettingName = null,
     ): void {
-        $option = $this->getOptionNamespacer()->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
-        
+        $namespacedOption = $this->getOptionNamespacer()->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
+
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option($option, []);
+        $commercialExtensionActivatedLicenseEntries = get_option($namespacedOption, []);
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
@@ -308,7 +308,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
 
         // Store the payloads to the DB
         update_option(
-            $option,
+            $namespacedOption,
             $commercialExtensionActivatedLicenseEntries
         );
 
