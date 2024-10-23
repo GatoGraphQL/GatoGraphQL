@@ -469,7 +469,7 @@ abstract class AbstractPlugin implements PluginInterface
          * requests happening simultaneously might both execute
          * this logic
          */
-        $transientName = 'gatographql-installing-plugin-setup-data';
+        $transientName = $this->getPluginNamespace() . '-installing-plugin-setup-data';
         $transient = \get_transient($transientName);
         if ($transient !== false) {
             // Another instance is executing this code right now
