@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers;
 
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 
 class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
@@ -16,6 +17,22 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public final const PLUGIN_CONFIGURATION = Plugin::NAMESPACE . '\plugin-configuration';
     public final const API_KEYS = Plugin::NAMESPACE . '\api-keys';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
+    
+    private ?OptionNamespacerInterface $optionNamespacer = null;
+    
+    final public function setOptionNamespacer(OptionNamespacerInterface $optionNamespacer): void
+    {
+        $this->optionNamespacer = $optionNamespacer;
+    }
+    final protected function getOptionNamespacer(): OptionNamespacerInterface
+    {
+        if ($this->optionNamespacer === null) {
+            /** @var OptionNamespacerInterface */
+            $optionNamespacer = $this->instanceManager->getInstance(OptionNamespacerInterface::class);
+            $this->optionNamespacer = $optionNamespacer;
+        }
+        return $this->optionNamespacer;
+    }
 
     /**
      * @return string[]
@@ -49,7 +66,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
 
     public function getDBOptionName(string $settingsCategory): string
     {
-        return match ($settingsCategory) {
+        $option = match ($settingsCategory) {
             self::ENDPOINT_CONFIGURATION => Options::ENDPOINT_CONFIGURATION,
             self::SCHEMA_CONFIGURATION => Options::SCHEMA_CONFIGURATION,
             self::SCHEMA_TYPE_CONFIGURATION => Options::SCHEMA_TYPE_CONFIGURATION,
@@ -59,6 +76,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,
             default => parent::getDBOptionName($settingsCategory),
         };
+        return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
     public function addOptionsFormSubmitButton(string $settingsCategory): bool
