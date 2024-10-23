@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
+use GatoGraphQL\GatoGraphQL\PluginMetadata;
 
 class BehaviorHelpers
 {
@@ -69,8 +70,8 @@ class BehaviorHelpers
          * Use a static namespace because here we don't have the value
          * set via the PluginInitializationConfiguration
          */
-        if (PluginEnvironmentHelpers::isWPConfigConstantDefined('GATOGRAPHQL', PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
-            return strtolower(PluginEnvironmentHelpers::getWPConfigConstantValue('GATOGRAPHQL', PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) === "true";
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginMetadata::WPCONFIG_CONST_NAMESPACE, PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
+            return strtolower(PluginEnvironmentHelpers::getWPConfigConstantValue(PluginMetadata::WPCONFIG_CONST_NAMESPACE, PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) === "true";
         }
 
         /**

@@ -27,8 +27,8 @@ class PluginEnvironment
          * Use a static namespace because here we don't have the value
          * set via the PluginInitializationConfiguration
          */
-        if (PluginEnvironmentHelpers::isWPConfigConstantDefined('GATOGRAPHQL', self::DISABLE_CONTAINER_CACHING)) {
-            return !PluginEnvironmentHelpers::getWPConfigConstantValue('GATOGRAPHQL', self::DISABLE_CONTAINER_CACHING);
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginMetadata::WPCONFIG_CONST_NAMESPACE, self::DISABLE_CONTAINER_CACHING)) {
+            return !PluginEnvironmentHelpers::getWPConfigConstantValue(PluginMetadata::WPCONFIG_CONST_NAMESPACE, self::DISABLE_CONTAINER_CACHING);
         }
 
         return true;
@@ -39,8 +39,8 @@ class PluginEnvironment
         $baseCacheDir = null;
         if (getenv(self::CACHE_DIR) !== false) {
             $baseCacheDir = rtrim(getenv(self::CACHE_DIR), '/');
-        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined('GATOGRAPHQL', self::CACHE_DIR)) {
-            $baseCacheDir = rtrim(PluginEnvironmentHelpers::getWPConfigConstantValue('GATOGRAPHQL', self::CACHE_DIR), '/');
+        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginMetadata::WPCONFIG_CONST_NAMESPACE, self::CACHE_DIR)) {
+            $baseCacheDir = rtrim(PluginEnvironmentHelpers::getWPConfigConstantValue(PluginMetadata::WPCONFIG_CONST_NAMESPACE, self::CACHE_DIR), '/');
         } else {
             $baseCacheDir = constant('WP_CONTENT_DIR');
         }
