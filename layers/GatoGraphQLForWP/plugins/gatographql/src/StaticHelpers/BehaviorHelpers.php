@@ -65,9 +65,6 @@ class BehaviorHelpers
 
         /**
          * If wp-config.php constant `GATOGRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined.
-         *
-         * Use a static namespace because here we don't have the value
-         * set via the PluginInitializationConfiguration
          */
         if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
             return strtolower(PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) === "true";

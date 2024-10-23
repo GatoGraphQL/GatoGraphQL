@@ -23,10 +23,6 @@ class PluginEnvironment
             return strtolower(getenv(self::DISABLE_CONTAINER_CACHING)) !== "true";
         }
 
-        /**
-         * Use a static namespace because here we don't have the value
-         * set via the PluginInitializationConfiguration
-         */
         if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::DISABLE_CONTAINER_CACHING)) {
             return !PluginEnvironmentHelpers::getWPConfigConstantValue(self::DISABLE_CONTAINER_CACHING);
         }
