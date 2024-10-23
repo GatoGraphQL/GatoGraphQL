@@ -8,11 +8,13 @@ use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 
 abstract class AbstractMainPluginInfo extends AbstractPluginInfo implements MainPluginInfoInterface
 {
+    /**
+     * Don't initialize 'cache-dir' yet so the folder can be
+     * customized by standalone plugins
+     */
     protected function initialize(): void
     {
-        $this->values = [
-            'cache-dir' => PluginEnvironment::getCacheDir(),
-        ];
+        $this->values = [];
     }
 
     /**
@@ -22,6 +24,9 @@ abstract class AbstractMainPluginInfo extends AbstractPluginInfo implements Main
      */
     public function getCacheDir(): string
     {
+        if (!isset($this->values['cache-dir'])) {
+            $this->values['cache-dir'] = PluginEnvironment::getCacheDir();
+        }
         return $this->values['cache-dir'];
     }
 }
