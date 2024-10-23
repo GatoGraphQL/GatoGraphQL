@@ -287,17 +287,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function maybeStoreEmptySettings(): void
     {
-        $instanceManager = InstanceManagerFacade::getInstance();
-
-        /** @var OptionNamespacerInterface */
-        $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
-
         foreach ($this->getAllSettingsOptions() as $option) {
-            $namespacedOption = $optionNamespacer->namespaceOption($option);
-            if (get_option($namespacedOption) !== false) {
+            if (get_option($option) !== false) {
                 continue;
             }
-            update_option($namespacedOption, []);
+            update_option($option, []);
         }
     }
 
@@ -306,15 +300,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function getAllSettingsOptions(): array
     {
-        return [
-            Options::ENDPOINT_CONFIGURATION,
-            Options::SCHEMA_CONFIGURATION,
-            Options::SCHEMA_TYPE_CONFIGURATION,
-            Options::SERVER_CONFIGURATION,
-            Options::PLUGIN_CONFIGURATION,
-            Options::API_KEYS,
-            Options::PLUGIN_MANAGEMENT,
-        ];
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var OptionNamespacerInterface */
+        $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
+
+        return array_map(
+            $optionNamespacer->namespaceOption(...),
+            [
+                Options::ENDPOINT_CONFIGURATION,
+                Options::SCHEMA_CONFIGURATION,
+                Options::SCHEMA_TYPE_CONFIGURATION,
+                Options::SERVER_CONFIGURATION,
+                Options::PLUGIN_CONFIGURATION,
+                Options::API_KEYS,
+                Options::PLUGIN_MANAGEMENT,
+            ]
+        );
     }
 
     /**
@@ -572,10 +574,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         /** @var OptionNamespacerInterface */
         $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
-        $namespacedOption = $optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
+        $option = $optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
 
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option($namespacedOption, []);
+        $commercialExtensionActivatedLicenseEntries = get_option($option, []);
         foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
             $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
         }
