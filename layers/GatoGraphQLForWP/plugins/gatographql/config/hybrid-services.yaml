@@ -15,6 +15,9 @@ services:
 
     GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface:
         class: \GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizer
+
+    GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Settings\OptionNamespacer
         
     GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes\:
         resource: '../src/Security/UserAuthorizationSchemes/*'

@@ -12,6 +12,7 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
+use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
@@ -23,6 +24,7 @@ use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\Settings\StaticOptions;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
@@ -299,15 +301,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function getAllSettingsOptions(): array
     {
-        return [
-            Options::ENDPOINT_CONFIGURATION,
-            Options::SCHEMA_CONFIGURATION,
-            Options::SCHEMA_TYPE_CONFIGURATION,
-            Options::SERVER_CONFIGURATION,
-            Options::PLUGIN_CONFIGURATION,
-            Options::API_KEYS,
-            Options::PLUGIN_MANAGEMENT,
-        ];
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        return array_map(
+            $optionNamespacer->namespaceOption(...),
+            [
+                Options::ENDPOINT_CONFIGURATION,
+                Options::SCHEMA_CONFIGURATION,
+                Options::SCHEMA_TYPE_CONFIGURATION,
+                Options::SERVER_CONFIGURATION,
+                Options::PLUGIN_CONFIGURATION,
+                Options::API_KEYS,
+                Options::PLUGIN_MANAGEMENT,
+            ]
+        );
     }
 
     /**
@@ -562,7 +568,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $commercialExtensionActivatedLicenseKeys = [];
 
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        $commercialExtensionActivatedLicenseEntries = get_option(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
         foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
             $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
         }
