@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/capabilities.php';
-
 /**
  * Make sure this function is not declared more than once
  * (eg: if for some reason the website has both the Extension
