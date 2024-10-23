@@ -11,11 +11,10 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulE
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use PoP\ComponentModel\Misc\GeneralUtils;
-
 use PoP\Root\Services\BasicServiceTrait;
+
 use function add_settings_error;
 use function get_option;
 use function home_url;
@@ -27,7 +26,6 @@ class LicenseValidationService implements LicenseValidationServiceInterface
 
     private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?ContainerManagerInterface $containerManager = null;
-    private ?OptionNamespacerInterface $optionNamespacer = null;
 
     final public function setMarketplaceProviderCommercialExtensionActivationService(MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService): void
     {
@@ -55,19 +53,6 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         }
         return $this->containerManager;
     }
-    final public function setOptionNamespacer(OptionNamespacerInterface $optionNamespacer): void
-    {
-        $this->optionNamespacer = $optionNamespacer;
-    }
-    final protected function getOptionNamespacer(): OptionNamespacerInterface
-    {
-        if ($this->optionNamespacer === null) {
-            /** @var OptionNamespacerInterface */
-            $optionNamespacer = $this->instanceManager->getInstance(OptionNamespacerInterface::class);
-            $this->optionNamespacer = $optionNamespacer;
-        }
-        return $this->optionNamespacer;
-    }
 
     /**
      * Activate the Gato GraphQL Extensions against the
@@ -81,10 +66,8 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         array $submittedLicenseKeys,
         ?string $formSettingName = null,
     ): void {
-        $option = $this->getOptionNamespacer()->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
-        
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option($option, []);
+        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
@@ -308,7 +291,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
 
         // Store the payloads to the DB
         update_option(
-            $option,
+            Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES,
             $commercialExtensionActivatedLicenseEntries
         );
 

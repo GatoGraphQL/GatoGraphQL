@@ -569,15 +569,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function getCommercialExtensionActivatedLicenseKeys(): array
     {
         $commercialExtensionActivatedLicenseKeys = [];
-
-        $instanceManager = InstanceManagerFacade::getInstance();
-
-        /** @var OptionNamespacerInterface */
-        $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
-        $option = $optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
-
+        
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option($option, []);
+        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
         foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
             $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
         }
