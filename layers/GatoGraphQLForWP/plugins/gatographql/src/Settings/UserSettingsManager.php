@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
-use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 
 class UserSettingsManager implements UserSettingsManagerInterface
 {
@@ -50,11 +50,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     protected function namespaceOption(string $option): string
     {
-        $instanceManager = SystemInstanceManagerFacade::getInstance();
-
-        /** @var OptionNamespacerInterface */
-        $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
-
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
         return $optionNamespacer->namespaceOption($option);
     }
 
