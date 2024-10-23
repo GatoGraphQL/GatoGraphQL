@@ -519,6 +519,11 @@ abstract class AbstractPlugin implements PluginInterface
         return [];
     }
 
+    public function getPluginNamespace(): string
+    {
+        return PluginMetadata::PLUGIN_NAMESPACE;
+    }
+
     public function getPluginWPConfigConstantNamespace(): string
     {
         return PluginMetadata::WPCONFIG_CONST_NAMESPACE;
