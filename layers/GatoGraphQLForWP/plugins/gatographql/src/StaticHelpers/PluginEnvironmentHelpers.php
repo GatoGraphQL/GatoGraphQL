@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
+use GatoGraphQL\GatoGraphQL\PluginApp;
+
 class PluginEnvironmentHelpers
 {
     /**
@@ -11,10 +13,10 @@ class PluginEnvironmentHelpers
      * as a constant in wp-config.php
      */
     public static function getWPConfigConstantValue(
-        string $namespace,
         string $envVariable,
+        ?string $namespace = null,
     ): mixed {
-        return constant(self::getWPConfigConstantName($namespace, $envVariable));
+        return constant(self::getWPConfigConstantName($envVariable, $namespace));
     }
 
     /**
@@ -22,10 +24,10 @@ class PluginEnvironmentHelpers
      * as a constant in wp-config.php
      */
     public static function isWPConfigConstantDefined(
-        string $namespace,
         string $envVariable,
+        ?string $namespace = null,
     ): bool {
-        return defined(self::getWPConfigConstantName($namespace, $envVariable));
+        return defined(self::getWPConfigConstantName($envVariable, $namespace));
     }
 
     /**
@@ -33,9 +35,10 @@ class PluginEnvironmentHelpers
      * to override Gato GraphQL environment variables
      */
     public static function getWPConfigConstantName(
-        string $namespace,
         string $envVariable,
+        ?string $namespace = null,
     ): string {
+        $namespace ??= PluginApp::getMainPlugin()->getPluginWPConfigConstantNamespace();
         return $namespace . '_' . $envVariable;
     }
 }
