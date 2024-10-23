@@ -67,6 +67,9 @@ class PluginEnvironment
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
 
+    /**
+     * Store under the folder chosen for the (standalone) plugin
+     */
     public static function getLogsDir(): string
     {
         $dirName = PluginApp::getMainPlugin()->getPluginWPContentFolderName();
