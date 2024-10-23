@@ -10,15 +10,15 @@ use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\PluginMetadata;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginEnvironmentHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleConfigurationHelpers;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function apply_filters;
 
 /**
@@ -93,9 +93,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Override for standalone plugins
      */
-    protected function getPluginWPConfigConstantNamespace(): string
+    public function getPluginWPConfigConstantNamespace(): string
     {
-        return PluginMetadata::WPCONFIG_CONST_NAMESPACE;
+        return PluginApp::getMainPluginManager()->getPlugin()->getPluginWPConfigConstantNamespace();
     }
 
     /**
