@@ -24,6 +24,7 @@ use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\Settings\StaticOptions;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
@@ -33,8 +34,8 @@ use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use WP_Upgrader;
 use function __;
 use function add_action;
@@ -569,9 +570,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function getCommercialExtensionActivatedLicenseKeys(): array
     {
         $commercialExtensionActivatedLicenseKeys = [];
-        
+
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        $commercialExtensionActivatedLicenseEntries = get_option(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
         foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
             $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
         }

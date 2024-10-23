@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
-use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\Settings\StaticOptions;
 
 class SettingsHelpers
 {
@@ -24,7 +24,7 @@ class SettingsHelpers
     {
         if (self::$commercialExtensionActivatedLicenseObjectProperties === null) {
             /** @var array<string,mixed> */
-            $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+            $commercialExtensionActivatedLicenseEntries = get_option(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
             self::$commercialExtensionActivatedLicenseObjectProperties = [];
             foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
                 self::$commercialExtensionActivatedLicenseObjectProperties[$extensionSlug] = new CommercialExtensionActivatedLicenseObjectProperties(

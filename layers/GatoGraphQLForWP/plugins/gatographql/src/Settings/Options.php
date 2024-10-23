@@ -52,9 +52,4 @@ class Options
      * settings/modules write to the DB
      */
     public final const TIMESTAMPS = 'timestamps';
-    /**
-     * Store the license data for all bundles/extensions that
-     * have been activated
-     */
-    public final const COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES = 'commercial-extension-activated-license-entries';
 }
