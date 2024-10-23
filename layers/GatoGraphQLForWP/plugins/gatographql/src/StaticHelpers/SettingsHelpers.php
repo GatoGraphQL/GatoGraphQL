@@ -6,7 +6,9 @@ namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
+use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class SettingsHelpers
 {
@@ -23,8 +25,14 @@ class SettingsHelpers
     public static function getCommercialExtensionActivatedLicenseObjectProperties(): array
     {
         if (self::$commercialExtensionActivatedLicenseObjectProperties === null) {
+            $instanceManager = InstanceManagerFacade::getInstance();
+
+            /** @var OptionNamespacerInterface */
+            $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
+            $option = $optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
+
             /** @var array<string,mixed> */
-            $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+            $commercialExtensionActivatedLicenseEntries = get_option($option, []);
             self::$commercialExtensionActivatedLicenseObjectProperties = [];
             foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
                 self::$commercialExtensionActivatedLicenseObjectProperties[$extensionSlug] = new CommercialExtensionActivatedLicenseObjectProperties(
