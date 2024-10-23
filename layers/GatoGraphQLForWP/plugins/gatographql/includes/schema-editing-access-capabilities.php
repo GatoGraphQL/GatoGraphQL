@@ -2,18 +2,16 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/capabilities.php';
-
 /**
  * Make sure this function is not declared more than once
  * (eg: if for some reason the website has both the Extension
  * and the Bundle installed).
  */
 if (!function_exists('registerGatoGraphQLSchemaEditingAccessCapabilities')) {
-    function registerGatoGraphQLSchemaEditingAccessCapabilities(string $file): void
-    {
-        $capability = constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA');
-
+    function registerGatoGraphQLSchemaEditingAccessCapabilities(
+        string $file,
+        string $capability
+    ): void {
         /**
          * This method cannot be invoked from within "plugins_loaded",
          * then place it here.
