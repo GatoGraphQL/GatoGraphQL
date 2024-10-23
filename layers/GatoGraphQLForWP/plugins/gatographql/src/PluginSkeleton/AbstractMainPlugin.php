@@ -22,6 +22,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
@@ -33,8 +34,8 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
-use WP_Upgrader;
 
+use WP_Upgrader;
 use function __;
 use function add_action;
 use function do_action;
@@ -286,11 +287,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function maybeStoreEmptySettings(): void
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var OptionNamespacerInterface */
+        $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
+
         foreach ($this->getAllSettingsOptions() as $option) {
-            if (get_option($option) !== false) {
+            $namespacedOption = $optionNamespacer->namespaceOption($option);
+            if (get_option($namespacedOption) !== false) {
                 continue;
             }
-            update_option($option, []);
+            update_option($namespacedOption, []);
         }
     }
 
@@ -561,8 +568,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         $commercialExtensionActivatedLicenseKeys = [];
 
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var OptionNamespacerInterface */
+        $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
+        $namespacedOption = $optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
+
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        $commercialExtensionActivatedLicenseEntries = get_option($namespacedOption, []);
         foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
             $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
         }
