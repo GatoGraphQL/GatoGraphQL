@@ -27,8 +27,8 @@ class PluginEnvironment
          * Use a static namespace because here we don't have the value
          * set via the PluginInitializationConfiguration
          */
-        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::DISABLE_CONTAINER_CACHING, PluginMetadata::WPCONFIG_CONST_NAMESPACE)) {
-            return !PluginEnvironmentHelpers::getWPConfigConstantValue(self::DISABLE_CONTAINER_CACHING, PluginMetadata::WPCONFIG_CONST_NAMESPACE);
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::DISABLE_CONTAINER_CACHING)) {
+            return !PluginEnvironmentHelpers::getWPConfigConstantValue(self::DISABLE_CONTAINER_CACHING);
         }
 
         return true;
@@ -41,8 +41,8 @@ class PluginEnvironment
         $baseCacheDir = null;
         if (getenv(self::CONTAINER_CACHE_DIR) !== false) {
             $baseCacheDir = rtrim(getenv(self::CONTAINER_CACHE_DIR), '/');
-        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::CONTAINER_CACHE_DIR, PluginMetadata::WPCONFIG_CONST_NAMESPACE)) {
-            $baseCacheDir = rtrim(PluginEnvironmentHelpers::getWPConfigConstantValue(self::CONTAINER_CACHE_DIR, PluginMetadata::WPCONFIG_CONST_NAMESPACE), '/');
+        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::CONTAINER_CACHE_DIR)) {
+            $baseCacheDir = rtrim(PluginEnvironmentHelpers::getWPConfigConstantValue(self::CONTAINER_CACHE_DIR), '/');
         } else {
             $baseCacheDir = constant('WP_CONTENT_DIR');
         }
