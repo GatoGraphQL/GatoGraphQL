@@ -34,7 +34,7 @@ class PluginEnvironment
         return true;
     }
 
-    public static function getGatoGraphQLDynamicFileStorageDir(string $dirName): string
+    public static function getGatoGraphQLDynamicFileStorageDir(): string
     {
         $baseCacheDir = null;
         if (getenv(self::CONTAINER_CACHE_DIR) !== false) {
@@ -45,6 +45,7 @@ class PluginEnvironment
             $baseCacheDir = constant('WP_CONTENT_DIR');
         }
 
+        $dirName = PluginApp::getMainPlugin()->getPluginWPContentFolderName();
         return $baseCacheDir . \DIRECTORY_SEPARATOR . $dirName;
     }
 
@@ -60,8 +61,7 @@ class PluginEnvironment
      */
     public static function getCacheDir(): string
     {
-        $dirName = PluginMetadata::WPCONTENT_FOLDER_NAME;
-        return static::getGatoGraphQLDynamicFileStorageDir($dirName) . \DIRECTORY_SEPARATOR . 'cache';
+        return static::getGatoGraphQLDynamicFileStorageDir() . \DIRECTORY_SEPARATOR . 'cache';
 
         // This is under wp-content/plugins/gatographql/cache
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
@@ -72,8 +72,7 @@ class PluginEnvironment
      */
     public static function getLogsDir(): string
     {
-        $dirName = PluginApp::getMainPlugin()->getPluginWPContentFolderName();
-        return static::getGatoGraphQLDynamicFileStorageDir($dirName) . \DIRECTORY_SEPARATOR . 'logs';
+        return static::getGatoGraphQLDynamicFileStorageDir() . \DIRECTORY_SEPARATOR . 'logs';
     }
 
     public static function getLogsFilePath(string $filename): string
