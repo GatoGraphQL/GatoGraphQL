@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
-use GatoGraphQL\GatoGraphQL\PluginMetadata;
 
 class BehaviorHelpers
 {
@@ -66,12 +65,9 @@ class BehaviorHelpers
 
         /**
          * If wp-config.php constant `GATOGRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` is defined.
-         *
-         * Use a static namespace because here we don't have the value
-         * set via the PluginInitializationConfiguration
          */
-        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR, PluginMetadata::WPCONFIG_CONST_NAMESPACE)) {
-            return strtolower(PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR, PluginMetadata::WPCONFIG_CONST_NAMESPACE)) === "true";
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) {
+            return strtolower(PluginEnvironmentHelpers::getWPConfigConstantValue(PluginEnvironment::SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR)) === "true";
         }
 
         /**
