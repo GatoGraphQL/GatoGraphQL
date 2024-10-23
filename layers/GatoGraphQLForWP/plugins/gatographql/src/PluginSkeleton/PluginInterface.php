@@ -85,7 +85,29 @@ interface PluginInterface
      */
     public function getInfo(): ?PluginInfoInterface;
 
+    /**
+     * Namespace the plugin.
+     *
+     * Useful for standalone plugins to override
+     * this value, and automatically have entities
+     * not conflict with Gato GraphQL (or other
+     * standalone plugins).
+     */
     public function getPluginNamespace(): string;
+    
+    /**
+     * Namespace the entities to store in DB:
+     * CPT, taxonomies, etc.
+     *
+     * Useful for standalone plugins to override
+     * this value, and automatically have entities
+     * not conflict with Gato GraphQL (or other
+     * standalone plugins).
+     *
+     * Use 7 chars to identify it, as CPTs have
+     * a max length of 20 chars.
+     */
+    public function getPluginNamespaceForDB(): string;
 
     public function getPluginWPConfigConstantNamespace(): string;
 

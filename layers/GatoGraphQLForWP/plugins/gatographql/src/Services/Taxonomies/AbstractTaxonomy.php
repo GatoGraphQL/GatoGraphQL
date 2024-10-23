@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\Taxonomies;
 
 use GatoGraphQL\GatoGraphQL\AppHelpers;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
 use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
-use PoP\ComponentModel\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\StandaloneServiceTrait;
@@ -183,8 +181,6 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
 
     protected function getTaxonomyNamespace(): string
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getPluginNamespaceForDB();
+        return PluginApp::getMainPlugin()->getPluginNamespaceForDB();
     }
 }

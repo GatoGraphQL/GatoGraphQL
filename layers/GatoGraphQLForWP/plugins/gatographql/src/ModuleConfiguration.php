@@ -10,46 +10,6 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
     /**
-     * Namespace the entities to store in DB:
-     * CPT, taxonomies, etc.
-     *
-     * Useful for standalone plugins to override
-     * this value, and automatically have entities
-     * not conflict with Gato GraphQL (or other
-     * standalone plugins).
-     *
-     * Use 7 chars to identify it, as CPTs have
-     * a max length of 20 chars.
-     */
-    public function getPluginNamespaceForDB(): string
-    {
-        $envVariable = Environment::PLUGIN_NAMESPACE_FOR_DB;
-        $defaultValue = 'graphql';
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-        );
-    }
-
-    /**
-     * Plugin name.
-     *
-     * Useful for standalone plugins to override
-     * this value.
-     */
-    public function getPluginName(): string
-    {
-        $envVariable = Environment::PLUGIN_NAME;
-        $defaultValue = \__('Gato GraphQL', 'gatographql');
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-        );
-    }
-
-    /**
      * Group the fields under the type when printing it for the user
      */
     public function groupFieldsUnderTypeForPrint(): bool
@@ -292,7 +252,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     protected function enableHook(string $envVariable): bool
     {
         return match ($envVariable) {
-            Environment::PLUGIN_NAMESPACE_FOR_DB,
             Environment::GATOGRAPHQL_WEBSITE_URL,
             Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL,
             Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL,

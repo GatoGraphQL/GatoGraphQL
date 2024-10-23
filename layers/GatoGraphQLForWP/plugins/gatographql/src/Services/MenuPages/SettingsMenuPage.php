@@ -9,8 +9,6 @@ use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
@@ -728,11 +726,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     protected function getPageTitle(): string
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return sprintf(
             \__('%s — %s', 'gatographql'),
-            $moduleConfiguration->getPluginName(),
+            PluginApp::getMainPlugin()->getPluginName(),
             $this->getMenuPageTitle()
         );
     }
