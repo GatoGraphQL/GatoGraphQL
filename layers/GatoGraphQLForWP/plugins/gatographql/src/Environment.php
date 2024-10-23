@@ -6,7 +6,6 @@ namespace GatoGraphQL\GatoGraphQL;
 
 class Environment
 {
-    public final const PLUGIN_NAMESPACE_FOR_DB = 'PLUGIN_NAMESPACE_FOR_DB';
     public final const PLUGIN_NAME = 'PLUGIN_NAME';
     public final const ADD_EXCERPT_AS_DESCRIPTION = 'ADD_EXCERPT_AS_DESCRIPTION';
     public final const GROUP_FIELDS_UNDER_TYPE_FOR_PRINT = 'GROUP_FIELDS_UNDER_TYPE_FOR_PRINT';
