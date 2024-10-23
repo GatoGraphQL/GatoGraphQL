@@ -79,13 +79,22 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                  * in wp-config.php, with the environment name prepended with "GATOGRAPHQL_"
                  */
                 function ($value) use ($envVariable) {
-                    if (PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
-                        return PluginEnvironmentHelpers::getWPConfigConstantValue($envVariable);
+                    $pluginWPConfigConstantNamespace = $this->getPluginWPConfigConstantNamespace();
+                    if (PluginEnvironmentHelpers::isWPConfigConstantDefined($pluginWPConfigConstantNamespace, $envVariable)) {
+                        return PluginEnvironmentHelpers::getWPConfigConstantValue($pluginWPConfigConstantNamespace, $envVariable);
                     }
                     return $value;
                 }
             );
         }
+    }
+
+    /**
+     * Override for standalone plugins
+     */
+    protected function getPluginWPConfigConstantNamespace(): string
+    {
+        return 'GATOGRAPHQL';
     }
 
     /**
@@ -138,7 +147,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
              */
             /** @var string */
             $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
+            $pluginWPConfigConstantNamespace = $this->getPluginWPConfigConstantNamespace();
+            if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($pluginWPConfigConstantNamespace, $envVariable)) {
                 continue;
             }
 
@@ -185,12 +195,13 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     protected function defineEnvironmentConstantsFromCallbacks(): void
     {
         $mappings = $this->getEnvironmentConstantsFromCallbacksMapping();
+        $pluginWPConfigConstantNamespace = $this->getPluginWPConfigConstantNamespace();
         foreach ($mappings as $mapping) {
             // If the environment value has been defined, or the constant in wp-config.php,
             // then do nothing, since they have priority
             /** @var string */
             $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
+            if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($pluginWPConfigConstantNamespace, $envVariable)) {
                 continue;
             }
             /** @var class-string<ModuleInterface> */
