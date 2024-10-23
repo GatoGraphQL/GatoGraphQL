@@ -69,7 +69,8 @@ class PluginEnvironment
 
     public static function getLogsDir(): string
     {
-        return static::getGatoGraphQLDynamicFileStorageDir() . \DIRECTORY_SEPARATOR . 'logs';
+        $dirName = PluginApp::getMainPlugin()->getPluginWPContentFolderName();
+        return static::getGatoGraphQLDynamicFileStorageDir($dirName) . \DIRECTORY_SEPARATOR . 'logs';
     }
 
     public static function getLogsFilePath(string $filename): string
