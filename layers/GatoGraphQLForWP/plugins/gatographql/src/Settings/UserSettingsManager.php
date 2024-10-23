@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
 class UserSettingsManager implements UserSettingsManagerInterface
 {
@@ -43,9 +44,20 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     protected function getOptionUniqueTimestamp(string $key): string
     {
-        $timestamps = \get_option(Options::TIMESTAMPS, [$key => $this->getUniqueIdentifier()]);
+        $timestamps = \get_option($this->namespaceOption(Options::TIMESTAMPS), [$key => $this->getUniqueIdentifier()]);
         return $timestamps[$key];
     }
+
+    protected function namespaceOption(string $option): string
+    {
+        $instanceManager = SystemInstanceManagerFacade::getInstance();
+
+        /** @var OptionNamespacerInterface */
+        $optionNamespacer = $instanceManager->getInstance(OptionNamespacerInterface::class);
+
+        return $optionNamespacer->namespaceOption($option);
+    }
+
     /**
      * Add a random number to `time()` to make it truly unique,
      * as to avoid a bug when 2 requests with different schema
@@ -85,7 +97,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_CONTAINER => $uniqueID,
             self::TIMESTAMP_OPERATIONAL => $uniqueID,
         ];
-        \update_option(Options::TIMESTAMPS, $timestamps);
+        \update_option($this->namespaceOption(Options::TIMESTAMPS), $timestamps);
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
@@ -98,14 +110,14 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_CONTAINER => $this->getContainerUniqueTimestamp(),
             self::TIMESTAMP_OPERATIONAL => $this->getUniqueIdentifier(),
         ];
-        \update_option(Options::TIMESTAMPS, $timestamps);
+        \update_option($this->namespaceOption(Options::TIMESTAMPS), $timestamps);
     }
     /**
      * Remove the timestamp
      */
     public function removeTimestamps(): void
     {
-        \delete_option(Options::TIMESTAMPS);
+        \delete_option($this->namespaceOption(Options::TIMESTAMPS));
     }
 
     public function hasSetting(string $module, string $option): bool
@@ -174,17 +186,17 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     public function hasSetModuleEnabled(string $moduleID): bool
     {
-        return $this->hasItem(Options::MODULES, $moduleID);
+        return $this->hasItem($this->namespaceOption(Options::MODULES), $moduleID);
     }
 
     public function isModuleEnabled(string $moduleID): bool
     {
-        return (bool) $this->getItem(Options::MODULES, $moduleID);
+        return (bool) $this->getItem($this->namespaceOption(Options::MODULES), $moduleID);
     }
 
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void
     {
-        $this->setOptionItem(Options::MODULES, $moduleID, $isEnabled);
+        $this->setOptionItem($this->namespaceOption(Options::MODULES), $moduleID, $isEnabled);
     }
 
     protected function setOptionItem(string $optionName, string $item, mixed $value): void
@@ -211,7 +223,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function setModulesEnabled(array $moduleIDValues): void
     {
-        $this->storeItems(Options::MODULES, $moduleIDValues);
+        $this->storeItems($this->namespaceOption(Options::MODULES), $moduleIDValues);
 
         // Update the timestamp
         $this->storeContainerTimestamp();
