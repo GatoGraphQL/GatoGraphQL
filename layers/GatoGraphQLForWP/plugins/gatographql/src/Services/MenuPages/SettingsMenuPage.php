@@ -19,6 +19,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
+use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
@@ -48,6 +49,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
     private ?ContainerManagerInterface $containerManager = null;
+    private ?OptionNamespacerInterface $optionNamespacer = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -134,6 +136,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->containerManager = $containerManager;
         }
         return $this->containerManager;
+    }
+    final public function setOptionNamespacer(OptionNamespacerInterface $optionNamespacer): void
+    {
+        $this->optionNamespacer = $optionNamespacer;
+    }
+    final protected function getOptionNamespacer(): OptionNamespacerInterface
+    {
+        if ($this->optionNamespacer === null) {
+            /** @var OptionNamespacerInterface */
+            $optionNamespacer = $this->instanceManager->getInstance(OptionNamespacerInterface::class);
+            $this->optionNamespacer = $optionNamespacer;
+        }
+        return $this->optionNamespacer;
     }
 
     public function getScreenID(): string
@@ -433,13 +448,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function resetSettings(): void
     {
         $userSettingsManager = $this->getUserSettingsManager();
-        $resetOptions = [
-            Options::ENDPOINT_CONFIGURATION,
-            Options::SCHEMA_CONFIGURATION,
-            Options::SCHEMA_TYPE_CONFIGURATION,
-            Options::SERVER_CONFIGURATION,
-            Options::PLUGIN_CONFIGURATION,
-        ];
+        $resetOptions = array_map(
+            $this->getOptionNamespacer()->namespaceOption(...),
+            [
+                Options::ENDPOINT_CONFIGURATION,
+                Options::SCHEMA_CONFIGURATION,
+                Options::SCHEMA_TYPE_CONFIGURATION,
+                Options::SERVER_CONFIGURATION,
+                Options::PLUGIN_CONFIGURATION,
+            ]
+        );
         foreach ($resetOptions as $option) {
             $userSettingsManager->storeEmptySettings($option);
         }
