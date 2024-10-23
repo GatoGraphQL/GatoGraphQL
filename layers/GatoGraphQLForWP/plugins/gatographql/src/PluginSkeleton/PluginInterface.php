@@ -86,6 +86,7 @@ interface PluginInterface
     public function getInfo(): ?PluginInfoInterface;
 
     public function getPluginNamespace(): string;
+    public function getPluginNamespaceForDB(): string;
 
     public function getPluginWPConfigConstantNamespace(): string;
 

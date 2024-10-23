@@ -11,4 +11,5 @@ final class PluginMetadata
     final public const DOCS_GITHUB_REPO_NAME = 'GatoGraphQL';
 
     final public const PLUGIN_NAMESPACE = 'gatographql';
+    final public const PLUGIN_NAMESPACE_FOR_DB = 'graphql';
 }
