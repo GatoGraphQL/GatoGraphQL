@@ -325,7 +325,7 @@ abstract class AbstractPlugin implements PluginInterface
             $customPostTypeRegistry->getCustomPostTypes(),
             fn (string $serviceDefinitionID) => str_starts_with(
                 $serviceDefinitionID,
-                $this->getPluginNamespace() . '\\'
+                $this->getPluginClassPSR4Namespace() . '\\'
             ),
             ARRAY_FILTER_USE_KEY
         ));
@@ -334,7 +334,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * The PSR-4 namespace, with format "Vendor\Project"
      */
-    public function getPluginNamespace(): string
+    public function getPluginClassPSR4Namespace(): string
     {
         return ClassHelpers::getClassPSR4Namespace(get_called_class());
     }
@@ -519,9 +519,6 @@ abstract class AbstractPlugin implements PluginInterface
         return [];
     }
 
-    /**
-     * Allow to override for standalone plugins
-     */
     public function getPluginWPConfigConstantNamespace(): string
     {
         return PluginMetadata::WPCONFIG_CONST_NAMESPACE;
