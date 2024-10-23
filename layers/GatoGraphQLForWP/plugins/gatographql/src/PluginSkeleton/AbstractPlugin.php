@@ -524,13 +524,13 @@ abstract class AbstractPlugin implements PluginInterface
         return PluginMetadata::PLUGIN_NAMESPACE;
     }
 
-    public function getPluginWPConfigConstantNamespace(): string
+    final public function getPluginWPConfigConstantNamespace(): string
     {
-        return PluginMetadata::WPCONFIG_CONST_NAMESPACE;
+        return strtoupper($this->getPluginNamespace());
     }
     
-    public function getPluginWPContentFolderName(): string
+    final public function getPluginWPContentFolderName(): string
     {
-        return PluginMetadata::WPCONTENT_FOLDER_NAME;
+        return strtolower($this->getPluginNamespace());
     }
 }
