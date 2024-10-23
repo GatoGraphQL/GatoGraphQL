@@ -139,17 +139,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function getGatoGraphQLShopMyOrdersURL(): string
-    {
-        $envVariable = Environment::GATOGRAPHQL_SHOP_MYORDERS_URL;
-        $defaultValue = 'https://gatographql.com/shop/my-orders';
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-        );
-    }
-
     /**
      * This function is not expected to be configured,
      * but it's mainly to help identify all related
@@ -255,7 +244,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             Environment::GATOGRAPHQL_WEBSITE_URL,
             Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL,
             Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL,
-            Environment::GATOGRAPHQL_SHOP_MYORDERS_URL,
             Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
                 => false,
             default

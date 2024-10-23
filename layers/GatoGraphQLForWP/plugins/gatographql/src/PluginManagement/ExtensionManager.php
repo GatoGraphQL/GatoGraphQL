@@ -165,10 +165,7 @@ class ExtensionManager extends AbstractPluginManager
                     $mainPluginVersionConstraint,
                     $mainPlugin->getPluginVersion(),
                     /**
-                     * Watch out! Hardcoding the URL, instead of doing
-                     * `$moduleConfiguration->getGatoGraphQLShopMyOrdersURL()`,
-                     * because it otherwise throws "`App::$appThread`
-                     * no initialized" error
+                     * Allow for standalone plugins to have their own Shop
                      */
                     sprintf(
                         '%s/shop/my-orders',
