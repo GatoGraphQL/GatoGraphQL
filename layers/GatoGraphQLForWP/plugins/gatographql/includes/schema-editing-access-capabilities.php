@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPIncludes\GatoGraphQL;
 
-class GatoGraphQL_SchemaEditingAccessCapabilities {
+class SchemaEditingAccessCapabilities {
 
     public static function registerGatoGraphQLSchemaEditingAccessCapabilities(
         string $file,

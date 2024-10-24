@@ -7,7 +7,7 @@ namespace PoPIncludes\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Environment as RootEnvironment;
 
-class GatoGraphQL_Startup {
+class Startup {
     /**
      * Validate that there is enough memory to run the plugin.
      *
