@@ -16,4 +16,9 @@ class ScopingHelpers
     {
         return Scoping::NAMESPACE_PREFIX . str_replace([' ', '-'], '', $pluginName);
     }
+
+    public static function isNamespaceInternallyScoped(string $class): bool
+    {
+        return str_starts_with($class, Scoping::NAMESPACE_PREFIX);
+    }
 }

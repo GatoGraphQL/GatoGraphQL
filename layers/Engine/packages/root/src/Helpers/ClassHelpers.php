@@ -22,6 +22,6 @@ class ClassHelpers
     public static function getClassPSR4Namespace(string $class): string
     {
         $parts = explode('\\', $class);
-        return $parts[0] . (isset($parts[1]) ? '\\' . $parts[1] : '') . (str_starts_with($parts[0], Scoping::NAMESPACE_PREFIX) && isset($parts[2]) ? '\\' . $parts[2] : '');
+        return $parts[0] . (isset($parts[1]) ? '\\' . $parts[1] : '') . (ScopingHelpers::isNamespaceInternallyScoped($class) && isset($parts[2]) ? '\\' . $parts[2] : '');
     }
 }
