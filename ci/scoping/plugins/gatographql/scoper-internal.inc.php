@@ -40,10 +40,17 @@ return [
             ])
             ->notPath([
                 /**
-                 * For some reason it also prefixes content in file
-                 * vendor/symfony/dependency-injection/Dumper/PhpDumper.php
-                 * and a couple more, so exclude them!
+                 * For some reason it also prefixes content in file:
+                 *   vendor/symfony/dependency-injection/Dumper/PhpDumper.php
+                 * and a few more, so directly exclude all other libraries.
                  */
+                '#vendor/guzzlehttp/#',
+                '#vendor/jrfnl/#',
+                '#vendor/league/#',
+                '#vendor/masterminds/#',
+                '#vendor/michelf/#',
+                '#vendor/psr/#',
+                '#vendor/ralouphie/#',
                 '#vendor/symfony/#',
             ])
             // ->path(
