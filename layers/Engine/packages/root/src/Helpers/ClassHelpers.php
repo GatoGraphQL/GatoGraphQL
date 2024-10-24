@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root\Helpers;
 
-use PoP\Root\Constants\Scoping;
-
 class ClassHelpers
 {
     /**
@@ -13,7 +11,7 @@ class ClassHelpers
      *
      * If own classes have been prefixed, then the top-level
      * domain will start with "InternallyPrefixed".
-     * 
+     *
      * For instance, the format for plugin "Gato GraphQL" will then be:
      * "InternallyPrefixedByGatoGraphQL\Vendor\Project"
      *
