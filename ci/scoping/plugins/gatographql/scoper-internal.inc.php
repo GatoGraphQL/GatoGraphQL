@@ -27,6 +27,10 @@ function convertRelativeToFullPath(?string $relativePath = null): string
     return $pluginDir . '/' . $relativePath;
 }
 return [
+    // Watch out! This name is hardcoded, but it must be EXACTLY the same
+    // as the calculated name for each plugin
+    // For instance, plugin "Gato GraphQL" will have the top-level namespace "GatoGraphQLScoped".
+    // @see layers/GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractPlugin.php `__construct`
     'prefix' => 'GatoGraphQLScoped',
     'finders' => [
         // Scope packages under vendor/, excluding local WordPress packages
