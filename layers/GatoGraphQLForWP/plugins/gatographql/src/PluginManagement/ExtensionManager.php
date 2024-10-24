@@ -8,12 +8,14 @@ use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
@@ -355,7 +357,9 @@ class ExtensionManager extends AbstractPluginManager
             //     return;
             // }
             $moduleRegistry = ModuleRegistryFacade::getInstance();
+            $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
             $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
+            $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
             $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
             $adminNotice_safe = sprintf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
@@ -370,7 +374,7 @@ class ExtensionManager extends AbstractPluginManager
                         sprintf(
                             '<code>%s > %s > %s</code>',
                             \__('Settings', 'gatographql'),
-                            \__('Plugin Management', 'gatographql'),
+                            $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
                             $activateExtensionsModuleResolver->getName($activateExtensionsModule),
                         )
                     )
