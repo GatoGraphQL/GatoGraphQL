@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
@@ -353,7 +354,9 @@ class ExtensionManager extends AbstractPluginManager
             // if (App::query('page') === $settingsMenuPage->getScreenID()) {
             //     return;
             // }
-            $activateExtensionsSettingsURL = AdminHelpers::getSettingsPageTabURL(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS);
+            $moduleRegistry = ModuleRegistryFacade::getInstance();
+            $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
+            $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
             $adminNotice_safe = sprintf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
@@ -363,12 +366,12 @@ class ExtensionManager extends AbstractPluginManager
                         : $extensionName,
                     sprintf(
                         $messagePlaceholder,
-                        $activateExtensionsSettingsURL,
+                        AdminHelpers::getSettingsPageTabURL($activateExtensionsModule),
                         sprintf(
                             '<code>%s > %s > %s</code>',
                             \__('Settings', 'gatographql'),
                             \__('Plugin Management', 'gatographql'),
-                            \__('Activate Extensions', 'gatographql'),
+                            $activateExtensionsModuleResolver->getName($activateExtensionsModule),
                         )
                     )
                 )
