@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Log;
 use Exception;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use PoP\ComponentModel\App;
 
@@ -15,7 +16,8 @@ class Logger implements LoggerInterface
     public function logError(string $message): void
     {
         \error_log(sprintf(
-            '[Gato GraphQL] %s',
+            '[%s] %s',
+            PluginApp::getMainPlugin()->getPluginName(),
             $message
         ));
     }
