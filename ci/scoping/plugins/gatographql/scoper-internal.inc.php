@@ -5,42 +5,29 @@ declare(strict_types=1);
 use Isolated\Symfony\Component\Finder\Finder;
 
 /**
- * Must only scope the packages in vendor/, because:
+ * Scope own classes for creating a standalone plugin.
  *
- * - config/ references only local configuration
- * - src/ references only local classes (with one exception), which need not be scoped
- * - vendor/ references external classes (excluding local -wp packages), which need be scoped
+ * Whitelisting classes to scope is not supported by PHP-Scoper:
  *
- * In addition, we must exclude all the local WordPress packages,
- * because scoping WordPress functions does NOT work.
- * @see https://github.com/humbug/php-scoper/issues/303
+ * @see https://github.com/humbug/php-scoper/issues/378#issuecomment-687601833
  *
- * Excluding the WordPress packages is feasible, because they do
- * not reference any external library.
+ * Then, instead, create a regex that excludes all classes except
+ * the ones we're looking for.
  *
- * The only exceptions are:
- * 
- * 1. getpop/root-wp, which uses Brain\Cortex:
- *
- * in getpop/root-wp/src/Module.php:
- *   use Brain\Cortex;
- *
- * in getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php:
- *   use Brain\Cortex\Route\RouteCollectionInterface;
- *   use Brain\Cortex\Route\RouteInterface;
- *   use Brain\Cortex\Route\QueryRoute;
- *
- * Then, manually add these 2 files to scope Brain\Cortex.
- * This works without side effects, because there are no WordPress stubs in them.
+ * Notice this must be executed everywhere (unlike the "external" scoping),
+ * including src/ and "-wp" packages
  */
-function convertRelativeToFullPath(string $relativePath): string
+function convertRelativeToFullPath(?string $relativePath = null): string
 {
     $monorepoDir = dirname(__DIR__, 4);
     $pluginDir = $monorepoDir . '/layers/GatoGraphQLForWP/plugins/gatographql';
+    if ($relativePath === null) {
+        return $pluginDir;
+    }
     return $pluginDir . '/' . $relativePath;
 }
 return [
-    'prefix' => 'PrefixedByPoP',
+    'prefix' => 'PrefixedByGatoStandalone',
     'finders' => [
         // Scope packages under vendor/, excluding local WordPress packages
         Finder::create()
@@ -51,42 +38,13 @@ return [
                 'tests',
             ])
             ->notPath([
-                // Exclude all libraries for WordPress
-                // 1. Exclude libraries ending in "-wp" from general packages
-                '#[getpop|graphql\-by\-pop|pop\-api|pop\-cms\-schema]/[a-zA-Z0-9_-]*-wp/#',
-                // 2. Exclude all libraries from WPSchema
-                '#pop-wp-schema/#',
-                // Exclude all composer.json from own libraries (they get broken!)
-                '#[getpop|gatographql|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/*/composer.json#',
-                // Exclude libraries
-                '#symfony/deprecation-contracts/#',
-                // Exclude tests from libraries
-                /**
-                 * Gato GraphQL plugin: This code is commented out as it is
-                 * not needed anymore, because package `brain/cortex`
-                 * is not loaded
-                 *
-                 * @see layers/Engine/packages/root-wp/src/Module.php
-                 */
-                // '#nikic/fast-route/test/#',
                 '#psr/log/Psr/Log/Test/#',
                 '#symfony/dom-crawler/Test/#',
                 '#symfony/http-foundation/Test/#',
                 '#symfony/service-contracts/Test/#',
                 '#michelf/php-markdown/test/#',
             ])
-            ->in(convertRelativeToFullPath('vendor')),
-        /**
-         * Gato GraphQL plugin: This code is commented out as it is
-         * not needed anymore, because package `brain/cortex`
-         * is not loaded
-         *
-         * @see layers/Engine/packages/root-wp/src/Module.php
-         */
-        // Finder::create()->append([
-        //     convertRelativeToFullPath('vendor/getpop/root-wp/src/Module.php'),
-        //     convertRelativeToFullPath('vendor/getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php'),
-        // ])
+            ->in(convertRelativeToFullPath()),
     ],
     'exclude-namespaces' => [
         // Own namespaces
@@ -111,100 +69,66 @@ return [
     ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
-            /**
-             * Gato GraphQL plugin: This code is commented out as it is
-             * not needed anymore, because package `brain/cortex`
-             * is not loaded
-             *
-             * @see layers/Engine/packages/root-wp/src/Module.php
-             */            
+            // $fileFolder = dirname($filePath);
             // /**
-            //  * File vendor/nikic/fast-route/src/bootstrap.php has this code:
-            //  *
-            //  * if (\strpos($class, 'FastRoute\\') === 0) {
-            //  *   $name = \substr($class, \strlen('FastRoute'));
-            //  *
-            //  * Fix it
+            //  * Symfony Polyfill packages.
+            //  * The bootstrap*.php files must register functions under the global namespace,
+            //  * and the other ones must register constants on the global namespace,
+            //  * so remove the namespaced after it's added.
+            //  * These files can't be whitelisted, because they may reference a prefixed class
             //  */
-            // if ($filePath === convertRelativeToFullPath('vendor/nikic/fast-route/src/bootstrap.php')) {
-            //     return str_replace(
-            //         ["'FastRoute\\\\'", "'FastRoute'"],
-            //         [sprintf("'%s\\\\FastRoute\\\\'", $prefix), sprintf("'%s\\\\FastRoute'", $prefix)],
+            // // Pattern to identify Symfony Polyfill bootstrap files
+            // // - vendor/symfony/polyfill-mbstring/bootstrap80.php
+            // // - etc
+            // $pattern = '#' . convertRelativeToFullPath('vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php') . '#';
+            // $symfonyPolyfillFilesWithGlobalClass = array_map(
+            //     convertRelativeToFullPath(...),
+            //     [
+            //         'vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+            //         'vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+            //         'vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+            //         'vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+            //         'vendor/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+            //         'vendor/symfony/polyfill-php83/Resources/stubs/DateError.php',
+            //     ]
+            // );
+            // $symfonyPolyfillFoldersWithGlobalClass = array_map(
+            //     convertRelativeToFullPath(...),
+            //     [
+            //         'vendor/symfony/polyfill-php83/Resources/stubs',
+            //     ]
+            // );
+            // $isSymfonyPolyfillFileWithGlobalClass = in_array($filePath, $symfonyPolyfillFilesWithGlobalClass)
+            //     || in_array($fileFolder, $symfonyPolyfillFoldersWithGlobalClass);
+            // if (
+            //     $isSymfonyPolyfillFileWithGlobalClass
+            //     || preg_match($pattern, $filePath)
+            // ) {
+            //     // Remove the namespace
+            //     $content = str_replace(
+            //         sprintf("namespace %s;", $prefix),
+            //         '',
             //         $content
             //     );
-            // }
-            // /**
-            //  * Brain/Cortex is prefixing classes \WP and \WP_Rewrite
-            //  * Avoid it!
-            //  */
-            // if (str_starts_with($filePath, convertRelativeToFullPath('vendor/brain/cortex/'))) {
-            //     return str_replace(
-            //         sprintf("\\%s\\WP", $prefix),
-            //         "\\WP",
+
+            //     // Remove the namespace from all the `function_exists` in bootstrap.php
+            //     $content = str_replace(
+            //         sprintf("function_exists('%s\\\\", $prefix),
+            //         "function_exists('",
             //         $content
             //     );
+
+            //     // Comment out the class_alias too
+            //     if ($isSymfonyPolyfillFileWithGlobalClass) {
+            //         $content = str_replace(
+            //             sprintf("\class_alias('%s\\\\", $prefix),
+            //             sprintf("//\class_alias('%s\\\\", $prefix),
+            //             $content
+            //         );
+            //     }
+
+            //     return $content;
             // }
-
-            $fileFolder = dirname($filePath);
-            /**
-             * Symfony Polyfill packages.
-             * The bootstrap*.php files must register functions under the global namespace,
-             * and the other ones must register constants on the global namespace,
-             * so remove the namespaced after it's added.
-             * These files can't be whitelisted, because they may reference a prefixed class
-             */
-            // Pattern to identify Symfony Polyfill bootstrap files
-            // - vendor/symfony/polyfill-mbstring/bootstrap80.php
-            // - etc
-            $pattern = '#' . convertRelativeToFullPath('vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php') . '#';
-            $symfonyPolyfillFilesWithGlobalClass = array_map(
-                convertRelativeToFullPath(...),
-                [
-                    'vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-                    'vendor/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-                    'vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-                    'vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-                    'vendor/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-                    'vendor/symfony/polyfill-php83/Resources/stubs/DateError.php',
-                ]
-            );
-            $symfonyPolyfillFoldersWithGlobalClass = array_map(
-                convertRelativeToFullPath(...),
-                [
-                    'vendor/symfony/polyfill-php83/Resources/stubs',
-                ]
-            );
-            $isSymfonyPolyfillFileWithGlobalClass = in_array($filePath, $symfonyPolyfillFilesWithGlobalClass)
-                || in_array($fileFolder, $symfonyPolyfillFoldersWithGlobalClass);
-            if (
-                $isSymfonyPolyfillFileWithGlobalClass
-                || preg_match($pattern, $filePath)
-            ) {
-                // Remove the namespace
-                $content = str_replace(
-                    sprintf("namespace %s;", $prefix),
-                    '',
-                    $content
-                );
-
-                // Remove the namespace from all the `function_exists` in bootstrap.php
-                $content = str_replace(
-                    sprintf("function_exists('%s\\\\", $prefix),
-                    "function_exists('",
-                    $content
-                );
-
-                // Comment out the class_alias too
-                if ($isSymfonyPolyfillFileWithGlobalClass) {
-                    $content = str_replace(
-                        sprintf("\class_alias('%s\\\\", $prefix),
-                        sprintf("//\class_alias('%s\\\\", $prefix),
-                        $content
-                    );
-                }
-
-                return $content;
-            }
 
             return $content;
         },
