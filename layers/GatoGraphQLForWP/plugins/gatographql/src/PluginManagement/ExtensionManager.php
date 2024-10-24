@@ -398,7 +398,7 @@ class ExtensionManager extends AbstractPluginManager
      */
     public function isExtensionLicenseActive(string $extensionSlug): bool
     {
-        return $this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] ?? false;
+        return isset($this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug]);
     }
 
     /**
