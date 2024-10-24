@@ -39,12 +39,10 @@ return [
             ->exclude([
                 'tests',
             ])
-            ->path([
-                // Include own source
-                '#^src/#',
-                // Include own libraries
-                '#^vendor/[getpop|gatographql|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/#',
-            ])
+            ->path(
+                // Include own source and own libraries only
+                '#^src/|^vendor/[getpop|gatographql|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/#',
+            )
             ->in(convertRelativeToFullPath()),
     ],
     'exclude-namespaces' => [
