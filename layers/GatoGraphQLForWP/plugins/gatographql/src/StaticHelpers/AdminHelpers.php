@@ -21,15 +21,15 @@ class AdminHelpers
          */
         $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
         $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($module);
-        $activateExtensionsCategory = $activateExtensionsModuleResolver->getSettingsCategory($module);
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $settingsCategory = $moduleResolver->getSettingsCategory($module);
         return \admin_url(sprintf(
             'admin.php?page=%s&%s=%s&%s=%s',
             $settingsMenuPage->getScreenID(),
             RequestParams::CATEGORY,
-            $settingsCategoryRegistry->getSettingsCategoryResolver($activateExtensionsCategory)->getID($activateExtensionsCategory),
+            $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getID($settingsCategory),
             RequestParams::MODULE,
-            $activateExtensionsModuleResolver->getID($module)
+            $moduleResolver->getID($module)
         ));
     }
 }
