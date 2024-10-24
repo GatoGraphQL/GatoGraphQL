@@ -541,6 +541,6 @@ abstract class AbstractPlugin implements PluginInterface
 
     final public function getPluginWPContentFolderName(): string
     {
-        return strtolower($this->getPluginNamespace());
+        return strtolower($this->getPluginSlug());
     }
 }
