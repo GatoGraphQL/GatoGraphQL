@@ -394,6 +394,14 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
+     * Call this method only after calling `assertCommercialLicenseHasBeenActivated`
+     */
+    public function isExtensionLicenseActive(string $extensionSlug): bool
+    {
+        return $this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] ?? false;
+    }
+
+    /**
      * @return array<string,string> Extension Slug => Extension Product Name
      */
     public function getCommercialExtensionSlugProductNames(): array
