@@ -41,9 +41,9 @@ return [
             ])
             ->path([
                 // Include own source
-                '#src/#',
+                '#^src/#',
                 // Include own libraries
-                '#vendor/[getpop|gatographql|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/#',
+                '#^vendor/[getpop|gatographql|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/#',
             ])
             ->in(convertRelativeToFullPath()),
     ],
