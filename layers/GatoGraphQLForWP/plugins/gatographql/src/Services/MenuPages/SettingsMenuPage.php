@@ -905,7 +905,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             <label for="<?php echo \esc_attr($id) ?>">
                 <strong><?php echo \esc_html($label); ?></strong>
                 <br/>
-                <input name="<?php echo \esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>" id="<?php echo \esc_attr($id) ?>" value="<?php echo \esc_html($value[$key] ?? '') ?>" type="text">
+                <input
+                    name="<?php echo \esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
+                    id="<?php echo \esc_attr($id) ?>"
+                    value="<?php echo \esc_html($value[$key] ?? '') ?>"
+                    type="text"
+                >
             </label>
             <?php
             $addSpacing = true;
