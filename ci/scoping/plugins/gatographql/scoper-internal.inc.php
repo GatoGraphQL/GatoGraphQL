@@ -43,12 +43,4 @@ return [
             ])
             ->in(convertRelativeToFullPath()),
     ],
-    'exclude-namespaces' => [
-        // Commented out as this code doesn't work, and then ALL code
-        // is being prefixed, including 3rd-party dependencies again
-        // // Own namespaces
-        // // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
-        // // If PoP comes first, then PoPSchema is still scoped!
-        // '/^(?!.*(PoPAPI|PoPBackbone|PoPCMSSchema|PoPSchema|PoPWPSchema|PoP|GraphQLByPoP|GatoGraphQL))/',
-    ],
 ];
