@@ -412,15 +412,9 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             }
         }
 
-        /**
-         * Only show the About page when actually loading it
-         * So it doesn't appear on the menu, but it's still available
-         * to display the release notes on the modal window
-         */
         $aboutMenuPage = $this->getReleaseNoteOrAboutMenuPage();
         if ($aboutMenuPage->isServiceEnabled()) {
             $aboutMenuPageTitle = $aboutMenuPage->getMenuPageTitle();
-            // if (App::query('page') === $aboutMenuPage->getScreenID()) {
             if (
                 $hookName = add_submenu_page(
                     $menuName,
@@ -433,7 +427,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             ) {
                 $aboutMenuPage->setHookName($hookName);
             }
-            // }
         }
     }
 
