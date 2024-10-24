@@ -24,7 +24,6 @@ use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
-use GatoGraphQL\GatoGraphQL\Settings\StaticOptions;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
@@ -567,8 +566,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         $commercialExtensionActivatedLicenseKeys = [];
 
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        $commercialExtensionActivatedLicenseEntries = get_option($optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES), []);
         foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
             $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
         }
