@@ -38,10 +38,14 @@ return [
             ->exclude([
                 'tests',
             ])
-            ->path(
-                // Include own source and own libraries only
-                '#^src/|^vendor/[getpop|gatographql|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/#',
-            )
+            ->notPath([
+                // For some reason it also prefixes content in this file, exclude it!
+                '#vendor/symfony/dependency-injection/Dumper/PhpDumper\.php#',
+            ])
+            // ->path(
+            //     // Include own source and own libraries only
+            //     '#^src/|^vendor/[getpop|gatographql|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/#',
+            // )
             ->in(convertRelativeToFullPath()),
     ],
     'exclude-namespaces' => [
