@@ -39,8 +39,12 @@ return [
                 'tests',
             ])
             ->notPath([
-                // For some reason it also prefixes content in this file, exclude it!
-                '#vendor/symfony/dependency-injection/Dumper/PhpDumper\.php#',
+                /**
+                 * For some reason it also prefixes content in file
+                 * vendor/symfony/dependency-injection/Dumper/PhpDumper.php
+                 * and a couple more, so exclude them!
+                 */
+                '#vendor/symfony/#',
             ])
             // ->path(
             //     // Include own source and own libraries only
