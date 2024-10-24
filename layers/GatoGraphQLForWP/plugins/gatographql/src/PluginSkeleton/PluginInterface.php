@@ -119,5 +119,5 @@ interface PluginInterface
      * If the plugin is prefixed using PHP-Scoper, use the
      * top-level namespace name calculated here.
      */
-    public function getPluginScopingTopLevelNamespace(): string;
+    public function getPluginInternalScopingTopLevelNamespace(): string;
 }

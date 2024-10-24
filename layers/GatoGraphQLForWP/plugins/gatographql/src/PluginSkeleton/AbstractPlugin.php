@@ -54,7 +54,7 @@ abstract class AbstractPlugin implements PluginInterface
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
         $this->pluginFolder = $pluginFolder ?? dirname($this->pluginFile);
         $this->pluginURL = $pluginURL ?? \plugin_dir_url($this->pluginFile);
-        $this->pluginScopingTopLevelNamespace = ScopingHelpers::getPluginScopingTopLevelNamespace($this->pluginName);
+        $this->pluginScopingTopLevelNamespace = ScopingHelpers::getPluginInternalScopingTopLevelNamespace($this->pluginName);
 
         // Have the Plugin set its own info on the corresponding PluginInfo
         $this->initializeInfo();
@@ -571,7 +571,7 @@ abstract class AbstractPlugin implements PluginInterface
      *
      * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
      */
-    final public function getPluginScopingTopLevelNamespace(): string
+    final public function getPluginInternalScopingTopLevelNamespace(): string
     {
         return $this->pluginScopingTopLevelNamespace;
     }

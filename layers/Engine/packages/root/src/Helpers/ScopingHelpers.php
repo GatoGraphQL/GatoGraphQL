@@ -20,7 +20,7 @@ class ScopingHelpers
      *
      * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
      */
-    public static function getPluginScopingTopLevelNamespace(string $pluginName): string
+    public static function getPluginInternalScopingTopLevelNamespace(string $pluginName): string
     {
         return Scoping::NAMESPACE_PREFIX . str_replace([' ', '-'], '', $pluginName);
     }
