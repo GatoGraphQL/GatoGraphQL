@@ -16,7 +16,7 @@ class SchemaEditingAccessCapabilities {
          *
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
-        register_activation_hook(
+        \register_activation_hook(
             $file,
             /**
              * Register custom capabilities
@@ -30,7 +30,7 @@ class SchemaEditingAccessCapabilities {
         /**
          * For consistency, also place the deregistration here
          */
-        register_deactivation_hook(
+        \register_deactivation_hook(
             $file,
             /**
              * Unregister custom capabilities
