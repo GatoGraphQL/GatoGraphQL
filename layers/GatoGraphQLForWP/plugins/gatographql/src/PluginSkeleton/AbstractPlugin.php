@@ -12,6 +12,7 @@ use GatoGraphQL\GatoGraphQL\PluginMetadata;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInfoInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
+use PoP\Root\Constants\Scoping;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 
@@ -53,7 +54,7 @@ abstract class AbstractPlugin implements PluginInterface
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
         $this->pluginFolder = $pluginFolder ?? dirname($this->pluginFile);
         $this->pluginURL = $pluginURL ?? \plugin_dir_url($this->pluginFile);
-        $this->pluginScopingTopLevelNamespace = 'InternallyPrefixedBy' . str_replace([' ', '-'], '', $this->pluginName);
+        $this->pluginScopingTopLevelNamespace = Scoping::NAMESPACE_PREFIX . str_replace([' ', '-'], '', $this->pluginName);
 
         // Have the Plugin set its own info on the corresponding PluginInfo
         $this->initializeInfo();
