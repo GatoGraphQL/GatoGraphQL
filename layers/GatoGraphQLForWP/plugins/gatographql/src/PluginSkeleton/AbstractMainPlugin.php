@@ -567,8 +567,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         $commercialExtensionActivatedLicenseKeys = [];
 
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        $commercialExtensionActivatedLicenseEntries = get_option($optionNamespacer->namespaceOption(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES), []);
         foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
             $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
         }

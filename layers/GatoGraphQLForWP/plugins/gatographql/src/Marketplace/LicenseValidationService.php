@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
+use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
@@ -13,8 +14,8 @@ use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivate
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Settings\StaticOptions;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Services\BasicServiceTrait;
 
+use PoP\Root\Services\BasicServiceTrait;
 use function add_settings_error;
 use function get_option;
 use function home_url;
@@ -66,8 +67,10 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         array $submittedLicenseKeys,
         ?string $formSettingName = null,
     ): void {
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        $option = $optionNamespacer->namespaceOption(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        $commercialExtensionActivatedLicenseEntries = get_option($option, []);
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
@@ -291,7 +294,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
 
         // Store the payloads to the DB
         update_option(
-            StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES,
+            $option,
             $commercialExtensionActivatedLicenseEntries
         );
 
