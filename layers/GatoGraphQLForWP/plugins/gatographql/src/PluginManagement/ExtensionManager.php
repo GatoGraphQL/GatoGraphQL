@@ -15,10 +15,12 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class ExtensionManager extends AbstractPluginManager
 {
@@ -361,6 +363,9 @@ class ExtensionManager extends AbstractPluginManager
             $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
             $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
             $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var SettingsMenuPage */
+            $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
             $adminNotice_safe = sprintf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
@@ -373,7 +378,7 @@ class ExtensionManager extends AbstractPluginManager
                         AdminHelpers::getSettingsPageTabURL($activateExtensionsModule),
                         sprintf(
                             '<code>%s > %s > %s</code>',
-                            \__('Settings', 'gatographql'),
+                            $settingsMenuPage->getMenuPageTitle(),
                             $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
                             $activateExtensionsModuleResolver->getName($activateExtensionsModule),
                         )
