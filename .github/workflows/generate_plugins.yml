@@ -212,7 +212,7 @@ jobs:
                     composer global config minimum-stability dev
                     composer global config prefer-stable true
                     composer global require humbug/php-scoper
-                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.external }}
+                if: ${{ matrix.pluginConfig.scoping }}
 
             # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
             # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
@@ -238,13 +238,13 @@ jobs:
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.external }}
+                if: ${{ matrix.pluginConfig.scoping }}
 
             -   name: Use Scoper autoload in plugin main file
                 run: |
                     sed -i 's/autoload.php/scoper-autoload.php/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.external }}
+                if: ${{ matrix.pluginConfig.scoping }}
 
     ###########################################################################
     # Generate plugin, and Upload as artifact
