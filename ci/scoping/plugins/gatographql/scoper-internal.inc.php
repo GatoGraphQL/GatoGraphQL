@@ -17,7 +17,8 @@ require_once __DIR__ . '/scoper-shared.inc.php';
  * the ones we're looking for.
  *
  * Notice this must be executed everywhere (unlike the "external" scoping),
- * including src/ and "-wp" packages
+ * including src/ and "-wp" packages, and also "vendor/" (so that 2 different
+ * standalone plugins don't have conflicting dependencies)
  */
 return [
     /**
@@ -46,5 +47,11 @@ return [
                 '#michelf/php-markdown/test/#',
             ])
             ->in(convertRelativeToFullPath()),
+    ],
+    'exclude-namespaces' => [
+        // Own namespaces
+        // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
+        // If PoP comes first, then PoPSchema is still scoped!
+        '/^(?!.*(PoPAPI|PoPBackbone|PoPCMSSchema|PoPSchema|PoPWPSchema|PoP|GraphQLByPoP|GatoGraphQL))/',
     ],
 ];
