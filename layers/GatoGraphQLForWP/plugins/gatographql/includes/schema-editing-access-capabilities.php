@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-/**
- * Make sure this function is not declared more than once
- * (eg: if for some reason the website has both the Extension
- * and the Bundle installed).
- */
-if (!function_exists('registerGatoGraphQLSchemaEditingAccessCapabilities')) {
-    function registerGatoGraphQLSchemaEditingAccessCapabilities(
+namespace PoPIncludes\GatoGraphQL;
+
+class SchemaEditingAccessCapabilities {
+
+    public static function registerGatoGraphQLSchemaEditingAccessCapabilities(
         string $file,
         string $capability
     ): void {
@@ -18,7 +16,7 @@ if (!function_exists('registerGatoGraphQLSchemaEditingAccessCapabilities')) {
          *
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
-        register_activation_hook(
+        \register_activation_hook(
             $file,
             /**
              * Register custom capabilities
@@ -32,7 +30,7 @@ if (!function_exists('registerGatoGraphQLSchemaEditingAccessCapabilities')) {
         /**
          * For consistency, also place the deregistration here
          */
-        register_deactivation_hook(
+        \register_deactivation_hook(
             $file,
             /**
              * Unregister custom capabilities

@@ -60,7 +60,7 @@ if (class_exists(Plugin::class)) {
 
 // Validate that there is enough memory to run the plugin
 require_once __DIR__ . '/includes/startup.php';
-if (!checkGatoGraphQLMemoryRequirements($pluginName)) {
+if (!\PoPIncludes\GatoGraphQL\Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
     return;
 }
 
@@ -71,7 +71,7 @@ if (!checkGatoGraphQLMemoryRequirements($pluginName)) {
  */
 require_once __DIR__ . '/includes/capabilities.php';
 require_once __DIR__ . '/includes/schema-editing-access-capabilities.php';
-registerGatoGraphQLSchemaEditingAccessCapabilities(
+\PoPIncludes\GatoGraphQL\SchemaEditingAccessCapabilities::registerGatoGraphQLSchemaEditingAccessCapabilities(
     __FILE__,
     constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA')
 );

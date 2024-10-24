@@ -13,6 +13,7 @@ use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInfoInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
+use PoP\Root\Helpers\ScopingHelpers;
 use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractPlugin implements PluginInterface
@@ -26,6 +27,19 @@ abstract class AbstractPlugin implements PluginInterface
     protected string $pluginName;
     protected string $pluginFolder;
     protected string $pluginURL;
+    /**
+     * If the plugin is prefixed using PHP-Scoper, use the
+     * top-level namespace name calculated here.
+     *
+     * This same name must be input in the scoper-internal.inc.php
+     * config file.
+     *
+     * For instance, plugin "Gato GraphQL" will have the top-level
+     * namespace "InternallyPrefixedByGatoGraphQL".
+     *
+     * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
+     */
+    protected string $pluginScopingTopLevelNamespace;
 
     public function __construct(
         protected string $pluginFile, /** The main plugin file */
@@ -40,6 +54,7 @@ abstract class AbstractPlugin implements PluginInterface
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
         $this->pluginFolder = $pluginFolder ?? dirname($this->pluginFile);
         $this->pluginURL = $pluginURL ?? \plugin_dir_url($this->pluginFile);
+        $this->pluginScopingTopLevelNamespace = ScopingHelpers::getPluginInternalScopingTopLevelNamespace($this->pluginName);
 
         // Have the Plugin set its own info on the corresponding PluginInfo
         $this->initializeInfo();
@@ -542,5 +557,22 @@ abstract class AbstractPlugin implements PluginInterface
     final public function getPluginWPContentFolderName(): string
     {
         return strtolower($this->getPluginSlug());
+    }
+
+    /**
+     * If the plugin is prefixed using PHP-Scoper, use the
+     * top-level namespace name calculated here.
+     *
+     * This same name must be input in the scoper-internal.inc.php
+     * config file.
+     *
+     * For instance, plugin "Gato GraphQL" will have the top-level
+     * namespace "InternallyPrefixedByGatoGraphQL".
+     *
+     * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
+     */
+    final public function getPluginInternalScopingTopLevelNamespace(): string
+    {
+        return $this->pluginScopingTopLevelNamespace;
     }
 }

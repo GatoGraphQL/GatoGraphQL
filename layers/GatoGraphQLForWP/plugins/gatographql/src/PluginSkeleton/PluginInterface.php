@@ -114,4 +114,10 @@ interface PluginInterface
     public function getPluginWPConfigConstantNamespace(): string;
 
     public function getPluginWPContentFolderName(): string;
+
+    /**
+     * If the plugin is prefixed using PHP-Scoper, use the
+     * top-level namespace name calculated here.
+     */
+    public function getPluginInternalScopingTopLevelNamespace(): string;
 }

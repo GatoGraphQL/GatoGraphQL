@@ -107,9 +107,6 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['additional_rector_before_configs'] = implode(' ', $entryConfig['additional_rector_before_configs'] ?? []);
             $entryConfig['additional_rector_after_configs'] = implode(' ', $entryConfig['additional_rector_after_configs'] ?? []);
 
-            // Automatically set the entries for conditional checks in GitHub Actions
-            $entryConfig['scope'] = isset($entryConfig['scoping']);
-
             // Transfer the "replace" entries in composer.json, from dependency packages to the root package
             $entryConfig['is_bundle'] ??= false;
             $entryConfig['exclude_replace'] ??= '';
