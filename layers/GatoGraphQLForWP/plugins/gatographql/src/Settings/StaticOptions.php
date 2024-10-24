@@ -16,5 +16,5 @@ class StaticOptions
      * Store the license data for all bundles/extensions that
      * have been activated
      */
-    public final const COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES = 'gatographql-commercial-extension-activated-license-entries';
+    public final const COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES = 'commercial-extension-activated-license-entries';
 }
