@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\Root\Helpers;
 
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Constants\Scoping;
 
 class ClassHelpers
