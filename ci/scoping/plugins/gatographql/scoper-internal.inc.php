@@ -27,7 +27,7 @@ function convertRelativeToFullPath(?string $relativePath = null): string
     return $pluginDir . '/' . $relativePath;
 }
 return [
-    'prefix' => 'PrefixedByGatoStandalone',
+    'prefix' => 'GatoGraphQLScoped',
     'finders' => [
         // Scope packages under vendor/, excluding local WordPress packages
         Finder::create()
