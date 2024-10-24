@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-/**
- * Make sure this function is not declared more than once
- * (eg: if for some reason the website has both the Extension
- * and the Bundle installed).
- */
-if (!function_exists('registerGatoGraphQLSchemaEditingAccessCapabilities')) {
-    function registerGatoGraphQLSchemaEditingAccessCapabilities(
+namespace PoPIncludes\GatoGraphQL;
+
+class GatoGraphQL_SchemaEditingAccessCapabilities {
+
+    public static function registerGatoGraphQLSchemaEditingAccessCapabilities(
         string $file,
         string $capability
     ): void {

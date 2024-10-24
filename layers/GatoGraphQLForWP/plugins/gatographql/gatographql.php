@@ -71,7 +71,7 @@ if (!\PoPIncludes\GatoGraphQL\GatoGraphQL_Startup::checkGatoGraphQLMemoryRequire
  */
 require_once __DIR__ . '/includes/capabilities.php';
 require_once __DIR__ . '/includes/schema-editing-access-capabilities.php';
-registerGatoGraphQLSchemaEditingAccessCapabilities(
+\PoPIncludes\GatoGraphQL\GatoGraphQL_SchemaEditingAccessCapabilities::registerGatoGraphQLSchemaEditingAccessCapabilities(
     __FILE__,
     constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA')
 );
