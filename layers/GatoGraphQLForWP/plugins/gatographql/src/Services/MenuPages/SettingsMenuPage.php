@@ -908,6 +908,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 <input
                     name="<?php echo \esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
                     id="<?php echo \esc_attr($id) ?>"
+                    class="regular-text"
                     value="<?php echo \esc_html($value[$key] ?? '') ?>"
                     type="text"
                 >
