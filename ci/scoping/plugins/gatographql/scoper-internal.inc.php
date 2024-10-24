@@ -39,12 +39,11 @@ return [
             ->exclude([
                 'tests',
             ])
-            ->notPath([
-                '#psr/log/Psr/Log/Test/#',
-                '#symfony/dom-crawler/Test/#',
-                '#symfony/http-foundation/Test/#',
-                '#symfony/service-contracts/Test/#',
-                '#michelf/php-markdown/test/#',
+            ->path([
+                // Include own source
+                '#src/#',
+                // Include own libraries
+                '#vendor/[getpop|gatographql|graphql\-by\-pop|pop\-api|pop\-backbone|pop\-cms\-schema|pop\-schema|pop\-wp\-schema]/#',
             ])
             ->in(convertRelativeToFullPath()),
     ],
