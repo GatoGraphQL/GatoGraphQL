@@ -856,6 +856,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']'); ?>"
                     id="<?php echo \esc_attr($name); ?>"
                     value="<?php echo \esc_attr($value); ?>"
+                    class="regular-text"
                     <?php if ($isNumber) { ?>
                         type="number"
                         step="1"
