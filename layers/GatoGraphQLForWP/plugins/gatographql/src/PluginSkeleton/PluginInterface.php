@@ -94,7 +94,7 @@ interface PluginInterface
      * standalone plugins).
      */
     public function getPluginNamespace(): string;
-    
+
     /**
      * Namespace the entities to store in DB:
      * CPT, taxonomies, etc.

@@ -13,8 +13,8 @@ use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivate
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Settings\StaticOptions;
 use PoP\ComponentModel\Misc\GeneralUtils;
-
 use PoP\Root\Services\BasicServiceTrait;
+
 use function add_settings_error;
 use function get_option;
 use function home_url;

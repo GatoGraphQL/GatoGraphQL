@@ -17,9 +17,9 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public final const PLUGIN_CONFIGURATION = Plugin::NAMESPACE . '\plugin-configuration';
     public final const API_KEYS = Plugin::NAMESPACE . '\api-keys';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
-    
+
     private ?OptionNamespacerInterface $optionNamespacer = null;
-    
+
     final public function setOptionNamespacer(OptionNamespacerInterface $optionNamespacer): void
     {
         $this->optionNamespacer = $optionNamespacer;
