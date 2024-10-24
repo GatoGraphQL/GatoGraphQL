@@ -66,12 +66,12 @@ return [
         '/^(?!.*(PoPAPI|PoPBackbone|PoPCMSSchema|PoPIncludes|PoPSchema|PoPWPSchema|PoP|GraphQLByPoP|GatoGraphQL))/',
     ],
     'exclude-functions' => [
-        // Functions referenced in files:
+        /** Functions referenced in files: */
         // layers/GatoGraphQLForWP/plugins/gatographql/includes/startup.php
         'wp_convert_hr_to_bytes',
         'add_action',
-        // // vendor/gatographql/gatographql/includes/schema-editing-access-capabilities.php
-        // 'register_activation_hook',
-        // 'register_deactivation_hook',
+        // layers/GatoGraphQLForWP/plugins/gatographql/includes/schema-editing-access-capabilities.php
+        'register_activation_hook',
+        'register_deactivation_hook',
     ],
 ];
