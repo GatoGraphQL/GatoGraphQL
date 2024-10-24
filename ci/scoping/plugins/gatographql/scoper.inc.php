@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Isolated\Symfony\Component\Finder\Finder;
 
+require_once __DIR__ . '/scoper-shared.inc.php';
+
 /**
  * Must only scope the packages in vendor/, because:
  *
@@ -33,12 +35,6 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Then, manually add these 2 files to scope Brain\Cortex.
  * This works without side effects, because there are no WordPress stubs in them.
  */
-function convertRelativeToFullPath(string $relativePath): string
-{
-    $monorepoDir = dirname(__DIR__, 4);
-    $pluginDir = $monorepoDir . '/layers/GatoGraphQLForWP/plugins/gatographql';
-    return $pluginDir . '/' . $relativePath;
-}
 return [
     'prefix' => 'PrefixedByPoP',
     'finders' => [

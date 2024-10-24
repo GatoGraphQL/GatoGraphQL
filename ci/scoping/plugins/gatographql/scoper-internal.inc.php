@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Isolated\Symfony\Component\Finder\Finder;
 
+require_once __DIR__ . '/scoper-shared.inc.php';
+
 /**
  * Scope own classes for creating a standalone plugin.
  *
@@ -17,15 +19,6 @@ use Isolated\Symfony\Component\Finder\Finder;
  * Notice this must be executed everywhere (unlike the "external" scoping),
  * including src/ and "-wp" packages
  */
-function convertRelativeToFullPath(?string $relativePath = null): string
-{
-    $monorepoDir = dirname(__DIR__, 4);
-    $pluginDir = $monorepoDir . '/layers/GatoGraphQLForWP/plugins/gatographql';
-    if ($relativePath === null) {
-        return $pluginDir;
-    }
-    return $pluginDir . '/' . $relativePath;
-}
 return [
     // Watch out! This name is hardcoded, but it must be EXACTLY the same
     // as the calculated name for each plugin
