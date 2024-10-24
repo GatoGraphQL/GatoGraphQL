@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
+namespace PoPIncludes\GatoGraphQL;
+
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Environment as RootEnvironment;
 
-/**
- * Make sure this function is not declared more than once
- */
-if (!function_exists('checkGatoGraphQLMemoryRequirements')) {
+class GatoGraphQL_Startup {
     /**
      * Validate that there is enough memory to run the plugin.
      *
@@ -16,7 +15,7 @@ if (!function_exists('checkGatoGraphQLMemoryRequirements')) {
      *
      * @see https://www.php.net/manual/en/ini.core.php#ini.sect.resource-limits
      */
-    function checkGatoGraphQLMemoryRequirements(string $pluginName): bool
+    public static function checkGatoGraphQLMemoryRequirements(string $pluginName): bool
     {
         $phpMemoryLimit = \ini_get('memory_limit');
         $phpMemoryLimitInBytes = \wp_convert_hr_to_bytes($phpMemoryLimit);
@@ -41,9 +40,7 @@ if (!function_exists('checkGatoGraphQLMemoryRequirements')) {
         }
         return true;
     }
-}
 
-if (!function_exists('maybeAdaptGatoGraphQLBundledExtensionPluginFile')) {
     /**
      * During development, due to symlinking in Lando, __FILE__ for bundled
      * extensions doesn't point to the expected location under "vendor",
@@ -54,7 +51,7 @@ if (!function_exists('maybeAdaptGatoGraphQLBundledExtensionPluginFile')) {
      *
      * This function fixes the file path with the expected behavior.
      */
-    function maybeAdaptGatoGraphQLBundledExtensionPluginFile(
+    public static function maybeAdaptGatoGraphQLBundledExtensionPluginFile(
         string $extensionFile,
         string $extensionClass,
         string $extensionPackageOwner
