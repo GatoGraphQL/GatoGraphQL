@@ -157,6 +157,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $showNoCommercialExtensionsInstalledMessage = false;
             $extensionManager = PluginApp::getExtensionManager();
             $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
+            $activateExtensionLicensesTitle = $this->getActivateExtensionLicensesTitle();
             if ($commercialExtensionSlugProductNames !== []) {
                 $ulPlaceholder = '<ul><li>%s</li></ul>';
                 $handlingLicenseMessageItems = [
@@ -172,7 +173,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Activate Extension Licenses', 'gatographql'),
+                    Properties::TITLE => $activateExtensionLicensesTitle,
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
                         sprintf(
@@ -233,7 +234,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         $module,
                         'activate-extensions'
                     ),
-                    Properties::TITLE => \__('Activate Extension Licenses', 'gatographql'),
+                    Properties::TITLE => $activateExtensionLicensesTitle,
                     Properties::DESCRIPTION => sprintf(
                         \__('<em>There are no Bundles or Extensions from the %s installed</em>', 'gatographql'),
                         $this->getGatoGraphQLShopName()
@@ -408,5 +409,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             \__('%s Shop', 'gatographql'),
             PluginApp::getMainPlugin()->getPluginName()
         );
+    }
+
+    protected function getActivateExtensionLicensesTitle(): string
+    {
+        return \__('Activate Extension Licenses', 'gatographql');
     }
 }
