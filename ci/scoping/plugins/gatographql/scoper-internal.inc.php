@@ -65,4 +65,8 @@ return [
         // If PoP comes first, then PoPSchema is still scoped!
         '/^(?!.*(PoPAPI|PoPBackbone|PoPCMSSchema|PoPIncludes|PoPSchema|PoPWPSchema|PoP|GraphQLByPoP|GatoGraphQL))/',
     ],
+    'exclude-functions' => [
+        // In file: layers/GatoGraphQLForWP/plugins/gatographql/includes/startup.php
+        'wp_convert_hr_to_bytes',
+    ],
 ];
