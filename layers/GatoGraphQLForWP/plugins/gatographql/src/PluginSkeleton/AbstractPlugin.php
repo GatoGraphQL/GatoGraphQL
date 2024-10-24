@@ -34,7 +34,7 @@ abstract class AbstractPlugin implements PluginInterface
      * config file.
      *
      * For instance, plugin "Gato GraphQL" will have the top-level
-     * namespace "GatoGraphQLScoped".
+     * namespace "InternallyPrefixedByGatoGraphQL".
      *
      * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
      */
@@ -53,7 +53,7 @@ abstract class AbstractPlugin implements PluginInterface
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
         $this->pluginFolder = $pluginFolder ?? dirname($this->pluginFile);
         $this->pluginURL = $pluginURL ?? \plugin_dir_url($this->pluginFile);
-        $this->pluginScopingTopLevelNamespace = str_replace([' ', '-'], '', $this->pluginName) . 'Scoped';
+        $this->pluginScopingTopLevelNamespace = 'InternallyPrefixedBy' . str_replace([' ', '-'], '', $this->pluginName);
 
         // Have the Plugin set its own info on the corresponding PluginInfo
         $this->initializeInfo();
@@ -566,7 +566,7 @@ abstract class AbstractPlugin implements PluginInterface
      * config file.
      *
      * For instance, plugin "Gato GraphQL" will have the top-level
-     * namespace "GatoGraphQLScoped".
+     * namespace "InternallyPrefixedByGatoGraphQL".
      *
      * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
      */
