@@ -22,7 +22,7 @@ class ScopingHelpers
      */
     public static function getPluginInternalScopingTopLevelNamespace(string $pluginName): string
     {
-        return Scoping::NAMESPACE_PREFIX . str_replace([' ', '-'], '', $pluginName);
+        return Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX . str_replace([' ', '-'], '', $pluginName);
     }
 
     /**
@@ -31,6 +31,6 @@ class ScopingHelpers
      */
     public static function isNamespaceInternallyScoped(string $class): bool
     {
-        return str_starts_with($class, Scoping::NAMESPACE_PREFIX);
+        return str_starts_with($class, Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX);
     }
 }
