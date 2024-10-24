@@ -63,6 +63,6 @@ return [
         // Own namespaces
         // Watch out! Do NOT alter the order of PoPSchema, PoPWPSchema and PoP!
         // If PoP comes first, then PoPSchema is still scoped!
-        '/^(?!.*(PoPAPI|PoPBackbone|PoPCMSSchema|PoPSchema|PoPWPSchema|PoP|GraphQLByPoP|GatoGraphQL))/',
+        '/^(?!.*(PoPAPI|PoPBackbone|PoPCMSSchema|PoPIncludes|PoPSchema|PoPWPSchema|PoP|GraphQLByPoP|GatoGraphQL))/',
     ],
 ];
