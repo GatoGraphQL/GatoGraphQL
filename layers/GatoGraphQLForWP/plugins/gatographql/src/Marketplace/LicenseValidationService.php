@@ -12,7 +12,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulE
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\Settings\StaticOptions;
+use GatoGraphQL\GatoGraphQL\Settings\Options;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 use PoP\Root\Services\BasicServiceTrait;
@@ -68,7 +68,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         ?string $formSettingName = null,
     ): void {
         $optionNamespacer = OptionNamespacerFacade::getInstance();
-        $option = $optionNamespacer->namespaceOption(StaticOptions::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
+        $option = $optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
         /** @var array<string,mixed> */
         $commercialExtensionActivatedLicenseEntries = get_option($option, []);
         [
