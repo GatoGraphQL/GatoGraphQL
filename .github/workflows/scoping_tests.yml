@@ -119,7 +119,7 @@ jobs:
 
             # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
             # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
-            -   name: Scope code into separate folder
+            -   name: Scope 3rd-party dependencies code into separate folder
                 run: php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config.external }} --output-dir $GITHUB_WORKSPACE/build-prefixed/vendor --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
