@@ -935,6 +935,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 <select
                     name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']' . ($isMultiple ? '[]' : '')); ?>"
                     id="<?php echo \esc_attr($name); ?>"
+                    class="regular-text"
                     <?php if ($isMultiple) : ?>
                         multiple="multiple"
                         size="10"
