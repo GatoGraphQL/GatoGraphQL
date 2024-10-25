@@ -61,6 +61,14 @@ class ScopingHelpers
         return str_replace([' ', '-', ',', '_', '&'], '', $pluginName);
     }
 
+    public static function getPluginExternalScopingTopLevelNamespace(string $pluginName): string
+    {
+        return static::getPluginScopingTopLevelNamespace(
+            Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX,
+            $pluginName,
+        );
+    }
+
     public static function isNamespaceInternallyScoped(string $class): bool
     {
         return static::isNamespaceScoped(
@@ -72,14 +80,6 @@ class ScopingHelpers
     protected static function isNamespaceScoped(string $prefix, string $class): bool
     {
         return str_starts_with($class, $prefix);
-    }
-
-    public static function getPluginExternalScopingTopLevelNamespace(string $pluginName): string
-    {
-        return static::getPluginScopingTopLevelNamespace(
-            Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX,
-            $pluginName,
-        );
     }
 
     public static function isNamespaceExternallyScoped(string $class): bool
