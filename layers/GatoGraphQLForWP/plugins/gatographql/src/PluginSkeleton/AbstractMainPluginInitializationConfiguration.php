@@ -8,7 +8,6 @@ use GatoGraphQL\GatoGraphQL\Facades\ContainerCacheConfigurationManagerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\InternalGraphQLServerContainerCacheConfigurationManagerFacade;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Helpers\AppThreadHelpers;
 
@@ -69,7 +68,7 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
             $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
         }
         return new ContainerCacheConfiguration(
-            GeneralUtils::slugify(PluginApp::getMainPlugin()->getPluginName(), '', false),
+            PluginApp::getMainPlugin()->getPluginNamespaceForClass(),
             $cacheContainerConfiguration,
             $containerConfigurationCacheNamespace,
             $containerConfigurationCacheDirectory
