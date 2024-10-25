@@ -16,7 +16,7 @@ class ScopingHelpers
      * config file.
      *
      * For instance, plugin "Gato GraphQL" will have the top-level
-     * namespace "InternallyPrefixedByGatoGraphQL".
+     * namespace "InternallyGatoPrefixByGatoGraphQL".
      *
      * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
      */
