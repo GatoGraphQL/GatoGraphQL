@@ -18,6 +18,7 @@ trait ContainerBuilderFactoryTrait
     protected bool $cacheContainerConfiguration;
     protected bool $cached;
     protected string $cacheFile;
+    protected string $applicationName;
 
     /**
      * Initialize the Container Builder.
@@ -28,10 +29,12 @@ trait ContainerBuilderFactoryTrait
      * @param string|null $directory directory where to store the cache. If null, the default value is used
      */
     public function init(
+        string $applicationName,
         ?bool $cacheContainerConfiguration = null,
         ?string $namespace = null,
         ?string $directory = null
     ): void {
+        $this->applicationName = $applicationName;
         $this->cacheContainerConfiguration = $cacheContainerConfiguration ?? Environment::cacheContainerConfiguration();
         $namespace ??= Environment::getCacheContainerConfigurationNamespace();
         $directory ??= Environment::getCacheContainerConfigurationDirectory();
@@ -151,7 +154,7 @@ trait ContainerBuilderFactoryTrait
      */
     public function getContainerNamespace(): string
     {
-        return 'PoPContainer';
+        return 'PoPContainerFor' . $this->applicationName;
     }
 
     abstract public function getContainerClassName(): string;

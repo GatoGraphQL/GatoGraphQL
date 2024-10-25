@@ -36,6 +36,7 @@ abstract class AbstractTestCase extends TestCase
         $appLoader->addModuleClassesToInitialize(static::getModuleClassesToInitialize());
         $appLoader->initializeModules($isDev);
         $containerCacheConfiguration = new ContainerCacheConfiguration(
+            'PHPUnitTest',
             $cacheContainerConfiguration,
             $containerNamespace,
             $containerDirectory
