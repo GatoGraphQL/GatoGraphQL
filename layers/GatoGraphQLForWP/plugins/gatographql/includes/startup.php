@@ -7,6 +7,9 @@ namespace PoPIncludes\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Environment as RootEnvironment;
 
+use function wp_convert_hr_to_bytes;
+use function add_action;
+
 class Startup {
     /**
      * Validate that there is enough memory to run the plugin.
@@ -18,13 +21,13 @@ class Startup {
     public static function checkGatoGraphQLMemoryRequirements(string $pluginName): bool
     {
         $phpMemoryLimit = \ini_get('memory_limit');
-        $phpMemoryLimitInBytes = \wp_convert_hr_to_bytes($phpMemoryLimit);
+        $phpMemoryLimitInBytes = wp_convert_hr_to_bytes($phpMemoryLimit);
         if ($phpMemoryLimitInBytes !== -1) {
             // Minimum: 64MB
             $minRequiredPHPMemoryLimit = '64M';
-            $minRequiredPHPMemoryLimitInBytes = \wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
+            $minRequiredPHPMemoryLimitInBytes = wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
             if ($phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
-                \add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName) {
+                add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName) {
                     printf(
                         '<div class="notice notice-error"><p>%s</p></div>',
                         sprintf(
