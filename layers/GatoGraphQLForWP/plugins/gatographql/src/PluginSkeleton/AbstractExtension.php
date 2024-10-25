@@ -53,7 +53,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         if ($extensionInitializationConfigurationClass === null) {
             return null;
         }
-        return new $extensionInitializationConfigurationClass();
+        return new $extensionInitializationConfigurationClass($this);
     }
 
     /**
