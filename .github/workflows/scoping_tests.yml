@@ -119,12 +119,22 @@ jobs:
 
             # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
             # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
-            -   name: Scope code into separate folder
-                run: php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config }} --output-dir $GITHUB_WORKSPACE/build-prefixed/vendor --ansi
+            -   name: Scope code for 3rd-party dependencies into separate folder
+                run: php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config.external }} --output-dir $GITHUB_WORKSPACE/build-prefixed/vendor --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
-            -   name: Copy scoped code back into original location
+            -   name: Copy scoped 3rd-party dependencies code back into original location
                 run: rsync -av build-prefixed/ ${{ matrix.pluginConfig.path }} --quiet
+
+            # (Optional) Also scope own classes (eg: for creating a standalone plugin)
+            -   name: Scope own code into separate folder
+                run: php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config.external }} --output-dir $GITHUB_WORKSPACE/build-prefixed-internal --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.internal }}
+
+            -   name: Copy scoped own code back into original location
+                run: rsync -av build-prefixed-internal/ ${{ matrix.pluginConfig.path }} --quiet
+                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.internal }}
 
             -   name: Regenerate autoloader for PROD
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi

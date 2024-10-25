@@ -212,29 +212,39 @@ jobs:
                     composer global config minimum-stability dev
                     composer global config prefer-stable true
                     composer global require humbug/php-scoper
-                if: ${{ matrix.pluginConfig.scope }}
+                if: ${{ matrix.pluginConfig.scoping }}
 
             # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
             # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
-            -   name: Scope plugin into separate folder
-                run: ~/.composer/vendor/bin/php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config }} --output-dir $GITHUB_WORKSPACE/build/prefixed-plugin/vendor --ansi --no-interaction
+            -   name: Scope code for 3rd-party dependencies into separate folder
+                run: ~/.composer/vendor/bin/php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config.external }} --output-dir $GITHUB_WORKSPACE/build/prefixed-plugin/vendor --ansi --no-interaction
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scope }}
+                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.external }}
 
-            -   name: Copy scoped code back to source folder
+            -   name: Copy scoped 3rd-party dependencies code back to source folder
                 run: rsync -av build/prefixed-plugin/ ${{ matrix.pluginConfig.path }} --quiet
-                if: ${{ matrix.pluginConfig.scope }}
+                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.external }}
+            
+            # (Optional) Also scope own classes (eg: for creating a standalone plugin)
+            -   name: Scope own code into separate folder
+                run: ~/.composer/vendor/bin/php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config.internal }} --output-dir $GITHUB_WORKSPACE/build/prefixed-plugin-internal --ansi --no-interaction
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.internal }}
+
+            -   name: Copy scoped own code back to source folder
+                run: rsync -av build/prefixed-plugin-internal/ ${{ matrix.pluginConfig.path }} --quiet
+                if: ${{ matrix.pluginConfig.scoping.phpscoper_config.internal }}
 
             -   name: Regenerate autoloader
                 run: composer dumpautoload --optimize --classmap-authoritative --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scope }}
+                if: ${{ matrix.pluginConfig.scoping }}
 
             -   name: Use Scoper autoload in plugin main file
                 run: |
                     sed -i 's/autoload.php/scoper-autoload.php/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scope }}
+                if: ${{ matrix.pluginConfig.scoping }}
 
     ###########################################################################
     # Generate plugin, and Upload as artifact

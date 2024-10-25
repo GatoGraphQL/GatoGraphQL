@@ -51,7 +51,11 @@ class PluginDataSource
                 ],
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/plugins/gatographql/rector.php',
                 'scoping' => [
-                    'phpscoper_config' => $this->rootDir . '/ci/scoping/plugins/gatographql/scoper.inc.php',
+                    'phpscoper_config' => [
+                        'external' => $this->rootDir . '/ci/scoping/plugins/gatographql/scoper.inc.php',
+                        // @todo Uncomment if need to create a standalone plugin
+                        // 'internal' => $this->rootDir . '/ci/scoping/plugins/gatographql/scoper-internal.inc.php',
+                    ],
                     'rector_test_config' => $this->rootDir . '/ci/scoping/plugins/gatographql/rector-test-scoping.php',
                 ],
                 'bashScripts' => [
