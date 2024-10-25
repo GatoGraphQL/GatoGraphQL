@@ -68,10 +68,8 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
             $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getNamespace();
             $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
         }
-        $mainPluginPSR4Namespace = ClassHelpers::getClassPSR4Namespace(get_class(PluginApp::getMainPlugin()));
-        $mainPluginPSR4NamespaceParts = explode('\\', $mainPluginPSR4Namespace);
         return new ContainerCacheConfiguration(
-            $mainPluginPSR4NamespaceParts[count($mainPluginPSR4NamespaceParts) - 1],
+            ClassHelpers::getTrailingClassPSR4Namespace(get_class(PluginApp::getMainPlugin())),
             $cacheContainerConfiguration,
             $containerConfigurationCacheNamespace,
             $containerConfigurationCacheDirectory
