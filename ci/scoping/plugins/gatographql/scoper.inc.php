@@ -36,7 +36,7 @@ require_once __DIR__ . '/scoper-shared.inc.php';
  * This works without side effects, because there are no WordPress stubs in them.
  */
 return [
-    'prefix' => 'PrefixedByPoP',
+    'prefix' => 'PrefixedByGatoGQL',
     'finders' => [
         // Scope packages under vendor/, excluding local WordPress packages
         Finder::create()
