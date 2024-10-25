@@ -91,6 +91,7 @@ return [
         'PoPAPI',
         'PoPBackbone',
         'PoPCMSSchema',
+        'PoPIncludes',
         'PoPSchema',
         'PoPWPSchema',
         'PoP',
