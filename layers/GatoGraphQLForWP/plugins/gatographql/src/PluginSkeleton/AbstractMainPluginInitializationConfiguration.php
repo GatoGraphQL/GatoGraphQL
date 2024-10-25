@@ -68,7 +68,7 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
             $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
         }
         return new ContainerCacheConfiguration(
-            PluginApp::getMainPlugin()->getPluginNamespace(),
+            PluginApp::getMainPlugin()->getPluginNamespaceForClass(),
             $cacheContainerConfiguration,
             $containerConfigurationCacheNamespace,
             $containerConfigurationCacheDirectory
