@@ -8,8 +8,8 @@ use PoP\Root\Helpers\ScopingHelpers;
 require_once __DIR__ . '/scoper-shared.inc.php';
 
 // Load code from the plugin to make the logic DRY
-require_once dirname(__DIR__, 2) . '/layers/Engine/packages/root/src/Constants/Scoping.php';
-require_once dirname(__DIR__, 2) . '/layers/Engine/packages/root/src/Helpers/ScopingHelpers.php';
+require_once dirname(__DIR__, 4) . '/layers/Engine/packages/root/src/Constants/Scoping.php';
+require_once dirname(__DIR__, 4) . '/layers/Engine/packages/root/src/Helpers/ScopingHelpers.php';
 
 /**
  * Must only scope the packages in vendor/, because:

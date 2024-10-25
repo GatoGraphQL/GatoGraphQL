@@ -8,8 +8,8 @@ use Isolated\Symfony\Component\Finder\Finder;
 use PoP\Root\Helpers\ScopingHelpers;
 
 // Load code from the plugin to make the logic DRY
-require_once dirname(__DIR__, 2) . '/layers/Engine/packages/root/src/Constants/Scoping.php';
-require_once dirname(__DIR__, 2) . '/layers/Engine/packages/root/src/Helpers/ScopingHelpers.php';
+require_once dirname(__DIR__, 4) . '/layers/Engine/packages/root/src/Constants/Scoping.php';
+require_once dirname(__DIR__, 4) . '/layers/Engine/packages/root/src/Helpers/ScopingHelpers.php';
 
 /**
  * Scope own classes for creating a standalone plugin.
