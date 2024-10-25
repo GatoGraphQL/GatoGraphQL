@@ -19,6 +19,7 @@ require_once __DIR__ . '/scoper-shared.inc.php';
  * Notice this must be executed in all the local source code
  * and local packages.
  */
+$pluginConciseNamespace = 'GatoGraphQL';
 return [
     /**
      * Watch out! This name is hardcoded, but it must be EXACTLY the same
@@ -29,7 +30,7 @@ return [
      *
      * @see layers/GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractPlugin.php `__construct`
      */
-    'prefix' => 'GatoInternalPrefixByGatoGraphQL',
+    'prefix' => 'GatoInternalPrefixBy' . $pluginConciseNamespace,
     'finders' => [
         Finder::create()
             ->files()
