@@ -24,6 +24,7 @@
 # `GENERATE_PLUGINS_FILTER` with any of these values:
 #   - extension
 #   - bundle
+#   - standalone-plugin
 ####################################################################################
 name: Generate plugins
 on:
