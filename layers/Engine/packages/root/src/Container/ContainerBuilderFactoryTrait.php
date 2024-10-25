@@ -141,6 +141,14 @@ trait ContainerBuilderFactoryTrait
         return $this->cached;
     }
 
+    /**
+     * If there are 2 applications running this engine
+     * (eg: Gato GraphQL and Gato Multilingual) then
+     * their cached containers must not conflict.
+     *
+     * To avoid that, include the application name
+     * in the namespace.
+     */
     public function getContainerNamespace(): string
     {
         return 'PoPContainer';
