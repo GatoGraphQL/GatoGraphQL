@@ -35,8 +35,9 @@ require_once __DIR__ . '/scoper-shared.inc.php';
  * Then, manually add these 2 files to scope Brain\Cortex.
  * This works without side effects, because there are no WordPress stubs in them.
  */
+$pluginConciseNamespace = 'GatoGQL';
 return [
-    'prefix' => 'PrefixedByPoP',
+    'prefix' => 'GatoExternalPrefixBy' . $pluginConciseNamespace,
     'finders' => [
         // Scope packages under vendor/, excluding local WordPress packages
         Finder::create()

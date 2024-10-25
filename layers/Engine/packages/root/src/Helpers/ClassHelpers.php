@@ -13,7 +13,7 @@ class ClassHelpers
      * domain will start with "InternallyPrefixed".
      *
      * For instance, the format for plugin "Gato GraphQL" will then be:
-     * "InternallyPrefixedByGatoGraphQL\Vendor\Project"
+     * "GatoInternalPrefixByGatoGraphQL\Vendor\Project"
      *
      * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
      */
