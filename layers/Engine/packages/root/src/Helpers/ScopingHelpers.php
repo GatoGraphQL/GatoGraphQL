@@ -51,10 +51,6 @@ class ScopingHelpers
         return str_replace([' ', '-', ',', '_', '&'], '', $pluginName);
     }
 
-    /**
-     * If own classes have been prefixed, then the top-level
-     * domain will start with "InternallyPrefixed".
-     */
     public static function isNamespaceInternallyScoped(string $class): bool
     {
         return str_starts_with($class, Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX);
