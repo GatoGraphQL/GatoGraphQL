@@ -2,9 +2,14 @@
 
 declare(strict_types=1);
 
-use Isolated\Symfony\Component\Finder\Finder;
-
 require_once __DIR__ . '/scoper-shared.inc.php';
+
+// Load code from the plugin to make the logic DRY
+require_once dirname(__DIR__, 2) . '/layers/Engine/packages/root/src/Constants/Scoping.php';
+require_once dirname(__DIR__, 2) . '/layers/Engine/packages/root/src/Helpers/ScopingHelpers.php';
+
+use Isolated\Symfony\Component\Finder\Finder;
+use PoP\Root\Helpers\ScopingHelpers;
 
 /**
  * Scope own classes for creating a standalone plugin.
@@ -19,18 +24,9 @@ require_once __DIR__ . '/scoper-shared.inc.php';
  * Notice this must be executed in all the local source code
  * and local packages.
  */
-$pluginConciseNamespace = 'GatoGraphQL';
+$pluginName = 'Gato GraphQL';
 return [
-    /**
-     * Watch out! This name is hardcoded, but it must be EXACTLY the same
-     * as the calculated name for each plugin.
-     * 
-     * For instance, plugin "Gato GraphQL" will have the top-level
-     * namespace "GatoInternalPrefixByGatoGraphQL".
-     *
-     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractPlugin.php `__construct`
-     */
-    'prefix' => 'GatoInternalPrefixBy' . $pluginConciseNamespace,
+    'prefix' => ScopingHelpers::getPluginInternalScopingTopLevelNamespace($pluginName),
     'finders' => [
         Finder::create()
             ->files()
