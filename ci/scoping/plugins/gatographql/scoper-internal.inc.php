@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/scoper-shared.inc.php';
 
+use Isolated\Symfony\Component\Finder\Finder;
+use PoP\Root\Helpers\ScopingHelpers;
+
 // Load code from the plugin to make the logic DRY
 require_once dirname(__DIR__, 2) . '/layers/Engine/packages/root/src/Constants/Scoping.php';
 require_once dirname(__DIR__, 2) . '/layers/Engine/packages/root/src/Helpers/ScopingHelpers.php';
-
-use Isolated\Symfony\Component\Finder\Finder;
-use PoP\Root\Helpers\ScopingHelpers;
 
 /**
  * Scope own classes for creating a standalone plugin.
