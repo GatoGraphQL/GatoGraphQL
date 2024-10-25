@@ -43,13 +43,13 @@ class ScopingHelpers
      */
     public static function getPluginInternalScopingTopLevelNamespace(string $pluginName): string
     {
-        return static::doGetPluginInternalScopingTopLevelNamespace(
+        return static::getPluginPrefixScopingTopLevelNamespace(
             Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX,
             $pluginName,
         );
     }
 
-    protected static function doGetPluginInternalScopingTopLevelNamespace(
+    protected static function getPluginPrefixScopingTopLevelNamespace(
         string $prefix,
         string $pluginName,
     ): string {
@@ -63,12 +63,20 @@ class ScopingHelpers
 
     public static function isNamespaceInternallyScoped(string $class): bool
     {
-        return str_starts_with($class, Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX);
+        return static::isNamespacePrefixScoped(
+            Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX,
+            $class,
+        );
+    }
+
+    protected static function isNamespacePrefixScoped(string $prefix, string $class): bool
+    {
+        return str_starts_with($class, $prefix);
     }
 
     public static function getPluginExternalScopingTopLevelNamespace(string $pluginName): string
     {
-        return static::doGetPluginInternalScopingTopLevelNamespace(
+        return static::getPluginPrefixScopingTopLevelNamespace(
             Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX,
             $pluginName,
         );
@@ -76,6 +84,9 @@ class ScopingHelpers
 
     public static function isNamespaceExternallyScoped(string $class): bool
     {
-        return str_starts_with($class, Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX);
+        return static::isNamespacePrefixScoped(
+            Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX,
+            $class,
+        );
     }
 }
