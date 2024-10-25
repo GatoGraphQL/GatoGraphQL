@@ -18,6 +18,7 @@ trait ContainerBuilderFactoryTrait
     protected bool $cacheContainerConfiguration;
     protected bool $cached;
     protected string $cacheFile;
+    protected string $applicationName;
 
     /**
      * Initialize the Container Builder.
@@ -28,10 +29,12 @@ trait ContainerBuilderFactoryTrait
      * @param string|null $directory directory where to store the cache. If null, the default value is used
      */
     public function init(
+        string $applicationName,
         ?bool $cacheContainerConfiguration = null,
         ?string $namespace = null,
         ?string $directory = null
     ): void {
+        $this->applicationName = $applicationName;
         $this->cacheContainerConfiguration = $cacheContainerConfiguration ?? Environment::cacheContainerConfiguration();
         $namespace ??= Environment::getCacheContainerConfigurationNamespace();
         $directory ??= Environment::getCacheContainerConfigurationDirectory();
@@ -76,7 +79,7 @@ trait ContainerBuilderFactoryTrait
             // Since we have 2 containers, store each under its namespace and classname
             $containerNamespace = $this->getContainerNamespace();
             $containerClassName = $this->getContainerClassName();
-            $directory .= $containerNamespace . \DIRECTORY_SEPARATOR;
+            $directory .= str_replace('\\', '_', $containerNamespace) . \DIRECTORY_SEPARATOR;
             $directory .= $containerClassName . \DIRECTORY_SEPARATOR;
             // On Windows the whole path is limited to 258 chars
             if ($cacheSetupSuccess && '\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
@@ -141,9 +144,17 @@ trait ContainerBuilderFactoryTrait
         return $this->cached;
     }
 
+    /**
+     * If there are 2 applications running this engine
+     * (eg: Gato GraphQL and Gato Multilingual) then
+     * their cached containers must not conflict.
+     *
+     * To avoid that, include the application name
+     * in the namespace.
+     */
     public function getContainerNamespace(): string
     {
-        return 'PoPContainer';
+        return 'PoPContainer\\' . $this->applicationName;
     }
 
     abstract public function getContainerClassName(): string;

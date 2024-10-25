@@ -392,6 +392,7 @@ class AppLoader implements AppLoaderInterface
          * since it will be used to initialize the Application container
          */
         App::getSystemContainerBuilderFactory()->init(
+            $this->containerCacheConfiguration?->getApplicationName() ?? '',
             $this->containerCacheConfiguration?->cacheContainerConfiguration(),
             $this->containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
             $this->containerCacheConfiguration?->getContainerConfigurationCacheDirectory()
@@ -484,6 +485,7 @@ class AppLoader implements AppLoaderInterface
          * Initialize the Application container only
          */
         App::getContainerBuilderFactory()->init(
+            $this->containerCacheConfiguration?->getApplicationName() ?? '',
             $this->containerCacheConfiguration?->cacheContainerConfiguration(),
             $this->containerCacheConfiguration?->getContainerConfigurationCacheNamespace(),
             $this->containerCacheConfiguration?->getContainerConfigurationCacheDirectory()

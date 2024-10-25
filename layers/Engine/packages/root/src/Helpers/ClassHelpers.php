@@ -22,4 +22,13 @@ class ClassHelpers
         $parts = explode('\\', $class);
         return $parts[0] . (isset($parts[1]) ? '\\' . $parts[1] : '') . (ScopingHelpers::isNamespaceInternallyScoped($class) && isset($parts[2]) ? '\\' . $parts[2] : '');
     }
+
+    /**
+     * Return "Project" in PSR-4 namespace "Vendor\Project".
+     */
+    public static function getTrailingClassPSR4Namespace(string $class): string
+    {
+        $classPSR4NamespaceParts = explode('\\', static::getClassPSR4Namespace($class));
+        return $classPSR4NamespaceParts[count($classPSR4NamespaceParts) - 1];
+    }
 }

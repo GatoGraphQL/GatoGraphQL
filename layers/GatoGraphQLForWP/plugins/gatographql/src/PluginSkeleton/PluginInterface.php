@@ -109,6 +109,16 @@ interface PluginInterface
      */
     public function getPluginNamespaceForDB(): string;
 
+    /**
+     * Namespace classes. Eg: The container caching class.
+     *
+     * Useful for standalone plugins to override
+     * this value, and automatically have entities
+     * not conflict with Gato GraphQL (or other
+     * standalone plugins).
+     */
+    public function getPluginNamespaceForClass(): string;
+
     public function getPluginWebsiteURL(): string;
 
     public function getPluginWPConfigConstantNamespace(): string;
