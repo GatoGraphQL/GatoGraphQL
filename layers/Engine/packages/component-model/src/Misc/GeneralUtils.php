@@ -199,4 +199,16 @@ class GeneralUtils
         }
         return substr($url, 0, $paramsPos);
     }
+
+    public static function slugify(
+        string $text,
+        string $delimiter = '-',
+        bool $makeLowerCase = true,
+    ): string {
+        $slug = trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $text))))), $delimiter);
+        if ($makeLowerCase) {
+            return strtolower($slug);
+        }
+        return $slug;
+    } 
 }
