@@ -37,7 +37,7 @@ require_once __DIR__ . '/scoper-shared.inc.php';
  */
 $pluginConciseNamespace = 'GatoGQL';
 return [
-    'prefix' => 'GatoPrefixBy' . $pluginConciseNamespace,
+    'prefix' => 'GatoExternalPrefixBy' . $pluginConciseNamespace,
     'finders' => [
         // Scope packages under vendor/, excluding local WordPress packages
         Finder::create()
