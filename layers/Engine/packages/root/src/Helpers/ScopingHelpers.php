@@ -6,6 +6,27 @@ namespace PoP\Root\Helpers;
 
 use PoP\Root\Constants\Scoping;
 
+/**
+ * The difference between "External" and "Internal" prefix is:
+ *
+ *   - External: Scope 3rd-party dependencies (eg: Symfony packages)
+ *   - Internal: Scope own dependencies (eg: all packages composing
+ *               the Gato GraphQL plugin)
+ *
+ * "External" is your typical scoping, needed to make sure that,
+ * if there's any other (WordPress) plugin installed in the same
+ * site with the same dependencies, these do not conflict.
+ *
+ * "Internal" is used within the Gato GraphQL project to also
+ * produce "standalone" plugins, which are plugins wrapping
+ * the Gato GraphQL plugin, and adding extra logic, such as
+ * "Gato Multilingual for Polylang".
+ *
+ * Internal scopes this project's own classes, so that, if the
+ * same site has 2 or more (WordPress) plugins from this project
+ * (eg: "Gato GraphQL" and "Gato Multilingual for WordPress"),
+ * these do not conflict with each other.
+ */
 class ScopingHelpers
 {
     /**
@@ -22,15 +43,50 @@ class ScopingHelpers
      */
     public static function getPluginInternalScopingTopLevelNamespace(string $pluginName): string
     {
-        return Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX . str_replace([' ', '-', ',', '_', '&'], '', $pluginName);
+        return static::getPluginScopingTopLevelNamespace(
+            Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX,
+            $pluginName,
+        );
     }
 
-    /**
-     * If own classes have been prefixed, then the top-level
-     * domain will start with "InternallyPrefixed".
-     */
+    protected static function getPluginScopingTopLevelNamespace(
+        string $prefix,
+        string $pluginName,
+    ): string {
+        return $prefix . static::convertPluginNameToClassNamespace($pluginName);
+    }
+
+    protected static function convertPluginNameToClassNamespace(string $pluginName): string
+    {
+        return str_replace([' ', '-', ',', '_', '&'], '', $pluginName);
+    }
+
+    public static function getPluginExternalScopingTopLevelNamespace(string $pluginName): string
+    {
+        return static::getPluginScopingTopLevelNamespace(
+            Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX,
+            $pluginName,
+        );
+    }
+
     public static function isNamespaceInternallyScoped(string $class): bool
     {
-        return str_starts_with($class, Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX);
+        return static::isNamespaceScoped(
+            Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX,
+            $class,
+        );
+    }
+
+    protected static function isNamespaceScoped(string $prefix, string $class): bool
+    {
+        return str_starts_with($class, $prefix);
+    }
+
+    public static function isNamespaceExternallyScoped(string $class): bool
+    {
+        return static::isNamespaceScoped(
+            Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX,
+            $class,
+        );
     }
 }
