@@ -27,18 +27,6 @@ abstract class AbstractPlugin implements PluginInterface
     protected string $pluginName;
     protected string $pluginFolder;
     protected string $pluginURL;
-    /**
-     * If the plugin is prefixed using PHP-Scoper, use the
-     * top-level namespace name calculated here.
-     *
-     * This same name must be input in the scoper-internal.inc.php
-     * config file.
-     *
-     * For instance, plugin "Gato GraphQL" will have the top-level
-     * namespace "GatoInternalPrefixByGatoGraphQL".
-     *
-     * @see ci/scoping/plugins/gatographql/scoper-internal.inc.php
-     */
     protected string $pluginScopingTopLevelNamespace;
 
     public function __construct(
