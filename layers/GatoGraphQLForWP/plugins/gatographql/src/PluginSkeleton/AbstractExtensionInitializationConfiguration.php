@@ -11,6 +11,6 @@ abstract class AbstractExtensionInitializationConfiguration extends AbstractPlug
 {
     public function __construct(
         protected ExtensionInterface $extension
-    ) {        
+    ) {
     }
 }

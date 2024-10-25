@@ -25,7 +25,7 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
 
     public function __construct(
         protected MainPluginInterface $mainPlugin
-    ) {        
+    ) {
     }
 
     /**
