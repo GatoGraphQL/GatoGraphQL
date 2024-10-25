@@ -97,14 +97,22 @@ return [
         'PoP',
         'GraphQLByPoP',
         'GatoGraphQL',
-        // Own container cache namespace
-        // Watch out! This value is being hardcoded!
-        // In the application, it can be overridden via code:
-        // - ContainerBuilderFactory::getContainerNamespace()
-        // - SystemContainerBuilderFactory::getContainerNamespace()
-        // But can't reference these classes here, since they are not found
-        // (unless adding the files to the autoload path)
-        'PoPContainer',
+        
+        // No need to exclude the container, as its code is generated on runtime
+        // /**
+        //  * Own container cache namespace
+        //  * 
+        //  * Watch out! This value is being hardcoded!
+        //  * 
+        //  * In the application, it can be overridden via code:
+        //  * 
+        //  *   - ContainerBuilderFactory::getContainerNamespace()
+        //  *   - SystemContainerBuilderFactory::getContainerNamespace()
+        //  * 
+        //  * But can't reference these classes here, since they are not found
+        //  * (unless adding the files to the autoload path)
+        //  */
+        // 'PoPContainer',
     ],
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
