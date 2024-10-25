@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPIncludes\GatoGraphQL;
 
+use function register_activation_hook;
+use function register_deactivation_hook;
+
 class SchemaEditingAccessCapabilities {
 
     public static function registerGatoGraphQLSchemaEditingAccessCapabilities(
@@ -16,7 +19,7 @@ class SchemaEditingAccessCapabilities {
          *
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
-        \register_activation_hook(
+        register_activation_hook(
             $file,
             /**
              * Register custom capabilities
@@ -30,7 +33,7 @@ class SchemaEditingAccessCapabilities {
         /**
          * For consistency, also place the deregistration here
          */
-        \register_deactivation_hook(
+        register_deactivation_hook(
             $file,
             /**
              * Unregister custom capabilities
