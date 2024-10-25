@@ -25,11 +25,11 @@ return [
      * as the calculated name for each plugin.
      * 
      * For instance, plugin "Gato GraphQL" will have the top-level
-     * namespace "InternallyGatoPrefixByGatoGraphQL".
+     * namespace "GatoInternalPrefixByGatoGraphQL".
      *
      * @see layers/GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractPlugin.php `__construct`
      */
-    'prefix' => 'InternallyGatoPrefixByGatoGraphQL',
+    'prefix' => 'GatoInternalPrefixByGatoGraphQL',
     'finders' => [
         Finder::create()
             ->files()

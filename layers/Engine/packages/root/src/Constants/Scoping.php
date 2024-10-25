@@ -6,5 +6,5 @@ namespace PoP\Root\Constants;
 
 class Scoping
 {
-    public final const INTERNAL_SCOPING_NAMESPACE_PREFIX = 'InternallyGatoPrefixBy';
+    public final const INTERNAL_SCOPING_NAMESPACE_PREFIX = 'GatoInternalPrefixBy';
 }
