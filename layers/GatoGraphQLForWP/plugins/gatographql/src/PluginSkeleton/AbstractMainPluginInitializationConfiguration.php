@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Helpers\AppThreadHelpers;
+use PoP\Root\Helpers\ClassHelpers;
 
 /**
  * Base class to set the configuration for all the PoP components in the main plugin.
@@ -67,8 +68,10 @@ abstract class AbstractMainPluginInitializationConfiguration extends AbstractPlu
             $containerConfigurationCacheNamespace = $containerCacheConfigurationManager->getNamespace();
             $containerConfigurationCacheDirectory = $containerCacheConfigurationManager->getDirectory();
         }
+        $mainPluginPSR4Namespace = ClassHelpers::getClassPSR4Namespace(get_class(PluginApp::getMainPlugin()));
+        $mainPluginPSR4NamespaceParts = explode('\\', $mainPluginPSR4Namespace);
         return new ContainerCacheConfiguration(
-            PluginApp::getMainPlugin()->getPluginNamespaceForClass(),
+            $mainPluginPSR4NamespaceParts[count($mainPluginPSR4NamespaceParts) - 1],
             $cacheContainerConfiguration,
             $containerConfigurationCacheNamespace,
             $containerConfigurationCacheDirectory
