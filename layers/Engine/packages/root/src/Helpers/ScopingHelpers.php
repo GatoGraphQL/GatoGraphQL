@@ -33,4 +33,14 @@ class ScopingHelpers
     {
         return str_starts_with($class, Scoping::INTERNAL_SCOPING_NAMESPACE_PREFIX);
     }
+
+    public static function getPluginExternalScopingTopLevelNamespace(string $pluginName): string
+    {
+        return Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX . str_replace([' ', '-', ',', '_', '&'], '', $pluginName);
+    }
+
+    public static function isNamespaceExternallyScoped(string $class): bool
+    {
+        return str_starts_with($class, Scoping::EXTERNAL_SCOPING_NAMESPACE_PREFIX);
+    }
 }
