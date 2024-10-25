@@ -79,7 +79,7 @@ trait ContainerBuilderFactoryTrait
             // Since we have 2 containers, store each under its namespace and classname
             $containerNamespace = $this->getContainerNamespace();
             $containerClassName = $this->getContainerClassName();
-            $directory .= $containerNamespace . \DIRECTORY_SEPARATOR;
+            $directory .= str_replace('\\', '_', $containerNamespace) . \DIRECTORY_SEPARATOR;
             $directory .= $containerClassName . \DIRECTORY_SEPARATOR;
             // On Windows the whole path is limited to 258 chars
             if ($cacheSetupSuccess && '\\' === \DIRECTORY_SEPARATOR && \strlen($directory) > 234) {
@@ -154,7 +154,7 @@ trait ContainerBuilderFactoryTrait
      */
     public function getContainerNamespace(): string
     {
-        return 'PoPContainerFor' . $this->applicationName;
+        return 'PoPContainer\\' . $this->applicationName;
     }
 
     abstract public function getContainerClassName(): string;
