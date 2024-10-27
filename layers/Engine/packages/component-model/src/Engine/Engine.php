@@ -85,10 +85,6 @@ class Engine implements EngineInterface
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    final public function setPersistentCache(PersistentCacheInterface $persistentCache): void
-    {
-        $this->persistentCache = $persistentCache;
-    }
     final public function getPersistentCache(): PersistentCacheInterface
     {
         if ($this->persistentCache === null) {

@@ -36,10 +36,6 @@ class PostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResol
         }
         return $this->postObjectTypeResolver;
     }
-    final public function setSetTagsOnPostMutationResolver(SetTagsOnPostMutationResolver $setTagsOnPostMutationResolver): void
-    {
-        $this->setTagsOnPostMutationResolver = $setTagsOnPostMutationResolver;
-    }
     final protected function getSetTagsOnPostBulkOperationMutationResolver(): SetTagsOnPostBulkOperationMutationResolver
     {
         if ($this->setTagsOnPostBulkOperationMutationResolver === null) {
