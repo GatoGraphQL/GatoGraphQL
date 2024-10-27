@@ -25,10 +25,6 @@ class Parser extends AbstractParser
     private ?DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry = null;
     private ?FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry = null;
 
-    final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
-    {
-        $this->metaDirectiveRegistry = $metaDirectiveRegistry;
-    }
     final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
     {
         if ($this->metaDirectiveRegistry === null) {
@@ -38,10 +34,6 @@ class Parser extends AbstractParser
         }
         return $this->metaDirectiveRegistry;
     }
-    final public function setDynamicVariableDefinerDirectiveRegistry(DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry): void
-    {
-        $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
-    }
     final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
     {
         if ($this->dynamicVariableDefinerDirectiveRegistry === null) {
@@ -50,10 +42,6 @@ class Parser extends AbstractParser
             $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
         }
         return $this->dynamicVariableDefinerDirectiveRegistry;
-    }
-    final public function setFieldDirectiveResolverRegistry(FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry): void
-    {
-        $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
     }
     final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
     {

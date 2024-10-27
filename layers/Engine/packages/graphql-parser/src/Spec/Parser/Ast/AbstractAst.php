@@ -18,10 +18,6 @@ abstract class AbstractAst implements AstInterface
 
     private ?GraphQLQueryStringFormatterInterface $graphQLQueryStringFormatter = null;
 
-    final public function setGraphQLQueryStringFormatter(GraphQLQueryStringFormatterInterface $graphQLQueryStringFormatter): void
-    {
-        $this->graphQLQueryStringFormatter = $graphQLQueryStringFormatter;
-    }
     final protected function getGraphQLQueryStringFormatter(): GraphQLQueryStringFormatterInterface
     {
         if ($this->graphQLQueryStringFormatter === null) {

@@ -44,10 +44,6 @@ class ExecutableDocument extends AbstractExecutableDocument
     private ?TypeRegistryInterface $typeRegistry = null;
     private ?OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry = null;
 
-    final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
-    {
-        $this->typeRegistry = $typeRegistry;
-    }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
         if ($this->typeRegistry === null) {
@@ -56,10 +52,6 @@ class ExecutableDocument extends AbstractExecutableDocument
             $this->typeRegistry = $typeRegistry;
         }
         return $this->typeRegistry;
-    }
-    final public function setOperationDependencyDefinerDirectiveRegistry(OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry): void
-    {
-        $this->operationDependencyDefinerDirectiveRegistry = $operationDependencyDefinerDirectiveRegistry;
     }
     final protected function getOperationDependencyDefinerDirectiveRegistry(): OperationDependencyDefinerDirectiveRegistryInterface
     {

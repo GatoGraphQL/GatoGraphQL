@@ -13,10 +13,6 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 {
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
-    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
-    {
-        $this->customPostTypeRegistry = $customPostTypeRegistry;
-    }
     final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {
         if ($this->customPostTypeRegistry === null) {
