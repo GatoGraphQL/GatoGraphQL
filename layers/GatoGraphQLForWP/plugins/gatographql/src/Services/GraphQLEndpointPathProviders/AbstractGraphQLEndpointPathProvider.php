@@ -26,10 +26,6 @@ abstract class AbstractGraphQLEndpointPathProvider extends AbstractAutomatically
         }
         return $this->moduleRegistry;
     }
-    final public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
-    {
-        $this->userSettingsManager = $userSettingsManager;
-    }
     final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
