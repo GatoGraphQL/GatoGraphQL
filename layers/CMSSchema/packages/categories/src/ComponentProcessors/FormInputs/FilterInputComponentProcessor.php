@@ -26,10 +26,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?TaxonomyFilterInput $taxonomyFilterInput = null;
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -38,10 +34,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
-    }
-    final public function setCategoryIDsFilterInput(CategoryIDsFilterInput $categoryIDsFilterInput): void
-    {
-        $this->categoryIDsFilterInput = $categoryIDsFilterInput;
     }
     final protected function getCategoryIDsFilterInput(): CategoryIDsFilterInput
     {
@@ -52,10 +44,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->categoryIDsFilterInput;
     }
-    final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
-    {
-        $this->taxonomyFilterInput = $taxonomyFilterInput;
-    }
     final protected function getTaxonomyFilterInput(): TaxonomyFilterInput
     {
         if ($this->taxonomyFilterInput === null) {
@@ -64,10 +52,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->taxonomyFilterInput = $taxonomyFilterInput;
         }
         return $this->taxonomyFilterInput;
-    }
-    final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
     }
     final protected function getCategoryTaxonomyEnumStringScalarTypeResolver(): CategoryTaxonomyEnumStringScalarTypeResolver
     {

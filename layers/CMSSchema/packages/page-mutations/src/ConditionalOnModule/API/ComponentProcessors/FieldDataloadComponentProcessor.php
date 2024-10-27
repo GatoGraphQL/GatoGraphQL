@@ -23,10 +23,6 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
-    final public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
-    {
-        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
-    }
     final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
         if ($this->pageObjectTypeResolver === null) {
@@ -35,10 +31,6 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
             $this->pageObjectTypeResolver = $pageObjectTypeResolver;
         }
         return $this->pageObjectTypeResolver;
-    }
-    final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
-    {
-        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {

@@ -11,10 +11,6 @@ class RemoveFeaturedImageFromCustomPostBulkOperationMutationResolver extends Abs
 {
     private ?RemoveFeaturedImageFromCustomPostMutationResolver $removeFeaturedImageFromCustomPostMutationResolver = null;
 
-    final public function setRemoveFeaturedImageFromCustomPostMutationResolver(RemoveFeaturedImageFromCustomPostMutationResolver $removeFeaturedImageFromCustomPostMutationResolver): void
-    {
-        $this->removeFeaturedImageFromCustomPostMutationResolver = $removeFeaturedImageFromCustomPostMutationResolver;
-    }
     final protected function getRemoveFeaturedImageFromCustomPostMutationResolver(): RemoveFeaturedImageFromCustomPostMutationResolver
     {
         if ($this->removeFeaturedImageFromCustomPostMutationResolver === null) {

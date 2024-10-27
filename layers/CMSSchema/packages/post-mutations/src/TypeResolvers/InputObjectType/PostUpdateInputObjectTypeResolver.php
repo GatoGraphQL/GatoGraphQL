@@ -11,10 +11,6 @@ class PostUpdateInputObjectTypeResolver extends CustomPostUpdateInputObjectTypeR
 {
     private ?PostContentAsOneofInputObjectTypeResolver $postContentAsOneofInputObjectTypeResolver = null;
 
-    final public function setPostContentAsOneofInputObjectTypeResolver(PostContentAsOneofInputObjectTypeResolver $postContentAsOneofInputObjectTypeResolver): void
-    {
-        $this->postContentAsOneofInputObjectTypeResolver = $postContentAsOneofInputObjectTypeResolver;
-    }
     final protected function getPostContentAsOneofInputObjectTypeResolver(): PostContentAsOneofInputObjectTypeResolver
     {
         if ($this->postContentAsOneofInputObjectTypeResolver === null) {

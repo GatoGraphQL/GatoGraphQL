@@ -12,10 +12,6 @@ class QueryableTagListObjectTypeDataLoader extends AbstractTagObjectTypeDataLoad
 {
     private ?QueryableTagTypeAPIInterface $queryableTagListTypeAPI = null;
 
-    final public function setQueryableTagTypeAPI(QueryableTagTypeAPIInterface $queryableTagListTypeAPI): void
-    {
-        $this->queryableTagListTypeAPI = $queryableTagListTypeAPI;
-    }
     final protected function getQueryableTagTypeAPI(): QueryableTagTypeAPIInterface
     {
         if ($this->queryableTagListTypeAPI === null) {

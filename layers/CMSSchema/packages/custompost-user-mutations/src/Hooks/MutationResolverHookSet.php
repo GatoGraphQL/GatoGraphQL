@@ -24,10 +24,6 @@ class MutationResolverHookSet extends AbstractHookSet
 {
     private ?UserTypeAPIInterface $userTypeAPI = null;
 
-    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
-    {
-        $this->userTypeAPI = $userTypeAPI;
-    }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
         if ($this->userTypeAPI === null) {

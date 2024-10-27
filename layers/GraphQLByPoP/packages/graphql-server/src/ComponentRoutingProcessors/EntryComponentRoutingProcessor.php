@@ -15,10 +15,6 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
 {
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
-    final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
-    {
-        $this->graphQLDataStructureFormatter = $graphQLDataStructureFormatter;
-    }
     final protected function getGraphQLDataStructureFormatter(): GraphQLDataStructureFormatter
     {
         if ($this->graphQLDataStructureFormatter === null) {

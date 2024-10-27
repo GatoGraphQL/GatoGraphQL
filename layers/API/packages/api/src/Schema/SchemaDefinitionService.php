@@ -73,10 +73,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         }
         return $this->persistentCache;
     }
-    final public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
-    {
-        $this->persistedFragmentManager = $persistedFragmentManager;
-    }
     final protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
         if ($this->persistedFragmentManager === null) {
@@ -85,10 +81,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->persistedFragmentManager = $persistedFragmentManager;
         }
         return $this->persistedFragmentManager;
-    }
-    final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
-    {
-        $this->persistedQueryManager = $persistedQueryManager;
     }
     final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {

@@ -13,10 +13,6 @@ abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
 
     private ?CMSHelperServiceInterface $cmsHelperService = null;
 
-    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
-    {
-        $this->cmsHelperService = $cmsHelperService;
-    }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
         if ($this->cmsHelperService === null) {

@@ -24,10 +24,6 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
     private ?SuperRootObjectTypeDataLoader $superRootObjectTypeDataLoader = null;
     private ?MandatoryOperationDirectiveResolverRegistryInterface $mandatoryOperationDirectiveResolverRegistry = null;
 
-    final public function setSuperRootObjectTypeDataLoader(SuperRootObjectTypeDataLoader $superRootObjectTypeDataLoader): void
-    {
-        $this->superRootObjectTypeDataLoader = $superRootObjectTypeDataLoader;
-    }
     final protected function getSuperRootObjectTypeDataLoader(): SuperRootObjectTypeDataLoader
     {
         if ($this->superRootObjectTypeDataLoader === null) {
@@ -36,10 +32,6 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
             $this->superRootObjectTypeDataLoader = $superRootObjectTypeDataLoader;
         }
         return $this->superRootObjectTypeDataLoader;
-    }
-    final public function setMandatoryOperationDirectiveResolverRegistry(MandatoryOperationDirectiveResolverRegistryInterface $mandatoryOperationDirectiveResolverRegistry): void
-    {
-        $this->mandatoryOperationDirectiveResolverRegistry = $mandatoryOperationDirectiveResolverRegistry;
     }
     final protected function getMandatoryOperationDirectiveResolverRegistry(): MandatoryOperationDirectiveResolverRegistryInterface
     {

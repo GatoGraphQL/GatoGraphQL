@@ -15,10 +15,6 @@ class CommentByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputO
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?IncludeFilterInput $includeFilterInput = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -27,10 +23,6 @@ class CommentByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputO
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
-    }
-    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
-    {
-        $this->includeFilterInput = $includeFilterInput;
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {

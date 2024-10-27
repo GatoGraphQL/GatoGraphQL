@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoEditingMediaCapabilityErrorPayloadObject
 {
     private ?LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver(LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver = $loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver(): LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver === null) {

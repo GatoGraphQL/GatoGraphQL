@@ -36,10 +36,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver = null;
     private ?MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver = null;
 
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
-    {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-    }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         if ($this->mediaTypeAPI === null) {
@@ -48,10 +44,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->mediaTypeAPI = $mediaTypeAPI;
         }
         return $this->mediaTypeAPI;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -62,10 +54,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
-    {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-    }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
         if ($this->mediaObjectTypeResolver === null) {
@@ -74,10 +62,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         }
         return $this->mediaObjectTypeResolver;
-    }
-    final public function setMediaItemByOneofInputObjectTypeResolver(MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver): void
-    {
-        $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
     }
     final protected function getMediaItemByOneofInputObjectTypeResolver(): MediaItemByOneofInputObjectTypeResolver
     {
@@ -88,10 +72,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->mediaItemByOneofInputObjectTypeResolver;
     }
-    final public function setRootMediaItemsFilterInputObjectTypeResolver(RootMediaItemsFilterInputObjectTypeResolver $rootMediaItemsFilterInputObjectTypeResolver): void
-    {
-        $this->rootMediaItemsFilterInputObjectTypeResolver = $rootMediaItemsFilterInputObjectTypeResolver;
-    }
     final protected function getRootMediaItemsFilterInputObjectTypeResolver(): RootMediaItemsFilterInputObjectTypeResolver
     {
         if ($this->rootMediaItemsFilterInputObjectTypeResolver === null) {
@@ -101,10 +81,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->rootMediaItemsFilterInputObjectTypeResolver;
     }
-    final public function setRootMediaItemPaginationInputObjectTypeResolver(RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver): void
-    {
-        $this->rootMediaItemPaginationInputObjectTypeResolver = $rootMediaItemPaginationInputObjectTypeResolver;
-    }
     final protected function getRootMediaItemPaginationInputObjectTypeResolver(): RootMediaItemPaginationInputObjectTypeResolver
     {
         if ($this->rootMediaItemPaginationInputObjectTypeResolver === null) {
@@ -113,10 +89,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->rootMediaItemPaginationInputObjectTypeResolver = $rootMediaItemPaginationInputObjectTypeResolver;
         }
         return $this->rootMediaItemPaginationInputObjectTypeResolver;
-    }
-    final public function setMediaItemSortInputObjectTypeResolver(MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver): void
-    {
-        $this->mediaItemSortInputObjectTypeResolver = $mediaItemSortInputObjectTypeResolver;
     }
     final protected function getMediaItemSortInputObjectTypeResolver(): MediaItemSortInputObjectTypeResolver
     {

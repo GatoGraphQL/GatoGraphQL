@@ -21,10 +21,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
-    {
-        $this->taxonomyFilterInput = $taxonomyFilterInput;
-    }
     final protected function getTaxonomyFilterInput(): TaxonomyFilterInput
     {
         if ($this->taxonomyFilterInput === null) {
@@ -34,10 +30,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->taxonomyFilterInput;
     }
-    final public function setPostTagTaxonomyEnumStringScalarTypeResolver(PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
-    }
     final protected function getPostTagTaxonomyEnumStringScalarTypeResolver(): PostTagTaxonomyEnumStringScalarTypeResolver
     {
         if ($this->postTagTaxonomyEnumStringScalarTypeResolver === null) {
@@ -46,10 +38,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
         }
         return $this->postTagTaxonomyEnumStringScalarTypeResolver;
-    }
-    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
-    {
-        $this->postTagTypeAPI = $postTagTypeAPI;
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {

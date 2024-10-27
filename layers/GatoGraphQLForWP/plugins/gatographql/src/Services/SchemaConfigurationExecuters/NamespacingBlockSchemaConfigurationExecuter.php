@@ -14,10 +14,6 @@ class NamespacingBlockSchemaConfigurationExecuter extends AbstractDefaultEnableD
 {
     private ?SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock = null;
 
-    final public function setSchemaConfigNamespacingBlock(SchemaConfigNamespacingBlock $schemaConfigNamespacingBlock): void
-    {
-        $this->schemaConfigNamespacingBlock = $schemaConfigNamespacingBlock;
-    }
     final protected function getSchemaConfigNamespacingBlock(): SchemaConfigNamespacingBlock
     {
         if ($this->schemaConfigNamespacingBlock === null) {

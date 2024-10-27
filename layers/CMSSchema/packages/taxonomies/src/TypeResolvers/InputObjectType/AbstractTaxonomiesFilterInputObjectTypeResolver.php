@@ -24,10 +24,6 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
     private ?SlugsFilterInput $slugsFilterInput = null;
     private ?HideEmptyFilterInput $hideEmptyFilterInput = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -36,10 +32,6 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
@@ -50,10 +42,6 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         }
         return $this->booleanScalarTypeResolver;
     }
-    final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
-    {
-        $this->parentIDFilterInput = $parentIDFilterInput;
-    }
     final protected function getParentIDFilterInput(): ParentIDFilterInput
     {
         if ($this->parentIDFilterInput === null) {
@@ -62,10 +50,6 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             $this->parentIDFilterInput = $parentIDFilterInput;
         }
         return $this->parentIDFilterInput;
-    }
-    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
-    {
-        $this->searchFilterInput = $searchFilterInput;
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
@@ -76,10 +60,6 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
         }
         return $this->searchFilterInput;
     }
-    final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
-    {
-        $this->slugsFilterInput = $slugsFilterInput;
-    }
     final protected function getSlugsFilterInput(): SlugsFilterInput
     {
         if ($this->slugsFilterInput === null) {
@@ -88,10 +68,6 @@ abstract class AbstractTaxonomiesFilterInputObjectTypeResolver extends AbstractO
             $this->slugsFilterInput = $slugsFilterInput;
         }
         return $this->slugsFilterInput;
-    }
-    final public function setHideEmptyFilterInput(HideEmptyFilterInput $hideEmptyFilterInput): void
-    {
-        $this->hideEmptyFilterInput = $hideEmptyFilterInput;
     }
     final protected function getHideEmptyFilterInput(): HideEmptyFilterInput
     {

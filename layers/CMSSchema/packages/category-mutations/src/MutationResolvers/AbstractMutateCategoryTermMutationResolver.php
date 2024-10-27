@@ -14,10 +14,6 @@ abstract class AbstractMutateCategoryTermMutationResolver extends AbstractMutate
 
     private ?CategoryTypeMutationAPIInterface $categoryTypeMutationAPI = null;
 
-    final public function setCategoryTypeMutationAPI(CategoryTypeMutationAPIInterface $categoryTypeMutationAPI): void
-    {
-        $this->categoryTypeMutationAPI = $categoryTypeMutationAPI;
-    }
     final protected function getCategoryTypeMutationAPI(): CategoryTypeMutationAPIInterface
     {
         if ($this->categoryTypeMutationAPI === null) {

@@ -11,10 +11,6 @@ class RootObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?Root $root = null;
 
-    final public function setRoot(Root $root): void
-    {
-        $this->root = $root;
-    }
     final protected function getRoot(): Root
     {
         if ($this->root === null) {

@@ -11,10 +11,6 @@ class PayloadableSetCategoriesOnPostBulkOperationMutationResolver extends Abstra
 {
     private ?PayloadableSetCategoriesOnPostMutationResolver $payloadableSetCategoriesOnPostMutationResolver = null;
 
-    final public function setPayloadableSetCategoriesOnPostMutationResolver(PayloadableSetCategoriesOnPostMutationResolver $payloadableSetCategoriesOnPostMutationResolver): void
-    {
-        $this->payloadableSetCategoriesOnPostMutationResolver = $payloadableSetCategoriesOnPostMutationResolver;
-    }
     final protected function getPayloadableSetCategoriesOnPostMutationResolver(): PayloadableSetCategoriesOnPostMutationResolver
     {
         if ($this->payloadableSetCategoriesOnPostMutationResolver === null) {

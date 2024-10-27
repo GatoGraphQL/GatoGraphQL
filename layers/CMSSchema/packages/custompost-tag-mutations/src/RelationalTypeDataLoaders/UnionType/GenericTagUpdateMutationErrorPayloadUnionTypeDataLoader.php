@@ -12,10 +12,6 @@ class GenericTagUpdateMutationErrorPayloadUnionTypeDataLoader extends AbstractUn
 {
     private ?GenericTagUpdateMutationErrorPayloadUnionTypeResolver $genericTagUpdateMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setGenericTagUpdateMutationErrorPayloadUnionTypeResolver(GenericTagUpdateMutationErrorPayloadUnionTypeResolver $genericTagUpdateMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->genericTagUpdateMutationErrorPayloadUnionTypeResolver = $genericTagUpdateMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getGenericTagUpdateMutationErrorPayloadUnionTypeResolver(): GenericTagUpdateMutationErrorPayloadUnionTypeResolver
     {
         if ($this->genericTagUpdateMutationErrorPayloadUnionTypeResolver === null) {

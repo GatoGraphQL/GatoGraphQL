@@ -40,10 +40,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
     private ?PayloadableAddCommentToCustomPostBulkOperationMutationResolver $payloadableAddCommentToCustomPostBulkOperationMutationResolver = null;
 
-    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
-    {
-        $this->commentTypeAPI = $commentTypeAPI;
-    }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         if ($this->commentTypeAPI === null) {
@@ -52,10 +48,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->commentTypeAPI = $commentTypeAPI;
         }
         return $this->commentTypeAPI;
-    }
-    final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
-    {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
     }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
@@ -66,10 +58,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->commentObjectTypeResolver;
     }
-    final public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
-    {
-        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
-    }
     final protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
     {
         if ($this->addCommentToCustomPostMutationResolver === null) {
@@ -78,10 +66,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
         }
         return $this->addCommentToCustomPostMutationResolver;
-    }
-    final public function setAddCommentToCustomPostBulkOperationMutationResolver(AddCommentToCustomPostBulkOperationMutationResolver $addCommentToCustomPostBulkOperationMutationResolver): void
-    {
-        $this->addCommentToCustomPostBulkOperationMutationResolver = $addCommentToCustomPostBulkOperationMutationResolver;
     }
     final protected function getAddCommentToCustomPostBulkOperationMutationResolver(): AddCommentToCustomPostBulkOperationMutationResolver
     {
@@ -92,10 +76,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->addCommentToCustomPostBulkOperationMutationResolver;
     }
-    final public function setCommentReplyInputObjectTypeResolver(CommentReplyInputObjectTypeResolver $commentReplyInputObjectTypeResolver): void
-    {
-        $this->commentReplyInputObjectTypeResolver = $commentReplyInputObjectTypeResolver;
-    }
     final protected function getCommentReplyInputObjectTypeResolver(): CommentReplyInputObjectTypeResolver
     {
         if ($this->commentReplyInputObjectTypeResolver === null) {
@@ -104,10 +84,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->commentReplyInputObjectTypeResolver = $commentReplyInputObjectTypeResolver;
         }
         return $this->commentReplyInputObjectTypeResolver;
-    }
-    final public function setCommentReplyMutationPayloadObjectTypeResolver(CommentReplyMutationPayloadObjectTypeResolver $commentReplyMutationPayloadObjectTypeResolver): void
-    {
-        $this->commentReplyMutationPayloadObjectTypeResolver = $commentReplyMutationPayloadObjectTypeResolver;
     }
     final protected function getCommentReplyMutationPayloadObjectTypeResolver(): CommentReplyMutationPayloadObjectTypeResolver
     {
@@ -118,10 +94,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->commentReplyMutationPayloadObjectTypeResolver;
     }
-    final public function setPayloadableAddCommentToCustomPostMutationResolver(PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver): void
-    {
-        $this->payloadableAddCommentToCustomPostMutationResolver = $payloadableAddCommentToCustomPostMutationResolver;
-    }
     final protected function getPayloadableAddCommentToCustomPostMutationResolver(): PayloadableAddCommentToCustomPostMutationResolver
     {
         if ($this->payloadableAddCommentToCustomPostMutationResolver === null) {
@@ -130,10 +102,6 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->payloadableAddCommentToCustomPostMutationResolver = $payloadableAddCommentToCustomPostMutationResolver;
         }
         return $this->payloadableAddCommentToCustomPostMutationResolver;
-    }
-    final public function setPayloadableAddCommentToCustomPostBulkOperationMutationResolver(PayloadableAddCommentToCustomPostBulkOperationMutationResolver $payloadableAddCommentToCustomPostBulkOperationMutationResolver): void
-    {
-        $this->payloadableAddCommentToCustomPostBulkOperationMutationResolver = $payloadableAddCommentToCustomPostBulkOperationMutationResolver;
     }
     final protected function getPayloadableAddCommentToCustomPostBulkOperationMutationResolver(): PayloadableAddCommentToCustomPostBulkOperationMutationResolver
     {

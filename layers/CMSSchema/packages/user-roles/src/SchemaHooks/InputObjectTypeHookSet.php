@@ -24,10 +24,6 @@ class InputObjectTypeHookSet extends AbstractHookSet
     private ?UserRolesFilterInput $userRolesFilterInput = null;
     private ?ExcludeUserRolesFilterInput $excludeUserRolesFilterInput = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -37,10 +33,6 @@ class InputObjectTypeHookSet extends AbstractHookSet
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setUserRolesFilterInput(UserRolesFilterInput $userRolesFilterInput): void
-    {
-        $this->userRolesFilterInput = $userRolesFilterInput;
-    }
     final protected function getUserRolesFilterInput(): UserRolesFilterInput
     {
         if ($this->userRolesFilterInput === null) {
@@ -49,10 +41,6 @@ class InputObjectTypeHookSet extends AbstractHookSet
             $this->userRolesFilterInput = $userRolesFilterInput;
         }
         return $this->userRolesFilterInput;
-    }
-    final public function setExcludeUserRolesFilterInput(ExcludeUserRolesFilterInput $excludeUserRolesFilterInput): void
-    {
-        $this->excludeUserRolesFilterInput = $excludeUserRolesFilterInput;
     }
     final protected function getExcludeUserRolesFilterInput(): ExcludeUserRolesFilterInput
     {

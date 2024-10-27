@@ -14,10 +14,6 @@ abstract class AbstractMetaTypeAPI implements MetaTypeAPIInterface
 
     private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
-    final public function setAllowOrDenySettingsService(AllowOrDenySettingsServiceInterface $allowOrDenySettingsService): void
-    {
-        $this->allowOrDenySettingsService = $allowOrDenySettingsService;
-    }
     final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface
     {
         if ($this->allowOrDenySettingsService === null) {

@@ -13,10 +13,6 @@ abstract class AbstractCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeReso
 {
     private ?CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver $commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver = null;
 
-    final public function setCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver(CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver $commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver): void
-    {
-        $this->commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver = $commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver;
-    }
     final protected function getCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver(): CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver
     {
         if ($this->commentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver === null) {

@@ -14,10 +14,6 @@ class CommentReplyMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeF
 {
     private ?CommentReplyMutationErrorPayloadUnionTypeResolver $commentReplyMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setCommentReplyMutationErrorPayloadUnionTypeResolver(CommentReplyMutationErrorPayloadUnionTypeResolver $commentReplyMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->commentReplyMutationErrorPayloadUnionTypeResolver = $commentReplyMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getCommentReplyMutationErrorPayloadUnionTypeResolver(): CommentReplyMutationErrorPayloadUnionTypeResolver
     {
         if ($this->commentReplyMutationErrorPayloadUnionTypeResolver === null) {

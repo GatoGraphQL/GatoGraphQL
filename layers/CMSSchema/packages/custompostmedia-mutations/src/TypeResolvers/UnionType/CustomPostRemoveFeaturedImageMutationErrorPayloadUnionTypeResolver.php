@@ -11,10 +11,6 @@ class CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver extends
 {
     private ?CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader $customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setCustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader(CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader $customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader = $customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getCustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader(): CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->customPostRemoveFeaturedImageMutationErrorPayloadUnionTypeDataLoader === null) {

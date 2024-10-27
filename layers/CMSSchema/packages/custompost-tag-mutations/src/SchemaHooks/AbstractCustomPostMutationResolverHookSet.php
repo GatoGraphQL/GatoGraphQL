@@ -17,10 +17,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     private ?TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver = null;
 
-    final public function setTagsByOneofInputObjectTypeResolver(TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver): void
-    {
-        $this->tagsByOneofInputObjectTypeResolver = $tagsByOneofInputObjectTypeResolver;
-    }
     final protected function getTagsByOneofInputObjectTypeResolver(): TagsByOneofInputObjectTypeResolver
     {
         if ($this->tagsByOneofInputObjectTypeResolver === null) {

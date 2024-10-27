@@ -27,10 +27,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?CustomPostStatusFilterInput $customPostStatusFilterInput = null;
     private ?UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput = null;
 
-    final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
-    {
-        $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
-    }
     final protected function getFilterCustomPostStatusEnumTypeResolver(): FilterCustomPostStatusEnumTypeResolver
     {
         if ($this->filterCustomPostStatusEnumTypeResolver === null) {
@@ -39,10 +35,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
         }
         return $this->filterCustomPostStatusEnumTypeResolver;
-    }
-    final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
-    {
-        $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
     }
     final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {
@@ -53,10 +45,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->customPostEnumStringScalarTypeResolver;
     }
-    final public function setCustomPostStatusFilterInput(CustomPostStatusFilterInput $customPostStatusFilterInput): void
-    {
-        $this->customPostStatusFilterInput = $customPostStatusFilterInput;
-    }
     final protected function getCustomPostStatusFilterInput(): CustomPostStatusFilterInput
     {
         if ($this->customPostStatusFilterInput === null) {
@@ -65,10 +53,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->customPostStatusFilterInput = $customPostStatusFilterInput;
         }
         return $this->customPostStatusFilterInput;
-    }
-    final public function setUnionCustomPostTypesFilterInput(UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput): void
-    {
-        $this->unionCustomPostTypesFilterInput = $unionCustomPostTypesFilterInput;
     }
     final protected function getUnionCustomPostTypesFilterInput(): UnionCustomPostTypesFilterInput
     {

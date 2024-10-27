@@ -34,10 +34,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?GenericTagTermUpdateInputObjectTypeResolver $genericTagTermUpdateInputObjectTypeResolver = null;
 
-    final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void
-    {
-        $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
-    }
     final protected function getGenericTagObjectTypeResolver(): GenericTagObjectTypeResolver
     {
         if ($this->genericTagObjectTypeResolver === null) {
@@ -46,10 +42,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
             $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
         }
         return $this->genericTagObjectTypeResolver;
-    }
-    final public function setGenericTagUpdateMutationPayloadObjectTypeResolver(GenericTagUpdateMutationPayloadObjectTypeResolver $genericTagUpdateMutationPayloadObjectTypeResolver): void
-    {
-        $this->genericTagUpdateMutationPayloadObjectTypeResolver = $genericTagUpdateMutationPayloadObjectTypeResolver;
     }
     final protected function getGenericTagUpdateMutationPayloadObjectTypeResolver(): GenericTagUpdateMutationPayloadObjectTypeResolver
     {
@@ -60,10 +52,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
         }
         return $this->genericTagUpdateMutationPayloadObjectTypeResolver;
     }
-    final public function setGenericTagDeleteMutationPayloadObjectTypeResolver(GenericTagDeleteMutationPayloadObjectTypeResolver $genericTagDeleteMutationPayloadObjectTypeResolver): void
-    {
-        $this->genericTagDeleteMutationPayloadObjectTypeResolver = $genericTagDeleteMutationPayloadObjectTypeResolver;
-    }
     final protected function getGenericTagDeleteMutationPayloadObjectTypeResolver(): GenericTagDeleteMutationPayloadObjectTypeResolver
     {
         if ($this->genericTagDeleteMutationPayloadObjectTypeResolver === null) {
@@ -72,10 +60,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
             $this->genericTagDeleteMutationPayloadObjectTypeResolver = $genericTagDeleteMutationPayloadObjectTypeResolver;
         }
         return $this->genericTagDeleteMutationPayloadObjectTypeResolver;
-    }
-    final public function setUpdateGenericTagTermMutationResolver(UpdateGenericTagTermMutationResolver $updateGenericTagTermMutationResolver): void
-    {
-        $this->updateGenericTagTermMutationResolver = $updateGenericTagTermMutationResolver;
     }
     final protected function getUpdateGenericTagTermMutationResolver(): UpdateGenericTagTermMutationResolver
     {
@@ -86,10 +70,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
         }
         return $this->updateGenericTagTermMutationResolver;
     }
-    final public function setDeleteGenericTagTermMutationResolver(DeleteGenericTagTermMutationResolver $deleteGenericTagTermMutationResolver): void
-    {
-        $this->deleteGenericTagTermMutationResolver = $deleteGenericTagTermMutationResolver;
-    }
     final protected function getDeleteGenericTagTermMutationResolver(): DeleteGenericTagTermMutationResolver
     {
         if ($this->deleteGenericTagTermMutationResolver === null) {
@@ -98,10 +78,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
             $this->deleteGenericTagTermMutationResolver = $deleteGenericTagTermMutationResolver;
         }
         return $this->deleteGenericTagTermMutationResolver;
-    }
-    final public function setPayloadableUpdateGenericTagTermMutationResolver(PayloadableUpdateGenericTagTermMutationResolver $payloadableUpdateGenericTagTermMutationResolver): void
-    {
-        $this->payloadableUpdateGenericTagTermMutationResolver = $payloadableUpdateGenericTagTermMutationResolver;
     }
     final protected function getPayloadableUpdateGenericTagTermMutationResolver(): PayloadableUpdateGenericTagTermMutationResolver
     {
@@ -112,10 +88,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
         }
         return $this->payloadableUpdateGenericTagTermMutationResolver;
     }
-    final public function setPayloadableDeleteGenericTagTermMutationResolver(PayloadableDeleteGenericTagTermMutationResolver $payloadableDeleteGenericTagTermMutationResolver): void
-    {
-        $this->payloadableDeleteGenericTagTermMutationResolver = $payloadableDeleteGenericTagTermMutationResolver;
-    }
     final protected function getPayloadableDeleteGenericTagTermMutationResolver(): PayloadableDeleteGenericTagTermMutationResolver
     {
         if ($this->payloadableDeleteGenericTagTermMutationResolver === null) {
@@ -125,10 +97,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
         }
         return $this->payloadableDeleteGenericTagTermMutationResolver;
     }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -137,10 +105,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setGenericTagTermUpdateInputObjectTypeResolver(GenericTagTermUpdateInputObjectTypeResolver $genericTagTermUpdateInputObjectTypeResolver): void
-    {
-        $this->genericTagTermUpdateInputObjectTypeResolver = $genericTagTermUpdateInputObjectTypeResolver;
     }
     final protected function getGenericTagTermUpdateInputObjectTypeResolver(): GenericTagTermUpdateInputObjectTypeResolver
     {

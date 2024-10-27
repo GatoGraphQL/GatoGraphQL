@@ -18,10 +18,6 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
     private ?ParentIDsFilterInput $parentIDsFilterInput = null;
     private ?ExcludeParentIDsFilterInput $excludeParentIDsFilterInput = null;
 
-    final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
-    {
-        $this->parentIDFilterInput = $parentIDFilterInput;
-    }
     final protected function getParentIDFilterInput(): ParentIDFilterInput
     {
         if ($this->parentIDFilterInput === null) {
@@ -31,10 +27,6 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
         }
         return $this->parentIDFilterInput;
     }
-    final public function setParentIDsFilterInput(ParentIDsFilterInput $parentIDsFilterInput): void
-    {
-        $this->parentIDsFilterInput = $parentIDsFilterInput;
-    }
     final protected function getParentIDsFilterInput(): ParentIDsFilterInput
     {
         if ($this->parentIDsFilterInput === null) {
@@ -43,10 +35,6 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
             $this->parentIDsFilterInput = $parentIDsFilterInput;
         }
         return $this->parentIDsFilterInput;
-    }
-    final public function setExcludeParentIDsFilterInput(ExcludeParentIDsFilterInput $excludeParentIDsFilterInput): void
-    {
-        $this->excludeParentIDsFilterInput = $excludeParentIDsFilterInput;
     }
     final protected function getExcludeParentIDsFilterInput(): ExcludeParentIDsFilterInput
     {

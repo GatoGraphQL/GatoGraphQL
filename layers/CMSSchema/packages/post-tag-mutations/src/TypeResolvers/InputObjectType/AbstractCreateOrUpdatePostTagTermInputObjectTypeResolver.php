@@ -14,10 +14,6 @@ abstract class AbstractCreateOrUpdatePostTagTermInputObjectTypeResolver extends 
     private ?PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    final public function setPostTagTaxonomyEnumStringScalarTypeResolver(PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
-    }
     final protected function getPostTagTaxonomyEnumStringScalarTypeResolver(): PostTagTaxonomyEnumStringScalarTypeResolver
     {
         if ($this->postTagTaxonomyEnumStringScalarTypeResolver === null) {
@@ -26,10 +22,6 @@ abstract class AbstractCreateOrUpdatePostTagTermInputObjectTypeResolver extends 
             $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
         }
         return $this->postTagTaxonomyEnumStringScalarTypeResolver;
-    }
-    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
-    {
-        $this->postTagTypeAPI = $postTagTypeAPI;
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {

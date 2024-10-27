@@ -15,10 +15,6 @@ class BundleExtensionAggregator
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?ModuleAggregator $moduleAggregator = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         if ($this->moduleRegistry === null) {
@@ -27,10 +23,6 @@ class BundleExtensionAggregator
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
-    }
-    final public function setModuleAggregator(ModuleAggregator $moduleAggregator): void
-    {
-        $this->moduleAggregator = $moduleAggregator;
     }
     final protected function getModuleAggregator(): ModuleAggregator
     {

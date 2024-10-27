@@ -23,10 +23,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
-    final public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
-    {
-        $this->schemaNamespacingService = $schemaNamespacingService;
-    }
     final protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
     {
         if ($this->schemaNamespacingService === null) {
@@ -36,10 +32,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
         }
         return $this->schemaNamespacingService;
     }
-    final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
-    {
-        $this->schemaDefinitionService = $schemaDefinitionService;
-    }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
         if ($this->schemaDefinitionService === null) {
@@ -48,10 +40,6 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
             $this->schemaDefinitionService = $schemaDefinitionService;
         }
         return $this->schemaDefinitionService;
-    }
-    final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
-    {
-        $this->attachableExtensionManager = $attachableExtensionManager;
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {

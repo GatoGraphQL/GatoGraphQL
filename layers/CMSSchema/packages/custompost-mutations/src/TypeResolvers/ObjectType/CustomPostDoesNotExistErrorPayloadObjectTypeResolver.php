@@ -12,10 +12,6 @@ class CustomPostDoesNotExistErrorPayloadObjectTypeResolver extends AbstractError
 {
     private ?CustomPostDoesNotExistErrorPayloadObjectTypeDataLoader $customPostDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setCustomPostDoesNotExistErrorPayloadObjectTypeDataLoader(CustomPostDoesNotExistErrorPayloadObjectTypeDataLoader $customPostDoesNotExistErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader = $customPostDoesNotExistErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getCustomPostDoesNotExistErrorPayloadObjectTypeDataLoader(): CustomPostDoesNotExistErrorPayloadObjectTypeDataLoader
     {
         if ($this->customPostDoesNotExistErrorPayloadObjectTypeDataLoader === null) {

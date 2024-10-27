@@ -23,10 +23,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?UserRolesFilterInput $userRolesFilterInput = null;
     private ?ExcludeUserRolesFilterInput $excludeUserRolesFilterInput = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -36,10 +32,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setUserRolesFilterInput(UserRolesFilterInput $userRolesFilterInput): void
-    {
-        $this->userRolesFilterInput = $userRolesFilterInput;
-    }
     final protected function getUserRolesFilterInput(): UserRolesFilterInput
     {
         if ($this->userRolesFilterInput === null) {
@@ -48,10 +40,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->userRolesFilterInput = $userRolesFilterInput;
         }
         return $this->userRolesFilterInput;
-    }
-    final public function setExcludeUserRolesFilterInput(ExcludeUserRolesFilterInput $excludeUserRolesFilterInput): void
-    {
-        $this->excludeUserRolesFilterInput = $excludeUserRolesFilterInput;
     }
     final protected function getExcludeUserRolesFilterInput(): ExcludeUserRolesFilterInput
     {

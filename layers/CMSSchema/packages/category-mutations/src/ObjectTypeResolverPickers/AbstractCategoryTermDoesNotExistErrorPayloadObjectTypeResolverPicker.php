@@ -13,10 +13,6 @@ abstract class AbstractCategoryTermDoesNotExistErrorPayloadObjectTypeResolverPic
 {
     private ?CategoryTermDoesNotExistErrorPayloadObjectTypeResolver $categoryDoesNotExistErrorPayloadObjectTypeResolver = null;
 
-    final public function setCategoryTermDoesNotExistErrorPayloadObjectTypeResolver(CategoryTermDoesNotExistErrorPayloadObjectTypeResolver $categoryDoesNotExistErrorPayloadObjectTypeResolver): void
-    {
-        $this->categoryDoesNotExistErrorPayloadObjectTypeResolver = $categoryDoesNotExistErrorPayloadObjectTypeResolver;
-    }
     final protected function getCategoryTermDoesNotExistErrorPayloadObjectTypeResolver(): CategoryTermDoesNotExistErrorPayloadObjectTypeResolver
     {
         if ($this->categoryDoesNotExistErrorPayloadObjectTypeResolver === null) {

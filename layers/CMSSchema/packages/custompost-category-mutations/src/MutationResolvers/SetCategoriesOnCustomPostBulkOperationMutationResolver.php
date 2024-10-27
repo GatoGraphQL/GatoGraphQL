@@ -11,10 +11,6 @@ class SetCategoriesOnCustomPostBulkOperationMutationResolver extends AbstractBul
 {
     private ?SetCategoriesOnCustomPostMutationResolver $setCategoriesOnCustomPostMutationResolver = null;
 
-    final public function setSetCategoriesOnCustomPostMutationResolver(SetCategoriesOnCustomPostMutationResolver $setCategoriesOnCustomPostMutationResolver): void
-    {
-        $this->setCategoriesOnCustomPostMutationResolver = $setCategoriesOnCustomPostMutationResolver;
-    }
     final protected function getSetCategoriesOnCustomPostMutationResolver(): SetCategoriesOnCustomPostMutationResolver
     {
         if ($this->setCategoriesOnCustomPostMutationResolver === null) {

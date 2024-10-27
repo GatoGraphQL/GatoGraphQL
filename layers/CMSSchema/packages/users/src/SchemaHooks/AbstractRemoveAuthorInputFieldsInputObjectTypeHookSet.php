@@ -17,10 +17,6 @@ abstract class AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet extends Abs
 
     private ?FilterByAuthorInputObjectTypeResolver $filterByAuthorInputObjectTypeResolver = null;
 
-    final public function setFilterByAuthorInputObjectTypeResolver(FilterByAuthorInputObjectTypeResolver $filterByAuthorInputObjectTypeResolver): void
-    {
-        $this->filterByAuthorInputObjectTypeResolver = $filterByAuthorInputObjectTypeResolver;
-    }
     final protected function getFilterByAuthorInputObjectTypeResolver(): FilterByAuthorInputObjectTypeResolver
     {
         if ($this->filterByAuthorInputObjectTypeResolver === null) {

@@ -29,10 +29,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     private ?UniversalCategoryTypeAPIInterface $universalCategoryTypeAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -41,10 +37,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -55,10 +47,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
-    {
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-    }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
         if ($this->queryableInterfaceTypeFieldResolver === null) {
@@ -67,10 +55,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         }
         return $this->queryableInterfaceTypeFieldResolver;
-    }
-    final public function setCategoryInterfaceTypeFieldResolver(CategoryInterfaceTypeFieldResolver $categoryInterfaceTypeFieldResolver): void
-    {
-        $this->categoryInterfaceTypeFieldResolver = $categoryInterfaceTypeFieldResolver;
     }
     final protected function getCategoryInterfaceTypeFieldResolver(): CategoryInterfaceTypeFieldResolver
     {
@@ -81,10 +65,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         }
         return $this->categoryInterfaceTypeFieldResolver;
     }
-    final public function setUniversalCategoryTypeAPI(UniversalCategoryTypeAPIInterface $universalCategoryTypeAPI): void
-    {
-        $this->universalCategoryTypeAPI = $universalCategoryTypeAPI;
-    }
     final protected function getUniversalCategoryTypeAPI(): UniversalCategoryTypeAPIInterface
     {
         if ($this->universalCategoryTypeAPI === null) {
@@ -93,10 +73,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             $this->universalCategoryTypeAPI = $universalCategoryTypeAPI;
         }
         return $this->universalCategoryTypeAPI;
-    }
-    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
-    {
-        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
     }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {

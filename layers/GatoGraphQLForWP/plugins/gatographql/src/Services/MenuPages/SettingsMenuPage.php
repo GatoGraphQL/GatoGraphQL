@@ -57,10 +57,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
-    final public function setSettingsNormalizer(SettingsNormalizerInterface $settingsNormalizer): void
-    {
-        $this->settingsNormalizer = $settingsNormalizer;
-    }
     final protected function getSettingsNormalizer(): SettingsNormalizerInterface
     {
         if ($this->settingsNormalizer === null) {
@@ -69,10 +65,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->settingsNormalizer = $settingsNormalizer;
         }
         return $this->settingsNormalizer;
-    }
-    final public function setPluginGeneralSettingsFunctionalityModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver): void
-    {
-        $this->PluginGeneralSettingsFunctionalityModuleResolver = $PluginGeneralSettingsFunctionalityModuleResolver;
     }
     final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
     {
@@ -83,10 +75,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         return $this->PluginGeneralSettingsFunctionalityModuleResolver;
     }
-    final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
-    {
-        $this->settingsCategoryRegistry = $settingsCategoryRegistry;
-    }
     final protected function getSettingsCategoryRegistry(): SettingsCategoryRegistryInterface
     {
         if ($this->settingsCategoryRegistry === null) {
@@ -95,10 +83,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->settingsCategoryRegistry = $settingsCategoryRegistry;
         }
         return $this->settingsCategoryRegistry;
-    }
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
@@ -109,10 +93,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         return $this->moduleRegistry;
     }
-    final public function setLicenseValidationService(LicenseValidationServiceInterface $licenseValidationService): void
-    {
-        $this->licenseValidationService = $licenseValidationService;
-    }
     final protected function getLicenseValidationService(): LicenseValidationServiceInterface
     {
         if ($this->licenseValidationService === null) {
@@ -122,10 +102,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         return $this->licenseValidationService;
     }
-    final public function setContainerManager(ContainerManagerInterface $containerManager): void
-    {
-        $this->containerManager = $containerManager;
-    }
     final protected function getContainerManager(): ContainerManagerInterface
     {
         if ($this->containerManager === null) {
@@ -134,10 +110,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->containerManager = $containerManager;
         }
         return $this->containerManager;
-    }
-    final public function setOptionNamespacer(OptionNamespacerInterface $optionNamespacer): void
-    {
-        $this->optionNamespacer = $optionNamespacer;
     }
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {

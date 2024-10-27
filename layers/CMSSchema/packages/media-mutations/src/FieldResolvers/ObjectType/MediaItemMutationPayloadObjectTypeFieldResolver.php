@@ -14,10 +14,6 @@ class MediaItemMutationPayloadObjectTypeFieldResolver extends AbstractObjectMuta
 {
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
 
-    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
-    {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-    }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
         if ($this->mediaObjectTypeResolver === null) {

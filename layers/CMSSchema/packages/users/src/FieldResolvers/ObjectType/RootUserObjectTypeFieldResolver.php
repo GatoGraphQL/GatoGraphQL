@@ -22,10 +22,6 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?UserByOneofInputObjectTypeResolver $userByOneofInputObjectTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -34,10 +30,6 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setUserByOneofInputObjectTypeResolver(UserByOneofInputObjectTypeResolver $userByOneofInputObjectTypeResolver): void
-    {
-        $this->userByOneofInputObjectTypeResolver = $userByOneofInputObjectTypeResolver;
     }
     final protected function getUserByOneofInputObjectTypeResolver(): UserByOneofInputObjectTypeResolver
     {

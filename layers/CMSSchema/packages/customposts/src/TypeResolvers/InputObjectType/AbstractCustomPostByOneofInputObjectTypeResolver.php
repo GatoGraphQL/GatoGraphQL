@@ -19,10 +19,6 @@ abstract class AbstractCustomPostByOneofInputObjectTypeResolver extends Abstract
     private ?IncludeFilterInput $includeFilterInput = null;
     private ?SlugFilterInput $slugFilterInput = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -31,10 +27,6 @@ abstract class AbstractCustomPostByOneofInputObjectTypeResolver extends Abstract
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -45,10 +37,6 @@ abstract class AbstractCustomPostByOneofInputObjectTypeResolver extends Abstract
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
-    {
-        $this->includeFilterInput = $includeFilterInput;
-    }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
         if ($this->includeFilterInput === null) {
@@ -57,10 +45,6 @@ abstract class AbstractCustomPostByOneofInputObjectTypeResolver extends Abstract
             $this->includeFilterInput = $includeFilterInput;
         }
         return $this->includeFilterInput;
-    }
-    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
-    {
-        $this->slugFilterInput = $slugFilterInput;
     }
     final protected function getSlugFilterInput(): SlugFilterInput
     {

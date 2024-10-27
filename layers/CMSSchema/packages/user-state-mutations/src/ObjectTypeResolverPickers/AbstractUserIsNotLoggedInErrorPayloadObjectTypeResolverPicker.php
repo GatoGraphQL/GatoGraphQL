@@ -13,10 +13,6 @@ abstract class AbstractUserIsNotLoggedInErrorPayloadObjectTypeResolverPicker ext
 {
     private ?UserIsNotLoggedInErrorPayloadObjectTypeResolver $userIsNotLoggedInErrorPayloadObjectTypeResolver = null;
 
-    final public function setUserIsNotLoggedInErrorPayloadObjectTypeResolver(UserIsNotLoggedInErrorPayloadObjectTypeResolver $userIsNotLoggedInErrorPayloadObjectTypeResolver): void
-    {
-        $this->userIsNotLoggedInErrorPayloadObjectTypeResolver = $userIsNotLoggedInErrorPayloadObjectTypeResolver;
-    }
     final protected function getUserIsNotLoggedInErrorPayloadObjectTypeResolver(): UserIsNotLoggedInErrorPayloadObjectTypeResolver
     {
         if ($this->userIsNotLoggedInErrorPayloadObjectTypeResolver === null) {

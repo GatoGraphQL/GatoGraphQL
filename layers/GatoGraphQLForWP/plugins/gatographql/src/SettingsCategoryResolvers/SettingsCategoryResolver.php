@@ -20,10 +20,6 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
 
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
-    final public function setOptionNamespacer(OptionNamespacerInterface $optionNamespacer): void
-    {
-        $this->optionNamespacer = $optionNamespacer;
-    }
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {
         if ($this->optionNamespacer === null) {

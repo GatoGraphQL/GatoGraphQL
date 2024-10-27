@@ -12,10 +12,6 @@ class UserIsLoggedInErrorPayloadObjectTypeResolver extends AbstractErrorPayloadO
 {
     private ?UserIsLoggedInErrorPayloadObjectTypeDataLoader $userIsLoggedInErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setUserIsLoggedInErrorPayloadObjectTypeDataLoader(UserIsLoggedInErrorPayloadObjectTypeDataLoader $userIsLoggedInErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->userIsLoggedInErrorPayloadObjectTypeDataLoader = $userIsLoggedInErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getUserIsLoggedInErrorPayloadObjectTypeDataLoader(): UserIsLoggedInErrorPayloadObjectTypeDataLoader
     {
         if ($this->userIsLoggedInErrorPayloadObjectTypeDataLoader === null) {

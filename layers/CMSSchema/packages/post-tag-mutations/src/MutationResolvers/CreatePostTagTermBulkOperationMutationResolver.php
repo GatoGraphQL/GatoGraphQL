@@ -11,10 +11,6 @@ class CreatePostTagTermBulkOperationMutationResolver extends AbstractBulkOperati
 {
     private ?CreatePostTagTermMutationResolver $createPostTagTermMutationResolver = null;
 
-    final public function setCreatePostTagTermMutationResolver(CreatePostTagTermMutationResolver $createPostTagTermMutationResolver): void
-    {
-        $this->createPostTagTermMutationResolver = $createPostTagTermMutationResolver;
-    }
     final protected function getCreatePostTagTermMutationResolver(): CreatePostTagTermMutationResolver
     {
         if ($this->createPostTagTermMutationResolver === null) {

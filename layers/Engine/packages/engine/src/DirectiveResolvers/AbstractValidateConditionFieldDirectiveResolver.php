@@ -18,10 +18,6 @@ abstract class AbstractValidateConditionFieldDirectiveResolver extends AbstractV
 {
     private ?SuperRootObjectTypeResolver $superRootObjectTypeResolver = null;
 
-    final public function setSuperRootObjectTypeResolver(SuperRootObjectTypeResolver $superRootObjectTypeResolver): void
-    {
-        $this->superRootObjectTypeResolver = $superRootObjectTypeResolver;
-    }
     final protected function getSuperRootObjectTypeResolver(): SuperRootObjectTypeResolver
     {
         if ($this->superRootObjectTypeResolver === null) {

@@ -31,10 +31,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?TaxonomyFilterInput $taxonomyFilterInput = null;
     private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -43,10 +39,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -57,10 +49,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setTagSlugsFilterInput(TagSlugsFilterInput $tagSlugsFilterInput): void
-    {
-        $this->tagSlugsFilterInput = $tagSlugsFilterInput;
-    }
     final protected function getTagSlugsFilterInput(): TagSlugsFilterInput
     {
         if ($this->tagSlugsFilterInput === null) {
@@ -69,10 +57,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->tagSlugsFilterInput = $tagSlugsFilterInput;
         }
         return $this->tagSlugsFilterInput;
-    }
-    final public function setTagIDsFilterInput(TagIDsFilterInput $tagIDsFilterInput): void
-    {
-        $this->tagIDsFilterInput = $tagIDsFilterInput;
     }
     final protected function getTagIDsFilterInput(): TagIDsFilterInput
     {
@@ -83,10 +67,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->tagIDsFilterInput;
     }
-    final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
-    {
-        $this->taxonomyFilterInput = $taxonomyFilterInput;
-    }
     final protected function getTaxonomyFilterInput(): TaxonomyFilterInput
     {
         if ($this->taxonomyFilterInput === null) {
@@ -95,10 +75,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->taxonomyFilterInput = $taxonomyFilterInput;
         }
         return $this->taxonomyFilterInput;
-    }
-    final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
     }
     final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
     {

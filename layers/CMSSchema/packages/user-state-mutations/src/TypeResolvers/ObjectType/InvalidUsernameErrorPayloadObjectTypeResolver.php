@@ -12,10 +12,6 @@ class InvalidUsernameErrorPayloadObjectTypeResolver extends AbstractErrorPayload
 {
     private ?InvalidUsernameErrorPayloadObjectTypeDataLoader $invalidUsernameErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setInvalidUsernameErrorPayloadObjectTypeDataLoader(InvalidUsernameErrorPayloadObjectTypeDataLoader $invalidUsernameErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->invalidUsernameErrorPayloadObjectTypeDataLoader = $invalidUsernameErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getInvalidUsernameErrorPayloadObjectTypeDataLoader(): InvalidUsernameErrorPayloadObjectTypeDataLoader
     {
         if ($this->invalidUsernameErrorPayloadObjectTypeDataLoader === null) {

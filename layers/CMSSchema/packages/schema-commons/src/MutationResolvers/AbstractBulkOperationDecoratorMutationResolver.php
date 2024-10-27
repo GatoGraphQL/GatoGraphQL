@@ -19,10 +19,6 @@ abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMu
 {
     private ?ObjectDictionaryInterface $objectDictionary = null;
 
-    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
-    {
-        $this->objectDictionary = $objectDictionary;
-    }
     final protected function getObjectDictionary(): ObjectDictionaryInterface
     {
         if ($this->objectDictionary === null) {

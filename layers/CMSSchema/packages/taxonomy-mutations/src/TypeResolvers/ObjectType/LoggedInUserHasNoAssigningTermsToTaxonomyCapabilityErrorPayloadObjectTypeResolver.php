@@ -12,10 +12,6 @@ class LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeR
 {
     private ?LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeDataLoader === null) {

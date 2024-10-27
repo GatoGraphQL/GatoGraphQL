@@ -14,10 +14,6 @@ class AddMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractAddMetaQuery
 {
     private ?UserMetaQueryInputObjectTypeResolver $userMetaQueryInputObjectTypeResolver = null;
 
-    final public function setUserMetaQueryInputObjectTypeResolver(UserMetaQueryInputObjectTypeResolver $userMetaQueryInputObjectTypeResolver): void
-    {
-        $this->userMetaQueryInputObjectTypeResolver = $userMetaQueryInputObjectTypeResolver;
-    }
     final protected function getUserMetaQueryInputObjectTypeResolver(): UserMetaQueryInputObjectTypeResolver
     {
         if ($this->userMetaQueryInputObjectTypeResolver === null) {

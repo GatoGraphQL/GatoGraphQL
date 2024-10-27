@@ -32,10 +32,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
     private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -44,10 +40,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -58,10 +50,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setCustomPostCategoriesFilterInputObjectTypeResolver(CustomPostCategoriesFilterInputObjectTypeResolver $customPostCategoriesFilterInputObjectTypeResolver): void
-    {
-        $this->customPostCategoriesFilterInputObjectTypeResolver = $customPostCategoriesFilterInputObjectTypeResolver;
-    }
     final protected function getCustomPostCategoriesFilterInputObjectTypeResolver(): CustomPostCategoriesFilterInputObjectTypeResolver
     {
         if ($this->customPostCategoriesFilterInputObjectTypeResolver === null) {
@@ -71,10 +59,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         }
         return $this->customPostCategoriesFilterInputObjectTypeResolver;
     }
-    final public function setCategoryPaginationInputObjectTypeResolver(CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver): void
-    {
-        $this->categoryPaginationInputObjectTypeResolver = $categoryPaginationInputObjectTypeResolver;
-    }
     final protected function getCategoryPaginationInputObjectTypeResolver(): CategoryPaginationInputObjectTypeResolver
     {
         if ($this->categoryPaginationInputObjectTypeResolver === null) {
@@ -83,10 +67,6 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
             $this->categoryPaginationInputObjectTypeResolver = $categoryPaginationInputObjectTypeResolver;
         }
         return $this->categoryPaginationInputObjectTypeResolver;
-    }
-    final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
-    {
-        $this->taxonomySortInputObjectTypeResolver = $taxonomySortInputObjectTypeResolver;
     }
     final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
     {

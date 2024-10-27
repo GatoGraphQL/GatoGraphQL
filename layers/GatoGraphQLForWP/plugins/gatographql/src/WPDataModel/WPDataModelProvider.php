@@ -28,10 +28,6 @@ class WPDataModelProvider implements WPDataModelProviderInterface
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
     private ?TaxonomyRegistryInterface $taxonomyRegistry = null;
 
-    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
-    {
-        $this->customPostTypeRegistry = $customPostTypeRegistry;
-    }
     final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {
         if ($this->customPostTypeRegistry === null) {
@@ -40,10 +36,6 @@ class WPDataModelProvider implements WPDataModelProviderInterface
             $this->customPostTypeRegistry = $customPostTypeRegistry;
         }
         return $this->customPostTypeRegistry;
-    }
-    final public function setTaxonomyRegistry(TaxonomyRegistryInterface $taxonomyRegistry): void
-    {
-        $this->taxonomyRegistry = $taxonomyRegistry;
     }
     final protected function getTaxonomyRegistry(): TaxonomyRegistryInterface
     {

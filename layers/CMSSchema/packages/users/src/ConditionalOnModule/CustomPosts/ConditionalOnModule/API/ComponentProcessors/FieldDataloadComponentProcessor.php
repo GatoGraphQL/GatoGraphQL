@@ -20,10 +20,6 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
-    final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
-    {
-        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-    }
     final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
         if ($this->customPostUnionTypeResolver === null) {
@@ -32,10 +28,6 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
             $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
         }
         return $this->customPostUnionTypeResolver;
-    }
-    final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
-    {
-        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {

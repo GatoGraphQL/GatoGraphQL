@@ -11,10 +11,6 @@ class UpdateMediaItemBulkOperationMutationResolver extends AbstractBulkOperation
 {
     private ?UpdateMediaItemMutationResolver $updateMediaItemMutationResolver = null;
 
-    final public function setUpdateMediaItemMutationResolver(UpdateMediaItemMutationResolver $updateMediaItemMutationResolver): void
-    {
-        $this->updateMediaItemMutationResolver = $updateMediaItemMutationResolver;
-    }
     final protected function getUpdateMediaItemMutationResolver(): UpdateMediaItemMutationResolver
     {
         if ($this->updateMediaItemMutationResolver === null) {

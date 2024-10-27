@@ -42,10 +42,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     private ?LocaleHelper $localeHelper = null;
     private ?RenderingHelpers $renderingHelpers = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         if ($this->moduleRegistry === null) {
@@ -54,10 +50,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
-    }
-    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
-    {
-        $this->userAuthorization = $userAuthorization;
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
@@ -68,10 +60,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         }
         return $this->userAuthorization;
     }
-    final public function setStringConversion(StringConversion $stringConversion): void
-    {
-        $this->stringConversion = $stringConversion;
-    }
     final protected function getStringConversion(): StringConversion
     {
         if ($this->stringConversion === null) {
@@ -80,10 +68,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             $this->stringConversion = $stringConversion;
         }
         return $this->stringConversion;
-    }
-    final public function setEditorHelpers(EditorHelpers $editorHelpers): void
-    {
-        $this->editorHelpers = $editorHelpers;
     }
     final protected function getEditorHelpers(): EditorHelpers
     {
@@ -94,10 +78,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         }
         return $this->editorHelpers;
     }
-    final public function setLocaleHelper(LocaleHelper $localeHelper): void
-    {
-        $this->localeHelper = $localeHelper;
-    }
     final protected function getLocaleHelper(): LocaleHelper
     {
         if ($this->localeHelper === null) {
@@ -106,10 +86,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             $this->localeHelper = $localeHelper;
         }
         return $this->localeHelper;
-    }
-    final public function setRenderingHelpers(RenderingHelpers $renderingHelpers): void
-    {
-        $this->renderingHelpers = $renderingHelpers;
     }
     final protected function getRenderingHelpers(): RenderingHelpers
     {

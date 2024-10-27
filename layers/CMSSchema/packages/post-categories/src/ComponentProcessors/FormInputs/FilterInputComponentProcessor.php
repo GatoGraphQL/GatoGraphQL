@@ -21,10 +21,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?PostCategoryTaxonomyEnumStringScalarTypeResolver $postCategoryTaxonomyEnumStringScalarTypeResolver = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
-    {
-        $this->taxonomyFilterInput = $taxonomyFilterInput;
-    }
     final protected function getTaxonomyFilterInput(): TaxonomyFilterInput
     {
         if ($this->taxonomyFilterInput === null) {
@@ -34,10 +30,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->taxonomyFilterInput;
     }
-    final public function setPostCategoryTaxonomyEnumStringScalarTypeResolver(PostCategoryTaxonomyEnumStringScalarTypeResolver $postCategoryTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->postCategoryTaxonomyEnumStringScalarTypeResolver = $postCategoryTaxonomyEnumStringScalarTypeResolver;
-    }
     final protected function getPostCategoryTaxonomyEnumStringScalarTypeResolver(): PostCategoryTaxonomyEnumStringScalarTypeResolver
     {
         if ($this->postCategoryTaxonomyEnumStringScalarTypeResolver === null) {
@@ -46,10 +38,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->postCategoryTaxonomyEnumStringScalarTypeResolver = $postCategoryTaxonomyEnumStringScalarTypeResolver;
         }
         return $this->postCategoryTaxonomyEnumStringScalarTypeResolver;
-    }
-    final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
-    {
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {

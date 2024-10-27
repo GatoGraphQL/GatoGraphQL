@@ -20,10 +20,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     private ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
     private ?WithFeaturedImageInterfaceTypeFieldResolver $withFeaturedImageInterfaceTypeFieldResolver = null;
 
-    final public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
-    {
-        $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
-    }
     final protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
     {
         if ($this->customPostMediaTypeAPI === null) {
@@ -32,10 +28,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
             $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
         }
         return $this->customPostMediaTypeAPI;
-    }
-    final public function setWithFeaturedImageInterfaceTypeFieldResolver(WithFeaturedImageInterfaceTypeFieldResolver $withFeaturedImageInterfaceTypeFieldResolver): void
-    {
-        $this->withFeaturedImageInterfaceTypeFieldResolver = $withFeaturedImageInterfaceTypeFieldResolver;
     }
     final protected function getWithFeaturedImageInterfaceTypeFieldResolver(): WithFeaturedImageInterfaceTypeFieldResolver
     {

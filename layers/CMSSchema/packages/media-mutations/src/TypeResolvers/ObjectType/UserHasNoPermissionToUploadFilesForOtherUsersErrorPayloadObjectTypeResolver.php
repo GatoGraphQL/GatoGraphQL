@@ -12,10 +12,6 @@ class UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolve
 {
     private ?UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setUserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader(UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader = $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getUserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader(): UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader
     {
         if ($this->userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeDataLoader === null) {

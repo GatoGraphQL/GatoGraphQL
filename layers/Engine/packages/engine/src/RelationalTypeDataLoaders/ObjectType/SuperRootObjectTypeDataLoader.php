@@ -11,10 +11,6 @@ class SuperRootObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?SuperRoot $superRoot = null;
 
-    final public function setSuperRoot(SuperRoot $superRoot): void
-    {
-        $this->superRoot = $superRoot;
-    }
     final protected function getSuperRoot(): SuperRoot
     {
         if ($this->superRoot === null) {

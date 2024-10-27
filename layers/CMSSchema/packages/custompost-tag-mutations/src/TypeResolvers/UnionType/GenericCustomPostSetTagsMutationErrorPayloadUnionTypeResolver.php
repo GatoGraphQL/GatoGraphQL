@@ -11,10 +11,6 @@ class GenericCustomPostSetTagsMutationErrorPayloadUnionTypeResolver extends Abst
 {
     private ?GenericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader $genericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setGenericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader(GenericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader $genericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->genericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader = $genericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getGenericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader(): GenericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->genericCustomPostSetTagsMutationErrorPayloadUnionTypeDataLoader === null) {

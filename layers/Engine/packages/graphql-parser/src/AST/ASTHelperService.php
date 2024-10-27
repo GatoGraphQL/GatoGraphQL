@@ -19,10 +19,6 @@ class ASTHelperService implements ASTHelperServiceInterface
 
     private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
 
-    final public function setASTNodeDuplicatorService(ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService): void
-    {
-        $this->astNodeDuplicatorService = $astNodeDuplicatorService;
-    }
     final protected function getASTNodeDuplicatorService(): ASTNodeDuplicatorServiceInterface
     {
         if ($this->astNodeDuplicatorService === null) {

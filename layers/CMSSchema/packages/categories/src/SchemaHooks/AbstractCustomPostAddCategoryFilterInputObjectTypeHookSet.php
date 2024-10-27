@@ -11,10 +11,6 @@ abstract class AbstractCustomPostAddCategoryFilterInputObjectTypeHookSet extends
 {
     private ?CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver $customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver = null;
 
-    final public function setCustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver(CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver $customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver): void
-    {
-        $this->customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver = $customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver;
-    }
     final protected function getCustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver(): CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver
     {
         if ($this->customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver === null) {

@@ -16,10 +16,6 @@ class CreateMediaItemFromURLInputObjectTypeResolver extends AbstractInputObjectT
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
-    {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
         if ($this->urlScalarTypeResolver === null) {
@@ -28,10 +24,6 @@ class CreateMediaItemFromURLInputObjectTypeResolver extends AbstractInputObjectT
             $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         }
         return $this->urlScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {

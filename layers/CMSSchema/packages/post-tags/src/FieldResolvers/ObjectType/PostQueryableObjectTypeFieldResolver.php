@@ -19,10 +19,6 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
 
-    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
-    {
-        $this->postTagTypeAPI = $postTagTypeAPI;
-    }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
         if ($this->postTagTypeAPI === null) {
@@ -31,10 +27,6 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
             $this->postTagTypeAPI = $postTagTypeAPI;
         }
         return $this->postTagTypeAPI;
-    }
-    final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
-    {
-        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {

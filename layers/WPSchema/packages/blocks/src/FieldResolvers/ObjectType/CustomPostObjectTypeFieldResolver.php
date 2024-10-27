@@ -34,10 +34,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     private ?BlockFilterByOneofInputObjectTypeResolver $blockFilterByOneofInputObjectTypeResolver = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
-    final public function setBlockContentParser(BlockContentParserInterface $blockContentParser): void
-    {
-        $this->blockContentParser = $blockContentParser;
-    }
     final protected function getBlockContentParser(): BlockContentParserInterface
     {
         if ($this->blockContentParser === null) {
@@ -47,10 +43,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         }
         return $this->blockContentParser;
     }
-    final public function setBlockFilterByOneofInputObjectTypeResolver(BlockFilterByOneofInputObjectTypeResolver $blockFilterByOneofInputObjectTypeResolver): void
-    {
-        $this->blockFilterByOneofInputObjectTypeResolver = $blockFilterByOneofInputObjectTypeResolver;
-    }
     final protected function getBlockFilterByOneofInputObjectTypeResolver(): BlockFilterByOneofInputObjectTypeResolver
     {
         if ($this->blockFilterByOneofInputObjectTypeResolver === null) {
@@ -59,10 +51,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $this->blockFilterByOneofInputObjectTypeResolver = $blockFilterByOneofInputObjectTypeResolver;
         }
         return $this->blockFilterByOneofInputObjectTypeResolver;
-    }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
-    {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {

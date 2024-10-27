@@ -13,10 +13,6 @@ class TaxonomySortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {
     private ?TaxonomyOrderByEnumTypeResolver $taxonomySortByEnumTypeResolver = null;
 
-    final public function setTaxonomyOrderByEnumTypeResolver(TaxonomyOrderByEnumTypeResolver $taxonomySortByEnumTypeResolver): void
-    {
-        $this->taxonomySortByEnumTypeResolver = $taxonomySortByEnumTypeResolver;
-    }
     final protected function getTaxonomyOrderByEnumTypeResolver(): TaxonomyOrderByEnumTypeResolver
     {
         if ($this->taxonomySortByEnumTypeResolver === null) {

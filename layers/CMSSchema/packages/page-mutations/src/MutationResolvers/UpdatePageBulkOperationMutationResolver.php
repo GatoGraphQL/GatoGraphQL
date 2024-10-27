@@ -11,10 +11,6 @@ class UpdatePageBulkOperationMutationResolver extends AbstractBulkOperationDecor
 {
     private ?UpdatePageMutationResolver $updatePageMutationResolver = null;
 
-    final public function setUpdatePageMutationResolver(UpdatePageMutationResolver $updatePageMutationResolver): void
-    {
-        $this->updatePageMutationResolver = $updatePageMutationResolver;
-    }
     final protected function getUpdatePageMutationResolver(): UpdatePageMutationResolver
     {
         if ($this->updatePageMutationResolver === null) {

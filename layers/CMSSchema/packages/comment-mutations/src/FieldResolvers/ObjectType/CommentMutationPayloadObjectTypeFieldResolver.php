@@ -14,10 +14,6 @@ class CommentMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutati
 {
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
 
-    final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
-    {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-    }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
         if ($this->commentObjectTypeResolver === null) {

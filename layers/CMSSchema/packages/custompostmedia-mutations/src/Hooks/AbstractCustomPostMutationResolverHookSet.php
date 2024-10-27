@@ -18,10 +18,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     private ?FeaturedImageByOneofInputObjectTypeResolver $featuredImageByOneofInputObjectTypeResolver = null;
 
-    final public function setFeaturedImageByOneofInputObjectTypeResolver(FeaturedImageByOneofInputObjectTypeResolver $featuredImageByOneofInputObjectTypeResolver): void
-    {
-        $this->featuredImageByOneofInputObjectTypeResolver = $featuredImageByOneofInputObjectTypeResolver;
-    }
     final protected function getFeaturedImageByOneofInputObjectTypeResolver(): FeaturedImageByOneofInputObjectTypeResolver
     {
         if ($this->featuredImageByOneofInputObjectTypeResolver === null) {

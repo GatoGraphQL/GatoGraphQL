@@ -23,10 +23,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     private ?CategoryTermUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setCategoryTermUpdateInputObjectTypeResolver(CategoryTermUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver): void
-    {
-        $this->categoryTermUpdateInputObjectTypeResolver = $categoryTermUpdateInputObjectTypeResolver;
-    }
     final protected function getCategoryTermUpdateInputObjectTypeResolver(): CategoryTermUpdateInputObjectTypeResolver
     {
         if ($this->categoryTermUpdateInputObjectTypeResolver === null) {
@@ -35,10 +31,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             $this->categoryTermUpdateInputObjectTypeResolver = $categoryTermUpdateInputObjectTypeResolver;
         }
         return $this->categoryTermUpdateInputObjectTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {

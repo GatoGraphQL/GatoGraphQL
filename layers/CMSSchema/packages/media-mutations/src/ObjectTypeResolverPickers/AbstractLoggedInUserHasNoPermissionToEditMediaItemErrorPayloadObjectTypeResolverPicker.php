@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObj
 {
     private ?LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver $loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver(LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver $loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver = $loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver(): LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver === null) {

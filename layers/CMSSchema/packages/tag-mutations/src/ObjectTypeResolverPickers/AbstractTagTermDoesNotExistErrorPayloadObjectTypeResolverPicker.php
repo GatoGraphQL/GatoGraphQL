@@ -13,10 +13,6 @@ abstract class AbstractTagTermDoesNotExistErrorPayloadObjectTypeResolverPicker e
 {
     private ?TagTermDoesNotExistErrorPayloadObjectTypeResolver $tagDoesNotExistErrorPayloadObjectTypeResolver = null;
 
-    final public function setTagTermDoesNotExistErrorPayloadObjectTypeResolver(TagTermDoesNotExistErrorPayloadObjectTypeResolver $tagDoesNotExistErrorPayloadObjectTypeResolver): void
-    {
-        $this->tagDoesNotExistErrorPayloadObjectTypeResolver = $tagDoesNotExistErrorPayloadObjectTypeResolver;
-    }
     final protected function getTagTermDoesNotExistErrorPayloadObjectTypeResolver(): TagTermDoesNotExistErrorPayloadObjectTypeResolver
     {
         if ($this->tagDoesNotExistErrorPayloadObjectTypeResolver === null) {

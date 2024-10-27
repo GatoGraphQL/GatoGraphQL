@@ -11,10 +11,6 @@ class SetFeaturedImageOnCustomPostBulkOperationMutationResolver extends Abstract
 {
     private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
 
-    final public function setSetFeaturedImageOnCustomPostMutationResolver(SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver): void
-    {
-        $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
-    }
     final protected function getSetFeaturedImageOnCustomPostMutationResolver(): SetFeaturedImageOnCustomPostMutationResolver
     {
         if ($this->setFeaturedImageOnCustomPostMutationResolver === null) {

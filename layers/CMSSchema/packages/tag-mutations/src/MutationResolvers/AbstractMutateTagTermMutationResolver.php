@@ -14,10 +14,6 @@ abstract class AbstractMutateTagTermMutationResolver extends AbstractMutateTaxon
 
     private ?TagTypeMutationAPIInterface $tagTypeMutationAPI = null;
 
-    final public function setTagTypeMutationAPI(TagTypeMutationAPIInterface $tagTypeMutationAPI): void
-    {
-        $this->tagTypeMutationAPI = $tagTypeMutationAPI;
-    }
     final protected function getTagTypeMutationAPI(): TagTypeMutationAPIInterface
     {
         if ($this->tagTypeMutationAPI === null) {

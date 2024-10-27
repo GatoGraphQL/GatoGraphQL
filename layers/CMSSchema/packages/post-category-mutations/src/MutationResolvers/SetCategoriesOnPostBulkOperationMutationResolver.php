@@ -11,10 +11,6 @@ class SetCategoriesOnPostBulkOperationMutationResolver extends AbstractBulkOpera
 {
     private ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
 
-    final public function setSetCategoriesOnPostMutationResolver(SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver): void
-    {
-        $this->setCategoriesOnPostMutationResolver = $setCategoriesOnPostMutationResolver;
-    }
     final protected function getSetCategoriesOnPostMutationResolver(): SetCategoriesOnPostMutationResolver
     {
         if ($this->setCategoriesOnPostMutationResolver === null) {

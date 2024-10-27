@@ -12,10 +12,6 @@ class RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeDataLoader ex
 {
     private ?RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver $rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver(RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver $rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver = $rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver(): RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver === null) {

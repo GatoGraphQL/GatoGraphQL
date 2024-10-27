@@ -15,10 +15,6 @@ class SchemaUserMetaBlockSchemaConfigurationExecuter extends AbstractSchemaMetaB
 {
     private ?SchemaConfigSchemaUserMetaBlock $schemaConfigSchemaUserMetaBlock = null;
 
-    final public function setSchemaConfigSchemaUserMetaBlock(SchemaConfigSchemaUserMetaBlock $schemaConfigSchemaUserMetaBlock): void
-    {
-        $this->schemaConfigSchemaUserMetaBlock = $schemaConfigSchemaUserMetaBlock;
-    }
     final protected function getSchemaConfigSchemaUserMetaBlock(): SchemaConfigSchemaUserMetaBlock
     {
         if ($this->schemaConfigSchemaUserMetaBlock === null) {

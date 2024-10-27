@@ -23,10 +23,6 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?EnumValueExtensionsObjectTypeResolver $enumValueExtensionsObjectTypeResolver = null;
 
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -36,10 +32,6 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->booleanScalarTypeResolver;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -48,10 +40,6 @@ class EnumValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setEnumValueExtensionsObjectTypeResolver(EnumValueExtensionsObjectTypeResolver $enumValueExtensionsObjectTypeResolver): void
-    {
-        $this->enumValueExtensionsObjectTypeResolver = $enumValueExtensionsObjectTypeResolver;
     }
     final protected function getEnumValueExtensionsObjectTypeResolver(): EnumValueExtensionsObjectTypeResolver
     {

@@ -12,10 +12,6 @@ class PostTagUpdateMutationErrorPayloadUnionTypeResolver extends AbstractTagUpda
 {
     private ?PostTagUpdateMutationErrorPayloadUnionTypeDataLoader $postTagUpdateMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setPostTagUpdateMutationErrorPayloadUnionTypeDataLoader(PostTagUpdateMutationErrorPayloadUnionTypeDataLoader $postTagUpdateMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->postTagUpdateMutationErrorPayloadUnionTypeDataLoader = $postTagUpdateMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getPostTagUpdateMutationErrorPayloadUnionTypeDataLoader(): PostTagUpdateMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->postTagUpdateMutationErrorPayloadUnionTypeDataLoader === null) {

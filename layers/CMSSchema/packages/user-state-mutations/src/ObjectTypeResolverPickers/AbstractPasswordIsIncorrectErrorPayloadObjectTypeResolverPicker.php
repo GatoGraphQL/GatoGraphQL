@@ -13,10 +13,6 @@ abstract class AbstractPasswordIsIncorrectErrorPayloadObjectTypeResolverPicker e
 {
     private ?PasswordIsIncorrectErrorPayloadObjectTypeResolver $userIsNotLoggedInErrorPayloadObjectTypeResolver = null;
 
-    final public function setPasswordIsIncorrectErrorPayloadObjectTypeResolver(PasswordIsIncorrectErrorPayloadObjectTypeResolver $userIsNotLoggedInErrorPayloadObjectTypeResolver): void
-    {
-        $this->userIsNotLoggedInErrorPayloadObjectTypeResolver = $userIsNotLoggedInErrorPayloadObjectTypeResolver;
-    }
     final protected function getPasswordIsIncorrectErrorPayloadObjectTypeResolver(): PasswordIsIncorrectErrorPayloadObjectTypeResolver
     {
         if ($this->userIsNotLoggedInErrorPayloadObjectTypeResolver === null) {

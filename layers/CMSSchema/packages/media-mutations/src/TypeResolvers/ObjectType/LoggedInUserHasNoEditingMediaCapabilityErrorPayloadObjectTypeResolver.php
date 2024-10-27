@@ -12,10 +12,6 @@ class LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver exte
 {
     private ?LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeDataLoader === null) {

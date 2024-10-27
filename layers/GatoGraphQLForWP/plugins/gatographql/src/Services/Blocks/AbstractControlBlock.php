@@ -23,10 +23,6 @@ abstract class AbstractControlBlock extends AbstractBlock
 
     private ?TypeRegistryInterface $typeRegistry = null;
 
-    final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
-    {
-        $this->typeRegistry = $typeRegistry;
-    }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
         if ($this->typeRegistry === null) {

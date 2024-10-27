@@ -11,10 +11,6 @@ class PayloadableUpdatePostTagTermBulkOperationMutationResolver extends Abstract
 {
     private ?PayloadableUpdatePostTagTermMutationResolver $payloadableUpdatePostTagTermMutationResolver = null;
 
-    final public function setPayloadableUpdatePostTagTermMutationResolver(PayloadableUpdatePostTagTermMutationResolver $payloadableUpdatePostTagTermMutationResolver): void
-    {
-        $this->payloadableUpdatePostTagTermMutationResolver = $payloadableUpdatePostTagTermMutationResolver;
-    }
     final protected function getPayloadableUpdatePostTagTermMutationResolver(): PayloadableUpdatePostTagTermMutationResolver
     {
         if ($this->payloadableUpdatePostTagTermMutationResolver === null) {

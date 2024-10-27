@@ -12,10 +12,6 @@ class PostCategoryUpdateMutationErrorPayloadUnionTypeResolver extends AbstractCa
 {
     private ?PostCategoryUpdateMutationErrorPayloadUnionTypeDataLoader $postCategoryUpdateMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setPostCategoryUpdateMutationErrorPayloadUnionTypeDataLoader(PostCategoryUpdateMutationErrorPayloadUnionTypeDataLoader $postCategoryUpdateMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->postCategoryUpdateMutationErrorPayloadUnionTypeDataLoader = $postCategoryUpdateMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getPostCategoryUpdateMutationErrorPayloadUnionTypeDataLoader(): PostCategoryUpdateMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->postCategoryUpdateMutationErrorPayloadUnionTypeDataLoader === null) {

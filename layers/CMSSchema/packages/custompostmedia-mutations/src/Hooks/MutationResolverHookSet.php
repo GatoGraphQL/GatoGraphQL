@@ -27,10 +27,6 @@ class MutationResolverHookSet extends AbstractHookSet
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?MediaTypeMutationAPIInterface $mediaTypeMutationAPI = null;
 
-    final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
-    {
-        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
-    }
     final protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
     {
         if ($this->customPostMediaTypeMutationAPI === null) {
@@ -40,10 +36,6 @@ class MutationResolverHookSet extends AbstractHookSet
         }
         return $this->customPostMediaTypeMutationAPI;
     }
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
-    {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-    }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         if ($this->mediaTypeAPI === null) {
@@ -52,10 +44,6 @@ class MutationResolverHookSet extends AbstractHookSet
             $this->mediaTypeAPI = $mediaTypeAPI;
         }
         return $this->mediaTypeAPI;
-    }
-    final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
-    {
-        $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
     }
     final protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface
     {

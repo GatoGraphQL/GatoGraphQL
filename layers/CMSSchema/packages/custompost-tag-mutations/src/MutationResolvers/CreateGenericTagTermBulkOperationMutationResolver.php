@@ -11,10 +11,6 @@ class CreateGenericTagTermBulkOperationMutationResolver extends AbstractBulkOper
 {
     private ?CreateGenericTagTermMutationResolver $createGenericTagTermMutationResolver = null;
 
-    final public function setCreateGenericTagTermMutationResolver(CreateGenericTagTermMutationResolver $createGenericTagTermMutationResolver): void
-    {
-        $this->createGenericTagTermMutationResolver = $createGenericTagTermMutationResolver;
-    }
     final protected function getCreateGenericTagTermMutationResolver(): CreateGenericTagTermMutationResolver
     {
         if ($this->createGenericTagTermMutationResolver === null) {

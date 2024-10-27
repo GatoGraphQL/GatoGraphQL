@@ -12,10 +12,6 @@ class UserHasNoPermissionToUploadFilesErrorPayloadObjectTypeResolver extends Abs
 {
     private ?UserHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader $userHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setUserHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader(UserHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader $userHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->userHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader = $userHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getUserHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader(): UserHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader
     {
         if ($this->userHasNoPermissionToUploadFilesErrorPayloadObjectTypeDataLoader === null) {

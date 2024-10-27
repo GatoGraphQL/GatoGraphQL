@@ -12,10 +12,6 @@ class RootCreatePostMutationErrorPayloadUnionTypeDataLoader extends AbstractUnio
 {
     private ?RootCreatePostMutationErrorPayloadUnionTypeResolver $rootCreatePostMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootCreatePostMutationErrorPayloadUnionTypeResolver(RootCreatePostMutationErrorPayloadUnionTypeResolver $rootCreatePostMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootCreatePostMutationErrorPayloadUnionTypeResolver = $rootCreatePostMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootCreatePostMutationErrorPayloadUnionTypeResolver(): RootCreatePostMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootCreatePostMutationErrorPayloadUnionTypeResolver === null) {

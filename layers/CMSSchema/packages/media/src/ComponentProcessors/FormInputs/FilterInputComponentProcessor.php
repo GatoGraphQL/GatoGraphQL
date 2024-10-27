@@ -21,10 +21,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?MimeTypesFilterInput $mimeTypesFilterInput = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -33,10 +29,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setMimeTypesFilterInput(MimeTypesFilterInput $mimeTypesFilterInput): void
-    {
-        $this->mimeTypesFilterInput = $mimeTypesFilterInput;
     }
     final protected function getMimeTypesFilterInput(): MimeTypesFilterInput
     {

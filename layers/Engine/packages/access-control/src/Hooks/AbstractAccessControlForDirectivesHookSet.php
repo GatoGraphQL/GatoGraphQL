@@ -15,10 +15,6 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
 {
     private ?AccessControlManagerInterface $accessControlManager = null;
 
-    final public function setAccessControlManager(AccessControlManagerInterface $accessControlManager): void
-    {
-        $this->accessControlManager = $accessControlManager;
-    }
     final protected function getAccessControlManager(): AccessControlManagerInterface
     {
         if ($this->accessControlManager === null) {

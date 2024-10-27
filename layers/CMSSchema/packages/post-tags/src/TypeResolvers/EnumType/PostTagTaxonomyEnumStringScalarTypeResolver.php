@@ -11,10 +11,6 @@ class PostTagTaxonomyEnumStringScalarTypeResolver extends AbstractTagTaxonomyEnu
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
-    {
-        $this->postTagTypeAPI = $postTagTypeAPI;
-    }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
         if ($this->postTagTypeAPI === null) {

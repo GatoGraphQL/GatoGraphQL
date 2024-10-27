@@ -15,10 +15,6 @@ class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListOb
 {
     private ?UserCustomPostsFilterInputObjectTypeResolver $userCustomPostsFilterInputObjectTypeResolver = null;
 
-    final public function setUserCustomPostsFilterInputObjectTypeResolver(UserCustomPostsFilterInputObjectTypeResolver $userCustomPostsFilterInputObjectTypeResolver): void
-    {
-        $this->userCustomPostsFilterInputObjectTypeResolver = $userCustomPostsFilterInputObjectTypeResolver;
-    }
     final protected function getUserCustomPostsFilterInputObjectTypeResolver(): UserCustomPostsFilterInputObjectTypeResolver
     {
         if ($this->userCustomPostsFilterInputObjectTypeResolver === null) {

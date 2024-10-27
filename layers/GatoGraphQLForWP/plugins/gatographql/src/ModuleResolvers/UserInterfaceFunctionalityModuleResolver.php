@@ -24,10 +24,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
-    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
-    {
-        $this->markdownContentParser = $markdownContentParser;
-    }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
         if ($this->markdownContentParser === null) {
@@ -36,10 +32,6 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
             $this->markdownContentParser = $markdownContentParser;
         }
         return $this->markdownContentParser;
-    }
-    final public function setCustomPostTypeRegistry(CustomPostTypeRegistryInterface $customPostTypeRegistry): void
-    {
-        $this->customPostTypeRegistry = $customPostTypeRegistry;
     }
     final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
     {

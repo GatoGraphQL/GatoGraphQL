@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorP
 {
     private ?LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver(LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver = $loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver(): LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolver === null) {

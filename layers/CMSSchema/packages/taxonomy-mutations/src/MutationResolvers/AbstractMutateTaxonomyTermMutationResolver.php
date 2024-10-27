@@ -24,10 +24,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     private ?TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
-    final public function setTaxonomyTypeMutationAPI(TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI): void
-    {
-        $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;
-    }
     final protected function getTaxonomyTypeMutationAPI(): TaxonomyTypeMutationAPIInterface
     {
         if ($this->taxonomyTypeMutationAPI === null) {
@@ -36,10 +32,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;
         }
         return $this->taxonomyTypeMutationAPI;
-    }
-    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
-    {
-        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
     }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {

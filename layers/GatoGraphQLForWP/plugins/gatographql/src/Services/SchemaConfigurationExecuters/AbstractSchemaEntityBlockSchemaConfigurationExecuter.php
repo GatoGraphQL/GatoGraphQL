@@ -12,10 +12,6 @@ abstract class AbstractSchemaEntityBlockSchemaConfigurationExecuter extends Abst
 {
     private ?UserSettingsHelpers $userSettingsHelpers = null;
 
-    final public function setUserSettingsHelpers(UserSettingsHelpers $userSettingsHelpers): void
-    {
-        $this->userSettingsHelpers = $userSettingsHelpers;
-    }
     final protected function getUserSettingsHelpers(): UserSettingsHelpers
     {
         if ($this->userSettingsHelpers === null) {

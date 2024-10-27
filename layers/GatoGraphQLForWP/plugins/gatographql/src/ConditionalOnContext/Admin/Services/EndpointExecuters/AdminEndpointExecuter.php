@@ -22,10 +22,6 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     private ?EndpointHelpers $endpointHelpers = null;
     private ?TemplateHelpersInterface $templateHelpers = null;
 
-    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
-    {
-        $this->userAuthorization = $userAuthorization;
-    }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         if ($this->userAuthorization === null) {
@@ -34,10 +30,6 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
             $this->userAuthorization = $userAuthorization;
         }
         return $this->userAuthorization;
-    }
-    final public function setQueryRetriever(QueryRetrieverInterface $queryRetriever): void
-    {
-        $this->queryRetriever = $queryRetriever;
     }
     final protected function getQueryRetriever(): QueryRetrieverInterface
     {
@@ -48,10 +40,6 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
         }
         return $this->queryRetriever;
     }
-    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
-    {
-        $this->endpointHelpers = $endpointHelpers;
-    }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
         if ($this->endpointHelpers === null) {
@@ -60,10 +48,6 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
             $this->endpointHelpers = $endpointHelpers;
         }
         return $this->endpointHelpers;
-    }
-    final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
-    {
-        $this->templateHelpers = $templateHelpers;
     }
     final protected function getTemplateHelpers(): TemplateHelpersInterface
     {

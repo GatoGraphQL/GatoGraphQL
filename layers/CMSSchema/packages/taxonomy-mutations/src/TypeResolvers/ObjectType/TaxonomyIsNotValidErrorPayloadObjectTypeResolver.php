@@ -12,10 +12,6 @@ class TaxonomyIsNotValidErrorPayloadObjectTypeResolver extends AbstractErrorPayl
 {
     private ?TaxonomyIsNotValidErrorPayloadObjectTypeDataLoader $taxonomyIsNotValidErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setTaxonomyIsNotValidErrorPayloadObjectTypeDataLoader(TaxonomyIsNotValidErrorPayloadObjectTypeDataLoader $taxonomyIsNotValidErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->taxonomyIsNotValidErrorPayloadObjectTypeDataLoader = $taxonomyIsNotValidErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getTaxonomyIsNotValidErrorPayloadObjectTypeDataLoader(): TaxonomyIsNotValidErrorPayloadObjectTypeDataLoader
     {
         if ($this->taxonomyIsNotValidErrorPayloadObjectTypeDataLoader === null) {

@@ -12,10 +12,6 @@ class LoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver ex
 {
     private ?LoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeDataLoader === null) {

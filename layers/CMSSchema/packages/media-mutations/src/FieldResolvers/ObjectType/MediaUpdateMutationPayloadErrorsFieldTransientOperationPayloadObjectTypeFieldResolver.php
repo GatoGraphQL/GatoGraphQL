@@ -14,10 +14,6 @@ class MediaUpdateMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFi
 {
     private ?MediaUpdateMutationErrorPayloadUnionTypeResolver $mediaUpdateMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setMediaUpdateMutationErrorPayloadUnionTypeResolver(MediaUpdateMutationErrorPayloadUnionTypeResolver $mediaUpdateMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->mediaUpdateMutationErrorPayloadUnionTypeResolver = $mediaUpdateMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getMediaUpdateMutationErrorPayloadUnionTypeResolver(): MediaUpdateMutationErrorPayloadUnionTypeResolver
     {
         if ($this->mediaUpdateMutationErrorPayloadUnionTypeResolver === null) {

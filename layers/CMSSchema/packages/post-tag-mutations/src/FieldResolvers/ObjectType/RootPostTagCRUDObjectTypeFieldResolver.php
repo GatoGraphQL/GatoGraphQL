@@ -70,10 +70,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
-    {
-        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
-    }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
         if ($this->postTagObjectTypeResolver === null) {
@@ -82,10 +78,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
         }
         return $this->postTagObjectTypeResolver;
-    }
-    final public function setRootDeletePostTagTermMutationPayloadObjectTypeResolver(RootDeletePostTagTermMutationPayloadObjectTypeResolver $rootDeletePostTagTermMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootDeletePostTagTermMutationPayloadObjectTypeResolver = $rootDeletePostTagTermMutationPayloadObjectTypeResolver;
     }
     final protected function getRootDeletePostTagTermMutationPayloadObjectTypeResolver(): RootDeletePostTagTermMutationPayloadObjectTypeResolver
     {
@@ -96,10 +88,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->rootDeletePostTagTermMutationPayloadObjectTypeResolver;
     }
-    final public function setRootUpdatePostTagTermMutationPayloadObjectTypeResolver(RootUpdatePostTagTermMutationPayloadObjectTypeResolver $rootUpdatePostTagTermMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootUpdatePostTagTermMutationPayloadObjectTypeResolver = $rootUpdatePostTagTermMutationPayloadObjectTypeResolver;
-    }
     final protected function getRootUpdatePostTagTermMutationPayloadObjectTypeResolver(): RootUpdatePostTagTermMutationPayloadObjectTypeResolver
     {
         if ($this->rootUpdatePostTagTermMutationPayloadObjectTypeResolver === null) {
@@ -108,10 +96,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->rootUpdatePostTagTermMutationPayloadObjectTypeResolver = $rootUpdatePostTagTermMutationPayloadObjectTypeResolver;
         }
         return $this->rootUpdatePostTagTermMutationPayloadObjectTypeResolver;
-    }
-    final public function setRootCreatePostTagTermMutationPayloadObjectTypeResolver(RootCreatePostTagTermMutationPayloadObjectTypeResolver $rootCreatePostTagTermMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootCreatePostTagTermMutationPayloadObjectTypeResolver = $rootCreatePostTagTermMutationPayloadObjectTypeResolver;
     }
     final protected function getRootCreatePostTagTermMutationPayloadObjectTypeResolver(): RootCreatePostTagTermMutationPayloadObjectTypeResolver
     {
@@ -122,10 +106,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->rootCreatePostTagTermMutationPayloadObjectTypeResolver;
     }
-    final public function setCreatePostTagTermMutationResolver(CreatePostTagTermMutationResolver $createPostTagTermMutationResolver): void
-    {
-        $this->createPostTagTermMutationResolver = $createPostTagTermMutationResolver;
-    }
     final protected function getCreatePostTagTermMutationResolver(): CreatePostTagTermMutationResolver
     {
         if ($this->createPostTagTermMutationResolver === null) {
@@ -134,10 +114,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->createPostTagTermMutationResolver = $createPostTagTermMutationResolver;
         }
         return $this->createPostTagTermMutationResolver;
-    }
-    final public function setCreatePostTagTermBulkOperationMutationResolver(CreatePostTagTermBulkOperationMutationResolver $createPostTagTermBulkOperationMutationResolver): void
-    {
-        $this->createPostTagTermBulkOperationMutationResolver = $createPostTagTermBulkOperationMutationResolver;
     }
     final protected function getCreatePostTagTermBulkOperationMutationResolver(): CreatePostTagTermBulkOperationMutationResolver
     {
@@ -148,10 +124,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->createPostTagTermBulkOperationMutationResolver;
     }
-    final public function setDeletePostTagTermMutationResolver(DeletePostTagTermMutationResolver $deletePostTagTermMutationResolver): void
-    {
-        $this->deletePostTagTermMutationResolver = $deletePostTagTermMutationResolver;
-    }
     final protected function getDeletePostTagTermMutationResolver(): DeletePostTagTermMutationResolver
     {
         if ($this->deletePostTagTermMutationResolver === null) {
@@ -160,10 +132,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->deletePostTagTermMutationResolver = $deletePostTagTermMutationResolver;
         }
         return $this->deletePostTagTermMutationResolver;
-    }
-    final public function setDeletePostTagTermBulkOperationMutationResolver(DeletePostTagTermBulkOperationMutationResolver $deletePostTagTermBulkOperationMutationResolver): void
-    {
-        $this->deletePostTagTermBulkOperationMutationResolver = $deletePostTagTermBulkOperationMutationResolver;
     }
     final protected function getDeletePostTagTermBulkOperationMutationResolver(): DeletePostTagTermBulkOperationMutationResolver
     {
@@ -174,10 +142,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->deletePostTagTermBulkOperationMutationResolver;
     }
-    final public function setUpdatePostTagTermMutationResolver(UpdatePostTagTermMutationResolver $updatePostTagTermMutationResolver): void
-    {
-        $this->updatePostTagTermMutationResolver = $updatePostTagTermMutationResolver;
-    }
     final protected function getUpdatePostTagTermMutationResolver(): UpdatePostTagTermMutationResolver
     {
         if ($this->updatePostTagTermMutationResolver === null) {
@@ -186,10 +150,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->updatePostTagTermMutationResolver = $updatePostTagTermMutationResolver;
         }
         return $this->updatePostTagTermMutationResolver;
-    }
-    final public function setUpdatePostTagTermBulkOperationMutationResolver(UpdatePostTagTermBulkOperationMutationResolver $updatePostTagTermBulkOperationMutationResolver): void
-    {
-        $this->updatePostTagTermBulkOperationMutationResolver = $updatePostTagTermBulkOperationMutationResolver;
     }
     final protected function getUpdatePostTagTermBulkOperationMutationResolver(): UpdatePostTagTermBulkOperationMutationResolver
     {
@@ -200,10 +160,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->updatePostTagTermBulkOperationMutationResolver;
     }
-    final public function setPayloadableDeletePostTagTermMutationResolver(PayloadableDeletePostTagTermMutationResolver $payloadableDeletePostTagTermMutationResolver): void
-    {
-        $this->payloadableDeletePostTagTermMutationResolver = $payloadableDeletePostTagTermMutationResolver;
-    }
     final protected function getPayloadableDeletePostTagTermMutationResolver(): PayloadableDeletePostTagTermMutationResolver
     {
         if ($this->payloadableDeletePostTagTermMutationResolver === null) {
@@ -212,10 +168,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->payloadableDeletePostTagTermMutationResolver = $payloadableDeletePostTagTermMutationResolver;
         }
         return $this->payloadableDeletePostTagTermMutationResolver;
-    }
-    final public function setPayloadableDeletePostTagTermBulkOperationMutationResolver(PayloadableDeletePostTagTermBulkOperationMutationResolver $payloadableDeletePostTagTermBulkOperationMutationResolver): void
-    {
-        $this->payloadableDeletePostTagTermBulkOperationMutationResolver = $payloadableDeletePostTagTermBulkOperationMutationResolver;
     }
     final protected function getPayloadableDeletePostTagTermBulkOperationMutationResolver(): PayloadableDeletePostTagTermBulkOperationMutationResolver
     {
@@ -226,10 +178,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->payloadableDeletePostTagTermBulkOperationMutationResolver;
     }
-    final public function setPayloadableUpdatePostTagTermMutationResolver(PayloadableUpdatePostTagTermMutationResolver $payloadableUpdatePostTagTermMutationResolver): void
-    {
-        $this->payloadableUpdatePostTagTermMutationResolver = $payloadableUpdatePostTagTermMutationResolver;
-    }
     final protected function getPayloadableUpdatePostTagTermMutationResolver(): PayloadableUpdatePostTagTermMutationResolver
     {
         if ($this->payloadableUpdatePostTagTermMutationResolver === null) {
@@ -238,10 +186,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->payloadableUpdatePostTagTermMutationResolver = $payloadableUpdatePostTagTermMutationResolver;
         }
         return $this->payloadableUpdatePostTagTermMutationResolver;
-    }
-    final public function setPayloadableUpdatePostTagTermBulkOperationMutationResolver(PayloadableUpdatePostTagTermBulkOperationMutationResolver $payloadableUpdatePostTagTermBulkOperationMutationResolver): void
-    {
-        $this->payloadableUpdatePostTagTermBulkOperationMutationResolver = $payloadableUpdatePostTagTermBulkOperationMutationResolver;
     }
     final protected function getPayloadableUpdatePostTagTermBulkOperationMutationResolver(): PayloadableUpdatePostTagTermBulkOperationMutationResolver
     {
@@ -252,10 +196,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->payloadableUpdatePostTagTermBulkOperationMutationResolver;
     }
-    final public function setPayloadableCreatePostTagTermMutationResolver(PayloadableCreatePostTagTermMutationResolver $payloadableCreatePostTagTermMutationResolver): void
-    {
-        $this->payloadableCreatePostTagTermMutationResolver = $payloadableCreatePostTagTermMutationResolver;
-    }
     final protected function getPayloadableCreatePostTagTermMutationResolver(): PayloadableCreatePostTagTermMutationResolver
     {
         if ($this->payloadableCreatePostTagTermMutationResolver === null) {
@@ -264,10 +204,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->payloadableCreatePostTagTermMutationResolver = $payloadableCreatePostTagTermMutationResolver;
         }
         return $this->payloadableCreatePostTagTermMutationResolver;
-    }
-    final public function setPayloadableCreatePostTagTermBulkOperationMutationResolver(PayloadableCreatePostTagTermBulkOperationMutationResolver $payloadableCreatePostTagTermBulkOperationMutationResolver): void
-    {
-        $this->payloadableCreatePostTagTermBulkOperationMutationResolver = $payloadableCreatePostTagTermBulkOperationMutationResolver;
     }
     final protected function getPayloadableCreatePostTagTermBulkOperationMutationResolver(): PayloadableCreatePostTagTermBulkOperationMutationResolver
     {
@@ -278,10 +214,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->payloadableCreatePostTagTermBulkOperationMutationResolver;
     }
-    final public function setRootDeletePostTagTermInputObjectTypeResolver(RootDeletePostTagTermInputObjectTypeResolver $rootDeletePostTagTermInputObjectTypeResolver): void
-    {
-        $this->rootDeletePostTagTermInputObjectTypeResolver = $rootDeletePostTagTermInputObjectTypeResolver;
-    }
     final protected function getRootDeletePostTagTermInputObjectTypeResolver(): RootDeletePostTagTermInputObjectTypeResolver
     {
         if ($this->rootDeletePostTagTermInputObjectTypeResolver === null) {
@@ -290,10 +222,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->rootDeletePostTagTermInputObjectTypeResolver = $rootDeletePostTagTermInputObjectTypeResolver;
         }
         return $this->rootDeletePostTagTermInputObjectTypeResolver;
-    }
-    final public function setRootUpdatePostTagTermInputObjectTypeResolver(RootUpdatePostTagTermInputObjectTypeResolver $rootUpdatePostTagTermInputObjectTypeResolver): void
-    {
-        $this->rootUpdatePostTagTermInputObjectTypeResolver = $rootUpdatePostTagTermInputObjectTypeResolver;
     }
     final protected function getRootUpdatePostTagTermInputObjectTypeResolver(): RootUpdatePostTagTermInputObjectTypeResolver
     {
@@ -304,10 +232,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->rootUpdatePostTagTermInputObjectTypeResolver;
     }
-    final public function setRootCreatePostTagTermInputObjectTypeResolver(RootCreatePostTagTermInputObjectTypeResolver $rootCreatePostTagTermInputObjectTypeResolver): void
-    {
-        $this->rootCreatePostTagTermInputObjectTypeResolver = $rootCreatePostTagTermInputObjectTypeResolver;
-    }
     final protected function getRootCreatePostTagTermInputObjectTypeResolver(): RootCreatePostTagTermInputObjectTypeResolver
     {
         if ($this->rootCreatePostTagTermInputObjectTypeResolver === null) {
@@ -317,10 +241,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->rootCreatePostTagTermInputObjectTypeResolver;
     }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
-    }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
         if ($this->userLoggedInCheckpoint === null) {
@@ -329,10 +249,6 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
             $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
         }
         return $this->userLoggedInCheckpoint;
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {

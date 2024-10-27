@@ -22,10 +22,6 @@ class QueryableMediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
     private ?DateFormatterInterface $dateFormatter = null;
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
 
-    final public function setCMSHelperService(CMSHelperServiceInterface $cmsHelperService): void
-    {
-        $this->cmsHelperService = $cmsHelperService;
-    }
     final protected function getCMSHelperService(): CMSHelperServiceInterface
     {
         if ($this->cmsHelperService === null) {
@@ -35,10 +31,6 @@ class QueryableMediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
         }
         return $this->cmsHelperService;
     }
-    final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
-    {
-        $this->dateFormatter = $dateFormatter;
-    }
     final protected function getDateFormatter(): DateFormatterInterface
     {
         if ($this->dateFormatter === null) {
@@ -47,10 +39,6 @@ class QueryableMediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
             $this->dateFormatter = $dateFormatter;
         }
         return $this->dateFormatter;
-    }
-    final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
-    {
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
     }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {

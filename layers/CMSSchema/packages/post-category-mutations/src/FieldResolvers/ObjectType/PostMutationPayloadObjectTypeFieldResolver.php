@@ -14,10 +14,6 @@ class PostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationP
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
 
-    final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
-    {
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-    }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
         if ($this->postObjectTypeResolver === null) {

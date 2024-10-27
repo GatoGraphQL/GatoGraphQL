@@ -12,10 +12,6 @@ class LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver e
 {
     private ?LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader $loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader $loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeDataLoader === null) {

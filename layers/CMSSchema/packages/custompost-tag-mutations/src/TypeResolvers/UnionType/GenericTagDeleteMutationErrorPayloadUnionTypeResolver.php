@@ -12,10 +12,6 @@ class GenericTagDeleteMutationErrorPayloadUnionTypeResolver extends AbstractTagD
 {
     private ?GenericTagDeleteMutationErrorPayloadUnionTypeDataLoader $genericTagDeleteMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setGenericTagDeleteMutationErrorPayloadUnionTypeDataLoader(GenericTagDeleteMutationErrorPayloadUnionTypeDataLoader $genericTagDeleteMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->genericTagDeleteMutationErrorPayloadUnionTypeDataLoader = $genericTagDeleteMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getGenericTagDeleteMutationErrorPayloadUnionTypeDataLoader(): GenericTagDeleteMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->genericTagDeleteMutationErrorPayloadUnionTypeDataLoader === null) {

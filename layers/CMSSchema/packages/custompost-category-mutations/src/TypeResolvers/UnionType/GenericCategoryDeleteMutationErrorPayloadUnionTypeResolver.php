@@ -12,10 +12,6 @@ class GenericCategoryDeleteMutationErrorPayloadUnionTypeResolver extends Abstrac
 {
     private ?GenericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader $genericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setGenericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader(GenericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader $genericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->genericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader = $genericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getGenericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader(): GenericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->genericCategoryDeleteMutationErrorPayloadUnionTypeDataLoader === null) {

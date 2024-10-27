@@ -42,10 +42,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?InputValueObjectTypeResolver $inputValueObjectTypeResolver = null;
     private ?TypeKindEnumTypeResolver $typeKindEnumTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -54,10 +50,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
@@ -68,10 +60,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->booleanScalarTypeResolver;
     }
-    final public function setNamedTypeExtensionsObjectTypeResolver(NamedTypeExtensionsObjectTypeResolver $namedTypeExtensionsObjectTypeResolver): void
-    {
-        $this->namedTypeExtensionsObjectTypeResolver = $namedTypeExtensionsObjectTypeResolver;
-    }
     final protected function getNamedTypeExtensionsObjectTypeResolver(): NamedTypeExtensionsObjectTypeResolver
     {
         if ($this->namedTypeExtensionsObjectTypeResolver === null) {
@@ -80,10 +68,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->namedTypeExtensionsObjectTypeResolver = $namedTypeExtensionsObjectTypeResolver;
         }
         return $this->namedTypeExtensionsObjectTypeResolver;
-    }
-    final public function setFieldObjectTypeResolver(FieldObjectTypeResolver $fieldObjectTypeResolver): void
-    {
-        $this->fieldObjectTypeResolver = $fieldObjectTypeResolver;
     }
     final protected function getFieldObjectTypeResolver(): FieldObjectTypeResolver
     {
@@ -94,10 +78,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->fieldObjectTypeResolver;
     }
-    final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
-    {
-        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
-    }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
         if ($this->typeObjectTypeResolver === null) {
@@ -106,10 +86,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         }
         return $this->typeObjectTypeResolver;
-    }
-    final public function setEnumValueObjectTypeResolver(EnumValueObjectTypeResolver $enumValueObjectTypeResolver): void
-    {
-        $this->enumValueObjectTypeResolver = $enumValueObjectTypeResolver;
     }
     final protected function getEnumValueObjectTypeResolver(): EnumValueObjectTypeResolver
     {
@@ -120,10 +96,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->enumValueObjectTypeResolver;
     }
-    final public function setInputValueObjectTypeResolver(InputValueObjectTypeResolver $inputValueObjectTypeResolver): void
-    {
-        $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
-    }
     final protected function getInputValueObjectTypeResolver(): InputValueObjectTypeResolver
     {
         if ($this->inputValueObjectTypeResolver === null) {
@@ -132,10 +104,6 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->inputValueObjectTypeResolver = $inputValueObjectTypeResolver;
         }
         return $this->inputValueObjectTypeResolver;
-    }
-    final public function setTypeKindEnumTypeResolver(TypeKindEnumTypeResolver $typeKindEnumTypeResolver): void
-    {
-        $this->typeKindEnumTypeResolver = $typeKindEnumTypeResolver;
     }
     final protected function getTypeKindEnumTypeResolver(): TypeKindEnumTypeResolver
     {

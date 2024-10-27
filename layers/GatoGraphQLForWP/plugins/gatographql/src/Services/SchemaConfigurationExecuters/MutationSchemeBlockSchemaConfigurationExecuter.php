@@ -19,10 +19,6 @@ class MutationSchemeBlockSchemaConfigurationExecuter extends AbstractBlockSchema
 {
     private ?SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock = null;
 
-    final public function setSchemaConfigMutationSchemeBlock(SchemaConfigMutationSchemeBlock $schemaConfigMutationSchemeBlock): void
-    {
-        $this->schemaConfigMutationSchemeBlock = $schemaConfigMutationSchemeBlock;
-    }
     final protected function getSchemaConfigMutationSchemeBlock(): SchemaConfigMutationSchemeBlock
     {
         if ($this->schemaConfigMutationSchemeBlock === null) {

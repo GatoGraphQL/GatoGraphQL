@@ -12,10 +12,6 @@ abstract class AbstractNameResolver implements NameResolverInterface
 
     private ?LooseContractManagerInterface $looseContractManager = null;
 
-    final public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void
-    {
-        $this->looseContractManager = $looseContractManager;
-    }
     final protected function getLooseContractManager(): LooseContractManagerInterface
     {
         if ($this->looseContractManager === null) {

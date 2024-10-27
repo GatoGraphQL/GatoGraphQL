@@ -15,10 +15,6 @@ class SchemaSettingsBlockSchemaConfigurationExecuter extends AbstractSchemaAllow
 {
     private ?SchemaConfigSchemaSettingsBlock $schemaConfigSchemaSettingsBlock = null;
 
-    final public function setSchemaConfigSchemaSettingsBlock(SchemaConfigSchemaSettingsBlock $schemaConfigSchemaSettingsBlock): void
-    {
-        $this->schemaConfigSchemaSettingsBlock = $schemaConfigSchemaSettingsBlock;
-    }
     final protected function getSchemaConfigSchemaSettingsBlock(): SchemaConfigSchemaSettingsBlock
     {
         if ($this->schemaConfigSchemaSettingsBlock === null) {

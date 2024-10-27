@@ -17,10 +17,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
     private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
 
-    final public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
-    {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-    }
     final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
         if ($this->rootObjectTypeResolver === null) {
@@ -29,10 +25,6 @@ class SchemaDefinitionService implements SchemaDefinitionServiceInterface
             $this->rootObjectTypeResolver = $rootObjectTypeResolver;
         }
         return $this->rootObjectTypeResolver;
-    }
-    final public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
-    {
-        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
     }
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {

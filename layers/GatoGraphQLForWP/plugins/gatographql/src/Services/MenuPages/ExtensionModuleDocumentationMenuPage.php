@@ -8,10 +8,6 @@ class ExtensionModuleDocumentationMenuPage extends AbstractExtensionModuleDocume
 {
     private ?ExtensionsMenuPage $extensionsMenuPage = null;
 
-    final public function setExtensionsMenuPage(ExtensionsMenuPage $extensionsMenuPage): void
-    {
-        $this->extensionsMenuPage = $extensionsMenuPage;
-    }
     final protected function getExtensionsMenuPage(): ExtensionsMenuPage
     {
         if ($this->extensionsMenuPage === null) {

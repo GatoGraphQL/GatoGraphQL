@@ -23,10 +23,6 @@ class UserSearchByOneofInputObjectTypeResolver extends AbstractOneofQueryableInp
     private ?SearchFilterInput $searchFilterInput = null;
     private ?EmailOrEmailsFilterInput $emailOrEmailsFilterInput = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -35,10 +31,6 @@ class UserSearchByOneofInputObjectTypeResolver extends AbstractOneofQueryableInp
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
-    {
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
     }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
@@ -49,10 +41,6 @@ class UserSearchByOneofInputObjectTypeResolver extends AbstractOneofQueryableInp
         }
         return $this->emailScalarTypeResolver;
     }
-    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
-    {
-        $this->searchFilterInput = $searchFilterInput;
-    }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
         if ($this->searchFilterInput === null) {
@@ -61,10 +49,6 @@ class UserSearchByOneofInputObjectTypeResolver extends AbstractOneofQueryableInp
             $this->searchFilterInput = $searchFilterInput;
         }
         return $this->searchFilterInput;
-    }
-    final public function setEmailOrEmailsFilterInput(EmailOrEmailsFilterInput $emailOrEmailsFilterInput): void
-    {
-        $this->emailOrEmailsFilterInput = $emailOrEmailsFilterInput;
     }
     final protected function getEmailOrEmailsFilterInput(): EmailOrEmailsFilterInput
     {

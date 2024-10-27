@@ -15,10 +15,6 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
     private ?PostCategoryObjectTypeDataLoader $postCategoryObjectTypeDataLoader = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    final public function setPostCategoryObjectTypeDataLoader(PostCategoryObjectTypeDataLoader $postCategoryObjectTypeDataLoader): void
-    {
-        $this->postCategoryObjectTypeDataLoader = $postCategoryObjectTypeDataLoader;
-    }
     final protected function getPostCategoryObjectTypeDataLoader(): PostCategoryObjectTypeDataLoader
     {
         if ($this->postCategoryObjectTypeDataLoader === null) {
@@ -27,10 +23,6 @@ class PostCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolver
             $this->postCategoryObjectTypeDataLoader = $postCategoryObjectTypeDataLoader;
         }
         return $this->postCategoryObjectTypeDataLoader;
-    }
-    final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
-    {
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {

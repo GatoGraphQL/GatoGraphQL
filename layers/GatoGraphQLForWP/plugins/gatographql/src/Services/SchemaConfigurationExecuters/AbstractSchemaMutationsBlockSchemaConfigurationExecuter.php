@@ -15,10 +15,6 @@ abstract class AbstractSchemaMutationsBlockSchemaConfigurationExecuter extends A
 {
     private ?SchemaConfigPayloadTypesForMutationsBlock $schemaConfigPayloadTypesForMutationsBlock = null;
 
-    final public function setSchemaConfigPayloadTypesForMutationsBlock(SchemaConfigPayloadTypesForMutationsBlock $schemaConfigPayloadTypesForMutationsBlock): void
-    {
-        $this->schemaConfigPayloadTypesForMutationsBlock = $schemaConfigPayloadTypesForMutationsBlock;
-    }
     final protected function getSchemaConfigPayloadTypesForMutationsBlock(): SchemaConfigPayloadTypesForMutationsBlock
     {
         if ($this->schemaConfigPayloadTypesForMutationsBlock === null) {

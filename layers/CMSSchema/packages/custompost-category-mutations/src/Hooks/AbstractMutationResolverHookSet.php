@@ -26,10 +26,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     private ?CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         if ($this->customPostTypeAPI === null) {
@@ -39,10 +35,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
         return $this->customPostTypeAPI;
     }
-    final public function setCustomPostCategoryTypeMutationAPI(CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI): void
-    {
-        $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
-    }
     final protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
     {
         if ($this->customPostCategoryTypeMutationAPI === null) {
@@ -51,10 +43,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
         }
         return $this->customPostCategoryTypeMutationAPI;
-    }
-    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
-    {
-        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
     }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {

@@ -23,10 +23,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     private ?CustomPostUpdateInputObjectTypeResolver $customPostUpdateInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setCustomPostUpdateInputObjectTypeResolver(CustomPostUpdateInputObjectTypeResolver $customPostUpdateInputObjectTypeResolver): void
-    {
-        $this->customPostUpdateInputObjectTypeResolver = $customPostUpdateInputObjectTypeResolver;
-    }
     final protected function getCustomPostUpdateInputObjectTypeResolver(): CustomPostUpdateInputObjectTypeResolver
     {
         if ($this->customPostUpdateInputObjectTypeResolver === null) {
@@ -35,10 +31,6 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             $this->customPostUpdateInputObjectTypeResolver = $customPostUpdateInputObjectTypeResolver;
         }
         return $this->customPostUpdateInputObjectTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {

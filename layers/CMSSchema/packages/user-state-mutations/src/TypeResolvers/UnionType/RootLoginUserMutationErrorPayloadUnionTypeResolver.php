@@ -11,10 +11,6 @@ class RootLoginUserMutationErrorPayloadUnionTypeResolver extends AbstractUserSta
 {
     private ?RootLoginUserMutationErrorPayloadUnionTypeDataLoader $rootLoginUserMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootLoginUserMutationErrorPayloadUnionTypeDataLoader(RootLoginUserMutationErrorPayloadUnionTypeDataLoader $rootLoginUserMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootLoginUserMutationErrorPayloadUnionTypeDataLoader = $rootLoginUserMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootLoginUserMutationErrorPayloadUnionTypeDataLoader(): RootLoginUserMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootLoginUserMutationErrorPayloadUnionTypeDataLoader === null) {

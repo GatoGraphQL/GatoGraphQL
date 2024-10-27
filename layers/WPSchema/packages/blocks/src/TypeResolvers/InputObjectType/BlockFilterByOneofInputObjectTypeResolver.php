@@ -18,10 +18,6 @@ class BlockFilterByOneofInputObjectTypeResolver extends AbstractOneofQueryableIn
     private ?IncludeFilterInput $includeFilterInput = null;
     private ?ExcludeFilterInput $excludeFilterInput = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -31,10 +27,6 @@ class BlockFilterByOneofInputObjectTypeResolver extends AbstractOneofQueryableIn
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
-    {
-        $this->includeFilterInput = $includeFilterInput;
-    }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
         if ($this->includeFilterInput === null) {
@@ -43,10 +35,6 @@ class BlockFilterByOneofInputObjectTypeResolver extends AbstractOneofQueryableIn
             $this->includeFilterInput = $includeFilterInput;
         }
         return $this->includeFilterInput;
-    }
-    final public function setExcludeFilterInput(ExcludeFilterInput $excludeFilterInput): void
-    {
-        $this->excludeFilterInput = $excludeFilterInput;
     }
     final protected function getExcludeFilterInput(): ExcludeFilterInput
     {

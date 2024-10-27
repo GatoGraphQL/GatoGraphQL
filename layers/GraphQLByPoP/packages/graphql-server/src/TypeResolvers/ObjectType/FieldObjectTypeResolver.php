@@ -12,10 +12,6 @@ class FieldObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 {
     private ?SchemaDefinitionReferenceObjectTypeDataLoader $schemaDefinitionReferenceObjectTypeDataLoader = null;
 
-    final public function setSchemaDefinitionReferenceObjectTypeDataLoader(SchemaDefinitionReferenceObjectTypeDataLoader $schemaDefinitionReferenceObjectTypeDataLoader): void
-    {
-        $this->schemaDefinitionReferenceObjectTypeDataLoader = $schemaDefinitionReferenceObjectTypeDataLoader;
-    }
     final protected function getSchemaDefinitionReferenceObjectTypeDataLoader(): SchemaDefinitionReferenceObjectTypeDataLoader
     {
         if ($this->schemaDefinitionReferenceObjectTypeDataLoader === null) {

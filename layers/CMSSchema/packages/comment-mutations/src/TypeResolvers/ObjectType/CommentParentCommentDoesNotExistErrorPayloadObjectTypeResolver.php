@@ -12,10 +12,6 @@ class CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver extends Abs
 {
     private ?CommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setCommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader(CommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader = $commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getCommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader(): CommentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader
     {
         if ($this->commentParentCommentDoesNotExistErrorPayloadObjectTypeDataLoader === null) {

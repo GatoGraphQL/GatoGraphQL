@@ -14,10 +14,6 @@ class AppStateProvider extends AbstractAppStateProvider
 {
     private ?CMSRoutingStateServiceInterface $cmsRoutingStateService = null;
 
-    final public function setCMSRoutingStateService(CMSRoutingStateServiceInterface $cmsRoutingStateService): void
-    {
-        $this->cmsRoutingStateService = $cmsRoutingStateService;
-    }
     final protected function getCMSRoutingStateService(): CMSRoutingStateServiceInterface
     {
         if ($this->cmsRoutingStateService === null) {

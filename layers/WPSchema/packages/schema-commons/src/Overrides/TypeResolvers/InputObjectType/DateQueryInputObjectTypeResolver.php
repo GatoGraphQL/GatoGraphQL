@@ -19,10 +19,6 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?RelationEnumTypeResolver $relationEnumTypeResolver = null;
 
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -31,10 +27,6 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -45,10 +37,6 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -57,10 +45,6 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setRelationEnumTypeResolver(RelationEnumTypeResolver $relationEnumTypeResolver): void
-    {
-        $this->relationEnumTypeResolver = $relationEnumTypeResolver;
     }
     final protected function getRelationEnumTypeResolver(): RelationEnumTypeResolver
     {

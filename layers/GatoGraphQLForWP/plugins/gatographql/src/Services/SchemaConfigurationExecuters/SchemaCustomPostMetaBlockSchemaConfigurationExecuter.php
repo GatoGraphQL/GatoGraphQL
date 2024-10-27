@@ -15,10 +15,6 @@ class SchemaCustomPostMetaBlockSchemaConfigurationExecuter extends AbstractSchem
 {
     private ?SchemaConfigSchemaCustomPostMetaBlock $schemaConfigCustomPostMetaBlock = null;
 
-    final public function setSchemaConfigSchemaCustomPostMetaBlock(SchemaConfigSchemaCustomPostMetaBlock $schemaConfigCustomPostMetaBlock): void
-    {
-        $this->schemaConfigCustomPostMetaBlock = $schemaConfigCustomPostMetaBlock;
-    }
     final protected function getSchemaConfigSchemaCustomPostMetaBlock(): SchemaConfigSchemaCustomPostMetaBlock
     {
         if ($this->schemaConfigCustomPostMetaBlock === null) {

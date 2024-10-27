@@ -11,10 +11,6 @@ class GenericErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTy
 {
     private ?GenericErrorPayloadObjectTypeDataLoader $genericErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setGenericErrorPayloadObjectTypeDataLoader(GenericErrorPayloadObjectTypeDataLoader $genericErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->genericErrorPayloadObjectTypeDataLoader = $genericErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getGenericErrorPayloadObjectTypeDataLoader(): GenericErrorPayloadObjectTypeDataLoader
     {
         if ($this->genericErrorPayloadObjectTypeDataLoader === null) {

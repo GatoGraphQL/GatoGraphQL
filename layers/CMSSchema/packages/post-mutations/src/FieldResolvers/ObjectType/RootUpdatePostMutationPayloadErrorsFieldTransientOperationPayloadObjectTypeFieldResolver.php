@@ -14,10 +14,6 @@ class RootUpdatePostMutationPayloadErrorsFieldTransientOperationPayloadObjectTyp
 {
     private ?RootUpdatePostMutationErrorPayloadUnionTypeResolver $rootUpdatePostMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootUpdatePostMutationErrorPayloadUnionTypeResolver(RootUpdatePostMutationErrorPayloadUnionTypeResolver $rootUpdatePostMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootUpdatePostMutationErrorPayloadUnionTypeResolver = $rootUpdatePostMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootUpdatePostMutationErrorPayloadUnionTypeResolver(): RootUpdatePostMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootUpdatePostMutationErrorPayloadUnionTypeResolver === null) {

@@ -12,10 +12,6 @@ class RootDeletePostTagTermMutationErrorPayloadUnionTypeDataLoader extends Abstr
 {
     private ?RootDeletePostTagTermMutationErrorPayloadUnionTypeResolver $rootDeletePostTagTermMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootDeletePostTagTermMutationErrorPayloadUnionTypeResolver(RootDeletePostTagTermMutationErrorPayloadUnionTypeResolver $rootDeletePostTagTermMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootDeletePostTagTermMutationErrorPayloadUnionTypeResolver = $rootDeletePostTagTermMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootDeletePostTagTermMutationErrorPayloadUnionTypeResolver(): RootDeletePostTagTermMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootDeletePostTagTermMutationErrorPayloadUnionTypeResolver === null) {

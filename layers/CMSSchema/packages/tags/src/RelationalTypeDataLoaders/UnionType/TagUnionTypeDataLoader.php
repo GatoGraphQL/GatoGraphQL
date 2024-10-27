@@ -12,10 +12,6 @@ class TagUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?TagUnionTypeResolver $tagUnionTypeResolver = null;
 
-    final public function setTagUnionTypeResolver(TagUnionTypeResolver $tagUnionTypeResolver): void
-    {
-        $this->tagUnionTypeResolver = $tagUnionTypeResolver;
-    }
     final protected function getTagUnionTypeResolver(): TagUnionTypeResolver
     {
         if ($this->tagUnionTypeResolver === null) {

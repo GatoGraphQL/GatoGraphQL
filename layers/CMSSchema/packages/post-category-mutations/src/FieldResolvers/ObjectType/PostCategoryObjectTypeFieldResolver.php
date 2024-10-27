@@ -34,10 +34,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?PostCategoryTermUpdateInputObjectTypeResolver $postCategoryTermUpdateInputObjectTypeResolver = null;
 
-    final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
-    {
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-    }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
         if ($this->postCategoryObjectTypeResolver === null) {
@@ -46,10 +42,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
             $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
         }
         return $this->postCategoryObjectTypeResolver;
-    }
-    final public function setPostCategoryUpdateMutationPayloadObjectTypeResolver(PostCategoryUpdateMutationPayloadObjectTypeResolver $postCategoryUpdateMutationPayloadObjectTypeResolver): void
-    {
-        $this->postCategoryUpdateMutationPayloadObjectTypeResolver = $postCategoryUpdateMutationPayloadObjectTypeResolver;
     }
     final protected function getPostCategoryUpdateMutationPayloadObjectTypeResolver(): PostCategoryUpdateMutationPayloadObjectTypeResolver
     {
@@ -60,10 +52,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
         }
         return $this->postCategoryUpdateMutationPayloadObjectTypeResolver;
     }
-    final public function setPostCategoryDeleteMutationPayloadObjectTypeResolver(PostCategoryDeleteMutationPayloadObjectTypeResolver $postCategoryDeleteMutationPayloadObjectTypeResolver): void
-    {
-        $this->postCategoryDeleteMutationPayloadObjectTypeResolver = $postCategoryDeleteMutationPayloadObjectTypeResolver;
-    }
     final protected function getPostCategoryDeleteMutationPayloadObjectTypeResolver(): PostCategoryDeleteMutationPayloadObjectTypeResolver
     {
         if ($this->postCategoryDeleteMutationPayloadObjectTypeResolver === null) {
@@ -72,10 +60,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
             $this->postCategoryDeleteMutationPayloadObjectTypeResolver = $postCategoryDeleteMutationPayloadObjectTypeResolver;
         }
         return $this->postCategoryDeleteMutationPayloadObjectTypeResolver;
-    }
-    final public function setUpdatePostCategoryTermMutationResolver(UpdatePostCategoryTermMutationResolver $updatePostCategoryTermMutationResolver): void
-    {
-        $this->updatePostCategoryTermMutationResolver = $updatePostCategoryTermMutationResolver;
     }
     final protected function getUpdatePostCategoryTermMutationResolver(): UpdatePostCategoryTermMutationResolver
     {
@@ -86,10 +70,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
         }
         return $this->updatePostCategoryTermMutationResolver;
     }
-    final public function setDeletePostCategoryTermMutationResolver(DeletePostCategoryTermMutationResolver $deletePostCategoryTermMutationResolver): void
-    {
-        $this->deletePostCategoryTermMutationResolver = $deletePostCategoryTermMutationResolver;
-    }
     final protected function getDeletePostCategoryTermMutationResolver(): DeletePostCategoryTermMutationResolver
     {
         if ($this->deletePostCategoryTermMutationResolver === null) {
@@ -98,10 +78,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
             $this->deletePostCategoryTermMutationResolver = $deletePostCategoryTermMutationResolver;
         }
         return $this->deletePostCategoryTermMutationResolver;
-    }
-    final public function setPayloadableUpdatePostCategoryTermMutationResolver(PayloadableUpdatePostCategoryTermMutationResolver $payloadableUpdatePostCategoryTermMutationResolver): void
-    {
-        $this->payloadableUpdatePostCategoryTermMutationResolver = $payloadableUpdatePostCategoryTermMutationResolver;
     }
     final protected function getPayloadableUpdatePostCategoryTermMutationResolver(): PayloadableUpdatePostCategoryTermMutationResolver
     {
@@ -112,10 +88,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
         }
         return $this->payloadableUpdatePostCategoryTermMutationResolver;
     }
-    final public function setPayloadableDeletePostCategoryTermMutationResolver(PayloadableDeletePostCategoryTermMutationResolver $payloadableDeletePostCategoryTermMutationResolver): void
-    {
-        $this->payloadableDeletePostCategoryTermMutationResolver = $payloadableDeletePostCategoryTermMutationResolver;
-    }
     final protected function getPayloadableDeletePostCategoryTermMutationResolver(): PayloadableDeletePostCategoryTermMutationResolver
     {
         if ($this->payloadableDeletePostCategoryTermMutationResolver === null) {
@@ -125,10 +97,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
         }
         return $this->payloadableDeletePostCategoryTermMutationResolver;
     }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -137,10 +105,6 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setPostCategoryTermUpdateInputObjectTypeResolver(PostCategoryTermUpdateInputObjectTypeResolver $postCategoryTermUpdateInputObjectTypeResolver): void
-    {
-        $this->postCategoryTermUpdateInputObjectTypeResolver = $postCategoryTermUpdateInputObjectTypeResolver;
     }
     final protected function getPostCategoryTermUpdateInputObjectTypeResolver(): PostCategoryTermUpdateInputObjectTypeResolver
     {

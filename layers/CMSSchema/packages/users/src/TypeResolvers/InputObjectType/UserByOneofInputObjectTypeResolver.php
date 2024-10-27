@@ -27,10 +27,6 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
     private ?UsernameFilterInput $usernameFilterInput = null;
     private ?EmailFilterInput $emailFilterInput = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -39,10 +35,6 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -53,10 +45,6 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
-    {
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-    }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
         if ($this->emailScalarTypeResolver === null) {
@@ -65,10 +53,6 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
             $this->emailScalarTypeResolver = $emailScalarTypeResolver;
         }
         return $this->emailScalarTypeResolver;
-    }
-    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
-    {
-        $this->includeFilterInput = $includeFilterInput;
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
@@ -79,10 +63,6 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
         }
         return $this->includeFilterInput;
     }
-    final public function setUsernameFilterInput(UsernameFilterInput $usernameFilterInput): void
-    {
-        $this->usernameFilterInput = $usernameFilterInput;
-    }
     final protected function getUsernameFilterInput(): UsernameFilterInput
     {
         if ($this->usernameFilterInput === null) {
@@ -91,10 +71,6 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
             $this->usernameFilterInput = $usernameFilterInput;
         }
         return $this->usernameFilterInput;
-    }
-    final public function setEmailFilterInput(EmailFilterInput $emailFilterInput): void
-    {
-        $this->emailFilterInput = $emailFilterInput;
     }
     final protected function getEmailFilterInput(): EmailFilterInput
     {

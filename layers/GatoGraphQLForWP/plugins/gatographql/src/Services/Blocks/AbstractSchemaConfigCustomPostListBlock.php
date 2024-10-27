@@ -17,10 +17,6 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
     private ?BlockRenderingHelpers $blockRenderingHelpers = null;
     private ?CPTUtils $cptUtils = null;
 
-    final public function setBlockRenderingHelpers(BlockRenderingHelpers $blockRenderingHelpers): void
-    {
-        $this->blockRenderingHelpers = $blockRenderingHelpers;
-    }
     final protected function getBlockRenderingHelpers(): BlockRenderingHelpers
     {
         if ($this->blockRenderingHelpers === null) {
@@ -29,10 +25,6 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
             $this->blockRenderingHelpers = $blockRenderingHelpers;
         }
         return $this->blockRenderingHelpers;
-    }
-    final public function setCPTUtils(CPTUtils $cptUtils): void
-    {
-        $this->cptUtils = $cptUtils;
     }
     final protected function getCPTUtils(): CPTUtils
     {

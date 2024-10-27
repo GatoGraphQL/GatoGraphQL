@@ -13,10 +13,6 @@ class PageByOneofInputObjectTypeResolver extends AbstractCustomPostByOneofInputO
 {
     private ?PathOrPathsFilterInput $pathOrPathsFilterInput = null;
 
-    final public function setPathOrPathsFilterInput(PathOrPathsFilterInput $pathOrPathsFilterInput): void
-    {
-        $this->pathOrPathsFilterInput = $pathOrPathsFilterInput;
-    }
     final protected function getPathOrPathsFilterInput(): PathOrPathsFilterInput
     {
         if ($this->pathOrPathsFilterInput === null) {

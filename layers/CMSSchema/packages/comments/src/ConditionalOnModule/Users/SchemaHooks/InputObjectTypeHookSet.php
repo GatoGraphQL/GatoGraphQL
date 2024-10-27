@@ -18,10 +18,6 @@ class InputObjectTypeHookSet extends AbstractHookSet
     private ?FilterCommentsByCommentAuthorInputObjectTypeResolver $filterCommentsByCommentAuthorInputObjectTypeResolver = null;
     private ?FilterCommentsByCustomPostAuthorInputObjectTypeResolver $filterCommentsByCustomPostAuthorInputObjectTypeResolver = null;
 
-    final public function setFilterCommentsByCommentAuthorInputObjectTypeResolver(FilterCommentsByCommentAuthorInputObjectTypeResolver $filterCommentsByCommentAuthorInputObjectTypeResolver): void
-    {
-        $this->filterCommentsByCommentAuthorInputObjectTypeResolver = $filterCommentsByCommentAuthorInputObjectTypeResolver;
-    }
     final protected function getFilterCommentsByCommentAuthorInputObjectTypeResolver(): FilterCommentsByCommentAuthorInputObjectTypeResolver
     {
         if ($this->filterCommentsByCommentAuthorInputObjectTypeResolver === null) {
@@ -30,10 +26,6 @@ class InputObjectTypeHookSet extends AbstractHookSet
             $this->filterCommentsByCommentAuthorInputObjectTypeResolver = $filterCommentsByCommentAuthorInputObjectTypeResolver;
         }
         return $this->filterCommentsByCommentAuthorInputObjectTypeResolver;
-    }
-    final public function setFilterCommentsByCustomPostAuthorInputObjectTypeResolver(FilterCommentsByCustomPostAuthorInputObjectTypeResolver $filterCommentsByCustomPostAuthorInputObjectTypeResolver): void
-    {
-        $this->filterCommentsByCustomPostAuthorInputObjectTypeResolver = $filterCommentsByCustomPostAuthorInputObjectTypeResolver;
     }
     final protected function getFilterCommentsByCustomPostAuthorInputObjectTypeResolver(): FilterCommentsByCustomPostAuthorInputObjectTypeResolver
     {

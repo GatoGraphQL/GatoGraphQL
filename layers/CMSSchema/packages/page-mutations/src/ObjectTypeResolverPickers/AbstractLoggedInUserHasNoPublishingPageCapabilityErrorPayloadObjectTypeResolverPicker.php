@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoPublishingPageCapabilityErrorPayloadObje
 {
     private ?LoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver(LoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver = $loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver(): LoggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoPublishingPageCapabilityErrorPayloadObjectTypeResolver === null) {

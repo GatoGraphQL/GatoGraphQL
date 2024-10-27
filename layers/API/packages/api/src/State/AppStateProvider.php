@@ -30,10 +30,6 @@ class AppStateProvider extends AbstractAppStateProvider
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
     private ?PersistedQueryManagerInterface $persistedQueryManager = null;
 
-    final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
-    {
-        $this->graphQLParserHelperService = $graphQLParserHelperService;
-    }
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {
         if ($this->graphQLParserHelperService === null) {
@@ -42,10 +38,6 @@ class AppStateProvider extends AbstractAppStateProvider
             $this->graphQLParserHelperService = $graphQLParserHelperService;
         }
         return $this->graphQLParserHelperService;
-    }
-    final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
-    {
-        $this->persistedQueryManager = $persistedQueryManager;
     }
     final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {

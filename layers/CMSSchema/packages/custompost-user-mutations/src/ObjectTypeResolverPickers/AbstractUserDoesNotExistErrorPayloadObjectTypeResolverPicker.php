@@ -13,10 +13,6 @@ abstract class AbstractUserDoesNotExistErrorPayloadObjectTypeResolverPicker exte
 {
     private ?UserDoesNotExistErrorPayloadObjectTypeResolver $mediaItemDoesNotExistErrorPayloadObjectTypeResolver = null;
 
-    final public function setUserDoesNotExistErrorPayloadObjectTypeResolver(UserDoesNotExistErrorPayloadObjectTypeResolver $mediaItemDoesNotExistErrorPayloadObjectTypeResolver): void
-    {
-        $this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver = $mediaItemDoesNotExistErrorPayloadObjectTypeResolver;
-    }
     final protected function getUserDoesNotExistErrorPayloadObjectTypeResolver(): UserDoesNotExistErrorPayloadObjectTypeResolver
     {
         if ($this->mediaItemDoesNotExistErrorPayloadObjectTypeResolver === null) {

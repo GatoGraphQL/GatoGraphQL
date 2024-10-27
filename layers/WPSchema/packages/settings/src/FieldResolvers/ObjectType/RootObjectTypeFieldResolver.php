@@ -20,10 +20,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?SettingsTypeAPIInterface $settingsTypeAPI = null;
 
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -32,10 +28,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setSettingsTypeAPI(SettingsTypeAPIInterface $settingsTypeAPI): void
-    {
-        $this->settingsTypeAPI = $settingsTypeAPI;
     }
     final protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
     {

@@ -14,10 +14,6 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?UserObjectTypeDataLoader $userObjectTypeDataLoader = null;
 
-    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
-    {
-        $this->userTypeAPI = $userTypeAPI;
-    }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
         if ($this->userTypeAPI === null) {
@@ -26,10 +22,6 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
             $this->userTypeAPI = $userTypeAPI;
         }
         return $this->userTypeAPI;
-    }
-    final public function setUserObjectTypeDataLoader(UserObjectTypeDataLoader $userObjectTypeDataLoader): void
-    {
-        $this->userObjectTypeDataLoader = $userObjectTypeDataLoader;
     }
     final protected function getUserObjectTypeDataLoader(): UserObjectTypeDataLoader
     {

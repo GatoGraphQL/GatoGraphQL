@@ -29,10 +29,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     private ?UniversalTagTypeAPIInterface $universalTagTypeAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         if ($this->intScalarTypeResolver === null) {
@@ -41,10 +37,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->intScalarTypeResolver = $intScalarTypeResolver;
         }
         return $this->intScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -55,10 +47,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
-    {
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-    }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
         if ($this->queryableInterfaceTypeFieldResolver === null) {
@@ -67,10 +55,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         }
         return $this->queryableInterfaceTypeFieldResolver;
-    }
-    final public function setTagInterfaceTypeFieldResolver(TagInterfaceTypeFieldResolver $tagInterfaceTypeFieldResolver): void
-    {
-        $this->tagInterfaceTypeFieldResolver = $tagInterfaceTypeFieldResolver;
     }
     final protected function getTagInterfaceTypeFieldResolver(): TagInterfaceTypeFieldResolver
     {
@@ -81,10 +65,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->tagInterfaceTypeFieldResolver;
     }
-    final public function setUniversalTagTypeAPI(UniversalTagTypeAPIInterface $universalTagTypeAPI): void
-    {
-        $this->universalTagTypeAPI = $universalTagTypeAPI;
-    }
     final protected function getUniversalTagTypeAPI(): UniversalTagTypeAPIInterface
     {
         if ($this->universalTagTypeAPI === null) {
@@ -93,10 +73,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->universalTagTypeAPI = $universalTagTypeAPI;
         }
         return $this->universalTagTypeAPI;
-    }
-    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
-    {
-        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
     }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {

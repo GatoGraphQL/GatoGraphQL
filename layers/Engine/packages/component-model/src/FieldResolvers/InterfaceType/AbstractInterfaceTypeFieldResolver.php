@@ -71,10 +71,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
-    final public function setNameResolver(NameResolverInterface $nameResolver): void
-    {
-        $this->nameResolver = $nameResolver;
-    }
     final protected function getNameResolver(): NameResolverInterface
     {
         if ($this->nameResolver === null) {
@@ -83,10 +79,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $this->nameResolver = $nameResolver;
         }
         return $this->nameResolver;
-    }
-    final public function setSchemaNamespacingService(SchemaNamespacingServiceInterface $schemaNamespacingService): void
-    {
-        $this->schemaNamespacingService = $schemaNamespacingService;
     }
     final protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
     {
@@ -97,10 +89,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
         return $this->schemaNamespacingService;
     }
-    final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
-    {
-        $this->typeRegistry = $typeRegistry;
-    }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
         if ($this->typeRegistry === null) {
@@ -109,10 +97,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $this->typeRegistry = $typeRegistry;
         }
         return $this->typeRegistry;
-    }
-    final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
-    {
-        $this->schemaDefinitionService = $schemaDefinitionService;
     }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
@@ -123,10 +107,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
         return $this->schemaDefinitionService;
     }
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
-    {
-        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
         if ($this->dangerouslyNonSpecificScalarTypeScalarTypeResolver === null) {
@@ -135,10 +115,6 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
         }
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
-    final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
-    {
-        $this->attachableExtensionManager = $attachableExtensionManager;
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {

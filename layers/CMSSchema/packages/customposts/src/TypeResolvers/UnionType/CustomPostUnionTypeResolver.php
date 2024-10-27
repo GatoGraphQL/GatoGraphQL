@@ -15,10 +15,6 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
     private ?CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader = null;
     private ?CustomPostInterfaceTypeResolver $customPostInterfaceTypeResolver = null;
 
-    final public function setCustomPostUnionTypeDataLoader(CustomPostUnionTypeDataLoader $customPostUnionTypeDataLoader): void
-    {
-        $this->customPostUnionTypeDataLoader = $customPostUnionTypeDataLoader;
-    }
     final protected function getCustomPostUnionTypeDataLoader(): CustomPostUnionTypeDataLoader
     {
         if ($this->customPostUnionTypeDataLoader === null) {
@@ -27,10 +23,6 @@ class CustomPostUnionTypeResolver extends AbstractUnionTypeResolver
             $this->customPostUnionTypeDataLoader = $customPostUnionTypeDataLoader;
         }
         return $this->customPostUnionTypeDataLoader;
-    }
-    final public function setCustomPostInterfaceTypeResolver(CustomPostInterfaceTypeResolver $customPostInterfaceTypeResolver): void
-    {
-        $this->customPostInterfaceTypeResolver = $customPostInterfaceTypeResolver;
     }
     final protected function getCustomPostInterfaceTypeResolver(): CustomPostInterfaceTypeResolver
     {

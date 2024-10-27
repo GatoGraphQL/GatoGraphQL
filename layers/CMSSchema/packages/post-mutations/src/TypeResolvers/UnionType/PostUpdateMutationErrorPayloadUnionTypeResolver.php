@@ -12,10 +12,6 @@ class PostUpdateMutationErrorPayloadUnionTypeResolver extends AbstractCustomPost
 {
     private ?PostUpdateMutationErrorPayloadUnionTypeDataLoader $postUpdateMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setPostUpdateMutationErrorPayloadUnionTypeDataLoader(PostUpdateMutationErrorPayloadUnionTypeDataLoader $postUpdateMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->postUpdateMutationErrorPayloadUnionTypeDataLoader = $postUpdateMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getPostUpdateMutationErrorPayloadUnionTypeDataLoader(): PostUpdateMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->postUpdateMutationErrorPayloadUnionTypeDataLoader === null) {

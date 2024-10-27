@@ -56,10 +56,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootCreatePostInputObjectTypeResolver $rootCreatePostInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
-    {
-        $this->postObjectTypeResolver = $postObjectTypeResolver;
-    }
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
         if ($this->postObjectTypeResolver === null) {
@@ -68,10 +64,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->postObjectTypeResolver = $postObjectTypeResolver;
         }
         return $this->postObjectTypeResolver;
-    }
-    final public function setRootUpdatePostMutationPayloadObjectTypeResolver(RootUpdatePostMutationPayloadObjectTypeResolver $rootUpdatePostMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootUpdatePostMutationPayloadObjectTypeResolver = $rootUpdatePostMutationPayloadObjectTypeResolver;
     }
     final protected function getRootUpdatePostMutationPayloadObjectTypeResolver(): RootUpdatePostMutationPayloadObjectTypeResolver
     {
@@ -82,10 +74,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->rootUpdatePostMutationPayloadObjectTypeResolver;
     }
-    final public function setRootCreatePostMutationPayloadObjectTypeResolver(RootCreatePostMutationPayloadObjectTypeResolver $rootCreatePostMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootCreatePostMutationPayloadObjectTypeResolver = $rootCreatePostMutationPayloadObjectTypeResolver;
-    }
     final protected function getRootCreatePostMutationPayloadObjectTypeResolver(): RootCreatePostMutationPayloadObjectTypeResolver
     {
         if ($this->rootCreatePostMutationPayloadObjectTypeResolver === null) {
@@ -94,10 +82,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->rootCreatePostMutationPayloadObjectTypeResolver = $rootCreatePostMutationPayloadObjectTypeResolver;
         }
         return $this->rootCreatePostMutationPayloadObjectTypeResolver;
-    }
-    final public function setCreatePostMutationResolver(CreatePostMutationResolver $createPostMutationResolver): void
-    {
-        $this->createPostMutationResolver = $createPostMutationResolver;
     }
     final protected function getCreatePostMutationResolver(): CreatePostMutationResolver
     {
@@ -108,10 +92,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->createPostMutationResolver;
     }
-    final public function setCreatePostBulkOperationMutationResolver(CreatePostBulkOperationMutationResolver $createPostBulkOperationMutationResolver): void
-    {
-        $this->createPostBulkOperationMutationResolver = $createPostBulkOperationMutationResolver;
-    }
     final protected function getCreatePostBulkOperationMutationResolver(): CreatePostBulkOperationMutationResolver
     {
         if ($this->createPostBulkOperationMutationResolver === null) {
@@ -120,10 +100,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->createPostBulkOperationMutationResolver = $createPostBulkOperationMutationResolver;
         }
         return $this->createPostBulkOperationMutationResolver;
-    }
-    final public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
-    {
-        $this->updatePostMutationResolver = $updatePostMutationResolver;
     }
     final protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
     {
@@ -134,10 +110,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->updatePostMutationResolver;
     }
-    final public function setUpdatePostBulkOperationMutationResolver(UpdatePostBulkOperationMutationResolver $updatePostBulkOperationMutationResolver): void
-    {
-        $this->updatePostBulkOperationMutationResolver = $updatePostBulkOperationMutationResolver;
-    }
     final protected function getUpdatePostBulkOperationMutationResolver(): UpdatePostBulkOperationMutationResolver
     {
         if ($this->updatePostBulkOperationMutationResolver === null) {
@@ -146,10 +118,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->updatePostBulkOperationMutationResolver = $updatePostBulkOperationMutationResolver;
         }
         return $this->updatePostBulkOperationMutationResolver;
-    }
-    final public function setPayloadableUpdatePostMutationResolver(PayloadableUpdatePostMutationResolver $payloadableUpdatePostMutationResolver): void
-    {
-        $this->payloadableUpdatePostMutationResolver = $payloadableUpdatePostMutationResolver;
     }
     final protected function getPayloadableUpdatePostMutationResolver(): PayloadableUpdatePostMutationResolver
     {
@@ -160,10 +128,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->payloadableUpdatePostMutationResolver;
     }
-    final public function setPayloadableUpdatePostBulkOperationMutationResolver(PayloadableUpdatePostBulkOperationMutationResolver $payloadableUpdatePostBulkOperationMutationResolver): void
-    {
-        $this->payloadableUpdatePostBulkOperationMutationResolver = $payloadableUpdatePostBulkOperationMutationResolver;
-    }
     final protected function getPayloadableUpdatePostBulkOperationMutationResolver(): PayloadableUpdatePostBulkOperationMutationResolver
     {
         if ($this->payloadableUpdatePostBulkOperationMutationResolver === null) {
@@ -172,10 +136,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->payloadableUpdatePostBulkOperationMutationResolver = $payloadableUpdatePostBulkOperationMutationResolver;
         }
         return $this->payloadableUpdatePostBulkOperationMutationResolver;
-    }
-    final public function setPayloadableCreatePostMutationResolver(PayloadableCreatePostMutationResolver $payloadableCreatePostMutationResolver): void
-    {
-        $this->payloadableCreatePostMutationResolver = $payloadableCreatePostMutationResolver;
     }
     final protected function getPayloadableCreatePostMutationResolver(): PayloadableCreatePostMutationResolver
     {
@@ -186,10 +146,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->payloadableCreatePostMutationResolver;
     }
-    final public function setPayloadableCreatePostBulkOperationMutationResolver(PayloadableCreatePostBulkOperationMutationResolver $payloadableCreatePostBulkOperationMutationResolver): void
-    {
-        $this->payloadableCreatePostBulkOperationMutationResolver = $payloadableCreatePostBulkOperationMutationResolver;
-    }
     final protected function getPayloadableCreatePostBulkOperationMutationResolver(): PayloadableCreatePostBulkOperationMutationResolver
     {
         if ($this->payloadableCreatePostBulkOperationMutationResolver === null) {
@@ -198,10 +154,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->payloadableCreatePostBulkOperationMutationResolver = $payloadableCreatePostBulkOperationMutationResolver;
         }
         return $this->payloadableCreatePostBulkOperationMutationResolver;
-    }
-    final public function setRootUpdatePostInputObjectTypeResolver(RootUpdatePostInputObjectTypeResolver $rootUpdatePostInputObjectTypeResolver): void
-    {
-        $this->rootUpdatePostInputObjectTypeResolver = $rootUpdatePostInputObjectTypeResolver;
     }
     final protected function getRootUpdatePostInputObjectTypeResolver(): RootUpdatePostInputObjectTypeResolver
     {
@@ -212,10 +164,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->rootUpdatePostInputObjectTypeResolver;
     }
-    final public function setRootCreatePostInputObjectTypeResolver(RootCreatePostInputObjectTypeResolver $rootCreatePostInputObjectTypeResolver): void
-    {
-        $this->rootCreatePostInputObjectTypeResolver = $rootCreatePostInputObjectTypeResolver;
-    }
     final protected function getRootCreatePostInputObjectTypeResolver(): RootCreatePostInputObjectTypeResolver
     {
         if ($this->rootCreatePostInputObjectTypeResolver === null) {
@@ -224,10 +172,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->rootCreatePostInputObjectTypeResolver = $rootCreatePostInputObjectTypeResolver;
         }
         return $this->rootCreatePostInputObjectTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {

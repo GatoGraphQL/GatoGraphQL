@@ -46,10 +46,6 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     private ?QueryASTTransformationServiceInterface $queryASTTransformationService = null;
     private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
 
-    final public function setQueryASTTransformationService(QueryASTTransformationServiceInterface $queryASTTransformationService): void
-    {
-        $this->queryASTTransformationService = $queryASTTransformationService;
-    }
     final protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {
         if ($this->queryASTTransformationService === null) {
@@ -58,10 +54,6 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $this->queryASTTransformationService = $queryASTTransformationService;
         }
         return $this->queryASTTransformationService;
-    }
-    final public function setASTNodeDuplicatorService(ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService): void
-    {
-        $this->astNodeDuplicatorService = $astNodeDuplicatorService;
     }
     final protected function getASTNodeDuplicatorService(): ASTNodeDuplicatorServiceInterface
     {

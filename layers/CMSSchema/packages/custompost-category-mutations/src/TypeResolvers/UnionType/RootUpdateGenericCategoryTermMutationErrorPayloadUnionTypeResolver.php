@@ -12,10 +12,6 @@ class RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver extends
 {
     private ?RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader $rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader(RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader $rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader = $rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader(): RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader === null) {

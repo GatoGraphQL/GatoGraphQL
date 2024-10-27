@@ -14,10 +14,6 @@ class AddMetaQueryInputFieldsInputObjectTypeHookSet extends AbstractAddMetaQuery
 {
     private ?TaxonomyMetaQueryInputObjectTypeResolver $taxonomyMetaQueryInputObjectTypeResolver = null;
 
-    final public function setTaxonomyMetaQueryInputObjectTypeResolver(TaxonomyMetaQueryInputObjectTypeResolver $taxonomyMetaQueryInputObjectTypeResolver): void
-    {
-        $this->taxonomyMetaQueryInputObjectTypeResolver = $taxonomyMetaQueryInputObjectTypeResolver;
-    }
     final protected function getTaxonomyMetaQueryInputObjectTypeResolver(): TaxonomyMetaQueryInputObjectTypeResolver
     {
         if ($this->taxonomyMetaQueryInputObjectTypeResolver === null) {

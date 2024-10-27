@@ -12,10 +12,6 @@ abstract class AbstractGenericErrorPayloadObjectTypeResolverPicker extends Abstr
 {
     private ?GenericErrorPayloadObjectTypeResolver $genericErrorPayloadObjectTypeResolver = null;
 
-    final public function setGenericErrorPayloadObjectTypeResolver(GenericErrorPayloadObjectTypeResolver $genericErrorPayloadObjectTypeResolver): void
-    {
-        $this->genericErrorPayloadObjectTypeResolver = $genericErrorPayloadObjectTypeResolver;
-    }
     final protected function getGenericErrorPayloadObjectTypeResolver(): GenericErrorPayloadObjectTypeResolver
     {
         if ($this->genericErrorPayloadObjectTypeResolver === null) {

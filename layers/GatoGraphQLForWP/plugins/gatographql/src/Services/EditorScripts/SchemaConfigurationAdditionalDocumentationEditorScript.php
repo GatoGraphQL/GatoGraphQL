@@ -14,10 +14,6 @@ class SchemaConfigurationAdditionalDocumentationEditorScript extends AbstractEdi
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
-    final public function setGraphQLSchemaConfigurationCustomPostType(GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType): void
-    {
-        $this->graphQLSchemaConfigurationCustomPostType = $graphQLSchemaConfigurationCustomPostType;
-    }
     final protected function getGraphQLSchemaConfigurationCustomPostType(): GraphQLSchemaConfigurationCustomPostType
     {
         if ($this->graphQLSchemaConfigurationCustomPostType === null) {

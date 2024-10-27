@@ -12,10 +12,6 @@ class LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver 
 {
     private ?LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeDataLoader === null) {

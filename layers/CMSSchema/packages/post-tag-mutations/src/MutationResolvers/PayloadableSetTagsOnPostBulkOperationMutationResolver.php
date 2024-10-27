@@ -11,10 +11,6 @@ class PayloadableSetTagsOnPostBulkOperationMutationResolver extends AbstractBulk
 {
     private ?PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver = null;
 
-    final public function setPayloadableSetTagsOnPostMutationResolver(PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver): void
-    {
-        $this->payloadableSetTagsOnPostMutationResolver = $payloadableSetTagsOnPostMutationResolver;
-    }
     final protected function getPayloadableSetTagsOnPostMutationResolver(): PayloadableSetTagsOnPostMutationResolver
     {
         if ($this->payloadableSetTagsOnPostMutationResolver === null) {

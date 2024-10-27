@@ -45,10 +45,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?CustomPostStatusFilterInput $customPostStatusFilterInput = null;
     private ?ExcludeCustomPostIDsFilterInput $excludeCustomPostIDsFilterInput = null;
 
-    final public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
-    {
-        $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
-    }
     final protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
     {
         if ($this->commentTypeEnumTypeResolver === null) {
@@ -57,10 +53,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
         }
         return $this->commentTypeEnumTypeResolver;
-    }
-    final public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
-    {
-        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
     }
     final protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
     {
@@ -71,10 +63,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->commentStatusEnumTypeResolver;
     }
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
-    {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-    }
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
         if ($this->customPostStatusEnumTypeResolver === null) {
@@ -83,10 +71,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
         }
         return $this->customPostStatusEnumTypeResolver;
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -97,10 +81,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setCommentStatusFilterInput(CommentStatusFilterInput $commentStatusFilterInput): void
-    {
-        $this->commentStatusFilterInput = $commentStatusFilterInput;
-    }
     final protected function getCommentStatusFilterInput(): CommentStatusFilterInput
     {
         if ($this->commentStatusFilterInput === null) {
@@ -109,10 +89,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->commentStatusFilterInput = $commentStatusFilterInput;
         }
         return $this->commentStatusFilterInput;
-    }
-    final public function setCommentTypesFilterInput(CommentTypesFilterInput $commentTypesFilterInput): void
-    {
-        $this->commentTypesFilterInput = $commentTypesFilterInput;
     }
     final protected function getCommentTypesFilterInput(): CommentTypesFilterInput
     {
@@ -123,10 +99,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->commentTypesFilterInput;
     }
-    final public function setCustomPostIDFilterInput(CustomPostIDFilterInput $customPostIDFilterInput): void
-    {
-        $this->customPostIDFilterInput = $customPostIDFilterInput;
-    }
     final protected function getCustomPostIDFilterInput(): CustomPostIDFilterInput
     {
         if ($this->customPostIDFilterInput === null) {
@@ -135,10 +107,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->customPostIDFilterInput = $customPostIDFilterInput;
         }
         return $this->customPostIDFilterInput;
-    }
-    final public function setCustomPostIDsFilterInput(CustomPostIDsFilterInput $customPostIDsFilterInput): void
-    {
-        $this->customPostIDsFilterInput = $customPostIDsFilterInput;
     }
     final protected function getCustomPostIDsFilterInput(): CustomPostIDsFilterInput
     {
@@ -149,10 +117,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->customPostIDsFilterInput;
     }
-    final public function setCustomPostStatusFilterInput(CustomPostStatusFilterInput $customPostStatusFilterInput): void
-    {
-        $this->customPostStatusFilterInput = $customPostStatusFilterInput;
-    }
     final protected function getCustomPostStatusFilterInput(): CustomPostStatusFilterInput
     {
         if ($this->customPostStatusFilterInput === null) {
@@ -161,10 +125,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->customPostStatusFilterInput = $customPostStatusFilterInput;
         }
         return $this->customPostStatusFilterInput;
-    }
-    final public function setExcludeCustomPostIDsFilterInput(ExcludeCustomPostIDsFilterInput $excludeCustomPostIDsFilterInput): void
-    {
-        $this->excludeCustomPostIDsFilterInput = $excludeCustomPostIDsFilterInput;
     }
     final protected function getExcludeCustomPostIDsFilterInput(): ExcludeCustomPostIDsFilterInput
     {

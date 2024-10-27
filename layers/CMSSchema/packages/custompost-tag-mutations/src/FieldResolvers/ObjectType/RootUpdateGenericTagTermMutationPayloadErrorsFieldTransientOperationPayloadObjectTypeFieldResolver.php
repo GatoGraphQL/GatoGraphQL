@@ -14,10 +14,6 @@ class RootUpdateGenericTagTermMutationPayloadErrorsFieldTransientOperationPayloa
 {
     private ?RootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver $rootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver(RootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver $rootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver = $rootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver(): RootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver === null) {

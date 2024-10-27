@@ -35,10 +35,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
     private ?NameResolverInterface $nameResolver = null;
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
-    final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
-    {
-        $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
-    }
     final protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface
     {
         if ($this->mediaTypeMutationAPI === null) {
@@ -47,10 +43,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
         }
         return $this->mediaTypeMutationAPI;
-    }
-    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
-    {
-        $this->userTypeAPI = $userTypeAPI;
     }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
@@ -61,10 +53,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
         }
         return $this->userTypeAPI;
     }
-    final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
-    {
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
-    }
     final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
         if ($this->userRoleTypeAPI === null) {
@@ -74,10 +62,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
         }
         return $this->userRoleTypeAPI;
     }
-    final public function setNameResolver(NameResolverInterface $nameResolver): void
-    {
-        $this->nameResolver = $nameResolver;
-    }
     final protected function getNameResolver(): NameResolverInterface
     {
         if ($this->nameResolver === null) {
@@ -86,10 +70,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             $this->nameResolver = $nameResolver;
         }
         return $this->nameResolver;
-    }
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
-    {
-        $this->mediaTypeAPI = $mediaTypeAPI;
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {

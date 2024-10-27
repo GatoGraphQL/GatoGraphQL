@@ -19,10 +19,6 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
 {
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 
-    final public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
-    {
-        $this->pageTypeAPI = $pageTypeAPI;
-    }
     final protected function getPageTypeAPI(): PageTypeAPIInterface
     {
         if ($this->pageTypeAPI === null) {

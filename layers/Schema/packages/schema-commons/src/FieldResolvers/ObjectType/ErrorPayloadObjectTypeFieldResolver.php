@@ -20,10 +20,6 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?ErrorPayloadInterfaceTypeFieldResolver $errorPayloadInterfaceTypeFieldResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -32,10 +28,6 @@ class ErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setErrorPayloadInterfaceTypeFieldResolver(ErrorPayloadInterfaceTypeFieldResolver $errorPayloadInterfaceTypeFieldResolver): void
-    {
-        $this->errorPayloadInterfaceTypeFieldResolver = $errorPayloadInterfaceTypeFieldResolver;
     }
     final protected function getErrorPayloadInterfaceTypeFieldResolver(): ErrorPayloadInterfaceTypeFieldResolver
     {

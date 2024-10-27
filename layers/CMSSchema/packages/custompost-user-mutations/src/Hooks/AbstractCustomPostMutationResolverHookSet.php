@@ -20,10 +20,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     private ?AuthorByOneofInputObjectTypeResolver $authorByOneofInputObjectTypeResolver = null;
 
-    final public function setAuthorByOneofInputObjectTypeResolver(AuthorByOneofInputObjectTypeResolver $authorByOneofInputObjectTypeResolver): void
-    {
-        $this->authorByOneofInputObjectTypeResolver = $authorByOneofInputObjectTypeResolver;
-    }
     final protected function getAuthorByOneofInputObjectTypeResolver(): AuthorByOneofInputObjectTypeResolver
     {
         if ($this->authorByOneofInputObjectTypeResolver === null) {

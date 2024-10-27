@@ -22,10 +22,6 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     private ?OffsetFilterInput $excludeIDsFilterInput = null;
     private ?LimitFilterInput $includeFilterInput = null;
 
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         if ($this->intScalarTypeResolver === null) {
@@ -35,10 +31,6 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setOffsetFilterInput(OffsetFilterInput $excludeIDsFilterInput): void
-    {
-        $this->excludeIDsFilterInput = $excludeIDsFilterInput;
-    }
     final protected function getOffsetFilterInput(): OffsetFilterInput
     {
         if ($this->excludeIDsFilterInput === null) {
@@ -47,10 +39,6 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
             $this->excludeIDsFilterInput = $excludeIDsFilterInput;
         }
         return $this->excludeIDsFilterInput;
-    }
-    final public function setLimitFilterInput(LimitFilterInput $includeFilterInput): void
-    {
-        $this->includeFilterInput = $includeFilterInput;
     }
     final protected function getLimitFilterInput(): LimitFilterInput
     {

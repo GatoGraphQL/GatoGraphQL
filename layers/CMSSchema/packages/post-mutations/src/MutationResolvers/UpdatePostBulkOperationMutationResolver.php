@@ -11,10 +11,6 @@ class UpdatePostBulkOperationMutationResolver extends AbstractBulkOperationDecor
 {
     private ?UpdatePostMutationResolver $updatePostMutationResolver = null;
 
-    final public function setUpdatePostMutationResolver(UpdatePostMutationResolver $updatePostMutationResolver): void
-    {
-        $this->updatePostMutationResolver = $updatePostMutationResolver;
-    }
     final protected function getUpdatePostMutationResolver(): UpdatePostMutationResolver
     {
         if ($this->updatePostMutationResolver === null) {

@@ -13,10 +13,6 @@ class MenuSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {
     private ?MenuOrderByEnumTypeResolver $menuSortByEnumTypeResolver = null;
 
-    final public function setMenuOrderByEnumTypeResolver(MenuOrderByEnumTypeResolver $menuSortByEnumTypeResolver): void
-    {
-        $this->menuSortByEnumTypeResolver = $menuSortByEnumTypeResolver;
-    }
     final protected function getMenuOrderByEnumTypeResolver(): MenuOrderByEnumTypeResolver
     {
         if ($this->menuSortByEnumTypeResolver === null) {

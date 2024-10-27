@@ -12,10 +12,6 @@ class LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResol
 {
     private ?LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeDataLoader === null) {

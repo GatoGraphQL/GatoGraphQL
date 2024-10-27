@@ -12,10 +12,6 @@ class PasswordIsIncorrectErrorPayloadObjectTypeResolver extends AbstractErrorPay
 {
     private ?PasswordIsIncorrectErrorPayloadObjectTypeDataLoader $passwordIsIncorrectErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setPasswordIsIncorrectErrorPayloadObjectTypeDataLoader(PasswordIsIncorrectErrorPayloadObjectTypeDataLoader $passwordIsIncorrectErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->passwordIsIncorrectErrorPayloadObjectTypeDataLoader = $passwordIsIncorrectErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getPasswordIsIncorrectErrorPayloadObjectTypeDataLoader(): PasswordIsIncorrectErrorPayloadObjectTypeDataLoader
     {
         if ($this->passwordIsIncorrectErrorPayloadObjectTypeDataLoader === null) {

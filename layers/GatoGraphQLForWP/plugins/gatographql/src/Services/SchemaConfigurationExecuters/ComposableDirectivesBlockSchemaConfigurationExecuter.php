@@ -14,10 +14,6 @@ class ComposableDirectivesBlockSchemaConfigurationExecuter extends AbstractDefau
 {
     private ?SchemaConfigComposableDirectivesBlock $schemaConfigComposableDirectivesBlock = null;
 
-    final public function setSchemaConfigComposableDirectivesBlock(SchemaConfigComposableDirectivesBlock $schemaConfigComposableDirectivesBlock): void
-    {
-        $this->schemaConfigComposableDirectivesBlock = $schemaConfigComposableDirectivesBlock;
-    }
     final protected function getSchemaConfigComposableDirectivesBlock(): SchemaConfigComposableDirectivesBlock
     {
         if ($this->schemaConfigComposableDirectivesBlock === null) {

@@ -16,10 +16,6 @@ class SchemaCategoriesBlockSchemaConfigurationExecuter extends AbstractCustomiza
 {
     private ?SchemaConfigSchemaCategoriesBlock $schemaConfigCategoriesBlock = null;
 
-    final public function setSchemaConfigSchemaCategoriesBlock(SchemaConfigSchemaCategoriesBlock $schemaConfigCategoriesBlock): void
-    {
-        $this->schemaConfigCategoriesBlock = $schemaConfigCategoriesBlock;
-    }
     final protected function getSchemaConfigSchemaCategoriesBlock(): SchemaConfigSchemaCategoriesBlock
     {
         if ($this->schemaConfigCategoriesBlock === null) {

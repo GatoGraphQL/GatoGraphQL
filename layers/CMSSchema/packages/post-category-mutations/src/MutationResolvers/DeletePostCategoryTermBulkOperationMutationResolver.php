@@ -11,10 +11,6 @@ class DeletePostCategoryTermBulkOperationMutationResolver extends AbstractBulkOp
 {
     private ?DeletePostCategoryTermMutationResolver $deletePostCategoryTermMutationResolver = null;
 
-    final public function setDeletePostCategoryTermMutationResolver(DeletePostCategoryTermMutationResolver $deletePostCategoryTermMutationResolver): void
-    {
-        $this->deletePostCategoryTermMutationResolver = $deletePostCategoryTermMutationResolver;
-    }
     final protected function getDeletePostCategoryTermMutationResolver(): DeletePostCategoryTermMutationResolver
     {
         if ($this->deletePostCategoryTermMutationResolver === null) {

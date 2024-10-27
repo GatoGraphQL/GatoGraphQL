@@ -26,10 +26,6 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
     private ?SettingsMenuPage $settingsMenuPage = null;
 
-    final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
-    {
-        $this->menuPageHelper = $menuPageHelper;
-    }
     final protected function getMenuPageHelper(): MenuPageHelper
     {
         if ($this->menuPageHelper === null) {
@@ -38,10 +34,6 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->menuPageHelper = $menuPageHelper;
         }
         return $this->menuPageHelper;
-    }
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
@@ -52,10 +44,6 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->moduleRegistry;
     }
-    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
-    {
-        $this->userAuthorization = $userAuthorization;
-    }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         if ($this->userAuthorization === null) {
@@ -64,10 +52,6 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->userAuthorization = $userAuthorization;
         }
         return $this->userAuthorization;
-    }
-    final public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
-    {
-        $this->graphiQLMenuPage = $graphiQLMenuPage;
     }
     final protected function getGraphiQLMenuPage(): GraphiQLMenuPage
     {
@@ -78,10 +62,6 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->graphiQLMenuPage;
     }
-    final public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
-    {
-        $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
-    }
     final protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
     {
         if ($this->graphQLVoyagerMenuPage === null) {
@@ -90,10 +70,6 @@ class TopMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
         }
         return $this->graphQLVoyagerMenuPage;
-    }
-    final public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
-    {
-        $this->settingsMenuPage = $settingsMenuPage;
     }
     final protected function getSettingsMenuPage(): SettingsMenuPage
     {

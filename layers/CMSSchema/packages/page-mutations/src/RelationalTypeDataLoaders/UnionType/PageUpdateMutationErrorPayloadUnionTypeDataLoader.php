@@ -12,10 +12,6 @@ class PageUpdateMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTyp
 {
     private ?PageUpdateMutationErrorPayloadUnionTypeResolver $pageUpdateMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setPageUpdateMutationErrorPayloadUnionTypeResolver(PageUpdateMutationErrorPayloadUnionTypeResolver $pageUpdateMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->pageUpdateMutationErrorPayloadUnionTypeResolver = $pageUpdateMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getPageUpdateMutationErrorPayloadUnionTypeResolver(): PageUpdateMutationErrorPayloadUnionTypeResolver
     {
         if ($this->pageUpdateMutationErrorPayloadUnionTypeResolver === null) {

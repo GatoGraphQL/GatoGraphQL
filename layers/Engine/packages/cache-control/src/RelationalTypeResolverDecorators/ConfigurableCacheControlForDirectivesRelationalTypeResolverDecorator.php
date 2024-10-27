@@ -15,10 +15,6 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
     private ?CacheControlManagerInterface $cacheControlManager = null;
     private ?CacheControlFieldDirectiveResolver $cacheControlFieldDirectiveResolver = null;
 
-    final public function setCacheControlManager(CacheControlManagerInterface $cacheControlManager): void
-    {
-        $this->cacheControlManager = $cacheControlManager;
-    }
     final protected function getCacheControlManager(): CacheControlManagerInterface
     {
         if ($this->cacheControlManager === null) {
@@ -27,10 +23,6 @@ class ConfigurableCacheControlForDirectivesRelationalTypeResolverDecorator exten
             $this->cacheControlManager = $cacheControlManager;
         }
         return $this->cacheControlManager;
-    }
-    final public function setCacheControlFieldDirectiveResolver(CacheControlFieldDirectiveResolver $cacheControlFieldDirectiveResolver): void
-    {
-        $this->cacheControlFieldDirectiveResolver = $cacheControlFieldDirectiveResolver;
     }
     final protected function getCacheControlFieldDirectiveResolver(): CacheControlFieldDirectiveResolver
     {

@@ -11,10 +11,6 @@ class CustomPostAddCommentMutationErrorPayloadUnionTypeResolver extends Abstract
 {
     private ?CustomPostAddCommentMutationErrorPayloadUnionTypeDataLoader $customPostAddCommentMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setCustomPostAddCommentMutationErrorPayloadUnionTypeDataLoader(CustomPostAddCommentMutationErrorPayloadUnionTypeDataLoader $customPostAddCommentMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->customPostAddCommentMutationErrorPayloadUnionTypeDataLoader = $customPostAddCommentMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getCustomPostAddCommentMutationErrorPayloadUnionTypeDataLoader(): CustomPostAddCommentMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->customPostAddCommentMutationErrorPayloadUnionTypeDataLoader === null) {

@@ -22,10 +22,6 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
-    {
-        $this->postTagTypeAPI = $postTagTypeAPI;
-    }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
         if ($this->postTagTypeAPI === null) {

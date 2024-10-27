@@ -11,10 +11,6 @@ class RootCreatePageInputObjectTypeResolver extends RootCreateCustomPostInputObj
 {
     private ?PageContentAsOneofInputObjectTypeResolver $pageContentAsOneofInputObjectTypeResolver = null;
 
-    final public function setPageContentAsOneofInputObjectTypeResolver(PageContentAsOneofInputObjectTypeResolver $pageContentAsOneofInputObjectTypeResolver): void
-    {
-        $this->pageContentAsOneofInputObjectTypeResolver = $pageContentAsOneofInputObjectTypeResolver;
-    }
     final protected function getPageContentAsOneofInputObjectTypeResolver(): PageContentAsOneofInputObjectTypeResolver
     {
         if ($this->pageContentAsOneofInputObjectTypeResolver === null) {

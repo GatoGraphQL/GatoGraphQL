@@ -11,10 +11,6 @@ class CustomPostStatusFilterInput extends AbstractValueToQueryFilterInput
 {
     private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
 
-    final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
-    {
-        $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
-    }
     final protected function getFilterCustomPostStatusEnumTypeResolver(): FilterCustomPostStatusEnumTypeResolver
     {
         if ($this->filterCustomPostStatusEnumTypeResolver === null) {

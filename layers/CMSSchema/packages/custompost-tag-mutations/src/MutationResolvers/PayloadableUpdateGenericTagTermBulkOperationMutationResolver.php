@@ -11,10 +11,6 @@ class PayloadableUpdateGenericTagTermBulkOperationMutationResolver extends Abstr
 {
     private ?PayloadableUpdateGenericTagTermMutationResolver $payloadableUpdateGenericTagTermMutationResolver = null;
 
-    final public function setPayloadableUpdateGenericTagTermMutationResolver(PayloadableUpdateGenericTagTermMutationResolver $payloadableUpdateGenericTagTermMutationResolver): void
-    {
-        $this->payloadableUpdateGenericTagTermMutationResolver = $payloadableUpdateGenericTagTermMutationResolver;
-    }
     final protected function getPayloadableUpdateGenericTagTermMutationResolver(): PayloadableUpdateGenericTagTermMutationResolver
     {
         if ($this->payloadableUpdateGenericTagTermMutationResolver === null) {

@@ -19,10 +19,6 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
 
     private ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
 
-    final public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
-    {
-        $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
-    }
     final protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
     {
         if ($this->userStateTypeMutationAPI === null) {

@@ -14,10 +14,6 @@ class DoingPostUserLoggedInAggregateCheckpoint extends AbstractAggregateCheckpoi
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
     private ?DoingPostCheckpoint $doingPostCheckpoint = null;
 
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
-    }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
         if ($this->userLoggedInCheckpoint === null) {
@@ -26,10 +22,6 @@ class DoingPostUserLoggedInAggregateCheckpoint extends AbstractAggregateCheckpoi
             $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
         }
         return $this->userLoggedInCheckpoint;
-    }
-    final public function setDoingPostCheckpoint(DoingPostCheckpoint $doingPostCheckpoint): void
-    {
-        $this->doingPostCheckpoint = $doingPostCheckpoint;
     }
     final protected function getDoingPostCheckpoint(): DoingPostCheckpoint
     {

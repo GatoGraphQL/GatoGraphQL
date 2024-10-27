@@ -14,10 +14,6 @@ abstract class AbstractFilterCustomPostsByTagsInputObjectTypeResolver extends Ab
 {
     private ?FilterByTaxonomyTermsInputObjectTypeResolver $filterByTaxonomyTermsInputObjectTypeResolver = null;
 
-    final public function setFilterByTaxonomyTermsInputObjectTypeResolver(FilterByTaxonomyTermsInputObjectTypeResolver $filterByTaxonomyTermsInputObjectTypeResolver): void
-    {
-        $this->filterByTaxonomyTermsInputObjectTypeResolver = $filterByTaxonomyTermsInputObjectTypeResolver;
-    }
     final protected function getFilterByTaxonomyTermsInputObjectTypeResolver(): FilterByTaxonomyTermsInputObjectTypeResolver
     {
         if ($this->filterByTaxonomyTermsInputObjectTypeResolver === null) {

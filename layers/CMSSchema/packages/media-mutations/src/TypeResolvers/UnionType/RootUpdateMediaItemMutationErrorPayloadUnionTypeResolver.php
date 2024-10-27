@@ -11,10 +11,6 @@ class RootUpdateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractU
 {
     private ?RootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader $rootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader(RootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader $rootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader = $rootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader(): RootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootUpdateMediaItemMutationErrorPayloadUnionTypeDataLoader === null) {

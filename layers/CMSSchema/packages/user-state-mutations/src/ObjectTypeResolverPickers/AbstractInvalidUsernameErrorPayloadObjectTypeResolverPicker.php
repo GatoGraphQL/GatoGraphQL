@@ -13,10 +13,6 @@ abstract class AbstractInvalidUsernameErrorPayloadObjectTypeResolverPicker exten
 {
     private ?InvalidUsernameErrorPayloadObjectTypeResolver $userIsNotLoggedInErrorPayloadObjectTypeResolver = null;
 
-    final public function setInvalidUsernameErrorPayloadObjectTypeResolver(InvalidUsernameErrorPayloadObjectTypeResolver $userIsNotLoggedInErrorPayloadObjectTypeResolver): void
-    {
-        $this->userIsNotLoggedInErrorPayloadObjectTypeResolver = $userIsNotLoggedInErrorPayloadObjectTypeResolver;
-    }
     final protected function getInvalidUsernameErrorPayloadObjectTypeResolver(): InvalidUsernameErrorPayloadObjectTypeResolver
     {
         if ($this->userIsNotLoggedInErrorPayloadObjectTypeResolver === null) {

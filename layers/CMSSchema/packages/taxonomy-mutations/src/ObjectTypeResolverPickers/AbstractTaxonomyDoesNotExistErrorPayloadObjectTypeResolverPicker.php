@@ -13,10 +13,6 @@ abstract class AbstractTaxonomyDoesNotExistErrorPayloadObjectTypeResolverPicker 
 {
     private ?TaxonomyDoesNotExistErrorPayloadObjectTypeResolver $taxonomyDoesNotExistErrorPayloadObjectTypeResolver = null;
 
-    final public function setTaxonomyDoesNotExistErrorPayloadObjectTypeResolver(TaxonomyDoesNotExistErrorPayloadObjectTypeResolver $taxonomyDoesNotExistErrorPayloadObjectTypeResolver): void
-    {
-        $this->taxonomyDoesNotExistErrorPayloadObjectTypeResolver = $taxonomyDoesNotExistErrorPayloadObjectTypeResolver;
-    }
     final protected function getTaxonomyDoesNotExistErrorPayloadObjectTypeResolver(): TaxonomyDoesNotExistErrorPayloadObjectTypeResolver
     {
         if ($this->taxonomyDoesNotExistErrorPayloadObjectTypeResolver === null) {

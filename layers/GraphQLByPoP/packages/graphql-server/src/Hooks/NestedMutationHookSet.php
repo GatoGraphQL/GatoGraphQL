@@ -19,10 +19,6 @@ class NestedMutationHookSet extends AbstractHookSet
 {
     private ?GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService = null;
 
-    final public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
-    {
-        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-    }
     final protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
     {
         if ($this->graphQLSchemaDefinitionService === null) {

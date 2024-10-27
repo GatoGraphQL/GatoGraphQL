@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPaylo
 {
     private ?LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver(LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver = $loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver(): LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolver === null) {

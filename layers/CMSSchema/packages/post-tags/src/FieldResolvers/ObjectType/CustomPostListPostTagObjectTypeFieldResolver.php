@@ -16,10 +16,6 @@ class CustomPostListPostTagObjectTypeFieldResolver extends AbstractCustomPostLis
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
 
-    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
-    {
-        $this->postTagTypeAPI = $postTagTypeAPI;
-    }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
         if ($this->postTagTypeAPI === null) {
@@ -28,10 +24,6 @@ class CustomPostListPostTagObjectTypeFieldResolver extends AbstractCustomPostLis
             $this->postTagTypeAPI = $postTagTypeAPI;
         }
         return $this->postTagTypeAPI;
-    }
-    final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
-    {
-        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
     }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {

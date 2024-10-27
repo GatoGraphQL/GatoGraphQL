@@ -19,10 +19,6 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
 
-    final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
-    {
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-    }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
         if ($this->postCategoryTypeAPI === null) {
@@ -31,10 +27,6 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
             $this->postCategoryTypeAPI = $postCategoryTypeAPI;
         }
         return $this->postCategoryTypeAPI;
-    }
-    final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
-    {
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
     }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {

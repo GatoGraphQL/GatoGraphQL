@@ -15,10 +15,6 @@ class BlockUnionTypeResolver extends AbstractUnionTypeResolver
     private ?BlockInterfaceTypeResolver $blockInterfaceTypeResolver = null;
     private ?BlockUnionTypeDataLoader $blockUnionTypeDataLoader = null;
 
-    final public function setBlockInterfaceTypeResolver(BlockInterfaceTypeResolver $blockInterfaceTypeResolver): void
-    {
-        $this->blockInterfaceTypeResolver = $blockInterfaceTypeResolver;
-    }
     final protected function getBlockInterfaceTypeResolver(): BlockInterfaceTypeResolver
     {
         if ($this->blockInterfaceTypeResolver === null) {
@@ -27,10 +23,6 @@ class BlockUnionTypeResolver extends AbstractUnionTypeResolver
             $this->blockInterfaceTypeResolver = $blockInterfaceTypeResolver;
         }
         return $this->blockInterfaceTypeResolver;
-    }
-    final public function setBlockUnionTypeDataLoader(BlockUnionTypeDataLoader $blockUnionTypeDataLoader): void
-    {
-        $this->blockUnionTypeDataLoader = $blockUnionTypeDataLoader;
     }
     final protected function getBlockUnionTypeDataLoader(): BlockUnionTypeDataLoader
     {

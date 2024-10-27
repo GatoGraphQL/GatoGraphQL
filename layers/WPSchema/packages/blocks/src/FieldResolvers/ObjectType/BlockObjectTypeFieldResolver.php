@@ -18,10 +18,6 @@ class BlockObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?BlockInterfaceTypeFieldResolver $blockInterfaceTypeFieldResolver = null;
 
-    final public function setBlockInterfaceTypeFieldResolver(BlockInterfaceTypeFieldResolver $blockInterfaceTypeFieldResolver): void
-    {
-        $this->blockInterfaceTypeFieldResolver = $blockInterfaceTypeFieldResolver;
-    }
     final protected function getBlockInterfaceTypeFieldResolver(): BlockInterfaceTypeFieldResolver
     {
         if ($this->blockInterfaceTypeFieldResolver === null) {

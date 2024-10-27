@@ -16,10 +16,6 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
     private ?MenuLocationEnumStringScalarTypeResolver $menuLocationEnumStringScalarTypeResolver = null;
     private ?LocationsFilterInput $locationsFilterInput = null;
 
-    final public function setMenuLocationEnumStringTypeResolver(MenuLocationEnumStringScalarTypeResolver $menuLocationEnumStringScalarTypeResolver): void
-    {
-        $this->menuLocationEnumStringScalarTypeResolver = $menuLocationEnumStringScalarTypeResolver;
-    }
     final protected function getMenuLocationEnumStringTypeResolver(): MenuLocationEnumStringScalarTypeResolver
     {
         if ($this->menuLocationEnumStringScalarTypeResolver === null) {
@@ -28,10 +24,6 @@ class RootMenusFilterInputObjectTypeResolver extends UpstreamRootMenusFilterInpu
             $this->menuLocationEnumStringScalarTypeResolver = $menuLocationEnumStringScalarTypeResolver;
         }
         return $this->menuLocationEnumStringScalarTypeResolver;
-    }
-    final public function setLocationsFilterInput(LocationsFilterInput $locationsFilterInput): void
-    {
-        $this->locationsFilterInput = $locationsFilterInput;
     }
     final protected function getLocationsFilterInput(): LocationsFilterInput
     {

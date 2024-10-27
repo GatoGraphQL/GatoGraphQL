@@ -22,10 +22,6 @@ class ApplicationStateFillerService implements ApplicationStateFillerServiceInte
 
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
 
-    final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
-    {
-        $this->graphQLParserHelperService = $graphQLParserHelperService;
-    }
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {
         if ($this->graphQLParserHelperService === null) {

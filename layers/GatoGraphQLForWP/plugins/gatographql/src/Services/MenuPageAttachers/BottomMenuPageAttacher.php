@@ -45,10 +45,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?AboutMenuPage $aboutMenuPage = null;
     private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
 
-    final public function setMenuPageHelper(MenuPageHelper $menuPageHelper): void
-    {
-        $this->menuPageHelper = $menuPageHelper;
-    }
     final protected function getMenuPageHelper(): MenuPageHelper
     {
         if ($this->menuPageHelper === null) {
@@ -57,10 +53,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->menuPageHelper = $menuPageHelper;
         }
         return $this->menuPageHelper;
-    }
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
@@ -71,10 +63,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->moduleRegistry;
     }
-    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
-    {
-        $this->userAuthorization = $userAuthorization;
-    }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         if ($this->userAuthorization === null) {
@@ -83,10 +71,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->userAuthorization = $userAuthorization;
         }
         return $this->userAuthorization;
-    }
-    final public function setSettingsMenuPage(SettingsMenuPage $settingsMenuPage): void
-    {
-        $this->settingsMenuPage = $settingsMenuPage;
     }
     final protected function getSettingsMenuPage(): SettingsMenuPage
     {
@@ -97,10 +81,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->settingsMenuPage;
     }
-    final public function setModuleDocumentationMenuPage(ModuleDocumentationMenuPage $moduleDocumentationMenuPage): void
-    {
-        $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
-    }
     final protected function getModuleDocumentationMenuPage(): ModuleDocumentationMenuPage
     {
         if ($this->moduleDocumentationMenuPage === null) {
@@ -109,10 +89,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->moduleDocumentationMenuPage = $moduleDocumentationMenuPage;
         }
         return $this->moduleDocumentationMenuPage;
-    }
-    final public function setModulesMenuPage(ModulesMenuPage $modulesMenuPage): void
-    {
-        $this->modulesMenuPage = $modulesMenuPage;
     }
     final protected function getModulesMenuPage(): ModulesMenuPage
     {
@@ -123,10 +99,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->modulesMenuPage;
     }
-    final public function setExtensionModuleDocumentationMenuPage(ExtensionModuleDocumentationMenuPage $extensionModuleDocumentationMenuPage): void
-    {
-        $this->extensionModuleDocumentationMenuPage = $extensionModuleDocumentationMenuPage;
-    }
     final protected function getExtensionModuleDocumentationMenuPage(): ExtensionModuleDocumentationMenuPage
     {
         if ($this->extensionModuleDocumentationMenuPage === null) {
@@ -135,10 +107,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->extensionModuleDocumentationMenuPage = $extensionModuleDocumentationMenuPage;
         }
         return $this->extensionModuleDocumentationMenuPage;
-    }
-    final public function setExtensionDocModuleDocumentationMenuPage(ExtensionDocModuleDocumentationMenuPage $extensionDocModuleDocumentationMenuPage): void
-    {
-        $this->extensionDocModuleDocumentationMenuPage = $extensionDocModuleDocumentationMenuPage;
     }
     final protected function getExtensionDocModuleDocumentationMenuPage(): ExtensionDocModuleDocumentationMenuPage
     {
@@ -149,10 +117,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->extensionDocModuleDocumentationMenuPage;
     }
-    final public function setExtensionsMenuPage(ExtensionsMenuPage $extensionsMenuPage): void
-    {
-        $this->extensionsMenuPage = $extensionsMenuPage;
-    }
     final protected function getExtensionsMenuPage(): ExtensionsMenuPage
     {
         if ($this->extensionsMenuPage === null) {
@@ -161,10 +125,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->extensionsMenuPage = $extensionsMenuPage;
         }
         return $this->extensionsMenuPage;
-    }
-    final public function setReleaseNotesAboutMenuPage(ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage): void
-    {
-        $this->releaseNotesAboutMenuPage = $releaseNotesAboutMenuPage;
     }
     final protected function getReleaseNotesAboutMenuPage(): ReleaseNotesAboutMenuPage
     {
@@ -175,10 +135,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->releaseNotesAboutMenuPage;
     }
-    final public function setExtensionDocsMenuPage(ExtensionDocsMenuPage $extensionDocsMenuPage): void
-    {
-        $this->extensionDocsMenuPage = $extensionDocsMenuPage;
-    }
     final protected function getExtensionDocsMenuPage(): ExtensionDocsMenuPage
     {
         if ($this->extensionDocsMenuPage === null) {
@@ -187,10 +143,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->extensionDocsMenuPage = $extensionDocsMenuPage;
         }
         return $this->extensionDocsMenuPage;
-    }
-    final public function setTutorialMenuPage(TutorialMenuPage $tutorialMenuPage): void
-    {
-        $this->tutorialMenuPage = $tutorialMenuPage;
     }
     final protected function getTutorialMenuPage(): TutorialMenuPage
     {
@@ -201,10 +153,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->tutorialMenuPage;
     }
-    final public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
-    {
-        $this->aboutMenuPage = $aboutMenuPage;
-    }
     final protected function getAboutMenuPage(): AboutMenuPage
     {
         if ($this->aboutMenuPage === null) {
@@ -213,10 +161,6 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->aboutMenuPage = $aboutMenuPage;
         }
         return $this->aboutMenuPage;
-    }
-    final public function setGraphQLEndpointCategoryTaxonomy(GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy): void
-    {
-        $this->graphQLEndpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy;
     }
     final protected function getGraphQLEndpointCategoryTaxonomy(): GraphQLEndpointCategoryTaxonomy
     {

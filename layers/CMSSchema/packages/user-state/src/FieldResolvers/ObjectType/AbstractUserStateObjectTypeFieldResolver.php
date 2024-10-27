@@ -14,10 +14,6 @@ abstract class AbstractUserStateObjectTypeFieldResolver extends AbstractObjectTy
 {
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
-    }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
         if ($this->userLoggedInCheckpoint === null) {

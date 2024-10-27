@@ -38,10 +38,6 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
 
-    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
-    {
-        $this->commentTypeAPI = $commentTypeAPI;
-    }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         if ($this->commentTypeAPI === null) {
@@ -50,10 +46,6 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             $this->commentTypeAPI = $commentTypeAPI;
         }
         return $this->commentTypeAPI;
-    }
-    final public function setCommentTypeMutationAPI(CommentTypeMutationAPIInterface $commentTypeMutationAPI): void
-    {
-        $this->commentTypeMutationAPI = $commentTypeMutationAPI;
     }
     final protected function getCommentTypeMutationAPI(): CommentTypeMutationAPIInterface
     {
@@ -64,10 +56,6 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         }
         return $this->commentTypeMutationAPI;
     }
-    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
-    {
-        $this->userTypeAPI = $userTypeAPI;
-    }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
         if ($this->userTypeAPI === null) {
@@ -77,10 +65,6 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         }
         return $this->userTypeAPI;
     }
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         if ($this->customPostTypeAPI === null) {
@@ -89,10 +73,6 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             $this->customPostTypeAPI = $customPostTypeAPI;
         }
         return $this->customPostTypeAPI;
-    }
-    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
-    {
-        $this->requestHelperService = $requestHelperService;
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {

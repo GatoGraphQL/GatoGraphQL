@@ -14,10 +14,6 @@ class CustomPostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMut
 {
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
 
-    final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
-    {
-        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
-    }
     final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
         if ($this->genericCustomPostObjectTypeResolver === null) {

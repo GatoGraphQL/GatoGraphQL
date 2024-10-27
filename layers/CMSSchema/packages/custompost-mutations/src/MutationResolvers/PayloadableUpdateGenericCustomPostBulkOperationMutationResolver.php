@@ -11,10 +11,6 @@ class PayloadableUpdateGenericCustomPostBulkOperationMutationResolver extends Ab
 {
     private ?PayloadableUpdateGenericCustomPostMutationResolver $payloadableUpdateGenericCustomPostMutationResolver = null;
 
-    final public function setPayloadableUpdateGenericCustomPostMutationResolver(PayloadableUpdateGenericCustomPostMutationResolver $payloadableUpdateGenericCustomPostMutationResolver): void
-    {
-        $this->payloadableUpdateGenericCustomPostMutationResolver = $payloadableUpdateGenericCustomPostMutationResolver;
-    }
     final protected function getPayloadableUpdateGenericCustomPostMutationResolver(): PayloadableUpdateGenericCustomPostMutationResolver
     {
         if ($this->payloadableUpdateGenericCustomPostMutationResolver === null) {

@@ -22,10 +22,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
 
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
-    {
-        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
         if ($this->dangerouslyNonSpecificScalarTypeScalarTypeResolver === null) {
@@ -34,10 +30,6 @@ class SchemaCastingService implements SchemaCastingServiceInterface
             $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
         }
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
-    final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
-    {
-        $this->inputCoercingService = $inputCoercingService;
     }
     final protected function getInputCoercingService(): InputCoercingServiceInterface
     {

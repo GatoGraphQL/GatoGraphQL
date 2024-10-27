@@ -12,10 +12,6 @@ class LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResol
 {
     private ?LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeDataLoader === null) {

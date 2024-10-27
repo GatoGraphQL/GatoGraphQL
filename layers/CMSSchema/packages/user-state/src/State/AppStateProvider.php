@@ -11,10 +11,6 @@ class AppStateProvider extends AbstractAppStateProvider
 {
     private ?UserStateTypeAPIInterface $userStateTypeAPI = null;
 
-    final public function setUserStateTypeAPI(UserStateTypeAPIInterface $userStateTypeAPI): void
-    {
-        $this->userStateTypeAPI = $userStateTypeAPI;
-    }
     final protected function getUserStateTypeAPI(): UserStateTypeAPIInterface
     {
         if ($this->userStateTypeAPI === null) {

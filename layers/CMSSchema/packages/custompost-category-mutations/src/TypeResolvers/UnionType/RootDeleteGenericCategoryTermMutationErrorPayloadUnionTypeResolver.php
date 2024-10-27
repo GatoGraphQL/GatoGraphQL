@@ -12,10 +12,6 @@ class RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeResolver extends
 {
     private ?RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader $rootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader(RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader $rootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader = $rootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader(): RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader === null) {
