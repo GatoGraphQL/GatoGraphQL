@@ -35,10 +35,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?RootLoginUserMutationPayloadObjectTypeResolver $rootLoginUserMutationPayloadObjectTypeResolver = null;
     private ?RootLogoutUserMutationPayloadObjectTypeResolver $rootLogoutUserMutationPayloadObjectTypeResolver = null;
 
-    final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
-    {
-        $this->userObjectTypeResolver = $userObjectTypeResolver;
-    }
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
         if ($this->userObjectTypeResolver === null) {
@@ -47,10 +43,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->userObjectTypeResolver = $userObjectTypeResolver;
         }
         return $this->userObjectTypeResolver;
-    }
-    final public function setLoginUserOneofMutationResolver(LoginUserOneofMutationResolver $loginUserOneofMutationResolver): void
-    {
-        $this->loginUserOneofMutationResolver = $loginUserOneofMutationResolver;
     }
     final protected function getLoginUserOneofMutationResolver(): LoginUserOneofMutationResolver
     {
@@ -61,10 +53,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->loginUserOneofMutationResolver;
     }
-    final public function setLogoutUserMutationResolver(LogoutUserMutationResolver $logoutUserMutationResolver): void
-    {
-        $this->logoutUserMutationResolver = $logoutUserMutationResolver;
-    }
     final protected function getLogoutUserMutationResolver(): LogoutUserMutationResolver
     {
         if ($this->logoutUserMutationResolver === null) {
@@ -73,10 +61,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->logoutUserMutationResolver = $logoutUserMutationResolver;
         }
         return $this->logoutUserMutationResolver;
-    }
-    final public function setLoginUserByOneofInputObjectTypeResolver(LoginUserByOneofInputObjectTypeResolver $loginUserByOneofInputObjectTypeResolver): void
-    {
-        $this->loginUserByOneofInputObjectTypeResolver = $loginUserByOneofInputObjectTypeResolver;
     }
     final protected function getLoginUserByOneofInputObjectTypeResolver(): LoginUserByOneofInputObjectTypeResolver
     {
@@ -87,10 +71,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->loginUserByOneofInputObjectTypeResolver;
     }
-    final public function setPayloadableLoginUserOneofMutationResolver(PayloadableLoginUserOneofMutationResolver $payloadableLoginUserOneofMutationResolver): void
-    {
-        $this->payloadableLoginUserOneofMutationResolver = $payloadableLoginUserOneofMutationResolver;
-    }
     final protected function getPayloadableLoginUserOneofMutationResolver(): PayloadableLoginUserOneofMutationResolver
     {
         if ($this->payloadableLoginUserOneofMutationResolver === null) {
@@ -99,10 +79,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->payloadableLoginUserOneofMutationResolver = $payloadableLoginUserOneofMutationResolver;
         }
         return $this->payloadableLoginUserOneofMutationResolver;
-    }
-    final public function setPayloadableLogoutUserMutationResolver(PayloadableLogoutUserMutationResolver $payloadableLogoutUserMutationResolver): void
-    {
-        $this->payloadableLogoutUserMutationResolver = $payloadableLogoutUserMutationResolver;
     }
     final protected function getPayloadableLogoutUserMutationResolver(): PayloadableLogoutUserMutationResolver
     {
@@ -113,10 +89,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->payloadableLogoutUserMutationResolver;
     }
-    final public function setRootLoginUserMutationPayloadObjectTypeResolver(RootLoginUserMutationPayloadObjectTypeResolver $rootLoginUserMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootLoginUserMutationPayloadObjectTypeResolver = $rootLoginUserMutationPayloadObjectTypeResolver;
-    }
     final protected function getRootLoginUserMutationPayloadObjectTypeResolver(): RootLoginUserMutationPayloadObjectTypeResolver
     {
         if ($this->rootLoginUserMutationPayloadObjectTypeResolver === null) {
@@ -125,10 +97,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->rootLoginUserMutationPayloadObjectTypeResolver = $rootLoginUserMutationPayloadObjectTypeResolver;
         }
         return $this->rootLoginUserMutationPayloadObjectTypeResolver;
-    }
-    final public function setRootLogoutUserMutationPayloadObjectTypeResolver(RootLogoutUserMutationPayloadObjectTypeResolver $rootLogoutUserMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootLogoutUserMutationPayloadObjectTypeResolver = $rootLogoutUserMutationPayloadObjectTypeResolver;
     }
     final protected function getRootLogoutUserMutationPayloadObjectTypeResolver(): RootLogoutUserMutationPayloadObjectTypeResolver
     {

@@ -12,10 +12,6 @@ class BlockUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?BlockUnionTypeResolver $blockUnionTypeResolver = null;
 
-    final public function setBlockUnionTypeResolver(BlockUnionTypeResolver $blockUnionTypeResolver): void
-    {
-        $this->blockUnionTypeResolver = $blockUnionTypeResolver;
-    }
     final protected function getBlockUnionTypeResolver(): BlockUnionTypeResolver
     {
         if ($this->blockUnionTypeResolver === null) {

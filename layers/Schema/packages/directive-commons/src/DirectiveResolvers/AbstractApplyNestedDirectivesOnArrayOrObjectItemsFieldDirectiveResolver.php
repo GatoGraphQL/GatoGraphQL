@@ -46,10 +46,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?ObjectResolvedDynamicVariablesServiceInterface $objectResolvedDynamicVariablesService = null;
 
-    final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
-    {
-        $this->directivePipelineService = $directivePipelineService;
-    }
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
         if ($this->directivePipelineService === null) {
@@ -59,10 +55,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         }
         return $this->directivePipelineService;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -71,10 +63,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setObjectResolvedDynamicVariablesService(ObjectResolvedDynamicVariablesServiceInterface $objectResolvedDynamicVariablesService): void
-    {
-        $this->objectResolvedDynamicVariablesService = $objectResolvedDynamicVariablesService;
     }
     final protected function getObjectResolvedDynamicVariablesService(): ObjectResolvedDynamicVariablesServiceInterface
     {

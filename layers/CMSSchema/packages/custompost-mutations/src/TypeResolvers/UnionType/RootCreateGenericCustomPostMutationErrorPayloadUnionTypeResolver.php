@@ -12,10 +12,6 @@ class RootCreateGenericCustomPostMutationErrorPayloadUnionTypeResolver extends A
 {
     private ?RootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader $rootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader(RootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader $rootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader = $rootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader(): RootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootCreateGenericCustomPostMutationErrorPayloadUnionTypeDataLoader === null) {

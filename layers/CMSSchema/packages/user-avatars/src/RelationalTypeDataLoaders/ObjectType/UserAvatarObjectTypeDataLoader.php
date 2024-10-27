@@ -11,10 +11,6 @@ class UserAvatarObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry = null;
 
-    final public function setUserAvatarRuntimeRegistry(UserAvatarRuntimeRegistryInterface $userAvatarRuntimeRegistry): void
-    {
-        $this->userAvatarRuntimeRegistry = $userAvatarRuntimeRegistry;
-    }
     final protected function getUserAvatarRuntimeRegistry(): UserAvatarRuntimeRegistryInterface
     {
         if ($this->userAvatarRuntimeRegistry === null) {

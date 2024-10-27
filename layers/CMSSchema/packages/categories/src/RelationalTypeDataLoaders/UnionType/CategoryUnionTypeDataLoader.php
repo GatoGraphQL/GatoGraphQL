@@ -12,10 +12,6 @@ class CategoryUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?CategoryUnionTypeResolver $categoryUnionTypeResolver = null;
 
-    final public function setCategoryUnionTypeResolver(CategoryUnionTypeResolver $categoryUnionTypeResolver): void
-    {
-        $this->categoryUnionTypeResolver = $categoryUnionTypeResolver;
-    }
     final protected function getCategoryUnionTypeResolver(): CategoryUnionTypeResolver
     {
         if ($this->categoryUnionTypeResolver === null) {

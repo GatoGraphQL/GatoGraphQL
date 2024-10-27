@@ -16,10 +16,6 @@ abstract class AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver exten
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -28,10 +24,6 @@ abstract class AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver exten
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
-    }
-    final public function setMediaItemByOneofInputObjectTypeResolver(MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver): void
-    {
-        $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
     }
     final protected function getMediaItemByOneofInputObjectTypeResolver(): MediaItemByOneofInputObjectTypeResolver
     {

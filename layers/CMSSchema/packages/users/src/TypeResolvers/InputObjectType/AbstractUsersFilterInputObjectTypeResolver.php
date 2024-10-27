@@ -11,10 +11,6 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
 {
     private ?UserSearchByOneofInputObjectTypeResolver $userSearchByOneofInputObjectTypeResolver = null;
 
-    final public function setUserSearchByOneofInputObjectTypeResolver(UserSearchByOneofInputObjectTypeResolver $userSearchByOneofInputObjectTypeResolver): void
-    {
-        $this->userSearchByOneofInputObjectTypeResolver = $userSearchByOneofInputObjectTypeResolver;
-    }
     final protected function getUserSearchByOneofInputObjectTypeResolver(): UserSearchByOneofInputObjectTypeResolver
     {
         if ($this->userSearchByOneofInputObjectTypeResolver === null) {

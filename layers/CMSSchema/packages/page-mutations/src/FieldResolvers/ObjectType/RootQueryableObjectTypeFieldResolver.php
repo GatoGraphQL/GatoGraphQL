@@ -42,10 +42,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?CustomPostSortInputObjectTypeResolver $customPageSortInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         if ($this->intScalarTypeResolver === null) {
@@ -54,10 +50,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->intScalarTypeResolver = $intScalarTypeResolver;
         }
         return $this->intScalarTypeResolver;
-    }
-    final public function setPageObjectTypeResolver(PageObjectTypeResolver $pageObjectTypeResolver): void
-    {
-        $this->pageObjectTypeResolver = $pageObjectTypeResolver;
     }
     final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
@@ -68,10 +60,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->pageObjectTypeResolver;
     }
-    final public function setPageTypeAPI(PageTypeAPIInterface $pageTypeAPI): void
-    {
-        $this->pageTypeAPI = $pageTypeAPI;
-    }
     final protected function getPageTypeAPI(): PageTypeAPIInterface
     {
         if ($this->pageTypeAPI === null) {
@@ -80,10 +68,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->pageTypeAPI = $pageTypeAPI;
         }
         return $this->pageTypeAPI;
-    }
-    final public function setPageByOneofInputObjectTypeResolver(PageByOneofInputObjectTypeResolver $pageByOneofInputObjectTypeResolver): void
-    {
-        $this->pageByOneofInputObjectTypeResolver = $pageByOneofInputObjectTypeResolver;
     }
     final protected function getPageByOneofInputObjectTypeResolver(): PageByOneofInputObjectTypeResolver
     {
@@ -94,10 +78,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->pageByOneofInputObjectTypeResolver;
     }
-    final public function setRootMyPagesFilterInputObjectTypeResolver(RootMyPagesFilterInputObjectTypeResolver $rootMyPagesFilterInputObjectTypeResolver): void
-    {
-        $this->rootMyPagesFilterInputObjectTypeResolver = $rootMyPagesFilterInputObjectTypeResolver;
-    }
     final protected function getRootMyPagesFilterInputObjectTypeResolver(): RootMyPagesFilterInputObjectTypeResolver
     {
         if ($this->rootMyPagesFilterInputObjectTypeResolver === null) {
@@ -106,10 +86,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->rootMyPagesFilterInputObjectTypeResolver = $rootMyPagesFilterInputObjectTypeResolver;
         }
         return $this->rootMyPagesFilterInputObjectTypeResolver;
-    }
-    final public function setPagePaginationInputObjectTypeResolver(PagePaginationInputObjectTypeResolver $pagePaginationInputObjectTypeResolver): void
-    {
-        $this->pagePaginationInputObjectTypeResolver = $pagePaginationInputObjectTypeResolver;
     }
     final protected function getPagePaginationInputObjectTypeResolver(): PagePaginationInputObjectTypeResolver
     {
@@ -120,10 +96,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->pagePaginationInputObjectTypeResolver;
     }
-    final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPageSortInputObjectTypeResolver): void
-    {
-        $this->customPageSortInputObjectTypeResolver = $customPageSortInputObjectTypeResolver;
-    }
     final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
     {
         if ($this->customPageSortInputObjectTypeResolver === null) {
@@ -132,10 +104,6 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->customPageSortInputObjectTypeResolver = $customPageSortInputObjectTypeResolver;
         }
         return $this->customPageSortInputObjectTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {

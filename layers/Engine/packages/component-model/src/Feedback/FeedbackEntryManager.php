@@ -31,10 +31,6 @@ class FeedbackEntryManager implements FeedbackEntryManagerInterface
 
     private ?DatabaseEntryManagerInterface $databaseEntryManager = null;
 
-    final public function setDatabaseEntryManager(DatabaseEntryManagerInterface $databaseEntryManager): void
-    {
-        $this->databaseEntryManager = $databaseEntryManager;
-    }
     final protected function getDatabaseEntryManager(): DatabaseEntryManagerInterface
     {
         if ($this->databaseEntryManager === null) {

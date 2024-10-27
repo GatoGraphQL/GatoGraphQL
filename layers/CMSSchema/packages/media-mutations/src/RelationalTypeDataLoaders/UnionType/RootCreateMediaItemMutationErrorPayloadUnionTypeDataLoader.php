@@ -12,10 +12,6 @@ class RootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader extends Abstrac
 {
     private ?RootCreateMediaItemMutationErrorPayloadUnionTypeResolver $rootCreateMediaItemMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootCreateMediaItemMutationErrorPayloadUnionTypeResolver(RootCreateMediaItemMutationErrorPayloadUnionTypeResolver $rootCreateMediaItemMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootCreateMediaItemMutationErrorPayloadUnionTypeResolver = $rootCreateMediaItemMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootCreateMediaItemMutationErrorPayloadUnionTypeResolver(): RootCreateMediaItemMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootCreateMediaItemMutationErrorPayloadUnionTypeResolver === null) {

@@ -19,10 +19,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
     private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 
-    final public function setQueryableTagTypeAPI(QueryableTagTypeAPIInterface $queryableTagTypeAPI): void
-    {
-        $this->queryableTagTypeAPI = $queryableTagTypeAPI;
-    }
     final protected function getQueryableTagTypeAPI(): QueryableTagTypeAPIInterface
     {
         if ($this->queryableTagTypeAPI === null) {
@@ -32,10 +28,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
         }
         return $this->queryableTagTypeAPI;
     }
-    final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void
-    {
-        $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
-    }
     final protected function getGenericTagObjectTypeResolver(): GenericTagObjectTypeResolver
     {
         if ($this->genericTagObjectTypeResolver === null) {
@@ -44,10 +36,6 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
             $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
         }
         return $this->genericTagObjectTypeResolver;
-    }
-    final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
     }
     final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
     {

@@ -12,10 +12,6 @@ class PostTagDeleteMutationErrorPayloadUnionTypeDataLoader extends AbstractUnion
 {
     private ?PostTagDeleteMutationErrorPayloadUnionTypeResolver $postTagDeleteMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setPostTagDeleteMutationErrorPayloadUnionTypeResolver(PostTagDeleteMutationErrorPayloadUnionTypeResolver $postTagDeleteMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->postTagDeleteMutationErrorPayloadUnionTypeResolver = $postTagDeleteMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getPostTagDeleteMutationErrorPayloadUnionTypeResolver(): PostTagDeleteMutationErrorPayloadUnionTypeResolver
     {
         if ($this->postTagDeleteMutationErrorPayloadUnionTypeResolver === null) {

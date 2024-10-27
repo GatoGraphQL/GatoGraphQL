@@ -19,10 +19,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?CustomPostUserTypeAPIInterface $customPostUserTypeAPI = null;
     private ?WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver = null;
 
-    final public function setCustomPostUserTypeAPI(CustomPostUserTypeAPIInterface $customPostUserTypeAPI): void
-    {
-        $this->customPostUserTypeAPI = $customPostUserTypeAPI;
-    }
     final protected function getCustomPostUserTypeAPI(): CustomPostUserTypeAPIInterface
     {
         if ($this->customPostUserTypeAPI === null) {
@@ -31,10 +27,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->customPostUserTypeAPI = $customPostUserTypeAPI;
         }
         return $this->customPostUserTypeAPI;
-    }
-    final public function setWithAuthorInterfaceTypeFieldResolver(WithAuthorInterfaceTypeFieldResolver $withAuthorInterfaceTypeFieldResolver): void
-    {
-        $this->withAuthorInterfaceTypeFieldResolver = $withAuthorInterfaceTypeFieldResolver;
     }
     final protected function getWithAuthorInterfaceTypeFieldResolver(): WithAuthorInterfaceTypeFieldResolver
     {

@@ -16,10 +16,6 @@ class PostTagMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutati
 {
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
 
-    final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
-    {
-        $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
-    }
     final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
         if ($this->postTagObjectTypeResolver === null) {

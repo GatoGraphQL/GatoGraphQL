@@ -11,10 +11,6 @@ class CreateGenericCategoryTermBulkOperationMutationResolver extends AbstractBul
 {
     private ?CreateGenericCategoryTermMutationResolver $createGenericCategoryTermMutationResolver = null;
 
-    final public function setCreateGenericCategoryTermMutationResolver(CreateGenericCategoryTermMutationResolver $createGenericCategoryTermMutationResolver): void
-    {
-        $this->createGenericCategoryTermMutationResolver = $createGenericCategoryTermMutationResolver;
-    }
     final protected function getCreateGenericCategoryTermMutationResolver(): CreateGenericCategoryTermMutationResolver
     {
         if ($this->createGenericCategoryTermMutationResolver === null) {

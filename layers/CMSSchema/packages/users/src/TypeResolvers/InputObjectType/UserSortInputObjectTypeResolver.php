@@ -13,10 +13,6 @@ class UserSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {
     private ?UserOrderByEnumTypeResolver $customPostSortByEnumTypeResolver = null;
 
-    final public function setUserOrderByEnumTypeResolver(UserOrderByEnumTypeResolver $customPostSortByEnumTypeResolver): void
-    {
-        $this->customPostSortByEnumTypeResolver = $customPostSortByEnumTypeResolver;
-    }
     final protected function getUserOrderByEnumTypeResolver(): UserOrderByEnumTypeResolver
     {
         if ($this->customPostSortByEnumTypeResolver === null) {

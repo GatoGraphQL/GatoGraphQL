@@ -31,10 +31,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
     private ?CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver = null;
     private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
 
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         if ($this->intScalarTypeResolver === null) {
@@ -43,10 +39,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
             $this->intScalarTypeResolver = $intScalarTypeResolver;
         }
         return $this->intScalarTypeResolver;
-    }
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
@@ -57,10 +49,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
         }
         return $this->customPostTypeAPI;
     }
-    final public function setCustomPostPaginationInputObjectTypeResolver(CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver): void
-    {
-        $this->customPostPaginationInputObjectTypeResolver = $customPostPaginationInputObjectTypeResolver;
-    }
     final protected function getCustomPostPaginationInputObjectTypeResolver(): CustomPostPaginationInputObjectTypeResolver
     {
         if ($this->customPostPaginationInputObjectTypeResolver === null) {
@@ -69,10 +57,6 @@ abstract class AbstractCustomPostListObjectTypeFieldResolver extends AbstractQue
             $this->customPostPaginationInputObjectTypeResolver = $customPostPaginationInputObjectTypeResolver;
         }
         return $this->customPostPaginationInputObjectTypeResolver;
-    }
-    final public function setCustomPostSortInputObjectTypeResolver(CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver): void
-    {
-        $this->customPostSortInputObjectTypeResolver = $customPostSortInputObjectTypeResolver;
     }
     final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
     {

@@ -11,10 +11,6 @@ class CommentReplyMutationErrorPayloadUnionTypeResolver extends AbstractCommentM
 {
     private ?CommentReplyMutationErrorPayloadUnionTypeDataLoader $commentReplyMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setCommentReplyMutationErrorPayloadUnionTypeDataLoader(CommentReplyMutationErrorPayloadUnionTypeDataLoader $commentReplyMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->commentReplyMutationErrorPayloadUnionTypeDataLoader = $commentReplyMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getCommentReplyMutationErrorPayloadUnionTypeDataLoader(): CommentReplyMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->commentReplyMutationErrorPayloadUnionTypeDataLoader === null) {

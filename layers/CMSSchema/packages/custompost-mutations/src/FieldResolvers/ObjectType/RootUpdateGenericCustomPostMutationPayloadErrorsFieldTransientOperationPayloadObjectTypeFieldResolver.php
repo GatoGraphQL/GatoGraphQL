@@ -14,10 +14,6 @@ class RootUpdateGenericCustomPostMutationPayloadErrorsFieldTransientOperationPay
 {
     private ?RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver $rootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver(RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver $rootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver = $rootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver(): RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver === null) {

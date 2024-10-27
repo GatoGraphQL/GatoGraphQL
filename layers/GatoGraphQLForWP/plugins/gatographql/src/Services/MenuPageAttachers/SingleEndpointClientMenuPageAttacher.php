@@ -14,10 +14,6 @@ class SingleEndpointClientMenuPageAttacher extends AbstractPluginMenuPageAttache
 {
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         if ($this->moduleRegistry === null) {

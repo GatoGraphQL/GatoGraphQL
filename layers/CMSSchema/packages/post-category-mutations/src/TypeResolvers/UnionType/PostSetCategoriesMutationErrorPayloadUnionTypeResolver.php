@@ -11,10 +11,6 @@ class PostSetCategoriesMutationErrorPayloadUnionTypeResolver extends AbstractPos
 {
     private ?PostSetCategoriesMutationErrorPayloadUnionTypeDataLoader $postSetCategoriesMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader(PostSetCategoriesMutationErrorPayloadUnionTypeDataLoader $postSetCategoriesMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->postSetCategoriesMutationErrorPayloadUnionTypeDataLoader = $postSetCategoriesMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader(): PostSetCategoriesMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->postSetCategoriesMutationErrorPayloadUnionTypeDataLoader === null) {

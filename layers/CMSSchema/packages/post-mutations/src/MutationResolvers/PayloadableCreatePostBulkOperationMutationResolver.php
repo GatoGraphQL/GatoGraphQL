@@ -11,10 +11,6 @@ class PayloadableCreatePostBulkOperationMutationResolver extends AbstractBulkOpe
 {
     private ?PayloadableCreatePostMutationResolver $payloadableCreatePostMutationResolver = null;
 
-    final public function setPayloadableCreatePostMutationResolver(PayloadableCreatePostMutationResolver $payloadableCreatePostMutationResolver): void
-    {
-        $this->payloadableCreatePostMutationResolver = $payloadableCreatePostMutationResolver;
-    }
     final protected function getPayloadableCreatePostMutationResolver(): PayloadableCreatePostMutationResolver
     {
         if ($this->payloadableCreatePostMutationResolver === null) {

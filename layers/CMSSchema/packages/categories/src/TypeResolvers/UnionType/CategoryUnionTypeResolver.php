@@ -15,10 +15,6 @@ class CategoryUnionTypeResolver extends AbstractUnionTypeResolver
     private ?CategoryUnionTypeDataLoader $categoryUnionTypeDataLoader = null;
     private ?CategoryInterfaceTypeResolver $categoryInterfaceTypeResolver = null;
 
-    final public function setCategoryUnionTypeDataLoader(CategoryUnionTypeDataLoader $categoryUnionTypeDataLoader): void
-    {
-        $this->categoryUnionTypeDataLoader = $categoryUnionTypeDataLoader;
-    }
     final protected function getCategoryUnionTypeDataLoader(): CategoryUnionTypeDataLoader
     {
         if ($this->categoryUnionTypeDataLoader === null) {
@@ -27,10 +23,6 @@ class CategoryUnionTypeResolver extends AbstractUnionTypeResolver
             $this->categoryUnionTypeDataLoader = $categoryUnionTypeDataLoader;
         }
         return $this->categoryUnionTypeDataLoader;
-    }
-    final public function setCategoryInterfaceTypeResolver(CategoryInterfaceTypeResolver $categoryInterfaceTypeResolver): void
-    {
-        $this->categoryInterfaceTypeResolver = $categoryInterfaceTypeResolver;
     }
     final protected function getCategoryInterfaceTypeResolver(): CategoryInterfaceTypeResolver
     {

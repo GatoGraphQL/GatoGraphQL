@@ -11,10 +11,6 @@ class RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver extends Abstr
 {
     private ?RootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader $rootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader(RootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader $rootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader = $rootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader(): RootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader === null) {

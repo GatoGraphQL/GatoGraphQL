@@ -19,10 +19,6 @@ class CommentObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
 
-    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
-    {
-        $this->commentTypeAPI = $commentTypeAPI;
-    }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         if ($this->commentTypeAPI === null) {

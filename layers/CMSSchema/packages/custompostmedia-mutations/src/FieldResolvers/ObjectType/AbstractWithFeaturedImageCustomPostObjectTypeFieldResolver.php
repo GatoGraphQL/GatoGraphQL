@@ -43,10 +43,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     private ?CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver $customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver = null;
     private ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
 
-    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
-    {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-    }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
         if ($this->mediaObjectTypeResolver === null) {
@@ -55,10 +51,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
             $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         }
         return $this->mediaObjectTypeResolver;
-    }
-    final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
-    {
-        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
     }
     final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
@@ -69,10 +61,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
         }
         return $this->customPostUnionTypeResolver;
     }
-    final public function setSetFeaturedImageOnCustomPostMutationResolver(SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver): void
-    {
-        $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
-    }
     final protected function getSetFeaturedImageOnCustomPostMutationResolver(): SetFeaturedImageOnCustomPostMutationResolver
     {
         if ($this->setFeaturedImageOnCustomPostMutationResolver === null) {
@@ -81,10 +69,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
             $this->setFeaturedImageOnCustomPostMutationResolver = $setFeaturedImageOnCustomPostMutationResolver;
         }
         return $this->setFeaturedImageOnCustomPostMutationResolver;
-    }
-    final public function setRemoveFeaturedImageFromCustomPostMutationResolver(RemoveFeaturedImageFromCustomPostMutationResolver $removeFeaturedImageFromCustomPostMutationResolver): void
-    {
-        $this->removeFeaturedImageFromCustomPostMutationResolver = $removeFeaturedImageFromCustomPostMutationResolver;
     }
     final protected function getRemoveFeaturedImageFromCustomPostMutationResolver(): RemoveFeaturedImageFromCustomPostMutationResolver
     {
@@ -95,10 +79,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
         }
         return $this->removeFeaturedImageFromCustomPostMutationResolver;
     }
-    final public function setCustomPostSetFeaturedImageInputObjectTypeResolver(CustomPostSetFeaturedImageInputObjectTypeResolver $customPostSetFeaturedImageInputObjectTypeResolver): void
-    {
-        $this->customPostSetFeaturedImageInputObjectTypeResolver = $customPostSetFeaturedImageInputObjectTypeResolver;
-    }
     final protected function getCustomPostSetFeaturedImageInputObjectTypeResolver(): CustomPostSetFeaturedImageInputObjectTypeResolver
     {
         if ($this->customPostSetFeaturedImageInputObjectTypeResolver === null) {
@@ -107,10 +87,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
             $this->customPostSetFeaturedImageInputObjectTypeResolver = $customPostSetFeaturedImageInputObjectTypeResolver;
         }
         return $this->customPostSetFeaturedImageInputObjectTypeResolver;
-    }
-    final public function setPayloadableSetFeaturedImageOnCustomPostMutationResolver(PayloadableSetFeaturedImageOnCustomPostMutationResolver $payloadableSetFeaturedImageOnCustomPostMutationResolver): void
-    {
-        $this->payloadableSetFeaturedImageOnCustomPostMutationResolver = $payloadableSetFeaturedImageOnCustomPostMutationResolver;
     }
     final protected function getPayloadableSetFeaturedImageOnCustomPostMutationResolver(): PayloadableSetFeaturedImageOnCustomPostMutationResolver
     {
@@ -121,10 +97,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
         }
         return $this->payloadableSetFeaturedImageOnCustomPostMutationResolver;
     }
-    final public function setPayloadableRemoveFeaturedImageFromCustomPostMutationResolver(PayloadableRemoveFeaturedImageFromCustomPostMutationResolver $payloadableRemoveFeaturedImageFromCustomPostMutationResolver): void
-    {
-        $this->payloadableRemoveFeaturedImageFromCustomPostMutationResolver = $payloadableRemoveFeaturedImageFromCustomPostMutationResolver;
-    }
     final protected function getPayloadableRemoveFeaturedImageFromCustomPostMutationResolver(): PayloadableRemoveFeaturedImageFromCustomPostMutationResolver
     {
         if ($this->payloadableRemoveFeaturedImageFromCustomPostMutationResolver === null) {
@@ -133,10 +105,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
             $this->payloadableRemoveFeaturedImageFromCustomPostMutationResolver = $payloadableRemoveFeaturedImageFromCustomPostMutationResolver;
         }
         return $this->payloadableRemoveFeaturedImageFromCustomPostMutationResolver;
-    }
-    final public function setCustomPostSetFeaturedImageMutationPayloadObjectTypeResolver(CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver $customPostSetFeaturedImageMutationPayloadObjectTypeResolver): void
-    {
-        $this->customPostSetFeaturedImageMutationPayloadObjectTypeResolver = $customPostSetFeaturedImageMutationPayloadObjectTypeResolver;
     }
     final protected function getCustomPostSetFeaturedImageMutationPayloadObjectTypeResolver(): CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver
     {
@@ -147,10 +115,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
         }
         return $this->customPostSetFeaturedImageMutationPayloadObjectTypeResolver;
     }
-    final public function setCustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver(CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver $customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver): void
-    {
-        $this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver = $customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver;
-    }
     final protected function getCustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver(): CustomPostRemoveFeaturedImageMutationPayloadObjectTypeResolver
     {
         if ($this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver === null) {
@@ -159,10 +123,6 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
             $this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver = $customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver;
         }
         return $this->customPostRemoveFeaturedImageMutationPayloadObjectTypeResolver;
-    }
-    final public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
-    {
-        $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
     }
     final protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
     {

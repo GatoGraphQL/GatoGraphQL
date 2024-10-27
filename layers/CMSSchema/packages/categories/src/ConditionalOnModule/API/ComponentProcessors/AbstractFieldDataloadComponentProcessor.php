@@ -21,10 +21,6 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
 
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
-    final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
-    {
-        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
-    }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {
         if ($this->listQueryInputOutputHandler === null) {

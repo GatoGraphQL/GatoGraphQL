@@ -11,10 +11,6 @@ class RootCreateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractC
 {
     private ?RootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader $rootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader(RootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader $rootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader = $rootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader(): RootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader === null) {

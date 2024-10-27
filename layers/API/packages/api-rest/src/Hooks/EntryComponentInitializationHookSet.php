@@ -18,10 +18,6 @@ class EntryComponentInitializationHookSet extends AbstractHookSet
     private ?RESTDataStructureFormatter $restDataStructureFormatter = null;
     private ?ApplicationStateFillerServiceInterface $applicationStateFillerService = null;
 
-    final public function setRESTDataStructureFormatter(RESTDataStructureFormatter $restDataStructureFormatter): void
-    {
-        $this->restDataStructureFormatter = $restDataStructureFormatter;
-    }
     final protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
     {
         if ($this->restDataStructureFormatter === null) {
@@ -30,10 +26,6 @@ class EntryComponentInitializationHookSet extends AbstractHookSet
             $this->restDataStructureFormatter = $restDataStructureFormatter;
         }
         return $this->restDataStructureFormatter;
-    }
-    final public function setApplicationStateFillerService(ApplicationStateFillerServiceInterface $applicationStateFillerService): void
-    {
-        $this->applicationStateFillerService = $applicationStateFillerService;
     }
     final protected function getApplicationStateFillerService(): ApplicationStateFillerServiceInterface
     {

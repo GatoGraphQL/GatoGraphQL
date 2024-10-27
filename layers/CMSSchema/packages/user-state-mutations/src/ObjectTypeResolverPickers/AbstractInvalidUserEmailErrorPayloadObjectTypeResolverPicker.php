@@ -13,10 +13,6 @@ abstract class AbstractInvalidUserEmailErrorPayloadObjectTypeResolverPicker exte
 {
     private ?InvalidUserEmailErrorPayloadObjectTypeResolver $userIsNotLoggedInErrorPayloadObjectTypeResolver = null;
 
-    final public function setInvalidUserEmailErrorPayloadObjectTypeResolver(InvalidUserEmailErrorPayloadObjectTypeResolver $userIsNotLoggedInErrorPayloadObjectTypeResolver): void
-    {
-        $this->userIsNotLoggedInErrorPayloadObjectTypeResolver = $userIsNotLoggedInErrorPayloadObjectTypeResolver;
-    }
     final protected function getInvalidUserEmailErrorPayloadObjectTypeResolver(): InvalidUserEmailErrorPayloadObjectTypeResolver
     {
         if ($this->userIsNotLoggedInErrorPayloadObjectTypeResolver === null) {

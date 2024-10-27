@@ -12,10 +12,6 @@ class CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver extends AbstractE
 {
     private ?CommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader $commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setCommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader(CommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader $commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader = $commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getCommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader(): CommentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader
     {
         if ($this->commentAuthorNameIsMissingErrorPayloadObjectTypeDataLoader === null) {

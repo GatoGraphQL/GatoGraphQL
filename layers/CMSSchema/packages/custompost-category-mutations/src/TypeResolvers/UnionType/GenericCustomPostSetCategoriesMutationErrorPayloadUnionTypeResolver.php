@@ -11,10 +11,6 @@ class GenericCustomPostSetCategoriesMutationErrorPayloadUnionTypeResolver extend
 {
     private ?GenericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader $genericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setGenericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader(GenericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader $genericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->genericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader = $genericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getGenericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader(): GenericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->genericCustomPostSetCategoriesMutationErrorPayloadUnionTypeDataLoader === null) {

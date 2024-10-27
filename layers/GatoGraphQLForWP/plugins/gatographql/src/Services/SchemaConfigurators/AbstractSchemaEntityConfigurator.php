@@ -38,10 +38,6 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
     private ?TypeRegistryInterface $typeRegistry = null;
     private ?FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         if ($this->moduleRegistry === null) {
@@ -51,10 +47,6 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
         }
         return $this->moduleRegistry;
     }
-    final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
-    {
-        $this->typeRegistry = $typeRegistry;
-    }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
         if ($this->typeRegistry === null) {
@@ -63,10 +55,6 @@ abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfigura
             $this->typeRegistry = $typeRegistry;
         }
         return $this->typeRegistry;
-    }
-    final public function setFieldDirectiveResolverRegistry(FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry): void
-    {
-        $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
     }
     final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
     {

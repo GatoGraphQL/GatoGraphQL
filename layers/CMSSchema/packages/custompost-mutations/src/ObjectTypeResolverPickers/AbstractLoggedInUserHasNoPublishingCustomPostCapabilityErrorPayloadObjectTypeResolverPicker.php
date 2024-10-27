@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoPublishingCustomPostCapabilityErrorPaylo
 {
     private ?LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver(LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver = $loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver(): LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoPublishingCustomPostCapabilityErrorPayloadObjectTypeResolver === null) {

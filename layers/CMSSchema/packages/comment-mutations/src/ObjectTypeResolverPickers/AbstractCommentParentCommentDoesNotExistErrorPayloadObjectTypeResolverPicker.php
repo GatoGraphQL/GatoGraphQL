@@ -13,10 +13,6 @@ abstract class AbstractCommentParentCommentDoesNotExistErrorPayloadObjectTypeRes
 {
     private ?CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver $commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver = null;
 
-    final public function setCommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver(CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver $commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver): void
-    {
-        $this->commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver = $commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver;
-    }
     final protected function getCommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver(): CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver
     {
         if ($this->commentParentCommentDoesNotExistErrorPayloadObjectTypeResolver === null) {

@@ -21,10 +21,6 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
     private ?TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver = null;
     private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -33,10 +29,6 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -47,10 +39,6 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setTagsByOneofInputObjectTypeResolver(TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver): void
-    {
-        $this->tagsByOneofInputObjectTypeResolver = $tagsByOneofInputObjectTypeResolver;
-    }
     final protected function getTagsByOneofInputObjectTypeResolver(): TagsByOneofInputObjectTypeResolver
     {
         if ($this->tagsByOneofInputObjectTypeResolver === null) {
@@ -59,10 +47,6 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
             $this->tagsByOneofInputObjectTypeResolver = $tagsByOneofInputObjectTypeResolver;
         }
         return $this->tagsByOneofInputObjectTypeResolver;
-    }
-    final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
     }
     final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
     {

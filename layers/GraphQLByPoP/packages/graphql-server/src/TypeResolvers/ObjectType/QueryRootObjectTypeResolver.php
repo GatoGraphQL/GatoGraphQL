@@ -16,10 +16,6 @@ class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObject
 
     private ?QueryRootObjectTypeDataLoader $queryRootObjectTypeDataLoader = null;
 
-    final public function setQueryRootObjectTypeDataLoader(QueryRootObjectTypeDataLoader $queryRootObjectTypeDataLoader): void
-    {
-        $this->queryRootObjectTypeDataLoader = $queryRootObjectTypeDataLoader;
-    }
     final protected function getQueryRootObjectTypeDataLoader(): QueryRootObjectTypeDataLoader
     {
         if ($this->queryRootObjectTypeDataLoader === null) {

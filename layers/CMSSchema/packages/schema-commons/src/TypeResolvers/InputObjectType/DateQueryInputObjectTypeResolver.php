@@ -13,10 +13,6 @@ class DateQueryInputObjectTypeResolver extends AbstractQueryableInputObjectTypeR
 {
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
-    final public function setDateScalarTypeResolver(DateScalarTypeResolver $dateScalarTypeResolver): void
-    {
-        $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-    }
     final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
     {
         if ($this->dateScalarTypeResolver === null) {

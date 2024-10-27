@@ -20,10 +20,6 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
     private ?IncludeFilterInput $includeFilterInput = null;
     private ?SlugFilterInput $slugFilterInput = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -32,10 +28,6 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -46,10 +38,6 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
-    {
-        $this->includeFilterInput = $includeFilterInput;
-    }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
         if ($this->includeFilterInput === null) {
@@ -58,10 +46,6 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
             $this->includeFilterInput = $includeFilterInput;
         }
         return $this->includeFilterInput;
-    }
-    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
-    {
-        $this->slugFilterInput = $slugFilterInput;
     }
     final protected function getSlugFilterInput(): SlugFilterInput
     {

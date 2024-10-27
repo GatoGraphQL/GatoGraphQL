@@ -34,10 +34,6 @@ class StandaloneGraphQLServer extends AbstractGraphQLServer
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
     private ?GraphQLServerAppStateProviderServiceInterface $graphQLServerAppStateProviderService = null;
 
-    final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
-    {
-        $this->graphQLParserHelperService = $graphQLParserHelperService;
-    }
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {
         if ($this->graphQLParserHelperService === null) {
@@ -46,10 +42,6 @@ class StandaloneGraphQLServer extends AbstractGraphQLServer
             $this->graphQLParserHelperService = $graphQLParserHelperService;
         }
         return $this->graphQLParserHelperService;
-    }
-    final public function setGraphQLServerAppStateProviderService(GraphQLServerAppStateProviderServiceInterface $graphQLServerAppStateProviderService): void
-    {
-        $this->graphQLServerAppStateProviderService = $graphQLServerAppStateProviderService;
     }
     final protected function getGraphQLServerAppStateProviderService(): GraphQLServerAppStateProviderServiceInterface
     {

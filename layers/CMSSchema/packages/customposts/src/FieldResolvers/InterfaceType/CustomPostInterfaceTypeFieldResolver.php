@@ -34,10 +34,6 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
     private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
 
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
-    {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-    }
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
         if ($this->customPostStatusEnumTypeResolver === null) {
@@ -46,10 +42,6 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
         }
         return $this->customPostStatusEnumTypeResolver;
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
@@ -60,10 +52,6 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
         }
         return $this->booleanScalarTypeResolver;
     }
-    final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
-    {
-        $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
-    }
     final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
         if ($this->dateTimeScalarTypeResolver === null) {
@@ -72,10 +60,6 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
         }
         return $this->dateTimeScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -86,10 +70,6 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
-    {
-        $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
-    }
     final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
     {
         if ($this->htmlScalarTypeResolver === null) {
@@ -99,10 +79,6 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
         }
         return $this->htmlScalarTypeResolver;
     }
-    final public function setQueryableInterfaceTypeFieldResolver(QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver): void
-    {
-        $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
-    }
     final protected function getQueryableInterfaceTypeFieldResolver(): QueryableInterfaceTypeFieldResolver
     {
         if ($this->queryableInterfaceTypeFieldResolver === null) {
@@ -111,10 +87,6 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             $this->queryableInterfaceTypeFieldResolver = $queryableInterfaceTypeFieldResolver;
         }
         return $this->queryableInterfaceTypeFieldResolver;
-    }
-    final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
-    {
-        $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
     }
     final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {

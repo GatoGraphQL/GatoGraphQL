@@ -12,10 +12,6 @@ class TaxonomyTermDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErr
 {
     private ?TaxonomyTermDoesNotExistErrorPayloadObjectTypeDataLoader $taxonomyDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setTaxonomyTermDoesNotExistErrorPayloadObjectTypeDataLoader(TaxonomyTermDoesNotExistErrorPayloadObjectTypeDataLoader $taxonomyDoesNotExistErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->taxonomyDoesNotExistErrorPayloadObjectTypeDataLoader = $taxonomyDoesNotExistErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getTaxonomyTermDoesNotExistErrorPayloadObjectTypeDataLoader(): TaxonomyTermDoesNotExistErrorPayloadObjectTypeDataLoader
     {
         if ($this->taxonomyDoesNotExistErrorPayloadObjectTypeDataLoader === null) {

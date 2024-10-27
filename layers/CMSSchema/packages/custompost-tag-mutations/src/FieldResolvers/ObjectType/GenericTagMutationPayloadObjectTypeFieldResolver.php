@@ -16,10 +16,6 @@ class GenericTagMutationPayloadObjectTypeFieldResolver extends AbstractObjectMut
 {
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
 
-    final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void
-    {
-        $this->genericTagObjectTypeResolver = $genericTagObjectTypeResolver;
-    }
     final protected function getGenericTagObjectTypeResolver(): GenericTagObjectTypeResolver
     {
         if ($this->genericTagObjectTypeResolver === null) {

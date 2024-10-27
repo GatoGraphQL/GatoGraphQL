@@ -14,10 +14,6 @@ class RootDeleteGenericTagTermMutationPayloadErrorsFieldTransientOperationPayloa
 {
     private ?RootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver $rootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver(RootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver $rootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver = $rootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver(): RootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver === null) {

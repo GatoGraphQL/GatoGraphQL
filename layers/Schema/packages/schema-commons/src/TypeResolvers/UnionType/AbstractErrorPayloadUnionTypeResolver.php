@@ -12,10 +12,6 @@ abstract class AbstractErrorPayloadUnionTypeResolver extends AbstractUnionTypeRe
 {
     private ?ErrorPayloadInterfaceTypeResolver $errorPayloadInterfaceTypeResolver = null;
 
-    final public function setErrorPayloadInterfaceTypeResolver(ErrorPayloadInterfaceTypeResolver $errorPayloadInterfaceTypeResolver): void
-    {
-        $this->errorPayloadInterfaceTypeResolver = $errorPayloadInterfaceTypeResolver;
-    }
     final protected function getErrorPayloadInterfaceTypeResolver(): ErrorPayloadInterfaceTypeResolver
     {
         if ($this->errorPayloadInterfaceTypeResolver === null) {

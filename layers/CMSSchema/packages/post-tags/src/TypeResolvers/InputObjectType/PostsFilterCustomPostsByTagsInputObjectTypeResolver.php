@@ -14,10 +14,6 @@ class PostsFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractFilter
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
     private ?PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver = null;
 
-    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
-    {
-        $this->postTagTypeAPI = $postTagTypeAPI;
-    }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {
         if ($this->postTagTypeAPI === null) {
@@ -26,10 +22,6 @@ class PostsFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractFilter
             $this->postTagTypeAPI = $postTagTypeAPI;
         }
         return $this->postTagTypeAPI;
-    }
-    final public function setPostTagTaxonomyEnumStringScalarTypeResolver(PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
     }
     final protected function getPostTagTaxonomyEnumStringScalarTypeResolver(): PostTagTaxonomyEnumStringScalarTypeResolver
     {

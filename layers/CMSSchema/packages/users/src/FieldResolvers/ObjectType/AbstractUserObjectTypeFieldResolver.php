@@ -33,10 +33,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
     private ?UserPaginationInputObjectTypeResolver $userPaginationInputObjectTypeResolver = null;
     private ?UserSortInputObjectTypeResolver $userSortInputObjectTypeResolver = null;
 
-    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
-    {
-        $this->userTypeAPI = $userTypeAPI;
-    }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
         if ($this->userTypeAPI === null) {
@@ -45,10 +41,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
             $this->userTypeAPI = $userTypeAPI;
         }
         return $this->userTypeAPI;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -59,10 +51,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
-    {
-        $this->userObjectTypeResolver = $userObjectTypeResolver;
-    }
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {
         if ($this->userObjectTypeResolver === null) {
@@ -71,10 +59,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
             $this->userObjectTypeResolver = $userObjectTypeResolver;
         }
         return $this->userObjectTypeResolver;
-    }
-    final public function setUsersFilterInputObjectTypeResolver(UsersFilterInputObjectTypeResolver $usersFilterInputObjectTypeResolver): void
-    {
-        $this->usersFilterInputObjectTypeResolver = $usersFilterInputObjectTypeResolver;
     }
     final protected function getUsersFilterInputObjectTypeResolver(): UsersFilterInputObjectTypeResolver
     {
@@ -85,10 +69,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
         }
         return $this->usersFilterInputObjectTypeResolver;
     }
-    final public function setUserPaginationInputObjectTypeResolver(UserPaginationInputObjectTypeResolver $userPaginationInputObjectTypeResolver): void
-    {
-        $this->userPaginationInputObjectTypeResolver = $userPaginationInputObjectTypeResolver;
-    }
     final protected function getUserPaginationInputObjectTypeResolver(): UserPaginationInputObjectTypeResolver
     {
         if ($this->userPaginationInputObjectTypeResolver === null) {
@@ -97,10 +77,6 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractQueryableObje
             $this->userPaginationInputObjectTypeResolver = $userPaginationInputObjectTypeResolver;
         }
         return $this->userPaginationInputObjectTypeResolver;
-    }
-    final public function setUserSortInputObjectTypeResolver(UserSortInputObjectTypeResolver $userSortInputObjectTypeResolver): void
-    {
-        $this->userSortInputObjectTypeResolver = $userSortInputObjectTypeResolver;
     }
     final protected function getUserSortInputObjectTypeResolver(): UserSortInputObjectTypeResolver
     {

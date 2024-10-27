@@ -19,10 +19,6 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
     private ?ApplicationStateFillerServiceInterface $applicationStateFillerService = null;
     private ?EngineInterface $engine = null;
 
-    final public function setApplicationStateFillerService(ApplicationStateFillerServiceInterface $applicationStateFillerService): void
-    {
-        $this->applicationStateFillerService = $applicationStateFillerService;
-    }
     final protected function getApplicationStateFillerService(): ApplicationStateFillerServiceInterface
     {
         if ($this->applicationStateFillerService === null) {
@@ -31,10 +27,6 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
             $this->applicationStateFillerService = $applicationStateFillerService;
         }
         return $this->applicationStateFillerService;
-    }
-    final public function setEngine(EngineInterface $engine): void
-    {
-        $this->engine = $engine;
     }
     final protected function getEngine(): EngineInterface
     {

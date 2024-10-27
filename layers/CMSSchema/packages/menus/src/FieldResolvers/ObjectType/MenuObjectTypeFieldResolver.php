@@ -28,10 +28,6 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?MenuTypeAPIInterface $menuTypeAPI = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    final public function setMenuItemRuntimeRegistry(MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry): void
-    {
-        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
-    }
     final protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
     {
         if ($this->menuItemRuntimeRegistry === null) {
@@ -40,10 +36,6 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
         }
         return $this->menuItemRuntimeRegistry;
-    }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
-    {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
@@ -54,10 +46,6 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->jsonObjectScalarTypeResolver;
     }
-    final public function setMenuItemObjectTypeResolver(MenuItemObjectTypeResolver $menuItemObjectTypeResolver): void
-    {
-        $this->menuItemObjectTypeResolver = $menuItemObjectTypeResolver;
-    }
     final protected function getMenuItemObjectTypeResolver(): MenuItemObjectTypeResolver
     {
         if ($this->menuItemObjectTypeResolver === null) {
@@ -67,10 +55,6 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->menuItemObjectTypeResolver;
     }
-    final public function setMenuTypeAPI(MenuTypeAPIInterface $menuTypeAPI): void
-    {
-        $this->menuTypeAPI = $menuTypeAPI;
-    }
     final protected function getMenuTypeAPI(): MenuTypeAPIInterface
     {
         if ($this->menuTypeAPI === null) {
@@ -79,10 +63,6 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->menuTypeAPI = $menuTypeAPI;
         }
         return $this->menuTypeAPI;
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {

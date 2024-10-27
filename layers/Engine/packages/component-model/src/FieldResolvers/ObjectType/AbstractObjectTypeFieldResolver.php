@@ -88,10 +88,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?VersioningServiceInterface $versioningService = null;
 
-    final public function setNameResolver(NameResolverInterface $nameResolver): void
-    {
-        $this->nameResolver = $nameResolver;
-    }
     final protected function getNameResolver(): NameResolverInterface
     {
         if ($this->nameResolver === null) {
@@ -100,10 +96,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $this->nameResolver = $nameResolver;
         }
         return $this->nameResolver;
-    }
-    final public function setSemverHelperService(SemverHelperServiceInterface $semverHelperService): void
-    {
-        $this->semverHelperService = $semverHelperService;
     }
     final protected function getSemverHelperService(): SemverHelperServiceInterface
     {
@@ -114,10 +106,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return $this->semverHelperService;
     }
-    final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
-    {
-        $this->schemaDefinitionService = $schemaDefinitionService;
-    }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
         if ($this->schemaDefinitionService === null) {
@@ -126,10 +114,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $this->schemaDefinitionService = $schemaDefinitionService;
         }
         return $this->schemaDefinitionService;
-    }
-    final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
-    {
-        $this->attachableExtensionManager = $attachableExtensionManager;
     }
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface
     {
@@ -140,10 +124,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
         return $this->attachableExtensionManager;
     }
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
-    {
-        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
         if ($this->dangerouslyNonSpecificScalarTypeScalarTypeResolver === null) {
@@ -152,10 +132,6 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
         }
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
-    final public function setVersioningService(VersioningServiceInterface $versioningService): void
-    {
-        $this->versioningService = $versioningService;
     }
     final protected function getVersioningService(): VersioningServiceInterface
     {

@@ -12,10 +12,6 @@ class LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResol
 {
     private ?LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeDataLoader === null) {

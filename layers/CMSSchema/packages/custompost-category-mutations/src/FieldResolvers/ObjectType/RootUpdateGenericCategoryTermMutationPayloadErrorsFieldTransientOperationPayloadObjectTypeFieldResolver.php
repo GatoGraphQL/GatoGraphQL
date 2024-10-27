@@ -14,10 +14,6 @@ class RootUpdateGenericCategoryTermMutationPayloadErrorsFieldTransientOperationP
 {
     private ?RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver $rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver(RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver $rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver = $rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver(): RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver === null) {

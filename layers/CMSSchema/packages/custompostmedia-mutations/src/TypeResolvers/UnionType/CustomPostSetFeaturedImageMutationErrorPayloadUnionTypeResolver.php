@@ -11,10 +11,6 @@ class CustomPostSetFeaturedImageMutationErrorPayloadUnionTypeResolver extends Ab
 {
     private ?CustomPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader $customPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setCustomPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader(CustomPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader $customPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->customPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader = $customPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getCustomPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader(): CustomPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->customPostSetFeaturedImageMutationErrorPayloadUnionTypeDataLoader === null) {

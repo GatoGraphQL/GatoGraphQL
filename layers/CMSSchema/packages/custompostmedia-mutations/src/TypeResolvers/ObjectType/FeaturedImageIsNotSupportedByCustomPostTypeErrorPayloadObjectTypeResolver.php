@@ -12,10 +12,6 @@ class FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver 
 {
     private ?FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setFeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getFeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(): FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader
     {
         if ($this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader === null) {

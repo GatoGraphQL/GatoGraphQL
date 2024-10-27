@@ -70,10 +70,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
-    final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
-    {
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-    }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
         if ($this->postCategoryObjectTypeResolver === null) {
@@ -82,10 +78,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
         }
         return $this->postCategoryObjectTypeResolver;
-    }
-    final public function setRootDeletePostCategoryTermMutationPayloadObjectTypeResolver(RootDeletePostCategoryTermMutationPayloadObjectTypeResolver $rootDeletePostCategoryTermMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootDeletePostCategoryTermMutationPayloadObjectTypeResolver = $rootDeletePostCategoryTermMutationPayloadObjectTypeResolver;
     }
     final protected function getRootDeletePostCategoryTermMutationPayloadObjectTypeResolver(): RootDeletePostCategoryTermMutationPayloadObjectTypeResolver
     {
@@ -96,10 +88,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->rootDeletePostCategoryTermMutationPayloadObjectTypeResolver;
     }
-    final public function setRootUpdatePostCategoryTermMutationPayloadObjectTypeResolver(RootUpdatePostCategoryTermMutationPayloadObjectTypeResolver $rootUpdatePostCategoryTermMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootUpdatePostCategoryTermMutationPayloadObjectTypeResolver = $rootUpdatePostCategoryTermMutationPayloadObjectTypeResolver;
-    }
     final protected function getRootUpdatePostCategoryTermMutationPayloadObjectTypeResolver(): RootUpdatePostCategoryTermMutationPayloadObjectTypeResolver
     {
         if ($this->rootUpdatePostCategoryTermMutationPayloadObjectTypeResolver === null) {
@@ -108,10 +96,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->rootUpdatePostCategoryTermMutationPayloadObjectTypeResolver = $rootUpdatePostCategoryTermMutationPayloadObjectTypeResolver;
         }
         return $this->rootUpdatePostCategoryTermMutationPayloadObjectTypeResolver;
-    }
-    final public function setRootCreatePostCategoryTermMutationPayloadObjectTypeResolver(RootCreatePostCategoryTermMutationPayloadObjectTypeResolver $rootCreatePostCategoryTermMutationPayloadObjectTypeResolver): void
-    {
-        $this->rootCreatePostCategoryTermMutationPayloadObjectTypeResolver = $rootCreatePostCategoryTermMutationPayloadObjectTypeResolver;
     }
     final protected function getRootCreatePostCategoryTermMutationPayloadObjectTypeResolver(): RootCreatePostCategoryTermMutationPayloadObjectTypeResolver
     {
@@ -122,10 +106,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->rootCreatePostCategoryTermMutationPayloadObjectTypeResolver;
     }
-    final public function setCreatePostCategoryTermMutationResolver(CreatePostCategoryTermMutationResolver $createPostCategoryTermMutationResolver): void
-    {
-        $this->createPostCategoryTermMutationResolver = $createPostCategoryTermMutationResolver;
-    }
     final protected function getCreatePostCategoryTermMutationResolver(): CreatePostCategoryTermMutationResolver
     {
         if ($this->createPostCategoryTermMutationResolver === null) {
@@ -134,10 +114,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->createPostCategoryTermMutationResolver = $createPostCategoryTermMutationResolver;
         }
         return $this->createPostCategoryTermMutationResolver;
-    }
-    final public function setCreatePostCategoryTermBulkOperationMutationResolver(CreatePostCategoryTermBulkOperationMutationResolver $createPostCategoryTermBulkOperationMutationResolver): void
-    {
-        $this->createPostCategoryTermBulkOperationMutationResolver = $createPostCategoryTermBulkOperationMutationResolver;
     }
     final protected function getCreatePostCategoryTermBulkOperationMutationResolver(): CreatePostCategoryTermBulkOperationMutationResolver
     {
@@ -148,10 +124,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->createPostCategoryTermBulkOperationMutationResolver;
     }
-    final public function setDeletePostCategoryTermMutationResolver(DeletePostCategoryTermMutationResolver $deletePostCategoryTermMutationResolver): void
-    {
-        $this->deletePostCategoryTermMutationResolver = $deletePostCategoryTermMutationResolver;
-    }
     final protected function getDeletePostCategoryTermMutationResolver(): DeletePostCategoryTermMutationResolver
     {
         if ($this->deletePostCategoryTermMutationResolver === null) {
@@ -160,10 +132,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->deletePostCategoryTermMutationResolver = $deletePostCategoryTermMutationResolver;
         }
         return $this->deletePostCategoryTermMutationResolver;
-    }
-    final public function setDeletePostCategoryTermBulkOperationMutationResolver(DeletePostCategoryTermBulkOperationMutationResolver $deletePostCategoryTermBulkOperationMutationResolver): void
-    {
-        $this->deletePostCategoryTermBulkOperationMutationResolver = $deletePostCategoryTermBulkOperationMutationResolver;
     }
     final protected function getDeletePostCategoryTermBulkOperationMutationResolver(): DeletePostCategoryTermBulkOperationMutationResolver
     {
@@ -174,10 +142,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->deletePostCategoryTermBulkOperationMutationResolver;
     }
-    final public function setUpdatePostCategoryTermMutationResolver(UpdatePostCategoryTermMutationResolver $updatePostCategoryTermMutationResolver): void
-    {
-        $this->updatePostCategoryTermMutationResolver = $updatePostCategoryTermMutationResolver;
-    }
     final protected function getUpdatePostCategoryTermMutationResolver(): UpdatePostCategoryTermMutationResolver
     {
         if ($this->updatePostCategoryTermMutationResolver === null) {
@@ -186,10 +150,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->updatePostCategoryTermMutationResolver = $updatePostCategoryTermMutationResolver;
         }
         return $this->updatePostCategoryTermMutationResolver;
-    }
-    final public function setUpdatePostCategoryTermBulkOperationMutationResolver(UpdatePostCategoryTermBulkOperationMutationResolver $updatePostCategoryTermBulkOperationMutationResolver): void
-    {
-        $this->updatePostCategoryTermBulkOperationMutationResolver = $updatePostCategoryTermBulkOperationMutationResolver;
     }
     final protected function getUpdatePostCategoryTermBulkOperationMutationResolver(): UpdatePostCategoryTermBulkOperationMutationResolver
     {
@@ -200,10 +160,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->updatePostCategoryTermBulkOperationMutationResolver;
     }
-    final public function setPayloadableDeletePostCategoryTermMutationResolver(PayloadableDeletePostCategoryTermMutationResolver $payloadableDeletePostCategoryTermMutationResolver): void
-    {
-        $this->payloadableDeletePostCategoryTermMutationResolver = $payloadableDeletePostCategoryTermMutationResolver;
-    }
     final protected function getPayloadableDeletePostCategoryTermMutationResolver(): PayloadableDeletePostCategoryTermMutationResolver
     {
         if ($this->payloadableDeletePostCategoryTermMutationResolver === null) {
@@ -212,10 +168,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->payloadableDeletePostCategoryTermMutationResolver = $payloadableDeletePostCategoryTermMutationResolver;
         }
         return $this->payloadableDeletePostCategoryTermMutationResolver;
-    }
-    final public function setPayloadableDeletePostCategoryTermBulkOperationMutationResolver(PayloadableDeletePostCategoryTermBulkOperationMutationResolver $payloadableDeletePostCategoryTermBulkOperationMutationResolver): void
-    {
-        $this->payloadableDeletePostCategoryTermBulkOperationMutationResolver = $payloadableDeletePostCategoryTermBulkOperationMutationResolver;
     }
     final protected function getPayloadableDeletePostCategoryTermBulkOperationMutationResolver(): PayloadableDeletePostCategoryTermBulkOperationMutationResolver
     {
@@ -226,10 +178,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->payloadableDeletePostCategoryTermBulkOperationMutationResolver;
     }
-    final public function setPayloadableUpdatePostCategoryTermMutationResolver(PayloadableUpdatePostCategoryTermMutationResolver $payloadableUpdatePostCategoryTermMutationResolver): void
-    {
-        $this->payloadableUpdatePostCategoryTermMutationResolver = $payloadableUpdatePostCategoryTermMutationResolver;
-    }
     final protected function getPayloadableUpdatePostCategoryTermMutationResolver(): PayloadableUpdatePostCategoryTermMutationResolver
     {
         if ($this->payloadableUpdatePostCategoryTermMutationResolver === null) {
@@ -238,10 +186,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->payloadableUpdatePostCategoryTermMutationResolver = $payloadableUpdatePostCategoryTermMutationResolver;
         }
         return $this->payloadableUpdatePostCategoryTermMutationResolver;
-    }
-    final public function setPayloadableUpdatePostCategoryTermBulkOperationMutationResolver(PayloadableUpdatePostCategoryTermBulkOperationMutationResolver $payloadableUpdatePostCategoryTermBulkOperationMutationResolver): void
-    {
-        $this->payloadableUpdatePostCategoryTermBulkOperationMutationResolver = $payloadableUpdatePostCategoryTermBulkOperationMutationResolver;
     }
     final protected function getPayloadableUpdatePostCategoryTermBulkOperationMutationResolver(): PayloadableUpdatePostCategoryTermBulkOperationMutationResolver
     {
@@ -252,10 +196,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->payloadableUpdatePostCategoryTermBulkOperationMutationResolver;
     }
-    final public function setPayloadableCreatePostCategoryTermMutationResolver(PayloadableCreatePostCategoryTermMutationResolver $payloadableCreatePostCategoryTermMutationResolver): void
-    {
-        $this->payloadableCreatePostCategoryTermMutationResolver = $payloadableCreatePostCategoryTermMutationResolver;
-    }
     final protected function getPayloadableCreatePostCategoryTermMutationResolver(): PayloadableCreatePostCategoryTermMutationResolver
     {
         if ($this->payloadableCreatePostCategoryTermMutationResolver === null) {
@@ -264,10 +204,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->payloadableCreatePostCategoryTermMutationResolver = $payloadableCreatePostCategoryTermMutationResolver;
         }
         return $this->payloadableCreatePostCategoryTermMutationResolver;
-    }
-    final public function setPayloadableCreatePostCategoryTermBulkOperationMutationResolver(PayloadableCreatePostCategoryTermBulkOperationMutationResolver $payloadableCreatePostCategoryTermBulkOperationMutationResolver): void
-    {
-        $this->payloadableCreatePostCategoryTermBulkOperationMutationResolver = $payloadableCreatePostCategoryTermBulkOperationMutationResolver;
     }
     final protected function getPayloadableCreatePostCategoryTermBulkOperationMutationResolver(): PayloadableCreatePostCategoryTermBulkOperationMutationResolver
     {
@@ -278,10 +214,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->payloadableCreatePostCategoryTermBulkOperationMutationResolver;
     }
-    final public function setRootDeletePostCategoryTermInputObjectTypeResolver(RootDeletePostCategoryTermInputObjectTypeResolver $rootDeletePostCategoryTermInputObjectTypeResolver): void
-    {
-        $this->rootDeletePostCategoryTermInputObjectTypeResolver = $rootDeletePostCategoryTermInputObjectTypeResolver;
-    }
     final protected function getRootDeletePostCategoryTermInputObjectTypeResolver(): RootDeletePostCategoryTermInputObjectTypeResolver
     {
         if ($this->rootDeletePostCategoryTermInputObjectTypeResolver === null) {
@@ -290,10 +222,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->rootDeletePostCategoryTermInputObjectTypeResolver = $rootDeletePostCategoryTermInputObjectTypeResolver;
         }
         return $this->rootDeletePostCategoryTermInputObjectTypeResolver;
-    }
-    final public function setRootUpdatePostCategoryTermInputObjectTypeResolver(RootUpdatePostCategoryTermInputObjectTypeResolver $rootUpdatePostCategoryTermInputObjectTypeResolver): void
-    {
-        $this->rootUpdatePostCategoryTermInputObjectTypeResolver = $rootUpdatePostCategoryTermInputObjectTypeResolver;
     }
     final protected function getRootUpdatePostCategoryTermInputObjectTypeResolver(): RootUpdatePostCategoryTermInputObjectTypeResolver
     {
@@ -304,10 +232,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->rootUpdatePostCategoryTermInputObjectTypeResolver;
     }
-    final public function setRootCreatePostCategoryTermInputObjectTypeResolver(RootCreatePostCategoryTermInputObjectTypeResolver $rootCreatePostCategoryTermInputObjectTypeResolver): void
-    {
-        $this->rootCreatePostCategoryTermInputObjectTypeResolver = $rootCreatePostCategoryTermInputObjectTypeResolver;
-    }
     final protected function getRootCreatePostCategoryTermInputObjectTypeResolver(): RootCreatePostCategoryTermInputObjectTypeResolver
     {
         if ($this->rootCreatePostCategoryTermInputObjectTypeResolver === null) {
@@ -317,10 +241,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->rootCreatePostCategoryTermInputObjectTypeResolver;
     }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
-    }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
         if ($this->userLoggedInCheckpoint === null) {
@@ -329,10 +249,6 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
         }
         return $this->userLoggedInCheckpoint;
-    }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {

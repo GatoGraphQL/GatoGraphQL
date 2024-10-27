@@ -17,10 +17,6 @@ class NoCacheValidateACLDirectiveForFieldsPrivateSchemaRelationalTypeResolverDec
 
     private ?CacheControlForAccessControlManagerInterface $cacheControlForAccessControlManager = null;
 
-    final public function setCacheControlForAccessControlManager(CacheControlForAccessControlManagerInterface $cacheControlForAccessControlManager): void
-    {
-        $this->cacheControlForAccessControlManager = $cacheControlForAccessControlManager;
-    }
     final protected function getCacheControlForAccessControlManager(): CacheControlForAccessControlManagerInterface
     {
         if ($this->cacheControlForAccessControlManager === null) {

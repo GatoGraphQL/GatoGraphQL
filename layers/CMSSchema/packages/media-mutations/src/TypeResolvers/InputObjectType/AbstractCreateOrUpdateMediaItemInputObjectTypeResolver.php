@@ -19,10 +19,6 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CreateMediaItemFromOneofInputObjectTypeResolver $createMediaItemFromOneofInputObjectTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -32,10 +28,6 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -44,10 +36,6 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setCreateMediaItemFromOneofInputObjectTypeResolver(CreateMediaItemFromOneofInputObjectTypeResolver $createMediaItemFromOneofInputObjectTypeResolver): void
-    {
-        $this->createMediaItemFromOneofInputObjectTypeResolver = $createMediaItemFromOneofInputObjectTypeResolver;
     }
     final protected function getCreateMediaItemFromOneofInputObjectTypeResolver(): CreateMediaItemFromOneofInputObjectTypeResolver
     {

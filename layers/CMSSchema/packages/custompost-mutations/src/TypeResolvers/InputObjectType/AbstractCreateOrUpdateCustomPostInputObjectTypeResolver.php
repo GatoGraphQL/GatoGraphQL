@@ -19,10 +19,6 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CustomPostContentAsOneofInputObjectTypeResolver $customPostContentAsOneofInputObjectTypeResolver = null;
 
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
-    {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-    }
     final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
     {
         if ($this->customPostStatusEnumTypeResolver === null) {
@@ -31,10 +27,6 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
             $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
         }
         return $this->customPostStatusEnumTypeResolver;
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -45,10 +37,6 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -57,10 +45,6 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setCustomPostContentAsOneofInputObjectTypeResolver(CustomPostContentAsOneofInputObjectTypeResolver $customPostContentAsOneofInputObjectTypeResolver): void
-    {
-        $this->customPostContentAsOneofInputObjectTypeResolver = $customPostContentAsOneofInputObjectTypeResolver;
     }
     final protected function getCustomPostContentAsOneofInputObjectTypeResolver(): CustomPostContentAsOneofInputObjectTypeResolver
     {

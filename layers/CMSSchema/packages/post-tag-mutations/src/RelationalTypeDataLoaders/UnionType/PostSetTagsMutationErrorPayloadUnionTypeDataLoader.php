@@ -12,10 +12,6 @@ class PostSetTagsMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTy
 {
     private ?PostSetTagsMutationErrorPayloadUnionTypeResolver $postSetTagsMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setPostSetTagsMutationErrorPayloadUnionTypeResolver(PostSetTagsMutationErrorPayloadUnionTypeResolver $postSetTagsMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->postSetTagsMutationErrorPayloadUnionTypeResolver = $postSetTagsMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getPostSetTagsMutationErrorPayloadUnionTypeResolver(): PostSetTagsMutationErrorPayloadUnionTypeResolver
     {
         if ($this->postSetTagsMutationErrorPayloadUnionTypeResolver === null) {

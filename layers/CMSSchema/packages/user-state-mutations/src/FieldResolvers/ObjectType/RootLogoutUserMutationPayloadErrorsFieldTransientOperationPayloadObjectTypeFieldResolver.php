@@ -14,10 +14,6 @@ class RootLogoutUserMutationPayloadErrorsFieldTransientOperationPayloadObjectTyp
 {
     private ?RootLogoutUserMutationErrorPayloadUnionTypeResolver $rootLogoutUserMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootLogoutUserMutationErrorPayloadUnionTypeResolver(RootLogoutUserMutationErrorPayloadUnionTypeResolver $rootLogoutUserMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootLogoutUserMutationErrorPayloadUnionTypeResolver = $rootLogoutUserMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootLogoutUserMutationErrorPayloadUnionTypeResolver(): RootLogoutUserMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootLogoutUserMutationErrorPayloadUnionTypeResolver === null) {

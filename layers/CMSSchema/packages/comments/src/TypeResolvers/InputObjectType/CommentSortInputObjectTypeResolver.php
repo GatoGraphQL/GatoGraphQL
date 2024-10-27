@@ -13,10 +13,6 @@ class CommentSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {
     private ?CommentOrderByEnumTypeResolver $customPostSortByEnumTypeResolver = null;
 
-    final public function setCommentOrderByEnumTypeResolver(CommentOrderByEnumTypeResolver $customPostSortByEnumTypeResolver): void
-    {
-        $this->customPostSortByEnumTypeResolver = $customPostSortByEnumTypeResolver;
-    }
     final protected function getCommentOrderByEnumTypeResolver(): CommentOrderByEnumTypeResolver
     {
         if ($this->customPostSortByEnumTypeResolver === null) {

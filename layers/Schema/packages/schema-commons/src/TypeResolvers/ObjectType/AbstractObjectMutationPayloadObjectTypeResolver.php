@@ -12,10 +12,6 @@ abstract class AbstractObjectMutationPayloadObjectTypeResolver extends AbstractT
 {
     private ?ObjectMutationPayloadObjectTypeDataLoader $objectMutationPayloadObjectTypeDataLoader = null;
 
-    final public function setObjectMutationPayloadObjectTypeDataLoader(ObjectMutationPayloadObjectTypeDataLoader $objectMutationPayloadObjectTypeDataLoader): void
-    {
-        $this->objectMutationPayloadObjectTypeDataLoader = $objectMutationPayloadObjectTypeDataLoader;
-    }
     final protected function getObjectMutationPayloadObjectTypeDataLoader(): ObjectMutationPayloadObjectTypeDataLoader
     {
         if ($this->objectMutationPayloadObjectTypeDataLoader === null) {

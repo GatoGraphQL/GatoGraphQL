@@ -16,10 +16,6 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
     private ?NumericScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     private ?MetaQueryCompareByNumericValueOperatorEnumTypeResolver $metaQueryCompareByNumericValueOperatorEnumTypeResolver = null;
 
-    final public function setNumericScalarTypeResolver(NumericScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
-    {
-        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
-    }
     final protected function getNumericScalarTypeResolver(): NumericScalarTypeResolver
     {
         if ($this->anyBuiltInScalarScalarTypeResolver === null) {
@@ -28,10 +24,6 @@ class MetaQueryCompareByNumericValueInputObjectTypeResolver extends AbstractInpu
             $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
         }
         return $this->anyBuiltInScalarScalarTypeResolver;
-    }
-    final public function setMetaQueryCompareByNumericValueOperatorEnumTypeResolver(MetaQueryCompareByNumericValueOperatorEnumTypeResolver $metaQueryCompareByNumericValueOperatorEnumTypeResolver): void
-    {
-        $this->metaQueryCompareByNumericValueOperatorEnumTypeResolver = $metaQueryCompareByNumericValueOperatorEnumTypeResolver;
     }
     final protected function getMetaQueryCompareByNumericValueOperatorEnumTypeResolver(): MetaQueryCompareByNumericValueOperatorEnumTypeResolver
     {

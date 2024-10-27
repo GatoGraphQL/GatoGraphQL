@@ -36,10 +36,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?MediaUpdateInputObjectTypeResolver $mediaUpdateInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
-    {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-    }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
         if ($this->mediaObjectTypeResolver === null) {
@@ -48,10 +44,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         }
         return $this->mediaObjectTypeResolver;
-    }
-    final public function setMediaUpdateMutationPayloadObjectTypeResolver(MediaUpdateMutationPayloadObjectTypeResolver $mediaUpdateMutationPayloadObjectTypeResolver): void
-    {
-        $this->mediaUpdateMutationPayloadObjectTypeResolver = $mediaUpdateMutationPayloadObjectTypeResolver;
     }
     final protected function getMediaUpdateMutationPayloadObjectTypeResolver(): MediaUpdateMutationPayloadObjectTypeResolver
     {
@@ -62,10 +54,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->mediaUpdateMutationPayloadObjectTypeResolver;
     }
-    final public function setUpdateMediaItemMutationResolver(UpdateMediaItemMutationResolver $updateMediaItemMutationResolver): void
-    {
-        $this->updateMediaItemMutationResolver = $updateMediaItemMutationResolver;
-    }
     final protected function getUpdateMediaItemMutationResolver(): UpdateMediaItemMutationResolver
     {
         if ($this->updateMediaItemMutationResolver === null) {
@@ -74,10 +62,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->updateMediaItemMutationResolver = $updateMediaItemMutationResolver;
         }
         return $this->updateMediaItemMutationResolver;
-    }
-    final public function setPayloadableUpdateMediaItemMutationResolver(PayloadableUpdateMediaItemMutationResolver $payloadableUpdateMediaItemMutationResolver): void
-    {
-        $this->payloadableUpdateMediaItemMutationResolver = $payloadableUpdateMediaItemMutationResolver;
     }
     final protected function getPayloadableUpdateMediaItemMutationResolver(): PayloadableUpdateMediaItemMutationResolver
     {
@@ -88,10 +72,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->payloadableUpdateMediaItemMutationResolver;
     }
-    final public function setMediaUpdateInputObjectTypeResolver(MediaUpdateInputObjectTypeResolver $mediaUpdateInputObjectTypeResolver): void
-    {
-        $this->mediaUpdateInputObjectTypeResolver = $mediaUpdateInputObjectTypeResolver;
-    }
     final protected function getMediaUpdateInputObjectTypeResolver(): MediaUpdateInputObjectTypeResolver
     {
         if ($this->mediaUpdateInputObjectTypeResolver === null) {
@@ -100,10 +80,6 @@ class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->mediaUpdateInputObjectTypeResolver = $mediaUpdateInputObjectTypeResolver;
         }
         return $this->mediaUpdateInputObjectTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {

@@ -12,10 +12,6 @@ class TagTermDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPay
 {
     private ?TagTermDoesNotExistErrorPayloadObjectTypeDataLoader $tagDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setTagTermDoesNotExistErrorPayloadObjectTypeDataLoader(TagTermDoesNotExistErrorPayloadObjectTypeDataLoader $tagDoesNotExistErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->tagDoesNotExistErrorPayloadObjectTypeDataLoader = $tagDoesNotExistErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getTagTermDoesNotExistErrorPayloadObjectTypeDataLoader(): TagTermDoesNotExistErrorPayloadObjectTypeDataLoader
     {
         if ($this->tagDoesNotExistErrorPayloadObjectTypeDataLoader === null) {

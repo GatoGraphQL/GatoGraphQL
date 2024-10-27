@@ -24,10 +24,6 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 
     private ?ExtensionDocsMenuPage $extensionDocsMenuPage = null;
 
-    final public function setExtensionDocsMenuPage(ExtensionDocsMenuPage $extensionDocsMenuPage): void
-    {
-        $this->extensionDocsMenuPage = $extensionDocsMenuPage;
-    }
     final protected function getExtensionDocsMenuPage(): ExtensionDocsMenuPage
     {
         if ($this->extensionDocsMenuPage === null) {

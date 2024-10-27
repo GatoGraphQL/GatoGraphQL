@@ -12,10 +12,6 @@ abstract class AbstractLoadingCPTSchemaConfiguratorExecuter extends AbstractSche
 {
     private ?EndpointBlockHelpers $endpointBlockHelpers = null;
 
-    final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
-    {
-        $this->endpointBlockHelpers = $endpointBlockHelpers;
-    }
     final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
     {
         if ($this->endpointBlockHelpers === null) {

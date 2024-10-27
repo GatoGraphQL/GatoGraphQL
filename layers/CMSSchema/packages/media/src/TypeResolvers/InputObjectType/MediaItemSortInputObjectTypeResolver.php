@@ -13,10 +13,6 @@ class MediaItemSortInputObjectTypeResolver extends SortInputObjectTypeResolver
 {
     private ?MediaItemOrderByEnumTypeResolver $customPostSortByEnumTypeResolver = null;
 
-    final public function setMediaItemOrderByEnumTypeResolver(MediaItemOrderByEnumTypeResolver $customPostSortByEnumTypeResolver): void
-    {
-        $this->customPostSortByEnumTypeResolver = $customPostSortByEnumTypeResolver;
-    }
     final protected function getMediaItemOrderByEnumTypeResolver(): MediaItemOrderByEnumTypeResolver
     {
         if ($this->customPostSortByEnumTypeResolver === null) {

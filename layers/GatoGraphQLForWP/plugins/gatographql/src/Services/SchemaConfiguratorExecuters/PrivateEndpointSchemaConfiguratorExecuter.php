@@ -16,10 +16,6 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
     private ?EndpointBlockHelpers $endpointBlockHelpers = null;
     private ?EndpointHelpers $endpointHelpers = null;
 
-    final public function setPrivateEndpointSchemaConfigurator(PrivateEndpointSchemaConfigurator $privateEndpointSchemaConfigurator): void
-    {
-        $this->privateEndpointSchemaConfigurator = $privateEndpointSchemaConfigurator;
-    }
     final protected function getPrivateEndpointSchemaConfigurator(): PrivateEndpointSchemaConfigurator
     {
         if ($this->privateEndpointSchemaConfigurator === null) {
@@ -29,10 +25,6 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
         }
         return $this->privateEndpointSchemaConfigurator;
     }
-    final public function setEndpointBlockHelpers(EndpointBlockHelpers $endpointBlockHelpers): void
-    {
-        $this->endpointBlockHelpers = $endpointBlockHelpers;
-    }
     final protected function getEndpointBlockHelpers(): EndpointBlockHelpers
     {
         if ($this->endpointBlockHelpers === null) {
@@ -41,10 +33,6 @@ class PrivateEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurat
             $this->endpointBlockHelpers = $endpointBlockHelpers;
         }
         return $this->endpointBlockHelpers;
-    }
-    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
-    {
-        $this->endpointHelpers = $endpointHelpers;
     }
     final protected function getEndpointHelpers(): EndpointHelpers
     {

@@ -13,10 +13,6 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
     private ?EngineInterface $engine = null;
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
 
-    final public function setEngine(EngineInterface $engine): void
-    {
-        $this->engine = $engine;
-    }
     final protected function getEngine(): EngineInterface
     {
         if ($this->engine === null) {
@@ -25,10 +21,6 @@ class RESTDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $this->engine = $engine;
         }
         return $this->engine;
-    }
-    final public function setGraphQLParserHelperService(GraphQLParserHelperServiceInterface $graphQLParserHelperService): void
-    {
-        $this->graphQLParserHelperService = $graphQLParserHelperService;
     }
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface
     {

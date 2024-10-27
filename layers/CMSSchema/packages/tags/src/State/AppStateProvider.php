@@ -12,10 +12,6 @@ class AppStateProvider extends AbstractAppStateProvider
 {
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
-    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
-    {
-        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
-    }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {
         if ($this->taxonomyTermTypeAPI === null) {

@@ -24,10 +24,6 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?UserStateTypeMutationAPIInterface $userStateTypeMutationAPI = null;
 
-    final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
-    {
-        $this->userTypeAPI = $userTypeAPI;
-    }
     final protected function getUserTypeAPI(): UserTypeAPIInterface
     {
         if ($this->userTypeAPI === null) {
@@ -36,10 +32,6 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             $this->userTypeAPI = $userTypeAPI;
         }
         return $this->userTypeAPI;
-    }
-    final public function setUserStateTypeMutationAPI(UserStateTypeMutationAPIInterface $userStateTypeMutationAPI): void
-    {
-        $this->userStateTypeMutationAPI = $userStateTypeMutationAPI;
     }
     final protected function getUserStateTypeMutationAPI(): UserStateTypeMutationAPIInterface
     {

@@ -18,10 +18,6 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
-    {
-        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
-    }
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
         if ($this->anyBuiltInScalarScalarTypeResolver === null) {
@@ -30,10 +26,6 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
         }
         return $this->anyBuiltInScalarScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {

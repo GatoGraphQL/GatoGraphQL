@@ -20,10 +20,6 @@ class ModelInstance implements ModelInstanceInterface
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?DefinitionManagerInterface $definitionManager = null;
 
-    final public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
-    {
-        $this->applicationInfo = $applicationInfo;
-    }
     final protected function getApplicationInfo(): ApplicationInfoInterface
     {
         if ($this->applicationInfo === null) {
@@ -32,10 +28,6 @@ class ModelInstance implements ModelInstanceInterface
             $this->applicationInfo = $applicationInfo;
         }
         return $this->applicationInfo;
-    }
-    final public function setDefinitionManager(DefinitionManagerInterface $definitionManager): void
-    {
-        $this->definitionManager = $definitionManager;
     }
     final protected function getDefinitionManager(): DefinitionManagerInterface
     {

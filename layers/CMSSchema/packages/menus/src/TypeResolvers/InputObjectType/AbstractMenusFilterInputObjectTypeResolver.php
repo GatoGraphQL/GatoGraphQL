@@ -18,10 +18,6 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     private ?SearchFilterInput $searchFilterInput = null;
     private ?SlugsFilterInput $slugsFilterInput = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -31,10 +27,6 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
-    {
-        $this->searchFilterInput = $searchFilterInput;
-    }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
         if ($this->searchFilterInput === null) {
@@ -43,10 +35,6 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
             $this->searchFilterInput = $searchFilterInput;
         }
         return $this->searchFilterInput;
-    }
-    final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
-    {
-        $this->slugsFilterInput = $slugsFilterInput;
     }
     final protected function getSlugsFilterInput(): SlugsFilterInput
     {

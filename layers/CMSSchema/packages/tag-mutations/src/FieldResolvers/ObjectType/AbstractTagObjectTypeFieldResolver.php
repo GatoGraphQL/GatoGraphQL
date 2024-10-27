@@ -23,10 +23,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     private ?TagTermUpdateInputObjectTypeResolver $tagTermUpdateInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setTagTermUpdateInputObjectTypeResolver(TagTermUpdateInputObjectTypeResolver $tagTermUpdateInputObjectTypeResolver): void
-    {
-        $this->tagTermUpdateInputObjectTypeResolver = $tagTermUpdateInputObjectTypeResolver;
-    }
     final protected function getTagTermUpdateInputObjectTypeResolver(): TagTermUpdateInputObjectTypeResolver
     {
         if ($this->tagTermUpdateInputObjectTypeResolver === null) {
@@ -35,10 +31,6 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             $this->tagTermUpdateInputObjectTypeResolver = $tagTermUpdateInputObjectTypeResolver;
         }
         return $this->tagTermUpdateInputObjectTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {

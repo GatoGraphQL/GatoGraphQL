@@ -16,10 +16,6 @@ abstract class AbstractCheckpointValidateConditionFieldDirectiveResolver extends
 {
     private ?EngineInterface $engine = null;
 
-    final public function setEngine(EngineInterface $engine): void
-    {
-        $this->engine = $engine;
-    }
     final protected function getEngine(): EngineInterface
     {
         if ($this->engine === null) {

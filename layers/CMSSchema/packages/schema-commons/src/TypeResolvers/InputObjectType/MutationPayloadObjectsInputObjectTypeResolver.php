@@ -13,10 +13,6 @@ class MutationPayloadObjectsInputObjectTypeResolver extends AbstractQueryableInp
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {

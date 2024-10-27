@@ -12,10 +12,6 @@ class CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver exte
 {
     private ?CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader = $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader(): CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader
     {
         if ($this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader === null) {

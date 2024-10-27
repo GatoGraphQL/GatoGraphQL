@@ -27,10 +27,6 @@ class PrematureRequestService implements PrematureRequestServiceInterface
     private ?GraphQLEndpointPathProviderRegistryInterface $graphQLEndpointPathProviderRegistry = null;
     private ?RoutingHelperServiceInterface $routingHelperService = null;
 
-    final public function setGraphQLEndpointPathProviderRegistry(GraphQLEndpointPathProviderRegistryInterface $graphQLEndpointPathProviderRegistry): void
-    {
-        $this->graphQLEndpointPathProviderRegistry = $graphQLEndpointPathProviderRegistry;
-    }
     final protected function getGraphQLEndpointPathProviderRegistry(): GraphQLEndpointPathProviderRegistryInterface
     {
         if ($this->graphQLEndpointPathProviderRegistry === null) {
@@ -39,10 +35,6 @@ class PrematureRequestService implements PrematureRequestServiceInterface
             $this->graphQLEndpointPathProviderRegistry = $graphQLEndpointPathProviderRegistry;
         }
         return $this->graphQLEndpointPathProviderRegistry;
-    }
-    final public function setRoutingHelperService(RoutingHelperServiceInterface $routingHelperService): void
-    {
-        $this->routingHelperService = $routingHelperService;
     }
     final protected function getRoutingHelperService(): RoutingHelperServiceInterface
     {

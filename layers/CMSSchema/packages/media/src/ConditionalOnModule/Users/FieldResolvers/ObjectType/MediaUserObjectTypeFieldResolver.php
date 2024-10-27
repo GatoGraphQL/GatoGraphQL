@@ -19,10 +19,6 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?UserMediaTypeAPIInterface $userMediaTypeAPI = null;
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
 
-    final public function setUserMediaTypeAPI(UserMediaTypeAPIInterface $userMediaTypeAPI): void
-    {
-        $this->userMediaTypeAPI = $userMediaTypeAPI;
-    }
     final protected function getUserMediaTypeAPI(): UserMediaTypeAPIInterface
     {
         if ($this->userMediaTypeAPI === null) {
@@ -31,10 +27,6 @@ class MediaUserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->userMediaTypeAPI = $userMediaTypeAPI;
         }
         return $this->userMediaTypeAPI;
-    }
-    final public function setUserObjectTypeResolver(UserObjectTypeResolver $userObjectTypeResolver): void
-    {
-        $this->userObjectTypeResolver = $userObjectTypeResolver;
     }
     final protected function getUserObjectTypeResolver(): UserObjectTypeResolver
     {

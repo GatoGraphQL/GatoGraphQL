@@ -21,10 +21,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
 
-    final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
-    {
-        $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
-    }
     final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
         if ($this->genericCustomPostObjectTypeResolver === null) {
@@ -34,10 +30,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         }
         return $this->genericCustomPostObjectTypeResolver;
     }
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
-    {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-    }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         if ($this->mediaTypeAPI === null) {
@@ -46,10 +38,6 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             $this->mediaTypeAPI = $mediaTypeAPI;
         }
         return $this->mediaTypeAPI;
-    }
-    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
-    {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {

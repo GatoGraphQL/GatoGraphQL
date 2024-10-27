@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPaylo
 {
     private ?LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver(LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver = $loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver(): LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResolver === null) {

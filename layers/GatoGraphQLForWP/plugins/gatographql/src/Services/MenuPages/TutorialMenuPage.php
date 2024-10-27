@@ -22,10 +22,6 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
     private ?TutorialLessonDataProvider $tutorialLessonDataProvider = null;
     private ?BundleExtensionAggregator $bundleExtensionAggregator = null;
 
-    final public function setTutorialLessonDataProvider(TutorialLessonDataProvider $tutorialLessonDataProvider): void
-    {
-        $this->tutorialLessonDataProvider = $tutorialLessonDataProvider;
-    }
     final protected function getTutorialLessonDataProvider(): TutorialLessonDataProvider
     {
         if ($this->tutorialLessonDataProvider === null) {
@@ -34,10 +30,6 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
             $this->tutorialLessonDataProvider = $tutorialLessonDataProvider;
         }
         return $this->tutorialLessonDataProvider;
-    }
-    final public function setBundleExtensionAggregator(BundleExtensionAggregator $bundleExtensionAggregator): void
-    {
-        $this->bundleExtensionAggregator = $bundleExtensionAggregator;
     }
     final protected function getBundleExtensionAggregator(): BundleExtensionAggregator
     {

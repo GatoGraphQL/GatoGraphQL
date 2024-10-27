@@ -18,10 +18,6 @@ final class SerializeLeafOutputTypeValuesFieldDirectiveResolver extends Abstract
 {
     private ?TypeSerializationServiceInterface $typeSerializationService = null;
 
-    final public function setTypeSerializationService(TypeSerializationServiceInterface $typeSerializationService): void
-    {
-        $this->typeSerializationService = $typeSerializationService;
-    }
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
         if ($this->typeSerializationService === null) {

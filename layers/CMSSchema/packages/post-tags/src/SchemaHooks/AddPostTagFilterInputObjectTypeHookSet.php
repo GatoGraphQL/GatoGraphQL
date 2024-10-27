@@ -13,10 +13,6 @@ class AddPostTagFilterInputObjectTypeHookSet extends AbstractAddTagFilterInputOb
 {
     private ?PostsFilterCustomPostsByTagsInputObjectTypeResolver $postsFilterCustomPostsByTagsInputObjectTypeResolver = null;
 
-    final public function setPostsFilterCustomPostsByTagsInputObjectTypeResolver(PostsFilterCustomPostsByTagsInputObjectTypeResolver $postsFilterCustomPostsByTagsInputObjectTypeResolver): void
-    {
-        $this->postsFilterCustomPostsByTagsInputObjectTypeResolver = $postsFilterCustomPostsByTagsInputObjectTypeResolver;
-    }
     final protected function getPostsFilterCustomPostsByTagsInputObjectTypeResolver(): PostsFilterCustomPostsByTagsInputObjectTypeResolver
     {
         if ($this->postsFilterCustomPostsByTagsInputObjectTypeResolver === null) {

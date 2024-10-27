@@ -15,10 +15,6 @@ class NoCacheAccessControlValidationRelationalTypeResolverDecorator extends Abst
 {
     private ?AccessControlValidationDirectiveResolverRegistryInterface $accessControlValidationDirectiveResolverRegistry = null;
 
-    final public function setAccessControlValidationDirectiveResolverRegistry(AccessControlValidationDirectiveResolverRegistryInterface $accessControlValidationDirectiveResolverRegistry): void
-    {
-        $this->accessControlValidationDirectiveResolverRegistry = $accessControlValidationDirectiveResolverRegistry;
-    }
     final protected function getAccessControlValidationDirectiveResolverRegistry(): AccessControlValidationDirectiveResolverRegistryInterface
     {
         if ($this->accessControlValidationDirectiveResolverRegistry === null) {

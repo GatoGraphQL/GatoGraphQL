@@ -12,10 +12,6 @@ class ComponentPaths extends AbstractComponentFilter
 {
     private ?ComponentPathHelpersInterface $componentPathHelpers = null;
 
-    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
-    {
-        $this->componentPathHelpers = $componentPathHelpers;
-    }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
         if ($this->componentPathHelpers === null) {
@@ -41,10 +37,6 @@ class ComponentPaths extends AbstractComponentFilter
 
     private ?ComponentPathManagerInterface $componentPathManager = null;
 
-    final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
-    {
-        $this->componentPathManager = $componentPathManager;
-    }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
         if ($this->componentPathManager === null) {

@@ -14,10 +14,6 @@ abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyI
     private ?LooseContractManagerInterface $looseContractManager = null;
     private ?NameResolverInterface $nameResolver = null;
 
-    final public function setLooseContractManager(LooseContractManagerInterface $looseContractManager): void
-    {
-        $this->looseContractManager = $looseContractManager;
-    }
     final protected function getLooseContractManager(): LooseContractManagerInterface
     {
         if ($this->looseContractManager === null) {
@@ -26,10 +22,6 @@ abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyI
             $this->looseContractManager = $looseContractManager;
         }
         return $this->looseContractManager;
-    }
-    final public function setNameResolver(NameResolverInterface $nameResolver): void
-    {
-        $this->nameResolver = $nameResolver;
     }
     final protected function getNameResolver(): NameResolverInterface
     {

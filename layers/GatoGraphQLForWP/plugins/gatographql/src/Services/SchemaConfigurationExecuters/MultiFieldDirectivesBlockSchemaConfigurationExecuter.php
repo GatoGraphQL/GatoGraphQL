@@ -14,10 +14,6 @@ class MultiFieldDirectivesBlockSchemaConfigurationExecuter extends AbstractDefau
 {
     private ?SchemaConfigMultiFieldDirectivesBlock $schemaConfigMultiFieldDirectivesBlock = null;
 
-    final public function setSchemaConfigMultiFieldDirectivesBlock(SchemaConfigMultiFieldDirectivesBlock $schemaConfigMultiFieldDirectivesBlock): void
-    {
-        $this->schemaConfigMultiFieldDirectivesBlock = $schemaConfigMultiFieldDirectivesBlock;
-    }
     final protected function getSchemaConfigMultiFieldDirectivesBlock(): SchemaConfigMultiFieldDirectivesBlock
     {
         if ($this->schemaConfigMultiFieldDirectivesBlock === null) {

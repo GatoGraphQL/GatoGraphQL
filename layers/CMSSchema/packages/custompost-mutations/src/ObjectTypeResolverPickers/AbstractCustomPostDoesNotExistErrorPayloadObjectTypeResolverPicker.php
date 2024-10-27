@@ -13,10 +13,6 @@ abstract class AbstractCustomPostDoesNotExistErrorPayloadObjectTypeResolverPicke
 {
     private ?CustomPostDoesNotExistErrorPayloadObjectTypeResolver $customPostDoesNotExistErrorPayloadObjectTypeResolver = null;
 
-    final public function setCustomPostDoesNotExistErrorPayloadObjectTypeResolver(CustomPostDoesNotExistErrorPayloadObjectTypeResolver $customPostDoesNotExistErrorPayloadObjectTypeResolver): void
-    {
-        $this->customPostDoesNotExistErrorPayloadObjectTypeResolver = $customPostDoesNotExistErrorPayloadObjectTypeResolver;
-    }
     final protected function getCustomPostDoesNotExistErrorPayloadObjectTypeResolver(): CustomPostDoesNotExistErrorPayloadObjectTypeResolver
     {
         if ($this->customPostDoesNotExistErrorPayloadObjectTypeResolver === null) {

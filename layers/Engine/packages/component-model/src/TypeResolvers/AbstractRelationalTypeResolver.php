@@ -76,10 +76,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     private ?MandatoryFieldDirectiveResolverRegistryInterface $mandatoryFieldDirectiveResolverRegistry = null;
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
 
-    final public function setMandatoryFieldDirectiveResolverRegistry(MandatoryFieldDirectiveResolverRegistryInterface $mandatoryFieldDirectiveResolverRegistry): void
-    {
-        $this->mandatoryFieldDirectiveResolverRegistry = $mandatoryFieldDirectiveResolverRegistry;
-    }
     final protected function getMandatoryFieldDirectiveResolverRegistry(): MandatoryFieldDirectiveResolverRegistryInterface
     {
         if ($this->mandatoryFieldDirectiveResolverRegistry === null) {
@@ -88,10 +84,6 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $this->mandatoryFieldDirectiveResolverRegistry = $mandatoryFieldDirectiveResolverRegistry;
         }
         return $this->mandatoryFieldDirectiveResolverRegistry;
-    }
-    final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
-    {
-        $this->directivePipelineService = $directivePipelineService;
     }
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {

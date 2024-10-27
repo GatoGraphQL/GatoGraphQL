@@ -11,10 +11,6 @@ class PostAddDefaultCustomPostTypeModuleConfigurationHookSet extends AbstractAdd
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
 
-    final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
-    {
-        $this->postTypeAPI = $postTypeAPI;
-    }
     final protected function getPostTypeAPI(): PostTypeAPIInterface
     {
         if ($this->postTypeAPI === null) {

@@ -12,10 +12,6 @@ class CommentAuthorEmailIsMissingErrorPayloadObjectTypeResolver extends Abstract
 {
     private ?CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader $commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setCommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader(CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader $commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader = $commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getCommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader(): CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader
     {
         if ($this->commentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader === null) {

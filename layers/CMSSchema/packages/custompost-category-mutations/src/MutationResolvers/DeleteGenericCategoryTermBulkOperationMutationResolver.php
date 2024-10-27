@@ -11,10 +11,6 @@ class DeleteGenericCategoryTermBulkOperationMutationResolver extends AbstractBul
 {
     private ?DeleteGenericCategoryTermMutationResolver $deleteGenericCategoryTermMutationResolver = null;
 
-    final public function setDeleteGenericCategoryTermMutationResolver(DeleteGenericCategoryTermMutationResolver $deleteGenericCategoryTermMutationResolver): void
-    {
-        $this->deleteGenericCategoryTermMutationResolver = $deleteGenericCategoryTermMutationResolver;
-    }
     final protected function getDeleteGenericCategoryTermMutationResolver(): DeleteGenericCategoryTermMutationResolver
     {
         if ($this->deleteGenericCategoryTermMutationResolver === null) {

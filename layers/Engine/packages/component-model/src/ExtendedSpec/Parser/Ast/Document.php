@@ -18,10 +18,6 @@ class Document extends AbstractDocument
     private ?DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry = null;
     private ?OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry = null;
 
-    final public function setDynamicVariableDefinerDirectiveRegistry(DynamicVariableDefinerDirectiveRegistryInterface $dynamicVariableDefinerDirectiveRegistry): void
-    {
-        $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
-    }
     final protected function getDynamicVariableDefinerDirectiveRegistry(): DynamicVariableDefinerDirectiveRegistryInterface
     {
         if ($this->dynamicVariableDefinerDirectiveRegistry === null) {
@@ -30,10 +26,6 @@ class Document extends AbstractDocument
             $this->dynamicVariableDefinerDirectiveRegistry = $dynamicVariableDefinerDirectiveRegistry;
         }
         return $this->dynamicVariableDefinerDirectiveRegistry;
-    }
-    final public function setOperationDependencyDefinerDirectiveRegistry(OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry): void
-    {
-        $this->operationDependencyDefinerDirectiveRegistry = $operationDependencyDefinerDirectiveRegistry;
     }
     final protected function getOperationDependencyDefinerDirectiveRegistry(): OperationDependencyDefinerDirectiveRegistryInterface
     {

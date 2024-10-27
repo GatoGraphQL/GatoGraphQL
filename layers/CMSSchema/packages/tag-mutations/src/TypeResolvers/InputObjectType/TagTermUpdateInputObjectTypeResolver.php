@@ -13,10 +13,6 @@ class TagTermUpdateInputObjectTypeResolver extends AbstractCreateOrUpdateTagTerm
 
     private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 
-    final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
-    }
     final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
     {
         if ($this->tagTaxonomyEnumStringScalarTypeResolver === null) {

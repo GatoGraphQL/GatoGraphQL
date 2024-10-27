@@ -13,10 +13,6 @@ class CMSHelperService implements CMSHelperServiceInterface
 
     private ?CMSServiceInterface $cmsService = null;
 
-    final public function setCMSService(CMSServiceInterface $cmsService): void
-    {
-        $this->cmsService = $cmsService;
-    }
     final protected function getCMSService(): CMSServiceInterface
     {
         if ($this->cmsService === null) {

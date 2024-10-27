@@ -20,10 +20,6 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     private ?MimeTypesFilterInput $mimeTypesFilterInput = null;
     private ?SearchFilterInput $searchFilterInput = null;
 
-    final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
-    {
-        $this->dateQueryInputObjectTypeResolver = $dateQueryInputObjectTypeResolver;
-    }
     final protected function getDateQueryInputObjectTypeResolver(): DateQueryInputObjectTypeResolver
     {
         if ($this->dateQueryInputObjectTypeResolver === null) {
@@ -32,10 +28,6 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
             $this->dateQueryInputObjectTypeResolver = $dateQueryInputObjectTypeResolver;
         }
         return $this->dateQueryInputObjectTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -46,10 +38,6 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setMimeTypesFilterInput(MimeTypesFilterInput $mimeTypesFilterInput): void
-    {
-        $this->mimeTypesFilterInput = $mimeTypesFilterInput;
-    }
     final protected function getMimeTypesFilterInput(): MimeTypesFilterInput
     {
         if ($this->mimeTypesFilterInput === null) {
@@ -58,10 +46,6 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
             $this->mimeTypesFilterInput = $mimeTypesFilterInput;
         }
         return $this->mimeTypesFilterInput;
-    }
-    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
-    {
-        $this->searchFilterInput = $searchFilterInput;
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {

@@ -11,10 +11,6 @@ class PayloadableDeleteGenericCategoryTermBulkOperationMutationResolver extends 
 {
     private ?PayloadableDeleteGenericCategoryTermMutationResolver $payloadableDeleteGenericCategoryTermMutationResolver = null;
 
-    final public function setPayloadableDeleteGenericCategoryTermMutationResolver(PayloadableDeleteGenericCategoryTermMutationResolver $payloadableDeleteGenericCategoryTermMutationResolver): void
-    {
-        $this->payloadableDeleteGenericCategoryTermMutationResolver = $payloadableDeleteGenericCategoryTermMutationResolver;
-    }
     final protected function getPayloadableDeleteGenericCategoryTermMutationResolver(): PayloadableDeleteGenericCategoryTermMutationResolver
     {
         if ($this->payloadableDeleteGenericCategoryTermMutationResolver === null) {

@@ -18,10 +18,6 @@ abstract class AbstractClient extends AbstractEndpointHandler
 
     private ?TemplateHelpersInterface $templateHelpers = null;
 
-    final public function setTemplateHelpers(TemplateHelpersInterface $templateHelpers): void
-    {
-        $this->templateHelpers = $templateHelpers;
-    }
     final protected function getTemplateHelpers(): TemplateHelpersInterface
     {
         if ($this->templateHelpers === null) {

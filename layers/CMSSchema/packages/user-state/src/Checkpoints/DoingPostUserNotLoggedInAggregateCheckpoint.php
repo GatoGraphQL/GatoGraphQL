@@ -14,10 +14,6 @@ class DoingPostUserNotLoggedInAggregateCheckpoint extends AbstractAggregateCheck
     private ?UserNotLoggedInCheckpoint $userNotLoggedInCheckpoint = null;
     private ?DoingPostCheckpoint $doingPostCheckpoint = null;
 
-    final public function setUserNotLoggedInCheckpoint(UserNotLoggedInCheckpoint $userNotLoggedInCheckpoint): void
-    {
-        $this->userNotLoggedInCheckpoint = $userNotLoggedInCheckpoint;
-    }
     final protected function getUserNotLoggedInCheckpoint(): UserNotLoggedInCheckpoint
     {
         if ($this->userNotLoggedInCheckpoint === null) {
@@ -26,10 +22,6 @@ class DoingPostUserNotLoggedInAggregateCheckpoint extends AbstractAggregateCheck
             $this->userNotLoggedInCheckpoint = $userNotLoggedInCheckpoint;
         }
         return $this->userNotLoggedInCheckpoint;
-    }
-    final public function setDoingPostCheckpoint(DoingPostCheckpoint $doingPostCheckpoint): void
-    {
-        $this->doingPostCheckpoint = $doingPostCheckpoint;
     }
     final protected function getDoingPostCheckpoint(): DoingPostCheckpoint
     {

@@ -16,10 +16,6 @@ abstract class AbstractCustomPostContentAsOneofInputObjectTypeResolver extends A
 {
     private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
 
-    final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
-    {
-        $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
-    }
     final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
     {
         if ($this->htmlScalarTypeResolver === null) {

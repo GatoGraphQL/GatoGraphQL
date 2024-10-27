@@ -11,10 +11,6 @@ class SetTagsOnCustomPostBulkOperationMutationResolver extends AbstractBulkOpera
 {
     private ?SetTagsOnCustomPostMutationResolver $setTagsOnCustomPostMutationResolver = null;
 
-    final public function setSetTagsOnCustomPostMutationResolver(SetTagsOnCustomPostMutationResolver $setTagsOnCustomPostMutationResolver): void
-    {
-        $this->setTagsOnCustomPostMutationResolver = $setTagsOnCustomPostMutationResolver;
-    }
     final protected function getSetTagsOnCustomPostMutationResolver(): SetTagsOnCustomPostMutationResolver
     {
         if ($this->setTagsOnCustomPostMutationResolver === null) {

@@ -14,10 +14,6 @@ class GenericTagDeleteMutationPayloadErrorsFieldTransientOperationPayloadObjectT
 {
     private ?GenericTagDeleteMutationErrorPayloadUnionTypeResolver $genericTagDeleteMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setGenericTagDeleteMutationErrorPayloadUnionTypeResolver(GenericTagDeleteMutationErrorPayloadUnionTypeResolver $genericTagDeleteMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->genericTagDeleteMutationErrorPayloadUnionTypeResolver = $genericTagDeleteMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getGenericTagDeleteMutationErrorPayloadUnionTypeResolver(): GenericTagDeleteMutationErrorPayloadUnionTypeResolver
     {
         if ($this->genericTagDeleteMutationErrorPayloadUnionTypeResolver === null) {

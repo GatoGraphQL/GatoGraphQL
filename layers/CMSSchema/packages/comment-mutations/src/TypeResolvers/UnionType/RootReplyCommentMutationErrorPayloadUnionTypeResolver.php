@@ -11,10 +11,6 @@ class RootReplyCommentMutationErrorPayloadUnionTypeResolver extends AbstractComm
 {
     private ?RootReplyCommentMutationErrorPayloadUnionTypeDataLoader $rootReplyCommentMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootReplyCommentMutationErrorPayloadUnionTypeDataLoader(RootReplyCommentMutationErrorPayloadUnionTypeDataLoader $rootReplyCommentMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootReplyCommentMutationErrorPayloadUnionTypeDataLoader = $rootReplyCommentMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootReplyCommentMutationErrorPayloadUnionTypeDataLoader(): RootReplyCommentMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootReplyCommentMutationErrorPayloadUnionTypeDataLoader === null) {

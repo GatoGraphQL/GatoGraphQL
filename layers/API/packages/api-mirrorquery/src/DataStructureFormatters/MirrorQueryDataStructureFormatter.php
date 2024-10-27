@@ -24,10 +24,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     private ?ASTHelperServiceInterface $astHelperService = null;
     private ?SuperRootObjectTypeResolver $superRootObjectTypeResolver = null;
 
-    final public function setASTHelperService(ASTHelperServiceInterface $astHelperService): void
-    {
-        $this->astHelperService = $astHelperService;
-    }
     final protected function getASTHelperService(): ASTHelperServiceInterface
     {
         if ($this->astHelperService === null) {
@@ -36,10 +32,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $this->astHelperService = $astHelperService;
         }
         return $this->astHelperService;
-    }
-    final public function setSuperRootObjectTypeResolver(SuperRootObjectTypeResolver $superRootObjectTypeResolver): void
-    {
-        $this->superRootObjectTypeResolver = $superRootObjectTypeResolver;
     }
     final protected function getSuperRootObjectTypeResolver(): SuperRootObjectTypeResolver
     {

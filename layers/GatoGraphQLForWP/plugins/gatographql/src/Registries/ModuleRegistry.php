@@ -14,10 +14,6 @@ class ModuleRegistry implements ModuleRegistryInterface
 {
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 
-    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
-    {
-        $this->userSettingsManager = $userSettingsManager;
-    }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();

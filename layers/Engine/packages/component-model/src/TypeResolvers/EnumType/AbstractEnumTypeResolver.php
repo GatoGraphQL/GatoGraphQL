@@ -36,10 +36,6 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
     private ?OutputServiceInterface $outputService = null;
 
-    final public function setOutputService(OutputServiceInterface $outputService): void
-    {
-        $this->outputService = $outputService;
-    }
     final protected function getOutputService(): OutputServiceInterface
     {
         if ($this->outputService === null) {

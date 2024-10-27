@@ -33,10 +33,6 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 
     private ?PrematureRequestServiceInterface $prematureRequestService = null;
 
-    final public function setPrematureRequestService(PrematureRequestServiceInterface $prematureRequestService): void
-    {
-        $this->prematureRequestService = $prematureRequestService;
-    }
     final protected function getPrematureRequestService(): PrematureRequestServiceInterface
     {
         if ($this->prematureRequestService === null) {

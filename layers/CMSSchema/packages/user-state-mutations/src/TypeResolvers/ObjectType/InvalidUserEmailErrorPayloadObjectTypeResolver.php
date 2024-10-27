@@ -12,10 +12,6 @@ class InvalidUserEmailErrorPayloadObjectTypeResolver extends AbstractErrorPayloa
 {
     private ?InvalidUserEmailErrorPayloadObjectTypeDataLoader $invalidUserEmailErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setInvalidUserEmailErrorPayloadObjectTypeDataLoader(InvalidUserEmailErrorPayloadObjectTypeDataLoader $invalidUserEmailErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->invalidUserEmailErrorPayloadObjectTypeDataLoader = $invalidUserEmailErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getInvalidUserEmailErrorPayloadObjectTypeDataLoader(): InvalidUserEmailErrorPayloadObjectTypeDataLoader
     {
         if ($this->invalidUserEmailErrorPayloadObjectTypeDataLoader === null) {

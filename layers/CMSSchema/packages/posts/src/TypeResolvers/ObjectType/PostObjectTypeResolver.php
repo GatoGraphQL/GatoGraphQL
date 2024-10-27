@@ -12,10 +12,6 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 {
     private ?PostObjectTypeDataLoader $postObjectTypeDataLoader = null;
 
-    final public function setPostObjectTypeDataLoader(PostObjectTypeDataLoader $postObjectTypeDataLoader): void
-    {
-        $this->postObjectTypeDataLoader = $postObjectTypeDataLoader;
-    }
     final protected function getPostObjectTypeDataLoader(): PostObjectTypeDataLoader
     {
         if ($this->postObjectTypeDataLoader === null) {

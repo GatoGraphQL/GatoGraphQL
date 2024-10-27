@@ -19,10 +19,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     private ?CategoriesByOneofInputObjectTypeResolver $categoriesByOneofInputObjectTypeResolver = null;
 
-    final public function setCategoriesByOneofInputObjectTypeResolver(CategoriesByOneofInputObjectTypeResolver $categoriesByOneofInputObjectTypeResolver): void
-    {
-        $this->categoriesByOneofInputObjectTypeResolver = $categoriesByOneofInputObjectTypeResolver;
-    }
     final protected function getCategoriesByOneofInputObjectTypeResolver(): CategoriesByOneofInputObjectTypeResolver
     {
         if ($this->categoriesByOneofInputObjectTypeResolver === null) {

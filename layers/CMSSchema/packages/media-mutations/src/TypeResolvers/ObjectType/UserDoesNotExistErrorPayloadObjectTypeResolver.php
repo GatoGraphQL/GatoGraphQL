@@ -12,10 +12,6 @@ class UserDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPayloa
 {
     private ?UserDoesNotExistErrorPayloadObjectTypeDataLoader $userDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setUserDoesNotExistErrorPayloadObjectTypeDataLoader(UserDoesNotExistErrorPayloadObjectTypeDataLoader $userDoesNotExistErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->userDoesNotExistErrorPayloadObjectTypeDataLoader = $userDoesNotExistErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getUserDoesNotExistErrorPayloadObjectTypeDataLoader(): UserDoesNotExistErrorPayloadObjectTypeDataLoader
     {
         if ($this->userDoesNotExistErrorPayloadObjectTypeDataLoader === null) {

@@ -12,10 +12,6 @@ class RootUpdatePostTagTermMutationErrorPayloadUnionTypeResolver extends Abstrac
 {
     private ?RootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader $rootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader(RootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader $rootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader = $rootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader(): RootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootUpdatePostTagTermMutationErrorPayloadUnionTypeDataLoader === null) {

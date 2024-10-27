@@ -32,10 +32,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -44,10 +40,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -58,10 +50,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setTaxonomyTaxonomiesFilterInputObjectTypeResolver(TaxonomyTaxonomiesFilterInputObjectTypeResolver $taxonomyTaxonomiesFilterInputObjectTypeResolver): void
-    {
-        $this->taxonomyTaxonomiesFilterInputObjectTypeResolver = $taxonomyTaxonomiesFilterInputObjectTypeResolver;
-    }
     final protected function getTaxonomyTaxonomiesFilterInputObjectTypeResolver(): TaxonomyTaxonomiesFilterInputObjectTypeResolver
     {
         if ($this->taxonomyTaxonomiesFilterInputObjectTypeResolver === null) {
@@ -71,10 +59,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
         }
         return $this->taxonomyTaxonomiesFilterInputObjectTypeResolver;
     }
-    final public function setCategoryPaginationInputObjectTypeResolver(CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver): void
-    {
-        $this->categoryPaginationInputObjectTypeResolver = $categoryPaginationInputObjectTypeResolver;
-    }
     final protected function getCategoryPaginationInputObjectTypeResolver(): CategoryPaginationInputObjectTypeResolver
     {
         if ($this->categoryPaginationInputObjectTypeResolver === null) {
@@ -83,10 +67,6 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
             $this->categoryPaginationInputObjectTypeResolver = $categoryPaginationInputObjectTypeResolver;
         }
         return $this->categoryPaginationInputObjectTypeResolver;
-    }
-    final public function setTaxonomySortInputObjectTypeResolver(TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver): void
-    {
-        $this->taxonomySortInputObjectTypeResolver = $taxonomySortInputObjectTypeResolver;
     }
     final protected function getTaxonomySortInputObjectTypeResolver(): TaxonomySortInputObjectTypeResolver
     {

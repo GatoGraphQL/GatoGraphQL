@@ -13,10 +13,6 @@ abstract class AbstractRoutingManager implements RoutingManagerInterface
 
     private ?RoutingHelperServiceInterface $routingHelperService = null;
 
-    final public function setRoutingHelperService(RoutingHelperServiceInterface $routingHelperService): void
-    {
-        $this->routingHelperService = $routingHelperService;
-    }
     final protected function getRoutingHelperService(): RoutingHelperServiceInterface
     {
         if ($this->routingHelperService === null) {

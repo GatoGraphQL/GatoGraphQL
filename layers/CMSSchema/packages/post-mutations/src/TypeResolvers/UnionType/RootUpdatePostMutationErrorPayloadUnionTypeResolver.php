@@ -12,10 +12,6 @@ class RootUpdatePostMutationErrorPayloadUnionTypeResolver extends AbstractRootUp
 {
     private ?RootUpdatePostMutationErrorPayloadUnionTypeDataLoader $rootUpdatePostMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootUpdatePostMutationErrorPayloadUnionTypeDataLoader(RootUpdatePostMutationErrorPayloadUnionTypeDataLoader $rootUpdatePostMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootUpdatePostMutationErrorPayloadUnionTypeDataLoader = $rootUpdatePostMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootUpdatePostMutationErrorPayloadUnionTypeDataLoader(): RootUpdatePostMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootUpdatePostMutationErrorPayloadUnionTypeDataLoader === null) {

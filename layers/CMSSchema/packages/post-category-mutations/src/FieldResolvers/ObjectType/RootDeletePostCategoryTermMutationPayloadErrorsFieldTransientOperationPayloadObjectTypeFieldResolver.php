@@ -14,10 +14,6 @@ class RootDeletePostCategoryTermMutationPayloadErrorsFieldTransientOperationPayl
 {
     private ?RootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver $rootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver(RootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver $rootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver = $rootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver(): RootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver === null) {

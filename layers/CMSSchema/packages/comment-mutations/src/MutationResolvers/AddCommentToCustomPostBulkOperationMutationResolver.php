@@ -11,10 +11,6 @@ class AddCommentToCustomPostBulkOperationMutationResolver extends AbstractBulkOp
 {
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
 
-    final public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
-    {
-        $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
-    }
     final protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
     {
         if ($this->addCommentToCustomPostMutationResolver === null) {

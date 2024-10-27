@@ -48,10 +48,6 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
     private ?ComponentPathManagerInterface $componentPathManager = null;
     private ?ComponentPathHelpersInterface $componentPathHelpers = null;
 
-    final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
-    {
-        $this->componentPathManager = $componentPathManager;
-    }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
         if ($this->componentPathManager === null) {
@@ -60,10 +56,6 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
             $this->componentPathManager = $componentPathManager;
         }
         return $this->componentPathManager;
-    }
-    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
-    {
-        $this->componentPathHelpers = $componentPathHelpers;
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {

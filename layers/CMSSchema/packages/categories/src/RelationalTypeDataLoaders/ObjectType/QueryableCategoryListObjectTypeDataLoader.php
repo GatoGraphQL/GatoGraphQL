@@ -12,10 +12,6 @@ class QueryableCategoryListObjectTypeDataLoader extends AbstractCategoryObjectTy
 {
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI = null;
 
-    final public function setQueryableCategoryTypeAPI(QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI): void
-    {
-        $this->queryableCategoryListTypeAPI = $queryableCategoryListTypeAPI;
-    }
     final protected function getQueryableCategoryTypeAPI(): QueryableCategoryTypeAPIInterface
     {
         if ($this->queryableCategoryListTypeAPI === null) {

@@ -11,10 +11,6 @@ class RootCreatePostInputObjectTypeResolver extends RootCreateCustomPostInputObj
 {
     private ?PostContentAsOneofInputObjectTypeResolver $postContentAsOneofInputObjectTypeResolver = null;
 
-    final public function setPostContentAsOneofInputObjectTypeResolver(PostContentAsOneofInputObjectTypeResolver $postContentAsOneofInputObjectTypeResolver): void
-    {
-        $this->postContentAsOneofInputObjectTypeResolver = $postContentAsOneofInputObjectTypeResolver;
-    }
     final protected function getPostContentAsOneofInputObjectTypeResolver(): PostContentAsOneofInputObjectTypeResolver
     {
         if ($this->postContentAsOneofInputObjectTypeResolver === null) {

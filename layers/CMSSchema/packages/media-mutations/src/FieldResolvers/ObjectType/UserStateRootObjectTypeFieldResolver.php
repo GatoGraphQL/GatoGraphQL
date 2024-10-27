@@ -40,10 +40,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
-    {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-    }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         if ($this->mediaTypeAPI === null) {
@@ -52,10 +48,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->mediaTypeAPI = $mediaTypeAPI;
         }
         return $this->mediaTypeAPI;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -66,10 +58,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
-    {
-        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
-    }
     final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
         if ($this->mediaObjectTypeResolver === null) {
@@ -78,10 +66,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         }
         return $this->mediaObjectTypeResolver;
-    }
-    final public function setMediaItemByOneofInputObjectTypeResolver(MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver): void
-    {
-        $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
     }
     final protected function getMediaItemByOneofInputObjectTypeResolver(): MediaItemByOneofInputObjectTypeResolver
     {
@@ -92,10 +76,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->mediaItemByOneofInputObjectTypeResolver;
     }
-    final public function setRootMyMediaItemsFilterInputObjectTypeResolver(RootMyMediaItemsFilterInputObjectTypeResolver $rootMyMediaItemsFilterInputObjectTypeResolver): void
-    {
-        $this->rootMyMediaItemsFilterInputObjectTypeResolver = $rootMyMediaItemsFilterInputObjectTypeResolver;
-    }
     final protected function getRootMyMediaItemsFilterInputObjectTypeResolver(): RootMyMediaItemsFilterInputObjectTypeResolver
     {
         if ($this->rootMyMediaItemsFilterInputObjectTypeResolver === null) {
@@ -104,10 +84,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->rootMyMediaItemsFilterInputObjectTypeResolver = $rootMyMediaItemsFilterInputObjectTypeResolver;
         }
         return $this->rootMyMediaItemsFilterInputObjectTypeResolver;
-    }
-    final public function setRootMediaItemPaginationInputObjectTypeResolver(RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver): void
-    {
-        $this->rootMediaItemPaginationInputObjectTypeResolver = $rootMediaItemPaginationInputObjectTypeResolver;
     }
     final protected function getRootMediaItemPaginationInputObjectTypeResolver(): RootMediaItemPaginationInputObjectTypeResolver
     {
@@ -118,10 +94,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->rootMediaItemPaginationInputObjectTypeResolver;
     }
-    final public function setMediaItemSortInputObjectTypeResolver(MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver): void
-    {
-        $this->mediaItemSortInputObjectTypeResolver = $mediaItemSortInputObjectTypeResolver;
-    }
     final protected function getMediaItemSortInputObjectTypeResolver(): MediaItemSortInputObjectTypeResolver
     {
         if ($this->mediaItemSortInputObjectTypeResolver === null) {
@@ -130,10 +102,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->mediaItemSortInputObjectTypeResolver = $mediaItemSortInputObjectTypeResolver;
         }
         return $this->mediaItemSortInputObjectTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {

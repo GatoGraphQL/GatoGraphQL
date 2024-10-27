@@ -11,10 +11,6 @@ class PayloadableSetCategoriesOnCustomPostBulkOperationMutationResolver extends 
 {
     private ?PayloadableSetCategoriesOnCustomPostMutationResolver $payloadableSetCategoriesOnCustomPostMutationResolver = null;
 
-    final public function setPayloadableSetCategoriesOnCustomPostMutationResolver(PayloadableSetCategoriesOnCustomPostMutationResolver $payloadableSetCategoriesOnCustomPostMutationResolver): void
-    {
-        $this->payloadableSetCategoriesOnCustomPostMutationResolver = $payloadableSetCategoriesOnCustomPostMutationResolver;
-    }
     final protected function getPayloadableSetCategoriesOnCustomPostMutationResolver(): PayloadableSetCategoriesOnCustomPostMutationResolver
     {
         if ($this->payloadableSetCategoriesOnCustomPostMutationResolver === null) {

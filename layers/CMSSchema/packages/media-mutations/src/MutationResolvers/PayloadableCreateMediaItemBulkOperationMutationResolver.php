@@ -11,10 +11,6 @@ class PayloadableCreateMediaItemBulkOperationMutationResolver extends AbstractBu
 {
     private ?PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver = null;
 
-    final public function setPayloadableCreateMediaItemMutationResolver(PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver): void
-    {
-        $this->payloadableCreateMediaItemMutationResolver = $payloadableCreateMediaItemMutationResolver;
-    }
     final protected function getPayloadableCreateMediaItemMutationResolver(): PayloadableCreateMediaItemMutationResolver
     {
         if ($this->payloadableCreateMediaItemMutationResolver === null) {

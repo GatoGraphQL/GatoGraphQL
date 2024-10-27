@@ -11,10 +11,6 @@ class UpdateGenericCustomPostBulkOperationMutationResolver extends AbstractBulkO
 {
     private ?UpdateGenericCustomPostMutationResolver $updateGenericCustomPostMutationResolver = null;
 
-    final public function setUpdateGenericCustomPostMutationResolver(UpdateGenericCustomPostMutationResolver $updateGenericCustomPostMutationResolver): void
-    {
-        $this->updateGenericCustomPostMutationResolver = $updateGenericCustomPostMutationResolver;
-    }
     final protected function getUpdateGenericCustomPostMutationResolver(): UpdateGenericCustomPostMutationResolver
     {
         if ($this->updateGenericCustomPostMutationResolver === null) {

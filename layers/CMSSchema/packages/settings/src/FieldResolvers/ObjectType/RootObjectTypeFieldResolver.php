@@ -27,10 +27,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?SettingsTypeAPIInterface $settingsTypeAPI = null;
 
-    final public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
-    {
-        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
-    }
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
         if ($this->anyBuiltInScalarScalarTypeResolver === null) {
@@ -39,10 +35,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
         }
         return $this->anyBuiltInScalarScalarTypeResolver;
-    }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
-    {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
@@ -53,10 +45,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->jsonObjectScalarTypeResolver;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -65,10 +53,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setSettingsTypeAPI(SettingsTypeAPIInterface $settingsTypeAPI): void
-    {
-        $this->settingsTypeAPI = $settingsTypeAPI;
     }
     final protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
     {

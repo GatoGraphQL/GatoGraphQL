@@ -13,10 +13,6 @@ abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputCo
 {
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
 
-    final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
-    {
-        $this->schemaDefinitionService = $schemaDefinitionService;
-    }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
         if ($this->schemaDefinitionService === null) {

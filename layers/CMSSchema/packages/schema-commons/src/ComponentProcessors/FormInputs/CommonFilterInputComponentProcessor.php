@@ -69,10 +69,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     private ?SlugFilterInput $slugFilterInput = null;
     private ?SlugsFilterInput $slugsFilterInput = null;
 
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -81,10 +77,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -95,10 +87,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         if ($this->intScalarTypeResolver === null) {
@@ -107,10 +95,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             $this->intScalarTypeResolver = $intScalarTypeResolver;
         }
         return $this->intScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -121,10 +105,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setSortFilterInput(SortFilterInput $sortFilterInput): void
-    {
-        $this->sortFilterInput = $sortFilterInput;
-    }
     final protected function getSortFilterInput(): SortFilterInput
     {
         if ($this->sortFilterInput === null) {
@@ -133,10 +113,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             $this->sortFilterInput = $sortFilterInput;
         }
         return $this->sortFilterInput;
-    }
-    final public function setExcludeIDsFilterInput(ExcludeIDsFilterInput $excludeIDsFilterInput): void
-    {
-        $this->excludeIDsFilterInput = $excludeIDsFilterInput;
     }
     final protected function getExcludeIDsFilterInput(): ExcludeIDsFilterInput
     {
@@ -147,10 +123,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         }
         return $this->excludeIDsFilterInput;
     }
-    final public function setExcludeParentIDsFilterInput(ExcludeParentIDsFilterInput $excludeParentIDsFilterInput): void
-    {
-        $this->excludeParentIDsFilterInput = $excludeParentIDsFilterInput;
-    }
     final protected function getExcludeParentIDsFilterInput(): ExcludeParentIDsFilterInput
     {
         if ($this->excludeParentIDsFilterInput === null) {
@@ -159,10 +131,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             $this->excludeParentIDsFilterInput = $excludeParentIDsFilterInput;
         }
         return $this->excludeParentIDsFilterInput;
-    }
-    final public function setFormatFilterInput(FormatFilterInput $formatFilterInput): void
-    {
-        $this->formatFilterInput = $formatFilterInput;
     }
     final protected function getFormatFilterInput(): FormatFilterInput
     {
@@ -173,10 +141,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         }
         return $this->formatFilterInput;
     }
-    final public function setGMTFilterInput(GMTFilterInput $gmtFilterInput): void
-    {
-        $this->gmtFilterInput = $gmtFilterInput;
-    }
     final protected function getGMTFilterInput(): GMTFilterInput
     {
         if ($this->gmtFilterInput === null) {
@@ -185,10 +149,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             $this->gmtFilterInput = $gmtFilterInput;
         }
         return $this->gmtFilterInput;
-    }
-    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
-    {
-        $this->includeFilterInput = $includeFilterInput;
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {
@@ -199,10 +159,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         }
         return $this->includeFilterInput;
     }
-    final public function setLimitFilterInput(LimitFilterInput $limitFilterInput): void
-    {
-        $this->limitFilterInput = $limitFilterInput;
-    }
     final protected function getLimitFilterInput(): LimitFilterInput
     {
         if ($this->limitFilterInput === null) {
@@ -211,10 +167,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             $this->limitFilterInput = $limitFilterInput;
         }
         return $this->limitFilterInput;
-    }
-    final public function setOffsetFilterInput(OffsetFilterInput $offsetFilterInput): void
-    {
-        $this->offsetFilterInput = $offsetFilterInput;
     }
     final protected function getOffsetFilterInput(): OffsetFilterInput
     {
@@ -225,10 +177,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         }
         return $this->offsetFilterInput;
     }
-    final public function setParentIDFilterInput(ParentIDFilterInput $parentIDFilterInput): void
-    {
-        $this->parentIDFilterInput = $parentIDFilterInput;
-    }
     final protected function getParentIDFilterInput(): ParentIDFilterInput
     {
         if ($this->parentIDFilterInput === null) {
@@ -237,10 +185,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             $this->parentIDFilterInput = $parentIDFilterInput;
         }
         return $this->parentIDFilterInput;
-    }
-    final public function setParentIDsFilterInput(ParentIDsFilterInput $parentIDsFilterInput): void
-    {
-        $this->parentIDsFilterInput = $parentIDsFilterInput;
     }
     final protected function getParentIDsFilterInput(): ParentIDsFilterInput
     {
@@ -251,10 +195,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         }
         return $this->parentIDsFilterInput;
     }
-    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
-    {
-        $this->searchFilterInput = $searchFilterInput;
-    }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
         if ($this->searchFilterInput === null) {
@@ -264,10 +204,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         }
         return $this->searchFilterInput;
     }
-    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
-    {
-        $this->slugFilterInput = $slugFilterInput;
-    }
     final protected function getSlugFilterInput(): SlugFilterInput
     {
         if ($this->slugFilterInput === null) {
@@ -276,10 +212,6 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             $this->slugFilterInput = $slugFilterInput;
         }
         return $this->slugFilterInput;
-    }
-    final public function setSlugsFilterInput(SlugsFilterInput $slugsFilterInput): void
-    {
-        $this->slugsFilterInput = $slugsFilterInput;
     }
     final protected function getSlugsFilterInput(): SlugsFilterInput
     {

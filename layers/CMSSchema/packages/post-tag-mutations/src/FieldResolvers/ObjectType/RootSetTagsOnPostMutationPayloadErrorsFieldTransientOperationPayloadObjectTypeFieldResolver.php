@@ -14,10 +14,6 @@ class RootSetTagsOnPostMutationPayloadErrorsFieldTransientOperationPayloadObject
 {
     private ?RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver $rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootSetTagsOnPostMutationErrorPayloadUnionTypeResolver(RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver $rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver = $rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootSetTagsOnPostMutationErrorPayloadUnionTypeResolver(): RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootSetTagsOnPostMutationErrorPayloadUnionTypeResolver === null) {

@@ -13,10 +13,6 @@ abstract class AbstractTaxonomyIsNotValidErrorPayloadObjectTypeResolverPicker ex
 {
     private ?TaxonomyIsNotValidErrorPayloadObjectTypeResolver $taxonomyIsNotValidErrorPayloadObjectTypeResolver = null;
 
-    final public function setTaxonomyIsNotValidErrorPayloadObjectTypeResolver(TaxonomyIsNotValidErrorPayloadObjectTypeResolver $taxonomyIsNotValidErrorPayloadObjectTypeResolver): void
-    {
-        $this->taxonomyIsNotValidErrorPayloadObjectTypeResolver = $taxonomyIsNotValidErrorPayloadObjectTypeResolver;
-    }
     final protected function getTaxonomyIsNotValidErrorPayloadObjectTypeResolver(): TaxonomyIsNotValidErrorPayloadObjectTypeResolver
     {
         if ($this->taxonomyIsNotValidErrorPayloadObjectTypeResolver === null) {

@@ -11,10 +11,6 @@ class RootCreatePageMutationErrorPayloadUnionTypeResolver extends AbstractRootCr
 {
     private ?RootCreatePageMutationErrorPayloadUnionTypeDataLoader $rootCreatePageMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootCreatePageMutationErrorPayloadUnionTypeDataLoader(RootCreatePageMutationErrorPayloadUnionTypeDataLoader $rootCreatePageMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootCreatePageMutationErrorPayloadUnionTypeDataLoader = $rootCreatePageMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootCreatePageMutationErrorPayloadUnionTypeDataLoader(): RootCreatePageMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootCreatePageMutationErrorPayloadUnionTypeDataLoader === null) {

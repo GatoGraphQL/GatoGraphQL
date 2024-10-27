@@ -11,10 +11,6 @@ class RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver extends AbstractPos
 {
     private ?RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader $rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader(RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader $rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader = $rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader(): RootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootSetTagsOnPostMutationErrorPayloadUnionTypeDataLoader === null) {

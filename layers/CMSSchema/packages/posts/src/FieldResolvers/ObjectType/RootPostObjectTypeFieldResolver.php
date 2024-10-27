@@ -27,10 +27,6 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
 {
     private ?PostByOneofInputObjectTypeResolver $postByOneofInputObjectTypeResolver = null;
 
-    final public function setPostByOneofInputObjectTypeResolver(PostByOneofInputObjectTypeResolver $postByOneofInputObjectTypeResolver): void
-    {
-        $this->postByOneofInputObjectTypeResolver = $postByOneofInputObjectTypeResolver;
-    }
     final protected function getPostByOneofInputObjectTypeResolver(): PostByOneofInputObjectTypeResolver
     {
         if ($this->postByOneofInputObjectTypeResolver === null) {

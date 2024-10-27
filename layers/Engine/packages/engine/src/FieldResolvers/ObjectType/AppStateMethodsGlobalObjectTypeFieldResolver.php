@@ -25,10 +25,6 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
-    {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-    }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
         if ($this->jsonObjectScalarTypeResolver === null) {
@@ -37,10 +33,6 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
             $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
         }
         return $this->jsonObjectScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {

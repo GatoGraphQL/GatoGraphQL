@@ -25,10 +25,6 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?QueryRootObjectTypeResolver $queryRootObjectTypeResolver = null;
     private ?MutationRootObjectTypeResolver $mutationRootObjectTypeResolver = null;
 
-    final public function setRootObjectTypeResolver(RootObjectTypeResolver $rootObjectTypeResolver): void
-    {
-        $this->rootObjectTypeResolver = $rootObjectTypeResolver;
-    }
     final protected function getRootObjectTypeResolver(): RootObjectTypeResolver
     {
         if ($this->rootObjectTypeResolver === null) {
@@ -38,10 +34,6 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->rootObjectTypeResolver;
     }
-    final public function setQueryRootObjectTypeResolver(QueryRootObjectTypeResolver $queryRootObjectTypeResolver): void
-    {
-        $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
-    }
     final protected function getQueryRootObjectTypeResolver(): QueryRootObjectTypeResolver
     {
         if ($this->queryRootObjectTypeResolver === null) {
@@ -50,10 +42,6 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->queryRootObjectTypeResolver = $queryRootObjectTypeResolver;
         }
         return $this->queryRootObjectTypeResolver;
-    }
-    final public function setMutationRootObjectTypeResolver(MutationRootObjectTypeResolver $mutationRootObjectTypeResolver): void
-    {
-        $this->mutationRootObjectTypeResolver = $mutationRootObjectTypeResolver;
     }
     final protected function getMutationRootObjectTypeResolver(): MutationRootObjectTypeResolver
     {

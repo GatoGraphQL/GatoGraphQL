@@ -13,10 +13,6 @@ abstract class AbstractFeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadOb
 {
     private ?FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver = null;
 
-    final public function setFeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver(FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver): void
-    {
-        $this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver = $featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver;
-    }
     final protected function getFeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver(): FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver
     {
         if ($this->featuredImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver === null) {

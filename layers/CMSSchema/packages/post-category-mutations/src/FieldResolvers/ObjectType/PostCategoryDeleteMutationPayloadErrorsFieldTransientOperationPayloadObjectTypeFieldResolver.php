@@ -14,10 +14,6 @@ class PostCategoryDeleteMutationPayloadErrorsFieldTransientOperationPayloadObjec
 {
     private ?PostCategoryDeleteMutationErrorPayloadUnionTypeResolver $postCategoryDeleteMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setPostCategoryDeleteMutationErrorPayloadUnionTypeResolver(PostCategoryDeleteMutationErrorPayloadUnionTypeResolver $postCategoryDeleteMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->postCategoryDeleteMutationErrorPayloadUnionTypeResolver = $postCategoryDeleteMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getPostCategoryDeleteMutationErrorPayloadUnionTypeResolver(): PostCategoryDeleteMutationErrorPayloadUnionTypeResolver
     {
         if ($this->postCategoryDeleteMutationErrorPayloadUnionTypeResolver === null) {

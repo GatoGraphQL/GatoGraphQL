@@ -14,10 +14,6 @@ class RemoveFeaturedImageFromCustomPostMutationResolver extends AbstractSetOrRem
 {
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
 
-    final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
-    {
-        $this->customPostMediaTypeMutationAPI = $customPostMediaTypeMutationAPI;
-    }
     final protected function getCustomPostMediaTypeMutationAPI(): CustomPostMediaTypeMutationAPIInterface
     {
         if ($this->customPostMediaTypeMutationAPI === null) {

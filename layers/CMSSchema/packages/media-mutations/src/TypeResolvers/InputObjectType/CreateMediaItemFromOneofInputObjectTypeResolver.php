@@ -15,10 +15,6 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
     private ?CreateMediaItemFromURLInputObjectTypeResolver $createMediaItemFromURLInputObjectTypeResolver = null;
     private ?MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver = null;
 
-    final public function setCreateMediaItemFromContentInputObjectTypeResolver(CreateMediaItemFromContentInputObjectTypeResolver $createMediaItemFromContentInputObjectTypeResolver): void
-    {
-        $this->createMediaItemFromContentInputObjectTypeResolver = $createMediaItemFromContentInputObjectTypeResolver;
-    }
     final protected function getCreateMediaItemFromContentInputObjectTypeResolver(): CreateMediaItemFromContentInputObjectTypeResolver
     {
         if ($this->createMediaItemFromContentInputObjectTypeResolver === null) {
@@ -28,10 +24,6 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
         }
         return $this->createMediaItemFromContentInputObjectTypeResolver;
     }
-    final public function setCreateMediaItemFromURLInputObjectTypeResolver(CreateMediaItemFromURLInputObjectTypeResolver $createMediaItemFromURLInputObjectTypeResolver): void
-    {
-        $this->createMediaItemFromURLInputObjectTypeResolver = $createMediaItemFromURLInputObjectTypeResolver;
-    }
     final protected function getCreateMediaItemFromURLInputObjectTypeResolver(): CreateMediaItemFromURLInputObjectTypeResolver
     {
         if ($this->createMediaItemFromURLInputObjectTypeResolver === null) {
@@ -40,10 +32,6 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
             $this->createMediaItemFromURLInputObjectTypeResolver = $createMediaItemFromURLInputObjectTypeResolver;
         }
         return $this->createMediaItemFromURLInputObjectTypeResolver;
-    }
-    final public function setMediaItemByOneofInputObjectTypeResolver(MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver): void
-    {
-        $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
     }
     final protected function getMediaItemByOneofInputObjectTypeResolver(): MediaItemByOneofInputObjectTypeResolver
     {

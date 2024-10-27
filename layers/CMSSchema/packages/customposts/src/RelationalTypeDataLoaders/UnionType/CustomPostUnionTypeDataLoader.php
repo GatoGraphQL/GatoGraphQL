@@ -12,10 +12,6 @@ class CustomPostUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
 
-    final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
-    {
-        $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
-    }
     final protected function getCustomPostUnionTypeResolver(): CustomPostUnionTypeResolver
     {
         if ($this->customPostUnionTypeResolver === null) {

@@ -13,10 +13,6 @@ abstract class AbstractTaxonomyTermDoesNotExistErrorPayloadObjectTypeResolverPic
 {
     private ?TaxonomyTermDoesNotExistErrorPayloadObjectTypeResolver $taxonomyTermDoesNotExistErrorPayloadObjectTypeResolver = null;
 
-    final public function setTaxonomyTermDoesNotExistErrorPayloadObjectTypeResolver(TaxonomyTermDoesNotExistErrorPayloadObjectTypeResolver $taxonomyTermDoesNotExistErrorPayloadObjectTypeResolver): void
-    {
-        $this->taxonomyTermDoesNotExistErrorPayloadObjectTypeResolver = $taxonomyTermDoesNotExistErrorPayloadObjectTypeResolver;
-    }
     final protected function getTaxonomyTermDoesNotExistErrorPayloadObjectTypeResolver(): TaxonomyTermDoesNotExistErrorPayloadObjectTypeResolver
     {
         if ($this->taxonomyTermDoesNotExistErrorPayloadObjectTypeResolver === null) {

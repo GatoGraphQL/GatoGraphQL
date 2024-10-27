@@ -50,11 +50,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    final public function setPersistentCache(PersistentCacheInterface $persistentCache): void
-    {
-        $this->persistentCache = $persistentCache;
-    }
-    final public function getPersistentCache(): PersistentCacheInterface
+    final protected function getPersistentCache(): PersistentCacheInterface
     {
         if ($this->persistentCache === null) {
             /** @var PersistentCacheInterface */
@@ -62,10 +58,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $this->persistentCache = $persistentCache;
         }
         return $this->persistentCache;
-    }
-    final public function setSchemaDefinitionService(SchemaDefinitionServiceInterface $schemaDefinitionService): void
-    {
-        $this->schemaDefinitionService = $schemaDefinitionService;
     }
     final protected function getSchemaDefinitionService(): SchemaDefinitionServiceInterface
     {
@@ -76,10 +68,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
         return $this->schemaDefinitionService;
     }
-    final public function setGraphQLSchemaDefinitionService(GraphQLSchemaDefinitionServiceInterface $graphQLSchemaDefinitionService): void
-    {
-        $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
-    }
     final protected function getGraphQLSchemaDefinitionService(): GraphQLSchemaDefinitionServiceInterface
     {
         if ($this->graphQLSchemaDefinitionService === null) {
@@ -88,10 +76,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
             $this->graphQLSchemaDefinitionService = $graphQLSchemaDefinitionService;
         }
         return $this->graphQLSchemaDefinitionService;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {

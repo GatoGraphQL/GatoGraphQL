@@ -112,10 +112,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
     private ?EngineInterface $engine = null;
 
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
-    {
-        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
         if ($this->dangerouslyNonSpecificScalarTypeScalarTypeResolver === null) {
@@ -124,10 +120,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
         }
         return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver;
-    }
-    final public function setOutputService(OutputServiceInterface $outputService): void
-    {
-        $this->outputService = $outputService;
     }
     final protected function getOutputService(): OutputServiceInterface
     {
@@ -138,10 +130,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         return $this->outputService;
     }
-    final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
-    {
-        $this->objectSerializationManager = $objectSerializationManager;
-    }
     final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
     {
         if ($this->objectSerializationManager === null) {
@@ -151,10 +139,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         return $this->objectSerializationManager;
     }
-    final public function setSchemaCastingService(SchemaCastingServiceInterface $schemaCastingService): void
-    {
-        $this->schemaCastingService = $schemaCastingService;
-    }
     final protected function getSchemaCastingService(): SchemaCastingServiceInterface
     {
         if ($this->schemaCastingService === null) {
@@ -163,10 +147,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this->schemaCastingService = $schemaCastingService;
         }
         return $this->schemaCastingService;
-    }
-    final public function setEngine(EngineInterface $engine): void
-    {
-        $this->engine = $engine;
     }
     final protected function getEngine(): EngineInterface
     {

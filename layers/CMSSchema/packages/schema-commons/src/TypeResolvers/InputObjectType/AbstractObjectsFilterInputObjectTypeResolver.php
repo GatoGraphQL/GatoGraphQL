@@ -18,10 +18,6 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
     private ?ExcludeIDsFilterInput $excludeIDsFilterInput = null;
     private ?IncludeFilterInput $includeFilterInput = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
         if ($this->idScalarTypeResolver === null) {
@@ -31,10 +27,6 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setExcludeIDsFilterInput(ExcludeIDsFilterInput $excludeIDsFilterInput): void
-    {
-        $this->excludeIDsFilterInput = $excludeIDsFilterInput;
-    }
     final protected function getExcludeIDsFilterInput(): ExcludeIDsFilterInput
     {
         if ($this->excludeIDsFilterInput === null) {
@@ -43,10 +35,6 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
             $this->excludeIDsFilterInput = $excludeIDsFilterInput;
         }
         return $this->excludeIDsFilterInput;
-    }
-    final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
-    {
-        $this->includeFilterInput = $includeFilterInput;
     }
     final protected function getIncludeFilterInput(): IncludeFilterInput
     {

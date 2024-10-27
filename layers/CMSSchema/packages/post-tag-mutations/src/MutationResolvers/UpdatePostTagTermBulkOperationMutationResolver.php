@@ -11,10 +11,6 @@ class UpdatePostTagTermBulkOperationMutationResolver extends AbstractBulkOperati
 {
     private ?UpdatePostTagTermMutationResolver $updatePostTagTermMutationResolver = null;
 
-    final public function setUpdatePostTagTermMutationResolver(UpdatePostTagTermMutationResolver $updatePostTagTermMutationResolver): void
-    {
-        $this->updatePostTagTermMutationResolver = $updatePostTagTermMutationResolver;
-    }
     final protected function getUpdatePostTagTermMutationResolver(): UpdatePostTagTermMutationResolver
     {
         if ($this->updatePostTagTermMutationResolver === null) {

@@ -15,10 +15,6 @@ class TagUnionTypeResolver extends AbstractUnionTypeResolver
     private ?TagUnionTypeDataLoader $tagUnionTypeDataLoader = null;
     private ?TagInterfaceTypeResolver $tagInterfaceTypeResolver = null;
 
-    final public function setTagUnionTypeDataLoader(TagUnionTypeDataLoader $tagUnionTypeDataLoader): void
-    {
-        $this->tagUnionTypeDataLoader = $tagUnionTypeDataLoader;
-    }
     final protected function getTagUnionTypeDataLoader(): TagUnionTypeDataLoader
     {
         if ($this->tagUnionTypeDataLoader === null) {
@@ -27,10 +23,6 @@ class TagUnionTypeResolver extends AbstractUnionTypeResolver
             $this->tagUnionTypeDataLoader = $tagUnionTypeDataLoader;
         }
         return $this->tagUnionTypeDataLoader;
-    }
-    final public function setTagInterfaceTypeResolver(TagInterfaceTypeResolver $tagInterfaceTypeResolver): void
-    {
-        $this->tagInterfaceTypeResolver = $tagInterfaceTypeResolver;
     }
     final protected function getTagInterfaceTypeResolver(): TagInterfaceTypeResolver
     {

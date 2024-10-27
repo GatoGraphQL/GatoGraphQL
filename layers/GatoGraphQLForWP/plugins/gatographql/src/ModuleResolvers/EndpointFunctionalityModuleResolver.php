@@ -30,10 +30,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
     private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
     private ?TutorialMenuPage $tutorialMenuPage = null;
 
-    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
-    {
-        $this->endpointHelpers = $endpointHelpers;
-    }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
         if ($this->endpointHelpers === null) {
@@ -42,10 +38,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
             $this->endpointHelpers = $endpointHelpers;
         }
         return $this->endpointHelpers;
-    }
-    final public function setGraphiQLMenuPage(GraphiQLMenuPage $graphiQLMenuPage): void
-    {
-        $this->graphiQLMenuPage = $graphiQLMenuPage;
     }
     final protected function getGraphiQLMenuPage(): GraphiQLMenuPage
     {
@@ -56,10 +48,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
         }
         return $this->graphiQLMenuPage;
     }
-    final public function setGraphQLVoyagerMenuPage(GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage): void
-    {
-        $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
-    }
     final protected function getGraphQLVoyagerMenuPage(): GraphQLVoyagerMenuPage
     {
         if ($this->graphQLVoyagerMenuPage === null) {
@@ -68,10 +56,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
             $this->graphQLVoyagerMenuPage = $graphQLVoyagerMenuPage;
         }
         return $this->graphQLVoyagerMenuPage;
-    }
-    final public function setTutorialMenuPage(TutorialMenuPage $tutorialMenuPage): void
-    {
-        $this->tutorialMenuPage = $tutorialMenuPage;
     }
     final protected function getTutorialMenuPage(): TutorialMenuPage
     {

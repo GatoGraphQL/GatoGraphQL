@@ -12,10 +12,6 @@ class GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver extends Abstr
 {
     private ?GenericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader $genericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setGenericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader(GenericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader $genericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->genericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader = $genericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getGenericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader(): GenericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->genericCustomPostUpdateMutationErrorPayloadUnionTypeDataLoader === null) {

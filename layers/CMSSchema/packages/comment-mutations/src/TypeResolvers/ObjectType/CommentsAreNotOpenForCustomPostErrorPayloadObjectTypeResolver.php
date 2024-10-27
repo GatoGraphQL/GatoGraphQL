@@ -12,10 +12,6 @@ class CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver extends Abst
 {
     private ?CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader $commentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader(CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader $commentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->commentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader = $commentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader(): CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader
     {
         if ($this->commentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader === null) {

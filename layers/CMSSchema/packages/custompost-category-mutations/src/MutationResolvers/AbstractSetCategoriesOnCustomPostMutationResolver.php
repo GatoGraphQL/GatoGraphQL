@@ -36,10 +36,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     private ?CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
-    final public function setNameResolver(NameResolverInterface $nameResolver): void
-    {
-        $this->nameResolver = $nameResolver;
-    }
     final protected function getNameResolver(): NameResolverInterface
     {
         if ($this->nameResolver === null) {
@@ -48,10 +44,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $this->nameResolver = $nameResolver;
         }
         return $this->nameResolver;
-    }
-    final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
-    {
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
     }
     final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
@@ -62,10 +54,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
         return $this->userRoleTypeAPI;
     }
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         if ($this->customPostTypeAPI === null) {
@@ -74,10 +62,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $this->customPostTypeAPI = $customPostTypeAPI;
         }
         return $this->customPostTypeAPI;
-    }
-    final public function setCustomPostTypeMutationAPI(CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI): void
-    {
-        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
     }
     final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
     {
@@ -88,10 +72,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
         return $this->customPostTypeMutationAPI;
     }
-    final public function setCustomPostCategoryTypeMutationAPI(CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI): void
-    {
-        $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
-    }
     final protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
     {
         if ($this->customPostCategoryTypeMutationAPI === null) {
@@ -100,10 +80,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
         }
         return $this->customPostCategoryTypeMutationAPI;
-    }
-    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
-    {
-        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
     }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {

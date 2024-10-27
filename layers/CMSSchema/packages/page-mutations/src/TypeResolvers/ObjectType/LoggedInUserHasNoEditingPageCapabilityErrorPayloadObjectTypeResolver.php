@@ -12,10 +12,6 @@ class LoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver exten
 {
     private ?LoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeDataLoader === null) {

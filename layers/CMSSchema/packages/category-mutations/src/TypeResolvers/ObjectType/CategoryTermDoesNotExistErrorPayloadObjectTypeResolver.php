@@ -12,10 +12,6 @@ class CategoryTermDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErr
 {
     private ?CategoryTermDoesNotExistErrorPayloadObjectTypeDataLoader $categoryDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setCategoryTermDoesNotExistErrorPayloadObjectTypeDataLoader(CategoryTermDoesNotExistErrorPayloadObjectTypeDataLoader $categoryDoesNotExistErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->categoryDoesNotExistErrorPayloadObjectTypeDataLoader = $categoryDoesNotExistErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getCategoryTermDoesNotExistErrorPayloadObjectTypeDataLoader(): CategoryTermDoesNotExistErrorPayloadObjectTypeDataLoader
     {
         if ($this->categoryDoesNotExistErrorPayloadObjectTypeDataLoader === null) {

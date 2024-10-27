@@ -11,10 +11,6 @@ class RootSetTagsOnCustomPostMutationErrorPayloadUnionTypeResolver extends Abstr
 {
     private ?RootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader $rootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader(RootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader $rootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader = $rootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader(): RootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootSetTagsOnCustomPostMutationErrorPayloadUnionTypeDataLoader === null) {

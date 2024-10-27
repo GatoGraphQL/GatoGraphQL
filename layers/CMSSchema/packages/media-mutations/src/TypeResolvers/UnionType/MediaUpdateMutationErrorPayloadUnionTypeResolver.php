@@ -11,10 +11,6 @@ class MediaUpdateMutationErrorPayloadUnionTypeResolver extends AbstractUpdateMed
 {
     private ?MediaUpdateMutationErrorPayloadUnionTypeDataLoader $mediaUpdateMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setMediaUpdateMutationErrorPayloadUnionTypeDataLoader(MediaUpdateMutationErrorPayloadUnionTypeDataLoader $mediaUpdateMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->mediaUpdateMutationErrorPayloadUnionTypeDataLoader = $mediaUpdateMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getMediaUpdateMutationErrorPayloadUnionTypeDataLoader(): MediaUpdateMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->mediaUpdateMutationErrorPayloadUnionTypeDataLoader === null) {

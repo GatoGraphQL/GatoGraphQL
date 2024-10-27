@@ -28,10 +28,6 @@ class LicenseValidationService implements LicenseValidationServiceInterface
     private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?ContainerManagerInterface $containerManager = null;
 
-    final public function setMarketplaceProviderCommercialExtensionActivationService(MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService): void
-    {
-        $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
-    }
     final protected function getMarketplaceProviderCommercialExtensionActivationService(): MarketplaceProviderCommercialExtensionActivationServiceInterface
     {
         if ($this->marketplaceProviderCommercialExtensionActivationService === null) {
@@ -40,10 +36,6 @@ class LicenseValidationService implements LicenseValidationServiceInterface
             $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
         }
         return $this->marketplaceProviderCommercialExtensionActivationService;
-    }
-    final public function setContainerManager(ContainerManagerInterface $containerManager): void
-    {
-        $this->containerManager = $containerManager;
     }
     final protected function getContainerManager(): ContainerManagerInterface
     {

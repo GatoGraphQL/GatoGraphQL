@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectT
 {
     private ?LoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver(LoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver $loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver = $loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver(): LoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver === null) {

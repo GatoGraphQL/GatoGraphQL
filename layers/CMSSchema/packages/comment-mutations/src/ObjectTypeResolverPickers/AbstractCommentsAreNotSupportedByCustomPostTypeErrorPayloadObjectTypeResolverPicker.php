@@ -13,10 +13,6 @@ abstract class AbstractCommentsAreNotSupportedByCustomPostTypeErrorPayloadObject
 {
     private ?CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver = null;
 
-    final public function setCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver(CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver): void
-    {
-        $this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver = $commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver;
-    }
     final protected function getCommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver(): CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver
     {
         if ($this->commentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver === null) {

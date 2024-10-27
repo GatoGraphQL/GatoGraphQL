@@ -21,10 +21,6 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -33,10 +29,6 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {

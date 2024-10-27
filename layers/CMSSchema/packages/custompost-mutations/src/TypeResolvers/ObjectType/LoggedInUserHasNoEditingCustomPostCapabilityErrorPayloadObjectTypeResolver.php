@@ -12,10 +12,6 @@ class LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver
 {
     private ?LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setLoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader(LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader $loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader = $loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getLoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader(): LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader
     {
         if ($this->loggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeDataLoader === null) {

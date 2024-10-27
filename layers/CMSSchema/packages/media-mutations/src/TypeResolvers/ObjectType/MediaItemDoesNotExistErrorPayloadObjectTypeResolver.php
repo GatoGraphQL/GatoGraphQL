@@ -12,10 +12,6 @@ class MediaItemDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorP
 {
     private ?MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader $mediaItemDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
-    final public function setMediaItemDoesNotExistErrorPayloadObjectTypeDataLoader(MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader $mediaItemDoesNotExistErrorPayloadObjectTypeDataLoader): void
-    {
-        $this->mediaItemDoesNotExistErrorPayloadObjectTypeDataLoader = $mediaItemDoesNotExistErrorPayloadObjectTypeDataLoader;
-    }
     final protected function getMediaItemDoesNotExistErrorPayloadObjectTypeDataLoader(): MediaItemDoesNotExistErrorPayloadObjectTypeDataLoader
     {
         if ($this->mediaItemDoesNotExistErrorPayloadObjectTypeDataLoader === null) {

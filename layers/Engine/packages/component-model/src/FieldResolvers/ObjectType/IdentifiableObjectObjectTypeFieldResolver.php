@@ -16,10 +16,6 @@ class IdentifiableObjectObjectTypeFieldResolver extends AbstractObjectTypeFieldR
 {
     private ?IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver = null;
 
-    final public function setIdentifiableObjectInterfaceTypeFieldResolver(IdentifiableObjectInterfaceTypeFieldResolver $identifiableObjectInterfaceTypeFieldResolver): void
-    {
-        $this->identifiableObjectInterfaceTypeFieldResolver = $identifiableObjectInterfaceTypeFieldResolver;
-    }
     final protected function getIdentifiableObjectInterfaceTypeFieldResolver(): IdentifiableObjectInterfaceTypeFieldResolver
     {
         if ($this->identifiableObjectInterfaceTypeFieldResolver === null) {

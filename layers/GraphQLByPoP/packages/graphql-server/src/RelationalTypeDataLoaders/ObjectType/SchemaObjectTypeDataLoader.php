@@ -16,10 +16,6 @@ class SchemaObjectTypeDataLoader extends AbstractUseObjectDictionaryObjectTypeDa
     private ?SchemaObjectTypeResolver $schemaObjectTypeResolver = null;
     private ?SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry = null;
 
-    final public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
-    {
-        $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
-    }
     final protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
         if ($this->schemaObjectTypeResolver === null) {
@@ -28,10 +24,6 @@ class SchemaObjectTypeDataLoader extends AbstractUseObjectDictionaryObjectTypeDa
             $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
         }
         return $this->schemaObjectTypeResolver;
-    }
-    final public function setSchemaDefinitionReferenceRegistry(SchemaDefinitionReferenceRegistryInterface $schemaDefinitionReferenceRegistry): void
-    {
-        $this->schemaDefinitionReferenceRegistry = $schemaDefinitionReferenceRegistry;
     }
     final protected function getSchemaDefinitionReferenceRegistry(): SchemaDefinitionReferenceRegistryInterface
     {

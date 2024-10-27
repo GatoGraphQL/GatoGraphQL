@@ -17,10 +17,6 @@ abstract class AbstractGraphQLEndpointPathProvider extends AbstractAutomatically
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         if ($this->moduleRegistry === null) {
@@ -29,10 +25,6 @@ abstract class AbstractGraphQLEndpointPathProvider extends AbstractAutomatically
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
-    }
-    final public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
-    {
-        $this->userSettingsManager = $userSettingsManager;
     }
     final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {

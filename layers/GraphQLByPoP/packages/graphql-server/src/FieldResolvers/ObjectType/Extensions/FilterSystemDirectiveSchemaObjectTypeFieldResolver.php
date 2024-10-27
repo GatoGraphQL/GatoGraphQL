@@ -24,10 +24,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     private ?DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver = null;
     private ?FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry = null;
 
-    final public function setDirectiveKindEnumTypeResolver(DirectiveKindEnumTypeResolver $directiveKindEnumTypeResolver): void
-    {
-        $this->directiveKindEnumTypeResolver = $directiveKindEnumTypeResolver;
-    }
     final protected function getDirectiveKindEnumTypeResolver(): DirectiveKindEnumTypeResolver
     {
         if ($this->directiveKindEnumTypeResolver === null) {
@@ -36,10 +32,6 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
             $this->directiveKindEnumTypeResolver = $directiveKindEnumTypeResolver;
         }
         return $this->directiveKindEnumTypeResolver;
-    }
-    final public function setFieldDirectiveResolverRegistry(FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry): void
-    {
-        $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
     }
     final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
     {

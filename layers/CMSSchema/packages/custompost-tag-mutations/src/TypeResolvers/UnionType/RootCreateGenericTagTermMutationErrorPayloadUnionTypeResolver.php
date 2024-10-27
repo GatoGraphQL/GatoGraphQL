@@ -12,10 +12,6 @@ class RootCreateGenericTagTermMutationErrorPayloadUnionTypeResolver extends Abst
 {
     private ?RootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader $rootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader(RootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader $rootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader = $rootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader(): RootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootCreateGenericTagTermMutationErrorPayloadUnionTypeDataLoader === null) {

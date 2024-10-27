@@ -12,10 +12,6 @@ abstract class AbstractCreateOrUpdateTagTermInputObjectTypeResolver extends Abst
 {
     private ?TagByOneofInputObjectTypeResolver $parentTagByOneofInputObjectTypeResolver = null;
 
-    final public function setTagByOneofInputObjectTypeResolver(TagByOneofInputObjectTypeResolver $parentTagByOneofInputObjectTypeResolver): void
-    {
-        $this->parentTagByOneofInputObjectTypeResolver = $parentTagByOneofInputObjectTypeResolver;
-    }
     final protected function getTagByOneofInputObjectTypeResolver(): TagByOneofInputObjectTypeResolver
     {
         if ($this->parentTagByOneofInputObjectTypeResolver === null) {

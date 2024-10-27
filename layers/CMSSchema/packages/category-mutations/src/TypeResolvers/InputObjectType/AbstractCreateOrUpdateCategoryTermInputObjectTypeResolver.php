@@ -12,10 +12,6 @@ abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends
 {
     private ?CategoryByOneofInputObjectTypeResolver $parentCategoryByOneofInputObjectTypeResolver = null;
 
-    final public function setCategoryByOneofInputObjectTypeResolver(CategoryByOneofInputObjectTypeResolver $parentCategoryByOneofInputObjectTypeResolver): void
-    {
-        $this->parentCategoryByOneofInputObjectTypeResolver = $parentCategoryByOneofInputObjectTypeResolver;
-    }
     final protected function getCategoryByOneofInputObjectTypeResolver(): CategoryByOneofInputObjectTypeResolver
     {
         if ($this->parentCategoryByOneofInputObjectTypeResolver === null) {

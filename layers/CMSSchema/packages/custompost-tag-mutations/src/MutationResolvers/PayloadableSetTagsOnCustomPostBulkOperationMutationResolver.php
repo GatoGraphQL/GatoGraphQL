@@ -11,10 +11,6 @@ class PayloadableSetTagsOnCustomPostBulkOperationMutationResolver extends Abstra
 {
     private ?PayloadableSetTagsOnCustomPostMutationResolver $payloadableSetTagsOnCustomPostMutationResolver = null;
 
-    final public function setPayloadableSetTagsOnCustomPostMutationResolver(PayloadableSetTagsOnCustomPostMutationResolver $payloadableSetTagsOnCustomPostMutationResolver): void
-    {
-        $this->payloadableSetTagsOnCustomPostMutationResolver = $payloadableSetTagsOnCustomPostMutationResolver;
-    }
     final protected function getPayloadableSetTagsOnCustomPostMutationResolver(): PayloadableSetTagsOnCustomPostMutationResolver
     {
         if ($this->payloadableSetTagsOnCustomPostMutationResolver === null) {

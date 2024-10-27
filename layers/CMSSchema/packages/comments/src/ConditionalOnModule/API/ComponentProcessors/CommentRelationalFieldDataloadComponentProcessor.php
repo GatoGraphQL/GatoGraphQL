@@ -19,10 +19,6 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;
 
-    final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
-    {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-    }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
         if ($this->commentObjectTypeResolver === null) {
@@ -31,10 +27,6 @@ class CommentRelationalFieldDataloadComponentProcessor extends AbstractRelationa
             $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         }
         return $this->commentObjectTypeResolver;
-    }
-    final public function setListQueryInputOutputHandler(ListQueryInputOutputHandler $listQueryInputOutputHandler): void
-    {
-        $this->listQueryInputOutputHandler = $listQueryInputOutputHandler;
     }
     final protected function getListQueryInputOutputHandler(): ListQueryInputOutputHandler
     {

@@ -24,10 +24,6 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
     private ?CustomPostObjectTypeDataLoader $customPostObjectTypeDataLoader = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    final public function setCustomPostObjectTypeDataLoader(CustomPostObjectTypeDataLoader $customPostObjectTypeDataLoader): void
-    {
-        $this->customPostObjectTypeDataLoader = $customPostObjectTypeDataLoader;
-    }
     final protected function getCustomPostObjectTypeDataLoader(): CustomPostObjectTypeDataLoader
     {
         if ($this->customPostObjectTypeDataLoader === null) {
@@ -36,10 +32,6 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
             $this->customPostObjectTypeDataLoader = $customPostObjectTypeDataLoader;
         }
         return $this->customPostObjectTypeDataLoader;
-    }
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {

@@ -16,10 +16,6 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
 {
     private ?UserMetaTypeAPIInterface $userMetaTypeAPI = null;
 
-    final public function setUserMetaTypeAPI(UserMetaTypeAPIInterface $userMetaTypeAPI): void
-    {
-        $this->userMetaTypeAPI = $userMetaTypeAPI;
-    }
     final protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
     {
         if ($this->userMetaTypeAPI === null) {

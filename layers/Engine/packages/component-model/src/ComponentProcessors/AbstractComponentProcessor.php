@@ -59,10 +59,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     private ?ComponentPaths $componentPaths = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
 
-    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
-    {
-        $this->componentPathHelpers = $componentPathHelpers;
-    }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
         if ($this->componentPathHelpers === null) {
@@ -71,10 +67,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $this->componentPathHelpers = $componentPathHelpers;
         }
         return $this->componentPathHelpers;
-    }
-    final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
-    {
-        $this->componentFilterManager = $componentFilterManager;
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
@@ -85,10 +77,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
         return $this->componentFilterManager;
     }
-    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
-    {
-        $this->componentProcessorManager = $componentProcessorManager;
-    }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
         if ($this->componentProcessorManager === null) {
@@ -97,10 +85,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $this->componentProcessorManager = $componentProcessorManager;
         }
         return $this->componentProcessorManager;
-    }
-    final public function setNameResolver(NameResolverInterface $nameResolver): void
-    {
-        $this->nameResolver = $nameResolver;
     }
     final protected function getNameResolver(): NameResolverInterface
     {
@@ -111,10 +95,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
         return $this->nameResolver;
     }
-    final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
-    {
-        $this->dataloadHelperService = $dataloadHelperService;
-    }
     final protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
         if ($this->dataloadHelperService === null) {
@@ -123,10 +103,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $this->dataloadHelperService = $dataloadHelperService;
         }
         return $this->dataloadHelperService;
-    }
-    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
-    {
-        $this->requestHelperService = $requestHelperService;
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
@@ -137,10 +113,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
         return $this->requestHelperService;
     }
-    final public function setComponentPaths(ComponentPaths $componentPaths): void
-    {
-        $this->componentPaths = $componentPaths;
-    }
     final protected function getComponentPaths(): ComponentPaths
     {
         if ($this->componentPaths === null) {
@@ -149,10 +121,6 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $this->componentPaths = $componentPaths;
         }
         return $this->componentPaths;
-    }
-    final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
-    {
-        $this->componentHelpers = $componentHelpers;
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {

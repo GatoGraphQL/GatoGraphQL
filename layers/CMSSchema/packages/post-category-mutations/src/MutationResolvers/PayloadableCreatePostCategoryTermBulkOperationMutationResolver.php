@@ -11,10 +11,6 @@ class PayloadableCreatePostCategoryTermBulkOperationMutationResolver extends Abs
 {
     private ?PayloadableCreatePostCategoryTermMutationResolver $payloadableCreatePostCategoryTermMutationResolver = null;
 
-    final public function setPayloadableCreatePostCategoryTermMutationResolver(PayloadableCreatePostCategoryTermMutationResolver $payloadableCreatePostCategoryTermMutationResolver): void
-    {
-        $this->payloadableCreatePostCategoryTermMutationResolver = $payloadableCreatePostCategoryTermMutationResolver;
-    }
     final protected function getPayloadableCreatePostCategoryTermMutationResolver(): PayloadableCreatePostCategoryTermMutationResolver
     {
         if ($this->payloadableCreatePostCategoryTermMutationResolver === null) {

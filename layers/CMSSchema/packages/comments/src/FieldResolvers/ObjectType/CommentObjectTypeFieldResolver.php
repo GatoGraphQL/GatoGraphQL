@@ -60,10 +60,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
     private ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
 
-    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
-    {
-        $this->commentTypeAPI = $commentTypeAPI;
-    }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         if ($this->commentTypeAPI === null) {
@@ -72,10 +68,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->commentTypeAPI = $commentTypeAPI;
         }
         return $this->commentTypeAPI;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -86,10 +78,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setHTMLScalarTypeResolver(HTMLScalarTypeResolver $htmlScalarTypeResolver): void
-    {
-        $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
-    }
     final protected function getHTMLScalarTypeResolver(): HTMLScalarTypeResolver
     {
         if ($this->htmlScalarTypeResolver === null) {
@@ -98,10 +86,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->htmlScalarTypeResolver = $htmlScalarTypeResolver;
         }
         return $this->htmlScalarTypeResolver;
-    }
-    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
-    {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
     }
     final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
@@ -112,10 +96,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
         return $this->urlScalarTypeResolver;
     }
-    final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
-    {
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-    }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
         if ($this->emailScalarTypeResolver === null) {
@@ -124,10 +104,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->emailScalarTypeResolver = $emailScalarTypeResolver;
         }
         return $this->emailScalarTypeResolver;
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -138,10 +114,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -150,10 +122,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
-    {
-        $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
     }
     final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
@@ -164,10 +132,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
         return $this->dateTimeScalarTypeResolver;
     }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
-    }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
         if ($this->intScalarTypeResolver === null) {
@@ -176,10 +140,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->intScalarTypeResolver = $intScalarTypeResolver;
         }
         return $this->intScalarTypeResolver;
-    }
-    final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
-    {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
     }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
@@ -190,10 +150,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
         return $this->commentObjectTypeResolver;
     }
-    final public function setCommentStatusEnumTypeResolver(CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver): void
-    {
-        $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
-    }
     final protected function getCommentStatusEnumTypeResolver(): CommentStatusEnumTypeResolver
     {
         if ($this->commentStatusEnumTypeResolver === null) {
@@ -202,10 +158,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->commentStatusEnumTypeResolver = $commentStatusEnumTypeResolver;
         }
         return $this->commentStatusEnumTypeResolver;
-    }
-    final public function setDateFormatter(DateFormatterInterface $dateFormatter): void
-    {
-        $this->dateFormatter = $dateFormatter;
     }
     final protected function getDateFormatter(): DateFormatterInterface
     {
@@ -216,10 +168,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
         return $this->dateFormatter;
     }
-    final public function setCommentResponsesFilterInputObjectTypeResolver(CommentResponsesFilterInputObjectTypeResolver $commentResponsesFilterInputObjectTypeResolver): void
-    {
-        $this->commentResponsesFilterInputObjectTypeResolver = $commentResponsesFilterInputObjectTypeResolver;
-    }
     final protected function getCommentResponsesFilterInputObjectTypeResolver(): CommentResponsesFilterInputObjectTypeResolver
     {
         if ($this->commentResponsesFilterInputObjectTypeResolver === null) {
@@ -228,10 +176,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->commentResponsesFilterInputObjectTypeResolver = $commentResponsesFilterInputObjectTypeResolver;
         }
         return $this->commentResponsesFilterInputObjectTypeResolver;
-    }
-    final public function setCommentResponsePaginationInputObjectTypeResolver(CommentResponsePaginationInputObjectTypeResolver $commentResponsePaginationInputObjectTypeResolver): void
-    {
-        $this->commentResponsePaginationInputObjectTypeResolver = $commentResponsePaginationInputObjectTypeResolver;
     }
     final protected function getCommentResponsePaginationInputObjectTypeResolver(): CommentResponsePaginationInputObjectTypeResolver
     {
@@ -242,10 +186,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
         return $this->commentResponsePaginationInputObjectTypeResolver;
     }
-    final public function setCommentSortInputObjectTypeResolver(CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver): void
-    {
-        $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
-    }
     final protected function getCommentSortInputObjectTypeResolver(): CommentSortInputObjectTypeResolver
     {
         if ($this->commentSortInputObjectTypeResolver === null) {
@@ -254,10 +194,6 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
         }
         return $this->commentSortInputObjectTypeResolver;
-    }
-    final public function setCommentTypeEnumTypeResolver(CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver): void
-    {
-        $this->commentTypeEnumTypeResolver = $commentTypeEnumTypeResolver;
     }
     final protected function getCommentTypeEnumTypeResolver(): CommentTypeEnumTypeResolver
     {

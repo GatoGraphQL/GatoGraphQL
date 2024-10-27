@@ -12,10 +12,6 @@ class RootCreatePostMutationErrorPayloadUnionTypeResolver extends AbstractRootCr
 {
     private ?RootCreatePostMutationErrorPayloadUnionTypeDataLoader $rootCreatePostMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final public function setRootCreatePostMutationErrorPayloadUnionTypeDataLoader(RootCreatePostMutationErrorPayloadUnionTypeDataLoader $rootCreatePostMutationErrorPayloadUnionTypeDataLoader): void
-    {
-        $this->rootCreatePostMutationErrorPayloadUnionTypeDataLoader = $rootCreatePostMutationErrorPayloadUnionTypeDataLoader;
-    }
     final protected function getRootCreatePostMutationErrorPayloadUnionTypeDataLoader(): RootCreatePostMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->rootCreatePostMutationErrorPayloadUnionTypeDataLoader === null) {

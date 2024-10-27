@@ -11,10 +11,6 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
 {
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         if ($this->customPostTypeAPI === null) {

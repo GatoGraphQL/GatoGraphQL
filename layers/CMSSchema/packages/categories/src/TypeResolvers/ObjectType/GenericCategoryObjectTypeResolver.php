@@ -18,10 +18,6 @@ class GenericCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolv
     private ?QueryableCategoryListObjectTypeDataLoader $queryableCategoryListObjectTypeDataLoader = null;
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI = null;
 
-    final public function setQueryableCategoryListObjectTypeDataLoader(QueryableCategoryListObjectTypeDataLoader $queryableCategoryListObjectTypeDataLoader): void
-    {
-        $this->queryableCategoryListObjectTypeDataLoader = $queryableCategoryListObjectTypeDataLoader;
-    }
     final protected function getQueryableCategoryListObjectTypeDataLoader(): QueryableCategoryListObjectTypeDataLoader
     {
         if ($this->queryableCategoryListObjectTypeDataLoader === null) {
@@ -30,10 +26,6 @@ class GenericCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolv
             $this->queryableCategoryListObjectTypeDataLoader = $queryableCategoryListObjectTypeDataLoader;
         }
         return $this->queryableCategoryListObjectTypeDataLoader;
-    }
-    final public function setQueryableCategoryTypeAPI(QueryableCategoryTypeAPIInterface $queryableCategoryListTypeAPI): void
-    {
-        $this->queryableCategoryListTypeAPI = $queryableCategoryListTypeAPI;
     }
     final protected function getQueryableCategoryTypeAPI(): QueryableCategoryTypeAPIInterface
     {

@@ -85,11 +85,7 @@ class Engine implements EngineInterface
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    final public function setPersistentCache(PersistentCacheInterface $persistentCache): void
-    {
-        $this->persistentCache = $persistentCache;
-    }
-    final public function getPersistentCache(): PersistentCacheInterface
+    final protected function getPersistentCache(): PersistentCacheInterface
     {
         if ($this->persistentCache === null) {
             /** @var PersistentCacheInterface */
@@ -97,10 +93,6 @@ class Engine implements EngineInterface
             $this->persistentCache = $persistentCache;
         }
         return $this->persistentCache;
-    }
-    final public function setDataStructureManager(DataStructureManagerInterface $dataStructureManager): void
-    {
-        $this->dataStructureManager = $dataStructureManager;
     }
     final protected function getDataStructureManager(): DataStructureManagerInterface
     {
@@ -111,10 +103,6 @@ class Engine implements EngineInterface
         }
         return $this->dataStructureManager;
     }
-    final public function setModelInstance(ModelInstanceInterface $modelInstance): void
-    {
-        $this->modelInstance = $modelInstance;
-    }
     final protected function getModelInstance(): ModelInstanceInterface
     {
         if ($this->modelInstance === null) {
@@ -123,10 +111,6 @@ class Engine implements EngineInterface
             $this->modelInstance = $modelInstance;
         }
         return $this->modelInstance;
-    }
-    final public function setComponentPathHelpers(ComponentPathHelpersInterface $componentPathHelpers): void
-    {
-        $this->componentPathHelpers = $componentPathHelpers;
     }
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
@@ -137,10 +121,6 @@ class Engine implements EngineInterface
         }
         return $this->componentPathHelpers;
     }
-    final public function setComponentPathManager(ComponentPathManagerInterface $componentPathManager): void
-    {
-        $this->componentPathManager = $componentPathManager;
-    }
     final protected function getComponentPathManager(): ComponentPathManagerInterface
     {
         if ($this->componentPathManager === null) {
@@ -149,10 +129,6 @@ class Engine implements EngineInterface
             $this->componentPathManager = $componentPathManager;
         }
         return $this->componentPathManager;
-    }
-    final public function setComponentFilterManager(ComponentFilterManagerInterface $componentFilterManager): void
-    {
-        $this->componentFilterManager = $componentFilterManager;
     }
     final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
@@ -163,10 +139,6 @@ class Engine implements EngineInterface
         }
         return $this->componentFilterManager;
     }
-    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
-    {
-        $this->componentProcessorManager = $componentProcessorManager;
-    }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
         if ($this->componentProcessorManager === null) {
@@ -175,10 +147,6 @@ class Engine implements EngineInterface
             $this->componentProcessorManager = $componentProcessorManager;
         }
         return $this->componentProcessorManager;
-    }
-    final public function setDataloadHelperService(DataloadHelperServiceInterface $dataloadHelperService): void
-    {
-        $this->dataloadHelperService = $dataloadHelperService;
     }
     final protected function getDataloadHelperService(): DataloadHelperServiceInterface
     {
@@ -189,10 +157,6 @@ class Engine implements EngineInterface
         }
         return $this->dataloadHelperService;
     }
-    final public function setEntryComponentManager(EntryComponentManagerInterface $entryComponentManager): void
-    {
-        $this->entryComponentManager = $entryComponentManager;
-    }
     final protected function getEntryComponentManager(): EntryComponentManagerInterface
     {
         if ($this->entryComponentManager === null) {
@@ -201,10 +165,6 @@ class Engine implements EngineInterface
             $this->entryComponentManager = $entryComponentManager;
         }
         return $this->entryComponentManager;
-    }
-    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
-    {
-        $this->requestHelperService = $requestHelperService;
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {
@@ -215,10 +175,6 @@ class Engine implements EngineInterface
         }
         return $this->requestHelperService;
     }
-    final public function setApplicationInfo(ApplicationInfoInterface $applicationInfo): void
-    {
-        $this->applicationInfo = $applicationInfo;
-    }
     final protected function getApplicationInfo(): ApplicationInfoInterface
     {
         if ($this->applicationInfo === null) {
@@ -227,10 +183,6 @@ class Engine implements EngineInterface
             $this->applicationInfo = $applicationInfo;
         }
         return $this->applicationInfo;
-    }
-    final public function setComponentHelpers(ComponentHelpersInterface $componentHelpers): void
-    {
-        $this->componentHelpers = $componentHelpers;
     }
     final protected function getComponentHelpers(): ComponentHelpersInterface
     {
@@ -241,10 +193,6 @@ class Engine implements EngineInterface
         }
         return $this->componentHelpers;
     }
-    final public function setFeedbackEntryManager(FeedbackEntryManagerInterface $feedbackEntryService): void
-    {
-        $this->feedbackEntryService = $feedbackEntryService;
-    }
     final protected function getFeedbackEntryManager(): FeedbackEntryManagerInterface
     {
         if ($this->feedbackEntryService === null) {
@@ -253,10 +201,6 @@ class Engine implements EngineInterface
             $this->feedbackEntryService = $feedbackEntryService;
         }
         return $this->feedbackEntryService;
-    }
-    final public function setDatabaseEntryManager(DatabaseEntryManagerInterface $databaseEntryManager): void
-    {
-        $this->databaseEntryManager = $databaseEntryManager;
     }
     final protected function getDatabaseEntryManager(): DatabaseEntryManagerInterface
     {

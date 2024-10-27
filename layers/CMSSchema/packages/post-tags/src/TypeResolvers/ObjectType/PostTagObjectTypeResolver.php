@@ -15,10 +15,6 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
     private ?PostTagObjectTypeDataLoader $postTagObjectTypeDataLoader = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    final public function setPostTagObjectTypeDataLoader(PostTagObjectTypeDataLoader $postTagObjectTypeDataLoader): void
-    {
-        $this->postTagObjectTypeDataLoader = $postTagObjectTypeDataLoader;
-    }
     final protected function getPostTagObjectTypeDataLoader(): PostTagObjectTypeDataLoader
     {
         if ($this->postTagObjectTypeDataLoader === null) {
@@ -27,10 +23,6 @@ class PostTagObjectTypeResolver extends AbstractTagObjectTypeResolver
             $this->postTagObjectTypeDataLoader = $postTagObjectTypeDataLoader;
         }
         return $this->postTagObjectTypeDataLoader;
-    }
-    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
-    {
-        $this->postTagTypeAPI = $postTagTypeAPI;
     }
     final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
     {

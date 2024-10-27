@@ -14,10 +14,6 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentObjectTypeDataLoader $commentObjectTypeDataLoader = null;
 
-    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
-    {
-        $this->commentTypeAPI = $commentTypeAPI;
-    }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         if ($this->commentTypeAPI === null) {
@@ -26,10 +22,6 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver
             $this->commentTypeAPI = $commentTypeAPI;
         }
         return $this->commentTypeAPI;
-    }
-    final public function setCommentObjectTypeDataLoader(CommentObjectTypeDataLoader $commentObjectTypeDataLoader): void
-    {
-        $this->commentObjectTypeDataLoader = $commentObjectTypeDataLoader;
     }
     final protected function getCommentObjectTypeDataLoader(): CommentObjectTypeDataLoader
     {

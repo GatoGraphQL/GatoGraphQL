@@ -11,10 +11,6 @@ class PayloadableAddCommentToCustomPostBulkOperationMutationResolver extends Abs
 {
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
 
-    final public function setPayloadableAddCommentToCustomPostMutationResolver(PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver): void
-    {
-        $this->payloadableAddCommentToCustomPostMutationResolver = $payloadableAddCommentToCustomPostMutationResolver;
-    }
     final protected function getPayloadableAddCommentToCustomPostMutationResolver(): PayloadableAddCommentToCustomPostMutationResolver
     {
         if ($this->payloadableAddCommentToCustomPostMutationResolver === null) {

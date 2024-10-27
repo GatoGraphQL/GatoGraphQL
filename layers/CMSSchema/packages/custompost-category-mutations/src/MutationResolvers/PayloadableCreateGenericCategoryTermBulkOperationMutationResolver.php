@@ -11,10 +11,6 @@ class PayloadableCreateGenericCategoryTermBulkOperationMutationResolver extends 
 {
     private ?PayloadableCreateGenericCategoryTermMutationResolver $payloadableCreateGenericCategoryTermMutationResolver = null;
 
-    final public function setPayloadableCreateGenericCategoryTermMutationResolver(PayloadableCreateGenericCategoryTermMutationResolver $payloadableCreateGenericCategoryTermMutationResolver): void
-    {
-        $this->payloadableCreateGenericCategoryTermMutationResolver = $payloadableCreateGenericCategoryTermMutationResolver;
-    }
     final protected function getPayloadableCreateGenericCategoryTermMutationResolver(): PayloadableCreateGenericCategoryTermMutationResolver
     {
         if ($this->payloadableCreateGenericCategoryTermMutationResolver === null) {

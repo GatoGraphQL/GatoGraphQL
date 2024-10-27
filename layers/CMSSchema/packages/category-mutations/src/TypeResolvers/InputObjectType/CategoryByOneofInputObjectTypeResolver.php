@@ -15,10 +15,6 @@ class CategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTyp
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -27,10 +23,6 @@ class CategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTyp
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
     }
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {

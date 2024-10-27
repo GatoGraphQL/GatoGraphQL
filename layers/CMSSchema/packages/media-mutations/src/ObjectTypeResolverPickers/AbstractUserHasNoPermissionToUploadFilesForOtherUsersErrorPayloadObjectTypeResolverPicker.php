@@ -13,10 +13,6 @@ abstract class AbstractUserHasNoPermissionToUploadFilesForOtherUsersErrorPayload
 {
     private ?UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver = null;
 
-    final public function setUserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver(UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver): void
-    {
-        $this->userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver = $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver;
-    }
     final protected function getUserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver(): UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver
     {
         if ($this->userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver === null) {

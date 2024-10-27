@@ -34,10 +34,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
     private ?PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver = null;
 
-    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
-    {
-        $this->markdownContentParser = $markdownContentParser;
-    }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
         if ($this->markdownContentParser === null) {
@@ -47,10 +43,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         }
         return $this->markdownContentParser;
     }
-    final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
-    {
-        $this->settingsCategoryRegistry = $settingsCategoryRegistry;
-    }
     final protected function getSettingsCategoryRegistry(): SettingsCategoryRegistryInterface
     {
         if ($this->settingsCategoryRegistry === null) {
@@ -59,10 +51,6 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $this->settingsCategoryRegistry = $settingsCategoryRegistry;
         }
         return $this->settingsCategoryRegistry;
-    }
-    final public function setPluginManagementFunctionalityModuleResolver(PluginManagementFunctionalityModuleResolver $pluginManagementFunctionalityModuleResolver): void
-    {
-        $this->pluginManagementFunctionalityModuleResolver = $pluginManagementFunctionalityModuleResolver;
     }
     final protected function getPluginManagementFunctionalityModuleResolver(): PluginManagementFunctionalityModuleResolver
     {

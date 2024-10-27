@@ -42,10 +42,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
-    {
-        $this->commentTypeAPI = $commentTypeAPI;
-    }
     final protected function getCommentTypeAPI(): CommentTypeAPIInterface
     {
         if ($this->commentTypeAPI === null) {
@@ -54,10 +50,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->commentTypeAPI = $commentTypeAPI;
         }
         return $this->commentTypeAPI;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -68,10 +60,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
-    {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
-    }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
         if ($this->commentObjectTypeResolver === null) {
@@ -80,10 +68,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->commentObjectTypeResolver = $commentObjectTypeResolver;
         }
         return $this->commentObjectTypeResolver;
-    }
-    final public function setCommentByOneofInputObjectTypeResolver(CommentByOneofInputObjectTypeResolver $commentByOneofInputObjectTypeResolver): void
-    {
-        $this->commentByOneofInputObjectTypeResolver = $commentByOneofInputObjectTypeResolver;
     }
     final protected function getCommentByOneofInputObjectTypeResolver(): CommentByOneofInputObjectTypeResolver
     {
@@ -94,10 +78,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->commentByOneofInputObjectTypeResolver;
     }
-    final public function setRootMyCommentsFilterInputObjectTypeResolver(RootMyCommentsFilterInputObjectTypeResolver $rootMyCommentsFilterInputObjectTypeResolver): void
-    {
-        $this->rootMyCommentsFilterInputObjectTypeResolver = $rootMyCommentsFilterInputObjectTypeResolver;
-    }
     final protected function getRootMyCommentsFilterInputObjectTypeResolver(): RootMyCommentsFilterInputObjectTypeResolver
     {
         if ($this->rootMyCommentsFilterInputObjectTypeResolver === null) {
@@ -106,10 +86,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->rootMyCommentsFilterInputObjectTypeResolver = $rootMyCommentsFilterInputObjectTypeResolver;
         }
         return $this->rootMyCommentsFilterInputObjectTypeResolver;
-    }
-    final public function setRootCommentPaginationInputObjectTypeResolver(RootCommentPaginationInputObjectTypeResolver $rootCommentPaginationInputObjectTypeResolver): void
-    {
-        $this->rootCommentPaginationInputObjectTypeResolver = $rootCommentPaginationInputObjectTypeResolver;
     }
     final protected function getRootCommentPaginationInputObjectTypeResolver(): RootCommentPaginationInputObjectTypeResolver
     {
@@ -120,10 +96,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->rootCommentPaginationInputObjectTypeResolver;
     }
-    final public function setCommentSortInputObjectTypeResolver(CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver): void
-    {
-        $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
-    }
     final protected function getCommentSortInputObjectTypeResolver(): CommentSortInputObjectTypeResolver
     {
         if ($this->commentSortInputObjectTypeResolver === null) {
@@ -132,10 +104,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
         }
         return $this->commentSortInputObjectTypeResolver;
-    }
-    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
-    {
-        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {

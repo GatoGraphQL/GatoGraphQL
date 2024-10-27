@@ -18,10 +18,6 @@ abstract class AbstractPostCategoryObjectTypeResolverPicker extends AbstractObje
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
-    {
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-    }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
         if ($this->postCategoryObjectTypeResolver === null) {
@@ -30,10 +26,6 @@ abstract class AbstractPostCategoryObjectTypeResolverPicker extends AbstractObje
             $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
         }
         return $this->postCategoryObjectTypeResolver;
-    }
-    final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
-    {
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
     }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {

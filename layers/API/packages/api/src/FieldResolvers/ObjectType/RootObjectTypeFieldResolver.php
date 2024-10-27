@@ -22,10 +22,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
-    {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
-    }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {
         if ($this->jsonObjectScalarTypeResolver === null) {

@@ -25,10 +25,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     private ?NameFilterInput $nameFilterInput = null;
     private ?EmailOrEmailsFilterInput $emailOrEmailsFilterInput = null;
 
-    final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
-    {
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-    }
     final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
     {
         if ($this->emailScalarTypeResolver === null) {
@@ -37,10 +33,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->emailScalarTypeResolver = $emailScalarTypeResolver;
         }
         return $this->emailScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -51,10 +43,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setNameFilterInput(NameFilterInput $nameFilterInput): void
-    {
-        $this->nameFilterInput = $nameFilterInput;
-    }
     final protected function getNameFilterInput(): NameFilterInput
     {
         if ($this->nameFilterInput === null) {
@@ -63,10 +51,6 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->nameFilterInput = $nameFilterInput;
         }
         return $this->nameFilterInput;
-    }
-    final public function setEmailOrEmailsFilterInput(EmailOrEmailsFilterInput $emailOrEmailsFilterInput): void
-    {
-        $this->emailOrEmailsFilterInput = $emailOrEmailsFilterInput;
     }
     final protected function getEmailOrEmailsFilterInput(): EmailOrEmailsFilterInput
     {

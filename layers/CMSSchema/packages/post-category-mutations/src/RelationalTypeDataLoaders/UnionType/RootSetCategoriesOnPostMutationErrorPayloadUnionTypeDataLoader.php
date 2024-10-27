@@ -12,10 +12,6 @@ class RootSetCategoriesOnPostMutationErrorPayloadUnionTypeDataLoader extends Abs
 {
     private ?RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver $rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver = null;
 
-    final public function setRootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver(RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver $rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver): void
-    {
-        $this->rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver = $rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver;
-    }
     final protected function getRootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver(): RootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver
     {
         if ($this->rootSetCategoriesOnPostMutationErrorPayloadUnionTypeResolver === null) {

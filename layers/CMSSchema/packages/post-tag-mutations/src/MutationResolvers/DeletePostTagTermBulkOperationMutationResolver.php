@@ -11,10 +11,6 @@ class DeletePostTagTermBulkOperationMutationResolver extends AbstractBulkOperati
 {
     private ?DeletePostTagTermMutationResolver $deletePostTagTermMutationResolver = null;
 
-    final public function setDeletePostTagTermMutationResolver(DeletePostTagTermMutationResolver $deletePostTagTermMutationResolver): void
-    {
-        $this->deletePostTagTermMutationResolver = $deletePostTagTermMutationResolver;
-    }
     final protected function getDeletePostTagTermMutationResolver(): DeletePostTagTermMutationResolver
     {
         if ($this->deletePostTagTermMutationResolver === null) {

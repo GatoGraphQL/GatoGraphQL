@@ -17,10 +17,6 @@ class GlobalFieldsBlockSchemaConfigurationExecuter extends AbstractBlockSchemaCo
 {
     private ?SchemaConfigGlobalFieldsBlock $schemaConfigGlobalFieldsBlock = null;
 
-    final public function setSchemaConfigGlobalFieldsBlock(SchemaConfigGlobalFieldsBlock $schemaConfigGlobalFieldsBlock): void
-    {
-        $this->schemaConfigGlobalFieldsBlock = $schemaConfigGlobalFieldsBlock;
-    }
     final protected function getSchemaConfigGlobalFieldsBlock(): SchemaConfigGlobalFieldsBlock
     {
         if ($this->schemaConfigGlobalFieldsBlock === null) {

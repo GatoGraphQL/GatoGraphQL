@@ -41,17 +41,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     private ?EndpointHelpers $endpointHelpers = null;
     private ?EditorHelpers $editorHelpers = null;
 
-    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
-    {
-        $this->userSettingsManager = $userSettingsManager;
-    }
     protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
-    }
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
     }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
@@ -62,10 +54,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
         return $this->moduleRegistry;
     }
-    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
-    {
-        $this->userAuthorization = $userAuthorization;
-    }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
         if ($this->userAuthorization === null) {
@@ -74,10 +62,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $this->userAuthorization = $userAuthorization;
         }
         return $this->userAuthorization;
-    }
-    final public function setCPTUtils(CPTUtils $cptUtils): void
-    {
-        $this->cptUtils = $cptUtils;
     }
     final protected function getCPTUtils(): CPTUtils
     {
@@ -88,10 +72,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
         return $this->cptUtils;
     }
-    final public function setPluginMenu(PluginMenu $pluginMenu): void
-    {
-        $this->pluginMenu = $pluginMenu;
-    }
     final protected function getPluginMenu(): PluginMenu
     {
         if ($this->pluginMenu === null) {
@@ -101,10 +81,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
         return $this->pluginMenu;
     }
-    final public function setEndpointHelpers(EndpointHelpers $endpointHelpers): void
-    {
-        $this->endpointHelpers = $endpointHelpers;
-    }
     final protected function getEndpointHelpers(): EndpointHelpers
     {
         if ($this->endpointHelpers === null) {
@@ -113,10 +89,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             $this->endpointHelpers = $endpointHelpers;
         }
         return $this->endpointHelpers;
-    }
-    final public function setEditorHelpers(EditorHelpers $editorHelpers): void
-    {
-        $this->editorHelpers = $editorHelpers;
     }
     final protected function getEditorHelpers(): EditorHelpers
     {

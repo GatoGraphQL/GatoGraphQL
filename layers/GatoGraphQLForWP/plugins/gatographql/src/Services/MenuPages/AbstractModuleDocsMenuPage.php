@@ -22,10 +22,6 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         if ($this->moduleRegistry === null) {
@@ -34,10 +30,6 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
-    }
-    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
-    {
-        $this->requestHelperService = $requestHelperService;
     }
     final protected function getRequestHelperService(): RequestHelperServiceInterface
     {

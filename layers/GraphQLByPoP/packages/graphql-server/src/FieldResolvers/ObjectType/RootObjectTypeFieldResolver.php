@@ -28,10 +28,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?SchemaObjectTypeDataLoader $schemaObjectTypeDataLoader = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setSchemaObjectTypeResolver(SchemaObjectTypeResolver $schemaObjectTypeResolver): void
-    {
-        $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
-    }
     final protected function getSchemaObjectTypeResolver(): SchemaObjectTypeResolver
     {
         if ($this->schemaObjectTypeResolver === null) {
@@ -40,10 +36,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->schemaObjectTypeResolver = $schemaObjectTypeResolver;
         }
         return $this->schemaObjectTypeResolver;
-    }
-    final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
-    {
-        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
     }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
@@ -54,10 +46,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->typeObjectTypeResolver;
     }
-    final public function setSchemaObjectTypeDataLoader(SchemaObjectTypeDataLoader $schemaObjectTypeDataLoader): void
-    {
-        $this->schemaObjectTypeDataLoader = $schemaObjectTypeDataLoader;
-    }
     final protected function getSchemaObjectTypeDataLoader(): SchemaObjectTypeDataLoader
     {
         if ($this->schemaObjectTypeDataLoader === null) {
@@ -66,10 +54,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->schemaObjectTypeDataLoader = $schemaObjectTypeDataLoader;
         }
         return $this->schemaObjectTypeDataLoader;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {

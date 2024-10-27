@@ -15,10 +15,6 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
 
-    final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
-    {
-        $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
-    }
     final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
     {
         if ($this->postCategoryObjectTypeResolver === null) {

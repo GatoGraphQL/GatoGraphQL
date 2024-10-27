@@ -16,10 +16,6 @@ class ComponentHelpers implements ComponentHelpersInterface
 
     private ?DefinitionManagerInterface $definitionManager = null;
 
-    final public function setDefinitionManager(DefinitionManagerInterface $definitionManager): void
-    {
-        $this->definitionManager = $definitionManager;
-    }
     final protected function getDefinitionManager(): DefinitionManagerInterface
     {
         if ($this->definitionManager === null) {

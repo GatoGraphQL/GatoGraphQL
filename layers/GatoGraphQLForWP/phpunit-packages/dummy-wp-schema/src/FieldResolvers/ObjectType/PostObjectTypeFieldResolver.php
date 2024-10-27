@@ -27,10 +27,6 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?FloatScalarTypeResolver $floatScalarTypeResolver = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
-    final public function setDateTimeScalarTypeResolver(DateTimeScalarTypeResolver $dateTimeScalarTypeResolver): void
-    {
-        $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
-    }
     final protected function getDateTimeScalarTypeResolver(): DateTimeScalarTypeResolver
     {
         if ($this->dateTimeScalarTypeResolver === null) {
@@ -39,10 +35,6 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->dateTimeScalarTypeResolver = $dateTimeScalarTypeResolver;
         }
         return $this->dateTimeScalarTypeResolver;
-    }
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
-    {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
     }
     final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
     {
@@ -53,10 +45,6 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -66,10 +54,6 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setFloatScalarTypeResolver(FloatScalarTypeResolver $floatScalarTypeResolver): void
-    {
-        $this->floatScalarTypeResolver = $floatScalarTypeResolver;
-    }
     final protected function getFloatScalarTypeResolver(): FloatScalarTypeResolver
     {
         if ($this->floatScalarTypeResolver === null) {
@@ -78,10 +62,6 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->floatScalarTypeResolver = $floatScalarTypeResolver;
         }
         return $this->floatScalarTypeResolver;
-    }
-    final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
-    {
-        $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
     }
     final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
     {

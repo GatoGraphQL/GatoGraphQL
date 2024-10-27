@@ -60,11 +60,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      * on services.yaml produces an exception of PHP properties not initialized
      * in its depended services.
      */
-    final public function setPersistentCache(PersistentCacheInterface $persistentCache): void
-    {
-        $this->persistentCache = $persistentCache;
-    }
-    final public function getPersistentCache(): PersistentCacheInterface
+    final protected function getPersistentCache(): PersistentCacheInterface
     {
         if ($this->persistentCache === null) {
             /** @var PersistentCacheInterface */
@@ -72,10 +68,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->persistentCache = $persistentCache;
         }
         return $this->persistentCache;
-    }
-    final public function setPersistedFragmentManager(PersistedFragmentManagerInterface $persistedFragmentManager): void
-    {
-        $this->persistedFragmentManager = $persistedFragmentManager;
     }
     final protected function getPersistedFragmentManager(): PersistedFragmentManagerInterface
     {
@@ -85,10 +77,6 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->persistedFragmentManager = $persistedFragmentManager;
         }
         return $this->persistedFragmentManager;
-    }
-    final public function setPersistedQueryManager(PersistedQueryManagerInterface $persistedQueryManager): void
-    {
-        $this->persistedQueryManager = $persistedQueryManager;
     }
     final protected function getPersistedQueryManager(): PersistedQueryManagerInterface
     {

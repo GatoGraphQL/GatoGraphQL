@@ -13,10 +13,6 @@ abstract class AbstractLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadOb
 {
     private ?LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver = null;
 
-    final public function setLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver(LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver): void
-    {
-        $this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver = $loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver;
-    }
     final protected function getLoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver(): LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver
     {
         if ($this->loggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver === null) {

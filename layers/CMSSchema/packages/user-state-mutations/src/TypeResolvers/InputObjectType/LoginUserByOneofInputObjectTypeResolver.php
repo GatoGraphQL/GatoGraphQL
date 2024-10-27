@@ -11,10 +11,6 @@ class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
 {
     private ?LoginCredentialsInputObjectTypeResolver $loginCredentialsInputObjectTypeResolver = null;
 
-    final public function setLoginCredentialsInputObjectTypeResolver(LoginCredentialsInputObjectTypeResolver $loginCredentialsInputObjectTypeResolver): void
-    {
-        $this->loginCredentialsInputObjectTypeResolver = $loginCredentialsInputObjectTypeResolver;
-    }
     final protected function getLoginCredentialsInputObjectTypeResolver(): LoginCredentialsInputObjectTypeResolver
     {
         if ($this->loginCredentialsInputObjectTypeResolver === null) {

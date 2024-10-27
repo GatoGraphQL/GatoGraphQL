@@ -14,10 +14,6 @@ class PostsFilterCustomPostsByCategoriesInputObjectTypeResolver extends Abstract
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
     private ?PostCategoryTaxonomyEnumStringScalarTypeResolver $postCategoryTaxonomyEnumStringScalarTypeResolver = null;
 
-    final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
-    {
-        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
-    }
     final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
     {
         if ($this->postCategoryTypeAPI === null) {
@@ -26,10 +22,6 @@ class PostsFilterCustomPostsByCategoriesInputObjectTypeResolver extends Abstract
             $this->postCategoryTypeAPI = $postCategoryTypeAPI;
         }
         return $this->postCategoryTypeAPI;
-    }
-    final public function setPostCategoryTaxonomyEnumStringScalarTypeResolver(PostCategoryTaxonomyEnumStringScalarTypeResolver $postCategoryTaxonomyEnumStringScalarTypeResolver): void
-    {
-        $this->postCategoryTaxonomyEnumStringScalarTypeResolver = $postCategoryTaxonomyEnumStringScalarTypeResolver;
     }
     final protected function getPostCategoryTaxonomyEnumStringScalarTypeResolver(): PostCategoryTaxonomyEnumStringScalarTypeResolver
     {

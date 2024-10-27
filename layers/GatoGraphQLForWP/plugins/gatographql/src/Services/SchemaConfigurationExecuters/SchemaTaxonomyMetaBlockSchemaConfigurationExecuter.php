@@ -15,10 +15,6 @@ class SchemaTaxonomyMetaBlockSchemaConfigurationExecuter extends AbstractSchemaM
 {
     private ?SchemaConfigSchemaTaxonomyMetaBlock $schemaConfigSchemaTaxonomyMetaBlock = null;
 
-    final public function setSchemaConfigSchemaTaxonomyMetaBlock(SchemaConfigSchemaTaxonomyMetaBlock $schemaConfigSchemaTaxonomyMetaBlock): void
-    {
-        $this->schemaConfigSchemaTaxonomyMetaBlock = $schemaConfigSchemaTaxonomyMetaBlock;
-    }
     final protected function getSchemaConfigSchemaTaxonomyMetaBlock(): SchemaConfigSchemaTaxonomyMetaBlock
     {
         if ($this->schemaConfigSchemaTaxonomyMetaBlock === null) {

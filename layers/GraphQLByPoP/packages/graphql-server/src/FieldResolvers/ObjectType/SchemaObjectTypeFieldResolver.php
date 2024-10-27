@@ -26,10 +26,6 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?SchemaExtensionsObjectTypeResolver $schemaExtensionsObjectTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setTypeObjectTypeResolver(TypeObjectTypeResolver $typeObjectTypeResolver): void
-    {
-        $this->typeObjectTypeResolver = $typeObjectTypeResolver;
-    }
     final protected function getTypeObjectTypeResolver(): TypeObjectTypeResolver
     {
         if ($this->typeObjectTypeResolver === null) {
@@ -38,10 +34,6 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->typeObjectTypeResolver = $typeObjectTypeResolver;
         }
         return $this->typeObjectTypeResolver;
-    }
-    final public function setDirectiveObjectTypeResolver(DirectiveObjectTypeResolver $directiveObjectTypeResolver): void
-    {
-        $this->directiveObjectTypeResolver = $directiveObjectTypeResolver;
     }
     final protected function getDirectiveObjectTypeResolver(): DirectiveObjectTypeResolver
     {
@@ -52,10 +44,6 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->directiveObjectTypeResolver;
     }
-    final public function setSchemaExtensionsObjectTypeResolver(SchemaExtensionsObjectTypeResolver $schemaExtensionsObjectTypeResolver): void
-    {
-        $this->schemaExtensionsObjectTypeResolver = $schemaExtensionsObjectTypeResolver;
-    }
     final protected function getSchemaExtensionsObjectTypeResolver(): SchemaExtensionsObjectTypeResolver
     {
         if ($this->schemaExtensionsObjectTypeResolver === null) {
@@ -64,10 +52,6 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->schemaExtensionsObjectTypeResolver = $schemaExtensionsObjectTypeResolver;
         }
         return $this->schemaExtensionsObjectTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {

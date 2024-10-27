@@ -13,10 +13,6 @@ abstract class AbstractCommentAuthorNameIsMissingErrorPayloadObjectTypeResolverP
 {
     private ?CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver $commentAuthorNameIsMissingErrorPayloadObjectTypeResolver = null;
 
-    final public function setCommentAuthorNameIsMissingErrorPayloadObjectTypeResolver(CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver $commentAuthorNameIsMissingErrorPayloadObjectTypeResolver): void
-    {
-        $this->commentAuthorNameIsMissingErrorPayloadObjectTypeResolver = $commentAuthorNameIsMissingErrorPayloadObjectTypeResolver;
-    }
     final protected function getCommentAuthorNameIsMissingErrorPayloadObjectTypeResolver(): CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver
     {
         if ($this->commentAuthorNameIsMissingErrorPayloadObjectTypeResolver === null) {

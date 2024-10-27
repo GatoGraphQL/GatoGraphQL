@@ -11,10 +11,6 @@ class PayloadableUpdatePageBulkOperationMutationResolver extends AbstractBulkOpe
 {
     private ?PayloadableUpdatePageMutationResolver $payloadableUpdatePageMutationResolver = null;
 
-    final public function setPayloadableUpdatePageMutationResolver(PayloadableUpdatePageMutationResolver $payloadableUpdatePageMutationResolver): void
-    {
-        $this->payloadableUpdatePageMutationResolver = $payloadableUpdatePageMutationResolver;
-    }
     final protected function getPayloadableUpdatePageMutationResolver(): PayloadableUpdatePageMutationResolver
     {
         if ($this->payloadableUpdatePageMutationResolver === null) {

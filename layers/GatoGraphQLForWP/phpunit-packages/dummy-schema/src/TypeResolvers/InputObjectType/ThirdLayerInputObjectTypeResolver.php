@@ -12,10 +12,6 @@ class ThirdLayerInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?FourthLayerInputObjectTypeResolver $fourthLayerFromInputObjectTypeResolver = null;
 
-    final public function setFourthLayerInputObjectTypeResolver(FourthLayerInputObjectTypeResolver $fourthLayerFromInputObjectTypeResolver): void
-    {
-        $this->fourthLayerFromInputObjectTypeResolver = $fourthLayerFromInputObjectTypeResolver;
-    }
     final protected function getFourthLayerInputObjectTypeResolver(): FourthLayerInputObjectTypeResolver
     {
         if ($this->fourthLayerFromInputObjectTypeResolver === null) {

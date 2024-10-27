@@ -17,10 +17,6 @@ class SchemaConfigSchemaCategoriesBlock extends AbstractSchemaConfigCustomizable
 
     private ?WPDataModelProviderInterface $wpDataModelProvider = null;
 
-    final public function setWPDataModelProvider(WPDataModelProviderInterface $wpDataModelProvider): void
-    {
-        $this->wpDataModelProvider = $wpDataModelProvider;
-    }
     final protected function getWPDataModelProvider(): WPDataModelProviderInterface
     {
         if ($this->wpDataModelProvider === null) {

@@ -16,10 +16,6 @@ abstract class AbstractGraphQLRelationalFieldQueryDataComponentProcessor extends
 {
     private ?GraphQLQueryASTTransformationServiceInterface $graphQLQueryASTTransformationService = null;
 
-    final public function setGraphQLQueryASTTransformationService(GraphQLQueryASTTransformationServiceInterface $graphQLQueryASTTransformationService): void
-    {
-        $this->graphQLQueryASTTransformationService = $graphQLQueryASTTransformationService;
-    }
     final protected function getGraphQLQueryASTTransformationService(): GraphQLQueryASTTransformationServiceInterface
     {
         if ($this->graphQLQueryASTTransformationService === null) {

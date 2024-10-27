@@ -39,10 +39,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry = null;
 
-    final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
-    {
-        $this->markdownContentParser = $markdownContentParser;
-    }
     final protected function getMarkdownContentParser(): MarkdownContentParserInterface
     {
         if ($this->markdownContentParser === null) {
@@ -51,10 +47,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             $this->markdownContentParser = $markdownContentParser;
         }
         return $this->markdownContentParser;
-    }
-    final public function setUserAuthorizationSchemeRegistry(UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry): void
-    {
-        $this->userAuthorizationSchemeRegistry = $userAuthorizationSchemeRegistry;
     }
     final protected function getUserAuthorizationSchemeRegistry(): UserAuthorizationSchemeRegistryInterface
     {

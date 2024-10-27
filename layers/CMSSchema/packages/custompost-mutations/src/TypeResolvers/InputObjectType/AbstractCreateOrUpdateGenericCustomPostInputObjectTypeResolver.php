@@ -13,10 +13,6 @@ abstract class AbstractCreateOrUpdateGenericCustomPostInputObjectTypeResolver ex
 {
     private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
 
-    final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
-    {
-        $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
-    }
     final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {
         if ($this->customPostEnumStringScalarTypeResolver === null) {

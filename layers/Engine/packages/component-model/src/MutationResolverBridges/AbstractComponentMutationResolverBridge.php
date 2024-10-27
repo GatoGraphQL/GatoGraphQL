@@ -27,10 +27,6 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
 
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
-    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
-    {
-        $this->componentProcessorManager = $componentProcessorManager;
-    }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
         if ($this->componentProcessorManager === null) {

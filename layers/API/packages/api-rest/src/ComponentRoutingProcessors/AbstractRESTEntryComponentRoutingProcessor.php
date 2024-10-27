@@ -15,10 +15,6 @@ abstract class AbstractRESTEntryComponentRoutingProcessor extends AbstractEntryC
 
     private ?RESTDataStructureFormatter $restDataStructureFormatter = null;
 
-    final public function setRESTDataStructureFormatter(RESTDataStructureFormatter $restDataStructureFormatter): void
-    {
-        $this->restDataStructureFormatter = $restDataStructureFormatter;
-    }
     final protected function getRESTDataStructureFormatter(): RESTDataStructureFormatter
     {
         if ($this->restDataStructureFormatter === null) {

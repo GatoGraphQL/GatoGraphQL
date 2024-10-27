@@ -16,10 +16,6 @@ class GenericCategoryMutationPayloadObjectTypeFieldResolver extends AbstractObje
 {
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
 
-    final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
-    {
-        $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
-    }
     final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
     {
         if ($this->genericCategoryObjectTypeResolver === null) {

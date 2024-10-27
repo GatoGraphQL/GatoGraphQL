@@ -31,10 +31,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?TypeRegistryInterface $typeRegistry = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -44,10 +40,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
-    {
-        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-    }
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
         if ($this->booleanScalarTypeResolver === null) {
@@ -56,10 +48,6 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
-    }
-    final public function setTypeRegistry(TypeRegistryInterface $typeRegistry): void
-    {
-        $this->typeRegistry = $typeRegistry;
     }
     final protected function getTypeRegistry(): TypeRegistryInterface
     {

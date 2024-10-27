@@ -23,10 +23,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?FirstLayerInputObjectTypeResolver $firstLayerInputObjectTypeResolver = null;
     private ?DummyCreateStringMutationResolver $dummyCreateStringMutationResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -36,10 +32,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setFirstLayerInputObjectTypeResolver(FirstLayerInputObjectTypeResolver $firstLayerInputObjectTypeResolver): void
-    {
-        $this->firstLayerInputObjectTypeResolver = $firstLayerInputObjectTypeResolver;
-    }
     final protected function getFirstLayerInputObjectTypeResolver(): FirstLayerInputObjectTypeResolver
     {
         if ($this->firstLayerInputObjectTypeResolver === null) {
@@ -48,10 +40,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->firstLayerInputObjectTypeResolver = $firstLayerInputObjectTypeResolver;
         }
         return $this->firstLayerInputObjectTypeResolver;
-    }
-    final public function setDummyCreateStringMutationResolver(DummyCreateStringMutationResolver $dummyCreateStringMutationResolver): void
-    {
-        $this->dummyCreateStringMutationResolver = $dummyCreateStringMutationResolver;
     }
     final protected function getDummyCreateStringMutationResolver(): DummyCreateStringMutationResolver
     {

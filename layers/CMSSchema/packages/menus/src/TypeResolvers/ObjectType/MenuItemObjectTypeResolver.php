@@ -13,10 +13,6 @@ class MenuItemObjectTypeResolver extends AbstractObjectTypeResolver
 {
     private ?MenuItemObjectTypeDataLoader $menuItemObjectTypeDataLoader = null;
 
-    final public function setMenuItemObjectTypeDataLoader(MenuItemObjectTypeDataLoader $menuItemObjectTypeDataLoader): void
-    {
-        $this->menuItemObjectTypeDataLoader = $menuItemObjectTypeDataLoader;
-    }
     final protected function getMenuItemObjectTypeDataLoader(): MenuItemObjectTypeDataLoader
     {
         if ($this->menuItemObjectTypeDataLoader === null) {

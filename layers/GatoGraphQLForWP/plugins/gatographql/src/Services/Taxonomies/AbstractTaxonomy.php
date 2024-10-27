@@ -20,10 +20,6 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     private ?PluginMenu $pluginMenu = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
 
-    final public function setPluginMenu(PluginMenu $pluginMenu): void
-    {
-        $this->pluginMenu = $pluginMenu;
-    }
     final protected function getPluginMenu(): PluginMenu
     {
         if ($this->pluginMenu === null) {
@@ -32,10 +28,6 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
             $this->pluginMenu = $pluginMenu;
         }
         return $this->pluginMenu;
-    }
-    final public function setUserAuthorization(UserAuthorizationInterface $userAuthorization): void
-    {
-        $this->userAuthorization = $userAuthorization;
     }
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {

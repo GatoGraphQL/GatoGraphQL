@@ -19,10 +19,6 @@ class PayloadableRemoveFeaturedImageFromCustomPostMutationResolver extends Remov
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?MediaTypeMutationAPIInterface $mediaTypeMutationAPI = null;
 
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
-    {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-    }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
         if ($this->mediaTypeAPI === null) {
@@ -31,10 +27,6 @@ class PayloadableRemoveFeaturedImageFromCustomPostMutationResolver extends Remov
             $this->mediaTypeAPI = $mediaTypeAPI;
         }
         return $this->mediaTypeAPI;
-    }
-    final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
-    {
-        $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
     }
     final protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface
     {

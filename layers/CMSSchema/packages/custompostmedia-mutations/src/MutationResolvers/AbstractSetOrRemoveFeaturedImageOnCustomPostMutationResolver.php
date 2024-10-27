@@ -28,10 +28,6 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
     private ?CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
-    final public function setNameResolver(NameResolverInterface $nameResolver): void
-    {
-        $this->nameResolver = $nameResolver;
-    }
     final protected function getNameResolver(): NameResolverInterface
     {
         if ($this->nameResolver === null) {
@@ -40,10 +36,6 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
             $this->nameResolver = $nameResolver;
         }
         return $this->nameResolver;
-    }
-    final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
-    {
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
     }
     final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
     {
@@ -54,10 +46,6 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
         }
         return $this->userRoleTypeAPI;
     }
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
         if ($this->customPostTypeAPI === null) {
@@ -67,10 +55,6 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
         }
         return $this->customPostTypeAPI;
     }
-    final public function setCustomPostMediaTypeAPI(CustomPostMediaTypeAPIInterface $customPostMediaTypeAPI): void
-    {
-        $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
-    }
     final protected function getCustomPostMediaTypeAPI(): CustomPostMediaTypeAPIInterface
     {
         if ($this->customPostMediaTypeAPI === null) {
@@ -79,10 +63,6 @@ abstract class AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver exte
             $this->customPostMediaTypeAPI = $customPostMediaTypeAPI;
         }
         return $this->customPostMediaTypeAPI;
-    }
-    final public function setCustomPostTypeMutationAPI(CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI): void
-    {
-        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
     }
     final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
     {

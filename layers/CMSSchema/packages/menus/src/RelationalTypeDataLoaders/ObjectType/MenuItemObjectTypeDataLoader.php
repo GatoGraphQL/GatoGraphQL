@@ -11,10 +11,6 @@ class MenuItemObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
     private ?MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry = null;
 
-    final public function setMenuItemRuntimeRegistry(MenuItemRuntimeRegistryInterface $menuItemRuntimeRegistry): void
-    {
-        $this->menuItemRuntimeRegistry = $menuItemRuntimeRegistry;
-    }
     final protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
     {
         if ($this->menuItemRuntimeRegistry === null) {

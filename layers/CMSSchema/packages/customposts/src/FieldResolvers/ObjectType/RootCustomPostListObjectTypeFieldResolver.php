@@ -34,10 +34,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
     private ?CustomPostByOneofInputObjectTypeResolver $customPostByOneofInputObjectTypeResolver = null;
     private ?RootCustomPostsFilterInputObjectTypeResolver $rootCustomPostsFilterInputObjectTypeResolver = null;
 
-    final public function setCustomPostByOneofInputObjectTypeResolver(CustomPostByOneofInputObjectTypeResolver $customPostByOneofInputObjectTypeResolver): void
-    {
-        $this->customPostByOneofInputObjectTypeResolver = $customPostByOneofInputObjectTypeResolver;
-    }
     final protected function getCustomPostByOneofInputObjectTypeResolver(): CustomPostByOneofInputObjectTypeResolver
     {
         if ($this->customPostByOneofInputObjectTypeResolver === null) {
@@ -46,10 +42,6 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
             $this->customPostByOneofInputObjectTypeResolver = $customPostByOneofInputObjectTypeResolver;
         }
         return $this->customPostByOneofInputObjectTypeResolver;
-    }
-    final public function setRootCustomPostsFilterInputObjectTypeResolver(RootCustomPostsFilterInputObjectTypeResolver $rootCustomPostsFilterInputObjectTypeResolver): void
-    {
-        $this->rootCustomPostsFilterInputObjectTypeResolver = $rootCustomPostsFilterInputObjectTypeResolver;
     }
     final protected function getRootCustomPostsFilterInputObjectTypeResolver(): RootCustomPostsFilterInputObjectTypeResolver
     {
