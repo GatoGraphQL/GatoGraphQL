@@ -16,7 +16,7 @@ class Module extends AbstractModule
     {
         return [];
     }
-    
+
     /**
      * Initialize services for the system container.
      * It uses Convention over Configuration: if the requested files exist,
