@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQLStandalone\GatoGraphQL\ContentProcessors;
 
 use GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton\StandalonePluginTrait;
+use GatoGraphQLStandalone\GatoGraphQL\StandalonePluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 
 trait StandalonePluginMarkdownContentRetrieverTrait
@@ -42,5 +43,13 @@ trait StandalonePluginMarkdownContentRetrieverTrait
             $this->getStandaloneGatoGraphQLComposerRelativePath(),
             $string
         );
+    }
+
+    /**
+     * Get the GitHub repo URL, to retrieve images for PROD.
+     */
+    protected function getGitHubRepoDocsRootPathURL(): string
+    {
+        return StandalonePluginStaticHelpers::getGitHubRepoDocsRootPathURL();
     }
 }
