@@ -10,4 +10,9 @@ trait StandalonePluginTrait
     {
         return 'vendor/gatographql/gatographql';
     }
+
+    protected function getStandaloneGatoGraphQLComposerRelativePath(): string
+    {
+        return 'vendor/gatographql-standalone/gatographql';
+    }
 }

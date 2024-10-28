@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\Services\MenuPages;
 
+use GatoGraphQLStandalone\GatoGraphQL\ContentProcessors\StandalonePluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage as UpstreamAboutMenuPage;
-use GatoStandalone\GatoMultilingualForPolylang\ContentProcessors\ExtensionBundleMarkdownContentRetrieverTrait;
 
 class AboutMenuPage extends UpstreamAboutMenuPage
 {
-    use ExtensionBundleMarkdownContentRetrieverTrait;
+    use StandalonePluginMarkdownContentRetrieverTrait;
 
     /**
      * Only show the Support page when the user
