@@ -119,8 +119,6 @@ interface PluginInterface
      */
     public function getPluginNamespaceForClass(): string;
 
-    public function getPluginWebsiteURL(): string;
-
     public function getPluginWPConfigConstantNamespace(): string;
 
     public function getPluginWPContentFolderName(): string;

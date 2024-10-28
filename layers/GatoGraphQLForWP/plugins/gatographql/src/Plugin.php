@@ -259,4 +259,9 @@ class Plugin extends AbstractMainPlugin
             $this->enqueueImageWidthsAssets(...)
         );
     }
+
+    public function getPluginWebsiteURL(): string
+    {
+        return 'https://gatographql.com';
+    }
 }

@@ -537,11 +537,6 @@ abstract class AbstractPlugin implements PluginInterface
         return PluginMetadata::PLUGIN_NAMESPACE_FOR_CLASS;
     }
 
-    public function getPluginWebsiteURL(): string
-    {
-        return 'https://gatographql.com';
-    }
-
     final public function getPluginWPConfigConstantNamespace(): string
     {
         return strtoupper($this->getPluginNamespace());
