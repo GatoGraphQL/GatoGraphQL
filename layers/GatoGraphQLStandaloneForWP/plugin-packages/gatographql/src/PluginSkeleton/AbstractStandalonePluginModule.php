@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQLStandalone\GatoGraphQL;
+namespace GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton;
 
 use GatoGraphQL\GatoGraphQL\Module;
 use PoP\Root\Module\ModuleInterface;
