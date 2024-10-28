@@ -19,7 +19,7 @@ abstract class AbstractBundleExtensionModule extends AbstractExtensionModule
      *
      * @return array<class-string<ModuleInterface>>
      */
-    final public function getDependedModuleClasses(): array
+    public function getDependedModuleClasses(): array
     {
         return [];
     }
