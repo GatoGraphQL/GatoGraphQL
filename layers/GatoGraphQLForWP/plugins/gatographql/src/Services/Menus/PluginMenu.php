@@ -7,6 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Services\Menus;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 
+use function add_menu_page;
+
 /**
  * Main plugin's admin menu
  */
@@ -33,7 +35,7 @@ class PluginMenu extends AbstractMenu
     {
         $menuName = PluginApp::getMainPlugin()->getPluginName();
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
-        \add_menu_page(
+        add_menu_page(
             $menuName,
             $menuName,
             $schemaEditorAccessCapability,
