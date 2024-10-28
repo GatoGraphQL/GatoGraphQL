@@ -14,6 +14,8 @@ $finder = PhpCsFixer\Finder::create()
         __DIR__ . '/layers/GatoGraphQLForWP/packages/*/tests',
         __DIR__ . '/layers/GatoGraphQLForWP/plugins/*/src',
         __DIR__ . '/layers/GatoGraphQLForWP/plugins/*/tests',
+        __DIR__ . '/layers/GatoGraphQLForWP/standalone-plugins/*/src',
+        __DIR__ . '/layers/GatoGraphQLForWP/standalone-plugins/*/tests',
         __DIR__ . '/layers/GraphQLByPoP/packages/*/src',
         __DIR__ . '/layers/GraphQLByPoP/packages/*/tests',
         __DIR__ . '/layers/Schema/packages/*/src',
