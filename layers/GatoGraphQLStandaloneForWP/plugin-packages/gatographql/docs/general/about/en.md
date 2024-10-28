@@ -10,7 +10,7 @@ _Support is provided to customers with an active license of Gato Multilingual fo
 
 Send your message to our support team:
 
-<form action="https://gatomultilingual.com/__forms/support.html" method="POST" name="support" target="_blank">
+<form action="{contact-form-url}" method="POST" name="support" target="_blank">
   <input type="hidden" name="form-name" value="support" />
 
   <label for="field-name">Your name:</label>
