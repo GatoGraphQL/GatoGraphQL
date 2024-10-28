@@ -157,6 +157,10 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
      */
     public function showInMenu(): ?string
     {
+        if (!$this->isServiceEnabled()) {
+            return null;
+        }
+
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         return $canAccessSchemaEditor ? $this->getMenu()->getName() : null;
     }

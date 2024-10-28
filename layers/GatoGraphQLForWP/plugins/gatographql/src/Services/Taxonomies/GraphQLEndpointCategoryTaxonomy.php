@@ -54,10 +54,6 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 
     public function showInMenu(): ?string
     {
-        if (!$this->isServiceEnabled()) {
-            return null;
-        }
-        
         return parent::showInMenu();
     }
 
