@@ -134,7 +134,7 @@ _Support is provided to customers of any Gato GraphQL product with an active lic
 
 Send your message to the Gato GraphQL Support team:
 
-<form action="{extension-website}/__forms/support.html" method="POST" name="support" target="_blank">
+<form action="{contact-form-url}" method="POST" name="support" target="_blank">
   <input type="hidden" name="form-name" value="support" />
 
   <label for="field-name">Your name:</label>

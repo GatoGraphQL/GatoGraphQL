@@ -113,7 +113,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
             );
         }
         $variableValueInjections = [
-            '{extension-website}' => PluginApp::getMainPlugin()->getPluginWebsiteURL(),
+            '{contact-form-url}' => PluginApp::getMainPlugin()->getPluginWebsiteURL() . '/__forms/support.html',
         ];
         foreach ($variableValueInjections as $search => $valueInject) {
             $replacements[$search] = sprintf(
