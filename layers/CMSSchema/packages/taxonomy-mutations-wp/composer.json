@@ -197,7 +197,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "6.1-dev"
+            "dev-master": "7.0-dev"
         }
     },
     "config": {
