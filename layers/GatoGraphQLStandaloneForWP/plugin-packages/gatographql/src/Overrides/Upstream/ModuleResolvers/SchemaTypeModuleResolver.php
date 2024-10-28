@@ -38,10 +38,19 @@ class SchemaTypeModuleResolver extends UpstreamSchemaTypeModuleResolver
             self::SCHEMA_CUSTOMPOSTS => [
                 ModuleSettingOptions::LIST_MAX_LIMIT => -1,
             ],
+            self::SCHEMA_POSTS => [
+                ModuleSettingOptions::LIST_MAX_LIMIT => -1,
+            ],
+            self::SCHEMA_PAGES => [
+                ModuleSettingOptions::LIST_MAX_LIMIT => -1,
+            ],
             self::SCHEMA_USERS => [
                 ModuleSettingOptions::LIST_MAX_LIMIT => -1,
             ],
             self::SCHEMA_MEDIA => [
+                ModuleSettingOptions::LIST_MAX_LIMIT => -1,
+            ],
+            self::SCHEMA_MENUS => [
                 ModuleSettingOptions::LIST_MAX_LIMIT => -1,
             ],
             self::SCHEMA_TAGS => [
