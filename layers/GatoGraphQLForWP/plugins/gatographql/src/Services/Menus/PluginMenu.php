@@ -33,7 +33,7 @@ class PluginMenu extends AbstractMenu
 
     public function addMenuPage(): void
     {
-        $menuName = PluginApp::getMainPlugin()->getPluginName();
+        $menuName = $this->getMenuName();
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
         add_menu_page(
             $menuName,
@@ -44,6 +44,11 @@ class PluginMenu extends AbstractMenu
             },
             $this->getPluginIconSVG()
         );
+    }
+
+    public function getMenuName(): string
+    {
+        return PluginApp::getMainPlugin()->getPluginName();
     }
 
     protected function getPluginIconSVG(): string

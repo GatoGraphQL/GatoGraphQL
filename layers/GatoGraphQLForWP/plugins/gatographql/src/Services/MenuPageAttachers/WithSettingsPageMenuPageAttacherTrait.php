@@ -20,13 +20,18 @@ trait WithSettingsPageMenuPageAttacherTrait
                 $menuName,
                 $menuPageTitle,
                 $menuPageTitle,
-                'manage_options',
+                $this->getSettingsMenuPageRequiredCapability(),
                 $this->getSettingsMenuPage()->getScreenID(),
                 [$this->getSettingsMenuPage(), 'print'],
             )
         ) {
             $settingsMenuPage->setHookName($hookName);
         }
+    }
+
+    protected function getSettingsMenuPageRequiredCapability(): string
+    {
+        return 'manage_options';
     }
 
     abstract protected function getMenuName(): string;

@@ -10,4 +10,5 @@ interface MenuInterface extends AutomaticallyInstantiatedServiceInterface
 {
     public function getName(): string;
     public function addMenuPage(): void;
+    public function getMenuName(): string;
 }
