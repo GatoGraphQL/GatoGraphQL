@@ -19,4 +19,8 @@ interface CustomPostTypeInterface extends ServiceInterface
     public function registerCustomPostType(): void;
     public function isHierarchical(): bool;
     public function useCustomPostExcerptAsDescription(): bool;
+    /**
+     * Show in menu
+     */
+    public function showInMenu(): ?string;
 }
