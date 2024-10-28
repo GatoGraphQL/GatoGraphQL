@@ -13,22 +13,17 @@ class GraphQLEndpointCategoryTaxonomy extends UpstreamGraphQLEndpointCategoryTax
         if (!$this->isServiceEnabled()) {
             return null;
         }
+        // Show in menu only if any of the attached CPTs is shown in menu
         return parent::showInMenu();
     }
 
     protected function isPublic(): bool
     {
-        if (!$this->isServiceEnabled()) {
-            return false;
-        }
-        return parent::isPublic();
+        return false;
     }
 
     protected function isPubliclyQueryable(): bool
     {
-        if (!$this->isServiceEnabled()) {
-            return true;
-        }
-        return parent::isPubliclyQueryable();
+        return true;
     }
 }
