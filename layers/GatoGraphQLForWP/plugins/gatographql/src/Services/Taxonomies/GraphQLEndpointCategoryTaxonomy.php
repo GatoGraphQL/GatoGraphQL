@@ -11,7 +11,7 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 {
-    /** @var string[]|null */
+    /** @var CustomPostTypeInterface[]|null */
     protected ?array $customPostTypes = null;
 
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
@@ -54,11 +54,19 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 
     public function showInMenu(): ?string
     {
-        return parent::showInMenu();
+        if (parent::showInMenu() === null) {
+            return null;
+        }
+
+        // Show if any of the attached CPTs is shown
+        foreach ($this->getCustomPostTypes() as $customPostType) {
+            // if ($customPostType)
+        }
+        return false;
     }
 
     /**
-     * @return string[]
+     * @return CustomPostTypeInterface[]
      */
     public function getCustomPostTypes(): array
     {
@@ -68,14 +76,10 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
                 $customPostTypeServices,
                 fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
             ));
-            $enabledEndpointCustomPostTypeServices = array_values(array_filter(
+            $this->customPostTypes = array_values(array_filter(
                 $endpointCustomPostTypeServices,
                 fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled()
             ));
-            $this->customPostTypes = array_map(
-                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
-                $enabledEndpointCustomPostTypeServices
-            );
         }
         return $this->customPostTypes;
     }

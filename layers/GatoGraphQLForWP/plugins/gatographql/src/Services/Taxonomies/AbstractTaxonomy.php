@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\Taxonomies;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
 use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
@@ -132,7 +133,10 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
          */
         \register_taxonomy(
             $this->getTaxonomy(),
-            $this->getCustomPostTypes(),
+            array_map(
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
+                $this->getCustomPostTypes()
+            ),
             $args
         );
     }
