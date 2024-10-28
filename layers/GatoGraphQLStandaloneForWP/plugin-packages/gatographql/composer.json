@@ -1,5 +1,5 @@
 {
-    "name": "gatographql/gatographql-overrides",
+    "name": "gatographql-standalone/gatographql",
     "conflict": {
         "pop-api/api-rest": "<6.0.2",
         "pop-api/api-graphql": "<6.0.2",
