@@ -36,11 +36,6 @@ class PluginManagementFunctionalityModuleResolver extends UpstreamPluginManageme
         };
     }
 
-    protected function getGatoGraphQLShopName(): string
-    {
-        return \__('Gato Multilingual Shop', 'gatographql');
-    }
-
     protected function getActivateExtensionLicensesTitle(): string
     {
         return \__('Activate Licenses', 'gatographql');
