@@ -61,7 +61,8 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 
         // Show if any of the attached CPTs is shown
         foreach ($this->getCustomPostTypes() as $customPostType) {
-            if ($customPostType->isServiceEnabled()
+            if (
+                $customPostType->isServiceEnabled()
                 && $customPostType->showInMenu()
             ) {
                 return $menu;
