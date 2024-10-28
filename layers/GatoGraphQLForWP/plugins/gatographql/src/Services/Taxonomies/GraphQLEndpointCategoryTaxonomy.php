@@ -54,7 +54,8 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 
     public function showInMenu(): ?string
     {
-        if (parent::showInMenu() === null) {
+        $menu = parent::showInMenu();
+        if ($menu === null) {
             return null;
         }
 
@@ -63,10 +64,10 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
             if ($customPostType->isServiceEnabled()
                 && $customPostType->showInMenu()
             ) {
-                return true;
+                return $menu;
             }
         }
-        return false;
+        return null;
     }
 
     /**
