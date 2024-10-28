@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers\BottomMenuPageAttacher:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\Services\MenuPageAttachers\BottomMenuPageAttacher
+
     GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage:
         class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\Services\MenuPages\AboutMenuPage
 
