@@ -258,9 +258,9 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 [link-travis]: https://travis-ci.com/github/GatoGraphQL/gatographql
 [link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/gatographql/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/gatographql
-[link-downloads]: https://GitHub.com/GatoGraphQL/gatographql/releases/
-[link-release]: https://GitHub.com/GatoGraphQL/gatographql/releases/
-[link-downloads]: https://GitHub.com/GatoGraphQL/gatographql/releases/
+[link-downloads]: https://github.com/GatoGraphQL/gatographql/releases/
+[link-release]: https://github.com/GatoGraphQL/gatographql/releases/
+[link-downloads]: https://github.com/GatoGraphQL/gatographql/releases/
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
 
