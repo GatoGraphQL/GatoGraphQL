@@ -16,4 +16,35 @@ class Module extends AbstractModule
     {
         return [];
     }
+    
+    /**
+     * Initialize services for the system container.
+     * It uses Convention over Configuration: if the requested files exist,
+     * load them.
+     */
+    protected function initializeSystemContainerServices(): void
+    {
+        parent::initializeSystemContainerServices();
+
+        $this->initSystemServices(dirname(__DIR__), '/Overrides/Upstream');
+        $this->initSystemServices(dirname(__DIR__), '/Overrides/Upstream', 'module-services.yaml');
+    }
+
+    /**
+     * Initialize services
+     *
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
+     */
+    protected function initializeContainerServices(
+        bool $skipSchema,
+        array $skipSchemaModuleClasses,
+    ): void {
+        parent::initializeContainerServices(
+            $skipSchema,
+            $skipSchemaModuleClasses
+        );
+
+        $this->initServices(dirname(__DIR__), '/Overrides/Upstream');
+        $this->initServices(dirname(__DIR__), '/Overrides/Upstream', 'module-services.yaml');
+    }
 }

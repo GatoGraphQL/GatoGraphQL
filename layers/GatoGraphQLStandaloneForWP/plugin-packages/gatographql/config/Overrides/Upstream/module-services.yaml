@@ -1,0 +1,38 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\ClientFunctionalityModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\EndpointFunctionalityModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\MetaSchemaTypeModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\MetaSchemaTypeModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\MutationSchemaTypeModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\MutationSchemaTypeModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\PluginManagementFunctionalityModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\SchemaTypeModuleResolver
+
+    GatoGraphQL\GatoGraphQL\ModuleResolvers\UserInterfaceFunctionalityModuleResolver:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\UserInterfaceFunctionalityModuleResolver

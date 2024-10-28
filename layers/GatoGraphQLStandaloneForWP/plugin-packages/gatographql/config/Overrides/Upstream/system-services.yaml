@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    # All these services are required to maybe execute ModuleListTableAction in Plugin.php
+    # Hence, they are defined both in the Application and System containers
+    # Please notice: they must NOT be autoconfigured!
+    # Otherwise, they will also be inititalized twice.
+    # @see https://github.com/GatoGraphQL/GatoGraphQL/issues/636
+    GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\Services\MenuPages\ModulesMenuPage
+        autoconfigure: false
+    
