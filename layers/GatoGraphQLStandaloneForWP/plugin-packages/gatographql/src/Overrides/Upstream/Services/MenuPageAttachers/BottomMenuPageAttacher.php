@@ -14,7 +14,7 @@ class BottomMenuPageAttacher extends UpstreamBottomMenuPageAttacher
      * and this page was added as the first item,
      * then WordPress will still add a first entry with the same
      * name as the plugin. Remove that entry from the menu!
-     */            
+     */
     public function addMenuPages(): void
     {
         parent::addMenuPages();

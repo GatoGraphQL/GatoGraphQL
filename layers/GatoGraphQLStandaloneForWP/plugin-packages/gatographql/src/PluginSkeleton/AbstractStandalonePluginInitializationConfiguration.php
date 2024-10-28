@@ -10,7 +10,6 @@ use GatoGraphQL\GatoGraphQL\PluginInitializationConfiguration;
 
 abstract class AbstractStandalonePluginInitializationConfiguration extends PluginInitializationConfiguration
 {
-
     /**
      * Define the values for certain environment constants from the plugin settings
      *

@@ -80,7 +80,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
             $generalTabDisplayableOptionNames = $this->getGeneralTabDisplayableOptionNames();
 
             $option = self::OPTION_USE_ADVANCED_MODE;
-            if ($this->enableGeneralTabAdvancedModeOption()
+            if (
+                $this->enableGeneralTabAdvancedModeOption()
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
                 $possibleValues = [
@@ -109,7 +110,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     {
         return true;
     }
-    
+
     protected function getGeneralTabAdvancedModeOptionDescription(): string
     {
         return \__('Adapt the behavior of the plugin using the Advanced Mode', 'gatographql');
