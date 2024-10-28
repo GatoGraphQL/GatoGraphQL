@@ -11,6 +11,9 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 {
+    /** @var CustomPostTypeInterface[]|null */
+    protected ?array $customPostTypes = null;
+
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
     final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
@@ -49,23 +52,40 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
         return $titleCase ? \__('Endpoint Categories', 'gatographql') : \__('endpoint categories', 'gatographql');
     }
 
+    public function showInMenu(): ?string
+    {
+        $menu = parent::showInMenu();
+        if ($menu === null) {
+            return null;
+        }
+
+        // Show if any of the attached CPTs is shown
+        foreach ($this->getCustomPostTypes() as $customPostType) {
+            if ($customPostType->isServiceEnabled()
+                && $customPostType->showInMenu()
+            ) {
+                return $menu;
+            }
+        }
+        return null;
+    }
+
     /**
-     * @return string[]
+     * @return CustomPostTypeInterface[]
      */
     public function getCustomPostTypes(): array
     {
-        $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
-        $endpointCustomPostTypeServices = array_values(array_filter(
-            $customPostTypeServices,
-            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
-        ));
-        $enabledEndpointCustomPostTypeServices = array_values(array_filter(
-            $endpointCustomPostTypeServices,
-            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled()
-        ));
-        return array_map(
-            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
-            $enabledEndpointCustomPostTypeServices
-        );
+        if ($this->customPostTypes === null) {
+            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
+            $endpointCustomPostTypeServices = array_values(array_filter(
+                $customPostTypeServices,
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
+            ));
+            $this->customPostTypes = array_values(array_filter(
+                $endpointCustomPostTypeServices,
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled()
+            ));
+        }
+        return $this->customPostTypes;
     }
 }

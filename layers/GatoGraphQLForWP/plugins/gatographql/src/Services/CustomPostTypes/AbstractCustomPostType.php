@@ -610,7 +610,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Show in menu
      */
-    protected function showInMenu(): ?string
+    public function showInMenu(): ?string
     {
         $canAccessSchemaEditor = $this->getUserAuthorization()->canAccessSchemaEditor();
         return $canAccessSchemaEditor ? $this->getMenu()->getName() : null;

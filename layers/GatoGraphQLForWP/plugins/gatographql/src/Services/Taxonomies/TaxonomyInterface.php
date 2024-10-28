@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\Taxonomies;
 
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
+
 interface TaxonomyInterface
 {
     public function getTaxonomy(): string;
@@ -18,7 +20,7 @@ interface TaxonomyInterface
     public function getTaxonomyPluralNames(bool $titleCase = true): string;
 
     /**
-     * @return string[]
+     * @return CustomPostTypeInterface[]
      */
     public function getCustomPostTypes(): array;
 
