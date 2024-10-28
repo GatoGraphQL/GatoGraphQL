@@ -11,6 +11,9 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 {
+    /** @var string[]|null */
+    protected ?array $customPostTypes = null;
+
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
     final protected function getCustomPostTypeRegistry(): CustomPostTypeRegistryInterface
@@ -54,18 +57,21 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
      */
     public function getCustomPostTypes(): array
     {
-        $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
-        $endpointCustomPostTypeServices = array_values(array_filter(
-            $customPostTypeServices,
-            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
-        ));
-        $enabledEndpointCustomPostTypeServices = array_values(array_filter(
-            $endpointCustomPostTypeServices,
-            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled()
-        ));
-        return array_map(
-            fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
-            $enabledEndpointCustomPostTypeServices
-        );
+        if ($this->customPostTypes === null) {
+            $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
+            $endpointCustomPostTypeServices = array_values(array_filter(
+                $customPostTypeServices,
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService instanceof GraphQLEndpointCustomPostTypeInterface
+            ));
+            $enabledEndpointCustomPostTypeServices = array_values(array_filter(
+                $endpointCustomPostTypeServices,
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->isServiceEnabled()
+            ));
+            $this->customPostTypes = array_map(
+                fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
+                $enabledEndpointCustomPostTypeServices
+            );
+        }
+        return $this->customPostTypes;
     }
 }
