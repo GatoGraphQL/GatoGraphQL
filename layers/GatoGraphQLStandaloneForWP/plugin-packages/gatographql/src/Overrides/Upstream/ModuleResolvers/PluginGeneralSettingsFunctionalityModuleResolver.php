@@ -87,7 +87,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
                         $option
                     ),
                     Properties::TITLE => \__('Use Advanced Mode?', 'gatographql'),
-                    Properties::DESCRIPTION => \__('Granularly adapt the behavior of the plugin in the Advanced Mode', 'gatographql'),
+                    Properties::DESCRIPTION => \__('Adapt the behavior of the plugin using the Advanced Mode', 'gatographql'),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
