@@ -8,23 +8,5 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver as
 
 class ClientFunctionalityModuleResolver extends UpstreamClientFunctionalityModuleResolver
 {
-    public function isPredefinedEnabledOrDisabled(string $module): ?bool
-    {
-        return match ($module) {
-            self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT
-                => false,
-            default => parent::isPredefinedEnabledOrDisabled($module),
-        };
-    }
-
-    public function isHidden(string $module): bool
-    {
-        return match ($module) {
-            self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT
-                => true,
-            default => parent::isHidden($module),
-        };
-    }
+    use OverrideToDisableModuleResolverTrait;
 }
