@@ -8,22 +8,22 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityMo
 
 class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGeneralSettingsFunctionalityModuleResolver
 {
-    public function isPredefinedEnabledOrDisabled(string $module): ?bool
-    {
-        return match ($module) {
-            // self::GENERAL,
-            self::SERVER_IP_CONFIGURATION
-            // self::SCHEMA_EDITING_ACCESS
-                => false,
-            default => parent::isPredefinedEnabledOrDisabled($module),
-        };
-    }
+    // public function isPredefinedEnabledOrDisabled(string $module): ?bool
+    // {
+    //     return match ($module) {
+    //         // self::GENERAL,
+    //         self::SERVER_IP_CONFIGURATION
+    //         // self::SCHEMA_EDITING_ACCESS
+    //             => false,
+    //         default => parent::isPredefinedEnabledOrDisabled($module),
+    //     };
+    // }
 
     public function isHidden(string $module): bool
     {
         return match ($module) {
             // self::GENERAL,
-            self::SERVER_IP_CONFIGURATION,
+            // self::SERVER_IP_CONFIGURATION,
             self::SCHEMA_EDITING_ACCESS
                 => true,
             default => parent::isHidden($module),
