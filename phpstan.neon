@@ -61,6 +61,7 @@ includes:
     - layers/Engine/packages/filestore/phpstan.neon.dist
     - layers/GatoGraphQLForWP/phpunit-packages/gatographql/phpstan.neon.dist
     - layers/GatoGraphQLForWP/plugins/gatographql/phpstan.neon.dist
+    - layers/GatoGraphQLStandaloneForWP/plugin-packages/gatographql/phpstan.neon.dist
     - layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-clients-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/phpstan.neon.dist
