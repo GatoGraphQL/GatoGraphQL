@@ -24,7 +24,7 @@ class PackageOrganizationDataSource
             'layers/GatoGraphQLForWP/phpunit-packages' => 'PHPUnitForGatoGraphQL',
             'layers/GatoGraphQLForWP/phpunit-plugins' => 'PHPUnitForGatoGraphQL',
             'layers/GatoGraphQLForWP/plugins' => 'GatoGraphQLForWordPress',
-            'layers/GatoGraphQLStandaloneForWP/plugin-packages' => 'GatoGraphQLForWordPress',
+            'layers/GatoGraphQLStandaloneForWP/plugin-packages' => 'GatoGraphQLStandaloneForWordPress',
             'layers/GraphQLByPoP/clients' => 'GraphQLByPoP',
             'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
             'layers/Schema/packages' => 'PoPSchema',
