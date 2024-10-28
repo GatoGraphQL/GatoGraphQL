@@ -147,7 +147,7 @@
     },
     "type": "library",
     "description": "General utilities for the plugin, not dependent on WordPress",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "gatographql-overrides"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP"],
     "homepage": "https://github.com/GatoGraphQL/gatographql-overrides",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -16,12 +16,12 @@ Use Gato GraphQL as a standalone plugin
 Via Composer
 
 ``` bash
-composer require gatographql/gatographql-overrides
+composer require gatographql-standalone/gatographql
 ```
 
 ## Development
 
-The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`GatoGraphQL/standalone-plugin-packages/gatographql-overrides`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQL/standalone-plugin-packages/gatographql-overrides).
+The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`GatoGraphQLStandaloneForWP/plugin-packages/gatographql`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLStandaloneForWP/plugin-packages/gatographql).
 
 ## Usage
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/gatographql/gatographql-overrides.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/gatographql-standalone/gatographql.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/gatographql/gatographql-overrides/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gatographql/gatographql-overrides.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/gatographql/gatographql-overrides.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/gatographql/gatographql-overrides.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/gatographql-standalone/gatographql/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gatographql-standalone/gatographql.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/gatographql-standalone/gatographql.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/gatographql-standalone/gatographql.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/gatographql/gatographql-overrides
-[link-travis]: https://travis-ci.org/gatographql/gatographql-overrides
-[link-scrutinizer]: https://scrutinizer-ci.com/g/gatographql/gatographql-overrides/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/gatographql/gatographql-overrides
-[link-downloads]: https://packagist.org/packages/gatographql/gatographql-overrides
+[link-packagist]: https://packagist.org/packages/gatographql-standalone/gatographql
+[link-travis]: https://travis-ci.org/gatographql-standalone/gatographql
+[link-scrutinizer]: https://scrutinizer-ci.com/g/gatographql-standalone/gatographql/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/gatographql-standalone/gatographql
+[link-downloads]: https://packagist.org/packages/gatographql-standalone/gatographql
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

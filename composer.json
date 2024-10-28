@@ -362,9 +362,9 @@
         }
     ],
     "replace": {
+        "gatographql-standalone/gatographql": "self.version",
         "gatographql/external-dependency-wrappers": "6.0.2",
         "gatographql/gatographql": "6.0.2",
-        "gatographql/gatographql-overrides": "self.version",
         "gatographql/plugin-utils": "6.0.2",
         "gatographql/testing-schema": "6.0.2",
         "getpop/access-control": "6.0.2",
