@@ -146,7 +146,7 @@
         "pop-wp-schema/multisite": "<6.0.2"
     },
     "type": "library",
-    "description": "General utilities for the plugin, not dependent on WordPress",
+    "description": "Use Gato GraphQL as a standalone plugin",
     "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP"],
     "homepage": "https://github.com/GatoGraphQLStandaloneForWordPress/gatographql",
     "license": "GPL-2.0-or-later",
