@@ -169,12 +169,12 @@
     },
     "autoload": {
         "psr-4": {
-            "GatoGraphQL\\GatoGraphQLOverrides\\": "src"
+            "GatoGraphQLStandalone\\GatoGraphQL\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GatoGraphQL\\GatoGraphQLOverrides\\": "tests"
+            "GatoGraphQLStandalone\\GatoGraphQL\\": "tests"
         }
     },
     "scripts": {

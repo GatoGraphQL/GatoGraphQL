@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GatoGraphQL\GatoGraphQLOverrides\Module::class,
+    \GatoGraphQLStandalone\GatoGraphQL\Module::class,
 ]);
 ```
 
