@@ -52,6 +52,15 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
         return $titleCase ? \__('Endpoint Categories', 'gatographql') : \__('endpoint categories', 'gatographql');
     }
 
+    public function showInMenu(): ?string
+    {
+        if (!$this->isServiceEnabled()) {
+            return null;
+        }
+        
+        return parent::showInMenu();
+    }
+
     /**
      * @return string[]
      */

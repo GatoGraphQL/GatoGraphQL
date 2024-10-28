@@ -8,15 +8,6 @@ use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy 
 
 class GraphQLEndpointCategoryTaxonomy extends UpstreamGraphQLEndpointCategoryTaxonomy
 {
-    public function showInMenu(): ?string
-    {
-        if (!$this->isServiceEnabled()) {
-            return null;
-        }
-        // Show in menu only if any of the attached CPTs is shown in menu
-        return parent::showInMenu();
-    }
-
     protected function isPublic(): bool
     {
         return false;
