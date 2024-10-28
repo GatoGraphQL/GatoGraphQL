@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL;
+namespace GatoGraphQLStandalone\GatoGraphQL;
 
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInitializationConfigurationInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInfoInterface;
-use GatoGraphQL\GatoGraphQL\PluginSkeleton\StandalonePluginTrait;
+use GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton\StandalonePluginTrait;
 
 /**
  * This class is not used by Gato GraphQL.

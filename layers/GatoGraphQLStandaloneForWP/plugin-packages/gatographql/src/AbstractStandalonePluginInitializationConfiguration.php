@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL;
+namespace GatoGraphQLStandalone\GatoGraphQL;
+
+use GatoGraphQL\GatoGraphQL\PluginInitializationConfiguration;
 
 abstract class AbstractStandalonePluginInitializationConfiguration extends PluginInitializationConfiguration
 {

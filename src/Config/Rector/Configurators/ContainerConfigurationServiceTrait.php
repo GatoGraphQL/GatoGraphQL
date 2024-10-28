@@ -26,6 +26,8 @@ trait ContainerConfigurationServiceTrait
             $this->rootDirectory . '/layers/GatoGraphQLForWP/phpunit-plugins/*/tests/*',
             $this->rootDirectory . '/layers/GatoGraphQLForWP/plugins/*/src/*',
             $this->rootDirectory . '/layers/GatoGraphQLForWP/plugins/*/tests/*',
+            $this->rootDirectory . '/layers/GatoGraphQLStandaloneForWP/plugin-packages/*/src/*',
+            $this->rootDirectory . '/layers/GatoGraphQLStandaloneForWP/plugin-packages/*/tests/*',
             $this->rootDirectory . '/layers/GraphQLByPoP/packages/*/src/*',
             $this->rootDirectory . '/layers/GraphQLByPoP/packages/*/tests/*',
             $this->rootDirectory . '/layers/Schema/packages/*/src/*',

@@ -52,6 +52,7 @@
     },
     "autoload": {
         "psr-4": {
+            "GatoGraphQLStandalone\\GatoGraphQL\\": "layers/GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src",
             "GatoGraphQL\\ExternalDependencyWrappers\\": "layers/GatoGraphQLForWP/packages/external-dependency-wrappers/src",
             "GatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/plugins/gatographql/src",
             "GatoGraphQL\\PluginUtils\\": "layers/GatoGraphQLForWP/packages/plugin-utils/src",
@@ -199,6 +200,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "GatoGraphQLStandalone\\GatoGraphQL\\": "layers/GatoGraphQLStandaloneForWP/plugin-packages/gatographql/tests",
             "GatoGraphQL\\ExternalDependencyWrappers\\": "layers/GatoGraphQLForWP/packages/external-dependency-wrappers/tests",
             "GatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/plugins/gatographql/tests",
             "GatoGraphQL\\PluginUtils\\": "layers/GatoGraphQLForWP/packages/plugin-utils/tests",
@@ -360,6 +362,7 @@
         }
     ],
     "replace": {
+        "gatographql-standalone/gatographql": "self.version",
         "gatographql/external-dependency-wrappers": "6.0.2",
         "gatographql/gatographql": "6.0.2",
         "gatographql/plugin-utils": "6.0.2",

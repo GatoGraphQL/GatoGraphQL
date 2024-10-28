@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL;
+namespace GatoGraphQLStandalone\GatoGraphQL;
 
+use GatoGraphQL\GatoGraphQL\Module;
 use PoP\Root\Module\ModuleInterface;
 
 /**

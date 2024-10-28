@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
+namespace GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton;
 
 trait StandalonePluginTrait
 {
