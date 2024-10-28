@@ -10,16 +10,25 @@ class GraphQLEndpointCategoryTaxonomy extends UpstreamGraphQLEndpointCategoryTax
 {
     public function showInMenu(): ?string
     {
+        if ($this->isServiceEnabled()) {
+            return parent::showInMenu();
+        }
         return null;
     }
 
     protected function isPublic(): bool
     {
+        if ($this->isServiceEnabled()) {
+            return parent::isPublic();
+        }
         return false;
     }
 
     protected function isPubliclyQueryable(): bool
     {
+        if ($this->isServiceEnabled()) {
+            return parent::isPubliclyQueryable();
+        }
         return true;
     }
 }
