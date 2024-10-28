@@ -10,6 +10,6 @@ services:
     # Otherwise, they will also be inititalized twice.
     # @see https://github.com/GatoGraphQL/GatoGraphQL/issues/636
     GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\Services\MenuPages\ModulesMenuPage
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\Services\MenuPages\ModulesMenuPage
         autoconfigure: false
     

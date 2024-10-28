@@ -5,34 +5,34 @@ services:
         autoconfigure: true
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\ClientFunctionalityModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\ClientFunctionalityModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\EndpointFunctionalityModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\EndpointFunctionalityModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\MetaSchemaTypeModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\MetaSchemaTypeModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\MetaSchemaTypeModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\MutationSchemaTypeModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\MutationSchemaTypeModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\MutationSchemaTypeModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\PluginManagementFunctionalityModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\PluginManagementFunctionalityModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\SchemaTypeModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\SchemaTypeModuleResolver
 
     GatoGraphQL\GatoGraphQL\ModuleResolvers\UserInterfaceFunctionalityModuleResolver:
-        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\ModuleResolvers\UserInterfaceFunctionalityModuleResolver
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\UserInterfaceFunctionalityModuleResolver
