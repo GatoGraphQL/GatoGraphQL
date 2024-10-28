@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage:
+        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\Services\MenuPages\ExtensionsMenuPage
+
+    GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage:
+        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\Services\MenuPages\ModulesMenuPage
+
+    GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy:
+        class: \GatoStandalone\GatoMultilingualForPolylang\Overrides\Upstream\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy
