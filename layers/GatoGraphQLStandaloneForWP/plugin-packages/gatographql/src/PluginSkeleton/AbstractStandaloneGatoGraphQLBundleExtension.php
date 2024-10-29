@@ -7,6 +7,7 @@ namespace GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
 
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractGatoGraphQLBundleExtension;
+
 use function add_action;
 
 abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGatoGraphQLBundleExtension
@@ -33,7 +34,7 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
     }
     
     /**
-     * @param $settingsCategories string[]
+     * @param string[] $settingsCategories
      * @return string[]
      */
     protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(array $settingsCategories): void
