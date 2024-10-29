@@ -13,9 +13,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      * Indicate if to return the errors in an ObjectMutationPayload
      * object in the response, or if to use the top-level errors.
      */
-    public function enableAdvancedMode(): bool
+    public function useAdvancedMode(): bool
     {
-        $envVariable = Environment::ENABLE_ADVANCED_MODE;
+        $envVariable = Environment::USE_ADVANCED_MODE;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
@@ -28,7 +28,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function disableAutomaticConfigUpdates(): bool
     {
-        if (!$this->enableAdvancedMode()) {
+        if (!$this->useAdvancedMode()) {
             return false;
         }
 
