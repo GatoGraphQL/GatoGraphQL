@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\Enums;
 
-class CustomPostStatus
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus as UpstreamCustomPostStatus;
+
+class CustomPostStatus extends UpstreamCustomPostStatus
 {
     public final const FUTURE = 'future';
     public final const PRIVATE = 'private';
