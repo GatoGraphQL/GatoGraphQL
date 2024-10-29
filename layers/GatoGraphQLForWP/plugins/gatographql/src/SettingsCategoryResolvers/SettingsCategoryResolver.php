@@ -40,8 +40,8 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_TYPE_CONFIGURATION,
             self::SERVER_CONFIGURATION,
-            self::API_KEYS,
             self::PLUGIN_CONFIGURATION,
+            self::API_KEYS,
             self::PLUGIN_MANAGEMENT,
         ];
     }
