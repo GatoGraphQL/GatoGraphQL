@@ -34,7 +34,6 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
 
     /**
      * @param string[] $settingsCategories
-     * @return string[]
      */
     protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(array $settingsCategories): void
     {
