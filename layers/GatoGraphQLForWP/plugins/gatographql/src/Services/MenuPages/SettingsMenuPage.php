@@ -782,7 +782,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $value = $this->getOptionValue($module, $input);
         $description_safe = $itemSetting[Properties::DESCRIPTION] ?? '';
         ?>
-            <label for="<?php echo \esc_attr($name); ?>">
+            <label for="<?php echo \esc_attr($name); ?>" style="cursor: pointer;">
                 <input type="checkbox" name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']'); ?>" id="<?php echo \esc_attr($name); ?>" value="1" <?php checked(1, $value); ?> />
                 <?php echo $description_safe; ?>
             </label>
