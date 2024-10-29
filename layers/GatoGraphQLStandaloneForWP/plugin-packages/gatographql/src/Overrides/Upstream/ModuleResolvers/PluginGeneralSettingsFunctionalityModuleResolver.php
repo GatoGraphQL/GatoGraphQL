@@ -56,7 +56,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
             self::GENERAL => [
                 // self::OPTION_PRINT_SETTINGS_WITH_TABS => false,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => false,
-                self::OPTION_USE_ADVANCED_MODE => AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE,
+                self::OPTION_USE_ADVANCED_MODE => AdvancedModeOptions::DO_NOT_USE_ADVANCED_MODE,
             ],
         ];
         return $defaultValues[$module][$option] ?? parent::getSettingsDefaultValue($module, $option);
@@ -85,9 +85,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
                 $possibleValues = [
-                    AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE => \__('Do not enable the Advanced Mode', 'gatographql'),
-                    AdvancedModeOptions::ENABLE_ADVANCED_MODE => \__('Enable the Advanced Mode', 'gatographql'),
-                    AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES => \__('Enable the Advanced Mode and Disable Automatic Config Updates', 'gatographql'),
+                    AdvancedModeOptions::DO_NOT_USE_ADVANCED_MODE => \__('Do not enable the Advanced Mode', 'gatographql'),
+                    AdvancedModeOptions::USE_ADVANCED_MODE => \__('Enable the Advanced Mode', 'gatographql'),
+                    AdvancedModeOptions::USE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES => \__('Enable the Advanced Mode and Disable Automatic Config Updates', 'gatographql'),
                 ];
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
