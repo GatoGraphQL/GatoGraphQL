@@ -108,7 +108,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
 
     protected function enableGeneralTabAdvancedModeOption(): bool
     {
-        return true;
+        return false;
     }
 
     protected function getGeneralTabAdvancedModeOptionDescription(): string
