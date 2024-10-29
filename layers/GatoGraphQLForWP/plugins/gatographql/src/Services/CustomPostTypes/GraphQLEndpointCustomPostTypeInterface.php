@@ -9,7 +9,7 @@ use WP_Post;
 
 interface GraphQLEndpointCustomPostTypeInterface extends CustomPostTypeInterface
 {
-    public function getEndpointOptionsBlock(): BlockInterface;
+    public function getEndpointOptionsBlock(): ?BlockInterface;
 
     /**
      * Read the options block and check the value of attribute "isEndpointEnabled"

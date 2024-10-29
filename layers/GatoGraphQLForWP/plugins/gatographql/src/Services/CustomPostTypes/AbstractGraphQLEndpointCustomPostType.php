@@ -203,9 +203,13 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
      */
     public function getOptionsBlockDataItem(WP_Post|int $postOrID): ?array
     {
+        $endpointOptionsBlock = $this->getEndpointOptionsBlock();
+        if ($endpointOptionsBlock === null) {
+            return null;
+        }
         return $this->getBlockHelpers()->getSingleBlockOfTypeFromCustomPost(
             $postOrID,
-            $this->getEndpointOptionsBlock()
+            $endpointOptionsBlock
         );
     }
 
