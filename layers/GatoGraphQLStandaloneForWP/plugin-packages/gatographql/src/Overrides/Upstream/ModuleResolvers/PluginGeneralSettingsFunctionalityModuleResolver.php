@@ -54,7 +54,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     {
         $defaultValues = [
             self::GENERAL => [
-                self::OPTION_PRINT_SETTINGS_WITH_TABS => false,
+                // self::OPTION_PRINT_SETTINGS_WITH_TABS => false,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => false,
                 self::OPTION_USE_ADVANCED_MODE => AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE,
             ],
