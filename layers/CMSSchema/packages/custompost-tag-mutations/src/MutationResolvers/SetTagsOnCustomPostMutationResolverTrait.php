@@ -106,19 +106,19 @@ trait SetTagsOnCustomPostMutationResolverTrait
     ): ?array {
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            $categoryIDs = $tagsBy->{MutationInputProperties::IDS};
+            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
             return $this->getTaxonomyToTaxonomyTermsByID(
                 false,
-                $categoryIDs,
+                $tagIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
         if (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            $categorySlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
             return $this->getTaxonomyToTaxonomyTermsBySlug(
                 false,
-                $categorySlugs,
+                $tagSlugs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
