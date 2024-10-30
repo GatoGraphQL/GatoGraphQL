@@ -116,4 +116,5 @@ interface ModuleResolverInterface
      * HTML Documentation for the module
      */
     public function getDocumentation(string $module): ?string;
+    public function areDependedPluginsActive(string $module): bool;
 }

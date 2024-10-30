@@ -275,7 +275,7 @@ class ModuleRegistry implements ModuleRegistryInterface
             }
         }
 
-        return true;
+        return $moduleResolver->areDependedPluginsActive($module);
     }
 
     /**

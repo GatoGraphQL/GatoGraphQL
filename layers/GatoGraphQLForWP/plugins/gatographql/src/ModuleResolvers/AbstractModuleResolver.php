@@ -214,4 +214,9 @@ abstract class AbstractModuleResolver implements ModuleResolverInterface
     {
         return null;
     }
+
+    public function areDependedPluginsActive(string $module): bool
+    {
+        return true;
+    }
 }
