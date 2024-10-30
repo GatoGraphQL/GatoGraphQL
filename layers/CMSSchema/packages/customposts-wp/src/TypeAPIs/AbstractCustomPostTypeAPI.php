@@ -213,14 +213,8 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             $allowQueryingPrivateCPTs = $options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS] ?? $moduleConfiguration->allowQueryingPrivateCPTs();
-            if ($allowQueryingPrivateCPTs) {
-                $query['post_type'] = 'any';
-            } else {
-                $customPostTypeOptions = [
-                    'publicly-queryable' => true,
-                ];
-                $query['post_type'] = $this->getCustomPostTypes($customPostTypeOptions);
-            }
+            $customPostTypeOptions = $allowQueryingPrivateCPTs ? [] : ['publicly-queryable' => true];
+            $query['post_type'] = $this->getCustomPostTypes($customPostTypeOptions);
         }
         // Querying "attachment" doesn't work in an array!
         if (is_array($query['post_type']) && count($query['post_type']) === 1) {
