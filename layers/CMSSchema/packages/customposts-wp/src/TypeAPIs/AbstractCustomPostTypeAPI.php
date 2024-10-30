@@ -184,6 +184,9 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             //     : $this->getStatusQueryArgValue($status);
             $query['post_status'] = $status;
         }
+        if (is_array($query['post_status']) && in_array('any', $query['post_status'])) {
+            $query['post_status'] = 'any';
+        }
         if (isset($query['include']) && is_array($query['include'])) {
             // It can be an array or a string
             $query['include'] = implode(',', $query['include']);
