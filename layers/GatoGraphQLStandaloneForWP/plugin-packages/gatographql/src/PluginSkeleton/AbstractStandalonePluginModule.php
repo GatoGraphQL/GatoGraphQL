@@ -35,4 +35,24 @@ abstract class AbstractStandalonePluginModule extends Module
     {
         return 'StandaloneModuleConfiguration';
     }
+
+    /**
+     * Set the default module configuration
+     *
+     * @param array<string,mixed> $moduleClassConfiguration
+     */
+    public function customizeModuleClassConfiguration(
+        array &$moduleClassConfiguration
+    ): void {
+        parent::customizeModuleClassConfiguration($moduleClassConfiguration);
+
+        if ($this->allowQueryingPrivateCPTs()) {
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPosts\Module::class][\PoPCMSSchema\CustomPosts\Environment::ALLOW_QUERYING_PRIVATE_CPTS] = true;
+        }
+    }
+
+    protected function allowQueryingPrivateCPTs(): bool
+    {
+        return false;
+    }
 }
