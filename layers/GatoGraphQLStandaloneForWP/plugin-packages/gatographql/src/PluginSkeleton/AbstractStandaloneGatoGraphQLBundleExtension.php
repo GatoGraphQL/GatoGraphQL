@@ -21,7 +21,7 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
         parent::doSetup();
 
         $settingsCategories = $this->getInstallPluginSetupDataFormSettingsCategories();
-        $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($settingsCategories);
+        $this->maybeInstallPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($settingsCategories);
     }
 
     /**
@@ -35,7 +35,7 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
     /**
      * @param string[] $settingsCategories
      */
-    protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(array $settingsCategories): void
+    protected function maybeInstallPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(array $settingsCategories): void
     {
         if ($settingsCategories === []) {
             return;
@@ -52,12 +52,12 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
                 if (!in_array($optionName, $settingsCategoryOptionNames)) {
                     return;
                 }
-                $this->updatePluginSetupData();
+                $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated();
             }
         );
     }
 
-    protected function updatePluginSetupData(): void
+    protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(): void
     {
         $this->installPluginSetupData();
     }
