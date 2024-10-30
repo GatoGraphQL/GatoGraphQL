@@ -41,6 +41,10 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
             return;
         }
 
+        if ($this->disableAutomaticConfigUpdates()) {
+            return;
+        }
+
         add_action(
             "update_option",
             function (string $optionName) use ($settingsCategories): void {
@@ -55,6 +59,12 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
                 $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated();
             }
         );
+    }
+
+    
+    protected function disableAutomaticConfigUpdates(): bool
+    {
+
     }
 
     protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(): void
