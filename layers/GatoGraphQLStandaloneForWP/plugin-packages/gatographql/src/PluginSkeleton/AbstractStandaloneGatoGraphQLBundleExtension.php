@@ -6,10 +6,9 @@ namespace GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton;
 
 use GatoGraphQLStandalone\GatoGraphQL\Module;
 use GatoGraphQLStandalone\GatoGraphQL\ModuleConfiguration;
-
-use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractGatoGraphQLBundleExtension;
 use PoP\ComponentModel\App;
+
 use function add_action;
 
 abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGatoGraphQLBundleExtension
@@ -23,46 +22,35 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
     {
         parent::doSetup();
 
-        $settingsCategories = $this->getInstallPluginSetupDataFormSettingsCategories();
-        $this->maybeInstallPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($settingsCategories);
+        $optionNames = $this->getInstallPluginSetupDataFormOptionNames();
+        $this->maybeInstallPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($optionNames);
     }
 
     /**
      * @return string[]
      */
-    protected function getInstallPluginSetupDataFormSettingsCategories(): array
+    protected function getInstallPluginSetupDataFormOptionNames(): array
     {
         return [];
     }
 
     /**
-     * @param string[] $settingsCategories
+     * @param string[] $optionNames
      */
-    protected function maybeInstallPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(array $settingsCategories): void
+    protected function maybeInstallPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(array $optionNames): void
     {
-        if ($settingsCategories === []) {
-            return;
+        foreach ($optionNames as $optionName) {
+            add_action(
+                "update_option_{$optionName}",
+                function(): void {
+                    if ($this->disableAutomaticConfigUpdates()) {
+                        return;
+                    }
+                    
+                    $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated();
+                }
+            );
         }
-
-        add_action(
-            "update_option",
-            function (string $optionName) use ($settingsCategories): void {
-                $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
-                $settingsCategoryOptionNames = array_map(
-                    fn (string $settingsCategory) => $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory),
-                    $settingsCategories
-                );
-                if (!in_array($optionName, $settingsCategoryOptionNames)) {
-                    return;
-                }
-
-                if ($this->disableAutomaticConfigUpdates()) {
-                    return;
-                }
-                
-                $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated();
-            }
-        );
     }
     
     protected function disableAutomaticConfigUpdates(): bool
