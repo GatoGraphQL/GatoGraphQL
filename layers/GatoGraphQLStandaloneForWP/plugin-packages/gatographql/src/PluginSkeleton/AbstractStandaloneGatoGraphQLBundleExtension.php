@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton;
 
+use GatoGraphQLStandalone\GatoGraphQL\Module;
+use GatoGraphQLStandalone\GatoGraphQL\ModuleConfiguration;
+
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractGatoGraphQLBundleExtension;
-
+use PoP\ComponentModel\App;
 use function add_action;
 
 abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGatoGraphQLBundleExtension
@@ -60,11 +63,12 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
             }
         );
     }
-
     
     protected function disableAutomaticConfigUpdates(): bool
     {
-
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->disableAutomaticConfigUpdates();
     }
 
     protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(): void
