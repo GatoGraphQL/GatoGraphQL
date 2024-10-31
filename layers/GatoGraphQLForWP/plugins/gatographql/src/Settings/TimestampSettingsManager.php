@@ -30,8 +30,10 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
     public function storeTimestamps(array $nameTimestamps): void
     {
         $option = $this->namespaceOption(Options::TIMESTAMPS);
+        /** @var array<string,string> */
+        $timestamps = get_option($option, []);
         $timestamps = array_merge(
-            get_option($option, []),
+            $timestamps,
             $nameTimestamps
         );
         update_option($option, $timestamps);
