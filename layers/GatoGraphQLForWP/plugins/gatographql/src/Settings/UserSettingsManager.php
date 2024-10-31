@@ -131,7 +131,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getLicenseCheckTimestamp(): ?int
     {
-        return null;
+        return $this->getTimestampSettingsManager()->getTimestamp(self::TIMESTAMP_LICENSE_CHECK);
     }
     
     /**
