@@ -13,18 +13,20 @@ use function uniqid;
 
 class TimestampSettingsManager implements TimestampSettingsManagerInterface
 {
-    public function getTimestamp(string $name, ?int $defaultValue = null): ?int
+    public function getTimestamp(string $name, ?string $defaultValue = null): ?string
     {
+        $timestamps = get_option($this->namespaceOption(Options::TIMESTAMPS), [$name => $defaultValue]);
+        return $timestamps[$name];
         return null;
     }
 
-    public function storeTimestamp(string $name, int $timestamp): void
+    public function storeTimestamp(string $name, string $timestamp): void
     {
 
     }
 
     /**
-     * @param array<string,int> $nameTimestamps Key: name, Value: timestamp
+     * @param array<string,string> $nameTimestamps Key: name, Value: timestamp
      */
     public function storeTimestamps(array $nameTimestamps): void
     {

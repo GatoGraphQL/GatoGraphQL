@@ -6,10 +6,10 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 
 interface TimestampSettingsManagerInterface
 {
-    public function getTimestamp(string $name, ?int $defaultValue = null): ?int;
-    public function storeTimestamp(string $name, int $timestamp): void;
+    public function getTimestamp(string $name, ?string $defaultValue = null): ?string;
+    public function storeTimestamp(string $name, string $timestamp): void;
     /**
-     * @param array<string,int> $nameTimestamps Key: name, Value: timestamp
+     * @param array<string,string> $nameTimestamps Key: name, Value: timestamp
      */
     public function storeTimestamps(array $nameTimestamps): void;
 }
