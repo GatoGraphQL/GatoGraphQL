@@ -29,7 +29,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
-    protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
+    final protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
     {
         return $this->timestampSettingsManager ??= TimestampSettingsManagerFacade::getInstance();
     }
