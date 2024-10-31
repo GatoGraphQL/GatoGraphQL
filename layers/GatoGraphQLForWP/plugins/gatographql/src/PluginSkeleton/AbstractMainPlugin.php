@@ -395,6 +395,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
 
+        // Maybe revalidate the commercial licenses
+        $this->maybeRevalidateCommercialLicenses();
+
         // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
     }
@@ -531,6 +534,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
+    }
+
+    /**
+     * After an X number of days, revalidate if the commercial
+     * licenses are still active.
+     *
+     * For this, store the latest "license check" timestamp in
+     * the DB, and check if that amount of time has been through,
+     * if so perform the check
+     */
+    protected function maybeRevalidateCommercialLicenses(): void
+    {
+        
     }
 
     /**
