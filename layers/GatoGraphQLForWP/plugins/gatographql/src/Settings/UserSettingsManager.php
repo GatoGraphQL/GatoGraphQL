@@ -119,7 +119,10 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function removeTimestamps(): void
     {
-        delete_option($this->namespaceOption(Options::TIMESTAMPS));
+        $this->getTimestampSettingsManager()->removeTimestamps([
+            self::TIMESTAMP_CONTAINER,
+            self::TIMESTAMP_OPERATIONAL,
+        ]);
     }
 
     public function hasSetting(string $module, string $option): bool
