@@ -13,16 +13,6 @@ use function uniqid;
 
 class TimestampSettingsManager implements TimestampSettingsManagerInterface
 {
-    private const TIMESTAMP_CONTAINER = 'container';
-    private const TIMESTAMP_OPERATIONAL = 'operational';
-
-    /**
-     * Cache the values in memory
-     *
-     * @var array<string,array<string,mixed>>
-     */
-    protected array $options = [];
-
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,
      * module enabled/disabled, user settings updated.
