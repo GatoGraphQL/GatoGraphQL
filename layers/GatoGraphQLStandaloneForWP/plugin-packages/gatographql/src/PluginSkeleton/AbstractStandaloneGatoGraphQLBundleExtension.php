@@ -42,17 +42,17 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
         foreach ($optionNames as $optionName) {
             add_action(
                 "update_option_{$optionName}",
-                function(): void {
+                function (): void {
                     if ($this->disableAutomaticConfigUpdates()) {
                         return;
                     }
-                    
+
                     $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated();
                 }
             );
         }
     }
-    
+
     protected function disableAutomaticConfigUpdates(): bool
     {
         /** @var ModuleConfiguration */
