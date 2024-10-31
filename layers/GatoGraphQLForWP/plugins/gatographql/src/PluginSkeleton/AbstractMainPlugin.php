@@ -569,7 +569,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
                 if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
                     return;
-                }        
+                }
+                
+                /**
+                 * Only validate while some License is active
+                 */
+                $extensionManager = PluginApp::getExtensionManager();
+                if ($extensionManager->getActivatedLicenseCommercialExtensionSlugProductNames() === []) {
+                    return;
+                }
 
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
 
