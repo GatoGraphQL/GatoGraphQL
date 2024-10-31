@@ -28,7 +28,12 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
      */
     public function storeTimestamps(array $nameTimestamps): void
     {
-        update_option($this->namespaceOption(Options::TIMESTAMPS), $nameTimestamps);
+        $option = $this->namespaceOption(Options::TIMESTAMPS);
+        $timestamps = array_merge(
+            get_option($option, []),
+            $nameTimestamps
+        );
+        update_option($option, $timestamps);
     }
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,
