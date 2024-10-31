@@ -57,8 +57,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     protected function getOptionUniqueTimestamp(string $key): string
     {
-        $timestamps = get_option($this->namespaceOption(Options::TIMESTAMPS), [$key => $this->getUniqueIdentifier()]);
-        return $timestamps[$key];
+        return $this->getTimestampSettingsManager()->getTimestamp($key, $this->getUniqueIdentifier());
     }
 
     protected function namespaceOption(string $option): string
