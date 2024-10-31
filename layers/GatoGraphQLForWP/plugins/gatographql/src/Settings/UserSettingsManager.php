@@ -112,7 +112,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_CONTAINER => $this->getContainerUniqueTimestamp(),
             self::TIMESTAMP_OPERATIONAL => $this->getUniqueIdentifier(),
         ];
-        update_option($this->namespaceOption(Options::TIMESTAMPS), $timestamps);
+        $this->getTimestampSettingsManager()->storeTimestamps($timestamps);
     }
     /**
      * Remove the timestamp
