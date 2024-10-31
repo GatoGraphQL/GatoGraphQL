@@ -22,8 +22,11 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
     public function getTimestamp(string $name, ?string $defaultValue = null): ?string
     {
         /** @var array<string,string> */
-        $timestamps = get_option($this->namespaceOption(Options::TIMESTAMPS), [$name => $defaultValue]);
-        return $timestamps[$name] ?? null;
+        $timestamps = get_option($this->namespaceOption(Options::TIMESTAMPS), []);
+        if (!array_key_exists($name, $timestamps)) {
+            return $defaultValue;
+        }
+        return $timestamps[$name];
     }
 
     protected function namespaceOption(string $option): string
