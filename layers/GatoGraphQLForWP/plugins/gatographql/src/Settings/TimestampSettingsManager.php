@@ -35,6 +35,25 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
         );
         update_option($option, $timestamps);
     }
+
+    /**
+     * @param string[] $names
+     */
+    public function removeTimestamps(array $names): void
+    {
+        $option = $this->namespaceOption(Options::TIMESTAMPS);
+        $timestamps = get_option($option, []);
+        foreach ($names as $name) {
+            unset($timestamps[$name]);
+        }
+
+        if ($timestamps === []) {
+            delete_option($option);
+            return;
+        }
+
+        update_option($option, $timestamps);
+    }
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,
      * module enabled/disabled, user settings updated.
@@ -122,12 +141,5 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
             self::TIMESTAMP_OPERATIONAL => $this->getUniqueIdentifier(),
         ];
         update_option($this->namespaceOption(Options::TIMESTAMPS), $timestamps);
-    }
-    /**
-     * Remove the timestamp
-     */
-    public function removeTimestamps(): void
-    {
-        delete_option($this->namespaceOption(Options::TIMESTAMPS));
     }
 }

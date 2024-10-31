@@ -12,4 +12,8 @@ interface TimestampSettingsManagerInterface
      * @param array<string,string> $nameTimestamps Key: name, Value: timestamp
      */
     public function storeTimestamps(array $nameTimestamps): void;
+    /**
+     * @param string[] $names
+     */
+    public function removeTimestamps(array $names): void;
 }
