@@ -546,18 +546,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function maybeRevalidateCommercialLicenses(): void
     {
-        $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
-        if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
-            return;
-        }
-
         /**
          * Logic to check if the main plugin or any extension has
          * just been activated or updated.
          */
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (string $pluginAppGraphQLServerName) use ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses): void {
+            function (string $pluginAppGraphQLServerName): void {
                 if (
                     $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
                     || !is_admin()
@@ -565,6 +560,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
+
+                /**
+                 * Execute this logic only now, inside the hook, to make
+                 * sure that `$extensionManager->assertCommercialLicenseHasBeenActivated(...)`
+                 * has been invoked
+                 */
+                $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
+                if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
+                    return;
+                }        
 
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
                 $licenseCheckTimestamp = $userSettingsManager->getLicenseCheckTimestamp();
