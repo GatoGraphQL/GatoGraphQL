@@ -19,6 +19,12 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
         return $timestamps[$name] ?? null;
     }
 
+    protected function namespaceOption(string $option): string
+    {
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        return $optionNamespacer->namespaceOption($option);
+    }
+
     public function storeTimestamp(string $name, string $timestamp): void
     {
         $this->storeTimestamps([$name => $timestamp]);
@@ -73,11 +79,5 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
         }
 
         update_option($option, $timestamps);
-    }
-
-    protected function namespaceOption(string $option): string
-    {
-        $optionNamespacer = OptionNamespacerFacade::getInstance();
-        return $optionNamespacer->namespaceOption($option);
     }
 }
