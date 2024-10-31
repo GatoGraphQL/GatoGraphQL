@@ -7,9 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
-
 use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
-use function delete_option;
+
 use function get_option;
 use function uniqid;
 use function update_option;
