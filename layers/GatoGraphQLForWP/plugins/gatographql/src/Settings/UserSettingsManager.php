@@ -8,6 +8,12 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 
+use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
+use function delete_option;
+use function get_option;
+use function uniqid;
+use function update_option;
+
 class UserSettingsManager implements UserSettingsManagerInterface
 {
     private const TIMESTAMP_CONTAINER = 'container';
@@ -19,6 +25,13 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * @var array<string,array<string,mixed>>
      */
     protected array $options = [];
+
+    private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
+
+    protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
+    {
+        return $this->timestampSettingsManager ??= TimestampSettingsManagerFacade::getInstance();
+    }
 
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,
@@ -44,14 +57,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     protected function getOptionUniqueTimestamp(string $key): string
     {
-        $timestamps = \get_option($this->namespaceOption(Options::TIMESTAMPS), [$key => $this->getUniqueIdentifier()]);
-        return $timestamps[$key];
-    }
-
-    protected function namespaceOption(string $option): string
-    {
-        $optionNamespacer = OptionNamespacerFacade::getInstance();
-        return $optionNamespacer->namespaceOption($option);
+        return $this->getTimestampSettingsManager()->getTimestamp($key, $this->getUniqueIdentifier());
     }
 
     /**
@@ -61,7 +67,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     protected function getUniqueIdentifier(): string
     {
-        return \uniqid();
+        return uniqid();
     }
     /**
      * Static timestamp, reflecting when the service container has been regenerated.
@@ -93,7 +99,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_CONTAINER => $uniqueID,
             self::TIMESTAMP_OPERATIONAL => $uniqueID,
         ];
-        \update_option($this->namespaceOption(Options::TIMESTAMPS), $timestamps);
+        $this->getTimestampSettingsManager()->storeTimestamps($timestamps);
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
@@ -106,14 +112,17 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_CONTAINER => $this->getContainerUniqueTimestamp(),
             self::TIMESTAMP_OPERATIONAL => $this->getUniqueIdentifier(),
         ];
-        \update_option($this->namespaceOption(Options::TIMESTAMPS), $timestamps);
+        $this->getTimestampSettingsManager()->storeTimestamps($timestamps);
     }
     /**
      * Remove the timestamp
      */
     public function removeTimestamps(): void
     {
-        \delete_option($this->namespaceOption(Options::TIMESTAMPS));
+        $this->getTimestampSettingsManager()->removeTimestamps([
+            self::TIMESTAMP_CONTAINER,
+            self::TIMESTAMP_OPERATIONAL,
+        ]);
     }
 
     public function hasSetting(string $module, string $option): bool
@@ -185,6 +194,12 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $this->hasItem($this->namespaceOption(Options::MODULES), $moduleID);
     }
 
+    protected function namespaceOption(string $option): string
+    {
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        return $optionNamespacer->namespaceOption($option);
+    }
+
     public function isModuleEnabled(string $moduleID): bool
     {
         return (bool) $this->getItem($this->namespaceOption(Options::MODULES), $moduleID);
@@ -250,7 +265,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         // Lazy load the options
         if (!isset($this->options[$optionName])) {
-            $this->options[$optionName] = \get_option($optionName, []);
+            $this->options[$optionName] = get_option($optionName, []);
         }
     }
 
@@ -276,12 +291,12 @@ class UserSettingsManager implements UserSettingsManagerInterface
             $itemValues
         );
         // Save to the DB
-        \update_option($optionName, $this->options[$optionName]);
+        update_option($optionName, $this->options[$optionName]);
     }
 
     public function storeEmptySettings(string $optionName): void
     {
         unset($this->options[$optionName]);
-        \update_option($optionName, []);
+        update_option($optionName, []);
     }
 }
