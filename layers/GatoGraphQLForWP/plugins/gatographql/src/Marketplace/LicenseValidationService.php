@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
@@ -13,9 +14,10 @@ use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionAc
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
+
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\BasicServiceTrait;
-
 use function add_settings_error;
 use function get_option;
 use function home_url;
@@ -27,6 +29,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
 
     private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?ContainerManagerInterface $containerManager = null;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
 
     final protected function getMarketplaceProviderCommercialExtensionActivationService(): MarketplaceProviderCommercialExtensionActivationServiceInterface
     {
@@ -46,6 +49,10 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         }
         return $this->containerManager;
     }
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
 
     /**
      * Activate the Gato GraphQL Extensions against the
@@ -59,6 +66,9 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         array $submittedLicenseKeys,
         ?string $formSettingName = null,
     ): void {
+        // Store the latest "license check" timestamp to DB
+        $this->getUserSettingsManager()->storeLicenseCheckTimestamp();
+
         $optionNamespacer = OptionNamespacerFacade::getInstance();
         $option = $optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
         /** @var array<string,mixed> */
