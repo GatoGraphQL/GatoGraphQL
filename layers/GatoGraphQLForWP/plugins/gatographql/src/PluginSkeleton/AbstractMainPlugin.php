@@ -395,11 +395,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
 
-        // Maybe revalidate the commercial licenses
-        $this->maybeRevalidateCommercialLicenses();
-
         // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
+
+        // Maybe revalidate the commercial licenses
+        $this->maybeRevalidateCommercialLicenses();
     }
 
     /**
