@@ -13,7 +13,7 @@ use function uniqid;
 
 class TimestampSettingsManager implements TimestampSettingsManagerInterface
 {
-    public function getTimestamp(string $name): ?int
+    public function getTimestamp(string $name, ?int $defaultValue = null): ?int
     {
         return null;
     }

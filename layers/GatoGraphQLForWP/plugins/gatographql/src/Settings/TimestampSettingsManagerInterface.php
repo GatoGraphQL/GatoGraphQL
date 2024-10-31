@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 
 interface TimestampSettingsManagerInterface
 {
-    public function getTimestamp(string $name): ?int;
+    public function getTimestamp(string $name, ?int $defaultValue = null): ?int;
     public function storeTimestamp(string $name, int $timestamp): void;
     /**
      * @param array<string,int> $nameTimestamps Key: name, Value: timestamp
