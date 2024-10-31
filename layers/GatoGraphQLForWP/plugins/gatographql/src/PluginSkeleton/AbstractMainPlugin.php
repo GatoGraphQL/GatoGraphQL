@@ -579,7 +579,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
                 $this->revalidateCommercialExtensionActivatedLicenses();
             },
-            PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
+            PluginLifecyclePriorities::REVALIDATE_LICENSE_CHECK
         );
     }
 
