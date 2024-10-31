@@ -32,7 +32,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
     {
         return $this->timestampSettingsManager ??= TimestampSettingsManagerFacade::getInstance();
-    }    
+    }
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {
         return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
@@ -131,7 +131,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_OPERATIONAL,
         ]);
     }
-    
+
     /**
      * Timestamp of latest executed validation of the commercial
      * licenses against the Marketplace provider's API
@@ -144,7 +144,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
         }
         return (int) $timestamp;
     }
-    
+
     /**
      * Store the current time to indicate the latest executed
      * validation of the commercial licenses

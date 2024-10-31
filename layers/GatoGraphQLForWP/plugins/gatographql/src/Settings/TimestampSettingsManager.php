@@ -13,7 +13,7 @@ use function update_option;
 class TimestampSettingsManager implements TimestampSettingsManagerInterface
 {
     private ?OptionNamespacerInterface $optionNamespacer = null;
-    
+
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {
         return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
@@ -68,7 +68,7 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
     public function removeTimestamps(array $names): void
     {
         $option = $this->namespaceOption(Options::TIMESTAMPS);
-        
+
         /**
          * Remove only the provided keys
          *

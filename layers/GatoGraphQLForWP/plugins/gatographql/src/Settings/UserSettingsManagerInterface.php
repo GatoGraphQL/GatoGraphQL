@@ -38,19 +38,19 @@ interface UserSettingsManagerInterface
      * Remove the timestamp
      */
     public function removeTimestamps(): void;
-    
+
     /**
      * Timestamp of latest executed validation of the commercial
      * licenses against the Marketplace provider's API
      */
     public function getLicenseCheckTimestamp(): ?int;
-    
+
     /**
      * Store the current time to indicate the latest executed
      * validation of the commercial licenses
      */
     public function storeLicenseCheckTimestamp(): void;
-    
+
     public function hasSetting(string $module, string $option): bool;
     public function getSetting(string $module, string $option): mixed;
     public function setSetting(string $module, string $option, mixed $value): void;

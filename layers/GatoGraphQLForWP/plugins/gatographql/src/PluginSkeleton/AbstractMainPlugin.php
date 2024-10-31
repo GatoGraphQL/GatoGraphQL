@@ -565,7 +565,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
-                
+
                 /**
                  * Only validate while some License is active.
                  *
