@@ -544,6 +544,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * Provide the number of days after which to revalidate if the
+     * commercial licenses are still active, or `null` to disable
+     * the check.
+     */
+    protected function getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses(): ?int
+    {
+        return null;
+    }
+
+    /**
      * Execute a /validate operation for all existing
      * licenses on the site. If any license has been
      * disabled, the corresponding extension will also
