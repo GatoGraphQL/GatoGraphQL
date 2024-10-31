@@ -546,7 +546,41 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function maybeRevalidateCommercialLicenses(): void
     {
-        
+        $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
+        if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
+            return;
+        }
+
+        /**
+         * Logic to check if the main plugin or any extension has
+         * just been activated or updated.
+         */
+        add_action(
+            PluginAppHooks::INITIALIZE_APP,
+            function (string $pluginAppGraphQLServerName) use ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses): void {
+                if (
+                    $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                    || !is_admin()
+                    || $this->initializationException !== null
+                ) {
+                    return;
+                }
+
+                $userSettingsManager = UserSettingsManagerFacade::getInstance();
+                $licenseCheckTimestamp = $userSettingsManager->getLicenseCheckTimestamp();
+
+                // Check if the X number of days have already passes
+                $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses = $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses * 86400;
+                $now = time();
+                $licenseCheckTimestamp = $userSettingsManager->getLicenseCheckTimestamp();
+                if (($now - $licenseCheckTimestamp) < $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses) {
+                    return;
+                }
+
+                $this->revalidateCommercialExtensionActivatedLicenses();
+            },
+            PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
+        );
     }
 
     /**

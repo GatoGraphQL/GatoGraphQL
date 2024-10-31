@@ -31,16 +31,17 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 class PluginLifecyclePriorities
 {
     public final const HANDLE_NEW_ACTIVATIONS = 80;
-    public final const SETUP_EXTENSIONS = 90;
-    public final const INITIALIZE_APP = 100;
-    public final const INITIALIZE_PLUGIN = 110;
-    public final const INITIALIZE_EXTENSIONS = 120;
-    public final const CONFIGURE_COMPONENTS = 130;
-    public final const BOOT_SYSTEM = 140;
-    public final const CONFIGURE_PLUGIN = 150;
-    public final const CONFIGURE_EXTENSIONS = 160;
-    public final const BOOT_APPLICATION = 170;
-    public final const BOOT_PLUGIN = 180;
-    public final const BOOT_EXTENSIONS = 190;
-    public final const AFTER_EVERYTHING = 200;
+    public final const REVALIDATE_LICENSE_CHECK = 90;
+    public final const SETUP_EXTENSIONS = 100;
+    public final const INITIALIZE_APP = 110;
+    public final const INITIALIZE_PLUGIN = 120;
+    public final const INITIALIZE_EXTENSIONS = 130;
+    public final const CONFIGURE_COMPONENTS = 140;
+    public final const BOOT_SYSTEM = 150;
+    public final const CONFIGURE_PLUGIN = 160;
+    public final const CONFIGURE_EXTENSIONS = 170;
+    public final const BOOT_APPLICATION = 180;
+    public final const BOOT_PLUGIN = 190;
+    public final const BOOT_EXTENSIONS = 200;
+    public final const AFTER_EVERYTHING = 210;
 }
