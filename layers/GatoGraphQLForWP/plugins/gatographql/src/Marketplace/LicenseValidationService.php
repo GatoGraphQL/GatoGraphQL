@@ -13,6 +13,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulE
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 
@@ -30,6 +31,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
     private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?ContainerManagerInterface $containerManager = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?OptionNamespacerInterface $optionNamespacer = null;
 
     final protected function getMarketplaceProviderCommercialExtensionActivationService(): MarketplaceProviderCommercialExtensionActivationServiceInterface
     {
@@ -53,6 +55,10 @@ class LicenseValidationService implements LicenseValidationServiceInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
+    final protected function getOptionNamespacer(): OptionNamespacerInterface
+    {
+        return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
+    }
 
     /**
      * Activate the Gato GraphQL Extensions against the
@@ -69,7 +75,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         // Store the latest "license check" timestamp to DB
         $this->getUserSettingsManager()->storeLicenseCheckTimestamp();
 
-        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        $optionNamespacer = $this->getOptionNamespacer();
         $option = $optionNamespacer->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES);
         /** @var array<string,mixed> */
         $commercialExtensionActivatedLicenseEntries = get_option($option, []);

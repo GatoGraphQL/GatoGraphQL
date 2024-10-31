@@ -27,10 +27,15 @@ class UserSettingsManager implements UserSettingsManagerInterface
     protected array $options = [];
 
     private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
+    private ?OptionNamespacerInterface $optionNamespacer = null;
 
     protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
     {
         return $this->timestampSettingsManager ??= TimestampSettingsManagerFacade::getInstance();
+    }    
+    final protected function getOptionNamespacer(): OptionNamespacerInterface
+    {
+        return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
     }
 
     /**
@@ -221,8 +226,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     protected function namespaceOption(string $option): string
     {
-        $optionNamespacer = OptionNamespacerFacade::getInstance();
-        return $optionNamespacer->namespaceOption($option);
+        return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
     public function isModuleEnabled(string $moduleID): bool

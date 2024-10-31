@@ -12,6 +12,13 @@ use function update_option;
 
 class TimestampSettingsManager implements TimestampSettingsManagerInterface
 {
+    private ?OptionNamespacerInterface $optionNamespacer = null;
+    
+    final protected function getOptionNamespacer(): OptionNamespacerInterface
+    {
+        return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
+    }
+
     public function getTimestamp(string $name, ?string $defaultValue = null): ?string
     {
         /** @var array<string,string> */
@@ -21,8 +28,7 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
 
     protected function namespaceOption(string $option): string
     {
-        $optionNamespacer = OptionNamespacerFacade::getInstance();
-        return $optionNamespacer->namespaceOption($option);
+        return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
     public function storeTimestamp(string $name, string $timestamp): void
