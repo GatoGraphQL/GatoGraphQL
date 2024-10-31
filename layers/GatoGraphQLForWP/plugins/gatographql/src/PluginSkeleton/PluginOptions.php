@@ -12,5 +12,5 @@ class PluginOptions
      *
      * It is stored as an array of "plugin/extension baseName" => "version"
      */
-    public final const PLUGIN_VERSIONS = 'gatographql-plugin-versions';
+    public final const PLUGIN_VERSIONS = 'plugin-versions';
 }
