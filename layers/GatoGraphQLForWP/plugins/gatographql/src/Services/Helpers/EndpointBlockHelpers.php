@@ -23,7 +23,7 @@ class EndpointBlockHelpers
     private ?BlockHelpers $blockHelpers = null;
     private ?EndpointSchemaConfigurationBlock $endpointSchemaConfigurationBlock = null;
 
-    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }

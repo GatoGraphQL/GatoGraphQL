@@ -33,7 +33,7 @@ class ModuleListTable extends AbstractItemListTable
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 
-    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }

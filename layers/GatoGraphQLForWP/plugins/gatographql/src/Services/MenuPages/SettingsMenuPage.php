@@ -49,7 +49,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     private ?ContainerManagerInterface $containerManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
-    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }

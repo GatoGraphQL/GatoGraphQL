@@ -41,7 +41,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     private ?EndpointHelpers $endpointHelpers = null;
     private ?EditorHelpers $editorHelpers = null;
 
-    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
