@@ -15,8 +15,8 @@ use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Helpers\ScopingHelpers;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function get_option;
 
 abstract class AbstractPlugin implements PluginInterface

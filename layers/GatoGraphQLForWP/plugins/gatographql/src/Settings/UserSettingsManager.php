@@ -7,9 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
-
 use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
-use function delete_option;
+
 use function get_option;
 use function uniqid;
 use function update_option;
@@ -18,6 +17,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
 {
     private const TIMESTAMP_CONTAINER = 'container';
     private const TIMESTAMP_OPERATIONAL = 'operational';
+    private const TIMESTAMP_LICENSE_CHECK = 'license-check';
 
     /**
      * Cache the values in memory
@@ -27,10 +27,15 @@ class UserSettingsManager implements UserSettingsManagerInterface
     protected array $options = [];
 
     private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
+    private ?OptionNamespacerInterface $optionNamespacer = null;
 
     protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
     {
         return $this->timestampSettingsManager ??= TimestampSettingsManagerFacade::getInstance();
+    }
+    final protected function getOptionNamespacer(): OptionNamespacerInterface
+    {
+        return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
     }
 
     /**
@@ -57,7 +62,9 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     protected function getOptionUniqueTimestamp(string $key): string
     {
-        return $this->getTimestampSettingsManager()->getTimestamp($key, $this->getUniqueIdentifier());
+        /** @var string */
+        $timestamp = $this->getTimestampSettingsManager()->getTimestamp($key, $this->getUniqueIdentifier());
+        return $timestamp;
     }
 
     /**
@@ -123,6 +130,31 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_CONTAINER,
             self::TIMESTAMP_OPERATIONAL,
         ]);
+    }
+
+    /**
+     * Timestamp of latest executed validation of the commercial
+     * licenses against the Marketplace provider's API
+     */
+    public function getLicenseCheckTimestamp(): ?int
+    {
+        $timestamp = $this->getTimestampSettingsManager()->getTimestamp(self::TIMESTAMP_LICENSE_CHECK);
+        if ($timestamp === null) {
+            return null;
+        }
+        return (int) $timestamp;
+    }
+
+    /**
+     * Store the current time to indicate the latest executed
+     * validation of the commercial licenses
+     */
+    public function storeLicenseCheckTimestamp(): void
+    {
+        $this->getTimestampSettingsManager()->storeTimestamp(
+            self::TIMESTAMP_LICENSE_CHECK,
+            (string) time()
+        );
     }
 
     public function hasSetting(string $module, string $option): bool
@@ -196,8 +228,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     protected function namespaceOption(string $option): string
     {
-        $optionNamespacer = OptionNamespacerFacade::getInstance();
-        return $optionNamespacer->namespaceOption($option);
+        return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
     public function isModuleEnabled(string $moduleID): bool

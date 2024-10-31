@@ -397,6 +397,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
+
+        // Maybe revalidate the commercial licenses
+        $this->maybeRevalidateCommercialLicenses();
     }
 
     /**
@@ -534,6 +537,64 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * After an X number of days, revalidate if the commercial
+     * licenses are still active.
+     *
+     * For this, store the latest "license check" timestamp in
+     * the DB, and check if that amount of time has been through,
+     * if so perform the check
+     */
+    protected function maybeRevalidateCommercialLicenses(): void
+    {
+        $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
+        if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
+            return;
+        }
+
+        /**
+         * Logic to check if the main plugin or any extension has
+         * just been activated or updated.
+         */
+        add_action(
+            PluginAppHooks::INITIALIZE_APP,
+            function (string $pluginAppGraphQLServerName) use ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses): void {
+                if (
+                    $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                    || !is_admin()
+                    || $this->initializationException !== null
+                ) {
+                    return;
+                }
+
+                /**
+                 * Only validate while some License is active.
+                 *
+                 * Execute this logic only now, inside the hook, to make
+                 * sure that `$extensionManager->assertCommercialLicenseHasBeenActivated(...)`
+                 * has been invoked
+                 */
+                $extensionManager = PluginApp::getExtensionManager();
+                if ($extensionManager->getActivatedLicenseCommercialExtensionSlugProductNames() === []) {
+                    return;
+                }
+
+                $userSettingsManager = UserSettingsManagerFacade::getInstance();
+
+                // Check if the X number of days have already passes
+                $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses = $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses * 86400;
+                $now = time();
+                $licenseCheckTimestamp = $userSettingsManager->getLicenseCheckTimestamp() ?? 0; // If `null`, execute the license check
+                if (($now - $licenseCheckTimestamp) < $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses) {
+                    return;
+                }
+
+                $this->revalidateCommercialExtensionActivatedLicenses();
+            },
+            PluginLifecyclePriorities::REVALIDATE_LICENSE_CHECK
+        );
+    }
+
+    /**
      * Execute logic after the plugin/extension has just been updated
      */
     public function pluginJustUpdated(string $newVersion, string $previousVersion): void
@@ -541,6 +602,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         parent::pluginJustUpdated($newVersion, $previousVersion);
 
         $this->revalidateCommercialExtensionActivatedLicenses();
+    }
+
+    /**
+     * Provide the number of days after which to revalidate if the
+     * commercial licenses are still active, or `null` to disable
+     * the check.
+     */
+    protected function getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses(): ?int
+    {
+        return null;
     }
 
     /**
