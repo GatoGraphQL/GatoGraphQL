@@ -131,7 +131,11 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getLicenseCheckTimestamp(): ?int
     {
-        return $this->getTimestampSettingsManager()->getTimestamp(self::TIMESTAMP_LICENSE_CHECK);
+        $timestamp = $this->getTimestampSettingsManager()->getTimestamp(self::TIMESTAMP_LICENSE_CHECK);
+        if ($timestamp === null) {
+            return null;
+        }
+        return (int) $timestamp;
     }
     
     /**
@@ -140,7 +144,10 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeLicenseCheckTimestamp(): void
     {
-
+        $this->getTimestampSettingsManager()->storeTimestamp(
+            self::TIMESTAMP_LICENSE_CHECK,
+            (string) time()
+        );
     }
 
     public function hasSetting(string $module, string $option): bool
