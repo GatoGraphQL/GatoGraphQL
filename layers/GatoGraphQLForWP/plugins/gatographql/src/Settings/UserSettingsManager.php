@@ -194,6 +194,12 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $this->hasItem($this->namespaceOption(Options::MODULES), $moduleID);
     }
 
+    protected function namespaceOption(string $option): string
+    {
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        return $optionNamespacer->namespaceOption($option);
+    }
+
     public function isModuleEnabled(string $moduleID): bool
     {
         return (bool) $this->getItem($this->namespaceOption(Options::MODULES), $moduleID);
