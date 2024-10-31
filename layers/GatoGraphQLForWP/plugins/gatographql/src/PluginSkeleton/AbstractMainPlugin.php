@@ -258,9 +258,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function removePluginFileFromStoredPluginVersions(string $pluginBaseName): void
     {
-        $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
+        $storedPluginVersions = get_option($option, []);
         unset($storedPluginVersions[$pluginBaseName]);
-        update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+        update_option($option, $storedPluginVersions);
     }
 
 
