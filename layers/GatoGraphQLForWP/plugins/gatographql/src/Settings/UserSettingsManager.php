@@ -8,10 +8,11 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 
+use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
 use function delete_option;
 use function get_option;
-use function update_option;
 use function uniqid;
+use function update_option;
 
 class UserSettingsManager implements UserSettingsManagerInterface
 {
@@ -24,6 +25,13 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * @var array<string,array<string,mixed>>
      */
     protected array $options = [];
+
+    private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
+
+    protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
+    {
+        return $this->timestampSettingsManager ??= TimestampSettingsManagerFacade::getInstance();
+    }
 
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,
