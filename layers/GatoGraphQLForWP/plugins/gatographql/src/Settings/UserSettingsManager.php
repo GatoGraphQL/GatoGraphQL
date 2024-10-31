@@ -17,6 +17,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
 {
     private const TIMESTAMP_CONTAINER = 'container';
     private const TIMESTAMP_OPERATIONAL = 'operational';
+    private const TIMESTAMP_LICENSE_CHECK = 'license-check';
 
     /**
      * Cache the values in memory
@@ -122,6 +123,24 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_CONTAINER,
             self::TIMESTAMP_OPERATIONAL,
         ]);
+    }
+    
+    /**
+     * Timestamp of latest executed validation of the commercial
+     * licenses against the Marketplace provider's API
+     */
+    public function getLicenseCheckTimestamp(): ?int
+    {
+        return null;
+    }
+    
+    /**
+     * Store the current time to indicate the latest executed
+     * validation of the commercial licenses
+     */
+    public function storeLicenseCheckTimestamp(): void
+    {
+
     }
 
     public function hasSetting(string $module, string $option): bool
