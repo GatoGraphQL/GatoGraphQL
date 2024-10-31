@@ -572,7 +572,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 }        
 
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                $licenseCheckTimestamp = $userSettingsManager->getLicenseCheckTimestamp();
 
                 // Check if the X number of days have already passes
                 $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses = $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses * 86400;
