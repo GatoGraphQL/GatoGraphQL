@@ -17,7 +17,6 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
     {
         $timestamps = get_option($this->namespaceOption(Options::TIMESTAMPS), [$name => $defaultValue]);
         return $timestamps[$name];
-        return null;
     }
 
     public function storeTimestamp(string $name, string $timestamp): void
