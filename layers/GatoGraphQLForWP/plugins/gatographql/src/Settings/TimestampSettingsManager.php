@@ -14,8 +14,9 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
 {
     public function getTimestamp(string $name, ?string $defaultValue = null): ?string
     {
+        /** @var array<string,string> */
         $timestamps = get_option($this->namespaceOption(Options::TIMESTAMPS), [$name => $defaultValue]);
-        return $timestamps[$name];
+        return $timestamps[$name] ?? null;
     }
 
     public function storeTimestamp(string $name, string $timestamp): void
@@ -42,6 +43,8 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
     public function removeTimestamps(array $names): void
     {
         $option = $this->namespaceOption(Options::TIMESTAMPS);
+        
+        /** @var array<string,string> */
         $timestamps = get_option($option, []);
         foreach ($names as $name) {
             unset($timestamps[$name]);
