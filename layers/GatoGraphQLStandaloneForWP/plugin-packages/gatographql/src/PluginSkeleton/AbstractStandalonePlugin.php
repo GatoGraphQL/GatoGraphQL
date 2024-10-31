@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton;
 
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInitializationConfigurationInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInfoInterface;
 
@@ -59,9 +60,18 @@ abstract class AbstractStandalonePlugin extends Plugin
 
     /**
      * Revalidate the license after 30 days
+     * (while the license is active)
      */
     protected function getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses(): ?int
     {
+        /**
+         * Only validate while the License is active
+         */
+        $extensionManager = PluginApp::getExtensionManager();
+        if (!$extensionManager->isExtensionLicenseActive($this->getPluginSlug())) {
+            return null;
+        }
+
         return 30;
     }
 }
