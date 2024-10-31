@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
+/**
+ * Plugin Option names.
+ *
+ * They must be namespaced (via the OptionNamespacer service),
+ * so that they all start with "gatographql-"
+ */
 class PluginOptions
 {
     /**
