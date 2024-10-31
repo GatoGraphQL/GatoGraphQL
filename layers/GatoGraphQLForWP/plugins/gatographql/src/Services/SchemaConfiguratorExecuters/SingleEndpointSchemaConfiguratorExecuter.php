@@ -20,7 +20,7 @@ class SingleEndpointSchemaConfiguratorExecuter extends AbstractSchemaConfigurato
     private ?GraphQLEndpointHandler $graphQLEndpointHandler = null;
     private ?EndpointBlockHelpers $endpointBlockHelpers = null;
 
-    protected function getUserSettingsManager(): UserSettingsManagerInterface
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
