@@ -42,12 +42,20 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
         foreach ($optionNames as $optionName) {
             add_action(
                 "update_option_{$optionName}",
-                function (): void {
+                function () use ($optionName): void {
                     if ($this->disableAutomaticConfigUpdates()) {
                         return;
                     }
 
-                    $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated();
+                    /**
+                     * Must wait until the extensions have been initialized
+                     */
+                    add_action(
+                        'init',
+                        function () use ($optionName): void {
+                            $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($optionName);
+                        }
+                    );
                 }
             );
         }
@@ -60,7 +68,7 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
         return $moduleConfiguration->disableAutomaticConfigUpdates();
     }
 
-    protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(): void
+    protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(string $optionName): void
     {
         $this->installPluginSetupData();
     }
