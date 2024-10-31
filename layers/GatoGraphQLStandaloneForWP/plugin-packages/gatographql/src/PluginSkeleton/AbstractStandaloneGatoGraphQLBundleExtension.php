@@ -47,7 +47,15 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
                         return;
                     }
 
-                    $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($optionName);
+                    /**
+                     * Must wait until the extensions have been initialized
+                     */
+                    add_action(
+                        'init',
+                        function () use ($optionName): void {
+                            $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($optionName);
+                        }
+                    );
                 }
             );
         }
