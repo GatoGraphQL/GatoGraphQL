@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use function delete_option;
 use function get_option;
 use function update_option;
-use function uniqid;
 
 class TimestampSettingsManager implements TimestampSettingsManagerInterface
 {
@@ -21,7 +20,7 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
 
     public function storeTimestamp(string $name, string $timestamp): void
     {
-
+        $this->storeTimestamps([$name => $timestamp]);
     }
 
     /**
@@ -29,7 +28,7 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
      */
     public function storeTimestamps(array $nameTimestamps): void
     {
-
+        update_option($this->namespaceOption(Options::TIMESTAMPS), $nameTimestamps);
     }
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,

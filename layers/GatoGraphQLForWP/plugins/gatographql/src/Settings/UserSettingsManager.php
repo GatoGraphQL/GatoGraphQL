@@ -60,12 +60,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $this->getTimestampSettingsManager()->getTimestamp($key, $this->getUniqueIdentifier());
     }
 
-    protected function namespaceOption(string $option): string
-    {
-        $optionNamespacer = OptionNamespacerFacade::getInstance();
-        return $optionNamespacer->namespaceOption($option);
-    }
-
     /**
      * Add a random number to `time()` to make it truly unique,
      * as to avoid a bug when 2 requests with different schema
@@ -105,7 +99,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
             self::TIMESTAMP_CONTAINER => $uniqueID,
             self::TIMESTAMP_OPERATIONAL => $uniqueID,
         ];
-        update_option($this->namespaceOption(Options::TIMESTAMPS), $timestamps);
+        $this->getTimestampSettingsManager()->storeTimestamps($timestamps);
     }
     /**
      * Store the current time to indicate the latest executed write to DB,
