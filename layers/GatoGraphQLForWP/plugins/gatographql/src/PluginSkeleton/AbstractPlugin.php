@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginMetadata;
@@ -14,7 +15,9 @@ use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Helpers\ScopingHelpers;
+
 use PoP\Root\Module\ModuleInterface;
+use function get_option;
 
 abstract class AbstractPlugin implements PluginInterface
 {
@@ -389,9 +392,11 @@ abstract class AbstractPlugin implements PluginInterface
      */
     private function removePluginVersion(): void
     {
-        $pluginVersions = \get_option(PluginOptions::PLUGIN_VERSIONS, []);
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
+        $pluginVersions = get_option($option, []);
         unset($pluginVersions[$this->pluginBaseName]);
-        \update_option(PluginOptions::PLUGIN_VERSIONS, $pluginVersions);
+        \update_option($option, $pluginVersions);
     }
 
     /**

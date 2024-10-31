@@ -258,9 +258,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function removePluginFileFromStoredPluginVersions(string $pluginBaseName): void
     {
-        $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
+        $storedPluginVersions = get_option($option, []);
         unset($storedPluginVersions[$pluginBaseName]);
-        update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+        update_option($option, $storedPluginVersions);
     }
 
 
@@ -423,7 +425,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
-                $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
+                $optionNamespacer = OptionNamespacerFacade::getInstance();
+                $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
+                $storedPluginVersions = get_option($option, []);
                 $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
 
                 // Check if the main plugin has been activated or updated
@@ -476,6 +480,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         $storedPluginVersions,
                         $justActivatedExtensions,
                         $justUpdatedExtensions,
+                        $option,
                     ): void {
                         if (
                             $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
@@ -494,7 +499,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                          *
                          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2631
                          */
-                        update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+                        update_option($option, $storedPluginVersions);
 
                         if ($isMainPluginJustActivated) {
                             $this->pluginJustActivated();
