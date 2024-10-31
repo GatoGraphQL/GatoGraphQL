@@ -30,8 +30,16 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
     public function storeTimestamps(array $nameTimestamps): void
     {
         $option = $this->namespaceOption(Options::TIMESTAMPS);
-        /** @var array<string,string> */
+
+        /**
+         * Get the current timestamps from the DB
+         * @var array<string,string>
+         */
         $timestamps = get_option($option, []);
+
+        /**
+         * Override with the provided values
+         */
         $timestamps = array_merge(
             $timestamps,
             $nameTimestamps
@@ -46,12 +54,19 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
     {
         $option = $this->namespaceOption(Options::TIMESTAMPS);
         
-        /** @var array<string,string> */
+        /**
+         * Remove only the provided keys
+         *
+         * @var array<string,string>
+         */
         $timestamps = get_option($option, []);
         foreach ($names as $name) {
             unset($timestamps[$name]);
         }
 
+        /**
+         * If there were no other keys, can safely delete the option
+         */
         if ($timestamps === []) {
             delete_option($option);
             return;
