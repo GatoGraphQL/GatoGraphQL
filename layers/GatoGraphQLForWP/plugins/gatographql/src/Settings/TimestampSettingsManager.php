@@ -13,6 +13,23 @@ use function uniqid;
 
 class TimestampSettingsManager implements TimestampSettingsManagerInterface
 {
+    public function getTimestamp(string $name): ?int
+    {
+        return null;
+    }
+
+    public function storeTimestamp(string $name, int $timestamp): void
+    {
+
+    }
+
+    /**
+     * @param array<string,int> $nameTimestamps Key: name, Value: timestamp
+     */
+    public function storeTimestamps(array $nameTimestamps): void
+    {
+
+    }
     /**
      * Timestamp of latest executed write to DB, concerning plugin activation,
      * module enabled/disabled, user settings updated.
