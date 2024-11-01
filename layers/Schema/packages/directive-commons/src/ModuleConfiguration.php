@@ -9,10 +9,10 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
-    public function skipBubblingUpErrorsInMetaDirectives(): bool
+    public function bubbleUpErrorsInMetaDirectives(): bool
     {
-        $envVariable = Environment::SKIP_BUBBLING_UP_ERRORS_IN_META_DIRECTIVES;
-        $defaultValue = false;
+        $envVariable = Environment::BUBBLE_UP_ERRORS_IN_META_DIRECTIVES;
+        $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(

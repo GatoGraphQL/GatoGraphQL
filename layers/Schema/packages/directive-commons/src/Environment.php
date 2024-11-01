@@ -6,5 +6,5 @@ namespace PoPSchema\DirectiveCommons;
 
 class Environment
 {
-    public final const SKIP_BUBBLING_UP_ERRORS_IN_META_DIRECTIVES = 'SKIP_BUBBLING_UP_ERRORS_IN_META_DIRECTIVES';
+    public final const BUBBLE_UP_ERRORS_IN_META_DIRECTIVES = 'BUBBLE_UP_ERRORS_IN_META_DIRECTIVES';
 }
