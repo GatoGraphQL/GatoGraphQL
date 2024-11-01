@@ -9,9 +9,9 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
-    public function bubbleUpErrorsInMetaDirectives(): bool
+    public function nestErrorsInMetaDirectives(): bool
     {
-        $envVariable = Environment::BUBBLE_UP_ERRORS_IN_META_DIRECTIVES;
+        $envVariable = Environment::NEST_ERRORS_IN_META_DIRECTIVES;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
