@@ -8,7 +8,7 @@ Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Powerful and flexible GraphQL server for WordPress. Access any piece of data (posts, users, comments, tags, categories, etc) from your app via a GraphQL API.
+Powerful and flexible GraphQL server for WordPress. Access any piece of data (posts, users, comments, tags, etc) from your app via a GraphQL API.
 
 == Description ==
 
