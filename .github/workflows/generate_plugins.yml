@@ -249,6 +249,12 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.scoping }}
 
+            -   name: Remove all function aliases from scoper-autoload.php
+                run: |
+                    sed -i 's/if (!function_exists(/\/\/if (!function_exists(/' vendor/scoper-autoload.php
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ matrix.pluginConfig.scoping }}
+
     ###########################################################################
     # Generate plugin, and Upload as artifact
     ###########################################################################
