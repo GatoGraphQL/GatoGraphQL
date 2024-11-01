@@ -447,7 +447,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
 
             $objectResolutionFeedbackStoreErrors = $separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors();
             $schemaFeedbackStoreErrors = $separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors();
-            
+
             /**
              * If bubbling up the errors for the meta directives, the errors
              * will be handled below.
@@ -457,7 +457,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
              * @var ModuleConfiguration
              */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            $nestErrorsInMetaDirectives = $moduleConfiguration->nestErrorsInMetaDirectives();            
+            $nestErrorsInMetaDirectives = $moduleConfiguration->nestErrorsInMetaDirectives();
             if ($nestErrorsInMetaDirectives) {
                 $separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->setErrors([]);
                 $separateEngineIterationFeedbackStore->schemaFeedbackStore->setErrors([]);
@@ -472,7 +472,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             }
 
             // If any item fails, set the whole response field as null
-            if ($nestErrorsInMetaDirectives
+            if (
+                $nestErrorsInMetaDirectives
                 && ($objectResolutionFeedbackStoreErrors !== [] || $schemaFeedbackStoreErrors !== [])
             ) {
                 // // Transfer the error to the composable directive
