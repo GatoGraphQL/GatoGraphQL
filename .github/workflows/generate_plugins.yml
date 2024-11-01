@@ -251,7 +251,7 @@ jobs:
 
             -   name: Remove all function aliases from scoper-autoload.php
                 run: |
-                    sed -i -E 's/if \(!function_exists(\'([a-zA-Z0-9_]+)\')\) { function/\/\/if (!function_exists(\'\1\')) { function' vendor/scoper-autoload.php
+                    sed -i -E 's/if \(!function_exists\(\'([a-zA-Z0-9_]+)\'\)\) { function/\/\/if (!function_exists(\'\1\')) { function' vendor/scoper-autoload.php
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.scoping }}
 
