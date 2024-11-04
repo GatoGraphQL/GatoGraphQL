@@ -8,5 +8,5 @@
   isGutenbergEditorEnabled
   isGutenbergEditorEnabledForPost: isGutenbergEditorEnabledForCustomPostType(name: "post")
   isGutenbergEditorEnabledForDummyCPT: isGutenbergEditorEnabledForCustomPostType(name: "dummy-cpt")
-  isGutenbergEditorEnabledForProduct: isGutenbergEditorEnabledForCustomPostType(name: "product")
+  isGutenbergEditorEnabledForEvent: isGutenbergEditorEnabledForCustomPostType(name: "event")
 }
