@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Settings\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
 use PoPWPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -12,18 +13,17 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Post;
 use function use_block_editor_for_post_type;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?SettingsTypeAPIInterface $settingsTypeAPI = null;
+    private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
 
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
@@ -34,15 +34,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->booleanScalarTypeResolver;
     }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        if ($this->idScalarTypeResolver === null) {
-            /** @var IDScalarTypeResolver */
-            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-            $this->idScalarTypeResolver = $idScalarTypeResolver;
-        }
-        return $this->idScalarTypeResolver;
-    }
     final protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
     {
         if ($this->settingsTypeAPI === null) {
@@ -51,6 +42,15 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->settingsTypeAPI = $settingsTypeAPI;
         }
         return $this->settingsTypeAPI;
+    }
+    final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
+    {
+        if ($this->customPostEnumStringScalarTypeResolver === null) {
+            /** @var CustomPostEnumStringScalarTypeResolver */
+            $customPostEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
+            $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
+        }
+        return $this->customPostEnumStringScalarTypeResolver;
     }
 
     /**
@@ -109,7 +109,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'isGutenbergEditorEnabledForCustomPostType' => [
-                'customPostType' => $this->getRootCreateGenericCustomPostInputObjectTypeResolver(),
+                'customPostType' => $this->getCustomPostEnumStringScalarTypeResolver(),
             ],
             default
                 => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
