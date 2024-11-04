@@ -328,7 +328,7 @@ class AppLoader implements AppLoaderInterface
             $this->orderedModuleClasses[] = $moduleClass;
 
             /**
-             * If this compononent satisfies the contracts for other
+             * If this component satisfies the contracts for other
              * modules, set them as "satisfied".
              */
             foreach ($module->getSatisfiedModuleClasses() as $satisfiedComponentClass) {
