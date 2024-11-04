@@ -111,16 +111,22 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'isGutenbergEditorEnabledForCustomPostType' => [
                 'customPostType' => $this->getCustomPostEnumStringScalarTypeResolver(),
             ],
-            default
-                => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['isGutenbergEditorEnabledForCustomPostType' => 'customPostType'] => $this->__('The custom post type', 'gatographql'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isGutenbergEditorEnabledForCustomPostType' => 'customPostType']
-                => SchemaTypeModifiers::MANDATORY,
+            ['isGutenbergEditorEnabledForCustomPostType' => 'customPostType'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
