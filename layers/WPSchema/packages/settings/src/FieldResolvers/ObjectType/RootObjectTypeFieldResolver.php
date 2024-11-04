@@ -12,15 +12,17 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use WP_Post;
 
+use WP_Post;
 use function use_block_editor_for_post_type;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?SettingsTypeAPIInterface $settingsTypeAPI = null;
 
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
@@ -31,6 +33,15 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
+    }
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
     }
     final protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
     {
@@ -95,6 +106,26 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        return match ($fieldName) {
+            'isGutenbergEditorEnabledForCustomPostType' => [
+                'customPostType' => $this->getRootCreateGenericCustomPostInputObjectTypeResolver(),
+            ],
+            default
+                => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['isGutenbergEditorEnabledForCustomPostType' => 'customPostType']
+                => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
