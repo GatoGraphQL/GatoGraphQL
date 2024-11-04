@@ -146,6 +146,8 @@
             }
         },
         "nonExistingObject": null,
-        "isGutenbergEditorEnabled": true
+        "isGutenbergEditorEnabled": true,
+        "isGutenbergEditorEnabledForPost": true,
+        "isGutenbergEditorEnabledForDummyCPT": true
     }
 }
