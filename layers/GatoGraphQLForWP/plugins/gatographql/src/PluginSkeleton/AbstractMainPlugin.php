@@ -1016,4 +1016,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             }
         );
     }
+
+    public function getPluginWebsiteURL(): string
+    {
+        return $this->getPluginDomainURL();
+    }
 }

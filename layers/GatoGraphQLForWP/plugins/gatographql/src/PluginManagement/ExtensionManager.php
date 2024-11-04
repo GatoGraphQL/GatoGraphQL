@@ -174,7 +174,7 @@ class ExtensionManager extends AbstractPluginManager
                      */
                     sprintf(
                         '%s/shop/my-orders',
-                        $mainPlugin->getPluginWebsiteURL()
+                        $mainPlugin->getPluginDomainURL()
                     ),
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 )

@@ -112,7 +112,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
                 $valueInject
             );
         }
-        $contactFormURL = PluginApp::getMainPlugin()->getPluginWebsiteURL() . '/__forms/support.html';
+        $contactFormURL = PluginApp::getMainPlugin()->getPluginDomainURL() . '/__forms/support.html';
         $variableValueInjections = [
             '{contact-form-url}' => $contactFormURL,
         ];

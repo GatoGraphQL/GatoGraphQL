@@ -260,7 +260,7 @@ class Plugin extends AbstractMainPlugin
         );
     }
 
-    public function getPluginWebsiteURL(): string
+    public function getPluginDomainURL(): string
     {
         return 'https://gatographql.com';
     }
