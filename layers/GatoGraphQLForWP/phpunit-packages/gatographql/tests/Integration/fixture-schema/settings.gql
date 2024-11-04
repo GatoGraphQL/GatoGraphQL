@@ -6,7 +6,7 @@
   existingObject: optionObjectValue(name: "wp_user_roles")
   nonExistingObject: optionObjectValue(name: "nonExisting")
   isGutenbergEditorEnabled
-  isGutenbergEditorEnabledForPost: isGutenbergEditorEnabledForCustomPostType(name: "post")
-  isGutenbergEditorEnabledForDummyCPT: isGutenbergEditorEnabledForCustomPostType(name: "dummy-cpt")
-  isGutenbergEditorEnabledForEvent: isGutenbergEditorEnabledForCustomPostType(name: "event")
+  isGutenbergEditorEnabledForPost: isGutenbergEditorEnabledForCustomPostType(customPostType: "post")
+  isGutenbergEditorEnabledForDummyCPT: isGutenbergEditorEnabledForCustomPostType(customPostType: "dummy-cpt")
+  isGutenbergEditorEnabledForEvent: isGutenbergEditorEnabledForCustomPostType(customPostType: "event")
 }
