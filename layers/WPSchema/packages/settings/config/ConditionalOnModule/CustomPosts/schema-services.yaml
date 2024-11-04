@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPWPSchema\Settings\ConditionalOnModule\CustomPosts\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/CustomPosts/FieldResolvers/*'
