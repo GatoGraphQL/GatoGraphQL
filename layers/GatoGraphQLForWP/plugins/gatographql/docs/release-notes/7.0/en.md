@@ -11,6 +11,7 @@
 - Added convenience class for standalone plugins ([#2899](https://github.com/GatoGraphQL/GatoGraphQL/pull/2899))
 - Allow to fetch posts with `auto-draft` status ([#2911](https://github.com/GatoGraphQL/GatoGraphQL/pull/2911))
 - Allow disabling the private endpoint ([#2913](https://github.com/GatoGraphQL/GatoGraphQL/pull/2913))
+- Added field `isGutenbergEditorEnabledForCustomPostType` ([#2960](https://github.com/GatoGraphQL/GatoGraphQL/pull/2960))
 
 ## Fixed
 
