@@ -56,6 +56,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return [
             'isGutenbergEditorEnabled',
+            'isGutenbergEditorEnabledForCustomPost',
+            'isGutenbergEditorEnabledForCustomPostType',
         ];
     }
 
@@ -63,6 +65,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'isGutenbergEditorEnabled' => $this->__('Is the Gutenberg editor enabled? (i.e. the "Classic Editor" plugin is not enabled)', 'settings'),
+            'isGutenbergEditorEnabledForCustomPost' => $this->__('Is the Gutenberg editor enabled for the custom post?', 'settings'),
+            'isGutenbergEditorEnabledForCustomPostType' => $this->__('Is the Gutenberg editor enabled for the custom post type?', 'settings'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -70,16 +74,24 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'isGutenbergEditorEnabled' => $this->getBooleanScalarTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'isGutenbergEditorEnabled',
+            'isGutenbergEditorEnabledForCustomPost',
+            'isGutenbergEditorEnabledForCustomPostType'
+                => $this->getBooleanScalarTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'isGutenbergEditorEnabled' => SchemaTypeModifiers::NON_NULLABLE,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'isGutenbergEditorEnabled',
+            'isGutenbergEditorEnabledForCustomPost',
+            'isGutenbergEditorEnabledForCustomPostType'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -91,6 +103,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'isGutenbergEditorEnabled':
+                return $this->getSettingsTypeAPI()->isGutenbergEditorEnabled();
+            case 'isGutenbergEditorEnabledForCustomPost':
+                return $this->getSettingsTypeAPI()->isGutenbergEditorEnabled();
+            case 'isGutenbergEditorEnabledForCustomPostType':
                 return $this->getSettingsTypeAPI()->isGutenbergEditorEnabled();
         }
 
