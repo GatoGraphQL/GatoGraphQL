@@ -70,7 +70,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return [
             'isGutenbergEditorEnabled',
-            'isGutenbergEditorEnabledForCustomPost',
             'isGutenbergEditorEnabledForCustomPostType',
         ];
     }
@@ -79,7 +78,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'isGutenbergEditorEnabled' => $this->__('Is the Gutenberg editor enabled? (i.e. the "Classic Editor" plugin is not enabled)', 'settings'),
-            'isGutenbergEditorEnabledForCustomPost' => $this->__('Is the Gutenberg editor enabled for the custom post?', 'settings'),
             'isGutenbergEditorEnabledForCustomPostType' => $this->__('Is the Gutenberg editor enabled for the custom post type?', 'settings'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -89,7 +87,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'isGutenbergEditorEnabled',
-            'isGutenbergEditorEnabledForCustomPost',
             'isGutenbergEditorEnabledForCustomPostType'
                 => $this->getBooleanScalarTypeResolver(),
             default
@@ -101,7 +98,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'isGutenbergEditorEnabled',
-            'isGutenbergEditorEnabledForCustomPost',
             'isGutenbergEditorEnabledForCustomPostType'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
@@ -140,11 +136,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldDataAccessor->getFieldName()) {
             case 'isGutenbergEditorEnabled':
                 return $this->getSettingsTypeAPI()->isGutenbergEditorEnabled();
-            case 'isGutenbergEditorEnabledForCustomPost':
-                if (!$this->getSettingsTypeAPI()->isGutenbergEditorEnabled()) {
-                    return false;
-                }
-                return use_block_editor_for_post_type($customPost->post_type);
             case 'isGutenbergEditorEnabledForCustomPostType':
                 if (!$this->getSettingsTypeAPI()->isGutenbergEditorEnabled()) {
                     return false;
