@@ -14,6 +14,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use WP_Post;
+
+use function use_block_editor_for_post_type;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -101,13 +104,21 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        /** @var WP_Post */
+        $customPost = object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'isGutenbergEditorEnabled':
                 return $this->getSettingsTypeAPI()->isGutenbergEditorEnabled();
             case 'isGutenbergEditorEnabledForCustomPost':
-                return $this->getSettingsTypeAPI()->isGutenbergEditorEnabled();
+                if (!$this->getSettingsTypeAPI()->isGutenbergEditorEnabled()) {
+                    return false;
+                }
+                return use_block_editor_for_post_type($customPost->post_type);
             case 'isGutenbergEditorEnabledForCustomPostType':
-                return $this->getSettingsTypeAPI()->isGutenbergEditorEnabled();
+                if (!$this->getSettingsTypeAPI()->isGutenbergEditorEnabled()) {
+                    return false;
+                }
+                return use_block_editor_for_post_type($customPost->post_type);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
