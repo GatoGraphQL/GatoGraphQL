@@ -48,7 +48,7 @@ class PluginMenu extends AbstractMenu
 
     public function getMenuName(): string
     {
-        return PluginApp::getMainPlugin()->getPluginName();
+        return PluginApp::getMainPlugin()->getPluginMenuName();
     }
 
     protected function getPluginIconSVG(): string

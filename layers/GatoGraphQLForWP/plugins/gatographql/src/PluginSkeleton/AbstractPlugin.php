@@ -60,6 +60,14 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
+     * Plugin name
+     */
+    public function getPluginMenuName(): string
+    {
+        return $this->getPluginName();
+    }
+
+    /**
      * Plugin base name
      */
     public function getPluginBaseName(): string
