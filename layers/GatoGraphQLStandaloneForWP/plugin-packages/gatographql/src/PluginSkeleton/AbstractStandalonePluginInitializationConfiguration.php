@@ -28,13 +28,13 @@ abstract class AbstractStandalonePluginInitializationConfiguration extends Plugi
                     'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_ADVANCED_MODE,
                     'callback' => fn ($value) => $value !== AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE,
                 ],
-                [
-                    'class' => \GatoGraphQLStandalone\GatoGraphQL\Module::class,
-                    'envVariable' => \GatoGraphQLStandalone\GatoGraphQL\Environment::DISABLE_AUTOMATIC_CONFIG_UPDATES,
-                    'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                    'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_ADVANCED_MODE,
-                    'callback' => fn ($value) => $value === AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES,
-                ],
+                // [
+                //     'class' => \GatoGraphQLStandalone\GatoGraphQL\Module::class,
+                //     'envVariable' => \GatoGraphQLStandalone\GatoGraphQL\Environment::DISABLE_AUTOMATIC_CONFIG_UPDATES,
+                //     'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                //     'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_ADVANCED_MODE,
+                //     'callback' => fn ($value) => $value === AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES,
+                // ],
             ]
         );
     }
