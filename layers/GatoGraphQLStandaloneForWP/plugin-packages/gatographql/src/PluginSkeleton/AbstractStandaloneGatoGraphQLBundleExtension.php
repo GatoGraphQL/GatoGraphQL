@@ -43,9 +43,9 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
             add_action(
                 "update_option_{$optionName}",
                 function () use ($optionName): void {
-                    if ($this->disableAutomaticConfigUpdates()) {
-                        return;
-                    }
+                    // if ($this->disableAutomaticConfigUpdates()) {
+                    //     return;
+                    // }
 
                     $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($optionName);
                 }
@@ -53,12 +53,12 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
         }
     }
 
-    protected function disableAutomaticConfigUpdates(): bool
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->disableAutomaticConfigUpdates();
-    }
+    // protected function disableAutomaticConfigUpdates(): bool
+    // {
+    //     /** @var ModuleConfiguration */
+    //     $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+    //     return $moduleConfiguration->disableAutomaticConfigUpdates();
+    // }
 
     protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(string $optionName): void
     {
