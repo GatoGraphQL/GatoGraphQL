@@ -26,20 +26,20 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function disableAutomaticConfigUpdates(): bool
-    {
-        if (!$this->enableAdvancedMode()) {
-            return false;
-        }
+    // public function disableAutomaticConfigUpdates(): bool
+    // {
+    //     if (!$this->enableAdvancedMode()) {
+    //         return false;
+    //     }
 
-        $envVariable = Environment::DISABLE_AUTOMATIC_CONFIG_UPDATES;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
+    //     $envVariable = Environment::DISABLE_AUTOMATIC_CONFIG_UPDATES;
+    //     $defaultValue = false;
+    //     $callback = EnvironmentValueHelpers::toBool(...);
 
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
+    //     return $this->retrieveConfigurationValueOrUseDefault(
+    //         $envVariable,
+    //         $defaultValue,
+    //         $callback,
+    //     );
+    // }
 }
