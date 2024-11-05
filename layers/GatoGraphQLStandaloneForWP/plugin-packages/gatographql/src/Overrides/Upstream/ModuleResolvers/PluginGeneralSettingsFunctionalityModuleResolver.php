@@ -115,7 +115,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     {
         return \__('Enable the Advanced Mode and Disable Automatic Config Updates', 'gatographql');
     }
-    
+
     protected function getGeneralTabAdvancedModeOptionDescription(): string
     {
         return \__('Adapt the behavior of the plugin using the Advanced Mode', 'gatographql');
