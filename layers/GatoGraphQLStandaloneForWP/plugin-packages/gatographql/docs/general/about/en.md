@@ -1,8 +1,8 @@
-# Gato Multilingual for Polylang — Support
+# {plugin-name} — Support
 
 <div class="hide-for-customers" markdown=1>
 
-_Support is provided to customers with an active license of Gato Multilingual for Polylang._
+_Support is provided to customers with an active license of {plugin-name}._
 
 </div>
 
