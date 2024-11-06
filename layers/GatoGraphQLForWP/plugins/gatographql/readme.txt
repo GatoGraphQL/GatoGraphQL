@@ -24,6 +24,10 @@ The [standard use cases](https://gatographql.com) are:
 
 **Speed up creating Gutenberg blocks:** Ship Gutenberg blocks faster, by avoiding creating REST controllers to feed them data.
 
+With Gato GraphQL, you also have the flexibility to migrate your application from WordPress to another framework or CMS (if ever needed) with minimal effort: The GraphQL server can run via its standalone PHP component (which doesn't depend on WordPress), and only those resolvers fetching WordPress data (posts, users, comments, etc) used by your application would need to be coded again.
+
+We call this, <strong>Headless WordPress without WordPress</strong>.
+
 == Extensions ==
 
 [Extensions](https://gatographql.com/extensions) allow you to augment the server functionality, and extend the GraphQL schema.
