@@ -2,28 +2,116 @@
     "data": {
         "customPostsByIDs": [
             {
-                "id": 1648,
-                "title": "Nostrum consequatur non fugit vel",
+                "id": 1619,
+                "title": "Error debitis nulla vel est",
+                "tags": [
+                    {
+                        "id": 22
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 20
+                    }
+                ]
+            },
+            {
+                "id": 1634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "tags": [
                     {
                         "id": 30
                     },
                     {
-                        "id": 29
-                    },
-                    {
-                        "id": 25
-                    },
-                    {
-                        "id": 23
+                        "id": 24
                     }
                 ],
                 "categories": [
                     {
-                        "id": 32
+                        "id": 28
                     },
                     {
+                        "id": 19
+                    }
+                ]
+            },
+            {
+                "id": 1654,
+                "title": "Dummy CPT with blocks",
+                "tags": [
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 24
+                    }
+                ],
+                "categories": [
+                    {
                         "id": 28
+                    },
+                    {
+                        "id": 19
+                    }
+                ]
+            },
+            {
+                "id": 1656,
+                "title": "Dummy CPT with non-existing block",
+                "tags": [
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 24
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 28
+                    },
+                    {
+                        "id": 19
+                    }
+                ]
+            },
+            {
+                "id": 1658,
+                "title": "Dummy CPT with no content",
+                "tags": [
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 24
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 28
+                    },
+                    {
+                        "id": 19
+                    }
+                ]
+            },
+            {
+                "id": 1639,
+                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                "tags": [
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 23
+                    },
+                    {
+                        "id": 22
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 26
                     },
                     {
                         "id": 21
@@ -61,8 +149,162 @@
                         "id": 20
                     }
                 ]
+            },
+            {
+                "id": 1630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                "tags": [
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 29
+                    },
+                    {
+                        "id": 24
+                    },
+                    {
+                        "id": 22
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 21
+                    }
+                ]
+            },
+            {
+                "id": 1627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "tags": [
+                    {
+                        "id": 29
+                    },
+                    {
+                        "id": 25
+                    },
+                    {
+                        "id": 24
+                    },
+                    {
+                        "id": 22
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 21
+                    }
+                ]
+            },
+            {
+                "id": 1629,
+                "title": "Qui ea incidunt qui",
+                "tags": [
+                    {
+                        "id": 29
+                    },
+                    {
+                        "id": 24
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 28
+                    },
+                    {
+                        "id": 20
+                    },
+                    {
+                        "id": 19
+                    }
+                ]
             }
         ],
-        "customPostsBySlugAndIDs": []
+        "customPostsBySlugAndIDs": [
+            {
+                "id": 1630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    },
+                    {
+                        "slug": "classical"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 21
+                    }
+                ]
+            },
+            {
+                "id": 1627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "tags": [
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "jazz"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    },
+                    {
+                        "slug": "classical"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 26
+                    },
+                    {
+                        "id": 21
+                    }
+                ]
+            },
+            {
+                "id": 1631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "heavy-metal"
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 20
+                    },
+                    {
+                        "id": 19
+                    }
+                ]
+            }
+        ]
     }
 }
