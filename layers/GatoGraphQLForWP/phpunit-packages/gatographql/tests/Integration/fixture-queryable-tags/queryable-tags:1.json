@@ -31,12 +31,12 @@
       "extensions": {
         "path": [
           "\"dummy-tag\"",
-          "(taxonomy: \"dummy-tag\")",
-          "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 36}) { ... }",
+          "(taxonomy: \"dummy-tag\"2",
+          "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 26}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 36}) { ... }",
+        "field": "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 26}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
