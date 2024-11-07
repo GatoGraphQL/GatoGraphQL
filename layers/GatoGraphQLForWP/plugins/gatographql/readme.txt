@@ -126,6 +126,12 @@ Check out the [Gato GraphQL vs WPGraphQL comparison](https://gatographql.com/com
 
 Check out the [Replacing WPGraphQL guide](https://gatographql.com/guides/intro/replacing-wpgraphql-with-gatographql).
 
+= Can I migrate from WordPress to Laravel/Symfony/etc? =
+
+Yes you can. Even more, only the WordPress-specific packages to fetch WordPress data (posts, users, comments, etc) used by your application would need to be ported to the new framework/CMS, and nothing else.
+
+Check guide [Migrating your app from WordPress to another PHP framework or CMS](https://gatographql.com/guides/interact/migrating-gatographql-from-wordpress-to-another-php-framework-or-cms) to learn more.
+
 = What are extensions needed for? =
 
 Extensions are needed to enhance the security of public APIs, add HTTP caching to speed up the application, execute multiple queries in a single request, connect to external services, send emails, and others.
