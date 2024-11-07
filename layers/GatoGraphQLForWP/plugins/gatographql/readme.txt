@@ -94,6 +94,12 @@ Among others, you can use any of these libraries/frameworks:
 - Svelte
 - Eleventy
 
+= Can I run Gato GraphQL without WordPress? =
+
+Yes you can. Gato GraphQL can be included within any PHP-based application (not only WordPress), based on Laravel, Symfony, or any other.
+
+Check guide [Running Gato GraphQL without WordPress](https://gatographql.com/guides/interact/running-gatographql-without-wordpress) for the explanation on how to do it.
+
 = Can I fetch Gutenberg block data with Gato GraphQL? =
 
 Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks) for an example.
