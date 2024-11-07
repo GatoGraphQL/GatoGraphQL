@@ -108,9 +108,17 @@ In addition, Gato GraphQL provides fields on the GraphQL schema to retrieve mult
 
 Check out the [Gato GraphQL vs WP REST API comparison](https://gatographql.com/comparisons/gatographql-vs-wp-rest-api).
 
+= How to replace the WP REST API with Gato GraphQL? =
+
+Check out the [Replacing the WP REST API guide](https://gatographql.com/guides/intro/replacing-the-wp-rest-api-with-gatographql).
+
 = How does Gato GraphQL compare against WPGraphQL? =
 
 Check out the [Gato GraphQL vs WPGraphQL comparison](https://gatographql.com/comparisons/gatographql-vs-wpgraphql).
+
+= How to replace WPGraphQL with Gato GraphQL? =
+
+Check out the [Replacing WPGraphQL guide](https://gatographql.com/guides/intro/replacing-wpgraphql-with-gatographql).
 
 = What are extensions needed for? =
 
