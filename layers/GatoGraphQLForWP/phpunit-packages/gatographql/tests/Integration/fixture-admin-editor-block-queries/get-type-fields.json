@@ -1495,6 +1495,9 @@
               "name": "tags"
             },
             {
+              "name": "useGutenbergEditorWithCustomPostType"
+            },
+            {
               "name": "user"
             },
             {
@@ -1882,6 +1885,9 @@
             },
             {
               "name": "updateTags"
+            },
+            {
+              "name": "useGutenbergEditorWithCustomPostType"
             },
             {
               "name": "user"

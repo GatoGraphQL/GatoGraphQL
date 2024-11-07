@@ -12140,6 +12140,37 @@
               "deprecationReason": null
             },
             {
+              "name": "useGutenbergEditorWithCustomPostType",
+              "description": "Is the Gutenberg editor enabled for the custom post type?",
+              "args": [
+                {
+                  "name": "customPostType",
+                  "description": "The custom post type",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CustomPostEnumString!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "CustomPostEnumString",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "user",
               "description": "Retrieve a single user",
               "args": [
@@ -17451,6 +17482,37 @@
                       "ofType": null
                     }
                   }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "useGutenbergEditorWithCustomPostType",
+              "description": "Is the Gutenberg editor enabled for the custom post type?",
+              "args": [
+                {
+                  "name": "customPostType",
+                  "description": "The custom post type",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "CustomPostEnumString!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "CustomPostEnumString",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
                 }
               },
               "isDeprecated": false,

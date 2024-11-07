@@ -5954,6 +5954,21 @@
                             ]
                         },
                         {
+                            "name": "useGutenbergEditorWithCustomPostType",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "customPostType",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "user",
                             "extensions": {
                                 "isMutation": false,
@@ -8324,6 +8339,21 @@
                                 },
                                 {
                                     "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "useGutenbergEditorWithCustomPostType",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "customPostType",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
