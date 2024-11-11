@@ -274,10 +274,10 @@ class ExtensionManager extends AbstractPluginManager
      *
      * Please notice that it receives the $extensionProductName,
      * which is EXACTLY the same name as registered in the
-     * Gato GraphQL Shop. This name is used as an identifier, to
+     * Gato Shop. This name is used as an identifier, to
      * validate that the license key belongs to the right extension.
      *
-     * @param string $extensionProductName The EXACT name as the product is stored in the Gato GraphQL Shop (i.e. in the Marketplace Provider's system)
+     * @param string $extensionProductName The EXACT name as the product is stored in the Gato Shop (i.e. in the Marketplace Provider's system)
      */
     public function assertCommercialLicenseHasBeenActivated(
         string $extensionSlug,

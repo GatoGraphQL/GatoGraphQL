@@ -152,7 +152,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          * In either case, all properties below will be set in the response,
          * so no need to do ?? null.
          *
-         * If the license is on the Gato GraphQL Shop on Test mode,
+         * If the license is on the Gato Shop on Test mode,
          * then only enable it for the extension in DEV.
          *
          * @var bool

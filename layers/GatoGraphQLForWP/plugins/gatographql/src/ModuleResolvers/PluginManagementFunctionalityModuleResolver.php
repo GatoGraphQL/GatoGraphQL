@@ -393,10 +393,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
 
     protected function getGatoGraphQLShopName(): string
     {
-        return sprintf(
-            \__('%s Shop', 'gatographql'),
-            PluginApp::getMainPlugin()->getPluginName()
-        );
+        return \__('Gato Shop', 'gatographql');
     }
 
     protected function getActivateExtensionLicensesTitle(): string
