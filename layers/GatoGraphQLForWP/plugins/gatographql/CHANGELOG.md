@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 7.0.1 - 11/11/2024
+
+### Fixed
+
+- Renamed "Gato GraphQL Shop" to "Gato Shop"
+
 ## 7.0.0 - 08/11/2024
 
 ### Breaking changes

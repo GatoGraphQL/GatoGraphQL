@@ -171,6 +171,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 7.0.1 =
+* Renamed "Gato GraphQL Shop" to "Gato Shop"
+
 = 7.0.0 =
 * Breaking change: Bump minimum required PHP version to 7.4 (#2905)
 * Breaking change: Allow to include Gato GraphQL as the engine to power another standalone plugin (#2897)

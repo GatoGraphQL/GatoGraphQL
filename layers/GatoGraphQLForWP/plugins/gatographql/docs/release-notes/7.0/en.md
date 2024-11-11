@@ -16,6 +16,7 @@
 ## Fixed
 
 - Fetching raw attribute sources with multiple nodes in blocks ([#2909](https://github.com/GatoGraphQL/GatoGraphQL/pull/2909))
+- Renamed "Gato GraphQL Shop" to "Gato Shop" (`v7.0.1`)
 
 ## [Extensions] Improvements
 
