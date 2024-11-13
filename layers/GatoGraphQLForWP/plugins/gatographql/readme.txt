@@ -171,6 +171,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 7.0.2 =
+* Changed label in Settings form button to "Save Changes (all from this tab)"
+
 = 7.0.1 =
 * Renamed "Gato GraphQL Shop" to "Gato Shop"
 

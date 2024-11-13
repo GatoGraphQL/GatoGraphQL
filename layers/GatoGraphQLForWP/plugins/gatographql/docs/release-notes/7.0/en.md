@@ -17,6 +17,7 @@
 
 - Fetching raw attribute sources with multiple nodes in blocks ([#2909](https://github.com/GatoGraphQL/GatoGraphQL/pull/2909))
 - Renamed "Gato GraphQL Shop" to "Gato Shop" (`v7.0.1`)
+- Changed label in Settings form button to "Save Changes (all from this tab)" (`v7.0.2`)
 
 ## [Extensions] Improvements
 
