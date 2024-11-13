@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 7.0.2 - 13/11/2024
+
+### Fixed
+
+- Changed label in Settings form button to "Save Changes (all from this tab)"
+
 ## 7.0.1 - 11/11/2024
 
 ### Fixed
