@@ -672,7 +672,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                     }
                                                     if ($settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory)) {
                                                         \submit_button(
-                                                            \__('Save Changes (All)', 'gatographql')
+                                                            \__('Save Changes (all from this tab)', 'gatographql')
                                                         );
                                                     }
                                                     ?>
