@@ -799,8 +799,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param string[]|bool $allowedBlocks The list of blocks, or `true` for all of them
      * @return string[]|bool The list of blocks, or `true` for all of them
      */
-    public function allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext(array|bool $allowedBlocks, WP_Block_Editor_Context $blockEditorContext): array|bool
+    public function allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext(array|bool $allowedBlocks, ?WP_Block_Editor_Context $blockEditorContext): array|bool
     {
+        if ($blockEditorContext === null) {
+            return $allowedBlocks;
+        }
         if ($blockEditorContext->post === null) {
             return $allowedBlocks;
         }
@@ -816,8 +819,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      * @param string[]|bool $allowedBlocks The list of blocks, or `true` for all of them
      * @return string[]|bool The list of blocks, or `true` for all of them
      */
-    public function allowGutenbergBlocksForCustomPostType(array|bool $allowedBlocks, WP_Post $post): array|bool
+    public function allowGutenbergBlocksForCustomPostType(array|bool $allowedBlocks, ?WP_Post $post): array|bool
     {
+        if ($post === null) {
+            return $allowedBlocks;
+        }
+
         /**
          * Check if it is this CPT
          */

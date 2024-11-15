@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 7.0.3 - 15/11/2024
+
+### Fixed
+
+- Allow method handling hook `allowed_block_types_all` to receive `null` (#2965)
+
 ## 7.0.2 - 13/11/2024
 
 ### Fixed

@@ -171,6 +171,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 7.0.3 =
+* Allow method handling hook `allowed_block_types_all` to receive `null` (#2965)
+
 = 7.0.2 =
 * Changed label in Settings form button to "Save Changes (all from this tab)"
 
