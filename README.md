@@ -151,7 +151,7 @@ composer build-server
 
 After a few minutes, the website will be available under `https://gatographql.lndo.site`.
 
-(Of, if you have [Lando's proxy disabled](https://docs.lando.dev/core/v3/proxy.html#configuration), it will be available under `https://localhost:{randomPort}`.)
+(Or, if you have [Lando's proxy disabled](https://docs.lando.dev/core/v3/proxy.html#configuration), it will be available under `https://localhost:{randomPort}`.)
 
 To print the server information, including the port to connect to the MySql database (so you can visualize and edit the data in the DB using an external client, such as MySQLWorkbench), run:
 
