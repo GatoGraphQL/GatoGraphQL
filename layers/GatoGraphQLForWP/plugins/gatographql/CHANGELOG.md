@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Allow method handling hook `allowed_block_types_all` to receive `null`
+- Allow method handling hook `allowed_block_types_all` to receive `null` (#2965)
 
 ## 7.0.2 - 13/11/2024
 
