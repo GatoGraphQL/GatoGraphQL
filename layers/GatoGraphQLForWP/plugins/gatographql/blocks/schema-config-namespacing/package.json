@@ -1,6 +1,6 @@
 {
     "name": "schema-config-namespacing",
-    "version": "7.0.3",
+    "version": "7.1.0-dev",
     "description": "Configure the namespacing in the the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
