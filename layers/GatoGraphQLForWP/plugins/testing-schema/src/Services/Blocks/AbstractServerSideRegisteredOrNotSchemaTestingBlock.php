@@ -39,4 +39,9 @@ abstract class AbstractServerSideRegisteredOrNotSchemaTestingBlock extends Abstr
             $blockContent
         );
     }
+
+    protected function registerHighlightJSCSS(): bool
+    {
+        return false;
+    }
 }
