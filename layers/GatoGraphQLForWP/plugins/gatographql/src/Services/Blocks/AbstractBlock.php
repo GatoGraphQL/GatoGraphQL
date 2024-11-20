@@ -103,8 +103,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final public function initialize(): void
     {
-        \add_action(
-            'init',
+        /**
+         * Call it on "boot" after the WP_Query is parsed, so the single CPT
+         * is loaded, and asking for `is_singular(CPT)` works.
+         */
+        App::addAction(
+            HookNames::AFTER_BOOT_APPLICATION,
             $this->initBlock(...),
             $this->getPriority()
         );
@@ -416,30 +420,17 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         /**
          * Register client/editor CSS file
          */
-        if ($this->registerCommonStyleCSS()) {
-            /**
-             * Call it on "boot" after the WP_Query is parsed, so the single CPT
-             * is loaded, and asking for `is_singular(CPT)` works.
-             */
-            App::addAction(
-                HookNames::AFTER_BOOT_APPLICATION,
-                function() use ($dir, $blockRegistrationName, $url): void
-                {
-                    if (!$this->loadCommonStyleCSS()) {
-                        return;
-                    }
-                    $style_css = 'build/style-index.css';
-                    /** @var string */
-                    $modificationTime = filemtime("$dir/$style_css");
-                    \wp_register_style(
-                        $blockRegistrationName . '-block',
-                        $url . $style_css,
-                        array(),
-                        $modificationTime
-                    );
-                    $blockConfiguration['style'] = $blockRegistrationName . '-block';
-                }
+        if ($this->registerCommonStyleCSS() && $this->loadCommonStyleCSS()) {
+            $style_css = 'build/style-index.css';
+            /** @var string */
+            $modificationTime = filemtime("$dir/$style_css");
+            \wp_register_style(
+                $blockRegistrationName . '-block',
+                $url . $style_css,
+                array(),
+                $modificationTime
             );
+            $blockConfiguration['style'] = $blockRegistrationName . '-block';
         }
 
         /**
