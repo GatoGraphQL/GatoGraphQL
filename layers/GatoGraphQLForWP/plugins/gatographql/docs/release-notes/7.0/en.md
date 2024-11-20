@@ -20,6 +20,7 @@
 - Changed label in Settings form button to "Save Changes (all from this tab)" (`v7.0.2`)
 - Allow method handling hook `allowed_block_types_all` to receive `null` (`v7.0.3`) ([#2965](https://github.com/GatoGraphQL/GatoGraphQL/pull/2965))
 - Do not print block editor scripts in the frontend (`v7.0.4`) ([#2966](https://github.com/GatoGraphQL/GatoGraphQL/pull/2966))
+- Do not print block editor stylesheets in the frontend (`v7.0.4`) ([#2967](https://github.com/GatoGraphQL/GatoGraphQL/pull/2967))
 
 ## [Extensions] Improvements
 
