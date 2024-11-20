@@ -420,7 +420,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         /**
          * Register client/editor CSS file
          */
-        if ($this->registerCommonStyleCSS() && $this->loadCommonStyleCSS()) {
+        if ($this->registerCommonStyleCSS() && $this->mustLoadClientEditorCommonAssets()) {
             $style_css = 'build/style-index.css';
             /** @var string */
             $modificationTime = filemtime("$dir/$style_css");
@@ -477,12 +477,13 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     }
 
     /**
-     * Load the common styles if either:
+     * Indicate if to load the client/editor common styles/scripts.
+     * That's when either:
      *
      * - In the wp-admin
      * - Loading a single post in the frontend for the CPTs associated with the block
      */
-    final protected function loadCommonStyleCSS(): bool
+    final protected function mustLoadClientEditorCommonAssets(): bool
     {
         if (\is_admin()) {
             return true;
