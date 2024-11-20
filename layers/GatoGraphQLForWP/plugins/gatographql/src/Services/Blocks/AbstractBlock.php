@@ -479,7 +479,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final protected function loadCommonStyleCSS(): bool
     {
-        if (is_admin()) {
+        if (\is_admin()) {
             return true;
         }
 
@@ -492,7 +492,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             return true;
         }
 
-        return is_singular($allowedCustomPostTypes);
+        return \is_singular($allowedCustomPostTypes);
     }
 
     protected function loadClientScriptsInCorrespondingSingleCPTsOnly(): bool
