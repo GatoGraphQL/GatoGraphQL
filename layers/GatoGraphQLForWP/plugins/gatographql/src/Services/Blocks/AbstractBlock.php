@@ -103,10 +103,15 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     final public function initialize(): void
     {
         \add_action(
-            'init',
+            $this->loadScriptsInWPAdminOnly() ? 'admin_init' : 'init',
             $this->initBlock(...),
             $this->getPriority()
         );
+    }
+
+    protected function loadScriptsInWPAdminOnly(): bool
+    {
+        return true;
     }
 
     /**
