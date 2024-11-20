@@ -471,6 +471,11 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         // $this->initDocumentationScripts();
     }
 
+    protected function loadClientScriptsInCorrespondingSingleCPTsOnly(): bool
+    {
+        return true;
+    }
+
     /**
      * Allow to not register the block on the server-side
      * for testing purposes.
