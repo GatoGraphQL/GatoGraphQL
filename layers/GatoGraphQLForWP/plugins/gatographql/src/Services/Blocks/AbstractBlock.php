@@ -429,20 +429,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         }
 
         /**
-         * Register callback function for dynamic block
-         */
-        if ($this->isDynamicBlock()) {
-            /**
-             * Show only if the user has the right permission
-             */
-            if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
-                $blockConfiguration['render_callback'] = $this->renderBlock(...);
-            } else {
-                $blockConfiguration['render_callback'] = $this->getRenderingHelpers()->getUnauthorizedAccessHTMLMessage(...);
-            }
-        }
-
-        /**
          * Localize the script with custom data
          * Execute on hook "wp_print_scripts" and not now,
          * because `getLocalizedData` might call EndpointHelpers->getAdminGraphQLEndpoint(),
@@ -458,6 +444,20 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
                 );
             }
         });
+
+        /**
+         * Register callback function for dynamic block
+         */
+        if ($this->isDynamicBlock()) {
+            /**
+             * Show only if the user has the right permission
+             */
+            if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
+                $blockConfiguration['render_callback'] = $this->renderBlock(...);
+            } else {
+                $blockConfiguration['render_callback'] = $this->getRenderingHelpers()->getUnauthorizedAccessHTMLMessage(...);
+            }
+        }
 
         if ($this->registerBlockServerSide()) {
             \register_block_type($blockFullName, $blockConfiguration);
