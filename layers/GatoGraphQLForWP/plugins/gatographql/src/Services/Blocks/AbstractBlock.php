@@ -415,7 +415,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         /**
          * Register client/editor CSS file
          */
-        if ($this->registerCommonStyleCSS()) {
+        if ($this->registerCommonStyleCSS() && $this->loadCommonStyleCSS()) {
             $style_css = 'build/style-index.css';
             /** @var string */
             $modificationTime = filemtime("$dir/$style_css");
@@ -469,6 +469,30 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/254
          */
         // $this->initDocumentationScripts();
+    }
+
+    /**
+     * Load the common styles if either:
+     *
+     * - In the wp-admin
+     * - Loading a single post in the frontend for the CPTs associated with the block
+     */
+    final protected function loadCommonStyleCSS(): bool
+    {
+        if (is_admin()) {
+            return true;
+        }
+
+        if (!$this->loadClientScriptsInCorrespondingSingleCPTsOnly()) {
+            return true;
+        }
+
+        $allowedPostTypes = $this->getAllowedPostTypes();
+        if ($allowedPostTypes === []) {
+            return true;
+        }
+
+        return is_singular($allowedPostTypes);
     }
 
     protected function loadClientScriptsInCorrespondingSingleCPTsOnly(): bool
