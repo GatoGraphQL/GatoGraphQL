@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Do not print block editor scripts in the frontend (#2966)
+- Do not print block editor stylesheets in the frontend (#2967)
 
 ## 7.0.3 - 15/11/2024
 

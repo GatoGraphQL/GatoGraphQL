@@ -18,6 +18,7 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\EditorHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\RenderingHelpers;
 use GatoGraphQL\PluginUtils\Services\Helpers\StringConversion;
+use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -102,8 +103,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final public function initialize(): void
     {
-        \add_action(
-            'init',
+        /**
+         * Call it on "boot" after the WP_Query is parsed, so the single CPT
+         * is loaded, and asking for `is_singular(CPT)` works.
+         */
+        App::addAction(
+            HookNames::AFTER_BOOT_APPLICATION,
             $this->initBlock(...),
             $this->getPriority()
         );
@@ -415,7 +420,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         /**
          * Register client/editor CSS file
          */
-        if ($this->registerCommonStyleCSS()) {
+        if ($this->registerCommonStyleCSS() && $this->mustLoadClientEditorCommonAssets()) {
             $style_css = 'build/style-index.css';
             /** @var string */
             $modificationTime = filemtime("$dir/$style_css");
@@ -469,6 +474,36 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/254
          */
         // $this->initDocumentationScripts();
+    }
+
+    /**
+     * Indicate if to load the client/editor common styles/scripts.
+     * That's when either:
+     *
+     * - In the wp-admin
+     * - Loading a single post in the frontend for the CPTs associated with the block
+     */
+    final protected function mustLoadClientEditorCommonAssets(): bool
+    {
+        if (\is_admin()) {
+            return true;
+        }
+
+        if (!$this->loadClientScriptsInCorrespondingSingleCPTsOnly()) {
+            return true;
+        }
+
+        $allowedCustomPostTypes = $this->getAllowedPostTypes();
+        if ($allowedCustomPostTypes === []) {
+            return true;
+        }
+
+        return \is_singular($allowedCustomPostTypes);
+    }
+
+    protected function loadClientScriptsInCorrespondingSingleCPTsOnly(): bool
+    {
+        return true;
     }
 
     /**

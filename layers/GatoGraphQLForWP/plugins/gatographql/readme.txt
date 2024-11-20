@@ -173,6 +173,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 7.0.4 =
 * Do not print block editor scripts in the frontend (#2966)
+* Do not print block editor stylesheets in the frontend (#2967)
 
 = 7.0.3 =
 * Allow method handling hook `allowed_block_types_all` to receive `null` (#2965)
