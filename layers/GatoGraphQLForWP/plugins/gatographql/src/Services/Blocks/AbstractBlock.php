@@ -417,40 +417,38 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             $blockConfiguration['editor_style'] = $blockRegistrationName . '-block-editor';
         }
 
-        if ($this->mustLoadClientEditorCommonAssets()) {
-            /**
-             * Register client/editor CSS file
-             */
-            if ($this->registerCommonStyleCSS()) {
-                $style_css = 'build/style-index.css';
-                /** @var string */
-                $modificationTime = filemtime("$dir/$style_css");
-                \wp_register_style(
-                    $blockRegistrationName . '-block',
-                    $url . $style_css,
-                    array(),
-                    $modificationTime
-                );
-                $blockConfiguration['style'] = $blockRegistrationName . '-block';
-            }
-
-            /**
-             * Localize the script with custom data
-             * Execute on hook "wp_print_scripts" and not now,
-             * because `getLocalizedData` might call EndpointHelpers->getAdminGraphQLEndpoint(),
-             * which calls ComponentModelModuleConfiguration::mustNamespaceTypes(),
-             * which is initialized during "wp"
-             */
-            \add_action('wp_print_scripts', function () use ($scriptRegistrationName): void {
-                if ($localizedData = $this->getLocalizedData()) {
-                    \wp_localize_script(
-                        $scriptRegistrationName,
-                        $this->getBlockLocalizationName(),
-                        $localizedData
-                    );
-                }
-            });
+        /**
+         * Register client/editor CSS file
+         */
+        if ($this->registerCommonStyleCSS() && $this->mustLoadClientEditorCommonAssets()) {
+            $style_css = 'build/style-index.css';
+            /** @var string */
+            $modificationTime = filemtime("$dir/$style_css");
+            \wp_register_style(
+                $blockRegistrationName . '-block',
+                $url . $style_css,
+                array(),
+                $modificationTime
+            );
+            $blockConfiguration['style'] = $blockRegistrationName . '-block';
         }
+
+        /**
+         * Localize the script with custom data
+         * Execute on hook "wp_print_scripts" and not now,
+         * because `getLocalizedData` might call EndpointHelpers->getAdminGraphQLEndpoint(),
+         * which calls ComponentModelModuleConfiguration::mustNamespaceTypes(),
+         * which is initialized during "wp"
+         */
+        \add_action('wp_print_scripts', function () use ($scriptRegistrationName): void {
+            if ($localizedData = $this->getLocalizedData()) {
+                \wp_localize_script(
+                    $scriptRegistrationName,
+                    $this->getBlockLocalizationName(),
+                    $localizedData
+                );
+            }
+        });
 
         /**
          * Register callback function for dynamic block
