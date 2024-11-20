@@ -49,7 +49,15 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     final public function initialize(): void
     {
-        \add_action('init', $this->initScript(...));
+        \add_action(
+            $this->isAdminEditorScript() ? 'admin_init' : 'init',
+            $this->initScript(...)
+        );
+    }
+
+    protected function isAdminEditorScript(): bool
+    {
+        return true;
     }
 
     public function getEnablingModule(): ?string
