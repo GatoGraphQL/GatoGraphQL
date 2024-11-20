@@ -50,12 +50,12 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
     final public function initialize(): void
     {
         \add_action(
-            $this->isAdminEditorScript() ? 'admin_init' : 'init',
+            $this->loadScriptsInWPAdminOnly() ? 'admin_init' : 'init',
             $this->initScript(...)
         );
     }
 
-    protected function isAdminEditorScript(): bool
+    protected function loadScriptsInWPAdminOnly(): bool
     {
         return true;
     }
