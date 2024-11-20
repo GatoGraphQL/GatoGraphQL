@@ -18,6 +18,7 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\EditorHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\RenderingHelpers;
 use GatoGraphQL\PluginUtils\Services\Helpers\StringConversion;
+use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -415,17 +416,30 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         /**
          * Register client/editor CSS file
          */
-        if ($this->registerCommonStyleCSS() && $this->loadCommonStyleCSS()) {
-            $style_css = 'build/style-index.css';
-            /** @var string */
-            $modificationTime = filemtime("$dir/$style_css");
-            \wp_register_style(
-                $blockRegistrationName . '-block',
-                $url . $style_css,
-                array(),
-                $modificationTime
+        if ($this->registerCommonStyleCSS()) {
+            /**
+             * Call it on "boot" after the WP_Query is parsed, so the single CPT
+             * is loaded, and asking for `is_singular(CPT)` works.
+             */
+            App::addAction(
+                HookNames::AFTER_BOOT_APPLICATION,
+                function() use ($dir, $blockRegistrationName, $url): void
+                {
+                    if (!$this->loadCommonStyleCSS()) {
+                        return;
+                    }
+                    $style_css = 'build/style-index.css';
+                    /** @var string */
+                    $modificationTime = filemtime("$dir/$style_css");
+                    \wp_register_style(
+                        $blockRegistrationName . '-block',
+                        $url . $style_css,
+                        array(),
+                        $modificationTime
+                    );
+                    $blockConfiguration['style'] = $blockRegistrationName . '-block';
+                }
             );
-            $blockConfiguration['style'] = $blockRegistrationName . '-block';
         }
 
         /**
