@@ -57,7 +57,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 
     protected function loadScriptsInWPAdminOnly(): bool
     {
-        return true;
+        return false;
     }
 
     public function getEnablingModule(): ?string
