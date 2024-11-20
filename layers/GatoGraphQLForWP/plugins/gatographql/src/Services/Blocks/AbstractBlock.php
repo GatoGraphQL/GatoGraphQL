@@ -487,12 +487,12 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             return true;
         }
 
-        $allowedPostTypes = $this->getAllowedPostTypes();
-        if ($allowedPostTypes === []) {
+        $allowedCustomPostTypes = $this->getAllowedPostTypes();
+        if ($allowedCustomPostTypes === []) {
             return true;
         }
 
-        return is_singular($allowedPostTypes);
+        return is_singular($allowedCustomPostTypes);
     }
 
     protected function loadClientScriptsInCorrespondingSingleCPTsOnly(): bool
