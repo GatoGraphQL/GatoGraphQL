@@ -466,7 +466,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
-                
 
                 $previousPluginVersions = $storedPluginVersions;
 
