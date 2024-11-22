@@ -18,6 +18,7 @@ use PoP\Root\Helpers\ScopingHelpers;
 use PoP\Root\Module\ModuleInterface;
 
 use function get_option;
+use function flush_rewrite_rules;
 
 abstract class AbstractPlugin implements PluginInterface
 {
@@ -321,7 +322,7 @@ abstract class AbstractPlugin implements PluginInterface
             }
 
             // Clear the permalinks to remove the CPT's rules from the database
-            \flush_rewrite_rules();
+            flush_rewrite_rules();
         }
     }
 
