@@ -463,24 +463,25 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 }
 
                 // If there were no changes, nothing to do
-                if (
-                    !$isMainPluginJustActivated
-                    && !$isMainPluginJustUpdated
-                    && $justActivatedExtensions === []
-                    && $justUpdatedExtensions === []
-                    && $justActivatedCommercialLicenseExtensions === []
-                ) {
+                $hasActivatedOrUpdatedAnyPlugin = $isMainPluginJustActivated
+                    || $isMainPluginJustUpdated
+                    || $justActivatedExtensions !== []
+                    || $justUpdatedExtensions !== [];
+                if (!($hasActivatedOrUpdatedAnyPlugin || $justActivatedCommercialLicenseExtensions !== [])) {
                     return;
                 }
 
                 /**
-                 * These two pieces of logic are mutually exclusive. Either:
+                 * Notice that these two pieces of logic are mutually exclusive,
+                 * (because when activating a license, we are not installing/activating
+                 * a plugin):
                  *
                  * 1. Any commercial license has been activated
                  * 2. Any of the others (plugin/extension installed/enabled)
-                 *
-                 * Hence we ask for one of them now, and handle all the
-                 * other logic later on, independently of each other.
+                 * 
+                 * However, just to keep the possibilities open, still check
+                 * once again, below, if any plugin or activated/updated
+                 * (it will not happen!)
                  */
                 if ($justActivatedCommercialLicenseExtensions !== []) {
                     /**
@@ -496,6 +497,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                      * extension can be properly loaded
                      */
                     flush_rewrite_rules();
+                }
+
+                // If there were no changes, nothing to do
+                if (!$hasActivatedOrUpdatedAnyPlugin) {
                     return;
                 }
 
