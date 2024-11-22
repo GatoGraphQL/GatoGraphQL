@@ -329,7 +329,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
          */
         $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
         $storedPluginVersions = get_option($option, []);
-        $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
+        $registeredExtensionBaseNameInstances = $extensionManager->getExtensions();
         foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
             if (!in_array($extensionInstance->getPluginSlug(), $justActivatedCommercialExtensionSlugs)) {
                 continue;
