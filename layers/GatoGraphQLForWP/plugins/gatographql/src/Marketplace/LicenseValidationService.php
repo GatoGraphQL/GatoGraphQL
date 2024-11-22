@@ -7,18 +7,20 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\DBFlags;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginOptions;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
+
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\BasicServiceTrait;
-
 use function add_settings_error;
 use function get_option;
 use function home_url;
@@ -308,6 +310,26 @@ class LicenseValidationService implements LicenseValidationServiceInterface
 
         // Because extensions will be activated/deactivated, flush the service container
         $this->getContainerManager()->flushContainer(true, true);
+
+        /**
+         * Actually...
+         *
+         * Calling `flush_rewrite_rules` when activating the extension's
+         * license (in options.php) doesn't work, the CPTs do not load
+         * properly afterwards. This must be invoked right after. That's
+         * why we use a DBFlag to indicate this state.
+         */
+        $justActivatedCommercialExtensionSlugs = array_keys($commercialExtensionActivatedLicenseEntries);
+        $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
+        $storedPluginVersions = get_option($option, []);
+        $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
+        foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
+            if (!in_array($extensionInstance->getPluginSlug(), $justActivatedCommercialExtensionSlugs)) {
+                continue;
+            }
+            $storedPluginVersions[$extensionBaseName] = DBFlags::JUST_ACTIVATED_COMMERCIAL_EXTENSION_LICENSE;
+        }
+        update_option($option, $storedPluginVersions);
     }
 
     /**
