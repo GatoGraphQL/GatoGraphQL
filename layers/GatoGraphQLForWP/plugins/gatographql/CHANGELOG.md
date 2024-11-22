@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 7.0.5 - 22/11/2024
+
+### Fixed
+
+- When an extension is activated, execute `flush_rewrite_rules` only at the end (or CPTs are not loaded properly) (#2968)
+
 ## 7.0.4 - 20/11/2024
 
 ### Fixed
