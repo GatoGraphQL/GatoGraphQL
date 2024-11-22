@@ -450,6 +450,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     if (!isset($storedPluginVersions[$extensionBaseName])) {
                         $justActivatedExtensions[$extensionBaseName] = $extensionInstance;
                     } elseif ($storedPluginVersions[$extensionBaseName] === DBFlags::JUST_ACTIVATED_COMMERCIAL_EXTENSION_LICENSE) {
+                        /**
+                         * Calling `flush_rewrite_rules` when activating the extension's
+                         * license (in options.php) doesn't work, the CPTs do not load
+                         * properly afterwards. This must be invoked right after. That's
+                         * why we use a DBFlag to indicate this state.
+                         */
                         $justActivatedAnyCommercialExtensionLicense = true;
                     } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersionWithCommitHash()) {
                         $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
