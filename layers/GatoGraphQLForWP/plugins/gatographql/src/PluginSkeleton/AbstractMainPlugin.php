@@ -444,7 +444,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * or its commercial license has just been activated
                  */
                 $justActivatedExtensions = [];
-                $justActivatedAnyCommercialExtensionLicense = false;
+                $justActivatedCommercialLicenseExtensions = [];
                 $justUpdatedExtensions = [];
                 foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
                     if (!isset($storedPluginVersions[$extensionBaseName])) {
@@ -456,7 +456,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                          * properly afterwards. This must be invoked right after. That's
                          * why we use a DBFlag to indicate this state.
                          */
-                        $justActivatedAnyCommercialExtensionLicense = true;
+                        $justActivatedCommercialLicenseExtensions[$extensionBaseName] = $extensionInstance;
                     } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersionWithCommitHash()) {
                         $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
                     }
@@ -468,7 +468,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     && !$isMainPluginJustUpdated
                     && $justActivatedExtensions === []
                     && $justUpdatedExtensions === []
-                    && !$justActivatedAnyCommercialExtensionLicense
+                    && $justActivatedCommercialLicenseExtensions === []
                 ) {
                     return;
                 }
@@ -482,11 +482,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * Hence we ask for one of them now, and handle all the
                  * other logic later on, independently of each other.
                  */
-                if ($justActivatedAnyCommercialExtensionLicense) {
+                if ($justActivatedCommercialLicenseExtensions !== []) {
                     /**
                      * Restore the extension version in the DB
                      */
-                    foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
+                    foreach ($justActivatedCommercialLicenseExtensions as $extensionBaseName => $extensionInstance) {
                         $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
                     }
                     update_option($option, $storedPluginVersions);
