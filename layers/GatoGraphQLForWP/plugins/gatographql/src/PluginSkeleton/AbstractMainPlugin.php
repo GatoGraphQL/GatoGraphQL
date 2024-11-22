@@ -437,9 +437,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
                 $isMainPluginJustUpdated = !$isMainPluginJustActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->getPluginVersionWithCommitHash();
 
-                // Check if any extension has been activated or updated
+                /**
+                 * Check if any extension has been activated or updated,
+                 * or its commercial license has just been activated
+                 */
                 $justActivatedExtensions = [];
                 $justUpdatedExtensions = [];
+                $justActivatedCommercialExtensionLicenses = [];
                 foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
                     if (!isset($storedPluginVersions[$extensionBaseName])) {
                         $justActivatedExtensions[$extensionBaseName] = $extensionInstance;
