@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
+use function did_action;
 use function flush_rewrite_rules;
 
 class ContainerManager implements ContainerManagerInterface
@@ -27,7 +28,17 @@ class ContainerManager implements ContainerManagerInterface
         ?bool $regenerateContainer,
     ): void {
         if ($flushRewriteRules) {
-            flush_rewrite_rules();
+            /**
+             * Watch out: `flush_rewrite_rules` must be called at the end,
+             * after the new CPTs are registered (eg: when an extension is
+             * activated). Otherwise, loading the single post for those CPTs
+             * doesn't work.
+             */
+            if (did_action('init') > 0) {
+                flush_rewrite_rules();
+            } else {
+                add_action('init', flush_rewrite_rules(...), PHP_INT_MAX);
+            }
         }
 
         /**
