@@ -478,7 +478,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  *
                  * 1. Any commercial license has been activated
                  * 2. Any of the others (plugin/extension installed/enabled)
-                 * 
+                 *
                  * However, just to keep the possibilities open, still check
                  * once again, below, if any plugin or activated/updated
                  * (it will not happen!)
