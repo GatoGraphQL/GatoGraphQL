@@ -473,14 +473,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
 
-                $previousPluginVersions = $storedPluginVersions;
-
-                // Recalculate the updated entry and update on the DB
-                $storedPluginVersions[$this->pluginBaseName] = $this->getPluginVersionWithCommitHash();
-                foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
-                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
-                }
-
                 /**
                  * These two pieces of logic are mutually exclusive. Either:
                  *
@@ -488,17 +480,31 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * 2. Any of the others (plugin/extension installed/enabled)
                  *
                  * Hence we ask for one of them now, and handle all the
-                 * other logic independently of each other.
+                 * other logic later on, independently of each other.
                  */
                 if ($justActivatedAnyCommercialExtensionLicense) {
                     /**
-                     * Restore the extension version in the DB,
-                     * and purge the rewrite rules, so that CPTs from that
+                     * Restore the extension version in the DB
+                     */
+                    foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
+                        $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
+                    }
+                    update_option($option, $storedPluginVersions);
+
+                    /**
+                     * Purge the rewrite rules, so that CPTs from that
                      * extension can be properly loaded
                      */
-                    update_option($option, $storedPluginVersions);
                     flush_rewrite_rules();
                     return;
+                }
+
+                $previousPluginVersions = $storedPluginVersions;
+
+                // Recalculate the updated entry and update on the DB
+                $storedPluginVersions[$this->pluginBaseName] = $this->getPluginVersionWithCommitHash();
+                foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
+                    $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
                 }
 
                 // Regenerate the timestamp, to generate the service container
