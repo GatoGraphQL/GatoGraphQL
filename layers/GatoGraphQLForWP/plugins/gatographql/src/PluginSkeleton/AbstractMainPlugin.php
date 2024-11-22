@@ -443,13 +443,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * or its commercial license has just been activated
                  */
                 $justActivatedExtensions = [];
-                $justActivatedCommercialExtensionLicenses = [];
+                $justActivatedAnyCommercialExtensionLicense = false;
                 $justUpdatedExtensions = [];
                 foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
                     if (!isset($storedPluginVersions[$extensionBaseName])) {
                         $justActivatedExtensions[$extensionBaseName] = $extensionInstance;
                     } elseif ($storedPluginVersions[$extensionBaseName] === DBFlags::JUST_ACTIVATED_COMMERCIAL_EXTENSION_LICENSE) {
-                        $justActivatedCommercialExtensionLicenses[$extensionBaseName] = $extensionInstance;
+                        $justActivatedAnyCommercialExtensionLicense = true;
                     } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersionWithCommitHash()) {
                         $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
                     }
@@ -460,8 +460,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     !$isMainPluginJustActivated
                     && !$isMainPluginJustUpdated
                     && $justActivatedExtensions === []
-                    && $justActivatedCommercialExtensionLicenses === []
                     && $justUpdatedExtensions === []
+                    && !$justActivatedAnyCommercialExtensionLicense
                 ) {
                     return;
                 }
