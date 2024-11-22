@@ -99,6 +99,9 @@ class LicenseValidationService implements LicenseValidationServiceInterface
             return;
         }
 
+        // Keep a record of the extensions that have just been activated
+        $justActivatedCommercialExtensionSlugs = [];
+
         // Keep the original values, to only flush the container if these have changed
         $originalCommercialExtensionActivatedLicenseEntries = $commercialExtensionActivatedLicenseEntries;
 
@@ -286,6 +289,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
                 $commercialExtensionActivatedLicenseObjectProperties->activationUsage,
                 $commercialExtensionActivatedLicenseObjectProperties->activationLimit,
             );
+            $justActivatedCommercialExtensionSlugs[] = $extensionSlug;
             if ($formSettingName !== null) {
                 $this->showAdminMessagesOnLicenseOperationSuccess(
                     $extensionSlug,
@@ -311,6 +315,10 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         // Because extensions will be activated/deactivated, flush the service container
         $this->getContainerManager()->flushContainer(true, true);
 
+        if ($justActivatedCommercialExtensionSlugs === []) {
+            return;
+        }
+
         /**
          * Actually...
          *
@@ -319,7 +327,6 @@ class LicenseValidationService implements LicenseValidationServiceInterface
          * properly afterwards. This must be invoked right after. That's
          * why we use a DBFlag to indicate this state.
          */
-        $justActivatedCommercialExtensionSlugs = array_keys($commercialExtensionActivatedLicenseEntries);
         $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
         $storedPluginVersions = get_option($option, []);
         $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
