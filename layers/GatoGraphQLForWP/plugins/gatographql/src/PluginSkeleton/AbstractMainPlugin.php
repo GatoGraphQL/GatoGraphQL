@@ -14,6 +14,7 @@ use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFacto
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\DBFlags;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
@@ -442,11 +443,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * or its commercial license has just been activated
                  */
                 $justActivatedExtensions = [];
-                $justUpdatedExtensions = [];
                 $justActivatedCommercialExtensionLicenses = [];
+                $justUpdatedExtensions = [];
                 foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
                     if (!isset($storedPluginVersions[$extensionBaseName])) {
                         $justActivatedExtensions[$extensionBaseName] = $extensionInstance;
+                    } elseif ($storedPluginVersions[$extensionBaseName] === DBFlags::JUST_ACTIVATED_COMMERCIAL_EXTENSION_LICENSE) {
+                        $justActivatedCommercialExtensionLicenses[$extensionBaseName] = $extensionInstance;
                     } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersionWithCommitHash()) {
                         $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
                     }
