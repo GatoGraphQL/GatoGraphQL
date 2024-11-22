@@ -40,6 +40,7 @@ use WP_Upgrader;
 use function __;
 use function add_action;
 use function do_action;
+use function flush_rewrite_rules;
 use function get_called_class;
 use function get_option;
 use function is_admin;
@@ -465,6 +466,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
+                
 
                 $previousPluginVersions = $storedPluginVersions;
 
@@ -472,6 +474,26 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $storedPluginVersions[$this->pluginBaseName] = $this->getPluginVersionWithCommitHash();
                 foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
                     $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
+                }
+
+                /**
+                 * These two pieces of logic are mutually exclusive. Either:
+                 *
+                 * 1. Any commercial license has been activated
+                 * 2. Any of the others (plugin/extension installed/enabled)
+                 *
+                 * Hence we ask for one of them now, and handle all the
+                 * other logic independently of each other.
+                 */
+                if ($justActivatedAnyCommercialExtensionLicense) {
+                    /**
+                     * Restore the extension version in the DB,
+                     * and purge the rewrite rules, so that CPTs from that
+                     * extension can be properly loaded
+                     */
+                    update_option($option, $storedPluginVersions);
+                    flush_rewrite_rules();
+                    return;
                 }
 
                 // Regenerate the timestamp, to generate the service container
