@@ -18,9 +18,9 @@ use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginOptions;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
-
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\BasicServiceTrait;
+
 use function add_settings_error;
 use function get_option;
 use function home_url;
