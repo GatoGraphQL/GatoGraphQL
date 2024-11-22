@@ -484,9 +484,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * (it will not happen!)
                  */
                 if ($justActivatedCommercialLicenseExtensions !== []) {
-                    /**
-                     * Restore the extension version in the DB
-                     */
+                    // Restore the extension version in the DB
                     foreach ($justActivatedCommercialLicenseExtensions as $extensionBaseName => $extensionInstance) {
                         $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
                     }
