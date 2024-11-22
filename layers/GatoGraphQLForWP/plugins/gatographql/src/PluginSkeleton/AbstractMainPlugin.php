@@ -460,6 +460,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     !$isMainPluginJustActivated
                     && !$isMainPluginJustUpdated
                     && $justActivatedExtensions === []
+                    && $justActivatedCommercialExtensionLicenses === []
                     && $justUpdatedExtensions === []
                 ) {
                     return;
