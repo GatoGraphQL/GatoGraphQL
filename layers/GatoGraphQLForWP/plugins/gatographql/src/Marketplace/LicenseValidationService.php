@@ -306,7 +306,13 @@ class LicenseValidationService implements LicenseValidationServiceInterface
             $commercialExtensionActivatedLicenseEntries
         );
 
-        // Because extensions will be activated/deactivated, flush the service container
+        /**
+         * Because extensions will be activated/deactivated, flush the service container.
+         *
+         * Watch out: `flush_rewrite_rules` must be called at the end,
+         * after the new CPTs are registered. Otherwise, loading the
+         * single post for those CPTs doesn't work.
+         */
         $this->getContainerManager()->flushContainer(true, true);
     }
 
