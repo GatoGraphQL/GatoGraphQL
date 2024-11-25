@@ -429,10 +429,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
 
-                // Check if there's a flag to flush the rewrite rules
+                /**
+                 * Check if there's a flag to flush the rewrite rules
+                 *
+                 * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Marketplace/LicenseValidationService.php
+                 */
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                $licenseCheckTimestamp = $userSettingsManager->getLicenseActivationTimestamp();
-                if ($licenseCheckTimestamp !== null) {
+                if ($userSettingsManager->getLicenseActivationTimestamp() !== null) {
+                    $userSettingsManager->removeLicenseActivationTimestamp();
                     $this->enqueueFlushRewriteRules();
                 }
 

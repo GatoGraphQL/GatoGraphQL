@@ -185,6 +185,17 @@ class UserSettingsManager implements UserSettingsManagerInterface
         $this->storeTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
     }
 
+    /**
+     * Remove the flag to indicate the latest activation
+     * of any commercial license
+     */
+    public function removeLicenseActivationTimestamp(): void
+    {
+        $this->getTimestampSettingsManager()->removeTimestamps([
+            self::TIMESTAMP_LICENSE_ACTIVATION,
+        ]);
+    }
+
     public function hasSetting(string $module, string $option): bool
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();

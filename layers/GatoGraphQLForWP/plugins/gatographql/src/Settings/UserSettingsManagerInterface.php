@@ -62,6 +62,12 @@ interface UserSettingsManagerInterface
      */
     public function storeLicenseActivationTimestamp(): void;
 
+    /**
+     * Remove the flag to indicate the latest activation
+     * of any commercial license
+     */
+    public function removeLicenseActivationTimestamp(): void;
+
     public function hasSetting(string $module, string $option): bool;
     public function getSetting(string $module, string $option): mixed;
     public function setSetting(string $module, string $option, mixed $value): void;
