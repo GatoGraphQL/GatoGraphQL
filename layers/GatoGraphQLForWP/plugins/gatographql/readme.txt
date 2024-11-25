@@ -171,6 +171,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 7.0.5 =
+* When an extension is activated, execute `flush_rewrite_rules` only at the end (or CPTs are not loaded properly) (#2970)
+
 = 7.0.4 =
 * Do not print block editor scripts in the frontend (#2966)
 * Do not print block editor stylesheets in the frontend (#2967)

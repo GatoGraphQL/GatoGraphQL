@@ -18,6 +18,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     private const TIMESTAMP_CONTAINER = 'container';
     private const TIMESTAMP_OPERATIONAL = 'operational';
     private const TIMESTAMP_LICENSE_CHECK = 'license-check';
+    private const TIMESTAMP_LICENSE_ACTIVATION = 'license-activation';
 
     /**
      * Cache the values in memory
@@ -138,7 +139,12 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getLicenseCheckTimestamp(): ?int
     {
-        $timestamp = $this->getTimestampSettingsManager()->getTimestamp(self::TIMESTAMP_LICENSE_CHECK);
+        return $this->getTimestamp(self::TIMESTAMP_LICENSE_CHECK);
+    }
+
+    protected function getTimestamp(string $timestampName): ?int
+    {
+        $timestamp = $this->getTimestampSettingsManager()->getTimestamp($timestampName);
         if ($timestamp === null) {
             return null;
         }
@@ -151,10 +157,43 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeLicenseCheckTimestamp(): void
     {
+        $this->storeTimestamp(self::TIMESTAMP_LICENSE_CHECK);
+    }
+
+    protected function storeTimestamp(string $timestampName): void
+    {
         $this->getTimestampSettingsManager()->storeTimestamp(
-            self::TIMESTAMP_LICENSE_CHECK,
+            $timestampName,
             (string) time()
         );
+    }
+
+    /**
+     * Timestamp of the latest activation of any commercial license
+     */
+    public function getLicenseActivationTimestamp(): ?int
+    {
+        return $this->getTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
+    }
+
+    /**
+     * Store the current time to indicate the latest activation
+     * of any commercial license
+     */
+    public function storeLicenseActivationTimestamp(): void
+    {
+        $this->storeTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
+    }
+
+    /**
+     * Remove the flag to indicate the latest activation
+     * of any commercial license
+     */
+    public function removeLicenseActivationTimestamp(): void
+    {
+        $this->getTimestampSettingsManager()->removeTimestamps([
+            self::TIMESTAMP_LICENSE_ACTIVATION,
+        ]);
     }
 
     public function hasSetting(string $module, string $option): bool
