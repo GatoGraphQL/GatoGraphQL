@@ -18,6 +18,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     private const TIMESTAMP_CONTAINER = 'container';
     private const TIMESTAMP_OPERATIONAL = 'operational';
     private const TIMESTAMP_LICENSE_CHECK = 'license-check';
+    private const TIMESTAMP_LICENSE_ACTIVATION = 'license-activation';
 
     /**
      * Cache the values in memory
@@ -153,6 +154,30 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $this->getTimestampSettingsManager()->storeTimestamp(
             self::TIMESTAMP_LICENSE_CHECK,
+            (string) time()
+        );
+    }
+
+    /**
+     * Timestamp of the latest activation of any commercial license
+     */
+    public function getLicenseActivationTimestamp(): ?int
+    {
+        $timestamp = $this->getTimestampSettingsManager()->getTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
+        if ($timestamp === null) {
+            return null;
+        }
+        return (int) $timestamp;
+    }
+
+    /**
+     * Store the current time to indicate the latest activation
+     * of any commercial license
+     */
+    public function storeLicenseActivationTimestamp(): void
+    {
+        $this->getTimestampSettingsManager()->storeTimestamp(
+            self::TIMESTAMP_LICENSE_ACTIVATION,
             (string) time()
         );
     }
