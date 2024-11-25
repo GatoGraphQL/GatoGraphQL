@@ -428,6 +428,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
+
+                // Check if there's a flag to flush the rewrite rules
+                $userSettingsManager = UserSettingsManagerFacade::getInstance();
+                $licenseCheckTimestamp = $userSettingsManager->getLicenseActivationTimestamp();
+                if ($licenseCheckTimestamp !== null) {
+                    $this->enqueueFlushRewriteRules();
+                }
+
                 $optionNamespacer = OptionNamespacerFacade::getInstance();
                 $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
                 $storedPluginVersions = get_option($option, []);
@@ -519,21 +527,26 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     PluginLifecyclePriorities::AFTER_EVERYTHING
                 );
 
-                /**
-                 * Execute at the end of hook "init", because
-                 * `AbstractCustomPostType` initializes the
-                 * custom post types on this hook, and the CPT
-                 * also adds rewrites that must be flushed.
-                 *
-                 * Watch out! Can't do `flush_rewrite_rules(...)`,
-                 * because then Rector throws Exception:
-                 *
-                 *   Call to undefined method PhpParser\PrettyPrinter\Standard::pPHPStan_Node_FunctionCallableNode()". On line: 499
-                 */
-                add_action('init', 'flush_rewrite_rules', PHP_INT_MAX);
+                $this->enqueueFlushRewriteRules();
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
+    }
+
+    protected function enqueueFlushRewriteRules(): void
+    {
+        /**
+         * Execute at the end of hook "init", because
+         * `AbstractCustomPostType` initializes the
+         * custom post types on this hook, and the CPT
+         * also adds rewrites that must be flushed.
+         *
+         * Watch out! Can't do `flush_rewrite_rules(...)`,
+         * because then Rector throws Exception:
+         *
+         *   Call to undefined method PhpParser\PrettyPrinter\Standard::pPHPStan_Node_FunctionCallableNode()". On line: 499
+         */
+        add_action('init', 'flush_rewrite_rules', PHP_INT_MAX);
     }
 
     /**
