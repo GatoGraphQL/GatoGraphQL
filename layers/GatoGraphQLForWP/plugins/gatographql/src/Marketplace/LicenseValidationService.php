@@ -7,14 +7,12 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\DBFlags;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginOptions;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
@@ -325,18 +323,9 @@ class LicenseValidationService implements LicenseValidationServiceInterface
          * Calling `flush_rewrite_rules` when activating the extension's
          * license (in options.php) doesn't work, the CPTs do not load
          * properly afterwards. This must be invoked right after. That's
-         * why we use a DBFlag to indicate this state.
+         * why we use a timestamp as a flag to indicate this state.
          */
-        $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
-        $storedPluginVersions = get_option($option, []);
-        $registeredExtensionBaseNameInstances = $extensionManager->getExtensions();
-        foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
-            if (!in_array($extensionInstance->getPluginSlug(), $justActivatedCommercialExtensionSlugs)) {
-                continue;
-            }
-            $storedPluginVersions[$extensionBaseName] = DBFlags::JUST_ACTIVATED_COMMERCIAL_EXTENSION_LICENSE;
-        }
-        update_option($option, $storedPluginVersions);
+        $this->getUserSettingsManager()->storeLicenseActivationTimestamp();
     }
 
     /**
