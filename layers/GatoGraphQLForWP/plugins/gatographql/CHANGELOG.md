@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- When an extension is activated, execute `flush_rewrite_rules` only at the end (or CPTs are not loaded properly) (#2968)
+- When an extension is activated, execute `flush_rewrite_rules` only at the end (or CPTs are not loaded properly) (#2970)
 
 ## 7.0.4 - 20/11/2024
 
