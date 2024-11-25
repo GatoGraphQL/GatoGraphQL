@@ -14,7 +14,6 @@ use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFacto
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\DBFlags;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
@@ -40,7 +39,6 @@ use WP_Upgrader;
 use function __;
 use function add_action;
 use function do_action;
-use function flush_rewrite_rules;
 use function get_called_class;
 use function get_option;
 use function is_admin;
@@ -439,66 +437,24 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
                 $isMainPluginJustUpdated = !$isMainPluginJustActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->getPluginVersionWithCommitHash();
 
-                /**
-                 * Check if any extension has been activated or updated,
-                 * or its commercial license has just been activated
-                 */
+                // Check if any extension has been activated or updated
                 $justActivatedExtensions = [];
-                $justActivatedCommercialLicenseExtensions = [];
                 $justUpdatedExtensions = [];
                 foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
                     if (!isset($storedPluginVersions[$extensionBaseName])) {
                         $justActivatedExtensions[$extensionBaseName] = $extensionInstance;
-                    } elseif ($storedPluginVersions[$extensionBaseName] === DBFlags::JUST_ACTIVATED_COMMERCIAL_EXTENSION_LICENSE) {
-                        /**
-                         * Calling `flush_rewrite_rules` when activating the extension's
-                         * license (in options.php) doesn't work, the CPTs do not load
-                         * properly afterwards. This must be invoked right after. That's
-                         * why we use a DBFlag to indicate this state.
-                         */
-                        $justActivatedCommercialLicenseExtensions[$extensionBaseName] = $extensionInstance;
                     } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersionWithCommitHash()) {
                         $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
                     }
                 }
 
                 // If there were no changes, nothing to do
-                $hasActivatedOrUpdatedAnyPlugin = $isMainPluginJustActivated
-                    || $isMainPluginJustUpdated
-                    || $justActivatedExtensions !== []
-                    || $justUpdatedExtensions !== [];
-                if (!($hasActivatedOrUpdatedAnyPlugin || $justActivatedCommercialLicenseExtensions !== [])) {
-                    return;
-                }
-
-                /**
-                 * Notice that these two pieces of logic are mutually exclusive,
-                 * (because when activating a license, we are not installing/activating
-                 * a plugin):
-                 *
-                 * 1. Any commercial license has been activated
-                 * 2. Any of the others (plugin/extension installed/enabled)
-                 *
-                 * However, just to keep the possibilities open, still check
-                 * once again, below, if any plugin or activated/updated
-                 * (it will not happen!)
-                 */
-                if ($justActivatedCommercialLicenseExtensions !== []) {
-                    // Restore the extension version in the DB
-                    foreach ($justActivatedCommercialLicenseExtensions as $extensionBaseName => $extensionInstance) {
-                        $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
-                    }
-                    update_option($option, $storedPluginVersions);
-
-                    /**
-                     * Purge the rewrite rules, so that CPTs from that
-                     * extension can be properly loaded
-                     */
-                    flush_rewrite_rules();
-                }
-
-                // If there were no changes, nothing to do
-                if (!$hasActivatedOrUpdatedAnyPlugin) {
+                if (
+                    !$isMainPluginJustActivated
+                    && !$isMainPluginJustUpdated
+                    && $justActivatedExtensions === []
+                    && $justUpdatedExtensions === []
+                ) {
                     return;
                 }
 
