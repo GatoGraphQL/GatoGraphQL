@@ -430,9 +430,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 }
 
                 /**
-                 * Check if there's a flag to flush the rewrite rules
+                 * Check if there's a flag to flush the rewrite rules.
                  *
-                 * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Marketplace/LicenseValidationService.php
+                 * Calling `flush_rewrite_rules` when activating the extension's
+                 * license (in options.php) doesn't work, the CPTs do not load
+                 * properly afterwards. This must be invoked right after. That's
+                 * why we use a timestamp as a flag to indicate this state.
+                 *
+                 * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Marketplace/LicenseValidationService.php `activateDeactivateValidateGatoGraphQLCommercialExtensions`
                  */
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
                 if ($userSettingsManager->getLicenseActivationTimestamp() !== null) {
