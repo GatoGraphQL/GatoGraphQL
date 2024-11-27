@@ -142,7 +142,7 @@ Yes it does. If you have purchased any Gato GraphQL product and found out that i
 
 = Can I try out Gato GraphQL + all extensions? =
 
-Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL + all extensions, for free, for 7 days.
+Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL + all extensions, for free.
 
 = Is the plugin open source? =
 
