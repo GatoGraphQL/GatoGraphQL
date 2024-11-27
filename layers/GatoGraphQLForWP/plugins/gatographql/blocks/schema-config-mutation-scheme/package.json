@@ -1,6 +1,6 @@
 {
     "name": "schema-config-mutation-scheme",
-    "version": "7.0.7",
+    "version": "7.1.0-dev",
     "description": "Configure the mutation scheme in the the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
