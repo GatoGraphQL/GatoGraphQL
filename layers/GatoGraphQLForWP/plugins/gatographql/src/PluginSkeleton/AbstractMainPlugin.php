@@ -390,7 +390,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
 
-        add_filter('plugin_action_links_gatographql/gatographql.php', $this->getPluginActionLinks(...), 10, 1);
+        add_filter('plugin_action_links_' . PluginApp::getMainPlugin()->getPluginBaseName(), $this->getPluginActionLinks(...), 10, 1);
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
