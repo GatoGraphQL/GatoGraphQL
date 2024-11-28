@@ -278,7 +278,7 @@ class Plugin extends AbstractMainPlugin
     public function getPluginActionLinks(array $actions): array
     {
         if (!PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()) {
-            return $actions;
+            return parent::getPluginActionLinks($actions);
         }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
