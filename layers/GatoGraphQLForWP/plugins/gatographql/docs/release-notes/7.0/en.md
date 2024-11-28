@@ -22,6 +22,7 @@
 - Do not print block editor scripts in the frontend (`v7.0.4`) ([#2966](https://github.com/GatoGraphQL/GatoGraphQL/pull/2966))
 - Do not print block editor stylesheets in the frontend (`v7.0.4`) ([#2967](https://github.com/GatoGraphQL/GatoGraphQL/pull/2967))
 - When an extension is activated, execute `flush_rewrite_rules` only at the end (or CPTs are not loaded properly) (`v7.0.5`) ([#2970](https://github.com/GatoGraphQL/GatoGraphQL/pull/2970))
+- Don't hardcode Gato GraphQL's plugin base name in `plugin_action_links` hook to allow standalone plugins to use it (`v7.0.8`) ([#2971](https://github.com/GatoGraphQL/GatoGraphQL/pull/2971))
 
 ## [Extensions] Improvements
 

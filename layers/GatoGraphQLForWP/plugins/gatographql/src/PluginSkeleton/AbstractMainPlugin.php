@@ -210,25 +210,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * Override for each specific Plugin.
+     *
      * @param string[] $actions
      * @return string[]
      */
     public function getPluginActionLinks(array $actions): array
     {
-        if (!PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()) {
-            return $actions;
-        }
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return [
-            sprintf(
-                '<a href="%s" target="_blank">%s%s</a>',
-                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
-                __('Go PRO', 'gatographql'),
-                HTMLCodes::OPEN_IN_NEW_WINDOW,
-            ),
-            ...$actions,
-        ];
+        return $actions;
     }
 
     /**
@@ -390,7 +379,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
 
-        add_filter('plugin_action_links_gatographql/gatographql.php', $this->getPluginActionLinks(...), 10, 1);
+        add_filter('plugin_action_links_' . PluginApp::getMainPlugin()->getPluginBaseName(), $this->getPluginActionLinks(...), 10, 1);
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
