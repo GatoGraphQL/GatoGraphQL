@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 7.0.8 - 28/11/2024
+
+### Fixed
+
+- Don't hardcode Gato GraphQL's plugin base name in `plugin_action_links` hook to allow standalone plugins to use it (#2971)
+
 ## 7.0.5 - 25/11/2024
 
 ### Fixed
