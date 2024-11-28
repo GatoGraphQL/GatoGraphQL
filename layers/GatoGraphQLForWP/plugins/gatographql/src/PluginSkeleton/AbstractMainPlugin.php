@@ -210,25 +210,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * Override for each specific Plugin.
+     *
      * @param string[] $actions
      * @return string[]
      */
     public function getPluginActionLinks(array $actions): array
     {
-        if (!PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()) {
-            return $actions;
-        }
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return [
-            sprintf(
-                '<a href="%s" target="_blank">%s%s</a>',
-                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
-                __('Go PRO', 'gatographql'),
-                HTMLCodes::OPEN_IN_NEW_WINDOW,
-            ),
-            ...$actions,
-        ];
+        return $actions;
     }
 
     /**
