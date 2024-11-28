@@ -19,8 +19,8 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function add_action;
 use function is_admin;
 
