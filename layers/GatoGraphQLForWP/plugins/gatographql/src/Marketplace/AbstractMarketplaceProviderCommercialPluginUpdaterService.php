@@ -68,17 +68,21 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
          * Generate the entries for all the commercial plugins,
          * possibly including the main Plugin too
          */
+        $mainPlugin = PluginApp::getMainPlugin();
         $extensionManager = PluginApp::getExtensionManager();
-        $extensionBaseNameInstances = $extensionManager->getExtensions();
+        $pluginBaseNameInstances = array_merge(
+            $mainPlugin, // @todo Check if it's necessary to compare the main plugin
+            $extensionManager->getExtensions(),
+        );
         
         foreach ($licenseKeys as $pluginSlug => $pluginLicenseKey) {
-            foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
+            foreach ($pluginBaseNameInstances as $pluginBaseName => $extensionInstance) {
                 if ($extensionInstance->getPluginSlug() !== $pluginSlug) {
                     continue;
                 }
             }
             $this->pluginSlugDataEntries[$pluginSlug] = [
-                'id' => $extensionBaseName,
+                'id' => $pluginBaseName,
                 'version' => $extensionInstance->getPluginVersion(),
                 'licenseKey' => $pluginLicenseKey,
             ];
