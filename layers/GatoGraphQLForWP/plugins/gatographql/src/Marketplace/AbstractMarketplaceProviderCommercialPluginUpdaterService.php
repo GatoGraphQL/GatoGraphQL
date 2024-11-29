@@ -65,15 +65,15 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 
         /**
          * Generate the entries for all the commercial plugins,
-         * possibly including the main Plugin too
+         * possibly including the main Plugin too.
+         *
+         * Notice there's no need to include the mainPlugin,
+         * because even with commercial Standalone Plugins,
+         * they include an Extension class inside. (And currently,
+         * `isCommercial` belongs to `Extension`, not `Plugin`)
          */
-        $mainPlugin = PluginApp::getMainPlugin();
         $extensionManager = PluginApp::getExtensionManager();
-        $pluginBaseNameInstances = array_merge(
-            [$mainPlugin], // @todo Check if it's necessary to compare the main plugin
-            $extensionManager->getExtensions(),
-        );
-        
+        $pluginBaseNameInstances = $extensionManager->getExtensions();        
         foreach ($licenseKeys as $pluginSlug => $pluginLicenseKey) {
             foreach ($pluginBaseNameInstances as $pluginBaseName => $extensionInstance) {
                 if ($extensionInstance->getPluginSlug() !== $pluginSlug) {
