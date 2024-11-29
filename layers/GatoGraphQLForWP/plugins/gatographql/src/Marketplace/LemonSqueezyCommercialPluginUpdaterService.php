@@ -8,8 +8,9 @@ use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPlug
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use PoP\ComponentModel\App;
-use WP_Error;
+use PoP\Root\Exception\ShouldNotHappenException;
 
+use WP_Error;
 use function wp_remote_get;
 
 /**
