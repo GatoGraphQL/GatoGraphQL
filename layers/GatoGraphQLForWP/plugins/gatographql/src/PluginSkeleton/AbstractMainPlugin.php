@@ -576,7 +576,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
                 
-                $this->maybeRevalidateCommercialLicenses();
+                $this->maybeRevalidateActiveCommercialLicenses();
             },
             PluginLifecyclePriorities::HANDLE_COMMERCIAL_EXTENSIONS
         );
@@ -590,7 +590,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * the DB, and check if that amount of time has been through,
      * if so perform the check
      */
-    protected function maybeRevalidateCommercialLicenses(): void
+    protected function maybeRevalidateActiveCommercialLicenses(): void
     {
         $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
         if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
