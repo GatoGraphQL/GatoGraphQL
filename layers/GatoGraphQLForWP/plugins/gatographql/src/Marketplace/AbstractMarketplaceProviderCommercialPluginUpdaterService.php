@@ -81,9 +81,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
                 }
             }
             $this->pluginSlugDataEntries[$pluginSlug] = new CommercialPluginUpdatedPluginData(
-                $pluginBaseName,
-                $pluginSlug,
-                $extensionInstance->getPluginVersion(),
+                $extensionInstance,
                 $pluginLicenseKey,
                 str_replace('-', '_', $pluginSlug) . '_updater',
             );
@@ -95,5 +93,10 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
     }
 
     abstract protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string;
+
+	/**
+	 * Fetch the update info from the remote server running the Marketplace provider's plugin.
+	 */
+	abstract protected function request(CommercialPluginUpdatedPluginData $pluginData): object|bool;
 
 }
