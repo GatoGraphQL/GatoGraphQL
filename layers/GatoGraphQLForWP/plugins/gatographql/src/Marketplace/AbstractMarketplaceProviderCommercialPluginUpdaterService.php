@@ -70,7 +70,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         $mainPlugin = PluginApp::getMainPlugin();
         $extensionManager = PluginApp::getExtensionManager();
         $pluginBaseNameInstances = array_merge(
-            $mainPlugin, // @todo Check if it's necessary to compare the main plugin
+            [$mainPlugin], // @todo Check if it's necessary to compare the main plugin
             $extensionManager->getExtensions(),
         );
         
