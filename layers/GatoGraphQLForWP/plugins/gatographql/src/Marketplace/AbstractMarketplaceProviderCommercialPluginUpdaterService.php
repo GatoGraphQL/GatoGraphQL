@@ -95,6 +95,42 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
     abstract protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string;
 
 	/**
+	 * Override the WordPress request to return the correct plugin info.
+	 *
+	 * @see https://developer.wordpress.org/reference/hooks/plugins_api/
+	 *
+	 * @param false|object|array<string,mixed> $result
+	 */
+	public function overridePluginInfo(
+        false|object|array $result,
+        string $action,
+        object $args
+    ): object|bool {
+		if ($action !== 'plugin_information') {
+			return $result;
+		}
+
+        /** @var string */
+        $pluginSlug = $args->slug;
+        $pluginData = $this->pluginSlugDataEntries[$pluginSlug] ?? null;
+		if ($pluginData === null) {
+			return $result;
+		}
+
+		$remote = $this->request($pluginData);
+		if (!$remote || !$remote->success || empty($remote->update) ) {
+			return $result;
+		}
+
+		$result       = $remote->update;
+		$result->name = $pluginData->plugin->getPluginName();
+		$result->slug = $pluginData->plugin->getPluginSlug();
+		$result->sections = (array) $result->sections;
+
+		return $result;
+	}
+
+	/**
 	 * Fetch the update info from the remote server running the Marketplace provider's plugin.
 	 */
 	abstract protected function request(CommercialPluginUpdatedPluginData $pluginData): object|bool;
