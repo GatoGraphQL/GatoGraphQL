@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 8.0.0 - 29/11/2024
+
+### Improvements
+
+- Whenever there's a new version available, commercial extensions can now be updated from the Plugins page (#2972)
+
 ## 7.0.8 - 28/11/2024
 
 ### Fixed
