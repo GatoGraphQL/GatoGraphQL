@@ -553,14 +553,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function handleCommercialExtensions(): void
     {
-        $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
-        if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
-            return;
-        }
-
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (string $pluginAppGraphQLServerName) use ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses): void {
+            function (string $pluginAppGraphQLServerName): void {
                 if (
                     $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
                     || !is_admin()
@@ -580,21 +575,39 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 if ($extensionManager->getActivatedLicenseCommercialExtensionSlugProductNames() === []) {
                     return;
                 }
-
-                $userSettingsManager = UserSettingsManagerFacade::getInstance();
-
-                // Check if the X number of days have already passes
-                $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses = $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses * 86400;
-                $now = time();
-                $licenseCheckTimestamp = $userSettingsManager->getLicenseCheckTimestamp() ?? 0; // If `null`, execute the license check
-                if (($now - $licenseCheckTimestamp) < $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses) {
-                    return;
-                }
-
-                $this->revalidateCommercialExtensionActivatedLicenses();
+                
+                $this->maybeRevalidateCommercialLicenses();
             },
             PluginLifecyclePriorities::HANDLE_COMMERCIAL_EXTENSIONS
         );
+    }
+
+    /**
+     * After an X number of days, revalidate if the commercial
+     * licenses are still active.
+     *
+     * For this, store the latest "license check" timestamp in
+     * the DB, and check if that amount of time has been through,
+     * if so perform the check
+     */
+    protected function maybeRevalidateCommercialLicenses(): void
+    {
+        $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
+        if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
+            return;
+        }
+
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+
+        // Check if the X number of days have already passes
+        $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses = $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses * 86400;
+        $now = time();
+        $licenseCheckTimestamp = $userSettingsManager->getLicenseCheckTimestamp() ?? 0; // If `null`, execute the license check
+        if (($now - $licenseCheckTimestamp) < $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses) {
+            return;
+        }
+
+        $this->revalidateCommercialExtensionActivatedLicenses();
     }
 
     /**
