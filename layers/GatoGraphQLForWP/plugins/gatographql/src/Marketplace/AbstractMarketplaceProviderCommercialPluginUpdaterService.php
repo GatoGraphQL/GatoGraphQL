@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use PoP\ComponentModel\App;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -52,8 +55,18 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         }
         $this->initialized = true;
 
-        add_filter('plugins_api', $this->info(...), 20, 3);
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+
+        $this->apiURL = $this->providePluginUpdatesAPIURL($moduleConfiguration->getMarketplaceProviderPluginUpdatesServerURL());
+
+        // $this->pluginSlugDataEntries
+        // $this->pluginSlugCacheKeys
+
+		add_filter('plugins_api', $this->info(...), 20, 3);
 		add_filter('site_transient_update_plugins', $this->update(...));
 		add_action('upgrader_process_complete', $this->purge(...), 10, 2);
     }
+
+    abstract protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string;
 }
