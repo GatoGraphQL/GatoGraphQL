@@ -172,9 +172,9 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	 *
 	 * @see https://make.wordpress.org/core/2020/07/30/recommended-usage-of-the-updates-api-to-support-the-auto-updates-ui-for-plugins-and-themes-in-wordpress-5-5/
 	 */
-	public function overridePluginUpdate(object $transient): object
+	public function overridePluginUpdate(object|false $transient): object|false
     {
-		if (empty($transient->checked)) {
+        if ($transient === false || empty($transient->checked)) {
 			return $transient;
 		}
 
