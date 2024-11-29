@@ -24,7 +24,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	protected bool $initialized = false;
 
     /**
-     * @var array<string,array{id:string,version:string}> Key: plugin slug, Value: array of entries: id, version
+     * @var array<string,array{id:string,version:string,licenseKey:string}> Key: plugin slug, Value: array of entries: id, version, license key
      */
     protected array $pluginSlugDataEntries = [];
 
@@ -64,7 +64,10 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $this->apiURL = $this->providePluginUpdatesAPIURL($moduleConfiguration->getMarketplaceProviderPluginUpdatesServerURL());
 
-        // Generate the entries for all the commercial extensions
+        /**
+         * Generate the entries for all the commercial plugins,
+         * possibly including the main Plugin too
+         */
         $extensionManager = PluginApp::getExtensionManager();
         $extensionBaseNameInstances = $extensionManager->getExtensions();
         
@@ -77,6 +80,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
             $this->pluginSlugDataEntries[$pluginSlug] = [
                 'id' => $extensionBaseName,
                 'version' => $extensionInstance->getPluginVersion(),
+                'licenseKey' => $pluginLicenseKey,
             ];
             $this->pluginSlugCacheKeys[$pluginSlug] = str_replace('-', '_', $pluginSlug) . '_updater';
         }
