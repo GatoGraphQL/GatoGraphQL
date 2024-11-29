@@ -384,7 +384,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $this->executeSetupProcedure();
 
         // Maybe revalidate the commercial licenses
-        $this->maybeRevalidateCommercialLicenses();
+        $this->handleCommercialExtensions();
     }
 
     /**
@@ -551,17 +551,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * the DB, and check if that amount of time has been through,
      * if so perform the check
      */
-    protected function maybeRevalidateCommercialLicenses(): void
+    protected function handleCommercialExtensions(): void
     {
         $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses = $this->getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses();
         if ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses === null) {
             return;
         }
 
-        /**
-         * Logic to check if the main plugin or any extension has
-         * just been activated or updated.
-         */
         add_action(
             PluginAppHooks::INITIALIZE_APP,
             function (string $pluginAppGraphQLServerName) use ($numberOfDaysToRevalidateCommercialExtensionActivatedLicenses): void {
