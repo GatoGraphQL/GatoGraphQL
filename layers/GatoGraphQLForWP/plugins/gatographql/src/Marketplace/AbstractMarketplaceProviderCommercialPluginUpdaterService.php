@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\ComponentModel\App;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\BasicServiceTrait;
@@ -55,13 +56,30 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         }
         $this->initialized = true;
 
+        if ($licenseKeys === []) {
+            return;
+        }
+
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-
         $this->apiURL = $this->providePluginUpdatesAPIURL($moduleConfiguration->getMarketplaceProviderPluginUpdatesServerURL());
 
-        // $this->pluginSlugDataEntries
-        // $this->pluginSlugCacheKeys
+        // Generate the entries for all the commercial extensions
+        $extensionManager = PluginApp::getExtensionManager();
+        $extensionBaseNameInstances = $extensionManager->getExtensions();
+        
+        foreach ($licenseKeys as $pluginSlug => $pluginLicenseKey) {
+            foreach ($extensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
+                if ($extensionInstance->getPluginSlug() !== $pluginSlug) {
+                    continue;
+                }
+            }
+            $this->pluginSlugDataEntries[$pluginSlug] = [
+                'id' => $extensionBaseName,
+                'version' => $extensionInstance->getPluginVersion(),
+            ];
+            $this->pluginSlugCacheKeys[$pluginSlug] = str_replace('-', '_', $pluginSlug) . '_updater';
+        }
 
 		add_filter('plugins_api', $this->info(...), 20, 3);
 		add_filter('site_transient_update_plugins', $this->update(...));
@@ -69,4 +87,5 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
     }
 
     abstract protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string;
+
 }
