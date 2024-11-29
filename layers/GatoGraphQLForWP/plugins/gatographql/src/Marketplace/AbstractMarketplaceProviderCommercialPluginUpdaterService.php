@@ -10,8 +10,9 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\ComponentModel\App;
 use PoP\Root\Exception\ShouldNotHappenException;
-
 use PoP\Root\Services\BasicServiceTrait;
+use WP_Upgrader;
+
 use function add_action;
 use function add_filter;
 use stdClass;
@@ -80,17 +81,18 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
                 if ($extensionInstance->getPluginSlug() !== $pluginSlug) {
                     continue;
                 }
+                $this->pluginSlugDataEntries[$pluginSlug] = new CommercialPluginUpdatedPluginData(
+                    $extensionInstance,
+                    $pluginLicenseKey,
+                    str_replace('-', '_', $pluginSlug) . '_updater',
+                );
+                break;
             }
-            $this->pluginSlugDataEntries[$pluginSlug] = new CommercialPluginUpdatedPluginData(
-                $extensionInstance,
-                $pluginLicenseKey,
-                str_replace('-', '_', $pluginSlug) . '_updater',
-            );
         }
 
 		add_filter('plugins_api', $this->overridePluginInfo(...), 20, 3);
 		add_filter('site_transient_update_plugins', $this->overridePluginUpdate(...));
-		add_action('upgrader_process_complete', $this->purge(...), 10, 2);
+		add_action('upgrader_process_complete', $this->overridePluginPurge(...), 10, 2);
     }
 
     abstract protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string;
@@ -178,5 +180,35 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         }
 
 		return $transient;
+	}
+
+	/**
+	 * When the update is complete, purge the cache.
+	 *
+	 * @see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/
+	 *
+	 * @param array<string,mixed> $options
+	 */
+	public function overridePluginPurge(WP_Upgrader $upgrader, $options): void
+    {
+		if (!($this->cacheAllowed
+			&& $options['action'] === 'update'
+			&& $options['type'] === 'plugin'
+			&& !empty($options['plugins'])
+		)) {
+            return;
+		}
+
+        /** @var string[] */
+        $pluginIDs = $options['plugins'];
+        foreach ($pluginIDs as $pluginID) {
+            foreach ($this->pluginSlugDataEntries as $pluginData) {
+                if ($pluginID !== $pluginData->plugin->getPluginBaseName()) {
+                    continue;
+                }
+                delete_transient($pluginData->cacheKey);
+                break;
+            }
+        }
 	}
 }
