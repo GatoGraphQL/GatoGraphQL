@@ -15,6 +15,7 @@ use WP_Upgrader;
 
 use function add_action;
 use function add_filter;
+use function delete_transient;
 use stdClass;
 
 /**
