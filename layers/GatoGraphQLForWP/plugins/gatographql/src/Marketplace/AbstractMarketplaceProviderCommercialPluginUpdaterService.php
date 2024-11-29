@@ -191,11 +191,11 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	 */
 	public function overridePluginPurge(WP_Upgrader $upgrader, $options): void
     {
-		if (!($this->cacheAllowed
-			&& $options['action'] === 'update'
-			&& $options['type'] === 'plugin'
-			&& !empty($options['plugins'])
-		)) {
+		if (!$this->cacheAllowed
+			|| ($options['action'] ?? null) !== 'update'
+			|| ($options['type'] ?? null) !== 'plugin'
+			|| empty($options['plugins'])
+		) {
             return;
 		}
 
