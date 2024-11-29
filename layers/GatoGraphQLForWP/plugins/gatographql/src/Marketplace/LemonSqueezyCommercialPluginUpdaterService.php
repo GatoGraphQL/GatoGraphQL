@@ -42,10 +42,7 @@ class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProv
 
     protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string
     {
-        return sprintf(
-            '/wp-json/lsq/v1',
-            $pluginUpdatesServerURL
-        );
+        return $pluginUpdatesServerURL . '/wp-json/lsq/v1';
     }
 
 	/**
