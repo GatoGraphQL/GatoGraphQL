@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\ComponentModel\App;
 use PoP\Root\Exception\ShouldNotHappenException;
-use PoP\Root\Services\BasicServiceTrait;
 
-use function add_filter;
+use PoP\Root\Services\BasicServiceTrait;
 use function add_action;
+use function add_filter;
 
 /**
  * Copied code from `Make-Lemonade/lemonsqueezy-wp-updater-example`
@@ -27,16 +28,11 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	protected bool $initialized = false;
 
     /**
-     * @var array<string,array{id:string,version:string,licenseKey:string}> Key: plugin slug, Value: array of entries: id, version, license key
+     * @var array<string,CommercialPluginUpdatedPluginData> Key: plugin slug, Value: CommercialPluginUpdatedPluginData
      */
     protected array $pluginSlugDataEntries = [];
 
 	protected string $apiURL;
-
-	/**
-     * @var array<string,array{id:string,version:string}> Key: plugin slug, Value: Cache key
-     */
-    protected array $pluginSlugCacheKeys = [];
 
 	/**
 	 * Only disable this for debugging
@@ -84,15 +80,16 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
                     continue;
                 }
             }
-            $this->pluginSlugDataEntries[$pluginSlug] = [
-                'id' => $pluginBaseName,
-                'version' => $extensionInstance->getPluginVersion(),
-                'licenseKey' => $pluginLicenseKey,
-            ];
-            $this->pluginSlugCacheKeys[$pluginSlug] = str_replace('-', '_', $pluginSlug) . '_updater';
+            $this->pluginSlugDataEntries[$pluginSlug] = new CommercialPluginUpdatedPluginData(
+                $pluginBaseName,
+                $pluginSlug,
+                $extensionInstance->getPluginVersion(),
+                $pluginLicenseKey,
+                str_replace('-', '_', $pluginSlug) . '_updater',
+            );
         }
 
-		add_filter('plugins_api', $this->info(...), 20, 3);
+		add_filter('plugins_api', $this->overridePluginInfo(...), 20, 3);
 		add_filter('site_transient_update_plugins', $this->update(...));
 		add_action('upgrader_process_complete', $this->purge(...), 10, 2);
     }
