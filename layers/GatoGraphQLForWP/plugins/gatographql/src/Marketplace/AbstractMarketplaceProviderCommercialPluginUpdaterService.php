@@ -14,6 +14,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\BasicServiceTrait;
 use function add_action;
 use function add_filter;
+use stdClass;
 
 /**
  * Copied code from `Make-Lemonade/lemonsqueezy-wp-updater-example`
@@ -88,7 +89,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         }
 
 		add_filter('plugins_api', $this->overridePluginInfo(...), 20, 3);
-		add_filter('site_transient_update_plugins', $this->update(...));
+		add_filter('site_transient_update_plugins', $this->overridePluginUpdate(...));
 		add_action('upgrader_process_complete', $this->purge(...), 10, 2);
     }
 
@@ -135,4 +136,47 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	 */
 	abstract protected function request(CommercialPluginUpdatedPluginData $pluginData): object|bool;
 
+	/**
+	 * Override the WordPress request to check if an update is available.
+	 *
+	 * @see https://make.wordpress.org/core/2020/07/30/recommended-usage-of-the-updates-api-to-support-the-auto-updates-ui-for-plugins-and-themes-in-wordpress-5-5/
+	 */
+	public function overridePluginUpdate(object $transient): object
+    {
+		if (empty($transient->checked)) {
+			return $transient;
+		}
+
+        foreach ($this->pluginSlugDataEntries as $pluginData) {
+            $res = (object) array(
+                'id'            => $pluginData->plugin->getPluginBaseName(),
+                'slug'          => $pluginData->plugin->getPluginSlug(),
+                'plugin'        => $pluginData->plugin->getPluginBaseName(),
+                'new_version'   => $pluginData->plugin->getPluginVersion(),
+                'url'           => '',
+                'package'       => '',
+                'icons'         => [],
+                'banners'       => [],
+                'banners_rtl'   => [],
+                'tested'        => '',
+                'requires_php'  => '',
+                'compatibility' => new stdClass(),
+            );
+            
+            $remote = $this->request($pluginData);
+
+            if ($remote && $remote->success && !empty($remote->update)
+                && version_compare($pluginData->plugin->getPluginVersion(), $remote->update->version, '<')
+            ) {
+                $res->new_version = $remote->update->version;
+                $res->package     = $remote->update->download_link;
+    
+                $transient->response[ $res->plugin ] = $res;
+            } else {
+                $transient->no_update[ $res->plugin ] = $res;
+            }
+        }
+
+		return $transient;
+	}
 }
