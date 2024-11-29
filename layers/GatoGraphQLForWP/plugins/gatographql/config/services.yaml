@@ -7,6 +7,9 @@ services:
     GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialExtensionActivationService
 
+    GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialPluginUpdaterServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialPluginUpdaterService
+
     GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface:
         class: \GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParser
 
