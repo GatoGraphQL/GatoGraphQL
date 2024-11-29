@@ -16,6 +16,7 @@ use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
+use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialPluginUpdaterServiceInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -612,12 +613,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Use our own Marketplace provider's service to
+     * Use the Marketplace provider's service to
      * update the active commercial extensions
      */
     protected function useMarketplacePluginUpdaterForActiveCommercialExtensions(): void
     {
+        $commercialExtensionActivatedLicenseKeys = $this->getCommercialExtensionActivatedLicenseKeys();
+        if ($commercialExtensionActivatedLicenseKeys === []) {
+            return;
+        }
 
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var MarketplaceProviderCommercialPluginUpdaterServiceInterface */
+        $marketplaceProviderCommercialPluginUpdaterService = $instanceManager->getInstance(MarketplaceProviderCommercialPluginUpdaterServiceInterface::class);
+
+        $marketplaceProviderCommercialPluginUpdaterService->useMarketplacePluginUpdaterForExtensions(
+            $commercialExtensionActivatedLicenseKeys
+        );
     }
 
     /**
