@@ -8,12 +8,18 @@ use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPlug
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\BasicServiceTrait;
+use stdClass;
 use WP_Upgrader;
+use WP_Error;
 
 use function add_action;
 use function add_filter;
 use function delete_transient;
-use stdClass;
+use function get_transient;
+use function is_wp_error;
+use function set_transient;
+use function wp_remote_retrieve_body;
+use function wp_remote_retrieve_response_code;
 
 /**
  * Copied code from `Make-Lemonade/lemonsqueezy-wp-updater-example`
@@ -112,7 +118,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 			return $result;
 		}
 
-		$remote = $this->request($pluginData);
+		$remote = $this->requestPluginDataFromServer($pluginData);
 		if (!$remote || !$remote->success || empty($remote->update) ) {
 			return $result;
 		}
@@ -128,7 +134,38 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	/**
 	 * Fetch the update info from the remote server running the Marketplace provider's plugin.
 	 */
-	abstract protected function request(CommercialPluginUpdatedPluginData $pluginData): object|bool;
+	protected function requestPluginDataFromServer(CommercialPluginUpdatedPluginData $pluginData): object|bool
+    {
+		$remote = get_transient($pluginData->cacheKey);
+		if ($remote !== false && $this->cacheAllowed) {
+			if ($remote === 'error') {
+				return false;
+			}
+
+			return json_decode($remote);
+		}
+
+		$remote = $this->getRemotePluginData($pluginData);
+
+		if (is_wp_error($remote)
+			|| wp_remote_retrieve_response_code($remote) !== 200
+			|| empty(wp_remote_retrieve_body($remote))
+		) {
+			set_transient($pluginData->cacheKey, 'error', MINUTE_IN_SECONDS * 10);
+			return false;
+		}
+
+		$payload = wp_remote_retrieve_body($remote);
+		set_transient($pluginData->cacheKey, $payload, DAY_IN_SECONDS);
+		return json_decode($payload);
+	}
+
+	/**
+	 * Fetch the update info from the remote server running the Marketplace provider's plugin.
+     * 
+     * @return array<string,mixed>|WP_Error
+	 */
+	abstract protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error;
 
 	/**
 	 * Override the WordPress request to check if an update is available.
@@ -157,7 +194,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
                 'compatibility' => new stdClass(),
             );
             
-            $remote = $this->request($pluginData);
+            $remote = $this->requestPluginDataFromServer($pluginData);
 
             if ($remote && $remote->success && !empty($remote->update)
                 && version_compare($pluginData->plugin->getPluginVersion(), $remote->update->version, '<')

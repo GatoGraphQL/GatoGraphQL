@@ -8,13 +8,9 @@ use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPlug
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use PoP\ComponentModel\App;
+use WP_Error;
 
-use function get_transient;
-use function is_wp_error;
-use function set_transient;
 use function wp_remote_get;
-use function wp_remote_retrieve_body;
-use function wp_remote_retrieve_response_code;
 
 /**
  * Copied code from `Make-Lemonade/lemonsqueezy-wp-updater-example`
@@ -55,34 +51,13 @@ class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProv
 	/**
 	 * Fetch the update info from the remote server running the Lemon Squeezy plugin.
 	 */
-	protected function request(CommercialPluginUpdatedPluginData $pluginData): object|bool
+	protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error
     {
-		$remote = get_transient($pluginData->cacheKey);
-		if ($remote !== false && $this->cacheAllowed) {
-			if ($remote === 'error') {
-				return false;
-			}
-
-			return json_decode($remote);
-		}
-
-		$remote = wp_remote_get(
+		return wp_remote_get(
 			$this->apiURL . "/update?license_key={$pluginData->licenseKey}",
 			[
 				'timeout' => 10,
             ]
 		);
-
-		if (is_wp_error($remote)
-			|| wp_remote_retrieve_response_code($remote) !== 200
-			|| empty(wp_remote_retrieve_body($remote))
-		) {
-			set_transient($pluginData->cacheKey, 'error', MINUTE_IN_SECONDS * 10);
-			return false;
-		}
-
-		$payload = wp_remote_retrieve_body($remote);
-		set_transient($pluginData->cacheKey, $payload, DAY_IN_SECONDS);
-		return json_decode($payload);
 	}
 }
