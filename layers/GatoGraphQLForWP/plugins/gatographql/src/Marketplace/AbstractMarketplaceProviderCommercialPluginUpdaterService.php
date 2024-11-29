@@ -32,4 +32,19 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	 * Only disable this for debugging
 	 */
 	protected bool $cacheAllowed = true;
+
+    /**
+     * Use the Marketplace provider's service to
+     * update the active commercial extensions
+     *
+     * @param array<string,string> $licenseKeys Key: Extension Slug, Value: License Key
+     */
+    public function useMarketplacePluginUpdaterForExtensions(
+        array $licenseKeys,
+    ): void {
+
+		add_filter('plugins_api', $this->info(...), 20, 3);
+		add_filter('site_transient_update_plugins', $this->update(...));
+		add_action('upgrader_process_complete', $this->purge(...), 10, 2);
+    }
 }
