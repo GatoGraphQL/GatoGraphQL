@@ -12,4 +12,15 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
  */
 class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProviderCommercialPluginUpdaterService
 {
+    /**
+     * Use the Marketplace provider's service to
+     * update the active commercial extensions
+     *
+     * @param array<string,string> $licenseKeys Key: Extension Slug, Value: License Key
+     */
+    public function useMarketplacePluginUpdaterForExtensions(
+        array $licenseKeys,
+    ): void {
+        
+    }
 }
