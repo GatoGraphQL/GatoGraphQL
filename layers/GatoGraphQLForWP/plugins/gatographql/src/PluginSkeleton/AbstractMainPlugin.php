@@ -577,6 +577,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 }
                 
                 $this->maybeRevalidateActiveCommercialLicenses();
+                $this->useMarketplacePluginUpdaterForActiveCommercialExtensions();
             },
             PluginLifecyclePriorities::HANDLE_COMMERCIAL_EXTENSIONS
         );
@@ -608,6 +609,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         }
 
         $this->revalidateCommercialExtensionActivatedLicenses();
+    }
+
+    /**
+     * Use our own Marketplace provider's service to
+     * update the active commercial extensions
+     */
+    protected function useMarketplacePluginUpdaterForActiveCommercialExtensions(): void
+    {
+
     }
 
     /**
