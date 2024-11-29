@@ -9,8 +9,8 @@ use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use PoP\ComponentModel\App;
 use PoP\Root\Exception\ShouldNotHappenException;
-
 use WP_Error;
+
 use function wp_remote_get;
 
 /**
@@ -21,8 +21,8 @@ use function wp_remote_get;
  */
 class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProviderCommercialPluginUpdaterService
 {
-	protected string $apiURL;
-    
+    protected string $apiURL;
+
     /**
      * Use the Marketplace provider's service to
      * update the active commercial extensions
@@ -46,12 +46,12 @@ class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProv
         return $pluginUpdatesServerURL . '/wp-json/lsq/v1';
     }
 
-	/**
-	 * Fetch the update info from the remote server running the Lemon Squeezy plugin.
-	 */
-	protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error
+    /**
+     * Fetch the update info from the remote server running the Lemon Squeezy plugin.
+     */
+    protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error
     {
-		$url = $this->apiURL . "/update?license_key={$pluginData->licenseKey}";
+        $url = $this->apiURL . "/update?license_key={$pluginData->licenseKey}";
         return wp_remote_get($url, ['timeout' => 10]);
-	}
+    }
 }

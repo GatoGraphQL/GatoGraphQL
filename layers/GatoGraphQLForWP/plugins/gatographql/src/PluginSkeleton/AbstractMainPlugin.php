@@ -576,7 +576,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 if ($extensionManager->getActivatedLicenseCommercialExtensionSlugProductNames() === []) {
                     return;
                 }
-                
+
                 $this->maybeRevalidateActiveCommercialLicenses();
                 $this->useMarketplacePluginUpdaterForActiveCommercialExtensions();
             },

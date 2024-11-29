@@ -31,17 +31,17 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 {
     use BasicServiceTrait;
 
-	protected bool $initialized = false;
+    protected bool $initialized = false;
 
     /**
      * @var array<string,CommercialPluginUpdatedPluginData> Key: plugin slug, Value: CommercialPluginUpdatedPluginData
      */
     protected array $pluginSlugDataEntries = [];
 
-	/**
-	 * Only disable this for debugging
-	 */
-	protected bool $cacheAllowed = true;
+    /**
+     * Only disable this for debugging
+     */
+    protected bool $cacheAllowed = true;
 
     /**
      * Use the Marketplace provider's service to
@@ -73,7 +73,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
          * `isCommercial` belongs to `Extension`, not `Plugin`)
          */
         $extensionManager = PluginApp::getExtensionManager();
-        $pluginBaseNameInstances = $extensionManager->getExtensions();        
+        $pluginBaseNameInstances = $extensionManager->getExtensions();
         foreach ($licenseKeys as $pluginSlug => $pluginLicenseKey) {
             foreach ($pluginBaseNameInstances as $pluginBaseName => $extensionInstance) {
                 if ($extensionInstance->getPluginSlug() !== $pluginSlug) {
@@ -88,99 +88,100 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
             }
         }
 
-		add_filter('plugins_api', $this->overridePluginInfo(...), 20, 3);
-		add_filter('site_transient_update_plugins', $this->overridePluginUpdate(...));
-		add_action('upgrader_process_complete', $this->overridePluginPurge(...), 10, 2);
+        add_filter('plugins_api', $this->overridePluginInfo(...), 20, 3);
+        add_filter('site_transient_update_plugins', $this->overridePluginUpdate(...));
+        add_action('upgrader_process_complete', $this->overridePluginPurge(...), 10, 2);
     }
 
     abstract protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string;
 
-	/**
-	 * Override the WordPress request to return the correct plugin info.
-	 *
-	 * @see https://developer.wordpress.org/reference/hooks/plugins_api/
-	 *
-	 * @param false|object|array<string,mixed> $result
-	 * @return false|object|array<string,mixed>
-	 */
-	public function overridePluginInfo(
+    /**
+     * Override the WordPress request to return the correct plugin info.
+     *
+     * @see https://developer.wordpress.org/reference/hooks/plugins_api/
+     *
+     * @param false|object|array<string,mixed> $result
+     * @return false|object|array<string,mixed>
+     */
+    public function overridePluginInfo(
         false|object|array $result,
         string $action,
         object $args
     ): false|object|array {
-		if ($action !== 'plugin_information') {
-			return $result;
-		}
+        if ($action !== 'plugin_information') {
+            return $result;
+        }
 
         /** @var string|null */
         $pluginSlug = $args->slug ?? null;
         if ($pluginSlug === null) {
-			return $result;
+            return $result;
         }
         $pluginData = $this->pluginSlugDataEntries[$pluginSlug] ?? null;
-		if ($pluginData === null) {
-			return $result;
-		}
+        if ($pluginData === null) {
+            return $result;
+        }
 
-		$remote = $this->requestPluginDataFromServer($pluginData);
-		if (!$remote || !($remote->success ?? null) || empty($remote->update) ) {
-			return $result;
-		}
+        $remote = $this->requestPluginDataFromServer($pluginData);
+        if (!$remote || !($remote->success ?? null) || empty($remote->update)) {
+            return $result;
+        }
 
-		$result       = $remote->update;
-		$result->name = $pluginData->plugin->getPluginName();
-		$result->slug = $pluginData->plugin->getPluginSlug();
-		$result->sections = (array) $result->sections;
+        $result       = $remote->update;
+        $result->name = $pluginData->plugin->getPluginName();
+        $result->slug = $pluginData->plugin->getPluginSlug();
+        $result->sections = (array) $result->sections;
 
-		return $result;
-	}
+        return $result;
+    }
 
-	/**
-	 * Fetch the update info from the remote server running the Marketplace provider's plugin.
-	 */
-	protected function requestPluginDataFromServer(CommercialPluginUpdatedPluginData $pluginData): object|bool
+    /**
+     * Fetch the update info from the remote server running the Marketplace provider's plugin.
+     */
+    protected function requestPluginDataFromServer(CommercialPluginUpdatedPluginData $pluginData): object|bool
     {
-		$remote = get_transient($pluginData->cacheKey);
-		if ($remote !== false && $this->cacheAllowed) {
-			if ($remote === 'error') {
-				return false;
-			}
+        $remote = get_transient($pluginData->cacheKey);
+        if ($remote !== false && $this->cacheAllowed) {
+            if ($remote === 'error') {
+                return false;
+            }
 
-			return json_decode($remote);
-		}
+            return json_decode($remote);
+        }
 
-		$remote = $this->getRemotePluginData($pluginData);
+        $remote = $this->getRemotePluginData($pluginData);
 
-		if (is_wp_error($remote)
-			|| wp_remote_retrieve_response_code($remote) !== 200
-			|| empty(wp_remote_retrieve_body($remote))
-		) {
-			set_transient($pluginData->cacheKey, 'error', MINUTE_IN_SECONDS * 10);
-			return false;
-		}
+        if (
+            is_wp_error($remote)
+            || wp_remote_retrieve_response_code($remote) !== 200
+            || empty(wp_remote_retrieve_body($remote))
+        ) {
+            set_transient($pluginData->cacheKey, 'error', MINUTE_IN_SECONDS * 10);
+            return false;
+        }
 
-		$payload = wp_remote_retrieve_body($remote);
-		set_transient($pluginData->cacheKey, $payload, DAY_IN_SECONDS);
-		return json_decode($payload);
-	}
+        $payload = wp_remote_retrieve_body($remote);
+        set_transient($pluginData->cacheKey, $payload, DAY_IN_SECONDS);
+        return json_decode($payload);
+    }
 
-	/**
-	 * Fetch the update info from the remote server running the Marketplace provider's plugin.
-     * 
+    /**
+     * Fetch the update info from the remote server running the Marketplace provider's plugin.
+     *
      * @return array<string,mixed>|WP_Error
-	 */
-	abstract protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error;
+     */
+    abstract protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error;
 
-	/**
-	 * Override the WordPress request to check if an update is available.
-	 *
-	 * @see https://make.wordpress.org/core/2020/07/30/recommended-usage-of-the-updates-api-to-support-the-auto-updates-ui-for-plugins-and-themes-in-wordpress-5-5/
-	 */
-	public function overridePluginUpdate(stdClass|false $transient): object|false
+    /**
+     * Override the WordPress request to check if an update is available.
+     *
+     * @see https://make.wordpress.org/core/2020/07/30/recommended-usage-of-the-updates-api-to-support-the-auto-updates-ui-for-plugins-and-themes-in-wordpress-5-5/
+     */
+    public function overridePluginUpdate(stdClass|false $transient): object|false
     {
         if ($transient === false || empty($transient->checked)) {
-			return $transient;
-		}
+            return $transient;
+        }
 
         foreach ($this->pluginSlugDataEntries as $pluginData) {
             $res = (object) array(
@@ -197,15 +198,16 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
                 'requires_php'  => '',
                 'compatibility' => new stdClass(),
             );
-            
+
             $remote = $this->requestPluginDataFromServer($pluginData);
 
-            if ($remote && ($remote->success ?? null) && !empty($remote->update)
+            if (
+                $remote && ($remote->success ?? null) && !empty($remote->update)
                 && version_compare($pluginData->plugin->getPluginVersion(), $remote->update->version, '<')
             ) {
                 $res->new_version = $remote->update->version;
                 $res->package     = $remote->update->download_link;
-    
+
                 $transient->response ??= [];
                 $transient->response[$res->plugin] = $res;
             } else {
@@ -214,25 +216,26 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
             }
         }
 
-		return $transient;
-	}
+        return $transient;
+    }
 
-	/**
-	 * When the update is complete, purge the cache.
-	 *
-	 * @see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/
-	 *
-	 * @param array<string,mixed> $options
-	 */
-	public function overridePluginPurge(WP_Upgrader $upgrader, array $options): void
+    /**
+     * When the update is complete, purge the cache.
+     *
+     * @see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/
+     *
+     * @param array<string,mixed> $options
+     */
+    public function overridePluginPurge(WP_Upgrader $upgrader, array $options): void
     {
-		if (!$this->cacheAllowed
-			|| ($options['action'] ?? null) !== 'update'
-			|| ($options['type'] ?? null) !== 'plugin'
-			|| empty($options['plugins'])
-		) {
+        if (
+            !$this->cacheAllowed
+            || ($options['action'] ?? null) !== 'update'
+            || ($options['type'] ?? null) !== 'plugin'
+            || empty($options['plugins'])
+        ) {
             return;
-		}
+        }
 
         /** @var string[] */
         $pluginIDs = $options['plugins'];
@@ -245,5 +248,5 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
                 break;
             }
         }
-	}
+    }
 }
