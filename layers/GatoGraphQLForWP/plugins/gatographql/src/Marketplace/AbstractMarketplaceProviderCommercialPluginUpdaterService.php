@@ -218,7 +218,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	 *
 	 * @param array<string,mixed> $options
 	 */
-	public function overridePluginPurge(WP_Upgrader $upgrader, $options): void
+	public function overridePluginPurge(WP_Upgrader $upgrader, array $options): void
     {
 		if (!$this->cacheAllowed
 			|| ($options['action'] ?? null) !== 'update'
