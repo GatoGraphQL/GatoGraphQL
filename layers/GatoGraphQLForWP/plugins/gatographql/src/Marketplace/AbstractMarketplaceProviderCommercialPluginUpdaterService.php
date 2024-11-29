@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\BasicServiceTrait;
 
 /**
@@ -16,17 +17,19 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 {
     use BasicServiceTrait;
 
+	protected bool $initialized = false;
+
     /**
      * @var array<string,array{id:string,version:string}> Key: plugin slug, Value: array of entries: id, version
      */
-    protected array $pluginSlugDataEntries;
+    protected array $pluginSlugDataEntries = [];
 
 	protected string $apiURL;
 
 	/**
      * @var array<string,array{id:string,version:string}> Key: plugin slug, Value: Cache key
      */
-    protected array $pluginSlugCacheKeys;
+    protected array $pluginSlugCacheKeys = [];
 
 	/**
 	 * Only disable this for debugging
@@ -38,12 +41,18 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
      * update the active commercial extensions
      *
      * @param array<string,string> $licenseKeys Key: Extension Slug, Value: License Key
+     *
+     * @throws ShouldNotHappenException If initializing the service more than once
      */
     public function setupMarketplacePluginUpdaterForExtensions(
         array $licenseKeys,
     ): void {
+        if ($this->initialized) {
+            throw new ShouldNotHappenException('This service must not be initialized more than once');
+        }
+        $this->initialized = true;
 
-		add_filter('plugins_api', $this->info(...), 20, 3);
+        add_filter('plugins_api', $this->info(...), 20, 3);
 		add_filter('site_transient_update_plugins', $this->update(...));
 		add_action('upgrader_process_complete', $this->purge(...), 10, 2);
     }
