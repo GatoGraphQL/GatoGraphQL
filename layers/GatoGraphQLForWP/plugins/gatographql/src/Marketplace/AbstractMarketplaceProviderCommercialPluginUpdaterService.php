@@ -11,6 +11,9 @@ use PoP\ComponentModel\App;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function add_filter;
+use function add_action;
+
 /**
  * Copied code from `Make-Lemonade/lemonsqueezy-wp-updater-example`
  *
