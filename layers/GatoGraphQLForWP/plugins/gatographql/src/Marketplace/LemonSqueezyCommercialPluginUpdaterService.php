@@ -50,11 +50,7 @@ class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProv
 	 */
 	protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error
     {
-		return wp_remote_get(
-			$this->apiURL . "/update?license_key={$pluginData->licenseKey}",
-			[
-				'timeout' => 10,
-            ]
-		);
+		$url = $this->apiURL . "/update?license_key={$pluginData->licenseKey}";
+        return wp_remote_get($url, ['timeout' => 10]);
 	}
 }
