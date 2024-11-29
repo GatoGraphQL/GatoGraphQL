@@ -41,7 +41,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	/**
 	 * Only disable this for debugging
 	 */
-	protected bool $cacheAllowed = false; // @todo Change to `true` once DEV finished
+	protected bool $cacheAllowed = true;
 
     /**
      * Use the Marketplace provider's service to
