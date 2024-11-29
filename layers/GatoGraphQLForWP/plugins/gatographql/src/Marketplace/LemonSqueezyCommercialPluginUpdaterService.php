@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use PoP\ComponentModel\App;
 
 use function get_transient;
 use function is_wp_error;
@@ -21,6 +24,26 @@ use function wp_remote_retrieve_response_code;
  */
 class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProviderCommercialPluginUpdaterService
 {
+	protected string $apiURL;
+    
+    /**
+     * Use the Marketplace provider's service to
+     * update the active commercial extensions
+     *
+     * @param array<string,string> $licenseKeys Key: Extension Slug, Value: License Key
+     *
+     * @throws ShouldNotHappenException If initializing the service more than once
+     */
+    public function setupMarketplacePluginUpdaterForExtensions(
+        array $licenseKeys,
+    ): void {
+        parent::setupMarketplacePluginUpdaterForExtensions($licenseKeys);
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $this->apiURL = $this->providePluginUpdatesAPIURL($moduleConfiguration->getMarketplaceProviderPluginUpdatesServerURL());
+    }
+
     protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string
     {
         return sprintf(

@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use PoP\ComponentModel\App;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Upgrader;
@@ -35,8 +32,6 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
      */
     protected array $pluginSlugDataEntries = [];
 
-	protected string $apiURL;
-
 	/**
 	 * Only disable this for debugging
 	 */
@@ -61,10 +56,6 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         if ($licenseKeys === []) {
             return;
         }
-
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $this->apiURL = $this->providePluginUpdatesAPIURL($moduleConfiguration->getMarketplaceProviderPluginUpdatesServerURL());
 
         /**
          * Generate the entries for all the commercial plugins,
