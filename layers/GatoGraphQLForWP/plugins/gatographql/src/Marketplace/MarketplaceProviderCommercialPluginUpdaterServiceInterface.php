@@ -12,7 +12,7 @@ interface MarketplaceProviderCommercialPluginUpdaterServiceInterface
      *
      * @param array<string,string> $licenseKeys Key: Extension Slug, Value: License Key
      */
-    public function useMarketplacePluginUpdaterForExtensions(
+    public function setupMarketplacePluginUpdaterForExtensions(
         array $licenseKeys,
     ): void;
 }

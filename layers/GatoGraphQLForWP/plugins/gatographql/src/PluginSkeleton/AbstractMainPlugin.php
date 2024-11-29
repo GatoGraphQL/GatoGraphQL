@@ -627,7 +627,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var MarketplaceProviderCommercialPluginUpdaterServiceInterface */
         $marketplaceProviderCommercialPluginUpdaterService = $instanceManager->getInstance(MarketplaceProviderCommercialPluginUpdaterServiceInterface::class);
 
-        $marketplaceProviderCommercialPluginUpdaterService->useMarketplacePluginUpdaterForExtensions(
+        $marketplaceProviderCommercialPluginUpdaterService->setupMarketplacePluginUpdaterForExtensions(
             $commercialExtensionActivatedLicenseKeys
         );
     }
