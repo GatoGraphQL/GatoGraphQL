@@ -15,4 +15,21 @@ use PoP\Root\Services\BasicServiceTrait;
 abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService implements MarketplaceProviderCommercialPluginUpdaterServiceInterface
 {
     use BasicServiceTrait;
+
+    /**
+     * @var array<string,array{id:string,version:string}> Key: plugin slug, Value: array of entries: id, version
+     */
+    protected array $pluginSlugDataEntries;
+
+	protected string $apiURL;
+
+	/**
+     * @var array<string,array{id:string,version:string}> Key: plugin slug, Value: Cache key
+     */
+    protected array $pluginSlugCacheKeys;
+
+	/**
+	 * Only disable this for debugging
+	 */
+	protected bool $cacheAllowed = true;
 }
