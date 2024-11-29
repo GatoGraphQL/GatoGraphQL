@@ -101,25 +101,29 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
 	 * @see https://developer.wordpress.org/reference/hooks/plugins_api/
 	 *
 	 * @param false|object|array<string,mixed> $result
+	 * @return false|object|array<string,mixed>
 	 */
 	public function overridePluginInfo(
         false|object|array $result,
         string $action,
         object $args
-    ): object|bool {
+    ): false|object|array {
 		if ($action !== 'plugin_information') {
 			return $result;
 		}
 
-        /** @var string */
-        $pluginSlug = $args->slug;
+        /** @var string|null */
+        $pluginSlug = $args->slug ?? null;
+        if ($pluginSlug === null) {
+			return $result;
+        }
         $pluginData = $this->pluginSlugDataEntries[$pluginSlug] ?? null;
 		if ($pluginData === null) {
 			return $result;
 		}
 
 		$remote = $this->requestPluginDataFromServer($pluginData);
-		if (!$remote || !$remote->success || empty($remote->update) ) {
+		if (!$remote || !($remote->success ?? null) || empty($remote->update) ) {
 			return $result;
 		}
 
@@ -196,15 +200,15 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
             
             $remote = $this->requestPluginDataFromServer($pluginData);
 
-            if ($remote && $remote->success && !empty($remote->update)
+            if ($remote && ($remote->success ?? null) && !empty($remote->update)
                 && version_compare($pluginData->plugin->getPluginVersion(), $remote->update->version, '<')
             ) {
                 $res->new_version = $remote->update->version;
                 $res->package     = $remote->update->download_link;
     
-                $transient->response[ $res->plugin ] = $res;
+                $transient->response[$res->plugin] = $res;
             } else {
-                $transient->no_update[ $res->plugin ] = $res;
+                $transient->no_update[$res->plugin] = $res;
             }
         }
 
