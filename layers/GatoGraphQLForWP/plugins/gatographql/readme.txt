@@ -172,7 +172,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 8.0.0 =
-* Whenever there's a new version available, commercial extensions can now be updated from the Plugins page (#2972)
+* Extensions (eg: the "All Extensions" bundle) can now be updated from the Plugins page (#2972)
 
 = 7.0.8 =
 * Fixed: Don't hardcode Gato GraphQL's plugin base name in `plugin_action_links` hook to allow standalone plugins to use it (#2971)
