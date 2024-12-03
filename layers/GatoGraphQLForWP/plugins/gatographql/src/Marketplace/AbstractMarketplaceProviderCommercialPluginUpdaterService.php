@@ -186,7 +186,12 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         foreach ($this->pluginSlugDataEntries as $pluginData) {
             $res = (object) array(
                 'id'            => $pluginData->plugin->getPluginBaseName(),
-                'slug'          => $pluginData->plugin->getPluginSlug(),
+                /**
+                 * If providing the slug, the plugin item in the Plugins page
+                 * will have link "View details", which produces an error,
+                 * instead of the expected "Visit plugin site"
+                 */
+                // 'slug'          => $pluginData->plugin->getPluginSlug(),
                 'plugin'        => $pluginData->plugin->getPluginBaseName(),
                 'new_version'   => $pluginData->plugin->getPluginVersion(),
                 'url'           => '',
