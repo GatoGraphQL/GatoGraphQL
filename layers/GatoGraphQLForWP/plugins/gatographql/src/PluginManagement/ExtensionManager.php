@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
@@ -20,8 +21,8 @@ use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use function plugin_basename;
 
 class ExtensionManager extends AbstractPluginManager
@@ -35,7 +36,7 @@ class ExtensionManager extends AbstractPluginManager
     /** @var array<string,string> Extension Slug => Extension Product Name */
     private array $nonActivatedLicenseCommercialExtensionSlugProductNames = [];
 
-    /** @var array<string,string> Extension Slug => Extension Product Name */
+    /** @var array<string,ActiveLicenseCommercialExtensionData> Extension Slug => ActiveLicenseCommercialExtensionData */
     private array $activatedLicenseCommercialExtensionSlugProductNames = [];
 
     /** @var array<string,string>|null Extension Slug => Extension Product Name */
@@ -342,7 +343,13 @@ class ExtensionManager extends AbstractPluginManager
         }
 
         // Everything is good!
-        $this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
+        $this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = new ActiveLicenseCommercialExtensionData(
+            $extensionProductName,
+            $extensionName,
+            $extensionSlug,
+            $extensionBaseName,
+            $extensionVersion,
+        );
         return true;
     }
 
