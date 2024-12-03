@@ -22,7 +22,14 @@ use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function add_action;
 use function is_admin;
+use function is_singular;
+use function register_block_type;
+use function wp_localize_script;
+use function wp_enqueue_style;
+use function wp_register_script;
+use function wp_register_style;
 
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
@@ -370,7 +377,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * or viewing the post in the frontend
          */
         if (($isAdmin && !in_array($this->getEditorHelpers()->getEditingCustomPostType(), $allowedCustomPostTypes))
-            || (!$isAdmin && !\is_singular($allowedCustomPostTypes))
+            || (!$isAdmin && !is_singular($allowedCustomPostTypes))
         ) {
             return;
         }
@@ -383,7 +390,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
                 $mainPlugin = PluginApp::getMainPlugin();
                 $mainPluginURL = $mainPlugin->getPluginURL();
                 $mainPluginVersion = $mainPlugin->getPluginVersion();
-                \wp_enqueue_style(
+                wp_enqueue_style(
                     'highlight-style',
                     $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css',
                     array(),
@@ -413,7 +420,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         $index_js     = 'build/index.js';
         $script_asset = require($script_asset_path);
         $scriptRegistrationName = $blockRegistrationName . '-block-editor';
-        \wp_register_script(
+        wp_register_script(
             $scriptRegistrationName,
             $url . $index_js,
             array_merge(
@@ -431,7 +438,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             $editor_css = 'build/index.css';
             /** @var string */
             $modificationTime = filemtime("$dir/$editor_css");
-            \wp_register_style(
+            wp_register_style(
                 $blockRegistrationName . '-block-editor',
                 $url . $editor_css,
                 array(),
@@ -447,7 +454,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             $style_css = 'build/style-index.css';
             /** @var string */
             $modificationTime = filemtime("$dir/$style_css");
-            \wp_register_style(
+            wp_register_style(
                 $blockRegistrationName . '-block',
                 $url . $style_css,
                 array(),
@@ -463,9 +470,9 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * which calls ComponentModelModuleConfiguration::mustNamespaceTypes(),
          * which is initialized during "wp"
          */
-        \add_action('wp_print_scripts', function () use ($scriptRegistrationName): void {
+        add_action('wp_print_scripts', function () use ($scriptRegistrationName): void {
             if ($localizedData = $this->getLocalizedData()) {
-                \wp_localize_script(
+                wp_localize_script(
                     $scriptRegistrationName,
                     $this->getBlockLocalizationName(),
                     $localizedData
@@ -488,7 +495,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         }
 
         if ($this->registerBlockServerSide()) {
-            \register_block_type($blockFullName, $blockConfiguration);
+            register_block_type($blockFullName, $blockConfiguration);
         }
 
         /**
@@ -521,7 +528,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             return true;
         }
 
-        return \is_singular($allowedCustomPostTypes);
+        return is_singular($allowedCustomPostTypes);
     }
 
     protected function loadClientScriptsInCorrespondingSingleCPTsOnly(): bool
