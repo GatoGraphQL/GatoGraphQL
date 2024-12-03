@@ -367,8 +367,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             ]
                         );
                     }
-                } catch (Exception) {
-                    // Do nothing
+                } catch (Exception $exception) {
+                    // Log the error, but otherwise do nothing
+                    \error_log($exception->__toString());
                 }
             }
         );
