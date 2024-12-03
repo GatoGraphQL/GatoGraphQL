@@ -9,7 +9,10 @@ use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInterface;
 class CommercialPluginUpdatedPluginData
 {
     public function __construct(
-        public readonly PluginInterface $plugin,
+        public readonly string $pluginName,
+        public readonly string $pluginSlug,
+        public readonly string $pluginBaseName,
+        public readonly string $pluginVersion,
         public readonly string $licenseKey,
         public readonly string $cacheKey,
     ) {
