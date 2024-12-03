@@ -4,7 +4,13 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 8.0.0 - 29/11/2024
+## 8.0.1 - DATE
+
+### Fixed
+
+- Catch exception from SymfonyDI on `admin_init` hook (#2974)
+
+## 8.0.0 - 30/11/2024
 
 ### Improvements
 
