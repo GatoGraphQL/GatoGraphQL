@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use Exception;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
@@ -22,8 +23,8 @@ use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
-use PoP\ComponentModel\Constants\FrameworkParams;
 
+use PoP\ComponentModel\Constants\FrameworkParams;
 use function update_option;
 
 /**
@@ -280,86 +281,94 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         \add_action(
             'admin_init',
             function () use ($settingsCategoryRegistry): void {
-                $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-                foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
-                    $categorySettingsItems = array_values(array_filter(
-                        $settingsItems,
-                        /** @param array<string,mixed> $item */
-                        fn (array $item) => $item['settings-category'] === $settingsCategory
-                    ));
-                    $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-                    foreach ($categorySettingsItems as $item) {
-                        $optionsFormModuleSectionName = $this->getOptionsFormModuleSectionName($optionsFormName, $item['id']);
-                        $module = $item['module'];
-                        \add_settings_section(
-                            $optionsFormModuleSectionName,
-                            // The empty string ensures the render function won't output a h2.
-                            '',
-                            function (): void {
-                            },
-                            $optionsFormName
-                        );
-                        foreach ($item['settings'] as $itemSetting) {
-                            \add_settings_field(
-                                $itemSetting[Properties::NAME],
-                                $itemSetting[Properties::TITLE] ?? '',
-                                function () use ($module, $itemSetting, $optionsFormName): void {
-                                    $type = $itemSetting[Properties::TYPE] ?? null;
-                                    $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
-                                    $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
-                                    ?>
-                                        <div id="section-<?php echo \esc_attr($itemSetting[Properties::NAME]) ?>" class="gatographql-settings-item" <?php if (!empty($cssStyle)) :
-                                            ?>style="<?php echo \esc_attr($cssStyle) ?>"<?php
-                                                         endif; ?>>
-                                            <?php
-                                            if (!empty($possibleValues)) {
-                                                $this->printSelectField($optionsFormName, $module, $itemSetting);
-                                            } elseif ($type === Properties::TYPE_ARRAY) {
-                                                $this->printTextareaField($optionsFormName, $module, $itemSetting);
-                                            } elseif ($type === Properties::TYPE_BOOL) {
-                                                $this->printCheckboxField($optionsFormName, $module, $itemSetting);
-                                            } elseif ($type === Properties::TYPE_NULL) {
-                                                $this->printLabelField($optionsFormName, $module, $itemSetting);
-                                            } elseif ($type === Properties::TYPE_PROPERTY_ARRAY) {
-                                                $this->printMultiInputField($optionsFormName, $module, $itemSetting);
-                                            } else {
-                                                $this->printInputField($optionsFormName, $module, $itemSetting);
-                                            }
-                                            ?>
-                                        </div>
-                                    <?php
-                                },
-                                $optionsFormName,
+                /**
+                 * If for some reason SymfonyDI throws a ServiceNotFoundException,
+                 * then catch it and do nothing (i.e. don't let the app explode)
+                 */
+                try {
+                    $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+                    foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
+                        $categorySettingsItems = array_values(array_filter(
+                            $settingsItems,
+                            /** @param array<string,mixed> $item */
+                            fn (array $item) => $item['settings-category'] === $settingsCategory
+                        ));
+                        $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                        foreach ($categorySettingsItems as $item) {
+                            $optionsFormModuleSectionName = $this->getOptionsFormModuleSectionName($optionsFormName, $item['id']);
+                            $module = $item['module'];
+                            \add_settings_section(
                                 $optionsFormModuleSectionName,
-                                [
-                                    'label' => $itemSetting[Properties::DESCRIPTION] ?? '',
-                                    'id' => $itemSetting[Properties::NAME],
-                                ]
+                                // The empty string ensures the render function won't output a h2.
+                                '',
+                                function (): void {
+                                },
+                                $optionsFormName
                             );
+                            foreach ($item['settings'] as $itemSetting) {
+                                \add_settings_field(
+                                    $itemSetting[Properties::NAME],
+                                    $itemSetting[Properties::TITLE] ?? '',
+                                    function () use ($module, $itemSetting, $optionsFormName): void {
+                                        $type = $itemSetting[Properties::TYPE] ?? null;
+                                        $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+                                        $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
+                                        ?>
+                                            <div id="section-<?php echo \esc_attr($itemSetting[Properties::NAME]) ?>" class="gatographql-settings-item" <?php if (!empty($cssStyle)) :
+                                                ?>style="<?php echo \esc_attr($cssStyle) ?>"<?php
+                                                            endif; ?>>
+                                                <?php
+                                                if (!empty($possibleValues)) {
+                                                    $this->printSelectField($optionsFormName, $module, $itemSetting);
+                                                } elseif ($type === Properties::TYPE_ARRAY) {
+                                                    $this->printTextareaField($optionsFormName, $module, $itemSetting);
+                                                } elseif ($type === Properties::TYPE_BOOL) {
+                                                    $this->printCheckboxField($optionsFormName, $module, $itemSetting);
+                                                } elseif ($type === Properties::TYPE_NULL) {
+                                                    $this->printLabelField($optionsFormName, $module, $itemSetting);
+                                                } elseif ($type === Properties::TYPE_PROPERTY_ARRAY) {
+                                                    $this->printMultiInputField($optionsFormName, $module, $itemSetting);
+                                                } else {
+                                                    $this->printInputField($optionsFormName, $module, $itemSetting);
+                                                }
+                                                ?>
+                                            </div>
+                                        <?php
+                                    },
+                                    $optionsFormName,
+                                    $optionsFormModuleSectionName,
+                                    [
+                                        'label' => $itemSetting[Properties::DESCRIPTION] ?? '',
+                                        'id' => $itemSetting[Properties::NAME],
+                                    ]
+                                );
+                            }
                         }
-                    }
 
-                    /**
-                     * Finally register all the settings
-                     */
-                    \register_setting(
-                        $optionsFormName,
-                        $settingsCategoryResolver->getDBOptionName($settingsCategory),
-                        [
-                            'type' => 'array',
-                            'description' => $settingsCategoryResolver->getName($settingsCategory),
-                            /**
-                             * This call is needed to cast the data
-                             * before saving to the DB.
-                             *
-                             * Please notice that this callback may be called twice:
-                             * once triggered by `update_option` and once by `add_option`,
-                             * (which is called by `update_option`).
-                             */
-                            'sanitize_callback' => fn (array $values) => $this->sanitizeCallback($values, $settingsCategory),
-                            'show_in_rest' => false,
-                        ]
-                    );
+                        /**
+                         * Finally register all the settings
+                         */
+                        \register_setting(
+                            $optionsFormName,
+                            $settingsCategoryResolver->getDBOptionName($settingsCategory),
+                            [
+                                'type' => 'array',
+                                'description' => $settingsCategoryResolver->getName($settingsCategory),
+                                /**
+                                 * This call is needed to cast the data
+                                 * before saving to the DB.
+                                 *
+                                 * Please notice that this callback may be called twice:
+                                 * once triggered by `update_option` and once by `add_option`,
+                                 * (which is called by `update_option`).
+                                 */
+                                'sanitize_callback' => fn (array $values) => $this->sanitizeCallback($values, $settingsCategory),
+                                'show_in_rest' => false,
+                            ]
+                        );
+                    }
+                } catch (Exception) {
+                    // Do nothing
                 }
             }
         );
