@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Catch exception from SymfonyDI on `admin_init` hook (#2974)
+- Only register block JS scripts when in allowed CPT (#2975)
 
 ## 8.0.0 - 30/11/2024
 

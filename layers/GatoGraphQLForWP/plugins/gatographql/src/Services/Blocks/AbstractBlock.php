@@ -22,6 +22,15 @@ use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function add_action;
+use function is_admin;
+use function is_singular;
+use function register_block_type;
+use function wp_localize_script;
+use function wp_enqueue_style;
+use function wp_register_script;
+use function wp_register_style;
+
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
  * The JS/CSS assets for each block is contained in folder {pluginDir}/blocks/{blockName}, and follows
@@ -335,6 +344,17 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      * Registers all block assets so that they can be enqueued through the block editor
      * in the corresponding context.
      *
+     * --------------------------------------------------------------------------------
+     *
+     * Only register the blocks when editing/viewing the corresponding CPTs,
+     * to enable standalone plugins to be installed alongside Gato GraphQL,
+     * and avoid a conflict from the same block registered twice.
+     *
+     * For instance, running Gato GraphQL and Gato Multilingual for Polylang
+     * would print error on screen:
+     *
+     *    Notice: Function WP_Block_Type_Registry::register was called incorrectly. Block type "gatographql-pro/graphiql" is already registered. Please see Debugging in WordPress for more information. (This message was added in version 5.0.0.) in /Users/leo/Local Sites/playground/app/public/wp-includes/functions.php on line 6114
+     *
      * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
      */
     public function initBlock(): void
@@ -346,13 +366,24 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * printing error console such as:
          * > The block "gatographql/schema-configuration" must have a registered category.
          */
-        if (\is_admin()) {
-            if ($customPostTypes = $this->getAllowedPostTypes()) {
-                if (!in_array($this->getEditorHelpers()->getEditingCustomPostType(), $customPostTypes)) {
-                    return;
-                }
-            }
+        $allowedCustomPostTypes = $this->getAllowedPostTypes();
+        $isAdmin = is_admin();
+        if ($allowedCustomPostTypes === [] && ($isAdmin || $this->loadClientScriptsInCorrespondingSingleCPTsOnly())) {
+            return;
+        }
 
+        /**
+         * Check that we're either eding the post in the wp-admin,
+         * or viewing the post in the frontend
+         */
+        if (
+            ($isAdmin && !in_array($this->getEditorHelpers()->getEditingCustomPostType(), $allowedCustomPostTypes))
+            || (!$isAdmin && !is_singular($allowedCustomPostTypes))
+        ) {
+            return;
+        }
+
+        if ($isAdmin) {
             /**
              * Register Highlight.js CSS file for documentation
              */
@@ -360,7 +391,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
                 $mainPlugin = PluginApp::getMainPlugin();
                 $mainPluginURL = $mainPlugin->getPluginURL();
                 $mainPluginVersion = $mainPlugin->getPluginVersion();
-                \wp_enqueue_style(
+                wp_enqueue_style(
                     'highlight-style',
                     $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css',
                     array(),
@@ -390,7 +421,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         $index_js     = 'build/index.js';
         $script_asset = require($script_asset_path);
         $scriptRegistrationName = $blockRegistrationName . '-block-editor';
-        \wp_register_script(
+        wp_register_script(
             $scriptRegistrationName,
             $url . $index_js,
             array_merge(
@@ -408,7 +439,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             $editor_css = 'build/index.css';
             /** @var string */
             $modificationTime = filemtime("$dir/$editor_css");
-            \wp_register_style(
+            wp_register_style(
                 $blockRegistrationName . '-block-editor',
                 $url . $editor_css,
                 array(),
@@ -424,7 +455,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             $style_css = 'build/style-index.css';
             /** @var string */
             $modificationTime = filemtime("$dir/$style_css");
-            \wp_register_style(
+            wp_register_style(
                 $blockRegistrationName . '-block',
                 $url . $style_css,
                 array(),
@@ -440,9 +471,9 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * which calls ComponentModelModuleConfiguration::mustNamespaceTypes(),
          * which is initialized during "wp"
          */
-        \add_action('wp_print_scripts', function () use ($scriptRegistrationName): void {
+        add_action('wp_print_scripts', function () use ($scriptRegistrationName): void {
             if ($localizedData = $this->getLocalizedData()) {
-                \wp_localize_script(
+                wp_localize_script(
                     $scriptRegistrationName,
                     $this->getBlockLocalizationName(),
                     $localizedData
@@ -465,7 +496,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         }
 
         if ($this->registerBlockServerSide()) {
-            \register_block_type($blockFullName, $blockConfiguration);
+            register_block_type($blockFullName, $blockConfiguration);
         }
 
         /**
@@ -485,7 +516,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final protected function mustLoadClientEditorCommonAssets(): bool
     {
-        if (\is_admin()) {
+        if (is_admin()) {
             return true;
         }
 
@@ -498,7 +529,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
             return true;
         }
 
-        return \is_singular($allowedCustomPostTypes);
+        return is_singular($allowedCustomPostTypes);
     }
 
     protected function loadClientScriptsInCorrespondingSingleCPTsOnly(): bool
