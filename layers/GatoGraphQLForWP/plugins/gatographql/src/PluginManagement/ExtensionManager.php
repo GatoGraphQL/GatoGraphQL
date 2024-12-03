@@ -33,8 +33,8 @@ class ExtensionManager extends AbstractPluginManager
     /** @var array<string,BundleExtensionInterface> */
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
-    /** @var array<string,string> Extension Slug => Extension Product Name */
-    private array $nonActivatedLicenseCommercialExtensionSlugProductNames = [];
+    /** @var array<string,ActiveLicenseCommercialExtensionData> Extension Slug => ActiveLicenseCommercialExtensionData */
+    private array $nonActivatedLicenseCommercialExtensionSlugDataEntries = [];
 
     /** @var array<string,ActiveLicenseCommercialExtensionData> Extension Slug => ActiveLicenseCommercialExtensionData */
     private array $activatedLicenseCommercialExtensionSlugDataEntries = [];
@@ -291,6 +291,14 @@ class ExtensionManager extends AbstractPluginManager
         $extensionBaseName = plugin_basename($extensionFile);
         $extensionSlug = dirname($extensionBaseName);
 
+        $extensionData = new ActiveLicenseCommercialExtensionData(
+            $extensionProductName,
+            $extensionName,
+            $extensionSlug,
+            $extensionBaseName,
+            $extensionVersion,
+        );
+
         /**
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
@@ -298,7 +306,7 @@ class ExtensionManager extends AbstractPluginManager
         $commercialExtensionActivatedLicenseObjectProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
         if (!isset($commercialExtensionActivatedLicenseObjectProperties[$extensionSlug])) {
             $this->showAdminWarningNotice($extensionName);
-            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
+            $this->nonActivatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = $extensionData;
             return false;
         }
 
@@ -326,7 +334,7 @@ class ExtensionManager extends AbstractPluginManager
                 $extensionName,
                 __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql')
             );
-            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
+            $this->nonActivatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = $extensionData;
             return false;
         }
 
@@ -338,18 +346,12 @@ class ExtensionManager extends AbstractPluginManager
                 $extensionName,
                 __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql')
             );
-            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
+            $this->nonActivatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = $extensionData;
             return false;
         }
 
         // Everything is good!
-        $this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = new ActiveLicenseCommercialExtensionData(
-            $extensionProductName,
-            $extensionName,
-            $extensionSlug,
-            $extensionBaseName,
-            $extensionVersion,
-        );
+        $this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = $extensionData;
         return true;
     }
 
@@ -403,11 +405,11 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * @return array<string,string> Extension Slug => Extension Product Name
+     * @return array<string,ActiveLicenseCommercialExtensionData> Extension Slug => ActiveLicenseCommercialExtensionData
      */
-    public function getNonActivatedLicenseCommercialExtensionSlugProductNames(): array
+    public function getNonActivatedLicenseCommercialExtensionSlugDataEntries(): array
     {
-        return $this->nonActivatedLicenseCommercialExtensionSlugProductNames;
+        return $this->nonActivatedLicenseCommercialExtensionSlugDataEntries;
     }
 
     /**
@@ -432,10 +434,10 @@ class ExtensionManager extends AbstractPluginManager
     public function getCommercialExtensionSlugProductNames(): array
     {
         if ($this->commercialExtensionSlugProductNames === null) {
-            $this->commercialExtensionSlugProductNames = array_merge(
-                $this->getNonActivatedLicenseCommercialExtensionSlugProductNames(),
-                array_map(
-                    fn (ActiveLicenseCommercialExtensionData $extensionData) => $extensionData->productName,
+            $this->commercialExtensionSlugProductNames = array_map(
+                fn (ActiveLicenseCommercialExtensionData $extensionData) => $extensionData->productName,
+                array_merge(
+                    $this->getNonActivatedLicenseCommercialExtensionSlugDataEntries(),
                     $this->getActivatedLicenseCommercialExtensionSlugDataEntries()
                 ),
             );
