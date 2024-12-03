@@ -171,6 +171,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 8.0.1 =
+* Fixed: Catch exception from SymfonyDI on `admin_init` hook (#2974)
+
 = 8.0.0 =
 * Extensions (eg: the "All Extensions" bundle) can now be updated from the Plugins page (#2972)
 
