@@ -4,13 +4,21 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 8.0.1 - DATE
+## 9.0.0 - DATE
+
+### Breaking changes
+
+- Changed signature of method `assertCommercialLicenseHasBeenActivated` (#2978)
+
+### Improvements
+
+- Only register block JS scripts when in allowed CPT (#2975)
+- Enable updating extensions from Plugins page after major release (#2978)
 
 ### Fixed
 
 - Catch exception from SymfonyDI on `admin_init` hook (#2974)
-- Only register block JS scripts when in allowed CPT (#2975)
-- Show "Visit plugin site" link instead of "View details" for commercial plugins (#2976)
+- Show "Visit plugin site" link instead of "View details" for extensions (#2976)
 - Fixed "Deprecated: Calling get_parent_class() without arguments is deprecated" (#2977)
 
 ## 8.0.0 - 30/11/2024
