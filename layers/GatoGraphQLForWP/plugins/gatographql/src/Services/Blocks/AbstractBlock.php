@@ -360,11 +360,15 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          *    Notice: Function WP_Block_Type_Registry::register was called incorrectly. Block type "gatographql-pro/graphiql" is already registered. Please see Debugging in WordPress for more information. (This message was added in version 5.0.0.) in /Users/leo/Local Sites/playground/app/public/wp-includes/functions.php on line 6114
          */
         $allowedCustomPostTypes = $this->getAllowedPostTypes();
-        if ($allowedCustomPostTypes === []) {
+        $isAdmin = is_admin();
+        if ($allowedCustomPostTypes === [] && ($isAdmin || $this->loadClientScriptsInCorrespondingSingleCPTsOnly())) {
             return;
         }
 
-        $isAdmin = is_admin();
+        /**
+         * Check that we're either eding the post in the wp-admin,
+         * or viewing the post in the frontend
+         */
         if (($isAdmin && !in_array($this->getEditorHelpers()->getEditingCustomPostType(), $allowedCustomPostTypes))
             || (!$isAdmin && !\is_singular($allowedCustomPostTypes))
         ) {
