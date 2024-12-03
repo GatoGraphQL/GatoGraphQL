@@ -344,6 +344,17 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      * Registers all block assets so that they can be enqueued through the block editor
      * in the corresponding context.
      *
+     * --------------------------------------------------------------------------------
+     * 
+     * Only register the blocks when editing/viewing the corresponding CPTs,
+     * to enable standalone plugins to be installed alongside Gato GraphQL,
+     * and avoid a conflict from the same block registered twice.
+     *
+     * For instance, running Gato GraphQL and Gato Multilingual for Polylang
+     * would print error on screen:
+     *
+     *    Notice: Function WP_Block_Type_Registry::register was called incorrectly. Block type "gatographql-pro/graphiql" is already registered. Please see Debugging in WordPress for more information. (This message was added in version 5.0.0.) in /Users/leo/Local Sites/playground/app/public/wp-includes/functions.php on line 6114
+     *
      * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
      */
     public function initBlock(): void
@@ -354,17 +365,6 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * Otherwise, the block would be registered but the category is not,
          * printing error console such as:
          * > The block "gatographql/schema-configuration" must have a registered category.
-         *
-         * --------
-         * 
-         * Only register the blocks when editing/viewing the corresponding CPTs,
-         * to enable standalone plugins to be installed alongside Gato GraphQL,
-         * and avoid a conflict from the same block registered twice.
-         *
-         * For instance, running Gato GraphQL and Gato Multilingual for Polylang
-         * would print error on screen:
-         *
-         *    Notice: Function WP_Block_Type_Registry::register was called incorrectly. Block type "gatographql-pro/graphiql" is already registered. Please see Debugging in WordPress for more information. (This message was added in version 5.0.0.) in /Users/leo/Local Sites/playground/app/public/wp-includes/functions.php on line 6114
          */
         $allowedCustomPostTypes = $this->getAllowedPostTypes();
         $isAdmin = is_admin();
