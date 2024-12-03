@@ -345,7 +345,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      * in the corresponding context.
      *
      * --------------------------------------------------------------------------------
-     * 
+     *
      * Only register the blocks when editing/viewing the corresponding CPTs,
      * to enable standalone plugins to be installed alongside Gato GraphQL,
      * and avoid a conflict from the same block registered twice.
@@ -376,7 +376,8 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * Check that we're either eding the post in the wp-admin,
          * or viewing the post in the frontend
          */
-        if (($isAdmin && !in_array($this->getEditorHelpers()->getEditingCustomPostType(), $allowedCustomPostTypes))
+        if (
+            ($isAdmin && !in_array($this->getEditorHelpers()->getEditingCustomPostType(), $allowedCustomPostTypes))
             || (!$isAdmin && !is_singular($allowedCustomPostTypes))
         ) {
             return;
