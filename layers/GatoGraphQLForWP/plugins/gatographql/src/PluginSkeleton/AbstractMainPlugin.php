@@ -573,7 +573,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * has been invoked
                  */
                 $extensionManager = PluginApp::getExtensionManager();
-                if ($extensionManager->getActivatedLicenseCommercialExtensionSlugProductNames() === []) {
+                if ($extensionManager->getActivatedLicenseCommercialExtensionSlugDataEntries() === []) {
                     return;
                 }
 

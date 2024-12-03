@@ -411,9 +411,9 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * @return array<string,string> Extension Slug => Extension Product Name
+     * @return array<string,string> Extension Slug => ActiveLicenseCommercialExtensionData
      */
-    public function getActivatedLicenseCommercialExtensionSlugProductNames(): array
+    public function getActivatedLicenseCommercialExtensionSlugDataEntries(): array
     {
         return $this->activatedLicenseCommercialExtensionSlugDataEntries;
     }
@@ -434,7 +434,7 @@ class ExtensionManager extends AbstractPluginManager
         if ($this->commercialExtensionSlugProductNames === null) {
             $this->commercialExtensionSlugProductNames = array_merge(
                 $this->getNonActivatedLicenseCommercialExtensionSlugProductNames(),
-                $this->getActivatedLicenseCommercialExtensionSlugProductNames(),
+                $this->getActivatedLicenseCommercialExtensionSlugDataEntries(),
             );
             ksort($this->commercialExtensionSlugProductNames);
         }
