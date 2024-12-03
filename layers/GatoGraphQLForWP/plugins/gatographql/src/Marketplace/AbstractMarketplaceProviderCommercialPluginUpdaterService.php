@@ -75,20 +75,18 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
         $extensionManager = PluginApp::getExtensionManager();
         $activeExtensionDataEntries = $extensionManager->getActivatedLicenseCommercialExtensionSlugDataEntries();
         foreach ($licenseKeys as $pluginSlug => $pluginLicenseKey) {
-            foreach ($activeExtensionDataEntries as $activeExtensionData) {
-                if ($activeExtensionData->slug !== $pluginSlug) {
-                    continue;
-                }
-                $this->pluginSlugDataEntries[$pluginSlug] = new CommercialPluginUpdatedPluginData(
-                    $activeExtensionData->name,
-                    $activeExtensionData->slug,
-                    $activeExtensionData->baseName,
-                    $activeExtensionData->version,
-                    $pluginLicenseKey,
-                    str_replace('-', '_', $pluginSlug) . '_updater',
-                );
-                break;
+            $activeExtensionData = $activeExtensionDataEntries[$pluginSlug] ?? null;
+            if ($activeExtensionData === null) {
+                continue;
             }
+            $this->pluginSlugDataEntries[$pluginSlug] = new CommercialPluginUpdatedPluginData(
+                $activeExtensionData->name,
+                $activeExtensionData->slug,
+                $activeExtensionData->baseName,
+                $activeExtensionData->version,
+                $pluginLicenseKey,
+                str_replace('-', '_', $pluginSlug) . '_updater',
+            );
         }
 
         add_filter('plugins_api', $this->overridePluginInfo(...), 20, 3);
