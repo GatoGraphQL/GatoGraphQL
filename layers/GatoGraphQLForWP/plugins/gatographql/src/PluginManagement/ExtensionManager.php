@@ -283,6 +283,8 @@ class ExtensionManager extends AbstractPluginManager
         string $extensionSlug,
         string $extensionProductName,
         string $extensionName,
+        string $extensionBaseName,
+        string $extensionVersion,
     ): bool {
         /**
          * Retrieve from the DB which licenses have been activated,
