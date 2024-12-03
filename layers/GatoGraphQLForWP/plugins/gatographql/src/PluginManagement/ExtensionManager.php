@@ -21,8 +21,8 @@ use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
-
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
+
 use function plugin_basename;
 
 class ExtensionManager extends AbstractPluginManager
