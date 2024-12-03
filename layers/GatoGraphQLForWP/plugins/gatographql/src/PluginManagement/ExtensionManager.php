@@ -434,7 +434,10 @@ class ExtensionManager extends AbstractPluginManager
         if ($this->commercialExtensionSlugProductNames === null) {
             $this->commercialExtensionSlugProductNames = array_merge(
                 $this->getNonActivatedLicenseCommercialExtensionSlugProductNames(),
-                $this->getActivatedLicenseCommercialExtensionSlugDataEntries(),
+                array_map(
+                    fn (ActiveLicenseCommercialExtensionData $extensionData) => $extensionData->productName,
+                    $this->getActivatedLicenseCommercialExtensionSlugDataEntries()
+                ),
             );
             ksort($this->commercialExtensionSlugProductNames);
         }
