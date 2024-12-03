@@ -37,7 +37,7 @@ class ExtensionManager extends AbstractPluginManager
     private array $nonActivatedLicenseCommercialExtensionSlugProductNames = [];
 
     /** @var array<string,ActiveLicenseCommercialExtensionData> Extension Slug => ActiveLicenseCommercialExtensionData */
-    private array $activatedLicenseCommercialExtensionSlugProductNames = [];
+    private array $activatedLicenseCommercialExtensionSlugDataEntries = [];
 
     /** @var array<string,string>|null Extension Slug => Extension Product Name */
     private ?array $commercialExtensionSlugProductNames = null;
@@ -343,7 +343,7 @@ class ExtensionManager extends AbstractPluginManager
         }
 
         // Everything is good!
-        $this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = new ActiveLicenseCommercialExtensionData(
+        $this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = new ActiveLicenseCommercialExtensionData(
             $extensionProductName,
             $extensionName,
             $extensionSlug,
@@ -415,7 +415,7 @@ class ExtensionManager extends AbstractPluginManager
      */
     public function getActivatedLicenseCommercialExtensionSlugProductNames(): array
     {
-        return $this->activatedLicenseCommercialExtensionSlugProductNames;
+        return $this->activatedLicenseCommercialExtensionSlugDataEntries;
     }
 
     /**
@@ -423,7 +423,7 @@ class ExtensionManager extends AbstractPluginManager
      */
     public function isExtensionLicenseActive(string $extensionSlug): bool
     {
-        return isset($this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug]);
+        return isset($this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug]);
     }
 
     /**
