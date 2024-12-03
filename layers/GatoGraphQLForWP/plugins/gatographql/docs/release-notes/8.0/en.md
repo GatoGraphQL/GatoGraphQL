@@ -3,10 +3,3 @@
 ## Improvements
 
 - Extensions (eg: the "All Extensions" bundle) can now be updated from the Plugins page ([#2972](https://github.com/GatoGraphQL/GatoGraphQL/pull/2972))
-
-## Fixed
-
-- Catch exception from SymfonyDI on `admin_init` hook ([#2974](https://github.com/GatoGraphQL/GatoGraphQL/pull/2974)) (`v8.0.1`)
-- Only register block JS scripts when in allowed CPT ([#2975](https://github.com/GatoGraphQL/GatoGraphQL/pull/2975)) (`v8.0.1`)
-- Show "Visit plugin site" link instead of "View details" for commercial plugins ([#2976](https://github.com/GatoGraphQL/GatoGraphQL/pull/2976)) (`v8.0.1`)
-- Fixed "Deprecated: Calling get_parent_class() without arguments is deprecated" ([#2977](https://github.com/GatoGraphQL/GatoGraphQL/pull/2977)) (`v8.0.1`)
