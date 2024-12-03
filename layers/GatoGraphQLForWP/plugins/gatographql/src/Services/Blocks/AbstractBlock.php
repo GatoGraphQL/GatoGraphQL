@@ -22,6 +22,8 @@ use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function is_admin;
+
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
  * The JS/CSS assets for each block is contained in folder {pluginDir}/blocks/{blockName}, and follows
@@ -357,13 +359,19 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          *
          *    Notice: Function WP_Block_Type_Registry::register was called incorrectly. Block type "gatographql-pro/graphiql" is already registered. Please see Debugging in WordPress for more information. (This message was added in version 5.0.0.) in /Users/leo/Local Sites/playground/app/public/wp-includes/functions.php on line 6114
          */
-        if (\is_admin()) {
-            if ($customPostTypes = $this->getAllowedPostTypes()) {
-                if (!in_array($this->getEditorHelpers()->getEditingCustomPostType(), $customPostTypes)) {
-                    return;
-                }
-            }
+        $allowedCustomPostTypes = $this->getAllowedPostTypes();
+        if ($allowedCustomPostTypes === []) {
+            return;
+        }
 
+        $isAdmin = is_admin();
+        if (($isAdmin && !in_array($this->getEditorHelpers()->getEditingCustomPostType(), $allowedCustomPostTypes))
+            || (!$isAdmin && !\is_singular($allowedCustomPostTypes))
+        ) {
+            return;
+        }
+
+        if ($isAdmin) {
             /**
              * Register Highlight.js CSS file for documentation
              */
@@ -496,7 +504,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final protected function mustLoadClientEditorCommonAssets(): bool
     {
-        if (\is_admin()) {
+        if (is_admin()) {
             return true;
         }
 
