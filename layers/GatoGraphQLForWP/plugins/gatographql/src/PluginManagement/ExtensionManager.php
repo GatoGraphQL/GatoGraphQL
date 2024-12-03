@@ -22,6 +22,8 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
+use function plugin_basename;
+
 class ExtensionManager extends AbstractPluginManager
 {
     /** @var string[] */
@@ -285,9 +287,9 @@ class ExtensionManager extends AbstractPluginManager
         string $extensionName,
         string $extensionVersion,
     ): bool {
-        $extensionBaseName = \plugin_basename($extensionFile);
+        $extensionBaseName = plugin_basename($extensionFile);
         $extensionSlug = dirname($extensionBaseName);
-        
+
         /**
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
