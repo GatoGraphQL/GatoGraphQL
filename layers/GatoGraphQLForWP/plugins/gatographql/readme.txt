@@ -171,10 +171,12 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 8.0.1 =
+= 9.0.0 =
+* Breaking change: Changed signature of method `assertCommercialLicenseHasBeenActivated` (#2978)
+* Only register block JS scripts when in allowed CPT (#2975)
+* Enable updating extensions from Plugins page after major release (#2978)
 * Fixed: Catch exception from SymfonyDI on `admin_init` hook (#2974)
-* Fixed: Only register block JS scripts when in allowed CPT (#2975)
-* Fixed: Show "Visit plugin site" link instead of "View details" for commercial plugins (#2976)
+* Fixed: Show "Visit plugin site" link instead of "View details" for extensions (#2976)
 * Fixed "Deprecated: Calling get_parent_class() without arguments is deprecated" (#2977)
 
 = 8.0.0 =
