@@ -280,12 +280,14 @@ class ExtensionManager extends AbstractPluginManager
      * @param string $extensionProductName The EXACT name as the product is stored in the Gato Shop (i.e. in the Marketplace Provider's system)
      */
     public function assertCommercialLicenseHasBeenActivated(
-        string $extensionSlug,
+        string $extensionFile,
         string $extensionProductName,
         string $extensionName,
-        string $extensionBaseName,
         string $extensionVersion,
     ): bool {
+        $extensionBaseName = \plugin_basename($extensionFile);
+        $extensionSlug = dirname($extensionBaseName);
+        
         /**
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
