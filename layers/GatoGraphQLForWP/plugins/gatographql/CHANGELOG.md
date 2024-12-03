@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Catch exception from SymfonyDI on `admin_init` hook (#2974)
 - Only register block JS scripts when in allowed CPT (#2975)
+- Show "Visit plugin site" link instead of "View details" for commercial plugins (#2976)
 
 ## 8.0.0 - 30/11/2024
 
