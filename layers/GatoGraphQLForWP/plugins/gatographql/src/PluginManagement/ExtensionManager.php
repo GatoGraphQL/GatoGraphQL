@@ -411,7 +411,7 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * @return array<string,string> Extension Slug => ActiveLicenseCommercialExtensionData
+     * @return array<string,ActiveLicenseCommercialExtensionData> Extension Slug => ActiveLicenseCommercialExtensionData
      */
     public function getActivatedLicenseCommercialExtensionSlugDataEntries(): array
     {

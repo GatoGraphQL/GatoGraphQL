@@ -73,17 +73,17 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService impleme
          * `isCommercial` belongs to `Extension`, not `Plugin`)
          */
         $extensionManager = PluginApp::getExtensionManager();
-        $pluginBaseNameInstances = $extensionManager->getExtensions();
+        $activeExtensionDataEntries = $extensionManager->getActivatedLicenseCommercialExtensionSlugDataEntries();
         foreach ($licenseKeys as $pluginSlug => $pluginLicenseKey) {
-            foreach ($pluginBaseNameInstances as $pluginBaseName => $extensionInstance) {
-                if ($extensionInstance->getPluginSlug() !== $pluginSlug) {
+            foreach ($activeExtensionDataEntries as $activeExtensionData) {
+                if ($activeExtensionData->slug !== $pluginSlug) {
                     continue;
                 }
                 $this->pluginSlugDataEntries[$pluginSlug] = new CommercialPluginUpdatedPluginData(
-                    $extensionInstance->getPluginName(),
-                    $extensionInstance->getPluginSlug(),
-                    $extensionInstance->getPluginBaseName(),
-                    $extensionInstance->getPluginVersion(),
+                    $activeExtensionData->name,
+                    $activeExtensionData->slug,
+                    $activeExtensionData->baseName,
+                    $activeExtensionData->version,
                     $pluginLicenseKey,
                     str_replace('-', '_', $pluginSlug) . '_updater',
                 );
