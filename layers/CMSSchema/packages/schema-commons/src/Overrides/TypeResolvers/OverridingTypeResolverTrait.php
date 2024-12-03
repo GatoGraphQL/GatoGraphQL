@@ -9,6 +9,6 @@ trait OverridingTypeResolverTrait
     protected function getClassToNamespace(): string
     {
         /** @var string */
-        return get_parent_class();
+        return get_parent_class(get_called_class());
     }
 }
