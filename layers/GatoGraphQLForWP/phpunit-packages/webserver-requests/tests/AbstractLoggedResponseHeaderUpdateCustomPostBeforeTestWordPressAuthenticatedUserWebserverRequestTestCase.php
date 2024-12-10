@@ -33,7 +33,7 @@ abstract class AbstractLoggedResponseHeaderUpdateCustomPostBeforeTestWordPressAu
     protected function validateResponseHeaders(ResponseInterface $response): void
     {
         $dataName = $this->getDataName();
-        $expectedResponseLogErrorMessage = $this->getExpectedResponseLogErrorMessage($dataName);
+        $expectedResponseLogErrorMessage = $this->getExpectedResponseLogErrorMessageOrRegex($dataName);
         $this->assertEquals(
             $expectedResponseLogErrorMessage,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
@@ -54,6 +54,6 @@ abstract class AbstractLoggedResponseHeaderUpdateCustomPostBeforeTestWordPressAu
         }
     }
 
-    abstract protected function getExpectedResponseLogErrorMessage(string $dataName): string;
+    abstract protected function getExpectedResponseLogErrorMessageOrRegex(string $dataName): string;
     abstract protected function getExpectedResponseLogInfoMessageOrRegex(string $dataName): string;
 }
