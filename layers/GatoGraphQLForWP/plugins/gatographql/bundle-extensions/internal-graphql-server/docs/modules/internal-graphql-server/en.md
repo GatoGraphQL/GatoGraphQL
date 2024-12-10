@@ -47,10 +47,11 @@ class GraphQLServer {
 
 
   /**
-   * Execute a persisted GraphQL query (providing its ID as an int, or slug as a string)
+   * Execute a persisted GraphQL query (providing its object
+   * of type WP_Post, ID as an int, or slug as a string)
    */
   public static function executePersistedQuery(
-    string|int $persistedQueryIDOrSlug,
+    WP_Post|string|int $persistedQuery,
     array $variables = [],
     ?string $operationName = null
   ): Response {
