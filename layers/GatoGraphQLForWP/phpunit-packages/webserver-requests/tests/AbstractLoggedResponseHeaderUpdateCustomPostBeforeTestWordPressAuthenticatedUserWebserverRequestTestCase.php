@@ -33,11 +33,21 @@ abstract class AbstractLoggedResponseHeaderUpdateCustomPostBeforeTestWordPressAu
     protected function validateResponseHeaders(ResponseInterface $response): void
     {
         $dataName = $this->getDataName();
-        $expectedResponseLogErrorMessage = $this->getExpectedResponseLogErrorMessageOrRegex($dataName);
-        $this->assertEquals(
-            $expectedResponseLogErrorMessage,
-            $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
-        );
+        $expectedResponseLogErrorMessageOrRegex = $this->getExpectedResponseLogErrorMessageOrRegex($dataName);
+        if (str_starts_with($expectedResponseLogErrorMessageOrRegex, '/') && str_ends_with($expectedResponseLogErrorMessageOrRegex, '/')) {
+            $expectedResponseLogErrorMessageRegex = $expectedResponseLogErrorMessageOrRegex;
+            $this->assertMatchesRegularExpression(
+                $expectedResponseLogErrorMessageRegex,
+                $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
+            );
+        } else {
+            $expectedResponseLogErrorMessage = $expectedResponseLogErrorMessageOrRegex;
+            $this->assertEquals(
+                $expectedResponseLogErrorMessage,
+                $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
+            );
+        }
+
         $expectedResponseLogInfoMessageOrRegex = $this->getExpectedResponseLogInfoMessageOrRegex($dataName);
         if (str_starts_with($expectedResponseLogInfoMessageOrRegex, '/') && str_ends_with($expectedResponseLogInfoMessageOrRegex, '/')) {
             $expectedResponseLogInfoMessageRegex = $expectedResponseLogInfoMessageOrRegex;
