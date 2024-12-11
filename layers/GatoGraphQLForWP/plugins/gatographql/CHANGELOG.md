@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Only register block JS scripts when in allowed CPT (#2975)
 - Enable updating extensions from Plugins page after major release (#2978)
+- Improve performance when caching resolvers for a queried field (#2981)
 
 ### Fixed
 

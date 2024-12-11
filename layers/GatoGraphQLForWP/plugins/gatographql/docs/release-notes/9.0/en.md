@@ -8,6 +8,7 @@
 
 - Only register block JS scripts when in allowed CPT ([#2975](https://github.com/GatoGraphQL/GatoGraphQL/pull/2975))
 - Enable updating extensions from Plugins page after major release ([#2978](https://github.com/GatoGraphQL/GatoGraphQL/pull/2978))
+- Improve performance when caching resolvers for a queried field ([#2981](https://github.com/GatoGraphQL/GatoGraphQL/pull/2981))
 
 ## Fixed
 
