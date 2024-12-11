@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
@@ -70,10 +69,13 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         if ($this->uniqueID === null) {
             $location = $this->getLocation();
             $locationComment = ' # Location: ' . $location->getLine() . 'x' . $location->getColumn();
-            $this->uniqueID = $this->asFieldOutputQueryString() . $locationComment;
-            if ($location instanceof RuntimeLocation) {
-                $this->uniqueID .= ' #Hash: ' . spl_object_hash($this);
-            }
+            $objectHash = ' #Hash: ' . spl_object_hash($this);
+            /**
+             * Watch out! Use ->getName() instead of ->asFieldOutputQueryString()
+             * as the latter may be a very expensive operation (eg: when printing
+             * a very big JSON)
+             */
+            $this->uniqueID = $this->getName() . $locationComment . $objectHash;
         }
         return $this->uniqueID;
     }
