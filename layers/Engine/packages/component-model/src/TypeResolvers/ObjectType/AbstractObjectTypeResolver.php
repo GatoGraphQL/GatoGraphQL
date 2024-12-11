@@ -1127,7 +1127,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * field name is not enough to cache: The resolver is specific
              * to the Field object
              */
-            $cacheKey = $field->getName() . spl_object_hash($field);
+            $cacheKey = $field->getName() . ' #' . spl_object_hash($field);
         } else {
             $cacheKey = $fieldOrFieldName;
         }
