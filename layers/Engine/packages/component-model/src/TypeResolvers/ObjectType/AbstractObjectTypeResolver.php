@@ -1121,7 +1121,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     {
         if ($fieldOrFieldName instanceof FieldInterface) {
             $field = $fieldOrFieldName;
-            $cacheKey = $field->getName();
+            /**
+             * Because field `_isTypeOrImplements` may be added sometimes
+             * (when invoked internally) and otherwise not, then just the
+             * field name is not enough to cache: The resolver is specific
+             * to the Field object
+             */
+            $cacheKey = $field->getName() . spl_object_hash($field);
         } else {
             $cacheKey = $fieldOrFieldName;
         }
