@@ -65,6 +65,69 @@
                 }
             },
             {
+                "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
+                "locations": [
+                    {
+                        "line": 317,
+                        "column": 7
+                    }
+                ],
+                "extensions": {
+                    "path": [
+                        "blocks { ... }",
+                        "...on GenericCustomPost { ... }",
+                        "serverSideRegisteredBlocks: customPost(by: {id: 1680}) { ... }",
+                        "query { ... }"
+                    ],
+                    "type": "GenericCustomPost",
+                    "field": "blocks { ... }",
+                    "id": 1680,
+                    "code": "PoP\/ComponentModel@w1"
+                }
+            },
+            {
+                "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
+                "locations": [
+                    {
+                        "line": 320,
+                        "column": 7
+                    }
+                ],
+                "extensions": {
+                    "path": [
+                        "blockDataItems",
+                        "...on GenericCustomPost { ... }",
+                        "serverSideRegisteredBlocks: customPost(by: {id: 1680}) { ... }",
+                        "query { ... }"
+                    ],
+                    "type": "GenericCustomPost",
+                    "field": "blockDataItems",
+                    "id": 1680,
+                    "code": "PoP\/ComponentModel@w1"
+                }
+            },
+            {
+                "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
+                "locations": [
+                    {
+                        "line": 321,
+                        "column": 7
+                    }
+                ],
+                "extensions": {
+                    "path": [
+                        "blockFlattenedDataItems",
+                        "...on GenericCustomPost { ... }",
+                        "serverSideRegisteredBlocks: customPost(by: {id: 1680}) { ... }",
+                        "query { ... }"
+                    ],
+                    "type": "GenericCustomPost",
+                    "field": "blockFlattenedDataItems",
+                    "id": 1680,
+                    "code": "PoP\/ComponentModel@w1"
+                }
+            },
+            {
                 "message": "Block type \"gatographql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {

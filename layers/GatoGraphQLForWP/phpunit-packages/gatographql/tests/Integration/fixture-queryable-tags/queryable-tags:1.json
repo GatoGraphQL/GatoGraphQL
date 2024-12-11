@@ -31,7 +31,7 @@
       "extensions": {
         "path": [
           "\"dummy-tag\"",
-          "(taxonomy: \"dummy-tag\"2",
+          "(taxonomy: \"dummy-tag\")",
           "dummyTag: tag(taxonomy: \"dummy-tag\", by: {id: 26}) { ... }",
           "query { ... }"
         ],

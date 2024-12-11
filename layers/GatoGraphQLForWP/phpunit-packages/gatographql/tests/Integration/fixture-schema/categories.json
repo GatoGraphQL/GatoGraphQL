@@ -4161,7 +4161,19 @@
                 "urlPath": "\/dummy-category\/world-cup\/"
             }
         ],
-        "dummyCategoryByID": null,
+        "dummyCategoryByID": {
+            "taxonomy": "dummy-category",
+            "count": 4,
+            "description": "",
+            "id": 20,
+            "metaValue": null,
+            "metaValues": null,
+            "name": "Brontosaurus",
+            "slug": "brontosaurus",
+            "slugPath": "absolute-brilliance\/brontosaurus",
+            "url": "https:\/\/gatographql.lndo.site\/dummy-category\/brontosaurus\/",
+            "urlPath": "\/dummy-category\/brontosaurus\/"
+        },
         "dummyCategoryBySlug": {
             "taxonomy": "dummy-category",
             "count": 3,

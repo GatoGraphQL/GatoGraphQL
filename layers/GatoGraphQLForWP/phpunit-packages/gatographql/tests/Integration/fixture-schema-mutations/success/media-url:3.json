@@ -8,6 +8,10 @@
             "status": "SUCCESS",
             "errors": null,
             "mediaItem": {
+                "parentCustomPost": {
+                    "id": 1,
+                    "title": "Hello world!"
+                },
                 "altText": "Some alternative info about this file that image",
                 "author": {
                     "id": 6,
@@ -29,6 +33,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1,
+                        "title": "Hello world!"
+                    },
                     "altText": "Some alternative info about this file that image",
                     "author": {
                         "id": 6,
@@ -49,6 +57,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1,
+                        "title": "Hello world!"
+                    },
                     "altText": "Some alternative info about this file that image",
                     "author": {
                         "id": 6,

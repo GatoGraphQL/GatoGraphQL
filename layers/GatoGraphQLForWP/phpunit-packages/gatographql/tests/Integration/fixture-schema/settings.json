@@ -73,7 +73,8 @@
                     "promote_users": true,
                     "edit_theme_options": true,
                     "delete_themes": true,
-                    "export": true
+                    "export": true,
+                    "gatogql_manage_graphql_schema": true
                 }
             },
             "editor": {
