@@ -84,11 +84,16 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
                 $this->enableGeneralTabAdvancedModeOption()
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
-                $possibleValues = [
-                    AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE => \__('Do not enable the Advanced Mode', 'gatographql'),
-                    AdvancedModeOptions::ENABLE_ADVANCED_MODE => \__('Enable the Advanced Mode', 'gatographql'),
-                    AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES => $this->getGeneralTabAdvancedModeOptionName(),
-                ];
+                $generalTabAdvancedModeOptionName = $this->getGeneralTabAdvancedModeLockUpdatesOptionName();
+                $possibleValues = array_merge(
+                    [
+                        AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE => \__('Do not enable the Advanced Mode', 'gatographql'),
+                        AdvancedModeOptions::ENABLE_ADVANCED_MODE => \__('Enable the Advanced Mode', 'gatographql'),
+                    ],
+                    $generalTabAdvancedModeOptionName !== null ? [
+                        AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES => $this->getGeneralTabAdvancedModeLockUpdatesOptionName(),
+                    ] : [],
+                );
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
                     Properties::NAME => $this->getSettingOptionName(
@@ -111,7 +116,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
         return false;
     }
 
-    protected function getGeneralTabAdvancedModeOptionName(): string
+    /**
+     * Return `null` to disable displaying this option
+     * in the Settings
+     */
+    protected function getGeneralTabAdvancedModeLockUpdatesOptionName(): ?string
     {
         return \__('Enable the Advanced Mode and Disable Automatic Config Updates', 'gatographql');
     }
