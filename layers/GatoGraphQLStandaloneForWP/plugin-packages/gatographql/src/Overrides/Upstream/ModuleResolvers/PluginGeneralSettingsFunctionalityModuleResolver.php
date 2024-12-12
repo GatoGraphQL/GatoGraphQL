@@ -91,7 +91,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
                         AdvancedModeOptions::ENABLE_ADVANCED_MODE => \__('Enable the Advanced Mode', 'gatographql'),
                     ],
                     $generalTabAdvancedModeOptionName !== null ? [
-                        AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES => $this->getGeneralTabAdvancedModeLockUpdatesOptionName(),
+                        AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES => $generalTabAdvancedModeOptionName,
                     ] : [],
                 );
                 $moduleSettings[] = [
