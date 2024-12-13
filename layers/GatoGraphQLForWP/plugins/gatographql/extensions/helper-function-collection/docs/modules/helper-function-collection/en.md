@@ -380,6 +380,58 @@ This query:
 }
 ```
 
+### `_arrayFlatten`
+
+Flatten an array of arrays into an array.
+
+This query:
+
+```graphql
+{
+  _arrayFlatten(array: [
+    [
+      {
+        "id": 2302,
+        "url": "https://mysite.com/media/143"
+      }
+    ],
+    [
+      {
+        "id": 2303,
+        "url": "https://mysite.com/media/146"
+      },
+      {
+        "id": 2304,
+        "url": "https://mysite.com/media/147"
+      },
+    ]
+  ])
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "_arrayFlatten": [
+      {
+        "id": 2302,
+        "url": "https://mysite.com/media/143"
+      },
+      {
+        "id": 2303,
+        "url": "https://mysite.com/media/146"
+      },
+      {
+        "id": 2304,
+        "url": "https://mysite.com/media/147"
+      }
+    ]
+  }
+}
+```
+
 ### `_arrayGenerateAllCombinationsOfItems`
 
 Combine the elements in the arrays, extracting one item from each array and merging it with all others, under the corresponding label.
