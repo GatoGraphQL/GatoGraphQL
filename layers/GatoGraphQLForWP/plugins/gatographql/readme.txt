@@ -179,6 +179,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed: Catch exception from SymfonyDI on `admin_init` hook (#2974)
 * Fixed: Show "Visit plugin site" link instead of "View details" for extensions (#2976)
 * Fixed "Deprecated: Calling get_parent_class() without arguments is deprecated" (#2977)
+* [Extensions][Helper Function Collection] Added field `_arrayFlatten`
 
 = 8.0.0 =
 * Extensions (eg: the "All Extensions" bundle) can now be updated from the Plugins page (#2972)
