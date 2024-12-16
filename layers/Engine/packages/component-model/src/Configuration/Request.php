@@ -14,7 +14,17 @@ class Request
      */
     public static function getActions(): array
     {
-        return App::getRequest()->request->all()[Params::ACTIONS] ?? App::getRequest()->query->all()[Params::ACTIONS] ?? [];
+        /**
+         * Watch out! Other plugins can implement the same URL param name!
+         * Hence, make sure it's an array, to avoid bugs from conflicts.
+         *
+         * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2985
+         */
+        $actions = App::getRequest()->request->all()[Params::ACTIONS] ?? App::getRequest()->query->all()[Params::ACTIONS] ?? [];
+        if (!is_array($actions)) {
+            return [$actions];
+        }
+        return $actions;
     }
 
     public static function getActionPath(): ?string
