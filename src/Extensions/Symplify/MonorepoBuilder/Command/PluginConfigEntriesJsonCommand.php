@@ -38,7 +38,7 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
             []
         );
         $this->addOption(
-            Option::SLUG,
+            Option::SLUGS,
             null,
             InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
             'Filter the entries by plugin slug. Useful to only generate bundles in GitHub Actions',
@@ -52,7 +52,7 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
         /** @var string[] */
         $extensionTypeFilter = $input->getOption(Option::FILTER);
         /** @var string[] */
-        $extensionSlugFilter = $input->getOption(Option::SLUG);
+        $extensionSlugFilter = $input->getOption(Option::SLUGS);
         $pluginConfigEntries = $this->pluginConfigEntriesJsonProvider->providePluginConfigEntries($scopedOnly, $extensionTypeFilter, $extensionSlugFilter);
 
         // must be without spaces, otherwise it breaks GitHub Actions json

@@ -69,7 +69,7 @@ final class Option
     /**
      * @var string
      */
-    public final const SLUG = 'slug';
+    public final const SLUGS = 'slugs';
     /**
      * @var string
      */
