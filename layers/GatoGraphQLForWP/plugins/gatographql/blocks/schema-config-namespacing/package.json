@@ -1,6 +1,6 @@
 {
     "name": "schema-config-namespacing",
-    "version": "9.0.0",
+    "version": "9.1.0-dev",
     "description": "Configure the namespacing in the the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
