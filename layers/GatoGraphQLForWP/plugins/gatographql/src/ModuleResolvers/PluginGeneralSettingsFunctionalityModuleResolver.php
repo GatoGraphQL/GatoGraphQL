@@ -95,7 +95,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         return match ($module) {
             self::GENERAL => \__('General', 'gatographql'),
             self::SERVER_IP_CONFIGURATION => \__('Server IP Configuration', 'gatographql'),
-            self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'gatographql-schema-editing-access'),
+            self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'gatographql'),
             default => $module,
         };
     }
@@ -105,7 +105,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         return match ($module) {
             self::GENERAL => \__('General options for the plugin', 'gatographql'),
             self::SERVER_IP_CONFIGURATION => \__('Configure retrieving the Client IP depending on the platform/environment', 'gatographql'),
-            self::SCHEMA_EDITING_ACCESS => \__('Grant access to users other than admins to edit the GraphQL schema', 'gatographql-schema-editing-access'),
+            self::SCHEMA_EDITING_ACCESS => \__('Grant access to users other than admins to edit the GraphQL schema', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -302,9 +302,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 $module,
                 $option
             ),
-            Properties::TITLE => \__('Which users can edit the schema?', 'gatographql-schema-editing-access'),
+            Properties::TITLE => \__('Which users can edit the schema?', 'gatographql'),
             Properties::DESCRIPTION => sprintf(
-                \__('Indicate which users can edit the schema (i.e. creating and updating Persisted Queries, Custom Endpoints, and others)<br/><span class="more-info">%s</span>', 'gatographql-schema-editing-access'),
+                \__('Indicate which users can edit the schema (i.e. creating and updating Persisted Queries, Custom Endpoints, and others)<br/><span class="more-info">%s</span>', 'gatographql'),
                 $this->getSettingsItemHelpLinkHTML(
                     'https://gatographql.com/guides/config/managing-who-can-edit-the-schema',
                     \__('Managing who can edit the schema', 'gatographql')
