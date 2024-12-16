@@ -13,6 +13,7 @@ on:
 env:
     CHECKOUT_SUBMODULES: ""
     GENERATE_PLUGINS_FILTER: ""
+    GENERATE_PLUGINS_SLUGS: ""
     # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
     COMPOSER_ROOT_VERSION: dev-master
 
@@ -38,7 +39,8 @@ jobs:
                 run: |
                     quote=\'
                     filter_arg="--filter=$(echo '${{ env.GENERATE_PLUGINS_FILTER }}' | sed -e 's/ / --filter=/g')"
-                    echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json $(echo $filter_arg) --config=config/monorepo-builder/plugin-config-entries-json.php --scoped-only)" >> $GITHUB_OUTPUT
+                    slugs_arg="--slugs=$(echo '${{ env.GENERATE_PLUGINS_SLUGS }}' | sed -e 's/ / --slugs=/g')"
+                    echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json $(echo $filter_arg) $(echo $slugs_arg) --config=config/monorepo-builder/plugin-config-entries-json.php --scoped-only)" >> $GITHUB_OUTPUT
                     echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
