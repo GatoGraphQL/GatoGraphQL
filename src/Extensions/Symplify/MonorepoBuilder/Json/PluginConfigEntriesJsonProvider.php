@@ -180,8 +180,9 @@ final class PluginConfigEntriesJsonProvider
             $pluginConfigEntries = $filteredPluginConfigEntries;
         }
 
+        // Remove any empty entry
+        $extensionSlugFilter = array_values(array_filter($extensionSlugFilter));
         if ($extensionSlugFilter !== []) {
-
             $pluginConfigEntries = array_values(array_filter(
                 $pluginConfigEntries,
                 fn (array $entry) => in_array($entry['plugin_slug'], $extensionSlugFilter)
