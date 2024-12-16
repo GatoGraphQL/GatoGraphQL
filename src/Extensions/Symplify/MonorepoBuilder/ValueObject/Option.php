@@ -69,6 +69,10 @@ final class Option
     /**
      * @var string
      */
+    public final const SLUG = 'slug';
+    /**
+     * @var string
+     */
     public final const EXCLUDE_PACKAGE_PATH = 'exclude-package-path';
     /**
      * @var string

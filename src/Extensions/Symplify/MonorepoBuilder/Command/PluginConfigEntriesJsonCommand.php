@@ -34,7 +34,14 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
             Option::FILTER,
             null,
             InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
-            'Filter the entries to those from extensions/bundles. Useful to only generate bundles in GitHub Actions',
+            'Filter the entries by type, to those from extensions/bundles/standalone plugins. Useful to only generate bundles in GitHub Actions',
+            []
+        );
+        $this->addOption(
+            Option::SLUG,
+            null,
+            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+            'Filter the entries by plugin slug. Useful to only generate bundles in GitHub Actions',
             []
         );
     }
@@ -44,7 +51,9 @@ final class PluginConfigEntriesJsonCommand extends AbstractSymplifyCommand
         $scopedOnly = (bool) $input->getOption(Option::SCOPED_ONLY);
         /** @var string[] */
         $extensionTypeFilter = $input->getOption(Option::FILTER);
-        $pluginConfigEntries = $this->pluginConfigEntriesJsonProvider->providePluginConfigEntries($scopedOnly, $extensionTypeFilter);
+        /** @var string[] */
+        $extensionSlugFilter = $input->getOption(Option::SLUG);
+        $pluginConfigEntries = $this->pluginConfigEntriesJsonProvider->providePluginConfigEntries($scopedOnly, $extensionTypeFilter, $extensionSlugFilter);
 
         // must be without spaces, otherwise it breaks GitHub Actions json
         $json = Json::encode($pluginConfigEntries);
