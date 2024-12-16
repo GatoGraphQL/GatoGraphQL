@@ -20,7 +20,11 @@ class Request
          *
          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2985
          */
-        return App::getRequest()->request->all()[Params::ACTIONS] ?? App::getRequest()->query->all()[Params::ACTIONS] ?? [];
+        $actions = App::getRequest()->request->all()[Params::ACTIONS] ?? App::getRequest()->query->all()[Params::ACTIONS] ?? [];
+        if (!is_array($actions)) {
+            return [$actions];
+        }
+        return $actions;
     }
 
     public static function getActionPath(): ?string
