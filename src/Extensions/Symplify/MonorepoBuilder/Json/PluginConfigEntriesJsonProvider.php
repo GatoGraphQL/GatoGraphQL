@@ -141,7 +141,6 @@ final class PluginConfigEntriesJsonProvider
             ])
         );
         if ($extensionTypeFilter !== []) {
-
             $filteredPluginConfigEntries = [];
 
             // Keep the standalone plugins?
