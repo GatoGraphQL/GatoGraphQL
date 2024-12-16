@@ -21,6 +21,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Catch exception from SymfonyDI on `admin_init` hook (#2974)
 - Show "Visit plugin site" link instead of "View details" for extensions (#2976)
 - Fixed "Deprecated: Calling get_parent_class() without arguments is deprecated" (#2977)
+- Elementor not loading widgets with Gato GraphQL active (#2986)
 
 ## 8.0.0 - 30/11/2024
 
