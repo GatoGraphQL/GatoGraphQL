@@ -24,11 +24,13 @@ final class PluginConfigEntriesJsonProvider
 
     /**
      * @param string[] $extensionTypeFilter
+     * @param string[] $extensionSlugFilter
      * @return array<array<string,string>>
      */
     public function providePluginConfigEntries(
         bool $scopedOnly = false,
         array $extensionTypeFilter = [],
+        array $extensionSlugFilter = [],
     ): array {
         /**
          * Validate that all required entries have been provided.
@@ -138,45 +140,54 @@ final class PluginConfigEntriesJsonProvider
                 OptionValues::STANDALONE_PLUGIN,
             ])
         );
-        if ($extensionTypeFilter === []) {
-            return $pluginConfigEntries;
+        if ($extensionTypeFilter !== []) {
+            $filteredPluginConfigEntries = [];
+
+            // Keep the standalone plugins?
+            if (in_array(OptionValues::STANDALONE_PLUGIN, $extensionTypeFilter)) {
+                $filteredPluginConfigEntries = array_merge(
+                    $filteredPluginConfigEntries,
+                    array_values(array_filter(
+                        $pluginConfigEntries,
+                        fn (array $entry) => $entry['is_standalone_plugin']
+                    ))
+                );
+            }
+
+            // Keep the bundles?
+            if (in_array(OptionValues::BUNDLE, $extensionTypeFilter)) {
+                $filteredPluginConfigEntries = array_merge(
+                    $filteredPluginConfigEntries,
+                    array_values(array_filter(
+                        $pluginConfigEntries,
+                        fn (array $entry) => !$entry['is_standalone_plugin'] && $entry['is_bundle']
+                    ))
+                );
+            }
+
+            // Keep the extensions?
+            if (in_array(OptionValues::EXTENSION, $extensionTypeFilter)) {
+                $filteredPluginConfigEntries = array_merge(
+                    $filteredPluginConfigEntries,
+                    array_values(array_filter(
+                        $pluginConfigEntries,
+                        fn (array $entry) => !$entry['is_standalone_plugin'] && !$entry['is_bundle']
+                    ))
+                );
+            }
+
+            $pluginConfigEntries = $filteredPluginConfigEntries;
         }
 
-        $filteredPluginConfigEntries = [];
-
-        // Keep the standalone plugins?
-        if (in_array(OptionValues::STANDALONE_PLUGIN, $extensionTypeFilter)) {
-            $filteredPluginConfigEntries = array_merge(
-                $filteredPluginConfigEntries,
-                array_values(array_filter(
-                    $pluginConfigEntries,
-                    fn (array $entry) => $entry['is_standalone_plugin']
-                ))
-            );
+        // Remove any empty entry
+        $extensionSlugFilter = array_values(array_filter($extensionSlugFilter));
+        if ($extensionSlugFilter !== []) {
+            $pluginConfigEntries = array_values(array_filter(
+                $pluginConfigEntries,
+                fn (array $entry) => in_array($entry['plugin_slug'], $extensionSlugFilter)
+            ));
         }
 
-        // Keep the bundles?
-        if (in_array(OptionValues::BUNDLE, $extensionTypeFilter)) {
-            $filteredPluginConfigEntries = array_merge(
-                $filteredPluginConfigEntries,
-                array_values(array_filter(
-                    $pluginConfigEntries,
-                    fn (array $entry) => !$entry['is_standalone_plugin'] && $entry['is_bundle']
-                ))
-            );
-        }
-
-        // Keep the extensions?
-        if (in_array(OptionValues::EXTENSION, $extensionTypeFilter)) {
-            $filteredPluginConfigEntries = array_merge(
-                $filteredPluginConfigEntries,
-                array_values(array_filter(
-                    $pluginConfigEntries,
-                    fn (array $entry) => !$entry['is_standalone_plugin'] && !$entry['is_bundle']
-                ))
-            );
-        }
-
-        return $filteredPluginConfigEntries;
+        return $pluginConfigEntries;
     }
 }
