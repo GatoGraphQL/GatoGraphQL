@@ -14,6 +14,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const CACHE_CONTROL = Plugin::NAMESPACE . '\\extensions\\cache-control';
     public const CONDITIONAL_FIELD_MANIPULATION = Plugin::NAMESPACE . '\\extensions\\conditional-field-manipulation';
     public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\\extensions\\custom-endpoints';
+    public const DEEPL = Plugin::NAMESPACE . '\\extensions\\deepl';
     public const DEPRECATION_NOTIFIER = Plugin::NAMESPACE . '\\extensions\\deprecation-notifier';
     public const EMAIL_SENDER = Plugin::NAMESPACE . '\\extensions\\email-sender';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
@@ -51,6 +52,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::CACHE_CONTROL,
             self::CONDITIONAL_FIELD_MANIPULATION,
             self::CUSTOM_ENDPOINTS,
+            self::DEEPL,
             self::DEPRECATION_NOTIFIER,
             self::EMAIL_SENDER,
             self::EVENTS_MANAGER,
@@ -87,6 +89,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::CACHE_CONTROL => \__('Cache Control', 'gatographql'),
             self::CONDITIONAL_FIELD_MANIPULATION => \__('Conditional Field Manipulation', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'gatographql'),
+            self::DEEPL => \__('DeepL', 'gatographql'),
             self::DEPRECATION_NOTIFIER => \__('Deprecation Notifier', 'gatographql'),
             self::EMAIL_SENDER => \__('Email Sender', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
@@ -124,6 +127,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::CACHE_CONTROL => \__('Provide HTTP Caching for endpoints accessed via GET, with the max-age value automatically calculated from the query.', 'gatographql'),
             self::CONDITIONAL_FIELD_MANIPULATION => \__('Apply a directive on a field only if some condition is met.', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Provide multiple GraphQL endpoints to target different users and applications.', 'gatographql'),
+            self::DEEPL => \__('Translate content to multiple languages using the DeepL API.', 'gatographql'),
             self::DEPRECATION_NOTIFIER => \__('Send deprecations in the response to the query (and not only when doing introspection).', 'gatographql'),
             self::EMAIL_SENDER => \__('Send emails via global mutation <code>_sendEmail</code>.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
