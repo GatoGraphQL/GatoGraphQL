@@ -25,7 +25,7 @@ final class ContainerBuilderWrapper implements ContainerBuilderWrapperInterface
     }
 
     /**
-     * @return Definition[] An array of Definition instances
+     * @return array<string,Definition> An array of Definition instances
      */
     final public function getDefinitions(): array
     {
