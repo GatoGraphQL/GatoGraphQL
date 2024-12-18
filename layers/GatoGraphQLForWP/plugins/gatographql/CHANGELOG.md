@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 9.1.0 - DATE
+
+### Added
+
+- Add documentation for new DeepL extension
+
 ## 9.0.0 - 16/12/2024
 
 ### Breaking changes
