@@ -55,110 +55,171 @@ You can translate your content to any of the following languages:
 
 | Code | Language |
 | --- | --- |
+| `ab` | Abkhaz |
+| `ace` | Acehnese |
+| `ach` | Acholi |
 | `af` | Afrikaans |
 | `sq` | Albanian |
+| `alz` | Alur |
 | `am` | Amharic |
 | `ar` | Arabic |
 | `hy` | Armenian |
 | `as` | Assamese |
+| `awa` | Awadhi |
 | `ay` | Aymara |
 | `az` | Azerbaijani |
+| `ban` | Balinese |
 | `bm` | Bambara |
+| `ba` | Bashkir |
 | `eu` | Basque |
+| `btx` | Batak Karo |
+| `bts` | Batak Simalungun |
+| `bbc` | Batak Toba |
 | `be` | Belarusian |
+| `bem` | Bemba |
 | `bn` | Bengali |
+| `bew` | Betawi |
 | `bho` | Bhojpuri |
+| `bik` | Bikol |
 | `bs` | Bosnian |
+| `br` | Breton |
 | `bg` | Bulgarian |
+| `bua` | Buryat |
+| `yue` | Cantonese |
 | `ca` | Catalan |
 | `ceb` | Cebuano |
-| `zh-CN` or `zh (BCP-47)` | Chinese (Simplified) |
-| `zh-TW` (BCP-47)` | Chinese (Traditional) |
+| `ny` | Chichewa (Nyanja) |
+| `zh` | Chinese (Simplified) |
+| `zh-CN` | Chinese (Simplified) |
+| `zh-TW` | Chinese (Traditional) |
+| `cv` | Chuvash |
 | `co` | Corsican |
+| `crh` | Crimean Tatar |
 | `hr` | Croatian |
 | `cs` | Czech |
 | `da` | Danish |
-| `dv` | Dhivehi |
+| `din` | Dinka |
+| `dv` | Divehi |
 | `doi` | Dogri |
+| `dov` | Dombe |
 | `nl` | Dutch |
+| `dz` | Dzongkha |
 | `en` | English |
 | `eo` | Esperanto |
 | `et` | Estonian |
 | `ee` | Ewe |
+| `fj` | Fijian |
 | `fil` | Filipino (Tagalog) |
+| `tl` | Filipino (Tagalog) |
 | `fi` | Finnish |
 | `fr` | French |
+| `fr-FR` | French (French) |
+| `fr-CA` | French (Canadian) |
 | `fy` | Frisian |
+| `ff` | Fulfulde |
+| `gaa` | Ga |
 | `gl` | Galician |
+| `lg` | Ganda (Luganda) |
 | `ka` | Georgian |
 | `de` | German |
 | `el` | Greek |
 | `gn` | Guarani |
 | `gu` | Gujarati |
 | `ht` | Haitian Creole |
+| `cnh` | Hakha Chin |
 | `ha` | Hausa |
 | `haw` | Hawaiian |
-| `he` or `iw` | Hebrew |
+| `iw` | Hebrew |
+| `he` | Hebrew |
+| `hil` | Hiligaynon |
 | `hi` | Hindi |
 | `hmn` | Hmong |
 | `hu` | Hungarian |
+| `hrx` | Hunsrik |
 | `is` | Icelandic |
 | `ig` | Igbo |
-| `ilo` | Ilocano |
+| `ilo` | Iloko |
 | `id` | Indonesian |
 | `ga` | Irish |
 | `it` | Italian |
 | `ja` | Japanese |
-| `jv` or `jw` | Javanese |
+| `jw` | Javanese |
+| `jv` | Javanese |
 | `kn` | Kannada |
+| `pam` | Kapampangan |
 | `kk` | Kazakh |
 | `km` | Khmer |
+| `cgg` | Kiga |
 | `rw` | Kinyarwanda |
+| `ktu` | Kituba |
 | `gom` | Konkani |
 | `ko` | Korean |
 | `kri` | Krio |
-| `ku` | Kurdish |
+| `ku` | Kurdish (Kurmanji) |
 | `ckb` | Kurdish (Sorani) |
 | `ky` | Kyrgyz |
 | `lo` | Lao |
+| `ltg` | Latgalian |
 | `la` | Latin |
 | `lv` | Latvian |
+| `lij` | Ligurian |
+| `li` | Limburgan |
 | `ln` | Lingala |
 | `lt` | Lithuanian |
-| `lg` | Luganda |
+| `lmo` | Lombard |
+| `luo` | Luo |
 | `lb` | Luxembourgish |
 | `mk` | Macedonian |
 | `mai` | Maithili |
+| `mak` | Makassar |
 | `mg` | Malagasy |
 | `ms` | Malay |
+| `ms-Arab` | Malay (Jawi) |
 | `ml` | Malayalam |
 | `mt` | Maltese |
 | `mi` | Maori |
 | `mr` | Marathi |
+| `chm` | Meadow Mari |
 | `mni-Mtei` | Meiteilon (Manipuri) |
+| `min` | Minang |
 | `lus` | Mizo |
 | `mn` | Mongolian |
 | `my` | Myanmar (Burmese) |
+| `nr` | Ndebele (South) |
+| `new` | Nepalbhasa (Newari) |
 | `ne` | Nepali |
+| `nso` | Northern Sotho (Sepedi) |
 | `no` | Norwegian |
-| `ny` | Nyanja (Chichewa) |
+| `nus` | Nuer |
+| `oc` | Occitan |
 | `or` | Odia (Oriya) |
 | `om` | Oromo |
+| `pag` | Pangasinan |
+| `pap` | Papiamento |
 | `ps` | Pashto |
 | `fa` | Persian |
 | `pl` | Polish |
-| `pt` | Portuguese (Portugal, Brazil) |
+| `pt` | Portuguese |
+| `pt-PT` | Portuguese (Portugal) |
+| `pt-BR` | Portuguese (Brazil) |
 | `pa` | Punjabi |
+| `pa-Arab` | Punjabi (Shahmukhi) |
 | `qu` | Quechua |
+| `rom` | Romani |
 | `ro` | Romanian |
+| `rn` | Rundi |
 | `ru` | Russian |
 | `sm` | Samoan |
+| `sg` | Sango |
 | `sa` | Sanskrit |
 | `gd` | Scots Gaelic |
-| `nso` | Sepedi |
 | `sr` | Serbian |
 | `st` | Sesotho |
+| `crs` | Seychellois Creole |
+| `shn` | Shan |
 | `sn` | Shona |
+| `scn` | Sicilian |
+| `szl` | Silesian |
 | `sd` | Sindhi |
 | `si` | Sinhala (Sinhalese) |
 | `sk` | Slovak |
@@ -167,15 +228,17 @@ You can translate your content to any of the following languages:
 | `es` | Spanish |
 | `su` | Sundanese |
 | `sw` | Swahili |
+| `ss` | Swati |
 | `sv` | Swedish |
-| `tl` | Tagalog (Filipino) |
 | `tg` | Tajik |
 | `ta` | Tamil |
 | `tt` | Tatar |
 | `te` | Telugu |
+| `tet` | Tetum |
 | `th` | Thai |
 | `ti` | Tigrinya |
 | `ts` | Tsonga |
+| `tn` | Tswana |
 | `tr` | Turkish |
 | `tk` | Turkmen |
 | `ak` | Twi (Akan) |
@@ -188,6 +251,7 @@ You can translate your content to any of the following languages:
 | `xh` | Xhosa |
 | `yi` | Yiddish |
 | `yo` | Yoruba |
+| `yua` | Yucatec Maya |
 | `zu` | Zulu |
 
 <!-- ## Google Translate API Configuration
