@@ -10,6 +10,8 @@ trait AttachableExtensionTrait
 {
     use ServiceTrait;
 
+    protected bool $attached = false;
+
     abstract protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface;
 
     /**
@@ -33,6 +35,8 @@ trait AttachableExtensionTrait
      */
     public function attach(string $group): void
     {
+        $this->attached = true;
+
         $attachableExtensionManager = $this->getAttachableExtensionManager();
         $classesToAttachTo = $this->getClassesToAttachTo();
         foreach ($classesToAttachTo as $attachableClass) {
@@ -42,5 +46,15 @@ trait AttachableExtensionTrait
                 $this
             );
         }
+    }
+
+    /**
+     * Use this function as a proxy to know if a Service
+     * has not been disabled (i.e. it has been added to
+     * the GraphQL schema)
+     */
+    public function hasServiceBeenAttached(): bool
+    {
+        return $this->attached;
     }
 }

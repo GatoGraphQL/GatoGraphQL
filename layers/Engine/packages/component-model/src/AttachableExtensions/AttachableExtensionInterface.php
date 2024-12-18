@@ -25,4 +25,11 @@ interface AttachableExtensionInterface extends ServiceInterface
      * The priority in the class has priority (pun intended ;))
      */
     public function attach(string $group): void;
+    
+    /**
+     * Use this function as a proxy to know if a Service
+     * has not been disabled (i.e. it has been added to
+     * the GraphQL schema)
+     */
+    public function hasServiceBeenAttached(): bool;
 }
