@@ -51,7 +51,7 @@ For instance, this query translates the post's `title` and `excerpt` fields from
 
 ## List of languages
 
-You can translate your content to any of the following languages:
+You can translate your content to any of the <a href="https://cloud.google.com/translate/docs/languages" target="_blank">following languages</a>:
 
 | Code | Language |
 | --- | --- |
