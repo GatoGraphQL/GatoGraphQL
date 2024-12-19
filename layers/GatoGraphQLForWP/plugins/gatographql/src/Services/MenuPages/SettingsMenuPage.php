@@ -891,6 +891,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             echo $description_safe;
         }
         $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
+        $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+        $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
         foreach ($keyLabels as $key => $label) {
             $id = $name . '_' . $key;
             if ($addSpacing) {
@@ -902,13 +904,42 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             <label for="<?php echo esc_attr($id) ?>">
                 <strong><?php echo esc_html($label); ?></strong>
                 <br/>
-                <input
-                    name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
-                    id="<?php echo esc_attr($id) ?>"
-                    class="regular-text"
-                    value="<?php echo esc_html($value[$key] ?? '') ?>"
-                    type="text"
-                >
+                <?php
+                    if (empty($possibleValues)) {
+                ?>
+                    <input
+                        name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
+                        id="<?php echo esc_attr($id) ?>"
+                        class="regular-text"
+                        value="<?php echo esc_html($value[$key] ?? '') ?>"
+                        type="text"
+                    >
+                <?php
+                    } else {
+                ?>
+                    <select
+                        name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']' . ($isMultiple ? '[]' : '')); ?>"
+                        id="<?php echo esc_attr($id) ?>"
+                        class="regular-text"
+                        <?php if ($isMultiple) : ?>
+                            multiple="multiple"
+                            size="10"
+                        <?php endif; ?>
+                    >
+                        <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
+                            <option
+                                value="<?php echo esc_attr($optionValue) ?>"
+                                <?php if ($optionValue === ($value[$key] ?? '')) : ?>
+                                    selected="selected"
+                                <?php endif; ?>
+                            >
+                                <?php echo esc_html($optionLabel) ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                    <?php
+                    }
+                ?>
             </label>
             <?php
             $addSpacing = true;
