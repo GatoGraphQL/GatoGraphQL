@@ -905,8 +905,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 <strong><?php echo esc_html($label); ?></strong>
                 <br/>
                 <?php
-                    if (empty($possibleValues)) {
-                ?>
+                if (empty($possibleValues)) {
+                    ?>
                     <input
                         name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
                         id="<?php echo esc_attr($id) ?>"
@@ -914,19 +914,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         value="<?php echo esc_html($value[$key] ?? '') ?>"
                         type="text"
                     >
-                <?php
-                    } else {
-                ?>
+                    <?php
+                } else {
+                    ?>
                     <select
                         name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']' . ($isMultiple ? '[]' : '')); ?>"
                         id="<?php echo esc_attr($id) ?>"
                         class="regular-text"
-                        <?php if ($isMultiple) : ?>
+                    <?php if ($isMultiple) : ?>
                             multiple="multiple"
                             size="10"
-                        <?php endif; ?>
+                    <?php endif; ?>
                     >
-                        <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
+                    <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
                             <option
                                 value="<?php echo esc_attr($optionValue) ?>"
                                 <?php if ($optionValue === ($value[$key] ?? '')) : ?>
@@ -935,10 +935,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             >
                                 <?php echo esc_html($optionLabel) ?>
                             </option>
-                        <?php endforeach ?>
+                    <?php endforeach ?>
                     </select>
                     <?php
-                    }
+                }
                 ?>
             </label>
             <?php
