@@ -171,6 +171,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 9.0.1 =
+* Settings: For entries of the "Key => Label" type (eg: Extension license keys), allow to use a select input to print preselected values (#2988)
+
 = 9.0.0 =
 * Breaking change: Changed signature of method `assertCommercialLicenseHasBeenActivated` (#2978)
 * Only register block JS scripts when in allowed CPT (#2975)

@@ -327,13 +327,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     function () use ($module, $itemSetting, $optionsFormName): void {
                                         $type = $itemSetting[Properties::TYPE] ?? null;
                                         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+                                        $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
                                         $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
                                         ?>
                                             <div id="section-<?php echo esc_attr($itemSetting[Properties::NAME]) ?>" class="gatographql-settings-item" <?php if (!empty($cssStyle)) :
                                                 ?>style="<?php echo esc_attr($cssStyle) ?>"<?php
                                                              endif; ?>>
                                                 <?php
-                                                if (!empty($possibleValues)) {
+                                                if (!empty($possibleValues) && empty($keyLabels)) {
                                                     $this->printSelectField($optionsFormName, $module, $itemSetting);
                                                 } elseif ($type === Properties::TYPE_ARRAY) {
                                                     $this->printTextareaField($optionsFormName, $module, $itemSetting);
@@ -890,6 +891,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             echo $description_safe;
         }
         $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
+        $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+        $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
         foreach ($keyLabels as $key => $label) {
             $id = $name . '_' . $key;
             if ($addSpacing) {
@@ -901,13 +904,42 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             <label for="<?php echo esc_attr($id) ?>">
                 <strong><?php echo esc_html($label); ?></strong>
                 <br/>
-                <input
-                    name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
-                    id="<?php echo esc_attr($id) ?>"
-                    class="regular-text"
-                    value="<?php echo esc_html($value[$key] ?? '') ?>"
-                    type="text"
-                >
+                <?php
+                    if (empty($possibleValues)) {
+                ?>
+                    <input
+                        name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
+                        id="<?php echo esc_attr($id) ?>"
+                        class="regular-text"
+                        value="<?php echo esc_html($value[$key] ?? '') ?>"
+                        type="text"
+                    >
+                <?php
+                    } else {
+                ?>
+                    <select
+                        name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']' . ($isMultiple ? '[]' : '')); ?>"
+                        id="<?php echo esc_attr($id) ?>"
+                        class="regular-text"
+                        <?php if ($isMultiple) : ?>
+                            multiple="multiple"
+                            size="10"
+                        <?php endif; ?>
+                    >
+                        <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
+                            <option
+                                value="<?php echo esc_attr($optionValue) ?>"
+                                <?php if ($optionValue === ($value[$key] ?? '')) : ?>
+                                    selected="selected"
+                                <?php endif; ?>
+                            >
+                                <?php echo esc_html($optionLabel) ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                    <?php
+                    }
+                ?>
             </label>
             <?php
             $addSpacing = true;

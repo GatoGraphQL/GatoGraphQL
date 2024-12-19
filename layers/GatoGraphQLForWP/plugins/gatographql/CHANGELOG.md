@@ -4,11 +4,15 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 9.1.0 - DATE
+## 9.0.1 - DATE
 
 ### Added
 
 - Add documentation for new DeepL extension
+
+### Improvements
+
+- Settings: For entries of the "Key => Label" type (eg: Extension license keys), allow to use a select input to print preselected values (#2988)
 
 ## 9.0.0 - 16/12/2024
 
