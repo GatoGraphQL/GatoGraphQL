@@ -327,13 +327,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     function () use ($module, $itemSetting, $optionsFormName): void {
                                         $type = $itemSetting[Properties::TYPE] ?? null;
                                         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+                                        $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
                                         $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
                                         ?>
                                             <div id="section-<?php echo esc_attr($itemSetting[Properties::NAME]) ?>" class="gatographql-settings-item" <?php if (!empty($cssStyle)) :
                                                 ?>style="<?php echo esc_attr($cssStyle) ?>"<?php
                                                              endif; ?>>
                                                 <?php
-                                                if (!empty($possibleValues)) {
+                                                if (!empty($possibleValues) && empty($keyLabels)) {
                                                     $this->printSelectField($optionsFormName, $module, $itemSetting);
                                                 } elseif ($type === Properties::TYPE_ARRAY) {
                                                     $this->printTextareaField($optionsFormName, $module, $itemSetting);
