@@ -3,14 +3,12 @@
 ## Breaking changes
 
 - Changed signature of method `assertCommercialLicenseHasBeenActivated` ([#2978](https://github.com/GatoGraphQL/GatoGraphQL/pull/2978))
-- Changed signature of method `validateDirectiveArgValue`, passing the `$directiveArgs` param when validating a single directive arg (`v9.0.1`) ([#2989](https://github.com/GatoGraphQL/GatoGraphQL/pull/2989))
 
 ## Improvements
 
 - Only register block JS scripts when in allowed CPT ([#2975](https://github.com/GatoGraphQL/GatoGraphQL/pull/2975))
 - Enable updating extensions from Plugins page after major release ([#2978](https://github.com/GatoGraphQL/GatoGraphQL/pull/2978))
 - Improve performance when caching resolvers for a queried field ([#2981](https://github.com/GatoGraphQL/GatoGraphQL/pull/2981))
-- Settings: For entries of the "Key => Label" type (eg: Extension license keys), allow to use a select input to print preselected values (`v9.0.1`) ([#2981](https://github.com/GatoGraphQL/GatoGraphQL/pull/2981))
 
 ## Fixed
 
