@@ -3,6 +3,7 @@
 ## Breaking changes
 
 - Changed signature of method `assertCommercialLicenseHasBeenActivated` ([#2978](https://github.com/GatoGraphQL/GatoGraphQL/pull/2978))
+- Changed signature of method `validateDirectiveArgValue`, passing the `$directiveArgs` param when validating a single directive arg (`v9.0.1`) ([#2989](https://github.com/GatoGraphQL/GatoGraphQL/pull/2989))
 
 ## Improvements
 

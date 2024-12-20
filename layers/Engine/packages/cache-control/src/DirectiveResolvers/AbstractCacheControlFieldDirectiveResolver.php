@@ -112,17 +112,26 @@ abstract class AbstractCacheControlFieldDirectiveResolver extends AbstractGlobal
 
     /**
      * Validate the constraints for a directive argument
+     *
+     * @param FieldInterface[] $fields
+     * @param array<string,mixed> $directiveArgs
      */
     protected function validateDirectiveArgValue(
         string $directiveArgName,
         mixed $directiveArgValue,
         AstInterface $astNode,
+        array $directiveArgs,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $fields,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         parent::validateDirectiveArgValue(
             $directiveArgName,
             $directiveArgValue,
             $astNode,
+            $directiveArgs,
+            $relationalTypeResolver,
+            $fields,
             $objectTypeFieldResolutionFeedbackStore,
         );
 
