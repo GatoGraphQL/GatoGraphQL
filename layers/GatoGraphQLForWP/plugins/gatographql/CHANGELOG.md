@@ -4,7 +4,11 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 9.0.1 - DATE
+## 10.0.0 - DATE
+
+### Breaking changes
+
+- Changed signature of method `validateDirectiveArgValue`, passing the `$directiveArgs` param when validating a single directive arg (#2989)
 
 ### Added
 
