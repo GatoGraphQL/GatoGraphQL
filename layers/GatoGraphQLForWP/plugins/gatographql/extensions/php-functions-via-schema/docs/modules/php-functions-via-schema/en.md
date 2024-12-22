@@ -237,7 +237,7 @@ Create an array filled with values.
 
 ### `_arrayFilter`
 
-Filter out the empty elements in an array.
+Filter out the null or empty elements in the array.
 
 ### `_arrayFlipToObject`
 
