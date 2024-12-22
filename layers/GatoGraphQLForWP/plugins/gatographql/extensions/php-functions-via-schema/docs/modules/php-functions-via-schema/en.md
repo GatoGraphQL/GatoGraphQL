@@ -235,6 +235,10 @@ Return an array containing all the elements from the first array which are not p
 
 Create an array filled with values.
 
+### `_arrayFilter`
+
+Filter out the empty elements in an array.
+
 ### `_arrayFlipToObject`
 
 Exchanges all numeric keys with their associated values in an array, returning an object.
