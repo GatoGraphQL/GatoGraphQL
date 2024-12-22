@@ -18,7 +18,7 @@ class StringListValueJSONObjectScalarTypeResolver extends AbstractScalarListValu
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Custom scalar representing a JSON Object where values are lists of strings', 'extended-schema-commons');
+        return $this->__('Custom scalar representing a JSON Object where values are lists of strings (`null` values not accepted)', 'extended-schema-commons');
     }
 
     protected function canCastJSONObjectPropertyValue(
