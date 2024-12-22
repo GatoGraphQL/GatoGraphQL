@@ -12,7 +12,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Add documentation for new DeepL extension
+- GraphQL type `StringListValueJSONObject` (#2991)
+- Documentation for new DeepL extension
 
 ### Improvements
 
