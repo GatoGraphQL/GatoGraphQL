@@ -44,6 +44,49 @@ Then, the following query allows to bridge between output and input:
 }
 ```
 
+### `_objectSpreadIDListValueAndFlip`
+
+Given a JSON object with ID as key, and a list of IDs as value, flip it into another JSON object, where each of the IDs in the list becomes the key, and the key becomes the value.
+
+For instance, if we provide the following JSON object (mapping the IDs from a post to all of its translation posts):
+
+```json
+{
+  "originPostToTranslationPostIDs": {
+    "1": [3, 4, 5],
+    "8": [10, 11],
+    "17": [19, 20, 21]
+  }
+}
+```
+
+...when applying field `_objectSpreadIDListValueAndFlip`:
+
+```graphql
+query SpreadAndFlipJSONObjectIDs(
+  $originPostToTranslationPostIDs: JSONObject!
+) {
+  translationPostToOriginPostID: _objectSpreadIDListValueAndFlip(object: $originPostToTranslationPostIDs)
+}
+```
+
+the response will become:
+
+```json
+{
+  "translationPostToOriginPostID": {
+    "3": "1",
+    "4": "1",
+    "5": "1",
+    "10": "8",
+    "11": "8",
+    "19": "17",
+    "20": "17",
+    "21": "17"
+  }
+}
+```
+
 ### `_strConvertMarkdownToHTML`
 
 Converts Markdown to HTML.
