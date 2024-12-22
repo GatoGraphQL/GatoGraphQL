@@ -11,7 +11,7 @@
 ## [Extensions] Added
 
 - [DeepL] DeepL plugin
-- [Helper Function Collection] Fields `_arrayFilter` and `_objectFilter`, and directive `@objectFilter`
+- [Schema Functions] Fields `_arrayFilter` and `_objectFilter`, and directive `@objectFilter`
 
 ## [Extensions] Improvements
 
@@ -20,4 +20,4 @@
 
 ## [Extensions] Fixed
 
-- [Function Fields] `_isEmpty` on empty object must be `false`
+- [Schema Functions] `_isEmpty` on empty object must be `false`
