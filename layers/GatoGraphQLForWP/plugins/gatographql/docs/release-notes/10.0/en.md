@@ -15,7 +15,7 @@
 ## [Extensions] Added
 
 - [DeepL] DeepL plugin
-- [Schema Functions] Fields `_arrayFilter` and `_objectFilter`, and directive `@objectFilter`
+- [Schema Functions] Fields `_arrayFilter`, `_objectFilter` and `_objectFlip`, and directive `@objectFilter`
 - [Helper Function Collection] Field `_objectSpreadIDListValueAndFlip`
 
 ## [Extensions] Improvements

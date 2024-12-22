@@ -417,6 +417,10 @@ Adds an entry to the object.
 
 Filter out the null or empty elements in the object.
 
+### `_objectFlip`
+
+Flip the keys and values in a JSON object.
+
 ### `_objectIntersectKey`
 
 Computes the intersection of objects using keys for comparison.
