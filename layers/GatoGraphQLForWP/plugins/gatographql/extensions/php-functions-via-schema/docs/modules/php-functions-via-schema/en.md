@@ -649,6 +649,10 @@ Subtract an integer number from the field value.
 
 Add an entry to the JSON object.
 
+### `@objectFilter`
+
+Filter out the null or empty elements in an object.
+
 ### `@objectKeepProperties`
 
 Keep specific properties only from the JSON object.
