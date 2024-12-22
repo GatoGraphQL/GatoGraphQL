@@ -415,7 +415,7 @@ Adds an entry to the object.
 
 ### `_objectFilter`
 
-Filter out the empty elements in an object.
+Filter out the null or empty elements in the object.
 
 ### `_objectIntersectKey`
 
