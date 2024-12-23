@@ -88,7 +88,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
             self::DEPRECATION => \__('Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface', 'gatographql'),
-            self::HTTP_CLIENT => \__('Collection of fields added to the GraphQL schema for interacting with APIs', 'gatographql'),
+            self::HTTP_CLIENT => \__('Connect to and interact with external services via their APIs', 'gatographql'),
             self::INTERNAL_GRAPHQL_SERVER => \__('Execute GraphQL queries directly within your application, using PHP code', 'gatographql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable', 'gatographql'),
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
