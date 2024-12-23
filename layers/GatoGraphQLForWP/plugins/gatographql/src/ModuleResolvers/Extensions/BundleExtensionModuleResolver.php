@@ -90,7 +90,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
             self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
             self::QUERY_FUNCTIONS => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
-            self::SCHEMA_FUNCTIONS => \__('Collection of fields and directives added to the GraphQL schema, providing useful functionality concerning sending emails, manipulating strings, connecting to external APIs, and others', 'gatographql'),
+            self::SCHEMA_FUNCTIONS => \__('Collection of fields and directives added to the GraphQL schema, providing useful functionality', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
