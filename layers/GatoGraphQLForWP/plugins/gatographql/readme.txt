@@ -44,6 +44,8 @@ The available extensions are:
 
 [Deprecation](https://gatographql.com/extensions/deprecation): Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface.
 
+[HTTP Client](https://gatographql.com/extensions/http-client): Connect to and interact with external services via their APIs.
+
 [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server): Execute GraphQL queries directly within your application, using PHP code.
 
 [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution): Combine multiple queries into a single query, sharing state across them and executing them in the requested order.
