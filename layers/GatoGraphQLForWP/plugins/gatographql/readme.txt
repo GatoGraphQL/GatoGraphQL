@@ -30,7 +30,7 @@ With Gato GraphQL, you also have the flexibility to migrate your application fro
 
 [Extensions](https://gatographql.com/extensions) allow you to augment the server functionality, and extend the GraphQL schema.
 
-[youtube https://www.youtube.com/watch?v=3YaaMJNTIuk]
+[youtube https://www.youtube.com/watch?v=d-Ap9axT7kE]
 
 You can purchase each extension separately, or get a [bundle containing all the extensions](https://gatographql.com/pricing).
 
