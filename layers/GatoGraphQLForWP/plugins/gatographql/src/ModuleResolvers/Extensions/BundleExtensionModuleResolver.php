@@ -133,7 +133,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::DEPRECATION
                 => $pluginURL . 'assets/img/extension-logos/deprecation.svg',
             self::HTTP_CLIENT
-                => $pluginURL . 'assets/img/extension-logos/internal-graphql-server.svg',
+                => $pluginURL . 'assets/img/extension-logos/http-client.svg',
             self::INTERNAL_GRAPHQL_SERVER
                 => $pluginURL . 'assets/img/extension-logos/internal-graphql-server.svg',
             self::MULTIPLE_QUERY_EXECUTION
