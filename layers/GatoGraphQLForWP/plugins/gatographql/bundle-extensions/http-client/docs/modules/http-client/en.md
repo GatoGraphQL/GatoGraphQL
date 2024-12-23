@@ -1,6 +1,6 @@
 # HTTP Client
 
-The GraphQL schema is provided with fields and directives which expose functionalities from the PHP programming language.
+Connect to and interact with external services via their APIs.
 
 ---
 
