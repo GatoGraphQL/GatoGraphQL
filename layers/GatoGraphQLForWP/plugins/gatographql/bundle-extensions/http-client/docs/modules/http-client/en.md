@@ -6,7 +6,9 @@ Connect to and interact with external services via their APIs.
 
 The GraphQL schema is provided with global fields to execute HTTP requests against a webserver and fetch their response.
 
-This query:
+It supports connecting to REST APIs, GraphQL APIs, and generic APIs, and retrieve and decode any type of data (including HTML, XML and CSV).
+
+**REST API:** this query connects to the WP REST API from some external website, to fetch its posts:
 
 ```graphql
 query {
@@ -16,7 +18,7 @@ query {
 }
 ```
 
-...retrieves this response:
+...producing this response:
 
 ```json
 {
@@ -61,6 +63,60 @@ query {
         173
       ]
     }
+  }
+}
+```
+
+**GraphQL API:** This query connects to GitHub's GraphQL API to fetch a list of repositories:
+
+```graphql
+query FetchGitHubRepositories(
+  $login: String!
+  $githubAccessToken: String!
+) {
+  _sendGraphQLHTTPRequest(input:{
+    endpoint: "https://api.github.com/graphql",
+    query: """
+    
+query GetRepositoriesByOwner($login: String!) {
+  repositoryOwner(login: $login) {
+    repositories(first: 100) {
+      nodes {
+        id
+        name
+        description
+      }
+    }
+  }
+}
+
+    """,
+    variables: [
+      {
+        name: "login",
+        value: $login
+      }
+    ],
+    options: {
+      auth: {
+        password: $githubAccessToken
+      }
+    }
+  })
+}
+```
+
+**Generic API:** This query connects to a WordPress RSS feed, and decodes the XML into a JSON object:
+
+```graphql
+query {
+  _sendHTTPRequest(input: {
+    url: "https://wordpress.com/blog/2024/07/16/wordpress-6-6/feed/rss/?withoutcomments=1"
+  }) {
+    body
+    rssJSON: _strDecodeXMLAsJSON(
+      xml: $__body
+    )
   }
 }
 ```
