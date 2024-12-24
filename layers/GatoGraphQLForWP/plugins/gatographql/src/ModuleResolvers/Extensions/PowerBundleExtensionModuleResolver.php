@@ -65,7 +65,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             // self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             // self::ALL_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
             self::POWER_EXTENSIONS => sprintf($bundlePlaceholder, \__('Power Extensions', 'gatographql')),
-            
+
             self::ACCESS_CONTROL => sprintf($extensionPlaceholder, \__('Access Control', 'gatographql')),
             self::CACHING => sprintf($extensionPlaceholder, \__('Caching', 'gatographql')),
             self::CUSTOM_ENDPOINTS => sprintf($extensionPlaceholder, \__('Custom Endpoints', 'gatographql')),
@@ -86,7 +86,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             // self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             // self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
             self::POWER_EXTENSIONS => \__('All of Gato GraphQL\'s power extensions, in a single plugin', 'gatographql'),
-            
+
             self::ACCESS_CONTROL => \__('Define Access Control Lists to manage granular access to the API for your users', 'gatographql'),
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
