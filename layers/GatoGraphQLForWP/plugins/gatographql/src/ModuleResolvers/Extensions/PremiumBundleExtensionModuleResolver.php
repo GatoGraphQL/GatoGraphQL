@@ -75,4 +75,9 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     {
         return [];
     }
+
+    public function isPremium(string $module): bool
+    {
+        return true;
+    }
 }
