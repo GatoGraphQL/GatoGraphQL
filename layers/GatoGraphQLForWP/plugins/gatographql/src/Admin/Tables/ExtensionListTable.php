@@ -165,6 +165,10 @@ class ExtensionListTable extends AbstractExtensionListTable
             } else {
                 $additionalPluginCardClassnames .= ' plugin-card-not-highlight';
             }
+            
+            if ($plugin['gato_is_premium']) {
+                $additionalPluginCardClassnames .= ' plugin-card-is-premium';
+            }
             return $additionalPluginCardClassnames;
         }
         return parent::getAdditionalPluginCardClassnames($plugin);
