@@ -16,6 +16,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
 
     public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
+    public const POWER_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\power-extensions';
 
     public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\bundle-extensions\\access-control';
     public const CACHING = Plugin::NAMESPACE . '\\bundle-extensions\\caching';
@@ -52,7 +53,8 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::SCHEMA_FUNCTIONS,
             ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
-                self::ALL_EXTENSIONS,
+                // self::ALL_EXTENSIONS,
+                self::POWER_EXTENSIONS,
             ] : [],
         );
     }
@@ -64,6 +66,8 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
+            self::POWER_EXTENSIONS => sprintf($bundlePlaceholder, \__('Power Extensions', 'gatographql')),
+            
             self::ACCESS_CONTROL => sprintf($extensionPlaceholder, \__('Access Control', 'gatographql')),
             self::CACHING => sprintf($extensionPlaceholder, \__('Caching', 'gatographql')),
             self::CUSTOM_ENDPOINTS => sprintf($extensionPlaceholder, \__('Custom Endpoints', 'gatographql')),
@@ -84,6 +88,8 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
+            self::POWER_EXTENSIONS => \__('All of Gato GraphQL\'s power extensions, in a single plugin', 'gatographql'),
+            
             self::ACCESS_CONTROL => \__('Define Access Control Lists to manage granular access to the API for your users', 'gatographql'),
             self::CACHING => \__('Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations', 'gatographql'),
             self::CUSTOM_ENDPOINTS => \__('Create custom schemas, with custom access rules for different users, each available under its own endpoint', 'gatographql'),
@@ -110,7 +116,8 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
             self::PRO,
-            self::ALL_EXTENSIONS =>
+            self::ALL_EXTENSIONS,
+            self::POWER_EXTENSIONS =>
                 $moduleConfiguration->getGatoGraphQLWebsiteURL(),
             default
                 => parent::getWebsiteURL($module),
@@ -122,7 +129,8 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
         return match ($module) {
             self::PRO,
-            self::ALL_EXTENSIONS
+            self::ALL_EXTENSIONS,
+            self::POWER_EXTENSIONS
                 => $pluginURL . 'assets/img/logos/GatoGraphQL-logo-face.png',
             self::ACCESS_CONTROL
                 => $pluginURL . 'assets/img/extension-logos/access-control.svg',
@@ -218,6 +226,32 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::POLYLANG,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
+            self::POWER_EXTENSIONS => [
+                ExtensionModuleResolver::ACCESS_CONTROL,
+                ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                ExtensionModuleResolver::CACHE_CONTROL,
+                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                ExtensionModuleResolver::CUSTOM_ENDPOINTS,
+                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
+                ExtensionModuleResolver::EMAIL_SENDER,
+                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                ExtensionModuleResolver::FIELD_DEPRECATION,
+                ExtensionModuleResolver::FIELD_ON_FIELD,
+                ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
+                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                ExtensionModuleResolver::FIELD_TO_INPUT,
+                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                ExtensionModuleResolver::HTTP_CLIENT,
+                ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
+                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                ExtensionModuleResolver::PERSISTED_QUERIES,
+                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+            ],
             self::ACCESS_CONTROL => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
@@ -290,6 +324,18 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::MULTIPLE_QUERY_EXECUTION,
                 self::PERSISTED_QUERIES,
                 self::POLYLANG_INTEGRATION,
+                self::QUERY_FUNCTIONS,
+                self::SCHEMA_FUNCTIONS,
+            ],
+            self::POWER_EXTENSIONS => [
+                self::ACCESS_CONTROL,
+                self::CACHING,
+                self::CUSTOM_ENDPOINTS,
+                self::DEPRECATION,
+                self::HTTP_CLIENT,
+                self::INTERNAL_GRAPHQL_SERVER,
+                self::MULTIPLE_QUERY_EXECUTION,
+                self::PERSISTED_QUERIES,
                 self::QUERY_FUNCTIONS,
                 self::SCHEMA_FUNCTIONS,
             ],
