@@ -277,7 +277,7 @@ class Plugin extends AbstractMainPlugin
      */
     public function getPluginActionLinks(array $actions): array
     {
-        if (!PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage()) {
+        if (!$this->addGoPROPluginActionLink()) {
             return parent::getPluginActionLinks($actions);
         }
         /** @var ModuleConfiguration */
@@ -292,4 +292,9 @@ class Plugin extends AbstractMainPlugin
             ...$actions,
         ];
     }
+
+    protected function addGoPROPluginActionLink(): bool
+    {
+        return PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
+    }    
 }
