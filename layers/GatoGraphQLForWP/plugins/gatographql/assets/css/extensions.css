@@ -65,7 +65,7 @@
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle.plugin-card-is-premium {
     border-color: rgb(178, 0, 209);
     background-color: rgb(226, 184, 232);
-    background: linear-gradient(90deg, rgb(209, 115, 230) 0%, rgb(213, 182, 232) 33%);
+    background: linear-gradient(90deg, rgb(209, 115, 230) 0%, rgb(225, 182, 232) 33%);
 }
 /* .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle:nth-child(1) {
     background: linear-gradient(90deg, rgb(222, 115, 230) 0%, rgb(232, 182, 204) 33%);
