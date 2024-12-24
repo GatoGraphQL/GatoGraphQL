@@ -296,5 +296,5 @@ class Plugin extends AbstractMainPlugin
     protected function addGoPROPluginActionLink(): bool
     {
         return PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
-    }    
+    }
 }

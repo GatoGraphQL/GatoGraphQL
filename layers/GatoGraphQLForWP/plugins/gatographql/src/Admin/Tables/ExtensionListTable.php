@@ -154,7 +154,7 @@ class ExtensionListTable extends AbstractExtensionListTable
     protected function getAdditionalPluginCardClassnames(array $plugin): ?string
     {
         $additionalPluginCardClassnames = parent::getAdditionalPluginCardClassnames($plugin) ?? '';
-        
+
         if ($plugin['gato_extension_is_bundle']) {
             $additionalPluginCardClassnames .= 'plugin-card-extension-bundle';
             if (
@@ -169,7 +169,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 $additionalPluginCardClassnames .= ' plugin-card-not-highlight';
             }
         }
-            
+
         if ($plugin['gato_extension_is_premium']) {
             $additionalPluginCardClassnames .= ' plugin-card-extension-is-premium';
         }
