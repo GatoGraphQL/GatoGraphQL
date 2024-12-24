@@ -160,6 +160,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 in_array($plugin['gato_extension_module'], [
                 BundleExtensionModuleResolver::PRO,
                 BundleExtensionModuleResolver::ALL_EXTENSIONS,
+                BundleExtensionModuleResolver::POWER_EXTENSIONS,
                 ])
             ) {
                 $additionalPluginCardClassnames .= ' plugin-card-highlight';
