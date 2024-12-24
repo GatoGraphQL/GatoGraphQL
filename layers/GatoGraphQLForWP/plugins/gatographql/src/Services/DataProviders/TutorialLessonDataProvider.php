@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\DataProviders;
 
 use GatoGraphQL\GatoGraphQL\Constants\TutorialLessons;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\PowerExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\PremiumExtensionModuleResolver;
 
 class TutorialLessonDataProvider
 {
@@ -24,17 +25,17 @@ class TutorialLessonDataProvider
             TutorialLessons::QUERYING_DYNAMIC_DATA => [
                 \__('Lesson 2: Querying dynamic data', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             // TutorialLessons::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
             //     \__('Exposing public and private endpoints', 'gatographql'),
             //     [
-            //         ExtensionModuleResolver::ACCESS_CONTROL,
-            //         ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
-            //         ExtensionModuleResolver::CACHE_CONTROL,
+            //         PowerExtensionModuleResolver::ACCESS_CONTROL,
+            //         PowerExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+            //         PowerExtensionModuleResolver::CACHE_CONTROL,
             //     ]
             // ],
             // TutorialLessons::COMPLEMENTING_WP_CLI => [
@@ -43,8 +44,8 @@ class TutorialLessonDataProvider
             // TutorialLessons::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
             //     \__('Injecting multiple resources into WP-CLI', 'gatographql'),
             //     [
-            //         ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-            //         ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+            //         PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+            //         PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             //     ]
             // ],
             // TutorialLessons::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
@@ -53,7 +54,7 @@ class TutorialLessonDataProvider
             // TutorialLessons::DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP => [
             //     \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
             //     [
-            //         ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+            //         PowerExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
             //     ]
             // ],
             // TutorialLessons::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
@@ -62,80 +63,80 @@ class TutorialLessonDataProvider
             TutorialLessons::DUPLICATING_A_BLOG_POST => [
                 \__('Lesson 3: Duplicating a blog post', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE => [
                 \__('Lesson 4: Duplicating multiple blog posts at once', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::CUSTOMIZING_CONTENT_FOR_DIFFERENT_USERS => [
                 \__('Lesson 5: Customizing content for different users', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::SEARCH_REPLACE_AND_STORE_AGAIN => [
                 \__('Lesson 6: Search, replace, and store again', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::ADAPTING_CONTENT_IN_BULK => [
                 \__('Lesson 7: Adapting content in bulk', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::SITE_MIGRATIONS => [
                 \__('Lesson 8: Site migrations', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK => [
                 \__('Lesson 9: Inserting/Removing a (Gutenberg) block in bulk', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::RETRIEVING_STRUCTURED_DATA_FROM_BLOCKS => [
                 \__('Lesson 10: Retrieving structured data from blocks', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::MODIFYING_AND_STORING_AGAIN_THE_IMAGE_URLS_FROM_ALL_IMAGE_BLOCKS_IN_A_POST => [
                 \__('Lesson 11: Modifying (and storing again) the image URLs from all Image blocks in a post', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
 
@@ -143,13 +144,13 @@ class TutorialLessonDataProvider
             // TutorialLessons::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE => [
             //     \__('Lesson 12: Translating block content in a post to a different language', 'gatographql'),
             //     [
-            //         ExtensionModuleResolver::FIELD_ON_FIELD,
-            //         ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-            //         ExtensionModuleResolver::FIELD_TO_INPUT,
-            //         ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-            //         ExtensionModuleResolver::GOOGLE_TRANSLATE,
-            //         ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-            //         ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+            //         PowerExtensionModuleResolver::FIELD_ON_FIELD,
+            //         PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+            //         PowerExtensionModuleResolver::FIELD_TO_INPUT,
+            //         PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+            //         PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+            //         PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             //     ]
             // ],
 
@@ -157,122 +158,122 @@ class TutorialLessonDataProvider
             // TutorialLessons::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE => [
             //     \__('Lesson 13: Bulk translating block content in multiple posts to a different language', 'gatographql'),
             //     [
-            //         ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-            //         ExtensionModuleResolver::FIELD_ON_FIELD,
-            //         ExtensionModuleResolver::FIELD_TO_INPUT,
-            //         ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-            //         ExtensionModuleResolver::GOOGLE_TRANSLATE,
-            //         ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-            //         ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+            //         PowerExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+            //         PowerExtensionModuleResolver::FIELD_ON_FIELD,
+            //         PowerExtensionModuleResolver::FIELD_TO_INPUT,
+            //         PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+            //         PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+            //         PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             //     ]
             // ],
 
             TutorialLessons::SENDING_EMAILS_WITH_PLEASURE => [
                 \__('Lesson 12: Sending emails with pleasure', 'gatographql'),
                 [
-                    ExtensionModuleResolver::EMAIL_SENDER,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::EMAIL_SENDER,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::SENDING_A_NOTIFICATION_WHEN_THERE_IS_A_NEW_POST => [
                 \__('Lesson 13: Sending a notification when there is a new post', 'gatographql'),
                 [
-                    ExtensionModuleResolver::AUTOMATION,
-                    ExtensionModuleResolver::EMAIL_SENDER,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                    ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PremiumExtensionModuleResolver::AUTOMATION,
+                    PowerExtensionModuleResolver::EMAIL_SENDER,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    PowerExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::SENDING_A_DAILY_SUMMARY_OF_ACTIVITY => [
                 \__('Lesson 14: Sending a daily summary of activity', 'gatographql'),
                 [
-                    ExtensionModuleResolver::AUTOMATION,
-                    ExtensionModuleResolver::EMAIL_SENDER,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                    ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PremiumExtensionModuleResolver::AUTOMATION,
+                    PowerExtensionModuleResolver::EMAIL_SENDER,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    PowerExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::AUTOMATICALLY_ADDING_A_MANDATORY_BLOCK => [
                 \__('Lesson 15: Automatically adding a mandatory block', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::INTERACTING_WITH_EXTERNAL_SERVICES_VIA_WEBHOOKS => [
                 \__('Lesson 16: Interacting with external services via webhooks', 'gatographql'),
                 [
-                    ExtensionModuleResolver::EMAIL_SENDER,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::EMAIL_SENDER,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::RETRIEVING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Lesson 17: Retrieving data from an external API', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::COMBINING_USER_DATA_FROM_DIFFERENT_SOURCES => [
                 \__('Lesson 18: Combining user data from different sources', 'gatographql'),
                 [
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::NOT_LEAKING_CREDENTIALS_WHEN_CONNECTING_TO_SERVICES => [
                 \__('Lesson 19: Not leaking credentials when connecting to services', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::HANDLING_ERRORS_WHEN_CONNECTING_TO_SERVICES => [
                 \__('Lesson 20: Handling errors when connecting to services', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
             TutorialLessons::CREATING_AN_API_GATEWAY => [
                 \__('Lesson 21: Creating an API gateway', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
 
@@ -280,94 +281,94 @@ class TutorialLessonDataProvider
             // TutorialLessons::TRANSLATING_CONTENT_FROM_URL => [
             //     \__('Lesson 24: Translating content from URL', 'gatographql'),
             //     [
-            //         ExtensionModuleResolver::GOOGLE_TRANSLATE,
-            //         ExtensionModuleResolver::HTTP_CLIENT,
+            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+            //         PowerExtensionModuleResolver::HTTP_CLIENT,
             //     ]
             // ],
 
             TutorialLessons::TRANSFORMING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Lesson 22: Transforming data from an external API', 'gatographql'),
                 [
-                    ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                    ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                    PowerExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::FILTERING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Lesson 23: Filtering data from an external API', 'gatographql'),
                 [
-                    ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::PINGING_EXTERNAL_SERVICES => [
                 \__('Lesson 24: Pinging external services', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::UPDATING_LARGE_SETS_OF_DATA => [
                 \__('Lesson 25: Updating large sets of data', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::IMPORTING_A_POST_FROM_ANOTHER_WORDPRESS_SITE => [
                 \__('Lesson 26: Importing a post from another WordPress site', 'gatographql'),
                 [
-                    ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                    PowerExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
             TutorialLessons::DISTRIBUTING_CONTENT_FROM_AN_UPSTREAM_TO_MULTIPLE_DOWNSTREAM_SITES => [
                 \__('Lesson 27: Distributing content from an upstream to multiple downstream sites', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
             TutorialLessons::AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP => [
                 \__('Lesson 28: Automatically sending newsletter subscribers from InstaWP to Mailchimp', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                    PowerExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             // 'content-orchestration' => [

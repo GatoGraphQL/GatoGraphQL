@@ -291,7 +291,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
              * Additional classes
              */
             $additionalPluginCardClassnames = $this->getAdditionalPluginCardClassnames($plugin);
-            if ($additionalPluginCardClassnames !== null) {
+            if ($additionalPluginCardClassnames !== null && $additionalPluginCardClassnames !== '') {
                 $html = substr_replace($html, $pluginCardClassname . ' ' . $additionalPluginCardClassnames, $pos, strlen($pluginCardClassname));
             }
 

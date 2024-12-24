@@ -153,8 +153,10 @@ class ExtensionListTable extends AbstractExtensionListTable
      */
     protected function getAdditionalPluginCardClassnames(array $plugin): ?string
     {
+        $additionalPluginCardClassnames = parent::getAdditionalPluginCardClassnames($plugin) ?? '';
+
         if ($plugin['gato_extension_is_bundle']) {
-            $additionalPluginCardClassnames = 'plugin-card-extension-bundle';
+            $additionalPluginCardClassnames .= 'plugin-card-extension-bundle';
             if (
                 in_array($plugin['gato_extension_module'], [
                 // PowerBundleExtensionModuleResolver::PRO,
@@ -166,13 +168,12 @@ class ExtensionListTable extends AbstractExtensionListTable
             } else {
                 $additionalPluginCardClassnames .= ' plugin-card-not-highlight';
             }
-            
-            if ($plugin['gato_extension_is_premium']) {
-                $additionalPluginCardClassnames .= ' plugin-card-is-premium';
-            }
-            return $additionalPluginCardClassnames;
         }
-        return parent::getAdditionalPluginCardClassnames($plugin);
+
+        if ($plugin['gato_extension_is_premium']) {
+            $additionalPluginCardClassnames .= ' plugin-card-extension-is-premium';
+        }
+        return $additionalPluginCardClassnames;
     }
 
     /**

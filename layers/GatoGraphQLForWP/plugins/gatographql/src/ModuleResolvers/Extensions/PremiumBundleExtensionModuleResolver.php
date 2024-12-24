@@ -10,6 +10,8 @@ use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
 class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
+    use PremiumExtensionModuleResolverTrait;
+
     public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
 
     /**
@@ -62,7 +64,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     {
         return match ($module) {
             self::POLYLANG_INTEGRATION => [
-                ExtensionModuleResolver::POLYLANG,
+                PremiumExtensionModuleResolver::POLYLANG,
             ],
             default => [],
         };
@@ -74,10 +76,5 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     public function getBundledBundleExtensionModules(string $module): array
     {
         return [];
-    }
-
-    public function isPremium(string $module): bool
-    {
-        return true;
     }
 }
