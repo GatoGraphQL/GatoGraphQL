@@ -8,6 +8,8 @@ use GatoGraphQL\GatoGraphQL\Plugin;
 
 class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
 {
+    use PremiumExtensionModuleResolverTrait;
+
     public const AUTOMATION = Plugin::NAMESPACE . '\\extensions\\automation';
     public const DEEPL = Plugin::NAMESPACE . '\\extensions\\deepl';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
