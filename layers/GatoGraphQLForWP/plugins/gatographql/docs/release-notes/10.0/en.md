@@ -8,6 +8,7 @@
 
 - GraphQL type `StringListValueJSONObject` ([#2991](https://github.com/GatoGraphQL/GatoGraphQL/pull/2991))
 - YouTube videos to the extension docs ([#9b95be5](https://github.com/GatoGraphQL/GatoGraphQL/commit/9b95be598df6ac15aa63927922ed32fd83548489))
+- Documentation for Premium Extensions ([#2994](https://github.com/GatoGraphQL/GatoGraphQL/pull/2994))
 
 ## Improvements
 
