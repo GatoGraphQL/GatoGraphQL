@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
 use GatoGraphQL\GatoGraphQL\Plugin;
 
-class ExtensionModuleResolver extends AbstractExtensionModuleResolver
+class PowerExtensionModuleResolver extends AbstractExtensionModuleResolver
 {
     public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\extensions\\access-control';
     public const ACCESS_CONTROL_VISITOR_IP = Plugin::NAMESPACE . '\\extensions\\access-control-visitor-ip';

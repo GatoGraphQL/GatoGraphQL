@@ -62,7 +62,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     {
         return match ($module) {
             self::POLYLANG_INTEGRATION => [
-                ExtensionModuleResolver::POLYLANG,
+                PowerExtensionModuleResolver::POLYLANG,
             ],
             default => [],
         };
