@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
-class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
+class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
     // public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
 

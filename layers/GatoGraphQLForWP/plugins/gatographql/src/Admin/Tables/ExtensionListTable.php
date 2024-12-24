@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\PowerBundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
@@ -127,7 +127,7 @@ class ExtensionListTable extends AbstractExtensionListTable
 
         // // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
         // $module = $plugin['gato_extension_module'];
-        // if ($module === BundleExtensionModuleResolver::PRO) {
+        // if ($module === PowerBundleExtensionModuleResolver::PRO) {
         //     $extensionActionLabel = sprintf(
         //         '%s%s',
         //         $displayGatoGraphQLPROBundleOnExtensionsPage && !$displayGatoGraphQLPROFeatureBundlesOnExtensionsPage ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
@@ -156,9 +156,9 @@ class ExtensionListTable extends AbstractExtensionListTable
             $additionalPluginCardClassnames = 'plugin-card-extension-bundle';
             if (
                 in_array($plugin['gato_extension_module'], [
-                // BundleExtensionModuleResolver::PRO,
-                // BundleExtensionModuleResolver::ALL_EXTENSIONS,
-                BundleExtensionModuleResolver::POWER_EXTENSIONS,
+                // PowerBundleExtensionModuleResolver::PRO,
+                // PowerBundleExtensionModuleResolver::ALL_EXTENSIONS,
+                PowerBundleExtensionModuleResolver::POWER_EXTENSIONS,
                 ])
             ) {
                 $additionalPluginCardClassnames .= ' plugin-card-highlight';
