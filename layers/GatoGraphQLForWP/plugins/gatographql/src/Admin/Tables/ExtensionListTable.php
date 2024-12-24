@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
 use GatoGraphQL\GatoGraphQL\App;
-use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
@@ -126,18 +125,17 @@ class ExtensionListTable extends AbstractExtensionListTable
         $displayGatoGraphQLPROBundleOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage();
         $displayGatoGraphQLPROFeatureBundlesOnExtensionsPage = PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage();
 
-        $module = $plugin['gato_extension_module'];
-
-        // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
-        if ($module === BundleExtensionModuleResolver::PRO) {
-            $extensionActionLabel = sprintf(
-                '%s%s',
-                $displayGatoGraphQLPROBundleOnExtensionsPage && !$displayGatoGraphQLPROFeatureBundlesOnExtensionsPage ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
-                HTMLCodes::OPEN_IN_NEW_WINDOW
-            );
-        } else {
+        // // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
+        // $module = $plugin['gato_extension_module'];
+        // if ($module === BundleExtensionModuleResolver::PRO) {
+        //     $extensionActionLabel = sprintf(
+        //         '%s%s',
+        //         $displayGatoGraphQLPROBundleOnExtensionsPage && !$displayGatoGraphQLPROFeatureBundlesOnExtensionsPage ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
+        //         HTMLCodes::OPEN_IN_NEW_WINDOW
+        //     );
+        // } else {
             $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
-        }
+        // }
 
         return sprintf(
             '
@@ -158,8 +156,8 @@ class ExtensionListTable extends AbstractExtensionListTable
             $additionalPluginCardClassnames = 'plugin-card-extension-bundle';
             if (
                 in_array($plugin['gato_extension_module'], [
-                BundleExtensionModuleResolver::PRO,
-                BundleExtensionModuleResolver::ALL_EXTENSIONS,
+                // BundleExtensionModuleResolver::PRO,
+                // BundleExtensionModuleResolver::ALL_EXTENSIONS,
                 BundleExtensionModuleResolver::POWER_EXTENSIONS,
                 ])
             ) {
