@@ -72,6 +72,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                  */
                 'gato_extension_module' => $module,
                 'gato_extension_is_bundle' => $isBundleExtension,
+                'gato_extension_is_premium' => $moduleResolver->isPremium($module),
             ];
             if ($isBundleExtension) {
                 /** @var BundleExtensionModuleResolverInterface */
@@ -164,6 +165,10 @@ class ExtensionListTable extends AbstractExtensionListTable
                 $additionalPluginCardClassnames .= ' plugin-card-highlight';
             } else {
                 $additionalPluginCardClassnames .= ' plugin-card-not-highlight';
+            }
+            
+            if ($plugin['gato_extension_is_premium']) {
+                $additionalPluginCardClassnames .= ' plugin-card-is-premium';
             }
             return $additionalPluginCardClassnames;
         }
