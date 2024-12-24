@@ -2,6 +2,8 @@
 
 This bundle contains **all of Gato GraphQL extensions**, in a single plugin.
 
+[Watch “Gato GraphQL extensions” on YouTube](https://www.youtube.com/watch?v=d-Ap9axT7kE)
+
 <!-- ## List of bundled extensions
 
 - [Access Control](../../../../../extensions/access-control/docs/modules/access-control/en.md)

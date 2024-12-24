@@ -1,5 +1,11 @@
 # Multiple Query Execution
 
+Combine multiple queries into a single query, sharing state across them and making sure they are executed in the requested order.
+
+[Watch “How to use the Multiple Query Execution extension” on YouTube](https://www.youtube.com/watch?v=Z85vSxr3RXs)
+
+---
+
 Multiple query execution combines multiple queries into a single query, executing them in the same requested order, while allowing them to communicate state with each other via dynamic variables.
 
 ```graphql

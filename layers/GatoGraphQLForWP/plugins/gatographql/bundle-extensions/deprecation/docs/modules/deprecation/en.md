@@ -2,6 +2,8 @@
 
 Evolve the GraphQL schema by deprecating fields, and explaining how to replace them, through a user interface.
 
+[Watch “How to use the Deprecation extension” on YouTube](https://www.youtube.com/watch?v=PLeJqLPsFE8)
+
 ---
 
 With **Field Deprecation**, the extension provides a user interface to deprecate fields from the GraphQL schema.

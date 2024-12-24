@@ -2,6 +2,8 @@
 
 Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs.
 
+[Watch “How to use the Persisted Queries extension” on YouTube](https://www.youtube.com/watch?v=tDU90vroF9Y)
+
 ---
 
 In a REST API, we create multiple endpoints, each returning a pre-defined set of data. In a GraphQL API, in contrast, we provide any query to a single endpoint, which returns exactly the requested data.

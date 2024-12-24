@@ -2,6 +2,8 @@
 
 Define Access Control Lists to manage granular access to the API for your users.
 
+[Watch “How to use the Access Control extension” on YouTube](https://www.youtube.com/watch?v=5b3PKkhqBFk)
+
 ---
 
 This extension allows us to create **Access Control Lists**, to manage who can access the different elements (operations, fields and directives) from the GraphQL schema, using the following rules:

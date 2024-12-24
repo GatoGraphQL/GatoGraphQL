@@ -2,6 +2,8 @@
 
 Create custom schemas, with custom access rules for different users, each available under its own endpoint.
 
+[Watch “How to use the Cache Control extension” on YouTube](https://www.youtube.com/watch?v=VNk7CQDDtos)
+
 ---
 
 A GraphQL server normally exposes a single endpoint for retrieving and posting data, providing a unique behavior for all users and applications.

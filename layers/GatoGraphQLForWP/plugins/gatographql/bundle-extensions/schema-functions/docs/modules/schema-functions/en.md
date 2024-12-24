@@ -2,6 +2,8 @@
 
 The GraphQL schema is provided with fields and directives which expose functionalities from the PHP programming language.
 
+[Watch “How to use the Schema Functions extension” on YouTube](https://www.youtube.com/watch?v=ztY2nyRaaWw)
+
 ---
 
 With **Function Fields**, the GraphQL schema is provided with "function" fields, which are useful for manipulating the data once it has been retrieved, allowing us to transform a field value in whatever way it is required, and granting us powerful data import/export capabilities.

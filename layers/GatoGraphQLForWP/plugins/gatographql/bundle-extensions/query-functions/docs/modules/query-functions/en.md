@@ -2,6 +2,8 @@
 
 Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities.
 
+[Watch “How to use the Query Functions extension” on YouTube](https://www.youtube.com/watch?v=J8Uo4_eWwP4)
+
 ---
 
 With **Field to Input**, obtain the value of a field, manipulate it, and input it into another field, all within the same query.

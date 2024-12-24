@@ -2,6 +2,8 @@
 
 Connect to and interact with external services via their APIs.
 
+[Watch “How to use the HTTP Client extension” on YouTube](https://www.youtube.com/watch?v=PmcmrJgfHT4)
+
 ---
 
 The GraphQL schema is provided with global fields to execute HTTP requests against a webserver and fetch their response.

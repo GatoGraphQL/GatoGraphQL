@@ -2,6 +2,8 @@
 
 Make your application faster by providing HTTP Caching for the GraphQL response, and by caching the results of expensive operations.
 
+[Watch “How to use the Caching extension” on YouTube](https://www.youtube.com/watch?v=b5Nj9m6N7U4)
+
 ---
 
 With **Cache Control**, use HTTP caching to send a `Cache-Control` header with a `max-age` value in the response of the GraphQL query, indicating for how long the response must be cached.
