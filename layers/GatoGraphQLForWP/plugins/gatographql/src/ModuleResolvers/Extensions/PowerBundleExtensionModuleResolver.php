@@ -26,7 +26,6 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
     public const INTERNAL_GRAPHQL_SERVER = Plugin::NAMESPACE . '\\bundle-extensions\\internal-graphql-server';
     public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\bundle-extensions\\multiple-query-execution';
     public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\\bundle-extensions\\persisted-queries';
-    public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
     public const QUERY_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\query-functions';
     public const SCHEMA_FUNCTIONS = Plugin::NAMESPACE . '\\bundle-extensions\\schema-functions';
 
@@ -48,7 +47,6 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
                 self::INTERNAL_GRAPHQL_SERVER,
                 self::MULTIPLE_QUERY_EXECUTION,
                 self::PERSISTED_QUERIES,
-                self::POLYLANG_INTEGRATION,
                 self::QUERY_FUNCTIONS,
                 self::SCHEMA_FUNCTIONS,
             ] : [],
@@ -76,7 +74,6 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             self::INTERNAL_GRAPHQL_SERVER => sprintf($extensionPlaceholder, \__('Internal GraphQL Server', 'gatographql')),
             self::MULTIPLE_QUERY_EXECUTION => sprintf($extensionPlaceholder, \__('Multiple Query Execution', 'gatographql')),
             self::PERSISTED_QUERIES => sprintf($extensionPlaceholder, \__('Persisted Queries', 'gatographql')),
-            self::POLYLANG_INTEGRATION => sprintf($extensionPlaceholder, \__('Polylang Integration', 'gatographql')),
             self::QUERY_FUNCTIONS => sprintf($extensionPlaceholder, \__('Query Functions', 'gatographql')),
             self::SCHEMA_FUNCTIONS => sprintf($extensionPlaceholder, \__('Schema Functions', 'gatographql')),
             default => $module,
@@ -98,7 +95,6 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             self::INTERNAL_GRAPHQL_SERVER => \__('Execute GraphQL queries directly within your application, using PHP code', 'gatographql'),
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple GraphQL queries together, and execute them as a single operation, to improve performance and make your queries more manageable', 'gatographql'),
             self::PERSISTED_QUERIES => \__('Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs', 'gatographql'),
-            self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
             self::QUERY_FUNCTIONS => \__('Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities', 'gatographql'),
             self::SCHEMA_FUNCTIONS => \__('Collection of fields and directives added to the GraphQL schema, providing useful functionality', 'gatographql'),
             default => parent::getDescription($module),
@@ -107,7 +103,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
 
     public function getPriority(): int
     {
-        return 20;
+        return 30;
     }
 
     public function getWebsiteURL(string $module): string
@@ -148,8 +144,6 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
                 => $pluginURL . 'assets/img/extension-logos/multiple-query-execution.svg',
             self::PERSISTED_QUERIES
                 => $pluginURL . 'assets/img/extension-logos/persisted-queries.svg',
-            self::POLYLANG_INTEGRATION
-                => $pluginURL . 'assets/img/extension-logos/polylang-integration.png',
             self::QUERY_FUNCTIONS
                 => $pluginURL . 'assets/img/extension-logos/query-functions.svg',
             self::SCHEMA_FUNCTIONS
@@ -276,9 +270,6 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
                 ExtensionModuleResolver::PERSISTED_QUERIES,
                 ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
             ],
-            self::POLYLANG_INTEGRATION => [
-                ExtensionModuleResolver::POLYLANG,
-            ],
             self::QUERY_FUNCTIONS => [
                 ExtensionModuleResolver::FIELD_TO_INPUT,
                 ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
@@ -319,7 +310,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             //     self::INTERNAL_GRAPHQL_SERVER,
             //     self::MULTIPLE_QUERY_EXECUTION,
             //     self::PERSISTED_QUERIES,
-            //     self::POLYLANG_INTEGRATION,
+            //     PremiumBundleExtensionModuleResolver::POLYLANG_INTEGRATION,
             //     self::QUERY_FUNCTIONS,
             //     self::SCHEMA_FUNCTIONS,
             // ],
