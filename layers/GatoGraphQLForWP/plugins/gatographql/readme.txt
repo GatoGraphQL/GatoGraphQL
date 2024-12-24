@@ -26,15 +26,15 @@ The [standard use cases](https://gatographql.com) are:
 
 With Gato GraphQL, you also have the flexibility to migrate your application from WordPress to another PHP-based framework or CMS (if ever needed) with minimal effort: The GraphQL server can run via its standalone PHP component (which doesn't depend on WordPress), and only those resolvers fetching WordPress data (posts, users, comments, etc) used by your application would need to be ported. You can do **Headless WordPress without WordPress**, avoiding the vendor lock-in to WordPress.
 
-== Extensions ==
+== Power Extensions ==
 
-[Extensions](https://gatographql.com/extensions) allow you to augment the server functionality, and extend the GraphQL schema.
+The [Power Extensions](https://gatographql.com/extensions#power-extensions) allow you to augment the server functionality.
 
 [youtube https://www.youtube.com/watch?v=d-Ap9axT7kE]
 
-You can purchase each extension separately, or get a [bundle containing all the extensions](https://gatographql.com/pricing).
+You can purchase a [bundle containing all the power extensions](https://gatographql.com/pricing#power-extensions) (at a big discount).
 
-The available extensions are:
+The available power extensions are:
 
 [Access Control](https://gatographql.com/extensions/access-control): Grant granular access to the schema (based on the user being logged-in, having some role or capability, or by IP), to manage who can access what data.
 
@@ -52,11 +52,19 @@ The available extensions are:
 
 [Persisted Queries](https://gatographql.com/extensions/persisted-queries): Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs.
 
-[Polylang Integration](https://gatographql.com/extensions/polylang-integration): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
-
 [Query Functions](https://gatographql.com/extensions/query-functions): Manipulate the values of fields within the GraphQL query, via a collection of utilities and special directives providing meta-programming capabilities.
 
 [Schema Functions](https://gatographql.com/extensions/schema-functions): The GraphQL schema is provided with fields and directives which expose functionalities from the PHP programming language.
+
+== Premium Extensions ==
+
+[Premium Extensions](https://gatographql.com/extensions#premium-extensions) allow you to integrate popular services and WordPress plugins into the GraphQL schema, and automate the execution of queries.
+
+You can [purchase each premium extension separately](https://gatographql.com/pricing#premium-extensions).
+
+The available premium extensions are:
+
+[Polylang Integration](https://gatographql.com/extensions/polylang-integration): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
 
 == Frequently Asked Questions ==
 
@@ -177,6 +185,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking changes: Changed signature of method `validateDirectiveArgValue`, passing the `$directiveArgs` param when validating a single directive arg (#2989)
 * Added GraphQL type `StringListValueJSONObject` (#2991)
 * Added YouTube videos to the extension docs (#9b95be5)
+* Added documentation for Premium Extensions (#2994)
 * Settings: For entries of the "Key => Label" type (eg: Extension license keys), allow to use a select input to print preselected values (#2988)
 
 = 9.0.0 =
