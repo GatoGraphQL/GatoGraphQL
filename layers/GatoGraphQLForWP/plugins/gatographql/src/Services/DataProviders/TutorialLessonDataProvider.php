@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\DataProviders;
 
 use GatoGraphQL\GatoGraphQL\Constants\TutorialLessons;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\PowerExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\PremiumExtensionModuleResolver;
 
 class TutorialLessonDataProvider
 {
@@ -147,7 +148,7 @@ class TutorialLessonDataProvider
             //         PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
             //         PowerExtensionModuleResolver::FIELD_TO_INPUT,
             //         PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-            //         PowerExtensionModuleResolver::GOOGLE_TRANSLATE,
+            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
             //         PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
             //         PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             //     ]
@@ -161,7 +162,7 @@ class TutorialLessonDataProvider
             //         PowerExtensionModuleResolver::FIELD_ON_FIELD,
             //         PowerExtensionModuleResolver::FIELD_TO_INPUT,
             //         PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-            //         PowerExtensionModuleResolver::GOOGLE_TRANSLATE,
+            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
             //         PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
             //         PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             //     ]
@@ -180,7 +181,7 @@ class TutorialLessonDataProvider
             TutorialLessons::SENDING_A_NOTIFICATION_WHEN_THERE_IS_A_NEW_POST => [
                 \__('Lesson 13: Sending a notification when there is a new post', 'gatographql'),
                 [
-                    PowerExtensionModuleResolver::AUTOMATION,
+                    PremiumExtensionModuleResolver::AUTOMATION,
                     PowerExtensionModuleResolver::EMAIL_SENDER,
                     PowerExtensionModuleResolver::FIELD_TO_INPUT,
                     PowerExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
@@ -192,7 +193,7 @@ class TutorialLessonDataProvider
             TutorialLessons::SENDING_A_DAILY_SUMMARY_OF_ACTIVITY => [
                 \__('Lesson 14: Sending a daily summary of activity', 'gatographql'),
                 [
-                    PowerExtensionModuleResolver::AUTOMATION,
+                    PremiumExtensionModuleResolver::AUTOMATION,
                     PowerExtensionModuleResolver::EMAIL_SENDER,
                     PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     PowerExtensionModuleResolver::FIELD_TO_INPUT,
@@ -280,7 +281,7 @@ class TutorialLessonDataProvider
             // TutorialLessons::TRANSLATING_CONTENT_FROM_URL => [
             //     \__('Lesson 24: Translating content from URL', 'gatographql'),
             //     [
-            //         PowerExtensionModuleResolver::GOOGLE_TRANSLATE,
+            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
             //         PowerExtensionModuleResolver::HTTP_CLIENT,
             //     ]
             // ],
