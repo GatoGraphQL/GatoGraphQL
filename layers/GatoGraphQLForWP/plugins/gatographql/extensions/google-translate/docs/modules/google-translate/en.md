@@ -1,8 +1,10 @@
 # Google Translate
 
-Directive `@strTranslate` to translate a field value to over 190 languages using the Google Translate API.
+Inject the Google Translate API as a translation provider into directive `@strTranslate`, to translate a field value to over 190 languages.
 
 ## Description
+
+Make Google Translate's API available as a translation provider in directive `@strTranslate`.
 
 Add directive `@strTranslate` to any field of type `String`, to translate it to the desired language.
 
