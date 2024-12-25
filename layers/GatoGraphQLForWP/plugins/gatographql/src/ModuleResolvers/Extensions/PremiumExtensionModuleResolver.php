@@ -16,6 +16,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
     public const MULTILINGUALPRESS = Plugin::NAMESPACE . '\\extensions\\multilingualpress';
     public const POLYLANG = Plugin::NAMESPACE . '\\extensions\\polylang';
+    public const TRANSLATION = Plugin::NAMESPACE . '\\extensions\\translation';
 
     /**
      * @return string[]
@@ -29,6 +30,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GOOGLE_TRANSLATE,
             self::MULTILINGUALPRESS,
             self::POLYLANG,
+            self::TRANSLATION,
         ];
     }
 
@@ -41,6 +43,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gatographql'),
             self::MULTILINGUALPRESS => \__('MultilingualPress', 'gatographql'),
             self::POLYLANG => \__('Polylang', 'gatographql'),
+            self::TRANSLATION => \__('Translation', 'gatographql'),
             default => $module,
         };
     }
@@ -54,6 +57,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gatographql'),
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
+            self::TRANSLATION => \__('Translate content to multiple languages using any provider\'s API.', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
