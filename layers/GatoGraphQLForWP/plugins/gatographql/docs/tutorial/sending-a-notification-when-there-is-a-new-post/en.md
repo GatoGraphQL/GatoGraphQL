@@ -68,8 +68,7 @@ To send the email in plain text:
 
 </div>
 
-<!-- {/* Ignore Automation guides */} -->
-<!-- Let's see next how to trigger the execution of the GraphQL query.
+Let's see next how to trigger the execution of the GraphQL query.
 
 ## Option 1: Trigger always by reacting to WordPress hooks
 
@@ -225,4 +224,4 @@ Depending on our strategy, we can trigger the execution of one or multiple addit
 
 <br/>
 
-</div> -->
+</div>
