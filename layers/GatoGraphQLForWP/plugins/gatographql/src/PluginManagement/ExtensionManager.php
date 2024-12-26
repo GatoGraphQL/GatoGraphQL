@@ -210,7 +210,7 @@ class ExtensionManager extends AbstractPluginManager
         if (!isset($this->extensionClassInstances[$dependedUponExtensionClass])) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    __('Extension <strong>%1$s</strong> depends on extension with class <strong>%2$s</strong> to be installed, but it is not. The extension has not been loaded.', 'gatographql'),
+                    __('Extension <strong>%1$s</strong> depends on extension with class <strong>%2$s</strong> to be installed and active, but it is not. The extension has not been loaded.', 'gatographql'),
                     $extensionName,
                     $dependedUponExtensionClass,
                 )
