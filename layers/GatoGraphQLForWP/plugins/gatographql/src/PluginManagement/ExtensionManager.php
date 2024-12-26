@@ -118,7 +118,7 @@ class ExtensionManager extends AbstractPluginManager
      *
      * If the assertion fails, it prints an error on the WP admin and returns false
      *
-     * @param string|null $mainPluginVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
+     * @param string $mainPluginVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
      * @return bool `true` if the extension can be registered, `false` otherwise
      *
      * @see https://getcomposer.org/doc/articles/versions.md#versions-and-constraints
@@ -126,8 +126,8 @@ class ExtensionManager extends AbstractPluginManager
     public function assertIsValid(
         string $extensionClass,
         string $extensionVersion,
-        ?string $extensionName = null,
-        ?string $mainPluginVersionConstraint = null,
+        string $extensionName,
+        string $mainPluginVersionConstraint,
     ): bool {
         // Validate that the extension is not registered yet.
         if (isset($this->extensionClassInstances[$extensionClass])) {
@@ -141,12 +141,12 @@ class ExtensionManager extends AbstractPluginManager
             $errorMessage = $installedExtensionVersion === $extensionVersion && $this->isExtensionBundled($extensionClass)
                 ? sprintf(
                     __('Extension <strong>%s</strong> with version <code>%s</code> is already installed. Are both the extension and a bundle containing the extension being installed? If so, please keep the bundle only.', 'gatographql'),
-                    $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
+                    $extensionName,
                     $extensionVersion,
                 )
                 : sprintf(
                     __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'gatographql'),
-                    $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
+                    $extensionName,
                     $installedExtensionVersion,
                     $extensionVersion,
                 );
@@ -168,7 +168,7 @@ class ExtensionManager extends AbstractPluginManager
             $this->printAdminNoticeErrorMessage(
                 sprintf(
                     __('Plugin <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The plugin has not been loaded.<br/>(If you have just updated <strong>%2$s</strong>, notice that the corresponding version for <strong>%1$s</strong> will be already available; please <a href="%5$s" target="_blank">download it%6$s</a> and install it.)', 'gatographql'),
-                    $extensionName ?? $extensionClass,
+                    $extensionName,
                     $mainPlugin->getPluginName(),
                     $mainPluginVersionConstraint,
                     $mainPlugin->getPluginVersion(),
