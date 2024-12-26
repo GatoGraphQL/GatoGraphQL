@@ -217,7 +217,7 @@ class ExtensionManager extends AbstractPluginManager
             );
             return false;
         }
-    
+
         /**
          * Validate that the required version of the depended-upon extension is installed.
          */
@@ -240,7 +240,7 @@ class ExtensionManager extends AbstractPluginManager
             );
             return false;
         }
-    
+
         return true;
     }
 
