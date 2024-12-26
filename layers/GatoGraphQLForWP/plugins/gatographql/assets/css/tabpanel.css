@@ -56,7 +56,8 @@
  * The pre > code are not scrollable, but expand outside the viewport.
  * So constrain it calculating the max-width for each case!
  */
-.gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre > code {
+.gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content/*,
+ .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre*/ {
     max-width: calc(100vw - 10px - 150px - 15px - 2em - 1px - 10px);
 }
 /**
@@ -73,7 +74,8 @@
     .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 160px;
     }
-    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre > code {
+    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content/*,
+    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre*/ {
         max-width: calc(100vw - 10px - 160px - 15px - 2em - 1px - 10px);
     }
 }
@@ -81,7 +83,8 @@
     .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 190px;
     }
-    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre > code {
+    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content/*,
+    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre*/ {
         max-width: calc(100vw - 56px - 190px - 15px - 2em - 1px - 15px);
     }
 }
@@ -89,7 +92,8 @@
     .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper {
         flex: 0 0 220px;
     }
-    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre > code {
+    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content/*,
+    .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content pre*/ {
         max-width: calc(100vw - 180px - 220px - 15px - 2em - 1px - 15px);
     }
 }
