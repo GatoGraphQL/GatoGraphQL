@@ -8,6 +8,7 @@ use Exception;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
+use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -23,8 +24,8 @@ use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
-use PoP\ComponentModel\Constants\FrameworkParams;
 
+use PoP\ComponentModel\Constants\FrameworkParams;
 use function __;
 use function add_action;
 use function add_settings_field;
@@ -125,12 +126,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {
-        if ($this->optionNamespacer === null) {
-            /** @var OptionNamespacerInterface */
-            $optionNamespacer = $this->instanceManager->getInstance(OptionNamespacerInterface::class);
-            $this->optionNamespacer = $optionNamespacer;
-        }
-        return $this->optionNamespacer;
+        return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
     }
 
     public function getScreenID(): string

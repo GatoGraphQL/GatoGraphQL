@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers;
 
+use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
@@ -22,12 +23,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
 
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {
-        if ($this->optionNamespacer === null) {
-            /** @var OptionNamespacerInterface */
-            $optionNamespacer = $this->instanceManager->getInstance(OptionNamespacerInterface::class);
-            $this->optionNamespacer = $optionNamespacer;
-        }
-        return $this->optionNamespacer;
+        return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
     }
 
     /**
