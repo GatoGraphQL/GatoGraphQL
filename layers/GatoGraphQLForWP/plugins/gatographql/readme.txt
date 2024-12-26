@@ -64,7 +64,7 @@ You can [purchase each premium extension separately](https://gatographql.com/pri
 
 The available premium extensions are:
 
-[Polylang Integration](https://gatographql.com/extensions/polylang-integration): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
+[Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
 
 == Frequently Asked Questions ==
 

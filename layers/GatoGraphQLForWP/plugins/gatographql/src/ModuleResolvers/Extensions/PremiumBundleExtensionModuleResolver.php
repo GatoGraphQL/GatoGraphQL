@@ -12,7 +12,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
 {
     use PremiumExtensionModuleResolverTrait;
 
-    public const POLYLANG_INTEGRATION = Plugin::NAMESPACE . '\\bundle-extensions\\polylang-integration';
+    public const POLYLANG = Plugin::NAMESPACE . '\\bundle-extensions\\polylang';
 
     /**
      * @return string[]
@@ -21,7 +21,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     {
         return PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
             ? [
-                self::POLYLANG_INTEGRATION,
+                self::POLYLANG,
             ] : [];
     }
 
@@ -29,7 +29,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     {
         $extensionPlaceholder = \__('%s', 'gatographql');
         return match ($module) {
-            self::POLYLANG_INTEGRATION => sprintf($extensionPlaceholder, \__('Polylang Integration', 'gatographql')),
+            self::POLYLANG => sprintf($extensionPlaceholder, \__('Polylang', 'gatographql')),
             default => $module,
         };
     }
@@ -37,7 +37,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::POLYLANG_INTEGRATION => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
+            self::POLYLANG => \__('Integration with the Polylang plugin, providing fields to the GraphQL schema to fetch multilingual data', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -51,8 +51,8 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     {
         $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
         return match ($module) {
-            self::POLYLANG_INTEGRATION
-                => $pluginURL . 'assets/img/extension-logos/polylang-integration.png',
+            self::POLYLANG
+                => $pluginURL . 'assets/img/extension-logos/polylang.png',
             default => parent::getLogoURL($module),
         };
     }
@@ -63,7 +63,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     public function getBundledExtensionModules(string $module): array
     {
         return match ($module) {
-            self::POLYLANG_INTEGRATION => [
+            self::POLYLANG => [
                 PremiumExtensionModuleResolver::POLYLANG,
             ],
             default => [],
