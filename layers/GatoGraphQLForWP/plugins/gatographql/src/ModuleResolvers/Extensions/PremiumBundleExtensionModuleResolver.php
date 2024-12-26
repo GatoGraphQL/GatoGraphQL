@@ -52,7 +52,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
         $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
         return match ($module) {
             self::POLYLANG
-                => $pluginURL . 'assets/img/extension-logos/polylang-integration.png',
+                => $pluginURL . 'assets/img/extension-logos/polylang.png',
             default => parent::getLogoURL($module),
         };
     }
