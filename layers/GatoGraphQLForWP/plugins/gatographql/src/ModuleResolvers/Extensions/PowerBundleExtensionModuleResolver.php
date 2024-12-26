@@ -310,7 +310,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             //     self::INTERNAL_GRAPHQL_SERVER,
             //     self::MULTIPLE_QUERY_EXECUTION,
             //     self::PERSISTED_QUERIES,
-            //     PremiumBundleExtensionModuleResolver::POLYLANG_INTEGRATION,
+            //     PremiumBundleExtensionModuleResolver::POLYLANG,
             //     self::QUERY_FUNCTIONS,
             //     self::SCHEMA_FUNCTIONS,
             // ],
