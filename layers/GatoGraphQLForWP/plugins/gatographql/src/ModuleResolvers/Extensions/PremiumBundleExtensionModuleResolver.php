@@ -73,10 +73,10 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
         $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
         $imagePathURL = $pluginURL . 'assets/img/extension-logos';
         return match ($module) {
-            self::AUTOMATION => $imagePathURL . '/automation.png',
-            self::DEEPL => $imagePathURL . '/deepl.png',
-            self::EVENTS_MANAGER => $imagePathURL . '/events-manager.png',
-            self::GOOGLE_TRANSLATE => $imagePathURL . '/google-translate.png',
+            self::AUTOMATION => $imagePathURL . '/automation.svg',
+            self::DEEPL => $imagePathURL . '/deepl.svg',
+            self::EVENTS_MANAGER => $imagePathURL . '/events-manager.webp',
+            self::GOOGLE_TRANSLATE => $imagePathURL . '/google-translate.svg',
             self::MULTILINGUALPRESS => $imagePathURL . '/multilingualpress.png',
             self::POLYLANG => $imagePathURL . '/polylang.png',
             default => parent::getLogoURL($module),
