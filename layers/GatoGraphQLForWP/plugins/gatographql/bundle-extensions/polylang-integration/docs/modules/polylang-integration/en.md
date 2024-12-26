@@ -1,8 +1,8 @@
-# Polylang Integration
+# Polylang
 
 Integration with the [Polylang](https://wordpress.org/plugins/polylang/) plugin (and also [Polylang PRO](https://polylang.pro)).
 
-[Watch “How to use the Polylang Integration extension” on YouTube](https://www.youtube.com/watch?v=O-V8mCMavrE)
+[Watch “How to use the Polylang extension” on YouTube](https://www.youtube.com/watch?v=O-V8mCMavrE)
 
 ---
 
