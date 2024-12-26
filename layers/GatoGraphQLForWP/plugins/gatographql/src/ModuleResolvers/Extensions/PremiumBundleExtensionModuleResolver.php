@@ -89,6 +89,23 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     public function getBundledExtensionModules(string $module): array
     {
         return match ($module) {
+            self::AUTOMATION => [
+                PremiumExtensionModuleResolver::AUTOMATION,
+            ],
+            self::DEEPL => [
+                PremiumExtensionModuleResolver::DEEPL,
+                PremiumExtensionModuleResolver::TRANSLATION,
+            ],
+            self::EVENTS_MANAGER => [
+                PremiumExtensionModuleResolver::EVENTS_MANAGER,
+            ],
+            self::GOOGLE_TRANSLATE => [
+                PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+                PremiumExtensionModuleResolver::TRANSLATION,
+            ],
+            self::MULTILINGUALPRESS => [
+                PremiumExtensionModuleResolver::MULTILINGUALPRESS,
+            ],
             self::POLYLANG => [
                 PremiumExtensionModuleResolver::POLYLANG,
             ],
