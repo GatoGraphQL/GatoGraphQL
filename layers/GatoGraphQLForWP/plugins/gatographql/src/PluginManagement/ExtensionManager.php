@@ -231,7 +231,7 @@ class ExtensionManager extends AbstractPluginManager
         ) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    __('Extension <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The plugin has not been loaded.', 'gatographql'),
+                    __('Extension <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The extension has not been loaded.', 'gatographql'),
                     $extensionName ?? $extensionClass,
                     $dependedUponExtension->getPluginName(),
                     $dependedUponExtensionVersionConstraint,
