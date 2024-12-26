@@ -201,7 +201,6 @@ class ExtensionManager extends AbstractPluginManager
      * @see https://getcomposer.org/doc/articles/versions.md#versions-and-constraints
      */
     public function assertDependedUponExtensionIsValid(
-        string $extensionClass,
         string $extensionName,
         string $dependedUponExtensionClass,
         string $dependedUponExtensionVersionConstraint,
