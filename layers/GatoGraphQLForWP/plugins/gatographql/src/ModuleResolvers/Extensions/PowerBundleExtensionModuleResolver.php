@@ -38,6 +38,10 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             // PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() ? [
             //     self::PRO,
             // ] : [],
+            PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
+                // // self::ALL_EXTENSIONS,
+                self::POWER_EXTENSIONS,
+            ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage() ? [
                 self::ACCESS_CONTROL,
                 self::CACHING,
@@ -49,10 +53,6 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
                 self::PERSISTED_QUERIES,
                 self::QUERY_FUNCTIONS,
                 self::SCHEMA_FUNCTIONS,
-            ] : [],
-            PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
-                // // self::ALL_EXTENSIONS,
-                self::POWER_EXTENSIONS,
             ] : [],
         );
     }
