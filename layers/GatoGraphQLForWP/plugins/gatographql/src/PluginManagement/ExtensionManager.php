@@ -196,6 +196,7 @@ class ExtensionManager extends AbstractPluginManager
      * "Access Control" with contraint "~9.0.0"
      *
      * @param string $dependedUponExtensionVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
+     * @param class-string<ExtensionInterface> $dependedUponExtensionClass
      * @return bool `true` if the extension can be registered, `false` otherwise
      *
      * @see https://getcomposer.org/doc/articles/versions.md#versions-and-constraints
