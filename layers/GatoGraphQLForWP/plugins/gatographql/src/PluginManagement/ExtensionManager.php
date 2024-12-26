@@ -189,6 +189,62 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
+     * Validate that the depended-upon extension has the required
+     * version constraint.
+     *
+     * Eg: "Access Control Visitor IP" v9.0.0 will require
+     * "Access Control" with contraint "~9.0.0"
+     *
+     * @param string|null $dependedUponExtensionVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
+     * @return bool `true` if the extension can be registered, `false` otherwise
+     *
+     * @see https://getcomposer.org/doc/articles/versions.md#versions-and-constraints
+     */
+    public function assertDependedUponExtensionIsValid(
+        string $extensionClass,
+        string $extensionName,
+        string $dependedUponExtensionClass,
+        string $dependedUponExtensionVersionConstraint,
+    ): bool {
+        // Validate that the depended-upon extension has been registered.
+        if (!isset($this->extensionClassInstances[$dependedUponExtensionClass])) {
+            $this->printAdminNoticeErrorMessage(
+                sprintf(
+                    __('Extension <strong>%1$s</strong> depends on extension with class <strong>%2$s</strong> to be installed and active, but it is not. The extension has not been loaded.', 'gatographql'),
+                    $extensionName,
+                    $dependedUponExtensionClass,
+                )
+            );
+            return false;
+        }
+    
+        /**
+         * Validate that the required version of the depended-upon extension is installed.
+         */
+        $dependedUponExtension = $this->getExtension($dependedUponExtensionClass);
+        $dependedUponExtensionVersion = $dependedUponExtension->getPluginVersion();
+        if (
+            $dependedUponExtensionVersionConstraint !== null && !SemverWrapper::satisfies(
+                $dependedUponExtensionVersion,
+                $dependedUponExtensionVersionConstraint
+            )
+        ) {
+            $this->printAdminNoticeErrorMessage(
+                sprintf(
+                    __('Extension <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The extension has not been loaded.', 'gatographql'),
+                    $extensionName ?? $extensionClass,
+                    $dependedUponExtension->getPluginName(),
+                    $dependedUponExtensionVersionConstraint,
+                    $dependedUponExtension->getPluginVersion(),
+                )
+            );
+            return false;
+        }
+    
+        return true;
+    }
+
+    /**
      * Validate that if the main plugin is "-dev", then the extension also is.
      * This is useful to issue licenses for the Marketplace by testing/production,
      * and validate that the corresponding extension is installed.
