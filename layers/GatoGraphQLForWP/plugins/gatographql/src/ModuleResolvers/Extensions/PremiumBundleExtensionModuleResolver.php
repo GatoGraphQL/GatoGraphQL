@@ -71,8 +71,9 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     public function getLogoURL(string $module): string
     {
         $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
+        $imagePathURL = $pluginURL . 'assets/img/extension-logos';
         return match ($module) {
-            self::POLYLANG => $pluginURL . 'assets/img/extension-logos/polylang.png',
+            self::POLYLANG => $imagePathURL . '/polylang.png',
             default => parent::getLogoURL($module),
         };
     }
