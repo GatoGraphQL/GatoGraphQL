@@ -195,7 +195,7 @@ class ExtensionManager extends AbstractPluginManager
      * Eg: "Access Control Visitor IP" v9.0.0 will require
      * "Access Control" with contraint "~9.0.0"
      *
-     * @param string|null $dependedUponExtensionVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
+     * @param string $dependedUponExtensionVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
      * @return bool `true` if the extension can be registered, `false` otherwise
      *
      * @see https://getcomposer.org/doc/articles/versions.md#versions-and-constraints
@@ -232,7 +232,7 @@ class ExtensionManager extends AbstractPluginManager
             $this->printAdminNoticeErrorMessage(
                 sprintf(
                     __('Extension <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The extension has not been loaded.', 'gatographql'),
-                    $extensionName ?? $extensionClass,
+                    $extensionName,
                     $dependedUponExtension->getPluginName(),
                     $dependedUponExtensionVersionConstraint,
                     $dependedUponExtension->getPluginVersion(),
