@@ -140,33 +140,31 @@ class TutorialLessonDataProvider
                 ]
             ],
 
-            // # Ignore `@strTranslate` tutorial docs
-            // TutorialLessons::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE => [
-            //     \__('Lesson 12: Translating block content in a post to a different language', 'gatographql'),
-            //     [
-            //         PowerExtensionModuleResolver::FIELD_ON_FIELD,
-            //         PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-            //         PowerExtensionModuleResolver::FIELD_TO_INPUT,
-            //         PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
-            //         PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-            //         PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-            //     ]
-            // ],
+            TutorialLessons::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE => [
+                \__('Lesson 12: Translating block content in a post to a different language', 'gatographql'),
+                [
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
 
-            # Ignore `@strTranslate` tutorial docs
-            // TutorialLessons::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE => [
-            //     \__('Lesson 13: Bulk translating block content in multiple posts to a different language', 'gatographql'),
-            //     [
-            //         PowerExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-            //         PowerExtensionModuleResolver::FIELD_ON_FIELD,
-            //         PowerExtensionModuleResolver::FIELD_TO_INPUT,
-            //         PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
-            //         PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-            //         PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-            //     ]
-            // ],
+            TutorialLessons::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE => [
+                \__('Lesson 13: Bulk translating block content in multiple posts to a different language', 'gatographql'),
+                [
+                    PowerExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                    PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                    PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                    PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
 
             TutorialLessons::SENDING_EMAILS_WITH_PLEASURE => [
                 \__('Lesson 12: Sending emails with pleasure', 'gatographql'),
@@ -277,14 +275,13 @@ class TutorialLessonDataProvider
                 ]
             ],
 
-            // # Ignore `@strTranslate` tutorial docs
-            // TutorialLessons::TRANSLATING_CONTENT_FROM_URL => [
-            //     \__('Lesson 24: Translating content from URL', 'gatographql'),
-            //     [
-            //         PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
-            //         PowerExtensionModuleResolver::HTTP_CLIENT,
-            //     ]
-            // ],
+            TutorialLessons::TRANSLATING_CONTENT_FROM_URL => [
+                \__('Lesson 24: Translating content from URL', 'gatographql'),
+                [
+                    PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    PowerExtensionModuleResolver::HTTP_CLIENT,
+                ]
+            ],
 
             TutorialLessons::TRANSFORMING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Lesson 22: Transforming data from an external API', 'gatographql'),
