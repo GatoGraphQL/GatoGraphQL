@@ -193,7 +193,7 @@ class ExtensionManager extends AbstractPluginManager
      * version constraint.
      *
      * Eg: "Access Control Visitor IP" v9.0.0 will require
-     * "Access Control" with contraint "~9.0.0"
+     * "Access Control" with constraint "~9.0.0"
      *
      * @param string $dependedUponExtensionVersionConstraint the semver version constraint required for the plugin (eg: "^1.0" means >=1.0.0 and <2.0.0)
      * @param class-string<ExtensionInterface> $dependedUponExtensionClass
