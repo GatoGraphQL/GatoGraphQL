@@ -20,6 +20,8 @@ extend-exclude = [
     "layers/GatoGraphQLForWP/plugins/gatographql/docs/tutorial/translating-content-from-url/en.md",
     "layers/GatoGraphQLForWP/plugins/gatographql/extensions/deepl/docs/modules/deepl/en.md",
     "layers/GatoGraphQLForWP/plugins/gatographql/extensions/google-translate/docs/modules/google-translate/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/bundle-extensions/google-translate/docs/modules/google-translate/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/bundle-extensions/deepl/docs/modules/deepl/en.md",
     "layers/GatoGraphQLForWP/plugins/gatographql/extensions/translation/docs/modules/translation/en.md",
     "layers/GatoGraphQLForWP/plugins/gatographql/setup/persisted-queries/admin/sync/import-posts-from-csv.gql",
     "**/input-object-inner-validations.json",
