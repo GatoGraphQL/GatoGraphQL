@@ -79,7 +79,7 @@ The Gato GraphQL website contains extensive documentation:
 
 = Can I watch videos demonstrating the plugin? =
 
-Sure you can, there are videos demonstrating how to use Gato GraphQL in:
+Sure you can. There are videos demonstrating how to use Gato GraphQL in:
 
 - The [Demos](https://gatographql.com/demos) page on gatographql.com
 - The [@GatoGraphQL YouTube channel](https://www.youtube.com/@GatoGraphQL)
