@@ -121,12 +121,8 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             'use_block_editor_for_post_type',
             $this->useBlockEditorForCustomPostType(...),
             PHP_INT_MAX,
-        2);
-        add_filter(
-            'gutenberg_can_edit_post_type',
-            $this->useBlockEditorForCustomPostType(...),
-            PHP_INT_MAX,
-        2);
+            2
+        );
 
         // To satisfy the menu position, the CPT will be initialized
         // earlier or later
