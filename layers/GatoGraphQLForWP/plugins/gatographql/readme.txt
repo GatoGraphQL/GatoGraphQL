@@ -32,7 +32,7 @@ The [Power Extensions](https://gatographql.com/extensions#power-extensions) allo
 
 [youtube https://www.youtube.com/watch?v=d-Ap9axT7kE]
 
-You can purchase a [bundle containing all the power extensions](https://gatographql.com/pricing#power-extensions) (at a big discount).
+You can purchase a [bundle containing all the power extensions](https://gatographql.com/pricing#power-extensions).
 
 The available power extensions are:
 
