@@ -9,12 +9,11 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractRelationalTypeResolverDecorator implements RelationalTypeResolverDecoratorInterface
+abstract class AbstractRelationalTypeResolverDecorator extends AbstractBasicService implements RelationalTypeResolverDecoratorInterface
 {
     use AttachableExtensionTrait;
-    use BasicServiceTrait;
 
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 

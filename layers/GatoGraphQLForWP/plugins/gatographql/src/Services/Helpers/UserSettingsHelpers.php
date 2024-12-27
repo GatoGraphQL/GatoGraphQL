@@ -7,12 +7,10 @@ namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class UserSettingsHelpers
+class UserSettingsHelpers extends AbstractBasicService
 {
-    use BasicServiceTrait;
-
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 
     final protected function getUserSettingsManager(): UserSettingsManagerInterface

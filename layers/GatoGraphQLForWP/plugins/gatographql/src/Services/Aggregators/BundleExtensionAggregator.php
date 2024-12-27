@@ -6,12 +6,10 @@ namespace GatoGraphQL\GatoGraphQL\Services\Aggregators;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class BundleExtensionAggregator
+class BundleExtensionAggregator extends AbstractBasicService
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?ModuleAggregator $moduleAggregator = null;
 
