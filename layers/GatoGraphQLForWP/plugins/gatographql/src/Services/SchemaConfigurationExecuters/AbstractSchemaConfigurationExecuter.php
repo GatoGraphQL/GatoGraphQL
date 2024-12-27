@@ -10,12 +10,10 @@ use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractSchemaConfigurationExecuter implements SchemaConfigurationExecuterInterface
+abstract class AbstractSchemaConfigurationExecuter extends AbstractBasicService implements SchemaConfigurationExecuterInterface
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface

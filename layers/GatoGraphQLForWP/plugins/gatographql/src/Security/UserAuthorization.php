@@ -10,7 +10,7 @@ use GatoGraphQL\GatoGraphQL\Exception\UserAuthorizationException;
 use GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
 use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
 use function is_user_logged_in;
 use function is_multisite;
@@ -19,10 +19,8 @@ use function is_super_admin;
 /**
  * UserAuthorization
  */
-class UserAuthorization implements UserAuthorizationInterface
+class UserAuthorization extends AbstractBasicService implements UserAuthorizationInterface
 {
-    use BasicServiceTrait;
-
     private ?UserAuthorizationSchemeRegistryInterface $userAuthorizationSchemeRegistry = null;
 
     final protected function getUserAuthorizationSchemeRegistry(): UserAuthorizationSchemeRegistryInterface

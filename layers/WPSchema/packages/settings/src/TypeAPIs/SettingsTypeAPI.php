@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoPWPSchema\Settings\TypeAPIs;
 
 use PoPWPSchema\SchemaCommons\StaticHelpers\WordPressStaticHelpers;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class SettingsTypeAPI implements SettingsTypeAPIInterface
+class SettingsTypeAPI extends AbstractBasicService implements SettingsTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     /**
      * The Gutenberg editor is enabled when the Classic editor
      * plugin is not enabled

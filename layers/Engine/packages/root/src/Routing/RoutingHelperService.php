@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoP\Root\Routing;
 
 use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class RoutingHelperService implements RoutingHelperServiceInterface
+class RoutingHelperService extends AbstractBasicService implements RoutingHelperServiceInterface
 {
-    use BasicServiceTrait;
-
     private bool $requestURIInitialized = false;
     private ?string $requestURI = null;
 

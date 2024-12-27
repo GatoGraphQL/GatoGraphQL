@@ -6,12 +6,10 @@ namespace GatoGraphQL\GatoGraphQL\Services\EndpointExecuters;
 
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractEndpointExecuter implements EndpointExecuterInterface
+abstract class AbstractEndpointExecuter extends AbstractBasicService implements EndpointExecuterInterface
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface

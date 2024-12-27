@@ -7,12 +7,10 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractModuleResolver implements ModuleResolverInterface
+abstract class AbstractModuleResolver extends AbstractBasicService implements ModuleResolverInterface
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface

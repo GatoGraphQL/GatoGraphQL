@@ -9,15 +9,13 @@ use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\Constants\ConfigurationValues;
 use PoP\ComponentModel\Registries\FieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
 /**
  * Base class for configuring the persisted GraphQL query before its execution
  */
-abstract class AbstractSchemaEntityConfigurator implements SchemaEntityConfiguratorInterface
+abstract class AbstractSchemaEntityConfigurator extends AbstractBasicService implements SchemaEntityConfiguratorInterface
 {
-    use BasicServiceTrait;
-
     /**
      * Keep a map of all namespaced type names to their resolver classes
      * @var array<string,string>|null

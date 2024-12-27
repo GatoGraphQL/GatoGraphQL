@@ -14,14 +14,12 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Environment as RootEnvironment;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
 use function sanitize_title;
 
-abstract class AbstractContentParser implements ContentParserInterface
+abstract class AbstractContentParser extends AbstractBasicService implements ContentParserInterface
 {
-    use BasicServiceTrait;
-
     public final const PATH_URL_TO_DOCS = 'pathURLToDocs';
 
     protected string $baseDir = '';

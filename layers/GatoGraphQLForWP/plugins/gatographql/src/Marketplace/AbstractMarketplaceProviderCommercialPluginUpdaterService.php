@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Exception\ShouldNotHappenException;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use WP_Upgrader;
 use WP_Error;
@@ -27,10 +27,8 @@ use function wp_remote_retrieve_response_code;
  * @see https://github.com/Make-Lemonade/lemonsqueezy-wp-updater-example
  * @see https://github.com/Make-Lemonade/lemonsqueezy-wp-updater-example/blob/7c0c71876309939b07d96e270f4db8568f3148cb/includes/class-plugin-updater.php
  */
-abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService implements MarketplaceProviderCommercialPluginUpdaterServiceInterface
+abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends AbstractBasicService implements MarketplaceProviderCommercialPluginUpdaterServiceInterface
 {
-    use BasicServiceTrait;
-
     protected bool $initialized = false;
 
     /**

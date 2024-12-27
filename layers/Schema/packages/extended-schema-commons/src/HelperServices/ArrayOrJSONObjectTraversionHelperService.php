@@ -6,14 +6,12 @@ namespace PoPSchema\ExtendedSchemaCommons\HelperServices;
 
 use PoP\Engine\Exception\RuntimeOperationException;
 use PoP\ComponentModel\Response\OutputServiceInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPSchema\ExtendedSchemaCommons\Constants\OperationSymbols;
 use stdClass;
 
-class ArrayOrJSONObjectTraversionHelperService implements ArrayOrJSONObjectTraversionHelperServiceInterface
+class ArrayOrJSONObjectTraversionHelperService extends AbstractBasicService implements ArrayOrJSONObjectTraversionHelperServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?OutputServiceInterface $outputService = null;
 
     final protected function getOutputService(): OutputServiceInterface

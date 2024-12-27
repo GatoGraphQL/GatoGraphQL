@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace PoPWPSchema\Multisite\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Site;
 
 use function get_sites;
 
-class MultisiteTypeAPI implements MultisiteTypeAPIInterface
+class MultisiteTypeAPI extends AbstractBasicService implements MultisiteTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     /**

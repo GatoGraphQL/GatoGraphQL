@@ -15,14 +15,12 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarType
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use SplObjectStorage;
 use stdClass;
 
-class TypeSerializationService implements TypeSerializationServiceInterface
+class TypeSerializationService extends AbstractBasicService implements TypeSerializationServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
 
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver

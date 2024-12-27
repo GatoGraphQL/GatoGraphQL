@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractComponentRoutingProcessor implements ComponentRoutingProcessorInterface
+abstract class AbstractComponentRoutingProcessor extends AbstractBasicService implements ComponentRoutingProcessorInterface
 {
-    use BasicServiceTrait;
-
     /**
      * @return string[]
      */

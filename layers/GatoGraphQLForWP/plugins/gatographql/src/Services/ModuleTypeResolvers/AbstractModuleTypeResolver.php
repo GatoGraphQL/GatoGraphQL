@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractModuleTypeResolver implements ModuleTypeResolverInterface
+abstract class AbstractModuleTypeResolver extends AbstractBasicService implements ModuleTypeResolverInterface
 {
-    use BasicServiceTrait;
-
     /**
      * By default, the slug is the module's name, without the owner/package
      */

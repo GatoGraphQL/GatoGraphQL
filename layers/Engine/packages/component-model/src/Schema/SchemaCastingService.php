@@ -13,12 +13,10 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarType
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithArgumentsInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class SchemaCastingService implements SchemaCastingServiceInterface
+class SchemaCastingService extends AbstractBasicService implements SchemaCastingServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
 

@@ -6,12 +6,10 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class SettingsNormalizer implements SettingsNormalizerInterface
+class SettingsNormalizer extends AbstractBasicService implements SettingsNormalizerInterface
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface

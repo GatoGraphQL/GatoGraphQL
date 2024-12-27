@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoP\Root\Routing;
 
 use PoP\Root\Configuration\Request;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractRoutingManager implements RoutingManagerInterface
+abstract class AbstractRoutingManager extends AbstractBasicService implements RoutingManagerInterface
 {
-    use BasicServiceTrait;
-
     private ?RoutingHelperServiceInterface $routingHelperService = null;
 
     final protected function getRoutingHelperService(): RoutingHelperServiceInterface

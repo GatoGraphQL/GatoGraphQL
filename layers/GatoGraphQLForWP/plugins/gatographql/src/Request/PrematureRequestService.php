@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\Registries\GraphQLEndpointPathProviderRegistryInterf
 use GatoGraphQL\GatoGraphQL\Services\GraphQLEndpointPathProviders\GraphQLEndpointPathProviderInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\Routing\RoutingHelperServiceInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
 /**
  * Use:
@@ -20,10 +20,8 @@ use PoP\Root\Services\BasicServiceTrait;
  *     -d '{"query": "{ id me { name } }"}' \
  *     https://mysite.com/graphql/
  */
-class PrematureRequestService implements PrematureRequestServiceInterface
+class PrematureRequestService extends AbstractBasicService implements PrematureRequestServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?GraphQLEndpointPathProviderRegistryInterface $graphQLEndpointPathProviderRegistry = null;
     private ?RoutingHelperServiceInterface $routingHelperService = null;
 
