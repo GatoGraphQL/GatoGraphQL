@@ -6,12 +6,9 @@ namespace GraphQLByPoP\GraphQLServer\ConditionalOnModule\AccessControl\Overrides
 
 use GraphQLByPoP\GraphQLServer\IFTTT\MandatoryDirectivesForFieldsRootTypeEntryDuplicatorInterface;
 use PoP\AccessControl\Services\AccessControlManager as UpstreamAccessControlManager;
-use PoP\Root\Services\BasicServiceTrait;
 
 class AccessControlManager extends UpstreamAccessControlManager
 {
-    use BasicServiceTrait;
-
     /**
      * @var array<string,array<mixed[]>>
      */

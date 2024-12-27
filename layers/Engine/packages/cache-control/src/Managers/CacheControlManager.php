@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\Managers;
 
-class CacheControlManager implements CacheControlManagerInterface
+use PoP\Root\Services\AbstractBasicService;
+
+class CacheControlManager extends AbstractBasicService implements CacheControlManagerInterface
 {
     /**
      * @var array<mixed[]>
