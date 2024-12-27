@@ -9,14 +9,11 @@ use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 use WP_Block_Editor_Context;
 use WP_Post;
 
 abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedService implements BlockCategoryInterface
 {
-    use BasicServiceTrait;
-
     public function isServiceEnabled(): bool
     {
         /**

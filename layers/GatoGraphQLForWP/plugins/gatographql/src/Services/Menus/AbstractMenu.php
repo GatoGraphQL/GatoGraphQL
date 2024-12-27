@@ -6,12 +6,9 @@ namespace GatoGraphQL\GatoGraphQL\Services\Menus;
 
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractMenu extends AbstractAutomaticallyInstantiatedService implements MenuInterface
 {
-    use BasicServiceTrait;
-
     /**
      * Only initialize once, for the main AppThread
      */

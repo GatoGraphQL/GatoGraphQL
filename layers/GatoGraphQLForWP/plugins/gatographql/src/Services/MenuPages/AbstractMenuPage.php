@@ -8,12 +8,9 @@ use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
-    use BasicServiceTrait;
-
     protected ?string $hookName = null;
 
     private ?MenuPageHelper $menuPageHelper = null;

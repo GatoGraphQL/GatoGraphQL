@@ -20,7 +20,6 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\RenderingHelpers;
 use GatoGraphQL\PluginUtils\Services\Helpers\StringConversion;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 
 use function add_action;
 use function is_admin;
@@ -43,7 +42,6 @@ use function wp_register_style;
 abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService implements BlockInterface
 {
     use HasDocumentationScriptTrait;
-    use BasicServiceTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
