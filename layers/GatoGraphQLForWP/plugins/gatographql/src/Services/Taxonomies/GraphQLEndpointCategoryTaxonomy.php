@@ -7,7 +7,6 @@ namespace GatoGraphQL\GatoGraphQL\Services\Taxonomies;
 use GatoGraphQL\GatoGraphQL\Registries\CustomPostTypeRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 {
@@ -20,7 +19,7 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
     {
         if ($this->customPostTypeRegistry === null) {
             /** @var CustomPostTypeRegistryInterface */
-            $customPostTypeRegistry = InstanceManagerFacade::getInstance()->getInstance(CustomPostTypeRegistryInterface::class);
+            $customPostTypeRegistry = $this->instanceManager->getInstance(CustomPostTypeRegistryInterface::class);
             $this->customPostTypeRegistry = $customPostTypeRegistry;
         }
         return $this->customPostTypeRegistry;
