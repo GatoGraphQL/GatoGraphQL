@@ -24,6 +24,8 @@ use WP_Block_Editor_Context;
 use WP_Post;
 use WP_Taxonomy;
 
+use function add_action;
+use function add_filter;
 use function get_taxonomy;
 use function is_object_in_taxonomy;
 use function wp_dropdown_categories;
@@ -110,14 +112,26 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
 
         $customPostType = $this->getCustomPostType();
+
+        /**
+         * If the Classic Editor is installed, still use the Gutenberg editor
+         * for the plugin's CPTs
+         */
+        add_filter(
+            'use_block_editor_for_post_type',
+            $this->useBlockEditorForCustomPostType(...),
+            PHP_INT_MAX,
+            2
+        );
+
         // To satisfy the menu position, the CPT will be initialized
         // earlier or later
-        \add_action(
+        add_action(
             'init',
             $this->initCustomPostType(...),
             $this->getMenuPosition()
         );
-        \add_action(
+        add_action(
             'init',
             $this->maybeLockGutenbergTemplate(...)
         );
@@ -132,14 +146,14 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * if that event happens, this code is kept.
          */
         if (\is_wp_version_compatible('5.8')) {
-            \add_filter(
+            add_filter(
                 'allowed_block_types_all',
                 $this->allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext(...),
                 10,
                 2
             );
         } else {
-            \add_filter(
+            add_filter(
                 'allowed_block_types',
                 $this->allowGutenbergBlocksForCustomPostType(...),
                 10,
@@ -149,7 +163,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         /**
          * Print the global JS variables, required by the blocks
          */
-        \add_action(
+        add_action(
             'admin_print_scripts',
             $this->printAdminGraphQLEndpointVariables(...)
         );
@@ -160,24 +174,24 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * */
         if ($this->isExcerptAsDescriptionEnabled() && $this->useCustomPostExcerptAsDescription()) {
             // Execute last as to always add the description at the top
-            \add_filter(
+            add_filter(
                 'the_content',
                 $this->maybeAddExcerptAsDescription(...),
                 PHP_INT_MAX
             );
         }
         // Add the custom columns to the post type
-        \add_filter(
+        add_filter(
             "manage_{$customPostType}_posts_columns",
             $this->setTableColumns(...)
         );
-        \add_action(
+        add_action(
             "manage_{$customPostType}_posts_custom_column",
             $this->resolveCustomColumn(...),
             10,
             2
         );
-        \add_action(
+        add_action(
             "restrict_manage_posts",
             $this->restrictManageCustomPosts(...),
             10,
@@ -188,13 +202,13 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * Add extra actions to the CPT table.
          * If they are hierarchical, they use hook "page_row_actions"
          */
-        \add_filter(
+        add_filter(
             'post_row_actions',
             $this->maybeAddCustomPostTypeTableActions(...),
             10,
             2
         );
-        \add_filter(
+        add_filter(
             'page_row_actions',
             $this->maybeAddCustomPostTypeTableActions(...),
             10,
@@ -215,7 +229,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             // ("auto-draft" status)
             // This is also saving "draft" to "draft" for which there's no need,
             // but can't avoid it
-            \add_action(
+            add_action(
                 "save_post_{$customPostType}",
                 function ($postID, $post): void {
                     if ($post->post_status === 'auto-draft') {
@@ -227,6 +241,16 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 2
             );
         }
+    }
+
+    public function useBlockEditorForCustomPostType(
+        bool $useBlockEditorForCustomPostType,
+        string $customPostType,
+    ): bool {
+        if ($this->getCustomPostType() === $customPostType) {
+            return true;
+        }
+        return $useBlockEditorForCustomPostType;
     }
 
     /**

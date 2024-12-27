@@ -24,6 +24,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Container not generated properly in certain hosts (`@required` attribute disregarded) (#3009)
+- Use the Gutenberg Editor for the plugin CPTs (when Classic Editor active) (#3011)
 
 ## 9.0.0 - 16/12/2024
 
