@@ -17,11 +17,11 @@ trait BasicServiceTrait
      * It was originally done like this:
      *
      *   #[Required]
-     * 
+     *
      * which was downgraded to:
      *
      *   @required
-     * 
+     *
      * However it doesn't always work! So instead inject
      * the InstanceManager via a CompilerPass
      *

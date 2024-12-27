@@ -9,7 +9,6 @@ use PoP\Root\Services\AbstractBasicService;
 
 abstract class AbstractSettingsCategoryResolver extends AbstractBasicService implements SettingsCategoryResolverInterface
 {
-
     final public function getID(string $settingsCategory): string
     {
         return strtolower(str_replace(

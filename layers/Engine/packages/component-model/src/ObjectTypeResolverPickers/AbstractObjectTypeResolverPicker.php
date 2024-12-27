@@ -11,6 +11,7 @@ use PoP\Root\Services\AbstractBasicService;
 abstract class AbstractObjectTypeResolverPicker extends AbstractBasicService implements ObjectTypeResolverPickerInterface
 {
     use AttachableExtensionTrait;
+
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface

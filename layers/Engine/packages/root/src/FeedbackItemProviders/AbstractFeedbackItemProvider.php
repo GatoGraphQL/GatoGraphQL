@@ -11,7 +11,6 @@ use PoP\Root\Services\AbstractBasicService;
 
 abstract class AbstractFeedbackItemProvider extends AbstractBasicService implements FeedbackItemProviderInterface
 {
-
     final public function getNamespacedCode(string $code): string
     {
         return $this->getNamespace() . $this->getNamespaceSeparator() . $code;

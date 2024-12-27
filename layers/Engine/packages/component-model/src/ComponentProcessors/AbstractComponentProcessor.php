@@ -39,6 +39,7 @@ use SplObjectStorage;
 abstract class AbstractComponentProcessor extends AbstractBasicService implements ComponentProcessorInterface
 {
     use ComponentPathProcessorTrait;
+
     public final const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public final const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
     public final const HOOK_ADD_HEADDATASETCOMPONENT_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetcomponentDataProperties';
