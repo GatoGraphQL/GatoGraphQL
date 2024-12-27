@@ -206,6 +206,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added documentation for Premium Extensions (#2994)
 * Settings: For entries of the "Key => Label" type (eg: Extension license keys), allow to use a select input to print preselected values (#2988)
 * Fixed: Container not generated properly in certain hosts (`@required` attribute disregarded) (#3009)
+* Fixed: Use the Gutenberg Editor for the plugin CPTs (when Classic Editor active) (#3011)
 
 = 9.0.0 =
 * Breaking change: Changed signature of method `assertCommercialLicenseHasBeenActivated` (#2978)

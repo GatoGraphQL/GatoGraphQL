@@ -18,6 +18,7 @@
 ## Fixed
 
 - Container not generated properly in certain hosts (`@required` attribute disregarded) ([#3009](https://github.com/GatoGraphQL/GatoGraphQL/pull/3009))
+- Use the Gutenberg Editor for the plugin CPTs (when Classic Editor active) ([#3011](https://github.com/GatoGraphQL/GatoGraphQL/pull/3011))
 
 ## [Extensions] Added
 
