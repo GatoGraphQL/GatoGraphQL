@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Registries;
 
 use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
-use PoP\Root\Services\ServiceInterface;
+use PoP\Root\Services\ActivableServiceInterface;
 
 abstract class AbstractBlockRegistry implements BlockRegistryInterface
 {
@@ -32,7 +32,7 @@ abstract class AbstractBlockRegistry implements BlockRegistryInterface
     {
         return array_values(array_filter(
             $this->getBlocks(),
-            fn (ServiceInterface $service) => $service->isServiceEnabled()
+            fn (ActivableServiceInterface $service) => $service->isServiceEnabled()
         ));
     }
 }

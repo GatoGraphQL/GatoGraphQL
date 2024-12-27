@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoP\Root\State;
 
 use PoP\Root\Services\AbstractBasicService;
-use PoP\Root\Services\ServiceTrait;
+use PoP\Root\Services\ActivableServiceTrait;
 
 abstract class AbstractAppStateProvider extends AbstractBasicService implements AppStateProviderInterface
 {
-    use ServiceTrait;
+    use ActivableServiceTrait;
 
     /**
      * @param array<string,mixed> $state

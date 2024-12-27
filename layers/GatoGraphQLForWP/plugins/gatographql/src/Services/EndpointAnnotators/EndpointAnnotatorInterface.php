@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators;
 
-use PoP\Root\Services\ServiceInterface;
+use PoP\Root\Services\ActivableServiceInterface;
 use WP_Post;
 
-interface EndpointAnnotatorInterface extends ServiceInterface
+interface EndpointAnnotatorInterface extends ActivableServiceInterface
 {
     /**
      * Add actions to the CPT list

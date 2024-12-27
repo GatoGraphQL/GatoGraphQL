@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Registries;
 
 use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\SchemaConfigurationExecuterInterface;
-use PoP\Root\Services\ServiceInterface;
+use PoP\Root\Services\ActivableServiceInterface;
 
 abstract class AbstractSchemaConfigurationExecuterRegistry implements SchemaConfigurationExecuterRegistryInterface
 {
@@ -32,7 +32,7 @@ abstract class AbstractSchemaConfigurationExecuterRegistry implements SchemaConf
     {
         return array_values(array_filter(
             $this->getSchemaConfigurationExecuters(),
-            fn (ServiceInterface $service) => $service->isServiceEnabled()
+            fn (ActivableServiceInterface $service) => $service->isServiceEnabled()
         ));
     }
 }

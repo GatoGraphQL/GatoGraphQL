@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\AttachableExtensions;
 
-use PoP\Root\Services\ServiceTrait;
+use PoP\Root\Services\ActivableServiceTrait;
 
 trait AttachableExtensionTrait
 {
-    use ServiceTrait;
+    use ActivableServiceTrait;
 
     protected bool $attached = false;
 

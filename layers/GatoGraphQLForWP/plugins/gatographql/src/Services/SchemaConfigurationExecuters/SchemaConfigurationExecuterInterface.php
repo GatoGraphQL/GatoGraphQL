@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 
-use PoP\Root\Services\ServiceInterface;
+use PoP\Root\Services\ActivableServiceInterface;
 
-interface SchemaConfigurationExecuterInterface extends ServiceInterface
+interface SchemaConfigurationExecuterInterface extends ActivableServiceInterface
 {
     /**
      * Execute the schema configuration contained in the custom post with certain ID

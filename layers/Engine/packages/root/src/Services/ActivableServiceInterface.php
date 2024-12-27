@@ -7,7 +7,7 @@ namespace PoP\Root\Services;
 /**
  * Container services
  */
-interface ServiceInterface
+interface ActivableServiceInterface
 {
     public function isServiceEnabled(): bool;
 }
