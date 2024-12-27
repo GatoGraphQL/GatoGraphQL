@@ -4,14 +4,24 @@ declare(strict_types=1);
 
 namespace PoP\Root\Services;
 
-use PoP\Root\Services\WithInstanceManagerServiceTrait;
+use PoP\Root\Instances\InstanceManagerInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 
 trait BasicServiceTrait
 {
-    use WithInstanceManagerServiceTrait;
-
+    protected InstanceManagerInterface $instanceManager;
     private ?TranslationAPIInterface $translationAPI = null;
+
+    #[Required]
+    final public function setInstanceManager(InstanceManagerInterface $instanceManager): void
+    {
+        $this->instanceManager = $instanceManager;
+    }
+    final protected function getInstanceManager(): InstanceManagerInterface
+    {
+        return $this->instanceManager;
+    }
 
     final protected function getTranslationAPI(): TranslationAPIInterface
     {
