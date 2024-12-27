@@ -7,7 +7,7 @@ namespace PoP\Root\Services;
 /**
  * Default implementation for services
  */
-trait ServiceTrait
+trait ActivableServiceTrait
 {
     public function isServiceEnabled(): bool
     {

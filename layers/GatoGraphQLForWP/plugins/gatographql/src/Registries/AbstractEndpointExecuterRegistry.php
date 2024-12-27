@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Registries;
 
 use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\EndpointExecuterInterface;
-use PoP\Root\Services\ServiceInterface;
+use PoP\Root\Services\ActivableServiceInterface;
 
 abstract class AbstractEndpointExecuterRegistry implements EndpointExecuterRegistryInterface
 {
@@ -34,7 +34,7 @@ abstract class AbstractEndpointExecuterRegistry implements EndpointExecuterRegis
     {
         return array_values(array_filter(
             $this->getEndpointExecuters(),
-            fn (ServiceInterface $service) => $service->isServiceEnabled()
+            fn (ActivableServiceInterface $service) => $service->isServiceEnabled()
         ));
     }
 }

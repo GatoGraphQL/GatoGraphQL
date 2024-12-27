@@ -13,7 +13,7 @@ use PoP\Root\Module\ApplicationEvents;
  */
 trait AutomaticallyInstantiatedServiceTrait
 {
-    use ServiceTrait;
+    use ActivableServiceTrait;
 
     public function initialize(): void
     {

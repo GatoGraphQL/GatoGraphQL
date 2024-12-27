@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\AttachableExtensions;
 
-use PoP\Root\Services\ServiceInterface;
+use PoP\Root\Services\ActivableServiceInterface;
 
 class AttachExtensionService implements AttachExtensionServiceInterface
 {
@@ -23,7 +23,7 @@ class AttachExtensionService implements AttachExtensionServiceInterface
             // Only attach the enabled thervices
             $extensions = array_filter(
                 $extensions,
-                fn (ServiceInterface $extension) => $extension->isServiceEnabled()
+                fn (ActivableServiceInterface $extension) => $extension->isServiceEnabled()
             );
             foreach ($extensions as $extension) {
                 $extension->attach($group);
