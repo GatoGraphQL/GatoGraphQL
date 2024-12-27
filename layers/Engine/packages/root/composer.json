@@ -17,7 +17,7 @@
         "ext-mbstring": "*",
         "pop-backbone/php-hooks": "^9.1",
         "symfony/config": "^6.0",
-        "symfony/dependency-injection": "6.3.12",
+        "symfony/dependency-injection": "^6.4",
         "symfony/dotenv": "^6.0",
         "symfony/http-foundation": "^6.0",
         "symfony/polyfill-php74": "^1.24",

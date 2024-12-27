@@ -27,7 +27,7 @@
         "symfony/cache": "^6.0",
         "symfony/config": "^6.0",
         "symfony/css-selector": "^6.0",
-        "symfony/dependency-injection": "6.3.12",
+        "symfony/dependency-injection": "^6.4",
         "symfony/dom-crawler": "^6.0",
         "symfony/dotenv": "^6.0",
         "symfony/expression-language": "^6.0",
