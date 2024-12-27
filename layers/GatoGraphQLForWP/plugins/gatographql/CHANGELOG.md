@@ -23,7 +23,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Exception with plugin capturing settings hooks before initialized (#3006)
+- Container not generated properly in certain hosts (`@required` attribute disregarded) (#3009)
 
 ## 9.0.0 - 16/12/2024
 

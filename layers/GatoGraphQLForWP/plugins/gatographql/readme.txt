@@ -188,7 +188,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added YouTube videos to the extension docs (#9b95be5)
 * Added documentation for Premium Extensions (#2994)
 * Settings: For entries of the "Key => Label" type (eg: Extension license keys), allow to use a select input to print preselected values (#2988)
-* Fixed: Exception with plugin capturing settings hooks before initialized (#3006)
+* Fixed: Container not generated properly in certain hosts (`@required` attribute disregarded) (#3009)
 
 = 9.0.0 =
 * Breaking change: Changed signature of method `assertCommercialLicenseHasBeenActivated` (#2978)

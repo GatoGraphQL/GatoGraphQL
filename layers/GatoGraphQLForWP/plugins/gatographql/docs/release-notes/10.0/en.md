@@ -17,7 +17,7 @@
 
 ## Fixed
 
-- Exception with plugin capturing settings hooks before initialized ([#3006](https://github.com/GatoGraphQL/GatoGraphQL/pull/3006))
+- Container not generated properly in certain hosts (`@required` attribute disregarded) ([#3009](https://github.com/GatoGraphQL/GatoGraphQL/pull/3009))
 
 ## [Extensions] Added
 
