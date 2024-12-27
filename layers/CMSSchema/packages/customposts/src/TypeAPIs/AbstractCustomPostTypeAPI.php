@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeAPIs;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 
-abstract class AbstractCustomPostTypeAPI implements CustomPostTypeAPIInterface
+abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements CustomPostTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     private ?CMSHelperServiceInterface $cmsHelperService = null;
 
     final protected function getCMSHelperService(): CMSHelperServiceInterface

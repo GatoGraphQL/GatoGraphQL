@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CommentsWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\Comments\Constants\CommentOrderBy;
 use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
@@ -25,10 +25,8 @@ use function post_type_supports;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CommentTypeAPI implements CommentTypeAPIInterface
+class CommentTypeAPI extends AbstractBasicService implements CommentTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 

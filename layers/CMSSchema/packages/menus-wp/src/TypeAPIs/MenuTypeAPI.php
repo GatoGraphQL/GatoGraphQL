@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MenusWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\Menus\ObjectModels\MenuItem;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -15,10 +15,8 @@ use WP_Term;
 use function esc_sql;
 use function wp_get_nav_menus;
 
-class MenuTypeAPI implements MenuTypeAPIInterface
+class MenuTypeAPI extends AbstractBasicService implements MenuTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     public function getMenu(string|int $menuID): ?object

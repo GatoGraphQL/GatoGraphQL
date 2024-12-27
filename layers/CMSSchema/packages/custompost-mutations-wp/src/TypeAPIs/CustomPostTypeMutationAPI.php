@@ -8,7 +8,7 @@ use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\ComponentModel\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 
 use function get_post_type_object;
@@ -20,9 +20,8 @@ use function wp_update_post;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
+class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPostTypeMutationAPIInterface
 {
-    use BasicServiceTrait;
     use TypeMutationAPITrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';

@@ -12,12 +12,10 @@ use PoP\ComponentModel\Configuration\Request;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class ComponentFilterManager implements ComponentFilterManagerInterface
+class ComponentFilterManager extends AbstractBasicService implements ComponentFilterManagerInterface
 {
-    use BasicServiceTrait;
-
     protected ?string $selected_filter_name = null;
     private ?ComponentFilterInterface $selected_filter = null;
     /**

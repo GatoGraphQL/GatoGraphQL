@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\TypeAPIs;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 
-abstract class AbstractUserTypeAPI implements UserTypeAPIInterface
+abstract class AbstractUserTypeAPI extends AbstractBasicService implements UserTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     private ?CMSHelperServiceInterface $cmsHelperService = null;
 
     final protected function getCMSHelperService(): CMSHelperServiceInterface

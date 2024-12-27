@@ -10,7 +10,7 @@ use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 use WP_Post;
 use WP_Term;
@@ -22,10 +22,8 @@ use function get_term_link;
 use function get_terms;
 use function wp_get_post_terms;
 
-abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
+abstract class AbstractTaxonomyTypeAPI extends AbstractBasicService implements TaxonomyTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 

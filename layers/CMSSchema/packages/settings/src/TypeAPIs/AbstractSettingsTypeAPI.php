@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Settings\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\Settings\Module;
 use PoPCMSSchema\Settings\ModuleConfiguration;
 use PoPCMSSchema\Settings\Exception\OptionNotAllowedException;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
-abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
+abstract class AbstractSettingsTypeAPI extends AbstractBasicService implements SettingsTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     private ?AllowOrDenySettingsServiceInterface $allowOrDenySettingsService = null;
 
     final protected function getAllowOrDenySettingsService(): AllowOrDenySettingsServiceInterface

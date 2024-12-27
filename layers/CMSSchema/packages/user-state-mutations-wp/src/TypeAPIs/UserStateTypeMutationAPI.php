@@ -7,7 +7,7 @@ namespace PoPCMSSchema\UserStateMutationsWP\TypeAPIs;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use WP_Error;
 
@@ -18,9 +18,8 @@ use function wp_signon;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
+class UserStateTypeMutationAPI extends AbstractBasicService implements UserStateTypeMutationAPIInterface
 {
-    use BasicServiceTrait;
     use TypeMutationAPITrait;
 
     /**

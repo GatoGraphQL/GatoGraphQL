@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\SchemaCommons\CMS;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class CMSHelperService implements CMSHelperServiceInterface
+class CMSHelperService extends AbstractBasicService implements CMSHelperServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?CMSServiceInterface $cmsService = null;
 
     final protected function getCMSService(): CMSServiceInterface

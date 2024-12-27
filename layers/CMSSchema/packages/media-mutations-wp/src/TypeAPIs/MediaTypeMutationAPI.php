@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutationsWP\TypeAPIs;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use WP_Error;
@@ -24,10 +24,8 @@ use function wp_insert_attachment;
 use function wp_slash;
 use function wp_update_attachment_metadata;
 
-class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
+class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMutationAPIInterface
 {
-    use BasicServiceTrait;
-
     /**
      * @throws MediaItemCRUDMutationException In case of error
      * @param array<string,mixed> $mediaItemData

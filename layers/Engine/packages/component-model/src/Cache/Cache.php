@@ -6,13 +6,12 @@ namespace PoP\ComponentModel\Cache;
 
 use DateInterval;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
-class Cache implements PersistentCacheInterface, TransientCacheInterface
+class Cache extends AbstractBasicService implements PersistentCacheInterface, TransientCacheInterface
 {
-    use BasicServiceTrait;
     use ReplaceCurrentExecutionDataWithPlaceholdersTrait;
 
     private ?ModelInstanceInterface $modelInstance = null;
