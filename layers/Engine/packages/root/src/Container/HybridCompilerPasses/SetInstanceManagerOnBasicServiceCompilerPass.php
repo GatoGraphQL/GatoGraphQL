@@ -16,7 +16,6 @@ class SetInstanceManagerOnBasicServiceCompilerPass extends AbstractCompilerPass
 
     protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
-        $instanceManagerDefinition = $containerBuilderWrapper->getDefinition(InstanceManagerInterface::class);
         $serviceClass = BasicServiceInterface::class;
         $definitions = $containerBuilderWrapper->getDefinitions();
         foreach ($definitions as $definitionID => $definition) {
@@ -32,7 +31,7 @@ class SetInstanceManagerOnBasicServiceCompilerPass extends AbstractCompilerPass
             ) {
                 $definition->addMethodCall(
                     'setInstanceManager',
-                    [$instanceManagerDefinition]
+                    [$this->createReference(InstanceManagerInterface::class)]
                 );
             }
         }
