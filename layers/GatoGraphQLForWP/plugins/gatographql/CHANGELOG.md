@@ -21,6 +21,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Settings: For entries of the "Key => Label" type (eg: Extension license keys), allow to use a select input to print preselected values (#2988)
 
+### Fixed
+
+- Exception with plugin capturing settings hooks before initialized (#3006)
+
 ## 9.0.0 - 16/12/2024
 
 ### Breaking changes
