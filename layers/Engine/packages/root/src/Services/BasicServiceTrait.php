@@ -6,14 +6,13 @@ namespace PoP\Root\Services;
 
 use PoP\Root\Instances\InstanceManagerInterface;
 use PoP\Root\Translation\TranslationAPIInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 
 trait BasicServiceTrait
 {
     protected InstanceManagerInterface $instanceManager;
     private ?TranslationAPIInterface $translationAPI = null;
 
-    #[Required]
+    // #[Required]
     final public function setInstanceManager(InstanceManagerInterface $instanceManager): void
     {
         $this->instanceManager = $instanceManager;
