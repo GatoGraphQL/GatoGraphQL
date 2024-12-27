@@ -9,7 +9,7 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 trait WithInstanceManagerServiceTrait
 {
-    protected InstanceManagerInterface $instanceManager;
+    public InstanceManagerInterface $instanceManager;
 
     #[Required]
     final public function setInstanceManager(InstanceManagerInterface $instanceManager): void
