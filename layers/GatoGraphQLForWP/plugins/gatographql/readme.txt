@@ -77,6 +77,13 @@ The Gato GraphQL website contains extensive documentation:
 - [Queries library](https://gatographql.com/library) with examples of GraphQL queries for many use cases
 - [Schema tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema
 
+= Can I watch videos demonstrating the plugin? =
+
+Sure you can, there are videos demonstrating how to use Gato GraphQL in:
+
+- The [Demos](https://gatographql.com/demos) page on gatographql.com
+- The [@GatoGraphQL YouTube channel](https://www.youtube.com/@GatoGraphQL)
+
 = Can I extend the GraphQL schema with my custom types and fields? =
 
 Yes you can. Use the GitHub template [GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter) to create an extension, and follow the documentation there.
