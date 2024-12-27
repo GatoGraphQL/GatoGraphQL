@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace PoP\LooseContracts;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractLooseContractSet extends AbstractAutomaticallyInstantiatedService
 {
-    use BasicServiceTrait;
-
     private ?LooseContractManagerInterface $looseContractManager = null;
 
     final protected function getLooseContractManager(): LooseContractManagerInterface

@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\PluginUtils\Services\Helpers\StringConversion;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 
 /**
  * Base class for a Gutenberg script.
@@ -20,8 +19,6 @@ use PoP\Root\Services\BasicServiceTrait;
  */
 abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?StringConversion $stringConversion = null;
 

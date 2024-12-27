@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\LooseContracts;
 
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractLooseContractResolutionSet extends AbstractAutomaticallyInstantiatedService
 {
-    use BasicServiceTrait;
-
     private ?LooseContractManagerInterface $looseContractManager = null;
     private ?NameResolverInterface $nameResolver = null;
 
