@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root;
 
 use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
+use PoP\Root\Container\HybridCompilerPasses\SetInstanceManagerOnBasicServiceCompilerPass;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
 use PoP\Root\Module\AbstractModule;
@@ -31,6 +32,7 @@ class Module extends AbstractModule
     {
         return [
             RegisterSystemCompilerPassServiceCompilerPass::class,
+            SetInstanceManagerOnBasicServiceCompilerPass::class,
             // Needed to initialize ModuleListTableAction
             AutomaticallyInstantiatedServiceCompilerPass::class,
         ];
