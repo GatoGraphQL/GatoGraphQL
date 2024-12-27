@@ -8,12 +8,9 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistryInterface;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 
 class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService
 {
-    use BasicServiceTrait;
-
     private ?EndpointExecuterRegistryInterface $customEndpointExecuterRegistry = null;
 
     final protected function getEndpointExecuterRegistry(): EndpointExecuterRegistryInterface

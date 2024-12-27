@@ -17,17 +17,15 @@ use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
 use function add_settings_error;
 use function get_option;
 use function home_url;
 use function update_option;
 
-class LicenseValidationService implements LicenseValidationServiceInterface
+class LicenseValidationService extends AbstractBasicService implements LicenseValidationServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?ContainerManagerInterface $containerManager = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;

@@ -9,7 +9,7 @@ namespace PoP\Root\Services;
  * so it's done automatically by the application.
  * Eg: hooks.
  */
-abstract class AbstractAutomaticallyInstantiatedService implements AutomaticallyInstantiatedServiceInterface
+abstract class AbstractAutomaticallyInstantiatedService extends AbstractBasicService implements AutomaticallyInstantiatedServiceInterface
 {
     use AutomaticallyInstantiatedServiceTrait;
 }

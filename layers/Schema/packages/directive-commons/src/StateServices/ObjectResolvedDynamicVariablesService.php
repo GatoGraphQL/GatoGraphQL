@@ -19,14 +19,12 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPSchema\DirectiveCommons\FeedbackItemProviders\FeedbackItemProvider;
 use SplObjectStorage;
 
-class ObjectResolvedDynamicVariablesService implements ObjectResolvedDynamicVariablesServiceInterface
+class ObjectResolvedDynamicVariablesService extends AbstractBasicService implements ObjectResolvedDynamicVariablesServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?TypeSerializationServiceInterface $typeSerializationService = null;
 
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface

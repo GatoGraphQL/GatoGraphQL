@@ -10,14 +10,10 @@ use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
 use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\StandaloneServiceTrait;
 
 abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService implements TaxonomyInterface
 {
-    use StandaloneServiceTrait;
-
     private ?PluginMenu $pluginMenu = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
 
@@ -25,7 +21,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     {
         if ($this->pluginMenu === null) {
             /** @var PluginMenu */
-            $pluginMenu = InstanceManagerFacade::getInstance()->getInstance(PluginMenu::class);
+            $pluginMenu = $this->instanceManager->getInstance(PluginMenu::class);
             $this->pluginMenu = $pluginMenu;
         }
         return $this->pluginMenu;
@@ -34,7 +30,7 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
     {
         if ($this->userAuthorization === null) {
             /** @var UserAuthorizationInterface */
-            $userAuthorization = InstanceManagerFacade::getInstance()->getInstance(UserAuthorizationInterface::class);
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
             $this->userAuthorization = $userAuthorization;
         }
         return $this->userAuthorization;

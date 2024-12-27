@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Checkpoints;
 
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractCheckpoint implements CheckpointInterface
+abstract class AbstractCheckpoint extends AbstractBasicService implements CheckpointInterface
 {
-    use BasicServiceTrait;
-
     /**
      * By default there's no problem
      */

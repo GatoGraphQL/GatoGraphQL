@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutationsWP\TypeAPIs;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CommentTypeMutationAPI implements CommentTypeMutationAPIInterface
+class CommentTypeMutationAPI extends AbstractBasicService implements CommentTypeMutationAPIInterface
 {
-    use BasicServiceTrait;
-
     /**
      * @throws CommentCRUDMutationException In case of error
      * @param array<string,mixed> $comment_data

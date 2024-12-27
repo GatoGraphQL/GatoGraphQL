@@ -7,13 +7,11 @@ namespace GatoGraphQL\GatoGraphQL\Services\EndpointAnnotators;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use WP_Post;
 
-abstract class AbstractEndpointAnnotator implements EndpointAnnotatorInterface
+abstract class AbstractEndpointAnnotator extends AbstractBasicService implements EndpointAnnotatorInterface
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface

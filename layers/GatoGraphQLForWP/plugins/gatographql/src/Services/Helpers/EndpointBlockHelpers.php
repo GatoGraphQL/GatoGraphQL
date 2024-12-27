@@ -11,13 +11,11 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointConfigurationFunctionalityMo
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use WP_Post;
 
-class EndpointBlockHelpers
+class EndpointBlockHelpers extends AbstractBasicService
 {
-    use BasicServiceTrait;
-
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?BlockHelpers $blockHelpers = null;

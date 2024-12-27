@@ -7,13 +7,11 @@ namespace PoP\ComponentModel\Response;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use SplObjectStorage;
 
-class DatabaseEntryManager implements DatabaseEntryManagerInterface
+class DatabaseEntryManager extends AbstractBasicService implements DatabaseEntryManagerInterface
 {
-    use BasicServiceTrait;
-
     public final const PRIMARY_DBNAME = 'primary';
     public final const HOOK_DBNAME_TO_FIELDNAMES = __CLASS__ . ':dbName-to-fieldNames';
 

@@ -14,12 +14,10 @@ use PoP\GraphQLParser\Exception\AbstractASTNodeException;
 use PoP\GraphQLParser\Exception\AbstractQueryException;
 use PoP\GraphQLParser\Exception\Parser\AbstractASTNodeParserException;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class ApplicationStateFillerService implements ApplicationStateFillerServiceInterface
+class ApplicationStateFillerService extends AbstractBasicService implements ApplicationStateFillerServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?GraphQLParserHelperServiceInterface $graphQLParserHelperService = null;
 
     final protected function getGraphQLParserHelperService(): GraphQLParserHelperServiceInterface

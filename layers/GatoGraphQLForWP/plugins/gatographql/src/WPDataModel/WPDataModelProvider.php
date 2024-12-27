@@ -12,13 +12,11 @@ use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoP\ComponentModel\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use WP_Taxonomy;
 
-class WPDataModelProvider implements WPDataModelProviderInterface
+class WPDataModelProvider extends AbstractBasicService implements WPDataModelProviderInterface
 {
-    use BasicServiceTrait;
-
     /** @var array<string,WP_Taxonomy>|null */
     protected ?array $hierarchicalQueryableCustomPostsAssociatedTaxonomies = null;
 

@@ -7,15 +7,12 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Menus\MenuInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 
 /**
  * Admin menu class
  */
 abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiatedService
 {
-    use BasicServiceTrait;
-
     abstract public function getMenu(): MenuInterface;
 
     protected function getMenuName(): string

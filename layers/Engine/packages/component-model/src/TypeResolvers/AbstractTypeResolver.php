@@ -8,12 +8,10 @@ use PoP\Root\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractTypeResolver implements TypeResolverInterface
+abstract class AbstractTypeResolver extends AbstractBasicService implements TypeResolverInterface
 {
-    use BasicServiceTrait;
-
     /**
      * @var array<string,mixed[]>|null
      */

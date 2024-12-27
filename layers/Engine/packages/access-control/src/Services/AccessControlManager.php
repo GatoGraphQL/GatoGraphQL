@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl\Services;
 
-class AccessControlManager implements AccessControlManagerInterface
+use PoP\Root\Services\AbstractBasicService;
+
+class AccessControlManager extends AbstractBasicService implements AccessControlManagerInterface
 {
     /**
      * @var array<string,array<mixed[]>>

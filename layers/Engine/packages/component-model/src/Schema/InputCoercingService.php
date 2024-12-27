@@ -16,13 +16,11 @@ use PoP\GraphQLParser\ExtendedSpec\Execution\ValueResolutionPromiseInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 
-class InputCoercingService implements InputCoercingServiceInterface
+class InputCoercingService extends AbstractBasicService implements InputCoercingServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?OutputServiceInterface $outputService = null;
 
     final protected function getOutputService(): OutputServiceInterface

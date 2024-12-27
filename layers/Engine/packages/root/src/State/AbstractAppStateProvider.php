@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\Root\State;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoP\Root\Services\ServiceTrait;
 
-abstract class AbstractAppStateProvider implements AppStateProviderInterface
+abstract class AbstractAppStateProvider extends AbstractBasicService implements AppStateProviderInterface
 {
-    use BasicServiceTrait;
     use ServiceTrait;
 
     /**

@@ -12,7 +12,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use SplObjectStorage;
 
 /**
@@ -54,10 +54,8 @@ use SplObjectStorage;
  * references will be resolved independently, and the second reference
  * will then produce "Updated title".
  */
-class ASTNodeDuplicatorService implements ASTNodeDuplicatorServiceInterface
+class ASTNodeDuplicatorService extends AbstractBasicService implements ASTNodeDuplicatorServiceInterface
 {
-    use BasicServiceTrait;
-
     /**
      * @var SplObjectStorage<FragmentReference,Fragment>
      */

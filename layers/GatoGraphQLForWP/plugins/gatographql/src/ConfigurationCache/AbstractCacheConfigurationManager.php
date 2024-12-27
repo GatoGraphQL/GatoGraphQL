@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInfoInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
 use function is_admin;
 use function sanitize_file_name;
@@ -21,10 +21,8 @@ use function sanitize_file_name;
  *
  * @author Leonardo Losoviz <leo@getpop.org>
  */
-abstract class AbstractCacheConfigurationManager implements CacheConfigurationManagerInterface
+abstract class AbstractCacheConfigurationManager extends AbstractBasicService implements CacheConfigurationManagerInterface
 {
-    use BasicServiceTrait;
-
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?EndpointHelpers $endpointHelpers = null;
 

@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Schema;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 
-class SchemaDefinitionService implements SchemaDefinitionServiceInterface
+class SchemaDefinitionService extends AbstractBasicService implements SchemaDefinitionServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?RootObjectTypeResolver $rootObjectTypeResolver = null;
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
 

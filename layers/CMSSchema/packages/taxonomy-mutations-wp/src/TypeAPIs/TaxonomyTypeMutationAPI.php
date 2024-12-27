@@ -8,7 +8,7 @@ use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\ComponentModel\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 
 use function wp_delete_term;
@@ -18,9 +18,8 @@ use function wp_update_term;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
+class TaxonomyTypeMutationAPI extends AbstractBasicService implements TaxonomyTypeMutationAPIInterface
 {
-    use BasicServiceTrait;
     use TypeMutationAPITrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';

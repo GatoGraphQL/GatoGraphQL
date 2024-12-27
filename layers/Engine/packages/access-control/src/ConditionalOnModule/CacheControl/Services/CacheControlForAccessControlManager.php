@@ -6,12 +6,10 @@ namespace PoP\AccessControl\ConditionalOnModule\CacheControl\Services;
 
 use PoP\AccessControl\ConditionalOnModule\CacheControl\Constants\HookNames;
 use PoP\ComponentModel\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class CacheControlForAccessControlManager implements CacheControlForAccessControlManagerInterface
+class CacheControlForAccessControlManager extends AbstractBasicService implements CacheControlForAccessControlManagerInterface
 {
-    use BasicServiceTrait;
-
     /**
      * @var string[]
      */

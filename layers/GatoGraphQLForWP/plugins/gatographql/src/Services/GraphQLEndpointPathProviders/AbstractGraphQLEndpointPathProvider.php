@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\GraphQLEndpointPathProviders;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
-use PoP\Root\Services\BasicServiceTrait;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 
 abstract class AbstractGraphQLEndpointPathProvider extends AbstractAutomaticallyInstantiatedService implements GraphQLEndpointPathProviderInterface
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 

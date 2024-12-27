@@ -33,13 +33,12 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use SplObjectStorage;
 
-abstract class AbstractComponentProcessor implements ComponentProcessorInterface
+abstract class AbstractComponentProcessor extends AbstractBasicService implements ComponentProcessorInterface
 {
     use ComponentPathProcessorTrait;
-    use BasicServiceTrait;
 
     public final const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
     public final const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';

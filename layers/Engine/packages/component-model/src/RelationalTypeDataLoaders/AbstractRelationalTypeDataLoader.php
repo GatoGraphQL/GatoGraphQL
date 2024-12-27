@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use PoP\LooseContracts\NameResolverInterface;
 
-abstract class AbstractRelationalTypeDataLoader implements RelationalTypeDataLoaderInterface
+abstract class AbstractRelationalTypeDataLoader extends AbstractBasicService implements RelationalTypeDataLoaderInterface
 {
-    use BasicServiceTrait;
-
     private ?NameResolverInterface $nameResolver = null;
 
     final protected function getNameResolver(): NameResolverInterface

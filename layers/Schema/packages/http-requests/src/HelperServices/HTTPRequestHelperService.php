@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\HTTPRequests\HelperServices;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class HTTPRequestHelperService implements HTTPRequestHelperServiceInterface
+class HTTPRequestHelperService extends AbstractBasicService implements HTTPRequestHelperServiceInterface
 {
-    use BasicServiceTrait;
-
     /**
      * Both Guzzle and Symfony HTTP Foundation retrieve the
      * header values as `string[]`, but for the HTTP Request,

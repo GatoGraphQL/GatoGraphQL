@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers;
 
 use PoP\Root\Exception\ImpossibleToHappenException;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResolverInterface
+abstract class AbstractSettingsCategoryResolver extends AbstractBasicService implements SettingsCategoryResolverInterface
 {
-    use BasicServiceTrait;
-
     final public function getID(string $settingsCategory): string
     {
         return strtolower(str_replace(

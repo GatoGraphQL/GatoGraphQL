@@ -9,7 +9,7 @@ use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\DOMCrawler\Crawler;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use Throwable;
 use WP_Block_Type;
@@ -29,10 +29,8 @@ use function parse_blocks;
  * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
  * @see https://github.com/Automattic/vip-block-data-api/tree/1.0.0
  */
-class BlockContentParser implements BlockContentParserInterface
+class BlockContentParser extends AbstractBasicService implements BlockContentParserInterface
 {
-    use BasicServiceTrait;
-
     private bool $includeInnerContent = false;
 
     /**

@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\Aggregators;
 
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class ModuleAggregator
+class ModuleAggregator extends AbstractBasicService
 {
-    use BasicServiceTrait;
-
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface

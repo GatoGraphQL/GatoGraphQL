@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRoles\TypeAPIs;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
+abstract class AbstractUserRoleTypeAPI extends AbstractBasicService implements UserRoleTypeAPIInterface
 {
-    use BasicServiceTrait;
-
     public function getTheUserRole(string|int|object $userObjectOrID): ?string
     {
         $roles = $this->getUserRoles($userObjectOrID);

@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\LooseContracts;
 
-use PoP\Root\Services\WithInstanceManagerServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractNameResolver implements NameResolverInterface
+abstract class AbstractNameResolver extends AbstractBasicService implements NameResolverInterface
 {
-    use WithInstanceManagerServiceTrait;
-
     private ?LooseContractManagerInterface $looseContractManager = null;
 
     final protected function getLooseContractManager(): LooseContractManagerInterface

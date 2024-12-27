@@ -10,14 +10,12 @@ use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\Root\App;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
 use function apply_filters;
 
-class EndpointHelpers
+class EndpointHelpers extends AbstractBasicService
 {
-    use BasicServiceTrait;
-
     /** @var string[]|null */
     private ?array $supportedAdminGraphQLEndpointGroups = null;
 
