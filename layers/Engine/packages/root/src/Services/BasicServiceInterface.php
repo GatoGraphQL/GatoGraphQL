@@ -10,7 +10,7 @@ use PoP\Root\Instances\InstanceManagerInterface;
  * Interface needed to inject the InstanceManager
  * via a CompilerPass
  */
-interface BasicServiceInterface
+interface BasicServiceInterface extends ServiceInterface
 {
     /**
      * This will be called by Symfony via the CompilerPass
