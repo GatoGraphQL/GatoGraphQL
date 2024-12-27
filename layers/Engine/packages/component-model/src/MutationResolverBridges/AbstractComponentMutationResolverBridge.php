@@ -19,12 +19,10 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\Root\Exception\AbstractClientException;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
+abstract class AbstractComponentMutationResolverBridge extends AbstractBasicService implements ComponentMutationResolverBridgeInterface
 {
-    use BasicServiceTrait;
-
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface

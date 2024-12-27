@@ -9,12 +9,10 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class DataloadHelperService implements DataloadHelperServiceInterface
+class DataloadHelperService extends AbstractBasicService implements DataloadHelperServiceInterface
 {
-    use BasicServiceTrait;
-
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface

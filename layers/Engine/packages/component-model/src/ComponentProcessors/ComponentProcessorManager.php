@@ -6,12 +6,10 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
 use PoP\Root\Exception\ShouldNotHappenException;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-class ComponentProcessorManager implements ComponentProcessorManagerInterface
+class ComponentProcessorManager extends AbstractBasicService implements ComponentProcessorManagerInterface
 {
-    use BasicServiceTrait;
-
     /**
      * @var array<string,array<string,ComponentProcessorInterface>>
      */

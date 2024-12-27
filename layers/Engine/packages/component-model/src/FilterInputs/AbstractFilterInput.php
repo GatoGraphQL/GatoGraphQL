@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FilterInputs;
 
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractFilterInput implements FilterInputInterface
+abstract class AbstractFilterInput extends AbstractBasicService implements FilterInputInterface
 {
-    use BasicServiceTrait;
 }

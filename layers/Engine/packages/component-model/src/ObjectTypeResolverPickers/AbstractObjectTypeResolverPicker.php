@@ -6,13 +6,11 @@ namespace PoP\ComponentModel\ObjectTypeResolverPickers;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractObjectTypeResolverPicker implements ObjectTypeResolverPickerInterface
+abstract class AbstractObjectTypeResolverPicker extends AbstractBasicService implements ObjectTypeResolverPickerInterface
 {
     use AttachableExtensionTrait;
-    use BasicServiceTrait;
-
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     final protected function getAttachableExtensionManager(): AttachableExtensionManagerInterface

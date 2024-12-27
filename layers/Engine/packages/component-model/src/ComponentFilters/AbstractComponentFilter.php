@@ -6,12 +6,10 @@ namespace PoP\ComponentModel\ComponentFilters;
 
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
-use PoP\Root\Services\BasicServiceTrait;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractComponentFilter implements ComponentFilterInterface
+abstract class AbstractComponentFilter extends AbstractBasicService implements ComponentFilterInterface
 {
-    use BasicServiceTrait;
-
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
