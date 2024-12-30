@@ -159,9 +159,13 @@ Yes you can. Even more, only the WordPress-specific packages to fetch WordPress 
 
 Check guide [Migrating your app from WordPress to another PHP framework or CMS](https://gatographql.com/guides/interact/migrating-gatographql-from-wordpress-to-another-php-framework-or-cms) to learn more.
 
-= What are extensions needed for? =
+= What are Power Extensions needed for? =
 
-Extensions are needed to enhance the security of public APIs, add HTTP caching to speed up the application, execute multiple queries in a single request, connect to external services, send emails, and others.
+Power Extensions are sold in a bundle containing all of them. They are needed to enhance the security of public APIs, add HTTP caching to speed up the application, execute multiple queries in a single request, connect to external services, send emails, and others.
+
+= What are Premium Extensions needed for? =
+
+Premium Extensions are sold individually. Each extension provides some specific functionality, such as an integration with some specific WordPress plugin or external service, or the ability to automate tasks.
 
 = Does Gato GraphQL have a refund policy? =
 
