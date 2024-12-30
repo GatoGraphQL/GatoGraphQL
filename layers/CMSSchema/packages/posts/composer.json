@@ -14,16 +14,16 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/customposts": "^10.0"
+        "pop-cms-schema/customposts": "^10.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.2",
-        "pop-api/api": "^10.0",
-        "pop-api/api-rest": "^10.0",
-        "pop-cms-schema/comments": "^10.0",
-        "pop-cms-schema/custompostmedia": "^10.0",
-        "pop-cms-schema/users": "^10.0",
+        "pop-api/api": "^10.1",
+        "pop-api/api-rest": "^10.1",
+        "pop-cms-schema/comments": "^10.1",
+        "pop-cms-schema/custompostmedia": "^10.1",
+        "pop-cms-schema/users": "^10.1",
         "rector/rector": "^0.18",
         "squizlabs/php_codesniffer": "^3.6"
     },
@@ -198,7 +198,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "10.0-dev"
+            "dev-master": "10.1-dev"
         }
     },
     "config": {
