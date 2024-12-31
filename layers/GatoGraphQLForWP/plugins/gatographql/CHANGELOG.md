@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 10.0.1 - DATE
+
+### Added
+
+- YouTube video for the Automation extension doc (#93311e2)
+
 ## 10.0.0 - 30/12/2024
 
 ### Breaking changes
@@ -16,7 +22,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - GraphQL type `StringListValueJSONObject` (#2991)
 - YouTube videos to the extension docs (#9b95be5)
 - Documentation for Premium Extensions (#2994)
-- YouTube video for the Automation extension doc (`v10.0.1`) (#93311e2)
 
 ### Improvements
 
