@@ -202,6 +202,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 10.0.1 =
+* Added YouTube video for the Automation extension doc (`v10.0.1`) (#93311e2)
+
 = 10.0.0 =
 * Breaking changes: Changed signature of method `validateDirectiveArgValue`, passing the `$directiveArgs` param when validating a single directive arg (#2989)
 * Breaking changes: Made params to method `assertIsValid` non-nullable (#2998)
