@@ -6,7 +6,7 @@ Use GraphQL to automate tasks in your app:
 - Chain queries
 - Schedule and trigger queries via WP-Cron
 
-<!-- [Watch “How to use the Automation extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
+[Watch “How to use the Automation extension” on YouTube](https://www.youtube.com/watch?v=a_ZYhCKj4JY)
 
 ---
 
