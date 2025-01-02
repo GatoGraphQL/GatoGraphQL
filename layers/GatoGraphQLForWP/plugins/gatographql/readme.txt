@@ -204,6 +204,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 10.1 =
 * Added YouTube video for the Automation extension doc (#93311e2)
+* Added documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
+* [Extensions][Schema Functions] Added fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
 
 = 10.0.0 =
 * Breaking changes: Changed signature of method `validateDirectiveArgValue`, passing the `$directiveArgs` param when validating a single directive arg (#2989)

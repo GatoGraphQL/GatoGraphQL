@@ -231,6 +231,10 @@ Split an array into chunks.
 
 Return an array containing all the elements from the first array which are not present on any of the other arrays.
 
+### `_arrayEncodeAsJSONString`
+
+JSON encode an array as a string.
+
 ### `_arrayFill`
 
 Create an array filled with values.
@@ -412,6 +416,10 @@ Indicate if the value is not `null`.
 ### `_objectAddEntry`
 
 Adds an entry to the object.
+
+### `_objectEncodeAsJSONString`
+
+JSON encode an object as a string.
 
 ### `_objectFilter`
 
