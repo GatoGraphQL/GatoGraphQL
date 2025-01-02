@@ -3,8 +3,8 @@
 ## Added
 
 - YouTube video for the Automation extension doc ([#93311e2](https://github.com/GatoGraphQL/GatoGraphQL/commit/93311e28ead43b18d4e18e1d19e3e0602de176af))
-- Documentation for new "Schema Functions extension" fields `_listEncodeAsJSONString` and `_objectEncodeAsJSONString`
+- Documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
 
 ## [Extensions] Added
 
-- [Schema Functions] Added fields `_listEncodeAsJSONString` and `_objectEncodeAsJSONString`
+- [Schema Functions] Added fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
