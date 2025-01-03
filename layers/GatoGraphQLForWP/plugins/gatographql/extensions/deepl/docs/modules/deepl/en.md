@@ -1,6 +1,6 @@
 # DeepL
 
-Inject the DeepL API as a translation provider into directive `@strTranslate`, to translate a field value to over 190 languages.
+Inject the DeepL API as a translation provider into directive `@strTranslate`, to translate a field value to over 30 languages.
 
 ## Description
 
