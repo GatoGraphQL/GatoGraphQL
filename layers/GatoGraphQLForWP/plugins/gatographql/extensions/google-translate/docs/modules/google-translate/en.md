@@ -14,10 +14,10 @@ For instance, this query translates the post's `title` and `excerpt` fields from
 {
   posts {
     enTitle: title
-    frTitle: title @strTranslate(from: "en", to: "fr")
+    frTitle: title @strTranslate(from: "en", to: "fr", provider: google_translate)
 
     enExcerpt: excerpt    
-    frExcerpt: excerpt @strTranslate(from: "en", to: "fr")
+    frExcerpt: excerpt @strTranslate(from: "en", to: "fr", provider: google_translate)
   }
 }
 ```

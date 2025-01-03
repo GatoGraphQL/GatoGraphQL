@@ -6,7 +6,7 @@ Directive `@strTranslate` to translate a field value using any API provider.
 
 Add directive `@strTranslate` to any field of type `String`, to translate it to the desired language.
 
-For instance, this query translates the post's `title` and `excerpt` fields from English to French:
+For instance, this query translates the post's `title` and `excerpt` fields from English to French (using the default API provider):
 
 ```graphql
 {
