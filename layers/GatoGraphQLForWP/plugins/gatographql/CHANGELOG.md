@@ -13,6 +13,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Order tabs in Settings by priority (#3014)
 - Documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") (#3016)
 
+### Fixed
+
+- Exception when serializing an array value (#3017)
+
 ## 10.0.0 - 30/12/2024
 
 ### Breaking changes
