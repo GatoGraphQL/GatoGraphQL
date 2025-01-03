@@ -1,8 +1,12 @@
-# Google Translate
+# Translation
 
-Add a directive `@strTranslate` to translate a field value to over 190 languages using the <a href="https://www.deepl.com/en/products/api" target="_blank">Google Translate API</a>.
+Add a directive `@strTranslate` to translate a field value using your selected service provider, among:
 
-<!-- [Watch “How to use the Google Translate extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
+- <a href="https://openai.com/api/" target="_blank">ChatGPT API</a>
+- <a href="https://www.deepl.com/en/products/api" target="_blank">DeepL API</a>
+- <a href="https://www.deepl.com/en/products/api" target="_blank">Google Translate API</a>
+
+<!-- [Watch “How to use the Translation extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
 
 ---
 
