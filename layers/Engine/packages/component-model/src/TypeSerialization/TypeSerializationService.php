@@ -191,6 +191,37 @@ class TypeSerializationService extends AbstractBasicService implements TypeSeria
             ));
         }
 
+        /**
+         * At this stage, `$value` should not be an array.
+         * But it might be if the query is not properly coded.
+         *
+         * For instance, in the query below, the value under
+         * `data.properties` is an array. `_strDecodeJSONObject`
+         * is of type `JSONObject`, and does not return an array
+         * as its cardinality. Then, when doing `@export`,
+         * it will attempt to serialize this array value:
+         * 
+         *   _strDecodeJSONObject(string: "{\n  \"data\": {\n    \"properties\": [0, 3, 7]\n  }\n}")
+         *     @underJSONObjectProperty(by: { path: "data.properties" })
+         *       @export(as: "properties")
+         * 
+         * To avoid it exploding, check for this case too.
+         * 
+         * ------
+         * 
+         * FYI: The query that avoid the problem above requires using
+         * `DangerouslyNonSpecificScalar`:
+         * 
+         *   jsonObject: _strDecodeJSONObject(string: "{\n  \"data\": {\n    \"properties\": [0, 3, 7]\n  }\n}")
+         *   dangerousNonSpecificScalar: _echo(value: $__jsonObject)
+         *     @underJSONObjectProperty(by: { path: "data.properties" })
+         *       @export(as: "properties")
+         *
+         */
+        if (is_array($value)) {
+            return (array) $fieldLeafOutputTypeResolver->serialize((object) $value);
+        }
+
         // Otherwise, simply serialize the given value directly
         return $fieldLeafOutputTypeResolver->serialize($value);
     }
