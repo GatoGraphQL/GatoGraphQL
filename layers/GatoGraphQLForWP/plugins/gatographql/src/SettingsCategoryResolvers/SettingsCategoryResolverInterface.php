@@ -18,7 +18,7 @@ interface SettingsCategoryResolverInterface
     public function getDBOptionName(string $settingsCategory): string;
 
     public function getOptionsFormName(string $settingsCategory): string;
-    
+
     public function getPriority(string $settingsCategory): int;
 
     /**

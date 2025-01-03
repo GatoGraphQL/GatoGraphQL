@@ -33,6 +33,10 @@ class Options
      */
     public final const PLUGIN_CONFIGURATION = 'plugin-configuration';
     /**
+     * Option name under which to store the Service Configuration, defined by the user
+     */
+    public final const SERVICE_CONFIGURATION = 'service-configuration';
+    /**
      * Option name under which to store the License Keys, defined by the user
      */
     public final const API_KEYS = 'api-keys';
