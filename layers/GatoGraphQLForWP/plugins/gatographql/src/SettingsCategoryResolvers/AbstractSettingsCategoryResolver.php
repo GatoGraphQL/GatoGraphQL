@@ -50,6 +50,11 @@ abstract class AbstractSettingsCategoryResolver extends AbstractBasicService imp
         return $this->getDBOptionName($settingsCategory);
     }
 
+    public function getPriority(string $settingsCategory): int
+    {
+        return 10;
+    }
+
     /**
      * When printing the Settings, not all categories
      * need to submit a form. In particular,
