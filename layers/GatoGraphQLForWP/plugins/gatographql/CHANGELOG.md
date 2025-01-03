@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - YouTube video for the Automation extension doc (#93311e2)
 - Documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
+- Order tabs in Settings by priority (#3014)
 
 ## 10.0.0 - 30/12/2024
 
