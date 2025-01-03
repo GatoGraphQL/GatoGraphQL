@@ -73,7 +73,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::EVENTS_MANAGER => $imagePathURL . '/events-manager.webp',
             self::MULTILINGUALPRESS => $imagePathURL . '/multilingualpress.png',
             self::POLYLANG => $imagePathURL . '/polylang.png',
-            self::TRANSLATION => $imagePathURL . '/google-translate.svg',
+            self::TRANSLATION => $imagePathURL . '/translation.svg',
             default => parent::getLogoURL($module),
         };
     }
