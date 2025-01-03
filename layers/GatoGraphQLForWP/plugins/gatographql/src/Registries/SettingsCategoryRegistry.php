@@ -69,7 +69,7 @@ class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
             foreach ($settingsCategorySettingsCategoryResolversByPriority as $priority => $settingsCategorySettingsCategoryResolvers) {
                 foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
                     $this->settingsCategorySettingsCategoryResolversByPriority[$settingsCategory] = $settingsCategoryResolver;
-                }                
+                }
             }
         }
         return $this->settingsCategorySettingsCategoryResolversByPriority;
