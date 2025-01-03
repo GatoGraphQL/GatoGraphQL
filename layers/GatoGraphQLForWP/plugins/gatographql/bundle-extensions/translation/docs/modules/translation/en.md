@@ -16,7 +16,7 @@ Use directive `@strTranslate` to translate the field values in your GraphQL quer
 - `deepl`
 - `google_translate`
 
-For instance, this query translates the post's `title` and `excerpt` fields from English to French using **DeepL**:
+For instance, this query translates the post's `title` and `excerpt` fields from English to French using the **DeepL API**:
 
 ```graphql
 {
