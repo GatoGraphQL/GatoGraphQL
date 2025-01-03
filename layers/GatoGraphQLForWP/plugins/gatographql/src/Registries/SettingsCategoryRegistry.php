@@ -17,6 +17,10 @@ class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
      * @var array<string,SettingsCategoryResolverInterface>
      */
     protected array $settingsCategorySettingsCategoryResolvers = [];
+    /**
+     * @var array<string,SettingsCategoryResolverInterface>|null
+     */
+    protected ?array $settingsCategorySettingsCategoryResolversByPriority = null;
 
     public function addSettingsCategoryResolver(SettingsCategoryResolverInterface $settingsCategoryResolver): void
     {
@@ -53,6 +57,21 @@ class SettingsCategoryRegistry implements SettingsCategoryRegistryInterface
      */
     public function getSettingsCategorySettingsCategoryResolvers(): array
     {
-        return $this->settingsCategorySettingsCategoryResolvers;
+        if ($this->settingsCategorySettingsCategoryResolversByPriority === null) {
+            $this->settingsCategorySettingsCategoryResolversByPriority = [];
+            $settingsCategorySettingsCategoryResolversByPriority = [];
+            foreach ($this->settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                $settingsCategorySettingsCategoryResolversByPriority[$settingsCategoryResolver->getPriority($settingsCategory)][$settingsCategory] = $settingsCategoryResolver;
+            }
+            uksort($settingsCategorySettingsCategoryResolversByPriority, function (int $a, int $b): int {
+                return $b <=> $a;
+            });
+            foreach ($settingsCategorySettingsCategoryResolversByPriority as $priority => $settingsCategorySettingsCategoryResolvers) {
+                foreach ($settingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
+                    $this->settingsCategorySettingsCategoryResolversByPriority[$settingsCategory] = $settingsCategoryResolver;
+                }                
+            }
+        }
+        return $this->settingsCategorySettingsCategoryResolversByPriority;
     }
 }

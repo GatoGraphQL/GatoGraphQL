@@ -75,6 +75,20 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
         return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
+    public function getPriority(string $settingsCategory): int
+    {
+        return match ($settingsCategory) {
+            self::ENDPOINT_CONFIGURATION => 100,
+            self::SCHEMA_CONFIGURATION => 90,
+            self::SCHEMA_TYPE_CONFIGURATION => 80,
+            self::SERVER_CONFIGURATION => 70,
+            self::PLUGIN_CONFIGURATION => 60,
+            self::API_KEYS => 50,
+            self::PLUGIN_MANAGEMENT => 40,
+            default => parent::getPriority($settingsCategory),
+        };
+    }
+
     public function addOptionsFormSubmitButton(string $settingsCategory): bool
     {
         return match ($settingsCategory) {
