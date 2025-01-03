@@ -9,8 +9,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - YouTube video for the Automation extension doc (#93311e2)
-- Documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
+- Documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString` (#3013)
 - Order tabs in Settings by priority (#3014)
+- Documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") (#3016)
 
 ## 10.0.0 - 30/12/2024
 

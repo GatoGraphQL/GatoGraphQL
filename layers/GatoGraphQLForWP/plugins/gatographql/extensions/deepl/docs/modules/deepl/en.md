@@ -1,6 +1,6 @@
 # DeepL
 
-Inject the DeepL API as a translation provider into directive `@strTranslate`, to translate a field value to over 190 languages.
+Inject the DeepL API as a translation provider into directive `@strTranslate`, to translate a field value to over 30 languages.
 
 ## Description
 
@@ -14,10 +14,10 @@ For instance, this query translates the post's `title` and `excerpt` fields from
 {
   posts {
     enTitle: title
-    frTitle: title @strTranslate(from: "en", to: "fr")
+    frTitle: title @strTranslate(from: "en", to: "fr", provider: deepl)
 
     enExcerpt: excerpt    
-    frExcerpt: excerpt @strTranslate(from: "en", to: "fr")
+    frExcerpt: excerpt @strTranslate(from: "en", to: "fr", provider: deepl)
   }
 }
 ```

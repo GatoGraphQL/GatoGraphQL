@@ -1,12 +1,12 @@
-# Google Translate
+# ChatGPT Translation
 
-Add a directive `@strTranslate` to translate a field value to over 190 languages using the <a href="https://www.deepl.com/en/products/api" target="_blank">Google Translate API</a>.
+Use ChatGPT as a translation provider into directive `@strTranslate`, to translate a field value to your desired language.
 
-<!-- [Watch “How to use the Google Translate extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
+## Description
 
----
+Make ChatGPT's API available as a translation provider in directive `@strTranslate`.
 
-Use **Google Translate** to translate the field values in your GraphQL query.
+Add directive `@strTranslate` to any field of type `String`, to translate it to the desired language.
 
 For instance, this query translates the post's `title` and `excerpt` fields from English to French:
 
@@ -14,10 +14,10 @@ For instance, this query translates the post's `title` and `excerpt` fields from
 {
   posts {
     enTitle: title
-    frTitle: title @strTranslate(from: "en", to: "fr")
+    frTitle: title @strTranslate(from: "en", to: "fr", provider: chatgpt)
 
     enExcerpt: excerpt    
-    frExcerpt: excerpt @strTranslate(from: "en", to: "fr")
+    frExcerpt: excerpt @strTranslate(from: "en", to: "fr", provider: chatgpt)
   }
 }
 ```
@@ -37,8 +37,8 @@ For instance, this query translates the post's `title` and `excerpt` fields from
       {
         "enTitle": "Explaining the privacy policy",
         "frTitle": "Expliquer la politique de confidentialité",
-        "enExcerpt": "Our privacy policy is at https://gato-graphql-pro.lndo.site/privacy/, and we are based in Carimano.",
-        "frExcerpt": "Notre politique de confidentialité se trouve sur https://gato-graphql-pro.lndo.site/privacy/, et nous sommes basés à Carimano."
+        "enExcerpt": "Our privacy policy is at https://gatographql-pro.lndo.site/privacy/, and we are based in Carimano.",
+        "frExcerpt": "Notre politique de confidentialité se trouve sur https://gatographql-pro.lndo.site/privacy/, et nous sommes basés à Carimano."
       },
       {
         "enTitle": "HTTP caching improves performance",

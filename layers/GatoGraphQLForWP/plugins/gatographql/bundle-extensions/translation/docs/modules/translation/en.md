@@ -1,23 +1,31 @@
-# DeepL
+# Translation
 
-Add a directive `@strTranslate` to translate a field value to over 30 languages using the <a href="https://www.deepl.com/en/products/api" target="_blank">DeepL API</a>.
+Add a directive `@strTranslate` to translate a field value using your selected service provider, among:
 
-<!-- [Watch “How to use the DeepL extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
+- <a href="https://openai.com/api/" target="_blank">ChatGPT API</a>
+- <a href="https://www.deepl.com/en/products/api" target="_blank">DeepL API</a>
+- <a href="https://www.deepl.com/en/products/api" target="_blank">Google Translate API</a>
+
+<!-- [Watch “How to use the Translation extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
 
 ---
 
-Use **DeepL** to translate the field values in your GraphQL query.
+Use directive `@strTranslate` to translate the field values in your GraphQL query, passing argument `provider` with the name of the provider to use:
 
-For instance, this query translates the post's `title` and `excerpt` fields from English to French:
+- `chatgpt`
+- `deepl`
+- `google_translate`
+
+For instance, this query translates the post's `title` and `excerpt` fields from English to French using DeepL:
 
 ```graphql
 {
   posts {
     enTitle: title
-    frTitle: title @strTranslate(from: "en", to: "fr")
+    frTitle: title @strTranslate(from: "en", to: "fr", provider: deepl)
 
     enExcerpt: excerpt    
-    frExcerpt: excerpt @strTranslate(from: "en", to: "fr")
+    frExcerpt: excerpt @strTranslate(from: "en", to: "fr", provider: deepl)
   }
 }
 ```
