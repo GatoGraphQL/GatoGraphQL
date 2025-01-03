@@ -88,7 +88,7 @@ class Plugin extends AbstractMainPlugin
         add_action('admin_notices', function (): void {
             $adminNotice_safe = sprintf(
                 '<div class="notice notice-info is-dismissible">' .
-                    '<h3>%s</h3>' .
+                    '<h2>%s</h2>' .
                     '<p>%s</p>' .
                     '<p>%s</p>' .
                 '</div>',
