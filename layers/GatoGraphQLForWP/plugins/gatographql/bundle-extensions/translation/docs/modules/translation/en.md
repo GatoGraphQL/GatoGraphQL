@@ -10,18 +10,22 @@ Add a directive `@strTranslate` to translate a field value using your selected s
 
 ---
 
-Use **Google Translate** to translate the field values in your GraphQL query.
+Use directive `@strTranslate` to translate the field values in your GraphQL query, passing argument `provider` with the name of the provider to use:
 
-For instance, this query translates the post's `title` and `excerpt` fields from English to French:
+- `chatgpt`
+- `deepl`
+- `google_translate`
+
+For instance, this query translates the post's `title` and `excerpt` fields from English to French using DeepL:
 
 ```graphql
 {
   posts {
     enTitle: title
-    frTitle: title @strTranslate(from: "en", to: "fr")
+    frTitle: title @strTranslate(from: "en", to: "fr", provider: deepl)
 
     enExcerpt: excerpt    
-    frExcerpt: excerpt @strTranslate(from: "en", to: "fr")
+    frExcerpt: excerpt @strTranslate(from: "en", to: "fr", provider: deepl)
   }
 }
 ```
