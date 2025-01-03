@@ -7,6 +7,10 @@
 - Order tabs in Settings by priority ([#3014](https://github.com/GatoGraphQL/GatoGraphQL/pull/3014))
 - Documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") ([#3016](https://github.com/GatoGraphQL/GatoGraphQL/pull/3016))
 
+## Fixed
+
+- Exception when serializing an array value ([#3017](https://github.com/GatoGraphQL/GatoGraphQL/pull/3017))
+
 ## [Extensions] Added
 
 - [Schema Functions] Added fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`

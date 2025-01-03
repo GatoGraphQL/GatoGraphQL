@@ -207,6 +207,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString` (#3013)
 * Order tabs in Settings by priority (#3014)
 * Added documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") (#3016)
+* Fixed: Exception when serializing an array value (#3017)
 * [Extensions][Schema Functions] Added fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
 
 = 10.0.0 =
