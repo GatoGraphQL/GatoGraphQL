@@ -8,7 +8,7 @@ Make Google Translate's API available as a translation provider in directive `@s
 
 Add directive `@strTranslate` to any field of type `String`, to translate it to the desired language.
 
-For instance, this query translates the post's `title` and `excerpt` fields from English to French using the **Google Translate API**:
+For instance, this query translates the post's `title` and `content` fields from English to French using the **Google Translate API**:
 
 ```graphql
 {
