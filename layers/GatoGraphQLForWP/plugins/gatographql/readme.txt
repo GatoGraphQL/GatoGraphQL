@@ -204,8 +204,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 10.1 =
 * Added YouTube video for the Automation extension doc (#93311e2)
-* Added documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
+* Added documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString` (#3013)
 * Order tabs in Settings by priority (#3014)
+* Added documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") (#3016)
 * [Extensions][Schema Functions] Added fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
 
 = 10.0.0 =
