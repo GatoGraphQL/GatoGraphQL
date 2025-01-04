@@ -206,7 +206,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added YouTube video for the Automation extension doc (#93311e2)
 * Completed documentation for extensions:
   * [Schema Functions] New fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString` (#3013)
-  * [Helper Function Collection] New field `_arrayOfJSONObjectsExtractPropertiesAndConvertToObject`
+  * [Helper Function Collection] New field `_arrayOfJSONObjectsExtractPropertiesAndConvertToObject` (#3018)
 * Order tabs in Settings by priority (#3014)
 * Added documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") (#3016)
 * Fixed: Exception when serializing an array value (#3017)
