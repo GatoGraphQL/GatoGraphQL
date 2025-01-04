@@ -574,8 +574,8 @@ This query:
         items: ["Pasta", "Bagel"]
       }
     ],
-    keyProperty: "label",
-    valueProperty: "items"
+    key: "label",
+    value: "items"
   )
 }
 ```
