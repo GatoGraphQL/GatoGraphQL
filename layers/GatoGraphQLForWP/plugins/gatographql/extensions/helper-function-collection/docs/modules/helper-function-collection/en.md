@@ -551,6 +551,49 @@ This query:
 }
 ```
 
+### `_arrayOfJSONObjectsExtractPropertiesAndConvertToObject`
+
+Given an array of JSON objects, with all of them having two common properties (such as `name` and `value`), extract the values of these properties and create a JSON object, with one property as the key and the other one as the value.
+
+This query:
+
+```graphql
+{
+  arrayToObject: _arrayOfJSONObjectsExtractPropertiesAndConvertToObject(
+    array: [
+      {
+        label: "person",
+        items: ["Sam", "Eric"]
+      },
+      {
+        label: "location",
+        items: ["Paris", "Rome"]
+      },
+      {
+        label: "meal",
+        items: ["Pasta", "Bagel"]
+      }
+    ],
+    key: "label",
+    value: "items"
+  )
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "arrayToObject": {
+      "person": ["Sam", "Eric"],
+      "location": ["Paris", "Rome"],
+      "meal": ["Pasta", "Bagel"]
+    }
+  }
+}
+```
+
 ### `_arrayOfJSONObjectsExtractProperty`
 
 Given an array of JSON objects, with all of them having a common property, extract the value of this property and replace it as elements on the array.

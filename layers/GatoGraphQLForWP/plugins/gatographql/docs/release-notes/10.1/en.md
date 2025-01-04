@@ -3,7 +3,9 @@
 ## Added
 
 - YouTube video for the Automation extension doc ([#93311e2](https://github.com/GatoGraphQL/GatoGraphQL/commit/93311e28ead43b18d4e18e1d19e3e0602de176af))
-- Documentation for new "Schema Functions extension" fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString` ([#3013](https://github.com/GatoGraphQL/GatoGraphQL/pull/3013))
+- Completed documentation for extensions:
+  - [Schema Functions] New fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString` ([#3013](https://github.com/GatoGraphQL/GatoGraphQL/pull/3013))
+  - [Helper Function Collection] New field `_arrayOfJSONObjectsExtractPropertiesAndConvertToObject` ([#3018](https://github.com/GatoGraphQL/GatoGraphQL/pull/3018))
 - Order tabs in Settings by priority ([#3014](https://github.com/GatoGraphQL/GatoGraphQL/pull/3014))
 - Documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") ([#3016](https://github.com/GatoGraphQL/GatoGraphQL/pull/3016))
 
@@ -13,4 +15,5 @@
 
 ## [Extensions] Added
 
-- [Schema Functions] Added fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
+- [Schema Functions] Fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
+- [Helper Function Collection] Field `_arrayOfJSONObjectsExtractPropertiesAndConvertToObject`
