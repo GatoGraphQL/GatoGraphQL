@@ -17,3 +17,7 @@
 
 - [Schema Functions] Fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
 - [Helper Function Collection] Field `_arrayOfJSONObjectsExtractPropertiesAndConvertToObject`
+
+## [Extensions] Fixed
+
+- [Google Translate] Make the `@strTranslate` directive send not more than 128 strings to translate

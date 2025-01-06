@@ -212,6 +212,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed: Exception when serializing an array value (#3017)
 * [Extensions][Schema Functions] Added fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
 * [Extensions][Helper Function Collection] Added field `_arrayOfJSONObjectsExtractPropertiesAndConvertToObject`
+* [Extensions][Google Translate] Fixed: Make the `@strTranslate` directive send not more than 128 strings to translate
 
 = 10.0.0 =
 * Breaking changes: Changed signature of method `validateDirectiveArgValue`, passing the `$directiveArgs` param when validating a single directive arg (#2989)
