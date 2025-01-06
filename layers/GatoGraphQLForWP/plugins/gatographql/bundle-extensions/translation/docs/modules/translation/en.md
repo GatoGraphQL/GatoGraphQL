@@ -6,7 +6,7 @@ Add a directive `@strTranslate` to translate a field value using your selected s
 - <a href="https://www.deepl.com/en/products/api" target="_blank">DeepL API</a>
 - <a href="https://cloud.google.com/translate" target="_blank">Google Translate API</a>
 
-<!-- [Watch “How to use the Translation extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
+[Watch “How to use the Translation extension” on YouTube](https://www.youtube.com/watch?v=Cy0ixRMALMg)
 
 ---
 
