@@ -15,7 +15,7 @@ trait ServiceConfigurationSettingsFunctionalityModuleResolverTrait
      */
     public function getPriority(): int
     {
-        return 210;
+        return 80;
     }
 
     /**
