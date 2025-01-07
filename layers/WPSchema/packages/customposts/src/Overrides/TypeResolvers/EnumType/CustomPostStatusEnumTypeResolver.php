@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPWPSchema\CustomPosts\Overrides\TypeResolvers\EnumType;
 
 use PoPWPSchema\CustomPosts\Enums\CustomPostStatus;
-
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver as UpstreamCustomPostStatusEnumTypeResolver;
 
 /**

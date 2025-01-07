@@ -852,16 +852,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             <label for="<?php echo esc_attr($name); ?>">
                 <?php
                 if ($useTextarea) {
-                ?>
+                    ?>
                     <textarea
                         name="<?php echo esc_attr($optionsFormName . '[' . $name . ']'); ?>"
                         id="<?php echo esc_attr($name); ?>"
                         rows="10"
                         cols="50"
                     ><?php echo esc_attr($value) ?></textarea>
-                <?php
+                    <?php
                 } else {
-                ?>
+                    ?>
                     <input
                         name="<?php echo esc_attr($optionsFormName . '[' . $name . ']'); ?>"
                         id="<?php echo esc_attr($name); ?>"
@@ -877,9 +877,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             type="text"
                         <?php } ?>
                     />
-                <?php
+                    <?php
                 }
-                echo $label_safe; 
+                echo $label_safe;
                 ?>
             </label>
         <?php
