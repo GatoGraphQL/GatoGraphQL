@@ -27,7 +27,7 @@ abstract class AbstractStandalonePluginInitializationConfiguration extends Plugi
                     'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                     'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_ADVANCED_MODE,
                     // Depending on `useBooleanForAdvancedModeOption`, the value can be either a string or a boolean
-                    'callback' => fn ($value) => (is_string($value) && $value !== AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE) || (is_bool($value) && !$value),
+                    'callback' => fn ($value) => (is_string($value) && $value !== AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE) || (is_bool($value) && $value),
                 ],
                 [
                     'class' => \GatoGraphQLStandalone\GatoGraphQL\Module::class,
