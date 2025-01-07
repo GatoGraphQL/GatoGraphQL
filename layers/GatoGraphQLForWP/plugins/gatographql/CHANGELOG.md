@@ -13,6 +13,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Order tabs in Settings by priority (#3014)
 - Documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") (#3016)
 
+### Improvements
+
+- Allow to create custom posts as `private` (#3019)
+
 ### Fixed
 
 - Exception when serializing an array value (#3017)
