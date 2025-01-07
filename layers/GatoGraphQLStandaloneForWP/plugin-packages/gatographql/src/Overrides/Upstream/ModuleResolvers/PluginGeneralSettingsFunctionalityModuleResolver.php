@@ -122,7 +122,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
 
     protected function useBooleanForAdvancedModeOption(): bool
     {
-        return false;
+        return $this->getGeneralTabAdvancedModeLockUpdatesOptionName() === null;
     }
 
     /**
