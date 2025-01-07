@@ -12,6 +12,7 @@
 ## Improvements
 
 - Allow to create custom posts as `private` ([#3019](https://github.com/GatoGraphQL/GatoGraphQL/pull/3019))
+- Allow printing textarea options in Settings ([#3020](https://github.com/GatoGraphQL/GatoGraphQL/pull/3020))
 
 ## Fixed
 

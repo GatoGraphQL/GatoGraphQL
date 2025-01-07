@@ -16,6 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Allow to create custom posts as `private` (#3019)
+- Allow printing textarea options in Settings (#3020)
 
 ### Fixed
 

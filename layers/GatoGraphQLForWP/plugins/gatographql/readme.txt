@@ -210,6 +210,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Order tabs in Settings by priority (#3014)
 * Added documentation for new extension "Translation" (replacing "Google Translate" and "DeepL") (#3016)
 * Allow to create custom posts as `private` (#3019)
+* Allow printing textarea options in Settings (#3020)
 * Fixed: Exception when serializing an array value (#3017)
 * [Extensions][Schema Functions] Added fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString`
 * [Extensions][Helper Function Collection] Added field `_arrayOfJSONObjectsExtractPropertiesAndConvertToObject`
