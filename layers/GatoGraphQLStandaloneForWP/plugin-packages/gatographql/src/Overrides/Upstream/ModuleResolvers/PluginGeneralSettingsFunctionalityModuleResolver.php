@@ -52,11 +52,12 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
 
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
+        $useBooleanForAdvancedModeOption = $this->useBooleanForAdvancedModeOption();
         $defaultValues = [
             self::GENERAL => [
                 // self::OPTION_PRINT_SETTINGS_WITH_TABS => false,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => false,
-                self::OPTION_USE_ADVANCED_MODE => AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE,
+                self::OPTION_USE_ADVANCED_MODE => $useBooleanForAdvancedModeOption ? false : AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE,
             ],
         ];
         return $defaultValues[$module][$option] ?? parent::getSettingsDefaultValue($module, $option);
@@ -84,16 +85,19 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
                 $this->enableGeneralTabAdvancedModeOption()
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
+                $useBooleanForAdvancedModeOption = $this->useBooleanForAdvancedModeOption();
                 $generalTabAdvancedModeOptionName = $this->getGeneralTabAdvancedModeLockUpdatesOptionName();
-                $possibleValues = array_merge(
-                    [
-                        AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE => \__('Do not enable the Advanced Mode', 'gatographql'),
-                        AdvancedModeOptions::ENABLE_ADVANCED_MODE => \__('Enable the Advanced Mode', 'gatographql'),
-                    ],
-                    $generalTabAdvancedModeOptionName !== null ? [
-                        AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES => $generalTabAdvancedModeOptionName,
-                    ] : [],
-                );
+                $possibleValues = $useBooleanForAdvancedModeOption
+                    ? null
+                    : array_merge(
+                        [
+                            AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE => \__('Do not enable the Advanced Mode', 'gatographql'),
+                            AdvancedModeOptions::ENABLE_ADVANCED_MODE => \__('Enable the Advanced Mode', 'gatographql'),
+                        ],
+                        $generalTabAdvancedModeOptionName !== null ? [
+                            AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES => $generalTabAdvancedModeOptionName,
+                        ] : [],
+                    );
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
                     Properties::NAME => $this->getSettingOptionName(
@@ -102,7 +106,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
                     ),
                     Properties::TITLE => \__('Enable the Advanced Mode?', 'gatographql'),
                     Properties::DESCRIPTION => $this->getGeneralTabAdvancedModeOptionDescription(),
-                    Properties::TYPE => Properties::TYPE_STRING,
+                    Properties::TYPE => $useBooleanForAdvancedModeOption ? Properties::TYPE_BOOL : Properties::TYPE_STRING,
                     Properties::POSSIBLE_VALUES => $possibleValues,
                 ];
             }
@@ -114,6 +118,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     protected function enableGeneralTabAdvancedModeOption(): bool
     {
         return false;
+    }
+
+    protected function useBooleanForAdvancedModeOption(): bool
+    {
+        return $this->getGeneralTabAdvancedModeLockUpdatesOptionName() === null;
     }
 
     /**

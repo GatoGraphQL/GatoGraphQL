@@ -26,14 +26,16 @@ abstract class AbstractStandalonePluginInitializationConfiguration extends Plugi
                     'envVariable' => \GatoGraphQLStandalone\GatoGraphQL\Environment::ENABLE_ADVANCED_MODE,
                     'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                     'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_ADVANCED_MODE,
-                    'callback' => fn ($value) => $value !== AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE,
+                    // Depending on `useBooleanForAdvancedModeOption`, the value can be either a string or a boolean
+                    'callback' => fn ($value) => (is_string($value) && $value !== AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE) || (is_bool($value) && $value),
                 ],
                 [
                     'class' => \GatoGraphQLStandalone\GatoGraphQL\Module::class,
                     'envVariable' => \GatoGraphQLStandalone\GatoGraphQL\Environment::DISABLE_AUTOMATIC_CONFIG_UPDATES,
                     'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                     'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_USE_ADVANCED_MODE,
-                    'callback' => fn ($value) => $value === AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES,
+                    // Depending on `useBooleanForAdvancedModeOption`, the value can be either a string or a boolean
+                    'callback' => fn ($value) => (is_string($value) && $value === AdvancedModeOptions::ENABLE_ADVANCED_MODE_AND_DISABLE_AUTOMATIC_CONFIG_UPDATES),
                 ],
             ]
         );
