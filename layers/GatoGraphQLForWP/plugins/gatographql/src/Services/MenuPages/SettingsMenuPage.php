@@ -847,24 +847,40 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         if ($isNumber) {
             $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
         }
+        $useTextarea = $itemSetting[Properties::USE_TEXTAREA] ?? false;
         ?>
             <label for="<?php echo esc_attr($name); ?>">
-                <input
-                    name="<?php echo esc_attr($optionsFormName . '[' . $name . ']'); ?>"
-                    id="<?php echo esc_attr($name); ?>"
-                    value="<?php echo esc_attr($value); ?>"
-                    class="regular-text"
-                    <?php if ($isNumber) { ?>
-                        type="number"
-                        step="1"
-                        <?php if ($minNumber !== null) { ?>
-                            min="<?php echo esc_attr($minNumber) ?>"
+                <?php
+                if ($useTextarea) {
+                ?>
+                    <textarea
+                        name="<?php echo esc_attr($optionsFormName . '[' . $name . ']'); ?>"
+                        id="<?php echo esc_attr($name); ?>"
+                        rows="10"
+                        cols="50"
+                    ><?php echo esc_attr($value) ?></textarea>
+                <?php
+                } else {
+                ?>
+                    <input
+                        name="<?php echo esc_attr($optionsFormName . '[' . $name . ']'); ?>"
+                        id="<?php echo esc_attr($name); ?>"
+                        value="<?php echo esc_attr($value); ?>"
+                        class="regular-text"
+                        <?php if ($isNumber) { ?>
+                            type="number"
+                            step="1"
+                            <?php if ($minNumber !== null) { ?>
+                                min="<?php echo esc_attr($minNumber) ?>"
+                            <?php } ?>
+                        <?php } else { ?>
+                            type="text"
                         <?php } ?>
-                    <?php } else { ?>
-                        type="text"
-                    <?php } ?>
-                />
-                <?php echo $label_safe; ?>
+                    />
+                <?php
+                }
+                echo $label_safe; 
+                ?>
             </label>
         <?php
     }

@@ -16,6 +16,8 @@ class Properties
     public final const KEY_LABELS = 'keyLabels';
     // Used for Select inputs
     public final const IS_MULTIPLE = 'isMultiple';
+    // Used for Strings
+    public final const USE_TEXTAREA = 'useTextarea';
     // Used for Integers
     public final const MIN_NUMBER = 'minNumber';
     public final const TYPE = 'type';
