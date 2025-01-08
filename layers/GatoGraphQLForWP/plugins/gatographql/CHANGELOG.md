@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 10.1.1 - DATE
+
+### Improvements
+
+- Plugin updates: Use the same icon as the Gato GraphQL plugin for the extensions (#3022)
+
 ## 10.1.0 - 08/01/2025
 
 ### Added

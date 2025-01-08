@@ -200,7 +200,10 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 10.1 =
+= 10.1.1 =
+* Plugin updates: Use the same icon as the Gato GraphQL plugin for the extensions (#3022)
+
+= 10.1.0 =
 * Added YouTube video for the Automation extension doc (#93311e2)
 * Completed documentation for extensions:
   * [Schema Functions] New fields `_arrayEncodeAsJSONString` and `_objectEncodeAsJSONString` (#3013)
