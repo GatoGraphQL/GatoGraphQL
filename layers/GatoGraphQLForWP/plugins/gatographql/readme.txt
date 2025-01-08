@@ -66,15 +66,13 @@ The available premium extensions are:
 
 [Automation](https://gatographql.com/extensions/automation): Use GraphQL to automate tasks in your app: Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron.
 
-[DeepL](https://gatographql.com/extensions/deepl): Translate a field value to over 30 languages using the DeepL API.
-
 [Events Manager](https://gatographql.com/extensions/events-manager): Integration with the Events Manager plugin, to fetch event data.
-
-[Google Translate](https://gatographql.com/extensions/google-translate): Translate a field value to over 190 languages using the Google Translate API.
 
 [MultilingualPress](https://gatographql.com/extensions/multilingualpress): Integration with the MultilingualPress plugin, to fetch multilingual data.
 
 [Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
+
+[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, DeepL, and Google Translate.
 
 == Frequently Asked Questions ==
 
