@@ -337,16 +337,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             }
 
             // Specify a manual doctype so that the parser will use the HTML5 parser
-            $crawler = new Crawler(
-                sprintf('<!doctype html><html><body>%s</body></html>', $block['innerHTML']),
-                null,
-                null,
-                /**
-                 * Watch out! We must disable the HTML5 parser!
-                 * @see https://github.com/GatoGraphQL/GatoGraphQL/pull/3023
-                 */
-                false
-            );
+            $crawler = new Crawler(sprintf('<!doctype html><html><body>%s</body></html>', $block['innerHTML']));
 
             // Enter the <body> tag for block parsing
             $crawler = $crawler->filter('body');
