@@ -18,7 +18,6 @@
 ## Fixed
 
 - Exception when serializing an array value ([#3017](https://github.com/GatoGraphQL/GatoGraphQL/pull/3017))
-- Do not use HTML5 Parser when parsing blocks (`v10.1.1`) ([#3023](https://github.com/GatoGraphQL/GatoGraphQL/pull/3023))
 
 ## [Extensions] Added
 

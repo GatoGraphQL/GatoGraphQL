@@ -6,10 +6,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 10.1.1 - DATE
 
-### Fixed
-
-- Do not use HTML5 Parser when parsing blocks (#3023)
-
 ### Improvements
 
 - Plugin updates: Use the same icon as the Gato GraphQL plugin for the extensions (#3022)
