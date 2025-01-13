@@ -202,6 +202,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 10.1.1 =
 * Plugin updates: Use the same icon as the Gato GraphQL plugin for the extensions (#3022)
+* Fixed bug: Do not use HTML5 Parser when parsing blocks (#3023)
 * [Extensions][Translation] Pass language + country code on `@strTranslate(to:)`
 
 = 10.1.0 =

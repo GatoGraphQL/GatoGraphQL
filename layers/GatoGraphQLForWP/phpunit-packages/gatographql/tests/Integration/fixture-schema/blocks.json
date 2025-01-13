@@ -1927,13 +1927,15 @@
                     {
                         "name": "core\/categories",
                         "attributes": {
+                            "taxonomy": "category",
                             "displayAsDropdown": false,
                             "showHierarchy": false,
                             "showPostCounts": false,
                             "showOnlyTopLevel": false,
-                            "showEmpty": false
+                            "showEmpty": false,
+                            "showLabel": true
                         },
-                        "contentSource": "<!-- wp:categories {\"displayAsDropdown\":false,\"showHierarchy\":false,\"showPostCounts\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false} \/-->",
+                        "contentSource": "<!-- wp:categories {\"taxonomy\":\"category\",\"displayAsDropdown\":false,\"showHierarchy\":false,\"showPostCounts\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false,\"showLabel\":true} \/-->",
                         "innerBlocks": null
                     },
                     {
@@ -1986,11 +1988,13 @@
                         "attributes": {
                             "showHierarchy": true,
                             "showPostCounts": true,
+                            "taxonomy": "category",
                             "displayAsDropdown": false,
                             "showOnlyTopLevel": false,
-                            "showEmpty": false
+                            "showEmpty": false,
+                            "showLabel": true
                         },
-                        "contentSource": "<!-- wp:categories {\"showHierarchy\":true,\"showPostCounts\":true,\"displayAsDropdown\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false} \/-->",
+                        "contentSource": "<!-- wp:categories {\"showHierarchy\":true,\"showPostCounts\":true,\"taxonomy\":\"category\",\"displayAsDropdown\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false,\"showLabel\":true} \/-->",
                         "innerBlocks": null
                     },
                     {
@@ -2033,11 +2037,13 @@
                     {
                         "name": "core\/categories",
                         "attributes": {
+                            "taxonomy": "category",
                             "displayAsDropdown": false,
                             "showHierarchy": false,
                             "showPostCounts": false,
                             "showOnlyTopLevel": false,
-                            "showEmpty": false
+                            "showEmpty": false,
+                            "showLabel": true
                         }
                     },
                     {
@@ -2082,9 +2088,11 @@
                         "attributes": {
                             "showHierarchy": true,
                             "showPostCounts": true,
+                            "taxonomy": "category",
                             "displayAsDropdown": false,
                             "showOnlyTopLevel": false,
-                            "showEmpty": false
+                            "showEmpty": false,
+                            "showLabel": true
                         }
                     },
                     {
@@ -2125,11 +2133,13 @@
                     {
                         "name": "core\/categories",
                         "attributes": {
+                            "taxonomy": "category",
                             "displayAsDropdown": false,
                             "showHierarchy": false,
                             "showPostCounts": false,
                             "showOnlyTopLevel": false,
-                            "showEmpty": false
+                            "showEmpty": false,
+                            "showLabel": true
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -2184,9 +2194,11 @@
                         "attributes": {
                             "showHierarchy": true,
                             "showPostCounts": true,
+                            "taxonomy": "category",
                             "displayAsDropdown": false,
                             "showOnlyTopLevel": false,
-                            "showEmpty": false
+                            "showEmpty": false,
+                            "showLabel": true
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -7619,13 +7631,15 @@
                 {
                     "name": "core\/categories",
                     "attributes": {
+                        "taxonomy": "category",
                         "displayAsDropdown": false,
                         "showHierarchy": false,
                         "showPostCounts": false,
                         "showOnlyTopLevel": false,
-                        "showEmpty": false
+                        "showEmpty": false,
+                        "showLabel": true
                     },
-                    "contentSource": "<!-- wp:categories {\"displayAsDropdown\":false,\"showHierarchy\":false,\"showPostCounts\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false} \/-->",
+                    "contentSource": "<!-- wp:categories {\"taxonomy\":\"category\",\"displayAsDropdown\":false,\"showHierarchy\":false,\"showPostCounts\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false,\"showLabel\":true} \/-->",
                     "innerBlocks": null
                 },
                 {
@@ -7678,11 +7692,13 @@
                     "attributes": {
                         "showHierarchy": true,
                         "showPostCounts": true,
+                        "taxonomy": "category",
                         "displayAsDropdown": false,
                         "showOnlyTopLevel": false,
-                        "showEmpty": false
+                        "showEmpty": false,
+                        "showLabel": true
                     },
-                    "contentSource": "<!-- wp:categories {\"showHierarchy\":true,\"showPostCounts\":true,\"displayAsDropdown\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false} \/-->",
+                    "contentSource": "<!-- wp:categories {\"showHierarchy\":true,\"showPostCounts\":true,\"taxonomy\":\"category\",\"displayAsDropdown\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false,\"showLabel\":true} \/-->",
                     "innerBlocks": null
                 },
                 {
@@ -7725,11 +7741,13 @@
                 {
                     "name": "core\/categories",
                     "attributes": {
+                        "taxonomy": "category",
                         "displayAsDropdown": false,
                         "showHierarchy": false,
                         "showPostCounts": false,
                         "showOnlyTopLevel": false,
-                        "showEmpty": false
+                        "showEmpty": false,
+                        "showLabel": true
                     }
                 },
                 {
@@ -7774,9 +7792,11 @@
                     "attributes": {
                         "showHierarchy": true,
                         "showPostCounts": true,
+                        "taxonomy": "category",
                         "displayAsDropdown": false,
                         "showOnlyTopLevel": false,
-                        "showEmpty": false
+                        "showEmpty": false,
+                        "showLabel": true
                     }
                 },
                 {
@@ -7817,11 +7837,13 @@
                 {
                     "name": "core\/categories",
                     "attributes": {
+                        "taxonomy": "category",
                         "displayAsDropdown": false,
                         "showHierarchy": false,
                         "showPostCounts": false,
                         "showOnlyTopLevel": false,
-                        "showEmpty": false
+                        "showEmpty": false,
+                        "showLabel": true
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
@@ -7876,9 +7898,11 @@
                     "attributes": {
                         "showHierarchy": true,
                         "showPostCounts": true,
+                        "taxonomy": "category",
                         "displayAsDropdown": false,
                         "showOnlyTopLevel": false,
-                        "showEmpty": false
+                        "showEmpty": false,
+                        "showLabel": true
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
