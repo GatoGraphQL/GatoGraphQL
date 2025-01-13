@@ -341,7 +341,11 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
                 sprintf('<!doctype html><html><body>%s</body></html>', $block['innerHTML']),
                 null,
                 null,
-                false
+                /**
+                 * Watch out! We must disable the HTML5 parser!
+                 * @see https://github.com/GatoGraphQL/GatoGraphQL/pull/3023
+                 */
+                false 
             );
 
             // Enter the <body> tag for block parsing
