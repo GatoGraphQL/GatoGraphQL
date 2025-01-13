@@ -337,7 +337,12 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             }
 
             // Specify a manual doctype so that the parser will use the HTML5 parser
-            $crawler = new Crawler(sprintf('<!doctype html><html><body>%s</body></html>', $block['innerHTML']));
+            $crawler = new Crawler(
+                sprintf('<!doctype html><html><body>%s</body></html>', $block['innerHTML']),
+                null,
+                null,
+                false
+            );
 
             // Enter the <body> tag for block parsing
             $crawler = $crawler->filter('body');
