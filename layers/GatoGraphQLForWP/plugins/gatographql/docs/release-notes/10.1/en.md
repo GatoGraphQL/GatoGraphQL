@@ -27,3 +27,7 @@
 ## [Extensions] Fixed
 
 - [Google Translate] Make the `@strTranslate` directive send not more than 128 strings to translate
+
+## [Extensions] Improvements
+
+- [Translation] Pass language + country code on `@strTranslate(to:)` (`v10.1.1`)
