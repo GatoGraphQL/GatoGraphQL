@@ -345,7 +345,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
                  * Watch out! We must disable the HTML5 parser!
                  * @see https://github.com/GatoGraphQL/GatoGraphQL/pull/3023
                  */
-                false 
+                false
             );
 
             // Enter the <body> tag for block parsing
