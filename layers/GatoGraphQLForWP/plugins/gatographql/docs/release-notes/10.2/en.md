@@ -2,7 +2,7 @@
 
 ## Added
 
-- Documentation for new field `_generateRandomString` in the **Helper Function Collection** extension
+- Documentation for new field `_generateRandomString` in the **Helper Function Collection** extension ([#3027](https://github.com/GatoGraphQL/GatoGraphQL/pull/3027))
 
 ## Improvements
 

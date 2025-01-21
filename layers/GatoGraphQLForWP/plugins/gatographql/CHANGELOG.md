@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 10.2.0 - DATE
 
+### Added
+
+- Documentation for new field `_generateRandomString` in the Helper Function Collection extension (#3027)
+
 ### Improvements
 
 - Plugin updates: Use the same icon as the Gato GraphQL plugin for the extensions (#3022)

@@ -8,6 +8,31 @@ Helper fields are **Global Fields**, hence they are added to every single type i
 
 This is the list of helper fields.
 
+### `_generateRandomString`
+
+Generate a random string.
+
+For instance, running this query:
+
+```graphql
+{
+  _generateRandomString(
+    length: 24,
+    characters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+  )
+}
+```
+
+might produce:
+
+```json
+{
+  "data": {
+    "_generateRandomString": "BPXV1T1UJLH2S7VG3IO33FUP"
+  }
+}
+```
+
 ### `_objectConvertToNameValueEntryList`
 
 Retrieve the properties from a JSON object to create a list of JSON entries.
