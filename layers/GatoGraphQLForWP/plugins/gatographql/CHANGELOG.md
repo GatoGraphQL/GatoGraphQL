@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Plugin updates: Use the same icon as the Gato GraphQL plugin for the extensions (#3022)
 - Allow to install setup data every time that the plugin is updated (#3028)
+- Convert all png images to webp (#3029)
 
 ## 10.1.0 - 08/01/2025
 
