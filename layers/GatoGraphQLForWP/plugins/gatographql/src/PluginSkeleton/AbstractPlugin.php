@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
+use GatoGraphQL\GatoGraphQL\Constants\Versioning;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -516,7 +517,7 @@ abstract class AbstractPlugin implements PluginInterface
     {
         $versionCallbacks = $this->getPluginSetupDataVersionCallbacks();
         foreach ($versionCallbacks as $version => $callbacks) {
-            if ($version !== '*' && $previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
+            if ($version !== Versioning::ANY_VERSION && $previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
                 continue;
             }
             foreach ($callbacks as $callback) {
