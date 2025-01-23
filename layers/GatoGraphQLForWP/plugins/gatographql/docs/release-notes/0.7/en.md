@@ -4,7 +4,7 @@
 
 Added support for [GraphQL mutations](https://graphql.org/learn/queries/#mutations)!
 
-![Mutations in the schema docs](../../images/releases/v07/schema-docs-mutation.png)
+![Mutations in the schema docs](../../images/releases/v07/schema-docs-mutation.webp)
 
 Through mutations, you are now able to modify data through your GraphQL queries:
 
@@ -68,7 +68,7 @@ Nested mutations have been [requested for the GraphQL spec](https://github.com/g
 
 Nested mutations change the root type, from `QueryRoot` and `MutationRoot`, to a single `Root` type handling both queries and mutations:
 
-![Nested mutations in the schema docs](../../images/schema-docs-nested-mutation.png)
+![Nested mutations in the schema docs](../../images/schema-docs-nested-mutation.webp)
 
 In addition, a "Mutation Scheme" section has been added to a Schema Configuration, allowing to enable/disable nested mutations for a specific Custom Endpoint or Persisted Query.
 

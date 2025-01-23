@@ -10,7 +10,7 @@ It also provides type `CustomPostUnion`, which is used whenever an entity can re
 
 <div class="img-width-1024" markdown=1>
 
-![`CustomPostUnion` type](../../images/interactive-schema-custompost-union.png "`CustomPostUnion` type")
+![`CustomPostUnion` type](../../images/interactive-schema-custompost-union.webp "`CustomPostUnion` type")
 
 </div>
 
@@ -18,7 +18,7 @@ For instance, a comment can be added to a post, but also to a page and to a CPT,
 
 <div class="img-width-1024" markdown=1>
 
-![`Comment` type](../../images/interactive-schema-comment.png "`Comment` type")
+![`Comment` type](../../images/interactive-schema-comment.webp "`Comment` type")
 
 </div>
 
@@ -109,7 +109,7 @@ In the Schema Configuration applied to the endpoint, by selecting option `"Use c
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the allowed Custom Post Types in the Schema Configuration](../../images/customposts-schema-configuration-queryable-cpts.png "Selecting the allowed Custom Post Types in the Schema Configuration")
+![Selecting the allowed Custom Post Types in the Schema Configuration](../../images/customposts-schema-configuration-queryable-cpts.webp "Selecting the allowed Custom Post Types in the Schema Configuration")
 
 </div>
 
@@ -117,7 +117,7 @@ Otherwise, the value defined under section "Included custom post types" in the S
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
+![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.webp "Selecting the allowed Custom Post Types in the Settings")
 
 </div>
 
@@ -130,7 +130,7 @@ Through the Settings page, we can also define:
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for Custom Post limits](../../images/settings-customposts-limits.png "Settings for Custom Post limits")
+![Settings for Custom Post limits](../../images/settings-customposts-limits.webp "Settings for Custom Post limits")
 
 </div>
 
@@ -138,6 +138,6 @@ If there is only one type added to `CustomPostUnion` (eg: only `Post`), we can t
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for Custom Posts](../../images/settings-customposts-single-type.png "Settings for Custom Post")
+![Settings for Custom Posts](../../images/settings-customposts-single-type.webp "Settings for Custom Post")
 
 </div>

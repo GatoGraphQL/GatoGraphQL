@@ -23,7 +23,7 @@ A Custom Post Type "Automation Rules" is provided to create automations. When cr
 
 <div class="img-width-1024" markdown=1>
 
-![Automation Rule editor](../../images/automation-rule-editor.png "Automation Rule editor")
+![Automation Rule editor](../../images/automation-rule-editor.webp "Automation Rule editor")
 
 </div>
 
@@ -53,7 +53,7 @@ These values are overridden by the "dynamic" GraphQL variables (see **Automation
 
 <div class="img-width-392" markdown=1>
 
-![Automation Rule - Persisted Query Execution](../../images/automation-mapping-persisted-query-execution.png "Automation Rule - Persisted Query Execution")
+![Automation Rule - Persisted Query Execution](../../images/automation-mapping-persisted-query-execution.webp "Automation Rule - Persisted Query Execution")
 
 </div>
 
@@ -83,7 +83,7 @@ If the same key is used for the "dynamic" and "static" GraphQL variables (see **
 
 <div class="img-width-412" markdown=1>
 
-![Automation Rule - Action hook](../../images/automation-mapping-action-hook.png "Automation Rule - Action hook")
+![Automation Rule - Action hook](../../images/automation-mapping-action-hook.webp "Automation Rule - Action hook")
 
 </div>
 
@@ -137,7 +137,7 @@ To print these logs, option **Enable Logs?** in **Settings > Plugin Configuratio
 
 <div class="img-width-1024" markdown=1>
 
-![Enable Logs? option in Settings](../../images/settings-enable-logs.png "Enable Logs? option in Settings")
+![Enable Logs? option in Settings](../../images/settings-enable-logs.webp "Enable Logs? option in Settings")
 
 </div>
 
@@ -437,6 +437,6 @@ Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 
 <div class="img-width-1024" markdown=1>
 
-![New entry in WP-Crontrol](../../images/wp-crontrol-entry.png "New entry in WP-Crontrol")
+![New entry in WP-Crontrol](../../images/wp-crontrol-entry.webp "New entry in WP-Crontrol")
 
 </div>

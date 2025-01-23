@@ -10,7 +10,7 @@ With **Field Deprecation**, the extension provides a user interface to deprecate
 
 <div class="img-width-1024" markdown=1>
 
-![Field Deprecation List editor](../../../../../extensions/field-deprecation/docs/images/field-deprecation-list.png "Field Deprecation List editor")
+![Field Deprecation List editor](../../../../../extensions/field-deprecation/docs/images/field-deprecation-list.webp "Field Deprecation List editor")
 
 </div>
 

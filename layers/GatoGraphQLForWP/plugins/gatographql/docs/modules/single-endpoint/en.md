@@ -6,7 +6,7 @@ By default the endpoint is `/graphql/`, and the path can be configured through t
 
 <div class="img-width-1024" markdown=1>
 
-![Single endpoint in Settings](../../images/settings-single-endpoint.png "Single endpoint in Settings")
+![Single endpoint in Settings](../../images/settings-single-endpoint.webp "Single endpoint in Settings")
 
 </div>
 
@@ -14,7 +14,7 @@ The GraphQL single endpoint can be configured by assigning a Schema Configuratio
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for the Schema Configuration for the Single Endpoint](../../images/settings-schema-configuration-for-single-endpoint.png)
+![Settings for the Schema Configuration for the Single Endpoint](../../images/settings-schema-configuration-for-single-endpoint.webp)
 
 </div>
 
@@ -30,7 +30,7 @@ To open it, click on link "🟢 GraphiQL (public)" on the plugin's menu:
 
 <div class="img-width-1024" markdown=1>
 
-![Single endpoint's link to the GraphiQL client](../../images/single-endpoint-graphiql-link.png)
+![Single endpoint's link to the GraphiQL client](../../images/single-endpoint-graphiql-link.webp)
 
 </div>
 
@@ -38,7 +38,7 @@ By default, the client is exposed under `/graphiql/`. This path can be modified 
 
 <div class="img-width-1024" markdown=1>
 
-![Path to GraphiQL client](../../images/settings-graphiql-for-single-endpoint.png)
+![Path to GraphiQL client](../../images/settings-graphiql-for-single-endpoint.webp)
 
 </div>
 
@@ -50,7 +50,7 @@ To open it, click on link "🟢 Schema (public)" on the plugin's menu:
 
 <div class="img-width-1024" markdown=1>
 
-![Single endpoint's link to the Interactive Schema client](../../images/single-endpoint-interactive-schema-link.png)
+![Single endpoint's link to the Interactive Schema client](../../images/single-endpoint-interactive-schema-link.webp)
 
 </div>
 
@@ -58,6 +58,6 @@ By default, the client is exposed under `/schema/`. This path can be modified on
 
 <div class="img-width-1024" markdown=1>
 
-![Path to Voyager client](../../images/settings-interactive-schema-for-single-endpoint.png)
+![Path to Voyager client](../../images/settings-interactive-schema-for-single-endpoint.webp)
 
 </div>

@@ -12,7 +12,7 @@ We use fields `tag` and `tags` to fetch tag data, which indicate which taxonomy 
 
 <div class="img-width-1024" markdown=1>
 
-![TagUnion type in the Interactive Schema](../../images/interactive-schema-tag-union.png "TagUnion type in the Interactive Schema")
+![TagUnion type in the Interactive Schema](../../images/interactive-schema-tag-union.webp "TagUnion type in the Interactive Schema")
 
 </div>
 
@@ -78,7 +78,7 @@ In the Schema Configuration applied to the endpoint, by selecting option `"Use c
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the allowed tag taxonomies in the Schema Configuration](../../images/tags-schema-configuration-queryable-taxonomies.png "Selecting the allowed tag taxonomies in the Schema Configuration")
+![Selecting the allowed tag taxonomies in the Schema Configuration](../../images/tags-schema-configuration-queryable-taxonomies.webp "Selecting the allowed tag taxonomies in the Schema Configuration")
 
 </div>
 
@@ -88,7 +88,7 @@ Otherwise, the value defined under section "Included tag taxonomies" in the Sett
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the allowed tag taxonomies in the Settings](../../images/tags-settings-queryable-taxonomies.png "Selecting the allowed tag taxonomies in the Settings")
+![Selecting the allowed tag taxonomies in the Settings](../../images/tags-settings-queryable-taxonomies.webp "Selecting the allowed tag taxonomies in the Settings")
 
 </div>
 
@@ -101,6 +101,6 @@ Through the Settings for `Schema Tags`, we can also define:
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for Tag limits](../../images/settings-tags-limits.png "Settings for Tag limits")
+![Settings for Tag limits](../../images/settings-tags-limits.webp "Settings for Tag limits")
 
 </div>

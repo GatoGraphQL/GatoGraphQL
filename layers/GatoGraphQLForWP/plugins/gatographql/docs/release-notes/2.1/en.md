@@ -49,7 +49,7 @@ It now provides an "automator" user interface (directly via the WordPress editor
 
 <div class="img-width-1024" markdown=1>
 
-![Automation Rule editor](../../../extensions/automation/docs/images/automation-rule-editor.png "Automation Rule editor")
+![Automation Rule editor](../../../extensions/automation/docs/images/automation-rule-editor.webp "Automation Rule editor")
 
 </div>
 

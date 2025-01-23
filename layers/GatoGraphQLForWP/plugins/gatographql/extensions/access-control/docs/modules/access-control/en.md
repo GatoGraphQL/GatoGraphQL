@@ -10,13 +10,13 @@ A new "Access Control List" Custom Post Type is added to the site. We can browse
 
 <div class="img-width-1024" markdown=1>
 
-![Access Control Lists](../../images/access-control-lists.png "Access Control Lists")
+![Access Control Lists](../../images/access-control-lists.webp "Access Control Lists")
 
 </div>
 
 <div class="img-width-1024" markdown=1>
 
-![Access Control List editor](../../images/access-control-list.png "Access Control List editor")
+![Access Control List editor](../../images/access-control-list.webp "Access Control List editor")
 
 </div>
 
@@ -32,7 +32,7 @@ We assign the Access Control List to the desired endpoint (private endpoint, sin
 
 <div class="img-width-610" markdown=1>
 
-![Selecting an Access Control List in the Schema Configuration](../../images/schema-config-access-control-lists.png "Selecting an Access Control List in the Schema Configuration")
+![Selecting an Access Control List in the Schema Configuration](../../images/schema-config-access-control-lists.webp "Selecting an Access Control List in the Schema Configuration")
 
 </div>
 

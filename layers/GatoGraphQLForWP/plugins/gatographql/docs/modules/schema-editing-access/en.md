@@ -39,7 +39,7 @@ For instance, a contributor can create, but not publish, a persisted query:
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted query by contributor](../../images/new-persisted-query-by-contributor.png "Persisted query by contributor")
+![Persisted query by contributor](../../images/new-persisted-query-by-contributor.webp "Persisted query by contributor")
 
 </div>-->
 
@@ -60,6 +60,6 @@ The appropriate configuration must be selected from the dropdown in the "Plugin 
 
 <div class="img-width-1024" markdown=1>
 
-![Configuring the schema editing access in the Settings](../../images/settings-schema-editing-access.png "Configuring the schema editing access in the Settings")
+![Configuring the schema editing access in the Settings](../../images/settings-schema-editing-access.webp "Configuring the schema editing access in the Settings")
 
 </div>

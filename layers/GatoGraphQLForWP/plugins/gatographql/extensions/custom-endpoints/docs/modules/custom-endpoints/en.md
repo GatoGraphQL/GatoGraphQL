@@ -18,7 +18,7 @@ The custom endpoint is a Custom Post Type, and its permalink is the endpoint. An
 
 <div class="img-width-1024" markdown=1>
 
-![Custom endpoint editor](../../images/custom-endpoint.png "Custom endpoint editor")
+![Custom endpoint editor](../../images/custom-endpoint.webp "Custom endpoint editor")
 
 </div>
 
@@ -32,7 +32,7 @@ Module `GraphiQL for Custom Endpoints` must be enabled.
 
 <div class="img-width-1024" markdown=1>
 
-![Custom endpoint's GraphiQL client](../../images/custom-endpoint-graphiql.png "Custom endpoint's GraphiQL client")
+![Custom endpoint's GraphiQL client](../../images/custom-endpoint-graphiql.webp "Custom endpoint's GraphiQL client")
 
 </div>
 
@@ -42,7 +42,7 @@ Module `Interactive Schema for Custom Endpoints` must be enabled.
 
 <div class="img-width-1024" markdown=1>
 
-![Custom endpoint's Interactive schema](../../images/custom-endpoint-interactive-schema.png "Custom endpoint's Interactive schema")
+![Custom endpoint's Interactive schema](../../images/custom-endpoint-interactive-schema.webp "Custom endpoint's Interactive schema")
 
 </div>
 
@@ -52,7 +52,7 @@ Clicking on the Custom Endpoints link in the menu, it displays the list of all t
 
 <div class="img-width-1024" markdown=1>
 
-![Custom Endpoints in the admin](../../images/custom-endpoints-page.png)
+![Custom Endpoints in the admin](../../images/custom-endpoints-page.webp)
 
 </div>
 
@@ -60,7 +60,7 @@ A custom endpoint is a custom post type (CPT). To create a new custom endpoint, 
 
 <div class="img-width-1024" markdown=1>
 
-![Creating a new Custom Endpoint](../../images/new-custom-endpoint.png)
+![Creating a new Custom Endpoint](../../images/new-custom-endpoint.webp)
 
 </div>
 
@@ -68,7 +68,7 @@ When the custom endpoint is ready, publish it, and its permalink becomes its end
 
 <div class="img-width-1024" markdown=1>
 
-![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
+![Custom Endpoint Overview](../../images/custom-endpoint-overview.webp)
 
 </div>
 
@@ -76,7 +76,7 @@ Appending `?view=source` to the permalink, it will show the endpoint's configura
 
 <div class="img-width-1024" markdown=1>
 
-![Custom endpoint source](../../images/custom-endpoint-source.png)
+![Custom endpoint source](../../images/custom-endpoint-source.webp)
 
 </div>
 
@@ -84,7 +84,7 @@ By default, the custom endpoint has path `/graphql/`, and this value is configur
 
 <div class="img-width-1024" markdown=1>
 
-![Custom endpoint Settings](../../images/settings-custom-endpoints.png)
+![Custom endpoint Settings](../../images/settings-custom-endpoints.webp)
 
 </div>
 
@@ -96,7 +96,7 @@ So we must create a create a schema configuration, and then select it from the d
 
 <div class="img-width-630" markdown=1>
 
-![Selecting the schema configuration](../../../../../docs/images/select-schema-configuration.png)
+![Selecting the schema configuration](../../../../../docs/images/select-schema-configuration.webp)
 
 </div>
 
@@ -106,7 +106,7 @@ On the sidebar panel "Endpoint categories" we can add categories to help manage 
 
 <div class="img-width-1024" markdown=1>
 
-![Endpoint categories when editing a Custom Endpoint](../../images/graphql-custom-endpoint-editor-with-categories.png)
+![Endpoint categories when editing a Custom Endpoint](../../images/graphql-custom-endpoint-editor-with-categories.webp)
 
 </div>
 
@@ -114,7 +114,7 @@ For instance, we can create categories to manage endpoints by client, applicatio
 
 <div class="img-width-1024" markdown=1>
 
-![List of endpoint categories](../../../../../docs/images/graphql-endpoint-categories.png)
+![List of endpoint categories](../../../../../docs/images/graphql-endpoint-categories.webp)
 
 </div>
 
@@ -122,13 +122,13 @@ On the list of Custom Endpoints, we can visualize their categories and, clicking
 
 <div class="img-width-1024" markdown=1>
 
-![List of Custom Endpoints with their categories](../../images/graphql-custom-endpoints-with-categories.png)
+![List of Custom Endpoints with their categories](../../images/graphql-custom-endpoints-with-categories.webp)
 
 </div>
 
 <div class="img-width-1024" markdown=1>
 
-![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
+![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.webp)
 
 </div>
 
@@ -140,7 +140,7 @@ For instance, we can create private Custom Endpoints that help manage the applic
 
 <div class="img-width-1024" markdown=1>
 
-![Private Custom Endpoint](../../images/private-custom-endpoint.png)
+![Private Custom Endpoint](../../images/private-custom-endpoint.webp)
 
 </div>
 
@@ -150,7 +150,7 @@ If we create a Custom Endpoint for a specific client, we can now assign a passwo
 
 <div class="img-width-1024" markdown=1>
 
-![Password-protected Custom Endpoint](../../images/password-protected-custom-endpoint.png)
+![Password-protected Custom Endpoint](../../images/password-protected-custom-endpoint.webp)
 
 </div>
 
@@ -158,7 +158,7 @@ When first accessing a password-protected endpoint (whether accessing the endpoi
 
 <div class="img-width-1024" markdown=1>
 
-![Password-protected Custom Endpoint: First access](../../images/password-protected-custom-endpoint-unauthorized.png)
+![Password-protected Custom Endpoint: First access](../../images/password-protected-custom-endpoint-unauthorized.webp)
 
 </div>
 
@@ -166,7 +166,7 @@ Once the password is provided and validated, only then the user will access the 
 
 <div class="img-width-1024" markdown=1>
 
-![Password-protected Custom Endpoint: After authorization](../../images/password-protected-custom-endpoint-authorized.png)
+![Password-protected Custom Endpoint: After authorization](../../images/password-protected-custom-endpoint-authorized.webp)
 
 </div>
 

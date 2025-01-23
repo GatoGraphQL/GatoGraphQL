@@ -47,7 +47,7 @@ The response is:
       "coreImageURLs": [
         "https://d.pr/i/fW6V3V+",
         "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-1024x622.jpg",
-        "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.png"
+        "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.webp"
       ]
     }
   }

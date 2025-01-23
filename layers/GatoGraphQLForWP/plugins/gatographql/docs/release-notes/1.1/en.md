@@ -44,7 +44,7 @@ An option to enable/disable the installation of the setup data (i.e. the predefi
 
 <div class="img-width-1024" markdown=1>
 
-![Manage installing setup data in the Settings](../../images/settings-plugin-setup-data.png)
+![Manage installing setup data in the Settings](../../images/settings-plugin-setup-data.webp)
 
 </div>
 

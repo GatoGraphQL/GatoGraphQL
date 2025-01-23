@@ -14,7 +14,7 @@ The response's `max-age` value is automatically calculated by the GraphQL engine
 
 <div class="img-width-1024" markdown=1>
 
-![Cache Control entry](../../../../../extensions/cache-control/docs/images/cache-control-entry.png "Cache Control entry")
+![Cache Control entry](../../../../../extensions/cache-control/docs/images/cache-control-entry.webp "Cache Control entry")
 
 </div>
 

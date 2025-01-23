@@ -1,4 +1,4 @@
-![PoP](https://assets-demo.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
+![PoP](https://assets-demo.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.webp)
 
 # PoP Engine
 
@@ -499,7 +499,7 @@ The first 4 plugins are needed to produce the PoP API, and the 5th plugin (pop-e
 
 That's it. You can then access PoP's API by adding parameter `output=json` to any URL on the site: https://mysite.com/?output=json.
 
-![If adding parameter output=json to your site produces a JSON response, then you got it!](https://uploads.getpop.org/wp-content/uploads/2018/12/api-json-response.png?)
+![If adding parameter output=json to your site produces a JSON response, then you got it!](https://uploads.getpop.org/wp-content/uploads/2018/12/api-json-response.webp?)
 
 > Note 1: Currently PoP runs in WordPress only. Hopefully, in the future it will be available for other CMSs and technologies too.
 
@@ -645,7 +645,7 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 - Handlebars templates are the view/front-end
 - the PoP engine is the controller
 
-![How it works](https://uploads.getpop.org/wp-content/uploads/2016/10/Step-5-640x301.png)
+![How it works](https://uploads.getpop.org/wp-content/uploads/2016/10/Step-5-640x301.webp)
 
 ## Design principles
 
@@ -828,6 +828,6 @@ https://github.com/GatoGraphQL/GatoGraphQL/issues?q=is%3Aissue+is%3Aopen+label%3
 
 Open to Open Source projects for free, PoP uses the Live, Web-Based Browser Testing provided by [BrowserStack](https://www.browserstack.com/).
 
-![BrowserStack](http://www.softcrylic.com/wp-content/uploads/2017/03/browser-stack.png)
+![BrowserStack](http://www.softcrylic.com/wp-content/uploads/2017/03/browser-stack.webp)
 
 -->

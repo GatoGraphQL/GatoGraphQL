@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/master/assets/GatoGraphQL-logo.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/master/assets/GatoGraphQL-logo.webp"/></p>
 
 ![Unit tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2253 --><!-- ![Integration tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/integration_tests.yml/badge.svg) -->
 ![Downgrade PHP tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/downgrade_php_tests.yml/badge.svg)
@@ -360,7 +360,7 @@ To create the release, we must head over to the [`tags` page in the GitHub repo]
 
 Then, on the tag page, click on `Create release from tag`.
 
-![Create release from tag](assets/img/create-release-from-tag.png)
+![Create release from tag](assets/img/create-release-from-tag.webp)
 
 This will trigger the [`generate_plugins.yml`](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/generate_plugins.yml) workflow, which will generate the extension plugins and attach them as assets to the tag page.
 

@@ -87,7 +87,7 @@ In the Settings page, in the corresponding tab for each, there is a checkbox to 
 
 <div class="img-width-1024" markdown=1>
 
-![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.png)
+![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.webp)
 
 </div>
 
@@ -97,7 +97,7 @@ Exposing “sensitive” data elements in the schema can be configured as follow
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-![Adding sensitive fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-sensitive-fields-to-schema.png "Adding sensitive fields to the schema, set in the Schema configuration")
+![Adding sensitive fields to the schema, set in the Schema configuration](../../images/schema-configuration-adding-sensitive-fields-to-schema.webp "Adding sensitive fields to the schema, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
@@ -105,7 +105,7 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 <div class="img-width-1024" markdown=1>
 
-![Expose Sensitive Data in the Schema, in the Settings](../../images/settings-schema-expose-sensitive-data-default.png "Expose Sensitive Data in the Schema, in the Settings")
+![Expose Sensitive Data in the Schema, in the Settings](../../images/settings-schema-expose-sensitive-data-default.webp "Expose Sensitive Data in the Schema, in the Settings")
 
 </div>
 

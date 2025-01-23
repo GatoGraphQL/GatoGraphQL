@@ -136,7 +136,7 @@ To enable or disable multi-field directives in the GraphQL schema, go to the "Mu
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for Multi-Field Directives](../../images/settings-multifield-directives.png "Settings for Multi-Field Directives")
+![Settings for Multi-Field Directives](../../images/settings-multifield-directives.webp "Settings for Multi-Field Directives")
 
 </div>
 
@@ -144,6 +144,6 @@ To enable or disable multi-field directives on a specific endpoint, select the d
 
 <div class="img-width-610" markdown=1>
 
-![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png "Multi-Field Directives in the Schema Configuration")
+![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.webp "Multi-Field Directives in the Schema Configuration")
 
 </div>

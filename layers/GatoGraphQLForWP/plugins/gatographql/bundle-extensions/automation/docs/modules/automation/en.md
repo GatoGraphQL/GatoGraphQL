@@ -14,7 +14,7 @@ With the **Automation Configurator**, you can create automations via the WordPre
 
 <div class="img-width-1024" markdown=1>
 
-![Automation Rule editor](../../../../../extensions/automation/docs/images/automation-rule-editor.png "Automation Rule editor")
+![Automation Rule editor](../../../../../extensions/automation/docs/images/automation-rule-editor.webp "Automation Rule editor")
 
 </div>
 

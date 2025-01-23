@@ -71,8 +71,8 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
         return match ($module) {
             self::AUTOMATION => $imagePathURL . '/automation.svg',
             self::EVENTS_MANAGER => $imagePathURL . '/events-manager.webp',
-            self::MULTILINGUALPRESS => $imagePathURL . '/multilingualpress.png',
-            self::POLYLANG => $imagePathURL . '/polylang.png',
+            self::MULTILINGUALPRESS => $imagePathURL . '/multilingualpress.webp',
+            self::POLYLANG => $imagePathURL . '/polylang.webp',
             self::TRANSLATION => $imagePathURL . '/translation.svg',
             default => parent::getLogoURL($module),
         };

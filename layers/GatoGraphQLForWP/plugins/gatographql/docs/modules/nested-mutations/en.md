@@ -61,13 +61,13 @@ mutation {
 
 Nested mutations change the root type, from `QueryRoot` and `MutationRoot`, to a single `Root` type handling both queries and mutations:
 
-![Nested mutations in the schema docs](../../images/schema-docs-nested-mutation.png)
+![Nested mutations in the schema docs](../../images/schema-docs-nested-mutation.webp)
 
 With nested mutations, every type in the schema can contain both query and mutation fields. To differentiate them, the mutation field's description is prepended with label `"[Mutation] "`.
 
 For instance, these are the fields for type `Root`:
 
-![Description for type `Root` in GraphiQL docs](../../images/mutation-desc-in-graphiql-docs.png)
+![Description for type `Root` in GraphiQL docs](../../images/mutation-desc-in-graphiql-docs.webp)
 
 ## Settings
 
@@ -75,7 +75,7 @@ Item "Default Mutation scheme" in the module settings enables to configure if to
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for nested mutations](../../images/settings-nested-mutations-default.png)
+![Settings for nested mutations](../../images/settings-nested-mutations-default.webp)
 
 </div>
 
@@ -117,7 +117,7 @@ A "Mutation Scheme" section has been added to a Schema Configuration, allowing t
 
 <div class="img-width-620" markdown=1>
 
-![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.png)
+![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.webp)
 
 </div>
 

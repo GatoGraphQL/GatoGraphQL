@@ -76,7 +76,7 @@ Global fields are added to all types in the GraphQL schema, which renders its vi
 
 <div class="img-width-1024" markdown=1>
 
-![Schema with global fields exposed under all types](../../images/schema-with-global-fields-under-all-types.png "Schema with global fields exposed under all types")
+![Schema with global fields exposed under all types](../../images/schema-with-global-fields-under-all-types.webp "Schema with global fields exposed under all types")
 
 </div>
 
@@ -91,7 +91,7 @@ By default, the schema exposes global fields under the Root type only, and it is
 
 <div class="img-width-1024" markdown=1>
 
-![Schema with global fields exposed under the Root type only](../../images/schema-with-global-fields-under-root-type-only.png "Schema with global fields exposed under the Root type only")
+![Schema with global fields exposed under the Root type only](../../images/schema-with-global-fields-under-root-type-only.webp "Schema with global fields exposed under the Root type only")
 
 </div>
 
@@ -105,7 +105,7 @@ To select the general level of exposure of global fields in the GraphQL schema, 
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for Global Fields](../../images/settings-global-fields.png "Settings for Global Fields")
+![Settings for Global Fields](../../images/settings-global-fields.webp "Settings for Global Fields")
 
 </div>
 
@@ -113,6 +113,6 @@ To modify the exposure of global fields on different custom endpoints, select th
 
 <div class="img-width-1024" markdown=1>
 
-![Editing Global Fields in the Schema Configuration](../../images/schema-config-global-fields.png "Editing Global Fields in the Schema Configuration")
+![Editing Global Fields in the Schema Configuration](../../images/schema-config-global-fields.webp "Editing Global Fields in the Schema Configuration")
 
 </div>

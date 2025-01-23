@@ -10,13 +10,13 @@ A new "Field Deprecation List" Custom Post Type is added to the site. We can bro
 
 <div class="img-width-1024" markdown=1>
 
-![Field Deprecation Lists](../../images/field-deprecation-lists.png "Field Deprecation Lists")
+![Field Deprecation Lists](../../images/field-deprecation-lists.webp "Field Deprecation Lists")
 
 </div>
 
 <div class="img-width-1024" markdown=1>
 
-![Field Deprecation List editor](../../images/field-deprecation-list.png "Field Deprecation List editor")
+![Field Deprecation List editor](../../images/field-deprecation-list.webp "Field Deprecation List editor")
 
 </div>
 
@@ -27,7 +27,7 @@ Every Field Deprecation List contains one or many entries, each of them with the
 
 <div class="img-width-1024" markdown=1>
 
-![Field Deprecation entry](../../images/field-deprecation-entry.png "Field Deprecation entry")
+![Field Deprecation entry](../../images/field-deprecation-entry.webp "Field Deprecation entry")
 
 </div>
 
@@ -35,7 +35,7 @@ After creating the Field Deprecation List, we can have the Custom Endpoint and P
 
 <div class="img-width-610" markdown=1>
 
-![Selecting a Field Deprecation List in the Schema Configuration](../../images/schema-config-field-deprecation-lists.png "Selecting a Field Deprecation List in the Schema Configuration")
+![Selecting a Field Deprecation List in the Schema Configuration](../../images/schema-config-field-deprecation-lists.webp "Selecting a Field Deprecation List in the Schema Configuration")
 
 </div>
 

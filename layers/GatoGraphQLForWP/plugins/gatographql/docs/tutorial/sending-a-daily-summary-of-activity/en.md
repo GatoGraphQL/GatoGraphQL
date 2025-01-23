@@ -126,7 +126,7 @@ Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 
 <div class="img-width-1024" markdown=1>
 
-![New entry in WP-Crontrol](../../../extensions/automation/docs/images/wp-crontrol-entry.png "New entry in WP-Crontrol")
+![New entry in WP-Crontrol](../../../extensions/automation/docs/images/wp-crontrol-entry.webp "New entry in WP-Crontrol")
 
 </div>
 

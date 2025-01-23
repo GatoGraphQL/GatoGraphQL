@@ -8,7 +8,7 @@ In the Access Control editor, a new rule "Visitor IP" is made available:
 
 <div class="img-width-1024" markdown=1>
 
-![Access Control: Visitor IP rule](../../images/acl-rule-visitor-ip.png "Access Control: Visitor IP rule")
+![Access Control: Visitor IP rule](../../images/acl-rule-visitor-ip.webp "Access Control: Visitor IP rule")
 
 </div>
 
@@ -28,7 +28,7 @@ And under Behavior, select if to "Allow access" or "Deny access" to the schema f
 
 <div class="img-width-600" markdown=1>
 
-![Adding entries in the Visitor IP block](../../images/acl-rule-visitor-ip-block.png "Adding entries in the Visitor IP block")
+![Adding entries in the Visitor IP block](../../images/acl-rule-visitor-ip-block.webp "Adding entries in the Visitor IP block")
 
 </div>
 
