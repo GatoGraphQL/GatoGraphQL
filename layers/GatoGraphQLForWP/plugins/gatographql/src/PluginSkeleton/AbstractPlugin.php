@@ -509,12 +509,14 @@ abstract class AbstractPlugin implements PluginInterface
      *
      * - $previousVersion = null => Activating the plugin
      * - $previousVersion < someVersion => Updating to a new version that has data to install
+     *
+     * To always trigger installing data, pass version "*"
      */
     protected function installPluginSetupData(?string $previousVersion = null): void
     {
         $versionCallbacks = $this->getPluginSetupDataVersionCallbacks();
         foreach ($versionCallbacks as $version => $callbacks) {
-            if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
+            if ($version !== '*' && $previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
                 continue;
             }
             foreach ($callbacks as $callback) {
