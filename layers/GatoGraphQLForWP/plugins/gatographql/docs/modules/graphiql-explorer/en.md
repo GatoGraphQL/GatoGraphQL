@@ -23,6 +23,6 @@ Customize in the Settings which GraphiQL clients will have the Explorer enabled,
 
 <div class="img-width-1024" markdown=1>
 
-![GraphiQL Explorer settings](../../images/legacy/v06/settings-graphiql-explorer.png)
+![GraphiQL Explorer settings](../../images/legacy/v06/settings-graphiql-explorer.webp)
 
 </div>

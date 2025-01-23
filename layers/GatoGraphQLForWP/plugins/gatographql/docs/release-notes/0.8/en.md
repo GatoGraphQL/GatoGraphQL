@@ -86,7 +86,7 @@ For instance, this query:
 
 Additional entities from the WordPress data model have been added to the GraphQL schema:
 
-![GraphQL schema](../../images/releases/v08/graphql-schema-v08.png)
+![GraphQL schema](../../images/releases/v08/graphql-schema-v08.webp)
 
 Let's see what new elements have been added.
 
@@ -156,7 +156,7 @@ Meta values may be public or private. Which meta keys can be queried must be exp
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the entries](../../images/settings-custompost-meta-entries.png "Defining the entries")
+![Defining the entries](../../images/settings-custompost-meta-entries.webp "Defining the entries")
 
 </div>
 
@@ -264,11 +264,11 @@ Options in the Settings page are divided by tabs. From `v0.8` it is also possibl
 
 To enable this behavior, uncheck item `"Have all options in this Settings page be organized under tabs, one tab per module."` on the Settings, and press on `"Save Changes (All)"`:
 
-![Checkbox to enable/disable tabs in Settings](../../images/releases/v08/settings-without-tabs-checkbox.png)
+![Checkbox to enable/disable tabs in Settings](../../images/releases/v08/settings-without-tabs-checkbox.webp)
 
 Then, all settings will be shown together in long form:
 
-![Settings in long format](../../images/releases/v08/settings-without-tabs.png)
+![Settings in long format](../../images/releases/v08/settings-without-tabs.webp)
 
 ---
 
@@ -288,11 +288,11 @@ In the previous `v0.7`, a single Options block for these entities contained many
 
 For instance, in `v0.7`, (in addition to enabling/disabling the endpoint) the Custom Endpoint Options block allowed to configure the GraphiQL and Interactive Schema clients:
 
-![Options in Custom Endpoint](../../images/legacy/v07/custom-endpoint.png)
+![Options in Custom Endpoint](../../images/legacy/v07/custom-endpoint.webp)
 
 Since `v0.8`, this configuration is added through the GraphiQL and Interactive Schema blocks:
 
-![Options in Custom Endpoint](../../images/custom-endpoint.png)
+![Options in Custom Endpoint](../../images/custom-endpoint.webp)
 
 The configuration stored in the Options blocks for all 3 CPTs is not automatically migrated to the new format. Hence, before upgrading to `v0.8`, please write down your stored configuration, and replicate it after upgrading to the new version.
 
@@ -302,7 +302,7 @@ In addition, you will need to click on the "Reset the template" button shown in 
 
 <div class="img-width-1024" markdown=1>
 
-![Reset the template in the WordPress editor](../../images/legacy/v07/reset-template.png)
+![Reset the template in the WordPress editor](../../images/legacy/v07/reset-template.webp)
 
 </div>
 

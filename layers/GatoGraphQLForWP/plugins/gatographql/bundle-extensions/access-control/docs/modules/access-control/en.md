@@ -16,7 +16,7 @@ This extension allows us to create **Access Control Lists**, to manage who can a
 
 <div class="img-width-1024" markdown=1>
 
-![Creating an Access Control List](../../../../../extensions/access-control/docs/images/access-control-list.png "Creating an Access Control List")
+![Creating an Access Control List](../../../../../extensions/access-control/docs/images/access-control-list.webp "Creating an Access Control List")
 
 </div>
 
@@ -36,7 +36,7 @@ With the **Public/Private Schema Mode**, when access to some a field or directiv
 
 <div class="img-width-1024" markdown=1>
 
-![Individual Public/Private schema mode](../../../../../extensions/access-control/docs/images/acl-public-private-schema-mode.png "Individual Public/Private schema mode")
+![Individual Public/Private schema mode](../../../../../extensions/access-control/docs/images/acl-public-private-schema-mode.webp "Individual Public/Private schema mode")
 
 </div>
 

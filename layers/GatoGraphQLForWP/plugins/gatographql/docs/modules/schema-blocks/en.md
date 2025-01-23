@@ -256,7 +256,7 @@ This query:
                                     "id": 1362,
                                     "sizeSlug": "large",
                                     "linkDestination": "none",
-                                    "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.png",
+                                    "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.webp",
                                     "alt": ""
                                   },
                                   "innerBlocks": null
@@ -316,7 +316,7 @@ We can do this in the Settings page under the Blocks tab, by ticking on option `
 
 <div class="img-width-1024" markdown=1>
 
-![Configuring to directly retrieve `GeneralBlock` instead of `BlockUnion`](../../images/settings-blocks-single-type.png)
+![Configuring to directly retrieve `GeneralBlock` instead of `BlockUnion`](../../images/settings-blocks-single-type.webp)
 
 </div>
 
@@ -724,7 +724,7 @@ For instance, the following query:
                                     "id": 1362,
                                     "sizeSlug": "large",
                                     "linkDestination": "none",
-                                    "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.png",
+                                    "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.webp",
                                     "alt": ""
                                   }
                                 }
@@ -1087,7 +1087,7 @@ This query:
             "id": 1362,
             "sizeSlug": "large",
             "linkDestination": "none",
-            "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.png",
+            "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.webp",
             "alt": ""
           },
           "parentBlockPosition": 23,

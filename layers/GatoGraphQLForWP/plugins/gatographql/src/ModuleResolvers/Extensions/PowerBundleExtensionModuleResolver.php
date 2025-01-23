@@ -127,7 +127,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             // self::PRO,
             // self::ALL_EXTENSIONS,
             self::POWER_EXTENSIONS
-                => $pluginURL . 'assets/img/logos/GatoGraphQL-logo-face.png',
+                => $pluginURL . 'assets/img/logos/GatoGraphQL-logo-face.webp',
             self::ACCESS_CONTROL
                 => $pluginURL . 'assets/img/extension-logos/access-control.svg',
             self::CACHING

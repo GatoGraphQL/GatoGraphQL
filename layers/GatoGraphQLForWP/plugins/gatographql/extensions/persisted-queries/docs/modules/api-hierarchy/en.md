@@ -29,13 +29,13 @@ Children persisted queries can override variables defined in the parent query. F
 
 <div class="img-width-1024" markdown=1>
 
-![Parent persisted query](../../images/parent-persisted-query.png "Parent persisted query")
+![Parent persisted query](../../images/parent-persisted-query.webp "Parent persisted query")
 
 </div>
 
 <div class="img-width-1024" markdown=1>
 
-![Child persisted query](../../images/child-persisted-query.png "Child persisted query")
+![Child persisted query](../../images/child-persisted-query.webp "Child persisted query")
 
 </div>
 
@@ -45,7 +45,7 @@ In the custom endpoint or persisted query, in the Document settings, there is se
 
 <div class="img-width-1024" markdown=1>
 
-![API inheritance](../../images/api-inheritance.png "API inheritance")
+![API inheritance](../../images/api-inheritance.webp "API inheritance")
 
 </div>
 

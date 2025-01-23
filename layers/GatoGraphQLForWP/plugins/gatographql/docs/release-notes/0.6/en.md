@@ -22,7 +22,7 @@ Previously, it was only available on the GraphiQL client for creating persisted 
 
 <div class="img-width-1024" markdown=1>
 
-![Public client with GraphiQL Explorer](../../images/releases/v06/public-client-with-graphiql-explorer.png)
+![Public client with GraphiQL Explorer](../../images/releases/v06/public-client-with-graphiql-explorer.webp)
 
 </div>
 
@@ -30,7 +30,7 @@ Enabled by default, the GraphiQL Explorer can be disabled for selected clients v
 
 <div class="img-width-1024" markdown=1>
 
-![Public client with GraphiQL Explorer](../../images/legacy/v06/settings-graphiql-explorer.png)
+![Public client with GraphiQL Explorer](../../images/legacy/v06/settings-graphiql-explorer.webp)
 
 </div>
 
@@ -98,7 +98,7 @@ Starting from this version, immediately after updating the plugin, an admin noti
 
 <div class="img-width-1024" markdown=1>
 
-![Offering to read the release notes via an admin notice](../../images/releases/v06/admin-notice-release-notes.png)
+![Offering to read the release notes via an admin notice](../../images/releases/v06/admin-notice-release-notes.webp)
 
 </div>
 
@@ -106,6 +106,6 @@ When clicking on the link, the release notes are shown on a modal window:
 
 <div class="img-width-1024" markdown=1>
 
-![Release notes in a modal window](../../images/releases/v06/release-notes-in-modal.png)
+![Release notes in a modal window](../../images/releases/v06/release-notes-in-modal.webp)
 
 </div>

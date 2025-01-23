@@ -14,7 +14,7 @@ While the schema normally looks like this:
 
 <div class="img-width-1024" markdown=1>
 
-![Interactive schema](../../images/normal-interactive-schema.png)
+![Interactive schema](../../images/normal-interactive-schema.webp)
 
 </div>
 
@@ -22,7 +22,7 @@ While the schema normally looks like this:
 
 <div class="img-width-1024" markdown=1>
 
-![Namespaced interactive schema](../../images/namespaced-interactive-schema.png)
+![Namespaced interactive schema](../../images/namespaced-interactive-schema.webp)
 
 </div>
 
@@ -32,7 +32,7 @@ Namespacing the schema can be configured as follows, in order of priority:
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-![Namespacing, set in the Schema configuration](../../images/schema-configuration-namespacing.png "Namespacing, set in the Schema configuration")
+![Namespacing, set in the Schema configuration](../../images/schema-configuration-namespacing.webp "Namespacing, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
@@ -40,7 +40,7 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 <div class="img-width-1024" markdown=1>
 
-![Namespacing in Settings](../../images/settings-namespacing-default.png "Namespacing in Settings")
+![Namespacing in Settings](../../images/settings-namespacing-default.webp "Namespacing in Settings")
 
 </div>
 

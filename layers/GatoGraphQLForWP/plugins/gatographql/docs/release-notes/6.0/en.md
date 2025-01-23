@@ -40,7 +40,7 @@ The first option (`Users with capability: "gatogql_manage_graphql_schema"`) is s
 
 <div class="img-width-1024" markdown=1>
 
-![Configuring the schema editing access in the Settings](../../images/settings-schema-editing-access.png "Configuring the schema editing access in the Settings")
+![Configuring the schema editing access in the Settings](../../images/settings-schema-editing-access.webp "Configuring the schema editing access in the Settings")
 
 </div>
 

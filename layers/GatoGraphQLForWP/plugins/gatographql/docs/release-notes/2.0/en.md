@@ -20,7 +20,7 @@ mutation CreateMediaItems {
   fromURL: createMediaItem(input: {
     from: {
       url: {
-        source: "https://gatographql.com/assets/GatoGraphQL-logo.png"
+        source: "https://gatographql.com/assets/GatoGraphQL-logo.webp"
       }
     }
     caption: "Gato GraphQL logo"
@@ -92,8 +92,8 @@ fragment MediaItemData on Media {
         "caption": "Gato GraphQL logo",
         "mimeType": "image/png",
         "slug": "gatographql-logo-png",
-        "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.png",
-        "title": "GatoGraphQL-logo.png"
+        "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.webp",
+        "title": "GatoGraphQL-logo.webp"
       }
     },
     "directlyByContents": {
@@ -161,7 +161,7 @@ fragment MediaItemData on Media {
       {
         "id": 1380,
         "mimeType": "image/png",
-        "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.png",
+        "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.webp",
         "author": {
           "slug": "admin"
         }
@@ -169,7 +169,7 @@ fragment MediaItemData on Media {
       {
         "id": 1365,
         "mimeType": "image/png",
-        "src": "https://mysite.com/wp-content/uploads/browser.png",
+        "src": "https://mysite.com/wp-content/uploads/browser.webp",
         "author": {
           "slug": "admin"
         }
@@ -178,7 +178,7 @@ fragment MediaItemData on Media {
     "myMediaItem": {
       "id": 1380,
       "mimeType": "image/png",
-      "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.png",
+      "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.webp",
       "author": {
         "slug": "admin"
       }

@@ -57,7 +57,7 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the entries on the Schema Configuration](../../images/environment-fields-schema-configuration-entries.png "Defining the entries on the Schema Configuration")
+![Defining the entries on the Schema Configuration](../../images/environment-fields-schema-configuration-entries.webp "Defining the entries on the Schema Configuration")
 
 </div>
 
@@ -65,7 +65,7 @@ Otherwise, the entries defined in the "Environment Fields" tab from the Settings
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the entries on the Settings](../../images/environment-fields-settings-entries.png "Defining the entries on the Settings")
+![Defining the entries on the Settings](../../images/environment-fields-settings-entries.webp "Defining the entries on the Settings")
 
 </div>
 
@@ -76,7 +76,7 @@ There are 2 behaviors, "Allow access" and "Deny access":
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the access behavior](../../images/environment-fields-settings-behavior.png "Defining the access behavior")
+![Defining the access behavior](../../images/environment-fields-settings-behavior.webp "Defining the access behavior")
 
 </div>
 

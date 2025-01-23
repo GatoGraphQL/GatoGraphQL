@@ -4,7 +4,7 @@ The Gato GraphQL Monorepo contains several projects.
 
 ## Gato GraphQL for WordPress
 
-<p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/master/assets/GatoGraphQL-logo.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/master/assets/GatoGraphQL-logo.webp"/></p>
 
 **Gato GraphQL** is a forward-looking and powerful GraphQL server for WordPress.
 
@@ -19,7 +19,7 @@ Plugins can extend the GraphQL schema, to fetch their own data.
 
 ## GraphQL By PoP
 
-<p align="center"><img src="https://graphql-by-pop.com/assets/superheroes.png" width="450" /></p>
+<p align="center"><img src="https://graphql-by-pop.com/assets/superheroes.webp" width="450" /></p>
 
 **GraphQL by PoP** is a CMS-agnostic GraphQL server in PHP.
 
@@ -28,7 +28,7 @@ Plugins can extend the GraphQL schema, to fetch their own data.
 
 ## PoP - set of PHP components
 
-<p align="center"><img src="https://assets-demo.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png" width="450" /></p>
+<p align="center"><img src="https://assets-demo.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.webp" width="450" /></p>
 
 **PoP** is a set of libraries which provide a server-side component model in PHP, and the foundation to implement applications with it.
 

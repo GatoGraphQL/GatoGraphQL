@@ -20,7 +20,7 @@ Each custom endpoint is customized to some specific configuration, and is access
 
 <div class="img-width-1024" markdown=1>
 
-![Custom endpoint editor](../../../../../extensions/custom-endpoints/docs/images/custom-endpoint.png "Custom endpoint editor")
+![Custom endpoint editor](../../../../../extensions/custom-endpoints/docs/images/custom-endpoint.webp "Custom endpoint editor")
 
 </div>
 
@@ -28,7 +28,7 @@ The custom endpoints can be managed via categories and hierarchies.
 
 <div class="img-width-1024" markdown=1>
 
-![Custom Endpoints in the admin](../../../../../extensions/custom-endpoints/docs/images/custom-endpoints-page.png)
+![Custom Endpoints in the admin](../../../../../extensions/custom-endpoints/docs/images/custom-endpoints-page.webp)
 
 </div>
 

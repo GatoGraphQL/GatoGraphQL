@@ -12,7 +12,7 @@ We use fields `category` and `categories` to fetch category data, which indicate
 
 <div class="img-width-1024" markdown=1>
 
-![CategoryUnion type in the Interactive Schema](../../images/interactive-schema-category-union.png "CategoryUnion type in the Interactive Schema")
+![CategoryUnion type in the Interactive Schema](../../images/interactive-schema-category-union.webp "CategoryUnion type in the Interactive Schema")
 
 </div>
 
@@ -78,7 +78,7 @@ In the Schema Configuration applied to the endpoint, by selecting option `"Use c
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the allowed category taxonomies in the Schema Configuration](../../images/categories-schema-configuration-queryable-taxonomies.png "Selecting the allowed category taxonomies in the Schema Configuration")
+![Selecting the allowed category taxonomies in the Schema Configuration](../../images/categories-schema-configuration-queryable-taxonomies.webp "Selecting the allowed category taxonomies in the Schema Configuration")
 
 </div>
 
@@ -88,7 +88,7 @@ Otherwise, the value defined under section "Included category taxonomies" in the
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the allowed category taxonomies in the Settings](../../images/categories-settings-queryable-taxonomies.png "Selecting the allowed category taxonomies in the Settings")
+![Selecting the allowed category taxonomies in the Settings](../../images/categories-settings-queryable-taxonomies.webp "Selecting the allowed category taxonomies in the Settings")
 
 </div>
 
@@ -101,6 +101,6 @@ Through the Settings for `Schema Categories`, we can also define:
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for Category limits](../../images/settings-categories-limits.png "Settings for Category limits")
+![Settings for Category limits](../../images/settings-categories-limits.webp "Settings for Category limits")
 
 </div>

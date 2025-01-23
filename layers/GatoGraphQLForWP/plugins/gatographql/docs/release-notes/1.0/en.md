@@ -285,7 +285,7 @@ This query:
                                     "id": 1362,
                                     "sizeSlug": "large",
                                     "linkDestination": "none",
-                                    "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.png",
+                                    "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.webp",
                                     "alt": ""
                                   },
                                   "innerBlocks": null
@@ -527,7 +527,7 @@ For instance, the following query:
                                     "id": 1362,
                                     "sizeSlug": "large",
                                     "linkDestination": "none",
-                                    "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.png",
+                                    "url": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.webp",
                                     "alt": ""
                                   }
                                 }

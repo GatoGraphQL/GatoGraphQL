@@ -51,7 +51,7 @@ By using `@default`, we can then retrieve some default image:
     "post": {
       "featuredImage": {
         "id": 55,
-        "src": "http://mysite.com/wp-content/uploads/my-default-image.png"
+        "src": "http://mysite.com/wp-content/uploads/my-default-image.webp"
       }
     }
   }

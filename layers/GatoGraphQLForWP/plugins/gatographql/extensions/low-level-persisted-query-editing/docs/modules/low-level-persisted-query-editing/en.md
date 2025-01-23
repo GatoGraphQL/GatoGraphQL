@@ -14,7 +14,7 @@ For instance, Cache Control works by applying directive `@cacheControl` on the s
 
 <div class="img-width-1024" markdown=1>
 
-![Defining a cache control policy](../../images/cache-control-entry.png "Defining a cache control policy")
+![Defining a cache control policy](../../images/cache-control-entry.webp "Defining a cache control policy")
 
 </div>
 
@@ -34,7 +34,7 @@ This extension `Low-Level Persisted Query Editing` makes all directives to be ap
 
 <div class="img-width-1024" markdown=1>
 
-![Schema-type directives available in the Persisted queries editor](../../images/low-level-persisted-query-editing.png "Schema-type directives available in the Persisted queries editor")
+![Schema-type directives available in the Persisted queries editor](../../images/low-level-persisted-query-editing.webp "Schema-type directives available in the Persisted queries editor")
 
 </div>
 

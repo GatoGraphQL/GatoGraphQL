@@ -22,7 +22,7 @@ For instance, we can now define the Custom Post Types that can be queried for so
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the allowed Custom Post Types in the Schema Configuration](../../images/customposts-schema-configuration-queryable-cpts.png)
+![Selecting the allowed Custom Post Types in the Schema Configuration](../../images/customposts-schema-configuration-queryable-cpts.webp)
 
 </div>
 
@@ -34,7 +34,7 @@ Added documentation for modules "Tags" and "Categories", displayed when clicking
 
 <div class="img-width-1024" markdown=1>
 
-![Documentation for "Tags" module](../../images/releases/v010/tags-doc.png)
+![Documentation for "Tags" module](../../images/releases/v010/tags-doc.webp)
 
 </div>
 

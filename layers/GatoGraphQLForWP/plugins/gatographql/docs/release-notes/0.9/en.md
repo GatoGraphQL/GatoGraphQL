@@ -8,7 +8,7 @@ These are all the changes added for version 0.9 of the GraphQL API for WordPress
 
 The GraphQL schema mapping the WordPress data model has been significantly completed! 💪
 
-![GraphQL schema](../../images/releases/v09/graphql-schema.png)
+![GraphQL schema](../../images/releases/v09/graphql-schema.webp)
 
 Let's see what new elements have been added.
 
@@ -143,7 +143,7 @@ The custom post types that can be queried must be explicitly configured in the S
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
+![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.webp "Selecting the allowed Custom Post Types in the Settings")
 
 </div>
 
@@ -1584,7 +1584,7 @@ To configure the single endpoint, go to tab "Schema Configuration" on the Settin
 
 <div class="img-width-1024" markdown=1>
 
-![Settings for the Schema Configuration for the Single Endpoint](../../images/settings-schema-configuration-for-single-endpoint.png)
+![Settings for the Schema Configuration for the Single Endpoint](../../images/settings-schema-configuration-for-single-endpoint.webp)
 
 </div>
 
@@ -1608,7 +1608,7 @@ For instance, type `Post` was namespaced as `PoPSchema_Posts_Post`. From `v0.9`,
 
 Namespacing applies to those types added by extensions. In this image, types `Event` and `Location` have been namespaced using the `EM_` prefix:
 
-![Namespaced schema](../../images/namespaced-interactive-schema.png)
+![Namespaced schema](../../images/namespaced-interactive-schema.webp)
 
 ## Split Settings into "Default value for Schema Configuration" and "Value for the Admin"
 
@@ -1625,7 +1625,7 @@ The updated modules are:
 - Nested Mutations
 - Expose Sensitive Data in the Schema
 
-![Selecting the same field on the two possible root types](../../images/releases/v09/split-settings-into-2.png)
+![Selecting the same field on the two possible root types](../../images/releases/v09/split-settings-into-2.webp)
 
 ## Validate constraints for field and directive arguments
 
@@ -1670,7 +1670,7 @@ The Settings for Posts and Pages used the "default limit" and "max limit" values
 
 Now, they have their own:
 
-![Default and max limit options for posts in the Settings page](../../images/releases/v09/posts-settings-new-options.png)
+![Default and max limit options for posts in the Settings page](../../images/releases/v09/posts-settings-new-options.webp)
 
 ## Return an error if access is not allowed for the option name or meta key
 
@@ -1769,17 +1769,17 @@ The following ones where added:
 
 When creating a Custom Endpoint or Persisted Query, we can add a "GraphQL endpoint category" to it, to organize all of our endpoints:
 
-![Endpoint categories when editing a Custom Endpoint](../../images/graphql-custom-endpoint-editor-with-categories.png)
+![Endpoint categories when editing a Custom Endpoint](../../images/graphql-custom-endpoint-editor-with-categories.webp)
 
 For instance, we can create categories to manage endpoints by client, application, or any other required piece of information:
 
-![List of endpoint categories](../../images/graphql-endpoint-categories.png)
+![List of endpoint categories](../../images/graphql-endpoint-categories.webp)
 
 On the list of Custom Endpoints and Persisted Queries, we can visualize their categories and, clicking on any category link, or using the filter at the top, will only display all entries for that category:
 
-![List of Custom Endpoints with their categories](../../images/graphql-custom-endpoints-with-categories.png)
+![List of Custom Endpoints with their categories](../../images/graphql-custom-endpoints-with-categories.webp)
 
-![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
+![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.webp)
 
 ## Support block string characters
 
@@ -1942,7 +1942,7 @@ From `v0.9` it is not needed to modify any value on the Settings. Just clicking 
 
 The GraphQL queries in the module documentation are now prettyprinted:
 
-![Prettyprinted GraphQL queries in module docs](../../images/releases/v09/prettyprinted-code.png)
+![Prettyprinted GraphQL queries in module docs](../../images/releases/v09/prettyprinted-code.webp)
 
 ## Upgraded GraphiQL
 
@@ -1960,9 +1960,9 @@ This plugin itself benefits from this feature: the unit tests in the repo are be
 
 All the blocks shown when editing a Schema Configuration, Custom Endpoint and Persisted Query now have an "info" button which, when clicked, displays documentation on a modal window.
 
-![Clicking on an "info" button...](../../images/releases/v09/modal-window-with-module-doc-1.png)
+![Clicking on an "info" button...](../../images/releases/v09/modal-window-with-module-doc-1.webp)
 
-![...opens a modal window with documentation](../../images/releases/v09/modal-window-with-module-doc-2.png)
+![...opens a modal window with documentation](../../images/releases/v09/modal-window-with-module-doc-2.webp)
 
 ## Fixed issues
 
@@ -2075,7 +2075,7 @@ Renamed module "Schema for the Admin" to "Expose Sensitive Data in the Schema". 
 
 In addition, its block for the Schema Configuration also got renamed, so you must click on "Reset the template" on all Schema Configurations to show the block again:
 
-![Click on "Reset the template" on all Schema Configurations](../../images/releases/v09/schema-config-reset-the-template.png)
+![Click on "Reset the template" on all Schema Configurations](../../images/releases/v09/schema-config-reset-the-template.webp)
 
 ### Renamed scalar type `AnyScalar` to `AnyBuiltInScalar`
 
@@ -2254,7 +2254,7 @@ This behavior can be overridden in the Settings page:
 
 <div class="img-width-1024" markdown=1>
 
-![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.png)
+![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.webp)
 
 </div>
 
@@ -2316,7 +2316,7 @@ Those modules which had their Settings value split into 2 ("Default value for Sc
 
 In addition, the `Default Schema Configuration` option for module "Schema Configuration" has been renamed, and it must also be set again.
 
-![Must set again the value for Default Schema Configuration](../../images/releases/v09/renamed-option-set-again.png)
+![Must set again the value for Default Schema Configuration](../../images/releases/v09/renamed-option-set-again.webp)
 
 ### Must re-set options "default limit" and "max limit" for Posts and Pages
 

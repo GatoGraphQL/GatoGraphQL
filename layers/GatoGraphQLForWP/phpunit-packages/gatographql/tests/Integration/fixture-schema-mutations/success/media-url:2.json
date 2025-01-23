@@ -20,8 +20,8 @@
                 "mimeType": "image\/png",
                 "sizes": "(max-width: 364px) 100vw, 364px",
                 "slug": "browser-png",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser-3.png",
-                "title": "browser.png",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser-3.webp",
+                "title": "browser.webp",
                 "width": 364
             }
         },
@@ -42,8 +42,8 @@
                     "mimeType": "image\/png",
                     "sizes": "(max-width: 364px) 100vw, 364px",
                     "slug": "browser-png",
-                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser-4.png",
-                    "title": "browser.png",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser-4.webp",
+                    "title": "browser.webp",
                     "width": 364
                 }
             },
@@ -63,8 +63,8 @@
                     "mimeType": "image\/png",
                     "sizes": "(max-width: 364px) 100vw, 364px",
                     "slug": "browser-png",
-                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser.png",
-                    "title": "browser.png",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser.webp",
+                    "title": "browser.webp",
                     "width": 364
                 }
             }

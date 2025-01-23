@@ -44,7 +44,7 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the entries in the Schema Configuration](../../images/schema-configuration-settings-entries.png "Defining the entries in the Schema Configuration")
+![Defining the entries in the Schema Configuration](../../images/schema-configuration-settings-entries.webp "Defining the entries in the Schema Configuration")
 
 </div>
 
@@ -52,7 +52,7 @@ Otherwise, the entries defined in the "Settings" tab from the Settings will be u
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the entries in the Settings](../../images/settings-settings-entries.png "Defining the entries in the Settings")
+![Defining the entries in the Settings](../../images/settings-settings-entries.webp "Defining the entries in the Settings")
 
 </div>
 
@@ -63,7 +63,7 @@ There are 2 behaviors, "Allow access" and "Deny access":
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the access behavior](../../images/schema-configuration-settings-behavior.png "Defining the access behavior")
+![Defining the access behavior](../../images/schema-configuration-settings-behavior.webp "Defining the access behavior")
 
 </div>
 

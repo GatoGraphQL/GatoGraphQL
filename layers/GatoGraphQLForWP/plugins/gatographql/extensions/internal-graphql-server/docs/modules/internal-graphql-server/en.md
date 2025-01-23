@@ -94,7 +94,7 @@ By default, the internal GraphQL Server applies the Schema Configuration selecte
 
 <div class="img-width-1024" markdown=1>
 
-![Configuring the Internal GraphQL Server in the Settings](../../images/settings-schema-configuration-for-internal-graphql-server.png "Configuring the Internal GraphQL Server in the Settings")
+![Configuring the Internal GraphQL Server in the Settings](../../images/settings-schema-configuration-for-internal-graphql-server.webp "Configuring the Internal GraphQL Server in the Settings")
 
 </div>
 

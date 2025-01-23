@@ -17,7 +17,7 @@ Each module can define its configuration through its own block in the Schema Con
 - Set-up HTTP caching via Cache Control Lists
 - Many others
 
-![Schema Configuration](../../images/schema-configuration.png)
+![Schema Configuration](../../images/schema-configuration.webp)
 
 ## Creating a Schema Configuration
 
@@ -25,7 +25,7 @@ Clicking on the Schema Configurations link in the menu, it displays the list of 
 
 <div class="img-width-1024" markdown=1>
 
-![Schema Configurations in the admin](../../images/schema-configurations-page.png)
+![Schema Configurations in the admin](../../images/schema-configurations-page.webp)
 
 </div>
 
@@ -33,7 +33,7 @@ A schema configuration is a custom post type (CPT). To create a new schema confi
 
 <div class="img-width-1024" markdown=1>
 
-![Creating a new Schema Configuration](../../images/new-schema-configuration.png)
+![Creating a new Schema Configuration](../../images/new-schema-configuration.webp)
 
 </div>
 
@@ -57,7 +57,7 @@ Once published, the schema configuration becomes available when editing a Custom
 
 <div class="img-width-1024" markdown=1>
 
-![Selecting the Schema Configuration in the Custom Endpoint](../../images/schema-configuration-in-custom-endpoint.png)
+![Selecting the Schema Configuration in the Custom Endpoint](../../images/schema-configuration-in-custom-endpoint.webp)
 
 </div>
 
@@ -65,7 +65,7 @@ If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema
 
 <div class="img-width-1024" markdown=1>
 
-![Default Schema Configuration in the Settings](../../images/settings-default-schema-configuration-for-custom-endpoints.png)
+![Default Schema Configuration in the Settings](../../images/settings-default-schema-configuration-for-custom-endpoints.webp)
 
 </div>
 
@@ -73,7 +73,7 @@ Opening the schema configuration's permalink in the browser will show its conten
 
 <div class="img-width-1024" markdown=1>
 
-![Schema configuration's source](../../images/schema-configuration-source.png)
+![Schema configuration's source](../../images/schema-configuration-source.webp)
 
 </div>
 

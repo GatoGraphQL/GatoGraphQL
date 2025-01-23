@@ -28,13 +28,13 @@ A new "Cache Control List" Custom Post Type is added to the site. We can browse 
 
 <div class="img-width-1024" markdown=1>
 
-![Cache Control Lists](../../images/cache-control-lists.png "Cache Control Lists")
+![Cache Control Lists](../../images/cache-control-lists.webp "Cache Control Lists")
 
 </div>
 
 <div class="img-width-1024" markdown=1>
 
-![Cache Control List editor](../../images/cache-control-list.png "Cache Control List editor")
+![Cache Control List editor](../../images/cache-control-list.webp "Cache Control List editor")
 
 Every Cache Control List contains one or many entries, each of them with the following elements:
 
@@ -45,7 +45,7 @@ Every Cache Control List contains one or many entries, each of them with the fol
 
 <div class="img-width-1024" markdown=1>
 
-![Cache Control entry](../../images/cache-control-entry.png "Cache Control entry")
+![Cache Control entry](../../images/cache-control-entry.webp "Cache Control entry")
 
 </div>
 
@@ -53,7 +53,7 @@ After creating the Cache Control List, we can have the endpoint use it by editin
 
 <div class="img-width-640" markdown=1>
 
-![Selecting a Cache Control List in the Schema Configuration](../../images/schema-config-cache-control-lists.png "Selecting a Cache Control List in the Schema Configuration")
+![Selecting a Cache Control List in the Schema Configuration](../../images/schema-config-cache-control-lists.webp "Selecting a Cache Control List in the Schema Configuration")
 
 </div>
 

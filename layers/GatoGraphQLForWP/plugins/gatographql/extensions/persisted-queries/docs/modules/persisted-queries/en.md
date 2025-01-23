@@ -75,7 +75,7 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted query editor](../../images/persisted-query.png "Persisted query editor")
+![Persisted query editor](../../images/persisted-query.webp "Persisted query editor")
 
 </div>
 
@@ -87,7 +87,7 @@ The persisted query can be executed directly in the browser, since it is accesse
 
 <div class="img-width-1024" markdown=1>
 
-![Executing a persisted in the browser](../../images/persisted-query-execution.png)
+![Executing a persisted in the browser](../../images/persisted-query-execution.webp)
 
 </div>
 
@@ -97,7 +97,7 @@ Clicking on the Persisted Queries link in the menu, it displays the list of all 
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted Queries in the admin](../../images/persisted-queries-page.png)
+![Persisted Queries in the admin](../../images/persisted-queries-page.webp)
 
 </div>
 
@@ -105,7 +105,7 @@ A persisted query is a custom post type (CPT). To create a new persisted query, 
 
 <div class="img-width-1024" markdown=1>
 
-![Creating a new Persisted Query](../../images/new-persisted-query.png)
+![Creating a new Persisted Query](../../images/new-persisted-query.webp)
 
 </div>
 
@@ -121,7 +121,7 @@ When the query is ready, publish it, and its permalink becomes its endpoint. The
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted Query Endpoint Overview](../../images/persisted-query-endpoint-overview.png)
+![Persisted Query Endpoint Overview](../../images/persisted-query-endpoint-overview.webp)
 
 </div>
 
@@ -129,7 +129,7 @@ Appending `?view=source` to the permalink, it will show the persisted query and 
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted query source](../../images/persisted-query-source.png)
+![Persisted query source](../../images/persisted-query-source.webp)
 
 </div>
 
@@ -137,7 +137,7 @@ By default, the persisted query's endpoint has path `/graphql-query/`, and this 
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted query Settings](../../images/settings-persisted-queries.png)
+![Persisted query Settings](../../images/settings-persisted-queries.webp)
 
 </div>
 
@@ -149,7 +149,7 @@ So we must create a create a schema configuration, and then select it from the d
 
 <div class="img-width-630" markdown=1>
 
-![Selecting the schema configuration](../../../../../docs/images/select-schema-configuration.png)
+![Selecting the schema configuration](../../../../../docs/images/select-schema-configuration.webp)
 
 </div>
 
@@ -159,7 +159,7 @@ On the sidebar panel "Endpoint categories" we can add categories to help manage 
 
 <div class="img-width-1024" markdown=1>
 
-![Endpoint categories when editing a Persisted Query](../../images/graphql-persisted-query-editor-with-categories.png)
+![Endpoint categories when editing a Persisted Query](../../images/graphql-persisted-query-editor-with-categories.webp)
 
 </div>
 
@@ -167,7 +167,7 @@ For instance, we can create categories to manage endpoints by client, applicatio
 
 <div class="img-width-1024" markdown=1>
 
-![List of endpoint categories](../../../../../docs/images/graphql-endpoint-categories.png)
+![List of endpoint categories](../../../../../docs/images/graphql-endpoint-categories.webp)
 
 </div>
 
@@ -175,7 +175,7 @@ On the list of Persisted Queries, we can visualize their categories and, clickin
 
 <div class="img-width-1024" markdown=1>
 
-![List of Persisted Queries with their categories](../../images/graphql-persisted-queries-with-categories.png)
+![List of Persisted Queries with their categories](../../images/graphql-persisted-queries-with-categories.webp)
 
 </div>
 
@@ -187,7 +187,7 @@ For instance, we can create private Persisted Queries that help manage the appli
 
 <div class="img-width-1024" markdown=1>
 
-![Private Persisted Query](../../images/private-persisted-query.png)
+![Private Persisted Query](../../images/private-persisted-query.webp)
 
 </div>
 
@@ -197,7 +197,7 @@ If we create a Persisted Query for a specific client, we can assign a password t
 
 <div class="img-width-1024" markdown=1>
 
-![Password-protected Persisted Query](../../images/password-protected-persisted-query.png)
+![Password-protected Persisted Query](../../images/password-protected-persisted-query.webp)
 
 </div>
 
@@ -205,7 +205,7 @@ When first accessing a password-protected persisted query, we encounter a screen
 
 <div class="img-width-1024" markdown=1>
 
-![Password-protected Persisted Query: First access](../../images/password-protected-persisted-query-unauthorized.png)
+![Password-protected Persisted Query: First access](../../images/password-protected-persisted-query-unauthorized.webp)
 
 </div>
 
@@ -219,7 +219,7 @@ For instance, in this query, the number of results is controlled via variable `$
 
 <div class="img-width-1024" markdown=1>
 
-![Using variables in persisted query](../../images/new-persisted-query-variables.png)
+![Using variables in persisted query](../../images/new-persisted-query-variables.webp)
 
 </div>
 
@@ -227,7 +227,7 @@ When executing this persisted query, passing `?limit=5` will execute the query r
 
 <div class="img-width-640" markdown=1>
 
-![Overriding value for variables in persisted query](../../images/executing-persisted-query-variables.png)
+![Overriding value for variables in persisted query](../../images/executing-persisted-query-variables.webp)
 
 </div>
 

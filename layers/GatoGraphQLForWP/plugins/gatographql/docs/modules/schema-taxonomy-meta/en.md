@@ -46,7 +46,7 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the entries in the Schema Configuration](../../images/schema-configuration-taxonomy-meta-entries.png "Defining the entries in the Schema Configuration")
+![Defining the entries in the Schema Configuration](../../images/schema-configuration-taxonomy-meta-entries.webp "Defining the entries in the Schema Configuration")
 
 </div>
 
@@ -54,7 +54,7 @@ Otherwise, the entries defined in the "Taxonomy Meta" tab from the Settings will
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the entries in the Settings](../../images/settings-taxonomy-meta-entries.png "Defining the entries in the Settings")
+![Defining the entries in the Settings](../../images/settings-taxonomy-meta-entries.webp "Defining the entries in the Settings")
 
 </div>
 
@@ -65,7 +65,7 @@ There are 2 behaviors, "Allow access" and "Deny access":
 
 <div class="img-width-1024" markdown=1>
 
-![Defining the access behavior](../../images/schema-configuration-taxonomy-meta-behavior.png "Defining the access behavior")
+![Defining the access behavior](../../images/schema-configuration-taxonomy-meta-behavior.webp "Defining the access behavior")
 
 </div>
 

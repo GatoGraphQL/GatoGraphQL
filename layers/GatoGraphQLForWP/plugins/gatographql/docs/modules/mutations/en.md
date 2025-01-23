@@ -128,7 +128,7 @@ As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadU
 
 <div class="img-width-1024" markdown=1>
 
-![GraphQL schema with payload object types for mutations](../../images/mutations-using-payload-object-types.png "GraphQL schema with payload object types for mutations")
+![GraphQL schema with payload object types for mutations](../../images/mutations-using-payload-object-types.webp "GraphQL schema with payload object types for mutations")
 
 </div>
 
@@ -280,7 +280,7 @@ Because there are no additional types added, the GraphQL schema will look leaner
 
 <div class="img-width-1024" markdown=1>
 
-![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
+![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.webp "GraphQL schema without payload object types for mutations")
 
 </div>
 
@@ -296,7 +296,7 @@ Using payload object types for mutations in the schema can be configured as foll
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-![Defining if and how to use payload object types for mutations, set in the Schema configuration](../../images/schema-configuration-payload-object-types-for-mutations.png "Defining if and how to use payload object types for mutations, set in the Schema configuration")
+![Defining if and how to use payload object types for mutations, set in the Schema configuration](../../images/schema-configuration-payload-object-types-for-mutations.webp "Defining if and how to use payload object types for mutations, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
@@ -304,6 +304,6 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 <div class="img-width-1024" markdown=1>
 
-![Defining if and how to use payload object types for mutations, in the Settings](../../images/settings-payload-object-types-for-mutations-default.png "Defining if and how to use payload object types for mutations, in the Settings")
+![Defining if and how to use payload object types for mutations, in the Settings](../../images/settings-payload-object-types-for-mutations-default.webp "Defining if and how to use payload object types for mutations, in the Settings")
 
 </div>
