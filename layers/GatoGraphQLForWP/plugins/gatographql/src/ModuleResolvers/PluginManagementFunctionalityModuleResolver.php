@@ -165,13 +165,13 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
                         sprintf(
-                            \__('Enter the license keys for the products purchased on the %s, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
+                            \__('Enter the license keys for the products purchased on the %s, and click on <strong>Activate licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
                             $this->getGatoGraphQLShopName()
                         ),
                         $this->getCollapsible(
                             sprintf(
                                 '%s%s',
-                                \__('When clicking on <strong>Activate Licenses (or Deactivate/Validate)</strong>, one of the following actions will take place:'),
+                                \__('When clicking on <strong>Activate licenses (or Deactivate/Validate)</strong>, one of the following actions will take place:'),
                                 sprintf(
                                     $ulPlaceholder,
                                     implode(
@@ -202,7 +202,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $activateExtensionsButtonsHTML = '';
                 if (function_exists('get_submit_button')) {
                     $activateExtensionsButtonsHTML = get_submit_button(
-                        \__('Activate Licenses (or Deactivate/Validate)', 'gatographql'),
+                        \__('Activate licenses (or Deactivate/Validate)', 'gatographql'),
                         'primary',
                         $activateButtonName,
                         false

@@ -38,6 +38,6 @@ class PluginManagementFunctionalityModuleResolver extends UpstreamPluginManageme
 
     protected function getActivateExtensionLicensesTitle(): string
     {
-        return \__('Activate Licenses', 'gatographql');
+        return \__('Activate licenses', 'gatographql');
     }
 }
