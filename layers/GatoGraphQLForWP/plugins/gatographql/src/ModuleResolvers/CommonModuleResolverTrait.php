@@ -85,7 +85,7 @@ trait CommonModuleResolverTrait
         string $url,
         string $title
     ): string {
-        $helpLabelPlaceholder = '<a href="%1$s" title="' . \__('\'%2$s\' on gatographql.com', 'gatographql') . '" target="_blank">' . \__('Help', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
+        $helpLabelPlaceholder = '<a href="%1$s" title="' . \__('\'%2$s\' on the website', 'gatographql') . '" target="_blank">' . \__('Help', 'gatographql') . HTMLCodes::OPEN_IN_NEW_WINDOW . '</a>';
         return sprintf(
             $helpLabelPlaceholder,
             $url,
