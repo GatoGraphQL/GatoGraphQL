@@ -32,7 +32,7 @@ Module `GraphiQL for Custom Endpoints` must be enabled.
 
 <div class="img-width-1024" markdown=1>
 
-![Custom endpoint's GraphiQL client](../../images/custom-endpoint-graphiql.webp "Custom endpoint's GraphiQL client")
+![Custom endpoint's GraphiQL client](../../images/custom-endpoint-graphiql.png "Custom endpoint's GraphiQL client")
 
 </div>
 
@@ -68,7 +68,7 @@ When the custom endpoint is ready, publish it, and its permalink becomes its end
 
 <div class="img-width-1024" markdown=1>
 
-![Custom Endpoint Overview](../../images/custom-endpoint-overview.webp)
+![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
 
 </div>
 
@@ -128,7 +128,7 @@ On the list of Custom Endpoints, we can visualize their categories and, clicking
 
 <div class="img-width-1024" markdown=1>
 
-![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.webp)
+![Filtering Custom Endpoints by category](../../images/graphql-custom-endpoints-filtering-by-category.png)
 
 </div>
 

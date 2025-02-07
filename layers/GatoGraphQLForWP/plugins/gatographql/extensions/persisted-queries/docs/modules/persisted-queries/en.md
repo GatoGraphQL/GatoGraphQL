@@ -75,7 +75,7 @@ Hence, we obtain multiple endpoints with predefined data, as in REST, but these 
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted query editor](../../images/persisted-query.webp "Persisted query editor")
+![Persisted query editor](../../images/persisted-query.png "Persisted query editor")
 
 </div>
 
@@ -87,7 +87,7 @@ The persisted query can be executed directly in the browser, since it is accesse
 
 <div class="img-width-1024" markdown=1>
 
-![Executing a persisted in the browser](../../images/persisted-query-execution.webp)
+![Executing a persisted in the browser](../../images/persisted-query-execution.png)
 
 </div>
 
@@ -121,7 +121,7 @@ When the query is ready, publish it, and its permalink becomes its endpoint. The
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted Query Endpoint Overview](../../images/persisted-query-endpoint-overview.webp)
+![Persisted Query Endpoint Overview](../../images/persisted-query-endpoint-overview.png)
 
 </div>
 
