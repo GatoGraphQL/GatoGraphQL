@@ -35,7 +35,7 @@ After creating the Field Deprecation List, we can have the Custom Endpoint and P
 
 <div class="img-width-610" markdown=1>
 
-![Selecting a Field Deprecation List in the Schema Configuration](../../images/schema-config-field-deprecation-lists.webp "Selecting a Field Deprecation List in the Schema Configuration")
+![Selecting a Field Deprecation List in the Schema Configuration](../../images/schema-config-field-deprecation-lists.png "Selecting a Field Deprecation List in the Schema Configuration")
 
 </div>
 

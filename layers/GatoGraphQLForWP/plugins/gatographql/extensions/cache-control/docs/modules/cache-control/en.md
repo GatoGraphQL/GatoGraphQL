@@ -53,7 +53,7 @@ After creating the Cache Control List, we can have the endpoint use it by editin
 
 <div class="img-width-640" markdown=1>
 
-![Selecting a Cache Control List in the Schema Configuration](../../images/schema-config-cache-control-lists.webp "Selecting a Cache Control List in the Schema Configuration")
+![Selecting a Cache Control List in the Schema Configuration](../../images/schema-config-cache-control-lists.png "Selecting a Cache Control List in the Schema Configuration")
 
 </div>
 

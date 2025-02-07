@@ -53,7 +53,7 @@ These values are overridden by the "dynamic" GraphQL variables (see **Automation
 
 <div class="img-width-392" markdown=1>
 
-![Automation Rule - Persisted Query Execution](../../images/automation-mapping-persisted-query-execution.webp "Automation Rule - Persisted Query Execution")
+![Automation Rule - Persisted Query Execution](../../images/automation-mapping-persisted-query-execution.png "Automation Rule - Persisted Query Execution")
 
 </div>
 

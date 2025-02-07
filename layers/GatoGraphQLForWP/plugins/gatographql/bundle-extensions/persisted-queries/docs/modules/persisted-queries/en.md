@@ -22,7 +22,7 @@ Persisted queries are normal GraphQL queries, however they are stored in the ser
 
 <div class="img-width-1024" markdown=1>
 
-![Persisted query editor](../../../../../extensions/persisted-queries/docs/images/persisted-query.webp "Persisted query editor")
+![Persisted query editor](../../../../../extensions/persisted-queries/docs/images/persisted-query.png "Persisted query editor")
 
 </div>
 
@@ -32,7 +32,7 @@ The persisted query can be executed via the GraphiQL client, or also directly in
 
 <div class="img-width-1024" markdown=1>
 
-![Executing a persisted in the browser](../../../../../extensions/persisted-queries/docs/images/persisted-query-execution.webp)
+![Executing a persisted in the browser](../../../../../extensions/persisted-queries/docs/images/persisted-query-execution.png)
 
 </div>
 

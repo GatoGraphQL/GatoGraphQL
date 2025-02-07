@@ -12,7 +12,7 @@ The Interactive schema client can be opened when editing the Custom Endpoint, un
 
 <div class="img-width-1024" markdown=1>
 
-![Custom endpoint's link to the GraphiQL client in the editor](../../images/custom-endpoint-overview-interactive-schema.webp "Custom endpoint's link to the GraphiQL client in the editor")
+![Custom endpoint's link to the GraphiQL client in the editor](../../images/custom-endpoint-overview-interactive-schema.png "Custom endpoint's link to the GraphiQL client in the editor")
 
 </div>
 
