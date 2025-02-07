@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 10.3.0 - DATE
+
+### Improvements
+
+- Use the smaller images between PNG and WEBP (#3031)
+
 ## 10.2.0 - 07/02/2025
 
 ### Added
