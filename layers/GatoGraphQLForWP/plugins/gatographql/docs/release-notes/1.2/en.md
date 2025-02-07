@@ -71,7 +71,7 @@ For instance, after translating this post from English to Chinese:
 
 <div class="img-width-1024" markdown=1>
 
-![Created posts from CSV](../../images/releases/v1.2/post-before-translation.webp)
+![Created posts from CSV](../../images/releases/v1.2/post-before-translation.png)
 
 </div>
 
@@ -79,7 +79,7 @@ For instance, after translating this post from English to Chinese:
 
 <div class="img-width-1024" markdown=1>
 
-![Created posts from CSV](../../images/releases/v1.2/post-after-translation.webp)
+![Created posts from CSV](../../images/releases/v1.2/post-after-translation.png)
 
 </div>
 
@@ -165,7 +165,7 @@ After executing the query, we get the results:
 
 <div class="img-width-1024" markdown=1>
 
-![Created posts from CSV](../../images/releases/v1.2/import-posts-from-csv.webp)
+![Created posts from CSV](../../images/releases/v1.2/import-posts-from-csv.png)
 
 </div>
 
