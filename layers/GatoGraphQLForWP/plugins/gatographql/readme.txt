@@ -200,6 +200,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 10.3.0 =
+* Use the smaller images between PNG and WEBP (#3031)
+
 = 10.2.0 =
 * Added documentation for new field `_generateRandomString` in the Helper Function Collection extension (#3027)
 * Plugin updates: Use the same icon as the Gato GraphQL plugin for the extensions (#3022)
