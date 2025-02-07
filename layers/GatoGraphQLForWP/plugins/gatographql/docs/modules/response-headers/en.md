@@ -25,7 +25,7 @@ Access-Control-Allow-Headers: content-type,content-length,accept
 
 <div class="img-width-610" markdown=1>
 
-![Providing Response Headers in the Schema Configuration](../../images/schema-configuration-response-headers.webp "Providing Response Headers in the Schema Configuration")
+![Providing Response Headers in the Schema Configuration](../../images/schema-configuration-response-headers.png "Providing Response Headers in the Schema Configuration")
 
 </div>
 

@@ -117,7 +117,7 @@ A "Mutation Scheme" section has been added to a Schema Configuration, allowing t
 
 <div class="img-width-620" markdown=1>
 
-![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.webp)
+![Mutation scheme in the schema configuration](../../images/schema-configuration-mutation-scheme.png)
 
 </div>
 

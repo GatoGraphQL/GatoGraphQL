@@ -296,7 +296,7 @@ Using payload object types for mutations in the schema can be configured as foll
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-![Defining if and how to use payload object types for mutations, set in the Schema configuration](../../images/schema-configuration-payload-object-types-for-mutations.webp "Defining if and how to use payload object types for mutations, set in the Schema configuration")
+![Defining if and how to use payload object types for mutations, set in the Schema configuration](../../images/schema-configuration-payload-object-types-for-mutations.png "Defining if and how to use payload object types for mutations, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
