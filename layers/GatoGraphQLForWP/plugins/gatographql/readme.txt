@@ -74,6 +74,16 @@ The available premium extensions are:
 
 [Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, DeepL, and Google Translate.
 
+== Built with Gato GraphQL ==
+
+All the plugins by [Gato Plugins](https://gatoplugins.com) use Gato GraphQL under the hook.
+
+You can use Gato GraphQL to do everything offered by Gato Plugins!
+
+The plugins are:
+
+[Gato Multilingual for Polylang](https://gatoplugins.com/plugins/multilingual-polylang): Automatically translate your content.
+
 == Frequently Asked Questions ==
 
 = Does the plugin provide documentation? =
