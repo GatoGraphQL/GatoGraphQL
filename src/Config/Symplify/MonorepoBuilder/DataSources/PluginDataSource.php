@@ -40,6 +40,7 @@ class PluginDataSource
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
                 ]),
+                'dist_enabled' => false,
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-dist',
                 'additional_rector_before_configs' => [
@@ -78,6 +79,7 @@ class PluginDataSource
                 'exclude_files' => implode(' ', [
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                 ]),
+                'dist_enabled' => false,
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-testing-schema-dist',
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/plugins/testing-schema/rector.php',
@@ -88,6 +90,7 @@ class PluginDataSource
                 'path' => 'layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing',
                 'plugin_slug' => 'gatographql-testing',
                 'main_file' => 'gatographql-testing.php',
+                'dist_enabled' => false,
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-testing-dist',
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/phpunit-plugins/testing/rector.php',
