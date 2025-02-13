@@ -102,6 +102,7 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['dist_repo_branch'] ??= 'main';
 
             // If not provided, the "Publish to DIST repo" will not be executed
+            $entryConfig['dist_enabled'] ??= false;
             $entryConfig['dist_repo_organization'] ??= '';
             $entryConfig['dist_repo_name'] ??= '';
 
