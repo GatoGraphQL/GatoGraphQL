@@ -211,6 +211,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 10.3.0 =
+* Updated documentation for the **Response Error Trigger** module, adding the new `_warn` field and `@warn` directive (#3034)
 * Use the smaller images between PNG and WEBP (#3031)
 
 = 10.2.0 =
