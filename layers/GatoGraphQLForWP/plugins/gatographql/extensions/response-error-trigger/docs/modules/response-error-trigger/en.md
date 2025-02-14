@@ -4,7 +4,11 @@ Explicitly add an error entry to the response to trigger the failure of the Grap
 
 ## Description
 
-This module adds global field `_fail` and directive `@fail` to the GraphQL schema, which add an entry to the `errors` property in the response.
+This module adds fields and directives to explicitly trigger errors, and add warnings, to be added to the GraphQL response.
+
+### Errors
+
+Global field `_fail` and directive `@fail`, which add an entry to the `errors` property in the response, are added to the GraphQL schema.
 
 Field `_fail` adds the error always, and directive `@fail` whenever the field value meets the condition under argument `condition` (as one of enum values `IS_NULL`, `IS_EMPTY` or `ALWAYS`; by default it is `IS_NULL`):
 
@@ -63,6 +67,32 @@ if (maybeErrorMessage) {
   // ...
 }
 ```
+
+### Warnings
+
+Global field `_warn` and directive `@warn`, which add an entry to the `warnings` property in the response, are added to the GraphQL schema:
+
+```graphql
+query {
+  _warn(message: "Some warning")
+  
+  posts {
+    id
+    featuredImage {
+      id
+      src
+    }
+    doesNotHaveFeaturedImage: _isNull(value: $__featuredImage)
+      @passOnwards(as: "doesNotHaveFeaturedImage")
+      @if(condition: $doesNotHaveFeaturedImage)
+        @warn(message: "The post does not have a featured image")
+  }
+}
+```
+
+Both of them can also receive argument `data`, to provide contextual information in the warning response.
+
+These schema elements are useful to indicate that, even though the query executed successfully, some condition was not expected.
 
 ## Examples
 

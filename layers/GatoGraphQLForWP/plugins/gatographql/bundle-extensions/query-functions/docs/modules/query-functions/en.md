@@ -242,7 +242,7 @@ query {
 
 ---
 
-With **Response Error Trigger**, global field `_fail` and directive `@fail` are added to the GraphQL schema, to explicitly add an entry to the `errors` property in the response.
+With **Response Error Trigger**, global field `_fail` and directive `@fail` are added to the GraphQL schema, to explicitly add an entry to the `errors` property in the response, and global field `_warn` and directive `@warn`, to add an entry to the `warnings` property in the response.
 
 Field `_fail` adds the error always, and directive `@fail` whenever the condition under argument `condition` is met:
 
