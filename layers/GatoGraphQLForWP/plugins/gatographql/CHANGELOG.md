@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 10.3.0 - DATE
 
+### Added
+
+- Updated documentation for the **Response Error Trigger** module, adding the new `_warn` field and `@warn` directive (#3034)
+
 ### Improvements
 
 - Use the smaller images between PNG and WEBP (#3031)
