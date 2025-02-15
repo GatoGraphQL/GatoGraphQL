@@ -40,7 +40,7 @@ class PluginDataSource
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
                 ]),
-                'dist_enabled' => false,
+                'dist_enabled' => true,
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-dist',
                 'additional_rector_before_configs' => [
