@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 10.3.1 - 15/02/2025
+
+### Fixed
+
+- Deploy plugin to wp.org (#bb5414d)
+
 ## 10.3.0 - 14/02/2025
 
 ### Added
