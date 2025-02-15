@@ -304,7 +304,7 @@ jobs:
 
             -   id: previous_tag
                 uses: WyriHaximus/github-action-get-previous-tag@master
-                if: ${{ matrix.pluginConfig.include_folders_for_dist_repo != '' && github.event_name == 'release' && matrix.pluginConfig.dist_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
+                if: ${{ github.event_name == 'release' && matrix.pluginConfig.dist_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
 
             -   name: Include (previously excluded) folders for DIST repo
                 run: sudo rsync -av ${{ matrix.pluginConfig.include_folders_for_dist_repo }} $GITHUB_WORKSPACE/build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }} --quiet
