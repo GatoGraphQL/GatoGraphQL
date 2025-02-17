@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
-// use DateTimeInterface;
-// use PoPSchema\SchemaCommons\Polyfill\PHP72\DateTimeInterface as PolyfillDateTimeInterface;
 // use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 // use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
@@ -48,15 +46,6 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
             // DowngradeLevelSetList::DOWN_TO_PHP_74,
             DowngradeLevelSetList::DOWN_TO_PHP_73,
         ]);
-
-        /**
-         * @todo Uncomment this code
-         * Currently it doesn't work, maybe because `RenameClassConstFetchRector`
-         * doesn't handle interfaces, so it doesn't replace `DateTimeInterface`
-         * Solution: Create a similar rule
-         */
-        // // Must also replace DateTimeInterface::ATOM for PHP 7.2
-        // $this->rectorConfig->ruleWithConfiguration(RenameClassConstFetchRector::class, [new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
         $this->rectorConfig->phpVersion(PhpVersion::PHP_74);
