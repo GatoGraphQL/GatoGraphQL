@@ -278,6 +278,13 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 $customPostData['date'] = $dateTime->format(DateTimeInterface::ATOM);
             }
         }
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::GMT_DATE)) {
+            /** @var DateTime|null */
+            $gmtDateTime = $fieldDataAccessor->getValue(MutationInputProperties::GMT_DATE);
+            if ($gmtDateTime !== null) {
+                $customPostData['gmtDate'] = $gmtDateTime->format(DateTimeInterface::ATOM);
+            }
+        }
 
         // Inject author, categories, tags, featured image, etc
         return App::applyFilters(

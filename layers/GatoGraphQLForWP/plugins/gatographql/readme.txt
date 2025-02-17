@@ -213,7 +213,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 10.4.0 =
 * Added password input on Settings (#3035)
 * Added `date` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3036)
-* Removed stale polyfill interface `DateTimeInterface` (for PHP 7.2)
+* Added `gmtDate` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3038)
+* Removed stale polyfill interface `DateTimeInterface` (for PHP 7.2) (#3037)
 
 = 10.3.0 =
 * Updated documentation for the **Response Error Trigger** module, adding the new `_warn` field and `@warn` directive (#3034)

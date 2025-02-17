@@ -88,6 +88,7 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
                 MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
                 MutationInputProperties::DATE => $this->getDateTimeScalarTypeResolver(),
+                MutationInputProperties::GMT_DATE => $this->getDateTimeScalarTypeResolver(),
             ]
         );
     }
@@ -109,6 +110,7 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
             MutationInputProperties::SLUG => $this->__('The slug of the custom post', 'custompost-mutations'),
             MutationInputProperties::STATUS => $this->__('The status of the custom post', 'custompost-mutations'),
             MutationInputProperties::DATE => $this->__('The date of the custom post', 'custompost-mutations'),
+            MutationInputProperties::GMT_DATE => $this->__('The date in GMT of the custom post', 'custompost-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -14,6 +14,7 @@ class MutationInputProperties
     public final const STATUS = 'status';
     public final const CUSTOMPOST_TYPE = 'customPostType';
     public final const DATE = 'date';
+    public final const GMT_DATE = 'gmtDate';
 
     public final const HTML = 'html';
 }
