@@ -10,10 +10,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added password input on Settings (#3035)
 - Added `date` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3036)
+- Added `gmtDate` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3038)
 
 ### Improvements
 
-- Removed stale polyfill interface `DateTimeInterface` (for PHP 7.2)
+- Removed stale polyfill interface `DateTimeInterface` (for PHP 7.2) (#3037)
 
 ## 10.3.1 - 15/02/2025
 
