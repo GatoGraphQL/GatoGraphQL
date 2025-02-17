@@ -61,6 +61,10 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
             $query['post_type'] = $query['custompost-type'];
             unset($query['custompost-type']);
         }
+        if (isset($query['date'])) {
+            $query['post_date'] = $query['date'];
+            unset($query['date']);
+        }
 
         return App::applyFilters(
             self::HOOK_QUERY,
