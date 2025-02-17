@@ -63,6 +63,8 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
         }
         if (isset($query['date'])) {
             $query['post_date'] = $query['date'];
+            // Also store the date for `draft` status
+            $query['edit_date'] = true;
             unset($query['date']);
         }
 
