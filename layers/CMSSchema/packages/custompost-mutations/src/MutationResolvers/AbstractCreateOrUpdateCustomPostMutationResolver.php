@@ -272,9 +272,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $customPostData['custompost-type'] = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE);
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::DATE)) {
-            /** @var DateTime */
+            /** @var DateTime|null */
             $dateTime = $fieldDataAccessor->getValue(MutationInputProperties::DATE);
-            $customPostData['date'] = $dateTime->format(DateTimeInterface::ATOM);
+            if ($dateTime !== null) {
+                $customPostData['date'] = $dateTime->format(DateTimeInterface::ATOM);
+            }
         }
 
         // Inject author, categories, tags, featured image, etc
