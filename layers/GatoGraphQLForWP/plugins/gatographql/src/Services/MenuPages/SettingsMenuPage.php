@@ -847,6 +847,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         if ($isNumber) {
             $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
         }
+        $isPassword = ($itemSetting[Properties::TYPE] ?? null) === Properties::TYPE_STRING && ($itemSetting[Properties::SUBTYPE] ?? null) === Properties::TYPE_PASSWORD;
         $useTextarea = $itemSetting[Properties::USE_TEXTAREA] ?? false;
         ?>
             <label for="<?php echo esc_attr($name); ?>">
@@ -873,6 +874,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                             <?php if ($minNumber !== null) { ?>
                                 min="<?php echo esc_attr($minNumber) ?>"
                             <?php } ?>
+                        <?php } elseif ($isPassword) { ?>
+                            type="password"
                         <?php } else { ?>
                             type="text"
                         <?php } ?>

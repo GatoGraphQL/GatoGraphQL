@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 10.4.0 - DATE
 
+### Added
+
+- Added password input on Settings (#3035)
+
 ## 10.3.1 - 15/02/2025
 
 ### Fixed
