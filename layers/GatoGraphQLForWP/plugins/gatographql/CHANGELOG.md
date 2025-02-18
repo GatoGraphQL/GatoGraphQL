@@ -11,6 +11,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added password input on Settings (#3035)
 - Added `date` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3036)
 - Added `gmtDate` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3038)
+- Updated **Translation** extension docs with **Claude** as translation provider (#3039)
 
 ### Improvements
 

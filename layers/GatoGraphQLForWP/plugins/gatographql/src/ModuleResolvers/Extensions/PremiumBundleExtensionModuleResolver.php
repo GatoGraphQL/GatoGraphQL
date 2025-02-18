@@ -54,7 +54,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
-            self::TRANSLATION => \__('Translate content to multiple languages using the service provider of your choice, among ChatGPT, DeepL, and Google Translate.', 'gatographql'),
+            self::TRANSLATION => \__('Translate content to multiple languages using the service provider of your choice, among ChatGPT, Claude, DeepL, and Google Translate.', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -98,6 +98,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             ],
             self::TRANSLATION => [
                 PremiumExtensionModuleResolver::CHATGPT_TRANSLATION,
+                PremiumExtensionModuleResolver::CLAUDE_TRANSLATION,
                 PremiumExtensionModuleResolver::DEEPL,
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
                 PremiumExtensionModuleResolver::TRANSLATION,

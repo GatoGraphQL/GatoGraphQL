@@ -72,7 +72,7 @@ The available premium extensions are:
 
 [Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
 
-[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, DeepL, and Google Translate.
+[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, DeepL, and Google Translate.
 
 == Built with Gato GraphQL ==
 
@@ -214,6 +214,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added password input on Settings (#3035)
 * Added `date` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3036)
 * Added `gmtDate` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3038)
+* Updated **Translation** extension docs with **Claude** as translation provider (#3039)
 * Removed stale polyfill interface `DateTimeInterface` (for PHP 7.2) (#3037)
 
 = 10.3.0 =
