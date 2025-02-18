@@ -16,13 +16,13 @@ For instance, this query translates the post's `title` and `content` fields from
     title @strTranslate(
       from: "en",
       to: "fr",
-      provider: chatgpt
+      provider: claude
     )
     
     content @strTranslate(
       from: "en",
       to: "fr",
-      provider: chatgpt
+      provider: claude
     )
   }
 }
