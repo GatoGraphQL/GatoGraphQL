@@ -2,7 +2,7 @@
 /*
 Plugin Name: Gato GraphQL - PHPUnit & Testing Utilities
 Description: Utilities for testing Gato GraphQL
-Version: 10.4.0
+Version: 10.5.0-dev
 Requires at least: 6.1
 Requires PHP: 8.1
 Author: Gato GraphQL
