@@ -912,6 +912,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
+        $type = $itemSetting[Properties::TYPE] ?? null;
+        $isBool = $type === Properties::TYPE_BOOL;
+        $isMultipleBool = empty($possibleValues) && $isBool;
         foreach ($keyLabels as $key => $label) {
             $id = $name . '_' . $key;
             if ($addSpacing) {
@@ -920,43 +923,52 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 <?php
             }
             ?>
-            <label for="<?php echo esc_attr($id) ?>">
+            <label for="<?php echo esc_attr($id) ?>"  <?php if ($isMultipleBool): ?>style="cursor: pointer;"<?php endif; ?>>
+                <?php
+                if ($isMultipleBool) {
+                    ?>
+                    <input type="checkbox" name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>" id="<?php echo esc_attr($id); ?>" value="1" <?php checked(true, esc_html($value[$key] ?? false)); ?> />
+                    <?php
+                }
+                ?>
                 <strong><?php echo esc_html($label); ?></strong>
                 <br/>
                 <?php
-                if (empty($possibleValues)) {
-                    ?>
-                    <input
-                        name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
-                        id="<?php echo esc_attr($id) ?>"
-                        class="regular-text"
-                        value="<?php echo esc_html($value[$key] ?? '') ?>"
-                        type="text"
-                    >
-                    <?php
-                } else {
-                    ?>
-                    <select
-                        name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']' . ($isMultiple ? '[]' : '')); ?>"
-                        id="<?php echo esc_attr($id) ?>"
-                        class="regular-text"
-                    <?php if ($isMultiple) : ?>
-                            multiple="multiple"
-                            size="10"
-                    <?php endif; ?>
-                    >
-                    <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
-                            <option
-                                value="<?php echo esc_attr($optionValue) ?>"
-                                <?php if ($optionValue === ($value[$key] ?? '')) : ?>
-                                    selected="selected"
-                                <?php endif; ?>
-                            >
-                                <?php echo esc_html($optionLabel) ?>
-                            </option>
-                    <?php endforeach ?>
-                    </select>
-                    <?php
+                if (!$isMultipleBool) {
+                    if (empty($possibleValues)) {
+                        ?>
+                        <input
+                            name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>"
+                            id="<?php echo esc_attr($id) ?>"
+                            class="regular-text"
+                            value="<?php echo esc_html($value[$key] ?? '') ?>"
+                            type="text"
+                        >
+                        <?php
+                    } else {
+                        ?>
+                        <select
+                            name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']' . ($isMultiple ? '[]' : '')); ?>"
+                            id="<?php echo esc_attr($id) ?>"
+                            class="regular-text"
+                        <?php if ($isMultiple) : ?>
+                                multiple="multiple"
+                                size="10"
+                        <?php endif; ?>
+                        >
+                        <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
+                                <option
+                                    value="<?php echo esc_attr($optionValue) ?>"
+                                    <?php if ($optionValue === ($value[$key] ?? '')) : ?>
+                                        selected="selected"
+                                    <?php endif; ?>
+                                >
+                                    <?php echo esc_html($optionLabel) ?>
+                                </option>
+                        <?php endforeach ?>
+                        </select>
+                        <?php
+                    }
                 }
                 ?>
             </label>
