@@ -334,7 +334,7 @@ class ExtensionManager extends AbstractPluginManager
      * validate that the license key belongs to the right extension.
      *
      * @param string $extensionProductName The EXACT name as the product is stored in the Gato Shop (i.e. in the Marketplace Provider's system)
-     * @param array<{changelogURL?:string}> $options
+     * @param array<string,mixed> $options
      */
     public function assertCommercialLicenseHasBeenActivated(
         string $extensionFile,
