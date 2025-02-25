@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Enable multiple checkbox options in Settings (#3040)
 
+### Fixed
+
+- If the GMT date is stored as `"0000-00-00 00:00:00"`, then use the non-GMT date (#3041)
+
 ## 10.4.0 - 18/02/2025
 
 ### Added

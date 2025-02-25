@@ -212,6 +212,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 10.5.0 =
 * Enable multiple checkbox options in Settings (#3040)
+* Fixed: If the GMT date is stored as `"0000-00-00 00:00:00"`, then use the non-GMT date (#3041)
 
 = 10.4.0 =
 * Added password input on Settings (#3035)
