@@ -922,7 +922,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 <?php
             }
             ?>
-            <label for="<?php echo esc_attr($id) ?>"  <?php if ($isMultipleBool): ?>style="cursor: pointer;"<?php endif; ?>>
+            <label for="<?php echo esc_attr($id) ?>"  <?php if ($isMultipleBool) :
+                ?>style="cursor: pointer;"<?php
+                        endif; ?>>
                 <?php
                 if ($isMultipleBool) {
                     ?>
