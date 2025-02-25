@@ -339,7 +339,7 @@ class ExtensionManager extends AbstractPluginManager
         string $extensionProductName,
         string $extensionName,
         string $extensionVersion,
-        string $extensionURL = '',
+        string $extensionChangelogURL = '',
     ): bool {
         $extensionBaseName = plugin_basename($extensionFile);
         $extensionSlug = dirname($extensionBaseName);
@@ -350,7 +350,7 @@ class ExtensionManager extends AbstractPluginManager
             $extensionSlug,
             $extensionBaseName,
             $extensionVersion,
-            $extensionURL,
+            $extensionChangelogURL,
         );
 
         /**

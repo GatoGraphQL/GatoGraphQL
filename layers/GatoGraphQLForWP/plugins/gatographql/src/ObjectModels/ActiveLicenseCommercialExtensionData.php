@@ -12,7 +12,7 @@ class ActiveLicenseCommercialExtensionData
         public readonly string $slug,
         public readonly string $baseName,
         public readonly string $version,
-        public readonly string $url,
+        public readonly string $changelogURL,
     ) {
     }
 }
