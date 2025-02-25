@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 10.5.0 - DATE
 
+### Improvements
+
+- Enable multiple checkbox options in Settings (#3040)
+
 ## 10.4.0 - 18/02/2025
 
 ### Added
