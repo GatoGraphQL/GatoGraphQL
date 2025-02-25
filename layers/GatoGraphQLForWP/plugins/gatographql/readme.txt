@@ -210,6 +210,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 10.5.0 =
+* Enable multiple checkbox options in Settings (#3040)
+
 = 10.4.0 =
 * Added password input on Settings (#3035)
 * Added `date` input on custom post mutations (`createPost`, `updatePost`, `createCustomPost`, and `updateCustomPost`) (#3036)
