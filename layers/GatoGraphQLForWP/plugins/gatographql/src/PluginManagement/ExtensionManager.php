@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
+use GatoGraphQL\GatoGraphQL\Constants\ExtensionDataOptions;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
@@ -333,12 +334,14 @@ class ExtensionManager extends AbstractPluginManager
      * validate that the license key belongs to the right extension.
      *
      * @param string $extensionProductName The EXACT name as the product is stored in the Gato Shop (i.e. in the Marketplace Provider's system)
+     * @param array<string,mixed> $options
      */
     public function assertCommercialLicenseHasBeenActivated(
         string $extensionFile,
         string $extensionProductName,
         string $extensionName,
         string $extensionVersion,
+        array $options = [],
     ): bool {
         $extensionBaseName = plugin_basename($extensionFile);
         $extensionSlug = dirname($extensionBaseName);
@@ -349,6 +352,7 @@ class ExtensionManager extends AbstractPluginManager
             $extensionSlug,
             $extensionBaseName,
             $extensionVersion,
+            $options[ExtensionDataOptions::CHANGELOG_URL] ?? '',
         );
 
         /**
