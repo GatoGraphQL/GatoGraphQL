@@ -342,6 +342,7 @@ class ExtensionManager extends AbstractPluginManager
     ): bool {
         $extensionBaseName = plugin_basename($extensionFile);
         $extensionSlug = dirname($extensionBaseName);
+        $extensionURL = '';
 
         $extensionData = new ActiveLicenseCommercialExtensionData(
             $extensionProductName,
@@ -349,6 +350,7 @@ class ExtensionManager extends AbstractPluginManager
             $extensionSlug,
             $extensionBaseName,
             $extensionVersion,
+            $extensionURL,
         );
 
         /**
