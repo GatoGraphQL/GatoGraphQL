@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
+use GatoGraphQL\GatoGraphQL\Constants\ExtensionDataOptions;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
@@ -21,8 +22,8 @@ use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use function plugin_basename;
 
 class ExtensionManager extends AbstractPluginManager
@@ -351,7 +352,7 @@ class ExtensionManager extends AbstractPluginManager
             $extensionSlug,
             $extensionBaseName,
             $extensionVersion,
-            $options['changelogURL'] ?? '',
+            $options[ExtensionDataOptions::CHANGELOG_URL] ?? '',
         );
 
         /**
