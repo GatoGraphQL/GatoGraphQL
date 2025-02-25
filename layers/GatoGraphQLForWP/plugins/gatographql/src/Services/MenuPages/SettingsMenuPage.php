@@ -912,9 +912,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
-        $type = $itemSetting[Properties::TYPE] ?? null;
-        $isBool = $type === Properties::TYPE_BOOL;
-        $isMultipleBool = empty($possibleValues) && $isBool;
+        $subtype = $itemSetting[Properties::SUBTYPE] ?? null;
+        $isMultipleBool = empty($possibleValues) && $subtype === Properties::TYPE_BOOL;
         foreach ($keyLabels as $key => $label) {
             $id = $name . '_' . $key;
             if ($addSpacing) {
