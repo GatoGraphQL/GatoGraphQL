@@ -194,7 +194,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 // 'slug'          => $pluginData->pluginSlug,
                 'plugin'        => $pluginData->pluginBaseName,
                 'new_version'   => $pluginData->pluginVersion,
-                'url'           => '',
+                'url'           => $pluginData->pluginURL,
                 'package'       => '',
                 'icons'         => [
                     // For each extension, use the same icon as the Gato GraphQL plugin
