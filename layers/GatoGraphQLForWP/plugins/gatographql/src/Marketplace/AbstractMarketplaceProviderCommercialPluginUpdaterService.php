@@ -191,7 +191,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                  * will have link "View details", which produces an error,
                  * instead of the expected "Visit plugin site"
                  */
-                // 'slug'          => $pluginData->pluginSlug,
+                'slug'          => '',//$pluginData->pluginSlug,
                 'plugin'        => $pluginData->pluginBaseName,
                 'new_version'   => $pluginData->pluginVersion,
                 'url'           => $pluginData->pluginChangelogURL,
