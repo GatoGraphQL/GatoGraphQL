@@ -15,7 +15,7 @@
     "require": {
         "php": "^8.1",
         "ext-mbstring": "*",
-        "pop-backbone/php-hooks": "^10.5",
+        "pop-backbone/php-hooks": "^10.6",
         "symfony/config": "^6.0",
         "symfony/dependency-injection": "^6.0",
         "symfony/dotenv": "^6.0",
@@ -48,7 +48,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "10.5-dev"
+            "dev-master": "10.6-dev"
         }
     },
     "config": {

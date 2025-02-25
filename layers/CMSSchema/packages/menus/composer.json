@@ -159,8 +159,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^10.5",
-        "pop-cms-schema/taxonomies": "^10.5"
+        "getpop/engine": "^10.6",
+        "pop-cms-schema/taxonomies": "^10.6"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -186,7 +186,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "10.5-dev"
+            "dev-master": "10.6-dev"
         }
     },
     "config": {
