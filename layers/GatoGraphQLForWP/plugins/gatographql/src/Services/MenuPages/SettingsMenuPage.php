@@ -931,9 +931,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 }
                 ?>
                 <strong><?php echo esc_html($label); ?></strong>
-                <br/>
                 <?php
                 if (!$isMultipleBool) {
+                    ?>
+                    <br/>
+                    <?php
                     if (empty($possibleValues)) {
                         ?>
                         <input
