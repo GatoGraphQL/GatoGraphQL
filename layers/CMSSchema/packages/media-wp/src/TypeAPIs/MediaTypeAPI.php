@@ -298,7 +298,8 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
             return null;
         }
         /** @var WP_Post $mediaItem */
-        return $gmt ? $mediaItem->post_date_gmt : $mediaItem->post_date;
+        // If the GMT date is stored as "0000-00-00 00:00:00", then use the non-GMT date
+        return $gmt && ($mediaItem->post_date_gmt !== "0000-00-00 00:00:00") ? $mediaItem->post_date_gmt : $mediaItem->post_date;
     }
 
     public function getModified(string|int|object $mediaObjectOrID, bool $gmt = false): ?string
@@ -308,7 +309,8 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
             return null;
         }
         /** @var WP_Post $mediaItem */
-        return $gmt ? $mediaItem->post_modified_gmt : $mediaItem->post_modified;
+        // If the GMT date is stored as "0000-00-00 00:00:00", then use the non-GMT date
+        return $gmt && ($mediaItem->post_modified_gmt !== "0000-00-00 00:00:00") ? $mediaItem->post_modified_gmt : $mediaItem->post_modified;
     }
 
     public function getMimeType(string|int|object $mediaObjectOrID): ?string
