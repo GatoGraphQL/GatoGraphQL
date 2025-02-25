@@ -210,6 +210,10 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 11.0.0 =
+* Important: If you have any extension installed (eg: the "“Power Extensions” bundle"), you need to update "Gato GraphQL" first! Otherwise the application will throw an exception.
+* Breaking change: Register `changelogURL` for the extensions, to show the new version's changelog when updating them (#3042)
+
 = 10.5.0 =
 * Enable multiple checkbox options in Settings (#3040)
 * Fixed: If the GMT date is stored as `"0000-00-00 00:00:00"`, then use the non-GMT date (#3041)

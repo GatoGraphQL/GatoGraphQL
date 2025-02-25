@@ -4,6 +4,14 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 11.0.0 - DATE
+
+**Important:** If you have any extension installed (eg: the **“Power Extensions” bundle**), you need to update **Gato GraphQL** first! Otherwise the application will throw an exception.
+
+### Breaking changes
+
+- Register `changelogURL` for the extensions, to show the new version's changelog when updating them (#3042)
+
 ## 10.5.0 - 25/02/2025
 
 ### Improvements
