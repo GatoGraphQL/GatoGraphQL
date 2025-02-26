@@ -101,6 +101,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
                 PremiumExtensionModuleResolver::CLAUDE_TRANSLATION,
                 PremiumExtensionModuleResolver::DEEPL,
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+                PremiumExtensionModuleResolver::MISTRALAI_TRANSLATION,
                 PremiumExtensionModuleResolver::TRANSLATION,
             ],
             default => [],
