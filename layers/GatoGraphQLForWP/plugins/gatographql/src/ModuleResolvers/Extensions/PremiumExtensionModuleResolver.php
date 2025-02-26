@@ -16,6 +16,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const DEEPL = Plugin::NAMESPACE . '\\extensions\\deepl';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
     public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
+    public const MISTRALAI_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\mistralai-translation';
     public const MULTILINGUALPRESS = Plugin::NAMESPACE . '\\extensions\\multilingualpress';
     public const POLYLANG = Plugin::NAMESPACE . '\\extensions\\polylang';
     public const TRANSLATION = Plugin::NAMESPACE . '\\extensions\\translation';
@@ -32,6 +33,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::DEEPL,
             self::EVENTS_MANAGER,
             self::GOOGLE_TRANSLATE,
+            self::MISTRALAI_TRANSLATION,
             self::MULTILINGUALPRESS,
             self::POLYLANG,
             self::TRANSLATION,
@@ -47,6 +49,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::DEEPL => \__('DeepL', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gatographql'),
+            self::MISTRALAI_TRANSLATION => \__('Mistral AI Translation', 'gatographql'),
             self::MULTILINGUALPRESS => \__('MultilingualPress', 'gatographql'),
             self::POLYLANG => \__('Polylang', 'gatographql'),
             self::TRANSLATION => \__('Translation', 'gatographql'),
@@ -63,6 +66,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::DEEPL => \__('Translate content to multiple languages using the DeepL API.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gatographql'),
+            self::MISTRALAI_TRANSLATION => \__('Translate content to multiple languages using the Mistral AI API.', 'gatographql'),
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::TRANSLATION => \__('Translate content to multiple languages using any provider\'s API.', 'gatographql'),
