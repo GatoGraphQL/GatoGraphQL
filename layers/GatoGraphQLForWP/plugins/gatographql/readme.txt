@@ -72,7 +72,7 @@ The available premium extensions are:
 
 [Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
 
-[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, DeepL, and Google Translate.
+[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, Mistral AI, DeepL, and Google Translate.
 
 == Built with Gato GraphQL ==
 
@@ -211,8 +211,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 11.0.0 =
-* Important: If you have any extension installed (eg: the "“Power Extensions” bundle"), you need to update "Gato GraphQL" first! Otherwise the application will throw an exception.
+* Important: If you have any extension installed (eg: the **“Power Extensions” bundle**), you need to update **Gato GraphQL** first! Otherwise the application will throw an exception.
 * Breaking change: Register `changelogURL` for the extensions, to show the new version's changelog when updating them (#3042)
+* Updated documentation for the **Translation** extension, adding **Mistral AI** as a translation provider (#3043)
 
 = 10.5.0 =
 * Enable multiple checkbox options in Settings (#3040)
