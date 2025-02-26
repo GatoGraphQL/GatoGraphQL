@@ -12,6 +12,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Register `changelogURL` for the extensions, to show the new version's changelog when updating them (#3042)
 
+### Added
+
+- Updated documentation for the **Translation** extension, adding **Mistral AI** as a translation provider (#3043)
+
 ## 10.5.0 - 25/02/2025
 
 ### Improvements
