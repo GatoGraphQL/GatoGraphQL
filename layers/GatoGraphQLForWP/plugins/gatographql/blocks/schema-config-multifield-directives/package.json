@@ -1,6 +1,6 @@
 {
     "name": "schema-config-multifield-directives",
-    "version": "11.0.1",
+    "version": "11.1.0-dev",
     "description": "Enable multi-field directives in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
