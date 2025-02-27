@@ -100,6 +100,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
                 PremiumExtensionModuleResolver::CHATGPT_TRANSLATION,
                 PremiumExtensionModuleResolver::CLAUDE_TRANSLATION,
                 PremiumExtensionModuleResolver::DEEPL,
+                PremiumExtensionModuleResolver::DEEPSEEK_TRANSLATION,
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
                 PremiumExtensionModuleResolver::MISTRALAI_TRANSLATION,
                 PremiumExtensionModuleResolver::TRANSLATION,
