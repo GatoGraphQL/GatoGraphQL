@@ -213,7 +213,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 11.0.0 =
 * Important: If you have any extension installed (eg: the **“Power Extensions” bundle**), you need to update **Gato GraphQL** first! Otherwise the application will throw an exception.
 * Breaking change: Register `changelogURL` for the extensions, to show the new version's changelog when updating them (#3042)
-* Updated documentation for the **Translation** extension, adding **Mistral AI** as a translation provider (#3043)
+* Updated documentation for the **Translation** extension, adding new translation providers: **Mistral AI** (#3043) and **DeepSeek** (#3044)
 
 = 10.5.0 =
 * Enable multiple checkbox options in Settings (#3040)

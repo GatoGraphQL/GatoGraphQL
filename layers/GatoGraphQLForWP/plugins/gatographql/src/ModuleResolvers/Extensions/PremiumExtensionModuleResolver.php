@@ -14,6 +14,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const CHATGPT_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\chatgpt-translation';
     public const CLAUDE_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\claude-translation';
     public const DEEPL = Plugin::NAMESPACE . '\\extensions\\deepl';
+    public const DEEPSEEK_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\deepseek-translation';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
     public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
     public const MISTRALAI_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\mistralai-translation';
@@ -31,6 +32,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::CHATGPT_TRANSLATION,
             self::CLAUDE_TRANSLATION,
             self::DEEPL,
+            self::DEEPSEEK_TRANSLATION,
             self::EVENTS_MANAGER,
             self::GOOGLE_TRANSLATE,
             self::MISTRALAI_TRANSLATION,
@@ -47,6 +49,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::CHATGPT_TRANSLATION => \__('ChatGPT Translation', 'gatographql'),
             self::CLAUDE_TRANSLATION => \__('Claude Translation', 'gatographql'),
             self::DEEPL => \__('DeepL', 'gatographql'),
+            self::DEEPSEEK_TRANSLATION => \__('DeepSeek', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gatographql'),
             self::MISTRALAI_TRANSLATION => \__('Mistral AI Translation', 'gatographql'),
@@ -64,6 +67,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::CHATGPT_TRANSLATION => \__('Translate content to multiple languages using the ChatGPT API.', 'gatographql'),
             self::CLAUDE_TRANSLATION => \__('Translate content to multiple languages using the Claude API.', 'gatographql'),
             self::DEEPL => \__('Translate content to multiple languages using the DeepL API.', 'gatographql'),
+            self::DEEPSEEK_TRANSLATION => \__('Translate content to multiple languages using the DeepSeek API.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gatographql'),
             self::MISTRALAI_TRANSLATION => \__('Translate content to multiple languages using the Mistral AI API.', 'gatographql'),
