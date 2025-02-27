@@ -72,7 +72,7 @@ The available premium extensions are:
 
 [Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
 
-[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, Mistral AI, DeepL, and Google Translate.
+[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, DeepSeek, Mistral AI, DeepL, and Google Translate.
 
 == Built with Gato GraphQL ==
 
