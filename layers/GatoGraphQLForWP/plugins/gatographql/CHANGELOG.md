@@ -14,7 +14,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Updated documentation for the **Translation** extension, adding **Mistral AI** as a translation provider (#3043)
+- Updated documentation for the **Translation** extension, adding new translation providers:
+  - **Mistral AI** (#3043)
+  - **DeepSeek** (#3044)
 
 ## 10.5.0 - 25/02/2025
 

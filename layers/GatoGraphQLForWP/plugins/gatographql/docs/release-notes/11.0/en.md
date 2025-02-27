@@ -6,4 +6,6 @@
 
 ## Added
 
-- Updated documentation for the **Translation** extension, adding **Mistral AI** as a translation provider ([#3043](https://github.com/GatoGraphQL/GatoGraphQL/pull/3043))
+- Updated documentation for the **Translation** extension, adding new translation providers
+  - **Mistral AI** ([#3043](https://github.com/GatoGraphQL/GatoGraphQL/pull/3043))
+  - **DeepSeek** ([#3044](https://github.com/GatoGraphQL/GatoGraphQL/pull/3044))
