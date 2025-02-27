@@ -20,7 +20,7 @@ use PoP\Root\Constants\Scoping;
  * "Internal" is used within the Gato GraphQL project to also
  * produce "standalone" plugins, which are plugins wrapping
  * the Gato GraphQL plugin, and adding extra logic, such as
- * "Gato Multilingual for Polylang".
+ * "Gato AI Translations for Polylang".
  *
  * Internal scopes this project's own classes, so that, if the
  * same site has 2 or more (WordPress) plugins from this project

@@ -82,7 +82,7 @@ You can use Gato GraphQL to do everything offered by Gato Plugins!
 
 The plugins are:
 
-[Gato Multilingual for Polylang](https://gatoplugins.com/plugins/multilingual-polylang): Automatically translate your content.
+[Gato AI Translations for Polylang](https://gatoplugins.com/plugins/ai-translations-for-polylang): Automatically translate your content.
 
 == Frequently Asked Questions ==
 

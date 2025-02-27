@@ -348,7 +348,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      * to enable standalone plugins to be installed alongside Gato GraphQL,
      * and avoid a conflict from the same block registered twice.
      *
-     * For instance, running Gato GraphQL and Gato Multilingual for Polylang
+     * For instance, running Gato GraphQL and Gato AI Translations for Polylang
      * would print error on screen:
      *
      *    Notice: Function WP_Block_Type_Registry::register was called incorrectly. Block type "gatographql-pro/graphiql" is already registered. Please see Debugging in WordPress for more information. (This message was added in version 5.0.0.) in /Users/leo/Local Sites/playground/app/public/wp-includes/functions.php on line 6114
