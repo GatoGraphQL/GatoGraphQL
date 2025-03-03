@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 11.0.4 - 03/03/2025
+
+### Fixed
+
+- Do not remove the Screen Options tab on the post list page (#3046)
+
 ## 11.0.0 - 27/02/2025
 
 ### Required actions
