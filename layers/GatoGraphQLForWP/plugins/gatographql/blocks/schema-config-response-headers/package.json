@@ -1,6 +1,6 @@
 {
     "name": "schema-config-response-headers",
-    "version": "11.1.0-dev",
+    "version": "11.0.4",
     "description": "Configure the 'Response Headers' module in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
