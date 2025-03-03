@@ -210,6 +210,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 11.0.4 =
+* Fixed: Do not remove the Screen Options tab on the post list page (#3046)
+
 = 11.0.0 =
 * Important: If you have any extension installed (eg: the **“Power Extensions” bundle**), you need to update **Gato GraphQL** first! Otherwise the application will throw an exception.
 * Breaking change: Register `changelogURL` for the extensions, to show the new version's changelog when updating them (#3042)
