@@ -137,11 +137,6 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
                 10,
                 3
             );
-        } else {
-            /**
-             * Remove the Screen Options tab
-             */
-            \add_filter('screen_options_show_screen', '__return_false');
         }
 
         /**
