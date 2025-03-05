@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Support `password` type in multi-inputs in Settings (#3047)
+- Use `password` type to activate extensions in Settings (#3048)
 
 ## 11.1.0 - 03/03/2025
 
