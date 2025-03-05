@@ -212,6 +212,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 11.1.2 =
 * Support `password` type in multi-inputs in Settings (#3047)
+* Use `password` type to activate extensions in Settings (#3048)
 
 = 11.0.4 =
 * Fixed: Do not remove the Screen Options tab on the post list page (#3046)

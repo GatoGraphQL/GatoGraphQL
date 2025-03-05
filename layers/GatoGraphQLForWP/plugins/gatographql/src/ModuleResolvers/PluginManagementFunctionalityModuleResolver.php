@@ -185,6 +185,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     ),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                     Properties::KEY_LABELS => $commercialExtensionSlugProductNames,
+                    Properties::SUBTYPE => Properties::TYPE_PASSWORD,
                 ];
                 /**
                  * Have the activate button name be sent as part of the form
