@@ -70,6 +70,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
         $imagePathURL = $pluginURL . 'assets/img/extension-logos';
         return match ($module) {
             self::AUTOMATION => $imagePathURL . '/automation.svg',
+            self::ELEMENTOR => $imagePathURL . '/elementor.svg',
             self::EVENTS_MANAGER => $imagePathURL . '/events-manager.webp',
             self::MULTILINGUALPRESS => $imagePathURL . '/multilingualpress.webp',
             self::POLYLANG => $imagePathURL . '/polylang.webp',
