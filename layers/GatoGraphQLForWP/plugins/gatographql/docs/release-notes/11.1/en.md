@@ -7,4 +7,4 @@
 
 ### Fixed
 
-- Hook `template_include` can receive `null` values (error may hapen when WooCommerce is installed) (`v11.1.2`) ([#3049](https://github.com/GatoGraphQL/GatoGraphQL/pull/3049))
+- Hook `template_include` can receive `null` values (error may happen when WooCommerce is installed) (`v11.1.2`) ([#3049](https://github.com/GatoGraphQL/GatoGraphQL/pull/3049))
