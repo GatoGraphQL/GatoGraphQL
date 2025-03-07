@@ -159,8 +159,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/custompost-categories-wp": "^11.1.2",
-        "pop-cms-schema/post-categories": "^11.1.2"
+        "pop-cms-schema/custompost-categories-wp": "^11.2",
+        "pop-cms-schema/post-categories": "^11.2"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
@@ -190,7 +190,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "11.1-dev"
+            "dev-master": "11.2-dev"
         }
     },
     "config": {
