@@ -4,7 +4,11 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 11.1.2 - DATE
+## 11.1.2 - 07/03/2025
+
+### Fixed
+
+- Hook `template_include` can receive `null` values (error may hapen when WooCommerce is installed) (#3049)
 
 ### Improvements
 
