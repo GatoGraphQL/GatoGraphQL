@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Hook `template_include` can receive `null` values (error may hapen when WooCommerce is installed) (#3049)
+- Hook `template_include` can receive `null` values (error may happen when WooCommerce is installed) (#3049)
 
 ### Improvements
 
