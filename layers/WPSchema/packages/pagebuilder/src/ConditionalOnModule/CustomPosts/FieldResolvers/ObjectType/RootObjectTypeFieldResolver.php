@@ -68,14 +68,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
-            'useGutenbergEditorWithCustomPostType',
+            'useWhichPageBuilderWithCustomPostType',
         ];
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'useGutenbergEditorWithCustomPostType' => $this->__('Is the Gutenberg editor enabled for the custom post type?', 'pagebuilder'),
+            'useWhichPageBuilderWithCustomPostType' => $this->__('Is the Gutenberg editor enabled for the custom post type?', 'pagebuilder'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -83,7 +83,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'useGutenbergEditorWithCustomPostType' => $this->getBooleanScalarTypeResolver(),
+            'useWhichPageBuilderWithCustomPostType' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -91,7 +91,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'useGutenbergEditorWithCustomPostType' => SchemaTypeModifiers::NON_NULLABLE,
+            'useWhichPageBuilderWithCustomPostType' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -99,7 +99,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'useGutenbergEditorWithCustomPostType' => [
+            'useWhichPageBuilderWithCustomPostType' => [
                 'customPostType' => $this->getCustomPostEnumStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -109,7 +109,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['useGutenbergEditorWithCustomPostType' => 'customPostType'] => $this->__('The custom post type', 'gatographql'),
+            ['useWhichPageBuilderWithCustomPostType' => 'customPostType'] => $this->__('The custom post type', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -117,7 +117,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['useGutenbergEditorWithCustomPostType' => 'customPostType'] => SchemaTypeModifiers::MANDATORY,
+            ['useWhichPageBuilderWithCustomPostType' => 'customPostType'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -129,8 +129,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'useGutenbergEditorWithCustomPostType':
-                if (!$this->getPageBuilderTypeAPI()->isGutenbergEditorEnabled()) {
+            case 'useWhichPageBuilderWithCustomPostType':
+                if (!$this->getPageBuilderTypeAPI()->getInstalledPageBuilders()) {
                     return false;
                 }
                 /** @var string */

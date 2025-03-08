@@ -6,5 +6,5 @@ namespace PoPWPSchema\PageBuilder\TypeAPIs;
 
 interface PageBuilderTypeAPIInterface
 {
-    public function isGutenbergEditorEnabled(): bool;
+    public function getInstalledPageBuilders(): bool;
 }

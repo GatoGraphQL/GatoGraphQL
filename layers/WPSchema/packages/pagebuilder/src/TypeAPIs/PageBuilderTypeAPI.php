@@ -15,7 +15,7 @@ class PageBuilderTypeAPI extends AbstractBasicService implements PageBuilderType
      *
      * @see https://wordpress.org/plugins/classic-editor/
      */
-    public function isGutenbergEditorEnabled(): bool
+    public function getInstalledPageBuilders(): bool
     {
         return !WordPressStaticHelpers::isWordPressPluginActive('classic-editor/classic-editor.php');
     }
