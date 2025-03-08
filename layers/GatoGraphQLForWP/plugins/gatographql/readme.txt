@@ -211,6 +211,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 11.2.0 =
+* Added field `useWhichPageBuilderWithCustomPostType`, to retrieve which Page Builders are editing what CPTs (#3051)
 * Added documentation for new field `_objectMerge`, from the **Schema Functions** extension (#3050)
  
 = 11.1.2 =
