@@ -20,11 +20,11 @@ class PageBuilderTypeAPI extends AbstractBasicService implements PageBuilderType
         }
         return $this->pageBuilderService;
     }
-    
+
     /**
      * Return the IDs of the Page Builders installed on
      * the site. The ID must not contain spaces or "-".
-     * 
+     *
      * @return string[]
      */
     public function getInstalledPageBuilders(): array
