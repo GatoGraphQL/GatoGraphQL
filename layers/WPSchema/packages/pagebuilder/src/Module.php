@@ -18,8 +18,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\SettingsWP\Module::class,
-            \PoPWPSchema\SchemaCommons\Module::class,
+            \PoPWPSchema\CustomPosts\Module::class,
         ];
     }
 
