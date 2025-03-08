@@ -437,6 +437,10 @@ Computes the intersection of objects using keys for comparison.
 
 Keeps specific properties only in the JSON object.
 
+### `_objectMerge`
+
+Merge two or more objects together.
+
 ### `_objectProperties`
 
 Retrieve the properties in a JSON object.
