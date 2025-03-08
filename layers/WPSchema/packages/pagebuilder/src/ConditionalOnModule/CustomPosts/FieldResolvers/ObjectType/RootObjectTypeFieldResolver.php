@@ -123,7 +123,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldDataAccessor->getFieldName()) {
             case 'useWhichPageBuilderWithCustomPostType':
                 if ($this->getPageBuilderTypeAPI()->getInstalledPageBuilders() === []) {
-                    return false;
+                    return null;
                 }
                 /** @var string */
                 $customPostType = $fieldDataAccessor->getValue('customPostType');
