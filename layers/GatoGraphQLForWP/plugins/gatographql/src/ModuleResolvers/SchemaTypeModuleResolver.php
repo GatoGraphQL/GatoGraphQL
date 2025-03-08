@@ -31,8 +31,8 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPWPSchema\Blocks\TypeResolvers\ObjectType\GeneralBlockObjectTypeResolver;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
-
 use PoPWPSchema\PageBuilder\Services\PageBuilderServiceInterface;
+
 use function is_multisite;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
