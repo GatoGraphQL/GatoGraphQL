@@ -62,7 +62,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'pageBuilders' => $this->__('Is the Gutenberg editor enabled? (i.e. the "Classic Editor" plugin is not enabled)', 'pagebuilder'),
+            'pageBuilders' => $this->__('The Page Builders installed on the site', 'pagebuilder'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -78,7 +78,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'pageBuilders' => SchemaTypeModifiers::NON_NULLABLE,
+            'pageBuilders' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }

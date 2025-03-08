@@ -9,7 +9,7 @@ use PoP\Root\Services\AbstractBasicService;
 class PageBuilderTypeAPI extends AbstractBasicService implements PageBuilderTypeAPIInterface
 {
     /**
-     * Return the ID of the Page Builders installed on
+     * Return the IDs of the Page Builders installed on
      * the site. The ID must not contain spaces or "-".
      * 
      * @return string[]

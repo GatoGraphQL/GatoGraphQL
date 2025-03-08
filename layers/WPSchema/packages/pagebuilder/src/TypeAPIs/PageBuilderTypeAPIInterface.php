@@ -7,7 +7,7 @@ namespace PoPWPSchema\PageBuilder\TypeAPIs;
 interface PageBuilderTypeAPIInterface
 {
     /**
-     * Return the ID of the Page Builders installed on
+     * Return the IDs of the Page Builders installed on
      * the site. The ID must not contain spaces or "-".
      * 
      * @return string[]
