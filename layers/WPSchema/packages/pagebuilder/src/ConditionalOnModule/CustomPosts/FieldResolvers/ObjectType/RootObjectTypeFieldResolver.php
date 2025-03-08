@@ -16,8 +16,6 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-use function use_block_editor_for_post_type;
-
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?PageBuilderProvidersEnumStringTypeResolver $pageBuilderProvidersEnumStringTypeResolver = null;
@@ -122,12 +120,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'useWhichPageBuilderWithCustomPostType':
-                if ($this->getPageBuilderTypeAPI()->getInstalledPageBuilders() === []) {
-                    return null;
-                }
                 /** @var string */
                 $customPostType = $fieldDataAccessor->getValue('customPostType');
-                return use_block_editor_for_post_type($customPostType);
+                return $this->getPageBuilderTypeAPI()->getPageBuilderEnabledForCustomPostType($customPostType);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
