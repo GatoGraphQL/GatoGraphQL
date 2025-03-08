@@ -14,8 +14,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+
 use function use_block_editor_for_post_type;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
