@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\PageBuilder\FieldResolvers\ObjectType;
 
 use PoPWPSchema\PageBuilder\TypeAPIs\PageBuilderTypeAPIInterface;
-use PoPWPSchema\PageBuilder\TypeResolvers\EnumType\PageBuilderProvidersEnumTypeResolver;
+use PoPWPSchema\PageBuilder\TypeResolvers\EnumType\PageBuilderProvidersEnumStringTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -17,17 +17,17 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?PageBuilderProvidersEnumTypeResolver $pageBuilderProvidersEnumTypeResolver = null;
+    private ?PageBuilderProvidersEnumStringTypeResolver $pageBuilderProvidersEnumStringTypeResolver = null;
     private ?PageBuilderTypeAPIInterface $pageBuilderTypeAPI = null;
 
-    final protected function getPageBuilderProvidersEnumTypeResolver(): PageBuilderProvidersEnumTypeResolver
+    final protected function getPageBuilderProvidersEnumStringTypeResolver(): PageBuilderProvidersEnumStringTypeResolver
     {
-        if ($this->pageBuilderProvidersEnumTypeResolver === null) {
-            /** @var PageBuilderProvidersEnumTypeResolver */
-            $pageBuilderProvidersEnumTypeResolver = $this->instanceManager->getInstance(PageBuilderProvidersEnumTypeResolver::class);
-            $this->pageBuilderProvidersEnumTypeResolver = $pageBuilderProvidersEnumTypeResolver;
+        if ($this->pageBuilderProvidersEnumStringTypeResolver === null) {
+            /** @var PageBuilderProvidersEnumStringTypeResolver */
+            $pageBuilderProvidersEnumStringTypeResolver = $this->instanceManager->getInstance(PageBuilderProvidersEnumStringTypeResolver::class);
+            $this->pageBuilderProvidersEnumStringTypeResolver = $pageBuilderProvidersEnumStringTypeResolver;
         }
-        return $this->pageBuilderProvidersEnumTypeResolver;
+        return $this->pageBuilderProvidersEnumStringTypeResolver;
     }
     final protected function getPageBuilderTypeAPI(): PageBuilderTypeAPIInterface
     {
@@ -70,7 +70,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'pageBuilders' => $this->getPageBuilderProvidersEnumTypeResolver(),
+            'pageBuilders' => $this->getPageBuilderProvidersEnumStringTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

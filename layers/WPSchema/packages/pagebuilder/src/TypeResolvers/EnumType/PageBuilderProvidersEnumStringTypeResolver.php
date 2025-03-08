@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPWPSchema\PageBuilder\TypeResolvers\EnumType;
 
 use PoPWPSchema\PageBuilder\Services\PageBuilderServiceInterface;
-use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
 
-class PageBuilderProvidersEnumTypeResolver extends AbstractEnumTypeResolver
+class PageBuilderProvidersEnumStringTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
     private ?PageBuilderServiceInterface $pageBuilderService = null;
 
@@ -23,12 +23,12 @@ class PageBuilderProvidersEnumTypeResolver extends AbstractEnumTypeResolver
 
     public function getTypeName(): string
     {
-        return 'PageBuilderProvidersEnum';
+        return 'PageBuilderProvidersEnumString';
     }
     /**
      * @return string[]
      */
-    public function getEnumValues(): array
+    public function getPossibleValues(): array
     {
         return array_keys($this->getPageBuilderService()->getProviderNameServices());
     }
