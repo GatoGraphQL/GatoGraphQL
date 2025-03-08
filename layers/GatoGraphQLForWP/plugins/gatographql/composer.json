@@ -56,6 +56,7 @@
         "pop-wp-schema/media": "^11.2",
         "pop-wp-schema/menus": "^11.2",
         "pop-wp-schema/multisite": "^11.2",
+        "pop-wp-schema/pagebuilder": "^11.2",
         "pop-wp-schema/pages": "^11.2",
         "pop-wp-schema/posts": "^11.2",
         "pop-wp-schema/settings": "^11.2",
