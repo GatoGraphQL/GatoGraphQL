@@ -20,5 +20,10 @@ interface PageBuilderProviderInterface extends ActivableServiceInterface
      */
     public function getProviderName(): string;
 
-    public function getWebsiteURL(): string;
+    /**
+     * The names of the CPTs edited using this Page Builder
+     *
+     * @return string[]
+     */
+    public function getEnabledCustomPostTypes(): array;
 }

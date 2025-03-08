@@ -13,4 +13,9 @@ interface PageBuilderTypeAPIInterface
      * @return string[]
      */
     public function getInstalledPageBuilders(): array;
+    /**
+     * The name of the page builder that handles that CPT,
+     * or `null` if none
+     */
+    public function getPageBuilderEnabledForCustomPostType(string $customPostType): ?string;
 }

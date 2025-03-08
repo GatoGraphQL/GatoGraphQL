@@ -31,4 +31,18 @@ class PageBuilderTypeAPI extends AbstractBasicService implements PageBuilderType
     {
         return array_keys($this->getPageBuilderService()->getProviderNameServices());
     }
+
+    /**
+     * The name of the page builder that handles that CPT,
+     * or `null` if none
+     */
+    public function getPageBuilderEnabledForCustomPostType(string $customPostType): ?string
+    {
+        foreach ($this->getPageBuilderService()->getProviderNameServices() as $pageBuilderName => $pageBuilderService) {
+            if (in_array($customPostType, $pageBuilderService->getEnabledCustomPostTypes())) {
+                return $pageBuilderName;
+            }
+        }
+        return null;
+    }
 }
