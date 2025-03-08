@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\PageBuilder\TypeAPIs;
 
-use PoPWPSchema\SchemaCommons\StaticHelpers\WordPressStaticHelpers;
 use PoP\Root\Services\AbstractBasicService;
 
 class PageBuilderTypeAPI extends AbstractBasicService implements PageBuilderTypeAPIInterface
 {
     /**
-     * The Gutenberg editor is enabled when the Classic editor
-     * plugin is not enabled
-     *
-     * @see https://wordpress.org/plugins/classic-editor/
+     * Return the ID of the Page Builders installed on
+     * the site. The ID must not contain spaces or "-".
+     * 
+     * @return string[]
      */
-    public function getInstalledPageBuilders(): bool
+    public function getInstalledPageBuilders(): array
     {
-        return !WordPressStaticHelpers::isWordPressPluginActive('classic-editor/classic-editor.php');
+        // @todo Implement getInstalledPageBuilders()!
+        return [];
     }
 }

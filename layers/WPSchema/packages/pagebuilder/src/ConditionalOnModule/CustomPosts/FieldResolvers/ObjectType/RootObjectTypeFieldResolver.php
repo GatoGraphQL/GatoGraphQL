@@ -122,7 +122,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'useWhichPageBuilderWithCustomPostType':
-                if (!$this->getPageBuilderTypeAPI()->getInstalledPageBuilders()) {
+                if ($this->getPageBuilderTypeAPI()->getInstalledPageBuilders() === []) {
                     return false;
                 }
                 /** @var string */

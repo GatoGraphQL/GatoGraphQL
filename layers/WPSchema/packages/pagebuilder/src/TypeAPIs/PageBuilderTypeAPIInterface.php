@@ -6,5 +6,11 @@ namespace PoPWPSchema\PageBuilder\TypeAPIs;
 
 interface PageBuilderTypeAPIInterface
 {
-    public function getInstalledPageBuilders(): bool;
+    /**
+     * Return the ID of the Page Builders installed on
+     * the site. The ID must not contain spaces or "-".
+     * 
+     * @return string[]
+     */
+    public function getInstalledPageBuilders(): array;
 }
