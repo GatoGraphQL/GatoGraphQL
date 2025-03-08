@@ -148,7 +148,6 @@
         "pop-cms-schema/custompost-category-mutations-wp": "<11.1.2",
         "pop-cms-schema/custompost-tag-mutations-wp": "<11.1.2",
         "pop-wp-schema/settings": "<11.1.2",
-        "pop-wp-schema/multisite": "<11.1.2",
         "gatographql-standalone/gatographql": "<11.1.2"
     },
     "type": "library",

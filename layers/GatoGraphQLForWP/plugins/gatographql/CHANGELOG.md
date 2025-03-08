@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Support fetching Page Builders data in the GraphQL schema (#3051)
 - Documentation for new field `_objectMerge`, from the **Schema Functions** extension (#3050)
 
 ## 11.1.2 - 07/03/2025

@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPWPSchema\PageBuilder\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPWPSchema\PageBuilder\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+

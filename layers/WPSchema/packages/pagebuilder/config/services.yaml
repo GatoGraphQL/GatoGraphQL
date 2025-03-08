@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPWPSchema\PageBuilder\TypeAPIs\PageBuilderTypeAPIInterface:
+        class: \PoPWPSchema\PageBuilder\TypeAPIs\PageBuilderTypeAPI
+
+    PoPWPSchema\PageBuilder\Services\PageBuilderServiceInterface:
+        class: \PoPWPSchema\PageBuilder\Services\PageBuilderService
+
+    PoPWPSchema\PageBuilder\Registries\PageBuilderProviderRegistryInterface:
+        class: \PoPWPSchema\PageBuilder\Registries\PageBuilderProviderRegistry

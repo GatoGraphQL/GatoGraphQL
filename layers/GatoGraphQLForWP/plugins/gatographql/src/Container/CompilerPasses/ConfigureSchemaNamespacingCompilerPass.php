@@ -101,6 +101,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPWPSchema\Blocks\Module::class,
             \PoPWPSchema\Site\Module::class,
             \PoPWPSchema\Multisite\Module::class,
+            \PoPWPSchema\PageBuilder\Module::class,
             \PoPWPSchema\TaxonomyMeta\Module::class,
             \PoPWPSchema\UserMeta\Module::class,
             \PoPWPSchema\Users\Module::class,
