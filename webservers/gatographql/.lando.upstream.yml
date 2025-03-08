@@ -251,6 +251,8 @@ services:
         - >-
           ../../layers/WPSchema/packages/multisite:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/multisite
         - >-
+          ../../layers/WPSchema/packages/pagebuilder:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/pagebuilder
+        - >-
           ../../layers/WPSchema/packages/pages:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/pages
         - >-
           ../../layers/WPSchema/packages/posts:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/posts
