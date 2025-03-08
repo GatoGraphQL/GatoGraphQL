@@ -23,6 +23,14 @@ class Module extends AbstractModule
     }
 
     /**
+     * Initialize services for the system container
+     */
+    protected function initializeSystemContainerServices(): void
+    {
+        $this->initSystemServices(dirname(__DIR__));
+    }
+
+    /**
      * Initialize services
      *
      * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
