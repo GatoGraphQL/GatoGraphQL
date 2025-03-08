@@ -33,11 +33,3 @@ services:
         class: ~
         autoconfigure: false
 
-    # Services from internal packages
-    # ----------------------------------------------------------------
-    # Added since it's used in ModuleResolver
-    PoPWPSchema\PageBuilder\Services\PageBuilderServiceInterface:
-        class: \PoPWPSchema\PageBuilder\Services\PageBuilderService
-    PoPWPSchema\PageBuilder\Registries\PageBuilderProviderRegistryInterface:
-        class: \PoPWPSchema\PageBuilder\Registries\PageBuilderProviderRegistry
-
