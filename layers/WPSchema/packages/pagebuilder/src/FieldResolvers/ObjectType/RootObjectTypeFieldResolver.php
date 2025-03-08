@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\PageBuilder\FieldResolvers\ObjectType;
 
-use PoPWPSchema\PageBuilder\TypeAPIs\PageBuilderTypeAPIInterface;
+use PoPWPSchema\PageBuilder\Services\PageBuilderServiceInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -18,7 +18,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?PageBuilderTypeAPIInterface $pageBuilderTypeAPI = null;
+    private ?PageBuilderServiceInterface $pageBuilderService = null;
 
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
@@ -29,14 +29,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->booleanScalarTypeResolver;
     }
-    final protected function getPageBuilderTypeAPI(): PageBuilderTypeAPIInterface
+    final protected function getPageBuilderService(): PageBuilderServiceInterface
     {
-        if ($this->pageBuilderTypeAPI === null) {
-            /** @var PageBuilderTypeAPIInterface */
-            $pageBuilderTypeAPI = $this->instanceManager->getInstance(PageBuilderTypeAPIInterface::class);
-            $this->pageBuilderTypeAPI = $pageBuilderTypeAPI;
+        if ($this->pageBuilderService === null) {
+            /** @var PageBuilderServiceInterface */
+            $pageBuilderService = $this->instanceManager->getInstance(PageBuilderServiceInterface::class);
+            $this->pageBuilderService = $pageBuilderService;
         }
-        return $this->pageBuilderTypeAPI;
+        return $this->pageBuilderService;
     }
 
     /**
@@ -91,7 +91,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'pageBuilders':
-                return $this->getPageBuilderTypeAPI()->getInstalledPageBuilders();
+                return array_keys($this->getPageBuilderService()->getProviderNameServices());
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
