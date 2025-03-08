@@ -6,32 +6,32 @@ namespace PoPWPSchema\PageBuilder\ConditionalOnModule\CustomPosts\FieldResolvers
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
 use PoPWPSchema\PageBuilder\TypeAPIs\PageBuilderTypeAPIInterface;
+use PoPWPSchema\PageBuilder\TypeResolvers\EnumType\PageBuilderProvidersEnumTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use function use_block_editor_for_post_type;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?PageBuilderProvidersEnumTypeResolver $pageBuilderProvidersEnumTypeResolver = null;
     private ?PageBuilderTypeAPIInterface $pageBuilderTypeAPI = null;
     private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
 
-    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    final protected function getPageBuilderProvidersEnumTypeResolver(): PageBuilderProvidersEnumTypeResolver
     {
-        if ($this->booleanScalarTypeResolver === null) {
-            /** @var BooleanScalarTypeResolver */
-            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
-            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        if ($this->pageBuilderProvidersEnumTypeResolver === null) {
+            /** @var PageBuilderProvidersEnumTypeResolver */
+            $pageBuilderProvidersEnumTypeResolver = $this->instanceManager->getInstance(PageBuilderProvidersEnumTypeResolver::class);
+            $this->pageBuilderProvidersEnumTypeResolver = $pageBuilderProvidersEnumTypeResolver;
         }
-        return $this->booleanScalarTypeResolver;
+        return $this->pageBuilderProvidersEnumTypeResolver;
     }
     final protected function getPageBuilderTypeAPI(): PageBuilderTypeAPIInterface
     {
@@ -83,7 +83,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'useWhichPageBuilderWithCustomPostType' => $this->getBooleanScalarTypeResolver(),
+            'useWhichPageBuilderWithCustomPostType' => $this->getPageBuilderProvidersEnumTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
