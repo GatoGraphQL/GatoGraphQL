@@ -32,6 +32,7 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPWPSchema\Blocks\TypeResolvers\ObjectType\GeneralBlockObjectTypeResolver;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 
+use PoPWPSchema\PageBuilder\Services\PageBuilderServiceInterface;
 use function is_multisite;
 
 class SchemaTypeModuleResolver extends AbstractModuleResolver
@@ -109,6 +110,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     private ?WPDataModelProviderInterface $wpDataModelProvider = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
+    private ?PageBuilderServiceInterface $pageBuilderService = null;
 
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
@@ -289,6 +291,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $this->markdownContentParser = $markdownContentParser;
         }
         return $this->markdownContentParser;
+    }
+    final protected function getPageBuilderService(): PageBuilderServiceInterface
+    {
+        if ($this->pageBuilderService === null) {
+            /** @var PageBuilderServiceInterface */
+            $pageBuilderService = $this->instanceManager->getInstance(PageBuilderServiceInterface::class);
+            $this->pageBuilderService = $pageBuilderService;
+        }
+        return $this->pageBuilderService;
     }
 
     /**
@@ -477,6 +488,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         switch ($module) {
             case self::SCHEMA_MULTISITE:
                 return is_multisite();
+            case self::SCHEMA_PAGEBUILDER:
+                /**
+                 * At least there must be 1 Page Builder installed.
+                 * Otherwise, the PageBuilderProvidersEnum would be empty,
+                 * triggering an error in GraphiQL
+                 */
+                return $this->getPageBuilderService()->getProviderNameServices() !== [];
         }
         return parent::areRequirementsSatisfied($module);
     }
