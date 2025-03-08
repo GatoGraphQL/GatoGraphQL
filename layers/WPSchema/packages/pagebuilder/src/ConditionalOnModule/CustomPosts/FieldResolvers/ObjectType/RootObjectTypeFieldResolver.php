@@ -75,7 +75,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'useWhichPageBuilderWithCustomPostType' => $this->__('Is the Gutenberg editor enabled for the custom post type?', 'pagebuilder'),
+            'useWhichPageBuilderWithCustomPostType' => $this->__('Indicate which Page Builder (if any) is configured to edit the custom post type, or `null` if none', 'pagebuilder'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -85,14 +85,6 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return match ($fieldName) {
             'useWhichPageBuilderWithCustomPostType' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
-    {
-        return match ($fieldName) {
-            'useWhichPageBuilderWithCustomPostType' => SchemaTypeModifiers::NON_NULLABLE,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
