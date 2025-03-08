@@ -1,0 +1,4 @@
+{
+  pageBuilders
+  useWhichPageBuilderWithCustomPostType(customPostType: "post")
+}
