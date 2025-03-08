@@ -6,7 +6,7 @@ namespace PoPWPSchema\PageBuilder\Services;
 
 use PoPWPSchema\PageBuilder\PageBuilderProviders\PageBuilderProviderInterface;
 
-interface PageBuilderInterface
+interface PageBuilderServiceInterface
 {
     /**
      * @return array<string,PageBuilderProviderInterface>

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\PageBuilder\TypeResolvers\EnumType;
 
-use PoPWPSchema\PageBuilder\Services\PageBuilderInterface;
+use PoPWPSchema\PageBuilder\Services\PageBuilderServiceInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
 class PageBuilderProvidersEnumTypeResolver extends AbstractEnumTypeResolver
 {
-    private ?PageBuilderInterface $pageBuilder = null;
+    private ?PageBuilderServiceInterface $pageBuilderService = null;
 
-    final protected function getPageBuilder(): PageBuilderInterface
+    final protected function getPageBuilderService(): PageBuilderServiceInterface
     {
-        if ($this->pageBuilder === null) {
-            /** @var PageBuilderInterface */
-            $pageBuilder = $this->instanceManager->getInstance(PageBuilderInterface::class);
-            $this->pageBuilder = $pageBuilder;
+        if ($this->pageBuilderService === null) {
+            /** @var PageBuilderServiceInterface */
+            $pageBuilderService = $this->instanceManager->getInstance(PageBuilderServiceInterface::class);
+            $this->pageBuilderService = $pageBuilderService;
         }
-        return $this->pageBuilder;
+        return $this->pageBuilderService;
     }
 
     public function getTypeName(): string
@@ -30,6 +30,6 @@ class PageBuilderProvidersEnumTypeResolver extends AbstractEnumTypeResolver
      */
     public function getEnumValues(): array
     {
-        return array_keys($this->getPageBuilder()->getProviderNameServices());
+        return array_keys($this->getPageBuilderService()->getProviderNameServices());
     }
 }

@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PoPWPSchema\PageBuilder\Facades;
 
 use PoP\Root\App;
-use PoPWPSchema\PageBuilder\Services\PageBuilderInterface;
+use PoPWPSchema\PageBuilder\Services\PageBuilderServiceInterface;
 
-class PageBuilderFacade
+class PageBuilderServiceFacade
 {
-    public static function getInstance(): PageBuilderInterface
+    public static function getInstance(): PageBuilderServiceInterface
     {
         /**
-         * @var PageBuilderInterface
+         * @var PageBuilderServiceInterface
          */
-        $service = App::getContainer()->get(PageBuilderInterface::class);
+        $service = App::getContainer()->get(PageBuilderServiceInterface::class);
         return $service;
     }
 }

@@ -8,7 +8,7 @@ use PoPWPSchema\PageBuilder\Registries\PageBuilderProviderRegistryInterface;
 use PoPWPSchema\PageBuilder\PageBuilderProviders\PageBuilderProviderInterface;
 use PoP\Root\Services\AbstractBasicService;
 
-class PageBuilder extends AbstractBasicService implements PageBuilderInterface
+class PageBuilderService extends AbstractBasicService implements PageBuilderServiceInterface
 {
     /**
      * @var array<string,PageBuilderProviderInterface>|null
