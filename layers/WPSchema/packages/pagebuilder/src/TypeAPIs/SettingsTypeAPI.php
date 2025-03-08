@@ -7,7 +7,7 @@ namespace PoPWPSchema\PageBuilder\TypeAPIs;
 use PoPWPSchema\SchemaCommons\StaticHelpers\WordPressStaticHelpers;
 use PoP\Root\Services\AbstractBasicService;
 
-class SettingsTypeAPI extends AbstractBasicService implements SettingsTypeAPIInterface
+class PageBuilderTypeAPI extends AbstractBasicService implements PageBuilderTypeAPIInterface
 {
     /**
      * The Gutenberg editor is enabled when the Classic editor

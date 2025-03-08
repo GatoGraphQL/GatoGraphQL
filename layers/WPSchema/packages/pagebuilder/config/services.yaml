@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPWPSchema\PageBuilder\TypeAPIs\SettingsTypeAPIInterface:
-        class: \PoPWPSchema\PageBuilder\TypeAPIs\SettingsTypeAPI
+    PoPWPSchema\PageBuilder\TypeAPIs\PageBuilderTypeAPIInterface:
+        class: \PoPWPSchema\PageBuilder\TypeAPIs\PageBuilderTypeAPI

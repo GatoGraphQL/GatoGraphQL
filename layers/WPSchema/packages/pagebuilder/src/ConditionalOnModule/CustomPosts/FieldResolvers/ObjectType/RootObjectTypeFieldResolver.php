@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\PageBuilder\ConditionalOnModule\CustomPosts\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
-use PoPWPSchema\PageBuilder\TypeAPIs\SettingsTypeAPIInterface;
+use PoPWPSchema\PageBuilder\TypeAPIs\PageBuilderTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -21,7 +21,7 @@ use function use_block_editor_for_post_type;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?SettingsTypeAPIInterface $settingsTypeAPI = null;
+    private ?PageBuilderTypeAPIInterface $pageBuilderTypeAPI = null;
     private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
 
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
@@ -33,14 +33,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->booleanScalarTypeResolver;
     }
-    final protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
+    final protected function getPageBuilderTypeAPI(): PageBuilderTypeAPIInterface
     {
-        if ($this->settingsTypeAPI === null) {
-            /** @var SettingsTypeAPIInterface */
-            $settingsTypeAPI = $this->instanceManager->getInstance(SettingsTypeAPIInterface::class);
-            $this->settingsTypeAPI = $settingsTypeAPI;
+        if ($this->pageBuilderTypeAPI === null) {
+            /** @var PageBuilderTypeAPIInterface */
+            $pageBuilderTypeAPI = $this->instanceManager->getInstance(PageBuilderTypeAPIInterface::class);
+            $this->pageBuilderTypeAPI = $pageBuilderTypeAPI;
         }
-        return $this->settingsTypeAPI;
+        return $this->pageBuilderTypeAPI;
     }
     final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
     {
@@ -130,7 +130,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'useGutenbergEditorWithCustomPostType':
-                if (!$this->getSettingsTypeAPI()->isGutenbergEditorEnabled()) {
+                if (!$this->getPageBuilderTypeAPI()->isGutenbergEditorEnabled()) {
                     return false;
                 }
                 /** @var string */
