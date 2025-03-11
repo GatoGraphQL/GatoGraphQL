@@ -6,10 +6,7 @@ Integration with the [Elementor](https://wordpress.org/plugins/elementor/) plugi
 
 ---
 
-Query the Elementor data from a custom post, retrieved via the following fields added to all `CustomPost` types (such as `Post`, `Page` and `GenericCustomPost`):
-
-- `elementorData`
-- `elementorFlattenedDataItems`
+Query and mutate the Elementor data from a custom post.
 
 Running this query:
 
