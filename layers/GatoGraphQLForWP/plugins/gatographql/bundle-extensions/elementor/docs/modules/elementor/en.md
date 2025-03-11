@@ -6,7 +6,7 @@ Integration with the [Elementor](https://wordpress.org/plugins/elementor/) plugi
 
 ---
 
-Query and mutate the Elementor data from a custom post.
+Interact with Elementor data from pages and templates.
 
 Running this query:
 
