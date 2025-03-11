@@ -2,7 +2,7 @@
 
 Integration with the [Elementor](https://wordpress.org/plugins/elementor/) plugin.
 
-The GraphQL schema is provided the fields and mutations to parse and update data in Elementor pages and templates.
+The GraphQL schema is provided with fields and mutations to interact with Elementor data from pages and templates.
 
 ## Fields
 
