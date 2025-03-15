@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Documentation for new Elementor Premium Extension (#3052)
 
+### Breaking changes
+
+- Plugin constructor signature receives nullable `commitHash` param (#3056)
+
 ## 11.2.0 - 15/03/2025
 
 ### Added
