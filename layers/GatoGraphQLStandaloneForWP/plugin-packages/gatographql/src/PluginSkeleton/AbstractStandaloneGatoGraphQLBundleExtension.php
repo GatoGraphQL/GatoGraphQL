@@ -34,7 +34,11 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
     {
         parent::anyCommercialLicenseJustActivated();
 
-        $this->maybeInstallPluginSetupDataAfterCommercialLicenseActivated();
+        // Do on "init" so the taxonomies have been registered
+        add_action(
+            'init',
+            $this->maybeInstallPluginSetupDataAfterCommercialLicenseActivated(...)
+        );
     }
 
     /**
