@@ -216,7 +216,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Support fetching Page Builders data in the GraphQL schema (#3051)
 * Added documentation for new field `_objectMerge`, from the **Schema Functions** extension (#3050)
 * Added documentation for new Elementor Premium Extension (#3052)
- 
+* Fixed: Malcare deactivate triggers Exception (#3054)
+
 = 11.1.2 =
 * Support `password` type in multi-inputs in Settings (#3047)
 * Use `password` type to activate extensions in Settings (#3048)

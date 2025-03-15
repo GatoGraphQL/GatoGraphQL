@@ -387,6 +387,17 @@ abstract class AbstractPlugin implements PluginInterface
     {
         $this->removePluginVersion();
 
+        /**
+         * Important: Make sure the Container has been initialized,
+         * otherwise the methods below will throw exception.
+         *
+         * For instance, Malcare calls `deactivate` differently than WP.
+         * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/3053
+         */
+        if (!App::isInitialized()) {
+            return;
+        }
+
         $this->unregisterPluginCustomPostTypes();
 
         /**
