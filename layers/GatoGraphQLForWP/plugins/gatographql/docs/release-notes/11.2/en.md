@@ -8,4 +8,4 @@
 ### Fixed
 
 - Malcare deactivate triggers Exception ([#3054](https://github.com/GatoGraphQL/GatoGraphQL/pull/3054))
-- Check if license is active against DB, not ExtensionManager ([#3055](https://github.com/GatoGraphQL/GatoGraphQL/pull/3055))
+- Store commercial license in ExtensionManager right after activation ([#3055](https://github.com/GatoGraphQL/GatoGraphQL/pull/3055))
