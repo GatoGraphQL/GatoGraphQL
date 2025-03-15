@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Documentation for new Elementor Premium Extension (#3052)
 
-## 11.2.0 - DATE
+## 11.2.0 - 15/03/2025
 
 ### Added
 
