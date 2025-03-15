@@ -27,6 +27,21 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
     }
 
     /**
+     * Install plugin setup data after a commercial license
+     * has been activated
+     */
+    public function anyCommercialLicenseJustActivated(): void
+    {
+        parent::anyCommercialLicenseJustActivated();
+
+        // Do on "init" so the taxonomies have been registered
+        add_action(
+            'init',
+            $this->maybeInstallPluginSetupDataAfterCommercialLicenseActivated(...)
+        );
+    }
+
+    /**
      * @return string[]
      */
     protected function getInstallPluginSetupDataFormOptionNames(): array
@@ -53,6 +68,27 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
         }
     }
 
+    /**
+     * Instead of reacting on Options::PLUGIN_MANAGEMENT, trigger
+     * installing data on the first request after the license is activated
+     */
+    protected function maybeInstallPluginSetupDataAfterCommercialLicenseActivated(): void
+    {
+        if (
+            !$this->doInstallPluginSetupDataAfterCommercialLicenseActivated()
+            || $this->disableAutomaticConfigUpdates()
+        ) {
+            return;
+        }
+
+        $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(null);
+    }
+
+    protected function doInstallPluginSetupDataAfterCommercialLicenseActivated(): bool
+    {
+        return true;
+    }
+
     protected function disableAutomaticConfigUpdates(): bool
     {
         /** @var ModuleConfiguration */
@@ -60,7 +96,7 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
         return $moduleConfiguration->disableAutomaticConfigUpdates();
     }
 
-    protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(string $optionName): void
+    protected function installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated(string|null $optionName): void
     {
         $this->installPluginSetupData();
     }

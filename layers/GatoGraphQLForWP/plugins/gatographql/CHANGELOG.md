@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Malcare deactivate triggers Exception (#3054)
+- Install plugin setup data on first request after activating license (#3055)
 
 ## 11.1.2 - 07/03/2025
 
