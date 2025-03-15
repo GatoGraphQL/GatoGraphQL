@@ -48,7 +48,12 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
                     }
 
                     $this->installPluginSetupDataWhenSettingsCategoriesOptionFormsUpdated($optionName);
-                }
+                },
+                /**
+                 * Execute after activating the license.
+                 * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php
+                 */
+                10
             );
         }
     }

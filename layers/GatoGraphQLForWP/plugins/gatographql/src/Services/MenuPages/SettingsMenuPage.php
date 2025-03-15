@@ -241,7 +241,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     return;
                 }
             },
-            10,
+            9, // Do it on "9", so hooks on "10" will be executed after the activation of the license
             2
         );
 
