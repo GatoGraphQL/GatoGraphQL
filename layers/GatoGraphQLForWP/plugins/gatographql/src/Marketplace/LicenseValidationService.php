@@ -220,6 +220,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
 
             // Do not store deactivated instances
             unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
+            $extensionManager->deactivateExtensionLicense($extensionSlug);
 
             $successMessage = sprintf(
                 \__('Deactivating license for "%s" succeeded. You now have %s/%s instances activated.', 'gatographql'),

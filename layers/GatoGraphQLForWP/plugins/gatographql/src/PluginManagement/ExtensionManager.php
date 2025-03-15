@@ -484,6 +484,11 @@ class ExtensionManager extends AbstractPluginManager
         return isset($this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug]);
     }
 
+    public function deactivateExtensionLicense(string $extensionSlug): void
+    {
+        unset($this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug]);
+    }
+
     /**
      * @return array<string,string> Extension Slug => Extension Product Name
      */
