@@ -74,7 +74,8 @@ abstract class AbstractStandaloneGatoGraphQLBundleExtension extends AbstractGato
      */
     protected function maybeInstallPluginSetupDataAfterCommercialLicenseActivated(): void
     {
-        if (!$this->doInstallPluginSetupDataAfterCommercialLicenseActivated()
+        if (
+            !$this->doInstallPluginSetupDataAfterCommercialLicenseActivated()
             || $this->disableAutomaticConfigUpdates()
         ) {
             return;

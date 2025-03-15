@@ -431,7 +431,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 if ($userSettingsManager->getLicenseActivationTimestamp() !== null) {
                     $userSettingsManager->removeLicenseActivationTimestamp();
                     $this->enqueueFlushRewriteRules();
-                    
+
                     /**
                      * Allow to install plugin setup data after
                      * a commercial license has been activated
