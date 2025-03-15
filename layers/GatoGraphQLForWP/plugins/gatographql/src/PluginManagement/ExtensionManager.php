@@ -484,6 +484,16 @@ class ExtensionManager extends AbstractPluginManager
         return isset($this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug]);
     }
 
+    public function activateExtensionLicense(string $extensionSlug): void
+    {
+        if (isset($this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug])) {
+            // Already activated
+            return;
+        }
+        $extensionData = $this->nonActivatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug];
+        $this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = $extensionData;
+    }
+
     public function deactivateExtensionLicense(string $extensionSlug): void
     {
         unset($this->activatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug]);

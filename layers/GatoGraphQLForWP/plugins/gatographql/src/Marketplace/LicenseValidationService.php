@@ -279,6 +279,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                 $extensionSlug,
                 $commercialExtensionActivatedLicenseObjectProperties,
             );
+            $extensionManager->activateExtensionLicense($extensionSlug);
 
             $successMessage = sprintf(
                 \__('Activating license for "%s" succeeded. You have %s/%s instances activated.', 'gatographql'),
