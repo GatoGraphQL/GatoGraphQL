@@ -22,7 +22,7 @@ abstract class AbstractStandalonePlugin extends Plugin
         string $pluginFile, /** The main plugin file */
         string $pluginVersion,
         ?string $pluginName = null,
-        string $commitHash = null, /** Useful for development to regenerate the container when testing the generated plugin */
+        ?string $commitHash = null, /** Useful for development to regenerate the container when testing the generated plugin */
         ?MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration = null,
     ) {
         $pluginFolder = \dirname($pluginFile) . '/' . $this->getGatoGraphQLComposerRelativePath();
