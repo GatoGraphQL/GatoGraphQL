@@ -7,6 +7,7 @@ namespace GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers;
 use GatoGraphQLStandalone\GatoGraphQL\Constants\AdvancedModeOptions;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver as UpstreamPluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use PoP\Root\Environment as RootEnvironment;
 
 class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGeneralSettingsFunctionalityModuleResolver
 {
@@ -53,11 +54,12 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         $useBooleanForAdvancedModeOption = $this->useBooleanForAdvancedModeOption();
+        $isApplicationEnvironmentDev = RootEnvironment::isApplicationEnvironmentDev();
         $defaultValues = [
             self::GENERAL => [
                 // self::OPTION_PRINT_SETTINGS_WITH_TABS => false,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => false,
-                self::OPTION_USE_ADVANCED_MODE => $useBooleanForAdvancedModeOption ? false : AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE,
+                self::OPTION_USE_ADVANCED_MODE => $useBooleanForAdvancedModeOption ? $isApplicationEnvironmentDev : ($isApplicationEnvironmentDev ? AdvancedModeOptions::ENABLE_ADVANCED_MODE : AdvancedModeOptions::DO_NOT_ENABLE_ADVANCED_MODE),
             ],
         ];
         return $defaultValues[$module][$option] ?? parent::getSettingsDefaultValue($module, $option);
