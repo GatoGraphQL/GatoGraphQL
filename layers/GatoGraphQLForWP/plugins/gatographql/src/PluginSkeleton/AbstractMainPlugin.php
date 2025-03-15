@@ -415,6 +415,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
 
+                $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
+
                 /**
                  * Check if there's a flag to flush the rewrite rules.
                  *
@@ -429,12 +431,33 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 if ($userSettingsManager->getLicenseActivationTimestamp() !== null) {
                     $userSettingsManager->removeLicenseActivationTimestamp();
                     $this->enqueueFlushRewriteRules();
+
+                    /**
+                     * Allow to install plugin setup data after
+                     * a commercial license has been activated
+                     */
+                    add_action(
+                        PluginAppHooks::INITIALIZE_APP,
+                        function (string $pluginAppGraphQLServerName) use ($registeredExtensionBaseNameInstances): void {
+                            if (
+                                $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                                || $this->initializationException !== null
+                            ) {
+                                return;
+                            }
+
+                            $this->anyCommercialLicenseJustActivated();
+                            foreach ($registeredExtensionBaseNameInstances as $extensionInstance) {
+                                $extensionInstance->anyCommercialLicenseJustActivated();
+                            }
+                        },
+                        PluginLifecyclePriorities::AFTER_EVERYTHING
+                    );
                 }
 
                 $optionNamespacer = OptionNamespacerFacade::getInstance();
                 $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
                 $storedPluginVersions = get_option($option, []);
-                $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
 
                 // Check if the main plugin has been activated or updated
                 $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
