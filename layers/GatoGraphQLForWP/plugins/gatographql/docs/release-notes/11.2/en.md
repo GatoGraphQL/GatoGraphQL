@@ -8,3 +8,4 @@
 ### Fixed
 
 - Malcare deactivate triggers Exception ([#3054](https://github.com/GatoGraphQL/GatoGraphQL/pull/3054))
+- Install plugin setup data on first request after activating license ([#3055](https://github.com/GatoGraphQL/GatoGraphQL/pull/3055))
