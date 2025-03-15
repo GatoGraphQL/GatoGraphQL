@@ -212,10 +212,12 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 12.0.0 =
+* Added documentation for new Elementor Premium Extension (#3052)
+
 = 11.2.0 =
 * Support fetching Page Builders data in the GraphQL schema (#3051)
 * Added documentation for new field `_objectMerge`, from the **Schema Functions** extension (#3050)
-* Added documentation for new Elementor Premium Extension (#3052)
 * Fixed: Malcare deactivate triggers Exception (#3054)
 
 = 11.1.2 =
