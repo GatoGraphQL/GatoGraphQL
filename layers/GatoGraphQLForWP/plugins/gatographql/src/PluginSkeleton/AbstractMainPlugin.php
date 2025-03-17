@@ -439,7 +439,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                      */
                     add_action(
                         PluginAppHooks::INITIALIZE_APP,
-                        function (string $pluginAppGraphQLServerName) use ($registeredExtensionBaseNameInstances): void {
+                        function (string $pluginAppGraphQLServerName) use ($registeredExtensionBaseNameInstances, $justActivatedLicenseExtensionNames): void
+                        {
                             if (
                                 $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
                                 || $this->initializationException !== null
@@ -447,8 +448,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                                 return;
                             }
 
-                            $this->isLicenseJustActivated();
+                            if (in_array($this->pluginSlug, $justActivatedLicenseExtensionNames)) {
+                                $this->isLicenseJustActivated();
+                            }
                             foreach ($registeredExtensionBaseNameInstances as $extensionInstance) {
+                                if (!in_array($extensionInstance->getPluginSlug(), $justActivatedLicenseExtensionNames)) {
+                                    continue;
+                                }
                                 $extensionInstance->isLicenseJustActivated();
                             }
                         },
