@@ -17,8 +17,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
 {
     private const TIMESTAMP_CONTAINER = 'container';
     private const TIMESTAMP_OPERATIONAL = 'operational';
-    private const TIMESTAMP_LICENSE_ACTIVATION = 'license-activation';
-    private const JUST_ACTIVATED_COMMERCIAL_LICENSE_EXTENSION_NAMES = 'just-activated-commercial-license-extension-names';
+    private const TRANSIENT_LICENSE_ACTIVATION = 'license-activation';
     private const TIMESTAMP_LICENSE_CHECK = 'license-check';
     /**
      * Cache the values in memory
@@ -176,7 +175,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getJustActivatedCommercialLicenseExtensionNames(): array
     {
-        return $this->getTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
+        return $this->getTimestamp(self::TRANSIENT_LICENSE_ACTIVATION);
     }
 
     /**
@@ -187,7 +186,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeJustActivatedCommercialLicenseExtensionNames(array $extensionSlugs): void
     {
-        $this->storeTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
+        $this->storeTimestamp(self::TRANSIENT_LICENSE_ACTIVATION);
     }
 
     /**
@@ -197,7 +196,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     public function removeJustActivatedCommercialLicenseExtensionNames(): void
     {
         $this->getTimestampSettingsManager()->removeTimestamps([
-            self::TIMESTAMP_LICENSE_ACTIVATION,
+            self::TRANSIENT_LICENSE_ACTIVATION,
         ]);
     }
 
