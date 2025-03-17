@@ -177,10 +177,12 @@ class UserSettingsManager implements UserSettingsManagerInterface
     }
 
     /**
-     * Store the current time to indicate the latest activation
-     * of any commercial license
+     * Store the extension names whose commercial license just
+     * just been activated.
+     *
+     * @param string[] $extensionSlugs
      */
-    public function storeLicenseActivationTimestamp(): void
+    public function storeLicenseActivationTimestamp(array $extensionSlugs): void
     {
         $this->storeTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
     }
