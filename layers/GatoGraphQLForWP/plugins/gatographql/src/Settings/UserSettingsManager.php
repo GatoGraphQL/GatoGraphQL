@@ -182,7 +182,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      *
      * @param string[] $extensionSlugs
      */
-    public function storeLicenseActivationTimestamp(array $extensionSlugs): void
+    public function storeJustActivatedCommercialLicenseExtensionNames(array $extensionSlugs): void
     {
         $this->storeTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
     }

@@ -62,7 +62,7 @@ interface UserSettingsManagerInterface
      *
      * @param string[] $extensionSlugs
      */
-    public function storeLicenseActivationTimestamp(array $extensionSlugs): void;
+    public function storeJustActivatedCommercialLicenseExtensionNames(array $extensionSlugs): void;
 
     /**
      * Remove the flag to indicate the latest activation
