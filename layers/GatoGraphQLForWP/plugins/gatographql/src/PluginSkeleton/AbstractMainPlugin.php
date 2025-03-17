@@ -447,9 +447,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                                 return;
                             }
 
-                            $this->anyCommercialLicenseJustActivated();
+                            $this->isLicenseJustActivated();
                             foreach ($registeredExtensionBaseNameInstances as $extensionInstance) {
-                                $extensionInstance->anyCommercialLicenseJustActivated();
+                                $extensionInstance->isLicenseJustActivated();
                             }
                         },
                         PluginLifecyclePriorities::AFTER_EVERYTHING
