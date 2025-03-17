@@ -7,3 +7,4 @@
 ## Breaking changes
 
 - Plugin constructor signature receives nullable `commitHash` param ([#3056](https://github.com/GatoGraphQL/GatoGraphQL/pull/3056))
+- Renamed method `anyCommercialLicenseJustActivated` to `isCommercialLicenseJustActivated` ([#3057](https://github.com/GatoGraphQL/GatoGraphQL/pull/3057))
