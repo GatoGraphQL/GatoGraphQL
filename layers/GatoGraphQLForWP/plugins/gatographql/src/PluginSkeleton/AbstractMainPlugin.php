@@ -428,9 +428,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Marketplace/LicenseValidationService.php `activateDeactivateValidateGatoGraphQLCommercialExtensions`
                  */
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
-                $justActivatedCommercialLicenseExtensionNames = $userSettingsManager->getJustActivatedCommercialLicenseTransientExtensionNames();
+                $justActivatedCommercialLicenseExtensionNames = $userSettingsManager->getJustActivatedLicenseTransientExtensionNames();
                 if ($justActivatedCommercialLicenseExtensionNames !== null && $justActivatedCommercialLicenseExtensionNames !== []) {
-                    $userSettingsManager->removeJustActivatedCommercialLicenseTransient();
+                    $userSettingsManager->removeJustActivatedLicenseTransient();
                     $this->enqueueFlushRewriteRules();
 
                     /**

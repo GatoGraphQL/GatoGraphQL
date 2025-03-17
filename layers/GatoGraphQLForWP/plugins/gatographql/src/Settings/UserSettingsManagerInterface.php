@@ -57,7 +57,7 @@ interface UserSettingsManagerInterface
      * 
      * @return string[]|null The license-just-activated extension names
      */
-    public function getJustActivatedCommercialLicenseTransientExtensionNames(): ?array;
+    public function getJustActivatedLicenseTransientExtensionNames(): ?array;
 
     /**
      * Store the extension names whose commercial license has
@@ -65,13 +65,13 @@ interface UserSettingsManagerInterface
      *
      * @param string[] $extensionSlugs
      */
-    public function storeJustActivatedCommercialLicenseTransient(array $extensionSlugs): void;
+    public function storeJustActivatedLicenseTransient(array $extensionSlugs): void;
 
     /**
      * Remove the flag to indicate the extension names whose commercial
      * license has just been activated.
      */
-    public function removeJustActivatedCommercialLicenseTransient(): void;
+    public function removeJustActivatedLicenseTransient(): void;
 
     public function hasSetting(string $module, string $option): bool;
     public function getSetting(string $module, string $option): mixed;
