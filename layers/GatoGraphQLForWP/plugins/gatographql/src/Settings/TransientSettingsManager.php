@@ -19,7 +19,7 @@ class TransientSettingsManager implements TransientSettingsManagerInterface
         return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
     }
 
-    public function getTransient(string $name, ?mixed $defaultValue = null): mixed
+    public function getTransient(string $name, mixed $defaultValue = null): mixed
     {
         /** @var array<string,mixed> */
         $transients = get_option($this->namespaceOption(Options::TRANSIENTS), []);
