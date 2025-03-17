@@ -57,6 +57,11 @@ class Options
      */
     public final const TIMESTAMPS = 'timestamps';
     /**
+     * Option name under which to store transient data, to calculate
+     * operations between request and request
+     */
+    public final const TRANSIENTS = 'transients';
+    /**
      * Store the license data for all bundles/extensions that
      * have been activated
      */

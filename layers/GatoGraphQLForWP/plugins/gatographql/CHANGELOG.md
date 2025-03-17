@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Plugin constructor signature receives nullable `commitHash` param (#3056)
+- Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 
 ## 11.2.0 - 15/03/2025
 

@@ -323,7 +323,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
          * properly afterwards. This must be invoked right after. That's
          * why we use a timestamp as a flag to indicate this state.
          */
-        $this->getUserSettingsManager()->storeLicenseActivationTimestamp();
+        $this->getUserSettingsManager()->storeJustActivatedLicenseTransient($justActivatedCommercialExtensionSlugs);
     }
 
     /**
