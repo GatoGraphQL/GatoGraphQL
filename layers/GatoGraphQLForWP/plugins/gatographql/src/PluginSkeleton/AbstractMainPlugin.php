@@ -429,7 +429,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  */
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
                 if ($userSettingsManager->getJustActivatedCommercialLicenseExtensionNames() !== []) {
-                    $userSettingsManager->removeLicenseActivationTimestamp();
+                    $userSettingsManager->removeJustActivatedCommercialLicenseExtensionNames();
                     $this->enqueueFlushRewriteRules();
 
                     /**

@@ -68,10 +68,10 @@ interface UserSettingsManagerInterface
     public function storeJustActivatedCommercialLicenseExtensionNames(array $extensionSlugs): void;
 
     /**
-     * Remove the flag to indicate the latest activation
-     * of any commercial license
+     * Remove the flag to indicate the extension names whose commercial
+     * license has just been activated.
      */
-    public function removeLicenseActivationTimestamp(): void;
+    public function removeJustActivatedCommercialLicenseExtensionNames(): void;
 
     public function hasSetting(string $module, string $option): bool;
     public function getSetting(string $module, string $option): mixed;

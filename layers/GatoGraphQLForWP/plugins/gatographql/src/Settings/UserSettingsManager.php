@@ -191,10 +191,10 @@ class UserSettingsManager implements UserSettingsManagerInterface
     }
 
     /**
-     * Remove the flag to indicate the latest activation
-     * of any commercial license
+     * Remove the flag to indicate the extension names whose commercial
+     * license has just been activated.
      */
-    public function removeLicenseActivationTimestamp(): void
+    public function removeJustActivatedCommercialLicenseExtensionNames(): void
     {
         $this->getTimestampSettingsManager()->removeTimestamps([
             self::TIMESTAMP_LICENSE_ACTIVATION,
