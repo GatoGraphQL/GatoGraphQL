@@ -177,9 +177,9 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * Retrieve the extension names whose commercial license has
      * just been activated.
      * 
-     * @return string[] The license-just-activated extension names
+     * @return string[]|null The license-just-activated extension names
      */
-    public function getJustActivatedCommercialLicenseTransient(): array
+    public function getJustActivatedCommercialLicenseTransient(): ?array
     {
         return $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_LICENSE_ACTIVATION);
     }
