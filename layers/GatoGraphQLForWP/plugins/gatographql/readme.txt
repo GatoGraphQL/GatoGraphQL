@@ -215,7 +215,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 12.0.0 =
 * Added documentation for new Elementor Premium Extension (#3052)
 * Breaking change: Plugin constructor signature receives nullable `commitHash` param (#3056)
-* Breaking change: Store the extension names whose license has just been activated, instead of a timestamp (#3057)
+* Breaking change: Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 
 = 11.2.0 =
 * Support fetching Page Builders data in the GraphQL schema (#3051)
