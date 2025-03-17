@@ -19,14 +19,14 @@ class TransientSettingsManager implements TransientSettingsManagerInterface
         return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
     }
 
-    public function getTransient(string $name, ?string $defaultValue = null): ?string
+    public function getTransient(string $name, ?mixed $defaultValue = null): mixed
     {
-        /** @var array<string,string> */
-        $timestamps = get_option($this->namespaceOption(Options::TRANSIENTS), []);
-        if (!array_key_exists($name, $timestamps)) {
+        /** @var array<string,mixed> */
+        $transients = get_option($this->namespaceOption(Options::TRANSIENTS), []);
+        if (!array_key_exists($name, $transients)) {
             return $defaultValue;
         }
-        return $timestamps[$name];
+        return $transients[$name];
     }
 
     protected function namespaceOption(string $option): string
@@ -34,32 +34,32 @@ class TransientSettingsManager implements TransientSettingsManagerInterface
         return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
-    public function storeTransient(string $name, string $timestamp): void
+    public function storeTransient(string $name, mixed $transient): void
     {
-        $this->storeTransients([$name => $timestamp]);
+        $this->storeTransients([$name => $transient]);
     }
 
     /**
-     * @param array<string,string> $nameTransients Key: name, Value: timestamp
+     * @param array<string,mixed> $nameTransients Key: name, Value: transient data
      */
     public function storeTransients(array $nameTransients): void
     {
         $option = $this->namespaceOption(Options::TRANSIENTS);
 
         /**
-         * Get the current timestamps from the DB
-         * @var array<string,string>
+         * Get the current transients from the DB
+         * @var array<string,mixed>
          */
-        $timestamps = get_option($option, []);
+        $transients = get_option($option, []);
 
         /**
          * Override with the provided values
          */
-        $timestamps = array_merge(
-            $timestamps,
+        $transients = array_merge(
+            $transients,
             $nameTransients
         );
-        update_option($option, $timestamps);
+        update_option($option, $transients);
     }
 
     /**
@@ -72,21 +72,21 @@ class TransientSettingsManager implements TransientSettingsManagerInterface
         /**
          * Remove only the provided keys
          *
-         * @var array<string,string>
+         * @var array<string,mixed>
          */
-        $timestamps = get_option($option, []);
+        $transients = get_option($option, []);
         foreach ($names as $name) {
-            unset($timestamps[$name]);
+            unset($transients[$name]);
         }
 
         /**
          * If there were no other keys, can safely delete the option
          */
-        if ($timestamps === []) {
+        if ($transients === []) {
             delete_option($option);
             return;
         }
 
-        update_option($option, $timestamps);
+        update_option($option, $transients);
     }
 }
