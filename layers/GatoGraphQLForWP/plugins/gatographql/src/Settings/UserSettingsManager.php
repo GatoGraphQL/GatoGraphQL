@@ -169,15 +169,18 @@ class UserSettingsManager implements UserSettingsManagerInterface
     }
 
     /**
-     * Timestamp of the latest activation of any commercial license
+     * Retrieve the extension names whose commercial license has
+     * just been activated.
+     * 
+     * @return string[]
      */
-    public function getLicenseActivationTimestamp(): ?int
+    public function getJustActivatedCommercialLicenseExtensionNames(): array
     {
         return $this->getTimestamp(self::TIMESTAMP_LICENSE_ACTIVATION);
     }
 
     /**
-     * Store the extension names whose commercial license just
+     * Store the extension names whose commercial license has
      * just been activated.
      *
      * @param string[] $extensionSlugs

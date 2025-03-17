@@ -52,12 +52,15 @@ interface UserSettingsManagerInterface
     public function storeLicenseCheckTimestamp(): void;
 
     /**
-     * Timestamp of the latest activation of any commercial license
+     * Retrieve the extension names whose commercial license has
+     * just been activated.
+     * 
+     * @return string[]
      */
-    public function getLicenseActivationTimestamp(): ?int;
+    public function getJustActivatedCommercialLicenseExtensionNames(): array;
 
     /**
-     * Store the extension names whose commercial license just
+     * Store the extension names whose commercial license has
      * just been activated.
      *
      * @param string[] $extensionSlugs
