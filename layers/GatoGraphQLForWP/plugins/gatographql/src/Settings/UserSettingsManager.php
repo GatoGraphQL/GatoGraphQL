@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFac
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
 
+use GatoGraphQL\GatoGraphQL\Facades\TransientSettingsManagerFacade;
 use function get_option;
 use function uniqid;
 use function update_option;
@@ -27,11 +28,16 @@ class UserSettingsManager implements UserSettingsManagerInterface
     protected array $options = [];
 
     private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
+    private ?TransientSettingsManagerInterface $transientSettingsManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
     final protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
     {
         return $this->timestampSettingsManager ??= TimestampSettingsManagerFacade::getInstance();
+    }
+    final protected function getTransientSettingsManager(): TransientSettingsManagerInterface
+    {
+        return $this->transientSettingsManager ??= TransientSettingsManagerFacade::getInstance();
     }
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {
@@ -175,7 +181,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getJustActivatedCommercialLicenseExtensionNames(): array
     {
-        return $this->getTimestamp(self::TRANSIENT_LICENSE_ACTIVATION);
+        return $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_LICENSE_ACTIVATION);
     }
 
     /**
@@ -186,7 +192,10 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeJustActivatedCommercialLicenseExtensionNames(array $extensionSlugs): void
     {
-        $this->storeTimestamp(self::TRANSIENT_LICENSE_ACTIVATION);
+        $this->getTransientSettingsManager()->storeTransient(
+            self::TRANSIENT_LICENSE_ACTIVATION,
+            $extensionSlugs
+        );
     }
 
     /**
@@ -195,7 +204,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function removeJustActivatedCommercialLicenseExtensionNames(): void
     {
-        $this->getTimestampSettingsManager()->removeTimestamps([
+        $this->getTransientSettingsManager()->removeTransients([
             self::TRANSIENT_LICENSE_ACTIVATION,
         ]);
     }
