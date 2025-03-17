@@ -177,9 +177,9 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * Retrieve the extension names whose commercial license has
      * just been activated.
      * 
-     * @return string[]
+     * @return string[] The license-just-activated extension names
      */
-    public function getJustActivatedCommercialLicenseExtensionNames(): array
+    public function getJustActivatedCommercialLicenseTransient(): array
     {
         return $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_LICENSE_ACTIVATION);
     }
@@ -190,7 +190,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      *
      * @param string[] $extensionSlugs
      */
-    public function storeJustActivatedCommercialLicenseExtensionNames(array $extensionSlugs): void
+    public function storeJustActivatedCommercialLicenseTransient(array $extensionSlugs): void
     {
         $this->getTransientSettingsManager()->storeTransient(
             self::TRANSIENT_LICENSE_ACTIVATION,
@@ -202,7 +202,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      * Remove the flag to indicate the extension names whose commercial
      * license has just been activated.
      */
-    public function removeJustActivatedCommercialLicenseExtensionNames(): void
+    public function removeJustActivatedCommercialLicenseTransient(): void
     {
         $this->getTransientSettingsManager()->removeTransients([
             self::TRANSIENT_LICENSE_ACTIVATION,
