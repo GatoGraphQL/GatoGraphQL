@@ -19,7 +19,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     private const TIMESTAMP_OPERATIONAL = 'operational';
     private const TIMESTAMP_LICENSE_ACTIVATION = 'license-activation';
     private const JUST_ACTIVATED_COMMERCIAL_LICENSE_EXTENSION_NAMES = 'just-activated-commercial-license-extension-names';
-
+    private const TIMESTAMP_LICENSE_CHECK = 'license-check';
     /**
      * Cache the values in memory
      *
@@ -139,7 +139,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function getLicenseCheckTimestamp(): ?int
     {
-        return $this->getTimestamp(self::JUST_ACTIVATED_COMMERCIAL_LICENSE_EXTENSION_NAMES);
+        return $this->getTimestamp(self::TIMESTAMP_LICENSE_CHECK);
     }
 
     protected function getTimestamp(string $timestampName): ?int
@@ -157,7 +157,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     public function storeLicenseCheckTimestamp(): void
     {
-        $this->storeTimestamp(self::JUST_ACTIVATED_COMMERCIAL_LICENSE_EXTENSION_NAMES);
+        $this->storeTimestamp(self::TIMESTAMP_LICENSE_CHECK);
     }
 
     protected function storeTimestamp(string $timestampName): void
