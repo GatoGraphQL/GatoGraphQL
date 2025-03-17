@@ -54,7 +54,7 @@ interface UserSettingsManagerInterface
     /**
      * Retrieve the extension names whose commercial license has
      * just been activated.
-     * 
+     *
      * @return string[]|null The license-just-activated extension names
      */
     public function getJustActivatedLicenseTransientExtensionNames(): ?array;

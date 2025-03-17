@@ -8,8 +8,8 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
-
 use GatoGraphQL\GatoGraphQL\Facades\TransientSettingsManagerFacade;
+
 use function get_option;
 use function uniqid;
 use function update_option;
@@ -176,7 +176,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     /**
      * Retrieve the extension names whose commercial license has
      * just been activated.
-     * 
+     *
      * @return string[]|null The license-just-activated extension names
      */
     public function getJustActivatedLicenseTransientExtensionNames(): ?array
