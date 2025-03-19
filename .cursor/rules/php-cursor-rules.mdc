@@ -13,23 +13,30 @@ Core Principles
 - Prefer iteration and modularization over duplication to promote code reuse.
 - Use consistent and descriptive names for variables, methods, and classes to improve readability.
 - Favor WordPress hooks (actions and filters) for extending functionality.
+- Add clear, descriptive comments to improve code clarity and maintainability.
+
 
 Dependencies
 - Composer for dependency management
 - PHP 8.1+
 - WordPress (latest stable version)
 
+
 PHP and WordPress Standards
 - Leverage PHP 8.1+ features when appropriate (e.g., typed properties, match expressions).
 - Adhere to PSR-12 coding standards for consistent code style.
 - Always use strict typing: declare(strict_types=1);
 - Implement robust error handling and logging:
-> Use WordPress debug logging features.
-> Create custom exceptions when necessary.
-> Employ try-catch blocks for expected exceptions.
+    - Use WordPress's built-in debug logging (WP_DEBUG_LOG).
+    - Create custom exceptions when necessary.
+    - Employ try-catch blocks for expected exceptions.
 - Utilize WordPress core functions and APIs when available.
 - Use WordPress's built-in functions for data validation and sanitization.
 - Implement proper nonce verification for form submissions.
+- For database interactions:
+    - Use WordPress’s $wpdb abstraction layer.
+    - Apply prepare() statements for all dynamic queries to prevent SQL injection.
+    - Use the dbDelta() function for managing database schema changes.
 
 
 Code Architecture
@@ -45,7 +52,7 @@ Code Architecture
     - Use type hints for properties, method parameters, and return types.
     - Leverage PHP's strict typing to catch type-related errors early.
 * Error Handling:
-    - Use WordPress debug logging features.
+    - Use WordPress's built-in debug logging (WP_DEBUG_LOG).
     - Create custom exceptions when necessary.
     - Use try-catch blocks for expected exceptions.
     - Handle exceptions gracefully and return appropriate responses.
@@ -53,6 +60,7 @@ Code Architecture
 
 WordPress Best Practices
 - Use WordPress hooks (actions and filters) instead of modifying core files.
+- Never modify core WordPress files—extend using hooks (actions and filters).
 - Implement proper theme functions using functions.php.
 - Use WordPress's built-in user roles and capabilities system.
 - Utilize WordPress's transients API for caching.
