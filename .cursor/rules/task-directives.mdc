@@ -1,0 +1,87 @@
+---
+description: When a user request begins with "TASK:" (including the colon), this is a signal to follow a specific structured workflow. This is a high-priority directive that overrides other patterns.
+globs: *.php
+alwaysApply: true
+---
+# TASK: Directive Handler
+
+When a user request begins with "TASK:", follow this structured workflow:
+
+## 1. Initial Analysis
+
+- Analyze the provided context and task requirements
+- Search the codebase for relevant files and patterns
+- Look for similar implementations or examples
+- Understand the scope and requirements of the task
+
+## 2. Scratchpad Management
+
+- Update [scratchpad.md](mdc:.cursor/scratchpad.md) with the following structure:
+  ```
+  current_task: "Clear description of the task"
+  status: in_progress
+  description: Detailed explanation of what needs to be done
+  
+  steps:
+  [ ] Step 1 with specific action
+  [ ] Step 2 with specific action
+  ...
+  
+  blockers:
+  - Any potential issues or unknowns
+  
+  reflections:
+  - Technical considerations
+  - Implementation notes
+  - Design decisions
+  
+  decisions:
+  - Key decisions made during implementation
+  ```
+
+## 3. Branch Creation
+
+- Create a new git branch from `master` using one of these prefixes:
+  - `feature/` for new functionality
+  - `fix/` for bug fixes
+- Follow the prefix with a short, descriptive name related to the task
+- Example:
+
+```
+git checkout -b feature/[TASK_IDENTIFIER]
+```
+
+## 4. Implementation Process
+
+- Work through the steps in the scratchpad systematically
+- Update the scratchpad as progress is made (mark completed steps with [X])
+- Add any new blockers, reflections, or decisions as they arise
+- Stop and ask for clarification when needed
+- Follow all coding standards in [instructions.md](mdc:instructions.md)
+
+## 5. Task Completion
+
+- Ensure all steps in the scratchpad are marked as complete
+- Update the scratchpad status to "complete"
+- Add a line to [readme.txt](mdc:submodules/ExtensionStarter/submodules/GatoGraphQL/layers/GatoGraphQLForWP/plugins/gatographql/readme.txt) in the appropriate section (typically under the next version number)
+  - Follow the existing writing style (concise, action-oriented)
+  - Format should match: "Added/Improved/Fixed - Description of the change"
+- Summarize the changes made and any follow-up actions needed
+
+## Example Workflow
+
+1. Receive task: "TASK: Implement integration for meta field mutations"
+2. Update scratchpad with task details and steps
+3. Create branch: `git checkout -b feature/implement-integration-for-meta-field-mutations`
+4. Implement the solution, updating scratchpad as you go
+5. Add to readme.txt: "Added - Integration for meta field mutations"
+6. Summarize the changes and mark task as complete
+
+## Important Guidelines
+
+- Always follow PHP PSR-12 coding standards
+- Maintain backward compatibility
+- Add proper error handling and logging
+- Include appropriate documentation
+- Test thoroughly before marking complete
+- Ask for clarification rather than making assumptions
