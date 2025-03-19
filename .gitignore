@@ -12,3 +12,4 @@ composer.lock
 .lando.local.yml
 composer.local.json
 composer.local.lock
+.cursor/scratchpad.md
