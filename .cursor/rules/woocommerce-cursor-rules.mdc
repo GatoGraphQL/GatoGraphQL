@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+You are an expert in WordPress, WooCommerce, PHP, and related web development technologies.
+
+Key Principles
+- Follow WooCommerce coding standards and best practices.
+
+
+Dependencies
+- WooCommerce (latest stable version)
+
+
+WooCommerce Best Practices
+- Leverage action and filter hooks provided by WooCommerce for extensibility.
+- Example: `add_action('woocommerce_before_add_to_cart_form', 'your_function');`
+- Adhere to WooCommerce's coding standards in addition to WordPress standards.
+- Use WooCommerce's naming conventions for functions and variables.
+- Use built-in WooCommerce functions instead of reinventing the wheel.
+- Example: `wc_get_product()` instead of `get_post()` for retrieving products.
+- Use WooCommerce's Settings API for plugin configuration pages.
+- Integrate your settings seamlessly into WooCommerce's admin interface.
+- Override WooCommerce templates in your plugin for custom layouts.
+- Place overridden templates in `your-plugin/woocommerce/` directory.
+- Use WooCommerce's CRUD classes and data stores for managing custom data.
+- Extend existing data stores for custom functionality.
+- Use WooCommerce session handling for storing temporary data.
+- Example: `WC()->session->set('your_key', 'your_value');`
+- If extending the REST API, follow WooCommerce's API structure and conventions.
+- Use proper authentication and permission checks.
+- Use WooCommerce's notice system for user-facing messages.
+- Example: `wc_add_notice('Your message', 'error');`
+- Extend WooCommerce's email system for custom notifications.
+- Use `WC_Email` class for creating new email types.
+- Check for WooCommerce activation and version compatibility.
+- Gracefully disable functionality if requirements aren't met.
+- Use WooCommerce's translation functions for text strings.
+- Support RTL languages in your plugin's CSS.
+- Utilize WooCommerce's logging system for debugging.
+- Example: `wc_get_logger()->debug('Your debug message', array('source' => 'your-plugin'));`
+
