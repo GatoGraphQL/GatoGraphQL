@@ -84,15 +84,15 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
          */
         $attachmentMetadata = wp_get_attachment_metadata((int) $existingMediaItemID, true);
         if ($attachmentMetadata !== false) {
-            wp_update_attachment_metadata($mediaItemID, wp_slash($attachmentMetadata));
+            wp_update_attachment_metadata($mediaItemID, $attachmentMetadata);
         }
         $attachedFile = get_attached_file((int) $existingMediaItemID, true);
         if ($attachedFile !== false) {
-            update_attached_file($mediaItemID, wp_slash($attachedFile));
+            update_attached_file($mediaItemID, $attachedFile);
         }
         $alternativeText = get_post_meta((int) $existingMediaItemID, '_wp_attachment_image_alt', true);
         if ($alternativeText) {
-            add_post_meta($mediaItemID, '_wp_attachment_image_alt', wp_slash($alternativeText));
+            add_post_meta($mediaItemID, '_wp_attachment_image_alt', $alternativeText);
         }
 
         return $mediaItemID;
