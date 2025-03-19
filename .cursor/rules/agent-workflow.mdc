@@ -1,0 +1,19 @@
+---
+description: Description: High-level guidance for AI agents on how to prioritize rules and manage workflows. This is a meta-rule that helps organize the application of other rules.
+globs: 
+alwaysApply: true
+---
+# Agent Workflow Guidelines
+
+## Priority Order
+1. "TASK:" directives (see [task-directives.mdc](mdc:.cursor/rules/task-directives.mdc))
+2. Code generation requests (follow patterns in relevant rule files)
+3. General inquiries (reference [instructions.md](mdc:instructions.md))
+
+## Scratchpad Management
+Always maintain the scratchpad at [scratchpad.md](mdc:.cursor/scratchpad.md) for any non-trivial task.
+
+## Documentation References
+- For PHP and WordPress standards: See [php-wordpress.mdc](mdc:.cursor/rules/php-wordpress.mdc)
+- For GraphQL schema extensions: See [schema-config-access-control-lists.webp](mdc:layers/GatoGraphQLForWP/plugins/access-control/docs/images/schema-config-access-control-lists.webp)
+- For core functionality: See [core.mdc](mdc:.cursor/rules/core.mdc)
