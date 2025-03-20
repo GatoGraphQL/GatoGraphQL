@@ -56,16 +56,16 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 
 #### GraphQL schema resolvers
 
-- Object Type Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/ObjectType/`
-- Custom Scalar Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/ScalarType/`
-- Enum Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/EnumType/`
-- Interface Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/InterfaceType/`
-- Union Type Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/UnionType/`
-- Input Object Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/InputObjectType/`
-- Object Field Resolvers: `layers/{layer_name}/packages/{package_name}/src/FieldResolvers/ObjectType/`
-- Interface Field Resolvers: `layers/{layer_name}/packages/{package_name}/src/FieldResolvers/InterfaceType/`
-- Mutation Resolvers: `layers/{layer_name}/packages/{package_name}/src/MutationResolvers/`
-- Directive Resolvers: `layers/{layer_name}/packages/{package_name}/src/DirectiveResolvers/`
+- Object Type Resolvers: `src/TypeResolvers/ObjectType/`
+- Custom Scalar Resolvers: `src/TypeResolvers/ScalarType/`
+- Enum Resolvers: `src/TypeResolvers/EnumType/`
+- Interface Resolvers: `src/TypeResolvers/InterfaceType/`
+- Union Type Resolvers: `src/TypeResolvers/UnionType/`
+- Input Object Resolvers: `src/TypeResolvers/InputObjectType/`
+- Object Field Resolvers: `src/FieldResolvers/ObjectType/`
+- Interface Field Resolvers: `src/FieldResolvers/InterfaceType/`
+- Mutation Resolvers: `src/MutationResolvers/`
+- Directive Resolvers: `src/DirectiveResolvers/`
 
 ### Tests
 
