@@ -88,7 +88,7 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 
 - Based on fixtures, containing:
   - A GraphQL query to execute against the GraphQL server
-  - A dictionary of GraphQL variables, as a .var.json file(Optional)
+  - A dictionary of GraphQL variables, as a `.var.json` file (Optional)
   - The expected response in JSON
 
 ### Coding Standards
