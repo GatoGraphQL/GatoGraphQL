@@ -208,20 +208,11 @@ ${service}->doSomething();
 
 ### Common Tasks
 
-#### Adding New CRM Support
-
-1. Create new class in `includes/crm/`
-2. Implement required abstract methods
-3. Add to CRM registration
-4. Create API connection tests
-5. Document supported features
-
 #### Creating Integrations
 
-1. Check `includes/integrations/` for similar plugins
-2. Use standard integration class structure
-3. Register filters for field sync
-4. Add admin settings if needed
+1. Check for similar plugins
+2. Replicate folders/files and adapt as needed
+3. Add module settings if needed
 
 ### Security Practices
 
