@@ -221,7 +221,8 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 4. Use existing helper functions and utilities
 5. Reference services from the container
 
-### Code Generation
+<!-- @todo Check if this is needed -->
+<!-- ### Code Generation
 
 When asking AI to generate code:
 
@@ -244,7 +245,7 @@ final protected function get{Service}(): {ServiceInterface}
 // Use service
 ${service} = $this->get{Service}();
 ${service}->doSomething();
-```
+``` -->
 
 ### Common Tasks
 
