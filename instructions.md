@@ -117,6 +117,16 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 #### Mutation Resolver
 
 - Mutation `createPost`: `layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+- Mutation resolvers for `createPost`:
+  - `layers/CMSSchema/packages/post-mutations/src/MutationResolvers/CreatePostMutationResolver.php`
+  - `layers/CMSSchema/packages/post-mutations/src/MutationResolvers/PayloadableCreatePostMutationResolver.php`
+
+##### Bulk Mutation Resolver
+
+- Bulk mutation `createPosts`: `layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+- Bulk mutation resolvers for `createPosts`:
+  - `layers/CMSSchema/packages/post-mutations/src/MutationResolvers/CreatePostBulkOperationMutationResolver.php`
+  - `layers/CMSSchema/packages/post-mutations/src/MutationResolvers/PayloadableCreatePostBulkOperationMutationResolver.php`
 
 #### Custom Scalar Resolver
 
@@ -146,11 +156,11 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 
 - Oneof Input Object `UserByInput`: `layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserByOneofInputObjectTypeResolver.php`
 
-#### Object DataLoader Resolvers
+#### Object DataLoader Resolver
 
 - Resolving `User` objects: `layers/CMSSchema/packages/users/src/RelationalTypeDataLoaders/ObjectType/UserObjectTypeDataLoader.php`
 
-#### Union DataLoader Resolvers
+#### Union DataLoader Resolver
 
 - Resolving `CustomPost` unions: `layers/CMSSchema/packages/customposts/src/RelationalTypeDataLoaders/ObjectType/CustomPostObjectTypeDataLoader.php`
 
