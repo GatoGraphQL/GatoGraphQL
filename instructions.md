@@ -154,7 +154,7 @@ ${service}->doSomething();
 
 ### Common Tasks
 
-#### Extending the GraphQL schema in Gato GraphQL to access WordPress data
+#### Extending the GraphQL schema in Gato GraphQL
 
 1. Plan and propose: Given the requirements, check for similar packages already included in Gato GraphQL, and propose how to extend the GraphQL schema
 2. Create folders, files, and code for the packages
