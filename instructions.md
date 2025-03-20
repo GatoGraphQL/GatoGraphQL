@@ -97,11 +97,9 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 - Test against supported WordPress versions (latest - 2)
 - Test against supported WooCommerce versions when applicable
 
-## Architecture
+## Extending the GraphQL Schema - Source code examples
 
-### Extending the GraphQL Schema (standard GraphQL spec elements)
-
-Source code examples:
+### GraphQL spec elements
 
 #### Type Resolver
 
@@ -143,9 +141,7 @@ Source code examples:
 
 - Directive `@skip`: `layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
 
-### Extending the GraphQL Schema (custom Gato GraphQL elements)
-
-Source code examples:
+### Custom Gato GraphQL elements
 
 #### Global Field Resolver
 
