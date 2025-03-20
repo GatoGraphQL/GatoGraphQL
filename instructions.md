@@ -179,46 +179,31 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 2. Prioritize maintaining backward compatibility
 3. Follow established hook naming conventions
 4. Use existing helper functions and utilities
+5. Reference services from the container
 
 ### Code Generation
 
 When asking AI to generate code:
 
-1. **Integration Development**
+1. **Interacting with Services**
 
 ```php
-class WPF_{CRM_Name} extends WPF_CRM_Base {
-    // Start with required abstract methods
-    // Add CRM-specific implementations
+// Define the service in the class
+private ?{ServiceInterface} ${service} = null;
+
+final protected function get{Service}(): {ServiceInterface}
+{
+   if ($this->{service} === null) {
+      /** @var {ServiceInterface} */
+      ${service} = $this->instanceManager->getInstance({ServiceInterface}::class);
+      $this->{service} = ${service};
+   }
+   return $this->{service};
 }
-```
 
-2. **Hook Usage**
-
-```php
-// Filters
-apply_filters( 'wpf_[context]_[action]', $value, $args );
-
-// Actions
-do_action( 'wpf_[context]_[action]', $args );
-```
-
-3. **API Interactions**
-
-```php
-// Use built-in HTTP methods
-$response = wp_remote_post( $url, $args );
-wpf_log( 'info', $user_id, 'API call to: ' . $url );
-```
-
-4. **Storing and Retrieving Options**
-
-```php
-// Store options
-wp_fusion()->settings->set( 'option_name', $value );
-
-// Retrieve options
-$value = wpf_get_option( 'option_name', $default = false );
+// Use service
+${service} = $this->get{Service}();
+${service}->doSomething();
 ```
 
 ### Common Tasks
