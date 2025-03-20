@@ -62,12 +62,14 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 - Custom Scalar Resolvers: `src/TypeResolvers/ScalarType/`
 - Enum Resolvers: `src/TypeResolvers/EnumType/`
 - Interface Resolvers: `src/TypeResolvers/InterfaceType/`
-- Union Type Resolvers: `src/TypeResolvers/UnionType/`
 - Input Object Resolvers: `src/TypeResolvers/InputObjectType/`
+- Union Type Resolvers: `src/TypeResolvers/UnionType/`
+- Resolvers to add Object Types to Union Types: `src/ObjectTypeResolverPickers/`
 - Object Field Resolvers: `src/FieldResolvers/ObjectType/`
 - Interface Field Resolvers: `src/FieldResolvers/InterfaceType/`
 - Directive Resolvers: `src/DirectiveResolvers/`
 - Mutation Resolvers: `src/MutationResolvers/`
+- DataLoader Resolvers: `src/RelationalTypeDataLoaders/`
 
 ### Tests
 
