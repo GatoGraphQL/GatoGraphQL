@@ -238,8 +238,8 @@ ${service}->doSomething();
 #### Creating Integrations
 
 1. Check for similar plugins
-2. Replicate folders/files and adapt as needed
-3. Add module settings if needed
+2. Check packages used by those plugins
+3. Replicate folders/files and adapt as needed
 
 ### Security Practices
 
