@@ -134,6 +134,10 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 
 - Union type `CustomPostUnionTypeResolver`: `layers/CMSSchema/packages/customposts/src/TypeResolvers/UnionType/CustomPostUnionTypeResolver.php`
 
+### Resolvers to add Object Types to Union Types
+
+- Adding `GenericCustomPost` to `CustomPostUnion`: `layers/CMSSchema/packages/customposts/src/ObjectTypeResolverPickers/CustomPostUnionGenericCustomPostObjectTypeResolverPicker.php`
+
 #### Input Object Resolver
 
 - Input Object `UserSortInput`: `layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserSortInputObjectTypeResolver.php`
@@ -145,6 +149,8 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 #### Directive Resolver
 
 - Directive `@skip`: `layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
+
+### DataLoader Resolvers:
 
 ### Custom Gato GraphQL elements
 
