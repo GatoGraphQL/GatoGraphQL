@@ -311,8 +311,6 @@ type(scope): description
 ### Internal
 
 - `readme.txt` - Plugin documentation
-- `includes/crms/class-base.php` - Base CRM class
-- `includes/integrations/class-base.php` - Base integration class
 
 ### External
 
