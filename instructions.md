@@ -259,6 +259,7 @@ ${service}->doSomething();
 5. Add the configuration to generate the plugin
 6. Create folders, files, and code for plugin and packages
 7. Implement the logic to extend the GraphQL schema for the integration
+8. Execute `composer update-monorepo` to regenerate `composer.json`
 
 ### Security Practices
 
