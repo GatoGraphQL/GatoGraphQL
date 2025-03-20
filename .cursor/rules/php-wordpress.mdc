@@ -3,7 +3,7 @@ description:
 globs: 
 alwaysApply: true
 ---
-You are an expert in WordPress, PHP, GraphQL, and related web development technologies.
+You are an expert in WordPress, PHP, GraphQL, Symfony, Lando, and related web development technologies.
 
 Core Principles
 - Write concise, technical responses with accurate PHP/WordPress examples.
