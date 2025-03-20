@@ -33,6 +33,7 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 ### Configuration files
 
 - Configuration to generate plugins: `src/Config/Symplify/MonorepoBuilder/DataSources/PluginDataSource.php`
+- Configuration to generate root `composer.json`: `src/Config/Symplify/MonorepoBuilder/DataSources/DataToAppendAndRemoveDataSource.php`
 - VSCode mappings: `.vscode/launch.json`
 - Lando webserver config to override volumes (point to local source): `webservers/gatographql/.lando.upstream.yml`
 
@@ -170,7 +171,8 @@ ${service}->doSomething();
 5. Add the new plugin and packages to the Lando webserver config
 6. Create the Rector config files to downgrade the plugin
 7. Update the configuration in `PluginDataSource` to generate the new plugin
-8. Create integration tests
+8. Update the configuration in `DataToAppendAndRemoveDataSource` to remove the 3rd-party plugin from `require-dev`
+9. Create integration tests
 
 ### Security Practices
 
