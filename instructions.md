@@ -154,39 +154,35 @@ ${service}->doSomething();
 
 ### Common Tasks
 
-#### Extending the GraphQL schema in Gato GraphQL
+#### Extending the GraphQL schema in Gato GraphQL to access WordPress data
 
-1. Plan and propose: Check similar packages already included in Gato GraphQL, and propose how to extend the GraphQL schema
-2. Create folders, files, and code for packages for the schema extension
+1. Plan and propose: Given the requirements, check for similar packages already included in Gato GraphQL, and propose how to extend the GraphQL schema
+2. Create folders, files, and code for the packages
 3. Implement the logic to extend the GraphQL schema
-4. Add a new module for Gato GraphQL
-5. Execute `composer update-monorepo` to regenerate `composer.json`
-6. Add the new packages to the VSCode mapping
-7. Add the new packages to the Lando webserver config
-8. Create integration tests
-9. Add the module documentation
+4. Execute `composer update-monorepo` to regenerate `composer.json`
+5. Add the new packages to the VSCode mapping
+6. Add the new packages to the Lando webserver config
+7. Add a new module for Gato GraphQL
+8. Add the module documentation
+9. Create integration tests
+10. Execute `composer init-server` to start the Lando webserver
 
-#### Creating Integrations with 3rd-party Plugins
+#### Creating Integrations with a 3rd-party Plugin
 
-##### Planning
-
-1. Propose how to extend the GraphQL schema for the new integration
-2. Check a similar plugin already implemented in the monorepo
-3. Check packages used by the original plugin
-
-##### Execution
-
-1. Create folders, files, and code for plugin and packages for the integration
-2. Implement the logic to extend the GraphQL schema for the integration
-3. Add a new module for Gato GraphQL
+1. Plan and propose: Given the requirements, check for a similar plugin in the monorepo, and propose how to create the new integration, and how it will extend the GraphQL schema
+2. Create folders, files, and code for plugin and packages for the integration
+3. Execute `composer require --dev "wpackagist-plugin/{plugin}"` to add the 3rd-party plugin in `composer.json`
 4. Execute `composer update-monorepo` to regenerate `composer.json`
 5. Add the new plugin and packages to the VSCode mapping
 6. Add the new plugin and packages to the Lando webserver config
 7. Create the Rector config files to downgrade the plugin
 8. Update the configuration in `PluginDataSource` to generate the new plugin
 9. Update the configuration in `DataToAppendAndRemoveDataSource` to remove the 3rd-party plugin from `require-dev`
-10. Create integration tests
-11. Add the module documentation
+10. Implement the logic to extend the GraphQL schema for the integration
+11. Add a new module for Gato GraphQL
+12. Add the module documentation
+13. Create integration tests
+14. Execute `composer init-server` to start the Lando webserver
 
 ### Security Practices
 
