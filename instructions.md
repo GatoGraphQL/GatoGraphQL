@@ -42,6 +42,23 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 - Main file: `Module.php`
 - Unit Tests: `tests/Unit/`
 
+#### GraphQL schema resolvers
+
+- Object Type Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/ObjectType/`
+- Custom Scalar Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/ScalarType/`
+- Enum Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/EnumType/`
+- Interface Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/InterfaceType/`
+- Union Type Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/UnionType/`
+- Input Object Resolvers: `layers/{layer_name}/packages/{package_name}/src/TypeResolvers/InputObjectType/`
+- Object Field Resolvers: `layers/{layer_name}/packages/{package_name}/src/FieldResolvers/ObjectType/`
+- Interface Field Resolvers: `layers/{layer_name}/packages/{package_name}/src/FieldResolvers/InterfaceType/`
+- Mutation Resolvers: `layers/{layer_name}/packages/{package_name}/src/MutationResolvers/`
+- Directive Resolvers: `layers/{layer_name}/packages/{package_name}/src/DirectiveResolvers/`
+
+#### Conditional resolvers (if another package is installed)
+
+- Conditional Resolvers: `layers/{layer_name}/packages/{package_name}/src/ConditionalOnModule/{depended_package_name}`
+
 ### Integrations
 
 - Stubs: `stubs/wpackagist-plugin/{integration-plugin}/stubs.php`
@@ -139,7 +156,7 @@ Source code examples:
 
 - Error Payload Union Type `RootAddCommentToCustomPostMutationErrorPayloadUnion`: `layers/CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver.php`
 
-#### Nested Mutations
+#### Nested Mutations Resolver
 
 - Mutation `Post.update`: `layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php`
 
