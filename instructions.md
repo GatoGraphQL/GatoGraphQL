@@ -150,11 +150,11 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 
 - Directive `@skip`: `layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
 
-### Object DataLoader Resolvers
+#### Object DataLoader Resolvers
 
 - Resolving `User` objects: `layers/CMSSchema/packages/users/src/RelationalTypeDataLoaders/ObjectType/UserObjectTypeDataLoader.php`
 
-### Union DataLoader Resolvers
+#### Union DataLoader Resolvers
 
 - Resolving `CustomPost` unions: `layers/CMSSchema/packages/customposts/src/RelationalTypeDataLoaders/ObjectType/CustomPostObjectTypeDataLoader.php`
 
