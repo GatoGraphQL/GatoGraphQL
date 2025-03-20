@@ -250,9 +250,15 @@ ${service}->doSomething();
 
 #### Creating Integrations
 
-1. Check for similar plugins
-2. Check packages used by those plugins
-3. Replicate folders/files and adapt as needed
+1. Expect to receive the name of a similar plugin, and the elements of the GraphQL schema to support
+2. Check packages used by the original plugin
+3. Add the new plugin and packages to:
+  - The VSCode mapping
+  - The Lando webserver config to override volumes
+4. Create the Rector config files to downgrade the plugin
+5. Add the configuration to generate the plugin
+6. Create folders, files, and code for plugin and packages
+7. Implement the logic to extend the GraphQL schema for the integration
 
 ### Security Practices
 
