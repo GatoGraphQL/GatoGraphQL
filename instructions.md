@@ -23,11 +23,24 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress,
 - Main plugin: `layers/GatoGraphQLForWP/plugins/gatographql/`
 - Main plugin file: `gatographql.php`
 
-### Plugin and Package Organization
+### Plugin Organization
 
 - Symfony DependencyInjection configuration: `config/`
 - Source code: `src/`
-- Tests: `tests/`
+- Unit Tests: `tests/Unit/`
+- Integration Tests: `tests/Integration/`
+
+### Package Organization
+
+- Source code: `src/`
+- Unit Tests: `tests/Unit/`
+
+### Test Organization
+
+- Fixtures, containing:
+  - A GraphQL query to execute againt the GraphQL server
+  - A dictionary of GraphQL variables, as a .var.json file(Optional)
+  - The expected response in JSON
 
 ### Coding Standards
 
