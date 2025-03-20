@@ -42,6 +42,10 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress,
 - Main file: `Module.php`
 - Unit Tests: `tests/Unit/`
 
+### Integrations
+
+- Stubs: `stubs/wpackagist-plugin/{integration-plugin}/stubs.php`
+
 ### Tests
 
 - Based on fixtures, containing:
@@ -72,6 +76,84 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress,
 - Test new plugin integrations thoroughly
 - Test against supported WordPress versions (latest - 2)
 - Test against supported WooCommerce versions when applicable
+
+## Architecture
+
+### Extending the GraphQL Schema (standard GraphQL spec elements)
+
+Source code examples:
+
+#### Type Resolver
+
+- `User` type: `layers/CMSSchema/packages/users/src/TypeResolvers/ObjectType/UserObjectTypeResolver.php`
+
+#### Field Resolver
+
+- Fields `name`, `displayName`, and others, for the `User` type: `layers/CMSSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php`
+
+#### Mutation Resolver
+
+- Mutation `createPost`: `layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+
+#### Custom Scalar Resolver
+
+- Custom scalar `Email`: `layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType/EmailScalarTypeResolver.php`
+
+#### Enum Resolver
+
+- Enum `CommentTypeEnum`: `layers/CMSSchema/packages/comments/src/TypeResolvers/EnumType/CommentTypeEnumTypeResolver.php`
+
+#### Interface Resolver
+
+- Interface `CustomPostInterfaceTypeResolver`: `layers/CMSSchema/packages/customposts/src/TypeResolvers/InterfaceType/CustomPostInterfaceTypeResolver.php`
+
+#### Union Type-Resolver
+
+- Union type `CustomPostUnionTypeResolver`: `layers/CMSSchema/packages/customposts/src/TypeResolvers/UnionType/CustomPostUnionTypeResolver.php`
+
+#### Input Object Resolver
+
+- Input Object `UserSortInput`: `layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserSortInputObjectTypeResolver.php`
+
+#### Oneof Input Object Resolver
+
+- Oneof Input Object `UserByInput`: `layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserByOneofInputObjectTypeResolver.php`
+
+#### Directive Resolver
+
+- Directive `@skip`: `layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
+
+### Extending the GraphQL Schema (custom Gato GraphQL elements)
+
+Source code examples:
+
+#### Global Field Resolver
+
+- Field `__typename`: `layers/GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/GlobalObjectTypeFieldResolver.php`
+
+#### Enum String Resolver
+
+- Enum String `CustomPostEnumString` `layers/CMSSchema/packages/customposts/src/TypeResolvers/EnumType/CustomPostEnumStringScalarTypeResolver.php`
+
+#### Error Payload Union Type Resolver
+
+- Error Payload Union Type `RootAddCommentToCustomPostMutationErrorPayloadUnion`: `layers/CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver.php`
+
+#### Nested Mutations
+
+- Mutation `Post.update`: `layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php`
+
+#### Field Arguments to filter data
+
+- Field `Root.comments`: `layers/CMSSchema/packages/comments/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+
+#### Custom Post Type - Type Resolver
+
+- Custom Post Type `Page`: `layers/CMSSchema/packages/pages/src/TypeResolvers/ObjectType/PageObjectTypeResolver.php`
+
+#### Custom Post Type - Field Resolver
+
+- Field `CustomPost.author`: `layers/CMSSchema/packages/users/src/ConditionalOnModule/CustomPosts/FieldResolvers/ObjectType/CustomPostObjectTypeFieldResolver.php`
 
 ## AI Assistant Guidelines
 
