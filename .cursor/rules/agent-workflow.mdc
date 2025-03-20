@@ -15,5 +15,5 @@ Always maintain the scratchpad at [scratchpad.md](mdc:.cursor/scratchpad.md) for
 
 ## Documentation References
 - For PHP and WordPress standards: See [php-wordpress.mdc](mdc:.cursor/rules/php-wordpress.mdc)
-- For GraphQL schema extensions: See [schema-config-access-control-lists.webp](mdc:layers/GatoGraphQLForWP/plugins/access-control/docs/images/schema-config-access-control-lists.webp)
-- For core functionality: See [core.mdc](mdc:.cursor/rules/core.mdc)
+<!-- - For GraphQL schema extensions: See [_schema-extension.mdc](mdc:.cursor/rules/_schema-extension.mdc) -->
+- For core functionality and new integrations: See [core.mdc](mdc:.cursor/rules/core.mdc)
