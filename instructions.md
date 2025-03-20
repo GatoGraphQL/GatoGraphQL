@@ -155,15 +155,22 @@ ${service}->doSomething();
 
 #### Creating Integrations
 
-1. Expect to receive the name of a similar plugin, and the elements of the GraphQL schema to support
-2. Check packages used by the original plugin
-3. Create folders, files, and code for plugin and packages for the integration
-4. Implement the logic to extend the GraphQL schema for the integration
-5. Execute `composer update-monorepo` to regenerate `composer.json`
-6. Add the new plugin and packages to the VSCode mapping
-7. Add the new plugin and packages to the Lando webserver config
-8. Create the Rector config files to downgrade the plugin
-9. Update the configuration in `PluginDataSource` to generate the new plugin
+##### Planning
+
+1. Propose how to extend the GraphQL schema for the new integration
+2. Check a similar plugin already implemented in the monorepo
+3. Check packages used by the original plugin
+
+##### Execution
+
+1. Create folders, files, and code for plugin and packages for the integration
+2. Implement the logic to extend the GraphQL schema for the integration
+3. Execute `composer update-monorepo` to regenerate `composer.json`
+4. Add the new plugin and packages to the VSCode mapping
+5. Add the new plugin and packages to the Lando webserver config
+6. Create the Rector config files to downgrade the plugin
+7. Update the configuration in `PluginDataSource` to generate the new plugin
+8. Create integration tests
 
 ### Security Practices
 
