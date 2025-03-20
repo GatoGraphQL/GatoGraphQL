@@ -54,7 +54,9 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 - Module Resolvers: `src/ModuleResolvers/`
 - Integration Tests: `tests/Integration/`
 
-#### GraphQL schema resolvers
+#### Package-specific Organization
+
+##### GraphQL schema resolvers
 
 - Object Type Resolvers: `src/TypeResolvers/ObjectType/`
 - Custom Scalar Resolvers: `src/TypeResolvers/ScalarType/`
