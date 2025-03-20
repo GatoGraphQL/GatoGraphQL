@@ -26,6 +26,10 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 - Testing plugins: `layers/{layer_name}/phpunit-plugins/{plugin_name}`
 - Testing plugin packages: `layers/{layer_name}/phpunit-packages/{package_name}`
 
+### Monorepo files
+
+- Integrations stubs: `stubs/wpackagist-plugin/{integration-plugin}/stubs.php`
+
 ### Gato GraphQL plugin
 
 - Folder: `layers/GatoGraphQLForWP/plugins/gatographql/`
@@ -61,10 +65,6 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 - Interface Field Resolvers: `layers/{layer_name}/packages/{package_name}/src/FieldResolvers/InterfaceType/`
 - Mutation Resolvers: `layers/{layer_name}/packages/{package_name}/src/MutationResolvers/`
 - Directive Resolvers: `layers/{layer_name}/packages/{package_name}/src/DirectiveResolvers/`
-
-### Integrations
-
-- Stubs: `stubs/wpackagist-plugin/{integration-plugin}/stubs.php`
 
 ### Tests
 
