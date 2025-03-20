@@ -154,7 +154,25 @@ ${service}->doSomething();
 
 ### Common Tasks
 
-#### Creating Integrations
+#### Extending the GraphQL schema in Gato GraphQL
+
+##### Planning
+
+1. Propose how to extend the GraphQL schema given the requirements
+2. Check similar packages already included in Gato GraphQL
+
+##### Execution
+
+1. Create folders, files, and code for packages for the schema extension
+2. Implement the logic to extend the GraphQL schema
+3. Add a new module for Gato GraphQL
+4. Execute `composer update-monorepo` to regenerate `composer.json`
+5. Add the new packages to the VSCode mapping
+6. Add the new packages to the Lando webserver config
+7. Create integration tests
+8. Add the module documentation
+
+#### Creating Integrations with 3rd-party Plugins
 
 ##### Planning
 
@@ -166,13 +184,15 @@ ${service}->doSomething();
 
 1. Create folders, files, and code for plugin and packages for the integration
 2. Implement the logic to extend the GraphQL schema for the integration
-3. Execute `composer update-monorepo` to regenerate `composer.json`
-4. Add the new plugin and packages to the VSCode mapping
-5. Add the new plugin and packages to the Lando webserver config
-6. Create the Rector config files to downgrade the plugin
-7. Update the configuration in `PluginDataSource` to generate the new plugin
-8. Update the configuration in `DataToAppendAndRemoveDataSource` to remove the 3rd-party plugin from `require-dev`
-9. Create integration tests
+3. Add a new module for Gato GraphQL
+4. Execute `composer update-monorepo` to regenerate `composer.json`
+5. Add the new plugin and packages to the VSCode mapping
+6. Add the new plugin and packages to the Lando webserver config
+7. Create the Rector config files to downgrade the plugin
+8. Update the configuration in `PluginDataSource` to generate the new plugin
+9. Update the configuration in `DataToAppendAndRemoveDataSource` to remove the 3rd-party plugin from `require-dev`
+10. Create integration tests
+11. Add the module documentation
 
 ### Security Practices
 
