@@ -42,6 +42,7 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
   - GraphQL schema services: `schema-services.yaml`
   - Module services: `module-services.yaml`
   - All other services: `services.yaml`
+- Conditional logic (if another package is installed): `src/ConditionalOnModule/{depended_package_name}`
 
 #### Plugin-specific Organization
 
@@ -60,10 +61,6 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 - Interface Field Resolvers: `layers/{layer_name}/packages/{package_name}/src/FieldResolvers/InterfaceType/`
 - Mutation Resolvers: `layers/{layer_name}/packages/{package_name}/src/MutationResolvers/`
 - Directive Resolvers: `layers/{layer_name}/packages/{package_name}/src/DirectiveResolvers/`
-
-#### Conditional resolvers (if another package is installed)
-
-- Conditional Resolvers: `layers/{layer_name}/packages/{package_name}/src/ConditionalOnModule/{depended_package_name}`
 
 ### Integrations
 
