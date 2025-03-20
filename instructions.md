@@ -33,7 +33,7 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress,
 ### Coding Standards
 
 - Follow Coding Standards as defined in `.cursor/rules/php-wordpress.mdc`
-- Dependency injection via DependencyInjection
+- Dependency injection via Symfony DependencyInjection
 - PHPStan for static analysis
 - PHPCS for code style enforcement
 - Use type hints and PHPDoc blocks for all new code
