@@ -67,9 +67,9 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 - Resolvers to add Object Types to Union Types: `src/ObjectTypeResolverPickers/`
 - Object Field Resolvers: `src/FieldResolvers/ObjectType/`
 - Interface Field Resolvers: `src/FieldResolvers/InterfaceType/`
-- Directive Resolvers: `src/DirectiveResolvers/`
 - Mutation Resolvers: `src/MutationResolvers/`
 - DataLoader Resolvers: `src/RelationalTypeDataLoaders/`
+- Directive Resolvers: `src/DirectiveResolvers/`
 
 ### Tests
 
@@ -146,10 +146,6 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 
 - Oneof Input Object `UserByInput`: `layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserByOneofInputObjectTypeResolver.php`
 
-#### Directive Resolver
-
-- Directive `@skip`: `layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
-
 #### Object DataLoader Resolvers
 
 - Resolving `User` objects: `layers/CMSSchema/packages/users/src/RelationalTypeDataLoaders/ObjectType/UserObjectTypeDataLoader.php`
@@ -157,6 +153,10 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 #### Union DataLoader Resolvers
 
 - Resolving `CustomPost` unions: `layers/CMSSchema/packages/customposts/src/RelationalTypeDataLoaders/ObjectType/CustomPostObjectTypeDataLoader.php`
+
+#### Directive Resolver
+
+- Directive `@skip`: `layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
 
 ### Custom Gato GraphQL elements
 
