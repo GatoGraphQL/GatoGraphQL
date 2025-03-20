@@ -289,6 +289,5 @@ type(scope): description
   - [Gato GraphQL Extensions reference](https://gatographql.com/extensions-reference)
   - [Gato GraphQL Queries library](https://gatographql.com/library)
   - [Gato GraphQL Schema tutorial](https://gatographql.com/tutorial)
-  - [Gato GraphQL Architecture](https://gatographql.com/architecture)
 - [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/)
 - [WordPress Documentation Standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/php/)
