@@ -6,39 +6,45 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress,
 
 ## Repo Organization
 
+### Monorepo
+
 - Monorepo hosting multiple WordPress plugins:
   - Gato GraphQL
   - Gato GraphQL integrations
   - Testing utilities
 - Each plugin is composed of Composer packages, hosted in the same monorepo
 
-## Development Standards
-
-### Code Organization
+### Monorepo folders
 
 - Plugins: `layers/{layer_name}/plugins/{plugin_name}`
 - Plugin packages: `layers/{layer_name}/packages/{package_name}`
 - Testing plugins: `layers/{layer_name}/phpunit-plugins/{plugin_name}`
 - Testing plugin packages: `layers/{layer_name}/phpunit-packages/{package_name}`
-- Main plugin: `layers/GatoGraphQLForWP/plugins/gatographql/`
-- Main plugin file: `gatographql.php`
+
+### Gato GraphQL plugin
+
+- Folder: `layers/GatoGraphQLForWP/plugins/gatographql/`
+- Main file: `gatographql.php`
+
+## Development Standards
 
 ### Plugin Organization
 
-- Symfony DependencyInjection configuration: `config/`
 - Source code: `src/`
+- Main file: `gatographql-{plugin_name}.php`
+- Symfony DependencyInjection configuration: `config/`
 - Unit Tests: `tests/Unit/`
 - Integration Tests: `tests/Integration/`
 
 ### Package Organization
 
 - Source code: `src/`
-- Main file: `src/Module.php`
+- Main file: `Module.php`
 - Unit Tests: `tests/Unit/`
 
-### Test Organization
+### Tests
 
-- Fixtures, containing:
+- Based on fixtures, containing:
   - A GraphQL query to execute againt the GraphQL server
   - A dictionary of GraphQL variables, as a .var.json file(Optional)
   - The expected response in JSON
