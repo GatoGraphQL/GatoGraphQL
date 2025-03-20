@@ -252,14 +252,13 @@ ${service}->doSomething();
 
 1. Expect to receive the name of a similar plugin, and the elements of the GraphQL schema to support
 2. Check packages used by the original plugin
-3. Add the new plugin and packages to:
-  - The VSCode mapping
-  - The Lando webserver config to override volumes
-4. Create the Rector config files to downgrade the plugin
-5. Add the configuration to generate the plugin
-6. Create folders, files, and code for plugin and packages
-7. Implement the logic to extend the GraphQL schema for the integration
-8. Execute `composer update-monorepo` to regenerate `composer.json`
+3. Create folders, files, and code for plugin and packages for the integration
+4. Implement the logic to extend the GraphQL schema for the integration
+5. Execute `composer update-monorepo` to regenerate `composer.json`
+6. Add the new plugin and packages to the VSCode mapping
+7. Add the new plugin and packages to the Lando webserver config
+8. Create the Rector config files to downgrade the plugin
+9. Update the configuration in `PluginDataSource` to generate the new plugin
 
 ### Security Practices
 
