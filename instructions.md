@@ -156,21 +156,15 @@ ${service}->doSomething();
 
 #### Extending the GraphQL schema in Gato GraphQL
 
-##### Planning
-
-1. Propose how to extend the GraphQL schema given the requirements
-2. Check similar packages already included in Gato GraphQL
-
-##### Execution
-
-1. Create folders, files, and code for packages for the schema extension
-2. Implement the logic to extend the GraphQL schema
-3. Add a new module for Gato GraphQL
-4. Execute `composer update-monorepo` to regenerate `composer.json`
-5. Add the new packages to the VSCode mapping
-6. Add the new packages to the Lando webserver config
-7. Create integration tests
-8. Add the module documentation
+1. Plan and propose: Check similar packages already included in Gato GraphQL, and propose how to extend the GraphQL schema
+2. Create folders, files, and code for packages for the schema extension
+3. Implement the logic to extend the GraphQL schema
+4. Add a new module for Gato GraphQL
+5. Execute `composer update-monorepo` to regenerate `composer.json`
+6. Add the new packages to the VSCode mapping
+7. Add the new packages to the Lando webserver config
+8. Create integration tests
+9. Add the module documentation
 
 #### Creating Integrations with 3rd-party Plugins
 
