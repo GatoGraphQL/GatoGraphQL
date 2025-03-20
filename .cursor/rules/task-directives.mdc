@@ -66,6 +66,9 @@ git checkout -b feature/[TASK_IDENTIFIER]
 - Add a line to [readme.txt](mdc:submodules/ExtensionStarter/submodules/GatoGraphQL/layers/GatoGraphQLForWP/plugins/gatographql/readme.txt) in the appropriate section (typically under the next version number)
   - Follow the existing writing style (concise, action-oriented)
   - Format should match: "Added/Improved/Fixed - Description of the change"
+- Add a line to [CHANGELOG.md](mdc:CHANGELOG.md) in the appropriate section (typically under the next version number)
+  - Follow the existing writing style (concise, action-oriented)
+  - Format should match: "Added/Improvements/Fixed/Breaking changes - Description of the change"
 - Summarize the changes made and any follow-up actions needed
 
 ## Example Workflow
@@ -79,7 +82,7 @@ git checkout -b feature/[TASK_IDENTIFIER]
 
 ## Important Guidelines
 
-- Always follow PHP PSR-1, PSR-4 and PSR-12 coding standards
+- Always follow PHP PSR-1, PSR-4, and PSR-12 coding standards
 - Maintain backward compatibility
 - Add proper error handling and logging
 - Include appropriate documentation
