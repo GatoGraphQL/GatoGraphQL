@@ -79,7 +79,7 @@ git checkout -b feature/[TASK_IDENTIFIER]
 
 ## Important Guidelines
 
-- Always follow PHP PSR-12 coding standards
+- Always follow PHP PSR-1, PSR-4, and PSR-12 coding standards
 - Maintain backward compatibility
 - Add proper error handling and logging
 - Include appropriate documentation

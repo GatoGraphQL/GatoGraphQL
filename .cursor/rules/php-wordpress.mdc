@@ -24,7 +24,8 @@ Dependencies
 
 PHP and WordPress Standards
 - Leverage PHP 8.1+ features when appropriate (e.g., typed properties, match expressions).
-- Adhere to PSR-12 coding standards for consistent code style.
+- Adhere to PSR-4 coding standards for autoloading classes from file paths.
+- Adhere to PSR-1 and PSR-12 coding standards for consistent code style.
 - Always use strict typing: declare(strict_types=1);
 - Implement robust error handling and logging:
     - Use WordPress's built-in debug logging (WP_DEBUG_LOG).
