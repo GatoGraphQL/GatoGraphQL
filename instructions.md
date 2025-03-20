@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress, allowing to query, transform, and mutate any piece of data from the WordPress site, via GraphQL queries. It supports 100+ WordPress plugins via integrations, adding fields and mutations to the GraphQL schema to query their data.
+Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress, allowing to query, transform, and mutate any piece of data from the WordPress site, via GraphQL queries. It supports any 3rd-party WordPress plugin via an integration, adding fields and mutations to the GraphQL schema to query its data.
 
 ## Repo Organization
 
