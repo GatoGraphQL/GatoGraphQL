@@ -15,6 +15,6 @@ class WithMetaMutationsInterfaceTypeResolver extends AbstractInterfaceTypeResolv
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Object types with meta mutations', 'custompostmeta');
+        return $this->__('Object types with meta mutations', 'meta-mutations');
     }
 }

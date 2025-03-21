@@ -11,9 +11,9 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\MetaMutations\FeedbackItemProviders\FeedbackItemProvider;
+use PoPCMSSchema\Meta\FeedbackItemProviders\FeedbackItemProvider;
+use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\MetaMutations\FieldResolvers\InterfaceType\WithMetaMutationsInterfaceTypeFieldResolver;
-use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeAPIInterface;
 
 abstract class AbstractWithMetaMutationsObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
