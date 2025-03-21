@@ -91,7 +91,7 @@ class WithMetaMutationsInterfaceTypeFieldResolver extends AbstractInterfaceTypeF
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'key' => $this->__('The meta-mutations key', 'meta-mutations'),
+            'key' => $this->__('The meta mutations key', 'meta-mutations'),
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
@@ -107,8 +107,8 @@ class WithMetaMutationsInterfaceTypeFieldResolver extends AbstractInterfaceTypeF
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'metaValue' => $this->__('Single meta-mutations value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta-mutations value.', 'custompostmeta'),
-            'metaValues' => $this->__('List of meta-mutations values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta-mutations value.', 'custompostmeta'),
+            'metaValue' => $this->__('Single meta mutations value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta mutations value.', 'custompostmeta'),
+            'metaValues' => $this->__('List of meta mutations values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta mutations value.', 'custompostmeta'),
             default => parent::getFieldDescription($fieldName),
         };
     }
