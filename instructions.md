@@ -154,18 +154,22 @@ ${service}->doSomething();
 
 ### Common Tasks
 
-#### Creating a module in Gato GraphQL
+#### Creating a package in Gato GraphQL
 
-1. Plan and propose: Given the requirements, check for similar packages already included in Gato GraphQL, and propose how to extend the GraphQL schema
+1. Plan and propose: Given the requirements, check for similar packages already included in Gato GraphQL
 2. Create folders, files, and code for the packages
-3. Implement the logic to extend the GraphQL schema
+3. Implement the logic
 4. Execute `composer update-monorepo` to regenerate `composer.json`
 5. Add the new packages to the VSCode mapping
 6. Add the new packages to the Lando webserver config
-7. Add a new module for Gato GraphQL
-8. Add the module documentation
-9. Create integration tests
-10. Execute `composer init-server` to start the Lando webserver
+
+#### Creating a module in Gato GraphQL
+
+1. Follow all the steps from common task "Creating a package in Gato GraphQL"
+2. Add a new module for Gato GraphQL
+3. Add the module documentation
+4. Create integration tests
+5. Execute `composer init-server` to start the Lando webserver
 
 #### Creating an Integration with a 3rd-party Plugin
 
