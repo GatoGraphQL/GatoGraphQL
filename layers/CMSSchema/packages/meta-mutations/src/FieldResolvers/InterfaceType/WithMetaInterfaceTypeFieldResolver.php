@@ -11,9 +11,9 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\MetaMutations\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
+use PoPCMSSchema\MetaMutations\TypeResolvers\InterfaceType\WithMetaMutationsInterfaceTypeResolver;
 
-class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
+class WithMetaMutationsInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
@@ -43,7 +43,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getInterfaceTypeResolverClassesToAttachTo(): array
     {
         return [
-            WithMetaInterfaceTypeResolver::class,
+            WithMetaMutationsInterfaceTypeResolver::class,
         ];
     }
     /**

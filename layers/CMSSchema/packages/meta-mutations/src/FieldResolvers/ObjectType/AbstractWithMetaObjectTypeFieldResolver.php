@@ -12,18 +12,18 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\MetaMutations\FeedbackItemProviders\FeedbackItemProvider;
-use PoPCMSSchema\MetaMutations\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
+use PoPCMSSchema\MetaMutations\FieldResolvers\InterfaceType\WithMetaMutationsInterfaceTypeFieldResolver;
 use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeAPIInterface;
 
-abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractWithMetaMutationsObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?WithMetaInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
+    private ?WithMetaMutationsInterfaceTypeFieldResolver $withMetaInterfaceTypeFieldResolver = null;
 
-    final protected function getWithMetaInterfaceTypeFieldResolver(): WithMetaInterfaceTypeFieldResolver
+    final protected function getWithMetaMutationsInterfaceTypeFieldResolver(): WithMetaMutationsInterfaceTypeFieldResolver
     {
         if ($this->withMetaInterfaceTypeFieldResolver === null) {
-            /** @var WithMetaInterfaceTypeFieldResolver */
-            $withMetaInterfaceTypeFieldResolver = $this->instanceManager->getInstance(WithMetaInterfaceTypeFieldResolver::class);
+            /** @var WithMetaMutationsInterfaceTypeFieldResolver */
+            $withMetaInterfaceTypeFieldResolver = $this->instanceManager->getInstance(WithMetaMutationsInterfaceTypeFieldResolver::class);
             $this->withMetaInterfaceTypeFieldResolver = $withMetaInterfaceTypeFieldResolver;
         }
         return $this->withMetaInterfaceTypeFieldResolver;
@@ -35,7 +35,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
     public function getImplementedInterfaceTypeFieldResolvers(): array
     {
         return [
-            $this->getWithMetaInterfaceTypeFieldResolver(),
+            $this->getWithMetaMutationsInterfaceTypeFieldResolver(),
         ];
     }
 

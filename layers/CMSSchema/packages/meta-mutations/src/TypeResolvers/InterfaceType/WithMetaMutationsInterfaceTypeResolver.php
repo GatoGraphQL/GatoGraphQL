@@ -6,15 +6,15 @@ namespace PoPCMSSchema\MetaMutations\TypeResolvers\InterfaceType;
 
 use PoP\ComponentModel\TypeResolvers\InterfaceType\AbstractInterfaceTypeResolver;
 
-class WithMetaInterfaceTypeResolver extends AbstractInterfaceTypeResolver
+class WithMetaMutationsInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'WithMeta';
+        return 'WithMetaMutations';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Fields with meta-mutations values', 'custompostmeta');
+        return $this->__('Object types with meta mutations', 'custompostmeta');
     }
 }
