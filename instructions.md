@@ -154,7 +154,7 @@ ${service}->doSomething();
 
 ### Common Tasks
 
-#### Extending the GraphQL schema in Gato GraphQL
+#### Creating a module in Gato GraphQL
 
 1. Plan and propose: Given the requirements, check for similar packages already included in Gato GraphQL, and propose how to extend the GraphQL schema
 2. Create folders, files, and code for the packages
@@ -167,7 +167,7 @@ ${service}->doSomething();
 9. Create integration tests
 10. Execute `composer init-server` to start the Lando webserver
 
-#### Creating Integrations with a 3rd-party Plugin
+#### Creating an Integration with a 3rd-party Plugin
 
 1. Plan and propose: Given the requirements, check for a similar plugin in the monorepo, and propose how to create the new integration, and how it will extend the GraphQL schema
 2. Create folders, files, and code for plugin and packages for the integration
