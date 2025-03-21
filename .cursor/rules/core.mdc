@@ -1,5 +1,5 @@
 ---
-description: Core WP Fusion architectural patterns and development guidelines. Use when working with core plugin functionality.
+description: Core Gato GraphQL architectural patterns and development guidelines. Use when working with core plugin functionality.
 globs: *php
 alwaysApply: false
 ---
@@ -18,95 +18,95 @@ alwaysApply: false
 
 #### Type Resolver
 
-- `User` type: `layers/CMSSchema/packages/users/src/TypeResolvers/ObjectType/UserObjectTypeResolver.php`
+- `User` type: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/TypeResolvers/ObjectType/UserObjectTypeResolver.php`
 
 #### Field Resolver
 
-- Fields `name`, `displayName`, and others, for the `User` type: `layers/CMSSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php`
+- Fields `name`, `displayName`, and others, for the `User` type: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php`
 
 #### Mutation Resolver
 
-- Mutation `createPost`: `layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+- Mutation `createPost`: `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
 - Mutation resolvers for `createPost`:
-  - `layers/CMSSchema/packages/post-mutations/src/MutationResolvers/CreatePostMutationResolver.php`
-  - `layers/CMSSchema/packages/post-mutations/src/MutationResolvers/PayloadableCreatePostMutationResolver.php`
+  - `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/MutationResolvers/CreatePostMutationResolver.php`
+  - `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/MutationResolvers/PayloadableCreatePostMutationResolver.php`
 
 ##### Bulk Mutation Resolver
 
-- Bulk mutation `createPosts`: `layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+- Bulk mutation `createPosts`: `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
 - Bulk mutation resolvers for `createPosts`:
-  - `layers/CMSSchema/packages/post-mutations/src/MutationResolvers/CreatePostBulkOperationMutationResolver.php`
-  - `layers/CMSSchema/packages/post-mutations/src/MutationResolvers/PayloadableCreatePostBulkOperationMutationResolver.php`
+  - `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/MutationResolvers/CreatePostBulkOperationMutationResolver.php`
+  - `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/MutationResolvers/PayloadableCreatePostBulkOperationMutationResolver.php`
 
 #### Custom Scalar Resolver
 
-- Custom scalar `Email`: `layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType/EmailScalarTypeResolver.php`
+- Custom scalar `Email`: `submodules/GatoGraphQL/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType/EmailScalarTypeResolver.php`
 
 #### Enum Resolver
 
-- Enum `CommentTypeEnum`: `layers/CMSSchema/packages/comments/src/TypeResolvers/EnumType/CommentTypeEnumTypeResolver.php`
+- Enum `CommentTypeEnum`: `submodules/GatoGraphQL/layers/CMSSchema/packages/comments/src/TypeResolvers/EnumType/CommentTypeEnumTypeResolver.php`
 
 #### Interface Resolver
 
-- Interface `CustomPostInterfaceTypeResolver`: `layers/CMSSchema/packages/customposts/src/TypeResolvers/InterfaceType/CustomPostInterfaceTypeResolver.php`
+- Interface `CustomPostInterfaceTypeResolver`: `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/TypeResolvers/InterfaceType/CustomPostInterfaceTypeResolver.php`
 
 #### Union Type-Resolver
 
-- Union type `CustomPostUnionTypeResolver`: `layers/CMSSchema/packages/customposts/src/TypeResolvers/UnionType/CustomPostUnionTypeResolver.php`
+- Union type `CustomPostUnionTypeResolver`: `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/TypeResolvers/UnionType/CustomPostUnionTypeResolver.php`
 
 ### Resolvers to add Object Types to Union Types
 
-- Adding `GenericCustomPost` to `CustomPostUnion`: `layers/CMSSchema/packages/customposts/src/ObjectTypeResolverPickers/CustomPostUnionGenericCustomPostObjectTypeResolverPicker.php`
+- Adding `GenericCustomPost` to `CustomPostUnion`: `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/ObjectTypeResolverPickers/CustomPostUnionGenericCustomPostObjectTypeResolverPicker.php`
 
 #### Input Object Resolver
 
-- Input Object `UserSortInput`: `layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserSortInputObjectTypeResolver.php`
+- Input Object `UserSortInput`: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserSortInputObjectTypeResolver.php`
 
 #### Oneof Input Object Resolver
 
-- Oneof Input Object `UserByInput`: `layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserByOneofInputObjectTypeResolver.php`
+- Oneof Input Object `UserByInput`: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserByOneofInputObjectTypeResolver.php`
 
 #### Object DataLoader Resolver
 
-- Resolving `User` objects: `layers/CMSSchema/packages/users/src/RelationalTypeDataLoaders/ObjectType/UserObjectTypeDataLoader.php`
+- Resolving `User` objects: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/RelationalTypeDataLoaders/ObjectType/UserObjectTypeDataLoader.php`
 
 #### Union DataLoader Resolver
 
-- Resolving `CustomPost` unions: `layers/CMSSchema/packages/customposts/src/RelationalTypeDataLoaders/ObjectType/CustomPostObjectTypeDataLoader.php`
+- Resolving `CustomPost` unions: `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/RelationalTypeDataLoaders/ObjectType/CustomPostObjectTypeDataLoader.php`
 
 #### Directive Resolver
 
-- Directive `@skip`: `layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
+- Directive `@skip`: `submodules/GatoGraphQL/layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
 
 ### Custom Gato GraphQL elements
 
 #### Global Field Resolver
 
-- Field `__typename`: `layers/GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/GlobalObjectTypeFieldResolver.php`
+- Field `__typename`: `submodules/GatoGraphQL/layers/GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/GlobalObjectTypeFieldResolver.php`
 
 #### Enum String Resolver
 
-- Enum String `CustomPostEnumString` `layers/CMSSchema/packages/customposts/src/TypeResolvers/EnumType/CustomPostEnumStringScalarTypeResolver.php`
+- Enum String `CustomPostEnumString` `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/TypeResolvers/EnumType/CustomPostEnumStringScalarTypeResolver.php`
 
 #### Error Payload Union Type Resolver
 
-- Error Payload Union Type `RootAddCommentToCustomPostMutationErrorPayloadUnion`: `layers/CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver.php`
+- Error Payload Union Type `RootAddCommentToCustomPostMutationErrorPayloadUnion`: `submodules/GatoGraphQL/layers/CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver.php`
 
 #### Nested Mutations Resolver
 
-- Mutation `Post.update`: `layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php`
+- Mutation `Post.update`: `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php`
 
 #### Field Arguments to filter data
 
-- Field `Root.comments`: `layers/CMSSchema/packages/comments/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+- Field `Root.comments`: `submodules/GatoGraphQL/layers/CMSSchema/packages/comments/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
 
 #### Custom Post Type - Type Resolver
 
-- Custom Post Type `Page`: `layers/CMSSchema/packages/pages/src/TypeResolvers/ObjectType/PageObjectTypeResolver.php`
+- Custom Post Type `Page`: `submodules/GatoGraphQL/layers/CMSSchema/packages/pages/src/TypeResolvers/ObjectType/PageObjectTypeResolver.php`
 
 #### Custom Post Type - Field Resolver
 
-- Field `CustomPost.author`: `layers/CMSSchema/packages/users/src/ConditionalOnModule/CustomPosts/FieldResolvers/ObjectType/CustomPostObjectTypeFieldResolver.php`
+- Field `CustomPost.author`: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/ConditionalOnModule/CustomPosts/FieldResolvers/ObjectType/CustomPostObjectTypeFieldResolver.php`
 
 <!-- ## Directory Structure
 ```
