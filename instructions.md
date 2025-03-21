@@ -178,14 +178,18 @@ services:
 
 ### Common Tasks
 
+#### Updating monorepo config for new package
+
+1. Execute `composer update-monorepo` to regenerate `composer.json` at the monorepo root
+2. Add the new package to the VSCode mapping
+3. Add the new package to the Lando webserver config
+
 #### Creating a package in Gato GraphQL
 
 1. Plan and propose: Given the requirements, check for similar packages already included in Gato GraphQL
 2. Create folders, files, and code for the packages
 3. Implement the logic
-4. Execute `composer update-monorepo` to regenerate `composer.json`
-5. Add the new packages to the VSCode mapping
-6. Add the new packages to the Lando webserver config
+4. Follow all the steps from common task "Updating monorepo config for new package"
 
 #### Creating a module in Gato GraphQL
 
