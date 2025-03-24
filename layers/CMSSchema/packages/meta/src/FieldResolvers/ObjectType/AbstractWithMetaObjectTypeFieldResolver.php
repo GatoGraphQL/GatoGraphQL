@@ -45,6 +45,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldNamesToResolve(): array
     {
         return [
+            'metaKeys',
             'metaValue',
             'metaValues',
             'jsonMeta',

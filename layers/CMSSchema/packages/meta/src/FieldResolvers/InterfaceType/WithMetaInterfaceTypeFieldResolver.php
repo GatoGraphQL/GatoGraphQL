@@ -63,6 +63,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldNamesToImplement(): array
     {
         return [
+            'metaKeys',
             'metaValue',
             'metaValues',
             'jsonMeta',
@@ -72,18 +73,26 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'metaValue' => $this->getStringScalarTypeResolver(),
-            'metaValues' => $this->getAnyBuiltInScalarScalarTypeResolver(),
-            'jsonMeta' => $this->getJSONObjectScalarTypeResolver(),
-            default => parent::getFieldTypeResolver($fieldName),
+            'metaKeys',
+            'metaValue' =>
+                $this->getStringScalarTypeResolver(),
+            'metaValues'
+                => $this->getAnyBuiltInScalarScalarTypeResolver(),
+            'jsonMeta'
+                => $this->getJSONObjectScalarTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($fieldName),
         };
     }
 
     public function getFieldTypeModifiers(string $fieldName): int
     {
         return match ($fieldName) {
-            'metaValues' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getFieldTypeModifiers($fieldName),
+            'metaKeys',
+            'metaValues'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getFieldTypeModifiers($fieldName),
         };
     }
 
@@ -120,6 +129,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
+            'metaKeys' => $this->__('List of allowed meta keys set on the entity.', 'custompostmeta'),
             'metaValue' => $this->__('Single meta value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
             'metaValues' => $this->__('List of meta values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
             'jsonMeta' => $this->__('JSON object, with all allowed meta entries.', 'custompostmeta'),
