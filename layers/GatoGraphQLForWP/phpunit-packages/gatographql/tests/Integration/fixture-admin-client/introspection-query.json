@@ -297,7 +297,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -324,10 +324,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -371,7 +371,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -398,10 +398,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -1044,7 +1044,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -1071,10 +1071,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -1118,7 +1118,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1145,10 +1145,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -1914,7 +1914,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -1941,10 +1941,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -1988,7 +1988,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -2015,10 +2015,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -2672,7 +2672,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -2699,10 +2699,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -2746,7 +2746,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -2773,10 +2773,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -7429,7 +7429,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -7456,10 +7456,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -7503,7 +7503,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -7530,10 +7530,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -8499,7 +8499,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -8526,10 +8526,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -8573,7 +8573,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -8600,10 +8600,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -9283,7 +9283,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -9310,10 +9310,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -9357,7 +9357,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -9384,10 +9384,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -9690,7 +9690,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -9717,10 +9717,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -9764,7 +9764,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -9791,10 +9791,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -20669,7 +20669,7 @@
                         },
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -20696,10 +20696,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -20743,7 +20743,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -20770,10 +20770,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
@@ -22805,6 +22805,16 @@
                 },
                 {
                     "kind": "SCALAR",
+                    "name": "AnyScalar",
+                    "description": "Wildcard type representing any of GraphQL's scalar types, including built-in types (String, Int, Boolean, Float or ID) and custom types",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
                     "name": "Boolean",
                     "description": "The Boolean scalar type represents `true` or `false`.",
                     "fields": null,
@@ -22897,6 +22907,16 @@
                     "kind": "SCALAR",
                     "name": "JSONObject",
                     "description": "Custom scalar representing a JSON Object of unrestricted shape",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
+                    "name": "ListValueJSONObject",
+                    "description": "Custom scalar representing a JSON Object where values are lists (of anything)",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -24281,7 +24301,7 @@
                     "fields": [
                         {
                             "name": "meta",
-                            "description": "JSON object, with all allowed meta entries.",
+                            "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
                                 {
                                     "name": "keys",
@@ -24308,10 +24328,10 @@
                             ],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "JSONObject!",
+                                "name": "ListValueJSONObject!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "JSONObject",
+                                    "name": "ListValueJSONObject",
                                     "ofType": null
                                 }
                             },
@@ -24355,7 +24375,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "AnyScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -24382,10 +24402,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyBuiltInScalar]",
+                                "name": "[AnyScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyBuiltInScalar",
+                                    "name": "AnyScalar",
                                     "ofType": null
                                 }
                             },
