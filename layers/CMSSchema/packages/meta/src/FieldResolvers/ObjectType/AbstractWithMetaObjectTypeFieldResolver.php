@@ -47,6 +47,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
         return [
             'metaValue',
             'metaValues',
+            'jsonMeta',
         ];
     }
 
