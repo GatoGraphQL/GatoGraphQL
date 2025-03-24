@@ -117,19 +117,27 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
 
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
-        return match ($fieldArgName) {
-            'key' => $this->__('The meta key', 'meta'),
-            'keys' => $this->__('The meta keys', 'meta'),
-            default => parent::getFieldArgDescription($fieldName, $fieldArgName),
+        return match ([$fieldName => $fieldArgName]) {
+            ['metaValue' => 'key'],
+            ['metaValues' => 'key']
+                => $this->__('The meta key', 'meta'),
+            ['jsonMeta' => 'keys']
+                => $this->__('The meta keys', 'meta'),
+            default
+                => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
 
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
-        return match ($fieldArgName) {
-            'key' => SchemaTypeModifiers::MANDATORY,
-            'keys' => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
+        return match ([$fieldName => $fieldArgName]) {
+            ['metaValue' => 'key'],
+            ['metaValues' => 'key']
+                => SchemaTypeModifiers::MANDATORY,
+            ['jsonMeta' => 'keys']
+                => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
         };
     }
 
