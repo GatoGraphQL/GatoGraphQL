@@ -36,4 +36,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $defaultValue,
         );
     }
+
+    public function treatUserMetaKeysAsSensitiveData(): bool
+    {
+        $envVariable = Environment::TREAT_USER_META_KEYS_AS_SENSITIVE_DATA;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

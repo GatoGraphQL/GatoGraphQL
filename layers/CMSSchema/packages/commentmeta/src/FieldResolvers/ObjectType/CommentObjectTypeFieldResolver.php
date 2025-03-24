@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMeta\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoPCMSSchema\CommentMeta\Module;
+use PoPCMSSchema\CommentMeta\ModuleConfiguration;
 use PoPCMSSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
@@ -39,6 +42,20 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
     protected function getMetaTypeAPI(): MetaTypeAPIInterface
     {
         return $this->getCommentMetaTypeAPI();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatCommentMetaKeysAsSensitiveData()) {
+            $sensitiveFieldArgNames[] = 'metaKeys';
+        }
+        return $sensitiveFieldArgNames;
     }
 
     public function resolveValue(

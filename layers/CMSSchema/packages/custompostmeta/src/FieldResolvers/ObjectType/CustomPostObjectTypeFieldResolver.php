@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMeta\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMeta\Module;
+use PoPCMSSchema\CustomPostMeta\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
@@ -39,6 +42,20 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
     protected function getMetaTypeAPI(): MetaTypeAPIInterface
     {
         return $this->getCustomPostMetaTypeAPI();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatCustomPostMetaKeysAsSensitiveData()) {
+            $sensitiveFieldArgNames[] = 'metaKeys';
+        }
+        return $sensitiveFieldArgNames;
     }
 
     public function resolveValue(
