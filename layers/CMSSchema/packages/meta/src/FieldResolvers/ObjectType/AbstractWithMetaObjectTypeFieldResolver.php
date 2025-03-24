@@ -105,7 +105,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                                         $nonAllowedKeys[0],
                                     ]
                                 ),
-                                $field->getArgument('key') ?? $field,
+                                $field->getArgument('keys') ?? $field,
                             )
                         );
                         break;
