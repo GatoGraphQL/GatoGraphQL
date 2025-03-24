@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Meta\FieldResolvers\InterfaceType;
 
 use PoPCMSSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
+use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\ListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -12,13 +13,12 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?ListValueJSONObjectScalarTypeResolver $listValueJSONObjectScalarTypeResolver = null;
 
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
@@ -38,14 +38,14 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         }
         return $this->stringScalarTypeResolver;
     }
-    final protected function getJSONObjectScalarTypeResolver(): JSONObjectScalarTypeResolver
+    final protected function getListValueJSONObjectScalarTypeResolver(): ListValueJSONObjectScalarTypeResolver
     {
-        if ($this->jsonObjectScalarTypeResolver === null) {
-            /** @var JSONObjectScalarTypeResolver */
-            $jsonObjectScalarTypeResolver = $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
-            $this->jsonObjectScalarTypeResolver = $jsonObjectScalarTypeResolver;
+        if ($this->listValueJSONObjectScalarTypeResolver === null) {
+            /** @var ListValueJSONObjectScalarTypeResolver */
+            $listValueJSONObjectScalarTypeResolver = $this->instanceManager->getInstance(ListValueJSONObjectScalarTypeResolver::class);
+            $this->listValueJSONObjectScalarTypeResolver = $listValueJSONObjectScalarTypeResolver;
         }
-        return $this->jsonObjectScalarTypeResolver;
+        return $this->listValueJSONObjectScalarTypeResolver;
     }
 
     /**
@@ -79,7 +79,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaValues'
                 => $this->getAnyBuiltInScalarScalarTypeResolver(),
             'meta'
-                => $this->getJSONObjectScalarTypeResolver(),
+                => $this->getListValueJSONObjectScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($fieldName),
         };
