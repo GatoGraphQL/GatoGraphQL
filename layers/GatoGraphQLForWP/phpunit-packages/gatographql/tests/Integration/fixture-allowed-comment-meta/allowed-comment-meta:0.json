@@ -2,7 +2,11 @@
   "data": {
     "comments": [
       {
-        "description": null
+        "description": null,
+        "jsonMeta": {},
+        "metaKeys": [
+          "_some_text_in_comment"
+        ]
       }
     ]
   }
