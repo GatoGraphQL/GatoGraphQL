@@ -3076,6 +3076,13 @@
           "description": "Wildcard type representing any of GraphQL's built-in types (String, Int, Boolean, Float or ID)"
         },
         {
+          "name": "AnyScalar",
+          "namespacedName": "AnyScalar",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Wildcard type representing any of GraphQL's scalar types, including built-in types (String, Int, Boolean, Float or ID) and custom types"
+        },
+        {
           "name": "Boolean",
           "namespacedName": "Boolean",
           "fields": null,
@@ -3144,6 +3151,13 @@
           "fields": null,
           "kind": "SCALAR",
           "description": "Custom scalar representing a JSON Object of unrestricted shape"
+        },
+        {
+          "name": "ListValueJSONObject",
+          "namespacedName": "ListValueJSONObject",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Custom scalar representing a JSON Object where values are lists (of anything)"
         },
         {
           "name": "MenuLocationEnumString",

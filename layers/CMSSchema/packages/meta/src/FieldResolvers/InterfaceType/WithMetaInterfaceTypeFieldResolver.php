@@ -11,23 +11,23 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
+    private ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?ListValueJSONObjectScalarTypeResolver $listValueJSONObjectScalarTypeResolver = null;
 
-    final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    final protected function getAnyScalarScalarTypeResolver(): AnyScalarScalarTypeResolver
     {
-        if ($this->anyBuiltInScalarScalarTypeResolver === null) {
-            /** @var AnyBuiltInScalarScalarTypeResolver */
-            $anyBuiltInScalarScalarTypeResolver = $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
-            $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+        if ($this->anyScalarScalarTypeResolver === null) {
+            /** @var AnyScalarScalarTypeResolver */
+            $anyScalarScalarTypeResolver = $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class);
+            $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
         }
-        return $this->anyBuiltInScalarScalarTypeResolver;
+        return $this->anyScalarScalarTypeResolver;
     }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -73,11 +73,11 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'metaKeys',
-            'metaValue' =>
-                $this->getStringScalarTypeResolver(),
+            'metaKeys'
+                => $this->getStringScalarTypeResolver(),
+            'metaValue',
             'metaValues'
-                => $this->getAnyBuiltInScalarScalarTypeResolver(),
+                => $this->getAnyScalarScalarTypeResolver(),
             'meta'
                 => $this->getListValueJSONObjectScalarTypeResolver(),
             default

@@ -368,6 +368,10 @@
         },
         {
           "kind": "SCALAR",
+          "name": "AnyScalar"
+        },
+        {
+          "kind": "SCALAR",
           "name": "Boolean"
         },
         {
@@ -405,6 +409,10 @@
         {
           "kind": "SCALAR",
           "name": "JSONObject"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "ListValueJSONObject"
         },
         {
           "kind": "SCALAR",
