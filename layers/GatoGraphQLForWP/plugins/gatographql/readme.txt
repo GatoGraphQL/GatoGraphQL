@@ -211,7 +211,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 11.3.0 =
-* Added fields `meta: JSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` (#3060)
+* Added fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` (#3060)
+* Added type `ListValueJSONObject` (#3060)
 
 = 11.2.0 =
 * Support fetching Page Builders data in the GraphQL schema (#3051)
