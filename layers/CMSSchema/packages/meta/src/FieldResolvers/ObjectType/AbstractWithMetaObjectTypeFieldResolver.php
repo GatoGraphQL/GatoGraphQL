@@ -95,6 +95,21 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 }
                 if ($nonAllowedKeys !== []) {
                     $field = $fieldDataAccessor->getField();
+                    if (count($nonAllowedKeys) === 1) {
+                        $objectTypeFieldResolutionFeedbackStore->addError(
+                            new ObjectTypeFieldResolutionFeedback(
+                                new FeedbackItemResolution(
+                                    FeedbackItemProvider::class,
+                                    FeedbackItemProvider::E1,
+                                    [
+                                        $nonAllowedKeys[0],
+                                    ]
+                                ),
+                                $field->getArgument('key') ?? $field,
+                            )
+                        );
+                        break;
+                    }
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
