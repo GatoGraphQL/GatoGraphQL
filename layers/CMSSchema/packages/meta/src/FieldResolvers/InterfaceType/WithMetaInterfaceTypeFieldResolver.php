@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\FieldResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
+use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\ListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?ListValueJSONObjectScalarTypeResolver $listValueJSONObjectScalarTypeResolver = null;
 
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
     {
@@ -36,6 +38,15 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
         }
         return $this->stringScalarTypeResolver;
     }
+    final protected function getListValueJSONObjectScalarTypeResolver(): ListValueJSONObjectScalarTypeResolver
+    {
+        if ($this->listValueJSONObjectScalarTypeResolver === null) {
+            /** @var ListValueJSONObjectScalarTypeResolver */
+            $listValueJSONObjectScalarTypeResolver = $this->instanceManager->getInstance(ListValueJSONObjectScalarTypeResolver::class);
+            $this->listValueJSONObjectScalarTypeResolver = $listValueJSONObjectScalarTypeResolver;
+        }
+        return $this->listValueJSONObjectScalarTypeResolver;
+    }
 
     /**
      * @return array<class-string<InterfaceTypeResolverInterface>>
@@ -52,25 +63,38 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldNamesToImplement(): array
     {
         return [
+            'metaKeys',
             'metaValue',
             'metaValues',
+            'meta',
         ];
     }
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'metaValue' => $this->getStringScalarTypeResolver(),
-            'metaValues' => $this->getAnyBuiltInScalarScalarTypeResolver(),
-            default => parent::getFieldTypeResolver($fieldName),
+            'metaKeys',
+            'metaValue' =>
+                $this->getStringScalarTypeResolver(),
+            'metaValues'
+                => $this->getAnyBuiltInScalarScalarTypeResolver(),
+            'meta'
+                => $this->getListValueJSONObjectScalarTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($fieldName),
         };
     }
 
     public function getFieldTypeModifiers(string $fieldName): int
     {
         return match ($fieldName) {
-            'metaValues' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getFieldTypeModifiers($fieldName),
+            'metaKeys',
+            'metaValues'
+                => SchemaTypeModifiers::IS_ARRAY,
+            'meta'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getFieldTypeModifiers($fieldName),
         };
     }
 
@@ -84,31 +108,46 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaValues' => [
                 'key' => $this->getStringScalarTypeResolver(),
             ],
+            'meta' => [
+                'keys' => $this->getStringScalarTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($fieldName),
         };
     }
 
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
-        return match ($fieldArgName) {
-            'key' => $this->__('The meta key', 'meta'),
-            default => parent::getFieldArgDescription($fieldName, $fieldArgName),
+        return match ([$fieldName => $fieldArgName]) {
+            ['metaValue' => 'key'],
+            ['metaValues' => 'key']
+                => $this->__('The meta key', 'meta'),
+            ['meta' => 'keys']
+                => $this->__('The meta keys', 'meta'),
+            default
+                => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
 
     public function getFieldArgTypeModifiers(string $fieldName, string $fieldArgName): int
     {
-        return match ($fieldArgName) {
-            'key' => SchemaTypeModifiers::MANDATORY,
-            default => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
+        return match ([$fieldName => $fieldArgName]) {
+            ['metaValue' => 'key'],
+            ['metaValues' => 'key']
+                => SchemaTypeModifiers::MANDATORY,
+            ['meta' => 'keys']
+                => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
         };
     }
 
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
+            'metaKeys' => $this->__('List of allowed meta keys set on the entity.', 'custompostmeta'),
             'metaValue' => $this->__('Single meta value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
             'metaValues' => $this->__('List of meta values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
+            'meta' => $this->__('JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).', 'custompostmeta'),
             default => parent::getFieldDescription($fieldName),
         };
     }

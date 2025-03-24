@@ -4,6 +4,13 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 11.2.0 - DATE
+
+### Added
+
+- Fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` (#3060)
+- Type `ListValueJSONObject` (#3060)
+
 ## 11.2.0 - 15/03/2025
 
 ### Added

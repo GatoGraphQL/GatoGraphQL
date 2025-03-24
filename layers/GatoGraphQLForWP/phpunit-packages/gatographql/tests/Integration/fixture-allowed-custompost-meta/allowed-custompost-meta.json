@@ -1,7 +1,9 @@
 {
   "data": {
     "post": {
-      "editLast": null
+      "editLast": null,
+      "meta": {},
+      "metaKeys": []
     }
   }
 }

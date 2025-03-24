@@ -46,7 +46,6 @@
         "pop-cms-schema/user-roles-wp": "^11.3",
         "pop-cms-schema/user-state-mutations-wp": "^11.3",
         "pop-schema/directive-commons": "^11.3",
-        "pop-schema/extended-schema-commons": "^11.3",
         "pop-schema/http-requests": "^11.3",
         "pop-wp-schema/blocks": "^11.3",
         "pop-wp-schema/commentmeta": "^11.3",

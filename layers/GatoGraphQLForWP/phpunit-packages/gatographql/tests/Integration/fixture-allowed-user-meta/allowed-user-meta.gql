@@ -1,5 +1,7 @@
 {
   user(by: { id: 1 }) {
     lastName: metaValue(key: "last_name")
+    meta(keys: ["last_name", "nickname", "first_name", "rich_editing", "wp_capabilities"])
+    metaKeys
   }
 }

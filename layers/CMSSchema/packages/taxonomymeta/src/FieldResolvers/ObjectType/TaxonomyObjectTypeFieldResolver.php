@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMeta\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
+use PoPCMSSchema\TaxonomyMeta\Module;
+use PoPCMSSchema\TaxonomyMeta\ModuleConfiguration;
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
@@ -41,21 +44,59 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
         return $this->getTaxonomyMetaTypeAPI();
     }
 
+    /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatTaxonomyMetaKeysAsSensitiveData()) {
+            $sensitiveFieldArgNames[] = 'metaKeys';
+        }
+        return $sensitiveFieldArgNames;
+    }
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $taxonomy = $object;
+        $taxonomyTerm = $object;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'metaKeys':
+                $metaKeys = [];
+                $taxonomyMetaTypeAPI = $this->getTaxonomyMetaTypeAPI();
+                $allTaxonomyTermMetaKeys = $taxonomyMetaTypeAPI->getTaxonomyTermMetaKeys($taxonomyTerm);
+                foreach ($allTaxonomyTermMetaKeys as $key) {
+                    if (!$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($key)) {
+                        continue;
+                    }
+                    $metaKeys[] = $key;
+                }
+                return $metaKeys;
+                return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMetaKeys($taxonomyTerm);
             case 'metaValue':
             case 'metaValues':
                 return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
-                    $taxonomy,
+                    $taxonomyTerm,
                     $fieldDataAccessor->getValue('key'),
                     $fieldDataAccessor->getFieldName() === 'metaValue'
                 );
+            case 'meta':
+                $meta = [];
+                $allMeta = $this->getTaxonomyMetaTypeAPI()->getAllTaxonomyTermMeta($taxonomyTerm);
+                /** @var string[] */
+                $keys = $fieldDataAccessor->getValue('keys');
+                foreach ($keys as $key) {
+                    if (!array_key_exists($key, $allMeta)) {
+                        continue;
+                    }
+                    $meta[$key] = $allMeta[$key];
+                }
+                return (object) $meta;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

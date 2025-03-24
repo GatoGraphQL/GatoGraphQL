@@ -60,6 +60,12 @@
               "name": "karma"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -210,6 +216,12 @@
               "name": "id"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -311,6 +323,12 @@
               "name": "isStatus"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -403,6 +421,12 @@
             },
             {
               "name": "id"
+            },
+            {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
             },
             {
               "name": "metaValue"
@@ -990,6 +1014,12 @@
               "name": "menuOrder"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -1120,6 +1150,12 @@
               "name": "isSticky"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -1203,6 +1239,12 @@
               "name": "id"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -1257,6 +1299,12 @@
             },
             {
               "name": "id"
+            },
+            {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
             },
             {
               "name": "metaValue"
@@ -1426,6 +1474,9 @@
               "name": "page"
             },
             {
+              "name": "pageBuilders"
+            },
+            {
               "name": "pageCount"
             },
             {
@@ -1496,6 +1547,9 @@
             },
             {
               "name": "useGutenbergEditorWithCustomPostType"
+            },
+            {
+              "name": "useWhichPageBuilderWithCustomPostType"
             },
             {
               "name": "user"
@@ -1728,6 +1782,9 @@
               "name": "page"
             },
             {
+              "name": "pageBuilders"
+            },
+            {
               "name": "pageCount"
             },
             {
@@ -1888,6 +1945,9 @@
             },
             {
               "name": "useGutenbergEditorWithCustomPostType"
+            },
+            {
+              "name": "useWhichPageBuilderWithCustomPostType"
             },
             {
               "name": "user"
@@ -2553,6 +2613,12 @@
               "name": "locale"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -3094,6 +3160,13 @@
           "description": "Wildcard type representing any of the numeric types (Int or Float)"
         },
         {
+          "name": "PageBuilderProvidersEnumString",
+          "namespacedName": "PageBuilderProvidersEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Possible values: `\"\"`."
+        },
+        {
           "name": "PostCategoryTaxonomyEnumString",
           "namespacedName": "PostCategoryTaxonomyEnumString",
           "fields": null,
@@ -3336,6 +3409,12 @@
           "name": "WithMeta",
           "namespacedName": "WithMeta",
           "fields": [
+            {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
             {
               "name": "metaValue"
             },

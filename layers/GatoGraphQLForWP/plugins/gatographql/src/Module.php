@@ -75,7 +75,6 @@ class Module extends AbstractPluginModule
              * so there's no need to load them.
              */
             // \PoPSchema\DirectiveCommons\Module::class,
-            // \PoPSchema\ExtendedSchemaCommons\Module::class,
             // \PoPSchema\HTTPRequests\Module::class,
         ];
     }

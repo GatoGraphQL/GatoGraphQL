@@ -17,6 +17,7 @@ class Module extends AbstractModule
         return [
             \PoP\Engine\Module::class,
             \PoPCMSSchema\SchemaCommons\Module::class,
+            \PoPSchema\ExtendedSchemaCommons\Module::class,
         ];
     }
 
