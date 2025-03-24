@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-abstract class AbstractTreatCommentMetaKeysAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractTreatMetaKeysAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+abstract class AbstractTreatCustomPostMetaKeysAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractTreatMetaKeysAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getModuleID(string $dataName): string
     {
