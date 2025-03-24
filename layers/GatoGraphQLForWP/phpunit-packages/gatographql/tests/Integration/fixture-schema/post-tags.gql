@@ -162,6 +162,7 @@ fragment PostTagData on PostTag {
   id
   metaValue(key: "not-existing")
   metaValues(key: "also-not-existing")
+  jsonMeta(keys: ["not-existing"])
   name
   postCount
   posts {
