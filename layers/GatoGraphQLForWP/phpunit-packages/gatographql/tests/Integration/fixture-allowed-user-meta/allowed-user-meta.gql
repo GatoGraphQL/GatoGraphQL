@@ -2,5 +2,6 @@
   user(by: { id: 1 }) {
     lastName: metaValue(key: "last_name")
     jsonMeta(keys: ["last_name"])
+    metaKeys
   }
 }

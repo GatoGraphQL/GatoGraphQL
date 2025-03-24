@@ -2,5 +2,6 @@
   postCategory(by: { id: 1 }) {
     description: metaValue(key: "description")
     jsonMeta(keys: ["description"])
+    metaKeys
   }
 }

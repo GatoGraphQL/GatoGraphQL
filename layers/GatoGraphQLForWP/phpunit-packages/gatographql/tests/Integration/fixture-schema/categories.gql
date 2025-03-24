@@ -216,6 +216,7 @@ fragment CategoryData on Category {
   metaValue(key: "not-existing")
   metaValues(key: "also-not-existing")
   jsonMeta(keys: ["not-existing"])
+  metaKeys
   name
   slug
   slugPath

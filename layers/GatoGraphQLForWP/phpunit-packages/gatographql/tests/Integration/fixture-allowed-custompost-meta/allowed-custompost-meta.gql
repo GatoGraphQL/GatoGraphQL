@@ -2,5 +2,6 @@
   post(by: { id: 1 }) {
     editLast: metaValue(key: "_edit_last")
     jsonMeta(keys: ["_edit_last"])
+    metaKeys
   }
 }

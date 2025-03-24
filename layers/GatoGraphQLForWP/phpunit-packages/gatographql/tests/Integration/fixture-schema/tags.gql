@@ -224,6 +224,7 @@ fragment TagData on Tag {
   metaValue(key: "not-existing")
   metaValues(key: "also-not-existing")
   jsonMeta(keys: ["not-existing"])
+  metaKeys
   name
   slug
   url
