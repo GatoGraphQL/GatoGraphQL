@@ -84,10 +84,11 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 break;
             case 'jsonMeta':
                 $nonAllowedKeys = [];
+                $metaTypeAPI = $this->getMetaTypeAPI();
                 /** @var string[] */
                 $keys = $fieldDataAccessor->getValue('key');
                 foreach ($keys as $key) {
-                    if ($this->getMetaTypeAPI()->validateIsMetaKeyAllowed($key)) {
+                    if ($metaTypeAPI->validateIsMetaKeyAllowed($key)) {
                         continue;
                     }
                     $nonAllowedKeys[] = $key;
