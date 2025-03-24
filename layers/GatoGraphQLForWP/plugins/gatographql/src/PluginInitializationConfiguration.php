@@ -569,6 +569,31 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA,
             ],
+            // Meta keys
+            [
+                'class' => CommentMetaModule::class,
+                'envVariable' => CommentMetaEnvironment::TREAT_COMMENT_META_KEYS_AS_SENSITIVE_DATA,
+                'module' => MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META,
+                'option' => MetaSchemaTypeModuleResolver::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA,
+            ],
+            [
+                'class' => CustomPostMetaModule::class,
+                'envVariable' => CustomPostMetaEnvironment::TREAT_CUSTOMPOST_META_KEYS_AS_SENSITIVE_DATA,
+                'module' => MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
+                'option' => MetaSchemaTypeModuleResolver::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA,
+            ],
+            [
+                'class' => TaxonomyMetaModule::class,
+                'envVariable' => TaxonomyMetaEnvironment::TREAT_TAXONOMY_META_KEYS_AS_SENSITIVE_DATA,
+                'module' => MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
+                'option' => MetaSchemaTypeModuleResolver::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA,
+            ],
+            [
+                'class' => UserMetaModule::class,
+                'envVariable' => UserMetaEnvironment::TREAT_USER_META_KEYS_AS_SENSITIVE_DATA,
+                'module' => MetaSchemaTypeModuleResolver::SCHEMA_USER_META,
+                'option' => MetaSchemaTypeModuleResolver::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA,
+            ],
             // Payloadable types for mutations
             [
                 'class' => \PoPCMSSchema\CommentMutations\Module::class,
