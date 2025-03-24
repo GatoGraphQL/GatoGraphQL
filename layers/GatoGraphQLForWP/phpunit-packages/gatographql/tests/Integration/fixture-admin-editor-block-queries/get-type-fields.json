@@ -57,10 +57,10 @@
               "name": "id"
             },
             {
-              "name": "meta"
+              "name": "karma"
             },
             {
-              "name": "karma"
+              "name": "meta"
             },
             {
               "name": "metaKeys"
@@ -1011,10 +1011,10 @@
               "name": "isStatus"
             },
             {
-              "name": "meta"
+              "name": "menuOrder"
             },
             {
-              "name": "menuOrder"
+              "name": "meta"
             },
             {
               "name": "metaKeys"
@@ -2607,13 +2607,13 @@
               "name": "id"
             },
             {
-              "name": "meta"
-            },
-            {
               "name": "lastName"
             },
             {
               "name": "locale"
+            },
+            {
+              "name": "meta"
             },
             {
               "name": "metaKeys"
