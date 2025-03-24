@@ -19,4 +19,9 @@ interface UserMetaTypeAPIInterface extends MetaTypeAPIInterface
      * @throws MetaKeyNotAllowedException
      */
     public function getUserMeta(string|int|object $userObjectOrID, string $key, bool $single = false, array $options = []): mixed;
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getAllUserMeta(string|int|object $userObjectOrID): array;
 }

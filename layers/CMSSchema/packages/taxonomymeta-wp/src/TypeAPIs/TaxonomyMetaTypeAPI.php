@@ -31,4 +31,20 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
         }
         return $value;
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getAllTaxonomyTermMeta(string|int|object $termObjectOrID): array
+    {
+        if (is_object($termObjectOrID)) {
+            /** @var WP_Term */
+            $term = $termObjectOrID;
+            $termID = $term->term_id;
+        } else {
+            $termID = $termObjectOrID;
+        }
+
+        return \get_term_meta((int)$termID) ?? [];
+    }
 }

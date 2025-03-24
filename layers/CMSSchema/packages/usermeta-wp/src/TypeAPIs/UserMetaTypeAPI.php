@@ -38,4 +38,20 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
         }
         return $value;
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getAllUserMeta(string|int|object $userObjectOrID): array
+    {
+        if (is_object($userObjectOrID)) {
+            /** @var WP_User */
+            $user = $userObjectOrID;
+            $userID = $user->ID;
+        } else {
+            $userID = $userObjectOrID;
+        }
+
+        return \get_user_meta((int)$userID) ?? [];
+    }
 }

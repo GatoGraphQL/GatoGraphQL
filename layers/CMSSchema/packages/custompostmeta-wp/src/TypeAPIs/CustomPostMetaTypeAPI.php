@@ -31,4 +31,20 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
         }
         return $value;
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getAllCustomPostMeta(string|int|object $customPostObjectOrID): array
+    {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            $customPostID = $customPost->ID;
+        } else {
+            $customPostID = $customPostObjectOrID;
+        }
+
+        return \get_post_meta((int)$customPostID) ?? [];
+    }
 }
