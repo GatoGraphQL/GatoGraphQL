@@ -37,7 +37,7 @@
         ],
         "type": "PostCategory",
         "field": "meta(keys: [\"description\"])",
-        "code": "PoPCMSSchema\/Meta@e2"
+        "code": "PoPCMSSchema\/Meta@e1"
       }
     }
   ],

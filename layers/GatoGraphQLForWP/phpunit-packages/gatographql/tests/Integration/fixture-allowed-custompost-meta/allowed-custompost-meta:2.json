@@ -37,7 +37,7 @@
         ],
         "type": "Post",
         "field": "meta(keys: [\"_edit_last\"])",
-        "code": "PoPCMSSchema\/Meta@e2"
+        "code": "PoPCMSSchema\/Meta@e1"
       }
     }
   ],
