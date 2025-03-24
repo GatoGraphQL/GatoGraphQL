@@ -71,7 +71,7 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
                 $commentMetaTypeAPI = $this->getCommentMetaTypeAPI();
                 $allCommentMetaKeys = $commentMetaTypeAPI->getCommentMetaKeys($comment);
                 foreach ($allCommentMetaKeys as $key) {
-                    if (!$commentMetaTypeAPI->validateIsMetaKeyAllowed($key))  {
+                    if (!$commentMetaTypeAPI->validateIsMetaKeyAllowed($key)) {
                         continue;
                     }
                     $metaKeys[] = $key;
