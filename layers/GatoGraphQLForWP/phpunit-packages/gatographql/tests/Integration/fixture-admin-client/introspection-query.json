@@ -280,7 +280,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -1043,7 +1043,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -1913,7 +1913,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -2671,7 +2671,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -7412,7 +7412,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -8498,7 +8498,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -9282,7 +9282,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -9689,7 +9689,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -20640,7 +20640,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {
@@ -24280,7 +24280,7 @@
                     "description": "Fields with meta values",
                     "fields": [
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
                                 {

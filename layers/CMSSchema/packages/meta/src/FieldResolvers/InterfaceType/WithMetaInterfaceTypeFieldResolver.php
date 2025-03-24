@@ -66,7 +66,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaKeys',
             'metaValue',
             'metaValues',
-            'jsonMeta',
+            'meta',
         ];
     }
 
@@ -78,7 +78,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
                 $this->getStringScalarTypeResolver(),
             'metaValues'
                 => $this->getAnyBuiltInScalarScalarTypeResolver(),
-            'jsonMeta'
+            'meta'
                 => $this->getJSONObjectScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($fieldName),
@@ -91,7 +91,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaKeys',
             'metaValues'
                 => SchemaTypeModifiers::IS_ARRAY,
-            'jsonMeta'
+            'meta'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($fieldName),
@@ -108,7 +108,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaValues' => [
                 'key' => $this->getStringScalarTypeResolver(),
             ],
-            'jsonMeta' => [
+            'meta' => [
                 'keys' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($fieldName),
@@ -121,7 +121,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             ['metaValue' => 'key'],
             ['metaValues' => 'key']
                 => $this->__('The meta key', 'meta'),
-            ['jsonMeta' => 'keys']
+            ['meta' => 'keys']
                 => $this->__('The meta keys', 'meta'),
             default
                 => parent::getFieldArgDescription($fieldName, $fieldArgName),
@@ -134,7 +134,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             ['metaValue' => 'key'],
             ['metaValues' => 'key']
                 => SchemaTypeModifiers::MANDATORY,
-            ['jsonMeta' => 'keys']
+            ['meta' => 'keys']
                 => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
@@ -147,7 +147,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaKeys' => $this->__('List of allowed meta keys set on the entity.', 'custompostmeta'),
             'metaValue' => $this->__('Single meta value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
             'metaValues' => $this->__('List of meta values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
-            'jsonMeta' => $this->__('JSON object, with all allowed meta entries.', 'custompostmeta'),
+            'meta' => $this->__('JSON object, with all allowed meta entries.', 'custompostmeta'),
             default => parent::getFieldDescription($fieldName),
         };
     }

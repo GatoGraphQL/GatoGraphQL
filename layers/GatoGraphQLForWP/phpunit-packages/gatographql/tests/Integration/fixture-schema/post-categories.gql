@@ -185,7 +185,7 @@ fragment PostCategoryData on PostCategory {
   id
   metaValue(key: "not-existing")
   metaValues(key: "also-not-existing")
-  jsonMeta(keys: ["not-existing"])
+  meta(keys: ["not-existing"])
   metaKeys
   name
   parent {

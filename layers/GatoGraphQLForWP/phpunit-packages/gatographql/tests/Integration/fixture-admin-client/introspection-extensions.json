@@ -160,7 +160,7 @@
                             "args": []
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -582,7 +582,7 @@
                             "args": []
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -1017,7 +1017,7 @@
                             ]
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -1397,7 +1397,7 @@
                             "args": []
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -3592,7 +3592,7 @@
                             ]
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -4124,7 +4124,7 @@
                             "args": []
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -4502,7 +4502,7 @@
                             "args": []
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -4706,7 +4706,7 @@
                             "args": []
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -10162,7 +10162,7 @@
                             "args": []
                         },
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -12108,7 +12108,7 @@
                     },
                     "fields": [
                         {
-                            "name": "jsonMeta",
+                            "name": "meta",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false

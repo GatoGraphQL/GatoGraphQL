@@ -1,7 +1,7 @@
 {
   comments(pagination: { limit: 1 }) {
     description: metaValue(key: "description")
-    jsonMeta(keys: ["description"]) 
+    meta(keys: ["description"]) 
     metaKeys
   }
 }

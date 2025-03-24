@@ -48,7 +48,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
             'metaKeys',
             'metaValue',
             'metaValues',
-            'jsonMeta',
+            'meta',
         ];
     }
 
@@ -82,7 +82,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                     );
                 }
                 break;
-            case 'jsonMeta':
+            case 'meta':
                 $nonAllowedKeys = [];
                 $metaTypeAPI = $this->getMetaTypeAPI();
                 /** @var string[] */

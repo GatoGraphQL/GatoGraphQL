@@ -85,8 +85,8 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                     $fieldDataAccessor->getValue('key'),
                     $fieldDataAccessor->getFieldName() === 'metaValue'
                 );
-            case 'jsonMeta':
-                $jsonMeta = [];
+            case 'meta':
+                $meta = [];
                 $allMeta = $this->getTaxonomyMetaTypeAPI()->getAllTaxonomyTermMeta($taxonomyTerm);
                 /** @var string[] */
                 $keys = $fieldDataAccessor->getValue('keys');
@@ -94,9 +94,9 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                     if (!array_key_exists($key, $allMeta)) {
                         continue;
                     }
-                    $jsonMeta[$key] = $allMeta[$key];
+                    $meta[$key] = $allMeta[$key];
                 }
-                return (object) $jsonMeta;
+                return (object) $meta;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

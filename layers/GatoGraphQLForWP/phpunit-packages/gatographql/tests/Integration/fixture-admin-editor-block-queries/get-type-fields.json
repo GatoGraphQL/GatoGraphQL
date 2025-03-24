@@ -57,7 +57,7 @@
               "name": "id"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "karma"
@@ -216,7 +216,7 @@
               "name": "id"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "metaKeys"
@@ -323,7 +323,7 @@
               "name": "isStatus"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "metaKeys"
@@ -423,7 +423,7 @@
               "name": "id"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "metaKeys"
@@ -1011,7 +1011,7 @@
               "name": "isStatus"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "menuOrder"
@@ -1150,7 +1150,7 @@
               "name": "isSticky"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "metaKeys"
@@ -1239,7 +1239,7 @@
               "name": "id"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "metaKeys"
@@ -1301,7 +1301,7 @@
               "name": "id"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "metaKeys"
@@ -2607,7 +2607,7 @@
               "name": "id"
             },
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "lastName"
@@ -3410,7 +3410,7 @@
           "namespacedName": "WithMeta",
           "fields": [
             {
-              "name": "jsonMeta"
+              "name": "meta"
             },
             {
               "name": "metaKeys"

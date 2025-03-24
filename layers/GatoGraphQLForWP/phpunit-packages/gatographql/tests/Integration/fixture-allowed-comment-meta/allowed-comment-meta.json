@@ -3,7 +3,7 @@
     "comments": [
       {
         "description": null,
-        "jsonMeta": {},
+        "meta": {},
         "metaKeys": [
           "_some_text_in_comment"
         ]
