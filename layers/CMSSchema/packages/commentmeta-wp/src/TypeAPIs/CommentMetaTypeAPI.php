@@ -45,7 +45,19 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
             $commentID = $commentObjectOrID;
         }
 
-        return \get_comment_meta((int)$commentID) ?? [];
+        return array_map(
+            /**
+             * @param mixed[] $items
+             * @return mixed[]
+             */
+            function (array $items): array {
+                return array_map(
+                    \maybe_unserialize(...),
+                    $items
+                );
+            },
+            \get_comment_meta((int)$commentID) ?? []
+        );
     }
 
     /**

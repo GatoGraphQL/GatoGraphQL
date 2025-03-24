@@ -45,7 +45,19 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
             $customPostID = $customPostObjectOrID;
         }
 
-        return \get_post_meta((int)$customPostID) ?? [];
+        return array_map(
+            /**
+             * @param mixed[] $items
+             * @return mixed[]
+             */
+            function (array $items): array {
+                return array_map(
+                    \maybe_unserialize(...),
+                    $items
+                );
+            },
+            \get_post_meta((int)$customPostID) ?? []
+        );
     }
 
     /**

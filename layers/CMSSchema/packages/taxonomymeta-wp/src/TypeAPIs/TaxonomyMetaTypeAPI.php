@@ -45,7 +45,19 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
             $termID = $termObjectOrID;
         }
 
-        return \get_term_meta((int)$termID) ?? [];
+        return array_map(
+            /**
+             * @param mixed[] $items
+             * @return mixed[]
+             */
+            function (array $items): array {
+                return array_map(
+                    \maybe_unserialize(...),
+                    $items
+                );
+            },
+            \get_term_meta((int)$termID) ?? []
+        );
     }
 
     /**

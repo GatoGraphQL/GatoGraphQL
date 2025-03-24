@@ -52,7 +52,19 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
             $userID = $userObjectOrID;
         }
 
-        return \get_user_meta((int)$userID) ?? [];
+        return array_map(
+            /**
+             * @param mixed[] $items
+             * @return mixed[]
+             */
+            function (array $items): array {
+                return array_map(
+                    \maybe_unserialize(...),
+                    $items
+                );
+            },
+            \get_user_meta((int)$userID) ?? []
+        );
     }
 
     /**
