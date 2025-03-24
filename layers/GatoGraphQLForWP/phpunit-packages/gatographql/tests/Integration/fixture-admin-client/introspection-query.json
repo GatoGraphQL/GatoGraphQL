@@ -280,6 +280,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "karma",
+                            "description": "Comment karma",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
@@ -312,22 +328,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "JSONObject",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "karma",
-                            "description": "Comment karma",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "Int!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "Int",
                                     "ofType": null
                                 }
                             },
@@ -7412,6 +7412,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "Menu order",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
@@ -7444,22 +7460,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "JSONObject",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "menuOrder",
-                            "description": "Menu order",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "Int!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "Int",
                                     "ofType": null
                                 }
                             },
@@ -20640,6 +20640,34 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "lastName",
+                            "description": "User's last name",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "locale",
+                            "description": "Retrieves the locale of a user",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "meta",
                             "description": "JSON object, with all allowed meta entries.",
                             "args": [
@@ -20672,34 +20700,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "JSONObject",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "lastName",
-                            "description": "User's last name",
-                            "args": [],
-                            "type": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "locale",
-                            "description": "Retrieves the locale of a user",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "String!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "String",
                                     "ofType": null
                                 }
                             },
