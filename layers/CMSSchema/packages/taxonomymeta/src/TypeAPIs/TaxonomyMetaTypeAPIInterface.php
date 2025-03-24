@@ -24,4 +24,9 @@ interface TaxonomyMetaTypeAPIInterface extends MetaTypeAPIInterface
      * @return array<string,mixed>
      */
     public function getAllTaxonomyTermMeta(string|int|object $termObjectOrID): array;
+
+    /**
+     * @return string[]
+     */
+    public function getTaxonomyTermMetaKeys(string|int|object $termObjectOrID): array;
 }

@@ -47,4 +47,12 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
 
         return \get_comment_meta((int)$commentID) ?? [];
     }
+
+    /**
+     * @return string[]
+     */
+    public function getCommentMetaKeys(string|int|object $commentObjectOrID): array
+    {
+        return array_keys($this->getAllCommentMeta($commentObjectOrID));
+    }
 }

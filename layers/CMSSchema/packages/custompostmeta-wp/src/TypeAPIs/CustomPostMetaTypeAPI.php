@@ -47,4 +47,12 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
 
         return \get_post_meta((int)$customPostID) ?? [];
     }
+
+    /**
+     * @return string[]
+     */
+    public function getCustomPostMetaKeys(string|int|object $customPostObjectOrID): array
+    {
+        return array_keys($this->getAllCustomPostMeta($customPostObjectOrID));
+    }
 }

@@ -47,4 +47,12 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
 
         return \get_term_meta((int)$termID) ?? [];
     }
+
+    /**
+     * @return string[]
+     */
+    public function getTaxonomyTermMetaKeys(string|int|object $termObjectOrID): array
+    {
+        return array_keys($this->getAllTaxonomyTermMeta($termObjectOrID));
+    }
 }

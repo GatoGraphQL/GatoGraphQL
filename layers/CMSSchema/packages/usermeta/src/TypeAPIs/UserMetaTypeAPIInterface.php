@@ -24,4 +24,9 @@ interface UserMetaTypeAPIInterface extends MetaTypeAPIInterface
      * @return array<string,mixed>
      */
     public function getAllUserMeta(string|int|object $userObjectOrID): array;
+
+    /**
+     * @return string[]
+     */
+    public function getUserMetaKeys(string|int|object $userObjectOrID): array;
 }

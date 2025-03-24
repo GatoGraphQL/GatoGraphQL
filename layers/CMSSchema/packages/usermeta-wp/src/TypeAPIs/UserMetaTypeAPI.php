@@ -54,4 +54,12 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 
         return \get_user_meta((int)$userID) ?? [];
     }
+
+    /**
+     * @return string[]
+     */
+    public function getUserMetaKeys(string|int|object $userObjectOrID): array
+    {
+        return array_keys($this->getAllUserMeta($userObjectOrID));
+    }
 }

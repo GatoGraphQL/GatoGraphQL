@@ -49,6 +49,8 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
     ): mixed {
         $taxonomyTerm = $object;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'metaKeys':
+                return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMetaKeys($taxonomyTerm);
             case 'metaValue':
             case 'metaValues':
                 return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(

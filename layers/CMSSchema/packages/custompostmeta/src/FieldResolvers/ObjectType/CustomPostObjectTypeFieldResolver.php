@@ -49,6 +49,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
     ): mixed {
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'metaKeys':
+                return $this->getCustomPostMetaTypeAPI()->getCustomPostMetaKeys($customPost);
             case 'metaValue':
             case 'metaValues':
                 return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(

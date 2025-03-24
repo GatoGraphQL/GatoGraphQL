@@ -49,6 +49,8 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
     ): mixed {
         $user = $object;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'metaKeys':
+                return $this->getUserMetaTypeAPI()->getUserMetaKeys($user);
             case 'metaValue':
             case 'metaValues':
                 return $this->getUserMetaTypeAPI()->getUserMeta(

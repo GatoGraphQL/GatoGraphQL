@@ -49,6 +49,8 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
     ): mixed {
         $comment = $object;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'metaKeys':
+                return $this->getCommentMetaTypeAPI()->getCommentMetaKeys($comment);
             case 'metaValue':
             case 'metaValues':
                 return $this->getCommentMetaTypeAPI()->getCommentMeta(
