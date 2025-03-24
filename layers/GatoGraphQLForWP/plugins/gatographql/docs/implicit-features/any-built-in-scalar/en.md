@@ -19,7 +19,7 @@ As such, if a field can return different scalar types, such as `Int` and `String
 
 However, this can easily make the GraphQL schema become bloated, so it should be avoided, as much as possible.
 
-It is for this reason that `AnyBuiltInScalar` was introduced. It is used whenever data in WordPress can be stored in different formats: options (saved in the `wp_options` table) and meta values.
+It is for this reason that `AnyBuiltInScalar` was introduced. It is used whenever data in WordPress can be stored in different formats: options (saved in the `wp_options` table).
 
 The affected fields are:
 
@@ -28,7 +28,9 @@ For `QueryRoot`:
 - `optionValue: AnyBuiltInScalar`
 - `optionValues: [AnyBuiltInScalar]`
 
+In addition, there's the sibling type `AnyScalar`, which extends to custom scalar too, such as `JSONObject`.
+
 For `Post`, `Page`, `GenericCustomPost`, `Comment`, `User`, `Tag` and `Category`:
 
-- `metaValue: AnyBuiltInScalar`
-- `metaValues: [AnyBuiltInScalar]`
+- `metaValue: AnyScalar`
+- `metaValues: [AnyScalar]`
