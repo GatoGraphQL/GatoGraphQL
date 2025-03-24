@@ -50,6 +50,16 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
         $taxonomyTerm = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'metaKeys':
+                $metaKeys = [];
+                $taxonomyMetaTypeAPI = $this->getTaxonomyMetaTypeAPI();
+                $allTaxonomyTermMetaKeys = $taxonomyMetaTypeAPI->getTaxonomyTermMetaKeys($taxonomyTerm);
+                foreach ($allTaxonomyTermMetaKeys as $key) {
+                    if (!$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($key))  {
+                        continue;
+                    }
+                    $metaKeys[] = $key;
+                }
+                return $metaKeys;
                 return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMetaKeys($taxonomyTerm);
             case 'metaValue':
             case 'metaValues':

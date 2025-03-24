@@ -50,7 +50,16 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
         $user = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'metaKeys':
-                return $this->getUserMetaTypeAPI()->getUserMetaKeys($user);
+                $metaKeys = [];
+                $userMetaTypeAPI = $this->getUserMetaTypeAPI();
+                $allUserMetaKeys = $userMetaTypeAPI->getUserMetaKeys($user);
+                foreach ($allUserMetaKeys as $key) {
+                    if (!$userMetaTypeAPI->validateIsMetaKeyAllowed($key))  {
+                        continue;
+                    }
+                    $metaKeys[] = $key;
+                }
+                return $metaKeys;
             case 'metaValue':
             case 'metaValues':
                 return $this->getUserMetaTypeAPI()->getUserMeta(
