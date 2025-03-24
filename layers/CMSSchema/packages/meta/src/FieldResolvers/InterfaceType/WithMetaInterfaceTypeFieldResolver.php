@@ -106,6 +106,9 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaValues' => [
                 'key' => $this->getStringScalarTypeResolver(),
             ],
+            'jsonMeta' => [
+                'keys' => $this->getStringScalarTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($fieldName),
         };
     }
@@ -114,6 +117,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     {
         return match ($fieldArgName) {
             'key' => $this->__('The meta key', 'meta'),
+            'keys' => $this->__('The meta keys', 'meta'),
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }
@@ -122,6 +126,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     {
         return match ($fieldArgName) {
             'key' => SchemaTypeModifiers::MANDATORY,
+            'keys' => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldArgTypeModifiers($fieldName, $fieldArgName),
         };
     }
