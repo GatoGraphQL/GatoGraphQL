@@ -119,7 +119,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                                 [
                                     implode(
                                         $this->__('\', \'', 'gatographql'),
-                                        $keys
+                                        $nonAllowedKeys
                                     ),
                                 ]
                             ),
