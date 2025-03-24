@@ -91,6 +91,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaKeys',
             'metaValues'
                 => SchemaTypeModifiers::IS_ARRAY,
+            'jsonMeta'
+                => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($fieldName),
         };
