@@ -147,7 +147,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             'metaKeys' => $this->__('List of allowed meta keys set on the entity.', 'custompostmeta'),
             'metaValue' => $this->__('Single meta value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
             'metaValues' => $this->__('List of meta values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
-            'meta' => $this->__('JSON object, with all allowed meta entries.', 'custompostmeta'),
+            'meta' => $this->__('JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).', 'custompostmeta'),
             default => parent::getFieldDescription($fieldName),
         };
     }
