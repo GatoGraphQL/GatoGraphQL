@@ -56,6 +56,18 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                     $fieldDataAccessor->getValue('key'),
                     $fieldDataAccessor->getFieldName() === 'metaValue'
                 );
+            case 'jsonMeta':
+                $jsonMeta = [];
+                $allMeta = $this->getCustomPostMetaTypeAPI()->getAllCustomPostMeta($customPost);
+                /** @var string[] */
+                $keys = $fieldDataAccessor->getValue('keys');
+                foreach ($keys as $key) {
+                    if (!array_key_exists($key, $allMeta)) {
+                        continue;
+                    }
+                    $jsonMeta[$key] = $allMeta[$key];
+                }
+                return (object) $jsonMeta;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

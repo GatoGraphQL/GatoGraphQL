@@ -47,15 +47,27 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $taxonomy = $object;
+        $taxonomyTerm = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'metaValue':
             case 'metaValues':
                 return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
-                    $taxonomy,
+                    $taxonomyTerm,
                     $fieldDataAccessor->getValue('key'),
                     $fieldDataAccessor->getFieldName() === 'metaValue'
                 );
+            case 'jsonMeta':
+                $jsonMeta = [];
+                $allMeta = $this->getTaxonomyMetaTypeAPI()->getAllTaxonomyTermMeta($taxonomyTerm);
+                /** @var string[] */
+                $keys = $fieldDataAccessor->getValue('keys');
+                foreach ($keys as $key) {
+                    if (!array_key_exists($key, $allMeta)) {
+                        continue;
+                    }
+                    $jsonMeta[$key] = $allMeta[$key];
+                }
+                return (object) $jsonMeta;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
