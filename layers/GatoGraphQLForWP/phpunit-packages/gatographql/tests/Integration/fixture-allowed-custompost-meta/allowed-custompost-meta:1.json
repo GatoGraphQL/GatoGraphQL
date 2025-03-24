@@ -21,7 +21,7 @@
       }
     },
     {
-      "message": "There are no keys with names '_edit_last'",
+      "message": "There is no key with name '_edit_last'",
       "locations": [
         {
           "line": 4,

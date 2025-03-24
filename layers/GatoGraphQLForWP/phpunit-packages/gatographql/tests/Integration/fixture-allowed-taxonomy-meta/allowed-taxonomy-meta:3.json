@@ -21,7 +21,7 @@
       }
     },
     {
-      "message": "There are no keys with names 'description'",
+      "message": "There is no key with name 'description'",
       "locations": [
         {
           "line": 4,
