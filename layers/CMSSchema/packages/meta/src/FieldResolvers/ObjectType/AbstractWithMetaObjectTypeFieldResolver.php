@@ -83,26 +83,34 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 }
                 break;
             case 'jsonMeta':
+                $nonAllowedKeys = [];
                 /** @var string[] */
                 $keys = $fieldDataAccessor->getValue('key');
-                $field = $fieldDataAccessor->getField();
                 foreach ($keys as $key) {
-                    if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($key)) {
-                        $objectTypeFieldResolutionFeedbackStore->addError(
-                            new ObjectTypeFieldResolutionFeedback(
-                                new FeedbackItemResolution(
-                                    FeedbackItemProvider::class,
-                                    FeedbackItemProvider::E1,
-                                    [
-                                        $key,
-                                    ]
-                                ),
-                                $field->getArgument('keys') ?? $field,
-                            )
-                        );
+                    if ($this->getMetaTypeAPI()->validateIsMetaKeyAllowed($key)) {
+                        continue;
                     }
-                    break;
+                    $nonAllowedKeys[] = $key;
                 }
+                if ($nonAllowedKeys !== []) {
+                    $field = $fieldDataAccessor->getField();
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E2,
+                                [
+                                    implode(
+                                        $this->__('\', \'', 'gatographql'),
+                                        $keys
+                                    ),
+                                ]
+                            ),
+                            $field->getArgument('keys') ?? $field,
+                        )
+                    );
+                }
+                break;
         }
     }
 }
