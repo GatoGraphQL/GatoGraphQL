@@ -86,7 +86,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 $nonAllowedKeys = [];
                 $metaTypeAPI = $this->getMetaTypeAPI();
                 /** @var string[] */
-                $keys = $fieldDataAccessor->getValue('key');
+                $keys = $fieldDataAccessor->getValue('keys');
                 foreach ($keys as $key) {
                     if ($metaTypeAPI->validateIsMetaKeyAllowed($key)) {
                         continue;
