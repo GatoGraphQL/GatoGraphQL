@@ -15,6 +15,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use stdClass;
 
 abstract class AbstractSetMetaCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements SetMetaOnCategoryObjectTypeFieldResolverInterface
 {
@@ -109,10 +110,11 @@ abstract class AbstractSetMetaCategoryObjectTypeFieldResolver extends AbstractOb
             $field,
             $object,
         );
-        $customPost = $object;
+        $category = $object;
         switch ($field->getName()) {
             case 'setMeta':
-                $fieldArgsForMutationForObject['input']->{MutationInputProperties::CATEGORY_ID} = $objectTypeResolver->getID($customPost);
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::CATEGORY_BY} ??= new stdClass();
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::CATEGORY_BY}->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
                 break;
         }
         return $fieldArgsForMutationForObject;
