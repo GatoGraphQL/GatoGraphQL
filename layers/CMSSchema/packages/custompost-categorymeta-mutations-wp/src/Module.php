@@ -28,6 +28,7 @@ class Module extends AbstractModule
             \PoPCMSSchema\CategoryMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostCategoriesWP\Module::class,
             \PoPCMSSchema\CustomPostCategoryMetaMutations\Module::class,
+            \PoPCMSSchema\CustomPostCategoryMutationsWP\Module::class,
             \PoPCMSSchema\TaxonomyMetaMutationsWP\Module::class,
         ];
     }
