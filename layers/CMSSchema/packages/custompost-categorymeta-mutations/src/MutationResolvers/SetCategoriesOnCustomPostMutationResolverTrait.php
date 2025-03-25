@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TaxonomyMetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
+use PoPCMSSchema\TaxonomyMetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMetaMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\TaxonomyMetaMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
 use PoPCMSSchema\TaxonomyMetaMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
@@ -173,20 +173,20 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E10,
+                TaxonomyMetaMutationErrorFeedbackItemProvider::class,
+                TaxonomyMetaMutationErrorFeedbackItemProvider::E10,
             ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E11,
+                TaxonomyMetaMutationErrorFeedbackItemProvider::class,
+                TaxonomyMetaMutationErrorFeedbackItemProvider::E11,
             ] => new TaxonomyIsNotValidErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E12,
+                TaxonomyMetaMutationErrorFeedbackItemProvider::class,
+                TaxonomyMetaMutationErrorFeedbackItemProvider::E12,
             ] => new TaxonomyIsNotValidErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
