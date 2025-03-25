@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMetaMutations\RelationalTypeDataLoaders\UnionType;
+namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
-use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMetaMutationPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class GenericCategoryUpdateMetaMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
 {
     private ?GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver $genericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = null;
 
@@ -22,7 +24,17 @@ class GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader extends A
         return $this->genericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
     }
 
-    protected function getUnionTypeResolver(): UnionTypeResolverInterface
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
+    public function getObjectTypeResolverClassesToAttachTo(): array
+    {
+        return [
+            GenericCategoryUpdateMetaMutationPayloadObjectTypeResolver::class,
+        ];
+    }
+
+    protected function getErrorsFieldFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return $this->getGenericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver();
     }

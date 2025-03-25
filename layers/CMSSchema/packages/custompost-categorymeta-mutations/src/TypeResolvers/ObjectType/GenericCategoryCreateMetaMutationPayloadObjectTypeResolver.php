@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType;
 
-class GenericCategoryCreateMutationPayloadObjectTypeResolver extends AbstractGenericCategoryMutationPayloadObjectTypeResolver
+class GenericCategoryCreateMetaMutationPayloadObjectTypeResolver extends AbstractGenericCategoryMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'GenericCategoryCreateMutationPayload';
+        return 'GenericCategoryCreateMetaMutationPayload';
     }
 
     public function getTypeDescription(): ?string
