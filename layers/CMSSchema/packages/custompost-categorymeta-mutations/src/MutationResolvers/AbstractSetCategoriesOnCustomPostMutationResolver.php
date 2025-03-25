@@ -11,7 +11,7 @@ use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateOrUpdateCustomPostM
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateTaxonomyTermMutationResolverTrait;
+use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\MutateTaxonomyTermMetaMutationResolverTrait;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -22,11 +22,11 @@ use PoP\Root\Exception\AbstractException;
 
 abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends AbstractMutationResolver
 {
-    use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait {
-        CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
-        CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
-        SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermDoesNotExistError insteadof MutateTaxonomyTermMutationResolverTrait;
-        SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermBySlugDoesNotExistError insteadof MutateTaxonomyTermMutationResolverTrait;
+    use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMetaMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait {
+        CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMetaMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
+        CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMetaMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
+        SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermDoesNotExistError insteadof MutateTaxonomyTermMetaMutationResolverTrait;
+        SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermBySlugDoesNotExistError insteadof MutateTaxonomyTermMetaMutationResolverTrait;
     }
 
     private ?NameResolverInterface $nameResolver = null;
