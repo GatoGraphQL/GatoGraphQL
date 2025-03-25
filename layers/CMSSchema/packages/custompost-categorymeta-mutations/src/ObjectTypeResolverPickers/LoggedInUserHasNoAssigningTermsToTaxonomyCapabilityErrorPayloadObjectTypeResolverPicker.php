@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\AbstractGenericCategoriesMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\RootCreateGenericCustomPostMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\RootCreateGenericCategoryMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\TaxonomyMetaMutations\ObjectTypeResolverPickers\AbstractLoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -20,9 +20,9 @@ class LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeR
     {
         return [
             AbstractGenericCategoriesMutationErrorPayloadUnionTypeResolver::class,
-            GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver::class,
-            RootCreateGenericCustomPostMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver::class,
+            GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreateGenericCategoryMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdateGenericCategoryMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

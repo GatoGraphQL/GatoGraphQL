@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\Hooks;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCategoryMutationResolverTrait;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeAPIs\CustomPostCategoryMetaTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
+use PoPCMSSchema\CategoryMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;

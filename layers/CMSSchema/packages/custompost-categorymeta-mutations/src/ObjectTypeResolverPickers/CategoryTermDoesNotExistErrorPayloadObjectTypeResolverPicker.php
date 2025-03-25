@@ -11,9 +11,9 @@ use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\Generic
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\RootCreateGenericCustomPostMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\RootCreateGenericCategoryMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class CategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker extends AbstractCategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker
@@ -30,9 +30,9 @@ class CategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker extends Abstr
             RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
             GenericCategoryDeleteMutationErrorPayloadUnionTypeResolver::class,
             GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
-            GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver::class,
-            RootCreateGenericCustomPostMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver::class,
+            GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreateGenericCategoryMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdateGenericCategoryMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

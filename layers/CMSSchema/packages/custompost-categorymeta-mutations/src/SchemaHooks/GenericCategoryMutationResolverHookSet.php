@@ -6,12 +6,12 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\SchemaHooks;
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\SchemaHooks\AbstractCustomPostMutationResolverHookSet;
-use PoPCMSSchema\CustomPostMutations\SchemaHooks\GenericCustomPostMutationResolverHookSetTrait;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\SchemaHooks\AbstractCategoryMutationResolverHookSet;
+use PoPCMSSchema\CategoryMutations\SchemaHooks\GenericCategoryMutationResolverHookSetTrait;
 
-class GenericCustomPostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
+class GenericCategoryMutationResolverHookSet extends AbstractCategoryMutationResolverHookSet
 {
-    use GenericCustomPostMutationResolverHookSetTrait;
+    use GenericCategoryMutationResolverHookSetTrait;
 
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
 

@@ -16,7 +16,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements SetMetaOnCategoryObjectTypeFieldResolverInterface
+abstract class AbstractSetMetaCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver implements SetMetaOnCategoryObjectTypeFieldResolverInterface
 {
     use SetMetaOnCategoryObjectTypeFieldResolverTrait;
 

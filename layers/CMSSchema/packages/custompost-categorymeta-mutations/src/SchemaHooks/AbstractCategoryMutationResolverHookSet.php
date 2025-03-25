@@ -7,15 +7,15 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\SchemaHooks;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\CategoryByOneofInputObjectTypeResolver;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
-abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
+abstract class AbstractCategoryMutationResolverHookSet extends AbstractHookSet
 {
     private ?CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver = null;
 
