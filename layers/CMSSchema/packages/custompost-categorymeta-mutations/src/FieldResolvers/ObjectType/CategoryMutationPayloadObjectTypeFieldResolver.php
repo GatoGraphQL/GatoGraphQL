@@ -10,7 +10,7 @@ use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayl
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class CustomPostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationPayloadObjectTypeFieldResolver
+class CategoryMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationPayloadObjectTypeFieldResolver
 {
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
 
@@ -36,7 +36,7 @@ class CustomPostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMut
 
     protected function getObjectFieldName(): string
     {
-        return 'customPost';
+        return 'category';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
