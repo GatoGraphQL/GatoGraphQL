@@ -187,6 +187,6 @@ abstract class AbstractSetMetaOnCategoryMutationResolver extends AbstractMutatio
 
     protected function getEntityName(): string
     {
-        return $this->__('custom post', 'custompost-categorymeta-mutations');
+        return $this->__('category', 'custompost-categorymeta-mutations');
     }
 }

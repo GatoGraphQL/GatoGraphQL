@@ -12,6 +12,6 @@ trait SetMetaOnCategoryObjectTypeFieldResolverTrait
 
     protected function getEntityName(): string
     {
-        return $this->getTranslationAPI()->__('custom post', 'custompost-categorymeta-mutations');
+        return $this->getTranslationAPI()->__('category', 'custompost-categorymeta-mutations');
     }
 }

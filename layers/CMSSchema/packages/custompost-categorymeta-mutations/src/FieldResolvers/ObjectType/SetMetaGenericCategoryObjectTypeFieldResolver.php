@@ -133,6 +133,6 @@ class SetMetaGenericCategoryObjectTypeFieldResolver extends AbstractSetMetaCateg
 
     protected function getEntityName(): string
     {
-        return $this->__('custom post', 'category-mutations');
+        return $this->__('category', 'category-mutations');
     }
 }

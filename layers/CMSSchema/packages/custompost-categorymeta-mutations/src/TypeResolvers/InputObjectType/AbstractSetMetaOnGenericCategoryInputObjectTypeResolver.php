@@ -29,7 +29,7 @@ abstract class AbstractSetMetaOnGenericCategoryInputObjectTypeResolver extends A
 
     protected function getEntityName(): string
     {
-        return $this->__('custom post', 'postcategory-mutations');
+        return $this->__('category', 'postcategory-mutations');
     }
 
     protected function addTaxonomyInputField(): bool
