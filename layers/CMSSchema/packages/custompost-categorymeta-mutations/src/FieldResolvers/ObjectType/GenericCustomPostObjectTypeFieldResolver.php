@@ -103,7 +103,7 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
         return $this->genericCategorySetMetaMutationPayloadObjectTypeResolver;
     }
 
-    public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
+    public function getCategoryObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         return $this->getGenericCustomPostObjectTypeResolver();
     }

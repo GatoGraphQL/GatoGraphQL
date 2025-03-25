@@ -11,7 +11,7 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
 interface SetMetaOnCategoryObjectTypeFieldResolverInterface
 {
-    public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface;
+    public function getCategoryObjectTypeResolver(): CustomPostObjectTypeResolverInterface;
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
     public function getSetCategoriesMutationResolver(): MutationResolverInterface;
     public function getSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface;

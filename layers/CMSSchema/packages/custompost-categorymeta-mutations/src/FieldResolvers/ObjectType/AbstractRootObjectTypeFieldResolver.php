@@ -201,7 +201,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             $this->getSetCategoriesFieldName(),
             $this->getBulkOperationSetCategoriesFieldName()
-                => $this->getCustomPostObjectTypeResolver(),
+                => $this->getCategoryObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

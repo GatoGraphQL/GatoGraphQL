@@ -103,7 +103,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->rootSetMetaOnCategoryMutationPayloadObjectTypeResolver;
     }
 
-    public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
+    public function getCategoryObjectTypeResolver(): CustomPostObjectTypeResolverInterface
     {
         return $this->getGenericCustomPostObjectTypeResolver();
     }

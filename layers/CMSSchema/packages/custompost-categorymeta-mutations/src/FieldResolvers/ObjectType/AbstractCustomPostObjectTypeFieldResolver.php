@@ -26,7 +26,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            get_class($this->getCustomPostObjectTypeResolver()),
+            get_class($this->getCategoryObjectTypeResolver()),
         ];
     }
 
@@ -143,7 +143,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             };
         }
         return match ($fieldName) {
-            'setMeta' => $this->getCustomPostObjectTypeResolver(),
+            'setMeta' => $this->getCategoryObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
