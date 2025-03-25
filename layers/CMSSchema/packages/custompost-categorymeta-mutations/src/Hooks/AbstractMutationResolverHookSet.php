@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\Hooks;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCategoryMutationResolverTrait;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeAPIs\CustomPostCategoryMetaTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPostCategoryMutations\Constants\CustomPostCategoryCRUDHookNames;
+use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -88,7 +88,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     protected function getErrorPayloadHookName(): string
     {
-        return CustomPostCategoryCRUDHookNames::ERROR_PAYLOAD;
+        return CategoryCRUDHookNames::ERROR_PAYLOAD;
     }
 
     public function maybeValidateCategories(
