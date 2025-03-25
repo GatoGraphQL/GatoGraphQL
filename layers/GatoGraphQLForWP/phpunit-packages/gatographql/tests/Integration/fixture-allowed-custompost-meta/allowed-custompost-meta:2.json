@@ -19,11 +19,33 @@
         "field": "editLast: metaValue(key: \"_edit_last\")",
         "code": "PoPCMSSchema\/Meta@e1"
       }
+    },
+    {
+      "message": "There is no key with name '_edit_last'",
+      "locations": [
+        {
+          "line": 4,
+          "column": 10
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(keys: [\"_edit_last\"])",
+          "meta(keys: [\"_edit_last\"])",
+          "post(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "field": "meta(keys: [\"_edit_last\"])",
+        "code": "PoPCMSSchema\/Meta@e1"
+      }
     }
   ],
   "data": {
     "post": {
-      "editLast": null
+      "editLast": null,
+      "meta": null,
+      "metaKeys": []
     }
   }
 }

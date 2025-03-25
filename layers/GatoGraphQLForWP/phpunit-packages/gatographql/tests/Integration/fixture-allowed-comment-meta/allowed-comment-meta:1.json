@@ -19,12 +19,36 @@
         "field": "description: metaValue(key: \"description\")",
         "code": "PoPCMSSchema\/Meta@e1"
       }
+    },
+    {
+      "message": "There is no key with name 'description'",
+      "locations": [
+        {
+          "line": 4,
+          "column": 10
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(keys: [\"description\"])",
+          "meta(keys: [\"description\"])",
+          "comments(pagination: {limit: 1}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Comment",
+        "field": "meta(keys: [\"description\"])",
+        "code": "PoPCMSSchema\/Meta@e1"
+      }
     }
   ],
   "data": {
     "comments": [
       {
-        "description": null
+        "description": null,
+        "meta": null,
+        "metaKeys": [
+          "_some_text_in_comment"
+        ]
       }
     ]
   }

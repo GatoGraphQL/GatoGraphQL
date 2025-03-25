@@ -1,7 +1,9 @@
 {
   "data": {
     "postCategory": {
-      "description": null
+      "description": null,
+      "meta": {},
+      "metaKeys": []
     }
   }
 }

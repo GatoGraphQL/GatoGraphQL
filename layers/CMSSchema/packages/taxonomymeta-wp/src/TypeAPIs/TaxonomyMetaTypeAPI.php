@@ -31,4 +31,40 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
         }
         return $value;
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getAllTaxonomyTermMeta(string|int|object $termObjectOrID): array
+    {
+        if (is_object($termObjectOrID)) {
+            /** @var WP_Term */
+            $term = $termObjectOrID;
+            $termID = $term->term_id;
+        } else {
+            $termID = $termObjectOrID;
+        }
+
+        return array_map(
+            /**
+             * @param mixed[] $items
+             * @return mixed[]
+             */
+            function (array $items): array {
+                return array_map(
+                    \maybe_unserialize(...),
+                    $items
+                );
+            },
+            \get_term_meta((int)$termID) ?? []
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTaxonomyTermMetaKeys(string|int|object $termObjectOrID): array
+    {
+        return array_keys($this->getAllTaxonomyTermMeta($termObjectOrID));
+    }
 }

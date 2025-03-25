@@ -15,11 +15,13 @@
                     {
                         "name": "core\/categories",
                         "attributes": {
+                            "taxonomy": "category",
                             "displayAsDropdown": false,
                             "showHierarchy": false,
                             "showPostCounts": false,
                             "showOnlyTopLevel": false,
-                            "showEmpty": false
+                            "showEmpty": false,
+                            "showLabel": true
                         },
                         "innerBlocks": null
                     },
@@ -69,9 +71,11 @@
                         "attributes": {
                             "showHierarchy": true,
                             "showPostCounts": true,
+                            "taxonomy": "category",
                             "displayAsDropdown": false,
                             "showOnlyTopLevel": false,
-                            "showEmpty": false
+                            "showEmpty": false,
+                            "showLabel": true
                         },
                         "innerBlocks": null
                     },

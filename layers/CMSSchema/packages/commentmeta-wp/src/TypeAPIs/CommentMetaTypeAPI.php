@@ -31,4 +31,40 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
         }
         return $value;
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getAllCommentMeta(string|int|object $commentObjectOrID): array
+    {
+        if (is_object($commentObjectOrID)) {
+            /** @var WP_Comment */
+            $comment = $commentObjectOrID;
+            $commentID = $comment->comment_ID;
+        } else {
+            $commentID = $commentObjectOrID;
+        }
+
+        return array_map(
+            /**
+             * @param mixed[] $items
+             * @return mixed[]
+             */
+            function (array $items): array {
+                return array_map(
+                    \maybe_unserialize(...),
+                    $items
+                );
+            },
+            \get_comment_meta((int)$commentID) ?? []
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCommentMetaKeys(string|int|object $commentObjectOrID): array
+    {
+        return array_keys($this->getAllCommentMeta($commentObjectOrID));
+    }
 }

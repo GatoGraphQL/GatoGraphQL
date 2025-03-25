@@ -215,6 +215,8 @@ fragment CategoryData on Category {
   id
   metaValue(key: "not-existing")
   metaValues(key: "also-not-existing")
+  meta(keys: ["not-existing"])
+  metaKeys
   name
   slug
   slugPath

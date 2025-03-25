@@ -10,6 +10,7 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 class FeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public final const E1 = 'e1';
+    public final const E2 = 'e2';
 
     /**
      * @return string[]
@@ -18,6 +19,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
+            self::E2,
         ];
     }
 
@@ -25,6 +27,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => $this->__('There is no key with name \'%s\'', 'meta'),
+            self::E2 => $this->__('There are no keys with names \'%s\'', 'meta'),
             default => parent::getMessagePlaceholder($code),
         };
     }
@@ -32,8 +35,11 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getCategory(string $code): string
     {
         return match ($code) {
-            self::E1 => FeedbackCategories::ERROR,
-            default => parent::getCategory($code),
+            self::E1,
+            self::E2
+                => FeedbackCategories::ERROR,
+            default
+                => parent::getCategory($code),
         };
     }
 }
