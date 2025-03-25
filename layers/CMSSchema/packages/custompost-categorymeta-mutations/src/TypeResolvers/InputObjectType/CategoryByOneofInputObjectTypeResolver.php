@@ -50,16 +50,16 @@ class CategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTyp
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            MutationInputProperties::IDS => $this->getIDScalarTypeResolver(),
-            MutationInputProperties::SLUGS => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
+            MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::IDS => $this->__('Input the category IDs', 'custompost-categorymeta-mutations'),
-            MutationInputProperties::SLUGS => $this->__('Input the category slugs', 'custompost-categorymeta-mutations'),
+            MutationInputProperties::ID => $this->__('Input the category ID', 'custompost-categorymeta-mutations'),
+            MutationInputProperties::SLUG => $this->__('Input the category slug', 'custompost-categorymeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

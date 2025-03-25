@@ -11,6 +11,6 @@ class MutationInputProperties
     public final const APPEND = 'append';
     public final const TAXONOMY = 'taxonomy';
 
-    public final const IDS = 'ids';
-    public final const SLUGS = 'slugs';
+    public final const ID = 'id';
+    public final const SLUG = 'slug';
 }
