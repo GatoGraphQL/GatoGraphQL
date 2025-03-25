@@ -70,7 +70,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
         App::addAction(
             $this->getExecuteCreateOrUpdateHookName(),
-            $this->maybeSetCategories(...),
+            $this->maybeSetMeta(...),
             10,
             3
         );
@@ -133,7 +133,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         return true;
     }
 
-    public function maybeSetCategories(
+    public function maybeSetMeta(
         int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

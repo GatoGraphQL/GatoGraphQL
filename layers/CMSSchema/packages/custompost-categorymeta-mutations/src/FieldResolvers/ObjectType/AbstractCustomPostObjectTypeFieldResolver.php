@@ -125,8 +125,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $usePayloadableCustomPostCategoryMetaMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMetaMutations();
         return match ($fieldName) {
             'setMeta' => $usePayloadableCustomPostCategoryMetaMutations
-                ? $this->getPayloadableSetCategoriesMutationResolver()
-                : $this->getSetCategoriesMutationResolver(),
+                ? $this->getPayloadableSetMetaMutationResolver()
+                : $this->getSetMetaMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }

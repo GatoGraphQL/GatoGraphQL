@@ -12,9 +12,9 @@ interface SetMetaOnCategoryObjectTypeFieldResolverInterface
 {
     public function getCategoryObjectTypeResolver(): CategoryObjectTypeResolverInterface;
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
-    public function getSetCategoriesMutationResolver(): MutationResolverInterface;
-    public function getSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface;
+    public function getSetMetaMutationResolver(): MutationResolverInterface;
+    public function getSetMetaBulkOperationMutationResolver(): MutationResolverInterface;
     public function getCategorySetMetaInputObjectTypeResolver(): AbstractSetMetaOnCategoryInputObjectTypeResolver;
-    public function getPayloadableSetCategoriesMutationResolver(): MutationResolverInterface;
-    public function getPayloadableSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface;
+    public function getPayloadableSetMetaMutationResolver(): MutationResolverInterface;
+    public function getPayloadableSetMetaBulkOperationMutationResolver(): MutationResolverInterface;
 }

@@ -96,12 +96,12 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
         return $this->getGenericCategoryObjectTypeResolver();
     }
 
-    public function getSetCategoriesMutationResolver(): MutationResolverInterface
+    public function getSetMetaMutationResolver(): MutationResolverInterface
     {
         return $this->getSetMetaOnCategoryMutationResolver();
     }
 
-    public function getSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface
+    public function getSetMetaBulkOperationMutationResolver(): MutationResolverInterface
     {
         return $this->getSetMetaOnCategoryBulkOperationMutationResolver();
     }
@@ -121,12 +121,12 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
         return $this->getGenericCategorySetMetaMutationPayloadObjectTypeResolver();
     }
 
-    public function getPayloadableSetCategoriesMutationResolver(): MutationResolverInterface
+    public function getPayloadableSetMetaMutationResolver(): MutationResolverInterface
     {
         return $this->getPayloadableSetMetaOnCategoryMutationResolver();
     }
 
-    public function getPayloadableSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface
+    public function getPayloadableSetMetaBulkOperationMutationResolver(): MutationResolverInterface
     {
         return $this->getPayloadableSetMetaOnCategoryBulkOperationMutationResolver();
     }

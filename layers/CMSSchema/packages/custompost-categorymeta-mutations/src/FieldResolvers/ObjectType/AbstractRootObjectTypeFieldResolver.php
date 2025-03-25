@@ -52,32 +52,32 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $addFieldsToQueryPayloadableCustomPostCategoryMetaMutations = $moduleConfiguration->addFieldsToQueryPayloadableCustomPostCategoryMetaMutations();
         return array_merge(
             [
-                $this->getSetCategoriesFieldName(),
-                $this->getBulkOperationSetCategoriesFieldName(),
+                $this->getSetMetaFieldName(),
+                $this->getBulkOperationSetMetaFieldName(),
             ],
             $addFieldsToQueryPayloadableCustomPostCategoryMetaMutations ? [
-                $this->getSetCategoriesFieldName() . 'MutationPayloadObjects',
+                $this->getSetMetaFieldName() . 'MutationPayloadObjects',
             ] : [],
         );
     }
 
-    abstract protected function getSetCategoriesFieldName(): string;
-    abstract protected function getBulkOperationSetCategoriesFieldName(): string;
+    abstract protected function getSetMetaFieldName(): string;
+    abstract protected function getBulkOperationSetMetaFieldName(): string;
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName() => sprintf(
+            $this->getSetMetaFieldName() => sprintf(
                 $this->__('Set categories on a %s', 'custompost-categorymeta-mutations'),
                 $this->getEntityName()
             ),
-            $this->getBulkOperationSetCategoriesFieldName() => sprintf(
+            $this->getBulkOperationSetMetaFieldName() => sprintf(
                 $this->__('Set categories on a %s in bulk', 'custompost-categorymeta-mutations'),
                 $this->getEntityName()
             ),
-            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => sprintf(
+            $this->getSetMetaFieldName() . 'MutationPayloadObjects' => sprintf(
                 $this->__('Retrieve the payload objects from a recently-executed `%s` mutation', 'post-mutations'),
-                $this->getSetCategoriesFieldName()
+                $this->getSetMetaFieldName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -90,23 +90,23 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $usePayloadableCustomPostCategoryMetaMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMetaMutations();
         if (!$usePayloadableCustomPostCategoryMetaMutations) {
             return match ($fieldName) {
-                $this->getSetCategoriesFieldName() => SchemaTypeModifiers::NONE,
-                $this->getBulkOperationSetCategoriesFieldName() => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                $this->getSetMetaFieldName() => SchemaTypeModifiers::NONE,
+                $this->getBulkOperationSetMetaFieldName() => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
                 default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
 
         if (
             in_array($fieldName, [
-            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects',
+            $this->getSetMetaFieldName() . 'MutationPayloadObjects',
             ])
         ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName() => SchemaTypeModifiers::NON_NULLABLE,
-            $this->getBulkOperationSetCategoriesFieldName() => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            $this->getSetMetaFieldName() => SchemaTypeModifiers::NON_NULLABLE,
+            $this->getBulkOperationSetMetaFieldName() => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -117,11 +117,11 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName() => [
+            $this->getSetMetaFieldName() => [
                 'input' => $this->getCategorySetMetaInputObjectTypeResolver(),
             ],
-            $this->getBulkOperationSetCategoriesFieldName() => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCategorySetMetaInputObjectTypeResolver()),
-            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
+            $this->getBulkOperationSetMetaFieldName() => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCategorySetMetaInputObjectTypeResolver()),
+            $this->getSetMetaFieldName() . 'MutationPayloadObjects' => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -130,7 +130,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         if (
             in_array($fieldName, [
-            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects',
+            $this->getSetMetaFieldName() . 'MutationPayloadObjects',
             ])
         ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
@@ -139,7 +139,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
         if (
             in_array($fieldName, [
-            $this->getBulkOperationSetCategoriesFieldName(),
+            $this->getBulkOperationSetMetaFieldName(),
             ])
         ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
@@ -147,7 +147,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         }
 
         return match ([$fieldName => $fieldArgName]) {
-            [$this->getSetCategoriesFieldName() => 'input']
+            [$this->getSetMetaFieldName() => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
@@ -157,7 +157,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         if (
             in_array($fieldName, [
-            $this->getBulkOperationSetCategoriesFieldName(),
+            $this->getBulkOperationSetMetaFieldName(),
             ])
         ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
@@ -173,12 +173,12 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostCategoryMetaMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMetaMutations();
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName() => $usePayloadableCustomPostCategoryMetaMutations
-                ? $this->getPayloadableSetCategoriesMutationResolver()
-                : $this->getSetCategoriesMutationResolver(),
-            $this->getBulkOperationSetCategoriesFieldName() => $usePayloadableCustomPostCategoryMetaMutations
-                ? $this->getPayloadableSetCategoriesBulkOperationMutationResolver()
-                : $this->getSetCategoriesBulkOperationMutationResolver(),
+            $this->getSetMetaFieldName() => $usePayloadableCustomPostCategoryMetaMutations
+                ? $this->getPayloadableSetMetaMutationResolver()
+                : $this->getSetMetaMutationResolver(),
+            $this->getBulkOperationSetMetaFieldName() => $usePayloadableCustomPostCategoryMetaMutations
+                ? $this->getPayloadableSetMetaBulkOperationMutationResolver()
+                : $this->getSetMetaBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -190,24 +190,24 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $usePayloadableCustomPostCategoryMetaMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMetaMutations();
         if ($usePayloadableCustomPostCategoryMetaMutations) {
             return match ($fieldName) {
-                $this->getSetCategoriesFieldName(),
-                $this->getBulkOperationSetCategoriesFieldName(),
-                $this->getSetCategoriesFieldName() . 'MutationPayloadObjects'
-                    => $this->getRootSetCategoriesMutationPayloadObjectTypeResolver(),
+                $this->getSetMetaFieldName(),
+                $this->getBulkOperationSetMetaFieldName(),
+                $this->getSetMetaFieldName() . 'MutationPayloadObjects'
+                    => $this->getRootSetMetaMutationPayloadObjectTypeResolver(),
                 default
                     => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName(),
-            $this->getBulkOperationSetCategoriesFieldName()
+            $this->getSetMetaFieldName(),
+            $this->getBulkOperationSetMetaFieldName()
                 => $this->getCategoryObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
-    abstract protected function getRootSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
+    abstract protected function getRootSetMetaMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
 
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -217,7 +217,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     ): mixed {
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
-            case $this->getSetCategoriesFieldName() . 'MutationPayloadObjects':
+            case $this->getSetMetaFieldName() . 'MutationPayloadObjects':
                 return $this->resolveMutationPayloadObjectsValue(
                     $objectTypeResolver,
                     $fieldDataAccessor,

@@ -96,12 +96,12 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getGenericCategoryObjectTypeResolver();
     }
 
-    public function getSetCategoriesMutationResolver(): MutationResolverInterface
+    public function getSetMetaMutationResolver(): MutationResolverInterface
     {
         return $this->getSetMetaOnCategoryMutationResolver();
     }
 
-    public function getSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface
+    public function getSetMetaBulkOperationMutationResolver(): MutationResolverInterface
     {
         return $this->getSetMetaOnCategoryBulkOperationMutationResolver();
     }
@@ -116,17 +116,17 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getRootSetMetaOnCategoryInputObjectTypeResolver();
     }
 
-    public function getPayloadableSetCategoriesMutationResolver(): MutationResolverInterface
+    public function getPayloadableSetMetaMutationResolver(): MutationResolverInterface
     {
         return $this->getPayloadableSetMetaOnCategoryMutationResolver();
     }
 
-    public function getPayloadableSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface
+    public function getPayloadableSetMetaBulkOperationMutationResolver(): MutationResolverInterface
     {
         return $this->getPayloadableSetMetaOnCategoryBulkOperationMutationResolver();
     }
 
-    protected function getRootSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
+    protected function getRootSetMetaMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
     {
         return $this->getRootSetMetaOnCategoryMutationPayloadObjectTypeResolver();
     }
@@ -136,12 +136,12 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->__('custom post', 'post-category-mutations');
     }
 
-    protected function getSetCategoriesFieldName(): string
+    protected function getSetMetaFieldName(): string
     {
         return 'setMetaOnCategory';
     }
 
-    protected function getBulkOperationSetCategoriesFieldName(): string
+    protected function getBulkOperationSetMetaFieldName(): string
     {
         return 'setMetaOnCategories';
     }
