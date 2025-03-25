@@ -9,17 +9,17 @@ use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableCustomPostMuta
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
-trait PayloadableSetCategoriesOnCustomPostMutationResolverTrait
+trait PayloadableSetMetaOnCategoryMutationResolverTrait
 {
     use PayloadableCustomPostMutationResolverTrait {
         PayloadableCustomPostMutationResolverTrait::createErrorPayloadFromObjectTypeFieldResolutionFeedback as upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback;
     }
-    use SetCategoriesOnCustomPostMutationResolverTrait;
+    use SetMetaOnCategoryMutationResolverTrait;
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
-        return $this->createSetCategoriesOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
+        return $this->createSetMetaOnCategoryErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
             ?? $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
     }
 

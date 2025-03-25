@@ -20,13 +20,13 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Exception\AbstractException;
 
-abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends AbstractMutationResolver
+abstract class AbstractSetMetaOnCategoryMutationResolver extends AbstractMutationResolver
 {
-    use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMetaMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait {
-        CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMetaMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
-        CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMetaMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
-        SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermDoesNotExistError insteadof MutateTaxonomyTermMetaMutationResolverTrait;
-        SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermBySlugDoesNotExistError insteadof MutateTaxonomyTermMetaMutationResolverTrait;
+    use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMetaMutationResolverTrait, SetMetaOnCategoryMutationResolverTrait {
+        CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMetaMutationResolverTrait, SetMetaOnCategoryMutationResolverTrait;
+        CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMetaMutationResolverTrait, SetMetaOnCategoryMutationResolverTrait;
+        SetMetaOnCategoryMutationResolverTrait::getTaxonomyTermDoesNotExistError insteadof MutateTaxonomyTermMetaMutationResolverTrait;
+        SetMetaOnCategoryMutationResolverTrait::getTaxonomyTermBySlugDoesNotExistError insteadof MutateTaxonomyTermMetaMutationResolverTrait;
     }
 
     private ?NameResolverInterface $nameResolver = null;
@@ -103,7 +103,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $this->setCategoriesOnCustomPost(
+        $this->setMetaOnCategory(
             $customPostID,
             $append,
             $fieldDataAccessor,
@@ -170,7 +170,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
 
         /** @var string */
         $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
-        $this->validateSetCategoriesOnCustomPost(
+        $this->validateSetMetaOnCategory(
             $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

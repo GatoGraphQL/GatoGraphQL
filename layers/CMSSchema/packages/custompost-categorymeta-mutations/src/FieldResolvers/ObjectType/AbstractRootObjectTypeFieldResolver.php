@@ -21,11 +21,11 @@ use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
 
-abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
+abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetMetaOnCategoryObjectTypeFieldResolverInterface
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
     use BulkOperationDecoratorObjectTypeFieldResolverTrait;
-    use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
+    use SetMetaOnCategoryObjectTypeFieldResolverTrait;
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>

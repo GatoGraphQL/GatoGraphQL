@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers;
+
+use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\AbstractSetMetaOnCategoryMutationResolver;
+
+class SetMetaOnCategoryMutationResolver extends AbstractSetMetaOnCategoryMutationResolver
+{
+}

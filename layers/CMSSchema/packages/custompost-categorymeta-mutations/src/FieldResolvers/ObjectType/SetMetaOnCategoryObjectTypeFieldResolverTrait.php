@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType
 
 use PoP\Root\Translation\TranslationAPIInterface;
 
-trait SetCategoriesOnCustomPostObjectTypeFieldResolverTrait
+trait SetMetaOnCategoryObjectTypeFieldResolverTrait
 {
     abstract protected function getTranslationAPI(): TranslationAPIInterface;
 

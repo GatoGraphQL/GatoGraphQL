@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetCategoriesOnCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetMetaOnCategoryMutationResolverTrait;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
-class PayloadableSetCategoriesOnCustomPostMutationResolver extends SetCategoriesOnCustomPostMutationResolver
+class PayloadableSetMetaOnCategoryMutationResolver extends SetMetaOnCategoryMutationResolver
 {
     use PayloadableMutationResolverTrait;
-    use PayloadableSetCategoriesOnCustomPostMutationResolverTrait;
+    use PayloadableSetMetaOnCategoryMutationResolverTrait;
 
     /**
      * Validate the app-level errors when executing the mutation,

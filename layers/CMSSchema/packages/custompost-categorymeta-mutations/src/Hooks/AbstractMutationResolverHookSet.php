@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\Hooks;
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetCategoriesOnCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCategoryMutationResolverTrait;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeAPIs\CustomPostCategoryMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
@@ -20,7 +20,7 @@ use stdClass;
 
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
-    use SetCategoriesOnCustomPostMutationResolverTrait;
+    use SetMetaOnCategoryMutationResolverTrait;
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostCategoryMetaTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
@@ -111,7 +111,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        $this->validateSetCategoriesOnCustomPost(
+        $this->validateSetMetaOnCategory(
             $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -142,7 +142,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        $this->setCategoriesOnCustomPost(
+        $this->setMetaOnCategory(
             $customPostID,
             false,
             $fieldDataAccessor,
@@ -154,7 +154,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         ErrorPayloadInterface $errorPayload,
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ErrorPayloadInterface {
-        return $this->createSetCategoriesOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
+        return $this->createSetMetaOnCategoryErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
             ?? $errorPayload;
     }
 }

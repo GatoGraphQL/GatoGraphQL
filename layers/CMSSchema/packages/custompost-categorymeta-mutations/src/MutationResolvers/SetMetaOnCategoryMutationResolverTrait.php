@@ -19,7 +19,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use stdClass;
 
-trait SetCategoriesOnCustomPostMutationResolverTrait
+trait SetMetaOnCategoryMutationResolverTrait
 {
     use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 
@@ -42,7 +42,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         );
     }
 
-    protected function validateSetCategoriesOnCustomPost(
+    protected function validateSetMetaOnCategory(
         string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -76,7 +76,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         }
     }
 
-    protected function setCategoriesOnCustomPost(
+    protected function setMetaOnCategory(
         string|int $customPostID,
         bool $append,
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -126,7 +126,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         return null;
     }
 
-    public function createSetCategoriesOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback(
+    public function createSetMetaOnCategoryErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ?ErrorPayloadInterface {
         $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();

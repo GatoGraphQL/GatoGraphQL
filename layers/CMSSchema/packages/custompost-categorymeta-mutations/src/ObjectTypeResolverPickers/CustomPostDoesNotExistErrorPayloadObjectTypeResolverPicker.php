@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootSetCategoriesOnCustomPostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootSetMetaOnCategoryMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers\AbstractCustomPostDoesNotExistErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -16,7 +16,7 @@ class CustomPostDoesNotExistErrorPayloadObjectTypeResolverPicker extends Abstrac
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootSetCategoriesOnCustomPostMutationErrorPayloadUnionTypeResolver::class,
+            RootSetMetaOnCategoryMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
