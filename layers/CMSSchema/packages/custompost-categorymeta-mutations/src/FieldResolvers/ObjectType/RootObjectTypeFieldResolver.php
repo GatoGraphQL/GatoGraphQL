@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType\AbstractRootObjectTypeFieldResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\AbstractSetMetaOnCategoryInputObjectTypeResolver;
-use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetMetaOnCategoryBulkOperationMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetMetaOnCategoryMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCategoryBulkOperationMutationResolver;
@@ -20,7 +19,6 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 
 class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
 {
-    private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
     private ?SetMetaOnCategoryMutationResolver $setMetaOnCategoryMutationResolver = null;
     private ?SetMetaOnCategoryBulkOperationMutationResolver $setMetaOnCategoryBulkOperationMutationResolver = null;
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
@@ -29,15 +27,6 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     private ?PayloadableSetMetaOnCategoryBulkOperationMutationResolver $payloadableSetMetaOnCategoryBulkOperationMutationResolver = null;
     private ?RootSetMetaOnCategoryMutationPayloadObjectTypeResolver $rootSetMetaOnCategoryMutationPayloadObjectTypeResolver = null;
 
-    final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
-    {
-        if ($this->genericCategoryObjectTypeResolver === null) {
-            /** @var GenericCategoryObjectTypeResolver */
-            $genericCategoryObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
-            $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
-        }
-        return $this->genericCategoryObjectTypeResolver;
-    }
     final protected function getSetMetaOnCategoryMutationResolver(): SetMetaOnCategoryMutationResolver
     {
         if ($this->setMetaOnCategoryMutationResolver === null) {
