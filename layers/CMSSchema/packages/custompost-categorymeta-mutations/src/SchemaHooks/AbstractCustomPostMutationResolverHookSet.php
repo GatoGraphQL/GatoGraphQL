@@ -57,7 +57,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::CATEGORIES_BY] = $this->getCategoriesByOneofInputObjectTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::CATEGORY_BY] = $this->getCategoriesByOneofInputObjectTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
@@ -74,7 +74,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $inputFieldName,
     ): ?string {
         // Only for the newly added inputFieldName
-        if ($inputFieldName !== MutationInputProperties::CATEGORIES_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+        if ($inputFieldName !== MutationInputProperties::CATEGORY_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return sprintf(

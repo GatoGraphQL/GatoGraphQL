@@ -48,7 +48,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         /** @var stdClass|null */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_BY);
         if ($categoriesBy === null || ((array) $categoriesBy) === []) {
             return;
         }
@@ -104,7 +104,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_BY);
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             $categoryIDs = $categoriesBy->{MutationInputProperties::IDS};
             return $this->getTaxonomyToTaxonomyTermsByID(

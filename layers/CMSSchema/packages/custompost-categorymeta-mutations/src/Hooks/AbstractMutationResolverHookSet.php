@@ -121,11 +121,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function canExecuteMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORIES_BY)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORY_BY)) {
             return false;
         }
         /** @var stdClass */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_BY);
         if (((array) $categoriesBy) === []) {
             return false;
         }
