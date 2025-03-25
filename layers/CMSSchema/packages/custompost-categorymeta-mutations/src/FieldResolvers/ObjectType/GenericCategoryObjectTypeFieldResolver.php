@@ -143,10 +143,10 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'update' => [
+            'updateMeta' => [
                 'input' => $this->getGenericCategoryTermMetaUpdateInputObjectTypeResolver(),
             ],
-            'delete' => [
+            'deleteMeta' => [
                 'input' => $this->getGenericCategoryTermMetaDeleteInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -159,10 +159,10 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         $moduleConfiguration = App::getModule(CategoryMutationsModule::class)->getConfiguration();
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         return match ($fieldName) {
-            'update' => $usePayloadableCategoryMutations
+            'updateMeta' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableUpdateGenericCategoryTermMetaMutationResolver()
                 : $this->getUpdateGenericCategoryTermMetaMutationResolver(),
-            'delete' => $usePayloadableCategoryMutations
+            'deleteMeta' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableDeleteGenericCategoryTermMetaMutationResolver()
                 : $this->getDeleteGenericCategoryTermMetaMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -176,14 +176,14 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         if (!$usePayloadableCategoryMutations) {
             return match ($fieldName) {
-                'update' => $this->getGenericCategoryObjectTypeResolver(),
-                'delete' => $this->getBooleanScalarTypeResolver(),
+                'updateMeta' => $this->getGenericCategoryObjectTypeResolver(),
+                'deleteMeta' => $this->getBooleanScalarTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'update' => $this->getGenericCategoryUpdateMutationPayloadObjectTypeResolver(),
-            'delete' => $this->getGenericCategoryDeleteMutationPayloadObjectTypeResolver(),
+            'updateMeta' => $this->getGenericCategoryUpdateMutationPayloadObjectTypeResolver(),
+            'deleteMeta' => $this->getGenericCategoryDeleteMutationPayloadObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
