@@ -147,7 +147,7 @@
         "pop-wp-schema/pagebuilder": "<11.2.0"
     },
     "type": "library",
-    "description": "Implementation for WordPress of contracts from package \"Custom Post Category Mutations\"",
+    "description": "Implementation for WordPress of contracts from package \"Custom Post Category Meta Mutations\"",
     "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "custompost-categorymeta-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-categorymeta-mutations-wp",
     "license": "GPL-2.0-or-later",

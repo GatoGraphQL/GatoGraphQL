@@ -1,4 +1,4 @@
-# Custom Post Category Mutations for WordPress
+# Custom Post Category Meta Mutations for WordPress
 
 <!--
 [![Build Status][ico-travis]][link-travis]
