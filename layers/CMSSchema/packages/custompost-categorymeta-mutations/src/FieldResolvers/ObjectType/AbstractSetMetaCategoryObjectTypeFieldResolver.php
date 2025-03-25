@@ -44,7 +44,7 @@ abstract class AbstractSetMetaCategoryObjectTypeFieldResolver extends AbstractOb
     {
         return match ($fieldName) {
             'setMeta' => sprintf(
-                $this->__('Set categories on the %s', 'custompost-categorymeta-mutations'),
+                $this->__('Set meta on the %s', 'custompost-categorymeta-mutations'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),

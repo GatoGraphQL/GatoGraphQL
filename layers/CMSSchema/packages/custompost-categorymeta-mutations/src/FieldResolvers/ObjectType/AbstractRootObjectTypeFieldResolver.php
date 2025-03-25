@@ -68,11 +68,11 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetMetaFieldName() => sprintf(
-                $this->__('Set categories on a %s', 'custompost-categorymeta-mutations'),
+                $this->__('Set meta on a %s', 'custompost-categorymeta-mutations'),
                 $this->getEntityName()
             ),
             $this->getBulkOperationSetMetaFieldName() => sprintf(
-                $this->__('Set categories on a %s in bulk', 'custompost-categorymeta-mutations'),
+                $this->__('Set meta on a %s in bulk', 'custompost-categorymeta-mutations'),
                 $this->getEntityName()
             ),
             $this->getSetMetaFieldName() . 'MutationPayloadObjects' => sprintf(
