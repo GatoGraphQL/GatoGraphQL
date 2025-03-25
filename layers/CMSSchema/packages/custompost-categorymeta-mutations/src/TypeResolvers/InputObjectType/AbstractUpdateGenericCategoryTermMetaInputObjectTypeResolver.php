@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\AbstractCreateOrUpdateCategoryTermMetaInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-abstract class AbstractCreateOrUpdateGenericCategoryTermMetaInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryTermMetaInputObjectTypeResolver implements UpdateGenericCategoryTermMetaInputObjectTypeResolverInterface, AddGenericCategoryTermMetaInputObjectTypeResolverInterface
+abstract class AbstractUpdateGenericCategoryTermMetaInputObjectTypeResolver extends AbstractUpdateCategoryTermMetaInputObjectTypeResolver implements UpdateGenericCategoryTermMetaInputObjectTypeResolverInterface
 {
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
 
@@ -27,8 +26,8 @@ abstract class AbstractCreateOrUpdateGenericCategoryTermMetaInputObjectTypeResol
         return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();
     }
 
-    protected function getTaxonomyInputFieldDefaultValue(): mixed
+    protected function isTaxonomyInputFieldMandatory(): bool
     {
-        return null;
+        return false;
     }
 }

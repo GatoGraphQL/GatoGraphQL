@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CategoryTermMetaDeleteInputObjectTypeResolverTrait;
-
-class GenericCategoryTermMetaDeleteInputObjectTypeResolver extends AbstractCreateOrUpdateGenericCategoryTermMetaInputObjectTypeResolver implements DeleteGenericCategoryTermMetaInputObjectTypeResolverInterface
+class GenericCategoryTermMetaDeleteInputObjectTypeResolver extends AbstractDeleteGenericCategoryTermMetaInputObjectTypeResolver implements DeleteGenericCategoryTermMetaInputObjectTypeResolverInterface
 {
     use CategoryTermMetaDeleteInputObjectTypeResolverTrait;
 
     public function getTypeName(): string
     {
-        return 'GenericCategoryDeleteInput';
+        return 'GenericCategoryMetaDeleteInput';
     }
 
     protected function isTaxonomyInputFieldMandatory(): bool

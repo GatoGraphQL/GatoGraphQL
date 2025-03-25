@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CategoryTermMetaCreateInputObjectTypeResolverTrait;
-
-class GenericCategoryTermMetaAddInputObjectTypeResolver extends AbstractCreateOrUpdateGenericCategoryTermMetaInputObjectTypeResolver implements AddGenericCategoryTermMetaInputObjectTypeResolverInterface
+class GenericCategoryTermMetaAddInputObjectTypeResolver extends AbstractAddGenericCategoryTermMetaInputObjectTypeResolver implements AddGenericCategoryTermMetaInputObjectTypeResolverInterface
 {
-    use CategoryTermMetaCreateInputObjectTypeResolverTrait;
+    use CategoryTermMetaAddInputObjectTypeResolverTrait;
 
     public function getTypeName(): string
     {
-        return 'GenericCategoryCreateInput';
+        return 'GenericCategoryMetaAddInput';
     }
 
     protected function isTaxonomyInputFieldMandatory(): bool

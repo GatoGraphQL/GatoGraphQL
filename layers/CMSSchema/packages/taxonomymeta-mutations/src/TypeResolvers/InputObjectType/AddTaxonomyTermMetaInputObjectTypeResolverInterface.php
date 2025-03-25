@@ -6,6 +6,6 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
-interface CreateTaxonomyTermMetaInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
+interface AddTaxonomyTermMetaInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
 {
 }
