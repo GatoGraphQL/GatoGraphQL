@@ -37,7 +37,7 @@ class CategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTyp
 
     public function getTypeName(): string
     {
-        return 'CategoriesByInput';
+        return 'CategoryByInput';
     }
 
     protected function isOneInputValueMandatory(): bool
