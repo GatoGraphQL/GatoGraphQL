@@ -305,12 +305,12 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addCategoryMeta' => $this->__('Create a category', 'category-mutations'),
-            'addCategoryMetas' => $this->__('Create categories', 'category-mutations'),
-            'updateCategoryMeta' => $this->__('Update a category', 'category-mutations'),
-            'updateCategoryMetas' => $this->__('Update categories', 'category-mutations'),
-            'deleteCategoryMeta' => $this->__('Delete a category', 'category-mutations'),
-            'deleteCategoryMetas' => $this->__('Delete categories', 'category-mutations'),
+            'addCategoryMeta' => $this->__('Add meta to category', 'category-mutations'),
+            'addCategoryMetas' => $this->__('Add meta to categories', 'category-mutations'),
+            'updateCategoryMeta' => $this->__('Update meta from category', 'category-mutations'),
+            'updateCategoryMetas' => $this->__('Update meta from categories', 'category-mutations'),
+            'deleteCategoryMeta' => $this->__('Delete meta from category', 'category-mutations'),
+            'deleteCategoryMetas' => $this->__('Delete meta from categories', 'category-mutations'),
             'addCategoryMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCategoryMeta` mutation', 'category-mutations'),
             'updateCategoryMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCategoryMeta` mutation', 'category-mutations'),
             'deleteCategoryMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCategoryMeta` mutation', 'category-mutations'),
