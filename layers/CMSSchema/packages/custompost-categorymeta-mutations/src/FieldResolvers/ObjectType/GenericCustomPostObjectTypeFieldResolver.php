@@ -14,13 +14,13 @@ use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCate
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCategoryMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\GenericCategorySetMetaInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategorySetMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 
 class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
-    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
+    private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
     private ?SetMetaOnCategoryMutationResolver $setMetaOnCategoryMutationResolver = null;
     private ?SetMetaOnCategoryBulkOperationMutationResolver $setMetaOnCategoryBulkOperationMutationResolver = null;
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
@@ -29,14 +29,14 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
     private ?PayloadableSetMetaOnCategoryBulkOperationMutationResolver $payloadableSetMetaOnCategoryBulkOperationMutationResolver = null;
     private ?GenericCategorySetMetaMutationPayloadObjectTypeResolver $genericCategorySetMetaMutationPayloadObjectTypeResolver = null;
 
-    final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
+    final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
     {
-        if ($this->genericCustomPostObjectTypeResolver === null) {
-            /** @var GenericCustomPostObjectTypeResolver */
-            $genericCustomPostObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
-            $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+        if ($this->genericCategoryObjectTypeResolver === null) {
+            /** @var GenericCategoryObjectTypeResolver */
+            $genericCategoryObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
+            $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
         }
-        return $this->genericCustomPostObjectTypeResolver;
+        return $this->genericCategoryObjectTypeResolver;
     }
     final protected function getSetMetaOnCategoryMutationResolver(): SetMetaOnCategoryMutationResolver
     {
@@ -104,7 +104,7 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
 
     public function getCategoryObjectTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return $this->getGenericCustomPostObjectTypeResolver();
+        return $this->getGenericCategoryObjectTypeResolver();
     }
 
     public function getSetCategoriesMutationResolver(): MutationResolverInterface

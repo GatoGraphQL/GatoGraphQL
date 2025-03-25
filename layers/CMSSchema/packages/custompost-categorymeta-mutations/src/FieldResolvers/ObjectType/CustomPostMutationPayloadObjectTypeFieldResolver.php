@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\AbstractGenericCategoriesMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class CustomPostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationPayloadObjectTypeFieldResolver
 {
-    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
+    private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
 
-    final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
+    final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
     {
-        if ($this->genericCustomPostObjectTypeResolver === null) {
-            /** @var GenericCustomPostObjectTypeResolver */
-            $genericCustomPostObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
-            $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
+        if ($this->genericCategoryObjectTypeResolver === null) {
+            /** @var GenericCategoryObjectTypeResolver */
+            $genericCategoryObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
+            $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
         }
-        return $this->genericCustomPostObjectTypeResolver;
+        return $this->genericCategoryObjectTypeResolver;
     }
 
     /**
@@ -42,7 +42,7 @@ class CustomPostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMut
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            $this->getObjectFieldName() => $this->getGenericCustomPostObjectTypeResolver(),
+            $this->getObjectFieldName() => $this->getGenericCategoryObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
