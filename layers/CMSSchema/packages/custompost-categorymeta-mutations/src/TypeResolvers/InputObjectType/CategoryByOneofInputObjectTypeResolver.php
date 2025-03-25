@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -62,17 +61,6 @@ class CategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTyp
             MutationInputProperties::IDS => $this->__('Input the category IDs', 'custompost-categorymeta-mutations'),
             MutationInputProperties::SLUGS => $this->__('Input the category slugs', 'custompost-categorymeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
-        };
-    }
-
-    public function getInputFieldTypeModifiers(string $inputFieldName): int
-    {
-        return match ($inputFieldName) {
-            MutationInputProperties::IDS,
-            MutationInputProperties::SLUGS
-                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default
-                => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 }
