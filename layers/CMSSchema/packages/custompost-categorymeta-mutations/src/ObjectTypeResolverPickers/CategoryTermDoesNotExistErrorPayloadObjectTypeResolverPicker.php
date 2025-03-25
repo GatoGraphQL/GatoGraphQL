@@ -8,7 +8,7 @@ use PoPCMSSchema\CategoryMutations\ObjectTypeResolverPickers\AbstractCategoryTer
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\AbstractGenericCategoriesMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\GenericCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootCreateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootAddGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
@@ -25,7 +25,7 @@ class CategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker extends Abstr
     {
         return [
             AbstractGenericCategoriesMutationErrorPayloadUnionTypeResolver::class,
-            RootCreateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
+            RootAddGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
             RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
             RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
             GenericCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver::class,

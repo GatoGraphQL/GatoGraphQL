@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeFieldResolver;
@@ -25,7 +25,7 @@ class GenericCategoryMutationTransientEntityOperationPayloadObjectTypeFieldResol
     {
         return [
             GenericCategoryUpdateMetaMutationPayloadObjectTypeResolver::class,
-            RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
+            RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
             RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
             RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
         ];

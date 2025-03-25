@@ -7,22 +7,22 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType
 use PoPCMSSchema\CategoryMutations\Module;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\CreateGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\CreateGenericCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\AddGenericCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\AddGenericCategoryTermMetaMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\DeleteGenericCategoryTermMetaBulkOperationMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\DeleteGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableCreateGenericCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableAddGenericCategoryTermMetaMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableDeleteGenericCategoryTermMetaMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMetaMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\UpdateGenericCategoryTermMetaBulkOperationMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\UpdateGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\RootCreateGenericCategoryTermMetaInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\RootAddGenericCategoryTermMetaInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\RootDeleteGenericCategoryTermMetaInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\RootUpdateGenericCategoryTermMetaInputObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
@@ -51,9 +51,9 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
     private ?RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
     private ?RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
-    private ?RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
-    private ?CreateGenericCategoryTermMetaMutationResolver $createGenericCategoryTermMetaMutationResolver = null;
-    private ?CreateGenericCategoryTermMetaBulkOperationMutationResolver $createGenericCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
+    private ?AddGenericCategoryTermMetaMutationResolver $addGenericCategoryTermMetaMutationResolver = null;
+    private ?AddGenericCategoryTermMetaBulkOperationMutationResolver $addGenericCategoryTermMetaBulkOperationMutationResolver = null;
     private ?DeleteGenericCategoryTermMetaMutationResolver $deleteGenericCategoryTermMetaMutationResolver = null;
     private ?DeleteGenericCategoryTermMetaBulkOperationMutationResolver $deleteGenericCategoryTermMetaBulkOperationMutationResolver = null;
     private ?UpdateGenericCategoryTermMetaMutationResolver $updateGenericCategoryTermMetaMutationResolver = null;
@@ -62,11 +62,11 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     private ?PayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver $payloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver = null;
     private ?PayloadableUpdateGenericCategoryTermMetaMutationResolver $payloadableUpdateGenericCategoryTermMetaMutationResolver = null;
     private ?PayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver $payloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver = null;
-    private ?PayloadableCreateGenericCategoryTermMetaMutationResolver $payloadableCreateGenericCategoryTermMetaMutationResolver = null;
-    private ?PayloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver $payloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?PayloadableAddGenericCategoryTermMetaMutationResolver $payloadableAddGenericCategoryTermMetaMutationResolver = null;
+    private ?PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver $payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver = null;
     private ?RootDeleteGenericCategoryTermMetaInputObjectTypeResolver $rootDeleteGenericCategoryTermMetaInputObjectTypeResolver = null;
     private ?RootUpdateGenericCategoryTermMetaInputObjectTypeResolver $rootUpdateGenericCategoryTermMetaInputObjectTypeResolver = null;
-    private ?RootCreateGenericCategoryTermMetaInputObjectTypeResolver $rootCreateGenericCategoryTermMetaInputObjectTypeResolver = null;
+    private ?RootAddGenericCategoryTermMetaInputObjectTypeResolver $rootAddGenericCategoryTermMetaInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
@@ -97,32 +97,32 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         }
         return $this->rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver(): RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver
+    final protected function getRootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver(): RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver */
-            $rootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $rootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver */
+            $rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        return $this->rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getCreateGenericCategoryTermMetaMutationResolver(): CreateGenericCategoryTermMetaMutationResolver
+    final protected function getAddGenericCategoryTermMetaMutationResolver(): AddGenericCategoryTermMetaMutationResolver
     {
-        if ($this->createGenericCategoryTermMetaMutationResolver === null) {
-            /** @var CreateGenericCategoryTermMetaMutationResolver */
-            $createGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(CreateGenericCategoryTermMetaMutationResolver::class);
-            $this->createGenericCategoryTermMetaMutationResolver = $createGenericCategoryTermMetaMutationResolver;
+        if ($this->addGenericCategoryTermMetaMutationResolver === null) {
+            /** @var AddGenericCategoryTermMetaMutationResolver */
+            $addGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(AddGenericCategoryTermMetaMutationResolver::class);
+            $this->addGenericCategoryTermMetaMutationResolver = $addGenericCategoryTermMetaMutationResolver;
         }
-        return $this->createGenericCategoryTermMetaMutationResolver;
+        return $this->addGenericCategoryTermMetaMutationResolver;
     }
-    final protected function getCreateGenericCategoryTermMetaBulkOperationMutationResolver(): CreateGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getAddGenericCategoryTermMetaBulkOperationMutationResolver(): AddGenericCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->createGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var CreateGenericCategoryTermMetaBulkOperationMutationResolver */
-            $createGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(CreateGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->createGenericCategoryTermMetaBulkOperationMutationResolver = $createGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->addGenericCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var AddGenericCategoryTermMetaBulkOperationMutationResolver */
+            $addGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(AddGenericCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->addGenericCategoryTermMetaBulkOperationMutationResolver = $addGenericCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->createGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->addGenericCategoryTermMetaBulkOperationMutationResolver;
     }
     final protected function getDeleteGenericCategoryTermMetaMutationResolver(): DeleteGenericCategoryTermMetaMutationResolver
     {
@@ -196,23 +196,23 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         }
         return $this->payloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver;
     }
-    final protected function getPayloadableCreateGenericCategoryTermMetaMutationResolver(): PayloadableCreateGenericCategoryTermMetaMutationResolver
+    final protected function getPayloadableAddGenericCategoryTermMetaMutationResolver(): PayloadableAddGenericCategoryTermMetaMutationResolver
     {
-        if ($this->payloadableCreateGenericCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableCreateGenericCategoryTermMetaMutationResolver */
-            $payloadableCreateGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableCreateGenericCategoryTermMetaMutationResolver::class);
-            $this->payloadableCreateGenericCategoryTermMetaMutationResolver = $payloadableCreateGenericCategoryTermMetaMutationResolver;
+        if ($this->payloadableAddGenericCategoryTermMetaMutationResolver === null) {
+            /** @var PayloadableAddGenericCategoryTermMetaMutationResolver */
+            $payloadableAddGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableAddGenericCategoryTermMetaMutationResolver::class);
+            $this->payloadableAddGenericCategoryTermMetaMutationResolver = $payloadableAddGenericCategoryTermMetaMutationResolver;
         }
-        return $this->payloadableCreateGenericCategoryTermMetaMutationResolver;
+        return $this->payloadableAddGenericCategoryTermMetaMutationResolver;
     }
-    final protected function getPayloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver(): PayloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getPayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver(): PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->payloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var PayloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver */
-            $payloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->payloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver = $payloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver */
+            $payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver = $payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->payloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver;
     }
     final protected function getRootDeleteGenericCategoryTermMetaInputObjectTypeResolver(): RootDeleteGenericCategoryTermMetaInputObjectTypeResolver
     {
@@ -232,14 +232,14 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         }
         return $this->rootUpdateGenericCategoryTermMetaInputObjectTypeResolver;
     }
-    final protected function getRootCreateGenericCategoryTermMetaInputObjectTypeResolver(): RootCreateGenericCategoryTermMetaInputObjectTypeResolver
+    final protected function getRootAddGenericCategoryTermMetaInputObjectTypeResolver(): RootAddGenericCategoryTermMetaInputObjectTypeResolver
     {
-        if ($this->rootCreateGenericCategoryTermMetaInputObjectTypeResolver === null) {
-            /** @var RootCreateGenericCategoryTermMetaInputObjectTypeResolver */
-            $rootCreateGenericCategoryTermMetaInputObjectTypeResolver = $this->instanceManager->getInstance(RootCreateGenericCategoryTermMetaInputObjectTypeResolver::class);
-            $this->rootCreateGenericCategoryTermMetaInputObjectTypeResolver = $rootCreateGenericCategoryTermMetaInputObjectTypeResolver;
+        if ($this->rootAddGenericCategoryTermMetaInputObjectTypeResolver === null) {
+            /** @var RootAddGenericCategoryTermMetaInputObjectTypeResolver */
+            $rootAddGenericCategoryTermMetaInputObjectTypeResolver = $this->instanceManager->getInstance(RootAddGenericCategoryTermMetaInputObjectTypeResolver::class);
+            $this->rootAddGenericCategoryTermMetaInputObjectTypeResolver = $rootAddGenericCategoryTermMetaInputObjectTypeResolver;
         }
-        return $this->rootCreateGenericCategoryTermMetaInputObjectTypeResolver;
+        return $this->rootAddGenericCategoryTermMetaInputObjectTypeResolver;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
@@ -369,10 +369,10 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     {
         return match ($fieldName) {
             'createCategory' => [
-                'input' => $this->getRootCreateGenericCategoryTermMetaInputObjectTypeResolver(),
+                'input' => $this->getRootAddGenericCategoryTermMetaInputObjectTypeResolver(),
             ],
             'createCategories'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateGenericCategoryTermMetaInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootAddGenericCategoryTermMetaInputObjectTypeResolver()),
             'updateCategory' => [
                 'input' => $this->getRootUpdateGenericCategoryTermMetaInputObjectTypeResolver(),
             ],
@@ -448,11 +448,11 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         return match ($fieldName) {
             'createCategory' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableCreateGenericCategoryTermMetaMutationResolver()
-                : $this->getCreateGenericCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableAddGenericCategoryTermMetaMutationResolver()
+                : $this->getAddGenericCategoryTermMetaMutationResolver(),
             'createCategories' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableCreateGenericCategoryTermMetaBulkOperationMutationResolver()
-                : $this->getCreateGenericCategoryTermMetaBulkOperationMutationResolver(),
+                ? $this->getPayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver()
+                : $this->getAddGenericCategoryTermMetaBulkOperationMutationResolver(),
             'updateCategory' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableUpdateGenericCategoryTermMetaMutationResolver()
                 : $this->getUpdateGenericCategoryTermMetaMutationResolver(),
@@ -479,7 +479,7 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
                 'createCategory',
                 'createCategories',
                 'createCategoryMutationPayloadObjects'
-                    => $this->getRootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
+                    => $this->getRootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
                 'updateCategory',
                 'updateCategories',
                 'updateCategoryMutationPayloadObjects'
