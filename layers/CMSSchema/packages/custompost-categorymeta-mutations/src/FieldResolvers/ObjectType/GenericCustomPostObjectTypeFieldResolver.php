@@ -13,8 +13,8 @@ use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSe
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetMetaOnCategoryMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCategoryBulkOperationMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCategoryMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\GenericCustomPostSetCategoriesInputObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCustomPostSetCategoriesMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\GenericCategorySetMetaInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategorySetMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -25,10 +25,10 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
     private ?SetMetaOnCategoryMutationResolver $setMetaOnCategoryMutationResolver = null;
     private ?SetMetaOnCategoryBulkOperationMutationResolver $setMetaOnCategoryBulkOperationMutationResolver = null;
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
-    private ?GenericCustomPostSetCategoriesInputObjectTypeResolver $genericCustomPostSetCategoriesInputObjectTypeResolver = null;
+    private ?GenericCategorySetMetaInputObjectTypeResolver $genericCategorySetMetaInputObjectTypeResolver = null;
     private ?PayloadableSetMetaOnCategoryMutationResolver $payloadableSetMetaOnCategoryMutationResolver = null;
     private ?PayloadableSetMetaOnCategoryBulkOperationMutationResolver $payloadableSetMetaOnCategoryBulkOperationMutationResolver = null;
-    private ?GenericCustomPostSetCategoriesMutationPayloadObjectTypeResolver $genericCustomPostSetCategoriesMutationPayloadObjectTypeResolver = null;
+    private ?GenericCategorySetMetaMutationPayloadObjectTypeResolver $genericCategorySetMetaMutationPayloadObjectTypeResolver = null;
 
     final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
@@ -66,14 +66,14 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
         }
         return $this->genericCategoryObjectTypeResolver;
     }
-    final protected function getGenericCustomPostSetCategoriesInputObjectTypeResolver(): AbstractSetMetaOnCategoryInputObjectTypeResolver
+    final protected function getGenericCategorySetMetaInputObjectTypeResolver(): AbstractSetMetaOnCategoryInputObjectTypeResolver
     {
-        if ($this->genericCustomPostSetCategoriesInputObjectTypeResolver === null) {
-            /** @var GenericCustomPostSetCategoriesInputObjectTypeResolver */
-            $genericCustomPostSetCategoriesInputObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostSetCategoriesInputObjectTypeResolver::class);
-            $this->genericCustomPostSetCategoriesInputObjectTypeResolver = $genericCustomPostSetCategoriesInputObjectTypeResolver;
+        if ($this->genericCategorySetMetaInputObjectTypeResolver === null) {
+            /** @var GenericCategorySetMetaInputObjectTypeResolver */
+            $genericCategorySetMetaInputObjectTypeResolver = $this->instanceManager->getInstance(GenericCategorySetMetaInputObjectTypeResolver::class);
+            $this->genericCategorySetMetaInputObjectTypeResolver = $genericCategorySetMetaInputObjectTypeResolver;
         }
-        return $this->genericCustomPostSetCategoriesInputObjectTypeResolver;
+        return $this->genericCategorySetMetaInputObjectTypeResolver;
     }
     final protected function getPayloadableSetMetaOnCategoryMutationResolver(): PayloadableSetMetaOnCategoryMutationResolver
     {
@@ -93,14 +93,14 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
         }
         return $this->payloadableSetMetaOnCategoryBulkOperationMutationResolver;
     }
-    final protected function getGenericCustomPostSetCategoriesMutationPayloadObjectTypeResolver(): GenericCustomPostSetCategoriesMutationPayloadObjectTypeResolver
+    final protected function getGenericCategorySetMetaMutationPayloadObjectTypeResolver(): GenericCategorySetMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->genericCustomPostSetCategoriesMutationPayloadObjectTypeResolver === null) {
-            /** @var GenericCustomPostSetCategoriesMutationPayloadObjectTypeResolver */
-            $genericCustomPostSetCategoriesMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostSetCategoriesMutationPayloadObjectTypeResolver::class);
-            $this->genericCustomPostSetCategoriesMutationPayloadObjectTypeResolver = $genericCustomPostSetCategoriesMutationPayloadObjectTypeResolver;
+        if ($this->genericCategorySetMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var GenericCategorySetMetaMutationPayloadObjectTypeResolver */
+            $genericCategorySetMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(GenericCategorySetMetaMutationPayloadObjectTypeResolver::class);
+            $this->genericCategorySetMetaMutationPayloadObjectTypeResolver = $genericCategorySetMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->genericCustomPostSetCategoriesMutationPayloadObjectTypeResolver;
+        return $this->genericCategorySetMetaMutationPayloadObjectTypeResolver;
     }
 
     public function getCustomPostObjectTypeResolver(): CustomPostObjectTypeResolverInterface
@@ -123,14 +123,14 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
         return $this->getGenericCategoryObjectTypeResolver();
     }
 
-    public function getCustomPostSetCategoriesInputObjectTypeResolver(): AbstractSetMetaOnCategoryInputObjectTypeResolver
+    public function getCategorySetMetaInputObjectTypeResolver(): AbstractSetMetaOnCategoryInputObjectTypeResolver
     {
-        return $this->getGenericCustomPostSetCategoriesInputObjectTypeResolver();
+        return $this->getGenericCategorySetMetaInputObjectTypeResolver();
     }
 
-    protected function getCustomPostSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
+    protected function getCategorySetMetaMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
     {
-        return $this->getGenericCustomPostSetCategoriesMutationPayloadObjectTypeResolver();
+        return $this->getGenericCategorySetMetaMutationPayloadObjectTypeResolver();
     }
 
     public function getPayloadableSetCategoriesMutationResolver(): MutationResolverInterface

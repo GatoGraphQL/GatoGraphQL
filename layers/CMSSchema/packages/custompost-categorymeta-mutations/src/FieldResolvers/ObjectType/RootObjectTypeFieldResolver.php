@@ -123,7 +123,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getGenericCategoryObjectTypeResolver();
     }
 
-    public function getCustomPostSetCategoriesInputObjectTypeResolver(): AbstractSetMetaOnCategoryInputObjectTypeResolver
+    public function getCategorySetMetaInputObjectTypeResolver(): AbstractSetMetaOnCategoryInputObjectTypeResolver
     {
         return $this->getRootSetMetaOnCategoryInputObjectTypeResolver();
     }

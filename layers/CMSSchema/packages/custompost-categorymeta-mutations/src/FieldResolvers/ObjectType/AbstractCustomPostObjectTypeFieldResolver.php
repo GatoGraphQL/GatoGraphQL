@@ -66,7 +66,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setCategories' => [
-                'input' => $this->getCustomPostSetCategoriesInputObjectTypeResolver(),
+                'input' => $this->getCategorySetMetaInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -138,7 +138,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $usePayloadableCustomPostCategoryMetaMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMetaMutations();
         if ($usePayloadableCustomPostCategoryMetaMutations) {
             return match ($fieldName) {
-                'setCategories' => $this->getCustomPostSetCategoriesMutationPayloadObjectTypeResolver(),
+                'setCategories' => $this->getCategorySetMetaMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
@@ -148,5 +148,5 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         };
     }
 
-    abstract protected function getCustomPostSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
+    abstract protected function getCategorySetMetaMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
 }

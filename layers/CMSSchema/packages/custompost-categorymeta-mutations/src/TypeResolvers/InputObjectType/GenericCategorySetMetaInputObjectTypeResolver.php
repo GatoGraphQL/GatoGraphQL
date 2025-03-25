@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType;
 
-class GenericCustomPostSetCategoriesInputObjectTypeResolver extends AbstractSetCategoriesOnGenericCustomPostInputObjectTypeResolver
+class GenericCategorySetMetaInputObjectTypeResolver extends AbstractSetCategoriesOnGenericCustomPostInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'GenericCustomPostSetCategoriesInput';
+        return 'GenericCategorySetMetaInput';
     }
 
     protected function addCustomPostInputField(): bool

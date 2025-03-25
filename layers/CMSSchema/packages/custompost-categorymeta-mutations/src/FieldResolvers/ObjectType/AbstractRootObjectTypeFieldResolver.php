@@ -118,9 +118,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetCategoriesFieldName() => [
-                'input' => $this->getCustomPostSetCategoriesInputObjectTypeResolver(),
+                'input' => $this->getCategorySetMetaInputObjectTypeResolver(),
             ],
-            $this->getBulkOperationSetCategoriesFieldName() => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCustomPostSetCategoriesInputObjectTypeResolver()),
+            $this->getBulkOperationSetCategoriesFieldName() => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCategorySetMetaInputObjectTypeResolver()),
             $this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
