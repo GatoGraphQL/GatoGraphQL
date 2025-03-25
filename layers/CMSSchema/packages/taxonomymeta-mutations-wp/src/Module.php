@@ -25,10 +25,8 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\TaxonomiesWP\Module::class,
+            \PoPCMSSchema\TaxonomyMutationsWP\Module::class,
             \PoPCMSSchema\TaxonomyMetaMutations\Module::class,
-            \PoPCMSSchema\UserStateMutationsWP\Module::class,
-            \PoPCMSSchema\UserRolesWP\Module::class,
         ];
     }
 
