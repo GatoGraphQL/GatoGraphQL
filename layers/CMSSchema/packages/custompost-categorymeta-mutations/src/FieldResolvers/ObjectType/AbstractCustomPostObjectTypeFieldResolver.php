@@ -36,14 +36,14 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldNamesToResolve(): array
     {
         return [
-            'setCategories',
+            'setMeta',
         ];
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'setCategories' => sprintf(
+            'setMeta' => sprintf(
                 $this->__('Set categories on the %s', 'custompost-categorymeta-mutations'),
                 $this->getEntityName()
             ),
@@ -54,7 +54,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'setCategories' => SchemaTypeModifiers::NON_NULLABLE,
+            'setMeta' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -65,7 +65,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'setCategories' => [
+            'setMeta' => [
                 'input' => $this->getCategorySetMetaInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -75,7 +75,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['setCategories' => 'input'] => SchemaTypeModifiers::MANDATORY,
+            ['setMeta' => 'input'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -88,7 +88,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function validateMutationOnObject(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         return match ($fieldName) {
-            'setCategories' => true,
+            'setMeta' => true,
             default => parent::validateMutationOnObject($objectTypeResolver, $fieldName),
         };
     }
@@ -111,7 +111,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         );
         $customPost = $object;
         switch ($field->getName()) {
-            case 'setCategories':
+            case 'setMeta':
                 $fieldArgsForMutationForObject['input']->{MutationInputProperties::CATEGORY_ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
@@ -124,7 +124,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostCategoryMetaMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMetaMutations();
         return match ($fieldName) {
-            'setCategories' => $usePayloadableCustomPostCategoryMetaMutations
+            'setMeta' => $usePayloadableCustomPostCategoryMetaMutations
                 ? $this->getPayloadableSetCategoriesMutationResolver()
                 : $this->getSetCategoriesMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -138,12 +138,12 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $usePayloadableCustomPostCategoryMetaMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMetaMutations();
         if ($usePayloadableCustomPostCategoryMetaMutations) {
             return match ($fieldName) {
-                'setCategories' => $this->getCategorySetMetaMutationPayloadObjectTypeResolver(),
+                'setMeta' => $this->getCategorySetMetaMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'setCategories' => $this->getCustomPostObjectTypeResolver(),
+            'setMeta' => $this->getCustomPostObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
