@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
-class CategoriesByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
+class CategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;

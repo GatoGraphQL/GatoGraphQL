@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\SchemaHooks;
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\CategoriesByOneofInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\CategoryByOneofInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
@@ -17,16 +17,16 @@ use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    private ?CategoriesByOneofInputObjectTypeResolver $categoriesByOneofInputObjectTypeResolver = null;
+    private ?CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver = null;
 
-    final protected function getCategoriesByOneofInputObjectTypeResolver(): CategoriesByOneofInputObjectTypeResolver
+    final protected function getCategoryByOneofInputObjectTypeResolver(): CategoryByOneofInputObjectTypeResolver
     {
-        if ($this->categoriesByOneofInputObjectTypeResolver === null) {
-            /** @var CategoriesByOneofInputObjectTypeResolver */
-            $categoriesByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CategoriesByOneofInputObjectTypeResolver::class);
-            $this->categoriesByOneofInputObjectTypeResolver = $categoriesByOneofInputObjectTypeResolver;
+        if ($this->categoryByOneofInputObjectTypeResolver === null) {
+            /** @var CategoryByOneofInputObjectTypeResolver */
+            $categoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryByOneofInputObjectTypeResolver::class);
+            $this->categoryByOneofInputObjectTypeResolver = $categoryByOneofInputObjectTypeResolver;
         }
-        return $this->categoriesByOneofInputObjectTypeResolver;
+        return $this->categoryByOneofInputObjectTypeResolver;
     }
 
     protected function init(): void
@@ -57,7 +57,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::CATEGORY_BY] = $this->getCategoriesByOneofInputObjectTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::CATEGORY_BY] = $this->getCategoryByOneofInputObjectTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 

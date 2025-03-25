@@ -17,7 +17,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?CategoriesByOneofInputObjectTypeResolver $categoriesByOneofInputObjectTypeResolver = null;
+    private ?CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver = null;
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
 
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
@@ -38,14 +38,14 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
         }
         return $this->idScalarTypeResolver;
     }
-    final protected function getCategoriesByOneofInputObjectTypeResolver(): CategoriesByOneofInputObjectTypeResolver
+    final protected function getCategoryByOneofInputObjectTypeResolver(): CategoryByOneofInputObjectTypeResolver
     {
-        if ($this->categoriesByOneofInputObjectTypeResolver === null) {
-            /** @var CategoriesByOneofInputObjectTypeResolver */
-            $categoriesByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CategoriesByOneofInputObjectTypeResolver::class);
-            $this->categoriesByOneofInputObjectTypeResolver = $categoriesByOneofInputObjectTypeResolver;
+        if ($this->categoryByOneofInputObjectTypeResolver === null) {
+            /** @var CategoryByOneofInputObjectTypeResolver */
+            $categoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryByOneofInputObjectTypeResolver::class);
+            $this->categoryByOneofInputObjectTypeResolver = $categoryByOneofInputObjectTypeResolver;
         }
-        return $this->categoriesByOneofInputObjectTypeResolver;
+        return $this->categoryByOneofInputObjectTypeResolver;
     }
     final protected function getCategoryTaxonomyEnumStringScalarTypeResolver(): CategoryTaxonomyEnumStringScalarTypeResolver
     {
@@ -75,7 +75,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
                 MutationInputProperties::CATEGORY_ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::CATEGORY_BY => $this->getCategoriesByOneofInputObjectTypeResolver(),
+                MutationInputProperties::CATEGORY_BY => $this->getCategoryByOneofInputObjectTypeResolver(),
                 MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
         );
