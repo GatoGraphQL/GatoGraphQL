@@ -176,9 +176,11 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         if (!$usePayloadableCategoryMutations) {
             return match ($fieldName) {
-                'updateMeta' => $this->getGenericCategoryObjectTypeResolver(),
-                'deleteMeta' => $this->getBooleanScalarTypeResolver(),
-                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+                'updateMeta',
+                'deleteMeta'
+                    => $this->getGenericCategoryObjectTypeResolver(),
+                default
+                    => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
