@@ -12,6 +12,7 @@ use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\DeleteGeneric
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableDeleteGenericCategoryTermMetaMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMetaMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\UpdateGenericCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\GenericCategoryTermDeleteInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\GenericCategoryTermUpdateInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryDeleteMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMutationPayloadObjectTypeResolver;
@@ -32,6 +33,7 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     private ?PayloadableUpdateGenericCategoryTermMetaMutationResolver $payloadableUpdateGenericCategoryTermMetaMutationResolver = null;
     private ?PayloadableDeleteGenericCategoryTermMetaMutationResolver $payloadableDeleteGenericCategoryTermMetaMutationResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?GenericCategoryTermDeleteInputObjectTypeResolver $genericCategoryTermDeleteInputObjectTypeResolver = null;
     private ?GenericCategoryTermUpdateInputObjectTypeResolver $genericCategoryTermUpdateInputObjectTypeResolver = null;
 
     final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
@@ -106,6 +108,15 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         }
         return $this->booleanScalarTypeResolver;
     }
+    final protected function getGenericCategoryTermDeleteInputObjectTypeResolver(): GenericCategoryTermDeleteInputObjectTypeResolver
+    {
+        if ($this->genericCategoryTermDeleteInputObjectTypeResolver === null) {
+            /** @var GenericCategoryTermDeleteInputObjectTypeResolver */
+            $genericCategoryTermDeleteInputObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryTermDeleteInputObjectTypeResolver::class);
+            $this->genericCategoryTermDeleteInputObjectTypeResolver = $genericCategoryTermDeleteInputObjectTypeResolver;
+        }
+        return $this->genericCategoryTermDeleteInputObjectTypeResolver;
+    }
     final protected function getGenericCategoryTermUpdateInputObjectTypeResolver(): GenericCategoryTermUpdateInputObjectTypeResolver
     {
         if ($this->genericCategoryTermUpdateInputObjectTypeResolver === null) {
@@ -135,7 +146,9 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
             'update' => [
                 'input' => $this->getGenericCategoryTermUpdateInputObjectTypeResolver(),
             ],
-            'delete' => [],
+            'delete' => [
+                'input' => $this->getGenericCategoryTermDeleteInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
