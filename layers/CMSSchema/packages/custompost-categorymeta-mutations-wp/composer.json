@@ -163,7 +163,7 @@
         "pop-cms-schema/category-mutations-wp": "^11.3",
         "pop-cms-schema/custompost-categories-wp": "^11.3",
         "pop-cms-schema/custompost-categorymeta-mutations": "^11.3",
-        "pop-cms-schema/custompost-mutations-wp": "^11.3"
+        "pop-cms-schema/taxonomymeta-mutations-wp": "^11.3"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",

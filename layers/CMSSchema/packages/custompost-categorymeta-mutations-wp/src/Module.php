@@ -25,10 +25,10 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostCategoryMetaMutations\Module::class,
             \PoPCMSSchema\CategoryMutationsWP\Module::class,
-            \PoPCMSSchema\CustomPostMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostCategoriesWP\Module::class,
+            \PoPCMSSchema\CustomPostCategoryMetaMutations\Module::class,
+            \PoPCMSSchema\TaxonomyMetaMutationsWP\Module::class,
         ];
     }
 
