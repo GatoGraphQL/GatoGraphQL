@@ -72,7 +72,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
                 MutationInputProperties::TAXONOMY => $this->getCategoryTaxonomyEnumStringScalarTypeResolver(),
             ] : [],
             $this->addCustomPostInputField() ? [
-                MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
+                MutationInputProperties::CATEGORY_ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
                 MutationInputProperties::CATEGORIES_BY => $this->getCategoriesByOneofInputObjectTypeResolver(),
@@ -90,7 +90,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
     {
         return match ($inputFieldName) {
             MutationInputProperties::TAXONOMY => $this->__('The category taxonomy', 'custompost-tag-mutations'),
-            MutationInputProperties::CUSTOMPOST_ID => sprintf(
+            MutationInputProperties::CATEGORY_ID => sprintf(
                 $this->__('The ID of the %s', 'custompost-categorymeta-mutations'),
                 $this->getEntityName()
             ),
@@ -116,7 +116,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
         return match ($inputFieldName) {
             MutationInputProperties::APPEND
                 => SchemaTypeModifiers::NON_NULLABLE,
-            MutationInputProperties::CUSTOMPOST_ID,
+            MutationInputProperties::CATEGORY_ID,
             MutationInputProperties::CATEGORIES_BY
                 => SchemaTypeModifiers::MANDATORY,
             default
