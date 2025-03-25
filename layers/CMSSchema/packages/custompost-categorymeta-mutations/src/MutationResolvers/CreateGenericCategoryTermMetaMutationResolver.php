@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\CreateTaxonomyTermMetaMutationResolverTrait;
 
-class CreateGenericCategoryTermMutationResolver extends AbstractMutateGenericCategoryTermMutationResolver
+class CreateGenericCategoryTermMetaMutationResolver extends AbstractMutateGenericCategoryTermMetaMutationResolver
 {
     use CreateTaxonomyTermMetaMutationResolverTrait;
 }

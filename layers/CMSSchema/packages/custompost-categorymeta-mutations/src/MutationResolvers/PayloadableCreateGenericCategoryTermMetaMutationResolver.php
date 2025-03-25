@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers;
+
+use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableCreateCategoryTermMetaMutationResolverTrait;
+
+class PayloadableCreateGenericCategoryTermMetaMutationResolver extends AbstractMutateGenericCategoryTermMetaMutationResolver
+{
+    use PayloadableCreateCategoryTermMetaMutationResolverTrait;
+}

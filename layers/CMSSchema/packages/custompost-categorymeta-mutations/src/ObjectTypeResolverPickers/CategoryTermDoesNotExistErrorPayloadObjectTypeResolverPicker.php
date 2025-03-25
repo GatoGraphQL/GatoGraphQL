@@ -8,9 +8,9 @@ use PoPCMSSchema\CategoryMutations\ObjectTypeResolverPickers\AbstractCategoryTer
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\AbstractGenericCategoriesMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\GenericCategoryDeleteMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootCreateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\RootCreateGenericCategoryMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryMutationErrorPayloadUnionTypeResolver;
@@ -25,9 +25,9 @@ class CategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker extends Abstr
     {
         return [
             AbstractGenericCategoriesMutationErrorPayloadUnionTypeResolver::class,
-            RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
-            RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
+            RootCreateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
+            RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
             GenericCategoryDeleteMutationErrorPayloadUnionTypeResolver::class,
             GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
             GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,

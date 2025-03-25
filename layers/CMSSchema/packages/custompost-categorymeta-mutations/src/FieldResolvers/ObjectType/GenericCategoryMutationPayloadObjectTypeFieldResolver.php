@@ -6,8 +6,8 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -33,8 +33,8 @@ class GenericCategoryMutationPayloadObjectTypeFieldResolver extends AbstractObje
     {
         return [
             GenericCategoryUpdateMutationPayloadObjectTypeResolver::class,
-            RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver::class,
-            RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver::class,
+            RootCreateGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
+            RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
         ];
     }
 

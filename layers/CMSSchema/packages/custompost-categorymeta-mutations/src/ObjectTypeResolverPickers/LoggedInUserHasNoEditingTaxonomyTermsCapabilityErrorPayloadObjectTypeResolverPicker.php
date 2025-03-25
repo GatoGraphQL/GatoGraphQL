@@ -6,9 +6,9 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\ObjectTypeResolverPickers
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\GenericCategoryDeleteMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootCreateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\TaxonomyMetaMutations\ObjectTypeResolverPickers\AbstractLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -20,9 +20,9 @@ class LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResol
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
-            RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
+            RootCreateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
+            RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
             GenericCategoryDeleteMutationErrorPayloadUnionTypeResolver::class,
             GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
