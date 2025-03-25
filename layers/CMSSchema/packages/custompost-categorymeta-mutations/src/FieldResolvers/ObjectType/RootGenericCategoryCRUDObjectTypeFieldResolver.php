@@ -283,21 +283,21 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         $addFieldsToQueryPayloadableCategoryMutations = $moduleConfiguration->addFieldsToQueryPayloadableCategoryMutations();
         return array_merge(
             [
-                'createCategory',
-                'createCategories',
+                'addCategoryMeta',
+                'addCategoryMetas',
             ],
             !$disableRedundantRootTypeMutationFields ? [
-                'updateCategory',
-                'updateCategories',
-                'deleteCategory',
-                'deleteCategories',
+                'updateCategoryMeta',
+                'updateCategoryMetas',
+                'deleteCategoryMeta',
+                'deleteCategoryMetas',
             ] : [],
             $addFieldsToQueryPayloadableCategoryMutations ? [
-                'createCategoryMutationPayloadObjects',
+                'addCategoryMetaMutationPayloadObjects',
             ] : [],
             $addFieldsToQueryPayloadableCategoryMutations && !$disableRedundantRootTypeMutationFields ? [
-                'updateCategoryMutationPayloadObjects',
-                'deleteCategoryMutationPayloadObjects',
+                'updateCategoryMetaMutationPayloadObjects',
+                'deleteCategoryMetaMutationPayloadObjects',
             ] : [],
         );
     }
@@ -305,15 +305,15 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createCategory' => $this->__('Create a category', 'category-mutations'),
-            'createCategories' => $this->__('Create categories', 'category-mutations'),
-            'updateCategory' => $this->__('Update a category', 'category-mutations'),
-            'updateCategories' => $this->__('Update categories', 'category-mutations'),
-            'deleteCategory' => $this->__('Delete a category', 'category-mutations'),
-            'deleteCategories' => $this->__('Delete categories', 'category-mutations'),
-            'createCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createCategory` mutation', 'category-mutations'),
-            'updateCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCategory` mutation', 'category-mutations'),
-            'deleteCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCategory` mutation', 'category-mutations'),
+            'addCategoryMeta' => $this->__('Create a category', 'category-mutations'),
+            'addCategoryMetas' => $this->__('Create categories', 'category-mutations'),
+            'updateCategoryMeta' => $this->__('Update a category', 'category-mutations'),
+            'updateCategoryMetas' => $this->__('Update categories', 'category-mutations'),
+            'deleteCategoryMeta' => $this->__('Delete a category', 'category-mutations'),
+            'deleteCategoryMetas' => $this->__('Delete categories', 'category-mutations'),
+            'addCategoryMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCategoryMeta` mutation', 'category-mutations'),
+            'updateCategoryMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCategoryMeta` mutation', 'category-mutations'),
+            'deleteCategoryMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCategoryMeta` mutation', 'category-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -325,13 +325,13 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         if (!$usePayloadableCategoryMutations) {
             return match ($fieldName) {
-                'createCategory',
-                'updateCategory',
-                'deleteCategory'
+                'addCategoryMeta',
+                'updateCategoryMeta',
+                'deleteCategoryMeta'
                     => SchemaTypeModifiers::NONE,
-                'createCategories',
-                'updateCategories',
-                'deleteCategories'
+                'addCategoryMetas',
+                'updateCategoryMetas',
+                'deleteCategoryMetas'
                     => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
                 default
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -340,22 +340,22 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
 
         if (
             in_array($fieldName, [
-            'createCategoryMutationPayloadObjects',
-            'updateCategoryMutationPayloadObjects',
-            'deleteCategoryMutationPayloadObjects',
+            'addCategoryMetaMutationPayloadObjects',
+            'updateCategoryMetaMutationPayloadObjects',
+            'deleteCategoryMetaMutationPayloadObjects',
             ])
         ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
         return match ($fieldName) {
-            'createCategory',
-            'updateCategory',
-            'deleteCategory'
+            'addCategoryMeta',
+            'updateCategoryMeta',
+            'deleteCategoryMeta'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'createCategories',
-            'updateCategories',
-            'deleteCategories'
+            'addCategoryMetas',
+            'updateCategoryMetas',
+            'deleteCategoryMetas'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -368,24 +368,24 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'createCategory' => [
+            'addCategoryMeta' => [
                 'input' => $this->getRootAddGenericCategoryTermMetaInputObjectTypeResolver(),
             ],
-            'createCategories'
+            'addCategoryMetas'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootAddGenericCategoryTermMetaInputObjectTypeResolver()),
-            'updateCategory' => [
+            'updateCategoryMeta' => [
                 'input' => $this->getRootUpdateGenericCategoryTermMetaInputObjectTypeResolver(),
             ],
-            'updateCategories'
+            'updateCategoryMetas'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateGenericCategoryTermMetaInputObjectTypeResolver()),
-            'deleteCategory' => [
+            'deleteCategoryMeta' => [
                 'input' => $this->getRootDeleteGenericCategoryTermMetaInputObjectTypeResolver(),
             ],
-            'deleteCategories'
+            'deleteCategoryMetas'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootDeleteGenericCategoryTermMetaInputObjectTypeResolver()),
-            'createCategoryMutationPayloadObjects',
-            'updateCategoryMutationPayloadObjects',
-            'deleteCategoryMutationPayloadObjects'
+            'addCategoryMetaMutationPayloadObjects',
+            'updateCategoryMetaMutationPayloadObjects',
+            'deleteCategoryMetaMutationPayloadObjects'
                 => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
             default
                 => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -396,9 +396,9 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     {
         if (
             in_array($fieldName, [
-            'createCategoryMutationPayloadObjects',
-            'updateCategoryMutationPayloadObjects',
-            'deleteCategoryMutationPayloadObjects',
+            'addCategoryMetaMutationPayloadObjects',
+            'updateCategoryMetaMutationPayloadObjects',
+            'deleteCategoryMetaMutationPayloadObjects',
             ])
         ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
@@ -407,9 +407,9 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
 
         if (
             in_array($fieldName, [
-            'createCategories',
-            'updateCategories',
-            'deleteCategories',
+            'addCategoryMetas',
+            'updateCategoryMetas',
+            'deleteCategoryMetas',
             ])
         ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
@@ -417,9 +417,9 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         }
 
         return match ([$fieldName => $fieldArgName]) {
-            ['createCategory' => 'input'],
-            ['updateCategory' => 'input'],
-            ['deleteCategory' => 'input']
+            ['addCategoryMeta' => 'input'],
+            ['updateCategoryMeta' => 'input'],
+            ['deleteCategoryMeta' => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
@@ -429,9 +429,9 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     {
         if (
             in_array($fieldName, [
-            'createCategories',
-            'updateCategories',
-            'deleteCategories',
+            'addCategoryMetas',
+            'updateCategoryMetas',
+            'deleteCategoryMetas',
             ])
         ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
@@ -447,22 +447,22 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         return match ($fieldName) {
-            'createCategory' => $usePayloadableCategoryMutations
+            'addCategoryMeta' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableAddGenericCategoryTermMetaMutationResolver()
                 : $this->getAddGenericCategoryTermMetaMutationResolver(),
-            'createCategories' => $usePayloadableCategoryMutations
+            'addCategoryMetas' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver()
                 : $this->getAddGenericCategoryTermMetaBulkOperationMutationResolver(),
-            'updateCategory' => $usePayloadableCategoryMutations
+            'updateCategoryMeta' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableUpdateGenericCategoryTermMetaMutationResolver()
                 : $this->getUpdateGenericCategoryTermMetaMutationResolver(),
-            'updateCategories' => $usePayloadableCategoryMutations
+            'updateCategoryMetas' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver()
                 : $this->getUpdateGenericCategoryTermMetaBulkOperationMutationResolver(),
-            'deleteCategory' => $usePayloadableCategoryMutations
+            'deleteCategoryMeta' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableDeleteGenericCategoryTermMetaMutationResolver()
                 : $this->getDeleteGenericCategoryTermMetaMutationResolver(),
-            'deleteCategories' => $usePayloadableCategoryMutations
+            'deleteCategoryMetas' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver()
                 : $this->getDeleteGenericCategoryTermMetaBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -476,29 +476,29 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         if ($usePayloadableCategoryMutations) {
             return match ($fieldName) {
-                'createCategory',
-                'createCategories',
-                'createCategoryMutationPayloadObjects'
+                'addCategoryMeta',
+                'addCategoryMetas',
+                'addCategoryMetaMutationPayloadObjects'
                     => $this->getRootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
-                'updateCategory',
-                'updateCategories',
-                'updateCategoryMutationPayloadObjects'
+                'updateCategoryMeta',
+                'updateCategoryMetas',
+                'updateCategoryMetaMutationPayloadObjects'
                     => $this->getRootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
-                'deleteCategory',
-                'deleteCategories',
-                'deleteCategoryMutationPayloadObjects'
+                'deleteCategoryMeta',
+                'deleteCategoryMetas',
+                'deleteCategoryMetaMutationPayloadObjects'
                     => $this->getRootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'createCategory',
-            'createCategories',
-            'updateCategory',
-            'updateCategories'
+            'addCategoryMeta',
+            'addCategoryMetas',
+            'updateCategoryMeta',
+            'updateCategoryMetas'
                 => $this->getGenericCategoryObjectTypeResolver(),
-            'deleteCategory',
-            'deleteCategories'
+            'deleteCategoryMeta',
+            'deleteCategoryMetas'
                 => $this->getBooleanScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -533,12 +533,12 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         }
 
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'createCategory':
-            case 'createCategories':
-            case 'updateCategory':
-            case 'updateCategories':
-            case 'deleteCategory':
-            case 'deleteCategories':
+            case 'addCategoryMeta':
+            case 'addCategoryMetas':
+            case 'updateCategoryMeta':
+            case 'updateCategoryMetas':
+            case 'deleteCategoryMeta':
+            case 'deleteCategoryMetas':
                 $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
                 break;
         }
@@ -553,9 +553,9 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     ): mixed {
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
-            case 'createCategoryMutationPayloadObjects':
-            case 'updateCategoryMutationPayloadObjects':
-            case 'deleteCategoryMutationPayloadObjects':
+            case 'addCategoryMetaMutationPayloadObjects':
+            case 'updateCategoryMetaMutationPayloadObjects':
+            case 'deleteCategoryMetaMutationPayloadObjects':
                 return $this->resolveMutationPayloadObjectsValue(
                     $objectTypeResolver,
                     $fieldDataAccessor,
