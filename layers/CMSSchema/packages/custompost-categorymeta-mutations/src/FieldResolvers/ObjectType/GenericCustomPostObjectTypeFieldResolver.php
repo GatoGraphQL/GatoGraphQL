@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType\AbstractCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType\AbstractSetMetaOnCategoryInputObjectTypeResolver;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetMetaOnCategoryBulkOperationMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetMetaOnCategoryMutationResolver;
@@ -103,7 +102,7 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
         return $this->genericCategorySetMetaMutationPayloadObjectTypeResolver;
     }
 
-    public function getCategoryObjectTypeResolver(): CustomPostObjectTypeResolverInterface
+    public function getCategoryObjectTypeResolver(): CategoryObjectTypeResolverInterface
     {
         return $this->getGenericCustomPostObjectTypeResolver();
     }
