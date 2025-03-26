@@ -77,6 +77,20 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+
+        /** @var bool */
+        $single = $fieldDataAccessor->getValue(MutationInputProperties::SINGLE);
+        if ($single) {
+            $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
+            /** @var string */
+            $key = $fieldDataAccessor->getValue(MutationInputProperties::KEY);
+            $this->validateSingleMetaEntryDoesNotExist(
+                $taxonomyTermID,
+                $key,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     abstract protected function isHierarchical(): bool;
