@@ -13,6 +13,7 @@ use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInter
 interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationAPIInterface
 {
     /**
+     * @return int The term_id of the newly created term
      * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
     public function addCategoryTermMeta(
@@ -20,16 +21,17 @@ interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationA
         string $key,
         mixed $value,
         bool $single = false,
-    ): void;
+    ): int;
     
     /**
+     * @return int The term_id of the newly created term
      * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateCategoryTermMeta(
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
-    ): void;
+    ): int;
 
     public function deleteCategoryTermMeta(
         string|int $taxonomyTermID,

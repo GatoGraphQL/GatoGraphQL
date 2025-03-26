@@ -9,6 +9,7 @@ use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationExc
 interface TaxonomyMetaTypeMutationAPIInterface
 {
     /**
+     * @return int The term_id of the newly created term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
     public function addTaxonomyTermMeta(
@@ -16,16 +17,17 @@ interface TaxonomyMetaTypeMutationAPIInterface
         string $key,
         mixed $value,
         bool $single = false,
-    ): void;
+    ): int;
     
     /**
+     * @return int The term_id of the newly created term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateTaxonomyTermMeta(
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
-    ): void;
+    ): int;
 
     /**
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)

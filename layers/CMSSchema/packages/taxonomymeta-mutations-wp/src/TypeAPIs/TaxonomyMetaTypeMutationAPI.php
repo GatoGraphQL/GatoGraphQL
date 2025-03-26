@@ -22,6 +22,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
     use TypeMutationAPITrait;
 
     /**
+     * @return int The term_id of the newly created term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
     public function addTaxonomyTermMeta(
@@ -29,9 +30,10 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         string $key,
         mixed $value,
         bool $single = false,
-    ): void {
+    ): int {
         $result = add_term_meta((int) $taxonomyTermID, $key, $value, $single);
         $this->handleMaybeError($result);
+        return $result;
     }
 
     protected function handleMaybeError(
@@ -65,7 +67,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
-    ): void {
+    ): int {
         $taxonomyDataOrError = wp_update_term((int) $taxonomyTermID, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
