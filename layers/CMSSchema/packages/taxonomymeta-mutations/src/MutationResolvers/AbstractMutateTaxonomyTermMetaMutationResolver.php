@@ -176,7 +176,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            TaxonomyMetaCRUDHookNames::VALIDATE_UPDATE_META_META,
+            TaxonomyMetaCRUDHookNames::VALIDATE_UPDATE_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -192,7 +192,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            TaxonomyMetaCRUDHookNames::VALIDATE_DELETE_META_META,
+            TaxonomyMetaCRUDHookNames::VALIDATE_DELETE_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -300,7 +300,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            TaxonomyMetaCRUDHookNames::EXECUTE_UPDATE_META_META,
+            TaxonomyMetaCRUDHookNames::EXECUTE_UPDATE_META,
             $taxonomyTermID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
