@@ -6,7 +6,7 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TaxonomyMetaMutations\ObjectModels\LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload;
+use PoPCMSSchema\TaxonomyMetaMutations\ObjectModels\TaxonomyTermMetaAlreadyHasSingleEntryErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait as TaxonomyMutationsPayloadableTaxonomyMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
@@ -32,7 +32,7 @@ trait PayloadableTaxonomyMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,
-            ] => new LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload(
+            ] => new TaxonomyTermMetaAlreadyHasSingleEntryErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => App::applyFilters(

@@ -6,6 +6,6 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload extends AbstractErrorPayload
+final class TaxonomyTermMetaAlreadyHasSingleEntryErrorPayload extends AbstractErrorPayload
 {
 }
