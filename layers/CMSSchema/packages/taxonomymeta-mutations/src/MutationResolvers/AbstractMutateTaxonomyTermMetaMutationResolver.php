@@ -191,6 +191,12 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        App::doAction(
+            TaxonomyMetaCRUDHookNames::VALIDATE_DELETE_META_META,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         $this->validateCommonMetaErrors(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
