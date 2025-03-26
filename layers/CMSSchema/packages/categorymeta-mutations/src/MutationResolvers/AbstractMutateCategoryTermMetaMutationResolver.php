@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
-use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermCRUDMutationException;
+use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\AbstractMutateTaxonomyTermMetaMutationResolver;
@@ -32,7 +32,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the updated taxonomy
-     * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function executeUpdateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
     {
@@ -42,7 +42,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the created taxonomy
-     * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
     protected function executeAddTaxonomyTermMeta(string $taxonomyName, array $taxonomyData): string|int
     {
@@ -51,7 +51,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return bool `true` if the operation successful, `false` if the term does not exist
-     * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
     protected function executeDeleteTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool
     {

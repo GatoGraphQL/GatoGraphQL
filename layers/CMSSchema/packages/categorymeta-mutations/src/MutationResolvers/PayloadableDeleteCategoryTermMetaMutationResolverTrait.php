@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermCRUDMutationException;
+use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -48,10 +48,10 @@ trait PayloadableDeleteCategoryTermMetaMutationResolverTrait
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
-        } catch (CategoryTermCRUDMutationException $categoryTermCRUDMutationException) {
+        } catch (CategoryTermMetaCRUDMutationException $categoryTermMetaCRUDMutationException) {
             return $this->createFailureObjectMutationPayload(
                 [
-                    $this->createGenericErrorPayloadFromPayloadClientException($categoryTermCRUDMutationException),
+                    $this->createGenericErrorPayloadFromPayloadClientException($categoryTermMetaCRUDMutationException),
                 ]
             )->getID();
         }
