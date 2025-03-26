@@ -11,13 +11,13 @@ abstract class AbstractDeleteCategoryTermMetaInputObjectTypeResolver extends Abs
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete a category term', 'categorymeta-mutations');
+        return $this->__('Input to delete a category term\'s meta entry', 'categorymeta-mutations');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the category to delete', 'categorymeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the category', 'categorymeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
