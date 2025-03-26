@@ -18,14 +18,14 @@ trait DeleteTaxonomyTermMetaMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return $this->delete($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        return $this->deleteMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
      * @return string|int The ID of the deleted entity
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    abstract protected function delete(
+    abstract protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): bool;

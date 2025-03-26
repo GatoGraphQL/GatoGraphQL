@@ -155,11 +155,11 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @return string|int The ID of the updated entity
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function update(
+    protected function updateMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $taxonomyTermID = parent::update($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $taxonomyTermID = parent::updateMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(
             CategoryMetaCRUDHookNames::EXECUTE_SET_META,
@@ -181,11 +181,11 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @return string|int The ID of the created entity
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function create(
+    protected function addMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $taxonomyTermID = parent::create($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $taxonomyTermID = parent::addMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $taxonomyTermID, $fieldDataAccessor);
         App::doAction(CategoryMetaCRUDHookNames::EXECUTE_ADD_META, $taxonomyTermID, $fieldDataAccessor);

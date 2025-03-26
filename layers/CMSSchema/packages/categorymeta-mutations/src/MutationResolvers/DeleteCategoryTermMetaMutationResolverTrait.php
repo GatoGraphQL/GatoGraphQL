@@ -18,7 +18,7 @@ trait DeleteCategoryTermMetaMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return $this->delete(
+        return $this->deleteMeta(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -28,7 +28,7 @@ trait DeleteCategoryTermMetaMutationResolverTrait
      * @return bool Was the deletion successful?
      * @throws CategoryTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
-    abstract protected function delete(
+    abstract protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): bool;

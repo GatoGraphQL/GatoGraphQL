@@ -18,7 +18,7 @@ trait CreateTaxonomyTermMetaMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return $this->create(
+        return $this->addMeta(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -28,7 +28,7 @@ trait CreateTaxonomyTermMetaMutationResolverTrait
      * @return string|int The ID of the created entity
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    abstract protected function create(
+    abstract protected function addMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int;

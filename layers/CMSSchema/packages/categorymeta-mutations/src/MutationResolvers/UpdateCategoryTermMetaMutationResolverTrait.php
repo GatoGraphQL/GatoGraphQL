@@ -18,7 +18,7 @@ trait UpdateCategoryTermMetaMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return $this->update(
+        return $this->updateMeta(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -28,7 +28,7 @@ trait UpdateCategoryTermMetaMutationResolverTrait
      * @return string|int The ID of the updated entity
      * @throws CategoryTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
-    abstract protected function update(
+    abstract protected function updateMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int;

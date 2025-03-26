@@ -266,7 +266,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      * @return string|int The ID of the updated entity
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function update(
+    protected function updateMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
@@ -307,7 +307,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      * @return string|int The ID of the created entity
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function create(
+    protected function addMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
@@ -336,7 +336,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      * @return bool Was the deletion successful?
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function delete(
+    protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): bool {
