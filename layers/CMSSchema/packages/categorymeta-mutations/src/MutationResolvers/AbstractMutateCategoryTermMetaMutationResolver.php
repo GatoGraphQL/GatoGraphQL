@@ -68,12 +68,12 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_CREATE,
+            CategoryMetaCRUDHookNames::VALIDATE_ADD_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
+            CategoryMetaCRUDHookNames::VALIDATE_SET_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -89,12 +89,12 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_UPDATE,
+            CategoryMetaCRUDHookNames::VALIDATE_UPDATE_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
+            CategoryMetaCRUDHookNames::VALIDATE_SET_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -112,7 +112,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     {
         $taxonomyData = parent::getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
 
-        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_CREATE_OR_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_SET_META_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -124,7 +124,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     {
         $taxonomyData = parent::getUpdateTaxonomyTermData($fieldDataAccessor);
 
-        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_UPDATE_META_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -136,7 +136,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     {
         $taxonomyData = parent::getCreateTaxonomyTermData($fieldDataAccessor);
 
-        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_ADD_META_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -152,13 +152,13 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         $taxonomyTermID = parent::update($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(
-            CategoryMetaCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+            CategoryMetaCRUDHookNames::EXECUTE_SET_META,
             $taxonomyTermID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            CategoryMetaCRUDHookNames::EXECUTE_UPDATE,
+            CategoryMetaCRUDHookNames::EXECUTE_UPDATE_META,
             $taxonomyTermID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -177,8 +177,8 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     ): string|int {
         $taxonomyTermID = parent::create($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor);
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_ADD_META, $taxonomyTermID, $fieldDataAccessor);
 
         return $taxonomyTermID;
     }
