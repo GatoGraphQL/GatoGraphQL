@@ -59,6 +59,15 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         $this->getCategoryMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $metaData['key']);
     }
 
+    /**
+     * @param array<string,mixed> $metaData
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     */
+    protected function executeSetTaxonomyTermMeta(string|int $taxonomyTermID, array $metaData): void
+    {
+        $this->getCategoryMetaTypeMutationAPI()->setTaxonomyTermMeta($taxonomyTermID, $metaData['entries']);
+    }
+
     protected function validateAddMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
