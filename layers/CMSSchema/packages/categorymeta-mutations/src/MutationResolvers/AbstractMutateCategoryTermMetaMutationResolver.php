@@ -59,11 +59,6 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         return $this->getCategoryMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $metaData['key']);
     }
 
-    protected function isHierarchical(): bool
-    {
-        return true;
-    }
-
     protected function validateAddMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
