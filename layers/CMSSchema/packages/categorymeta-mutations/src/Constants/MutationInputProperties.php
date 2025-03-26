@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMetaMutations\Constants;
+namespace PoPCMSSchema\CategoryMetaMutations\Constants;
 
 class MutationInputProperties
 {
