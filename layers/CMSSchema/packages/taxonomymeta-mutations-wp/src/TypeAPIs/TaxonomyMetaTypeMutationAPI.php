@@ -7,7 +7,6 @@ namespace PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
-use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 
@@ -21,56 +20,7 @@ use function wp_update_term;
 class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements TaxonomyMetaTypeMutationAPIInterface
 {
     use TypeMutationAPITrait;
-
-    public const HOOK_QUERY = __CLASS__ . ':query';
-
-    /**
-     * @param array<string,mixed> $query
-     * @return array<string,mixed> $query
-     */
-    protected function convertTaxonomiesMutationQuery(array $query): array
-    {
-        // Convert the parameters
-        if (isset($query['id'])) {
-            // Nothing to do
-            // $query['id'] = $query['id'];
-            // unset($query['id']);
-        }
-        if (isset($query['taxonomy-name'])) {
-            // Nothing to do
-            // $query['taxonomy-name'] = $query['taxonomy-name'];
-            // unset($query['taxonomy-name']);
-        }
-        if (isset($query['name'])) {
-            // Nothing to do
-            // $query['name'] = $query['name'];
-            // unset($query['name']);
-        }
-        if (isset($query['slug'])) {
-            // Nothing to do
-            // $query['slug'] = $query['slug'];
-            // unset($query['slug']);
-        }
-
-        /**
-         * If parent-id is `null` then remove the parent!
-         */
-        if (array_key_exists('parent-id', $query)) {
-            $query['parent'] = $query['parent-id'];
-            unset($query['parent-id']);
-        }
-
-        if (isset($query['description'])) {
-            // Nothing to do
-            // $query['description'] = $query['description'];
-            // unset($query['description']);
-        }
-
-        return App::applyFilters(
-            self::HOOK_QUERY,
-            $query
-        );
-    }
+    
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the created taxonomy
@@ -78,8 +28,6 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
      */
     public function addTaxonomyTermMeta(string $taxonomyName, array $data): string|int
     {
-        // Convert the parameters
-        $data = $this->convertTaxonomiesMutationQuery($data);
         $taxonomyTermName = $data['name'] ?? '';
         $taxonomyDataOrError = wp_insert_term($taxonomyTermName, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
@@ -108,8 +56,6 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
      */
     public function updateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
     {
-        // Convert the parameters
-        $data = $this->convertTaxonomiesMutationQuery($data);
         $taxonomyDataOrError = wp_update_term((int) $taxonomyTermID, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
