@@ -188,7 +188,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     ): string|int {
         $taxonomyTermID = parent::addMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_ADD_META, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_ADD_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
         return $taxonomyTermID;
     }
@@ -205,7 +205,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
         App::doAction(
             CategoryMetaCRUDHookNames::EXECUTE_UPDATE_META,
-            $taxonomyTermID,
+            $fieldDataAccessor->getValue(MutationInputProperties::ID),
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -223,9 +223,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     ): bool {
         $result = parent::deleteMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        /** @var string|int */
-        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_DELETE_META, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_DELETE_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
         return $result;
     }
@@ -239,9 +237,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     ): bool {
         $result = parent::setMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        /** @var string|int */
-        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
         return $result;
     }
