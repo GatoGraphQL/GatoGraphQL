@@ -263,16 +263,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @param array<string,mixed> $taxonomyData
-     * @return string|int the ID of the updated taxonomy
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
-     */
-    protected function executeUpdateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
-    {
-        return $this->getTaxonomyMetaTypeMutationAPI()->updateTaxonomyTermMeta($taxonomyTermID, $taxonomyName, $taxonomyData);
-    }
-
-    /**
      * @return string|int The ID of the updated entity
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
@@ -305,12 +295,12 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
     /**
      * @param array<string,mixed> $taxonomyData
-     * @return string|int the ID of the created taxonomy
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @return string|int the ID of the updated taxonomy
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeAddTaxonomyTermMeta(string $taxonomyName, array $taxonomyData): string|int
+    protected function executeUpdateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getTaxonomyMetaTypeMutationAPI()->addTaxonomyTermMeta($taxonomyName, $taxonomyData);
+        return $this->getTaxonomyMetaTypeMutationAPI()->updateTaxonomyTermMeta($taxonomyTermID, $taxonomyName, $taxonomyData);
     }
 
     /**
@@ -330,6 +320,16 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         App::doAction(TaxonomyMetaCRUDHookNames::EXECUTE_ADD_META, $taxonomyTermID, $fieldDataAccessor);
 
         return $taxonomyTermID;
+    }
+
+    /**
+     * @param array<string,mixed> $taxonomyData
+     * @return string|int the ID of the created taxonomy
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     */
+    protected function executeAddTaxonomyTermMeta(string $taxonomyName, array $taxonomyData): string|int
+    {
+        return $this->getTaxonomyMetaTypeMutationAPI()->addTaxonomyTermMeta($taxonomyName, $taxonomyData);
     }
 
     /**
