@@ -104,7 +104,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     protected function getTaxonomyTermIDFromInput(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int {
-        /** @var string|int */
         return $fieldDataAccessor->getValue(MutationInputProperties::ID);
     }
 
@@ -126,25 +125,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
-
-        /**
-         * Perform this validation, even though this situation
-         * should never happen. That's why there's no
-         * CategoryIDMissingError added to the Union type
-         */
-        $this->validateTaxonomyTermIDNotEmpty(
-            $taxonomyTermID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        $this->maybeValidateTaxonomyParent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        /** @var string|int $taxonomyTermID */
 
         $this->validateTaxonomyTermByIDExists(
             $taxonomyTermID,
