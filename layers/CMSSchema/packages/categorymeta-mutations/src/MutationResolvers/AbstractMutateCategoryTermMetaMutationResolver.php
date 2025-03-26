@@ -31,14 +31,6 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         return $this->categoryTypeMutationAPI;
     }
 
-    protected function getTaxonomyTermIDFromInput(
-        FieldDataAccessorInterface $fieldDataAccessor,
-    ): string|int {
-        /** @var stdClass */
-        $categoryBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_BY);
-        return $categoryBy->{MutationInputProperties::ID};
-    }
-
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the updated taxonomy

@@ -81,7 +81,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         /** @var bool */
         $single = $fieldDataAccessor->getValue(MutationInputProperties::SINGLE);
         if ($single) {
-            $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
+            $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
             /** @var string */
             $key = $fieldDataAccessor->getValue(MutationInputProperties::KEY);
             $this->validateSingleMetaEntryDoesNotExist(
@@ -99,7 +99,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
 
         $this->validateTaxonomyTermByIDExists(
             $taxonomyTermID,
@@ -158,15 +158,9 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         }
 
         // If the taxonomy is null, then the ID must've been provided
-        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         /** @var string */
         return $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
-    }
-
-    protected function getTaxonomyTermIDFromInput(
-        FieldDataAccessorInterface $fieldDataAccessor,
-    ): string|int {
-        return $fieldDataAccessor->getValue(MutationInputProperties::ID);
     }
 
     protected function validateUpdateMetaErrors(
@@ -269,7 +263,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         /** @var string|int */
-        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         $taxonomyData = $this->getUpdateMetaData($fieldDataAccessor);
 
@@ -332,7 +326,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): bool {
         /** @var string|int */
-        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         $taxonomyData = $this->getUpdateMetaData($fieldDataAccessor);
 
