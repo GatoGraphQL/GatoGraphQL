@@ -97,6 +97,38 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         );
     }
 
+    protected function validateDeleteMetaErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        App::doAction(
+            CategoryMetaCRUDHookNames::VALIDATE_DELETE_META,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        parent::validateDeleteMetaErrors(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function validateSetMetaErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        App::doAction(
+            CategoryMetaCRUDHookNames::VALIDATE_SET_META,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        parent::validateSetMetaErrors(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
     /**
      * @return array<string,mixed>
      */
