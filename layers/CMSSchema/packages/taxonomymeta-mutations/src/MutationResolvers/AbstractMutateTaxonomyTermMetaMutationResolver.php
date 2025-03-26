@@ -125,7 +125,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
 
         /**
          * Perform this validation, even though this situation
@@ -194,7 +194,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         /** @var string|int */
-        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
 
         /**
          * Perform this validation, even though this situation
@@ -340,7 +340,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         /** @var string|int */
-        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         $taxonomyData = $this->getUpdateTaxonomyTermData($fieldDataAccessor);
 
@@ -404,7 +404,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): bool {
         /** @var string|int */
-        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
 
         $result = $this->executeDeleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
