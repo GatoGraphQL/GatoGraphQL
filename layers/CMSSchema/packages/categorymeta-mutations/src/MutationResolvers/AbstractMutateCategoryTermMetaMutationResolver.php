@@ -46,7 +46,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      */
     protected function executeUpdateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getCategoryMetaTypeMutationAPI()->updateCategoryTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
+        return $this->getCategoryMetaTypeMutationAPI()->updateCategoryTermMeta($taxonomyTermID, $taxonomyName, $taxonomyData);
     }
 
     /**
@@ -56,7 +56,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      */
     protected function executeAddTaxonomyTermMeta(string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getCategoryMetaTypeMutationAPI()->createCategoryTerm($taxonomyName, $taxonomyData);
+        return $this->getCategoryMetaTypeMutationAPI()->addCategoryTermMeta($taxonomyName, $taxonomyData);
     }
 
     /**
@@ -65,7 +65,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      */
     protected function executeDeleteTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool
     {
-        return $this->getCategoryMetaTypeMutationAPI()->deleteCategoryTerm($taxonomyTermID, $taxonomyName);
+        return $this->getCategoryMetaTypeMutationAPI()->deleteCategoryTermMeta($taxonomyTermID, $taxonomyName);
     }
 
     protected function isHierarchical(): bool

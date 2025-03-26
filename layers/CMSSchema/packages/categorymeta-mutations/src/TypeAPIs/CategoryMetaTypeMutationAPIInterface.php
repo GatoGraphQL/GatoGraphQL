@@ -17,12 +17,12 @@ interface CategoryMetaTypeMutationAPIInterface extends TaxonomyTypeMutationAPIIn
      * @return string|int the ID of the created category
      * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    public function createCategoryTerm(string $taxonomyName, array $data): string|int;
+    public function addCategoryTermMeta(string $taxonomyName, array $data): string|int;
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated category
      * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateCategoryTerm(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int;
-    public function deleteCategoryTerm(string|int $taxonomyTermID, string $taxonomyName): bool;
+    public function updateCategoryTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int;
+    public function deleteCategoryTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool;
 }

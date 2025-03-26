@@ -20,7 +20,7 @@ class CategoryMetaTypeMutationAPI extends TaxonomyTypeMutationAPI implements Cat
      * @return string|int the ID of the created category
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    public function createCategoryTerm(string $taxonomyName, array $data): string|int
+    public function addCategoryTermMeta(string $taxonomyName, array $data): string|int
     {
         return $this->addTaxonomyTermMeta($taxonomyName, $data);
     }
@@ -39,12 +39,12 @@ class CategoryMetaTypeMutationAPI extends TaxonomyTypeMutationAPI implements Cat
      * @return string|int the ID of the updated category
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateCategoryTerm(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
+    public function updateCategoryTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
     {
         return $this->updateTaxonomyTermMeta($taxonomyTermID, $taxonomyName, $data);
     }
 
-    public function deleteCategoryTerm(string|int $taxonomyTermID, string $taxonomyName): bool
+    public function deleteCategoryTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool
     {
         return $this->deleteTaxonomyTermMeta($taxonomyTermID, $taxonomyName);
     }
