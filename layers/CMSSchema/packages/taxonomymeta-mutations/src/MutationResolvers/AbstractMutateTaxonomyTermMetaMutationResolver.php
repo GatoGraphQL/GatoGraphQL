@@ -151,13 +151,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     protected function getTaxonomyName(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string {
-        /** @var string|null */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomyName !== null) {
-            return $taxonomyName;
-        }
-
-        // If the taxonomy is null, then the ID must've been provided
+        /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         /** @var string */
         return $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
