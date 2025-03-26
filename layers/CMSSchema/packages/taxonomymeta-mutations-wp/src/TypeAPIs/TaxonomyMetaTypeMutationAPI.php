@@ -11,8 +11,8 @@ use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 
 use function add_term_meta;
-use function wp_delete_term;
-use function wp_update_term;
+use function delete_term_meta;
+use function update_term_meta;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -80,15 +80,9 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         string $key,
         mixed $value,
     ): int {
-        $taxonomyDataOrError = wp_update_term((int) $taxonomyTermID, $taxonomyName, $data);
-        if ($taxonomyDataOrError instanceof WP_Error) {
-            /** @var WP_Error */
-            $wpError = $taxonomyDataOrError;
-            throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
-        }
-        /** @var int */
-        $taxonomyTermID = $taxonomyDataOrError['term_id'];
-        return $taxonomyTermID;
+        $result = update_term_meta((int) $taxonomyTermID, $key, $value);
+        $this->handleMaybeError($result);
+        return $result;
     }
 
     /**
@@ -98,16 +92,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         string|int $taxonomyTermID,
         string $key,
     ): void {
-        $taxonomyDataOrError = wp_delete_term((int) $taxonomyTermID, $taxonomyName);
-        if ($taxonomyDataOrError instanceof WP_Error) {
-            /** @var WP_Error */
-            $wpError = $taxonomyDataOrError;
-            throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
-        }
-        if ($taxonomyDataOrError === 0) {
-            return false;
-        }
-        /** @var bool $taxonomyDataOrError */
-        return $taxonomyDataOrError;
+        $result = delete_term_meta((int) $taxonomyTermID, $key);
+        $this->handleMaybeError($result);
     }
 }
