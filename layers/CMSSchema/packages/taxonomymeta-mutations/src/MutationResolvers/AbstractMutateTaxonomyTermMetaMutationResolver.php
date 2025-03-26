@@ -317,6 +317,33 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      */
     protected function executeDeleteTaxonomyTermMeta(string|int $taxonomyTermID, array $metaData): void
     {
-        return $this->getTaxonomyMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $metaData['key']);
+        $this->getTaxonomyMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $metaData['key']);
+    }
+
+    /**
+     * @return bool Was the deletion successful?
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     */
+    protected function setMeta(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): bool {
+        /** @var string|int */
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $metaData = $this->getSetMetaData($fieldDataAccessor);
+
+        $result = $this->executeSetTaxonomyTermMeta($taxonomyTermID, $metaData);
+
+        return $result;
+    }
+
+    /**
+     * @param array<string,mixed> $metaData
+     * @return bool `true` if the operation successful, `false` if the term does not exist
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     */
+    protected function executeSetTaxonomyTermMeta(string|int $taxonomyTermID, array $metaData): void
+    {
+        $this->getTaxonomyMetaTypeMutationAPI()->setTaxonomyTermMeta($taxonomyTermID, $metaData['entries']);
     }
 }

@@ -56,7 +56,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      */
     protected function executeDeleteTaxonomyTermMeta(string|int $taxonomyTermID, array $metaData): void
     {
-        return $this->getCategoryMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $metaData['key']);
+        $this->getCategoryMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $metaData['key']);
     }
 
     protected function validateAddMetaErrors(
