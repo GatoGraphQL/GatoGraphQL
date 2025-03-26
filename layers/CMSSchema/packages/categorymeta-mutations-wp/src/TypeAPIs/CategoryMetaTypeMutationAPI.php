@@ -28,7 +28,7 @@ class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements
         return $this->addTaxonomyTermMeta($taxonomyTermID, $key, $value, $single);
     }
 
-    protected function addTaxonomyTermMetaMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
+    protected function getTaxonomyTermMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
     {
         return new CategoryTermMetaCRUDMutationException(
             $wpError->get_error_message(),

@@ -42,16 +42,16 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         if ($result === false) {
             /** @var WP_Error */
             $wpError = $result;
-            throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
+            throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
         }
         if ($result instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $result;
-            throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
+            throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
         }
     }
 
-    protected function addTaxonomyTermMetaMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
+    protected function getTaxonomyTermMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
     {
         return new TaxonomyTermMetaCRUDMutationException(
             $wpError->get_error_message(),
@@ -72,7 +72,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
+            throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
         }
         /** @var int */
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
@@ -90,7 +90,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
+            throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
         }
         if ($taxonomyDataOrError === 0) {
             return false;
