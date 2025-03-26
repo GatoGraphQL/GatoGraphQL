@@ -24,7 +24,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The term already has meta for key \'%s\'', 'taxonomymeta-mutations'),
+            self::E1 => $this->__('The term with ID \'%s\' already has meta for key \'%s\'', 'taxonomymeta-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }
