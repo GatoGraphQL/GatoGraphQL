@@ -22,10 +22,10 @@ class CategoryMetaTypeMutationAPI extends TaxonomyTypeMutationAPI implements Cat
      */
     public function createCategoryTerm(string $taxonomyName, array $data): string|int
     {
-        return $this->createTaxonomyTerm($taxonomyName, $data);
+        return $this->addTaxonomyTermMeta($taxonomyName, $data);
     }
 
-    protected function createTaxonomyTermMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
+    protected function addTaxonomyTermMetaMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
     {
         return new CategoryTermMetaCRUDMutationException(
             $wpError->get_error_message(),
@@ -41,11 +41,11 @@ class CategoryMetaTypeMutationAPI extends TaxonomyTypeMutationAPI implements Cat
      */
     public function updateCategoryTerm(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
     {
-        return $this->updateTaxonomyTerm($taxonomyTermID, $taxonomyName, $data);
+        return $this->updateTaxonomyTermMeta($taxonomyTermID, $taxonomyName, $data);
     }
 
     public function deleteCategoryTerm(string|int $taxonomyTermID, string $taxonomyName): bool
     {
-        return $this->deleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
+        return $this->deleteTaxonomyTermMeta($taxonomyTermID, $taxonomyName);
     }
 }

@@ -269,7 +269,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      */
     protected function executeUpdateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getTaxonomyMetaTypeMutationAPI()->updateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
+        return $this->getTaxonomyMetaTypeMutationAPI()->updateTaxonomyTermMeta($taxonomyTermID, $taxonomyName, $taxonomyData);
     }
 
     protected function createUpdateTaxonomy(FieldDataAccessorInterface $fieldDataAccessor, int|string $taxonomyTermID): void
@@ -316,7 +316,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      */
     protected function executeCreateTaxonomyTerm(string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getTaxonomyMetaTypeMutationAPI()->createTaxonomyTerm($taxonomyName, $taxonomyData);
+        return $this->getTaxonomyMetaTypeMutationAPI()->addTaxonomyTermMeta($taxonomyName, $taxonomyData);
     }
 
     /**
@@ -371,6 +371,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      */
     protected function executeDeleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName): bool
     {
-        return $this->getTaxonomyMetaTypeMutationAPI()->deleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
+        return $this->getTaxonomyMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $taxonomyName);
     }
 }

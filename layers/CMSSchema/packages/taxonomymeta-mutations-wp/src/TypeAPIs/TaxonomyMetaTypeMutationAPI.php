@@ -76,7 +76,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
      * @return string|int the ID of the created taxonomy
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    public function createTaxonomyTerm(string $taxonomyName, array $data): string|int
+    public function addTaxonomyTermMeta(string $taxonomyName, array $data): string|int
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
@@ -85,14 +85,14 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermMetaCRUDMutationException($wpError);
+            throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
         }
         /** @var int */
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
         return $taxonomyTermID;
     }
 
-    protected function createTaxonomyTermMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
+    protected function addTaxonomyTermMetaMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
     {
         return new TaxonomyTermMetaCRUDMutationException(
             $wpError->get_error_message(),
@@ -106,7 +106,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
      * @return string|int the ID of the updated taxonomy
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
-    public function updateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
+    public function updateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
@@ -114,7 +114,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermMetaCRUDMutationException($wpError);
+            throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
         }
         /** @var int */
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
@@ -125,13 +125,13 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
      * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
-    public function deleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName): bool
+    public function deleteTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool
     {
         $taxonomyDataOrError = wp_delete_term((int) $taxonomyTermID, $taxonomyName);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermMetaCRUDMutationException($wpError);
+            throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
         }
         if ($taxonomyDataOrError === 0) {
             return false;

@@ -13,16 +13,16 @@ interface TaxonomyMetaTypeMutationAPIInterface
      * @return string|int the ID of the created taxonomy
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    public function createTaxonomyTerm(string $taxonomyName, array $data): string|int;
+    public function addTaxonomyTermMeta(string $taxonomyName, array $data): string|int;
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated taxonomy
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int;
+    public function updateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int;
     /**
      * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
-    public function deleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName): bool;
+    public function deleteTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool;
 }
