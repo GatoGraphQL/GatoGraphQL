@@ -20,14 +20,16 @@ use function wp_update_term;
 class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements TaxonomyMetaTypeMutationAPIInterface
 {
     use TypeMutationAPITrait;
-    
+
     /**
-     * @param array<string,mixed> $data
-     * @return string|int the ID of the created taxonomy
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
-    public function addTaxonomyTermMeta(string $taxonomyName, array $data): string|int
-    {
+    public function addTaxonomyTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+        mixed $value,
+        bool $single = false,
+    ): void {
         $taxonomyTermName = $data['name'] ?? '';
         $taxonomyDataOrError = wp_insert_term($taxonomyTermName, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
@@ -50,12 +52,13 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return string|int the ID of the updated taxonomy
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
-    {
+    public function updateTaxonomyTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+        mixed $value,
+    ): void {
         $taxonomyDataOrError = wp_update_term((int) $taxonomyTermID, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
@@ -68,11 +71,12 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
     }
 
     /**
-     * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
-    public function deleteTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool
-    {
+    public function deleteTaxonomyTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+    ): void {
         $taxonomyDataOrError = wp_delete_term((int) $taxonomyTermID, $taxonomyName);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */

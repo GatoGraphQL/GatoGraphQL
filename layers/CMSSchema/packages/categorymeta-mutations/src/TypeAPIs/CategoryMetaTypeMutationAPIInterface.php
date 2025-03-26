@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermCRUDMutationException;
-use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
+use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -13,16 +13,26 @@ use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface
 interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationAPIInterface
 {
     /**
-     * @param array<string,mixed> $data
-     * @return string|int the ID of the created category
-     * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
-    public function addCategoryTermMeta(string $taxonomyName, array $data): string|int;
+    public function addCategoryTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+        mixed $value,
+        bool $single = false,
+    ): void;
+    
     /**
-     * @param array<string,mixed> $data
-     * @return string|int the ID of the updated category
      * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateCategoryTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int;
-    public function deleteCategoryTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool;
+    public function updateCategoryTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+        mixed $value,
+    ): void;
+
+    public function deleteCategoryTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+    ): void;
 }

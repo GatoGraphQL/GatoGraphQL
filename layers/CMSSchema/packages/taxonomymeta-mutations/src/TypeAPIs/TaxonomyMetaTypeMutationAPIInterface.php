@@ -9,20 +9,29 @@ use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationExc
 interface TaxonomyMetaTypeMutationAPIInterface
 {
     /**
-     * @param array<string,mixed> $data
-     * @return string|int the ID of the created taxonomy
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
-    public function addTaxonomyTermMeta(string $taxonomyName, array $data): string|int;
+    public function addTaxonomyTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+        mixed $value,
+        bool $single = false,
+    ): void;
+    
     /**
-     * @param array<string,mixed> $data
-     * @return string|int the ID of the updated taxonomy
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int;
+    public function updateTaxonomyTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+        mixed $value,
+    ): void;
+
     /**
-     * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
-    public function deleteTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool;
+    public function deleteTaxonomyTermMeta(
+        string|int $taxonomyTermID,
+        string $key,
+    ): void;
 }
