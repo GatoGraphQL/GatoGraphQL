@@ -276,12 +276,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         $taxonomyTermID = $this->executeUpdateTaxonomyTermMeta($taxonomyTermID, $taxonomyName, $taxonomyData);
 
         App::doAction(
-            TaxonomyMetaCRUDHookNames::EXECUTE_SET_META,
-            $taxonomyTermID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        App::doAction(
             TaxonomyMetaCRUDHookNames::EXECUTE_UPDATE_META,
             $taxonomyTermID,
             $fieldDataAccessor,
@@ -314,7 +308,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         $taxonomyData = $this->getAddMetaData($fieldDataAccessor);
         $taxonomyTermID = $this->executeAddTaxonomyTermMeta($taxonomyName, $taxonomyData);
 
-        App::doAction(TaxonomyMetaCRUDHookNames::EXECUTE_SET_META, $taxonomyTermID, $fieldDataAccessor);
         App::doAction(TaxonomyMetaCRUDHookNames::EXECUTE_ADD_META, $taxonomyTermID, $fieldDataAccessor);
 
         return $taxonomyTermID;
