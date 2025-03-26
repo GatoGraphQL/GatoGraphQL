@@ -9,6 +9,15 @@ use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationExc
 interface TaxonomyMetaTypeMutationAPIInterface
 {
     /**
+     * @param array<string,mixed[]> $entries
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
+     */
+    public function setTaxonomyTermMeta(
+        string|int $taxonomyTermID,
+        array $entries,
+    ): void;
+
+    /**
      * @return int The term_id of the newly created term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */

@@ -22,6 +22,40 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
     use TypeMutationAPITrait;
 
     /**
+     * @param array<string,mixed[]> $entries
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
+     */
+    public function setTaxonomyTermMeta(
+        string|int $taxonomyTermID,
+        array $entries,
+    ): void {
+        foreach ($entries as $key => $values) {
+            $numberItems = count($values);
+            if ($numberItems === 0) {
+                continue;
+            }
+
+            /**
+             * If there are 2 or more items, then use `add` to add them.
+             * If there is only 1 item, then use `update` to update it.
+             */
+            if ($numberItems > 1) {
+                $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+                foreach ($values as $value) {
+                    $this->addTaxonomyTermMeta($taxonomyTermID, $key, $value);
+                }
+            } else {
+                $value = $values[0];
+                if ($value === null) {
+                    $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+                    continue;
+                }
+                $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
+            }
+        }
+    }
+    
+    /**
      * @return int The term_id of the newly created term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
