@@ -15,7 +15,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CategoryMetaMutations\Module;
 use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
 use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermMetaUpdateInputObjectTypeResolver;
-use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver

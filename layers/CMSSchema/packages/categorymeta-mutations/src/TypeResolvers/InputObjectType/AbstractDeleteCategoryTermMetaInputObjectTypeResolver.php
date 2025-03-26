@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\AbstractDeleteTaxonomyTermInputObjectTypeResolver;
+use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType\AbstractDeleteTaxonomyTermInputObjectTypeResolver;
 
 abstract class AbstractDeleteCategoryTermMetaInputObjectTypeResolver extends AbstractDeleteTaxonomyTermInputObjectTypeResolver implements DeleteCategoryTermMetaInputObjectTypeResolverInterface
 {

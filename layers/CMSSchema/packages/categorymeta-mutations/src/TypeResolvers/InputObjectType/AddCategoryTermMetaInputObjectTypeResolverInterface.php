@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\CreateTaxonomyTermInputObjectTypeResolverInterface;
+use PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType\CreateTaxonomyTermInputObjectTypeResolverInterface;
 
 interface AddCategoryTermMetaInputObjectTypeResolverInterface extends CreateTaxonomyTermInputObjectTypeResolverInterface
 {

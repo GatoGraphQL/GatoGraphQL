@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermCRUDMutationException;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\CreateTaxonomyTermMutationResolverTrait;
+use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\CreateTaxonomyTermMetaMutationResolverTrait;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -13,9 +13,9 @@ use PoP\Root\Exception\AbstractException;
 
 trait PayloadableAddCategoryTermMetaMutationResolverTrait
 {
-    use PayloadableMutationResolverTrait, CreateTaxonomyTermMutationResolverTrait {
-        CreateTaxonomyTermMutationResolverTrait::executeMutation as upstreamExecuteMutation;
-        PayloadableMutationResolverTrait::validate insteadof CreateTaxonomyTermMutationResolverTrait;
+    use PayloadableMutationResolverTrait, CreateTaxonomyTermMetaMutationResolverTrait {
+        CreateTaxonomyTermMetaMutationResolverTrait::executeMutation as upstreamExecuteMutation;
+        PayloadableMutationResolverTrait::validate insteadof CreateTaxonomyTermMetaMutationResolverTrait;
     }
     use PayloadableCategoryMetaMutationResolverTrait;
 

@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
 use PoPCMSSchema\CategoryMetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CategoryMetaMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait;
+use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\App;
