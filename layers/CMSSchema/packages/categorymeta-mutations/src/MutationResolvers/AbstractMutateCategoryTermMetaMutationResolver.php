@@ -44,7 +44,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @return string|int the ID of the updated taxonomy
      * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeUpdateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
+    protected function executeUpdateTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
     {
         return $this->getCategoryMetaTypeMutationAPI()->updateCategoryTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
     }
@@ -54,7 +54,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @return string|int the ID of the created taxonomy
      * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function executeCreateTaxonomyTerm(string $taxonomyName, array $taxonomyData): string|int
+    protected function executeAddTaxonomyTermMeta(string $taxonomyName, array $taxonomyData): string|int
     {
         return $this->getCategoryMetaTypeMutationAPI()->createCategoryTerm($taxonomyName, $taxonomyData);
     }
@@ -63,7 +63,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function executeDeleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName): bool
+    protected function executeDeleteTaxonomyTermMeta(string|int $taxonomyTermID, string $taxonomyName): bool
     {
         return $this->getCategoryMetaTypeMutationAPI()->deleteCategoryTerm($taxonomyTermID, $taxonomyName);
     }
