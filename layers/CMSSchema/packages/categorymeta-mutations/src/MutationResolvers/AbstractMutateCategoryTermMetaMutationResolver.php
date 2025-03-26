@@ -68,11 +68,6 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-        App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_SET_META,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
 
         parent::validateAddMetaErrors(
             $fieldDataAccessor,
@@ -86,11 +81,6 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     ): void {
         App::doAction(
             CategoryMetaCRUDHookNames::VALIDATE_UPDATE_META,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_SET_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -160,12 +150,6 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         $taxonomyTermID = parent::updateMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(
-            CategoryMetaCRUDHookNames::EXECUTE_SET_META,
-            $taxonomyTermID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        App::doAction(
             CategoryMetaCRUDHookNames::EXECUTE_UPDATE_META,
             $taxonomyTermID,
             $fieldDataAccessor,
@@ -185,7 +169,6 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     ): string|int {
         $taxonomyTermID = parent::addMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $taxonomyTermID, $fieldDataAccessor);
         App::doAction(CategoryMetaCRUDHookNames::EXECUTE_ADD_META, $taxonomyTermID, $fieldDataAccessor);
 
         return $taxonomyTermID;
