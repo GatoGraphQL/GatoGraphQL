@@ -12,4 +12,5 @@ class MutationInputProperties
     public final const KEY = 'key';
     public final const VALUE = 'value';
     public final const ENTRIES = 'entries';
+    public final const SINGLE = 'single';
 }
