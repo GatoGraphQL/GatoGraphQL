@@ -194,7 +194,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getCreateOrUpdateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getSetMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $taxonomyData = [];
 
@@ -206,38 +206,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $taxonomyData['slug'] = $fieldDataAccessor->getValue(MutationInputProperties::SLUG);
         }
 
-        if ($this->isHierarchical()) {
-            if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_BY)) {
-                /** @var stdClass|null */
-                $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
-
-                /**
-                 * Remove the parent if:
-                 *
-                 * - `parentBy` is `null`
-                 * - Either `id` or `slug` is `null`
-                 */
-                if ($taxonomyParentBy === null) {
-                    $taxonomyData['parent-id'] = null;
-                } elseif (property_exists($taxonomyParentBy, InputProperties::ID)) {
-                    $taxonomyData['parent-id'] = $taxonomyParentBy->{InputProperties::ID};
-                } elseif (property_exists($taxonomyParentBy, InputProperties::SLUG)) {
-                    /** @var string|null */
-                    $taxonomyParentSlug = $taxonomyParentBy->{InputProperties::SLUG};
-                    if ($taxonomyParentSlug === null) {
-                        $taxonomyData['parent-id'] = null;
-                    } else {
-                        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
-                        $taxonomyData['parent-id'] = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyParentSlug, $taxonomyName);
-                    }
-                }
-            }
-        }
-
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::DESCRIPTION)) {
-            $taxonomyData['description'] = $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION);
-        }
-
         $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_SET_META_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
@@ -246,9 +214,28 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getUpdateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getAddMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $taxonomyData = $this->getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
+        $taxonomyData = [
+            'key' => $fieldDataAccessor->getValue(MutationInputProperties::KEY),
+            'value' => $fieldDataAccessor->getValue(MutationInputProperties::VALUE),
+            'single' => $fieldDataAccessor->getValue(MutationInputProperties::SINGLE),
+        ];
+
+        $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_ADD_META_DATA, $taxonomyData, $fieldDataAccessor);
+
+        return $taxonomyData;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getUpdateMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
+    {
+        $taxonomyData = [
+            'key' => $fieldDataAccessor->getValue(MutationInputProperties::KEY),
+            'value' => $fieldDataAccessor->getValue(MutationInputProperties::VALUE),
+        ];
 
         $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_UPDATE_META_DATA, $taxonomyData, $fieldDataAccessor);
 
@@ -258,11 +245,13 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getCreateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getDeleteMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $taxonomyData = $this->getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
+        $taxonomyData = [
+            'key' => $fieldDataAccessor->getValue(MutationInputProperties::KEY),
+        ];
 
-        $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_ADD_META_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_DELETE_META_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -292,7 +281,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         /** @var string|int */
         $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
-        $taxonomyData = $this->getUpdateTaxonomyTermData($fieldDataAccessor);
+        $taxonomyData = $this->getUpdateMetaData($fieldDataAccessor);
 
         $taxonomyTermID = $this->executeUpdateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
 
@@ -334,7 +323,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     ): string|int {
         /** @var string */
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
-        $taxonomyData = $this->getCreateTaxonomyTermData($fieldDataAccessor);
+        $taxonomyData = $this->getAddMetaData($fieldDataAccessor);
         $taxonomyTermID = $this->executeCreateTaxonomyTerm($taxonomyName, $taxonomyData);
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
