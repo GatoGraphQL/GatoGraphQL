@@ -286,9 +286,9 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      * @return string|int the ID of the created taxonomy
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function executeAddTaxonomyTermMeta(string $taxonomyName, array $metaData): string|int
+    protected function executeAddTaxonomyTermMeta(array $metaData): string|int
     {
-        return $this->getTaxonomyMetaTypeMutationAPI()->addTaxonomyTermMeta($taxonomyName, $metaData);
+        return $this->getTaxonomyMetaTypeMutationAPI()->addTaxonomyTermMeta( $metaData);
     }
 
     /**
