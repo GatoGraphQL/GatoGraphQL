@@ -37,7 +37,7 @@ abstract class AbstractSetTaxonomyTermMetaInputObjectTypeResolver extends Abstra
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete a taxonomy term\'s meta entry', 'taxonomymeta-mutations');
+        return $this->__('Input to set entries on a taxonomy term', 'taxonomymeta-mutations');
     }
 
     /**
