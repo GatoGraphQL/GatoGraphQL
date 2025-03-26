@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMutations\Constants;
+namespace PoPCMSSchema\CustomPostTagMutations\Constants;
 
-class CategoryCRUDHookNames
+class GenericTagCRUDHookNames
 {
     public final const VALIDATE_CREATE_OR_UPDATE = __CLASS__ . ':validate-create-or-update';
     public final const VALIDATE_CREATE = __CLASS__ . ':validate-create';
@@ -15,5 +15,4 @@ class CategoryCRUDHookNames
     public final const GET_CREATE_OR_UPDATE_DATA = __CLASS__ . ':get-create-or-update-data';
     public final const GET_CREATE_DATA = __CLASS__ . ':get-create-data';
     public final const GET_UPDATE_DATA = __CLASS__ . ':get-update-data';
-    public final const ERROR_PAYLOAD = __CLASS__ . ':error-payload';
 }
