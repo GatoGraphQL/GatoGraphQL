@@ -16,6 +16,17 @@ use WP_Error;
 class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements CategoryMetaTypeMutationAPIInterface
 {
     /**
+     * @param array<string,mixed[]> $entries
+     * @throws CategoryTermMetaCRUDMutationException If there was an error
+     */
+    public function setCategoryTermMeta(
+        string|int $taxonomyTermID,
+        array $entries,
+    ): void {
+        return $this->setTaxonomyTermMeta($taxonomyTermID, $entries);
+    }
+
+    /**
      * @return int The term_id of the newly created term
      * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
