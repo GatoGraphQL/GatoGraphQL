@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
+use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\AbstractMutateTaxonomyTermMetaMutationResolver;
 use PoP\ComponentModel\App;
@@ -210,5 +211,38 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         );
 
         return $taxonomyTermID;
+    }
+
+    /**
+     * @return bool Was the deletion successful?
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     */
+    protected function deleteMeta(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): bool {
+        $result = parent::deleteMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+
+        /** @var string|int */
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_DELETE_META, $taxonomyTermID, $fieldDataAccessor);
+
+        return $result;
+    }
+
+    /**
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     */
+    protected function setMeta(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): bool {
+        $result = parent::setMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+
+        /** @var string|int */
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $taxonomyTermID, $fieldDataAccessor);
+
+        return $result;
     }
 }

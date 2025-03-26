@@ -9,7 +9,6 @@ use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -303,6 +302,14 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getUpdateMetaData($fieldDataAccessor);
         $this->executeDeleteTaxonomyTermMeta($taxonomyTermID, $metaData['key']);
+
+        App::doAction(
+            TaxonomyMetaCRUDHookNames::EXECUTE_DELETE_META,
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         return true;
     }
 
@@ -316,17 +323,25 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @return bool Was the deletion successful?
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function setMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
+    ): bool {
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getSetMetaData($fieldDataAccessor);
         $this->executeSetTaxonomyTermMeta($taxonomyTermID, $metaData['entries']);
+
+        App::doAction(
+            TaxonomyMetaCRUDHookNames::EXECUTE_SET_META,
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        return true;
     }
 
     /**
