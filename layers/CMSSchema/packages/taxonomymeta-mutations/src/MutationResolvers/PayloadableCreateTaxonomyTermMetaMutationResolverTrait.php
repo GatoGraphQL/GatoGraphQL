@@ -10,11 +10,11 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
-trait PayloadableCreateTaxonomyTermMetaMutationResolverTrait
+trait PayloadableAddTaxonomyTermMetaMutationResolverTrait
 {
-    use PayloadableMutationResolverTrait, CreateTaxonomyTermMetaMutationResolverTrait {
-        CreateTaxonomyTermMetaMutationResolverTrait::executeMutation as upstreamExecuteMutation;
-        PayloadableMutationResolverTrait::validate insteadof CreateTaxonomyTermMetaMutationResolverTrait;
+    use PayloadableMutationResolverTrait, AddTaxonomyTermMetaMutationResolverTrait {
+        AddTaxonomyTermMetaMutationResolverTrait::executeMutation as upstreamExecuteMutation;
+        PayloadableMutationResolverTrait::validate insteadof AddTaxonomyTermMetaMutationResolverTrait;
     }
     use PayloadableTaxonomyMutationResolverTrait;
 

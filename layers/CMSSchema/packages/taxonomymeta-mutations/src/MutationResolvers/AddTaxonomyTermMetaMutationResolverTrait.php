@@ -9,7 +9,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 
-trait CreateTaxonomyTermMetaMutationResolverTrait
+trait AddTaxonomyTermMetaMutationResolverTrait
 {
     /**
      * @throws AbstractException In case of error
