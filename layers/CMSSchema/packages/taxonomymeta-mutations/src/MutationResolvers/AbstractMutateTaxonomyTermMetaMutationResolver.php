@@ -196,15 +196,9 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      */
     protected function getSetMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $taxonomyData = [];
-
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::NAME)) {
-            $taxonomyData['name'] = $fieldDataAccessor->getValue(MutationInputProperties::NAME);
-        }
-
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::SLUG)) {
-            $taxonomyData['slug'] = $fieldDataAccessor->getValue(MutationInputProperties::SLUG);
-        }
+        $taxonomyData = [
+            'entries' => $fieldDataAccessor->getValue(MutationInputProperties::ENTRIES),
+        ];
 
         $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_SET_META_DATA, $taxonomyData, $fieldDataAccessor);
 
