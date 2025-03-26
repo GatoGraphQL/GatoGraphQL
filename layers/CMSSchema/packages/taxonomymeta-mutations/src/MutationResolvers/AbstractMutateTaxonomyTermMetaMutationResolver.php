@@ -65,20 +65,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        // /** @var string|null */
-        // $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        // if ($taxonomyName !== null) {
-        //     /**
-        //      * Validate the taxonomy exists, even though in practice
-        //      * it will always exist (since the input is an Enum)
-        //      */
-        //     $this->validateTaxonomyExists(
-        //         $taxonomyName,
-        //         $fieldDataAccessor,
-        //         $objectTypeFieldResolutionFeedbackStore,
-        //     );
-        // }
-
         $this->maybeValidateTaxonomyParent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
