@@ -6,7 +6,7 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\Taxonomies\Constants\InputProperties;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyCRUDHookNames;
+use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
@@ -48,12 +48,12 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            TaxonomyCRUDHookNames::VALIDATE_CREATE,
+            TaxonomyMetaCRUDHookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            TaxonomyCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
+            TaxonomyMetaCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -123,12 +123,12 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            TaxonomyCRUDHookNames::VALIDATE_UPDATE,
+            TaxonomyMetaCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            TaxonomyCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
+            TaxonomyMetaCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -334,7 +334,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $taxonomyData['description'] = $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION);
         }
 
-        $taxonomyData = App::applyFilters(TaxonomyCRUDHookNames::GET_CREATE_OR_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_CREATE_OR_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -346,7 +346,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     {
         $taxonomyData = $this->getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
 
-        $taxonomyData = App::applyFilters(TaxonomyCRUDHookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -358,7 +358,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     {
         $taxonomyData = $this->getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
 
-        $taxonomyData = App::applyFilters(TaxonomyCRUDHookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(TaxonomyMetaCRUDHookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -395,13 +395,13 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 
         App::doAction(
-            TaxonomyCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+            TaxonomyMetaCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $taxonomyTermID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            TaxonomyCRUDHookNames::EXECUTE_UPDATE,
+            TaxonomyMetaCRUDHookNames::EXECUTE_UPDATE,
             $taxonomyTermID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -435,8 +435,8 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 
-        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor);
-        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(TaxonomyMetaCRUDHookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(TaxonomyMetaCRUDHookNames::EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor);
 
         return $taxonomyTermID;
     }
