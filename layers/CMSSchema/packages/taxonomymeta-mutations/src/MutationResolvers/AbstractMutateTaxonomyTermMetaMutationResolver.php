@@ -8,7 +8,7 @@ use PoPCMSSchema\Taxonomies\Constants\InputProperties;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -366,7 +366,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the updated taxonomy
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function executeUpdateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
     {
@@ -379,7 +379,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -413,7 +413,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the created taxonomy
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
     protected function executeCreateTaxonomyTerm(string $taxonomyName, array $taxonomyData): string|int
     {
@@ -422,7 +422,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the created entity
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -443,7 +443,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return bool Was the deletion successful?
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function delete(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -468,7 +468,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return bool `true` if the operation successful, `false` if the term does not exist
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function executeDeleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName): bool
     {

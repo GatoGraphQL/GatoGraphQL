@@ -7,7 +7,7 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 
 trait CreateTaxonomyTermMetaMutationResolverTrait
 {
@@ -26,7 +26,7 @@ trait CreateTaxonomyTermMetaMutationResolverTrait
 
     /**
      * @return string|int The ID of the created entity
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     abstract protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,

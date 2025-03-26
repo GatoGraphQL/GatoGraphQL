@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\ComponentModel\App;
@@ -74,7 +74,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the created taxonomy
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     public function createTaxonomyTerm(string $taxonomyName, array $data): string|int
     {
@@ -85,16 +85,16 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermCRUDMutationException($wpError);
+            throw $this->createTaxonomyTermMetaCRUDMutationException($wpError);
         }
         /** @var int */
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
         return $taxonomyTermID;
     }
 
-    protected function createTaxonomyTermCRUDMutationException(WP_Error $wpError): TaxonomyTermCRUDMutationException
+    protected function createTaxonomyTermMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
     {
-        return new TaxonomyTermCRUDMutationException(
+        return new TaxonomyTermMetaCRUDMutationException(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
             $this->getWPErrorData($wpError),
@@ -104,7 +104,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated taxonomy
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     public function updateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
     {
@@ -114,7 +114,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermCRUDMutationException($wpError);
+            throw $this->createTaxonomyTermMetaCRUDMutationException($wpError);
         }
         /** @var int */
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
@@ -123,7 +123,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
 
     /**
      * @return bool `true` if the operation successful, `false` if the term does not exist
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy does not exist)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
     public function deleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName): bool
     {
@@ -131,7 +131,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermCRUDMutationException($wpError);
+            throw $this->createTaxonomyTermMetaCRUDMutationException($wpError);
         }
         if ($taxonomyDataOrError === 0) {
             return false;
