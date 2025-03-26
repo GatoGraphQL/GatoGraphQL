@@ -6,14 +6,14 @@ namespace PoPCMSSchema\CategoryMetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
-use PoPCMSSchema\TaxonomyMutationsWP\TypeAPIs\TaxonomyTypeMutationAPI;
+use PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs\TaxonomyMetaTypeMutationAPI;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use WP_Error;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CategoryMetaTypeMutationAPI extends TaxonomyTypeMutationAPI implements CategoryMetaTypeMutationAPIInterface
+class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements CategoryMetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed> $data

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermCRUDMutationException;
-use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface CategoryMetaTypeMutationAPIInterface extends TaxonomyTypeMutationAPIInterface
+interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed> $data
