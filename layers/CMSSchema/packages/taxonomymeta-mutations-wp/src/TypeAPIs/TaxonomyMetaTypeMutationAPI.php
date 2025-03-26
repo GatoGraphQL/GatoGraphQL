@@ -51,16 +51,25 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
 
     protected function getTaxonomyTermMetaCRUDMutationException(WP_Error|string $error): TaxonomyTermMetaCRUDMutationException
     {
+        $taxonomyTermMetaCRUDMutationExceptionClass = $this->getTaxonomyTermMetaCRUDMutationExceptionClass();
         if (is_string($error)) {
-            return new TaxonomyTermMetaCRUDMutationException($error);
+            return new $taxonomyTermMetaCRUDMutationExceptionClass($error);
         }
         /** @var WP_Error */
         $wpError = $error;
-        return new TaxonomyTermMetaCRUDMutationException(
+        return new $taxonomyTermMetaCRUDMutationExceptionClass(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
             $this->getWPErrorData($wpError),
         );
+    }
+
+    /**
+     * @phpstan-return class-string<TaxonomyTermMetaCRUDMutationException>
+     */
+    protected function getTaxonomyTermMetaCRUDMutationExceptionClass(): string
+    {
+        return TaxonomyTermMetaCRUDMutationException::class;
     }
 
     /**
