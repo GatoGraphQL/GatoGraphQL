@@ -220,12 +220,12 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): bool {
-        $result = parent::deleteMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    ): string|int {
+        $taxonomyTermID = parent::deleteMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(CategoryMetaCRUDHookNames::EXECUTE_DELETE_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
-        return $result;
+        return $taxonomyTermID;
     }
 
     /**
@@ -234,11 +234,11 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     protected function setMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): bool {
-        $result = parent::setMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    ): string|int {
+        $taxonomyTermID = parent::setMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
-        return $result;
+        return $taxonomyTermID;
     }
 }
