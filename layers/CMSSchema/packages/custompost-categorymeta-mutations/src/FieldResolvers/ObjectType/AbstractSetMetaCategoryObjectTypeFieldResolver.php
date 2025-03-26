@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Module;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\ModuleConfiguration;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -113,8 +113,7 @@ abstract class AbstractSetMetaCategoryObjectTypeFieldResolver extends AbstractOb
         $category = $object;
         switch ($field->getName()) {
             case 'setMeta':
-                $fieldArgsForMutationForObject['input']->{MutationInputProperties::CATEGORY_BY} ??= new stdClass();
-                $fieldArgsForMutationForObject['input']->{MutationInputProperties::CATEGORY_BY}->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
                 break;
         }
         return $fieldArgsForMutationForObject;
