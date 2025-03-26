@@ -40,9 +40,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         int|false|WP_Error $result,
     ): void {
         if ($result === false) {
-            /** @var WP_Error */
-            $wpError = $result;
-            throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
+            throw $this->getTaxonomyTermMetaCRUDMutationException(\__('Error adding term meta', 'taxonomymeta-mutations-wp'));
         }
         if ($result instanceof WP_Error) {
             /** @var WP_Error */
@@ -51,8 +49,13 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         }
     }
 
-    protected function getTaxonomyTermMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
+    protected function getTaxonomyTermMetaCRUDMutationException(WP_Error|string $error): TaxonomyTermMetaCRUDMutationException
     {
+        if (is_string($error)) {
+            return new TaxonomyTermMetaCRUDMutationException($error);
+        }
+        /** @var WP_Error */
+        $wpError = $error;
         return new TaxonomyTermMetaCRUDMutationException(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
