@@ -73,7 +73,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         return true;
     }
 
-    protected function validateCreateErrors(
+    protected function validateAddMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -88,13 +88,13 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        parent::validateCreateErrors(
+        parent::validateAddMetaErrors(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
 
-    protected function validateUpdateErrors(
+    protected function validateUpdateMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -109,7 +109,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        parent::validateUpdateErrors(
+        parent::validateUpdateMetaErrors(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
