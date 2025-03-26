@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMutations\MutationResolvers\AbstractMutateCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\AbstractMutateCategoryTermMetaMutationResolver;
 
 abstract class AbstractMutateGenericCategoryTermMetaMutationResolver extends AbstractMutateCategoryTermMetaMutationResolver
 {
