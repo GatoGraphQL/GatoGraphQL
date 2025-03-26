@@ -30,29 +30,6 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        /** @var string|null */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomyName !== null) {
-            $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-            foreach ($taxonomyTermIDs as $taxonomyTermID) {
-                $this->validateTaxonomyTermByIDExists(
-                    $taxonomyTermID,
-                    $taxonomyName,
-                    $fieldDataAccessor,
-                    $objectTypeFieldResolutionFeedbackStore,
-                );
-            }
-
-            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-                return null;
-            }
-
-            return [
-                $taxonomyName => $taxonomyTermIDs,
-            ];
-        }
-
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         // Retrieve the taxonomy from the terms
@@ -106,37 +83,6 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        /** @var string|null */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomyName !== null) {
-            $taxonomyToTaxonomyTermsIDs = [
-                $taxonomyName => [],
-            ];
-
-            $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-            $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
-            foreach ($taxonomyTermSlugs as $taxonomyTermSlug) {
-                $taxonomyTermID = $taxonomyTermTypeAPI->getTaxonomyTermID($taxonomyTermSlug, $taxonomyName);
-                if ($taxonomyTermID === null) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            $this->getTaxonomyTermBySlugDoesNotExistError($taxonomyName, $taxonomyTermSlug),
-                            $fieldDataAccessor->getField(),
-                        )
-                    );
-                    continue;
-                }
-                $taxonomyToTaxonomyTermsIDs[$taxonomyName][] = $taxonomyTermID;
-            }
-
-            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-                return null;
-            }
-
-            return $taxonomyToTaxonomyTermsIDs;
-        }
-
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         // Retrieve the taxonomy from the terms
