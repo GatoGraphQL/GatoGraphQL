@@ -291,13 +291,13 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @return bool Was the deletion successful?
+     * @return string|int The ID of the taxonomy term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): bool {
+    ): string|int {
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getUpdateMetaData($fieldDataAccessor);
@@ -310,7 +310,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        return true;
+        return $taxonomyTermID;
     }
 
     /**
@@ -323,12 +323,13 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     }
 
     /**
+     * @return string|int The ID of the taxonomy term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function setMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): bool {
+    ): string|int {
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getSetMetaData($fieldDataAccessor);
@@ -341,7 +342,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        return true;
+        return $taxonomyTermID;
     }
 
     /**
