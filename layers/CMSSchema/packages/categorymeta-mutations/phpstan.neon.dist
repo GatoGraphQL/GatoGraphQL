@@ -7,10 +7,10 @@ parameters:
 		# Some bug in PHPStan: false positive on comparison `$objectTypeFieldResolutionFeedbackStore->getErrors() !== []`
 		- 
 			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
-			path: src/MutationResolvers/PayloadableUpdateCategoryTermMutationResolverTrait.php
+			path: src/MutationResolvers/PayloadableUpdateCategoryTermMetaMutationResolverTrait.php
 		- 
 			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
-			path: src/MutationResolvers/PayloadableCreateCategoryTermMutationResolverTrait.php
+			path: src/MutationResolvers/PayloadableAddCategoryTermMetaMutationResolverTrait.php
 		- 
 			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
-			path: src/MutationResolvers/PayloadableDeleteCategoryTermMutationResolverTrait.php
+			path: src/MutationResolvers/PayloadableDeleteCategoryTermMetaMutationResolverTrait.php

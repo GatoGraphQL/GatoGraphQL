@@ -14,20 +14,20 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CategoryMetaMutations\Module;
 use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermUpdateInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermMetaUpdateInputObjectTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?CategoryTermUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver = null;
+    private ?CategoryTermMetaUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final protected function getCategoryTermUpdateInputObjectTypeResolver(): CategoryTermUpdateInputObjectTypeResolver
+    final protected function getCategoryTermMetaUpdateInputObjectTypeResolver(): CategoryTermMetaUpdateInputObjectTypeResolver
     {
         if ($this->categoryTermUpdateInputObjectTypeResolver === null) {
-            /** @var CategoryTermUpdateInputObjectTypeResolver */
-            $categoryTermUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermUpdateInputObjectTypeResolver::class);
+            /** @var CategoryTermMetaUpdateInputObjectTypeResolver */
+            $categoryTermUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermMetaUpdateInputObjectTypeResolver::class);
             $this->categoryTermUpdateInputObjectTypeResolver = $categoryTermUpdateInputObjectTypeResolver;
         }
         return $this->categoryTermUpdateInputObjectTypeResolver;
@@ -92,7 +92,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return match ($fieldName) {
             'update' => [
-                'input' => $this->getCategoryTermUpdateInputObjectTypeResolver(),
+                'input' => $this->getCategoryTermMetaUpdateInputObjectTypeResolver(),
             ],
             'delete' => [],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
