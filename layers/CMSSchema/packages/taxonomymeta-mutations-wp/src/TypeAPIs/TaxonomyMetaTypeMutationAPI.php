@@ -10,8 +10,8 @@ use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 
+use function add_term_meta;
 use function wp_delete_term;
-use function wp_insert_term;
 use function wp_update_term;
 
 /**
