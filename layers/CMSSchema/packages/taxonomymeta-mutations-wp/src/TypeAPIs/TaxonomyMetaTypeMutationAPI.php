@@ -30,16 +30,23 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
         mixed $value,
         bool $single = false,
     ): void {
-        $taxonomyTermName = $data['name'] ?? '';
-        $taxonomyDataOrError = wp_insert_term($taxonomyTermName, $taxonomyName, $data);
-        if ($taxonomyDataOrError instanceof WP_Error) {
+        $result = add_term_meta((int) $taxonomyTermID, $key, $value, $single);
+        $this->handleMaybeError($result);
+    }
+
+    protected function handleMaybeError(
+        int|false|WP_Error $result,
+    ): void {
+        if ($result === false) {
             /** @var WP_Error */
-            $wpError = $taxonomyDataOrError;
+            $wpError = $result;
             throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
         }
-        /** @var int */
-        $taxonomyTermID = $taxonomyDataOrError['term_id'];
-        return $taxonomyTermID;
+        if ($result instanceof WP_Error) {
+            /** @var WP_Error */
+            $wpError = $result;
+            throw $this->addTaxonomyTermMetaMetaCRUDMutationException($wpError);
+        }
     }
 
     protected function addTaxonomyTermMetaMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
