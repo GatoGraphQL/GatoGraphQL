@@ -118,9 +118,9 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getCreateOrUpdateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getSetMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $taxonomyData = parent::getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
+        $taxonomyData = parent::getSetMetaData($fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_SET_META_DATA, $taxonomyData, $fieldDataAccessor);
 
@@ -130,9 +130,21 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getUpdateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getAddMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $taxonomyData = parent::getUpdateTaxonomyTermData($fieldDataAccessor);
+        $taxonomyData = parent::getAddMetaData($fieldDataAccessor);
+
+        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_ADD_META_DATA, $taxonomyData, $fieldDataAccessor);
+
+        return $taxonomyData;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getUpdateMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
+    {
+        $taxonomyData = parent::getUpdateMetaData($fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_UPDATE_META_DATA, $taxonomyData, $fieldDataAccessor);
 
@@ -142,11 +154,11 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getCreateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getDeleteMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $taxonomyData = parent::getCreateTaxonomyTermData($fieldDataAccessor);
+        $taxonomyData = parent::getDeleteMetaData($fieldDataAccessor);
 
-        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_ADD_META_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_DELETE_META_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
