@@ -60,7 +60,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $this->validateIsUserLoggedIn(
+        $this->validateCommonMetaErrors(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -68,15 +68,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
-
-        /** @var string */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-
-        $this->validateCanLoggedInUserEditTaxonomy(
-            $taxonomyName,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
 
         /** @var bool */
         $single = $fieldDataAccessor->getValue(MutationInputProperties::SINGLE);
@@ -91,6 +82,56 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
+    }
+
+    protected function validateCommonMetaErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
+
+        $this->validateTaxonomyTermByIDExists(
+            $taxonomyTermID,
+            null,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $this->validateIsUserLoggedIn(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
+
+        /**
+         * If explicitly providing the taxonomy, make sure it
+         * exists for that ID.
+         */
+        if ($fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) !== null) {
+            $this->validateTaxonomyTermByIDExists(
+                $taxonomyTermID,
+                $taxonomyName,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->validateCanLoggedInUserEditTaxonomy(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     abstract protected function isHierarchical(): bool;
@@ -136,46 +177,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
-
-        $this->validateTaxonomyTermByIDExists(
-            $taxonomyTermID,
-            null,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        $this->validateIsUserLoggedIn(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
-        /**
-         * If explicitly providing the taxonomy, make sure it
-         * exists for that ID.
-         */
-        if ($fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) !== null) {
-            $this->validateTaxonomyTermByIDExists(
-                $taxonomyTermID,
-                $taxonomyName,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $this->validateCanLoggedInUserEditTaxonomy(
-            $taxonomyName,
+        $this->validateCommonMetaErrors(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -185,51 +187,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        /** @var string|int */
-        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
-
-        /**
-         * Perform this validation, even though this situation
-         * should never happen. That's why there's no
-         * CategoryIDMissingError added to the Union type
-         */
-        $this->validateTaxonomyTermIDNotEmpty(
-            $taxonomyTermID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $this->validateIsUserLoggedIn(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
-        /**
-         * If explicitly providing the taxonomy, make sure it
-         * exists for that ID.
-         */
-        if ($fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) !== null) {
-            $this->validateTaxonomyTermByIDExists(
-                $taxonomyTermID,
-                $taxonomyName,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $this->validateCanLoggedInUserDeleteTaxonomyTerm(
-            $taxonomyTermID,
+        $this->validateCommonMetaErrors(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
