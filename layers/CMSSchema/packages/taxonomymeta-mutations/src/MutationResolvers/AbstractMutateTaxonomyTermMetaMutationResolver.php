@@ -43,6 +43,22 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         return $this->taxonomyTermTypeAPI;
     }
 
+    protected function validateSetMetaErrors(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        App::doAction(
+            TaxonomyMetaCRUDHookNames::VALIDATE_SET_META,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $this->validateCommonMetaErrors(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
     protected function validateAddMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -153,22 +169,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int {
         return $fieldDataAccessor->getValue(MutationInputProperties::ID);
-    }
-
-    protected function validateSetMetaErrors(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        App::doAction(
-            TaxonomyMetaCRUDHookNames::VALIDATE_SET_META,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        $this->validateCommonMetaErrors(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
     }
 
     protected function validateUpdateMetaErrors(
