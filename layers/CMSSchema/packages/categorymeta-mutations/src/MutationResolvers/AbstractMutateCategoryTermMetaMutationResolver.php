@@ -132,18 +132,6 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getSetMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $taxonomyData = parent::getSetMetaData($fieldDataAccessor);
-
-        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_SET_META_DATA, $taxonomyData, $fieldDataAccessor);
-
-        return $taxonomyData;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
     protected function getAddMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $taxonomyData = parent::getAddMetaData($fieldDataAccessor);
@@ -173,6 +161,18 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
         $taxonomyData = parent::getDeleteMetaData($fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_DELETE_META_DATA, $taxonomyData, $fieldDataAccessor);
+
+        return $taxonomyData;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getSetMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
+    {
+        $taxonomyData = parent::getSetMetaData($fieldDataAccessor);
+
+        $taxonomyData = App::applyFilters(CategoryMetaCRUDHookNames::GET_SET_META_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
