@@ -25,13 +25,13 @@ trait DeleteCategoryTermMetaMutationResolverTrait
     }
 
     /**
-     * @return bool Was the deletion successful?
+     * @return string|int The ID of the taxonomy term
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     abstract protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): bool;
+    ): string|int;
 
     /**
      * Validate the app-level errors in top-level "errors" entry.

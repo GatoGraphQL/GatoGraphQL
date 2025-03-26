@@ -214,7 +214,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @return bool Was the deletion successful?
+     * @return string|int The ID of the taxonomy term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function deleteMeta(

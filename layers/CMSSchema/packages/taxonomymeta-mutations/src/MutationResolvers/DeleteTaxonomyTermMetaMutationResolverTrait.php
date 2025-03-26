@@ -22,13 +22,13 @@ trait DeleteTaxonomyTermMetaMutationResolverTrait
     }
 
     /**
-     * @return string|int The ID of the deleted entity
+     * @return string|int The ID of the taxonomy term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     abstract protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): bool;
+    ): string|int;
 
     public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
