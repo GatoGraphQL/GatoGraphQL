@@ -6,7 +6,7 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\MutateTaxonomyTermMetaMutationResolverTrait;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateTaxonomyTermMutationResolverTrait;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -14,7 +14,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 trait MutateTaxonomyTermMetaMutationResolverTrait
 {
-    use MutateTaxonomyTermMetaMutationResolverTrait;
+    use MutateTaxonomyTermMutationResolverTrait;
 
     abstract protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface;
 
