@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
+use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -18,9 +19,19 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 {
     use MutateTaxonomyTermMetaMutationResolverTrait;
 
+    private ?TaxonomyMetaTypeAPIInterface $taxonomyTypeAPI = null;
     private ?TaxonomyMetaTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
+    final protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
+    {
+        if ($this->taxonomyTypeAPI === null) {
+            /** @var TaxonomyMetaTypeAPIInterface */
+            $taxonomyTypeAPI = $this->instanceManager->getInstance(TaxonomyMetaTypeAPIInterface::class);
+            $this->taxonomyTypeAPI = $taxonomyTypeAPI;
+        }
+        return $this->taxonomyTypeAPI;
+    }
     final protected function getTaxonomyMetaTypeMutationAPI(): TaxonomyMetaTypeMutationAPIInterface
     {
         if ($this->taxonomyTypeMutationAPI === null) {
