@@ -119,23 +119,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
 
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
 
-        /**
-         * If explicitly providing the taxonomy, make sure it
-         * exists for that ID.
-         */
-        if ($fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) !== null) {
-            $this->validateTaxonomyTermByIDExists(
-                $taxonomyTermID,
-                $taxonomyName,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
         $this->validateCanLoggedInUserEditTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,
