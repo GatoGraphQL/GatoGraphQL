@@ -6,10 +6,8 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TaxonomyMetaMutations\ObjectModels\LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload;
 use PoPCMSSchema\TaxonomyMetaMutations\ObjectModels\LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload;
-use PoPCMSSchema\TaxonomyMetaMutations\ObjectModels\TaxonomyTermDoesNotExistErrorPayload;
-use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait as TaxonomyMutationsPayloadableTaxonomyMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\App;
@@ -17,6 +15,10 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
 trait PayloadableTaxonomyMutationResolverTrait
 {
+    use TaxonomyMutationsPayloadableTaxonomyMutationResolverTrait {
+        TaxonomyMutationsPayloadableTaxonomyMutationResolverTrait::createErrorPayloadFromObjectTypeFieldResolutionFeedback as upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback;
+    }
+
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
@@ -28,71 +30,21 @@ trait PayloadableTaxonomyMutationResolverTrait
             ]
         ) {
             [
-                $this->getUserNotLoggedInErrorFeedbackItemProviderClass(),
-                $this->getUserNotLoggedInErrorFeedbackItemProviderCode(),
-            ] => new UserIsNotLoggedInErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
+                MutationErrorFeedbackItemProvider::E1,
             ] => new LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            // [
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E5,
-            // ] => new TaxonomyDoesNotExistErrorPayload(
-            //     $feedbackItemResolution->getMessage(),
-            // ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E6,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E7,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E8,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E9,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => App::applyFilters(
                 TaxonomyMetaCRUDHookNames::ERROR_PAYLOAD,
-                new GenericErrorPayload(
+                $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
+                    $objectTypeFieldResolutionFeedback,
+                ) ?? new GenericErrorPayload(
                     $feedbackItemResolution->getMessage(),
                     $feedbackItemResolution->getNamespacedCode(),
                 ),
                 $objectTypeFieldResolutionFeedback,
             )
         };
-    }
-
-    protected function getUserNotLoggedInErrorFeedbackItemProviderClass(): string
-    {
-        return MutationErrorFeedbackItemProvider::class;
-    }
-
-    protected function getUserNotLoggedInErrorFeedbackItemProviderCode(): string
-    {
-        return MutationErrorFeedbackItemProvider::E1;
     }
 }
