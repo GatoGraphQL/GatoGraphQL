@@ -25,9 +25,9 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\CategoriesWP\Module::class,
+            \PoPCMSSchema\CategoryMutationsWP\Module::class,
             \PoPCMSSchema\CategoryMetaMutations\Module::class,
-            \PoPCMSSchema\TaxonomyMutationsWP\Module::class,
+            \PoPCMSSchema\TaxonomyMetaMutationsWP\Module::class,
         ];
     }
 

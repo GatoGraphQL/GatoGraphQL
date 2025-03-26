@@ -20,8 +20,8 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\Categories\Module::class,
-            \PoPCMSSchema\TaxonomyMutations\Module::class,
+            \PoPCMSSchema\CategoryMutations\Module::class,
+            \PoPCMSSchema\TaxonomyMetaMutations\Module::class,
         ];
     }
 
