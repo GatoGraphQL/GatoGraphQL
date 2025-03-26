@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
-use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\AbstractMutateTaxonomyTermMutationResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -143,7 +143,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -169,7 +169,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the created entity
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,

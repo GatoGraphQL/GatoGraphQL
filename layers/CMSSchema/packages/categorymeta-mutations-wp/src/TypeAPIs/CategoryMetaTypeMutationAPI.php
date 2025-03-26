@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMetaMutationsWP\TypeAPIs;
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
 use PoPCMSSchema\TaxonomyMutationsWP\TypeAPIs\TaxonomyTypeMutationAPI;
-use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use WP_Error;
 
 /**
@@ -25,7 +25,7 @@ class CategoryMetaTypeMutationAPI extends TaxonomyTypeMutationAPI implements Cat
         return $this->createTaxonomyTerm($taxonomyName, $data);
     }
 
-    protected function createTaxonomyTermCRUDMutationException(WP_Error $wpError): TaxonomyTermCRUDMutationException
+    protected function createTaxonomyTermMetaCRUDMutationException(WP_Error $wpError): TaxonomyTermMetaCRUDMutationException
     {
         return new CategoryTermMetaCRUDMutationException(
             $wpError->get_error_message(),
