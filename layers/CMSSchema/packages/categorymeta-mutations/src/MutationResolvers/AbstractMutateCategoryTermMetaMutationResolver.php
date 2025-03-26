@@ -7,13 +7,15 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
+use PoPCMSSchema\CategoryMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\AbstractMutateTaxonomyTermMutationResolver;
+use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\AbstractMutateTaxonomyTermMetaMutationResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use stdClass;
 
-abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMutateTaxonomyTermMutationResolver implements CategoryTermMetaMutationResolverInterface
+abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMutateTaxonomyTermMetaMutationResolver implements CategoryTermMetaMutationResolverInterface
 {
     use MutateCategoryTermMetaMutationResolverTrait;
 
@@ -27,6 +29,14 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
             $this->categoryTypeMutationAPI = $categoryTypeMutationAPI;
         }
         return $this->categoryTypeMutationAPI;
+    }
+
+    protected function getTaxonomyTermIDFromInput(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string|int {
+        /** @var stdClass */
+        $categoryBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_BY);
+        return $categoryBy->{MutationInputProperties::ID};
     }
 
     /**

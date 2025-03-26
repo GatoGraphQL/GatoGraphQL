@@ -65,8 +65,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $this->maybeValidateTaxonomyParent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
@@ -98,10 +96,16 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         }
 
         // If the taxonomy is null, then the ID must've been provided
-        /** @var string|int */
-        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
         /** @var string */
         return $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+    }
+
+    protected function getTaxonomyTermIDFromInput(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string|int {
+        /** @var string|int */
+        return $fieldDataAccessor->getValue(MutationInputProperties::ID);
     }
 
     protected function validateUpdateMetaErrors(
@@ -235,42 +239,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-    }
-
-    protected function maybeValidateTaxonomyParent(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        if (!$this->isHierarchical()) {
-            return;
-        }
-
-        /** @var string */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-
-        /** @var stdClass|null */
-        $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
-        if ($taxonomyParentBy !== null) {
-            if (isset($taxonomyParentBy->{InputProperties::ID})) {
-                /** @var string|int */
-                $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
-                $this->validateTaxonomyTermByIDExists(
-                    $taxonomyParentID,
-                    $taxonomyName,
-                    $fieldDataAccessor,
-                    $objectTypeFieldResolutionFeedbackStore,
-                );
-            } elseif (isset($taxonomyParentBy->{InputProperties::SLUG})) {
-                /** @var string */
-                $taxonomyParentSlug = $taxonomyParentBy->{InputProperties::SLUG};
-                $this->validateTaxonomyTermBySlugExists(
-                    $taxonomyParentSlug,
-                    $taxonomyName,
-                    $fieldDataAccessor,
-                    $objectTypeFieldResolutionFeedbackStore,
-                );
-            }
-        }
     }
 
     /**
