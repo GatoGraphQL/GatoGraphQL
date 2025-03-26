@@ -42,7 +42,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements Taxono
             if ($numberItems > 1) {
                 $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
                 foreach ($values as $value) {
-                    $this->addTaxonomyTermMeta($taxonomyTermID, $key, $value);
+                    $this->addTaxonomyTermMeta($taxonomyTermID, $key, $value, false);
                 }
             } else {
                 $value = $values[0];
