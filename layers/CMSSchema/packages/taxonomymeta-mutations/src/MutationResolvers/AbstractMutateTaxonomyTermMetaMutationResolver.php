@@ -343,8 +343,9 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         /** @var string|int */
         $taxonomyTermID = $this->getTaxonomyTermIDFromInput($fieldDataAccessor);
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
+        $taxonomyData = $this->getUpdateMetaData($fieldDataAccessor);
 
-        $result = $this->executeDeleteTaxonomyTermMeta($taxonomyTermID, $taxonomyName);
+        $result = $this->executeDeleteTaxonomyTermMeta($taxonomyTermID, $taxonomyName, $taxonomyData);
         if ($result === false) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
