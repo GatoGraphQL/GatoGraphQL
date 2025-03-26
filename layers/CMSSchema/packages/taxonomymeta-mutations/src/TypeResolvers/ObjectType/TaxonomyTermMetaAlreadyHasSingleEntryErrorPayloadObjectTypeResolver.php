@@ -29,7 +29,7 @@ class TaxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver extend
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to edit taxonomy terms"', 'taxonomymeta-mutations');
+        return $this->__('Error payload for: "The taxonomy term already has the single meta entry"', 'taxonomymeta-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
