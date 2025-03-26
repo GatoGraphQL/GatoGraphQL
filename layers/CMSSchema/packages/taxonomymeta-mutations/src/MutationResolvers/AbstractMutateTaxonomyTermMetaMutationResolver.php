@@ -43,7 +43,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         return $this->taxonomyTermTypeAPI;
     }
 
-    protected function validateCreateErrors(
+    protected function validateAddMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -118,7 +118,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         return $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
     }
 
-    protected function validateUpdateErrors(
+    protected function validateUpdateMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -197,7 +197,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         );
     }
 
-    protected function validateDeleteErrors(
+    protected function validateDeleteMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
