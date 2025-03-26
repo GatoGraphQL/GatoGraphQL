@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\InputObjectType;
 
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\AddCategoryTermMetaInputObjectTypeResolverInterface;
+
 interface AddGenericCategoryTermMetaInputObjectTypeResolverInterface extends AddCategoryTermMetaInputObjectTypeResolverInterface
 {
 }
