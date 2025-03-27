@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
+use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
+use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateTaxonomyTermMutationResolverTrait;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -15,8 +15,14 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 trait MutateTaxonomyTermMetaMutationResolverTrait
 {
     use MutateTaxonomyTermMutationResolverTrait;
+    use MutateTermMetaMutationResolverTrait;
 
     abstract protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface;
+    
+    protected function getMetaTypeAPI(): MetaTypeAPIInterface
+    {
+        return $this->getTaxonomyMetaTypeAPI();
+    }
 
     protected function validateSingleMetaEntryDoesNotExist(
         string|int $taxonomyTermID,
@@ -30,68 +36,6 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
                 $this->getSingleMetaEntryAlreadyExistsError($taxonomyTermID, $key),
-                $fieldDataAccessor->getField(),
-            )
-        );
-    }
-
-    protected function getSingleMetaEntryAlreadyExistsError(
-        string|int $taxonomyTermID,
-        string $key,
-    ): FeedbackItemResolution {
-        return new FeedbackItemResolution(
-            MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E1,
-            [
-                $taxonomyTermID,
-                $key,
-            ]
-        );
-    }
-
-    /**
-     * @param string[] $metaKeys
-     */
-    protected function validateAreMetaKeysAllowed(
-        array $metaKeys,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $taxonomyMetaTypeAPI = $this->getTaxonomyMetaTypeAPI();
-        $nonAllowedMetaKeys = array_map(
-            fn (string $metaKey) => !$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($metaKey),
-            $metaKeys
-        );
-        if ($nonAllowedMetaKeys === []) {
-            return;
-        }
-        if (count($nonAllowedMetaKeys) === 1) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E2,
-                        [
-                            $metaKeys[0],
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-            return;
-        }
-        $objectTypeFieldResolutionFeedbackStore->addError(
-            new ObjectTypeFieldResolutionFeedback(
-                new FeedbackItemResolution(
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E3,
-                    [
-                        implode(
-                            $this->__('\', \'', 'taxonomymeta-mutations'),
-                            $metaKeys
-                        ),
-                    ]
-                ),
                 $fieldDataAccessor->getField(),
             )
         );
