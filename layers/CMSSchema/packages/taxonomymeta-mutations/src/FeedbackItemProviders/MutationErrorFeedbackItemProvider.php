@@ -10,6 +10,8 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public final const E1 = 'e1';
+    public final const E2 = 'e2';
+    public final const E3 = 'e3';
 
     /**
      * @return string[]
@@ -18,6 +20,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
+            self::E2,
+            self::E3,
         ];
     }
 
@@ -25,6 +29,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => $this->__('The term with ID \'%s\' already has meta entry for key \'%s\'', 'taxonomymeta-mutations'),
+            self::E2 => $this->__('Meta key \'%s\' is not allowed', 'taxonomymeta-mutations'),
+            self::E3 => $this->__('Meta keys \'%s\' are not allowed', 'taxonomymeta-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

@@ -48,4 +48,55 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
             ]
         );
     }
+
+    /**
+     * @param string[] $metaKeys
+     */
+    protected function validateAreMetaKeysAllowed(
+        array $metaKeys,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $nonAllowedMetaKeys = [];
+        $taxonomyMetaTypeAPI = $this->getTaxonomyMetaTypeAPI();
+        foreach ($metaKeys as $metaKey) {
+            if ($taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($metaKey)) {
+                continue;
+            }
+            $nonAllowedMetaKeys[] = $metaKey;
+        }
+        if ($nonAllowedMetaKeys === []) {
+            return;
+        }
+        if (count($nonAllowedMetaKeys) === 1) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E2,
+                        [
+                            $metaKeys[0],
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E3,
+                    [
+                        implode(
+                            $this->__('\', \'', 'taxonomymeta-mutations'),
+                            $metaKeys
+                        ),
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
+        );
+    }
 }
