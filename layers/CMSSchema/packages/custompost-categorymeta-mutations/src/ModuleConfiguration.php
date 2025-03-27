@@ -15,7 +15,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      */
     public function usePayloadableCustomPostCategoryMetaMutations(): bool
     {
-        $envVariable = Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS;
+        $envVariable = Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_META_MUTATIONS;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
@@ -32,7 +32,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             return false;
         }
 
-        $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS;
+        $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTCATEGORY_META_MUTATIONS;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
