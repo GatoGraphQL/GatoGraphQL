@@ -19,25 +19,6 @@ trait MutateTaxonomyTermMutationResolverTrait
 
     abstract protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface;
 
-    /**
-     * Check that the user is logged-in
-     */
-    protected function validateIsUserLoggedIn(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
-        if ($errorFeedbackItemResolution === null) {
-            return;
-        }
-        $objectTypeFieldResolutionFeedbackStore->addError(
-            new ObjectTypeFieldResolutionFeedback(
-                $errorFeedbackItemResolution,
-                $fieldDataAccessor->getField(),
-            )
-        );
-    }
-
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
