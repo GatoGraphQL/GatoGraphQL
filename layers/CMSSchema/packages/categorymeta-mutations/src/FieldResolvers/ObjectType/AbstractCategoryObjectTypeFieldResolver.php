@@ -14,23 +14,23 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CategoryMetaMutations\Module;
 use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermMetaUpdateInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermUpdateMetaInputObjectTypeResolver;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?CategoryTermMetaUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver = null;
+    private ?CategoryTermUpdateMetaInputObjectTypeResolver $categoryTermUpdateMetaInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final protected function getCategoryTermMetaUpdateInputObjectTypeResolver(): CategoryTermMetaUpdateInputObjectTypeResolver
+    final protected function getCategoryTermUpdateMetaInputObjectTypeResolver(): CategoryTermUpdateMetaInputObjectTypeResolver
     {
-        if ($this->categoryTermUpdateInputObjectTypeResolver === null) {
-            /** @var CategoryTermMetaUpdateInputObjectTypeResolver */
-            $categoryTermUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermMetaUpdateInputObjectTypeResolver::class);
-            $this->categoryTermUpdateInputObjectTypeResolver = $categoryTermUpdateInputObjectTypeResolver;
+        if ($this->categoryTermUpdateMetaInputObjectTypeResolver === null) {
+            /** @var CategoryTermUpdateMetaInputObjectTypeResolver */
+            $categoryTermUpdateMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermUpdateMetaInputObjectTypeResolver::class);
+            $this->categoryTermUpdateMetaInputObjectTypeResolver = $categoryTermUpdateMetaInputObjectTypeResolver;
         }
-        return $this->categoryTermUpdateInputObjectTypeResolver;
+        return $this->categoryTermUpdateMetaInputObjectTypeResolver;
     }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
@@ -92,7 +92,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return match ($fieldName) {
             'update' => [
-                'input' => $this->getCategoryTermMetaUpdateInputObjectTypeResolver(),
+                'input' => $this->getCategoryTermUpdateMetaInputObjectTypeResolver(),
             ],
             'delete' => [],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
