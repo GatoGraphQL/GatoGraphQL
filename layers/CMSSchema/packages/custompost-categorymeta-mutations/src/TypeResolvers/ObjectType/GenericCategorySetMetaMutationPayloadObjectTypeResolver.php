@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType;
 
-class GenericCategorySetMetaMutationPayloadObjectTypeResolver extends AbstractGenericCategoriesMutationPayloadObjectTypeResolver
+class GenericCategorySetMetaMutationPayloadObjectTypeResolver extends AbstractGenericCategoryMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {
@@ -13,6 +13,6 @@ class GenericCategorySetMetaMutationPayloadObjectTypeResolver extends AbstractGe
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of setting categories on a custom post (using nested mutations)', 'postcategory-mutations');
+        return $this->__('Payload of executing a set meta nested mutation on a category term', 'category-mutations');
     }
 }
