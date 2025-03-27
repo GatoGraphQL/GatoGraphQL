@@ -282,20 +282,16 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $addFieldsToQueryPayloadableCategoryMutations = $moduleConfiguration->addFieldsToQueryPayloadableCategoryMutations();
         return array_merge(
-            [
+            !$disableRedundantRootTypeMutationFields ? [
                 'addCategoryMeta',
                 'addCategoryMetas',
-            ],
-            !$disableRedundantRootTypeMutationFields ? [
                 'updateCategoryMeta',
                 'updateCategoryMetas',
                 'deleteCategoryMeta',
                 'deleteCategoryMetas',
             ] : [],
-            $addFieldsToQueryPayloadableCategoryMutations ? [
-                'addCategoryMetaMutationPayloadObjects',
-            ] : [],
             $addFieldsToQueryPayloadableCategoryMutations && !$disableRedundantRootTypeMutationFields ? [
+                'addCategoryMetaMutationPayloadObjects',
                 'updateCategoryMetaMutationPayloadObjects',
                 'deleteCategoryMetaMutationPayloadObjects',
             ] : [],
