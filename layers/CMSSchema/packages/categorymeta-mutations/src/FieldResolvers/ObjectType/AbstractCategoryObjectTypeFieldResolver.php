@@ -14,6 +14,9 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CategoryMetaMutations\Module;
 use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermAddMetaInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermDeleteMetaInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermSetMetaInputObjectTypeResolver;
 use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermUpdateMetaInputObjectTypeResolver;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
@@ -21,6 +24,9 @@ use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+    private ?CategoryTermAddMetaInputObjectTypeResolver $categoryTermAddMetaInputObjectTypeResolver = null;
+    private ?CategoryTermDeleteMetaInputObjectTypeResolver $categoryTermDeleteMetaInputObjectTypeResolver = null;
+    private ?CategoryTermSetMetaInputObjectTypeResolver $categoryTermSetMetaInputObjectTypeResolver = null;
     private ?CategoryTermUpdateMetaInputObjectTypeResolver $categoryTermUpdateMetaInputObjectTypeResolver = null;
 
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
@@ -31,6 +37,33 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
         }
         return $this->userLoggedInCheckpoint;
+    }
+    final protected function getCategoryTermAddMetaInputObjectTypeResolver(): CategoryTermAddMetaInputObjectTypeResolver
+    {
+        if ($this->categoryTermAddMetaInputObjectTypeResolver === null) {
+            /** @var CategoryTermAddMetaInputObjectTypeResolver */
+            $categoryTermAddMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermAddMetaInputObjectTypeResolver::class);
+            $this->categoryTermAddMetaInputObjectTypeResolver = $categoryTermAddMetaInputObjectTypeResolver;
+        }
+        return $this->categoryTermAddMetaInputObjectTypeResolver;
+    }
+    final protected function getCategoryTermDeleteMetaInputObjectTypeResolver(): CategoryTermDeleteMetaInputObjectTypeResolver
+    {
+        if ($this->categoryTermDeleteMetaInputObjectTypeResolver === null) {
+            /** @var CategoryTermDeleteMetaInputObjectTypeResolver */
+            $categoryTermDeleteMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermDeleteMetaInputObjectTypeResolver::class);
+            $this->categoryTermDeleteMetaInputObjectTypeResolver = $categoryTermDeleteMetaInputObjectTypeResolver;
+        }
+        return $this->categoryTermDeleteMetaInputObjectTypeResolver;
+    }
+    final protected function getCategoryTermSetMetaInputObjectTypeResolver(): CategoryTermSetMetaInputObjectTypeResolver
+    {
+        if ($this->categoryTermSetMetaInputObjectTypeResolver === null) {
+            /** @var CategoryTermSetMetaInputObjectTypeResolver */
+            $categoryTermSetMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermSetMetaInputObjectTypeResolver::class);
+            $this->categoryTermSetMetaInputObjectTypeResolver = $categoryTermSetMetaInputObjectTypeResolver;
+        }
+        return $this->categoryTermSetMetaInputObjectTypeResolver;
     }
     final protected function getCategoryTermUpdateMetaInputObjectTypeResolver(): CategoryTermUpdateMetaInputObjectTypeResolver
     {
