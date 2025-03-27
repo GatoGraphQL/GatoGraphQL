@@ -17,6 +17,3 @@ services:
 
     PoPCMSSchema\CustomPostCategoryMetaMutations\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
-
-    PoPCMSSchema\CustomPostCategoryMetaMutations\ObjectTypeResolverPickers\:
-        resource: '../src/ObjectTypeResolverPickers/*'
