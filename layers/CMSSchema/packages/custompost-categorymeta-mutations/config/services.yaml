@@ -4,8 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\CustomPostCategoryMetaMutations\FeedbackItemProviders\:
-        resource: '../src/FeedbackItemProviders/*'
-
     PoPCMSSchema\CustomPostCategoryMetaMutations\Hooks\:
         resource: '../src/Hooks/*'
