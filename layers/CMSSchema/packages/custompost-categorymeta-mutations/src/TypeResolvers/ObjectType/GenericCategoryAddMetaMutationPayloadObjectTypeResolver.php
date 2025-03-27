@@ -13,6 +13,6 @@ class GenericCategoryAddMetaMutationPayloadObjectTypeResolver extends AbstractGe
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an add nested mutation on a category', 'category-mutations');
+        return $this->__('Payload of executing an add meta nested mutation on a category term', 'category-mutations');
     }
 }

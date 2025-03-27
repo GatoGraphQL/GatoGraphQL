@@ -13,6 +13,6 @@ class RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver extends Ab
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of creating a category term', 'category-mutations');
+        return $this->__('Payload of adding meta to a category term', 'category-mutations');
     }
 }
