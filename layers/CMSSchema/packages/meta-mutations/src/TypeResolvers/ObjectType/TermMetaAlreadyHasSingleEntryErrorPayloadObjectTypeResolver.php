@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTypeResolver
 {
-    private ?TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = null;
+    private ?TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = null;
 
     final protected function getTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader(): TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader
     {
-        if ($this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader === null) {
+        if ($this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader === null) {
             /** @var TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader */
-            $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader::class);
-            $this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
+            $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader::class);
+            $this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
         }
-        return $this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
+        return $this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string
