@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support for categorymeta-mutations
+Adds support for category meta mutations
 
 ## Install
 

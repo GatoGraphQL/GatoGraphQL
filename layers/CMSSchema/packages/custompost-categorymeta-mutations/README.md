@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Base functionality to add categories to custom posts
+Adds meta mutations to the `GenericCategory` type
 
 ## Install
 

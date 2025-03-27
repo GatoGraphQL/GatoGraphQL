@@ -146,7 +146,7 @@
         "pop-wp-schema/pagebuilder": "<11.2.0"
     },
     "type": "library",
-    "description": "Base functionality to add categories to custom posts",
+    "description": "Adds meta mutations to the `GenericCategory` type",
     "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "custompost-categorymeta-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-categorymeta-mutations",
     "license": "GPL-2.0-or-later",
