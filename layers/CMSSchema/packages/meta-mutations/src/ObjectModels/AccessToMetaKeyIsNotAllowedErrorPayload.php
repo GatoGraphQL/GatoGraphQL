@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MetaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class MetaKeyNotAllowedErrorPayload extends AbstractErrorPayload
+final class AccessToMetaKeyIsNotAllowedErrorPayload extends AbstractErrorPayload
 {
 }

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MetaMutations\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\MetaMutations\ObjectModels\MetaKeyNotAllowedErrorPayload;
+use PoPCMSSchema\MetaMutations\ObjectModels\AccessToMetaKeyIsNotAllowedErrorPayload;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractDictionaryObjectTypeDataLoader;
 
-class MetaKeyNotAllowedErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
+class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
 {
     public function getObjectClass(): string
     {
-        return MetaKeyNotAllowedErrorPayload::class;
+        return AccessToMetaKeyIsNotAllowedErrorPayload::class;
     }
 }

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractCategoryMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractMetaKeyNotAllowedErrorPayloadObjectTypeResolverPicker;
+use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class MetaKeyNotAllowedErrorPayloadObjectTypeResolverPicker extends AbstractMetaKeyNotAllowedErrorPayloadObjectTypeResolverPicker
+class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker extends AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

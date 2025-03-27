@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MetaMutations\TypeResolvers\ObjectType;
 
-use PoPCMSSchema\MetaMutations\RelationalTypeDataLoaders\ObjectType\MetaKeyNotAllowedErrorPayloadObjectTypeDataLoader;
+use PoPCMSSchema\MetaMutations\RelationalTypeDataLoaders\ObjectType\AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractErrorPayloadObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class MetaKeyNotAllowedErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTypeResolver
+class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTypeResolver
 {
-    private ?MetaKeyNotAllowedErrorPayloadObjectTypeDataLoader $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = null;
+    private ?AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = null;
 
-    final protected function getMetaKeyNotAllowedErrorPayloadObjectTypeDataLoader(): MetaKeyNotAllowedErrorPayloadObjectTypeDataLoader
+    final protected function getAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader(): AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader
     {
         if ($this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader === null) {
-            /** @var MetaKeyNotAllowedErrorPayloadObjectTypeDataLoader */
-            $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(MetaKeyNotAllowedErrorPayloadObjectTypeDataLoader::class);
+            /** @var AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader */
+            $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader::class);
             $this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
         }
         return $this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
@@ -24,7 +24,7 @@ class MetaKeyNotAllowedErrorPayloadObjectTypeResolver extends AbstractErrorPaylo
 
     public function getTypeName(): string
     {
-        return 'MetaKeyNotAllowedErrorPayload';
+        return 'AccessToMetaKeyIsNotAllowedErrorPayload';
     }
 
     public function getTypeDescription(): ?string
@@ -34,6 +34,6 @@ class MetaKeyNotAllowedErrorPayloadObjectTypeResolver extends AbstractErrorPaylo
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getMetaKeyNotAllowedErrorPayloadObjectTypeDataLoader();
+        return $this->getAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader();
     }
 }
