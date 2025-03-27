@@ -6,7 +6,7 @@ namespace PoPCMSSchema\MetaMutations\MutationResolvers;
 
 use PoPCMSSchema\MetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MetaMutations\ObjectModels\AccessToMetaKeyIsNotAllowedErrorPayload;
-use PoPCMSSchema\MetaMutations\ObjectModels\TaxonomyTermMetaAlreadyHasSingleEntryErrorPayload;
+use PoPCMSSchema\MetaMutations\ObjectModels\TermMetaAlreadyHasSingleEntryErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
@@ -25,7 +25,7 @@ trait PayloadableMetaMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E1,
-            ] => new TaxonomyTermMetaAlreadyHasSingleEntryErrorPayload(
+            ] => new TermMetaAlreadyHasSingleEntryErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [

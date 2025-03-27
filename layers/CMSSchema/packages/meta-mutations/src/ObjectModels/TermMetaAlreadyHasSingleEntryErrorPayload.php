@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MetaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class TaxonomyTermMetaAlreadyHasSingleEntryErrorPayload extends AbstractErrorPayload
+final class TermMetaAlreadyHasSingleEntryErrorPayload extends AbstractErrorPayload
 {
 }
