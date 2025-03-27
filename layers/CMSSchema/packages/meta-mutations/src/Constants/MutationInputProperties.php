@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\Constants;
+namespace PoPCMSSchema\MetaMutations\Constants;
 
 class MutationInputProperties
 {

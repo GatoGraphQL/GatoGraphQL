@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType\AbstractUpdateTaxonomyTermMetaInputObjectTypeResolver;
 
 abstract class AbstractUpdateCategoryTermMetaInputObjectTypeResolver extends AbstractUpdateTaxonomyTermMetaInputObjectTypeResolver implements UpdateCategoryTermMetaInputObjectTypeResolverInterface

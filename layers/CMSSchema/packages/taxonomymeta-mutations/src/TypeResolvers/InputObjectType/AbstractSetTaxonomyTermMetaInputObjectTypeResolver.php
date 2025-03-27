@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\ListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;

@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
-use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\AbstractMutateTaxonomyTermMetaMutationResolver;
 use PoP\ComponentModel\App;

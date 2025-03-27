@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;

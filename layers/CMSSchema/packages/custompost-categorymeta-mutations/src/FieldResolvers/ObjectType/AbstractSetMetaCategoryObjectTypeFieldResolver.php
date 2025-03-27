@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Module;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\ModuleConfiguration;
-use PoPCMSSchema\TaxonomyMetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
