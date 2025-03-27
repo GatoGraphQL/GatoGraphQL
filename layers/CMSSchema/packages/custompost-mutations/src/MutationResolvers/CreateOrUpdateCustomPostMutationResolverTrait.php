@@ -26,24 +26,6 @@ trait CreateOrUpdateCustomPostMutationResolverTrait
     abstract protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface;
     abstract protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface;
 
-    /**
-     * Check that the user is logged-in
-     */
-    protected function validateIsUserLoggedIn(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
-        if ($errorFeedbackItemResolution !== null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $errorFeedbackItemResolution,
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
-    }
-
     protected function validateCanLoggedInUserEditCustomPosts(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
