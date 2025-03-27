@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\AbstractGenericCategoryMetaMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
@@ -24,10 +21,7 @@ class GenericCategoryMutationTransientEntityOperationPayloadObjectTypeFieldResol
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            GenericCategoryUpdateMetaMutationPayloadObjectTypeResolver::class,
-            RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
-            RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
-            RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
+            AbstractGenericCategoryMetaMutationPayloadObjectTypeResolver::class,
         ];
     }
 }
