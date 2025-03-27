@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\Hooks;
 
 use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetMetaOnCategoryMutationResolverTrait;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeAPIs\CustomPostCategoryMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
@@ -20,10 +18,7 @@ use stdClass;
 
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
-    use SetMetaOnCategoryMutationResolverTrait;
-
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
-    private ?CustomPostCategoryMetaTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
@@ -34,15 +29,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $this->customPostTypeAPI = $customPostTypeAPI;
         }
         return $this->customPostTypeAPI;
-    }
-    final protected function getCustomPostCategoryMetaTypeMutationAPI(): CustomPostCategoryMetaTypeMutationAPIInterface
-    {
-        if ($this->customPostCategoryTypeMutationAPI === null) {
-            /** @var CustomPostCategoryMetaTypeMutationAPIInterface */
-            $customPostCategoryTypeMutationAPI = $this->instanceManager->getInstance(CustomPostCategoryMetaTypeMutationAPIInterface::class);
-            $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
-        }
-        return $this->customPostCategoryTypeMutationAPI;
     }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {
