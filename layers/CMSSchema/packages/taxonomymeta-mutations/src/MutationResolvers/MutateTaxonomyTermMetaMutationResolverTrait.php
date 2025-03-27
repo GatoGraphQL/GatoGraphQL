@@ -8,9 +8,6 @@ use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverT
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateTaxonomyTermMutationResolverTrait;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 trait MutateTaxonomyTermMetaMutationResolverTrait
 {
@@ -24,20 +21,10 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
         return $this->getTaxonomyMetaTypeAPI();
     }
 
-    protected function validateSingleMetaEntryDoesNotExist(
-        string|int $taxonomyTermID,
+    protected function doesSingleMetaEntryAlreadyExist(
+        string|int $termID,
         string $key,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        if ($this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($taxonomyTermID, $key, true) === null) {
-            return;
-        }
-        $objectTypeFieldResolutionFeedbackStore->addError(
-            new ObjectTypeFieldResolutionFeedback(
-                $this->getSingleMetaEntryAlreadyExistsError($taxonomyTermID, $key),
-                $fieldDataAccessor->getField(),
-            )
-        );
+    ): bool {
+        return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($termID, $key, true) !== null;
     }
 }

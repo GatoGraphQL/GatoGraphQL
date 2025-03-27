@@ -15,6 +15,28 @@ trait MutateTermMetaMutationResolverTrait
 {
     abstract protected function getMetaTypeAPI(): MetaTypeAPIInterface;
 
+    protected function validateSingleMetaEntryDoesNotExist(
+        string|int $termID,
+        string $key,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!$this->doesSingleMetaEntryAlreadyExist($termID, $key)) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                $this->getSingleMetaEntryAlreadyExistsError($termID, $key),
+                $fieldDataAccessor->getField(),
+            )
+        );
+    }
+
+    abstract protected function doesSingleMetaEntryAlreadyExist(
+        string|int $termID,
+        string $key,
+    ): bool;
+
     protected function getSingleMetaEntryAlreadyExistsError(
         string|int $termID,
         string $key,
