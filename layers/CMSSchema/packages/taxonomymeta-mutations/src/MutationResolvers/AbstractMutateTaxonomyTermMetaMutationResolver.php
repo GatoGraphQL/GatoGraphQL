@@ -14,6 +14,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
+use stdClass;
 
 abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMutationResolver implements TaxonomyTermMetaMutationResolverInterface
 {
@@ -61,7 +62,22 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $this->validateCommonMetaErrors(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        /** @var stdClass */
+        $entries = $fieldDataAccessor->getValue(MutationInputProperties::ENTRIES);
+        $keys = array_keys((array)$entries);
+        $this->validateAreMetaKeysAllowed(
+            $keys,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -87,6 +103,13 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
+
+        $key = $fieldDataAccessor->getValue(MutationInputProperties::KEY);
+        $this->validateAreMetaKeysAllowed(
+            [$key],
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
         /** @var bool */
         $single = $fieldDataAccessor->getValue(MutationInputProperties::SINGLE);
@@ -160,7 +183,20 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $this->validateCommonMetaErrors(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $key = $fieldDataAccessor->getValue(MutationInputProperties::KEY);
+        $this->validateAreMetaKeysAllowed(
+            [$key],
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -176,7 +212,20 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $this->validateCommonMetaErrors(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $key = $fieldDataAccessor->getValue(MutationInputProperties::KEY);
+        $this->validateAreMetaKeysAllowed(
+            [$key],
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
