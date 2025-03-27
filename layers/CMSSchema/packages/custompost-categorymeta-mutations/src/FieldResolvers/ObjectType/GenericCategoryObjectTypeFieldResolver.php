@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CategoryMetaMutations\FieldResolvers\ObjectType\AbstractCategoryObjectTypeFieldResolver;
-use PoPCMSSchema\CategoryMutations\Module as CategoryMutationsModule;
-use PoPCMSSchema\CategoryMutations\ModuleConfiguration as CategoryMutationsModuleConfiguration;
+use PoPCMSSchema\CategoryMetaMutations\Module as CategoryMetaMutationsModule;
+use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration as CategoryMetaMutationsModuleConfiguration;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryAddMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryDeleteMetaMutationPayloadObjectTypeResolver;
@@ -82,10 +82,10 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        /** @var CategoryMutationsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CategoryMutationsModule::class)->getConfiguration();
-        $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
-        if (!$usePayloadableCategoryMutations) {
+        /** @var CategoryMetaMutationsModuleConfiguration */
+        $moduleConfiguration = App::getModule(CategoryMetaMutationsModule::class)->getConfiguration();
+        $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
+        if (!$usePayloadableCategoryMetaMutations) {
             return match ($fieldName) {
                 'addMeta',
                 'deleteMeta',
