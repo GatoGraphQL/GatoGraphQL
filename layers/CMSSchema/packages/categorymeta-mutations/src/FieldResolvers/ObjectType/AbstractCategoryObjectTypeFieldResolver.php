@@ -81,16 +81,16 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldNamesToResolve(): array
     {
         return [
-            'update',
-            'delete',
+            'updateMeta',
+            'deleteMeta',
         ];
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'update' => $this->__('Update the category', 'categorymeta-mutations'),
-            'delete' => $this->__('Delete the category', 'categorymeta-mutations'),
+            'updateMeta' => $this->__('Update the category', 'categorymeta-mutations'),
+            'deleteMeta' => $this->__('Delete the category', 'categorymeta-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -102,16 +102,16 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
         if (!$usePayloadableCategoryMetaMutations) {
             return match ($fieldName) {
-                'update',
-                'delete'
+                'updateMeta',
+                'deleteMeta'
                     => SchemaTypeModifiers::NONE,
                 default
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'update',
-            'delete'
+            'updateMeta',
+            'deleteMeta'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -124,10 +124,10 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'update' => [
+            'updateMeta' => [
                 'input' => $this->getCategoryTermUpdateMetaInputObjectTypeResolver(),
             ],
-            'delete' => [],
+            'deleteMeta' => [],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -135,8 +135,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['update' => 'input']
-            // ['delete' => 'input']
+            ['updateMeta' => 'input']
+            // ['deleteMeta' => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             default
                 => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
@@ -153,8 +153,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         string $fieldName
     ): bool {
         switch ($fieldName) {
-            case 'update':
-            case 'delete':
+            case 'updateMeta':
+            case 'deleteMeta':
                 return true;
         }
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
@@ -170,7 +170,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         FieldInterface $field,
     ): ?string {
         return match ($field->getName()) {
-            'delete' => 'input',
+            'deleteMeta' => 'input',
             default => parent::getFieldArgsInputObjectSubpropertyName(
                 $objectTypeResolver,
                 $field,
@@ -196,11 +196,11 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         );
         $category = $object;
         switch ($field->getName()) {
-            case 'update':
+            case 'updateMeta':
                 $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
                 break;
 
-            case 'delete':
+            case 'deleteMeta':
                 // This mutation receives no input! Hence create it
                 $fieldArgsForMutationForObject['input'] = (object) [
                     MutationInputProperties::ID => $objectTypeResolver->getID($category),
@@ -238,8 +238,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         }
 
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'update':
-            case 'delete':
+            case 'updateMeta':
+            case 'deleteMeta':
                 $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
                 break;
         }
