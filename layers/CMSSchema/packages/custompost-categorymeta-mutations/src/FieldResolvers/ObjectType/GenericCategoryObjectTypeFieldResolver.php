@@ -10,6 +10,7 @@ use PoPCMSSchema\CategoryMutations\ModuleConfiguration as CategoryMutationsModul
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryAddMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryDeleteMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategorySetMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMetaMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -21,6 +22,7 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     private ?GenericCategoryDeleteMetaMutationPayloadObjectTypeResolver $genericCategoryDeleteMetaMutationPayloadObjectTypeResolver = null;
     private ?GenericCategoryAddMetaMutationPayloadObjectTypeResolver $genericCategoryCreateMutationPayloadObjectTypeResolver = null;
     private ?GenericCategoryUpdateMetaMutationPayloadObjectTypeResolver $genericCategoryUpdateMetaMutationPayloadObjectTypeResolver = null;
+    private ?GenericCategorySetMetaMutationPayloadObjectTypeResolver $genericCategorySetMetaMutationPayloadObjectTypeResolver = null;
 
     final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
     {
@@ -58,6 +60,15 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         }
         return $this->genericCategoryUpdateMetaMutationPayloadObjectTypeResolver;
     }
+    final protected function getGenericCategorySetMetaMutationPayloadObjectTypeResolver(): GenericCategorySetMetaMutationPayloadObjectTypeResolver
+    {
+        if ($this->genericCategorySetMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var GenericCategorySetMetaMutationPayloadObjectTypeResolver */
+            $genericCategorySetMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(GenericCategorySetMetaMutationPayloadObjectTypeResolver::class);
+            $this->genericCategorySetMetaMutationPayloadObjectTypeResolver = $genericCategorySetMetaMutationPayloadObjectTypeResolver;
+        }
+        return $this->genericCategorySetMetaMutationPayloadObjectTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -77,8 +88,9 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         if (!$usePayloadableCategoryMutations) {
             return match ($fieldName) {
                 'addMeta',
-                'updateMeta',
-                'deleteMeta'
+                'deleteMeta',
+                'setMeta',
+                'updateMeta'
                     => $this->getGenericCategoryObjectTypeResolver(),
                 default
                     => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -86,8 +98,9 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         }
         return match ($fieldName) {
             'addMeta' => $this->getGenericCategoryAddMetaMutationPayloadObjectTypeResolver(),
-            'updateMeta' => $this->getGenericCategoryUpdateMetaMutationPayloadObjectTypeResolver(),
             'deleteMeta' => $this->getGenericCategoryDeleteMetaMutationPayloadObjectTypeResolver(),
+            'setMeta' => $this->getGenericCategorySetMetaMutationPayloadObjectTypeResolver(),
+            'updateMeta' => $this->getGenericCategoryUpdateMetaMutationPayloadObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
