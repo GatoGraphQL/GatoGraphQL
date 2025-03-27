@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\UnionType;
+namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType;
 
 abstract class AbstractCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver extends AbstractCategoryMetaMutationErrorPayloadUnionTypeResolver
 {
