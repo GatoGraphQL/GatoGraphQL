@@ -16,8 +16,6 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMutateTaxonomyTermMetaMutationResolver implements CategoryTermMetaMutationResolverInterface
 {
-    use MutateCategoryTermMetaMutationResolverTrait;
-
     private ?CategoryMetaTypeMutationAPIInterface $categoryTypeMutationAPI = null;
 
     final protected function getCategoryMetaTypeMutationAPI(): CategoryMetaTypeMutationAPIInterface
