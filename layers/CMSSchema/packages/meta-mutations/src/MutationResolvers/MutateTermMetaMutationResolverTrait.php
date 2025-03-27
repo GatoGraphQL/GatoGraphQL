@@ -16,14 +16,14 @@ trait MutateTermMetaMutationResolverTrait
     abstract protected function getMetaTypeAPI(): MetaTypeAPIInterface;
 
     protected function getSingleMetaEntryAlreadyExistsError(
-        string|int $taxonomyTermID,
+        string|int $termID,
         string $key,
     ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E1,
             [
-                $taxonomyTermID,
+                $termID,
                 $key,
             ]
         );
