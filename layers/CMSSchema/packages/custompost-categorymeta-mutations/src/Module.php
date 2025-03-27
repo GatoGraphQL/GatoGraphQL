@@ -9,11 +9,6 @@ use PoP\Root\Module\AbstractModule;
 
 class Module extends AbstractModule
 {
-    protected function requiresSatisfyingModule(): bool
-    {
-        return true;
-    }
-
     /**
      * @return array<class-string<ModuleInterface>>
      */
