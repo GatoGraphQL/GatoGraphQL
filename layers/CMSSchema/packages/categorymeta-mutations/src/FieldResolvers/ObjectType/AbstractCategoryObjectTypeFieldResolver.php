@@ -127,7 +127,9 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'updateMeta' => [
                 'input' => $this->getCategoryTermUpdateMetaInputObjectTypeResolver(),
             ],
-            'deleteMeta' => [],
+            'deleteMeta' => [
+                'input' => $this->getCategoryTermDeleteMetaInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -135,8 +137,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['updateMeta' => 'input']
-            // ['deleteMeta' => 'input']
+            ['updateMeta' => 'input'],
+            ['deleteMeta' => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             default
                 => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
@@ -161,24 +163,6 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     }
 
     /**
-     * Because "delete" receives no arguments, it doesn't
-     * know it needs to pass the "input" entry to the MutationResolver,
-     * so explicitly set it up then.
-     */
-    public function getFieldArgsInputObjectSubpropertyName(
-        ObjectTypeResolverInterface $objectTypeResolver,
-        FieldInterface $field,
-    ): ?string {
-        return match ($field->getName()) {
-            'deleteMeta' => 'input',
-            default => parent::getFieldArgsInputObjectSubpropertyName(
-                $objectTypeResolver,
-                $field,
-            ),
-        };
-    }
-
-    /**
      * @param array<string,mixed> $fieldArgsForMutationForObject
      * @return array<string,mixed>
      */
@@ -197,14 +181,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         $category = $object;
         switch ($field->getName()) {
             case 'updateMeta':
-                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
-                break;
-
             case 'deleteMeta':
-                // This mutation receives no input! Hence create it
-                $fieldArgsForMutationForObject['input'] = (object) [
-                    MutationInputProperties::ID => $objectTypeResolver->getID($category),
-                ];
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
                 break;
         }
         return $fieldArgsForMutationForObject;
