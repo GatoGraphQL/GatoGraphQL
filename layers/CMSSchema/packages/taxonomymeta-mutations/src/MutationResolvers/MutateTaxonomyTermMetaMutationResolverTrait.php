@@ -57,14 +57,11 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $nonAllowedMetaKeys = [];
         $taxonomyMetaTypeAPI = $this->getTaxonomyMetaTypeAPI();
-        foreach ($metaKeys as $metaKey) {
-            if ($taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($metaKey)) {
-                continue;
-            }
-            $nonAllowedMetaKeys[] = $metaKey;
-        }
+        $nonAllowedMetaKeys = array_map(
+            fn (string $metaKey) => !$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($metaKey),
+            $metaKeys
+        );
         if ($nonAllowedMetaKeys === []) {
             return;
         }
