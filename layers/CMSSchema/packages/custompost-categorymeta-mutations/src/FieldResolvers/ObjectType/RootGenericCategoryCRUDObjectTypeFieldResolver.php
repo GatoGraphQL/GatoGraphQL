@@ -37,7 +37,6 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\Module as EngineModule;
 use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
@@ -68,7 +67,6 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     private ?RootUpdateCategoryTermMetaInputObjectTypeResolver $rootUpdateCategoryTermMetaInputObjectTypeResolver = null;
     private ?RootAddCategoryTermMetaInputObjectTypeResolver $rootAddCategoryTermMetaInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
-    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
     {
@@ -249,15 +247,6 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
             $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
         }
         return $this->userLoggedInCheckpoint;
-    }
-    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
-    {
-        if ($this->booleanScalarTypeResolver === null) {
-            /** @var BooleanScalarTypeResolver */
-            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
-            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
-        }
-        return $this->booleanScalarTypeResolver;
     }
 
     /**
@@ -491,11 +480,10 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
             'addCategoryMeta',
             'addCategoryMetas',
             'updateCategoryMeta',
-            'updateCategoryMetas'
-                => $this->getGenericCategoryObjectTypeResolver(),
+            'updateCategoryMetas',
             'deleteCategoryMeta',
             'deleteCategoryMetas'
-                => $this->getBooleanScalarTypeResolver(),
+                => $this->getGenericCategoryObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
