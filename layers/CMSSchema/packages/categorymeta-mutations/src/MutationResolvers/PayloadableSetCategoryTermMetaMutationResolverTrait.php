@@ -10,11 +10,11 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
-trait PayloadableDeleteCategoryTermMetaMutationResolverTrait
+trait PayloadableSetCategoryTermMetaMutationResolverTrait
 {
-    use PayloadableMutationResolverTrait, DeleteCategoryTermMetaMutationResolverTrait {
-        DeleteCategoryTermMetaMutationResolverTrait::executeMutation as upstreamExecuteMutation;
-        PayloadableMutationResolverTrait::validate insteadof DeleteCategoryTermMetaMutationResolverTrait;
+    use PayloadableMutationResolverTrait, SetCategoryTermMetaMutationResolverTrait {
+        SetCategoryTermMetaMutationResolverTrait::executeMutation as upstreamExecuteMutation;
+        PayloadableMutationResolverTrait::validate insteadof SetCategoryTermMetaMutationResolverTrait;
     }
     use PayloadableCategoryMetaMutationResolverTrait;
 
@@ -29,7 +29,7 @@ trait PayloadableDeleteCategoryTermMetaMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $this->validateDeleteMetaErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
+        $this->validateSetMetaErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createFailureObjectMutationPayload(
                 array_map(
