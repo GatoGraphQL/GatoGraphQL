@@ -89,8 +89,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'updateMeta' => $this->__('Update the category', 'categorymeta-mutations'),
-            'deleteMeta' => $this->__('Delete the category', 'categorymeta-mutations'),
+            'updateMeta' => $this->__('Update a category term meta entry', 'categorymeta-mutations'),
+            'deleteMeta' => $this->__('Delete a category term meta entry', 'categorymeta-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
