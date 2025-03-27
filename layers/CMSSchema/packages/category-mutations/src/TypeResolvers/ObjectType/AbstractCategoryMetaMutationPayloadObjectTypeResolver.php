@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeResolver;
 
-abstract class AbstractCategoryMutationPayloadObjectTypeResolver extends AbstractObjectMutationPayloadObjectTypeResolver
+abstract class AbstractCategoryMetaMutationPayloadObjectTypeResolver extends AbstractObjectMutationPayloadObjectTypeResolver
 {
 }
