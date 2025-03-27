@@ -3,3 +3,6 @@ services:
         public: true
         autowire: true
         autoconfigure: true
+
+    PoPCMSSchema\MetaMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

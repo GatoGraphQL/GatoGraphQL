@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\ObjectModels;
+namespace PoPCMSSchema\MetaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 

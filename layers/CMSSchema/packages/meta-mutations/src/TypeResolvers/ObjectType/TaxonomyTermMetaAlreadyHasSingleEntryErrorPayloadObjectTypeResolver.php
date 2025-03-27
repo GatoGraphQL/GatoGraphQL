@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\MetaMutations\TypeResolvers\ObjectType;
 
-use PoPCMSSchema\TaxonomyMetaMutations\RelationalTypeDataLoaders\ObjectType\TaxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
+use PoPCMSSchema\MetaMutations\RelationalTypeDataLoaders\ObjectType\TaxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractErrorPayloadObjectTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 

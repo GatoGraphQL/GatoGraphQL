@@ -5,6 +5,3 @@ services:
 
     PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
-
-    PoPCMSSchema\TaxonomyMetaMutations\RelationalTypeDataLoaders\:
-        resource: '../src/RelationalTypeDataLoaders/*'
