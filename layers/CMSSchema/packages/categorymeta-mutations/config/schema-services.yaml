@@ -11,9 +11,3 @@ services:
 
     PoPCMSSchema\CategoryMetaMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
-
-    PoPCMSSchema\CategoryMetaMutations\ObjectTypeResolverPickers\:
-        resource: '../src/ObjectTypeResolverPickers/*'
-
-    PoPCMSSchema\CategoryMetaMutations\RelationalTypeDataLoaders\:
-        resource: '../src/RelationalTypeDataLoaders/*'
