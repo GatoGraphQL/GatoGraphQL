@@ -11,16 +11,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker extends AbstractErrorPayloadObjectTypeResolverPicker
 {
-    private ?AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = null;
+    private ?AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver $accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver = null;
 
     final protected function getAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver(): AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver
     {
-        if ($this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver === null) {
+        if ($this->accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver === null) {
             /** @var AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver */
-            $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver::class);
-            $this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver;
+            $accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver::class);
+            $this->accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver = $accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver;
         }
-        return $this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver;
+        return $this->accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

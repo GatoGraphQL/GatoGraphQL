@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTypeResolver
 {
-    private ?AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = null;
+    private ?AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader $accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader = null;
 
     final protected function getAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader(): AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader
     {
-        if ($this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader === null) {
+        if ($this->accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader === null) {
             /** @var AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader */
-            $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader::class);
-            $this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
+            $accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader::class);
+            $this->accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader = $accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader;
         }
-        return $this->taxonomyTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
+        return $this->accessToMetaKeyIsNotAllowedErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string
