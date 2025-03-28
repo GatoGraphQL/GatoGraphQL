@@ -38,11 +38,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     {
         App::addAction(
             $this->getValidateCreateHookName(),
-            $this->maybeValidateSetCategoryMeta(...)
+            $this->maybeValidateSetMeta(...)
         );
         App::addAction(
             $this->getValidateUpdateHookName(),
-            $this->maybeValidateSetCategoryMeta(...)
+            $this->maybeValidateSetMeta(...)
         );
         App::addAction(
             $this->getExecuteCreateOrUpdateHookName(),
@@ -67,7 +67,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         return CategoryCRUDHookNames::ERROR_PAYLOAD;
     }
 
-    public function maybeValidateSetCategoryMeta(
+    public function maybeValidateSetMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
