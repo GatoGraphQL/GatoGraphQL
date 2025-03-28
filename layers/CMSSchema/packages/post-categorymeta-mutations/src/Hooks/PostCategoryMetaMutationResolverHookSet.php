@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostCategoryMetaMutations\Hooks;
 
 use PoPCMSSchema\CategoryMetaMutations\Hooks\AbstractCategoryMetaMutationResolverHookSet;
-use PoPCMSSchema\CustomPostCategoryMutations\Constants\PostCategoryCRUDHookNames;
+use PoPCMSSchema\PostCategoryMutations\Constants\PostCategoryCRUDHookNames;
 
 class PostCategoryMetaMutationResolverHookSet extends AbstractCategoryMetaMutationResolverHookSet
 {
