@@ -14,7 +14,7 @@ use PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs\TaxonomyMetaTypeMutationAPI;
 class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements CategoryMetaTypeMutationAPIInterface
 {
     /**
-     * @param array<string,mixed[]> $entries
+     * @param array<string,mixed[]|null> $entries
      * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
     public function setCategoryTermMeta(

@@ -10,7 +10,7 @@ use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationExc
 interface TaxonomyMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterface
 {
     /**
-     * @param array<string,mixed[]> $entries
+     * @param array<string,mixed[]|null> $entries
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
     public function setTaxonomyTermMeta(

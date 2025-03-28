@@ -13,7 +13,7 @@ use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInter
 interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationAPIInterface
 {
     /**
-     * @param array<string,mixed[]> $entries
+     * @param array<string,mixed[]|null> $entries
      * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
     public function setCategoryTermMeta(

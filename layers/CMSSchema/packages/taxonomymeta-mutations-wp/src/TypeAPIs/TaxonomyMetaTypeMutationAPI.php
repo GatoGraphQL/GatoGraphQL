@@ -21,7 +21,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     use TypeMutationAPITrait;
 
     /**
-     * @param array<string,mixed[]> $entries
+     * @param array<string,mixed[]|null> $entries
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
     public function setTaxonomyTermMeta(
@@ -29,6 +29,10 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         array $entries,
     ): void {
         foreach ($entries as $key => $values) {
+            if ($values === null) {
+                $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+            }
+
             $numberItems = count($values);
             if ($numberItems === 0) {
                 continue;

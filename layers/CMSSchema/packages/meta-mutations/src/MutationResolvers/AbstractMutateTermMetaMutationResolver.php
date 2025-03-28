@@ -294,7 +294,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
     }
 
     /**
-     * @param array<string,mixed[]> $entries
+     * @param array<string,mixed[]|null> $entries
      * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
     abstract protected function executeSetTermMeta(string|int $termID, array $entries): void;

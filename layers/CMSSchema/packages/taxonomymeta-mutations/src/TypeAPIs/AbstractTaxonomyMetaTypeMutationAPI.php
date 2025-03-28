@@ -11,7 +11,7 @@ use PoP\Root\Services\AbstractBasicService;
 abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService implements TaxonomyMetaTypeMutationAPIInterface
 {
     /**
-     * @param array<string,mixed[]> $entries
+     * @param array<string,mixed[]|null> $entries
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
     public function setTermMeta(
