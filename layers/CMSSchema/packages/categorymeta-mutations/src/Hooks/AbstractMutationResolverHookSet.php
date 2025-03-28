@@ -101,8 +101,8 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return false;
         }
         /** @var stdClass */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::META);
-        if (((array) $categoriesBy) === []) {
+        $meta = $fieldDataAccessor->getValue(MutationInputProperties::META);
+        if (((array) $meta) === []) {
             return false;
         }
 
