@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\Hooks;
+namespace PoPCMSSchema\MetaMutations\Hooks;
 
-use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
 use PoPCMSSchema\MetaMutations\MutationResolvers\PayloadableMetaMutationResolverTrait;
-use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
+use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -17,22 +16,12 @@ use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use stdClass;
 
-abstract class AbstractMutationResolverHookSet extends AbstractHookSet
+abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
 {
     use MutateTermMetaMutationResolverTrait;
     use PayloadableMetaMutationResolverTrait;
     
-    private ?TaxonomyMetaTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
-
-    final protected function getTaxonomyMetaTypeMutationAPI(): TaxonomyMetaTypeMutationAPIInterface
-    {
-        if ($this->taxonomyTypeMutationAPI === null) {
-            /** @var TaxonomyMetaTypeMutationAPIInterface */
-            $taxonomyTypeMutationAPI = $this->instanceManager->getInstance(TaxonomyMetaTypeMutationAPIInterface::class);
-            $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;
-        }
-        return $this->taxonomyTypeMutationAPI;
-    }
+    abstract protected function getMetaTypeMutationAPI(): MetaTypeMutationAPIInterface;
 
     protected function init(): void
     {
@@ -62,10 +51,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     abstract protected function getValidateUpdateHookName(): string;
     abstract protected function getExecuteCreateOrUpdateHookName(): string;
 
-    protected function getErrorPayloadHookName(): string
-    {
-        return CategoryCRUDHookNames::ERROR_PAYLOAD;
-    }
+    abstract protected function getErrorPayloadHookName(): string;
 
     public function maybeValidateSetMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -101,7 +87,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     }
 
     public function maybeSetMeta(
-        int|string $taxonomyTermID,
+        int|string $termID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -111,7 +97,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
         /** @var stdClass */
         $metaEntries = $fieldDataAccessor->getValue(MutationInputProperties::META);
-        $this->getTaxonomyMetaTypeMutationAPI()->setTaxonomyTermMeta($taxonomyTermID, (array) $metaEntries);
+        $this->getMetaTypeMutationAPI()->setTermMeta($termID, (array) $metaEntries);
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
