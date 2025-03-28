@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\Hooks;
 
 use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
 use PoPCMSSchema\MetaMutations\MutationResolvers\PayloadableMetaMutationResolverTrait;
-use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -23,26 +22,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     use MutateTermMetaMutationResolverTrait;
     use PayloadableMetaMutationResolverTrait;
     
-    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
-    private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
+    private ?TaxonomyMetaTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
 
-    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    final protected function getTaxonomyMetaTypeMutationAPI(): TaxonomyMetaTypeMutationAPIInterface
     {
-        if ($this->customPostTypeAPI === null) {
-            /** @var CustomPostTypeAPIInterface */
-            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
-            $this->customPostTypeAPI = $customPostTypeAPI;
+        if ($this->taxonomyTypeMutationAPI === null) {
+            /** @var TaxonomyMetaTypeMutationAPIInterface */
+            $taxonomyTypeMutationAPI = $this->instanceManager->getInstance(TaxonomyMetaTypeMutationAPIInterface::class);
+            $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;
         }
-        return $this->customPostTypeAPI;
-    }
-    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
-    {
-        if ($this->taxonomyTermTypeAPI === null) {
-            /** @var TaxonomyTermTypeAPIInterface */
-            $taxonomyTermTypeAPI = $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
-            $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
-        }
-        return $this->taxonomyTermTypeAPI;
+        return $this->taxonomyTypeMutationAPI;
     }
 
     protected function init(): void
@@ -112,7 +101,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     }
 
     public function maybeSetMeta(
-        int|string $customPostID,
+        int|string $taxonomyTermID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -120,12 +109,10 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        $this->setMetaOnCategory(
-            $customPostID,
-            false,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        /** @var stdClass */
+        $metaEntries = $fieldDataAccessor->getValue(MutationInputProperties::META);
+
+        $this->getTaxonomyMetaTypeMutationAPI()->setTaxonomyTermMeta($taxonomyTermID, (array) $metaEntries);
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
