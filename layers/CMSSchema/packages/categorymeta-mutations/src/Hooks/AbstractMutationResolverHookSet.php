@@ -111,7 +111,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
         /** @var stdClass */
         $metaEntries = $fieldDataAccessor->getValue(MutationInputProperties::META);
-
         $this->getTaxonomyMetaTypeMutationAPI()->setTaxonomyTermMeta($taxonomyTermID, (array) $metaEntries);
     }
 
