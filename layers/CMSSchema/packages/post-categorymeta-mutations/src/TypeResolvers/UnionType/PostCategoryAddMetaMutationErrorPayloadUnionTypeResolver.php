@@ -29,7 +29,7 @@ class PostCategoryAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractC
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when adding meta on a category term (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when adding meta on a post\'s category term (using nested mutations)', 'post-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
