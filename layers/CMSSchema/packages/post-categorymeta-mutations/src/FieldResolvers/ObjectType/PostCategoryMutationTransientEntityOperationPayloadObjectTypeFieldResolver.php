@@ -12,7 +12,7 @@ class PostCategoryMutationTransientEntityOperationPayloadObjectTypeFieldResolver
 {
     protected function getObjectIDFieldName(): string
     {
-        return 'categoryID';
+        return 'postCategoryID';
     }
 
     /**
