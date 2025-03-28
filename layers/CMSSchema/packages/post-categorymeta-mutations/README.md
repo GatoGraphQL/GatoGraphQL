@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds meta mutations to the `GenericCategory` type
+Adds meta mutations to the `PostCategory` type
 
 ## Install
 
