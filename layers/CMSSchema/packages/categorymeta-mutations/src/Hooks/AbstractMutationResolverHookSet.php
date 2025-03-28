@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMetaMutations\Hooks;
+namespace PoPCMSSchema\CategoryMetaMutations\Hooks;
 
-use PoPCMSSchema\CustomPostCategoryMetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
@@ -18,6 +19,8 @@ use stdClass;
 
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
+    use MutateTermMetaMutationResolverTrait;
+    
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
@@ -44,15 +47,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     {
         App::addAction(
             $this->getValidateCreateHookName(),
-            $this->maybeValidateCategories(...),
-            10,
-            3
+            $this->maybeValidateSetCategoryMeta(...)
         );
         App::addAction(
             $this->getValidateUpdateHookName(),
-            $this->maybeValidateCategories(...),
-            10,
-            3
+            $this->maybeValidateSetCategoryMeta(...)
         );
         App::addAction(
             $this->getExecuteCreateOrUpdateHookName(),
@@ -77,28 +76,19 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         return CategoryCRUDHookNames::ERROR_PAYLOAD;
     }
 
-    public function maybeValidateCategories(
+    public function maybeValidateSetCategoryMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-        string $customPostType,
     ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
 
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        $this->validateIsUserLoggedIn(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $this->validateSetMetaOnCategory(
-            $customPostType,
+        /** @var stdClass */
+        $metaEntries = $fieldDataAccessor->getValue(MutationInputProperties::META);
+        $keys = array_keys((array)$metaEntries);
+        $this->validateAreMetaKeysAllowed(
+            $keys,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -107,11 +97,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function canExecuteMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORY_BY)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::META)) {
             return false;
         }
         /** @var stdClass */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_BY);
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::META);
         if (((array) $categoriesBy) === []) {
             return false;
         }
