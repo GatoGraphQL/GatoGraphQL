@@ -11,22 +11,22 @@ use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\RootSetCate
 use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\RootUpdateCategoryTermMetaInputObjectTypeResolver;
 use PoPCMSSchema\CategoryMutations\Module;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\AddGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\AddGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\DeleteGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\DeleteGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableAddGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableDeleteGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableSetGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\SetGenericCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\UpdateGenericCategoryTermMetaBulkOperationMutationResolver;
-use PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\UpdateGenericCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\AddCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\AddCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\DeleteCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\DeleteCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableAddCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableAddCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableDeleteCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableDeleteCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableSetCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableSetCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableUpdateCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableUpdateCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\SetCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\SetCategoryTermMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\UpdateCategoryTermMetaBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\UpdateCategoryTermMetaMutationResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\RootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
@@ -58,22 +58,22 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
     private ?RootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
     private ?RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
     private ?RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
-    private ?AddGenericCategoryTermMetaMutationResolver $addGenericCategoryTermMetaMutationResolver = null;
-    private ?AddGenericCategoryTermMetaBulkOperationMutationResolver $addGenericCategoryTermMetaBulkOperationMutationResolver = null;
-    private ?DeleteGenericCategoryTermMetaMutationResolver $deleteGenericCategoryTermMetaMutationResolver = null;
-    private ?DeleteGenericCategoryTermMetaBulkOperationMutationResolver $deleteGenericCategoryTermMetaBulkOperationMutationResolver = null;
-    private ?SetGenericCategoryTermMetaMutationResolver $setGenericCategoryTermMetaMutationResolver = null;
-    private ?SetGenericCategoryTermMetaBulkOperationMutationResolver $setGenericCategoryTermMetaBulkOperationMutationResolver = null;
-    private ?UpdateGenericCategoryTermMetaMutationResolver $updateGenericCategoryTermMetaMutationResolver = null;
-    private ?UpdateGenericCategoryTermMetaBulkOperationMutationResolver $updateGenericCategoryTermMetaBulkOperationMutationResolver = null;
-    private ?PayloadableDeleteGenericCategoryTermMetaMutationResolver $payloadableDeleteGenericCategoryTermMetaMutationResolver = null;
-    private ?PayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver $payloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver = null;
-    private ?PayloadableSetGenericCategoryTermMetaMutationResolver $payloadableSetGenericCategoryTermMetaMutationResolver = null;
-    private ?PayloadableSetGenericCategoryTermMetaBulkOperationMutationResolver $payloadableSetGenericCategoryTermMetaBulkOperationMutationResolver = null;
-    private ?PayloadableUpdateGenericCategoryTermMetaMutationResolver $payloadableUpdateGenericCategoryTermMetaMutationResolver = null;
-    private ?PayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver $payloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver = null;
-    private ?PayloadableAddGenericCategoryTermMetaMutationResolver $payloadableAddGenericCategoryTermMetaMutationResolver = null;
-    private ?PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver $payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?AddCategoryTermMetaMutationResolver $addCategoryTermMetaMutationResolver = null;
+    private ?AddCategoryTermMetaBulkOperationMutationResolver $addCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?DeleteCategoryTermMetaMutationResolver $deleteCategoryTermMetaMutationResolver = null;
+    private ?DeleteCategoryTermMetaBulkOperationMutationResolver $deleteCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?SetCategoryTermMetaMutationResolver $setCategoryTermMetaMutationResolver = null;
+    private ?SetCategoryTermMetaBulkOperationMutationResolver $setCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?UpdateCategoryTermMetaMutationResolver $updateCategoryTermMetaMutationResolver = null;
+    private ?UpdateCategoryTermMetaBulkOperationMutationResolver $updateCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?PayloadableDeleteCategoryTermMetaMutationResolver $payloadableDeleteCategoryTermMetaMutationResolver = null;
+    private ?PayloadableDeleteCategoryTermMetaBulkOperationMutationResolver $payloadableDeleteCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?PayloadableSetCategoryTermMetaMutationResolver $payloadableSetCategoryTermMetaMutationResolver = null;
+    private ?PayloadableSetCategoryTermMetaBulkOperationMutationResolver $payloadableSetCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?PayloadableUpdateCategoryTermMetaMutationResolver $payloadableUpdateCategoryTermMetaMutationResolver = null;
+    private ?PayloadableUpdateCategoryTermMetaBulkOperationMutationResolver $payloadableUpdateCategoryTermMetaBulkOperationMutationResolver = null;
+    private ?PayloadableAddCategoryTermMetaMutationResolver $payloadableAddCategoryTermMetaMutationResolver = null;
+    private ?PayloadableAddCategoryTermMetaBulkOperationMutationResolver $payloadableAddCategoryTermMetaBulkOperationMutationResolver = null;
     private ?RootDeleteCategoryTermMetaInputObjectTypeResolver $rootDeleteCategoryTermMetaInputObjectTypeResolver = null;
     private ?RootSetCategoryTermMetaInputObjectTypeResolver $rootSetCategoryTermMetaInputObjectTypeResolver = null;
     private ?RootUpdateCategoryTermMetaInputObjectTypeResolver $rootUpdateCategoryTermMetaInputObjectTypeResolver = null;
@@ -125,149 +125,149 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         }
         return $this->rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getAddGenericCategoryTermMetaMutationResolver(): AddGenericCategoryTermMetaMutationResolver
+    final protected function getAddCategoryTermMetaMutationResolver(): AddCategoryTermMetaMutationResolver
     {
-        if ($this->addGenericCategoryTermMetaMutationResolver === null) {
-            /** @var AddGenericCategoryTermMetaMutationResolver */
-            $addGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(AddGenericCategoryTermMetaMutationResolver::class);
-            $this->addGenericCategoryTermMetaMutationResolver = $addGenericCategoryTermMetaMutationResolver;
+        if ($this->addCategoryTermMetaMutationResolver === null) {
+            /** @var AddCategoryTermMetaMutationResolver */
+            $addCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(AddCategoryTermMetaMutationResolver::class);
+            $this->addCategoryTermMetaMutationResolver = $addCategoryTermMetaMutationResolver;
         }
-        return $this->addGenericCategoryTermMetaMutationResolver;
+        return $this->addCategoryTermMetaMutationResolver;
     }
-    final protected function getAddGenericCategoryTermMetaBulkOperationMutationResolver(): AddGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getAddCategoryTermMetaBulkOperationMutationResolver(): AddCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->addGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var AddGenericCategoryTermMetaBulkOperationMutationResolver */
-            $addGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(AddGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->addGenericCategoryTermMetaBulkOperationMutationResolver = $addGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->addCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var AddCategoryTermMetaBulkOperationMutationResolver */
+            $addCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(AddCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->addCategoryTermMetaBulkOperationMutationResolver = $addCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->addGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->addCategoryTermMetaBulkOperationMutationResolver;
     }
-    final protected function getDeleteGenericCategoryTermMetaMutationResolver(): DeleteGenericCategoryTermMetaMutationResolver
+    final protected function getDeleteCategoryTermMetaMutationResolver(): DeleteCategoryTermMetaMutationResolver
     {
-        if ($this->deleteGenericCategoryTermMetaMutationResolver === null) {
-            /** @var DeleteGenericCategoryTermMetaMutationResolver */
-            $deleteGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(DeleteGenericCategoryTermMetaMutationResolver::class);
-            $this->deleteGenericCategoryTermMetaMutationResolver = $deleteGenericCategoryTermMetaMutationResolver;
+        if ($this->deleteCategoryTermMetaMutationResolver === null) {
+            /** @var DeleteCategoryTermMetaMutationResolver */
+            $deleteCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(DeleteCategoryTermMetaMutationResolver::class);
+            $this->deleteCategoryTermMetaMutationResolver = $deleteCategoryTermMetaMutationResolver;
         }
-        return $this->deleteGenericCategoryTermMetaMutationResolver;
+        return $this->deleteCategoryTermMetaMutationResolver;
     }
-    final protected function getDeleteGenericCategoryTermMetaBulkOperationMutationResolver(): DeleteGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getDeleteCategoryTermMetaBulkOperationMutationResolver(): DeleteCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->deleteGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var DeleteGenericCategoryTermMetaBulkOperationMutationResolver */
-            $deleteGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(DeleteGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->deleteGenericCategoryTermMetaBulkOperationMutationResolver = $deleteGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->deleteCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var DeleteCategoryTermMetaBulkOperationMutationResolver */
+            $deleteCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(DeleteCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->deleteCategoryTermMetaBulkOperationMutationResolver = $deleteCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->deleteGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->deleteCategoryTermMetaBulkOperationMutationResolver;
     }
-    final protected function getSetGenericCategoryTermMetaMutationResolver(): SetGenericCategoryTermMetaMutationResolver
+    final protected function getSetCategoryTermMetaMutationResolver(): SetCategoryTermMetaMutationResolver
     {
-        if ($this->setGenericCategoryTermMetaMutationResolver === null) {
-            /** @var SetGenericCategoryTermMetaMutationResolver */
-            $setGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(SetGenericCategoryTermMetaMutationResolver::class);
-            $this->setGenericCategoryTermMetaMutationResolver = $setGenericCategoryTermMetaMutationResolver;
+        if ($this->setCategoryTermMetaMutationResolver === null) {
+            /** @var SetCategoryTermMetaMutationResolver */
+            $setCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(SetCategoryTermMetaMutationResolver::class);
+            $this->setCategoryTermMetaMutationResolver = $setCategoryTermMetaMutationResolver;
         }
-        return $this->setGenericCategoryTermMetaMutationResolver;
+        return $this->setCategoryTermMetaMutationResolver;
     }
-    final protected function getSetGenericCategoryTermMetaBulkOperationMutationResolver(): SetGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getSetCategoryTermMetaBulkOperationMutationResolver(): SetCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->setGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var SetGenericCategoryTermMetaBulkOperationMutationResolver */
-            $setGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(SetGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->setGenericCategoryTermMetaBulkOperationMutationResolver = $setGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->setCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var SetCategoryTermMetaBulkOperationMutationResolver */
+            $setCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(SetCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->setCategoryTermMetaBulkOperationMutationResolver = $setCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->setGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->setCategoryTermMetaBulkOperationMutationResolver;
     }
-    final protected function getUpdateGenericCategoryTermMetaMutationResolver(): UpdateGenericCategoryTermMetaMutationResolver
+    final protected function getUpdateCategoryTermMetaMutationResolver(): UpdateCategoryTermMetaMutationResolver
     {
-        if ($this->updateGenericCategoryTermMetaMutationResolver === null) {
-            /** @var UpdateGenericCategoryTermMetaMutationResolver */
-            $updateGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(UpdateGenericCategoryTermMetaMutationResolver::class);
-            $this->updateGenericCategoryTermMetaMutationResolver = $updateGenericCategoryTermMetaMutationResolver;
+        if ($this->updateCategoryTermMetaMutationResolver === null) {
+            /** @var UpdateCategoryTermMetaMutationResolver */
+            $updateCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(UpdateCategoryTermMetaMutationResolver::class);
+            $this->updateCategoryTermMetaMutationResolver = $updateCategoryTermMetaMutationResolver;
         }
-        return $this->updateGenericCategoryTermMetaMutationResolver;
+        return $this->updateCategoryTermMetaMutationResolver;
     }
-    final protected function getUpdateGenericCategoryTermMetaBulkOperationMutationResolver(): UpdateGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getUpdateCategoryTermMetaBulkOperationMutationResolver(): UpdateCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->updateGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var UpdateGenericCategoryTermMetaBulkOperationMutationResolver */
-            $updateGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(UpdateGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->updateGenericCategoryTermMetaBulkOperationMutationResolver = $updateGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->updateCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var UpdateCategoryTermMetaBulkOperationMutationResolver */
+            $updateCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(UpdateCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->updateCategoryTermMetaBulkOperationMutationResolver = $updateCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->updateGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->updateCategoryTermMetaBulkOperationMutationResolver;
     }
-    final protected function getPayloadableDeleteGenericCategoryTermMetaMutationResolver(): PayloadableDeleteGenericCategoryTermMetaMutationResolver
+    final protected function getPayloadableDeleteCategoryTermMetaMutationResolver(): PayloadableDeleteCategoryTermMetaMutationResolver
     {
-        if ($this->payloadableDeleteGenericCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableDeleteGenericCategoryTermMetaMutationResolver */
-            $payloadableDeleteGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteGenericCategoryTermMetaMutationResolver::class);
-            $this->payloadableDeleteGenericCategoryTermMetaMutationResolver = $payloadableDeleteGenericCategoryTermMetaMutationResolver;
+        if ($this->payloadableDeleteCategoryTermMetaMutationResolver === null) {
+            /** @var PayloadableDeleteCategoryTermMetaMutationResolver */
+            $payloadableDeleteCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteCategoryTermMetaMutationResolver::class);
+            $this->payloadableDeleteCategoryTermMetaMutationResolver = $payloadableDeleteCategoryTermMetaMutationResolver;
         }
-        return $this->payloadableDeleteGenericCategoryTermMetaMutationResolver;
+        return $this->payloadableDeleteCategoryTermMetaMutationResolver;
     }
-    final protected function getPayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver(): PayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getPayloadableDeleteCategoryTermMetaBulkOperationMutationResolver(): PayloadableDeleteCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->payloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var PayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver */
-            $payloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->payloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver = $payloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->payloadableDeleteCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var PayloadableDeleteCategoryTermMetaBulkOperationMutationResolver */
+            $payloadableDeleteCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->payloadableDeleteCategoryTermMetaBulkOperationMutationResolver = $payloadableDeleteCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->payloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->payloadableDeleteCategoryTermMetaBulkOperationMutationResolver;
     }
-    final protected function getPayloadableSetGenericCategoryTermMetaMutationResolver(): PayloadableSetGenericCategoryTermMetaMutationResolver
+    final protected function getPayloadableSetCategoryTermMetaMutationResolver(): PayloadableSetCategoryTermMetaMutationResolver
     {
-        if ($this->payloadableSetGenericCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableSetGenericCategoryTermMetaMutationResolver */
-            $payloadableSetGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableSetGenericCategoryTermMetaMutationResolver::class);
-            $this->payloadableSetGenericCategoryTermMetaMutationResolver = $payloadableSetGenericCategoryTermMetaMutationResolver;
+        if ($this->payloadableSetCategoryTermMetaMutationResolver === null) {
+            /** @var PayloadableSetCategoryTermMetaMutationResolver */
+            $payloadableSetCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableSetCategoryTermMetaMutationResolver::class);
+            $this->payloadableSetCategoryTermMetaMutationResolver = $payloadableSetCategoryTermMetaMutationResolver;
         }
-        return $this->payloadableSetGenericCategoryTermMetaMutationResolver;
+        return $this->payloadableSetCategoryTermMetaMutationResolver;
     }
-    final protected function getPayloadableSetGenericCategoryTermMetaBulkOperationMutationResolver(): PayloadableSetGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getPayloadableSetCategoryTermMetaBulkOperationMutationResolver(): PayloadableSetCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->payloadableSetGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var PayloadableSetGenericCategoryTermMetaBulkOperationMutationResolver */
-            $payloadableSetGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableSetGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->payloadableSetGenericCategoryTermMetaBulkOperationMutationResolver = $payloadableSetGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->payloadableSetCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var PayloadableSetCategoryTermMetaBulkOperationMutationResolver */
+            $payloadableSetCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableSetCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->payloadableSetCategoryTermMetaBulkOperationMutationResolver = $payloadableSetCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->payloadableSetGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->payloadableSetCategoryTermMetaBulkOperationMutationResolver;
     }
-    final protected function getPayloadableUpdateGenericCategoryTermMetaMutationResolver(): PayloadableUpdateGenericCategoryTermMetaMutationResolver
+    final protected function getPayloadableUpdateCategoryTermMetaMutationResolver(): PayloadableUpdateCategoryTermMetaMutationResolver
     {
-        if ($this->payloadableUpdateGenericCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableUpdateGenericCategoryTermMetaMutationResolver */
-            $payloadableUpdateGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateGenericCategoryTermMetaMutationResolver::class);
-            $this->payloadableUpdateGenericCategoryTermMetaMutationResolver = $payloadableUpdateGenericCategoryTermMetaMutationResolver;
+        if ($this->payloadableUpdateCategoryTermMetaMutationResolver === null) {
+            /** @var PayloadableUpdateCategoryTermMetaMutationResolver */
+            $payloadableUpdateCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateCategoryTermMetaMutationResolver::class);
+            $this->payloadableUpdateCategoryTermMetaMutationResolver = $payloadableUpdateCategoryTermMetaMutationResolver;
         }
-        return $this->payloadableUpdateGenericCategoryTermMetaMutationResolver;
+        return $this->payloadableUpdateCategoryTermMetaMutationResolver;
     }
-    final protected function getPayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver(): PayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getPayloadableUpdateCategoryTermMetaBulkOperationMutationResolver(): PayloadableUpdateCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->payloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var PayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver */
-            $payloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->payloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver = $payloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->payloadableUpdateCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var PayloadableUpdateCategoryTermMetaBulkOperationMutationResolver */
+            $payloadableUpdateCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->payloadableUpdateCategoryTermMetaBulkOperationMutationResolver = $payloadableUpdateCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->payloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->payloadableUpdateCategoryTermMetaBulkOperationMutationResolver;
     }
-    final protected function getPayloadableAddGenericCategoryTermMetaMutationResolver(): PayloadableAddGenericCategoryTermMetaMutationResolver
+    final protected function getPayloadableAddCategoryTermMetaMutationResolver(): PayloadableAddCategoryTermMetaMutationResolver
     {
-        if ($this->payloadableAddGenericCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableAddGenericCategoryTermMetaMutationResolver */
-            $payloadableAddGenericCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableAddGenericCategoryTermMetaMutationResolver::class);
-            $this->payloadableAddGenericCategoryTermMetaMutationResolver = $payloadableAddGenericCategoryTermMetaMutationResolver;
+        if ($this->payloadableAddCategoryTermMetaMutationResolver === null) {
+            /** @var PayloadableAddCategoryTermMetaMutationResolver */
+            $payloadableAddCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableAddCategoryTermMetaMutationResolver::class);
+            $this->payloadableAddCategoryTermMetaMutationResolver = $payloadableAddCategoryTermMetaMutationResolver;
         }
-        return $this->payloadableAddGenericCategoryTermMetaMutationResolver;
+        return $this->payloadableAddCategoryTermMetaMutationResolver;
     }
-    final protected function getPayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver(): PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver
+    final protected function getPayloadableAddCategoryTermMetaBulkOperationMutationResolver(): PayloadableAddCategoryTermMetaBulkOperationMutationResolver
     {
-        if ($this->payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver === null) {
-            /** @var PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver */
-            $payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver::class);
-            $this->payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver = $payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver;
+        if ($this->payloadableAddCategoryTermMetaBulkOperationMutationResolver === null) {
+            /** @var PayloadableAddCategoryTermMetaBulkOperationMutationResolver */
+            $payloadableAddCategoryTermMetaBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableAddCategoryTermMetaBulkOperationMutationResolver::class);
+            $this->payloadableAddCategoryTermMetaBulkOperationMutationResolver = $payloadableAddCategoryTermMetaBulkOperationMutationResolver;
         }
-        return $this->payloadableAddGenericCategoryTermMetaBulkOperationMutationResolver;
+        return $this->payloadableAddCategoryTermMetaBulkOperationMutationResolver;
     }
     final protected function getRootDeleteCategoryTermMetaInputObjectTypeResolver(): RootDeleteCategoryTermMetaInputObjectTypeResolver
     {
@@ -520,29 +520,29 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         return match ($fieldName) {
             'addCategoryMeta' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableAddGenericCategoryTermMetaMutationResolver()
-                : $this->getAddGenericCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableAddCategoryTermMetaMutationResolver()
+                : $this->getAddCategoryTermMetaMutationResolver(),
             'addCategoryMetas' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableAddGenericCategoryTermMetaBulkOperationMutationResolver()
-                : $this->getAddGenericCategoryTermMetaBulkOperationMutationResolver(),
+                ? $this->getPayloadableAddCategoryTermMetaBulkOperationMutationResolver()
+                : $this->getAddCategoryTermMetaBulkOperationMutationResolver(),
             'updateCategoryMeta' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableUpdateGenericCategoryTermMetaMutationResolver()
-                : $this->getUpdateGenericCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableUpdateCategoryTermMetaMutationResolver()
+                : $this->getUpdateCategoryTermMetaMutationResolver(),
             'updateCategoryMetas' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableUpdateGenericCategoryTermMetaBulkOperationMutationResolver()
-                : $this->getUpdateGenericCategoryTermMetaBulkOperationMutationResolver(),
+                ? $this->getPayloadableUpdateCategoryTermMetaBulkOperationMutationResolver()
+                : $this->getUpdateCategoryTermMetaBulkOperationMutationResolver(),
             'deleteCategoryMeta' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableDeleteGenericCategoryTermMetaMutationResolver()
-                : $this->getDeleteGenericCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableDeleteCategoryTermMetaMutationResolver()
+                : $this->getDeleteCategoryTermMetaMutationResolver(),
             'deleteCategoryMetas' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableDeleteGenericCategoryTermMetaBulkOperationMutationResolver()
-                : $this->getDeleteGenericCategoryTermMetaBulkOperationMutationResolver(),
+                ? $this->getPayloadableDeleteCategoryTermMetaBulkOperationMutationResolver()
+                : $this->getDeleteCategoryTermMetaBulkOperationMutationResolver(),
             'setCategoryMeta' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableSetGenericCategoryTermMetaMutationResolver()
-                : $this->getSetGenericCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableSetCategoryTermMetaMutationResolver()
+                : $this->getSetCategoryTermMetaMutationResolver(),
             'setCategoryMetas' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableSetGenericCategoryTermMetaBulkOperationMutationResolver()
-                : $this->getSetGenericCategoryTermMetaBulkOperationMutationResolver(),
+                ? $this->getPayloadableSetCategoryTermMetaBulkOperationMutationResolver()
+                : $this->getSetCategoryTermMetaBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }

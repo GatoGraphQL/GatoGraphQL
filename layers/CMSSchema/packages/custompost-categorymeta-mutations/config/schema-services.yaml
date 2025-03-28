@@ -9,9 +9,6 @@ services:
     PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPCMSSchema\CustomPostCategoryMetaMutations\MutationResolvers\:
-        resource: '../src/MutationResolvers/*'
-
     PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
