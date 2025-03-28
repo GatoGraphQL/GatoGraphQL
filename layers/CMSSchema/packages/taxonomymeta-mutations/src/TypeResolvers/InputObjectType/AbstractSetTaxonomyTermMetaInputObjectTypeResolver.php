@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
-use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\ListValueJSONObjectScalarTypeResolver;
+use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\NullableListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 abstract class AbstractSetTaxonomyTermMetaInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements SetTaxonomyTermMetaInputObjectTypeResolverInterface
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?ListValueJSONObjectScalarTypeResolver $listValueJSONObjectScalarTypeResolver = null;
+    private ?NullableListValueJSONObjectScalarTypeResolver $nullableListValueJSONObjectScalarTypeResolver = null;
 
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -25,14 +25,14 @@ abstract class AbstractSetTaxonomyTermMetaInputObjectTypeResolver extends Abstra
         }
         return $this->idScalarTypeResolver;
     }
-    final protected function getListValueJSONObjectScalarTypeResolver(): ListValueJSONObjectScalarTypeResolver
+    final protected function getNullableListValueJSONObjectScalarTypeResolver(): NullableListValueJSONObjectScalarTypeResolver
     {
-        if ($this->listValueJSONObjectScalarTypeResolver === null) {
-            /** @var ListValueJSONObjectScalarTypeResolver */
-            $listValueJSONObjectScalarTypeResolver = $this->instanceManager->getInstance(ListValueJSONObjectScalarTypeResolver::class);
-            $this->listValueJSONObjectScalarTypeResolver = $listValueJSONObjectScalarTypeResolver;
+        if ($this->nullableListValueJSONObjectScalarTypeResolver === null) {
+            /** @var NullableListValueJSONObjectScalarTypeResolver */
+            $nullableListValueJSONObjectScalarTypeResolver = $this->instanceManager->getInstance(NullableListValueJSONObjectScalarTypeResolver::class);
+            $this->nullableListValueJSONObjectScalarTypeResolver = $nullableListValueJSONObjectScalarTypeResolver;
         }
-        return $this->listValueJSONObjectScalarTypeResolver;
+        return $this->nullableListValueJSONObjectScalarTypeResolver;
     }
 
     public function getTypeDescription(): ?string
@@ -50,7 +50,7 @@ abstract class AbstractSetTaxonomyTermMetaInputObjectTypeResolver extends Abstra
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::ENTRIES => $this->getListValueJSONObjectScalarTypeResolver(),
+                MutationInputProperties::ENTRIES => $this->getNullableListValueJSONObjectScalarTypeResolver(),
             ]
         );
     }
