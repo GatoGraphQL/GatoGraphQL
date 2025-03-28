@@ -3,9 +3,6 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\CategoryMetaMutations\FieldResolvers\:
-        resource: '../src/FieldResolvers/*'
-
     PoPCMSSchema\CategoryMetaMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
