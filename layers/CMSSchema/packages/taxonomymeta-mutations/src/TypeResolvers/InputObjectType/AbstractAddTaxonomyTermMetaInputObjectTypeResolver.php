@@ -104,7 +104,7 @@ abstract class AbstractAddTaxonomyTermMetaInputObjectTypeResolver extends Abstra
         };
     }
 
-    public function getInputFieldDefaultValue(string $inputFieldName): int
+    public function getInputFieldDefaultValue(string $inputFieldName): mixed
     {
         return match ($inputFieldName) {
             MutationInputProperties::SINGLE => false,
