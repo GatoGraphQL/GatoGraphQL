@@ -6,8 +6,6 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateTermMetaMutationResolver;
-use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
-use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
@@ -21,7 +19,7 @@ use PoP\Root\App;
 abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMutateTermMetaMutationResolver implements TaxonomyTermMetaMutationResolverInterface
 {
     use MutateTaxonomyTermMutationResolverTrait;
-    use MutateTermMetaMutationResolverTrait;
+    use MutateTaxonomyTermMetaMutationResolverTrait;
 
     private ?TaxonomyMetaTypeAPIInterface $taxonomyTypeAPI = null;
     private ?TaxonomyMetaTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
@@ -53,18 +51,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
             $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
         }
         return $this->taxonomyTermTypeAPI;
-    }
-
-    protected function getMetaTypeAPI(): MetaTypeAPIInterface
-    {
-        return $this->getTaxonomyMetaTypeAPI();
-    }
-
-    protected function doesSingleMetaEntryAlreadyExist(
-        string|int $termID,
-        string $key,
-    ): bool {
-        return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($termID, $key, true) !== null;
     }
 
     protected function validateTermExists(
