@@ -8,6 +8,7 @@ use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
+use PoPCMSSchema\MetaMutations\MutationResolvers\PayloadableMetaMutationResolverTrait;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
@@ -20,6 +21,7 @@ use stdClass;
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
     use MutateTermMetaMutationResolverTrait;
+    use PayloadableMetaMutationResolverTrait;
     
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
@@ -130,7 +132,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         ErrorPayloadInterface $errorPayload,
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ErrorPayloadInterface {
-        return $this->createSetMetaOnCategoryErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
+        return $this->createMetaMutationErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
             ?? $errorPayload;
     }
 }
