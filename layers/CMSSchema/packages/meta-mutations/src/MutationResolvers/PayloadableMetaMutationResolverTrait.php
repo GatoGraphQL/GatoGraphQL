@@ -14,7 +14,7 @@ trait PayloadableMetaMutationResolverTrait
 {
     protected function createMetaMutationErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
-    ): ErrorPayloadInterface {
+    ): ?ErrorPayloadInterface {
         $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return match (
             [
