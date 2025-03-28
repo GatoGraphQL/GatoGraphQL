@@ -43,9 +43,9 @@ abstract class AbstractListValueJSONObjectScalarTypeResolver extends JSONObjectS
         $inputValueArray = (array) $inputValue;
         foreach ($inputValueArray as $key => $value) {
             /**
-             * Check the value is an array
+             * Check the value is an array, or null (if allowed)
              */
-            if (!is_array($value) || (!$canValueBeNullable && $value === null)) {
+            if (!(is_array($value) || ($canValueBeNullable && $value === null))) {
                 $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
                 return null;
             }
