@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
-use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
-use PoP\Root\Services\AbstractBasicService;
+use PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs\AbstractTaxonomyMetaTypeMutationAPI;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use WP_Error;
 
 use function add_term_meta;
@@ -17,7 +16,7 @@ use function update_term_meta;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class TaxonomyMetaTypeMutationAPI extends AbstractBasicService implements TaxonomyMetaTypeMutationAPIInterface
+class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
 {
     use TypeMutationAPITrait;
 

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs;
 
+use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 
-interface TaxonomyMetaTypeMutationAPIInterface
+interface TaxonomyMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]> $entries
