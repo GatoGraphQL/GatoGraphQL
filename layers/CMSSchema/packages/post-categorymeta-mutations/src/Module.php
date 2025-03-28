@@ -15,7 +15,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\Categories\Module::class,
+            \PoPCMSSchema\PostCategories\Module::class,
             \PoPCMSSchema\CategoryMetaMutations\Module::class,
             \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
             \PoPCMSSchema\TaxonomyMetaMutations\Module::class,
