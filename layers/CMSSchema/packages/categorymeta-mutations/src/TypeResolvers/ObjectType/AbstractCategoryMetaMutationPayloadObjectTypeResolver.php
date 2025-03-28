@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeResolver;
 
