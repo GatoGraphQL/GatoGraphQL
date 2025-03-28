@@ -8,7 +8,7 @@ use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverI
 use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CreateCategoryTermInputObjectTypeResolverInterface;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\UpdateCategoryTermInputObjectTypeResolverInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
-use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\ListValueJSONObjectScalarTypeResolver;
+use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\NullableListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -17,16 +17,16 @@ use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractCategoryMutationResolverHookSet extends AbstractHookSet
 {
-    private ?ListValueJSONObjectScalarTypeResolver $listValueJSONObjectScalarTypeResolver = null;
+    private ?NullableListValueJSONObjectScalarTypeResolver $nullableListValueJSONObjectScalarTypeResolver = null;
 
-    final protected function getListValueJSONObjectScalarTypeResolver(): ListValueJSONObjectScalarTypeResolver
+    final protected function getNullableListValueJSONObjectScalarTypeResolver(): NullableListValueJSONObjectScalarTypeResolver
     {
-        if ($this->listValueJSONObjectScalarTypeResolver === null) {
-            /** @var ListValueJSONObjectScalarTypeResolver */
-            $listValueJSONObjectScalarTypeResolver = $this->instanceManager->getInstance(ListValueJSONObjectScalarTypeResolver::class);
-            $this->listValueJSONObjectScalarTypeResolver = $listValueJSONObjectScalarTypeResolver;
+        if ($this->nullableListValueJSONObjectScalarTypeResolver === null) {
+            /** @var NullableListValueJSONObjectScalarTypeResolver */
+            $nullableListValueJSONObjectScalarTypeResolver = $this->instanceManager->getInstance(NullableListValueJSONObjectScalarTypeResolver::class);
+            $this->nullableListValueJSONObjectScalarTypeResolver = $nullableListValueJSONObjectScalarTypeResolver;
         }
-        return $this->listValueJSONObjectScalarTypeResolver;
+        return $this->nullableListValueJSONObjectScalarTypeResolver;
     }
 
     protected function init(): void
@@ -57,7 +57,7 @@ abstract class AbstractCategoryMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::META] = $this->getListValueJSONObjectScalarTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::META] = $this->getNullableListValueJSONObjectScalarTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
