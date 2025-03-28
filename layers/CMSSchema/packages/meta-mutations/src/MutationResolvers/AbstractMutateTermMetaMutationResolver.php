@@ -173,7 +173,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
     protected function getSetMetaData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [
-            'entries' => $fieldDataAccessor->getValue(MutationInputProperties::ENTRIES),
+            'entries' => (array) $fieldDataAccessor->getValue(MutationInputProperties::ENTRIES),
         ];
     }
 
