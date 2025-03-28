@@ -27,11 +27,15 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
     {
         App::addAction(
             $this->getValidateCreateHookName(),
-            $this->maybeValidateSetMeta(...)
+            $this->maybeValidateSetMeta(...),
+            10,
+            2
         );
         App::addAction(
             $this->getValidateUpdateHookName(),
-            $this->maybeValidateSetMeta(...)
+            $this->maybeValidateSetMeta(...),
+            10,
+            2
         );
         App::addAction(
             $this->getExecuteCreateOrUpdateHookName(),
