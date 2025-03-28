@@ -21,7 +21,7 @@ class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements
         string|int $taxonomyTermID,
         array $entries,
     ): void {
-        return $this->setTaxonomyTermMeta($taxonomyTermID, $entries);
+        $this->setTaxonomyTermMeta($taxonomyTermID, $entries);
     }
 
     /**
@@ -61,6 +61,6 @@ class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements
         string|int $taxonomyTermID,
         string $key,
     ): void {
-        return $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+        $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
     }
 }
