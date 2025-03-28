@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
-use PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs\AbstractTaxonomyMetaTypeMutationAPI;
+use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\AbstractTaxonomyMetaTypeMutationAPI;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use WP_Error;
 
