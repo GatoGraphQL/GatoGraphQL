@@ -31,6 +31,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         foreach ($entries as $key => $values) {
             if ($values === null) {
                 $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+                continue;
             }
 
             $numberItems = count($values);
