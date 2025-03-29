@@ -60,9 +60,9 @@ trait MutateTermMetaMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $taxonomyMetaTypeAPI = $this->getMetaTypeAPI();
-        $nonAllowedMetaKeys = array_map(
-            fn (string $metaKey) => !$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($metaKey),
-            $metaKeys
+        $nonAllowedMetaKeys = array_filter(
+            $metaKeys,
+            fn (string $metaKey) => !$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($metaKey)
         );
         if ($nonAllowedMetaKeys === []) {
             return;
