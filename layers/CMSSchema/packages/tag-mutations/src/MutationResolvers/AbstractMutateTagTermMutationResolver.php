@@ -177,8 +177,8 @@ abstract class AbstractMutateTagTermMutationResolver extends AbstractMutateTaxon
     ): string|int {
         $taxonomyTermID = parent::create($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        App::doAction(TagCRUDHookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor);
-        App::doAction(TagCRUDHookNames::EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(TagCRUDHookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        App::doAction(TagCRUDHookNames::EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         return $taxonomyTermID;
     }

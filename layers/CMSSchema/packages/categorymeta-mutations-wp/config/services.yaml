@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface:
+        class: \PoPCMSSchema\CategoryMetaMutationsWP\TypeAPIs\CategoryMetaTypeMutationAPI
+
