@@ -78,6 +78,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
             );
         }
         $this->handleMaybeError($result);
+        /** @var int $result */
         return $result;
     }
 
@@ -133,6 +134,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
                 \__('Error updating term meta', 'taxonomymeta-mutations-wp')
             );
         }
+        /** @var int|bool $result */
         return $result;
     }
 

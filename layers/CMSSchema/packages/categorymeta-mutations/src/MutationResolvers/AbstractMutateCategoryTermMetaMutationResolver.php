@@ -47,7 +47,6 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function executeDeleteTermMeta(string|int $taxonomyTermID, string $key): void

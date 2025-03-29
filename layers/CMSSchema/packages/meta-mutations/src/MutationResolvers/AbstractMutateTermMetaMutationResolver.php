@@ -301,7 +301,6 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
     }
 
     /**
-     * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
     abstract protected function executeDeleteTermMeta(string|int $termID, string $key): void;

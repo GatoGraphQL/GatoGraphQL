@@ -8,7 +8,6 @@ use PoPCMSSchema\MetaMutations\MutationResolvers\PayloadableMetaMutationResolver
 use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait as TaxonomyMutationsPayloadableTaxonomyMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
-use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
@@ -29,9 +28,6 @@ trait PayloadableTaxonomyMetaMutationResolverTrait
                 $objectTypeFieldResolutionFeedback,
             ) ?? $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedback,
-            ) ?? new GenericErrorPayload(
-                $feedbackItemResolution->getMessage(),
-                $feedbackItemResolution->getNamespacedCode(),
             ),
             $objectTypeFieldResolutionFeedback,
         );

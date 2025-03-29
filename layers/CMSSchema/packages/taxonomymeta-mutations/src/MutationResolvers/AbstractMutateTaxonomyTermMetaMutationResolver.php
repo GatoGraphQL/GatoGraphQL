@@ -72,6 +72,9 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+        if ($taxonomyName === null) {
+            return;
+        }
         $this->validateCanLoggedInUserEditTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,
@@ -279,7 +282,6 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function executeDeleteTermMeta(string|int $taxonomyTermID, string $key): void
