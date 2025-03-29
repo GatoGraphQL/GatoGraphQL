@@ -48,14 +48,14 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
                 foreach ($values as $value) {
                     $this->addTaxonomyTermMeta($taxonomyTermID, $key, $value, false);
                 }
-            } else {
-                $value = $values[0];
-                if ($value === null) {
-                    $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
-                    continue;
-                }
-                $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
+                continue;
             }
+            $value = $values[0];
+            if ($value === null) {
+                $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+                continue;
+            }
+            $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
         }
     }
     
