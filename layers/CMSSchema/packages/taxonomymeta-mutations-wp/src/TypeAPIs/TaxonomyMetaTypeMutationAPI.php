@@ -113,14 +113,14 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     }
 
     /**
-     * @return string|int the ID of the created meta entry (if it didn't exist) 
+     * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateTaxonomyTermMeta(
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
-    ): string|int {
+    ): string|int|bool {
         $result = update_term_meta((int) $taxonomyTermID, $key, $value);
         $this->handleMaybeError($result);
         return $result;

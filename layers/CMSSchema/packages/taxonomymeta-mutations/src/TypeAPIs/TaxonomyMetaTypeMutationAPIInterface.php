@@ -30,14 +30,14 @@ interface TaxonomyMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterf
     ): int;
     
     /**
-     * @return string|int the ID of the created meta entry (if it didn't exist) 
+     * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateTaxonomyTermMeta(
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
-    ): string|int;
+    ): string|int|bool;
 
     /**
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
