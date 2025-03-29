@@ -8,6 +8,7 @@ use PoPCMSSchema\MetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemPr
 use PoPCMSSchema\MetaMutations\ObjectModels\AccessToMetaKeyIsNotAllowedErrorPayload;
 use PoPCMSSchema\MetaMutations\ObjectModels\TermMetaAlreadyHasSingleEntryErrorPayload;
 use PoPCMSSchema\MetaMutations\ObjectModels\TermMetaKeyDoesNotExistErrorPayload;
+use PoPCMSSchema\MetaMutations\ObjectModels\TermMetaKeyWithValueDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
@@ -45,6 +46,12 @@ trait PayloadableMetaMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new TermMetaKeyDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            ] => new TermMetaKeyWithValueDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => null,

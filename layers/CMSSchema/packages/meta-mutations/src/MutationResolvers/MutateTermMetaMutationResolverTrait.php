@@ -68,6 +68,30 @@ trait MutateTermMetaMutationResolverTrait
         );
     }
 
+    protected function validateMetaEntryWithValueExists(
+        string|int $termID,
+        string $key,
+        mixed $value,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->doesMetaEntryWithValueExist($termID, $key, $value)) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                $this->getMetaEntryWithValueDoesNotExistError($termID, $key, $value),
+                $fieldDataAccessor->getField(),
+            )
+        );
+    }
+
+    abstract protected function doesMetaEntryWithValueExist(
+        string|int $termID,
+        string $key,
+        mixed $value,
+    ): bool;
+
     protected function getMetaEntryDoesNotExistError(
         string|int $termID,
         string $key,
@@ -78,6 +102,22 @@ trait MutateTermMetaMutationResolverTrait
             [
                 $termID,
                 $key,
+            ]
+        );
+    }
+
+    protected function getMetaEntryWithValueDoesNotExistError(
+        string|int $termID,
+        string $key,
+        mixed $value,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E5,
+            [
+                $termID,
+                $key,
+                $value,
             ]
         );
     }

@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class TermMetaKeyDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTypeResolver
 {
-    private ?TermMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = null;
+    private ?TermMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader $termMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
     final protected function getTermMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader(): TermMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader
     {
-        if ($this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader === null) {
+        if ($this->termMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader === null) {
             /** @var TermMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader */
-            $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(TermMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader::class);
-            $this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader = $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
+            $termMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(TermMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+            $this->termMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader = $termMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader;
         }
-        return $this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeDataLoader;
+        return $this->termMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string

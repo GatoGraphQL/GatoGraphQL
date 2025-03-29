@@ -142,6 +142,22 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $prevValue = $fieldDataAccessor->getValue(MutationInputProperties::PREV_VALUE);
+        if (!empty($prevValue)) {
+            $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+            $this->validateMetaEntryWithValueExists(
+                $termID,
+                $key,
+                $prevValue,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     protected function validateDeleteMetaErrors(

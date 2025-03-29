@@ -25,4 +25,12 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
     ): bool {
         return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($termID, $key, true) !== null;
     }
+
+    protected function doesMetaEntryWithValueExist(
+        string|int $termID,
+        string $key,
+        mixed $value,
+    ): bool {
+        return in_array($value, $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($termID, $key, false));
+    }
 }
