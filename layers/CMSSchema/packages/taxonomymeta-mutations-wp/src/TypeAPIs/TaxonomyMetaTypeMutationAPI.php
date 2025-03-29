@@ -72,6 +72,11 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         bool $single = false,
     ): int {
         $result = add_term_meta((int) $taxonomyTermID, $key, $value, $single);
+        if ($result === false) {
+            throw $this->getTaxonomyTermMetaCRUDMutationException(
+                \__('Error adding term meta', 'taxonomymeta-mutations-wp')
+            );
+        }
         $this->handleMaybeError($result);
         return $result;
     }
@@ -79,14 +84,13 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     protected function handleMaybeError(
         int|bool|WP_Error $result,
     ): void {
-        if ($result === false) {
-            throw $this->getTaxonomyTermMetaCRUDMutationException(\__('Error mutating term meta', 'taxonomymeta-mutations-wp'));
+        if (!($result instanceof WP_Error)) {
+            return;
         }
-        if ($result instanceof WP_Error) {
-            /** @var WP_Error */
-            $wpError = $result;
-            throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
-        }
+
+        /** @var WP_Error */
+        $wpError = $result;
+        throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
     }
 
     protected function getTaxonomyTermMetaCRUDMutationException(WP_Error|string $error): TaxonomyTermMetaCRUDMutationException
@@ -123,6 +127,11 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     ): string|int|bool {
         $result = update_term_meta((int) $taxonomyTermID, $key, $value);
         $this->handleMaybeError($result);
+        if ($result === false) {
+            throw $this->getTaxonomyTermMetaCRUDMutationException(
+                \__('Error updating term meta', 'taxonomymeta-mutations-wp')
+            );
+        }
         return $result;
     }
 
@@ -135,5 +144,10 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     ): void {
         $result = delete_term_meta((int) $taxonomyTermID, $key);
         $this->handleMaybeError($result);
+        if ($result === false) {
+            throw $this->getTaxonomyTermMetaCRUDMutationException(
+                \__('Error deleting term meta', 'taxonomymeta-mutations-wp')
+            );
+        }
     }
 }
