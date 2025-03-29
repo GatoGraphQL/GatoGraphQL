@@ -74,7 +74,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     }
 
     protected function handleMaybeError(
-        int|false|WP_Error $result,
+        int|bool|WP_Error $result,
     ): void {
         if ($result === false) {
             throw $this->getTaxonomyTermMetaCRUDMutationException(\__('Error adding term meta', 'taxonomymeta-mutations-wp'));
