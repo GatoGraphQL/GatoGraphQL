@@ -1,10 +1,12 @@
-mutation {
+query CheckOriginalCategoryMetaData {
   category(by: {id: 20}, taxonomy: "dummy-category") {
     id
     metaKeys
     meta(keys: $__metaKeys) 
   }
-  
+}
+
+mutation AddCategoryMeta {
   addCategoryMeta(input: {
     id: 20
     key: "description"
@@ -24,8 +26,10 @@ mutation {
       meta(keys: $__metaKeys) 
     }
   }
-  
-  updateCategoryMeta(input: {
+}
+
+mutation UpdateCategoryMeta {
+  updateCategoryMeta: updateCategoryMeta(input: {
     id: 20
     key: "description"
     value: "Updated description"
@@ -44,8 +48,10 @@ mutation {
       meta(keys: $__metaKeys) 
     }
   }
-  
-  deleteCategoryMeta(input: {
+}
+
+mutation DeleteCategoryMeta {
+  deleteCategoryMeta: deleteCategoryMeta(input: {
     id: 20
     key: "description"
   }) {
@@ -63,7 +69,9 @@ mutation {
       meta(keys: $__metaKeys) 
     }
   }
-  
+}
+
+mutation SetCategoryMeta {
   setCategoryMeta(input: {
     id: 20
     entries: {
@@ -86,7 +94,9 @@ mutation {
       meta(keys: $__metaKeys) 
     }
   }
-  
+}
+
+mutation RevertSetCategoryMeta {
   revertSetCategoryMeta: setCategoryMeta(input: {
     id: 20
     entries: {
@@ -107,4 +117,14 @@ mutation {
       meta(keys: $__metaKeys) 
     }
   }
+}
+
+query ExecuteAll @depends(on: [
+  "CheckOriginalCategoryMetaData",
+  "AddCategoryMeta",
+  "UpdateCategoryMeta",
+  "DeleteCategoryMeta",
+  "SetCategoryMeta",
+  "RevertSetCategoryMeta",
+]) {
 }
