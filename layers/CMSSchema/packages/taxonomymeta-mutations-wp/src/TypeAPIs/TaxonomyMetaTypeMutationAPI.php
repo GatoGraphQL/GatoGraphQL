@@ -30,7 +30,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     ): void {
         foreach ($entries as $key => $values) {
             if ($values === null) {
-                $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+                delete_term_meta((int) $taxonomyTermID, $key);
                 continue;
             }
 
@@ -46,17 +46,17 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
             if ($numberItems === 1) {
                 $value = $values[0];
                 if ($value === null) {
-                    $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+                    delete_term_meta((int) $taxonomyTermID, $key);
                     continue;
                 }
-                $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
+                update_term_meta((int) $taxonomyTermID, $key, $value);
                 continue;
             }
 
             // $numberItems > 1
-            $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+            delete_term_meta((int) $taxonomyTermID, $key);
             foreach ($values as $value) {
-                $this->addTaxonomyTermMeta($taxonomyTermID, $key, $value, false);
+                add_term_meta((int) $taxonomyTermID, $key, $value, false);
             }
         }
     }
