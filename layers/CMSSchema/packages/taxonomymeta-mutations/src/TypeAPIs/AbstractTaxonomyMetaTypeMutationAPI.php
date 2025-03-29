@@ -43,14 +43,15 @@ abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService 
     }
 
     /**
+     * @return string|int the ID of the created meta entry (if it didn't exist) 
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateTermMeta(
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
-    ): void {
-        $this->updateTaxonomyTermMeta(
+    ): string|int {
+        return $this->updateTaxonomyTermMeta(
             $taxonomyTermID,
             $key,
             $value,

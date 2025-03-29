@@ -46,14 +46,15 @@ class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements
     }
 
     /**
+     * @return string|int the ID of the created meta entry (if it didn't exist) 
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateCategoryTermMeta(
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
-    ): void {
-        $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
+    ): string|int {
+        return $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
     }
 
     public function deleteCategoryTermMeta(

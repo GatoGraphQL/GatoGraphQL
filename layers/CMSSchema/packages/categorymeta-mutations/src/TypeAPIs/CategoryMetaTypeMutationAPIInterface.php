@@ -33,13 +33,14 @@ interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationA
     ): int;
     
     /**
+     * @return string|int the ID of the created meta entry (if it didn't exist) 
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateCategoryTermMeta(
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
-    ): void;
+    ): string|int;
 
     public function deleteCategoryTermMeta(
         string|int $taxonomyTermID,

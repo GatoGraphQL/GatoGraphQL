@@ -247,11 +247,12 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     }
 
     /**
+     * @return string|int the ID of the created meta entry (if it didn't exist) 
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeUpdateTermMeta(string|int $taxonomyTermID, string $key, mixed $value): void
+    protected function executeUpdateTermMeta(string|int $taxonomyTermID, string $key, mixed $value): string|int
     {
-        $this->getTaxonomyMetaTypeMutationAPI()->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
+        return $this->getTaxonomyMetaTypeMutationAPI()->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
     }
 
     /**
