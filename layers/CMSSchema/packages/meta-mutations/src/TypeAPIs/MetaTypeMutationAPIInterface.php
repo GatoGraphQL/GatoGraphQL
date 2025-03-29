@@ -29,14 +29,13 @@ interface MetaTypeMutationAPIInterface
     ): int;
     
     /**
-     * @return int The term_id of the newly created term
      * @throws TermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateTermMeta(
         string|int $termID,
         string $key,
         mixed $value,
-    ): int;
+    ): void;
 
     /**
      * @throws TermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
