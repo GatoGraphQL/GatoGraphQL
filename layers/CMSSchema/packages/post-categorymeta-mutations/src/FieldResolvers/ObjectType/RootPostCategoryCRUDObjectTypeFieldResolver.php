@@ -70,41 +70,47 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractRootCategoryCR
         return $this->rootAddPostCategoryTermMetaMutationPayloadObjectTypeResolver;
     }
 
+    protected function getCategoryEntityName(): string
+    {
+        return 'PostCategory';
+    }
+
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
+        $categoryEntityName = $this->getCategoryEntityName();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
         if ($usePayloadableCategoryMetaMutations) {
             return match ($fieldName) {
-                'addCategoryMeta',
-                'addCategoryMetas',
-                'addCategoryMetaMutationPayloadObjects'
+                'add' . $categoryEntityName . 'Meta',
+                'add' . $categoryEntityName . 'Metas',
+                'add' . $categoryEntityName . 'MetaMutationPayloadObjects'
                     => $this->getRootAddPostCategoryTermMetaMutationPayloadObjectTypeResolver(),
-                'updateCategoryMeta',
-                'updateCategoryMetas',
-                'updateCategoryMetaMutationPayloadObjects'
+                'update' . $categoryEntityName . 'Meta',
+                'update' . $categoryEntityName . 'Metas',
+                'update' . $categoryEntityName . 'MetaMutationPayloadObjects'
                     => $this->getRootUpdatePostCategoryTermMetaMutationPayloadObjectTypeResolver(),
-                'deleteCategoryMeta',
-                'deleteCategoryMetas',
-                'deleteCategoryMetaMutationPayloadObjects'
+                'delete' . $categoryEntityName . 'Meta',
+                'delete' . $categoryEntityName . 'Metas',
+                'delete' . $categoryEntityName . 'MetaMutationPayloadObjects'
                     => $this->getRootDeletePostCategoryTermMetaMutationPayloadObjectTypeResolver(),
-                'setCategoryMeta',
-                'setCategoryMetas',
-                'setCategoryMetaMutationPayloadObjects'
+                'set' . $categoryEntityName . 'Meta',
+                'set' . $categoryEntityName . 'Metas',
+                'set' . $categoryEntityName . 'MetaMutationPayloadObjects'
                     => $this->getRootSetPostCategoryTermMetaMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'addCategoryMeta',
-            'addCategoryMetas',
-            'updateCategoryMeta',
-            'updateCategoryMetas',
-            'deleteCategoryMeta',
-            'deleteCategoryMetas',
-            'setCategoryMeta',
-            'setCategoryMetas'
+            'add' . $categoryEntityName . 'Meta',
+            'add' . $categoryEntityName . 'Metas',
+            'update' . $categoryEntityName . 'Meta',
+            'update' . $categoryEntityName . 'Metas',
+            'delete' . $categoryEntityName . 'Meta',
+            'delete' . $categoryEntityName . 'Metas',
+            'set' . $categoryEntityName . 'Meta',
+            'set' . $categoryEntityName . 'Metas'
                 => $this->getPostCategoryObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
