@@ -60,7 +60,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
             }
         }
     }
-    
+
     /**
      * @return int The term_id of the newly created term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error

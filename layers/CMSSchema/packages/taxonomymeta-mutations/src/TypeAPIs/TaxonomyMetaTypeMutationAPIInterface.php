@@ -28,7 +28,7 @@ interface TaxonomyMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterf
         mixed $value,
         bool $single = false,
     ): int;
-    
+
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)

@@ -23,7 +23,7 @@ abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService 
             $entries,
         );
     }
-    
+
     /**
      * @return int The term_id of the newly created term
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error

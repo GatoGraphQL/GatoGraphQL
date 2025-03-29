@@ -14,7 +14,7 @@ use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 abstract class AbstractTaxonomyMetaMutationResolverHookSet extends AbstractMetaMutationResolverHookSet
 {
     use MutateTaxonomyTermMetaMutationResolverTrait;
-    
+
     private ?TaxonomyMetaTypeMutationAPIInterface $taxonomyMetaTypeMutationAPI = null;
     private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
 
@@ -46,5 +46,4 @@ abstract class AbstractTaxonomyMetaMutationResolverHookSet extends AbstractMetaM
     {
         return $this->getTaxonomyMetaTypeAPI();
     }
-
 }

@@ -20,7 +20,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
 {
     use MutateTermMetaMutationResolverTrait;
     use PayloadableMetaMutationResolverTrait;
-    
+
     abstract protected function getMetaTypeMutationAPI(): MetaTypeMutationAPIInterface;
 
     protected function init(): void

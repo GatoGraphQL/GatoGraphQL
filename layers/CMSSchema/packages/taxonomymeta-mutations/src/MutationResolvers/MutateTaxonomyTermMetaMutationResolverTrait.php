@@ -11,7 +11,7 @@ use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 trait MutateTaxonomyTermMetaMutationResolverTrait
 {
     use MutateTermMetaMutationResolverTrait;
-    
+
     abstract protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface;
 
     protected function getMetaTypeAPI(): MetaTypeAPIInterface

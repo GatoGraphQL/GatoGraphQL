@@ -45,7 +45,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     private ?PayloadableSetCategoryTermMetaMutationResolver $payloadableSetCategoryTermMetaMutationResolver = null;
     private ?PayloadableUpdateCategoryTermMetaMutationResolver $payloadableUpdateCategoryTermMetaMutationResolver = null;
     private ?PayloadableAddCategoryTermMetaMutationResolver $payloadableAddCategoryTermMetaMutationResolver = null;
-    
+
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
         if ($this->userLoggedInCheckpoint === null) {

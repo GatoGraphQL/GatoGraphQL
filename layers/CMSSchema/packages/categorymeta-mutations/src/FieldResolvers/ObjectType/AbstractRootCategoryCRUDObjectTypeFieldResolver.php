@@ -269,7 +269,7 @@ abstract class AbstractRootCategoryCRUDObjectTypeFieldResolver extends AbstractO
         ];
     }
 
-    protected abstract function getCategoryEntityName(): string;
+    abstract protected function getCategoryEntityName(): string;
 
     /**
      * @return string[]
