@@ -19,7 +19,7 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
         return $this->getTaxonomyMetaTypeAPI();
     }
 
-    protected function doesSingleMetaEntryAlreadyExist(
+    protected function doesMetaEntryExist(
         string|int $termID,
         string $key,
     ): bool {

@@ -21,7 +21,7 @@ trait MutateTermMetaMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$this->doesSingleMetaEntryAlreadyExist($termID, $key)) {
+        if (!$this->doesMetaEntryExist($termID, $key)) {
             return;
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
@@ -32,7 +32,7 @@ trait MutateTermMetaMutationResolverTrait
         );
     }
 
-    abstract protected function doesSingleMetaEntryAlreadyExist(
+    abstract protected function doesMetaEntryExist(
         string|int $termID,
         string $key,
     ): bool;
