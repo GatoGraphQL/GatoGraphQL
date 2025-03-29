@@ -80,7 +80,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         int|bool|WP_Error $result,
     ): void {
         if ($result === false) {
-            throw $this->getTaxonomyTermMetaCRUDMutationException(\__('Error adding term meta', 'taxonomymeta-mutations-wp'));
+            throw $this->getTaxonomyTermMetaCRUDMutationException(\__('Error mutating term meta', 'taxonomymeta-mutations-wp'));
         }
         if ($result instanceof WP_Error) {
             /** @var WP_Error */
