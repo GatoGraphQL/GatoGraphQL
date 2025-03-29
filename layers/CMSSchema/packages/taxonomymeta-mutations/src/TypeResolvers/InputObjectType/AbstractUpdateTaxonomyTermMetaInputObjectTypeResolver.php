@@ -63,6 +63,7 @@ abstract class AbstractUpdateTaxonomyTermMetaInputObjectTypeResolver extends Abs
             [
                 MutationInputProperties::KEY => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::VALUE => $this->getAnyScalarScalarTypeResolver(),
+                MutationInputProperties::PREV_VALUE => $this->getAnyScalarScalarTypeResolver(),
             ]
         );
     }
@@ -75,6 +76,7 @@ abstract class AbstractUpdateTaxonomyTermMetaInputObjectTypeResolver extends Abs
             MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'taxonomymeta-mutations'),
             MutationInputProperties::KEY => $this->__('The meta key', 'taxonomymeta-mutations'),
             MutationInputProperties::VALUE => $this->__('The meta value', 'taxonomymeta-mutations'),
+            MutationInputProperties::PREV_VALUE => $this->__('Previous value to check before updating. If specified, only update existing metadata entries with this value. Otherwise, update all entries', 'taxonomymeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

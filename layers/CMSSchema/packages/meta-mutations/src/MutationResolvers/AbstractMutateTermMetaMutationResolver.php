@@ -209,6 +209,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         return [
             'key' => $fieldDataAccessor->getValue(MutationInputProperties::KEY),
             'value' => $fieldDataAccessor->getValue(MutationInputProperties::VALUE),
+            'prevValue' => $fieldDataAccessor->getValue(MutationInputProperties::PREV_VALUE),
         ];
     }
 
@@ -256,7 +257,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getUpdateMetaData($fieldDataAccessor);
 
-        $termMetaIDOrTrue = $this->executeUpdateTermMeta($termID, $metaData['key'], $metaData['value']);
+        $termMetaIDOrTrue = $this->executeUpdateTermMeta($termID, $metaData['key'], $metaData['value'], $metaData['prevValue']);
 
         return $termID;
     }
@@ -265,7 +266,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
-    abstract protected function executeUpdateTermMeta(string|int $termID, string $key, mixed $value): string|int|bool;
+    abstract protected function executeUpdateTermMeta(string|int $termID, string $key, mixed $value, mixed $prevValue = null): string|int|bool;
 
     /**
      * @return string|int The ID of the entity term

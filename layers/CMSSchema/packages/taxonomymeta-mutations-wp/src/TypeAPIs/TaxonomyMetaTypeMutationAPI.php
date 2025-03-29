@@ -124,8 +124,9 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
+        mixed $prevValue = null,
     ): string|int|bool {
-        $result = update_term_meta((int) $taxonomyTermID, $key, $value);
+        $result = update_term_meta((int) $taxonomyTermID, $key, $value, $prevValue ?? '');
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getTaxonomyTermMetaCRUDMutationException(

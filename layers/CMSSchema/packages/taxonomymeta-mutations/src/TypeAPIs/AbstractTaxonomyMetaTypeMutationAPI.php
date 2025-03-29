@@ -50,11 +50,13 @@ abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService 
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
+        mixed $prevValue = null,
     ): string|int|bool {
         return $this->updateTaxonomyTermMeta(
             $taxonomyTermID,
             $key,
             $value,
+            $prevValue,
         );
     }
 

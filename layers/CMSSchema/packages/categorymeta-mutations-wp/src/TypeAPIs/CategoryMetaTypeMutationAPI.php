@@ -53,8 +53,9 @@ class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
+        mixed $prevValue = null,
     ): string|int|bool {
-        return $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
+        return $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value, $prevValue);
     }
 
     public function deleteCategoryTermMeta(

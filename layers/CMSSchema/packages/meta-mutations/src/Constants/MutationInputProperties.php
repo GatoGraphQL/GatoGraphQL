@@ -10,6 +10,7 @@ class MutationInputProperties
     public final const KEY = 'key';
     public final const VALUE = 'value';
     public final const SINGLE = 'single';
+    public final const PREV_VALUE = 'prevValue';
     public final const ENTRIES = 'entries';
     public final const META = 'meta';
 }

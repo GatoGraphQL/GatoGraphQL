@@ -37,6 +37,7 @@ interface TaxonomyMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterf
         string|int $taxonomyTermID,
         string $key,
         mixed $value,
+        mixed $prevValue = null,
     ): string|int|bool;
 
     /**
