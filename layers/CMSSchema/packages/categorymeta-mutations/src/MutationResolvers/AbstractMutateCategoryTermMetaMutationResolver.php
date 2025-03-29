@@ -32,7 +32,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @return string|int the ID of the created taxonomy
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function executeAddTaxonomyTermMeta(string|int $taxonomyTermID, string $key, mixed $value, bool $single): string|int
+    protected function executeAddTermMeta(string|int $taxonomyTermID, string $key, mixed $value, bool $single): string|int
     {
         return $this->getCategoryMetaTypeMutationAPI()->addTaxonomyTermMeta($taxonomyTermID, $key, $value, $single);
     }
@@ -40,7 +40,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     /**
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeUpdateTaxonomyTermMeta(string|int $taxonomyTermID, string $key, mixed $value): void
+    protected function executeUpdateTermMeta(string|int $taxonomyTermID, string $key, mixed $value): void
     {
         $this->getCategoryMetaTypeMutationAPI()->updateTaxonomyTermMeta($taxonomyTermID, $key, $value);
     }
@@ -49,7 +49,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeDeleteTaxonomyTermMeta(string|int $taxonomyTermID, string $key): void
+    protected function executeDeleteTermMeta(string|int $taxonomyTermID, string $key): void
     {
         $this->getCategoryMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $key);
     }
@@ -58,7 +58,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @param array<string,mixed[]|null> $entries
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeSetTaxonomyTermMeta(string|int $taxonomyTermID, array $entries): void
+    protected function executeSetTermMeta(string|int $taxonomyTermID, array $entries): void
     {
         $this->getCategoryMetaTypeMutationAPI()->setTaxonomyTermMeta($taxonomyTermID, $entries);
     }
