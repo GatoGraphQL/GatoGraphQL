@@ -51,6 +51,37 @@ trait MutateTermMetaMutationResolverTrait
         );
     }
 
+    protected function validateMetaEntryExists(
+        string|int $termID,
+        string $key,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->doesMetaEntryExist($termID, $key)) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                $this->getMetaEntryDoesNotExistError($termID, $key),
+                $fieldDataAccessor->getField(),
+            )
+        );
+    }
+
+    protected function getMetaEntryDoesNotExistError(
+        string|int $termID,
+        string $key,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E4,
+            [
+                $termID,
+                $key,
+            ]
+        );
+    }
+
     /**
      * @param string[] $metaKeys
      */

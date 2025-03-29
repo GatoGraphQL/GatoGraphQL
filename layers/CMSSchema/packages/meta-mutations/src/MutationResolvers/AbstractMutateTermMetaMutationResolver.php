@@ -165,6 +165,18 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $this->validateMetaEntryExists(
+            $termID,
+            $key,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     /**
