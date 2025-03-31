@@ -11,16 +11,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractTermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolverPicker extends AbstractErrorPayloadObjectTypeResolverPicker
 {
-    private ?TermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = null;
+    private ?TermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver $entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = null;
 
     final protected function getTermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver(): TermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver
     {
-        if ($this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver === null) {
+        if ($this->entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver === null) {
             /** @var TermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver */
-            $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(TermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver::class);
-            $this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = $termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver;
+            $entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(TermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver::class);
+            $this->entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = $entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver;
         }
-        return $this->termMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver;
+        return $this->entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface
