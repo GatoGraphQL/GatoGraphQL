@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MetaMutations\MutationResolvers;
 
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MetaMutations\Exception\TermMetaCRUDMutationException;
+use PoPCMSSchema\MetaMutations\Exception\EntityMetaCRUDMutationException;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -241,7 +241,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
 
     /**
      * @return string|int The ID of the entity term
-     * @throws TermMetaCRUDMutationException If there was an error (eg: some entity term creation validation failed)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: some entity term creation validation failed)
      */
     protected function addMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -257,13 +257,13 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
 
     /**
      * @return string|int the ID of the created entity
-     * @throws TermMetaCRUDMutationException If there was an error (eg: some entity term creation validation failed)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: some entity term creation validation failed)
      */
     abstract protected function executeAddEntityMeta(string|int $entityID, string $key, mixed $value, bool $single): string|int;
 
     /**
      * @return string|int The ID of the entity term
-     * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
     protected function updateMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -280,13 +280,13 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
     abstract protected function executeUpdateEntityMeta(string|int $entityID, string $key, mixed $value, mixed $prevValue = null): string|int|bool;
 
     /**
      * @return string|int The ID of the entity term
-     * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
     protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -301,13 +301,13 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
     }
 
     /**
-     * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
     abstract protected function executeDeleteEntityMeta(string|int $entityID, string $key): void;
 
     /**
      * @return string|int The ID of the entity term
-     * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
     protected function setMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -323,7 +323,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
 
     /**
      * @param array<string,mixed[]|null> $entries
-     * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
     abstract protected function executeSetEntityMeta(string|int $entityID, array $entries): void;
 }

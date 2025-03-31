@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MetaMutations\Exception;
 
 use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
 
-class TermMetaCRUDMutationException extends AbstractPayloadClientException
+class EntityMetaCRUDMutationException extends AbstractPayloadClientException
 {
 }
