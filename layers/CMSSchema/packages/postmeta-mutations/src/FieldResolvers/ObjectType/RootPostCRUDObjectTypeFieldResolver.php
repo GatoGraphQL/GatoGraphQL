@@ -70,6 +70,15 @@ class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObje
         return $this->rootAddPostMetaMutationPayloadObjectTypeResolver;
     }
 
+    /**
+     * Disable because we don't need `addPostMeta` and
+     * `addCustomPostMeta`, it's too confusing
+     */
+    public function isServiceEnabled(): bool
+    {
+        return false;
+    }
+
     protected function getCustomPostEntityName(): string
     {
         return 'Post';
