@@ -16,98 +16,98 @@ trait MutateTermMetaMutationResolverTrait
     abstract protected function getMetaTypeAPI(): MetaTypeAPIInterface;
 
     protected function validateSingleMetaEntryDoesNotExist(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$this->doesMetaEntryExist($termID, $key)) {
+        if (!$this->doesMetaEntryExist($entityID, $key)) {
             return;
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
-                $this->getSingleMetaEntryAlreadyExistsError($termID, $key),
+                $this->getSingleMetaEntryAlreadyExistsError($entityID, $key),
                 $fieldDataAccessor->getField(),
             )
         );
     }
 
     abstract protected function doesMetaEntryExist(
-        string|int $termID,
+        string|int $entityID,
         string $key,
     ): bool;
 
     protected function getSingleMetaEntryAlreadyExistsError(
-        string|int $termID,
+        string|int $entityID,
         string $key,
     ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E1,
             [
-                $termID,
+                $entityID,
                 $key,
             ]
         );
     }
 
     protected function validateMetaEntryExists(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if ($this->doesMetaEntryExist($termID, $key)) {
+        if ($this->doesMetaEntryExist($entityID, $key)) {
             return;
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
-                $this->getMetaEntryDoesNotExistError($termID, $key),
+                $this->getMetaEntryDoesNotExistError($entityID, $key),
                 $fieldDataAccessor->getField(),
             )
         );
     }
 
     protected function validateMetaEntryWithValueExists(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         mixed $value,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if ($this->doesMetaEntryWithValueExist($termID, $key, $value)) {
+        if ($this->doesMetaEntryWithValueExist($entityID, $key, $value)) {
             return;
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
-                $this->getMetaEntryWithValueDoesNotExistError($termID, $key, $value),
+                $this->getMetaEntryWithValueDoesNotExistError($entityID, $key, $value),
                 $fieldDataAccessor->getField(),
             )
         );
     }
 
     abstract protected function doesMetaEntryWithValueExist(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         mixed $value,
     ): bool;
 
     protected function getMetaEntryDoesNotExistError(
-        string|int $termID,
+        string|int $entityID,
         string $key,
     ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E4,
             [
-                $termID,
+                $entityID,
                 $key,
             ]
         );
     }
 
     protected function getMetaEntryWithValueDoesNotExistError(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         mixed $value,
     ): FeedbackItemResolution {
@@ -115,7 +115,7 @@ trait MutateTermMetaMutationResolverTrait
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E5,
             [
-                $termID,
+                $entityID,
                 $key,
                 $value,
             ]

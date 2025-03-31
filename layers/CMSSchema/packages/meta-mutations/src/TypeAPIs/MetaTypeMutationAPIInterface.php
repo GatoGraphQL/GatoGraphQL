@@ -13,7 +13,7 @@ interface MetaTypeMutationAPIInterface
      * @throws TermMetaCRUDMutationException If there was an error
      */
     public function setTermMeta(
-        string|int $termID,
+        string|int $entityID,
         array $entries,
     ): void;
 
@@ -22,7 +22,7 @@ interface MetaTypeMutationAPIInterface
      * @throws TermMetaCRUDMutationException If there was an error
      */
     public function addTermMeta(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         mixed $value,
         bool $single = false,
@@ -33,7 +33,7 @@ interface MetaTypeMutationAPIInterface
      * @throws TermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateTermMeta(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         mixed $value,
     ): string|int|bool;
@@ -42,7 +42,7 @@ interface MetaTypeMutationAPIInterface
      * @throws TermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
     public function deleteTermMeta(
-        string|int $termID,
+        string|int $entityID,
         string $key,
     ): void;
 }

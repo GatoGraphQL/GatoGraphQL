@@ -67,11 +67,11 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         /** @var bool */
         $single = $fieldDataAccessor->getValue(MutationInputProperties::SINGLE);
         if ($single) {
-            $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+            $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
             /** @var string */
             $key = $fieldDataAccessor->getValue(MutationInputProperties::KEY);
             $this->validateSingleMetaEntryDoesNotExist(
-                $termID,
+                $entityID,
                 $key,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
@@ -85,10 +85,10 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
 
-        $this->validateTermExists(
-            $termID,
+        $this->validateEntityExists(
+            $entityID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -102,21 +102,21 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
             return;
         }
 
-        $this->validateUserCanEditTerm(
-            $termID,
+        $this->validateUserCanEditEntity(
+            $entityID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
 
-    abstract protected function validateTermExists(
-        string|int $termID,
+    abstract protected function validateEntityExists(
+        string|int $entityID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
 
-    abstract protected function validateUserCanEditTerm(
-        string|int $termID,
+    abstract protected function validateUserCanEditEntity(
+        string|int $entityID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
@@ -149,9 +149,9 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
 
         $prevValue = $fieldDataAccessor->getValue(MutationInputProperties::PREV_VALUE);
         if (!empty($prevValue)) {
-            $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+            $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
             $this->validateMetaEntryWithValueExists(
-                $termID,
+                $entityID,
                 $key,
                 $prevValue,
                 $fieldDataAccessor,
@@ -186,9 +186,9 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
             return;
         }
 
-        $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $this->validateMetaEntryExists(
-            $termID,
+            $entityID,
             $key,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -248,18 +248,18 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         /** @var string|int */
-        $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getAddMetaData($fieldDataAccessor);
-        $termMetaID = $this->executeAddTermMeta($termID, $metaData['key'], $metaData['value'], $metaData['single']);
+        $termMetaID = $this->executeAddTermMeta($entityID, $metaData['key'], $metaData['value'], $metaData['single']);
 
-        return $termID;
+        return $entityID;
     }
 
     /**
      * @return string|int the ID of the created entity
      * @throws TermMetaCRUDMutationException If there was an error (eg: some entity term creation validation failed)
      */
-    abstract protected function executeAddTermMeta(string|int $termID, string $key, mixed $value, bool $single): string|int;
+    abstract protected function executeAddTermMeta(string|int $entityID, string $key, mixed $value, bool $single): string|int;
 
     /**
      * @return string|int The ID of the entity term
@@ -270,19 +270,19 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         /** @var string|int */
-        $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getUpdateMetaData($fieldDataAccessor);
 
-        $termMetaIDOrTrue = $this->executeUpdateTermMeta($termID, $metaData['key'], $metaData['value'], $metaData['prevValue']);
+        $termMetaIDOrTrue = $this->executeUpdateTermMeta($entityID, $metaData['key'], $metaData['value'], $metaData['prevValue']);
 
-        return $termID;
+        return $entityID;
     }
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
-    abstract protected function executeUpdateTermMeta(string|int $termID, string $key, mixed $value, mixed $prevValue = null): string|int|bool;
+    abstract protected function executeUpdateTermMeta(string|int $entityID, string $key, mixed $value, mixed $prevValue = null): string|int|bool;
 
     /**
      * @return string|int The ID of the entity term
@@ -293,17 +293,17 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         /** @var string|int */
-        $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getUpdateMetaData($fieldDataAccessor);
-        $this->executeDeleteTermMeta($termID, $metaData['key']);
+        $this->executeDeleteTermMeta($entityID, $metaData['key']);
 
-        return $termID;
+        return $entityID;
     }
 
     /**
      * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
-    abstract protected function executeDeleteTermMeta(string|int $termID, string $key): void;
+    abstract protected function executeDeleteTermMeta(string|int $entityID, string $key): void;
 
     /**
      * @return string|int The ID of the entity term
@@ -314,16 +314,16 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         /** @var string|int */
-        $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getSetMetaData($fieldDataAccessor);
-        $this->executeSetTermMeta($termID, $metaData['entries']);
+        $this->executeSetTermMeta($entityID, $metaData['entries']);
 
-        return $termID;
+        return $entityID;
     }
 
     /**
      * @param array<string,mixed[]|null> $entries
      * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
-    abstract protected function executeSetTermMeta(string|int $termID, array $entries): void;
+    abstract protected function executeSetTermMeta(string|int $entityID, array $entries): void;
 }

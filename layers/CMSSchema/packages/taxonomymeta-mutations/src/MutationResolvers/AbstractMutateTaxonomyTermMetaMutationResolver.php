@@ -53,7 +53,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         return $this->taxonomyTermTypeAPI;
     }
 
-    protected function validateTermExists(
+    protected function validateEntityExists(
         string|int $taxonomyTermID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -66,7 +66,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         );
     }
 
-    protected function validateUserCanEditTerm(
+    protected function validateUserCanEditEntity(
         string|int $taxonomyTermID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
