@@ -21,18 +21,18 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     use MutateCustomPostMutationResolverTrait;
     use MutateCustomPostMetaMutationResolverTrait;
 
-    private ?CustomPostMetaTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI = null;
     private ?CustomPostMetaTypeMutationAPIInterface $customPostTypeMutationAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     final protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface
     {
-        if ($this->customPostTypeAPI === null) {
+        if ($this->customPostMetaTypeAPI === null) {
             /** @var CustomPostMetaTypeAPIInterface */
-            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostMetaTypeAPIInterface::class);
-            $this->customPostTypeAPI = $customPostTypeAPI;
+            $customPostMetaTypeAPI = $this->instanceManager->getInstance(CustomPostMetaTypeAPIInterface::class);
+            $this->customPostMetaTypeAPI = $customPostMetaTypeAPI;
         }
-        return $this->customPostTypeAPI;
+        return $this->customPostMetaTypeAPI;
     }
     final protected function getCustomPostMetaTypeMutationAPI(): CustomPostMetaTypeMutationAPIInterface
     {
@@ -71,7 +71,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $customPostName = $this->getCustomPostTypeAPI()->getCustomPostCustomPost($customPostID);
+        $customPostName = $this->getCustomPostTypeAPI()->getCustomPost($customPostID);
         if ($customPostName === null) {
             return;
         }
