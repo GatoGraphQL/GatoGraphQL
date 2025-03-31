@@ -87,7 +87,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
 
         $termID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
 
-        $this->validateTermExists(
+        $this->validateEntityExists(
             $termID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -109,7 +109,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         );
     }
 
-    abstract protected function validateTermExists(
+    abstract protected function validateEntityExists(
         string|int $termID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
