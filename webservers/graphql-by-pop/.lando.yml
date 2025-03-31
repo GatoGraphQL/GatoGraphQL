@@ -120,6 +120,10 @@ services:
         - >-
           ../../layers/CMSSchema/packages/custompostmeta:/app/vendor/pop-cms-schema/custompostmeta
         - >-
+          ../../layers/CMSSchema/packages/custompostmeta-mutations-wp:/app/vendor/pop-cms-schema/custompostmeta-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompostmeta-mutations:/app/vendor/pop-cms-schema/custompostmeta-mutations
+        - >-
           ../../layers/CMSSchema/packages/customposts-wp:/app/vendor/pop-cms-schema/customposts-wp
         - >-
           ../../layers/CMSSchema/packages/customposts:/app/vendor/pop-cms-schema/customposts
@@ -167,6 +171,8 @@ services:
           ../../layers/CMSSchema/packages/post-tags:/app/vendor/pop-cms-schema/post-tags
         - >-
           ../../layers/CMSSchema/packages/postmedia-mutations:/app/vendor/pop-cms-schema/postmedia-mutations
+        - >-
+          ../../layers/CMSSchema/packages/postmeta-mutations:/app/vendor/pop-cms-schema/postmeta-mutations
         - >-
           ../../layers/CMSSchema/packages/posts-wp:/app/vendor/pop-cms-schema/posts-wp
         - '../../layers/CMSSchema/packages/posts:/app/vendor/pop-cms-schema/posts'
