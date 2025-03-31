@@ -91,7 +91,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
     }
 
     public function maybeSetMeta(
-        int|string $termID,
+        int|string $entityID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -101,7 +101,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
 
         /** @var stdClass */
         $metaEntries = $fieldDataAccessor->getValue(MutationInputProperties::META);
-        $this->getMetaTypeMutationAPI()->setTermMeta($termID, (array) $metaEntries);
+        $this->getMetaTypeMutationAPI()->setTermMeta($entityID, (array) $metaEntries);
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

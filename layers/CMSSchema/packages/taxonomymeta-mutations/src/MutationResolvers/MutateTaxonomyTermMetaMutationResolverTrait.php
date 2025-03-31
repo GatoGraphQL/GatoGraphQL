@@ -20,17 +20,17 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
     }
 
     protected function doesMetaEntryExist(
-        string|int $termID,
+        string|int $entityID,
         string $key,
     ): bool {
-        return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($termID, $key, true) !== null;
+        return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($entityID, $key, true) !== null;
     }
 
     protected function doesMetaEntryWithValueExist(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         mixed $value,
     ): bool {
-        return in_array($value, $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($termID, $key, false));
+        return in_array($value, $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($entityID, $key, false));
     }
 }
