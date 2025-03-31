@@ -12,10 +12,10 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use stdClass;
 
-abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationResolver implements TermMetaMutationResolverInterface
+abstract class AbstractMutateEntityMetaMutationResolver extends AbstractMutationResolver implements EntityMetaMutationResolverInterface
 {
     use ValidateUserLoggedInMutationResolverTrait;
-    use MutateTermMetaMutationResolverTrait;
+    use MutateEntityMetaMutationResolverTrait;
 
     protected function validateSetMetaErrors(
         FieldDataAccessorInterface $fieldDataAccessor,

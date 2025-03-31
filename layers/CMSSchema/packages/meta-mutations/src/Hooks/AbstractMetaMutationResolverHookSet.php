@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MetaMutations\Hooks;
 
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
+use PoPCMSSchema\MetaMutations\MutationResolvers\MutateEntityMetaMutationResolverTrait;
 use PoPCMSSchema\MetaMutations\MutationResolvers\PayloadableMetaMutationResolverTrait;
 use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -18,7 +18,7 @@ use stdClass;
 
 abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
 {
-    use MutateTermMetaMutationResolverTrait;
+    use MutateEntityMetaMutationResolverTrait;
     use PayloadableMetaMutationResolverTrait;
 
     abstract protected function getMetaTypeMutationAPI(): MetaTypeMutationAPIInterface;

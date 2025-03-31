@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
+use PoPCMSSchema\MetaMutations\MutationResolvers\MutateEntityMetaMutationResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
 trait MutateTaxonomyTermMetaMutationResolverTrait
 {
-    use MutateTermMetaMutationResolverTrait;
+    use MutateEntityMetaMutationResolverTrait;
 
     abstract protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface;
 

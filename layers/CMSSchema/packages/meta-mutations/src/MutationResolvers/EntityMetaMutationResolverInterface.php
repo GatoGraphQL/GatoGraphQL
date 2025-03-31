@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MetaMutations\MutationResolvers;
 
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-interface TermMetaMutationResolverInterface extends MutationResolverInterface
+interface EntityMetaMutationResolverInterface extends MutationResolverInterface
 {
 }
