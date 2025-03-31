@@ -253,7 +253,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeUpdateTermMeta(string|int $taxonomyTermID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
+    protected function executeUpdateEntityMeta(string|int $taxonomyTermID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
     {
         return $this->getTaxonomyMetaTypeMutationAPI()->updateTaxonomyTermMeta($taxonomyTermID, $key, $value, $prevValue);
     }
