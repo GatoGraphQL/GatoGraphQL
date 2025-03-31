@@ -11,16 +11,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 abstract class AbstractEntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolverPicker extends AbstractErrorPayloadObjectTypeResolverPicker
 {
-    private ?EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver $entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = null;
+    private ?EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver $entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver = null;
 
     final protected function getEntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver(): EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver
     {
-        if ($this->entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver === null) {
+        if ($this->entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver === null) {
             /** @var EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver */
-            $entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver::class);
-            $this->entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver = $entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver;
+            $entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver::class);
+            $this->entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver = $entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver;
         }
-        return $this->entityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolver;
+        return $this->entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver;
     }
 
     public function getObjectTypeResolver(): ObjectTypeResolverInterface

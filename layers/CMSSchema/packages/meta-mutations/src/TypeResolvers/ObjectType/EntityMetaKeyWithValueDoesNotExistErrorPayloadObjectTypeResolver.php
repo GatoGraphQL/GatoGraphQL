@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTypeResolver
 {
-    private ?EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader $termMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader = null;
+    private ?EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader $entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader = null;
 
     final protected function getEntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader(): EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader
     {
-        if ($this->termMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader === null) {
+        if ($this->entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader === null) {
             /** @var EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader */
-            $termMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader::class);
-            $this->termMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader = $termMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader;
+            $entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader = $this->instanceManager->getInstance(EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader::class);
+            $this->entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader = $entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader;
         }
-        return $this->termMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader;
+        return $this->entityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeDataLoader;
     }
 
     public function getTypeName(): string
