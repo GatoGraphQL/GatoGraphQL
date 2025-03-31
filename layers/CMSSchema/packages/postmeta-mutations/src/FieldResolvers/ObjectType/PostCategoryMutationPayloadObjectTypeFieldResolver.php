@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\AbstractPostMetaMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;

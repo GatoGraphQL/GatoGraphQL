@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMetaMutations\SchemaHooks;
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\CategoryMetaMutations\SchemaHooks\AbstractCategoryMutationResolverHookSet;
 
 class PostMutationResolverHookSet extends AbstractCategoryMutationResolverHookSet
