@@ -53,7 +53,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         return $this->customPostTypeAPI;
     }
 
-    protected function validateTermExists(
+    protected function validateEntityExists(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
