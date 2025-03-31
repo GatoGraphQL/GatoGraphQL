@@ -36,7 +36,7 @@ class PostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationP
 
     protected function getObjectFieldName(): string
     {
-        return 'customPost';
+        return 'post';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
