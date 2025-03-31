@@ -9,11 +9,14 @@ use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationExc
 use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateOrUpdateCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateTermMetaMutationResolver;
+use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 
 abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMutateTermMetaMutationResolver implements CustomPostMetaMutationResolverInterface
@@ -24,6 +27,8 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     private ?CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI = null;
     private ?CustomPostMetaTypeMutationAPIInterface $customPostTypeMutationAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?NameResolverInterface $nameResolver = null;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
 
     final protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface
     {
@@ -51,6 +56,24 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
             $this->customPostTypeAPI = $customPostTypeAPI;
         }
         return $this->customPostTypeAPI;
+    }
+    final protected function getNameResolver(): NameResolverInterface
+    {
+        if ($this->nameResolver === null) {
+            /** @var NameResolverInterface */
+            $nameResolver = $this->instanceManager->getInstance(NameResolverInterface::class);
+            $this->nameResolver = $nameResolver;
+        }
+        return $this->nameResolver;
+    }
+    final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        if ($this->userRoleTypeAPI === null) {
+            /** @var UserRoleTypeAPIInterface */
+            $userRoleTypeAPI = $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+            $this->userRoleTypeAPI = $userRoleTypeAPI;
+        }
+        return $this->userRoleTypeAPI;
     }
 
     protected function validateEntityExists(
