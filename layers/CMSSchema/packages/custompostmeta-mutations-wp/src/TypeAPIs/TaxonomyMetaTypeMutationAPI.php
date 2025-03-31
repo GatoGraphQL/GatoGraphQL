@@ -119,7 +119,7 @@ class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAP
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     public function updateCustomPostMeta(
         string|int $customPostID,

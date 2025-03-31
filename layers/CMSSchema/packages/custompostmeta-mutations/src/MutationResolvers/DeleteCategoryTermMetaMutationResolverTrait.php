@@ -25,7 +25,7 @@ trait DeleteCategoryTermMetaMutationResolverTrait
     }
 
     /**
-     * @return string|int The ID of the taxonomy term
+     * @return string|int The ID of the custom post
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     abstract protected function deleteMeta(

@@ -37,7 +37,7 @@ abstract class AbstractSetCustomPostMetaInputObjectTypeResolver extends Abstract
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to set entries on a taxonomy term', 'custompostmeta-mutations');
+        return $this->__('Input to set entries on a custom post', 'custompostmeta-mutations');
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class AbstractSetCustomPostMetaInputObjectTypeResolver extends Abstract
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'custompostmeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the custom post', 'custompostmeta-mutations'),
             MutationInputProperties::ENTRIES => $this->__('The meta entries', 'custompostmeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };

@@ -34,7 +34,7 @@ interface CategoryMetaTypeMutationAPIInterface extends CustomPostMetaTypeMutatio
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     public function updateCategoryTermMeta(
         string|int $customPostID,

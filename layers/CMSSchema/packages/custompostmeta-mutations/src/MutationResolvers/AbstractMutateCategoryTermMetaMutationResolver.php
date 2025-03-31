@@ -30,7 +30,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int the ID of the created meta entry
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: some custom post creation validation failed)
      */
     protected function executeAddTermMeta(string|int $customPostID, string $key, mixed $value, bool $single): string|int
     {
@@ -39,7 +39,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function executeUpdateTermMeta(string|int $customPostID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
     {
@@ -47,7 +47,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function executeDeleteTermMeta(string|int $customPostID, string $key): void
     {
@@ -56,7 +56,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @param array<string,mixed[]|null> $entries
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function executeSetTermMeta(string|int $customPostID, array $entries): void
     {
@@ -177,7 +177,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the created entity
-     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: some custom post creation validation failed)
      */
     protected function addMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -192,7 +192,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function updateMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -211,8 +211,8 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @return string|int The ID of the taxonomy term
-     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @return string|int The ID of the custom post
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -226,7 +226,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function setMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
