@@ -101,7 +101,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
 
         /** @var stdClass */
         $metaEntries = $fieldDataAccessor->getValue(MutationInputProperties::META);
-        $this->getMetaTypeMutationAPI()->setTermMeta($entityID, (array) $metaEntries);
+        $this->getMetaTypeMutationAPI()->setEntityMeta($entityID, (array) $metaEntries);
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
