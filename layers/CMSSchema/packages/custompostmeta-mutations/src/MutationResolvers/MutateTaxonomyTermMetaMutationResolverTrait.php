@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
+use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 
 trait MutateCustomPostMetaMutationResolverTrait
 {
     use MutateTermMetaMutationResolverTrait;
 
-    abstract protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface;
+    abstract protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface;
 
     protected function getMetaTypeAPI(): MetaTypeAPIInterface
     {
-        return $this->getTaxonomyMetaTypeAPI();
+        return $this->getCustomPostMetaTypeAPI();
     }
 
     protected function doesMetaEntryExist(
         string|int $termID,
         string $key,
     ): bool {
-        return $this->getTaxonomyMetaTypeAPI()->getCustomPostMeta($termID, $key, true) !== null;
+        return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta($termID, $key, true) !== null;
     }
 
     protected function doesMetaEntryWithValueExist(
@@ -31,6 +31,6 @@ trait MutateCustomPostMetaMutationResolverTrait
         string $key,
         mixed $value,
     ): bool {
-        return in_array($value, $this->getTaxonomyMetaTypeAPI()->getCustomPostMeta($termID, $key, false));
+        return in_array($value, $this->getCustomPostMetaTypeAPI()->getCustomPostMeta($termID, $key, false));
     }
 }

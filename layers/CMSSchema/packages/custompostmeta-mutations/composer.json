@@ -177,12 +177,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPCMSSchema\\TaxonomyMetaMutations\\": "src"
+            "PoPCMSSchema\\CustomPostMetaMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPCMSSchema\\TaxonomyMetaMutations\\": "tests"
+            "PoPCMSSchema\\CustomPostMetaMutations\\": "tests"
         }
     },
     "scripts": {

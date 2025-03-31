@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\Hooks;
 
 use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
-use PoPCMSSchema\TaxonomyMetaMutations\Hooks\AbstractTaxonomyMetaMutationResolverHookSet;
+use PoPCMSSchema\CustomPostMetaMutations\Hooks\AbstractCustomPostMetaMutationResolverHookSet;
 
-abstract class AbstractCategoryMetaMutationResolverHookSet extends AbstractTaxonomyMetaMutationResolverHookSet
+abstract class AbstractCategoryMetaMutationResolverHookSet extends AbstractCustomPostMetaMutationResolverHookSet
 {
     protected function getErrorPayloadHookName(): string
     {

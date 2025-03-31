@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations;
+namespace PoPCMSSchema\CustomPostMetaMutations;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\Constants;
+namespace PoPCMSSchema\CustomPostMetaMutations\Constants;
 
-class TaxonomyMetaCRUDHookNames
+class CustomPostMetaCRUDHookNames
 {
     public final const VALIDATE_SET_META = __CLASS__ . ':validate-set-meta';
     public final const VALIDATE_ADD_META = __CLASS__ . ':validate-add-meta';

@@ -180,12 +180,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPCMSSchema\\TaxonomyMetaMutationsWP\\": "src"
+            "PoPCMSSchema\\CustomPostMetaMutationsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPCMSSchema\\TaxonomyMetaMutationsWP\\": "tests"
+            "PoPCMSSchema\\CustomPostMetaMutationsWP\\": "tests"
         }
     },
     "scripts": {

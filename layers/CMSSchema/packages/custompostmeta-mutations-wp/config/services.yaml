@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface:
-        class: \PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs\TaxonomyMetaTypeMutationAPI
+    PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface:
+        class: \PoPCMSSchema\CustomPostMetaMutationsWP\TypeAPIs\CustomPostMetaTypeMutationAPI
 
     PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface:
         class: \PoPCMSSchema\CategoryMetaMutationsWP\TypeAPIs\CategoryMetaTypeMutationAPI

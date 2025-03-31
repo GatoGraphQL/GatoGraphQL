@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutationsWP;
+namespace PoPCMSSchema\CustomPostMetaMutationsWP;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
@@ -15,7 +15,7 @@ class Module extends AbstractModule
     public function getSatisfiedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\TaxonomyMetaMutations\Module::class,
+            \PoPCMSSchema\CustomPostMetaMutations\Module::class,
         ];
     }
 
@@ -26,7 +26,7 @@ class Module extends AbstractModule
     {
         return [
             \PoPCMSSchema\TaxonomyMutationsWP\Module::class,
-            \PoPCMSSchema\TaxonomyMetaMutations\Module::class,
+            \PoPCMSSchema\CustomPostMetaMutations\Module::class,
         ];
     }
 

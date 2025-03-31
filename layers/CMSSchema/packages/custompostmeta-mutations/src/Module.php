@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations;
+namespace PoPCMSSchema\CustomPostMetaMutations;
 
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ModuleInterface;
@@ -20,7 +20,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\TaxonomyMeta\Module::class,
+            \PoPCMSSchema\CustomPostMeta\Module::class,
             \PoPCMSSchema\TaxonomyMutations\Module::class,
         ];
     }

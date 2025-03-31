@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMetaMutations\TypeAPIs;
 
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\CustomPostMetaCRUDMutationException;
-use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
+use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
 use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService implements TaxonomyMetaTypeMutationAPIInterface
+abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractBasicService implements CustomPostMetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]|null> $entries

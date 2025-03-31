@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
-use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\AbstractTaxonomyMetaTypeMutationAPI;
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\CustomPostMetaCRUDMutationException;
+use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\AbstractCustomPostMetaTypeMutationAPI;
+use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use WP_Error;
 
 use function add_post_meta;
@@ -16,7 +16,7 @@ use function update_post_meta;
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
+class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAPI
 {
     use TypeMutationAPITrait;
 

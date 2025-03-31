@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\MetaMutations\MutationResolvers\TermMetaMutationResolverInterface;
 

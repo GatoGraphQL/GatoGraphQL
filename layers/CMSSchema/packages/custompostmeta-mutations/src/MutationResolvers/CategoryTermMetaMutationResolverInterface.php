@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\CustomPostMetaMutationResolverInterface;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\CustomPostMetaMutationResolverInterface;
 
 interface CategoryTermMetaMutationResolverInterface extends CustomPostMetaMutationResolverInterface
 {

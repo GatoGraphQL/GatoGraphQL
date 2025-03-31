@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\Exception;
+namespace PoPCMSSchema\CustomPostMetaMutations\Exception;
 
 use PoPCMSSchema\MetaMutations\Exception\TermMetaCRUDMutationException;
 

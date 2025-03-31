@@ -18,7 +18,7 @@ class Module extends AbstractModule
             \PoPCMSSchema\PostCategories\Module::class,
             \PoPCMSSchema\CategoryMetaMutations\Module::class,
             \PoPCMSSchema\PostCategoryMutations\Module::class,
-            \PoPCMSSchema\TaxonomyMetaMutations\Module::class,
+            \PoPCMSSchema\CustomPostMetaMutations\Module::class,
         ];
     }
 

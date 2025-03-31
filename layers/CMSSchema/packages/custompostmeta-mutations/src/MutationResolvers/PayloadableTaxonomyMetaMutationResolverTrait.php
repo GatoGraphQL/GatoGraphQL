@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\MetaMutations\MutationResolvers\PayloadableMetaMutationResolverTrait;
-use PoPCMSSchema\TaxonomyMetaMutations\Constants\TaxonomyMetaCRUDHookNames;
+use PoPCMSSchema\CustomPostMetaMutations\Constants\CustomPostMetaCRUDHookNames;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait as TaxonomyMutationsPayloadableTaxonomyMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
-trait PayloadableTaxonomyMetaMutationResolverTrait
+trait PayloadableCustomPostMetaMutationResolverTrait
 {
     use TaxonomyMutationsPayloadableTaxonomyMutationResolverTrait {
         TaxonomyMutationsPayloadableTaxonomyMutationResolverTrait::createErrorPayloadFromObjectTypeFieldResolutionFeedback as upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback;
@@ -23,7 +23,7 @@ trait PayloadableTaxonomyMetaMutationResolverTrait
     ): ErrorPayloadInterface {
         $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return App::applyFilters(
-            TaxonomyMetaCRUDHookNames::ERROR_PAYLOAD,
+            CustomPostMetaCRUDHookNames::ERROR_PAYLOAD,
             $this->createMetaMutationErrorPayloadFromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedback,
             ) ?? $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(

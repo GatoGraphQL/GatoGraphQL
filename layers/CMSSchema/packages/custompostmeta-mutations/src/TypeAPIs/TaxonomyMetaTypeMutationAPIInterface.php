@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\CustomPostMetaCRUDMutationException;
+use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 
-interface TaxonomyMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterface
+interface CustomPostMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]|null> $entries

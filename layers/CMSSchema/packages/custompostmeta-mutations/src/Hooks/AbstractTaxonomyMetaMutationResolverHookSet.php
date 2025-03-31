@@ -2,48 +2,48 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\Hooks;
+namespace PoPCMSSchema\CustomPostMetaMutations\Hooks;
 
 use PoPCMSSchema\MetaMutations\Hooks\AbstractMetaMutationResolverHookSet;
 use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\MutateCustomPostMetaMutationResolverTrait;
-use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
-use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\MutateCustomPostMetaMutationResolverTrait;
+use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 
-abstract class AbstractTaxonomyMetaMutationResolverHookSet extends AbstractMetaMutationResolverHookSet
+abstract class AbstractCustomPostMetaMutationResolverHookSet extends AbstractMetaMutationResolverHookSet
 {
     use MutateCustomPostMetaMutationResolverTrait;
 
-    private ?TaxonomyMetaTypeMutationAPIInterface $taxonomyMetaTypeMutationAPI = null;
-    private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
+    private ?CustomPostMetaTypeMutationAPIInterface $customPostMetaTypeMutationAPI = null;
+    private ?CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI = null;
 
-    final protected function getTaxonomyMetaTypeMutationAPI(): TaxonomyMetaTypeMutationAPIInterface
+    final protected function getCustomPostMetaTypeMutationAPI(): CustomPostMetaTypeMutationAPIInterface
     {
-        if ($this->taxonomyMetaTypeMutationAPI === null) {
-            /** @var TaxonomyMetaTypeMutationAPIInterface */
-            $taxonomyMetaTypeMutationAPI = $this->instanceManager->getInstance(TaxonomyMetaTypeMutationAPIInterface::class);
-            $this->taxonomyMetaTypeMutationAPI = $taxonomyMetaTypeMutationAPI;
+        if ($this->customPostMetaTypeMutationAPI === null) {
+            /** @var CustomPostMetaTypeMutationAPIInterface */
+            $customPostMetaTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMetaTypeMutationAPIInterface::class);
+            $this->customPostMetaTypeMutationAPI = $customPostMetaTypeMutationAPI;
         }
-        return $this->taxonomyMetaTypeMutationAPI;
+        return $this->customPostMetaTypeMutationAPI;
     }
-    final protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
+    final protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface
     {
-        if ($this->taxonomyMetaTypeAPI === null) {
-            /** @var TaxonomyMetaTypeAPIInterface */
-            $taxonomyMetaTypeAPI = $this->instanceManager->getInstance(TaxonomyMetaTypeAPIInterface::class);
-            $this->taxonomyMetaTypeAPI = $taxonomyMetaTypeAPI;
+        if ($this->customPostMetaTypeAPI === null) {
+            /** @var CustomPostMetaTypeAPIInterface */
+            $customPostMetaTypeAPI = $this->instanceManager->getInstance(CustomPostMetaTypeAPIInterface::class);
+            $this->customPostMetaTypeAPI = $customPostMetaTypeAPI;
         }
-        return $this->taxonomyMetaTypeAPI;
+        return $this->customPostMetaTypeAPI;
     }
 
     protected function getMetaTypeMutationAPI(): MetaTypeMutationAPIInterface
     {
-        return $this->getTaxonomyMetaTypeMutationAPI();
+        return $this->getCustomPostMetaTypeMutationAPI();
     }
 
     protected function getMetaTypeAPI(): MetaTypeAPIInterface
     {
-        return $this->getTaxonomyMetaTypeAPI();
+        return $this->getCustomPostMetaTypeAPI();
     }
 }

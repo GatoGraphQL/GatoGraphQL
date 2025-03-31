@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\NullableListValueJSONObjectScalarTypeResolver;

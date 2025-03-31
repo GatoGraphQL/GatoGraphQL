@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType\UpdateCustomPostMetaInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType\UpdateCustomPostMetaInputObjectTypeResolverInterface;
 
 interface UpdateCategoryTermMetaInputObjectTypeResolverInterface extends UpdateCustomPostMetaInputObjectTypeResolverInterface
 {
