@@ -308,13 +308,13 @@ abstract class AbstractRootCustomPostCRUDObjectTypeFieldResolver extends Abstrac
         $customPostEntityName = $this->getCustomPostEntityName();
         return match ($fieldName) {
             'add' . $customPostEntityName . 'Meta' => $this->__('Add meta to custom post', 'custompost-mutations'),
-            'add' . $customPostEntityName . 'Metas' => $this->__('Add meta to categories', 'custompost-mutations'),
+            'add' . $customPostEntityName . 'Metas' => $this->__('Add meta to custom posts', 'custompost-mutations'),
             'update' . $customPostEntityName . 'Meta' => $this->__('Update meta from custom post', 'custompost-mutations'),
-            'update' . $customPostEntityName . 'Metas' => $this->__('Update meta from categories', 'custompost-mutations'),
+            'update' . $customPostEntityName . 'Metas' => $this->__('Update meta from custom posts', 'custompost-mutations'),
             'delete' . $customPostEntityName . 'Meta' => $this->__('Delete meta from custom post', 'custompost-mutations'),
-            'delete' . $customPostEntityName . 'Metas' => $this->__('Delete meta from categories', 'custompost-mutations'),
+            'delete' . $customPostEntityName . 'Metas' => $this->__('Delete meta from custom posts', 'custompost-mutations'),
             'set' . $customPostEntityName . 'Meta' => $this->__('Set meta on custom post', 'custompost-mutations'),
-            'set' . $customPostEntityName . 'Metas' => $this->__('Set meta on categories', 'custompost-mutations'),
+            'set' . $customPostEntityName . 'Metas' => $this->__('Set meta on custom posts', 'custompost-mutations'),
             'add' . $customPostEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCustomPostMeta` mutation', 'custompost-mutations'),
             'update' . $customPostEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCustomPostMeta` mutation', 'custompost-mutations'),
             'delete' . $customPostEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCustomPostMeta` mutation', 'custompost-mutations'),
