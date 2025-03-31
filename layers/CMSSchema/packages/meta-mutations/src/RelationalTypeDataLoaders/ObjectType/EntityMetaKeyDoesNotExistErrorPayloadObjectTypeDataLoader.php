@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MetaMutations\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\MetaMutations\ObjectModels\TermMetaKeyDoesNotExistErrorPayload;
+use PoPCMSSchema\MetaMutations\ObjectModels\EntityMetaKeyDoesNotExistErrorPayload;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractDictionaryObjectTypeDataLoader;
 
-class TermMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
+class EntityMetaKeyDoesNotExistErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
 {
     public function getObjectClass(): string
     {
-        return TermMetaKeyDoesNotExistErrorPayload::class;
+        return EntityMetaKeyDoesNotExistErrorPayload::class;
     }
 }
