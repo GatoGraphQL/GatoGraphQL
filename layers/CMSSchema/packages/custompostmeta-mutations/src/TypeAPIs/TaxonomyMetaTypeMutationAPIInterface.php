@@ -41,7 +41,7 @@ interface CustomPostMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInte
     ): string|int|bool;
 
     /**
-     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     public function deleteCustomPostMeta(
         string|int $customPostID,

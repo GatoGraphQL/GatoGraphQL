@@ -21,27 +21,27 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     use MutateCustomPostMutationResolverTrait;
     use MutateCustomPostMetaMutationResolverTrait;
 
-    private ?CustomPostMetaTypeAPIInterface $taxonomyTypeAPI = null;
-    private ?CustomPostMetaTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
+    private ?CustomPostMetaTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostMetaTypeMutationAPIInterface $customPostTypeMutationAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
     final protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface
     {
-        if ($this->taxonomyTypeAPI === null) {
+        if ($this->customPostTypeAPI === null) {
             /** @var CustomPostMetaTypeAPIInterface */
-            $taxonomyTypeAPI = $this->instanceManager->getInstance(CustomPostMetaTypeAPIInterface::class);
-            $this->taxonomyTypeAPI = $taxonomyTypeAPI;
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostMetaTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
         }
-        return $this->taxonomyTypeAPI;
+        return $this->customPostTypeAPI;
     }
     final protected function getCustomPostMetaTypeMutationAPI(): CustomPostMetaTypeMutationAPIInterface
     {
-        if ($this->taxonomyTypeMutationAPI === null) {
+        if ($this->customPostTypeMutationAPI === null) {
             /** @var CustomPostMetaTypeMutationAPIInterface */
-            $taxonomyTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMetaTypeMutationAPIInterface::class);
-            $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;
+            $customPostTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMetaTypeMutationAPIInterface::class);
+            $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
         }
-        return $this->taxonomyTypeMutationAPI;
+        return $this->customPostTypeMutationAPI;
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
@@ -71,12 +71,12 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $taxonomyName = $this->getCustomPostTypeAPI()->getCustomPostCustomPost($customPostID);
-        if ($taxonomyName === null) {
+        $customPostName = $this->getCustomPostTypeAPI()->getCustomPostCustomPost($customPostID);
+        if ($customPostName === null) {
             return;
         }
         $this->validateCanLoggedInUserEditCustomPost(
-            $taxonomyName,
+            $customPostName,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -218,7 +218,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     }
 
     /**
-     * @return string|int the ID of the created taxonomy
+     * @return string|int the ID of the created custom post
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: some custom post creation validation failed)
      */
     protected function executeAddTermMeta(string|int $customPostID, string $key, mixed $value, bool $single): string|int

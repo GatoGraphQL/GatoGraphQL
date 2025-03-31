@@ -61,7 +61,7 @@ abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractBasicServic
     }
 
     /**
-     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     public function deleteTermMeta(
         string|int $customPostID,
