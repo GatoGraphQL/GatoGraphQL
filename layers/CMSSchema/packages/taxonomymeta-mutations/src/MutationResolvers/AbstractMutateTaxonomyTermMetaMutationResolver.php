@@ -22,7 +22,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     use MutateTaxonomyTermMetaMutationResolverTrait;
 
     private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
-    private ?TaxonomyMetaTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
+    private ?TaxonomyMetaTypeMutationAPIInterface $taxonomyMetaTypeMutationAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
@@ -36,12 +36,12 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
     }
     final protected function getTaxonomyMetaTypeMutationAPI(): TaxonomyMetaTypeMutationAPIInterface
     {
-        if ($this->taxonomyTypeMutationAPI === null) {
+        if ($this->taxonomyMetaTypeMutationAPI === null) {
             /** @var TaxonomyMetaTypeMutationAPIInterface */
-            $taxonomyTypeMutationAPI = $this->instanceManager->getInstance(TaxonomyMetaTypeMutationAPIInterface::class);
-            $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;
+            $taxonomyMetaTypeMutationAPI = $this->instanceManager->getInstance(TaxonomyMetaTypeMutationAPIInterface::class);
+            $this->taxonomyMetaTypeMutationAPI = $taxonomyMetaTypeMutationAPI;
         }
-        return $this->taxonomyTypeMutationAPI;
+        return $this->taxonomyMetaTypeMutationAPI;
     }
     final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
     {
