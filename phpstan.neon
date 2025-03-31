@@ -49,6 +49,8 @@ includes:
     - layers/CMSSchema/packages/custompostmedia-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompostmeta/phpstan.neon.dist
     - layers/WPSchema/packages/custompostmeta/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompostmeta-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompostmeta-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompostmeta-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/customposts/phpstan.neon.dist
     - layers/WPSchema/packages/customposts/phpstan.neon.dist
@@ -108,6 +110,7 @@ includes:
     - layers/CMSSchema/packages/post-tags/phpstan.neon.dist
     - layers/CMSSchema/packages/post-tags-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/postmedia-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/postmeta-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/posts/phpstan.neon.dist
     - layers/WPSchema/packages/posts/phpstan.neon.dist
     - layers/CMSSchema/packages/posts-wp/phpstan.neon.dist
