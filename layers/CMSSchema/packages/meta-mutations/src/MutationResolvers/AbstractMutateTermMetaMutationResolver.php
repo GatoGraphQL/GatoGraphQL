@@ -316,7 +316,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         /** @var string|int */
         $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getSetMetaData($fieldDataAccessor);
-        $this->executeSetTermMeta($entityID, $metaData['entries']);
+        $this->executeSetEntityMeta($entityID, $metaData['entries']);
 
         return $entityID;
     }
@@ -325,5 +325,5 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
      * @param array<string,mixed[]|null> $entries
      * @throws TermMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
-    abstract protected function executeSetTermMeta(string|int $entityID, array $entries): void;
+    abstract protected function executeSetEntityMeta(string|int $entityID, array $entries): void;
 }

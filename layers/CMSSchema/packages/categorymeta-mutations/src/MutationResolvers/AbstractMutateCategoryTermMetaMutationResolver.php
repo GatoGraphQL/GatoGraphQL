@@ -58,7 +58,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @param array<string,mixed[]|null> $entries
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeSetTermMeta(string|int $taxonomyTermID, array $entries): void
+    protected function executeSetEntityMeta(string|int $taxonomyTermID, array $entries): void
     {
         $this->getCategoryMetaTypeMutationAPI()->setTaxonomyTermMeta($taxonomyTermID, $entries);
     }
