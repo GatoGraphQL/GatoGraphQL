@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\PostCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\PostUpdateMetaMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class PostCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class PostUpdateMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?PostCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver $postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?PostUpdateMetaMutationErrorPayloadUnionTypeResolver $postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = null;
 
-    final protected function getPostCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver(): PostCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver
+    final protected function getPostUpdateMetaMutationErrorPayloadUnionTypeResolver(): PostUpdateMetaMutationErrorPayloadUnionTypeResolver
     {
         if ($this->postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver === null) {
-            /** @var PostCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver */
-            $postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver::class);
+            /** @var PostUpdateMetaMutationErrorPayloadUnionTypeResolver */
+            $postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostUpdateMetaMutationErrorPayloadUnionTypeResolver::class);
             $this->postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = $postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
         }
         return $this->postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
@@ -24,6 +24,6 @@ class PostCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader extends Abst
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->getPostCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver();
+        return $this->getPostUpdateMetaMutationErrorPayloadUnionTypeResolver();
     }
 }

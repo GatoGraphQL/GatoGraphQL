@@ -1,7 +1,7 @@
 {
     "name": "pop-cms-schema/postmeta-mutations",
     "type": "library",
-    "description": "Adds meta mutations to the `PostCategory` type",
+    "description": "Adds meta mutations to the `Post` type",
     "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "postmeta-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/postmeta-mutations",
     "license": "GPL-2.0-or-later",

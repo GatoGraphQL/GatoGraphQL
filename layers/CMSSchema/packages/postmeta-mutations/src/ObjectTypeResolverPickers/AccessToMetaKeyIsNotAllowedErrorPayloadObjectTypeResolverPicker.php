@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\RootCreatePostCategoryTermMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\RootUpdatePostCategoryTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootCreatePostTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootUpdatePostTermMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\PostCategoryUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\PostUpdateMutationErrorPayloadUnionTypeResolver;
 
 class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker extends AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker
 {
@@ -18,9 +18,9 @@ class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker extends Ab
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootCreatePostCategoryTermMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdatePostCategoryTermMutationErrorPayloadUnionTypeResolver::class,
-            PostCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreatePostTermMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdatePostTermMutationErrorPayloadUnionTypeResolver::class,
+            PostUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

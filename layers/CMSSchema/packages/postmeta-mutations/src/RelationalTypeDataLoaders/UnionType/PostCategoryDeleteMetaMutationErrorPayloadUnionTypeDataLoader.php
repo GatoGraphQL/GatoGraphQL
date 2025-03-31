@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\PostCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\PostDeleteMetaMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class PostCategoryDeleteMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class PostDeleteMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?PostCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver $postCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?PostDeleteMetaMutationErrorPayloadUnionTypeResolver $postCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver = null;
 
-    final protected function getPostCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver(): PostCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver
+    final protected function getPostDeleteMetaMutationErrorPayloadUnionTypeResolver(): PostDeleteMetaMutationErrorPayloadUnionTypeResolver
     {
         if ($this->postCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver === null) {
-            /** @var PostCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver */
-            $postCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver::class);
+            /** @var PostDeleteMetaMutationErrorPayloadUnionTypeResolver */
+            $postCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostDeleteMetaMutationErrorPayloadUnionTypeResolver::class);
             $this->postCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver = $postCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver;
         }
         return $this->postCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver;
@@ -24,6 +24,6 @@ class PostCategoryDeleteMetaMutationErrorPayloadUnionTypeDataLoader extends Abst
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->getPostCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver();
+        return $this->getPostDeleteMetaMutationErrorPayloadUnionTypeResolver();
     }
 }

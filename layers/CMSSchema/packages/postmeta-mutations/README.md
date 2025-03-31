@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds meta mutations to the `PostCategory` type
+Adds meta mutations to the `Post` type
 
 ## Install
 

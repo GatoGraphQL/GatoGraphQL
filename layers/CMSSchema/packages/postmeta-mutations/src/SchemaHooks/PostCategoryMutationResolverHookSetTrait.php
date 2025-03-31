@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\SchemaHooks;
 
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType\CreatePostCategoryTermInputObjectTypeResolverInterface;
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType\UpdatePostCategoryTermInputObjectTypeResolverInterface;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\CreatePostTermInputObjectTypeResolverInterface;
+use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\UpdatePostTermInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
-trait PostCategoryMutationResolverHookSetTrait
+trait PostMutationResolverHookSetTrait
 {
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        return $inputObjectTypeResolver instanceof CreatePostCategoryTermInputObjectTypeResolverInterface
-            || $inputObjectTypeResolver instanceof UpdatePostCategoryTermInputObjectTypeResolverInterface;
+        return $inputObjectTypeResolver instanceof CreatePostTermInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdatePostTermInputObjectTypeResolverInterface;
     }
 }

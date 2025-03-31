@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMetaMutations\SchemaHooks;
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\CategoryMetaMutations\SchemaHooks\AbstractCategoryMutationResolverHookSet;
 
-class PostCategoryMutationResolverHookSet extends AbstractCategoryMutationResolverHookSet
+class PostMutationResolverHookSet extends AbstractCategoryMutationResolverHookSet
 {
-    use PostCategoryMutationResolverHookSetTrait;
+    use PostMutationResolverHookSetTrait;
 
-    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postCategoryObjectTypeResolver = null;
 
-    final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
         if ($this->postCategoryObjectTypeResolver === null) {
-            /** @var PostCategoryObjectTypeResolver */
-            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+            /** @var PostObjectTypeResolver */
+            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
             $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
         }
         return $this->postCategoryObjectTypeResolver;
@@ -26,6 +26,6 @@ class PostCategoryMutationResolverHookSet extends AbstractCategoryMutationResolv
 
     protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
-        return $this->getPostCategoryObjectTypeResolver();
+        return $this->getPostObjectTypeResolver();
     }
 }

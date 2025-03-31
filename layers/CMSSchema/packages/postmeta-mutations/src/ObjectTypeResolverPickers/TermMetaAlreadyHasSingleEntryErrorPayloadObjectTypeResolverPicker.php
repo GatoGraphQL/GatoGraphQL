@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\PostCategoryUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\RootCreatePostCategoryTermMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\RootUpdatePostCategoryTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\PostUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootCreatePostTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootUpdatePostTermMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -18,9 +18,9 @@ class TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolverPicker extends 
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootCreatePostCategoryTermMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdatePostCategoryTermMutationErrorPayloadUnionTypeResolver::class,
-            PostCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreatePostTermMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdatePostTermMutationErrorPayloadUnionTypeResolver::class,
+            PostUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

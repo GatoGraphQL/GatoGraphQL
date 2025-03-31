@@ -7,64 +7,64 @@ namespace PoPCMSSchema\PostMetaMutations\FieldResolvers\ObjectType;
 use PoPCMSSchema\CategoryMetaMutations\FieldResolvers\ObjectType\AbstractCategoryObjectTypeFieldResolver;
 use PoPCMSSchema\CategoryMetaMutations\Module as CategoryMetaMutationsModule;
 use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration as CategoryMetaMutationsModuleConfiguration;
-use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostCategoryAddMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostCategoryDeleteMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostCategorySetMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostCategoryUpdateMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostAddMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostDeleteMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostSetMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostUpdateMetaMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFieldResolver
+class PostObjectTypeFieldResolver extends AbstractCategoryObjectTypeFieldResolver
 {
-    private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
-    private ?PostCategoryDeleteMetaMutationPayloadObjectTypeResolver $postCategoryDeleteMetaMutationPayloadObjectTypeResolver = null;
-    private ?PostCategoryAddMetaMutationPayloadObjectTypeResolver $postCategoryCreateMutationPayloadObjectTypeResolver = null;
-    private ?PostCategoryUpdateMetaMutationPayloadObjectTypeResolver $postCategoryUpdateMetaMutationPayloadObjectTypeResolver = null;
-    private ?PostCategorySetMetaMutationPayloadObjectTypeResolver $postCategorySetMetaMutationPayloadObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostDeleteMetaMutationPayloadObjectTypeResolver $postCategoryDeleteMetaMutationPayloadObjectTypeResolver = null;
+    private ?PostAddMetaMutationPayloadObjectTypeResolver $postCategoryCreateMutationPayloadObjectTypeResolver = null;
+    private ?PostUpdateMetaMutationPayloadObjectTypeResolver $postCategoryUpdateMetaMutationPayloadObjectTypeResolver = null;
+    private ?PostSetMetaMutationPayloadObjectTypeResolver $postCategorySetMetaMutationPayloadObjectTypeResolver = null;
 
-    final protected function getPostCategoryObjectTypeResolver(): PostCategoryObjectTypeResolver
+    final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
         if ($this->postCategoryObjectTypeResolver === null) {
-            /** @var PostCategoryObjectTypeResolver */
-            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
+            /** @var PostObjectTypeResolver */
+            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
             $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
         }
         return $this->postCategoryObjectTypeResolver;
     }
-    final protected function getPostCategoryDeleteMetaMutationPayloadObjectTypeResolver(): PostCategoryDeleteMetaMutationPayloadObjectTypeResolver
+    final protected function getPostDeleteMetaMutationPayloadObjectTypeResolver(): PostDeleteMetaMutationPayloadObjectTypeResolver
     {
         if ($this->postCategoryDeleteMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var PostCategoryDeleteMetaMutationPayloadObjectTypeResolver */
-            $postCategoryDeleteMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryDeleteMetaMutationPayloadObjectTypeResolver::class);
+            /** @var PostDeleteMetaMutationPayloadObjectTypeResolver */
+            $postCategoryDeleteMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostDeleteMetaMutationPayloadObjectTypeResolver::class);
             $this->postCategoryDeleteMetaMutationPayloadObjectTypeResolver = $postCategoryDeleteMetaMutationPayloadObjectTypeResolver;
         }
         return $this->postCategoryDeleteMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getPostCategoryAddMetaMutationPayloadObjectTypeResolver(): PostCategoryAddMetaMutationPayloadObjectTypeResolver
+    final protected function getPostAddMetaMutationPayloadObjectTypeResolver(): PostAddMetaMutationPayloadObjectTypeResolver
     {
         if ($this->postCategoryCreateMutationPayloadObjectTypeResolver === null) {
-            /** @var PostCategoryAddMetaMutationPayloadObjectTypeResolver */
-            $postCategoryCreateMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryAddMetaMutationPayloadObjectTypeResolver::class);
+            /** @var PostAddMetaMutationPayloadObjectTypeResolver */
+            $postCategoryCreateMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostAddMetaMutationPayloadObjectTypeResolver::class);
             $this->postCategoryCreateMutationPayloadObjectTypeResolver = $postCategoryCreateMutationPayloadObjectTypeResolver;
         }
         return $this->postCategoryCreateMutationPayloadObjectTypeResolver;
     }
-    final protected function getPostCategoryUpdateMetaMutationPayloadObjectTypeResolver(): PostCategoryUpdateMetaMutationPayloadObjectTypeResolver
+    final protected function getPostUpdateMetaMutationPayloadObjectTypeResolver(): PostUpdateMetaMutationPayloadObjectTypeResolver
     {
         if ($this->postCategoryUpdateMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var PostCategoryUpdateMetaMutationPayloadObjectTypeResolver */
-            $postCategoryUpdateMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryUpdateMetaMutationPayloadObjectTypeResolver::class);
+            /** @var PostUpdateMetaMutationPayloadObjectTypeResolver */
+            $postCategoryUpdateMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostUpdateMetaMutationPayloadObjectTypeResolver::class);
             $this->postCategoryUpdateMetaMutationPayloadObjectTypeResolver = $postCategoryUpdateMetaMutationPayloadObjectTypeResolver;
         }
         return $this->postCategoryUpdateMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getPostCategorySetMetaMutationPayloadObjectTypeResolver(): PostCategorySetMetaMutationPayloadObjectTypeResolver
+    final protected function getPostSetMetaMutationPayloadObjectTypeResolver(): PostSetMetaMutationPayloadObjectTypeResolver
     {
         if ($this->postCategorySetMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var PostCategorySetMetaMutationPayloadObjectTypeResolver */
-            $postCategorySetMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostCategorySetMetaMutationPayloadObjectTypeResolver::class);
+            /** @var PostSetMetaMutationPayloadObjectTypeResolver */
+            $postCategorySetMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PostSetMetaMutationPayloadObjectTypeResolver::class);
             $this->postCategorySetMetaMutationPayloadObjectTypeResolver = $postCategorySetMetaMutationPayloadObjectTypeResolver;
         }
         return $this->postCategorySetMetaMutationPayloadObjectTypeResolver;
@@ -76,7 +76,7 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostCategoryObjectTypeResolver::class,
+            PostObjectTypeResolver::class,
         ];
     }
 
@@ -91,16 +91,16 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
                 'deleteMeta',
                 'setMeta',
                 'updateMeta'
-                    => $this->getPostCategoryObjectTypeResolver(),
+                    => $this->getPostObjectTypeResolver(),
                 default
                     => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'addMeta' => $this->getPostCategoryAddMetaMutationPayloadObjectTypeResolver(),
-            'deleteMeta' => $this->getPostCategoryDeleteMetaMutationPayloadObjectTypeResolver(),
-            'setMeta' => $this->getPostCategorySetMetaMutationPayloadObjectTypeResolver(),
-            'updateMeta' => $this->getPostCategoryUpdateMetaMutationPayloadObjectTypeResolver(),
+            'addMeta' => $this->getPostAddMetaMutationPayloadObjectTypeResolver(),
+            'deleteMeta' => $this->getPostDeleteMetaMutationPayloadObjectTypeResolver(),
+            'setMeta' => $this->getPostSetMetaMutationPayloadObjectTypeResolver(),
+            'updateMeta' => $this->getPostUpdateMetaMutationPayloadObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

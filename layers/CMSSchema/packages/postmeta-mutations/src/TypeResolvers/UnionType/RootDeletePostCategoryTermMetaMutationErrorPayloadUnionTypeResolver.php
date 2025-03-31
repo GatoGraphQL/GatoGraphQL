@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType;
 
 use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractRootDeleteCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType\RootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader;
+use PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType\RootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class RootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootDeleteCategoryTermMetaMutationErrorPayloadUnionTypeResolver
+class RootDeletePostTermMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootDeleteCategoryTermMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?RootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader $rootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?RootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader $rootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final protected function getRootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader(): RootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader
+    final protected function getRootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader(): RootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->rootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader === null) {
-            /** @var RootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader */
-            $rootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->rootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader = $rootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader;
+        if ($this->rootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader */
+            $rootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader = $rootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->rootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->rootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
     {
-        return 'RootDeletePostCategoryTermMetaMutationErrorPayloadUnion';
+        return 'RootDeletePostTermMetaMutationErrorPayloadUnion';
     }
 
     public function getTypeDescription(): ?string
@@ -34,6 +34,6 @@ class RootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeResolver extend
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getRootDeletePostCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader();
+        return $this->getRootDeletePostTermMetaMutationErrorPayloadUnionTypeDataLoader();
     }
 }

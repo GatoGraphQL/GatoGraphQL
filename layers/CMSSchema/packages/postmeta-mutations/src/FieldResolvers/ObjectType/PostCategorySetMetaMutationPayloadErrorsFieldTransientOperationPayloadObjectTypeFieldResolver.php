@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostCategorySetMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\PostCategorySetMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\PostSetMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\PostSetMetaMutationErrorPayloadUnionTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class PostCategorySetMetaMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
+class PostSetMetaMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
 {
-    private ?PostCategorySetMetaMutationErrorPayloadUnionTypeResolver $postCategorySetMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?PostSetMetaMutationErrorPayloadUnionTypeResolver $postCategorySetMetaMutationErrorPayloadUnionTypeResolver = null;
 
-    final protected function getPostCategorySetMetaMutationErrorPayloadUnionTypeResolver(): PostCategorySetMetaMutationErrorPayloadUnionTypeResolver
+    final protected function getPostSetMetaMutationErrorPayloadUnionTypeResolver(): PostSetMetaMutationErrorPayloadUnionTypeResolver
     {
         if ($this->postCategorySetMetaMutationErrorPayloadUnionTypeResolver === null) {
-            /** @var PostCategorySetMetaMutationErrorPayloadUnionTypeResolver */
-            $postCategorySetMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostCategorySetMetaMutationErrorPayloadUnionTypeResolver::class);
+            /** @var PostSetMetaMutationErrorPayloadUnionTypeResolver */
+            $postCategorySetMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostSetMetaMutationErrorPayloadUnionTypeResolver::class);
             $this->postCategorySetMetaMutationErrorPayloadUnionTypeResolver = $postCategorySetMetaMutationErrorPayloadUnionTypeResolver;
         }
         return $this->postCategorySetMetaMutationErrorPayloadUnionTypeResolver;
@@ -30,12 +30,12 @@ class PostCategorySetMetaMutationPayloadErrorsFieldTransientOperationPayloadObje
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            PostCategorySetMetaMutationPayloadObjectTypeResolver::class,
+            PostSetMetaMutationPayloadObjectTypeResolver::class,
         ];
     }
 
     protected function getErrorsFieldFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return $this->getPostCategorySetMetaMutationErrorPayloadUnionTypeResolver();
+        return $this->getPostSetMetaMutationErrorPayloadUnionTypeResolver();
     }
 }
