@@ -9,9 +9,9 @@ use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\AbstractTaxonomyMetaTypeMutation
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use WP_Error;
 
-use function add_term_meta;
-use function delete_term_meta;
-use function update_term_meta;
+use function add_post_meta;
+use function delete_post_meta;
+use function update_post_meta;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -30,7 +30,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     ): void {
         foreach ($entries as $key => $values) {
             if ($values === null) {
-                delete_term_meta((int) $taxonomyTermID, $key);
+                delete_post_meta((int) $taxonomyTermID, $key);
                 continue;
             }
 
@@ -46,17 +46,17 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
             if ($numberItems === 1) {
                 $value = $values[0];
                 if ($value === null) {
-                    delete_term_meta((int) $taxonomyTermID, $key);
+                    delete_post_meta((int) $taxonomyTermID, $key);
                     continue;
                 }
-                update_term_meta((int) $taxonomyTermID, $key, $value);
+                update_post_meta((int) $taxonomyTermID, $key, $value);
                 continue;
             }
 
             // $numberItems > 1
-            delete_term_meta((int) $taxonomyTermID, $key);
+            delete_post_meta((int) $taxonomyTermID, $key);
             foreach ($values as $value) {
-                add_term_meta((int) $taxonomyTermID, $key, $value, false);
+                add_post_meta((int) $taxonomyTermID, $key, $value, false);
             }
         }
     }
@@ -71,7 +71,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         mixed $value,
         bool $single = false,
     ): int {
-        $result = add_term_meta((int) $taxonomyTermID, $key, $value, $single);
+        $result = add_post_meta((int) $taxonomyTermID, $key, $value, $single);
         if ($result === false) {
             throw $this->getTaxonomyTermMetaCRUDMutationException(
                 \__('Error adding term meta', 'custompostmeta-mutations-wp')
@@ -127,7 +127,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         mixed $value,
         mixed $prevValue = null,
     ): string|int|bool {
-        $result = update_term_meta((int) $taxonomyTermID, $key, $value, $prevValue ?? '');
+        $result = update_post_meta((int) $taxonomyTermID, $key, $value, $prevValue ?? '');
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getTaxonomyTermMetaCRUDMutationException(
@@ -145,7 +145,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         string|int $taxonomyTermID,
         string $key,
     ): void {
-        $result = delete_term_meta((int) $taxonomyTermID, $key);
+        $result = delete_post_meta((int) $taxonomyTermID, $key);
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getTaxonomyTermMetaCRUDMutationException(
