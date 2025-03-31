@@ -102,7 +102,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
             return;
         }
 
-        $this->validateUserCanEditTerm(
+        $this->validateUserCanEditEntity(
             $entityID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -115,7 +115,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
 
-    abstract protected function validateUserCanEditTerm(
+    abstract protected function validateUserCanEditEntity(
         string|int $entityID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

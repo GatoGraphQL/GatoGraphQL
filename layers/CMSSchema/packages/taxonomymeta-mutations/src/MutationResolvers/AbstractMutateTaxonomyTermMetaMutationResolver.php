@@ -66,7 +66,7 @@ abstract class AbstractMutateTaxonomyTermMetaMutationResolver extends AbstractMu
         );
     }
 
-    protected function validateUserCanEditTerm(
+    protected function validateUserCanEditEntity(
         string|int $taxonomyTermID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
