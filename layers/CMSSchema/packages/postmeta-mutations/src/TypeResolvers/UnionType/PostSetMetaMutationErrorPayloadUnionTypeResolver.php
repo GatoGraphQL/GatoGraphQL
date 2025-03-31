@@ -29,7 +29,7 @@ class PostSetMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPos
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when setting meta on a post\'s custom post (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when setting meta on a post (using nested mutations)', 'post-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

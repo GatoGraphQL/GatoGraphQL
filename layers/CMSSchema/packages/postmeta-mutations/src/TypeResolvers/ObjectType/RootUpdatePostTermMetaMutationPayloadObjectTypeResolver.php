@@ -13,6 +13,6 @@ class RootUpdatePostMetaMutationPayloadObjectTypeResolver extends AbstractPostMe
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update meta mutation on a post\'s custom post', 'custompost-mutations');
+        return $this->__('Payload of executing an update meta mutation on a post', 'custompost-mutations');
     }
 }
