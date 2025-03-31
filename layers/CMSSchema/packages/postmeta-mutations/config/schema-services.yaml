@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\PostCategoryMetaMutations\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\PostCategoryMetaMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\PostCategoryMetaMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\PostCategoryMetaMutations\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
+
+    PoPCMSSchema\PostCategoryMetaMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
