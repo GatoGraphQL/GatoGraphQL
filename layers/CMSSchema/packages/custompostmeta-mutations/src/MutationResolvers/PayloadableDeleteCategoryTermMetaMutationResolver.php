@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableDeleteCustomPostMetaMutationResolverTrait;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\PayloadableDeleteCustomPostMetaMutationResolverTrait;
 
 class PayloadableDeleteCustomPostMetaMutationResolver extends AbstractMutateCustomPostMetaMutationResolver
 {

@@ -10,16 +10,16 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class PostUpdateMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?PostUpdateMetaMutationErrorPayloadUnionTypeResolver $postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?PostUpdateMetaMutationErrorPayloadUnionTypeResolver $postCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver = null;
 
     final protected function getPostUpdateMetaMutationErrorPayloadUnionTypeResolver(): PostUpdateMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver === null) {
+        if ($this->postCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver === null) {
             /** @var PostUpdateMetaMutationErrorPayloadUnionTypeResolver */
-            $postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostUpdateMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver = $postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
+            $postCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostUpdateMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->postCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver = $postCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->postCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->postCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface

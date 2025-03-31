@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType;
 
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractCategoryAddMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractCustomPostAddMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType\PostAddMetaMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class PostAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractCategoryAddMetaMutationErrorPayloadUnionTypeResolver
+class PostAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostAddMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?PostAddMetaMutationErrorPayloadUnionTypeDataLoader $postCategoryAddMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?PostAddMetaMutationErrorPayloadUnionTypeDataLoader $postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
     final protected function getPostAddMetaMutationErrorPayloadUnionTypeDataLoader(): PostAddMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->postCategoryAddMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+        if ($this->postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader === null) {
             /** @var PostAddMetaMutationErrorPayloadUnionTypeDataLoader */
-            $postCategoryAddMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostAddMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->postCategoryAddMetaMutationErrorPayloadUnionTypeDataLoader = $postCategoryAddMetaMutationErrorPayloadUnionTypeDataLoader;
+            $postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostAddMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader = $postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->postCategoryAddMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

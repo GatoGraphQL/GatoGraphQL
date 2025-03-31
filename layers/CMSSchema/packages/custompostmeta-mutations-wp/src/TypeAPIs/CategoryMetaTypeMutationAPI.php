@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutationsWP\TypeAPIs;
+namespace PoPCMSSchema\CustomPostMetaMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\CategoryMetaMutations\Exception\CustomPostMetaCRUDMutationException;
-use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
+use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMetaMutationsWP\TypeAPIs\CustomPostMetaTypeMutationAPI;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CategoryMetaTypeMutationAPI extends CustomPostMetaTypeMutationAPI implements CategoryMetaTypeMutationAPIInterface
+class CustomPostMetaTypeMutationAPI extends CustomPostMetaTypeMutationAPI implements CustomPostMetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]|null> $entries

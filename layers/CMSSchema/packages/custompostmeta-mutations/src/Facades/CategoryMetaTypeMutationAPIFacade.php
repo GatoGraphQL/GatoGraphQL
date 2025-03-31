@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\Facades;
+namespace PoPCMSSchema\CustomPostMetaMutations\Facades;
 
 use PoP\Root\App;
-use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
 
-class CategoryMetaTypeMutationAPIFacade
+class CustomPostMetaTypeMutationAPIFacade
 {
-    public static function getInstance(): CategoryMetaTypeMutationAPIInterface
+    public static function getInstance(): CustomPostMetaTypeMutationAPIInterface
     {
         /**
-         * @var CategoryMetaTypeMutationAPIInterface
+         * @var CustomPostMetaTypeMutationAPIInterface
          */
-        $service = App::getContainer()->get(CategoryMetaTypeMutationAPIInterface::class);
+        $service = App::getContainer()->get(CustomPostMetaTypeMutationAPIInterface::class);
         return $service;
     }
 }

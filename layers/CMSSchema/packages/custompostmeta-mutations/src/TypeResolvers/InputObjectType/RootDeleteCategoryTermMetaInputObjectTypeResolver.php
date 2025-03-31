@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType;
 
 class RootDeleteCustomPostMetaInputObjectTypeResolver extends AbstractDeleteCustomPostMetaInputObjectTypeResolver implements DeleteCustomPostMetaInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {
-        return 'RootDeleteCategoryMetaInput';
+        return 'RootDeleteCustomPostMetaInput';
     }
 
     protected function addIDInputField(): bool

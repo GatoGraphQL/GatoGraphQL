@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\Hooks;
 
-use PoPCMSSchema\CategoryMetaMutations\Hooks\AbstractCategoryMetaMutationResolverHookSet;
+use PoPCMSSchema\CustomPostMetaMutations\Hooks\AbstractCustomPostMetaMutationResolverHookSet;
 use PoPCMSSchema\PostMutations\Constants\PostCRUDHookNames;
 
-class PostMetaMutationResolverHookSet extends AbstractCategoryMetaMutationResolverHookSet
+class PostMetaMutationResolverHookSet extends AbstractCustomPostMetaMutationResolverHookSet
 {
     protected function getValidateCreateHookName(): string
     {

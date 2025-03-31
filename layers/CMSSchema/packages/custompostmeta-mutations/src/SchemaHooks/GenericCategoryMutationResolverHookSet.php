@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\SchemaHooks;
 
-use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\SchemaHooks\AbstractCategoryMutationResolverHookSet;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\SchemaHooks\AbstractCustomPostMutationResolverHookSet;
 
-class GenericCategoryMutationResolverHookSet extends AbstractCategoryMutationResolverHookSet
+class GenericCustomPostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    use GenericCategoryMutationResolverHookSetTrait;
+    use GenericCustomPostMutationResolverHookSetTrait;
 
-    private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
 
-    final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
+    final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
-        if ($this->genericCategoryObjectTypeResolver === null) {
-            /** @var GenericCategoryObjectTypeResolver */
-            $genericCategoryObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
-            $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
+        if ($this->genericCustomPostObjectTypeResolver === null) {
+            /** @var GenericCustomPostObjectTypeResolver */
+            $genericCustomPostObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+            $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
         }
-        return $this->genericCategoryObjectTypeResolver;
+        return $this->genericCustomPostObjectTypeResolver;
     }
 
-    protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
+    protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return $this->getGenericCategoryObjectTypeResolver();
+        return $this->getGenericCustomPostObjectTypeResolver();
     }
 }

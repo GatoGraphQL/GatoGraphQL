@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType;
 
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMetaMutations\RelationalTypeDataLoaders\UnionType\GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\RelationalTypeDataLoaders\UnionType\GenericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver extends AbstractCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver
+class GenericCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader $genericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?GenericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader $genericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final protected function getGenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader(): GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader
+    final protected function getGenericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader(): GenericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->genericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader === null) {
-            /** @var GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader */
-            $genericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->genericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader = $genericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
+        if ($this->genericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var GenericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader */
+            $genericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(GenericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->genericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader = $genericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->genericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->genericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
     {
-        return 'GenericCategoryUpdateMetaMutationErrorPayloadUnion';
+        return 'GenericCustomPostUpdateMetaMutationErrorPayloadUnion';
     }
 
     public function getTypeDescription(): ?string
@@ -34,6 +34,6 @@ class GenericCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver extends Abs
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getGenericCategoryUpdateMetaMutationErrorPayloadUnionTypeDataLoader();
+        return $this->getGenericCustomPostUpdateMetaMutationErrorPayloadUnionTypeDataLoader();
     }
 }

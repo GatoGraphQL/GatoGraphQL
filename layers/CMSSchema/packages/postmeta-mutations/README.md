@@ -1,4 +1,4 @@
-# Post Category Meta Mutations
+# Post CustomPost Meta Mutations
 
 <!--
 [![Build Status][ico-travis]][link-travis]

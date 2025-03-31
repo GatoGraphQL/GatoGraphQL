@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\SchemaHooks;
+namespace PoPCMSSchema\CustomPostMetaMutations\SchemaHooks;
 
-use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\NullableListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
@@ -15,7 +15,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
-abstract class AbstractCategoryMutationResolverHookSet extends AbstractHookSet
+abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
     private ?NullableListValueJSONObjectScalarTypeResolver $nullableListValueJSONObjectScalarTypeResolver = null;
 
@@ -80,5 +80,5 @@ abstract class AbstractCategoryMutationResolverHookSet extends AbstractHookSet
         return $this->__('The meta to set', 'custompostmeta-mutations');
     }
 
-    abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
+    abstract protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface;
 }

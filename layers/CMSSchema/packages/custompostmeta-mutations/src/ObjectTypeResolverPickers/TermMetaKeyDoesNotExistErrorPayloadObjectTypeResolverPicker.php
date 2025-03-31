@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\ObjectTypeResolverPickers;
+namespace PoPCMSSchema\CustomPostMetaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractRootDeleteCustomPostMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractCustomPostDeleteMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractRootDeleteCustomPostMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractTermMetaKeyDoesNotExistErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -18,7 +18,7 @@ class TermMetaKeyDoesNotExistErrorPayloadObjectTypeResolverPicker extends Abstra
     {
         return [
             AbstractRootDeleteCustomPostMetaMutationErrorPayloadUnionTypeResolver::class,
-            AbstractCategoryDeleteMetaMutationErrorPayloadUnionTypeResolver::class,
+            AbstractCustomPostDeleteMetaMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

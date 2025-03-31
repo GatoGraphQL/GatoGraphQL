@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\ObjectTypeResolverPickers;
+namespace PoPCMSSchema\CustomPostMetaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\RootCreateGenericCustomPostMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractCategoryAddMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractRootAddCustomPostMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractCustomPostAddMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractRootAddCustomPostMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractTermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -21,10 +21,10 @@ class TermMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolverPicker extends 
     {
         return [
             AbstractRootAddCustomPostMetaMutationErrorPayloadUnionTypeResolver::class,
-            AbstractCategoryAddMetaMutationErrorPayloadUnionTypeResolver::class,
+            AbstractCustomPostAddMetaMutationErrorPayloadUnionTypeResolver::class,
             RootCreateGenericCustomPostMutationErrorPayloadUnionTypeResolver::class,
             RootUpdateGenericCustomPostMutationErrorPayloadUnionTypeResolver::class,
-            GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
+            GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

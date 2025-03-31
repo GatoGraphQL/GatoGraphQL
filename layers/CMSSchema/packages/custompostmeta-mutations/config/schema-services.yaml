@@ -3,13 +3,13 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\CategoryMetaMutations\TypeResolvers\:
+    PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPCMSSchema\CategoryMetaMutations\MutationResolvers\:
+    PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\:
         resource: '../src/MutationResolvers/*'
 
-    PoPCMSSchema\CategoryMetaMutations\ObjectTypeResolverPickers\:
+    PoPCMSSchema\CustomPostMetaMutations\ObjectTypeResolverPickers\:
         resource: '../src/ObjectTypeResolverPickers/*'
 
     PoPCMSSchema\CustomPostMetaMutations\RelationalTypeDataLoaders\:

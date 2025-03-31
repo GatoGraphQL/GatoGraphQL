@@ -8,7 +8,7 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateGeneric
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateGenericCustomPostInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
-trait GenericCategoryMutationResolverHookSetTrait
+trait GenericCustomPostMutationResolverHookSetTrait
 {
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,

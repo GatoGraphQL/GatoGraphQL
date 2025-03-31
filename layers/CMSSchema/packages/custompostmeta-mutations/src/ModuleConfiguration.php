@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations;
+namespace PoPCMSSchema\CustomPostMetaMutations;
 
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
@@ -13,7 +13,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      * Indicate if to return the errors in an ObjectMutationPayload
      * object in the response, or if to use the top-level errors.
      */
-    public function usePayloadableCategoryMetaMutations(): bool
+    public function usePayloadableCustomPostMetaMutations(): bool
     {
         $envVariable = Environment::USE_PAYLOADABLE_CATEGORY_META_MUTATIONS;
         $defaultValue = true;
@@ -26,9 +26,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function addFieldsToQueryPayloadableCategoryMetaMutations(): bool
+    public function addFieldsToQueryPayloadableCustomPostMetaMutations(): bool
     {
-        if (!$this->usePayloadableCategoryMetaMutations()) {
+        if (!$this->usePayloadableCustomPostMetaMutations()) {
             return false;
         }
 

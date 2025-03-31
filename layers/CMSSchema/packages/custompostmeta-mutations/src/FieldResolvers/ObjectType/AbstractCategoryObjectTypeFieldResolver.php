@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CustomPostMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CategoryMetaMutations\Module;
-use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\AddCustomPostMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\DeleteCustomPostMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableAddCustomPostMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableDeleteCustomPostMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableSetCustomPostMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableUpdateCustomPostMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\SetCustomPostMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\UpdateCustomPostMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CustomPostAddMetaInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CustomPostDeleteMetaInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CustomPostSetMetaInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CustomPostUpdateMetaInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\Module;
+use PoPCMSSchema\CustomPostMetaMutations\ModuleConfiguration;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\AddCustomPostMetaMutationResolver;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\DeleteCustomPostMetaMutationResolver;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\PayloadableAddCustomPostMetaMutationResolver;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\PayloadableDeleteCustomPostMetaMutationResolver;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\PayloadableSetCustomPostMetaMutationResolver;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\PayloadableUpdateCustomPostMetaMutationResolver;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\SetCustomPostMetaMutationResolver;
+use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\UpdateCustomPostMetaMutationResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType\CustomPostAddMetaInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType\CustomPostDeleteMetaInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType\CustomPostSetMetaInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType\CustomPostUpdateMetaInputObjectTypeResolver;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\App;
@@ -30,7 +30,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
     private ?CustomPostAddMetaInputObjectTypeResolver $customPostAddMetaInputObjectTypeResolver = null;
@@ -192,8 +192,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
-        if (!$usePayloadableCategoryMetaMutations) {
+        $usePayloadableCustomPostMetaMutations = $moduleConfiguration->usePayloadableCustomPostMetaMutations();
+        if (!$usePayloadableCustomPostMetaMutations) {
             return match ($fieldName) {
                 'addMeta',
                 'deleteMeta',
@@ -301,18 +301,18 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
+        $usePayloadableCustomPostMetaMutations = $moduleConfiguration->usePayloadableCustomPostMetaMutations();
         return match ($fieldName) {
-            'addMeta' => $usePayloadableCategoryMetaMutations
+            'addMeta' => $usePayloadableCustomPostMetaMutations
                 ? $this->getPayloadableAddCustomPostMetaMutationResolver()
                 : $this->getAddCustomPostMetaMutationResolver(),
-            'updateMeta' => $usePayloadableCategoryMetaMutations
+            'updateMeta' => $usePayloadableCustomPostMetaMutations
                 ? $this->getPayloadableUpdateCustomPostMetaMutationResolver()
                 : $this->getUpdateCustomPostMetaMutationResolver(),
-            'deleteMeta' => $usePayloadableCategoryMetaMutations
+            'deleteMeta' => $usePayloadableCustomPostMetaMutations
                 ? $this->getPayloadableDeleteCustomPostMetaMutationResolver()
                 : $this->getDeleteCustomPostMetaMutationResolver(),
-            'setMeta' => $usePayloadableCategoryMetaMutations
+            'setMeta' => $usePayloadableCustomPostMetaMutations
                 ? $this->getPayloadableSetCustomPostMetaMutationResolver()
                 : $this->getSetCustomPostMetaMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -341,8 +341,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
          * @var ModuleConfiguration
          */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
-        if ($usePayloadableCategoryMetaMutations) {
+        $usePayloadableCustomPostMetaMutations = $moduleConfiguration->usePayloadableCustomPostMetaMutations();
+        if ($usePayloadableCustomPostMetaMutations) {
             return $validationCheckpoints;
         }
 

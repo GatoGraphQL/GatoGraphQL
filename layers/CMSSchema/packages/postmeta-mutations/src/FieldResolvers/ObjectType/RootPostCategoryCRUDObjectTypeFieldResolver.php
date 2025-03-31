@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMetaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\FieldResolvers\ObjectType\AbstractRootCategoryCRUDObjectTypeFieldResolver;
-use PoPCMSSchema\CategoryMetaMutations\Module;
-use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
+use PoPCMSSchema\CustomPostMetaMutations\FieldResolvers\ObjectType\AbstractRootCustomPostCRUDObjectTypeFieldResolver;
+use PoPCMSSchema\CustomPostMetaMutations\Module;
+use PoPCMSSchema\CustomPostMetaMutations\ModuleConfiguration;
 use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\RootAddPostTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\RootDeletePostTermMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\RootSetPostTermMetaMutationPayloadObjectTypeResolver;
@@ -16,9 +16,9 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\App;
 
-class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCategoryCRUDObjectTypeFieldResolver
+class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObjectTypeFieldResolver
 {
-    private ?PostObjectTypeResolver $postCategoryObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postCustomPostObjectTypeResolver = null;
     private ?RootDeletePostTermMetaMutationPayloadObjectTypeResolver $rootDeletePostTermMetaMutationPayloadObjectTypeResolver = null;
     private ?RootSetPostTermMetaMutationPayloadObjectTypeResolver $rootSetPostTermMetaMutationPayloadObjectTypeResolver = null;
     private ?RootUpdatePostTermMetaMutationPayloadObjectTypeResolver $rootUpdatePostTermMetaMutationPayloadObjectTypeResolver = null;
@@ -26,12 +26,12 @@ class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCategoryCRUDObject
 
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        if ($this->postCategoryObjectTypeResolver === null) {
+        if ($this->postCustomPostObjectTypeResolver === null) {
             /** @var PostObjectTypeResolver */
-            $postCategoryObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
-            $this->postCategoryObjectTypeResolver = $postCategoryObjectTypeResolver;
+            $postCustomPostObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            $this->postCustomPostObjectTypeResolver = $postCustomPostObjectTypeResolver;
         }
-        return $this->postCategoryObjectTypeResolver;
+        return $this->postCustomPostObjectTypeResolver;
     }
     final protected function getRootDeletePostTermMetaMutationPayloadObjectTypeResolver(): RootDeletePostTermMetaMutationPayloadObjectTypeResolver
     {
@@ -70,18 +70,18 @@ class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCategoryCRUDObject
         return $this->rootAddPostTermMetaMutationPayloadObjectTypeResolver;
     }
 
-    protected function getCategoryEntityName(): string
+    protected function getCustomPostEntityName(): string
     {
         return 'Post';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $categoryEntityName = $this->getCategoryEntityName();
+        $categoryEntityName = $this->getCustomPostEntityName();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
-        if ($usePayloadableCategoryMetaMutations) {
+        $usePayloadableCustomPostMetaMutations = $moduleConfiguration->usePayloadableCustomPostMetaMutations();
+        if ($usePayloadableCustomPostMetaMutations) {
             return match ($fieldName) {
                 'add' . $categoryEntityName . 'Meta',
                 'add' . $categoryEntityName . 'Metas',

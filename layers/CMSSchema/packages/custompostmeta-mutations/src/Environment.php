@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations;
+namespace PoPCMSSchema\CustomPostMetaMutations;
 
 class Environment
 {

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\Hooks;
+namespace PoPCMSSchema\CustomPostMetaMutations\Hooks;
 
-use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostMetaMutations\Hooks\AbstractCustomPostMetaMutationResolverHookSet;
 
-abstract class AbstractCategoryMetaMutationResolverHookSet extends AbstractCustomPostMetaMutationResolverHookSet
+abstract class AbstractCustomPostMetaMutationResolverHookSet extends AbstractCustomPostMetaMutationResolverHookSet
 {
     protected function getErrorPayloadHookName(): string
     {
-        return CategoryCRUDHookNames::ERROR_PAYLOAD;
+        return CustomPostCRUDHookNames::ERROR_PAYLOAD;
     }
 }

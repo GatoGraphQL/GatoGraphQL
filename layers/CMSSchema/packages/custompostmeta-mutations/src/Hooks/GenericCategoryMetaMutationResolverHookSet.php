@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\Hooks;
 
-use PoPCMSSchema\CategoryMetaMutations\Hooks\AbstractCategoryMetaMutationResolverHookSet;
-use PoPCMSSchema\CustomPostMutations\Constants\GenericCategoryCRUDHookNames;
+use PoPCMSSchema\CustomPostMetaMutations\Hooks\AbstractCustomPostMetaMutationResolverHookSet;
+use PoPCMSSchema\CustomPostMutations\Constants\GenericCustomPostCRUDHookNames;
 
-class GenericCategoryMetaMutationResolverHookSet extends AbstractCategoryMetaMutationResolverHookSet
+class GenericCustomPostMetaMutationResolverHookSet extends AbstractCustomPostMetaMutationResolverHookSet
 {
     protected function getValidateCreateHookName(): string
     {
-        return GenericCategoryCRUDHookNames::VALIDATE_CREATE;
+        return GenericCustomPostCRUDHookNames::VALIDATE_CREATE;
     }
     protected function getValidateUpdateHookName(): string
     {
-        return GenericCategoryCRUDHookNames::VALIDATE_UPDATE;
+        return GenericCustomPostCRUDHookNames::VALIDATE_UPDATE;
     }
     protected function getExecuteCreateOrUpdateHookName(): string
     {
-        return GenericCategoryCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
+        return GenericCustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
     }
 }

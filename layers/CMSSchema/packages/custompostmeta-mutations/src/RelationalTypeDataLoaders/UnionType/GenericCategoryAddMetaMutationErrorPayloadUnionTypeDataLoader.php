@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\GenericCategoryAddMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\GenericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class GenericCategoryAddMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class GenericCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?GenericCategoryAddMetaMutationErrorPayloadUnionTypeResolver $genericCategoryAddMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?GenericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver $genericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver = null;
 
-    final protected function getGenericCategoryAddMetaMutationErrorPayloadUnionTypeResolver(): GenericCategoryAddMetaMutationErrorPayloadUnionTypeResolver
+    final protected function getGenericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver(): GenericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->genericCategoryAddMetaMutationErrorPayloadUnionTypeResolver === null) {
-            /** @var GenericCategoryAddMetaMutationErrorPayloadUnionTypeResolver */
-            $genericCategoryAddMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(GenericCategoryAddMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->genericCategoryAddMetaMutationErrorPayloadUnionTypeResolver = $genericCategoryAddMetaMutationErrorPayloadUnionTypeResolver;
+        if ($this->genericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var GenericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver */
+            $genericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(GenericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->genericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver = $genericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->genericCategoryAddMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->genericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->getGenericCategoryAddMetaMutationErrorPayloadUnionTypeResolver();
+        return $this->getGenericCustomPostAddMetaMutationErrorPayloadUnionTypeResolver();
     }
 }

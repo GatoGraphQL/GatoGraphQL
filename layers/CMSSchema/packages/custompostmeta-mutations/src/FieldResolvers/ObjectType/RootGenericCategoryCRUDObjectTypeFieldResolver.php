@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\FieldResolvers\ObjectType\AbstractRootCategoryCRUDObjectTypeFieldResolver;
-use PoPCMSSchema\CategoryMetaMutations\Module;
-use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\FieldResolvers\ObjectType\AbstractRootCustomPostCRUDObjectTypeFieldResolver;
+use PoPCMSSchema\CustomPostMetaMutations\Module;
+use PoPCMSSchema\CustomPostMetaMutations\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver;
@@ -16,22 +16,22 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\App;
 
-class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractRootCategoryCRUDObjectTypeFieldResolver
+class RootGenericCustomPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObjectTypeFieldResolver
 {
-    private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
+    private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver $rootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver = null;
     private ?RootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver $rootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver = null;
     private ?RootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver $rootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver = null;
     private ?RootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver $rootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver = null;
 
-    final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
+    final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
-        if ($this->genericCategoryObjectTypeResolver === null) {
-            /** @var GenericCategoryObjectTypeResolver */
-            $genericCategoryObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryObjectTypeResolver::class);
-            $this->genericCategoryObjectTypeResolver = $genericCategoryObjectTypeResolver;
+        if ($this->genericCustomPostObjectTypeResolver === null) {
+            /** @var GenericCustomPostObjectTypeResolver */
+            $genericCustomPostObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostObjectTypeResolver::class);
+            $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
         }
-        return $this->genericCategoryObjectTypeResolver;
+        return $this->genericCustomPostObjectTypeResolver;
     }
     final protected function getRootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver(): RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver
     {
@@ -70,18 +70,18 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractRootCategor
         return $this->rootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver;
     }
 
-    protected function getCategoryEntityName(): string
+    protected function getCustomPostEntityName(): string
     {
-        return 'Category';
+        return 'CustomPost';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $categoryEntityName = $this->getCategoryEntityName();
+        $categoryEntityName = $this->getCustomPostEntityName();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
-        if ($usePayloadableCategoryMetaMutations) {
+        $usePayloadableCustomPostMetaMutations = $moduleConfiguration->usePayloadableCustomPostMetaMutations();
+        if ($usePayloadableCustomPostMetaMutations) {
             return match ($fieldName) {
                 'add' . $categoryEntityName . 'Meta',
                 'add' . $categoryEntityName . 'Metas',
@@ -111,7 +111,7 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractRootCategor
             'delete' . $categoryEntityName . 'Metas',
             'set' . $categoryEntityName . 'Meta',
             'set' . $categoryEntityName . 'Metas'
-                => $this->getGenericCategoryObjectTypeResolver(),
+                => $this->getGenericCustomPostObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

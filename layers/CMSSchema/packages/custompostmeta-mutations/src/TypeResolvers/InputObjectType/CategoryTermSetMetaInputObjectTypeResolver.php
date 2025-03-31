@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType;
 
 class CustomPostSetMetaInputObjectTypeResolver extends AbstractSetCustomPostMetaInputObjectTypeResolver implements SetCustomPostMetaInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {
-        return 'CategorySetMetaInput';
+        return 'CustomPostSetMetaInput';
     }
 
     protected function addIDInputField(): bool

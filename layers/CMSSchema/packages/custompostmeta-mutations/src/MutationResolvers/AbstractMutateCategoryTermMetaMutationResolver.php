@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
-use PoPCMSSchema\CategoryMetaMutations\Exception\CustomPostMetaCRUDMutationException;
-use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMetaMutations\Constants\CustomPostMetaCRUDHookNames;
+use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
+use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\AbstractMutateCustomPostMetaMutationResolver;
@@ -16,13 +16,13 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMutateCustomPostMetaMutationResolver implements CustomPostMetaMutationResolverInterface
 {
-    private ?CategoryMetaTypeMutationAPIInterface $categoryTypeMutationAPI = null;
+    private ?CustomPostMetaTypeMutationAPIInterface $categoryTypeMutationAPI = null;
 
-    final protected function getCategoryMetaTypeMutationAPI(): CategoryMetaTypeMutationAPIInterface
+    final protected function getCustomPostMetaTypeMutationAPI(): CustomPostMetaTypeMutationAPIInterface
     {
         if ($this->categoryTypeMutationAPI === null) {
-            /** @var CategoryMetaTypeMutationAPIInterface */
-            $categoryTypeMutationAPI = $this->instanceManager->getInstance(CategoryMetaTypeMutationAPIInterface::class);
+            /** @var CustomPostMetaTypeMutationAPIInterface */
+            $categoryTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMetaTypeMutationAPIInterface::class);
             $this->categoryTypeMutationAPI = $categoryTypeMutationAPI;
         }
         return $this->categoryTypeMutationAPI;
@@ -34,7 +34,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
      */
     protected function executeAddTermMeta(string|int $customPostID, string $key, mixed $value, bool $single): string|int
     {
-        return $this->getCategoryMetaTypeMutationAPI()->addCustomPostMeta($customPostID, $key, $value, $single);
+        return $this->getCustomPostMetaTypeMutationAPI()->addCustomPostMeta($customPostID, $key, $value, $single);
     }
 
     /**
@@ -43,7 +43,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
      */
     protected function executeUpdateTermMeta(string|int $customPostID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
     {
-        return $this->getCategoryMetaTypeMutationAPI()->updateCustomPostMeta($customPostID, $key, $value, $prevValue);
+        return $this->getCustomPostMetaTypeMutationAPI()->updateCustomPostMeta($customPostID, $key, $value, $prevValue);
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
      */
     protected function executeDeleteTermMeta(string|int $customPostID, string $key): void
     {
-        $this->getCategoryMetaTypeMutationAPI()->deleteCustomPostMeta($customPostID, $key);
+        $this->getCustomPostMetaTypeMutationAPI()->deleteCustomPostMeta($customPostID, $key);
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
      */
     protected function executeSetTermMeta(string|int $customPostID, array $entries): void
     {
-        $this->getCategoryMetaTypeMutationAPI()->setCustomPostMeta($customPostID, $entries);
+        $this->getCustomPostMetaTypeMutationAPI()->setCustomPostMeta($customPostID, $entries);
     }
 
     protected function validateAddMetaErrors(
@@ -68,7 +68,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_ADD_META,
+            CustomPostMetaCRUDHookNames::VALIDATE_ADD_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -84,7 +84,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_UPDATE_META,
+            CustomPostMetaCRUDHookNames::VALIDATE_UPDATE_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -100,7 +100,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_DELETE_META,
+            CustomPostMetaCRUDHookNames::VALIDATE_DELETE_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -116,7 +116,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            CategoryMetaCRUDHookNames::VALIDATE_SET_META,
+            CustomPostMetaCRUDHookNames::VALIDATE_SET_META,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -134,7 +134,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     {
         $customPostData = parent::getAddMetaData($fieldDataAccessor);
 
-        $customPostData = App::applyFilters(CategoryMetaCRUDHookNames::GET_ADD_META_DATA, $customPostData, $fieldDataAccessor);
+        $customPostData = App::applyFilters(CustomPostMetaCRUDHookNames::GET_ADD_META_DATA, $customPostData, $fieldDataAccessor);
 
         return $customPostData;
     }
@@ -146,7 +146,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     {
         $customPostData = parent::getUpdateMetaData($fieldDataAccessor);
 
-        $customPostData = App::applyFilters(CategoryMetaCRUDHookNames::GET_UPDATE_META_DATA, $customPostData, $fieldDataAccessor);
+        $customPostData = App::applyFilters(CustomPostMetaCRUDHookNames::GET_UPDATE_META_DATA, $customPostData, $fieldDataAccessor);
 
         return $customPostData;
     }
@@ -158,7 +158,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     {
         $customPostData = parent::getDeleteMetaData($fieldDataAccessor);
 
-        $customPostData = App::applyFilters(CategoryMetaCRUDHookNames::GET_DELETE_META_DATA, $customPostData, $fieldDataAccessor);
+        $customPostData = App::applyFilters(CustomPostMetaCRUDHookNames::GET_DELETE_META_DATA, $customPostData, $fieldDataAccessor);
 
         return $customPostData;
     }
@@ -170,7 +170,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     {
         $customPostData = parent::getSetMetaData($fieldDataAccessor);
 
-        $customPostData = App::applyFilters(CategoryMetaCRUDHookNames::GET_SET_META_DATA, $customPostData, $fieldDataAccessor);
+        $customPostData = App::applyFilters(CustomPostMetaCRUDHookNames::GET_SET_META_DATA, $customPostData, $fieldDataAccessor);
 
         return $customPostData;
     }
@@ -185,7 +185,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     ): string|int {
         $customPostID = parent::addMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_ADD_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
+        App::doAction(CustomPostMetaCRUDHookNames::EXECUTE_ADD_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
         return $customPostID;
     }
@@ -201,7 +201,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         $customPostID = parent::updateMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(
-            CategoryMetaCRUDHookNames::EXECUTE_UPDATE_META,
+            CustomPostMetaCRUDHookNames::EXECUTE_UPDATE_META,
             $fieldDataAccessor->getValue(MutationInputProperties::ID),
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -220,7 +220,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     ): string|int {
         $customPostID = parent::deleteMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_DELETE_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
+        App::doAction(CustomPostMetaCRUDHookNames::EXECUTE_DELETE_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
         return $customPostID;
     }
@@ -234,7 +234,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     ): string|int {
         $customPostID = parent::setMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
-        App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
+        App::doAction(CustomPostMetaCRUDHookNames::EXECUTE_SET_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
         return $customPostID;
     }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMetaMutations\Exception\CustomPostMetaCRUDMutationException;
+use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -16,7 +16,7 @@ trait PayloadableAddCustomPostMetaMutationResolverTrait
         AddCustomPostMetaMutationResolverTrait::executeMutation as upstreamExecuteMutation;
         PayloadableMutationResolverTrait::validate insteadof AddCustomPostMetaMutationResolverTrait;
     }
-    use PayloadableCategoryMetaMutationResolverTrait;
+    use PayloadableCustomPostMetaMutationResolverTrait;
 
     /**
      * Validate the app-level errors when executing the mutation,

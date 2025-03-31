@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
+namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\PayloadableCustomPostMetaMutationResolverTrait;
 
-trait PayloadableCategoryMetaMutationResolverTrait
+trait PayloadableCustomPostMetaMutationResolverTrait
 {
     use PayloadableCustomPostMetaMutationResolverTrait;
 }

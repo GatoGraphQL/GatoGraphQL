@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMetaMutations\ObjectTypeResolverPickers;
+namespace PoPCMSSchema\CustomPostMetaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractCategoryMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractCustomPostMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostMutations\ObjectTypeResolverPickers\AbstractLoggedInUserHasNoEditingCustomPostsCapabilityErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -16,7 +16,7 @@ class LoggedInUserHasNoEditingCustomPostsCapabilityErrorPayloadObjectTypeResolve
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCategoryMetaMutationErrorPayloadUnionTypeResolver::class,
+            AbstractCustomPostMetaMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
