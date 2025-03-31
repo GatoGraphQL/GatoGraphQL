@@ -12,16 +12,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class PostAddMetaMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
 {
-    private ?PostAddMetaMutationErrorPayloadUnionTypeResolver $postCustomPostAddMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?PostAddMetaMutationErrorPayloadUnionTypeResolver $postAddMetaMutationErrorPayloadUnionTypeResolver = null;
 
     final protected function getPostAddMetaMutationErrorPayloadUnionTypeResolver(): PostAddMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->postCustomPostAddMetaMutationErrorPayloadUnionTypeResolver === null) {
+        if ($this->postAddMetaMutationErrorPayloadUnionTypeResolver === null) {
             /** @var PostAddMetaMutationErrorPayloadUnionTypeResolver */
-            $postCustomPostAddMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostAddMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->postCustomPostAddMetaMutationErrorPayloadUnionTypeResolver = $postCustomPostAddMetaMutationErrorPayloadUnionTypeResolver;
+            $postAddMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PostAddMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->postAddMetaMutationErrorPayloadUnionTypeResolver = $postAddMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->postCustomPostAddMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->postAddMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     /**

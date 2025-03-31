@@ -12,16 +12,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class PostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationPayloadObjectTypeFieldResolver
 {
-    private ?PostObjectTypeResolver $postCustomPostObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
 
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        if ($this->postCustomPostObjectTypeResolver === null) {
+        if ($this->postObjectTypeResolver === null) {
             /** @var PostObjectTypeResolver */
-            $postCustomPostObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
-            $this->postCustomPostObjectTypeResolver = $postCustomPostObjectTypeResolver;
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            $this->postObjectTypeResolver = $postObjectTypeResolver;
         }
-        return $this->postCustomPostObjectTypeResolver;
+        return $this->postObjectTypeResolver;
     }
 
     /**

@@ -18,7 +18,7 @@ use PoP\Root\App;
 
 class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObjectTypeFieldResolver
 {
-    private ?PostObjectTypeResolver $postCustomPostObjectTypeResolver = null;
+    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?RootDeletePostMetaMutationPayloadObjectTypeResolver $rootDeletePostMetaMutationPayloadObjectTypeResolver = null;
     private ?RootSetPostMetaMutationPayloadObjectTypeResolver $rootSetPostMetaMutationPayloadObjectTypeResolver = null;
     private ?RootUpdatePostMetaMutationPayloadObjectTypeResolver $rootUpdatePostMetaMutationPayloadObjectTypeResolver = null;
@@ -26,12 +26,12 @@ class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObje
 
     final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
     {
-        if ($this->postCustomPostObjectTypeResolver === null) {
+        if ($this->postObjectTypeResolver === null) {
             /** @var PostObjectTypeResolver */
-            $postCustomPostObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
-            $this->postCustomPostObjectTypeResolver = $postCustomPostObjectTypeResolver;
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            $this->postObjectTypeResolver = $postObjectTypeResolver;
         }
-        return $this->postCustomPostObjectTypeResolver;
+        return $this->postObjectTypeResolver;
     }
     final protected function getRootDeletePostMetaMutationPayloadObjectTypeResolver(): RootDeletePostMetaMutationPayloadObjectTypeResolver
     {

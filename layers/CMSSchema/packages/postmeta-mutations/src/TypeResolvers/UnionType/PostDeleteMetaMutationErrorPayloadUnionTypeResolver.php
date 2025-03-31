@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class PostDeleteMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostDeleteMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?PostDeleteMetaMutationErrorPayloadUnionTypeDataLoader $postCustomPostDeleteMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?PostDeleteMetaMutationErrorPayloadUnionTypeDataLoader $postDeleteMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
     final protected function getPostDeleteMetaMutationErrorPayloadUnionTypeDataLoader(): PostDeleteMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->postCustomPostDeleteMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+        if ($this->postDeleteMetaMutationErrorPayloadUnionTypeDataLoader === null) {
             /** @var PostDeleteMetaMutationErrorPayloadUnionTypeDataLoader */
-            $postCustomPostDeleteMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostDeleteMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->postCustomPostDeleteMetaMutationErrorPayloadUnionTypeDataLoader = $postCustomPostDeleteMetaMutationErrorPayloadUnionTypeDataLoader;
+            $postDeleteMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostDeleteMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->postDeleteMetaMutationErrorPayloadUnionTypeDataLoader = $postDeleteMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->postCustomPostDeleteMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->postDeleteMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string

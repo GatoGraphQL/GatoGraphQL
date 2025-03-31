@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class PostAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostAddMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?PostAddMetaMutationErrorPayloadUnionTypeDataLoader $postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?PostAddMetaMutationErrorPayloadUnionTypeDataLoader $postAddMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
     final protected function getPostAddMetaMutationErrorPayloadUnionTypeDataLoader(): PostAddMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+        if ($this->postAddMetaMutationErrorPayloadUnionTypeDataLoader === null) {
             /** @var PostAddMetaMutationErrorPayloadUnionTypeDataLoader */
-            $postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostAddMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader = $postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader;
+            $postAddMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostAddMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->postAddMetaMutationErrorPayloadUnionTypeDataLoader = $postAddMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->postCustomPostAddMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->postAddMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
