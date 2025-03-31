@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
-abstract class AbstractDeleteTaxonomyTermMetaInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements DeleteTaxonomyTermMetaInputObjectTypeResolverInterface
+abstract class AbstractDeleteCustomPostMetaInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements DeleteCustomPostMetaInputObjectTypeResolverInterface
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

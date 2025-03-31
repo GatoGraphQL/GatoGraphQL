@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType\AbstractAddTaxonomyTermMetaInputObjectTypeResolver;
+use PoPCMSSchema\TaxonomyMetaMutations\TypeResolvers\InputObjectType\AbstractAddCustomPostMetaInputObjectTypeResolver;
 
-abstract class AbstractAddCategoryTermMetaInputObjectTypeResolver extends AbstractAddTaxonomyTermMetaInputObjectTypeResolver implements AddCategoryTermMetaInputObjectTypeResolverInterface
+abstract class AbstractAddCategoryTermMetaInputObjectTypeResolver extends AbstractAddCustomPostMetaInputObjectTypeResolver implements AddCategoryTermMetaInputObjectTypeResolverInterface
 {
     public function getTypeDescription(): ?string
     {

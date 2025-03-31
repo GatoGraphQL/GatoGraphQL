@@ -8,13 +8,13 @@ use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
-use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\AbstractMutateTaxonomyTermMetaMutationResolver;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\CustomPostMetaCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers\AbstractMutateCustomPostMetaMutationResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
-abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMutateTaxonomyTermMetaMutationResolver implements CategoryTermMetaMutationResolverInterface
+abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMutateCustomPostMetaMutationResolver implements CategoryTermMetaMutationResolverInterface
 {
     private ?CategoryMetaTypeMutationAPIInterface $categoryTypeMutationAPI = null;
 
@@ -32,35 +32,35 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
      * @return string|int the ID of the created meta entry
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function executeAddTermMeta(string|int $taxonomyTermID, string $key, mixed $value, bool $single): string|int
+    protected function executeAddTermMeta(string|int $customPostID, string $key, mixed $value, bool $single): string|int
     {
-        return $this->getCategoryMetaTypeMutationAPI()->addTaxonomyTermMeta($taxonomyTermID, $key, $value, $single);
+        return $this->getCategoryMetaTypeMutationAPI()->addCustomPostMeta($customPostID, $key, $value, $single);
     }
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeUpdateTermMeta(string|int $taxonomyTermID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
+    protected function executeUpdateTermMeta(string|int $customPostID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
     {
-        return $this->getCategoryMetaTypeMutationAPI()->updateTaxonomyTermMeta($taxonomyTermID, $key, $value, $prevValue);
+        return $this->getCategoryMetaTypeMutationAPI()->updateCustomPostMeta($customPostID, $key, $value, $prevValue);
     }
 
     /**
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeDeleteTermMeta(string|int $taxonomyTermID, string $key): void
+    protected function executeDeleteTermMeta(string|int $customPostID, string $key): void
     {
-        $this->getCategoryMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+        $this->getCategoryMetaTypeMutationAPI()->deleteCustomPostMeta($customPostID, $key);
     }
 
     /**
      * @param array<string,mixed[]|null> $entries
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeSetTermMeta(string|int $taxonomyTermID, array $entries): void
+    protected function executeSetTermMeta(string|int $customPostID, array $entries): void
     {
-        $this->getCategoryMetaTypeMutationAPI()->setTaxonomyTermMeta($taxonomyTermID, $entries);
+        $this->getCategoryMetaTypeMutationAPI()->setCustomPostMeta($customPostID, $entries);
     }
 
     protected function validateAddMetaErrors(
@@ -177,28 +177,28 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the created entity
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
     protected function addMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $taxonomyTermID = parent::addMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $customPostID = parent::addMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(CategoryMetaCRUDHookNames::EXECUTE_ADD_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
-        return $taxonomyTermID;
+        return $customPostID;
     }
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function updateMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $taxonomyTermID = parent::updateMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $customPostID = parent::updateMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(
             CategoryMetaCRUDHookNames::EXECUTE_UPDATE_META,
@@ -207,35 +207,35 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        return $taxonomyTermID;
+        return $customPostID;
     }
 
     /**
      * @return string|int The ID of the taxonomy term
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function deleteMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $taxonomyTermID = parent::deleteMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $customPostID = parent::deleteMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(CategoryMetaCRUDHookNames::EXECUTE_DELETE_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
-        return $taxonomyTermID;
+        return $customPostID;
     }
 
     /**
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function setMeta(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $taxonomyTermID = parent::setMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $customPostID = parent::setMeta($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         App::doAction(CategoryMetaCRUDHookNames::EXECUTE_SET_META, $fieldDataAccessor->getValue(MutationInputProperties::ID), $fieldDataAccessor);
 
-        return $taxonomyTermID;
+        return $customPostID;
     }
 }

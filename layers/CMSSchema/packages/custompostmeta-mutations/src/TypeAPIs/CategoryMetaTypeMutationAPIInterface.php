@@ -17,7 +17,7 @@ interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationA
      * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
     public function setCategoryTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         array $entries,
     ): void;
 
@@ -26,7 +26,7 @@ interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationA
      * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
     public function addCategoryTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
         mixed $value,
         bool $single = false,
@@ -37,13 +37,13 @@ interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationA
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateCategoryTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
         mixed $value,
     ): string|int|bool;
 
     public function deleteCategoryTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
     ): void;
 }

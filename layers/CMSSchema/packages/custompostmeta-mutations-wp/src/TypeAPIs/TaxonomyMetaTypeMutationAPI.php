@@ -6,7 +6,7 @@ namespace PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\AbstractTaxonomyMetaTypeMutationAPI;
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use WP_Error;
 
 use function add_post_meta;
@@ -22,15 +22,15 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
 
     /**
      * @param array<string,mixed[]|null> $entries
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
+     * @throws CustomPostMetaCRUDMutationException If there was an error
      */
-    public function setTaxonomyTermMeta(
-        string|int $taxonomyTermID,
+    public function setCustomPostMeta(
+        string|int $customPostID,
         array $entries,
     ): void {
         foreach ($entries as $key => $values) {
             if ($values === null) {
-                delete_post_meta((int) $taxonomyTermID, $key);
+                delete_post_meta((int) $customPostID, $key);
                 continue;
             }
 
@@ -46,34 +46,34 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
             if ($numberItems === 1) {
                 $value = $values[0];
                 if ($value === null) {
-                    delete_post_meta((int) $taxonomyTermID, $key);
+                    delete_post_meta((int) $customPostID, $key);
                     continue;
                 }
-                update_post_meta((int) $taxonomyTermID, $key, $value);
+                update_post_meta((int) $customPostID, $key, $value);
                 continue;
             }
 
             // $numberItems > 1
-            delete_post_meta((int) $taxonomyTermID, $key);
+            delete_post_meta((int) $customPostID, $key);
             foreach ($values as $value) {
-                add_post_meta((int) $taxonomyTermID, $key, $value, false);
+                add_post_meta((int) $customPostID, $key, $value, false);
             }
         }
     }
 
     /**
      * @return int The term_id of the newly created term
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
+     * @throws CustomPostMetaCRUDMutationException If there was an error
      */
-    public function addTaxonomyTermMeta(
-        string|int $taxonomyTermID,
+    public function addCustomPostMeta(
+        string|int $customPostID,
         string $key,
         mixed $value,
         bool $single = false,
     ): int {
-        $result = add_post_meta((int) $taxonomyTermID, $key, $value, $single);
+        $result = add_post_meta((int) $customPostID, $key, $value, $single);
         if ($result === false) {
-            throw $this->getTaxonomyTermMetaCRUDMutationException(
+            throw $this->getCustomPostMetaCRUDMutationException(
                 \__('Error adding term meta', 'custompostmeta-mutations-wp')
             );
         }
@@ -91,18 +91,18 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
 
         /** @var WP_Error */
         $wpError = $result;
-        throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
+        throw $this->getCustomPostMetaCRUDMutationException($wpError);
     }
 
-    protected function getTaxonomyTermMetaCRUDMutationException(WP_Error|string $error): TaxonomyTermMetaCRUDMutationException
+    protected function getCustomPostMetaCRUDMutationException(WP_Error|string $error): CustomPostMetaCRUDMutationException
     {
-        $taxonomyTermMetaCRUDMutationExceptionClass = $this->getTaxonomyTermMetaCRUDMutationExceptionClass();
+        $customPostMetaCRUDMutationExceptionClass = $this->getCustomPostMetaCRUDMutationExceptionClass();
         if (is_string($error)) {
-            return new $taxonomyTermMetaCRUDMutationExceptionClass($error);
+            return new $customPostMetaCRUDMutationExceptionClass($error);
         }
         /** @var WP_Error */
         $wpError = $error;
-        return new $taxonomyTermMetaCRUDMutationExceptionClass(
+        return new $customPostMetaCRUDMutationExceptionClass(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
             $this->getWPErrorData($wpError),
@@ -110,27 +110,27 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     }
 
     /**
-     * @phpstan-return class-string<TaxonomyTermMetaCRUDMutationException>
+     * @phpstan-return class-string<CustomPostMetaCRUDMutationException>
      */
-    protected function getTaxonomyTermMetaCRUDMutationExceptionClass(): string
+    protected function getCustomPostMetaCRUDMutationExceptionClass(): string
     {
-        return TaxonomyTermMetaCRUDMutationException::class;
+        return CustomPostMetaCRUDMutationException::class;
     }
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateTaxonomyTermMeta(
-        string|int $taxonomyTermID,
+    public function updateCustomPostMeta(
+        string|int $customPostID,
         string $key,
         mixed $value,
         mixed $prevValue = null,
     ): string|int|bool {
-        $result = update_post_meta((int) $taxonomyTermID, $key, $value, $prevValue ?? '');
+        $result = update_post_meta((int) $customPostID, $key, $value, $prevValue ?? '');
         $this->handleMaybeError($result);
         if ($result === false) {
-            throw $this->getTaxonomyTermMetaCRUDMutationException(
+            throw $this->getCustomPostMetaCRUDMutationException(
                 \__('Error updating term meta', 'custompostmeta-mutations-wp')
             );
         }
@@ -139,16 +139,16 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     }
 
     /**
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
-    public function deleteTaxonomyTermMeta(
-        string|int $taxonomyTermID,
+    public function deleteCustomPostMeta(
+        string|int $customPostID,
         string $key,
     ): void {
-        $result = delete_post_meta((int) $taxonomyTermID, $key);
+        $result = delete_post_meta((int) $customPostID, $key);
         $this->handleMaybeError($result);
         if ($result === false) {
-            throw $this->getTaxonomyTermMetaCRUDMutationException(
+            throw $this->getCustomPostMetaCRUDMutationException(
                 \__('Error deleting term meta', 'custompostmeta-mutations-wp')
             );
         }

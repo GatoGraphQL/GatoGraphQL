@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
-abstract class AbstractUpdateTaxonomyTermMetaInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements UpdateTaxonomyTermMetaInputObjectTypeResolverInterface
+abstract class AbstractUpdateCustomPostMetaInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements UpdateCustomPostMetaInputObjectTypeResolverInterface
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

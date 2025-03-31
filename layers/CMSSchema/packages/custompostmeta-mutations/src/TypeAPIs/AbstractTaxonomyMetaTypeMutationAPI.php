@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs;
 
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
 use PoP\Root\Services\AbstractBasicService;
 
@@ -12,30 +12,30 @@ abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService 
 {
     /**
      * @param array<string,mixed[]|null> $entries
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
+     * @throws CustomPostMetaCRUDMutationException If there was an error
      */
     public function setTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         array $entries,
     ): void {
-        $this->setTaxonomyTermMeta(
-            $taxonomyTermID,
+        $this->setCustomPostMeta(
+            $customPostID,
             $entries,
         );
     }
 
     /**
      * @return int The term_id of the newly created term
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
+     * @throws CustomPostMetaCRUDMutationException If there was an error
      */
     public function addTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
         mixed $value,
         bool $single = false,
     ): int {
-        return $this->addTaxonomyTermMeta(
-            $taxonomyTermID,
+        return $this->addCustomPostMeta(
+            $customPostID,
             $key,
             $value,
             $single,
@@ -44,16 +44,16 @@ abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService 
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
         mixed $value,
         mixed $prevValue = null,
     ): string|int|bool {
-        return $this->updateTaxonomyTermMeta(
-            $taxonomyTermID,
+        return $this->updateCustomPostMeta(
+            $customPostID,
             $key,
             $value,
             $prevValue,
@@ -61,14 +61,14 @@ abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService 
     }
 
     /**
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
     public function deleteTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
     ): void {
-        $this->deleteTaxonomyTermMeta(
-            $taxonomyTermID,
+        $this->deleteCustomPostMeta(
+            $customPostID,
             $key,
         );
     }

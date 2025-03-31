@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMetaMutationsWP\TypeAPIs;
 use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
 use PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs\TaxonomyMetaTypeMutationAPI;
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -19,10 +19,10 @@ class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements
      * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
     public function setCategoryTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         array $entries,
     ): void {
-        $this->setTaxonomyTermMeta($taxonomyTermID, $entries);
+        $this->setCustomPostMeta($customPostID, $entries);
     }
 
     /**
@@ -30,18 +30,18 @@ class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements
      * @throws CategoryTermMetaCRUDMutationException If there was an error
      */
     public function addCategoryTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
         mixed $value,
         bool $single = false,
     ): int {
-        return $this->addTaxonomyTermMeta($taxonomyTermID, $key, $value, $single);
+        return $this->addCustomPostMeta($customPostID, $key, $value, $single);
     }
 
     /**
-     * @phpstan-return class-string<TaxonomyTermMetaCRUDMutationException>
+     * @phpstan-return class-string<CustomPostMetaCRUDMutationException>
      */
-    protected function getTaxonomyTermMetaCRUDMutationExceptionClass(): string
+    protected function getCustomPostMetaCRUDMutationExceptionClass(): string
     {
         return CategoryTermMetaCRUDMutationException::class;
     }
@@ -51,18 +51,18 @@ class CategoryMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateCategoryTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
         mixed $value,
         mixed $prevValue = null,
     ): string|int|bool {
-        return $this->updateTaxonomyTermMeta($taxonomyTermID, $key, $value, $prevValue);
+        return $this->updateCustomPostMeta($customPostID, $key, $value, $prevValue);
     }
 
     public function deleteCategoryTermMeta(
-        string|int $taxonomyTermID,
+        string|int $customPostID,
         string $key,
     ): void {
-        $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+        $this->deleteCustomPostMeta($customPostID, $key);
     }
 }

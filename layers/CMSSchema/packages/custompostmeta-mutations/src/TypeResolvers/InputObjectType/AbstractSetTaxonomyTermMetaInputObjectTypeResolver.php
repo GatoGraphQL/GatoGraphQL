@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeReso
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
-abstract class AbstractSetTaxonomyTermMetaInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements SetTaxonomyTermMetaInputObjectTypeResolverInterface
+abstract class AbstractSetCustomPostMetaInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements SetCustomPostMetaInputObjectTypeResolverInterface
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?NullableListValueJSONObjectScalarTypeResolver $nullableListValueJSONObjectScalarTypeResolver = null;

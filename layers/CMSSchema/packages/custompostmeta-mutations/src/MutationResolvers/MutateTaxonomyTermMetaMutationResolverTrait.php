@@ -8,7 +8,7 @@ use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverT
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\TaxonomyMetaTypeAPIInterface;
 
-trait MutateTaxonomyTermMetaMutationResolverTrait
+trait MutateCustomPostMetaMutationResolverTrait
 {
     use MutateTermMetaMutationResolverTrait;
 
@@ -23,7 +23,7 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
         string|int $termID,
         string $key,
     ): bool {
-        return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($termID, $key, true) !== null;
+        return $this->getTaxonomyMetaTypeAPI()->getCustomPostMeta($termID, $key, true) !== null;
     }
 
     protected function doesMetaEntryWithValueExist(
@@ -31,6 +31,6 @@ trait MutateTaxonomyTermMetaMutationResolverTrait
         string $key,
         mixed $value,
     ): bool {
-        return in_array($value, $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta($termID, $key, false));
+        return in_array($value, $this->getTaxonomyMetaTypeAPI()->getCustomPostMeta($termID, $key, false));
     }
 }

@@ -6,6 +6,6 @@ namespace PoPCMSSchema\TaxonomyMetaMutations\Exception;
 
 use PoPCMSSchema\MetaMutations\Exception\TermMetaCRUDMutationException;
 
-class TaxonomyTermMetaCRUDMutationException extends TermMetaCRUDMutationException
+class CustomPostMetaCRUDMutationException extends TermMetaCRUDMutationException
 {
 }

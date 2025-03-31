@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
-use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
+use PoPCMSSchema\TaxonomyMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 
 interface TaxonomyMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]|null> $entries
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
+     * @throws CustomPostMetaCRUDMutationException If there was an error
      */
-    public function setTaxonomyTermMeta(
-        string|int $taxonomyTermID,
+    public function setCustomPostMeta(
+        string|int $customPostID,
         array $entries,
     ): void;
 
     /**
      * @return int The term_id of the newly created term
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error
+     * @throws CustomPostMetaCRUDMutationException If there was an error
      */
-    public function addTaxonomyTermMeta(
-        string|int $taxonomyTermID,
+    public function addCustomPostMeta(
+        string|int $customPostID,
         string $key,
         mixed $value,
         bool $single = false,
@@ -31,20 +31,20 @@ interface TaxonomyMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterf
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateTaxonomyTermMeta(
-        string|int $taxonomyTermID,
+    public function updateCustomPostMeta(
+        string|int $customPostID,
         string $key,
         mixed $value,
         mixed $prevValue = null,
     ): string|int|bool;
 
     /**
-     * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
-    public function deleteTaxonomyTermMeta(
-        string|int $taxonomyTermID,
+    public function deleteCustomPostMeta(
+        string|int $customPostID,
         string $key,
     ): void;
 }
