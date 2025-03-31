@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MetaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class TermMetaAlreadyHasSingleEntryErrorPayload extends AbstractErrorPayload
+final class EntityMetaKeyWithValueDoesNotExistErrorPayload extends AbstractErrorPayload
 {
 }

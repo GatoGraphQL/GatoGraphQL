@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\MetaMutations\MutationResolvers\TermMetaMutationResolverInterface;
+use PoPCMSSchema\MetaMutations\MutationResolvers\EntityMetaMutationResolverInterface;
 
-interface TaxonomyTermMetaMutationResolverInterface extends TermMetaMutationResolverInterface
+interface TaxonomyTermMetaMutationResolverInterface extends EntityMetaMutationResolverInterface
 {
 }
