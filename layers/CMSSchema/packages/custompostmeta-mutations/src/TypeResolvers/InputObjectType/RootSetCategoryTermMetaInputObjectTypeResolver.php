@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
 
-class RootSetCategoryTermMetaInputObjectTypeResolver extends AbstractSetCategoryTermMetaInputObjectTypeResolver implements SetCategoryTermMetaInputObjectTypeResolverInterface
+class RootSetCustomPostMetaInputObjectTypeResolver extends AbstractSetCustomPostMetaInputObjectTypeResolver implements SetCustomPostMetaInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {

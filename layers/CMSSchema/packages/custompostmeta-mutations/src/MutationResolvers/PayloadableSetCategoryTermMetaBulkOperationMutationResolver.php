@@ -7,22 +7,22 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class PayloadableSetCategoryTermMetaBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
+class PayloadableSetCustomPostMetaBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
 {
-    private ?PayloadableSetCategoryTermMetaMutationResolver $payloadableSetCategoryTermMetaMutationResolver = null;
+    private ?PayloadableSetCustomPostMetaMutationResolver $payloadableSetCustomPostMetaMutationResolver = null;
 
-    final protected function getPayloadableSetCategoryTermMetaMutationResolver(): PayloadableSetCategoryTermMetaMutationResolver
+    final protected function getPayloadableSetCustomPostMetaMutationResolver(): PayloadableSetCustomPostMetaMutationResolver
     {
-        if ($this->payloadableSetCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableSetCategoryTermMetaMutationResolver */
-            $payloadableSetCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableSetCategoryTermMetaMutationResolver::class);
-            $this->payloadableSetCategoryTermMetaMutationResolver = $payloadableSetCategoryTermMetaMutationResolver;
+        if ($this->payloadableSetCustomPostMetaMutationResolver === null) {
+            /** @var PayloadableSetCustomPostMetaMutationResolver */
+            $payloadableSetCustomPostMetaMutationResolver = $this->instanceManager->getInstance(PayloadableSetCustomPostMetaMutationResolver::class);
+            $this->payloadableSetCustomPostMetaMutationResolver = $payloadableSetCustomPostMetaMutationResolver;
         }
-        return $this->payloadableSetCategoryTermMetaMutationResolver;
+        return $this->payloadableSetCustomPostMetaMutationResolver;
     }
 
     protected function getDecoratedOperationMutationResolver(): MutationResolverInterface
     {
-        return $this->getPayloadableSetCategoryTermMetaMutationResolver();
+        return $this->getPayloadableSetCustomPostMetaMutationResolver();
     }
 }

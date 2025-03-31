@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class RootDeleteGenericCategoryTermMetaMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
+class RootDeleteGenericCustomPostMetaMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
 {
-    private ?RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver $rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver $rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver = null;
 
-    final protected function getRootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver(): RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver
+    final protected function getRootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver(): RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver === null) {
-            /** @var RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver */
-            $rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver = $rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+        if ($this->rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver */
+            $rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver = $rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     /**
@@ -30,12 +30,12 @@ class RootDeleteGenericCategoryTermMetaMutationPayloadErrorsFieldTransientOperat
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class,
+            RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver::class,
         ];
     }
 
     protected function getErrorsFieldFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        return $this->getRootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver();
+        return $this->getRootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver();
     }
 }

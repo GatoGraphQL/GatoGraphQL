@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableSetCategoryTermMetaMutationResolverTrait;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableSetCustomPostMetaMutationResolverTrait;
 
-class PayloadableSetCategoryTermMetaMutationResolver extends AbstractMutateCategoryTermMetaMutationResolver
+class PayloadableSetCustomPostMetaMutationResolver extends AbstractMutateCustomPostMetaMutationResolver
 {
-    use PayloadableSetCategoryTermMetaMutationResolverTrait;
+    use PayloadableSetCustomPostMetaMutationResolverTrait;
 }

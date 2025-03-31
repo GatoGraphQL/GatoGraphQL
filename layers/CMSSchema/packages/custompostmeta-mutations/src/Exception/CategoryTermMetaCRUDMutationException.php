@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CategoryMetaMutations\Exception;
 
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 
-final class CategoryTermMetaCRUDMutationException extends CustomPostMetaCRUDMutationException
+final class CustomPostMetaCRUDMutationException extends CustomPostMetaCRUDMutationException
 {
 }

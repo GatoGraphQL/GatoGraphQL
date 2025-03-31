@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
+use PoPCMSSchema\CategoryMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMetaMutationsWP\TypeAPIs\CustomPostMetaTypeMutationAPI;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
@@ -16,9 +16,9 @@ class CategoryMetaTypeMutationAPI extends CustomPostMetaTypeMutationAPI implemen
 {
     /**
      * @param array<string,mixed[]|null> $entries
-     * @throws CategoryTermMetaCRUDMutationException If there was an error
+     * @throws CustomPostMetaCRUDMutationException If there was an error
      */
-    public function setCategoryTermMeta(
+    public function setCustomPostMeta(
         string|int $customPostID,
         array $entries,
     ): void {
@@ -27,9 +27,9 @@ class CategoryMetaTypeMutationAPI extends CustomPostMetaTypeMutationAPI implemen
 
     /**
      * @return int The term_id of the newly created term
-     * @throws CategoryTermMetaCRUDMutationException If there was an error
+     * @throws CustomPostMetaCRUDMutationException If there was an error
      */
-    public function addCategoryTermMeta(
+    public function addCustomPostMeta(
         string|int $customPostID,
         string $key,
         mixed $value,
@@ -43,14 +43,14 @@ class CategoryMetaTypeMutationAPI extends CustomPostMetaTypeMutationAPI implemen
      */
     protected function getCustomPostMetaCRUDMutationExceptionClass(): string
     {
-        return CategoryTermMetaCRUDMutationException::class;
+        return CustomPostMetaCRUDMutationException::class;
     }
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: custom post does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
-    public function updateCategoryTermMeta(
+    public function updateCustomPostMeta(
         string|int $customPostID,
         string $key,
         mixed $value,
@@ -59,7 +59,7 @@ class CategoryMetaTypeMutationAPI extends CustomPostMetaTypeMutationAPI implemen
         return $this->updateCustomPostMeta($customPostID, $key, $value, $prevValue);
     }
 
-    public function deleteCategoryTermMeta(
+    public function deleteCustomPostMeta(
         string|int $customPostID,
         string $key,
     ): void {

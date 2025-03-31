@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\CustomPostMetaMutationResolverInterface;
 
-interface CategoryTermMetaMutationResolverInterface extends CustomPostMetaMutationResolverInterface
+interface CustomPostMetaMutationResolverInterface extends CustomPostMetaMutationResolverInterface
 {
 }

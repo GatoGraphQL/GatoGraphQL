@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver $rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver $rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver = null;
 
-    final protected function getRootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver(): RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver
+    final protected function getRootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver(): RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver === null) {
-            /** @var RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver */
-            $rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver = $rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+        if ($this->rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver */
+            $rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver = $rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->rootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->rootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->getRootDeleteGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver();
+        return $this->getRootDeleteGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver();
     }
 }

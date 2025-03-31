@@ -6,18 +6,18 @@ namespace PoPCMSSchema\CategoryMetaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CategoryMetaMutations\Module;
 use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\AddCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\DeleteCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableAddCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableDeleteCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableSetCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableUpdateCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\SetCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\UpdateCategoryTermMetaMutationResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermAddMetaInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermDeleteMetaInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermSetMetaInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CategoryTermUpdateMetaInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\AddCustomPostMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\DeleteCustomPostMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableAddCustomPostMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableDeleteCustomPostMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableSetCustomPostMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\PayloadableUpdateCustomPostMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\SetCustomPostMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\MutationResolvers\UpdateCustomPostMetaMutationResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CustomPostAddMetaInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CustomPostDeleteMetaInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CustomPostSetMetaInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType\CustomPostUpdateMetaInputObjectTypeResolver;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\App;
@@ -33,18 +33,18 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
-    private ?CategoryTermAddMetaInputObjectTypeResolver $categoryTermAddMetaInputObjectTypeResolver = null;
-    private ?CategoryTermDeleteMetaInputObjectTypeResolver $categoryTermDeleteMetaInputObjectTypeResolver = null;
-    private ?CategoryTermSetMetaInputObjectTypeResolver $categoryTermSetMetaInputObjectTypeResolver = null;
-    private ?CategoryTermUpdateMetaInputObjectTypeResolver $categoryTermUpdateMetaInputObjectTypeResolver = null;
-    private ?AddCategoryTermMetaMutationResolver $addCategoryTermMetaMutationResolver = null;
-    private ?DeleteCategoryTermMetaMutationResolver $deleteCategoryTermMetaMutationResolver = null;
-    private ?SetCategoryTermMetaMutationResolver $setCategoryTermMetaMutationResolver = null;
-    private ?UpdateCategoryTermMetaMutationResolver $updateCategoryTermMetaMutationResolver = null;
-    private ?PayloadableDeleteCategoryTermMetaMutationResolver $payloadableDeleteCategoryTermMetaMutationResolver = null;
-    private ?PayloadableSetCategoryTermMetaMutationResolver $payloadableSetCategoryTermMetaMutationResolver = null;
-    private ?PayloadableUpdateCategoryTermMetaMutationResolver $payloadableUpdateCategoryTermMetaMutationResolver = null;
-    private ?PayloadableAddCategoryTermMetaMutationResolver $payloadableAddCategoryTermMetaMutationResolver = null;
+    private ?CustomPostAddMetaInputObjectTypeResolver $customPostAddMetaInputObjectTypeResolver = null;
+    private ?CustomPostDeleteMetaInputObjectTypeResolver $customPostDeleteMetaInputObjectTypeResolver = null;
+    private ?CustomPostSetMetaInputObjectTypeResolver $customPostSetMetaInputObjectTypeResolver = null;
+    private ?CustomPostUpdateMetaInputObjectTypeResolver $customPostUpdateMetaInputObjectTypeResolver = null;
+    private ?AddCustomPostMetaMutationResolver $addCustomPostMetaMutationResolver = null;
+    private ?DeleteCustomPostMetaMutationResolver $deleteCustomPostMetaMutationResolver = null;
+    private ?SetCustomPostMetaMutationResolver $setCustomPostMetaMutationResolver = null;
+    private ?UpdateCustomPostMetaMutationResolver $updateCustomPostMetaMutationResolver = null;
+    private ?PayloadableDeleteCustomPostMetaMutationResolver $payloadableDeleteCustomPostMetaMutationResolver = null;
+    private ?PayloadableSetCustomPostMetaMutationResolver $payloadableSetCustomPostMetaMutationResolver = null;
+    private ?PayloadableUpdateCustomPostMetaMutationResolver $payloadableUpdateCustomPostMetaMutationResolver = null;
+    private ?PayloadableAddCustomPostMetaMutationResolver $payloadableAddCustomPostMetaMutationResolver = null;
 
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
@@ -55,113 +55,113 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         }
         return $this->userLoggedInCheckpoint;
     }
-    final protected function getCategoryTermAddMetaInputObjectTypeResolver(): CategoryTermAddMetaInputObjectTypeResolver
+    final protected function getCustomPostAddMetaInputObjectTypeResolver(): CustomPostAddMetaInputObjectTypeResolver
     {
-        if ($this->categoryTermAddMetaInputObjectTypeResolver === null) {
-            /** @var CategoryTermAddMetaInputObjectTypeResolver */
-            $categoryTermAddMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermAddMetaInputObjectTypeResolver::class);
-            $this->categoryTermAddMetaInputObjectTypeResolver = $categoryTermAddMetaInputObjectTypeResolver;
+        if ($this->customPostAddMetaInputObjectTypeResolver === null) {
+            /** @var CustomPostAddMetaInputObjectTypeResolver */
+            $customPostAddMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostAddMetaInputObjectTypeResolver::class);
+            $this->customPostAddMetaInputObjectTypeResolver = $customPostAddMetaInputObjectTypeResolver;
         }
-        return $this->categoryTermAddMetaInputObjectTypeResolver;
+        return $this->customPostAddMetaInputObjectTypeResolver;
     }
-    final protected function getCategoryTermDeleteMetaInputObjectTypeResolver(): CategoryTermDeleteMetaInputObjectTypeResolver
+    final protected function getCustomPostDeleteMetaInputObjectTypeResolver(): CustomPostDeleteMetaInputObjectTypeResolver
     {
-        if ($this->categoryTermDeleteMetaInputObjectTypeResolver === null) {
-            /** @var CategoryTermDeleteMetaInputObjectTypeResolver */
-            $categoryTermDeleteMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermDeleteMetaInputObjectTypeResolver::class);
-            $this->categoryTermDeleteMetaInputObjectTypeResolver = $categoryTermDeleteMetaInputObjectTypeResolver;
+        if ($this->customPostDeleteMetaInputObjectTypeResolver === null) {
+            /** @var CustomPostDeleteMetaInputObjectTypeResolver */
+            $customPostDeleteMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostDeleteMetaInputObjectTypeResolver::class);
+            $this->customPostDeleteMetaInputObjectTypeResolver = $customPostDeleteMetaInputObjectTypeResolver;
         }
-        return $this->categoryTermDeleteMetaInputObjectTypeResolver;
+        return $this->customPostDeleteMetaInputObjectTypeResolver;
     }
-    final protected function getCategoryTermSetMetaInputObjectTypeResolver(): CategoryTermSetMetaInputObjectTypeResolver
+    final protected function getCustomPostSetMetaInputObjectTypeResolver(): CustomPostSetMetaInputObjectTypeResolver
     {
-        if ($this->categoryTermSetMetaInputObjectTypeResolver === null) {
-            /** @var CategoryTermSetMetaInputObjectTypeResolver */
-            $categoryTermSetMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermSetMetaInputObjectTypeResolver::class);
-            $this->categoryTermSetMetaInputObjectTypeResolver = $categoryTermSetMetaInputObjectTypeResolver;
+        if ($this->customPostSetMetaInputObjectTypeResolver === null) {
+            /** @var CustomPostSetMetaInputObjectTypeResolver */
+            $customPostSetMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostSetMetaInputObjectTypeResolver::class);
+            $this->customPostSetMetaInputObjectTypeResolver = $customPostSetMetaInputObjectTypeResolver;
         }
-        return $this->categoryTermSetMetaInputObjectTypeResolver;
+        return $this->customPostSetMetaInputObjectTypeResolver;
     }
-    final protected function getCategoryTermUpdateMetaInputObjectTypeResolver(): CategoryTermUpdateMetaInputObjectTypeResolver
+    final protected function getCustomPostUpdateMetaInputObjectTypeResolver(): CustomPostUpdateMetaInputObjectTypeResolver
     {
-        if ($this->categoryTermUpdateMetaInputObjectTypeResolver === null) {
-            /** @var CategoryTermUpdateMetaInputObjectTypeResolver */
-            $categoryTermUpdateMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermUpdateMetaInputObjectTypeResolver::class);
-            $this->categoryTermUpdateMetaInputObjectTypeResolver = $categoryTermUpdateMetaInputObjectTypeResolver;
+        if ($this->customPostUpdateMetaInputObjectTypeResolver === null) {
+            /** @var CustomPostUpdateMetaInputObjectTypeResolver */
+            $customPostUpdateMetaInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostUpdateMetaInputObjectTypeResolver::class);
+            $this->customPostUpdateMetaInputObjectTypeResolver = $customPostUpdateMetaInputObjectTypeResolver;
         }
-        return $this->categoryTermUpdateMetaInputObjectTypeResolver;
+        return $this->customPostUpdateMetaInputObjectTypeResolver;
     }
-    final protected function getAddCategoryTermMetaMutationResolver(): AddCategoryTermMetaMutationResolver
+    final protected function getAddCustomPostMetaMutationResolver(): AddCustomPostMetaMutationResolver
     {
-        if ($this->addCategoryTermMetaMutationResolver === null) {
-            /** @var AddCategoryTermMetaMutationResolver */
-            $addCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(AddCategoryTermMetaMutationResolver::class);
-            $this->addCategoryTermMetaMutationResolver = $addCategoryTermMetaMutationResolver;
+        if ($this->addCustomPostMetaMutationResolver === null) {
+            /** @var AddCustomPostMetaMutationResolver */
+            $addCustomPostMetaMutationResolver = $this->instanceManager->getInstance(AddCustomPostMetaMutationResolver::class);
+            $this->addCustomPostMetaMutationResolver = $addCustomPostMetaMutationResolver;
         }
-        return $this->addCategoryTermMetaMutationResolver;
+        return $this->addCustomPostMetaMutationResolver;
     }
-    final protected function getDeleteCategoryTermMetaMutationResolver(): DeleteCategoryTermMetaMutationResolver
+    final protected function getDeleteCustomPostMetaMutationResolver(): DeleteCustomPostMetaMutationResolver
     {
-        if ($this->deleteCategoryTermMetaMutationResolver === null) {
-            /** @var DeleteCategoryTermMetaMutationResolver */
-            $deleteCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(DeleteCategoryTermMetaMutationResolver::class);
-            $this->deleteCategoryTermMetaMutationResolver = $deleteCategoryTermMetaMutationResolver;
+        if ($this->deleteCustomPostMetaMutationResolver === null) {
+            /** @var DeleteCustomPostMetaMutationResolver */
+            $deleteCustomPostMetaMutationResolver = $this->instanceManager->getInstance(DeleteCustomPostMetaMutationResolver::class);
+            $this->deleteCustomPostMetaMutationResolver = $deleteCustomPostMetaMutationResolver;
         }
-        return $this->deleteCategoryTermMetaMutationResolver;
+        return $this->deleteCustomPostMetaMutationResolver;
     }
-    final protected function getSetCategoryTermMetaMutationResolver(): SetCategoryTermMetaMutationResolver
+    final protected function getSetCustomPostMetaMutationResolver(): SetCustomPostMetaMutationResolver
     {
-        if ($this->setCategoryTermMetaMutationResolver === null) {
-            /** @var SetCategoryTermMetaMutationResolver */
-            $setCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(SetCategoryTermMetaMutationResolver::class);
-            $this->setCategoryTermMetaMutationResolver = $setCategoryTermMetaMutationResolver;
+        if ($this->setCustomPostMetaMutationResolver === null) {
+            /** @var SetCustomPostMetaMutationResolver */
+            $setCustomPostMetaMutationResolver = $this->instanceManager->getInstance(SetCustomPostMetaMutationResolver::class);
+            $this->setCustomPostMetaMutationResolver = $setCustomPostMetaMutationResolver;
         }
-        return $this->setCategoryTermMetaMutationResolver;
+        return $this->setCustomPostMetaMutationResolver;
     }
-    final protected function getUpdateCategoryTermMetaMutationResolver(): UpdateCategoryTermMetaMutationResolver
+    final protected function getUpdateCustomPostMetaMutationResolver(): UpdateCustomPostMetaMutationResolver
     {
-        if ($this->updateCategoryTermMetaMutationResolver === null) {
-            /** @var UpdateCategoryTermMetaMutationResolver */
-            $updateCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(UpdateCategoryTermMetaMutationResolver::class);
-            $this->updateCategoryTermMetaMutationResolver = $updateCategoryTermMetaMutationResolver;
+        if ($this->updateCustomPostMetaMutationResolver === null) {
+            /** @var UpdateCustomPostMetaMutationResolver */
+            $updateCustomPostMetaMutationResolver = $this->instanceManager->getInstance(UpdateCustomPostMetaMutationResolver::class);
+            $this->updateCustomPostMetaMutationResolver = $updateCustomPostMetaMutationResolver;
         }
-        return $this->updateCategoryTermMetaMutationResolver;
+        return $this->updateCustomPostMetaMutationResolver;
     }
-    final protected function getPayloadableDeleteCategoryTermMetaMutationResolver(): PayloadableDeleteCategoryTermMetaMutationResolver
+    final protected function getPayloadableDeleteCustomPostMetaMutationResolver(): PayloadableDeleteCustomPostMetaMutationResolver
     {
-        if ($this->payloadableDeleteCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableDeleteCategoryTermMetaMutationResolver */
-            $payloadableDeleteCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteCategoryTermMetaMutationResolver::class);
-            $this->payloadableDeleteCategoryTermMetaMutationResolver = $payloadableDeleteCategoryTermMetaMutationResolver;
+        if ($this->payloadableDeleteCustomPostMetaMutationResolver === null) {
+            /** @var PayloadableDeleteCustomPostMetaMutationResolver */
+            $payloadableDeleteCustomPostMetaMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteCustomPostMetaMutationResolver::class);
+            $this->payloadableDeleteCustomPostMetaMutationResolver = $payloadableDeleteCustomPostMetaMutationResolver;
         }
-        return $this->payloadableDeleteCategoryTermMetaMutationResolver;
+        return $this->payloadableDeleteCustomPostMetaMutationResolver;
     }
-    final protected function getPayloadableSetCategoryTermMetaMutationResolver(): PayloadableSetCategoryTermMetaMutationResolver
+    final protected function getPayloadableSetCustomPostMetaMutationResolver(): PayloadableSetCustomPostMetaMutationResolver
     {
-        if ($this->payloadableSetCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableSetCategoryTermMetaMutationResolver */
-            $payloadableSetCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableSetCategoryTermMetaMutationResolver::class);
-            $this->payloadableSetCategoryTermMetaMutationResolver = $payloadableSetCategoryTermMetaMutationResolver;
+        if ($this->payloadableSetCustomPostMetaMutationResolver === null) {
+            /** @var PayloadableSetCustomPostMetaMutationResolver */
+            $payloadableSetCustomPostMetaMutationResolver = $this->instanceManager->getInstance(PayloadableSetCustomPostMetaMutationResolver::class);
+            $this->payloadableSetCustomPostMetaMutationResolver = $payloadableSetCustomPostMetaMutationResolver;
         }
-        return $this->payloadableSetCategoryTermMetaMutationResolver;
+        return $this->payloadableSetCustomPostMetaMutationResolver;
     }
-    final protected function getPayloadableUpdateCategoryTermMetaMutationResolver(): PayloadableUpdateCategoryTermMetaMutationResolver
+    final protected function getPayloadableUpdateCustomPostMetaMutationResolver(): PayloadableUpdateCustomPostMetaMutationResolver
     {
-        if ($this->payloadableUpdateCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableUpdateCategoryTermMetaMutationResolver */
-            $payloadableUpdateCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateCategoryTermMetaMutationResolver::class);
-            $this->payloadableUpdateCategoryTermMetaMutationResolver = $payloadableUpdateCategoryTermMetaMutationResolver;
+        if ($this->payloadableUpdateCustomPostMetaMutationResolver === null) {
+            /** @var PayloadableUpdateCustomPostMetaMutationResolver */
+            $payloadableUpdateCustomPostMetaMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateCustomPostMetaMutationResolver::class);
+            $this->payloadableUpdateCustomPostMetaMutationResolver = $payloadableUpdateCustomPostMetaMutationResolver;
         }
-        return $this->payloadableUpdateCategoryTermMetaMutationResolver;
+        return $this->payloadableUpdateCustomPostMetaMutationResolver;
     }
-    final protected function getPayloadableAddCategoryTermMetaMutationResolver(): PayloadableAddCategoryTermMetaMutationResolver
+    final protected function getPayloadableAddCustomPostMetaMutationResolver(): PayloadableAddCustomPostMetaMutationResolver
     {
-        if ($this->payloadableAddCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableAddCategoryTermMetaMutationResolver */
-            $payloadableAddCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableAddCategoryTermMetaMutationResolver::class);
-            $this->payloadableAddCategoryTermMetaMutationResolver = $payloadableAddCategoryTermMetaMutationResolver;
+        if ($this->payloadableAddCustomPostMetaMutationResolver === null) {
+            /** @var PayloadableAddCustomPostMetaMutationResolver */
+            $payloadableAddCustomPostMetaMutationResolver = $this->instanceManager->getInstance(PayloadableAddCustomPostMetaMutationResolver::class);
+            $this->payloadableAddCustomPostMetaMutationResolver = $payloadableAddCustomPostMetaMutationResolver;
         }
-        return $this->payloadableAddCategoryTermMetaMutationResolver;
+        return $this->payloadableAddCustomPostMetaMutationResolver;
     }
 
     /**
@@ -222,16 +222,16 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return match ($fieldName) {
             'addMeta' => [
-                'input' => $this->getCategoryTermAddMetaInputObjectTypeResolver(),
+                'input' => $this->getCustomPostAddMetaInputObjectTypeResolver(),
             ],
             'deleteMeta' => [
-                'input' => $this->getCategoryTermDeleteMetaInputObjectTypeResolver(),
+                'input' => $this->getCustomPostDeleteMetaInputObjectTypeResolver(),
             ],
             'setMeta' => [
-                'input' => $this->getCategoryTermSetMetaInputObjectTypeResolver(),
+                'input' => $this->getCustomPostSetMetaInputObjectTypeResolver(),
             ],
             'updateMeta' => [
-                'input' => $this->getCategoryTermUpdateMetaInputObjectTypeResolver(),
+                'input' => $this->getCustomPostUpdateMetaInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -304,17 +304,17 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         $usePayloadableCategoryMetaMutations = $moduleConfiguration->usePayloadableCategoryMetaMutations();
         return match ($fieldName) {
             'addMeta' => $usePayloadableCategoryMetaMutations
-                ? $this->getPayloadableAddCategoryTermMetaMutationResolver()
-                : $this->getAddCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableAddCustomPostMetaMutationResolver()
+                : $this->getAddCustomPostMetaMutationResolver(),
             'updateMeta' => $usePayloadableCategoryMetaMutations
-                ? $this->getPayloadableUpdateCategoryTermMetaMutationResolver()
-                : $this->getUpdateCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableUpdateCustomPostMetaMutationResolver()
+                : $this->getUpdateCustomPostMetaMutationResolver(),
             'deleteMeta' => $usePayloadableCategoryMetaMutations
-                ? $this->getPayloadableDeleteCategoryTermMetaMutationResolver()
-                : $this->getDeleteCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableDeleteCustomPostMetaMutationResolver()
+                : $this->getDeleteCustomPostMetaMutationResolver(),
             'setMeta' => $usePayloadableCategoryMetaMutations
-                ? $this->getPayloadableSetCategoryTermMetaMutationResolver()
-                : $this->getSetCategoryTermMetaMutationResolver(),
+                ? $this->getPayloadableSetCustomPostMetaMutationResolver()
+                : $this->getSetCustomPostMetaMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }

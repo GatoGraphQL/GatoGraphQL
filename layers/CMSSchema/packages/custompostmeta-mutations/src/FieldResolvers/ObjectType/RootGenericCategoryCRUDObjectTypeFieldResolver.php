@@ -8,10 +8,10 @@ use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeRe
 use PoPCMSSchema\CategoryMetaMutations\FieldResolvers\ObjectType\AbstractRootCategoryCRUDObjectTypeFieldResolver;
 use PoPCMSSchema\CategoryMetaMutations\Module;
 use PoPCMSSchema\CategoryMetaMutations\ModuleConfiguration;
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\RootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\App;
@@ -19,10 +19,10 @@ use PoP\Root\App;
 class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractRootCategoryCRUDObjectTypeFieldResolver
 {
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
-    private ?RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
-    private ?RootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
-    private ?RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
-    private ?RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver $rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver = null;
+    private ?RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver $rootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver = null;
+    private ?RootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver $rootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver = null;
+    private ?RootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver $rootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver = null;
+    private ?RootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver $rootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver = null;
 
     final protected function getGenericCategoryObjectTypeResolver(): GenericCategoryObjectTypeResolver
     {
@@ -33,41 +33,41 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractRootCategor
         }
         return $this->genericCategoryObjectTypeResolver;
     }
-    final protected function getRootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver(): RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver
+    final protected function getRootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver(): RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver */
-            $rootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $rootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver */
+            $rootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver = $rootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        return $this->rootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver(): RootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver
+    final protected function getRootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver(): RootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver */
-            $rootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $rootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver */
+            $rootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver = $rootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        return $this->rootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver(): RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver
+    final protected function getRootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver(): RootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver */
-            $rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver */
+            $rootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver = $rootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        return $this->rootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver(): RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver
+    final protected function getRootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver(): RootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver */
-            $rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver = $rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver */
+            $rootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver = $rootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver;
+        return $this->rootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver;
     }
 
     protected function getCategoryEntityName(): string
@@ -86,19 +86,19 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractRootCategor
                 'add' . $categoryEntityName . 'Meta',
                 'add' . $categoryEntityName . 'Metas',
                 'add' . $categoryEntityName . 'MetaMutationPayloadObjects'
-                    => $this->getRootAddGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
+                    => $this->getRootAddGenericCustomPostMetaMutationPayloadObjectTypeResolver(),
                 'update' . $categoryEntityName . 'Meta',
                 'update' . $categoryEntityName . 'Metas',
                 'update' . $categoryEntityName . 'MetaMutationPayloadObjects'
-                    => $this->getRootUpdateGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
+                    => $this->getRootUpdateGenericCustomPostMetaMutationPayloadObjectTypeResolver(),
                 'delete' . $categoryEntityName . 'Meta',
                 'delete' . $categoryEntityName . 'Metas',
                 'delete' . $categoryEntityName . 'MetaMutationPayloadObjects'
-                    => $this->getRootDeleteGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
+                    => $this->getRootDeleteGenericCustomPostMetaMutationPayloadObjectTypeResolver(),
                 'set' . $categoryEntityName . 'Meta',
                 'set' . $categoryEntityName . 'Metas',
                 'set' . $categoryEntityName . 'MetaMutationPayloadObjects'
-                    => $this->getRootSetGenericCategoryTermMetaMutationPayloadObjectTypeResolver(),
+                    => $this->getRootSetGenericCustomPostMetaMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }

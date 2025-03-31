@@ -7,22 +7,22 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class PayloadableDeleteCategoryTermMetaBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
+class PayloadableDeleteCustomPostMetaBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
 {
-    private ?PayloadableDeleteCategoryTermMetaMutationResolver $payloadableDeleteCategoryTermMetaMutationResolver = null;
+    private ?PayloadableDeleteCustomPostMetaMutationResolver $payloadableDeleteCustomPostMetaMutationResolver = null;
 
-    final protected function getPayloadableDeleteCategoryTermMetaMutationResolver(): PayloadableDeleteCategoryTermMetaMutationResolver
+    final protected function getPayloadableDeleteCustomPostMetaMutationResolver(): PayloadableDeleteCustomPostMetaMutationResolver
     {
-        if ($this->payloadableDeleteCategoryTermMetaMutationResolver === null) {
-            /** @var PayloadableDeleteCategoryTermMetaMutationResolver */
-            $payloadableDeleteCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteCategoryTermMetaMutationResolver::class);
-            $this->payloadableDeleteCategoryTermMetaMutationResolver = $payloadableDeleteCategoryTermMetaMutationResolver;
+        if ($this->payloadableDeleteCustomPostMetaMutationResolver === null) {
+            /** @var PayloadableDeleteCustomPostMetaMutationResolver */
+            $payloadableDeleteCustomPostMetaMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteCustomPostMetaMutationResolver::class);
+            $this->payloadableDeleteCustomPostMetaMutationResolver = $payloadableDeleteCustomPostMetaMutationResolver;
         }
-        return $this->payloadableDeleteCategoryTermMetaMutationResolver;
+        return $this->payloadableDeleteCustomPostMetaMutationResolver;
     }
 
     protected function getDecoratedOperationMutationResolver(): MutationResolverInterface
     {
-        return $this->getPayloadableDeleteCategoryTermMetaMutationResolver();
+        return $this->getPayloadableDeleteCustomPostMetaMutationResolver();
     }
 }

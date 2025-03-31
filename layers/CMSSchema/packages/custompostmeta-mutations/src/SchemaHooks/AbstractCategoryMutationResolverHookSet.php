@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\SchemaHooks;
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CreateCategoryTermInputObjectTypeResolverInterface;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\UpdateCategoryTermInputObjectTypeResolverInterface;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\NullableListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
@@ -64,8 +64,8 @@ abstract class AbstractCategoryMutationResolverHookSet extends AbstractHookSet
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        return $inputObjectTypeResolver instanceof CreateCategoryTermInputObjectTypeResolverInterface
-            || $inputObjectTypeResolver instanceof UpdateCategoryTermInputObjectTypeResolverInterface;
+        return $inputObjectTypeResolver instanceof CreateCustomPostInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdateCustomPostInputObjectTypeResolverInterface;
     }
 
     public function maybeAddInputFieldDescription(

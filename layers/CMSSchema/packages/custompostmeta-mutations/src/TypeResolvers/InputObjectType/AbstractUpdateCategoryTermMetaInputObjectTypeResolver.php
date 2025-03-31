@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\InputObjectType;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType\AbstractUpdateCustomPostMetaInputObjectTypeResolver;
 
-abstract class AbstractUpdateCategoryTermMetaInputObjectTypeResolver extends AbstractUpdateCustomPostMetaInputObjectTypeResolver implements UpdateCategoryTermMetaInputObjectTypeResolverInterface
+abstract class AbstractUpdateCustomPostMetaInputObjectTypeResolver extends AbstractUpdateCustomPostMetaInputObjectTypeResolver implements UpdateCustomPostMetaInputObjectTypeResolverInterface
 {
     public function getTypeDescription(): ?string
     {

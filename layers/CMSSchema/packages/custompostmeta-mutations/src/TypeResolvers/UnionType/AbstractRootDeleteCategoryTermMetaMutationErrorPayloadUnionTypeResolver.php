@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType;
 
-abstract class AbstractRootDeleteCategoryTermMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootCategoryTermMetaMutationErrorPayloadUnionTypeResolver
+abstract class AbstractRootDeleteCustomPostMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootCustomPostMetaMutationErrorPayloadUnionTypeResolver
 {
 }

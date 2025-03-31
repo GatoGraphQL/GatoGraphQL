@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractRootUpdateCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\UnionType\AbstractRootUpdateCustomPostMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractTermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -17,7 +17,7 @@ class TermMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolverPicker exten
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractRootUpdateCategoryTermMetaMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootUpdateCustomPostMetaMutationErrorPayloadUnionTypeResolver::class,
             AbstractCategoryUpdateMetaMutationErrorPayloadUnionTypeResolver::class,
         ];
     }

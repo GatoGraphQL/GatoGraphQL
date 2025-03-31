@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
+use PoPCMSSchema\CategoryMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
-trait PayloadableDeleteCategoryTermMetaMutationResolverTrait
+trait PayloadableDeleteCustomPostMetaMutationResolverTrait
 {
-    use PayloadableMutationResolverTrait, DeleteCategoryTermMetaMutationResolverTrait {
-        DeleteCategoryTermMetaMutationResolverTrait::executeMutation as upstreamExecuteMutation;
-        PayloadableMutationResolverTrait::validate insteadof DeleteCategoryTermMetaMutationResolverTrait;
+    use PayloadableMutationResolverTrait, DeleteCustomPostMetaMutationResolverTrait {
+        DeleteCustomPostMetaMutationResolverTrait::executeMutation as upstreamExecuteMutation;
+        PayloadableMutationResolverTrait::validate insteadof DeleteCustomPostMetaMutationResolverTrait;
     }
     use PayloadableCategoryMetaMutationResolverTrait;
 
@@ -39,17 +39,17 @@ trait PayloadableDeleteCategoryTermMetaMutationResolverTrait
             )->getID();
         }
 
-        $categoryTermID = null;
+        $customPostID = null;
         try {
             /** @var string|int */
-            $categoryTermID = $this->upstreamExecuteMutation(
+            $customPostID = $this->upstreamExecuteMutation(
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
-        } catch (CategoryTermMetaCRUDMutationException $categoryTermMetaCRUDMutationException) {
+        } catch (CustomPostMetaCRUDMutationException $customPostMetaCRUDMutationException) {
             return $this->createFailureObjectMutationPayload(
                 [
-                    $this->createGenericErrorPayloadFromPayloadClientException($categoryTermMetaCRUDMutationException),
+                    $this->createGenericErrorPayloadFromPayloadClientException($customPostMetaCRUDMutationException),
                 ]
             )->getID();
         }
@@ -60,11 +60,11 @@ trait PayloadableDeleteCategoryTermMetaMutationResolverTrait
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 ),
-                $categoryTermID
+                $customPostID
             )->getID();
         }
 
-        /** @var string|int $categoryTermID */
-        return $this->createSuccessObjectMutationPayload($categoryTermID)->getID();
+        /** @var string|int $customPostID */
+        return $this->createSuccessObjectMutationPayload($customPostID)->getID();
     }
 }

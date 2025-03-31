@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\CategoryMetaMutations\Constants\CategoryMetaCRUDHookNames;
-use PoPCMSSchema\CategoryMetaMutations\Exception\CategoryTermMetaCRUDMutationException;
+use PoPCMSSchema\CategoryMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPCMSSchema\CategoryMetaMutations\TypeAPIs\CategoryMetaTypeMutationAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
@@ -14,7 +14,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
-abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMutateCustomPostMetaMutationResolver implements CategoryTermMetaMutationResolverInterface
+abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMutateCustomPostMetaMutationResolver implements CustomPostMetaMutationResolverInterface
 {
     private ?CategoryMetaTypeMutationAPIInterface $categoryTypeMutationAPI = null;
 
@@ -30,7 +30,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int the ID of the created meta entry
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: some custom post creation validation failed)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: some custom post creation validation failed)
      */
     protected function executeAddTermMeta(string|int $customPostID, string $key, mixed $value, bool $single): string|int
     {
@@ -39,7 +39,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: custom post does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function executeUpdateTermMeta(string|int $customPostID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
     {
@@ -47,7 +47,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     }
 
     /**
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: custom post does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function executeDeleteTermMeta(string|int $customPostID, string $key): void
     {
@@ -56,7 +56,7 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
 
     /**
      * @param array<string,mixed[]|null> $entries
-     * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: custom post does not exist)
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
     protected function executeSetTermMeta(string|int $customPostID, array $entries): void
     {

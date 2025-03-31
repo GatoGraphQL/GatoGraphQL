@@ -7,22 +7,22 @@ namespace PoPCMSSchema\CategoryMetaMutations\MutationResolvers;
 use PoPCMSSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class DeleteCategoryTermMetaBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
+class DeleteCustomPostMetaBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
 {
-    private ?DeleteCategoryTermMetaMutationResolver $deleteCategoryTermMetaMutationResolver = null;
+    private ?DeleteCustomPostMetaMutationResolver $deleteCustomPostMetaMutationResolver = null;
 
-    final protected function getDeleteCategoryTermMetaMutationResolver(): DeleteCategoryTermMetaMutationResolver
+    final protected function getDeleteCustomPostMetaMutationResolver(): DeleteCustomPostMetaMutationResolver
     {
-        if ($this->deleteCategoryTermMetaMutationResolver === null) {
-            /** @var DeleteCategoryTermMetaMutationResolver */
-            $deleteCategoryTermMetaMutationResolver = $this->instanceManager->getInstance(DeleteCategoryTermMetaMutationResolver::class);
-            $this->deleteCategoryTermMetaMutationResolver = $deleteCategoryTermMetaMutationResolver;
+        if ($this->deleteCustomPostMetaMutationResolver === null) {
+            /** @var DeleteCustomPostMetaMutationResolver */
+            $deleteCustomPostMetaMutationResolver = $this->instanceManager->getInstance(DeleteCustomPostMetaMutationResolver::class);
+            $this->deleteCustomPostMetaMutationResolver = $deleteCustomPostMetaMutationResolver;
         }
-        return $this->deleteCategoryTermMetaMutationResolver;
+        return $this->deleteCustomPostMetaMutationResolver;
     }
 
     protected function getDecoratedOperationMutationResolver(): MutationResolverInterface
     {
-        return $this->getDeleteCategoryTermMetaMutationResolver();
+        return $this->getDeleteCustomPostMetaMutationResolver();
     }
 }
