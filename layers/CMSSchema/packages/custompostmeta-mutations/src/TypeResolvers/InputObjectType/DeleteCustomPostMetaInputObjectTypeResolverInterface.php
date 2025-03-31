@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\InputObjectType\DeleteCustomPostMetaInputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
-interface DeleteCustomPostMetaInputObjectTypeResolverInterface extends DeleteCustomPostMetaInputObjectTypeResolverInterface
+interface DeleteCustomPostMetaInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
 {
 }
