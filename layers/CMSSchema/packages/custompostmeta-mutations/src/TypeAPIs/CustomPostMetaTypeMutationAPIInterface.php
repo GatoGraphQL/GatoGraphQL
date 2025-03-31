@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\TypeAPIs;
 
+use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
-use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
-interface CustomPostMetaTypeMutationAPIInterface extends CustomPostMetaTypeMutationAPIInterface
+interface CustomPostMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]|null> $entries
@@ -40,8 +37,12 @@ interface CustomPostMetaTypeMutationAPIInterface extends CustomPostMetaTypeMutat
         string|int $customPostID,
         string $key,
         mixed $value,
+        mixed $prevValue = null,
     ): string|int|bool;
 
+    /**
+     * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
+     */
     public function deleteCustomPostMeta(
         string|int $customPostID,
         string $key,
