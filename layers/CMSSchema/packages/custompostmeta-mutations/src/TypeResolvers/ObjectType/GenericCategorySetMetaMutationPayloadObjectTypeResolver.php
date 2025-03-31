@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType;
 
 class GenericCategorySetMetaMutationPayloadObjectTypeResolver extends AbstractGenericCategoryMetaMutationPayloadObjectTypeResolver
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMetaMutations\Hooks;
+namespace PoPCMSSchema\CustomPostMetaMutations\Hooks;
 
 use PoPCMSSchema\CategoryMetaMutations\Hooks\AbstractCategoryMetaMutationResolverHookSet;
 use PoPCMSSchema\CustomPostCategoryMutations\Constants\GenericCategoryCRUDHookNames;

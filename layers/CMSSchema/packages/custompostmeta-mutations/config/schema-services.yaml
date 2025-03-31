@@ -12,11 +12,11 @@ services:
     PoPCMSSchema\CategoryMetaMutations\ObjectTypeResolverPickers\:
         resource: '../src/ObjectTypeResolverPickers/*'
 
-    PoPCMSSchema\CustomPostCategoryMetaMutations\RelationalTypeDataLoaders\:
+    PoPCMSSchema\CustomPostMetaMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
 
-    PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\:
+    PoPCMSSchema\CustomPostMetaMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPCMSSchema\CustomPostCategoryMetaMutations\SchemaHooks\:
+    PoPCMSSchema\CustomPostMetaMutations\SchemaHooks\:
         resource: '../src/SchemaHooks/*'

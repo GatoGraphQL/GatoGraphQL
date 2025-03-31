@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMetaMutations\SchemaHooks;
+namespace PoPCMSSchema\CustomPostMetaMutations\SchemaHooks;
 
 use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\CreateGenericCategoryTermInputObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\UpdateGenericCategoryTermInputObjectTypeResolverInterface;

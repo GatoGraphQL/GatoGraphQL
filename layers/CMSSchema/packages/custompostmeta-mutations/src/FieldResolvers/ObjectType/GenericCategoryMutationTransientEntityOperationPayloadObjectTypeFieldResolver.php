@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostCategoryMetaMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\CustomPostMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CustomPostCategoryMetaMutations\TypeResolvers\ObjectType\AbstractGenericCategoryMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\ObjectType\AbstractGenericCategoryMetaMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
