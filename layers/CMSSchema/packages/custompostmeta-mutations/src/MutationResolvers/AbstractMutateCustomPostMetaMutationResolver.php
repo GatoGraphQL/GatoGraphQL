@@ -25,7 +25,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     use MutateCustomPostMetaMutationResolverTrait;
 
     private ?CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI = null;
-    private ?CustomPostMetaTypeMutationAPIInterface $customPostTypeMutationAPI = null;
+    private ?CustomPostMetaTypeMutationAPIInterface $customPostMetaTypeMutationAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
@@ -41,12 +41,12 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     }
     final protected function getCustomPostMetaTypeMutationAPI(): CustomPostMetaTypeMutationAPIInterface
     {
-        if ($this->customPostTypeMutationAPI === null) {
+        if ($this->customPostMetaTypeMutationAPI === null) {
             /** @var CustomPostMetaTypeMutationAPIInterface */
-            $customPostTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMetaTypeMutationAPIInterface::class);
-            $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+            $customPostMetaTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMetaTypeMutationAPIInterface::class);
+            $this->customPostMetaTypeMutationAPI = $customPostMetaTypeMutationAPI;
         }
-        return $this->customPostTypeMutationAPI;
+        return $this->customPostMetaTypeMutationAPI;
     }
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
