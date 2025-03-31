@@ -11,7 +11,7 @@ abstract class AbstractAddCustomPostMetaInputObjectTypeResolver extends Abstract
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to add meta to a customPost term', 'custompostmeta-mutations');
+        return $this->__('Input to add meta to a custom post', 'custompostmeta-mutations');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
