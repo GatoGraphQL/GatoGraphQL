@@ -48,7 +48,7 @@ abstract class AbstractUpdateTaxonomyTermMetaInputObjectTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a taxonomy term\'s meta', 'taxonomymeta-mutations');
+        return $this->__('Input to update a taxonomy term\'s meta', 'custompostmeta-mutations');
     }
 
     /**
@@ -73,10 +73,10 @@ abstract class AbstractUpdateTaxonomyTermMetaInputObjectTypeResolver extends Abs
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'taxonomymeta-mutations'),
-            MutationInputProperties::KEY => $this->__('The meta key', 'taxonomymeta-mutations'),
-            MutationInputProperties::VALUE => $this->__('The meta value', 'taxonomymeta-mutations'),
-            MutationInputProperties::PREV_VALUE => $this->__('Previous value to check before updating. If specified, only update existing metadata entries with this value. Otherwise, update all entries', 'taxonomymeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'custompostmeta-mutations'),
+            MutationInputProperties::KEY => $this->__('The meta key', 'custompostmeta-mutations'),
+            MutationInputProperties::VALUE => $this->__('The meta value', 'custompostmeta-mutations'),
+            MutationInputProperties::PREV_VALUE => $this->__('Previous value to check before updating. If specified, only update existing metadata entries with this value. Otherwise, update all entries', 'custompostmeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

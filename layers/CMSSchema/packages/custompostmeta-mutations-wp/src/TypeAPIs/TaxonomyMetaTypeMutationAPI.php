@@ -74,7 +74,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         $result = add_term_meta((int) $taxonomyTermID, $key, $value, $single);
         if ($result === false) {
             throw $this->getTaxonomyTermMetaCRUDMutationException(
-                \__('Error adding term meta', 'taxonomymeta-mutations-wp')
+                \__('Error adding term meta', 'custompostmeta-mutations-wp')
             );
         }
         $this->handleMaybeError($result);
@@ -131,7 +131,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getTaxonomyTermMetaCRUDMutationException(
-                \__('Error updating term meta', 'taxonomymeta-mutations-wp')
+                \__('Error updating term meta', 'custompostmeta-mutations-wp')
             );
         }
         /** @var int|bool $result */
@@ -149,7 +149,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getTaxonomyTermMetaCRUDMutationException(
-                \__('Error deleting term meta', 'taxonomymeta-mutations-wp')
+                \__('Error deleting term meta', 'custompostmeta-mutations-wp')
             );
         }
     }

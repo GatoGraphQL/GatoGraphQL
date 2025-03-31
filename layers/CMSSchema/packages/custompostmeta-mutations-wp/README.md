@@ -16,12 +16,12 @@ Implementation for WordPress of contracts from package "Custom Posts Mutations"
 Via Composer
 
 ``` bash
-composer require pop-cms-schema/taxonomymeta-mutations-wp
+composer require pop-cms-schema/custompostmeta-mutations-wp
 ```
 
 ## Development
 
-The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Schema/packages/taxonomymeta-mutations-wp`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Schema/packages/taxonomymeta-mutations-wp).
+The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Schema/packages/custompostmeta-mutations-wp`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Schema/packages/custompostmeta-mutations-wp).
 
 ## Usage
 
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/taxonomymeta-mutations-wp.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/custompostmeta-mutations-wp.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-cms-schema/taxonomymeta-mutations-wp/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/taxonomymeta-mutations-wp.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/taxonomymeta-mutations-wp.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/taxonomymeta-mutations-wp.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/custompostmeta-mutations-wp/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/custompostmeta-mutations-wp.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/custompostmeta-mutations-wp.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/custompostmeta-mutations-wp.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-cms-schema/taxonomymeta-mutations-wp
-[link-travis]: https://travis-ci.org/pop-cms-schema/taxonomymeta-mutations-wp
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/taxonomymeta-mutations-wp/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/taxonomymeta-mutations-wp
-[link-downloads]: https://packagist.org/packages/pop-cms-schema/taxonomymeta-mutations-wp
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/custompostmeta-mutations-wp
+[link-travis]: https://travis-ci.org/pop-cms-schema/custompostmeta-mutations-wp
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/custompostmeta-mutations-wp/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/custompostmeta-mutations-wp
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/custompostmeta-mutations-wp
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

@@ -37,7 +37,7 @@ abstract class AbstractDeleteTaxonomyTermMetaInputObjectTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete a taxonomy term\'s meta entry', 'taxonomymeta-mutations');
+        return $this->__('Input to delete a taxonomy term\'s meta entry', 'custompostmeta-mutations');
     }
 
     /**
@@ -60,8 +60,8 @@ abstract class AbstractDeleteTaxonomyTermMetaInputObjectTypeResolver extends Abs
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'taxonomymeta-mutations'),
-            MutationInputProperties::KEY => $this->__('The meta key', 'taxonomymeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'custompostmeta-mutations'),
+            MutationInputProperties::KEY => $this->__('The meta key', 'custompostmeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

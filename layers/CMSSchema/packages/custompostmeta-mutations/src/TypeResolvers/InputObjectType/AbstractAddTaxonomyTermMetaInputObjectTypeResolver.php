@@ -59,7 +59,7 @@ abstract class AbstractAddTaxonomyTermMetaInputObjectTypeResolver extends Abstra
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to add meta to a taxonomy term', 'taxonomymeta-mutations');
+        return $this->__('Input to add meta to a taxonomy term', 'custompostmeta-mutations');
     }
 
     /**
@@ -84,10 +84,10 @@ abstract class AbstractAddTaxonomyTermMetaInputObjectTypeResolver extends Abstra
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'taxonomymeta-mutations'),
-            MutationInputProperties::KEY => $this->__('The meta key', 'taxonomymeta-mutations'),
-            MutationInputProperties::VALUE => $this->__('The meta value', 'taxonomymeta-mutations'),
-            MutationInputProperties::SINGLE => $this->__('Is the meta a single value?', 'taxonomymeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'custompostmeta-mutations'),
+            MutationInputProperties::KEY => $this->__('The meta key', 'custompostmeta-mutations'),
+            MutationInputProperties::VALUE => $this->__('The meta value', 'custompostmeta-mutations'),
+            MutationInputProperties::SINGLE => $this->__('Is the meta a single value?', 'custompostmeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

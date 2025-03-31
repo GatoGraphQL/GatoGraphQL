@@ -77,7 +77,7 @@ abstract class AbstractCategoryMutationResolverHookSet extends AbstractHookSet
         if ($inputFieldName !== MutationInputProperties::META || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The meta to set', 'custompost-categorymeta-mutations');
+        return $this->__('The meta to set', 'custompostmeta-mutations');
     }
 
     abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;

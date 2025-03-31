@@ -9,19 +9,19 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds support for taxonomymeta-mutations
+Adds support for custompostmeta-mutations
 
 ## Install
 
 Via Composer
 
 ``` bash
-composer require pop-cms-schema/taxonomymeta-mutations
+composer require pop-cms-schema/custompostmeta-mutations
 ```
 
 ## Development
 
-The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Schema/packages/taxonomymeta-mutations`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Schema/packages/taxonomymeta-mutations).
+The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Schema/packages/custompostmeta-mutations`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Schema/packages/custompostmeta-mutations).
 
 ## Usage
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/taxonomymeta-mutations.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/custompostmeta-mutations.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-cms-schema/taxonomymeta-mutations/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/taxonomymeta-mutations.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/taxonomymeta-mutations.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/taxonomymeta-mutations.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/custompostmeta-mutations/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/custompostmeta-mutations.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/custompostmeta-mutations.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/custompostmeta-mutations.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-cms-schema/taxonomymeta-mutations
-[link-travis]: https://travis-ci.org/pop-cms-schema/taxonomymeta-mutations
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/taxonomymeta-mutations/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/taxonomymeta-mutations
-[link-downloads]: https://packagist.org/packages/pop-cms-schema/taxonomymeta-mutations
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/custompostmeta-mutations
+[link-travis]: https://travis-ci.org/pop-cms-schema/custompostmeta-mutations
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/custompostmeta-mutations/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/custompostmeta-mutations
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/custompostmeta-mutations
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
