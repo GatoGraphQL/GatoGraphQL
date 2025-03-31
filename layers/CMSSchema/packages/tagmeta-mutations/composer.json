@@ -141,7 +141,6 @@
         "pop-cms-schema/comment-mutations-wp": "<11.2.0",
         "pop-cms-schema/tag-mutations-wp": "<11.2.0",
         "pop-cms-schema/custompost-tag-mutations-wp": "<11.2.0",
-        "pop-cms-schema/custompost-tagmeta-mutations-wp": "<11.2.0",
         "pop-wp-schema/settings": "<11.2.0",
         "gatographql-standalone/gatographql": "<11.2.0",
         "pop-wp-schema/multisite": "<11.2.0",
