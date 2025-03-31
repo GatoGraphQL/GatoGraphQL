@@ -29,6 +29,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
+    private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
     final protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface
     {
@@ -74,6 +75,15 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
             $this->userRoleTypeAPI = $userRoleTypeAPI;
         }
         return $this->userRoleTypeAPI;
+    }
+    final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
+    {
+        if ($this->customPostTypeMutationAPI === null) {
+            /** @var CustomPostTypeMutationAPIInterface */
+            $customPostTypeMutationAPI = $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
+            $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+        }
+        return $this->customPostTypeMutationAPI;
     }
 
     protected function validateEntityExists(
