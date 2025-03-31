@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType;
 
 use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractRootAddCustomPostMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType\RootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader;
+use PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType\RootAddPostMetaMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class RootAddPostTermMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootAddCustomPostMetaMutationErrorPayloadUnionTypeResolver
+class RootAddPostMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootAddCustomPostMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?RootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader $rootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?RootAddPostMetaMutationErrorPayloadUnionTypeDataLoader $rootAddPostMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final protected function getRootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader(): RootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader
+    final protected function getRootAddPostMetaMutationErrorPayloadUnionTypeDataLoader(): RootAddPostMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->rootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader === null) {
-            /** @var RootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader */
-            $rootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->rootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader = $rootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader;
+        if ($this->rootAddPostMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootAddPostMetaMutationErrorPayloadUnionTypeDataLoader */
+            $rootAddPostMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootAddPostMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootAddPostMetaMutationErrorPayloadUnionTypeDataLoader = $rootAddPostMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->rootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->rootAddPostMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
     {
-        return 'RootAddPostTermMetaMutationErrorPayloadUnion';
+        return 'RootAddPostMetaMutationErrorPayloadUnion';
     }
 
     public function getTypeDescription(): ?string
@@ -34,6 +34,6 @@ class RootAddPostTermMetaMutationErrorPayloadUnionTypeResolver extends AbstractR
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getRootAddPostTermMetaMutationErrorPayloadUnionTypeDataLoader();
+        return $this->getRootAddPostMetaMutationErrorPayloadUnionTypeDataLoader();
     }
 }

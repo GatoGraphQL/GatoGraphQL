@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType;
 
-class RootUpdatePostTermMetaMutationPayloadObjectTypeResolver extends AbstractPostMetaMutationPayloadObjectTypeResolver
+class RootUpdatePostMetaMutationPayloadObjectTypeResolver extends AbstractPostMetaMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'RootUpdatePostTermMetaMutationPayload';
+        return 'RootUpdatePostMetaMutationPayload';
     }
 
     public function getTypeDescription(): ?string

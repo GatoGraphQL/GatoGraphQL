@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\RootSetPostTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\RootSetPostMetaMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class RootSetPostTermMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class RootSetPostMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?RootSetPostTermMetaMutationErrorPayloadUnionTypeResolver $rootSetPostTermMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?RootSetPostMetaMutationErrorPayloadUnionTypeResolver $rootSetPostMetaMutationErrorPayloadUnionTypeResolver = null;
 
-    final protected function getRootSetPostTermMetaMutationErrorPayloadUnionTypeResolver(): RootSetPostTermMetaMutationErrorPayloadUnionTypeResolver
+    final protected function getRootSetPostMetaMutationErrorPayloadUnionTypeResolver(): RootSetPostMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->rootSetPostTermMetaMutationErrorPayloadUnionTypeResolver === null) {
-            /** @var RootSetPostTermMetaMutationErrorPayloadUnionTypeResolver */
-            $rootSetPostTermMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootSetPostTermMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->rootSetPostTermMetaMutationErrorPayloadUnionTypeResolver = $rootSetPostTermMetaMutationErrorPayloadUnionTypeResolver;
+        if ($this->rootSetPostMetaMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootSetPostMetaMutationErrorPayloadUnionTypeResolver */
+            $rootSetPostMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootSetPostMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootSetPostMetaMutationErrorPayloadUnionTypeResolver = $rootSetPostMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->rootSetPostTermMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->rootSetPostMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->getRootSetPostTermMetaMutationErrorPayloadUnionTypeResolver();
+        return $this->getRootSetPostMetaMutationErrorPayloadUnionTypeResolver();
     }
 }
