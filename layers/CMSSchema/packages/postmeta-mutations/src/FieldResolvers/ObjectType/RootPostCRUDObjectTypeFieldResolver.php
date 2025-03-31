@@ -16,7 +16,10 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\App;
 
-class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObjectTypeFieldResolver
+/**
+ * Made abstract to not initialize class (it's disabled)
+ */
+abstract class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?RootDeletePostMetaMutationPayloadObjectTypeResolver $rootDeletePostMetaMutationPayloadObjectTypeResolver = null;
