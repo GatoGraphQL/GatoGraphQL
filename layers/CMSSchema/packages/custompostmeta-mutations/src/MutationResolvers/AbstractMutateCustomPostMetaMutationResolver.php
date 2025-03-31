@@ -66,7 +66,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         );
     }
 
-    protected function validateUserCanEditTerm(
+    protected function validateUserCanEditEntity(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
