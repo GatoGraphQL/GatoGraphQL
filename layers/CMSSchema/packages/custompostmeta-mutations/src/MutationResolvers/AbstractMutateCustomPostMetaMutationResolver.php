@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateTermMetaMutationResolver;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPostMetaMutations\Constants\CustomPostMetaCRUDHookNames;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
-use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutateCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateOrUpdateCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateTermMetaMutationResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 
 abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMutateTermMetaMutationResolver implements CustomPostMetaMutationResolverInterface
 {
-    use MutateCustomPostMutationResolverTrait;
+    use CreateOrUpdateCustomPostMutationResolverTrait;
     use MutateCustomPostMetaMutationResolverTrait;
 
     private ?CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI = null;
@@ -58,9 +58,8 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateCustomPostByIDExists(
+        $this->validateCustomPostExists(
             $customPostID,
-            null,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -71,12 +70,8 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $customPostName = $this->getCustomPostTypeAPI()->getCustomPost($customPostID);
-        if ($customPostName === null) {
-            return;
-        }
         $this->validateCanLoggedInUserEditCustomPost(
-            $customPostName,
+            $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
