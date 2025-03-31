@@ -12,7 +12,7 @@ interface MetaTypeMutationAPIInterface
      * @param array<string,mixed[]|null> $entries
      * @throws EntityMetaCRUDMutationException If there was an error
      */
-    public function setTermMeta(
+    public function setEntityMeta(
         string|int $entityID,
         array $entries,
     ): void;
@@ -21,7 +21,7 @@ interface MetaTypeMutationAPIInterface
      * @return int The term_id of the newly created term
      * @throws EntityMetaCRUDMutationException If there was an error
      */
-    public function addTermMeta(
+    public function addEntityMeta(
         string|int $entityID,
         string $key,
         mixed $value,
@@ -32,7 +32,7 @@ interface MetaTypeMutationAPIInterface
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws EntityMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateTermMeta(
+    public function updateEntityMeta(
         string|int $entityID,
         string $key,
         mixed $value,
@@ -41,7 +41,7 @@ interface MetaTypeMutationAPIInterface
     /**
      * @throws EntityMetaCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
-    public function deleteTermMeta(
+    public function deleteEntityMeta(
         string|int $entityID,
         string $key,
     ): void;
