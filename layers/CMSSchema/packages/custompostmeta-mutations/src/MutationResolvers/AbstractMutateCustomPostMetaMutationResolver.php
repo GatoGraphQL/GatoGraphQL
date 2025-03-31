@@ -12,14 +12,14 @@ use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateOrUpdateCustomPostM
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateTermMetaMutationResolver;
+use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateEntityMetaMutationResolver;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 
-abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMutateTermMetaMutationResolver implements CustomPostMetaMutationResolverInterface
+abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMutateEntityMetaMutationResolver implements CustomPostMetaMutationResolverInterface
 {
     use CreateOrUpdateCustomPostMutationResolverTrait;
     use MutateCustomPostMetaMutationResolverTrait;
