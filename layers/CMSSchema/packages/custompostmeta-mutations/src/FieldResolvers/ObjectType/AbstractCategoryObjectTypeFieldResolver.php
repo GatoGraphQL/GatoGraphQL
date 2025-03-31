@@ -285,13 +285,13 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             $field,
             $object,
         );
-        $category = $object;
+        $customPost = $object;
         switch ($field->getName()) {
             case 'addMeta':
             case 'deleteMeta':
             case 'setMeta':
             case 'updateMeta':
-                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
         return $fieldArgsForMutationForObject;

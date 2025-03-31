@@ -13,6 +13,6 @@ class GenericCustomPostDeleteMetaMutationPayloadObjectTypeResolver extends Abstr
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a delete meta nested mutation on a category term', 'category-mutations');
+        return $this->__('Payload of executing a delete meta nested mutation on a custom post', 'custompost-mutations');
     }
 }

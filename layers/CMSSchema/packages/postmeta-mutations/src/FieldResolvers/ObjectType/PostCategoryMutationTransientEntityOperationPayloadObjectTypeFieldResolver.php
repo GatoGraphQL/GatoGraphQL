@@ -12,7 +12,7 @@ class PostMutationTransientEntityOperationPayloadObjectTypeFieldResolver extends
 {
     protected function getObjectIDFieldName(): string
     {
-        return 'categoryID';
+        return 'customPostID';
     }
 
     /**

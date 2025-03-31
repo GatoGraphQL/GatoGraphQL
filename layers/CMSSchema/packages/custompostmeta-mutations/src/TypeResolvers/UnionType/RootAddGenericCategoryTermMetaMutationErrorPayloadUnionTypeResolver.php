@@ -29,7 +29,7 @@ class RootAddGenericCustomPostMetaMutationErrorPayloadUnionTypeResolver extends 
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when adding meta on a category term', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when adding meta on a custom post', 'post-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

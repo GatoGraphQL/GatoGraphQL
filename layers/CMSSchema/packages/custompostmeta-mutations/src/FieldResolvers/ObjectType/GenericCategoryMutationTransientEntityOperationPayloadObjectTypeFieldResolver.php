@@ -12,7 +12,7 @@ class GenericCustomPostMutationTransientEntityOperationPayloadObjectTypeFieldRes
 {
     protected function getObjectIDFieldName(): string
     {
-        return 'categoryID';
+        return 'customPostID';
     }
 
     /**

@@ -16,16 +16,16 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMutateCustomPostMetaMutationResolver implements CustomPostMetaMutationResolverInterface
 {
-    private ?CustomPostMetaTypeMutationAPIInterface $categoryTypeMutationAPI = null;
+    private ?CustomPostMetaTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
     final protected function getCustomPostMetaTypeMutationAPI(): CustomPostMetaTypeMutationAPIInterface
     {
-        if ($this->categoryTypeMutationAPI === null) {
+        if ($this->customPostTypeMutationAPI === null) {
             /** @var CustomPostMetaTypeMutationAPIInterface */
-            $categoryTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMetaTypeMutationAPIInterface::class);
-            $this->categoryTypeMutationAPI = $categoryTypeMutationAPI;
+            $customPostTypeMutationAPI = $this->instanceManager->getInstance(CustomPostMetaTypeMutationAPIInterface::class);
+            $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
         }
-        return $this->categoryTypeMutationAPI;
+        return $this->customPostTypeMutationAPI;
     }
 
     /**

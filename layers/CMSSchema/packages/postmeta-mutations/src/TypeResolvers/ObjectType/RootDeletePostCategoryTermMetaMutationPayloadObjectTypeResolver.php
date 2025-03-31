@@ -13,6 +13,6 @@ class RootDeletePostTermMetaMutationPayloadObjectTypeResolver extends AbstractPo
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a delete meta mutation on a post\'s category term', 'category-mutations');
+        return $this->__('Payload of executing a delete meta mutation on a post\'s custom post', 'custompost-mutations');
     }
 }

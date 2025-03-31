@@ -11,13 +11,13 @@ abstract class AbstractUpdateCustomPostMetaInputObjectTypeResolver extends Abstr
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a category term\'s meta', 'custompostmeta-mutations');
+        return $this->__('Input to update a customPost term\'s meta', 'custompostmeta-mutations');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the category', 'custompostmeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the custom post', 'custompostmeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

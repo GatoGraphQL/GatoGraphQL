@@ -13,6 +13,6 @@ class RootAddPostTermMetaMutationPayloadObjectTypeResolver extends AbstractPostM
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of adding meta to a posts\'s category term', 'category-mutations');
+        return $this->__('Payload of adding meta to a posts\'s custom post', 'custompost-mutations');
     }
 }

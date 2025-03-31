@@ -13,6 +13,6 @@ class PostAddMetaMutationPayloadObjectTypeResolver extends AbstractPostMetaMutat
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an add meta nested mutation on a post\'s custom post', 'category-mutations');
+        return $this->__('Payload of executing an add meta nested mutation on a post\'s custom post', 'custompost-mutations');
     }
 }
