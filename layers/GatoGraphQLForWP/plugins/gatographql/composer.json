@@ -31,7 +31,6 @@
         "pop-cms-schema/custompost-tagmeta-mutations": "^11.3",
         "pop-cms-schema/custompost-mutations-wp": "^11.3",
         "pop-cms-schema/custompost-tag-mutations-wp": "^11.3",
-        "pop-cms-schema/custompost-tagmeta-mutations-wp": "^11.3",
         "pop-cms-schema/custompost-user-mutations-wp": "^11.3",
         "pop-cms-schema/custompostmedia-mutations-wp": "^11.3",
         "pop-cms-schema/custompostmedia-wp": "^11.3",
