@@ -14,7 +14,7 @@ abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractBasicServic
      * @param array<string,mixed[]|null> $entries
      * @throws CustomPostMetaCRUDMutationException If there was an error
      */
-    public function setTermMeta(
+    public function setEntityMeta(
         string|int $customPostID,
         array $entries,
     ): void {
@@ -28,7 +28,7 @@ abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractBasicServic
      * @return int The term_id of the newly created term
      * @throws CustomPostMetaCRUDMutationException If there was an error
      */
-    public function addTermMeta(
+    public function addEntityMeta(
         string|int $customPostID,
         string $key,
         mixed $value,
@@ -46,7 +46,7 @@ abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractBasicServic
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
-    public function updateTermMeta(
+    public function updateEntityMeta(
         string|int $customPostID,
         string $key,
         mixed $value,
@@ -63,7 +63,7 @@ abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractBasicServic
     /**
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
-    public function deleteTermMeta(
+    public function deleteEntityMeta(
         string|int $customPostID,
         string $key,
     ): void {
