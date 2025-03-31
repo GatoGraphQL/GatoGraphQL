@@ -74,7 +74,7 @@ class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAP
         $result = add_post_meta((int) $customPostID, $key, $value, $single);
         if ($result === false) {
             throw $this->getCustomPostMetaCRUDMutationException(
-                \__('Error adding term meta', 'custompostmeta-mutations-wp')
+                \__('Error adding custom post meta', 'custompostmeta-mutations-wp')
             );
         }
         $this->handleMaybeError($result);
@@ -131,7 +131,7 @@ class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAP
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getCustomPostMetaCRUDMutationException(
-                \__('Error updating term meta', 'custompostmeta-mutations-wp')
+                \__('Error updating custom post meta', 'custompostmeta-mutations-wp')
             );
         }
         /** @var int|bool $result */
@@ -149,7 +149,7 @@ class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAP
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getCustomPostMetaCRUDMutationException(
-                \__('Error deleting term meta', 'custompostmeta-mutations-wp')
+                \__('Error deleting custom post meta', 'custompostmeta-mutations-wp')
             );
         }
     }
