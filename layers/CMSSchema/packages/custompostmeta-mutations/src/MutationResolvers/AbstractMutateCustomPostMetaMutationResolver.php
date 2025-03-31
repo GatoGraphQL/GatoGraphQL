@@ -249,7 +249,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
      * @return string|int the ID of the created custom post
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: some custom post creation validation failed)
      */
-    protected function executeAddTermMeta(string|int $customPostID, string $key, mixed $value, bool $single): string|int
+    protected function executeAddEntityMeta(string|int $customPostID, string $key, mixed $value, bool $single): string|int
     {
         return $this->getCustomPostMetaTypeMutationAPI()->addCustomPostMeta($customPostID, $key, $value, $single);
     }
@@ -281,7 +281,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
-    protected function executeUpdateTermMeta(string|int $customPostID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
+    protected function executeUpdateEntityMeta(string|int $customPostID, string $key, mixed $value, mixed $prevValue = null): string|int|bool
     {
         return $this->getCustomPostMetaTypeMutationAPI()->updateCustomPostMeta($customPostID, $key, $value, $prevValue);
     }
@@ -312,7 +312,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     /**
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
-    protected function executeDeleteTermMeta(string|int $customPostID, string $key): void
+    protected function executeDeleteEntityMeta(string|int $customPostID, string $key): void
     {
         $this->getCustomPostMetaTypeMutationAPI()->deleteCustomPostMeta($customPostID, $key);
     }
@@ -344,7 +344,7 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
      * @param array<string,mixed[]|null> $entries
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
-    protected function executeSetTermMeta(string|int $customPostID, array $entries): void
+    protected function executeSetEntityMeta(string|int $customPostID, array $entries): void
     {
         $this->getCustomPostMetaTypeMutationAPI()->setCustomPostMeta($customPostID, $entries);
     }

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\MetaMutations\MutationResolvers\MutateTermMetaMutationResolverTrait;
+use PoPCMSSchema\MetaMutations\MutationResolvers\MutateEntityMetaMutationResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 
 trait MutateCustomPostMetaMutationResolverTrait
 {
-    use MutateTermMetaMutationResolverTrait;
+    use MutateEntityMetaMutationResolverTrait;
 
     abstract protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface;
 
