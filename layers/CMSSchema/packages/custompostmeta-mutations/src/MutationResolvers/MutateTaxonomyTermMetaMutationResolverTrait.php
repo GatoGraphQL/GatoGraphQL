@@ -20,17 +20,17 @@ trait MutateCustomPostMetaMutationResolverTrait
     }
 
     protected function doesMetaEntryExist(
-        string|int $termID,
+        string|int $entityID,
         string $key,
     ): bool {
-        return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta($termID, $key, true) !== null;
+        return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta($entityID, $key, true) !== null;
     }
 
     protected function doesMetaEntryWithValueExist(
-        string|int $termID,
+        string|int $entityID,
         string $key,
         mixed $value,
     ): bool {
-        return in_array($value, $this->getCustomPostMetaTypeAPI()->getCustomPostMeta($termID, $key, false));
+        return in_array($value, $this->getCustomPostMetaTypeAPI()->getCustomPostMeta($entityID, $key, false));
     }
 }
