@@ -153,7 +153,7 @@
         "pop-wp-schema/pagebuilder": "<11.2.0"
     },
     "type": "library",
-    "description": "Implementation for WordPress of contracts from package \"Taxonomy Meta Mutations\"",
+    "description": "Implementation for WordPress of contracts from package \"Custom Post Meta Mutations\"",
     "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "custompostmeta-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompostmeta-mutations-wp",
     "license": "GPL-2.0-or-later",

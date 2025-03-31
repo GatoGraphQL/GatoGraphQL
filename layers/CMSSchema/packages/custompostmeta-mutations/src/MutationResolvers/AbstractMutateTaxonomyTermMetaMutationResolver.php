@@ -11,7 +11,7 @@ use PoPCMSSchema\CustomPostMetaMutations\Constants\CustomPostMetaCRUDHookNames;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutateCustomPostMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
@@ -71,11 +71,11 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $taxonomyName = $this->getCustomPostTypeAPI()->getCustomPostTaxonomy($customPostID);
+        $taxonomyName = $this->getCustomPostTypeAPI()->getCustomPostCustomPost($customPostID);
         if ($taxonomyName === null) {
             return;
         }
-        $this->validateCanLoggedInUserEditTaxonomy(
+        $this->validateCanLoggedInUserEditCustomPost(
             $taxonomyName,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

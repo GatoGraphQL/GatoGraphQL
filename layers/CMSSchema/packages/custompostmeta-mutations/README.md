@@ -1,4 +1,4 @@
-# Taxonomy Meta Mutations
+# Custom Post Meta Mutations
 
 <!--
 [![Build Status][ico-travis]][link-travis]

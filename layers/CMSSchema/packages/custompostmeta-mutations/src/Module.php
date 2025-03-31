@@ -21,7 +21,7 @@ class Module extends AbstractModule
     {
         return [
             \PoPCMSSchema\CustomPostMeta\Module::class,
-            \PoPCMSSchema\TaxonomyMutations\Module::class,
+            \PoPCMSSchema\CustomPostMutations\Module::class,
         ];
     }
 
