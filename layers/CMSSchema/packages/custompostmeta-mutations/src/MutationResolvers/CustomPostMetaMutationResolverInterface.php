@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMetaMutations\MutationResolvers\CustomPostMetaMutationResolverInterface;
+use PoPCMSSchema\MetaMutations\MutationResolvers\TermMetaMutationResolverInterface;
 
-interface CustomPostMetaMutationResolverInterface extends CustomPostMetaMutationResolverInterface
+interface CustomPostMetaMutationResolverInterface extends TermMetaMutationResolverInterface
 {
 }
