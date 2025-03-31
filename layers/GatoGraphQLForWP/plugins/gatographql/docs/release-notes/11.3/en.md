@@ -5,6 +5,7 @@
 - Fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` ([#3060](https://github.com/GatoGraphQL/GatoGraphQL/pull/3060))
 - Type `ListValueJSONObject` ([#3060](https://github.com/GatoGraphQL/GatoGraphQL/pull/3060))
 - Category meta mutations ([#3063](https://github.com/GatoGraphQL/GatoGraphQL/pull/3063))
+- Tag meta mutations ([#3064](https://github.com/GatoGraphQL/GatoGraphQL/pull/3064))
 
 ## Improvements
 
