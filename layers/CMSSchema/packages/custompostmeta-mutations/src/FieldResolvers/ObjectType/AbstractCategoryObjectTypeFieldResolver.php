@@ -180,10 +180,10 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addMeta' => $this->__('Add a category term meta entry', 'custompostmeta-mutations'),
-            'deleteMeta' => $this->__('Delete a category term meta entry', 'custompostmeta-mutations'),
-            'setMeta' => $this->__('Set meta entries to a a category term', 'custompostmeta-mutations'),
-            'updateMeta' => $this->__('Update a category term meta entry', 'custompostmeta-mutations'),
+            'addMeta' => $this->__('Add a custom post meta entry', 'custompostmeta-mutations'),
+            'deleteMeta' => $this->__('Delete a custom post meta entry', 'custompostmeta-mutations'),
+            'setMeta' => $this->__('Set meta entries to a a custom post', 'custompostmeta-mutations'),
+            'updateMeta' => $this->__('Update a custom post meta entry', 'custompostmeta-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
