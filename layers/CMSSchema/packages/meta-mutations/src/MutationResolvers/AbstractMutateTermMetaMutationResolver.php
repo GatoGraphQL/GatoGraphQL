@@ -250,7 +250,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
         /** @var string|int */
         $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getAddMetaData($fieldDataAccessor);
-        $termMetaID = $this->executeAddTermMeta($entityID, $metaData['key'], $metaData['value'], $metaData['single']);
+        $termMetaID = $this->executeAddEntityMeta($entityID, $metaData['key'], $metaData['value'], $metaData['single']);
 
         return $entityID;
     }
@@ -259,7 +259,7 @@ abstract class AbstractMutateTermMetaMutationResolver extends AbstractMutationRe
      * @return string|int the ID of the created entity
      * @throws TermMetaCRUDMutationException If there was an error (eg: some entity term creation validation failed)
      */
-    abstract protected function executeAddTermMeta(string|int $entityID, string $key, mixed $value, bool $single): string|int;
+    abstract protected function executeAddEntityMeta(string|int $entityID, string $key, mixed $value, bool $single): string|int;
 
     /**
      * @return string|int The ID of the entity term
