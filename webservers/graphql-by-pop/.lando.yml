@@ -68,6 +68,10 @@ services:
         - >-
           ../../layers/CMSSchema/packages/category-mutations:/app/vendor/pop-cms-schema/category-mutations
         - >-
+          ../../layers/CMSSchema/packages/categorymeta-mutations-wp:/app/vendor/pop-cms-schema/categorymeta-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/categorymeta-mutations:/app/vendor/pop-cms-schema/categorymeta-mutations
+        - >-
           ../../layers/CMSSchema/packages/comment-mutations-wp:/app/vendor/pop-cms-schema/comment-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/comment-mutations:/app/vendor/pop-cms-schema/comment-mutations
@@ -85,6 +89,10 @@ services:
           ../../layers/CMSSchema/packages/custompost-category-mutations:/app/vendor/pop-cms-schema/custompost-category-mutations
         - >-
           ../../layers/CMSSchema/packages/custompost-category-mutations-wp:/app/vendor/pop-cms-schema/custompost-category-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/custompost-categorymeta-mutations:/app/vendor/pop-cms-schema/custompost-categorymeta-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompost-tagmeta-mutations:/app/vendor/pop-cms-schema/custompost-tagmeta-mutations
         - >-
           ../../layers/CMSSchema/packages/custompost-mutations-wp:/app/vendor/pop-cms-schema/custompost-mutations-wp
         - >-
@@ -127,6 +135,8 @@ services:
         - '../../layers/CMSSchema/packages/menus:/app/vendor/pop-cms-schema/menus'
         - '../../layers/CMSSchema/packages/meta:/app/vendor/pop-cms-schema/meta'
         - >-
+          ../../layers/CMSSchema/packages/meta-mutations:/app/vendor/pop-cms-schema/meta-mutations
+        - >-
           ../../layers/CMSSchema/packages/metaquery-wp:/app/vendor/pop-cms-schema/metaquery-wp
         - >-
           ../../layers/CMSSchema/packages/page-mutations:/app/vendor/pop-cms-schema/page-mutations
@@ -143,6 +153,10 @@ services:
           ../../layers/CMSSchema/packages/post-categories:/app/vendor/pop-cms-schema/post-categories
         - >-
           ../../layers/CMSSchema/packages/post-category-mutations:/app/vendor/pop-cms-schema/post-category-mutations
+        - >-
+          ../../layers/CMSSchema/packages/post-categorymeta-mutations:/app/vendor/pop-cms-schema/post-categorymeta-mutations
+        - >-
+          ../../layers/CMSSchema/packages/post-tagmeta-mutations:/app/vendor/pop-cms-schema/post-tagmeta-mutations
         - >-
           ../../layers/CMSSchema/packages/post-mutations:/app/vendor/pop-cms-schema/post-mutations
         - >-
@@ -176,9 +190,17 @@ services:
         - >-
           ../../layers/CMSSchema/packages/tag-mutations:/app/vendor/pop-cms-schema/tag-mutations
         - >-
+          ../../layers/CMSSchema/packages/tagmeta-mutations-wp:/app/vendor/pop-cms-schema/tagmeta-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/tagmeta-mutations:/app/vendor/pop-cms-schema/tagmeta-mutations
+        - >-
           ../../layers/CMSSchema/packages/taxonomies-wp:/app/vendor/pop-cms-schema/taxonomies-wp
         - >-
           ../../layers/CMSSchema/packages/taxonomies:/app/vendor/pop-cms-schema/taxonomies
+        - >-
+          ../../layers/CMSSchema/packages/taxonomymeta-mutations-wp:/app/vendor/pop-cms-schema/taxonomymeta-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/taxonomymeta-mutations:/app/vendor/pop-cms-schema/taxonomymeta-mutations
         - >-
           ../../layers/CMSSchema/packages/taxonomyquery-wp:/app/vendor/pop-cms-schema/taxonomyquery-wp
         - >-

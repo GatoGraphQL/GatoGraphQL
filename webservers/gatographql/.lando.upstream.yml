@@ -93,6 +93,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/custompost-categorymeta-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/custompost-categorymeta-mutations
         - >-
+          ../../layers/CMSSchema/packages/custompost-tagmeta-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/custompost-tagmeta-mutations
+        - >-
           ../../layers/CMSSchema/packages/custompost-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/custompost-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/custompost-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/custompost-mutations
@@ -159,6 +161,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/post-categorymeta-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-categorymeta-mutations
         - >-
+          ../../layers/CMSSchema/packages/post-tagmeta-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-tagmeta-mutations
+        - >-
           ../../layers/CMSSchema/packages/post-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-mutations
         - >-
           ../../layers/CMSSchema/packages/post-tag-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-tag-mutations
@@ -192,6 +196,10 @@ services:
           ../../layers/CMSSchema/packages/tag-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/tag-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/tag-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/tag-mutations
+        - >-
+          ../../layers/CMSSchema/packages/tagmeta-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/tagmeta-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/tagmeta-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/tagmeta-mutations
         - >-
           ../../layers/CMSSchema/packages/taxonomies-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomies-wp
         - >-
