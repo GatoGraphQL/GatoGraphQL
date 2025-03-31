@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategoryMetaMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType;
 
-class RootDeletePostCategoryTermMetaMutationPayloadObjectTypeResolver extends AbstractPostCategoryMetaMutationPayloadObjectTypeResolver
+class RootDeletePostCategoryTermMetaMutationPayloadObjectTypeResolver extends AbstractPostMetaMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {

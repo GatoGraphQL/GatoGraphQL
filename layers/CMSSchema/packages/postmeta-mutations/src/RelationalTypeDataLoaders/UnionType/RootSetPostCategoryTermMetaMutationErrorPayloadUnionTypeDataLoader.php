@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategoryMetaMutations\RelationalTypeDataLoaders\UnionType;
+namespace PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\PostCategoryMetaMutations\TypeResolvers\UnionType\RootSetPostCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\RootSetPostCategoryTermMetaMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategoryMetaMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType;
 
 use PoPCMSSchema\CategoryMetaMutations\TypeResolvers\ObjectType\AbstractCategoryMetaMutationPayloadObjectTypeResolver;
 
-abstract class AbstractPostCategoryMetaMutationPayloadObjectTypeResolver extends AbstractCategoryMetaMutationPayloadObjectTypeResolver
+abstract class AbstractPostMetaMutationPayloadObjectTypeResolver extends AbstractCategoryMetaMutationPayloadObjectTypeResolver
 {
 }

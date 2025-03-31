@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategoryMetaMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\PostMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\PostCategoryMetaMutations\TypeResolvers\ObjectType\AbstractPostCategoryMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\AbstractPostMetaMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
@@ -21,7 +21,7 @@ class PostCategoryMutationTransientEntityOperationPayloadObjectTypeFieldResolver
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractPostCategoryMetaMutationPayloadObjectTypeResolver::class,
+            AbstractPostMetaMutationPayloadObjectTypeResolver::class,
         ];
     }
 }

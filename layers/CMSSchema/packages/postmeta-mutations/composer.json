@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPCMSSchema\\PostCategoryMetaMutations\\": "src"
+            "PoPCMSSchema\\PostMetaMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPCMSSchema\\PostCategoryMetaMutations\\": "tests"
+            "PoPCMSSchema\\PostMetaMutations\\": "tests"
         }
     },
     "scripts": {

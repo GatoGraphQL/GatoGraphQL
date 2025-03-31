@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategoryMetaMutations\Hooks;
+namespace PoPCMSSchema\PostMetaMutations\Hooks;
 
 use PoPCMSSchema\CategoryMetaMutations\Hooks\AbstractCategoryMetaMutationResolverHookSet;
 use PoPCMSSchema\PostCategoryMutations\Constants\PostCategoryCRUDHookNames;
 
-class PostCategoryMetaMutationResolverHookSet extends AbstractCategoryMetaMutationResolverHookSet
+class PostMetaMutationResolverHookSet extends AbstractCategoryMetaMutationResolverHookSet
 {
     protected function getValidateCreateHookName(): string
     {
