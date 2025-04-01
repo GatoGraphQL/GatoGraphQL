@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostUserMutations\ObjectTypeResolverPickers;
+namespace PoPCMSSchema\UserMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CustomPostUserMutations\ObjectModels\UserDoesNotExistErrorPayload;
-use PoPCMSSchema\CustomPostUserMutations\TypeResolvers\ObjectType\UserDoesNotExistErrorPayloadObjectTypeResolver;
+use PoPCMSSchema\UserMutations\ObjectModels\UserDoesNotExistErrorPayload;
+use PoPCMSSchema\UserMutations\TypeResolvers\ObjectType\UserDoesNotExistErrorPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
