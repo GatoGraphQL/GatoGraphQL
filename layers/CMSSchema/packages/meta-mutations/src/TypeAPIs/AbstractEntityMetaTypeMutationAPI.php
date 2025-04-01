@@ -99,7 +99,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         $result = $this->executeAddEntityMeta($entityID, $key, $value, $single);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                \__('Error adding custom post meta', 'custompostmeta-mutations-wp')
+                \__('Error adding meta', 'meta-mutations')
             );
         }
         $this->handleMaybeError($result);
@@ -116,7 +116,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
 
     /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
-     * @throws EntityMetaCRUDMutationException If there was an error (eg: custom post does not exist)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity does not exist)
      */
     public function updateEntityMeta(
         string|int $entityID,
@@ -128,7 +128,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                \__('Error updating custom post meta', 'custompostmeta-mutations-wp')
+                \__('Error updating meta', 'meta-mutations')
             );
         }
         /** @var int|bool $result */
@@ -143,7 +143,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
     ): int|bool|WP_Error;
 
     /**
-     * @throws EntityMetaCRUDMutationException If there was an error (eg: custom post does not exist)
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity does not exist)
      */
     public function deleteEntityMeta(
         string|int $entityID,
@@ -153,7 +153,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                \__('Error deleting custom post meta', 'custompostmeta-mutations-wp')
+                \__('Error deleting meta', 'meta-mutations')
             );
         }
     }
