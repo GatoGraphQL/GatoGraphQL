@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutations\TypeAPIs;
 
-use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
+use PoPCMSSchema\MetaMutations\TypeAPIs\EntityMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 
-interface CustomPostMetaTypeMutationAPIInterface extends MetaTypeMutationAPIInterface
+interface CustomPostMetaTypeMutationAPIInterface extends EntityMetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]|null> $entries
