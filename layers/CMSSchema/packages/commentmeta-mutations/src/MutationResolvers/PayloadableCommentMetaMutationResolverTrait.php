@@ -33,11 +33,11 @@ trait PayloadableCommentMetaMutationResolverTrait
             ] => new UserIsNotLoggedInErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            default => App::applyFilters(
+            default => $this->createMetaMutationErrorPayloadFromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedback,
+            ) ?? App::applyFilters(
                 CommentMetaCRUDHookNames::ERROR_PAYLOAD,
-                $this->createMetaMutationErrorPayloadFromObjectTypeFieldResolutionFeedback(
-                    $objectTypeFieldResolutionFeedback,
-                ) ?? new GenericErrorPayload(
+                new GenericErrorPayload(
                     $feedbackItemResolution->getMessage(),
                     $feedbackItemResolution->getNamespacedCode(),
                 ),
