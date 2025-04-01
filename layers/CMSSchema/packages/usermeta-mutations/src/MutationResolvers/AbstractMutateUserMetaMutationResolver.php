@@ -103,7 +103,7 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $user = $this->getUserTypeAPI()->getUser($userID);
+        $user = $this->getUserTypeAPI()->getUserByID($userID);
         if ($user !== null) {
             return;
         }
