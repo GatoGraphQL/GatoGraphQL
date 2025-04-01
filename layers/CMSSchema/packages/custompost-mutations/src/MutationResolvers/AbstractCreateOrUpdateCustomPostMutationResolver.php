@@ -194,6 +194,20 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
+        $customPostType = $this->getExpectedCustomPostType();
+        if ($customPostType !== null) {
+            $this->validateIsExpectedCustomPostType(
+                $customPostID,
+                $customPostType,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         $this->validateCanLoggedInUserEditCustomPost(
             $customPostID,
             $fieldDataAccessor,
@@ -205,13 +219,18 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         }
 
         /** @var string */
-        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        $customPostType ??= $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
         $this->triggerValidateUpdateHook(
             $customPostID,
             $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+    }
+
+    protected function getExpectedCustomPostType(): ?string
+    {
+        return null;
     }
 
     protected function triggerValidateUpdateHook(
