@@ -44,4 +44,122 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
      * @phpstan-return class-string<EntityMetaCRUDMutationException>
      */
     abstract protected function getEntityMetaCRUDMutationExceptionClass(): string;
+
+    /**
+     * @param array<string,mixed[]|null> $entries
+     * @throws EntityMetaCRUDMutationException If there was an error
+     */
+    public function setEntityMeta(
+        string|int $entityID,
+        array $entries,
+    ): void {
+        foreach ($entries as $key => $values) {
+            if ($values === null) {
+                $this->executeDeleteEntityMeta($entityID, $key);
+                continue;
+            }
+
+            $numberItems = count($values);
+            if ($numberItems === 0) {
+                continue;
+            }
+
+            /**
+             * If there are 2 or more items, then use `add` to add them.
+             * If there is only 1 item, then use `update` to update it.
+             */
+            if ($numberItems === 1) {
+                $value = $values[0];
+                if ($value === null) {
+                    $this->executeDeleteEntityMeta($entityID, $key);
+                    continue;
+                }
+                $this->executeUpdateEntityMeta($entityID, $key, $value);
+                continue;
+            }
+
+            // $numberItems > 1
+            $this->executeDeleteEntityMeta($entityID, $key);
+            foreach ($values as $value) {
+                $this->executeAddEntityMeta($entityID, $key, $value, false);
+            }
+        }
+    }
+
+    /**
+     * @return int The term_id of the newly created term
+     * @throws EntityMetaCRUDMutationException If there was an error
+     */
+    public function addEntityMeta(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+        bool $single = false,
+    ): int {
+        $result = $this->executeAddEntityMeta($entityID, $key, $value, $single);
+        if ($result === false) {
+            throw $this->getEntityMetaCRUDMutationException(
+                \__('Error adding meta', 'meta-mutations')
+            );
+        }
+        $this->handleMaybeError($result);
+        /** @var int $result */
+        return $result;
+    }
+
+    abstract protected function executeAddEntityMeta(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+        bool $single = false,
+    ): int|false|WP_Error;
+
+    /**
+     * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity does not exist)
+     */
+    public function updateEntityMeta(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+        mixed $prevValue = null,
+    ): string|int|bool {
+        $result = $this->executeUpdateEntityMeta($entityID, $key, $value, $prevValue ?? '');
+        $this->handleMaybeError($result);
+        if ($result === false) {
+            throw $this->getEntityMetaCRUDMutationException(
+                \__('Error updating meta', 'meta-mutations')
+            );
+        }
+        /** @var int|bool $result */
+        return $result;
+    }
+
+    abstract protected function executeUpdateEntityMeta(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+        mixed $prevValue = null,
+    ): int|bool|WP_Error;
+
+    /**
+     * @throws EntityMetaCRUDMutationException If there was an error (eg: entity does not exist)
+     */
+    public function deleteEntityMeta(
+        string|int $entityID,
+        string $key,
+    ): void {
+        $result = $this->executeDeleteEntityMeta($entityID, $key);
+        $this->handleMaybeError($result);
+        if ($result === false) {
+            throw $this->getEntityMetaCRUDMutationException(
+                \__('Error deleting meta', 'meta-mutations')
+            );
+        }
+    }
+
+    abstract protected function executeDeleteEntityMeta(
+        string|int $entityID,
+        string $key,
+    ): bool;
 }
