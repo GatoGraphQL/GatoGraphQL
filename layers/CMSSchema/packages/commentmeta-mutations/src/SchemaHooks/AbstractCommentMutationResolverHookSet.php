@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMetaMutations\SchemaHooks;
 
+use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\AddCommentToCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolverInterface;
-use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CreateCommentInputObjectTypeResolverInterface;
-use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\UpdateCommentInputObjectTypeResolverInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\NullableListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
@@ -64,8 +63,7 @@ abstract class AbstractCommentMutationResolverHookSet extends AbstractHookSet
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        return $inputObjectTypeResolver instanceof CreateCommentInputObjectTypeResolverInterface
-            || $inputObjectTypeResolver instanceof UpdateCommentInputObjectTypeResolverInterface;
+        return $inputObjectTypeResolver instanceof AddCommentToCustomPostInputObjectTypeResolverInterface;
     }
 
     public function maybeAddInputFieldDescription(
