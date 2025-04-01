@@ -7,9 +7,9 @@ namespace PoPCMSSchema\CommentMetaMutationsWP\TypeAPIs;
 use PoPCMSSchema\CommentMetaMutations\TypeAPIs\AbstractCommentMetaTypeMutationAPI;
 use WP_Error;
 
-use function add_post_meta;
-use function delete_post_meta;
-use function update_post_meta;
+use function add_comment_meta;
+use function delete_comment_meta;
+use function update_comment_meta;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -22,7 +22,7 @@ class CommentMetaTypeMutationAPI extends AbstractCommentMetaTypeMutationAPI
         mixed $value,
         bool $single = false,
     ): int|false|WP_Error {
-        return add_post_meta((int) $entityID, $key, $value, $single);
+        return add_comment_meta((int) $entityID, $key, $value, $single);
     }
 
     protected function executeUpdateEntityMeta(
@@ -31,13 +31,13 @@ class CommentMetaTypeMutationAPI extends AbstractCommentMetaTypeMutationAPI
         mixed $value,
         mixed $prevValue = null,
     ): int|bool|WP_Error {
-        return update_post_meta((int) $entityID, $key, $value, $prevValue ?? '');
+        return update_comment_meta((int) $entityID, $key, $value, $prevValue ?? '');
     }
 
     protected function executeDeleteEntityMeta(
         string|int $entityID,
         string $key,
     ): bool {
-        return delete_post_meta((int) $entityID, $key);
+        return delete_comment_meta((int) $entityID, $key);
     }
 }

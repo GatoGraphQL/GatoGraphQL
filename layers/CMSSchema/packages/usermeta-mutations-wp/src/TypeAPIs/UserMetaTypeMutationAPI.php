@@ -7,9 +7,9 @@ namespace PoPCMSSchema\UserMetaMutationsWP\TypeAPIs;
 use PoPCMSSchema\UserMetaMutations\TypeAPIs\AbstractUserMetaTypeMutationAPI;
 use WP_Error;
 
-use function add_post_meta;
-use function delete_post_meta;
-use function update_post_meta;
+use function add_user_meta;
+use function delete_user_meta;
+use function update_user_meta;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -22,7 +22,7 @@ class UserMetaTypeMutationAPI extends AbstractUserMetaTypeMutationAPI
         mixed $value,
         bool $single = false,
     ): int|false|WP_Error {
-        return add_post_meta((int) $entityID, $key, $value, $single);
+        return add_user_meta((int) $entityID, $key, $value, $single);
     }
 
     protected function executeUpdateEntityMeta(
@@ -31,13 +31,13 @@ class UserMetaTypeMutationAPI extends AbstractUserMetaTypeMutationAPI
         mixed $value,
         mixed $prevValue = null,
     ): int|bool|WP_Error {
-        return update_post_meta((int) $entityID, $key, $value, $prevValue ?? '');
+        return update_user_meta((int) $entityID, $key, $value, $prevValue ?? '');
     }
 
     protected function executeDeleteEntityMeta(
         string|int $entityID,
         string $key,
     ): bool {
-        return delete_post_meta((int) $entityID, $key);
+        return delete_user_meta((int) $entityID, $key);
     }
 }
