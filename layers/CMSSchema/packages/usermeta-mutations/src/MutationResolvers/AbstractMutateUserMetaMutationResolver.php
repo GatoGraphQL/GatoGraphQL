@@ -111,7 +111,7 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E10,
+                    MutationErrorFeedbackItemProvider::E1,
                     [
                         $userID,
                     ]
@@ -142,7 +142,7 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E11,
+                    MutationErrorFeedbackItemProvider::E4,
                     [
                         $userID,
                     ]
