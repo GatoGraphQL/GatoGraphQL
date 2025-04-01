@@ -15,7 +15,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      */
     public function usePayloadableCommentMetaMutations(): bool
     {
-        $envVariable = Environment::USE_PAYLOADABLE_CUSTOMPOST_META_MUTATIONS;
+        $envVariable = Environment::USE_PAYLOADABLE_COMMENT_META_MUTATIONS;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
@@ -32,7 +32,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             return false;
         }
 
-        $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOST_META_MUTATIONS;
+        $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_COMMENT_META_MUTATIONS;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
