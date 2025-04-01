@@ -70,47 +70,41 @@ class RootUserCRUDObjectTypeFieldResolver extends AbstractRootUserCRUDObjectType
         return $this->rootAddUserMetaMutationPayloadObjectTypeResolver;
     }
 
-    protected function getUserEntityName(): string
-    {
-        return 'User';
-    }
-
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $userEntityName = $this->getUserEntityName();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableUserMetaMutations = $moduleConfiguration->usePayloadableUserMetaMutations();
         if ($usePayloadableUserMetaMutations) {
             return match ($fieldName) {
-                'add' . $userEntityName . 'Meta',
-                'add' . $userEntityName . 'Metas',
-                'add' . $userEntityName . 'MetaMutationPayloadObjects'
+                'addUserMeta',
+                'addUserMetas',
+                'addUserMetaMutationPayloadObjects'
                     => $this->getRootAddUserMetaMutationPayloadObjectTypeResolver(),
-                'update' . $userEntityName . 'Meta',
-                'update' . $userEntityName . 'Metas',
-                'update' . $userEntityName . 'MetaMutationPayloadObjects'
+                'updateUserMeta',
+                'updateUserMetas',
+                'updateUserMetaMutationPayloadObjects'
                     => $this->getRootUpdateUserMetaMutationPayloadObjectTypeResolver(),
-                'delete' . $userEntityName . 'Meta',
-                'delete' . $userEntityName . 'Metas',
-                'delete' . $userEntityName . 'MetaMutationPayloadObjects'
+                'deleteUserMeta',
+                'deleteUserMetas',
+                'deleteUserMetaMutationPayloadObjects'
                     => $this->getRootDeleteUserMetaMutationPayloadObjectTypeResolver(),
-                'set' . $userEntityName . 'Meta',
-                'set' . $userEntityName . 'Metas',
-                'set' . $userEntityName . 'MetaMutationPayloadObjects'
+                'setUserMeta',
+                'setUserMetas',
+                'setUserMetaMutationPayloadObjects'
                     => $this->getRootSetUserMetaMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'add' . $userEntityName . 'Meta',
-            'add' . $userEntityName . 'Metas',
-            'update' . $userEntityName . 'Meta',
-            'update' . $userEntityName . 'Metas',
-            'delete' . $userEntityName . 'Meta',
-            'delete' . $userEntityName . 'Metas',
-            'set' . $userEntityName . 'Meta',
-            'set' . $userEntityName . 'Metas'
+            'addUserMeta',
+            'addUserMetas',
+            'updateUserMeta',
+            'updateUserMetas',
+            'deleteUserMeta',
+            'deleteUserMetas',
+            'setUserMeta',
+            'setUserMetas'
                 => $this->getUserObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

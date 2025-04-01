@@ -70,47 +70,41 @@ class RootCommentCRUDObjectTypeFieldResolver extends AbstractRootCommentCRUDObje
         return $this->rootAddCommentMetaMutationPayloadObjectTypeResolver;
     }
 
-    protected function getCommentEntityName(): string
-    {
-        return 'Comment';
-    }
-
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $commentEntityName = $this->getCommentEntityName();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCommentMetaMutations = $moduleConfiguration->usePayloadableCommentMetaMutations();
         if ($usePayloadableCommentMetaMutations) {
             return match ($fieldName) {
-                'add' . $commentEntityName . 'Meta',
-                'add' . $commentEntityName . 'Metas',
-                'add' . $commentEntityName . 'MetaMutationPayloadObjects'
+                'addCommentMeta',
+                'addCommentMetas',
+                'addCommentMetaMutationPayloadObjects'
                     => $this->getRootAddCommentMetaMutationPayloadObjectTypeResolver(),
-                'update' . $commentEntityName . 'Meta',
-                'update' . $commentEntityName . 'Metas',
-                'update' . $commentEntityName . 'MetaMutationPayloadObjects'
+                'updateCommentMeta',
+                'updateCommentMetas',
+                'updateCommentMetaMutationPayloadObjects'
                     => $this->getRootUpdateCommentMetaMutationPayloadObjectTypeResolver(),
-                'delete' . $commentEntityName . 'Meta',
-                'delete' . $commentEntityName . 'Metas',
-                'delete' . $commentEntityName . 'MetaMutationPayloadObjects'
+                'deleteCommentMeta',
+                'deleteCommentMetas',
+                'deleteCommentMetaMutationPayloadObjects'
                     => $this->getRootDeleteCommentMetaMutationPayloadObjectTypeResolver(),
-                'set' . $commentEntityName . 'Meta',
-                'set' . $commentEntityName . 'Metas',
-                'set' . $commentEntityName . 'MetaMutationPayloadObjects'
+                'setCommentMeta',
+                'setCommentMetas',
+                'setCommentMetaMutationPayloadObjects'
                     => $this->getRootSetCommentMetaMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'add' . $commentEntityName . 'Meta',
-            'add' . $commentEntityName . 'Metas',
-            'update' . $commentEntityName . 'Meta',
-            'update' . $commentEntityName . 'Metas',
-            'delete' . $commentEntityName . 'Meta',
-            'delete' . $commentEntityName . 'Metas',
-            'set' . $commentEntityName . 'Meta',
-            'set' . $commentEntityName . 'Metas'
+            'addCommentMeta',
+            'addCommentMetas',
+            'updateCommentMeta',
+            'updateCommentMetas',
+            'deleteCommentMeta',
+            'deleteCommentMetas',
+            'setCommentMeta',
+            'setCommentMetas'
                 => $this->getCommentObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),

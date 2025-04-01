@@ -269,14 +269,11 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
         ];
     }
 
-    abstract protected function getCommentEntityName(): string;
-
     /**
      * @return string[]
      */
     public function getFieldNamesToResolve(): array
     {
-        $commentEntityName = $this->getCommentEntityName();
         /** @var EngineModuleConfiguration */
         $engineModuleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
         $disableRedundantRootTypeMutationFields = $engineModuleConfiguration->disableRedundantRootTypeMutationFields();
@@ -285,61 +282,59 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
         $addFieldsToQueryPayloadableCommentMetaMutations = $moduleConfiguration->addFieldsToQueryPayloadableCommentMetaMutations();
         return array_merge(
             !$disableRedundantRootTypeMutationFields ? [
-                'add' . $commentEntityName . 'Meta',
-                'add' . $commentEntityName . 'Metas',
-                'update' . $commentEntityName . 'Meta',
-                'update' . $commentEntityName . 'Metas',
-                'delete' . $commentEntityName . 'Meta',
-                'delete' . $commentEntityName . 'Metas',
-                'set' . $commentEntityName . 'Meta',
-                'set' . $commentEntityName . 'Metas',
+                'addCommentMeta',
+                'addCommentMetas',
+                'updateCommentMeta',
+                'updateCommentMetas',
+                'deleteCommentMeta',
+                'deleteCommentMetas',
+                'setCommentMeta',
+                'setCommentMetas',
             ] : [],
             $addFieldsToQueryPayloadableCommentMetaMutations && !$disableRedundantRootTypeMutationFields ? [
-                'add' . $commentEntityName . 'MetaMutationPayloadObjects',
-                'update' . $commentEntityName . 'MetaMutationPayloadObjects',
-                'delete' . $commentEntityName . 'MetaMutationPayloadObjects',
-                'set' . $commentEntityName . 'MetaMutationPayloadObjects',
+                'addCommentMetaMutationPayloadObjects',
+                'updateCommentMetaMutationPayloadObjects',
+                'deleteCommentMetaMutationPayloadObjects',
+                'setCommentMetaMutationPayloadObjects',
             ] : [],
         );
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
-        $commentEntityName = $this->getCommentEntityName();
         return match ($fieldName) {
-            'add' . $commentEntityName . 'Meta' => $this->__('Add meta to comment', 'comment-mutations'),
-            'add' . $commentEntityName . 'Metas' => $this->__('Add meta to comments', 'comment-mutations'),
-            'update' . $commentEntityName . 'Meta' => $this->__('Update meta from comment', 'comment-mutations'),
-            'update' . $commentEntityName . 'Metas' => $this->__('Update meta from comments', 'comment-mutations'),
-            'delete' . $commentEntityName . 'Meta' => $this->__('Delete meta from comment', 'comment-mutations'),
-            'delete' . $commentEntityName . 'Metas' => $this->__('Delete meta from comments', 'comment-mutations'),
-            'set' . $commentEntityName . 'Meta' => $this->__('Set meta on comment', 'comment-mutations'),
-            'set' . $commentEntityName . 'Metas' => $this->__('Set meta on comments', 'comment-mutations'),
-            'add' . $commentEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCommentMeta` mutation', 'comment-mutations'),
-            'update' . $commentEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCommentMeta` mutation', 'comment-mutations'),
-            'delete' . $commentEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCommentMeta` mutation', 'comment-mutations'),
-            'set' . $commentEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setCommentMeta` mutation', 'comment-mutations'),
+            'addCommentMeta' => $this->__('Add meta to comment', 'comment-mutations'),
+            'addCommentMetas' => $this->__('Add meta to comments', 'comment-mutations'),
+            'updateCommentMeta' => $this->__('Update meta from comment', 'comment-mutations'),
+            'updateCommentMetas' => $this->__('Update meta from comments', 'comment-mutations'),
+            'deleteCommentMeta' => $this->__('Delete meta from comment', 'comment-mutations'),
+            'deleteCommentMetas' => $this->__('Delete meta from comments', 'comment-mutations'),
+            'setCommentMeta' => $this->__('Set meta on comment', 'comment-mutations'),
+            'setCommentMetas' => $this->__('Set meta on comments', 'comment-mutations'),
+            'addCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCommentMeta` mutation', 'comment-mutations'),
+            'updateCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCommentMeta` mutation', 'comment-mutations'),
+            'deleteCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCommentMeta` mutation', 'comment-mutations'),
+            'setCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setCommentMeta` mutation', 'comment-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
-        $commentEntityName = $this->getCommentEntityName();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCommentMetaMutations = $moduleConfiguration->usePayloadableCommentMetaMutations();
         if (!$usePayloadableCommentMetaMutations) {
             return match ($fieldName) {
-                'add' . $commentEntityName . 'Meta',
-                'update' . $commentEntityName . 'Meta',
-                'delete' . $commentEntityName . 'Meta',
-                'set' . $commentEntityName . 'Meta'
+                'addCommentMeta',
+                'updateCommentMeta',
+                'deleteCommentMeta',
+                'setCommentMeta'
                     => SchemaTypeModifiers::NONE,
-                'add' . $commentEntityName . 'Metas',
-                'update' . $commentEntityName . 'Metas',
-                'delete' . $commentEntityName . 'Metas',
-                'set' . $commentEntityName . 'Metas'
+                'addCommentMetas',
+                'updateCommentMetas',
+                'deleteCommentMetas',
+                'setCommentMetas'
                     => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
                 default
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -348,25 +343,25 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
 
         if (
             in_array($fieldName, [
-            'add' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'update' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'delete' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'set' . $commentEntityName . 'MetaMutationPayloadObjects',
+            'addCommentMetaMutationPayloadObjects',
+            'updateCommentMetaMutationPayloadObjects',
+            'deleteCommentMetaMutationPayloadObjects',
+            'setCommentMetaMutationPayloadObjects',
             ])
         ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
         return match ($fieldName) {
-            'add' . $commentEntityName . 'Meta',
-            'update' . $commentEntityName . 'Meta',
-            'delete' . $commentEntityName . 'Meta',
-            'set' . $commentEntityName . 'Meta'
+            'addCommentMeta',
+            'updateCommentMeta',
+            'deleteCommentMeta',
+            'setCommentMeta'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'add' . $commentEntityName . 'Metas',
-            'update' . $commentEntityName . 'Metas',
-            'delete' . $commentEntityName . 'Metas',
-            'set' . $commentEntityName . 'Metas'
+            'addCommentMetas',
+            'updateCommentMetas',
+            'deleteCommentMetas',
+            'setCommentMetas'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -378,32 +373,31 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
      */
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
-        $commentEntityName = $this->getCommentEntityName();
         return match ($fieldName) {
-            'add' . $commentEntityName . 'Meta' => [
+            'addCommentMeta' => [
                 'input' => $this->getRootAddCommentMetaInputObjectTypeResolver(),
             ],
-            'add' . $commentEntityName . 'Metas'
+            'addCommentMetas'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootAddCommentMetaInputObjectTypeResolver()),
-            'update' . $commentEntityName . 'Meta' => [
+            'updateCommentMeta' => [
                 'input' => $this->getRootUpdateCommentMetaInputObjectTypeResolver(),
             ],
-            'update' . $commentEntityName . 'Metas'
+            'updateCommentMetas'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateCommentMetaInputObjectTypeResolver()),
-            'delete' . $commentEntityName . 'Meta' => [
+            'deleteCommentMeta' => [
                 'input' => $this->getRootDeleteCommentMetaInputObjectTypeResolver(),
             ],
-            'delete' . $commentEntityName . 'Metas'
+            'deleteCommentMetas'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootDeleteCommentMetaInputObjectTypeResolver()),
-            'set' . $commentEntityName . 'Meta' => [
+            'setCommentMeta' => [
                 'input' => $this->getRootSetCommentMetaInputObjectTypeResolver(),
             ],
-            'set' . $commentEntityName . 'Metas'
+            'setCommentMetas'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootSetCommentMetaInputObjectTypeResolver()),
-            'add' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'update' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'delete' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'set' . $commentEntityName . 'MetaMutationPayloadObjects'
+            'addCommentMetaMutationPayloadObjects',
+            'updateCommentMetaMutationPayloadObjects',
+            'deleteCommentMetaMutationPayloadObjects',
+            'setCommentMetaMutationPayloadObjects'
                 => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
             default
                 => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -412,13 +406,12 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        $commentEntityName = $this->getCommentEntityName();
         if (
             in_array($fieldName, [
-            'add' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'update' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'delete' . $commentEntityName . 'MetaMutationPayloadObjects',
-            'set' . $commentEntityName . 'MetaMutationPayloadObjects',
+            'addCommentMetaMutationPayloadObjects',
+            'updateCommentMetaMutationPayloadObjects',
+            'deleteCommentMetaMutationPayloadObjects',
+            'setCommentMetaMutationPayloadObjects',
             ])
         ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
@@ -427,10 +420,10 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
 
         if (
             in_array($fieldName, [
-            'add' . $commentEntityName . 'Metas',
-            'update' . $commentEntityName . 'Metas',
-            'delete' . $commentEntityName . 'Metas',
-            'set' . $commentEntityName . 'Metas',
+            'addCommentMetas',
+            'updateCommentMetas',
+            'deleteCommentMetas',
+            'setCommentMetas',
             ])
         ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
@@ -438,10 +431,10 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
         }
 
         return match ([$fieldName => $fieldArgName]) {
-            ['add' . $commentEntityName . 'Meta' => 'input'],
-            ['update' . $commentEntityName . 'Meta' => 'input'],
-            ['delete' . $commentEntityName . 'Meta' => 'input'],
-            ['set' . $commentEntityName . 'Meta' => 'input']
+            ['addCommentMeta' => 'input'],
+            ['updateCommentMeta' => 'input'],
+            ['deleteCommentMeta' => 'input'],
+            ['setCommentMeta' => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
@@ -449,13 +442,12 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        $commentEntityName = $this->getCommentEntityName();
         if (
             in_array($fieldName, [
-            'add' . $commentEntityName . 'Metas',
-            'update' . $commentEntityName . 'Metas',
-            'delete' . $commentEntityName . 'Metas',
-            'set' . $commentEntityName . 'Metas',
+            'addCommentMetas',
+            'updateCommentMetas',
+            'deleteCommentMetas',
+            'setCommentMetas',
             ])
         ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
@@ -467,33 +459,32 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
-        $commentEntityName = $this->getCommentEntityName();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCommentMetaMutations = $moduleConfiguration->usePayloadableCommentMetaMutations();
         return match ($fieldName) {
-            'add' . $commentEntityName . 'Meta' => $usePayloadableCommentMetaMutations
+            'addCommentMeta' => $usePayloadableCommentMetaMutations
                 ? $this->getPayloadableAddCommentMetaMutationResolver()
                 : $this->getAddCommentMetaMutationResolver(),
-            'add' . $commentEntityName . 'Metas' => $usePayloadableCommentMetaMutations
+            'addCommentMetas' => $usePayloadableCommentMetaMutations
                 ? $this->getPayloadableAddCommentMetaBulkOperationMutationResolver()
                 : $this->getAddCommentMetaBulkOperationMutationResolver(),
-            'update' . $commentEntityName . 'Meta' => $usePayloadableCommentMetaMutations
+            'updateCommentMeta' => $usePayloadableCommentMetaMutations
                 ? $this->getPayloadableUpdateCommentMetaMutationResolver()
                 : $this->getUpdateCommentMetaMutationResolver(),
-            'update' . $commentEntityName . 'Metas' => $usePayloadableCommentMetaMutations
+            'updateCommentMetas' => $usePayloadableCommentMetaMutations
                 ? $this->getPayloadableUpdateCommentMetaBulkOperationMutationResolver()
                 : $this->getUpdateCommentMetaBulkOperationMutationResolver(),
-            'delete' . $commentEntityName . 'Meta' => $usePayloadableCommentMetaMutations
+            'deleteCommentMeta' => $usePayloadableCommentMetaMutations
                 ? $this->getPayloadableDeleteCommentMetaMutationResolver()
                 : $this->getDeleteCommentMetaMutationResolver(),
-            'delete' . $commentEntityName . 'Metas' => $usePayloadableCommentMetaMutations
+            'deleteCommentMetas' => $usePayloadableCommentMetaMutations
                 ? $this->getPayloadableDeleteCommentMetaBulkOperationMutationResolver()
                 : $this->getDeleteCommentMetaBulkOperationMutationResolver(),
-            'set' . $commentEntityName . 'Meta' => $usePayloadableCommentMetaMutations
+            'setCommentMeta' => $usePayloadableCommentMetaMutations
                 ? $this->getPayloadableSetCommentMetaMutationResolver()
                 : $this->getSetCommentMetaMutationResolver(),
-            'set' . $commentEntityName . 'Metas' => $usePayloadableCommentMetaMutations
+            'setCommentMetas' => $usePayloadableCommentMetaMutations
                 ? $this->getPayloadableSetCommentMetaBulkOperationMutationResolver()
                 : $this->getSetCommentMetaBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -527,16 +518,15 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
             return $validationCheckpoints;
         }
 
-        $commentEntityName = $this->getCommentEntityName();
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'add' . $commentEntityName . 'Meta':
-            case 'add' . $commentEntityName . 'Metas':
-            case 'update' . $commentEntityName . 'Meta':
-            case 'update' . $commentEntityName . 'Metas':
-            case 'delete' . $commentEntityName . 'Meta':
-            case 'delete' . $commentEntityName . 'Metas':
-            case 'set' . $commentEntityName . 'Meta':
-            case 'set' . $commentEntityName . 'Metas':
+            case 'addCommentMeta':
+            case 'addCommentMetas':
+            case 'updateCommentMeta':
+            case 'updateCommentMetas':
+            case 'deleteCommentMeta':
+            case 'deleteCommentMetas':
+            case 'setCommentMeta':
+            case 'setCommentMetas':
                 $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
                 break;
         }
@@ -549,13 +539,12 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $commentEntityName = $this->getCommentEntityName();
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
-            case 'add' . $commentEntityName . 'MetaMutationPayloadObjects':
-            case 'update' . $commentEntityName . 'MetaMutationPayloadObjects':
-            case 'delete' . $commentEntityName . 'MetaMutationPayloadObjects':
-            case 'set' . $commentEntityName . 'MetaMutationPayloadObjects':
+            case 'addCommentMetaMutationPayloadObjects':
+            case 'updateCommentMetaMutationPayloadObjects':
+            case 'deleteCommentMetaMutationPayloadObjects':
+            case 'setCommentMetaMutationPayloadObjects':
                 return $this->resolveMutationPayloadObjectsValue(
                     $objectTypeResolver,
                     $fieldDataAccessor,
