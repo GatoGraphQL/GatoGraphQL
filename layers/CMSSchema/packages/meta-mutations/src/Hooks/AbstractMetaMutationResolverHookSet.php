@@ -21,7 +21,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
     use MutateEntityMetaMutationResolverTrait;
     use PayloadableMetaMutationResolverTrait;
 
-    abstract protected function getMetaTypeMutationAPI(): EntityMetaTypeMutationAPIInterface;
+    abstract protected function getEntityMetaTypeMutationAPI(): EntityMetaTypeMutationAPIInterface;
 
     protected function init(): void
     {
@@ -101,7 +101,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
 
         /** @var stdClass */
         $metaEntries = $fieldDataAccessor->getValue(MutationInputProperties::META);
-        $this->getMetaTypeMutationAPI()->setEntityMeta($entityID, (array) $metaEntries);
+        $this->getEntityMetaTypeMutationAPI()->setEntityMeta($entityID, (array) $metaEntries);
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

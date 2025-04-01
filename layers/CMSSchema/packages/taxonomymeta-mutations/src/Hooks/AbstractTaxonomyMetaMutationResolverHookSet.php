@@ -37,7 +37,7 @@ abstract class AbstractTaxonomyMetaMutationResolverHookSet extends AbstractMetaM
         return $this->taxonomyMetaTypeAPI;
     }
 
-    protected function getMetaTypeMutationAPI(): EntityMetaTypeMutationAPIInterface
+    protected function getEntityMetaTypeMutationAPI(): EntityMetaTypeMutationAPIInterface
     {
         return $this->getTaxonomyMetaTypeMutationAPI();
     }

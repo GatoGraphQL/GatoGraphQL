@@ -38,7 +38,7 @@ abstract class AbstractCustomPostMetaMutationResolverHookSet extends AbstractMet
         return $this->customPostMetaTypeAPI;
     }
 
-    protected function getMetaTypeMutationAPI(): EntityMetaTypeMutationAPIInterface
+    protected function getEntityMetaTypeMutationAPI(): EntityMetaTypeMutationAPIInterface
     {
         return $this->getCustomPostMetaTypeMutationAPI();
     }
