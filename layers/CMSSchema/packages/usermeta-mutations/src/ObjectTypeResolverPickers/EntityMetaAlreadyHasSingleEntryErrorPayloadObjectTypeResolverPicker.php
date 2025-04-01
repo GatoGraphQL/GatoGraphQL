@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserMetaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\GenericUserUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\RootCreateGenericUserMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\RootUpdateGenericUserMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\UserUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\RootCreateUserMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\RootUpdateUserMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\UserMetaMutations\TypeResolvers\UnionType\AbstractUserAddMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\UserMetaMutations\TypeResolvers\UnionType\AbstractRootAddUserMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractEntityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolverPicker;
@@ -22,9 +22,9 @@ class EntityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolverPicker extend
         return [
             AbstractRootAddUserMetaMutationErrorPayloadUnionTypeResolver::class,
             AbstractUserAddMetaMutationErrorPayloadUnionTypeResolver::class,
-            RootCreateGenericUserMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdateGenericUserMutationErrorPayloadUnionTypeResolver::class,
-            GenericUserUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreateUserMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdateUserMutationErrorPayloadUnionTypeResolver::class,
+            UserUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

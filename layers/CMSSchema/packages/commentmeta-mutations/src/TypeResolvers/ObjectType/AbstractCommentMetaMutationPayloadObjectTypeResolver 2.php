@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CommentMetaMutations\TypeResolvers\ObjectType;
+
+use PoPCMSSchema\CommentMetaMutations\TypeResolvers\ObjectType\AbstractCommentMetaMutationPayloadObjectTypeResolver;
+
+abstract class AbstractCommentMetaMutationPayloadObjectTypeResolver extends AbstractCommentMetaMutationPayloadObjectTypeResolver
+{
+}

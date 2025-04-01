@@ -7,9 +7,9 @@ namespace PoPCMSSchema\CommentMetaMutations\ObjectTypeResolverPickers;
 use PoPCMSSchema\CommentMetaMutations\TypeResolvers\UnionType\AbstractCommentMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\RootCreateGenericCommentMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\RootUpdateGenericCommentMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\GenericCommentUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\RootCreateCommentMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\RootUpdateCommentMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\CommentUpdateMutationErrorPayloadUnionTypeResolver;
 
 class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker extends AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker
 {
@@ -20,9 +20,9 @@ class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker extends Ab
     {
         return [
             AbstractCommentMetaMutationErrorPayloadUnionTypeResolver::class,
-            RootCreateGenericCommentMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdateGenericCommentMutationErrorPayloadUnionTypeResolver::class,
-            GenericCommentUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreateCommentMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdateCommentMutationErrorPayloadUnionTypeResolver::class,
+            CommentUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
