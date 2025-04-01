@@ -168,6 +168,29 @@
                             "args": []
                         },
                         {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "metaValue",
                             "extensions": {
                                 "isMutation": false,
@@ -555,6 +578,29 @@
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         },
@@ -971,6 +1017,29 @@
                             ]
                         },
                         {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "metaValue",
                             "extensions": {
                                 "isMutation": false,
@@ -1324,6 +1393,29 @@
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         },
@@ -3508,6 +3600,29 @@
                             "args": []
                         },
                         {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "metaValue",
                             "extensions": {
                                 "isMutation": false,
@@ -4009,6 +4124,29 @@
                             "args": []
                         },
                         {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "metaValue",
                             "extensions": {
                                 "isMutation": false,
@@ -4364,6 +4502,29 @@
                             "args": []
                         },
                         {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "metaValue",
                             "extensions": {
                                 "isMutation": false,
@@ -4541,6 +4702,29 @@
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         },
@@ -5477,6 +5661,14 @@
                             ]
                         },
                         {
+                            "name": "pageBuilders",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "pageCount",
                             "extensions": {
                                 "isMutation": false,
@@ -5955,6 +6147,21 @@
                         },
                         {
                             "name": "useGutenbergEditorWithCustomPostType",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "customPostType",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "useWhichPageBuilderWithCustomPostType",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -7329,6 +7536,14 @@
                             ]
                         },
                         {
+                            "name": "pageBuilders",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "pageCount",
                             "extensions": {
                                 "isMutation": false,
@@ -8347,6 +8562,21 @@
                         },
                         {
                             "name": "useGutenbergEditorWithCustomPostType",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "customPostType",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "useWhichPageBuilderWithCustomPostType",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -9948,6 +10178,29 @@
                             "args": []
                         },
                         {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "metaValue",
                             "extensions": {
                                 "isMutation": false,
@@ -11077,6 +11330,18 @@
                     "enumValues": null
                 },
                 {
+                    "name": "AnyScalar",
+                    "extensions": {
+                        "elementName": "AnyScalar",
+                        "namespacedName": "AnyScalar",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "Boolean",
                     "extensions": {
                         "elementName": "Boolean",
@@ -11208,6 +11473,18 @@
                     "enumValues": null
                 },
                 {
+                    "name": "ListValueJSONObject",
+                    "extensions": {
+                        "elementName": "ListValueJSONObject",
+                        "namespacedName": "ListValueJSONObject",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "MenuLocationEnumString",
                     "extensions": {
                         "elementName": "MenuLocationEnumString",
@@ -11228,6 +11505,18 @@
                         "elementName": "Numeric",
                         "namespacedName": "Numeric",
                         "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "PageBuilderProvidersEnumString",
+                    "extensions": {
+                        "elementName": "PageBuilderProvidersEnumString",
+                        "namespacedName": "PageBuilderProvidersEnumString",
+                        "possibleValues": [],
                         "isOneOf": false
                     },
                     "fields": null,
@@ -11842,6 +12131,29 @@
                         "isOneOf": false
                     },
                     "fields": [
+                        {
+                            "name": "meta",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "keys",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "metaKeys",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
                         {
                             "name": "metaValue",
                             "extensions": {
@@ -13793,6 +14105,12 @@
                             }
                         },
                         {
+                            "name": "date",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "excerpt",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -13800,6 +14118,12 @@
                         },
                         {
                             "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "gmtDate",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -14007,6 +14331,12 @@
                             }
                         },
                         {
+                            "name": "date",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "excerpt",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -14014,6 +14344,12 @@
                         },
                         {
                             "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "gmtDate",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -14111,6 +14447,12 @@
                             }
                         },
                         {
+                            "name": "date",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "excerpt",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -14118,6 +14460,12 @@
                         },
                         {
                             "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "gmtDate",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -15459,6 +15807,12 @@
                             }
                         },
                         {
+                            "name": "date",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "excerpt",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -15466,6 +15820,12 @@
                         },
                         {
                             "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "gmtDate",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -15691,6 +16051,12 @@
                             }
                         },
                         {
+                            "name": "date",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "excerpt",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -15698,6 +16064,12 @@
                         },
                         {
                             "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "gmtDate",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -15807,6 +16179,12 @@
                             }
                         },
                         {
+                            "name": "date",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "excerpt",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -15814,6 +16192,12 @@
                         },
                         {
                             "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "gmtDate",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -16730,6 +17114,12 @@
                         },
                         {
                             "name": "pending",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "private",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

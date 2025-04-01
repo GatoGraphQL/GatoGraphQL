@@ -15,6 +15,26 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Plugin constructor signature receives nullable `commitHash` param (#3056)
 - Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 
+## 11.3.0 - DATE
+
+### Added
+
+- Fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` (#3060)
+- Custom post meta mutations (#3067)
+- Category meta mutations (#3063)
+- Tag meta mutations (#3064)
+- Type `ListValueJSONObject` (#3060)
+
+### Improvements
+
+- Made meta field `metaValue` handle any scalar type (previously only `String`) (#3061)
+- Made meta field `metaValues` handle any scalar type (previously only built-in ones), such as `JSONObject` (#3061)
+- Allow to hook inputs into tag/category mutations (#3062)
+
+### Fixed
+
+- Passing a non-`post` CPT to `updatePost` will show an error (#3070)
+
 ## 11.2.0 - 15/03/2025
 
 ### Added

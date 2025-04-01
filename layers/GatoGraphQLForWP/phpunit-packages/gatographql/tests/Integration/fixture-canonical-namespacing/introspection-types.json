@@ -368,6 +368,10 @@
         },
         {
           "kind": "SCALAR",
+          "name": "AnyScalar"
+        },
+        {
+          "kind": "SCALAR",
           "name": "Boolean"
         },
         {
@@ -408,11 +412,19 @@
         },
         {
           "kind": "SCALAR",
+          "name": "ListValueJSONObject"
+        },
+        {
+          "kind": "SCALAR",
           "name": "MenuLocationEnumString"
         },
         {
           "kind": "SCALAR",
           "name": "Numeric"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "PageBuilderProvidersEnumString"
         },
         {
           "kind": "SCALAR",

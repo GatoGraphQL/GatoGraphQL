@@ -1,5 +1,7 @@
 {
   post(by: { id: 1 }) {
     editLast: metaValue(key: "_edit_last")
+    meta(keys: ["_edit_last"])
+    metaKeys
   }
 }

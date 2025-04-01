@@ -19,11 +19,53 @@
         "field": "lastName: metaValue(key: \"last_name\")",
         "code": "PoPCMSSchema\/Meta@e1"
       }
+    },
+    {
+      "message": "There is no key with name 'last_name'",
+      "locations": [
+        {
+          "line": 4,
+          "column": 10
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(keys: [\"last_name\", \"nickname\", \"first_name\", \"rich_editing\", \"wp_capabilities\"])",
+          "meta(keys: [\"last_name\", \"nickname\", \"first_name\", \"rich_editing\", \"wp_capabilities\"])",
+          "user(by: {id: 1}) { ... }",
+          "query { ... }"
+        ],
+        "type": "User",
+        "field": "meta(keys: [\"last_name\", \"nickname\", \"first_name\", \"rich_editing\", \"wp_capabilities\"])",
+        "code": "PoPCMSSchema\/Meta@e1"
+      }
     }
   ],
   "data": {
     "user": {
-      "lastName": null
+      "lastName": null,
+      "meta": null,
+      "metaKeys": [
+        "nickname",
+        "first_name",
+        "description",
+        "rich_editing",
+        "syntax_highlighting",
+        "comment_shortcuts",
+        "admin_color",
+        "use_ssl",
+        "show_admin_bar_front",
+        "locale",
+        "wp_capabilities",
+        "wp_user_level",
+        "dismissed_wp_pointers",
+        "show_welcome_panel",
+        "_application_passwords",
+        "app_password",
+        "session_tokens",
+        "wp_dashboard_quick_press_last_post_id",
+        "community-events-location"
+      ]
     }
   }
 }

@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface:
+        class: \PoPCMSSchema\CustomPostMetaMutationsWP\TypeAPIs\CustomPostMetaTypeMutationAPI
+

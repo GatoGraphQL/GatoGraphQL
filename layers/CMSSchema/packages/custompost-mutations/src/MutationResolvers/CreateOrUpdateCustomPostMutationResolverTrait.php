@@ -26,24 +26,6 @@ trait CreateOrUpdateCustomPostMutationResolverTrait
     abstract protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface;
     abstract protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface;
 
-    /**
-     * Check that the user is logged-in
-     */
-    protected function validateIsUserLoggedIn(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
-        if ($errorFeedbackItemResolution !== null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $errorFeedbackItemResolution,
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
-    }
-
     protected function validateCanLoggedInUserEditCustomPosts(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -127,6 +109,29 @@ trait CreateOrUpdateCustomPostMutationResolverTrait
                         MutationErrorFeedbackItemProvider::E7,
                         [
                             $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateIsCustomPostType(
+        string|int $customPostID,
+        string|int $customPostType,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $customPostType) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E5,
+                        [
+                            $customPostID,
+                            $customPostType,
                         ]
                     ),
                     $fieldDataAccessor->getField(),

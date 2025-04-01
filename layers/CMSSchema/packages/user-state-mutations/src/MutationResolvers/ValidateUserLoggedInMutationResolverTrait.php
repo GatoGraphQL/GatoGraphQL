@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\Root\App;
 use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\App;
 
 trait ValidateUserLoggedInMutationResolverTrait
 {
@@ -25,6 +28,25 @@ trait ValidateUserLoggedInMutationResolverTrait
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E1,
+        );
+    }
+
+    /**
+     * Check that the user is logged-in
+     */
+    protected function validateIsUserLoggedIn(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution === null) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                $errorFeedbackItemResolution,
+                $fieldDataAccessor->getField(),
+            )
         );
     }
 }

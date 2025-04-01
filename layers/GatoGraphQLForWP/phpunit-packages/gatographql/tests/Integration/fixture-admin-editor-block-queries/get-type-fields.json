@@ -60,6 +60,12 @@
               "name": "karma"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -210,6 +216,12 @@
               "name": "id"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -311,6 +323,12 @@
               "name": "isStatus"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -403,6 +421,12 @@
             },
             {
               "name": "id"
+            },
+            {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
             },
             {
               "name": "metaValue"
@@ -990,6 +1014,12 @@
               "name": "menuOrder"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -1120,6 +1150,12 @@
               "name": "isSticky"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -1203,6 +1239,12 @@
               "name": "id"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -1257,6 +1299,12 @@
             },
             {
               "name": "id"
+            },
+            {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
             },
             {
               "name": "metaValue"
@@ -1426,6 +1474,9 @@
               "name": "page"
             },
             {
+              "name": "pageBuilders"
+            },
+            {
               "name": "pageCount"
             },
             {
@@ -1496,6 +1547,9 @@
             },
             {
               "name": "useGutenbergEditorWithCustomPostType"
+            },
+            {
+              "name": "useWhichPageBuilderWithCustomPostType"
             },
             {
               "name": "user"
@@ -1728,6 +1782,9 @@
               "name": "page"
             },
             {
+              "name": "pageBuilders"
+            },
+            {
               "name": "pageCount"
             },
             {
@@ -1888,6 +1945,9 @@
             },
             {
               "name": "useGutenbergEditorWithCustomPostType"
+            },
+            {
+              "name": "useWhichPageBuilderWithCustomPostType"
             },
             {
               "name": "user"
@@ -2553,6 +2613,12 @@
               "name": "locale"
             },
             {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
+            {
               "name": "metaValue"
             },
             {
@@ -3010,6 +3076,13 @@
           "description": "Wildcard type representing any of GraphQL's built-in types (String, Int, Boolean, Float or ID)"
         },
         {
+          "name": "AnyScalar",
+          "namespacedName": "AnyScalar",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Wildcard type representing any of GraphQL's scalar types, including built-in types (String, Int, Boolean, Float or ID) and custom types"
+        },
+        {
           "name": "Boolean",
           "namespacedName": "Boolean",
           "fields": null,
@@ -3080,6 +3153,13 @@
           "description": "Custom scalar representing a JSON Object of unrestricted shape"
         },
         {
+          "name": "ListValueJSONObject",
+          "namespacedName": "ListValueJSONObject",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Custom scalar representing a JSON Object where values are lists (of anything)"
+        },
+        {
           "name": "MenuLocationEnumString",
           "namespacedName": "MenuLocationEnumString",
           "fields": null,
@@ -3092,6 +3172,13 @@
           "fields": null,
           "kind": "SCALAR",
           "description": "Wildcard type representing any of the numeric types (Int or Float)"
+        },
+        {
+          "name": "PageBuilderProvidersEnumString",
+          "namespacedName": "PageBuilderProvidersEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Possible values: `\"\"`."
         },
         {
           "name": "PostCategoryTaxonomyEnumString",
@@ -3336,6 +3423,12 @@
           "name": "WithMeta",
           "namespacedName": "WithMeta",
           "fields": [
+            {
+              "name": "meta"
+            },
+            {
+              "name": "metaKeys"
+            },
             {
               "name": "metaValue"
             },

@@ -1,0 +1,240 @@
+---
+description: Core Gato GraphQL architectural patterns and development guidelines. Use when working with core plugin functionality.
+globs: *php
+alwaysApply: false
+---
+# Core Development Rules
+
+## Architecture Principles
+- Maintain backward compatibility
+- Follow WordPress coding standards
+- Use dependency injection where possible
+- Keep classes focused and single-purpose
+- Use interfaces for standardization
+
+## Extending the GraphQL Schema - Source code examples
+
+### GraphQL spec elements
+
+#### Type Resolver
+
+- `User` type: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/TypeResolvers/ObjectType/UserObjectTypeResolver.php`
+
+#### Field Resolver
+
+- Fields `name`, `displayName`, and others, for the `User` type: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php`
+
+#### Mutation Resolver
+
+- Mutation `createPost`: `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+- Mutation resolvers for `createPost`:
+  - `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/MutationResolvers/CreatePostMutationResolver.php`
+  - `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/MutationResolvers/PayloadableCreatePostMutationResolver.php`
+
+##### Bulk Mutation Resolver
+
+- Bulk mutation `createPosts`: `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+- Bulk mutation resolvers for `createPosts`:
+  - `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/MutationResolvers/CreatePostBulkOperationMutationResolver.php`
+  - `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/MutationResolvers/PayloadableCreatePostBulkOperationMutationResolver.php`
+
+#### Custom Scalar Resolver
+
+- Custom scalar `Email`: `submodules/GatoGraphQL/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType/EmailScalarTypeResolver.php`
+
+#### Enum Resolver
+
+- Enum `CommentTypeEnum`: `submodules/GatoGraphQL/layers/CMSSchema/packages/comments/src/TypeResolvers/EnumType/CommentTypeEnumTypeResolver.php`
+
+#### Interface Resolver
+
+- Interface `CustomPostInterfaceTypeResolver`: `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/TypeResolvers/InterfaceType/CustomPostInterfaceTypeResolver.php`
+
+#### Union Type-Resolver
+
+- Union type `CustomPostUnionTypeResolver`: `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/TypeResolvers/UnionType/CustomPostUnionTypeResolver.php`
+
+### Resolvers to add Object Types to Union Types
+
+- Adding `GenericCustomPost` to `CustomPostUnion`: `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/ObjectTypeResolverPickers/CustomPostUnionGenericCustomPostObjectTypeResolverPicker.php`
+
+#### Input Object Resolver
+
+- Input Object `UserSortInput`: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserSortInputObjectTypeResolver.php`
+
+#### Oneof Input Object Resolver
+
+- Oneof Input Object `UserByInput`: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/TypeResolvers/InputObjectType/UserByOneofInputObjectTypeResolver.php`
+
+#### Object DataLoader Resolver
+
+- Resolving `User` objects: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/RelationalTypeDataLoaders/ObjectType/UserObjectTypeDataLoader.php`
+
+#### Union DataLoader Resolver
+
+- Resolving `CustomPost` unions: `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/RelationalTypeDataLoaders/ObjectType/CustomPostObjectTypeDataLoader.php`
+
+#### Directive Resolver
+
+- Directive `@skip`: `submodules/GatoGraphQL/layers/Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php`
+
+### Custom Gato GraphQL elements
+
+#### Global Field Resolver
+
+- Field `__typename`: `submodules/GatoGraphQL/layers/GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/GlobalObjectTypeFieldResolver.php`
+
+#### Enum String Resolver
+
+- Enum String `CustomPostEnumString` `submodules/GatoGraphQL/layers/CMSSchema/packages/customposts/src/TypeResolvers/EnumType/CustomPostEnumStringScalarTypeResolver.php`
+
+#### Error Payload Union Type Resolver
+
+- Error Payload Union Type `RootAddCommentToCustomPostMutationErrorPayloadUnion`: `submodules/GatoGraphQL/layers/CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver.php`
+
+#### Nested Mutations Resolver
+
+- Mutation `Post.update`: `submodules/GatoGraphQL/layers/CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php`
+
+#### Field Arguments to filter data
+
+- Field `Root.comments`: `submodules/GatoGraphQL/layers/CMSSchema/packages/comments/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php`
+
+#### Custom Post Type - Type Resolver
+
+- Custom Post Type `Page`: `submodules/GatoGraphQL/layers/CMSSchema/packages/pages/src/TypeResolvers/ObjectType/PageObjectTypeResolver.php`
+
+#### Custom Post Type - Field Resolver
+
+- Field `CustomPost.author`: `submodules/GatoGraphQL/layers/CMSSchema/packages/users/src/ConditionalOnModule/CustomPosts/FieldResolvers/ObjectType/CustomPostObjectTypeFieldResolver.php`
+
+<!-- ## Directory Structure
+```
+wp-fusion/
+├── includes/
+│   ├── admin/      # Admin interfaces
+│   ├── crm/        # CRM handlers
+│   ├── integrations/ # Plugin integrations
+│   └── class-*.php # Core classes
+├── assets/         # JS, CSS, images
+└── tests/          # PHPUnit tests
+```
+
+## Coding Patterns
+```php
+// Singleton pattern
+class WPF_Example {
+    private static $instance;
+
+    public static function instance() {
+        if ( ! isset( self::$instance ) ) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+}
+
+// Hook registration
+class WPF_Feature {
+    public function __construct() {
+        add_action( 'init', array( $this, 'init' ) );
+        add_filter( 'wpf_example', array( $this, 'filter_example' ) );
+    }
+}
+
+/**
+ * Handles the HTTP Response
+ *
+ * @since  x.x.x
+ *
+ * @param  HTTP_Response $response The HTTP response data.
+ * @return HTTP_Response|WP_Error Response on success, error on failure.
+ */
+public function handle_response( $response ) {
+    if ( is_wp_error( $response ) ) {
+        wpf_log( 'error', 0, 'Error: ' . $response->get_error_message() );
+        return false;
+    }
+
+    $body = json_decode( wp_remote_retrieve_body( $response ) );
+    
+    if ( ! $body ) {
+        wpf_log( 'error', 0, 'Invalid response: ' . wp_remote_retrieve_body( $response ) );
+        return false;
+    }
+
+    return $body;
+}
+``` -->
+
+## Performance Guidelines
+- Cache expensive operations
+- Use transients appropriately
+- Batch process large operations
+- Minimize database queries
+- Use WordPress object cache
+
+## Security Requirements
+- Validate and sanitize all inputs
+- Use prepared SQL statements
+- Check capabilities and nonces
+- Escape output
+- Follow WordPress security best practices
+
+<!-- ## Common Functions
+```php
+// Logging
+wpf_log( 'notice', $user_id, $message );
+
+// Options
+wpf_get_option( 'option_name' );
+
+// User meta
+wp_fusion()->user->get_tags( $user_id );
+wp_fusion()->user->apply_tags( $tags, $user_id );
+
+// CRM operations
+wp_fusion()->crm->add_contact( $data );
+``` -->
+
+## Error Handling
+- Use `wp_error` for WordPress-style errors
+- Log meaningful error messages
+- Provide user-friendly notices
+- Handle API failures gracefully
+- Implement retry mechanisms
+
+## Documentation Requirements
+- PHPDoc blocks for classes/methods
+- Inline comments for complex logic
+- Document all filters/actions
+- Update `CHANGELOG`
+<!-- - Keep `README.md` current -->
+
+<!-- ## Versioning & @since Tags
+- Every new class must include a `@since x.x.x` tag
+- Every new method must include a `@since x.x.x` tag
+- Every new property must include a `@since x.x.x` tag
+- Use `x.x.x` placeholder which will be replaced at release time
+- Example format:
+```php
+/**
+ * The plugin name for WP Fusion's module tracking.
+ *
+ * @since x.x.x
+ * @var   string
+ */
+public $name = 'Example Plugin';
+
+/**
+ * Handles the form submission.
+ *
+ * @since  x.x.x
+ *
+ * @param  array $data The form data.
+ * @return bool  True on success.
+ */
+public function handle_form( $data ) {
+    // Method implementation
+}
+```  -->

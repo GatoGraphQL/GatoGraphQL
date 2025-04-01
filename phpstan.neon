@@ -19,6 +19,8 @@ includes:
     - layers/CMSSchema/packages/categories-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/category-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/category-mutations-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/categorymeta-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/categorymeta-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/comment-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/comment-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/commentmeta/phpstan.neon.dist
@@ -32,10 +34,12 @@ includes:
     - layers/CMSSchema/packages/custompost-categories-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-category-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-category-mutations-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompost-categorymeta-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-tag-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-tag-mutations-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompost-tagmeta-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-tags-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-user-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/custompost-user-mutations-wp/phpstan.neon.dist
@@ -45,6 +49,8 @@ includes:
     - layers/CMSSchema/packages/custompostmedia-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompostmeta/phpstan.neon.dist
     - layers/WPSchema/packages/custompostmeta/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompostmeta-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompostmeta-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/custompostmeta-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/customposts/phpstan.neon.dist
     - layers/WPSchema/packages/customposts/phpstan.neon.dist
@@ -83,6 +89,7 @@ includes:
     - layers/CMSSchema/packages/menus-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/meta/phpstan.neon.dist
     - layers/WPSchema/packages/meta/phpstan.neon.dist
+    - layers/CMSSchema/packages/meta-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/metaquery-wp/phpstan.neon.dist
     - layers/WPSchema/packages/multisite/phpstan.neon.dist
     - layers/CMSSchema/packages/page-mutations/phpstan.neon.dist
@@ -96,11 +103,14 @@ includes:
     - layers/CMSSchema/packages/post-categories/phpstan.neon.dist
     - layers/CMSSchema/packages/post-categories-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/post-category-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/post-categorymeta-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/post-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/post-tag-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/post-tagmeta-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/post-tags/phpstan.neon.dist
     - layers/CMSSchema/packages/post-tags-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/postmedia-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/postmeta-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/posts/phpstan.neon.dist
     - layers/WPSchema/packages/posts/phpstan.neon.dist
     - layers/CMSSchema/packages/posts-wp/phpstan.neon.dist
@@ -118,6 +128,8 @@ includes:
     - layers/WPSchema/packages/site/phpstan.neon.dist
     - layers/CMSSchema/packages/tag-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/tag-mutations-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/tagmeta-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/tagmeta-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/tags/phpstan.neon.dist
     - layers/CMSSchema/packages/tags-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomies/phpstan.neon.dist
@@ -126,6 +138,8 @@ includes:
     - layers/CMSSchema/packages/taxonomy-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomymeta/phpstan.neon.dist
     - layers/WPSchema/packages/taxonomymeta/phpstan.neon.dist
+    - layers/CMSSchema/packages/taxonomymeta-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/taxonomymeta-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomymeta-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomyquery/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomyquery-wp/phpstan.neon.dist

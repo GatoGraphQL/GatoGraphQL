@@ -217,6 +217,17 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking change: Plugin constructor signature receives nullable `commitHash` param (#3056)
 * Breaking change: Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 
+= 11.3.0 =
+* Added fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` (#3060)
+* Added custom post meta mutations (#3067)
+* Added category meta mutations (#3063)
+* Added tag meta mutations (#3064)
+* Added type `ListValueJSONObject` (#3060)
+* Made meta field `metaValue` handle any scalar type (previously only `String`) (#3061)
+* Made meta field `metaValues` handle any scalar type (previously only built-in ones), such as `JSONObject` (#3061)
+* Allow to hook inputs into tag/category mutations (#3062)
+* Fixed: Passing a non-`post` CPT to `updatePost` will show an error (#3070)
+
 = 11.2.0 =
 * Support fetching Page Builders data in the GraphQL schema (#3051)
 * Added documentation for new field `_objectMerge`, from the **Schema Functions** extension (#3050)
