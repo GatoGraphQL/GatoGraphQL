@@ -47,8 +47,10 @@ abstract class AbstractUserMetaMutationResolverHookSet extends AbstractMetaMutat
     {
         return $this->getUserMetaTypeAPI();
     }
-    protected function getErrorPayloadHookName(): string
-    {
-        return UserCRUDHookNames::ERROR_PAYLOAD;
-    }
+
+    // @todo Re-enable when adding User Mutations
+    // protected function getErrorPayloadHookName(): string
+    // {
+    //     return UserCRUDHookNames::ERROR_PAYLOAD;
+    // }
 }
