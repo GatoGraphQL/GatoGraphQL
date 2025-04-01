@@ -11,14 +11,14 @@ class CommentMetaMutationResolverHookSet extends AbstractCommentMetaMutationReso
 {
     protected function getValidateCreateHookName(): string
     {
-        return CommentCRUDHookNames::VALIDATE_CREATE;
+        return CommentCRUDHookNames::VALIDATE_ADD_COMMENT;
     }
-    protected function getValidateUpdateHookName(): string
+    protected function getValidateUpdateHookName(): ?string
     {
-        return CommentCRUDHookNames::VALIDATE_UPDATE;
+        return null;
     }
     protected function getExecuteCreateOrUpdateHookName(): string
     {
-        return CommentCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
+        return CommentCRUDHookNames::EXECUTE_ADD_COMMENT;
     }
 }

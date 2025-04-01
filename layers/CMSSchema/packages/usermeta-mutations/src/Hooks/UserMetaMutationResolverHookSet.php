@@ -13,7 +13,7 @@ class UserMetaMutationResolverHookSet extends AbstractUserMetaMutationResolverHo
     {
         return UserCRUDHookNames::VALIDATE_CREATE;
     }
-    protected function getValidateUpdateHookName(): string
+    protected function getValidateUpdateHookName(): ?string
     {
         return UserCRUDHookNames::VALIDATE_UPDATE;
     }

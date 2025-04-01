@@ -13,7 +13,7 @@ class PostMetaMutationResolverHookSet extends AbstractCustomPostMetaMutationReso
     {
         return PostCRUDHookNames::VALIDATE_CREATE;
     }
-    protected function getValidateUpdateHookName(): string
+    protected function getValidateUpdateHookName(): ?string
     {
         return PostCRUDHookNames::VALIDATE_UPDATE;
     }
