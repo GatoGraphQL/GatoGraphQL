@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMetaMutations\SchemaHooks;
 
-use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\CreateCommentInputObjectTypeResolverInterface;
-use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\UpdateCommentInputObjectTypeResolverInterface;
+use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\AddCommentToCustomPostInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
 trait CommentMutationResolverHookSetTrait
@@ -13,7 +12,6 @@ trait CommentMutationResolverHookSetTrait
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        return $inputObjectTypeResolver instanceof CreateCommentInputObjectTypeResolverInterface
-            || $inputObjectTypeResolver instanceof UpdateCommentInputObjectTypeResolverInterface;
+        return $inputObjectTypeResolver instanceof AddCommentToCustomPostInputObjectTypeResolverInterface;
     }
 }
