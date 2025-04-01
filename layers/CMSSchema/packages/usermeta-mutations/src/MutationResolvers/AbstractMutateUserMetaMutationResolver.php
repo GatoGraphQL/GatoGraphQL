@@ -9,7 +9,6 @@ use PoPCMSSchema\UserMetaMutations\Exception\UserMetaCRUDMutationException;
 use PoPCMSSchema\UserMetaMutations\TypeAPIs\UserMetaTypeMutationAPIInterface;
 use PoPCMSSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 use PoPCMSSchema\UserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\UserMutations\TypeAPIs\UserTypeMutationAPIInterface;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
@@ -31,7 +30,6 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
-    private ?UserTypeMutationAPIInterface $userTypeMutationAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
     final protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
@@ -78,15 +76,6 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
             $this->userRoleTypeAPI = $userRoleTypeAPI;
         }
         return $this->userRoleTypeAPI;
-    }
-    final protected function getUserTypeMutationAPI(): UserTypeMutationAPIInterface
-    {
-        if ($this->userTypeMutationAPI === null) {
-            /** @var UserTypeMutationAPIInterface */
-            $userTypeMutationAPI = $this->instanceManager->getInstance(UserTypeMutationAPIInterface::class);
-            $this->userTypeMutationAPI = $userTypeMutationAPI;
-        }
-        return $this->userTypeMutationAPI;
     }
     final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
     {
