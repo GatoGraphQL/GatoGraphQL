@@ -196,7 +196,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
         $customPostType = $this->getCustomPostType();
         if ($customPostType !== '') {
-            $this->validateIsExpectedCustomPostType(
+            $this->validateIsCustomPostType(
                 $customPostID,
                 $customPostType,
                 $fieldDataAccessor,

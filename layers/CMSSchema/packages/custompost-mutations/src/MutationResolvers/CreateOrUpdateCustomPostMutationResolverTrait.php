@@ -117,7 +117,7 @@ trait CreateOrUpdateCustomPostMutationResolverTrait
         }
     }
 
-    protected function validateIsExpectedCustomPostType(
+    protected function validateIsCustomPostType(
         string|int $customPostID,
         string|int $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
