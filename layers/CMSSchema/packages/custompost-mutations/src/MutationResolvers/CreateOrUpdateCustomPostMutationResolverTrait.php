@@ -117,6 +117,29 @@ trait CreateOrUpdateCustomPostMutationResolverTrait
         }
     }
 
+    protected function validateIsCustomPostType(
+        string|int $customPostID,
+        string|int $customPostType,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $customPostType) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E5,
+                        [
+                            $customPostID,
+                            $customPostType,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
     protected function validateCanLoggedInUserEditCustomPost(
         string|int $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
