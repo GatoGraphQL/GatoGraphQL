@@ -27,13 +27,13 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
 
     protected function getEntityMetaCRUDMutationException(WP_Error|string $error): EntityMetaCRUDMutationException
     {
-        $customPostMetaCRUDMutationExceptionClass = $this->getEntityMetaCRUDMutationExceptionClass();
+        $entityMetaCRUDMutationExceptionClass = $this->getEntityMetaCRUDMutationExceptionClass();
         if (is_string($error)) {
-            return new $customPostMetaCRUDMutationExceptionClass($error);
+            return new $entityMetaCRUDMutationExceptionClass($error);
         }
         /** @var WP_Error */
         $wpError = $error;
-        return new $customPostMetaCRUDMutationExceptionClass(
+        return new $entityMetaCRUDMutationExceptionClass(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
             $this->getWPErrorData($wpError),
