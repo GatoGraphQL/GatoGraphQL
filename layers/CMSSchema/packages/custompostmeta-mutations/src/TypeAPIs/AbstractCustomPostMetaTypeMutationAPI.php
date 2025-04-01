@@ -6,9 +6,9 @@ namespace PoPCMSSchema\CustomPostMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
-use PoP\Root\Services\AbstractBasicService;
+use PoPCMSSchema\MetaMutations\TypeAPIs\AbstractEntityMetaTypeMutationAPI;
 
-abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractBasicService implements CustomPostMetaTypeMutationAPIInterface
+abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractEntityMetaTypeMutationAPI implements CustomPostMetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]|null> $entries
