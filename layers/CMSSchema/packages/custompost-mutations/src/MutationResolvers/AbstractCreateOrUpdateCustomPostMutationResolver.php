@@ -194,8 +194,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
-        $customPostType = $this->getExpectedCustomPostType();
-        if ($customPostType !== null) {
+        $customPostType = $this->getCustomPostType();
+        if ($customPostType !== '') {
             $this->validateIsExpectedCustomPostType(
                 $customPostID,
                 $customPostType,
@@ -226,11 +226,6 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-    }
-
-    protected function getExpectedCustomPostType(): ?string
-    {
-        return null;
     }
 
     protected function triggerValidateUpdateHook(
