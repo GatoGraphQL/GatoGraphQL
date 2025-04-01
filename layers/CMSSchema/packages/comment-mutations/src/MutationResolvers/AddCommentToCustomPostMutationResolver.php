@@ -89,7 +89,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-        
+
         $field = $fieldDataAccessor->getField();
 
         // Check that the user is logged-in
@@ -307,7 +307,11 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
             $comment_data['customPostID'] = $this->getCommentTypeAPI()->getCommentPostID($parentComment);
         }
 
-        return $comment_data;
+        return App::applyFilters(
+            CommentCRUDHookNames::GET_ADD_COMMENT_DATA,
+            $comment_data,
+            $fieldDataAccessor,
+        );
     }
 
     /**
