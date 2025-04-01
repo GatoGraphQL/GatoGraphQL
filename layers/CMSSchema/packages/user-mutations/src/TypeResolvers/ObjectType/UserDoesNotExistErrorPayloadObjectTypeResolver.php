@@ -29,7 +29,7 @@ class UserDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPayloa
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested media item does not exist"', 'user-mutations');
+        return $this->__('Error payload for: "The user does not exist"', 'user-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
