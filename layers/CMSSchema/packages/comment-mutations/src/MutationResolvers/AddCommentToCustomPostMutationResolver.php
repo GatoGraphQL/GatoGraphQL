@@ -22,7 +22,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\CommentMutations\Constants\HookNames;
+use PoPCMSSchema\CommentMutations\Constants\CommentCRUDHookNames;
 use stdClass;
 
 /**
@@ -237,7 +237,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
     protected function additionals(string|int $comment_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction(HookNames::EXECUTE_ADD_COMMENT, $comment_id, $fieldDataAccessor);
+        App::doAction(CommentCRUDHookNames::EXECUTE_ADD_COMMENT, $comment_id, $fieldDataAccessor);
     }
 
     /**
