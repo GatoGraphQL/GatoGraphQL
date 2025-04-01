@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostUserMutationsWP;
+namespace PoPCMSSchema\UserMutationsWP;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
@@ -15,7 +15,7 @@ class Module extends AbstractModule
     public function getSatisfiedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostUserMutations\Module::class,
+            \PoPCMSSchema\UserMutations\Module::class,
         ];
     }
 
@@ -25,9 +25,8 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostUserMutations\Module::class,
-            \PoPCMSSchema\CustomPostMutationsWP\Module::class,
-            \PoPCMSSchema\UserMutationsWP\Module::class,
+            \PoPCMSSchema\UserMutations\Module::class,
+            \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }
 

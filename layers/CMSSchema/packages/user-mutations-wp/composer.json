@@ -1,5 +1,5 @@
 {
-    "name": "pop-cms-schema/custompost-user-mutations-wp",
+    "name": "pop-cms-schema/user-mutations-wp",
     "conflict": {
         "pop-api/api-rest": "<11.2.0",
         "pop-api/api-graphql": "<11.2.0",
@@ -16,7 +16,6 @@
         "pop-cms-schema/pagemedia-mutations": "<11.2.0",
         "pop-cms-schema/users-wp": "<11.2.0",
         "pop-cms-schema/custompostmeta-wp": "<11.2.0",
-        "pop-cms-schema/custompost-mutations": "<11.2.0",
         "pop-cms-schema/post-tag-mutations": "<11.2.0",
         "pop-cms-schema/tags-wp": "<11.2.0",
         "pop-cms-schema/posts": "<11.2.0",
@@ -24,7 +23,6 @@
         "pop-cms-schema/custompost-category-mutations": "<11.2.0",
         "pop-cms-schema/taxonomymeta": "<11.2.0",
         "pop-cms-schema/media-wp": "<11.2.0",
-        "pop-cms-schema/user-roles-wp": "<11.2.0",
         "pop-cms-schema/commentmeta-wp": "<11.2.0",
         "pop-cms-schema/taxonomyquery": "<11.2.0",
         "pop-cms-schema/user-state-mutations": "<11.2.0",
@@ -34,6 +32,7 @@
         "pop-cms-schema/post-categories-wp": "<11.2.0",
         "pop-cms-schema/custompostmedia": "<11.2.0",
         "pop-cms-schema/post-mutations": "<11.2.0",
+        "pop-cms-schema/user-state-mutations-wp": "<1.5.5",
         "pop-cms-schema/user-roles": "<11.2.0",
         "pop-cms-schema/usermeta": "<11.2.0",
         "pop-cms-schema/queriedobject-wp": "<11.2.0",
@@ -53,7 +52,7 @@
         "pop-cms-schema/settings-wp": "<11.2.0",
         "pop-cms-schema/users": "<11.2.0",
         "pop-cms-schema/queriedobject": "<11.2.0",
-        "pop-cms-schema/customposts-wp": "<11.2.0",
+        "pop-cms-schema/custompost-user-mutations": "<11.2.0",
         "pop-cms-schema/taxonomies-wp": "<11.2.0",
         "pop-cms-schema/custompostmedia-wp": "<11.2.0",
         "pop-cms-schema/menus": "<11.2.0",
@@ -69,7 +68,7 @@
         "pop-cms-schema/categories": "<11.2.0",
         "pop-cms-schema/taxonomies": "<11.2.0",
         "pop-cms-schema/custompost-tag-mutations": "<11.2.0",
-        "pop-cms-schema/user-state-wp": "<11.2.0",
+        "pop-cms-schema/custompost-user-mutations-wp": "<11.2.0",
         "pop-cms-schema/media": "<11.2.0",
         "pop-cms-schema/post-tags": "<11.2.0",
         "getpop/loosecontracts": "<11.2.0",
@@ -125,6 +124,7 @@
         "pop-wp-schema/media": "<11.2.0",
         "pop-cms-schema/media-mutations-wp": "<11.2.0",
         "pop-cms-schema/media-mutations": "<11.2.0",
+        "pop-cms-schema/user-state-wp": "<11.2.0",
         "pop-cms-schema/page-mutations": "<11.2.0",
         "pop-cms-schema/page-mutations-wp": "<11.2.0",
         "pop-wp-schema/pages": "<11.2.0",
@@ -146,9 +146,9 @@
         "pop-wp-schema/pagebuilder": "<11.2.0"
     },
     "type": "library",
-    "description": "Implementation for WordPress of contracts from package \"Custom Post User Mutations\"",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "custompost-user-mutations-wp"],
-    "homepage": "https://github.com/PoPCMSSchema/custompost-user-mutations-wp",
+    "description": "Implementation for WordPress of contracts from package \"User Mutations\"",
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "user-mutations-wp"],
+    "homepage": "https://github.com/PoPCMSSchema/user-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -159,9 +159,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/custompost-mutations-wp": "^11.3",
-        "pop-cms-schema/custompost-user-mutations": "^11.3",
-        "pop-cms-schema/user-mutations-wp": "^11.3"
+        "pop-cms-schema/user-mutations": "^11.3",
+        "pop-cms-schema/user-state-mutations-wp": "^11.3"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
@@ -174,12 +173,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPCMSSchema\\CustomPostUserMutationsWP\\": "src"
+            "PoPCMSSchema\\UserMutationsWP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPCMSSchema\\CustomPostUserMutationsWP\\": "tests"
+            "PoPCMSSchema\\UserMutationsWP\\": "tests"
         }
     },
     "scripts": {
