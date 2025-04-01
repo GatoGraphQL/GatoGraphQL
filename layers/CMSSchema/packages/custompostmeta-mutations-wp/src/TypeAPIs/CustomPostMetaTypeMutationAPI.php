@@ -79,14 +79,6 @@ class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAP
     }
 
     /**
-     * @phpstan-return class-string<CustomPostMetaCRUDMutationException>
-     */
-    protected function getEntityMetaCRUDMutationExceptionClass(): string
-    {
-        return CustomPostMetaCRUDMutationException::class;
-    }
-
-    /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */

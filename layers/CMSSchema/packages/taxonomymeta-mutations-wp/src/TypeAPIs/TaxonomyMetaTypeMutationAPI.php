@@ -79,14 +79,6 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     }
 
     /**
-     * @phpstan-return class-string<EntityMetaCRUDMutationException>
-     */
-    protected function getEntityMetaCRUDMutationExceptionClass(): string
-    {
-        return TaxonomyTermMetaCRUDMutationException::class;
-    }
-
-    /**
      * @return string|int|bool the ID of the created meta entry if it didn't exist, or `true` if it did exist
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */

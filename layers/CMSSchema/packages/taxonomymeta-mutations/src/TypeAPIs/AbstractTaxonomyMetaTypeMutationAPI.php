@@ -11,6 +11,14 @@ use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInter
 abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractEntityMetaTypeMutationAPI implements TaxonomyMetaTypeMutationAPIInterface
 {
     /**
+     * @phpstan-return class-string<EntityMetaCRUDMutationException>
+     */
+    protected function getEntityMetaCRUDMutationExceptionClass(): string
+    {
+        return TaxonomyTermMetaCRUDMutationException::class;
+    }
+
+    /**
      * @param array<string,mixed[]|null> $entries
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
      */
