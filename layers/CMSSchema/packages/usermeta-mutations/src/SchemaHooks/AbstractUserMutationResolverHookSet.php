@@ -62,12 +62,15 @@ abstract class AbstractUserMutationResolverHookSet extends AbstractHookSet
     }
 
     // @todo Re-enable when adding User Mutations
-    // protected function isInputObjectTypeResolver(
-    //     InputObjectTypeResolverInterface $inputObjectTypeResolver,
-    // ): bool {
-    //     return $inputObjectTypeResolver instanceof CreateUserInputObjectTypeResolverInterface
-    //         || $inputObjectTypeResolver instanceof UpdateUserInputObjectTypeResolverInterface;
-    // }
+    protected function isInputObjectTypeResolver(
+        InputObjectTypeResolverInterface $inputObjectTypeResolver,
+    ): bool {
+        // @todo Remove temp code when adding User Mutations
+        return false;
+        // @todo Re-enable when adding User Mutations
+        // return $inputObjectTypeResolver instanceof CreateUserInputObjectTypeResolverInterface
+        //     || $inputObjectTypeResolver instanceof UpdateUserInputObjectTypeResolverInterface;
+    }
 
     public function maybeAddInputFieldDescription(
         ?string $inputFieldDescription,
