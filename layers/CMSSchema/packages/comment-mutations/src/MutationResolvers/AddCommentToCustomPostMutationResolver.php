@@ -88,6 +88,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        
         $field = $fieldDataAccessor->getField();
 
         // Check that the user is logged-in
@@ -225,6 +227,26 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
                 )
             );
         }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->triggerValidateAddCommentHook(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function triggerValidateAddCommentHook(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        App::doAction(
+            CommentCRUDHookNames::VALIDATE_ADD_COMMENT,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
