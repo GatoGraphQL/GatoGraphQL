@@ -8,12 +8,15 @@ use PoPCMSSchema\UserMetaMutations\Constants\UserMetaCRUDHookNames;
 use PoPCMSSchema\UserMetaMutations\Exception\UserMetaCRUDMutationException;
 use PoPCMSSchema\UserMetaMutations\TypeAPIs\UserMetaTypeMutationAPIInterface;
 use PoPCMSSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
-use PoPCMSSchema\UserMutations\MutationResolvers\CreateOrUpdateUserMutationResolverTrait;
+use PoPCMSSchema\UserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\UserMutations\TypeAPIs\UserTypeMutationAPIInterface;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateEntityMetaMutationResolver;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -21,7 +24,6 @@ use PoP\Root\App;
 
 abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEntityMetaMutationResolver implements UserMetaMutationResolverInterface
 {
-    use CreateOrUpdateUserMutationResolverTrait;
     use MutateUserMetaMutationResolverTrait;
 
     private ?UserMetaTypeAPIInterface $userMetaTypeAPI = null;
@@ -30,6 +32,7 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?UserTypeMutationAPIInterface $userTypeMutationAPI = null;
+    private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
     final protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
     {
@@ -85,16 +88,36 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
         }
         return $this->userTypeMutationAPI;
     }
+    final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
+    {
+        if ($this->customPostTypeMutationAPI === null) {
+            /** @var CustomPostTypeMutationAPIInterface */
+            $customPostTypeMutationAPI = $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
+            $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+        }
+        return $this->customPostTypeMutationAPI;
+    }
 
     protected function validateEntityExists(
         string|int $userID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateUserExists(
-            $userID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
+        $user = $this->getUserTypeAPI()->getUser($userID);
+        if ($user !== null) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E10,
+                    [
+                        $userID,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
         );
     }
 
@@ -103,10 +126,29 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateCanLoggedInUserEditUser(
-            $userID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
+        /**
+         * As solution, check if the user can edit the custom post
+         * where the user was added
+         *
+         * @var object
+         */
+        $user = $this->getUserTypeAPI()->getUser($userID);
+        $customPostID = $this->getUserTypeAPI()->getUserPostID($user);
+        $userID = App::getState('current-user-id');
+        if ($this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E11,
+                    [
+                        $userID,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
         );
     }
 
