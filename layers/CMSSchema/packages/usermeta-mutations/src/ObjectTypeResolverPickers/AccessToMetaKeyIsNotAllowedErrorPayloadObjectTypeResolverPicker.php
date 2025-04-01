@@ -7,9 +7,6 @@ namespace PoPCMSSchema\UserMetaMutations\ObjectTypeResolverPickers;
 use PoPCMSSchema\UserMetaMutations\TypeResolvers\UnionType\AbstractUserMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\RootCreateUserMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\RootUpdateUserMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\UserMutations\TypeResolvers\UnionType\UserUpdateMutationErrorPayloadUnionTypeResolver;
 
 class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker extends AbstractAccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker
 {
@@ -20,9 +17,10 @@ class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolverPicker extends Ab
     {
         return [
             AbstractUserMetaMutationErrorPayloadUnionTypeResolver::class,
-            RootCreateUserMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdateUserMutationErrorPayloadUnionTypeResolver::class,
-            UserUpdateMutationErrorPayloadUnionTypeResolver::class,
+            // @todo Re-enable when adding User Mutations
+            // RootCreateUserMutationErrorPayloadUnionTypeResolver::class,
+            // RootUpdateUserMutationErrorPayloadUnionTypeResolver::class,
+            // UserUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
