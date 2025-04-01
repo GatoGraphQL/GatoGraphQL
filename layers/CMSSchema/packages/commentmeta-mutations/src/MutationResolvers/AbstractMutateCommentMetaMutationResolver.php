@@ -8,12 +8,14 @@ use PoPCMSSchema\CommentMetaMutations\Constants\CommentMetaCRUDHookNames;
 use PoPCMSSchema\CommentMetaMutations\Exception\CommentMetaCRUDMutationException;
 use PoPCMSSchema\CommentMetaMutations\TypeAPIs\CommentMetaTypeMutationAPIInterface;
 use PoPCMSSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
-use PoPCMSSchema\CommentMutations\MutationResolvers\CreateOrUpdateCommentMutationResolverTrait;
+use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateEntityMetaMutationResolver;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -21,7 +23,6 @@ use PoP\Root\App;
 
 abstract class AbstractMutateCommentMetaMutationResolver extends AbstractMutateEntityMetaMutationResolver implements CommentMetaMutationResolverInterface
 {
-    use CreateOrUpdateCommentMutationResolverTrait;
     use MutateCommentMetaMutationResolverTrait;
 
     private ?CommentMetaTypeAPIInterface $commentMetaTypeAPI = null;
@@ -91,10 +92,21 @@ abstract class AbstractMutateCommentMetaMutationResolver extends AbstractMutateE
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateCommentExists(
-            $commentID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
+        $comment = $this->getCommentTypeAPI()->getComment($commentID);
+        if ($comment !== null) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E10,
+                    [
+                        $commentID,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
         );
     }
 
