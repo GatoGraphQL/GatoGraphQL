@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPII
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\MetaMutations\Hooks\AbstractMetaMutationResolverHookSet;
-use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
+use PoPCMSSchema\MetaMutations\TypeAPIs\EntityMetaTypeMutationAPIInterface;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
 abstract class AbstractCustomPostMetaMutationResolverHookSet extends AbstractMetaMutationResolverHookSet
@@ -38,7 +38,7 @@ abstract class AbstractCustomPostMetaMutationResolverHookSet extends AbstractMet
         return $this->customPostMetaTypeAPI;
     }
 
-    protected function getMetaTypeMutationAPI(): MetaTypeMutationAPIInterface
+    protected function getEntityMetaTypeMutationAPI(): EntityMetaTypeMutationAPIInterface
     {
         return $this->getCustomPostMetaTypeMutationAPI();
     }

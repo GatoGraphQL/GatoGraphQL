@@ -6,10 +6,18 @@ namespace PoPCMSSchema\CustomPostMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
 use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\CustomPostMetaTypeMutationAPIInterface;
-use PoP\Root\Services\AbstractBasicService;
+use PoPCMSSchema\MetaMutations\TypeAPIs\AbstractEntityMetaTypeMutationAPI;
 
-abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractBasicService implements CustomPostMetaTypeMutationAPIInterface
+abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractEntityMetaTypeMutationAPI implements CustomPostMetaTypeMutationAPIInterface
 {
+    /**
+     * @phpstan-return class-string<CustomPostMetaCRUDMutationException>
+     */
+    protected function getEntityMetaCRUDMutationExceptionClass(): string
+    {
+        return CustomPostMetaCRUDMutationException::class;
+    }
+
     /**
      * @param array<string,mixed[]|null> $entries
      * @throws CustomPostMetaCRUDMutationException If there was an error

@@ -6,7 +6,7 @@ namespace PoPCMSSchema\MetaMutations\TypeAPIs;
 
 use PoPCMSSchema\MetaMutations\Exception\EntityMetaCRUDMutationException;
 
-interface MetaTypeMutationAPIInterface
+interface EntityMetaTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed[]|null> $entries

@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
-use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\AbstractTaxonomyMetaTypeMutationAPI;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
-use WP_Error;
+use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\AbstractTaxonomyMetaTypeMutationAPI;
 
 use function add_term_meta;
 use function delete_term_meta;
@@ -18,8 +16,6 @@ use function update_term_meta;
  */
 class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
 {
-    use TypeMutationAPITrait;
-
     /**
      * @param array<string,mixed[]|null> $entries
      * @throws TaxonomyTermMetaCRUDMutationException If there was an error
@@ -73,48 +69,13 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     ): int {
         $result = add_term_meta((int) $taxonomyTermID, $key, $value, $single);
         if ($result === false) {
-            throw $this->getTaxonomyTermMetaCRUDMutationException(
+            throw $this->getEntityMetaCRUDMutationException(
                 \__('Error adding term meta', 'taxonomymeta-mutations-wp')
             );
         }
         $this->handleMaybeError($result);
         /** @var int $result */
         return $result;
-    }
-
-    protected function handleMaybeError(
-        int|bool|WP_Error $result,
-    ): void {
-        if (!($result instanceof WP_Error)) {
-            return;
-        }
-
-        /** @var WP_Error */
-        $wpError = $result;
-        throw $this->getTaxonomyTermMetaCRUDMutationException($wpError);
-    }
-
-    protected function getTaxonomyTermMetaCRUDMutationException(WP_Error|string $error): TaxonomyTermMetaCRUDMutationException
-    {
-        $taxonomyTermMetaCRUDMutationExceptionClass = $this->getTaxonomyTermMetaCRUDMutationExceptionClass();
-        if (is_string($error)) {
-            return new $taxonomyTermMetaCRUDMutationExceptionClass($error);
-        }
-        /** @var WP_Error */
-        $wpError = $error;
-        return new $taxonomyTermMetaCRUDMutationExceptionClass(
-            $wpError->get_error_message(),
-            $wpError->get_error_code() ? $wpError->get_error_code() : null,
-            $this->getWPErrorData($wpError),
-        );
-    }
-
-    /**
-     * @phpstan-return class-string<TaxonomyTermMetaCRUDMutationException>
-     */
-    protected function getTaxonomyTermMetaCRUDMutationExceptionClass(): string
-    {
-        return TaxonomyTermMetaCRUDMutationException::class;
     }
 
     /**
@@ -130,7 +91,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         $result = update_term_meta((int) $taxonomyTermID, $key, $value, $prevValue ?? '');
         $this->handleMaybeError($result);
         if ($result === false) {
-            throw $this->getTaxonomyTermMetaCRUDMutationException(
+            throw $this->getEntityMetaCRUDMutationException(
                 \__('Error updating term meta', 'taxonomymeta-mutations-wp')
             );
         }
@@ -148,7 +109,7 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
         $result = delete_term_meta((int) $taxonomyTermID, $key);
         $this->handleMaybeError($result);
         if ($result === false) {
-            throw $this->getTaxonomyTermMetaCRUDMutationException(
+            throw $this->getEntityMetaCRUDMutationException(
                 \__('Error deleting term meta', 'taxonomymeta-mutations-wp')
             );
         }

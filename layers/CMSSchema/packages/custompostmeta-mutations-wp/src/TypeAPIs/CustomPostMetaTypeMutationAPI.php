@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMetaMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\AbstractCustomPostMetaTypeMutationAPI;
 use PoPCMSSchema\CustomPostMetaMutations\Exception\CustomPostMetaCRUDMutationException;
-use WP_Error;
 
 use function add_post_meta;
 use function delete_post_meta;
@@ -18,8 +16,6 @@ use function update_post_meta;
  */
 class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAPI
 {
-    use TypeMutationAPITrait;
-
     /**
      * @param array<string,mixed[]|null> $entries
      * @throws CustomPostMetaCRUDMutationException If there was an error
@@ -73,48 +69,13 @@ class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAP
     ): int {
         $result = add_post_meta((int) $customPostID, $key, $value, $single);
         if ($result === false) {
-            throw $this->getCustomPostMetaCRUDMutationException(
+            throw $this->getEntityMetaCRUDMutationException(
                 \__('Error adding custom post meta', 'custompostmeta-mutations-wp')
             );
         }
         $this->handleMaybeError($result);
         /** @var int $result */
         return $result;
-    }
-
-    protected function handleMaybeError(
-        int|bool|WP_Error $result,
-    ): void {
-        if (!($result instanceof WP_Error)) {
-            return;
-        }
-
-        /** @var WP_Error */
-        $wpError = $result;
-        throw $this->getCustomPostMetaCRUDMutationException($wpError);
-    }
-
-    protected function getCustomPostMetaCRUDMutationException(WP_Error|string $error): CustomPostMetaCRUDMutationException
-    {
-        $customPostMetaCRUDMutationExceptionClass = $this->getCustomPostMetaCRUDMutationExceptionClass();
-        if (is_string($error)) {
-            return new $customPostMetaCRUDMutationExceptionClass($error);
-        }
-        /** @var WP_Error */
-        $wpError = $error;
-        return new $customPostMetaCRUDMutationExceptionClass(
-            $wpError->get_error_message(),
-            $wpError->get_error_code() ? $wpError->get_error_code() : null,
-            $this->getWPErrorData($wpError),
-        );
-    }
-
-    /**
-     * @phpstan-return class-string<CustomPostMetaCRUDMutationException>
-     */
-    protected function getCustomPostMetaCRUDMutationExceptionClass(): string
-    {
-        return CustomPostMetaCRUDMutationException::class;
     }
 
     /**
@@ -130,7 +91,7 @@ class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAP
         $result = update_post_meta((int) $customPostID, $key, $value, $prevValue ?? '');
         $this->handleMaybeError($result);
         if ($result === false) {
-            throw $this->getCustomPostMetaCRUDMutationException(
+            throw $this->getEntityMetaCRUDMutationException(
                 \__('Error updating custom post meta', 'custompostmeta-mutations-wp')
             );
         }
@@ -148,7 +109,7 @@ class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAP
         $result = delete_post_meta((int) $customPostID, $key);
         $this->handleMaybeError($result);
         if ($result === false) {
-            throw $this->getCustomPostMetaCRUDMutationException(
+            throw $this->getEntityMetaCRUDMutationException(
                 \__('Error deleting custom post meta', 'custompostmeta-mutations-wp')
             );
         }

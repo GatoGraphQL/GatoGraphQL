@@ -7,7 +7,7 @@ namespace PoPCMSSchema\MetaMutations\Hooks;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\MutateEntityMetaMutationResolverTrait;
 use PoPCMSSchema\MetaMutations\MutationResolvers\PayloadableMetaMutationResolverTrait;
-use PoPCMSSchema\MetaMutations\TypeAPIs\MetaTypeMutationAPIInterface;
+use PoPCMSSchema\MetaMutations\TypeAPIs\EntityMetaTypeMutationAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -21,7 +21,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
     use MutateEntityMetaMutationResolverTrait;
     use PayloadableMetaMutationResolverTrait;
 
-    abstract protected function getMetaTypeMutationAPI(): MetaTypeMutationAPIInterface;
+    abstract protected function getEntityMetaTypeMutationAPI(): EntityMetaTypeMutationAPIInterface;
 
     protected function init(): void
     {
@@ -101,7 +101,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
 
         /** @var stdClass */
         $metaEntries = $fieldDataAccessor->getValue(MutationInputProperties::META);
-        $this->getMetaTypeMutationAPI()->setEntityMeta($entityID, (array) $metaEntries);
+        $this->getEntityMetaTypeMutationAPI()->setEntityMeta($entityID, (array) $metaEntries);
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
