@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CommentMetaMutations\MutationResolvers;
 
 use PoPCMSSchema\CommentMetaMutations\Constants\CommentMetaCRUDHookNames;
 use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableEditCommentToCustomPostMutationResolverTrait;
 use PoPCMSSchema\MetaMutations\MutationResolvers\PayloadableMetaMutationResolverTrait;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -16,6 +17,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 trait PayloadableCommentMetaMutationResolverTrait
 {
     use PayloadableMetaMutationResolverTrait;
+    use PayloadableEditCommentToCustomPostMutationResolverTrait;
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
@@ -34,6 +36,8 @@ trait PayloadableCommentMetaMutationResolverTrait
                 $feedbackItemResolution->getMessage(),
             ),
             default => $this->createMetaMutationErrorPayloadFromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedback,
+            ) ?? $this->createEditCommentErrorPayloadFromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedback,
             ) ?? App::applyFilters(
                 CommentMetaCRUDHookNames::ERROR_PAYLOAD,
