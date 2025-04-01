@@ -9,7 +9,7 @@ use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 
-abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService
+abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService implements EntityMetaTypeMutationAPIInterface
 {
     use TypeMutationAPITrait;
 
