@@ -9,6 +9,7 @@ use PoPCMSSchema\UserMetaMutations\Exception\UserMetaCRUDMutationException;
 use PoPCMSSchema\UserMetaMutations\TypeAPIs\UserMetaTypeMutationAPIInterface;
 use PoPCMSSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
 use PoPCMSSchema\UserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\UserMutations\TypeAPIs\UserTypeMutationAPIInterface;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
@@ -30,6 +31,7 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
+    private ?UserTypeMutationAPIInterface $userTypeMutationAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
     final protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
@@ -77,6 +79,15 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
         }
         return $this->userRoleTypeAPI;
     }
+    final protected function getUserTypeMutationAPI(): UserTypeMutationAPIInterface
+    {
+        if ($this->userTypeMutationAPI === null) {
+            /** @var UserTypeMutationAPIInterface */
+            $userTypeMutationAPI = $this->instanceManager->getInstance(UserTypeMutationAPIInterface::class);
+            $this->userTypeMutationAPI = $userTypeMutationAPI;
+        }
+        return $this->userTypeMutationAPI;
+    }
     final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
     {
         if ($this->customPostTypeMutationAPI === null) {
@@ -115,16 +126,7 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        /**
-         * As solution, check if the user can edit the custom post
-         * where the user was added
-         *
-         * @var object
-         */
-        $user = $this->getUserTypeAPI()->getUser($userID);
-        $customPostID = $this->getUserTypeAPI()->getUserPostID($user);
-        $userID = App::getState('current-user-id');
-        if ($this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
+        if ($this->getUserTypeMutationAPI()->canLoggedInUserEditUser($userID)) {
             return;
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
