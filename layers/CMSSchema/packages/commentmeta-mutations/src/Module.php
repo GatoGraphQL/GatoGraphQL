@@ -22,6 +22,7 @@ class Module extends AbstractModule
         return [
             \PoPCMSSchema\CommentMeta\Module::class,
             \PoPCMSSchema\CommentMutations\Module::class,
+            \PoPCMSSchema\CustomPostMutations\Module::class,
         ];
     }
 

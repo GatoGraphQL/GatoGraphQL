@@ -11,6 +11,7 @@ use PoPCMSSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
+use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MetaMutations\MutationResolvers\AbstractMutateEntityMetaMutationResolver;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
@@ -31,6 +32,7 @@ abstract class AbstractMutateCommentMetaMutationResolver extends AbstractMutateE
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?CommentTypeMutationAPIInterface $commentTypeMutationAPI = null;
+    private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
 
     final protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface
     {
@@ -86,6 +88,15 @@ abstract class AbstractMutateCommentMetaMutationResolver extends AbstractMutateE
         }
         return $this->commentTypeMutationAPI;
     }
+    final protected function getCustomPostTypeMutationAPI(): CustomPostTypeMutationAPIInterface
+    {
+        if ($this->customPostTypeMutationAPI === null) {
+            /** @var CustomPostTypeMutationAPIInterface */
+            $customPostTypeMutationAPI = $this->instanceManager->getInstance(CustomPostTypeMutationAPIInterface::class);
+            $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+        }
+        return $this->customPostTypeMutationAPI;
+    }
 
     protected function validateEntityExists(
         string|int $commentID,
@@ -115,10 +126,29 @@ abstract class AbstractMutateCommentMetaMutationResolver extends AbstractMutateE
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateCanLoggedInUserEditComment(
-            $commentID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
+        /**
+         * As solution, check if the user can edit the custom post
+         * where the comment was added
+         *
+         * @var object
+         */
+        $comment = $this->getCommentTypeAPI()->getComment($commentID);
+        $customPostID = $this->getCommentTypeAPI()->getCommentPostID($comment);
+        $userID = App::getState('current-user-id');
+        if ($this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E11,
+                    [
+                        $commentID,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
         );
     }
 
