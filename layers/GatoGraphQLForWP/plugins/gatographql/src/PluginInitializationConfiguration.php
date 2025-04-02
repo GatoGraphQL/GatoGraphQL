@@ -1151,7 +1151,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPCMSSchema\UserStateMutations\Module::class,
                 \PoPCMSSchema\UserStateMutationsWP\Module::class,
             ],
+            MutationSchemaTypeModuleResolver::SCHEMA_USER_META_MUTATIONS => [
+                \PoPCMSSchema\UserMetaMutations\Module::class,
+                \PoPCMSSchema\UserMetaMutationsWP\Module::class,
+            ],
             MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_USER_MUTATIONS => [
+                \PoPCMSSchema\UserMutations\Module::class,
+                \PoPCMSSchema\UserMutationsWP\Module::class,
                 \PoPCMSSchema\CustomPostUserMutations\Module::class,
                 \PoPCMSSchema\CustomPostUserMutationsWP\Module::class,
             ],
@@ -1230,6 +1236,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             MutationSchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
                 \PoPCMSSchema\CommentMutations\Module::class,
                 \PoPCMSSchema\CommentMutationsWP\Module::class,
+            ],
+            MutationSchemaTypeModuleResolver::SCHEMA_COMMENT_META_MUTATIONS => [
+                \PoPCMSSchema\CommentMetaMutations\Module::class,
+                \PoPCMSSchema\CommentMetaMutationsWP\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
                 CustomPostMetaModule::class,

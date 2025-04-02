@@ -13,7 +13,7 @@ class PostTagMetaMutationResolverHookSet extends AbstractTagMetaMutationResolver
     {
         return PostTagCRUDHookNames::VALIDATE_CREATE;
     }
-    protected function getValidateUpdateHookName(): string
+    protected function getValidateUpdateHookName(): ?string
     {
         return PostTagCRUDHookNames::VALIDATE_UPDATE;
     }

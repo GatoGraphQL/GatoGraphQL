@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\CommentMetaMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\CommentMetaMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
+
+    PoPCMSSchema\CommentMetaMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
+
+    PoPCMSSchema\CommentMetaMutations\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\CommentMetaMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\CommentMetaMutations\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'

@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\UserMetaMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\UserMetaMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
+
+    PoPCMSSchema\UserMetaMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
+
+    PoPCMSSchema\UserMetaMutations\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\UserMetaMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\UserMetaMutations\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'

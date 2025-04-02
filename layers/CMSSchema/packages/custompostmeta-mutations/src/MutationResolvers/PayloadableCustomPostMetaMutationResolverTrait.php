@@ -21,7 +21,6 @@ trait PayloadableCustomPostMetaMutationResolverTrait
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
-        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return App::applyFilters(
             CustomPostMetaCRUDHookNames::ERROR_PAYLOAD,
             $this->createMetaMutationErrorPayloadFromObjectTypeFieldResolutionFeedback(

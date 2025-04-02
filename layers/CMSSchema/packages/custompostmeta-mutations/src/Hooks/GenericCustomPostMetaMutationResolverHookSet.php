@@ -13,7 +13,7 @@ class GenericCustomPostMetaMutationResolverHookSet extends AbstractCustomPostMet
     {
         return GenericCustomPostCRUDHookNames::VALIDATE_CREATE;
     }
-    protected function getValidateUpdateHookName(): string
+    protected function getValidateUpdateHookName(): ?string
     {
         return GenericCustomPostCRUDHookNames::VALIDATE_UPDATE;
     }
