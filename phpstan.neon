@@ -25,6 +25,8 @@ includes:
     - layers/CMSSchema/packages/comment-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/commentmeta/phpstan.neon.dist
     - layers/WPSchema/packages/commentmeta/phpstan.neon.dist
+    - layers/CMSSchema/packages/commentmeta-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/commentmeta-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/commentmeta-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/comments/phpstan.neon.dist
     - layers/WPSchema/packages/comments/phpstan.neon.dist
@@ -146,6 +148,8 @@ includes:
     - layers/GatoGraphQLForWP/plugins/testing-schema/phpstan.neon.dist
     - layers/CMSSchema/packages/user-avatars/phpstan.neon.dist
     - layers/CMSSchema/packages/user-avatars-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/user-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/user-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/user-roles/phpstan.neon.dist
     - layers/CMSSchema/packages/user-roles-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/user-state/phpstan.neon.dist
@@ -154,6 +158,8 @@ includes:
     - layers/CMSSchema/packages/user-state-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/usermeta/phpstan.neon.dist
     - layers/WPSchema/packages/usermeta/phpstan.neon.dist
+    - layers/CMSSchema/packages/usermeta-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/usermeta-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/usermeta-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/users/phpstan.neon.dist
     - layers/WPSchema/packages/users/phpstan.neon.dist
