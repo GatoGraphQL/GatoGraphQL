@@ -7,8 +7,8 @@
   - Custom posts ([#3067](https://github.com/GatoGraphQL/GatoGraphQL/pull/3067))
   - Categories ([#3063](https://github.com/GatoGraphQL/GatoGraphQL/pull/3063))
   - Tags ([#3064](https://github.com/GatoGraphQL/GatoGraphQL/pull/3064))
-  - Users ([#3071](https://github.com/GatoGraphQL/GatoGraphQL/pull/3071))
-  - Comments ([#3071](https://github.com/GatoGraphQL/GatoGraphQL/pull/3071))
+  - Users ([#3072](https://github.com/GatoGraphQL/GatoGraphQL/pull/3072))
+  - Comments ([#3072](https://github.com/GatoGraphQL/GatoGraphQL/pull/3072))
 - Type `ListValueJSONObject` ([#3060](https://github.com/GatoGraphQL/GatoGraphQL/pull/3060))
 
 ## Improvements
