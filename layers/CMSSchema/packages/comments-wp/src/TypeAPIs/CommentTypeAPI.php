@@ -255,7 +255,7 @@ class CommentTypeAPI extends AbstractBasicService implements CommentTypeAPIInter
         /** @var WP_Comment $comment */
         return $comment->comment_content;
     }
-    public function getCommentPostID(object $comment): string|int
+    public function getCommentCustomPostID(object $comment): string|int
     {
         /** @var WP_Comment */
         $comment = $comment;

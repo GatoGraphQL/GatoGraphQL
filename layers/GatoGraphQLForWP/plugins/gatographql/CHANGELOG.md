@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Plugin constructor signature receives nullable `commitHash` param (#3056)
 - Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
+- Renamed `getCommentPostID` to `getCommentCustomPostID` (#3073)
 
 ## 11.3.0 - DATE
 
