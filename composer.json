@@ -22,8 +22,6 @@
         "leoloso/faker": "^1.2",
         "masterminds/html5": "^2.7",
         "michelf/php-markdown": "^1.9",
-        "pop-cms-schema/comment-meta-mutations-wp": "^11.3",
-        "pop-cms-schema/user-meta-mutations-wp": "^11.3",
         "psr/cache": "^3.0",
         "psr/simple-cache": "^3.0",
         "symfony/cache": "^6.0",
