@@ -7,7 +7,6 @@ namespace PoPCMSSchema\UserMetaMutations\Hooks;
 use PoPCMSSchema\UserMetaMutations\MutationResolvers\MutateUserMetaMutationResolverTrait;
 use PoPCMSSchema\UserMetaMutations\TypeAPIs\UserMetaTypeMutationAPIInterface;
 use PoPCMSSchema\UserMeta\TypeAPIs\UserMetaTypeAPIInterface;
-use PoPCMSSchema\UserMutations\Constants\UserCRUDHookNames;
 use PoPCMSSchema\MetaMutations\Hooks\AbstractMetaMutationResolverHookSet;
 use PoPCMSSchema\MetaMutations\TypeAPIs\EntityMetaTypeMutationAPIInterface;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;

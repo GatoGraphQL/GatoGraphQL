@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserMetaMutations\Hooks;
 
 use PoPCMSSchema\UserMetaMutations\Hooks\AbstractUserMetaMutationResolverHookSet;
-use PoPCMSSchema\UserMutations\Constants\UserCRUDHookNames;
 
 // @todo Remove "abstract" when adding User Mutations
 abstract class UserMetaMutationResolverHookSet extends AbstractUserMetaMutationResolverHookSet
