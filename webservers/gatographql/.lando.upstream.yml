@@ -81,6 +81,10 @@ services:
         - >-
           ../../layers/CMSSchema/packages/commentmeta:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/commentmeta
         - >-
+          ../../layers/CMSSchema/packages/commentmeta-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/commentmeta-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/commentmeta-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/commentmeta-mutations
+        - >-
           ../../layers/CMSSchema/packages/comments-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/comments-wp
         - >-
           ../../layers/CMSSchema/packages/comments:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/comments
@@ -231,6 +235,10 @@ services:
         - >-
           ../../layers/CMSSchema/packages/user-avatars:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/user-avatars
         - >-
+          ../../layers/CMSSchema/packages/user-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/user-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/user-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/user-mutations
+        - >-
           ../../layers/CMSSchema/packages/user-roles-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/user-roles-wp
         - >-
           ../../layers/CMSSchema/packages/user-roles:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/user-roles
@@ -246,6 +254,10 @@ services:
           ../../layers/CMSSchema/packages/usermeta-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/usermeta-wp
         - >-
           ../../layers/CMSSchema/packages/usermeta:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/usermeta
+        - >-
+          ../../layers/CMSSchema/packages/usermeta-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/usermeta-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/usermeta-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/usermeta-mutations
         - >-
           ../../layers/CMSSchema/packages/users-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/users-wp
         - >-
