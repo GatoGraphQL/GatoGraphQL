@@ -212,11 +212,12 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 11.3.0 =
 * Added fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` (#3060)
-* Added custom post meta mutations (#3067)
-* Added category meta mutations (#3063)
-* Added tag meta mutations (#3064)
-* Added user meta mutations (#3072)
-* Added comment meta mutations (#3072)
+* Added meta mutations
+  * Custom posts (#3067)
+  * Categories (#3063)
+  * Tags (#3064)
+  * Users (#3072)
+  * Comments (#3072)
 * Added type `ListValueJSONObject` (#3060)
 * Made meta field `metaValue` handle any scalar type (previously only `String`) (#3061)
 * Made meta field `metaValues` handle any scalar type (previously only built-in ones), such as `JSONObject` (#3061)
