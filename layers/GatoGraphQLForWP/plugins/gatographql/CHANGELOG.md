@@ -9,9 +9,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` (#3060)
-- Custom post meta mutations (#3067)
-- Category meta mutations (#3063)
-- Tag meta mutations (#3064)
+- Meta mutations
+  - Custom posts (#3067)
+  - Categories (#3063)
+  - Tags (#3064)
+  - Users (#3071)
+  - Comments (#3071)
 - Type `ListValueJSONObject` (#3060)
 
 ### Improvements
