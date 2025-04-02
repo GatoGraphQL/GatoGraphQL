@@ -13,7 +13,7 @@ class GenericCategoryMetaMutationResolverHookSet extends AbstractCategoryMetaMut
     {
         return GenericCategoryCRUDHookNames::VALIDATE_CREATE;
     }
-    protected function getValidateUpdateHookName(): string
+    protected function getValidateUpdateHookName(): ?string
     {
         return GenericCategoryCRUDHookNames::VALIDATE_UPDATE;
     }

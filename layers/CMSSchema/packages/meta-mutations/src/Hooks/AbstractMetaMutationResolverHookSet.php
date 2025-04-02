@@ -31,12 +31,16 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
             10,
             2
         );
-        App::addAction(
-            $this->getValidateUpdateHookName(),
-            $this->maybeValidateSetMeta(...),
-            10,
-            2
-        );
+        // Comments has create but not update
+        $validateUpdateHookName = $this->getValidateUpdateHookName();
+        if ($validateUpdateHookName !== null) {
+            App::addAction(
+                $validateUpdateHookName,
+                $this->maybeValidateSetMeta(...),
+                10,
+                2
+            );
+        }
         App::addAction(
             $this->getExecuteCreateOrUpdateHookName(),
             $this->maybeSetMeta(...),
@@ -52,7 +56,7 @@ abstract class AbstractMetaMutationResolverHookSet extends AbstractHookSet
     }
 
     abstract protected function getValidateCreateHookName(): string;
-    abstract protected function getValidateUpdateHookName(): string;
+    abstract protected function getValidateUpdateHookName(): ?string;
     abstract protected function getExecuteCreateOrUpdateHookName(): string;
 
     abstract protected function getErrorPayloadHookName(): string;

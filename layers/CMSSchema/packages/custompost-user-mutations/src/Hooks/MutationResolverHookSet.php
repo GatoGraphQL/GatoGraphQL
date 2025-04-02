@@ -6,8 +6,8 @@ namespace PoPCMSSchema\CustomPostUserMutations\Hooks;
 
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CustomPostUserMutations\ObjectModels\UserDoesNotExistErrorPayload;
+use PoPCMSSchema\UserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\UserMutations\ObjectModels\UserDoesNotExistErrorPayload;
 use PoPCMSSchema\Users\Constants\InputProperties;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;

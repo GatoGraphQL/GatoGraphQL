@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPCMSSchema\Users\RelationalTypeDataLoaders\ObjectType\UserObjectTypeDataLoader;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
-class UserObjectTypeResolver extends AbstractObjectTypeResolver
+class UserObjectTypeResolver extends AbstractObjectTypeResolver implements UserObjectTypeResolverInterface
 {
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?UserObjectTypeDataLoader $userObjectTypeDataLoader = null;

@@ -21,7 +21,7 @@ class Module extends AbstractModule
     {
         return [
             \PoPCMSSchema\CustomPostMutations\Module::class,
-            \PoPCMSSchema\Users\Module::class,
+            \PoPCMSSchema\UserMutations\Module::class,
         ];
     }
 

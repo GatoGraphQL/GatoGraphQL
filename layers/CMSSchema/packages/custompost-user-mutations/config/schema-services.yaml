@@ -8,6 +8,3 @@ services:
 
     PoPCMSSchema\CustomPostUserMutations\ObjectTypeResolverPickers\:
         resource: '../src/ObjectTypeResolverPickers/*'
-
-    PoPCMSSchema\CustomPostUserMutations\RelationalTypeDataLoaders\:
-        resource: '../src/RelationalTypeDataLoaders/*'

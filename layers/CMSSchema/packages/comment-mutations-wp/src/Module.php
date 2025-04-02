@@ -27,6 +27,7 @@ class Module extends AbstractModule
         return [
             \PoPCMSSchema\CommentMutations\Module::class,
             \PoPCMSSchema\CommentsWP\Module::class,
+            \PoPCMSSchema\CustomPostsWP\Module::class,
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }

@@ -13,7 +13,7 @@ class PostCategoryMetaMutationResolverHookSet extends AbstractCategoryMetaMutati
     {
         return PostCategoryCRUDHookNames::VALIDATE_CREATE;
     }
-    protected function getValidateUpdateHookName(): string
+    protected function getValidateUpdateHookName(): ?string
     {
         return PostCategoryCRUDHookNames::VALIDATE_UPDATE;
     }

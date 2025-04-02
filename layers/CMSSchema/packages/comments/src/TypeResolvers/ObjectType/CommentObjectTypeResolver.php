@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType\CommentObjectTypeDataLoader;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 
-class CommentObjectTypeResolver extends AbstractObjectTypeResolver
+class CommentObjectTypeResolver extends AbstractObjectTypeResolver implements CommentObjectTypeResolverInterface
 {
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentObjectTypeDataLoader $commentObjectTypeDataLoader = null;

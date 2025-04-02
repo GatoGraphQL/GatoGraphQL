@@ -13,7 +13,7 @@ class GenericTagMetaMutationResolverHookSet extends AbstractTagMetaMutationResol
     {
         return GenericTagCRUDHookNames::VALIDATE_CREATE;
     }
-    protected function getValidateUpdateHookName(): string
+    protected function getValidateUpdateHookName(): ?string
     {
         return GenericTagCRUDHookNames::VALIDATE_UPDATE;
     }
