@@ -282,6 +282,24 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                         self::SCHEMA_CATEGORY_META_MUTATIONS,
                     ],
                 ];
+            case self::SCHEMA_CATEGORY_META_MUTATIONS:
+                return [
+                    [
+                        self::SCHEMA_CATEGORY_MUTATIONS,
+                    ],
+                    [
+                        self::SCHEMA_META_MUTATIONS,
+                    ],
+                ];
+            case self::SCHEMA_TAG_META_MUTATIONS:
+                return [
+                    [
+                        self::SCHEMA_TAG_MUTATIONS,
+                    ],
+                    [
+                        self::SCHEMA_META_MUTATIONS,
+                    ],
+                ];
             case self::SCHEMA_CUSTOMPOST_TAG_META_MUTATIONS:
                 return [
                     [
