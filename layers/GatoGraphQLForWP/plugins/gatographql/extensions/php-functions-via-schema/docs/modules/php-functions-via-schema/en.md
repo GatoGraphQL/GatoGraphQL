@@ -449,6 +449,10 @@ Retrieve the properties in a JSON object.
 
 Retrieve a property from a JSON object.
 
+### `_objectRecursiveReplace`
+
+Replaces elements from passed objects into the first object recursively.
+
 ### `_objectRemoveEntry`
 
 Removes an entry from the JSON object.
