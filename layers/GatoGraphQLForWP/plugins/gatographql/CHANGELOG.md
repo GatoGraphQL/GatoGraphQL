@@ -16,6 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - Users (#3072)
   - Comments (#3072)
 - Type `ListValueJSONObject` (#3060)
+- Documentation for new field `_objectRecursiveMerge`, from the **Schema Functions** extension (#3074)
 
 ### Improvements
 
