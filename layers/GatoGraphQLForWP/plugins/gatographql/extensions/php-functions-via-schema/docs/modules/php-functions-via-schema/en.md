@@ -451,7 +451,7 @@ Retrieve a property from a JSON object.
 
 ### `_objectRecursiveReplace`
 
-Recursively merge two or more objects together.
+Replaces elements from passed objects into the first object recursively.
 
 ### `_objectRemoveEntry`
 
