@@ -14,7 +14,7 @@
 
 - Fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` ([#3060](https://github.com/GatoGraphQL/GatoGraphQL/pull/3060))
 - Type `ListValueJSONObject` ([#3060](https://github.com/GatoGraphQL/GatoGraphQL/pull/3060))
-- Documentation for new field `_objectRecursiveMerge`, from the **Schema Functions** extension ([#3074](https://github.com/GatoGraphQL/GatoGraphQL/pull/3074))
+- Documentation for new field `_objectRecursiveReplace`, from the **Schema Functions** extension ([#3074](https://github.com/GatoGraphQL/GatoGraphQL/pull/3074))
 
 ### Meta mutations
 
