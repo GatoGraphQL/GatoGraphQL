@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMetaMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractRootUpdateCustomPostTermMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractRootUpdateCustomPostMetaMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractEntityMetaEntryAlreadyHasValueErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -17,7 +17,7 @@ class EntityMetaEntryAlreadyHasValueErrorPayloadObjectTypeResolverPicker extends
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractRootUpdateCustomPostTermMetaMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootUpdateCustomPostMetaMutationErrorPayloadUnionTypeResolver::class,
             AbstractCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
