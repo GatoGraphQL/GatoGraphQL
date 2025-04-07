@@ -33,4 +33,13 @@ trait MutateCustomPostMetaMutationResolverTrait
     ): bool {
         return in_array($value, $this->getCustomPostMetaTypeAPI()->getCustomPostMeta($entityID, $key, false));
     }
+
+    protected function doesMetaEntryHaveValue(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+    ): bool {
+        $existingValue = $this->getCustomPostMetaTypeAPI()->getCustomPostMeta($entityID, $key, false);
+        return $existingValue === [$value];
+    }
 }
