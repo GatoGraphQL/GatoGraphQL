@@ -122,6 +122,46 @@ trait MutateEntityMetaMutationResolverTrait
         );
     }
 
+    protected function validateMetaEntryDoesNotHaveValue(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!$this->doesMetaEntryHaveValue($entityID, $key, $value)) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                $this->getEntityMetaEntryAlreadyHasValueError($entityID, $key, $value),
+                $fieldDataAccessor->getField(),
+            )
+        );
+    }
+
+    abstract protected function doesMetaEntryHaveValue(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+    ): bool;
+
+    protected function getEntityMetaEntryAlreadyHasValueError(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E6,
+            [
+                $entityID,
+                $key,
+                $value,
+            ]
+        );
+    }
+
     /**
      * @param string[] $metaKeys
      */

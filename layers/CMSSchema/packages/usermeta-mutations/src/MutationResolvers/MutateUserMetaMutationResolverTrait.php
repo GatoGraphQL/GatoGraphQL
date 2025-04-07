@@ -33,4 +33,13 @@ trait MutateUserMetaMutationResolverTrait
     ): bool {
         return in_array($value, $this->getUserMetaTypeAPI()->getUserMeta($entityID, $key, false));
     }
+
+    protected function doesMetaEntryHaveValue(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+    ): bool {
+        $existingValue = $this->getUserMetaTypeAPI()->getUserMeta($entityID, $key, false);
+        return $existingValue === [$value];
+    }
 }

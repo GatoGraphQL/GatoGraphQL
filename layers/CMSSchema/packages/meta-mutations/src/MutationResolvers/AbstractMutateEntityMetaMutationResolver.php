@@ -147,9 +147,22 @@ abstract class AbstractMutateEntityMetaMutationResolver extends AbstractMutation
             return;
         }
 
+        $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $value = $fieldDataAccessor->getValue(MutationInputProperties::VALUE);
+        $this->validateMetaEntryDoesNotHaveValue(
+            $entityID,
+            $key,
+            $value,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         $prevValue = $fieldDataAccessor->getValue(MutationInputProperties::PREV_VALUE);
         if (!empty($prevValue)) {
-            $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
             $this->validateMetaEntryWithValueExists(
                 $entityID,
                 $key,
