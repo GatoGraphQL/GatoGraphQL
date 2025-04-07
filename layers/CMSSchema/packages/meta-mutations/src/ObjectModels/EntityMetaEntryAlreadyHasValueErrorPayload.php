@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MetaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class EntityMetaEntryHasSameUpdateValueErrorPayload extends AbstractErrorPayload
+final class EntityMetaEntryAlreadyHasValueErrorPayload extends AbstractErrorPayload
 {
 }
