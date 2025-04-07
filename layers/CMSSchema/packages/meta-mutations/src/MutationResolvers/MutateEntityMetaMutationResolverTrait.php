@@ -134,7 +134,7 @@ trait MutateEntityMetaMutationResolverTrait
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
-                $this->getMetaEntryHasSameUpdateValueError($entityID, $key, $value),
+                $this->getEntityMetaEntryHasSameUpdateValueError($entityID, $key, $value),
                 $fieldDataAccessor->getField(),
             )
         );
@@ -146,7 +146,7 @@ trait MutateEntityMetaMutationResolverTrait
         mixed $value,
     ): bool;
 
-    protected function getMetaEntryHasSameUpdateValueError(
+    protected function getEntityMetaEntryHasSameUpdateValueError(
         string|int $entityID,
         string $key,
         mixed $value,
