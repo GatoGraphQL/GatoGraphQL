@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\FieldResolvers\InterfaceType;
 
+use PoPCMSSchema\Meta\TypeResolvers\InputObjectType\MetaKeysFilterInputObjectTypeResolver;
 use PoPCMSSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\ListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
@@ -19,6 +20,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     private ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?ListValueJSONObjectScalarTypeResolver $listValueJSONObjectScalarTypeResolver = null;
+    private ?MetaKeysFilterInputObjectTypeResolver $metaKeysFilterInputObjectTypeResolver = null;
 
     final protected function getAnyScalarScalarTypeResolver(): AnyScalarScalarTypeResolver
     {
@@ -46,6 +48,15 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
             $this->listValueJSONObjectScalarTypeResolver = $listValueJSONObjectScalarTypeResolver;
         }
         return $this->listValueJSONObjectScalarTypeResolver;
+    }
+    final protected function getMetaKeysFilterInputObjectTypeResolver(): MetaKeysFilterInputObjectTypeResolver
+    {
+        if ($this->metaKeysFilterInputObjectTypeResolver === null) {
+            /** @var MetaKeysFilterInputObjectTypeResolver */
+            $metaKeysFilterInputObjectTypeResolver = $this->instanceManager->getInstance(MetaKeysFilterInputObjectTypeResolver::class);
+            $this->metaKeysFilterInputObjectTypeResolver = $metaKeysFilterInputObjectTypeResolver;
+        }
+        return $this->metaKeysFilterInputObjectTypeResolver;
     }
 
     /**
@@ -104,6 +115,9 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldArgNameTypeResolvers(string $fieldName): array
     {
         return match ($fieldName) {
+            'metaKeys' => [
+                'filter' => $this->getMetaKeysFilterInputObjectTypeResolver(),
+            ],
             'metaValue',
             'metaValues' => [
                 'key' => $this->getStringScalarTypeResolver(),
@@ -118,6 +132,8 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
+            ['metaKeys' => 'filter']
+                => $this->__('Input to filter meta keys', 'gatographql'),
             ['metaValue' => 'key'],
             ['metaValues' => 'key']
                 => $this->__('The meta key', 'meta'),
