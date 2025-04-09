@@ -26,7 +26,7 @@ query {
     lastName
     locale
     metaValue(key: "nickname")
-    # metaValues(key: "wp_capabilities")
+    metaValues(key: "wp_capabilities")
     meta(keys: ["nickname", "wp_capabilities"])
     metaKeys
     includingMetaKeys: metaKeys(filter: { include: ["nickname", "wp_capabilities"] })
