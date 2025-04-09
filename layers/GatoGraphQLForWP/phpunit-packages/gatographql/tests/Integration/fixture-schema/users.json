@@ -3,9 +3,9 @@
         "users": [
             {
                 "avatar": {
-                    "id": "da83a02a60e209782d40d3feb41e00c5",
+                    "id": "151c781af7bc12e23f83ac650902c3ad",
                     "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/00941d24f33655ec9e5e6b2f448004b5?s=96&#038;d=mm&#038;r=g"
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/02a2cc9bf6e20f72ef99fab2a277b7a2b00fcf8c6900a6c66eb442cdeb2dfe66?s=96&#038;d=mm&#038;r=g"
                 },
                 "capabilities": [
                     "delete_others_pages",
@@ -83,6 +83,62 @@
                 "lastName": "Smith",
                 "locale": "en_US",
                 "metaValue": "editor",
+                "metaValue2": {
+                    "editor": true
+                },
+                "meta": {
+                    "nickname": [
+                        "editor"
+                    ],
+                    "wp_capabilities": [
+                        {
+                            "editor": true
+                        }
+                    ]
+                },
+                "metaKeys": [
+                    "nickname",
+                    "first_name",
+                    "last_name",
+                    "description",
+                    "rich_editing",
+                    "syntax_highlighting",
+                    "comment_shortcuts",
+                    "admin_color",
+                    "use_ssl",
+                    "show_admin_bar_front",
+                    "locale",
+                    "wp_capabilities",
+                    "wp_user_level",
+                    "dismissed_wp_pointers",
+                    "_application_passwords",
+                    "session_tokens",
+                    "wp_dashboard_quick_press_last_post_id"
+                ],
+                "includingMetaKeys": [
+                    "nickname",
+                    "wp_capabilities"
+                ],
+                "excludingMetaKeys": [
+                    "first_name",
+                    "last_name",
+                    "description",
+                    "rich_editing",
+                    "syntax_highlighting",
+                    "comment_shortcuts",
+                    "admin_color",
+                    "use_ssl",
+                    "show_admin_bar_front",
+                    "locale",
+                    "wp_user_level",
+                    "dismissed_wp_pointers",
+                    "_application_passwords",
+                    "session_tokens",
+                    "wp_dashboard_quick_press_last_post_id"
+                ],
+                "includingAndExcludingMetaKeys": [
+                    "nickname"
+                ],
                 "name": "Editor Smith",
                 "nicename": "editor",
                 "nickname": "editor",
@@ -152,9 +208,9 @@
             },
             {
                 "avatar": {
-                    "id": "4519654833ec6920a78b689fd4295f9f",
+                    "id": "903330aa75ae09ed50e6892435966828",
                     "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/b7a8ba9684cc5c1a4a035b34ff2fcb04?s=96&#038;d=mm&#038;r=g"
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/ad1dd9c4dbbe4eab67f63fce29e00214833aee1e254078a06891a7d618888ff9?s=96&#038;d=mm&#038;r=g"
                 },
                 "capabilities": [
                     "delete_posts",
@@ -203,6 +259,62 @@
                 "lastName": "Marquez",
                 "locale": "en_US",
                 "metaValue": "author",
+                "metaValue2": {
+                    "author": true
+                },
+                "meta": {
+                    "nickname": [
+                        "author"
+                    ],
+                    "wp_capabilities": [
+                        {
+                            "author": true
+                        }
+                    ]
+                },
+                "metaKeys": [
+                    "nickname",
+                    "first_name",
+                    "last_name",
+                    "description",
+                    "rich_editing",
+                    "syntax_highlighting",
+                    "comment_shortcuts",
+                    "admin_color",
+                    "use_ssl",
+                    "show_admin_bar_front",
+                    "locale",
+                    "wp_capabilities",
+                    "wp_user_level",
+                    "dismissed_wp_pointers",
+                    "_application_passwords",
+                    "session_tokens",
+                    "wp_dashboard_quick_press_last_post_id"
+                ],
+                "includingMetaKeys": [
+                    "nickname",
+                    "wp_capabilities"
+                ],
+                "excludingMetaKeys": [
+                    "first_name",
+                    "last_name",
+                    "description",
+                    "rich_editing",
+                    "syntax_highlighting",
+                    "comment_shortcuts",
+                    "admin_color",
+                    "use_ssl",
+                    "show_admin_bar_front",
+                    "locale",
+                    "wp_user_level",
+                    "dismissed_wp_pointers",
+                    "_application_passwords",
+                    "session_tokens",
+                    "wp_dashboard_quick_press_last_post_id"
+                ],
+                "includingAndExcludingMetaKeys": [
+                    "nickname"
+                ],
                 "name": "Author Marquez",
                 "nicename": "author",
                 "nickname": "author",
@@ -244,9 +356,9 @@
             },
             {
                 "avatar": {
-                    "id": "c311c5482bb63499b8cc002fd51b5d6b",
+                    "id": "07b70c8ebc386861764ccc8da808a2f3",
                     "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/9ba43933f8e0c00e3345109d69ac948f?s=96&#038;d=mm&#038;r=g"
+                    "src": "https:\/\/secure.gravatar.com\/avatar\/82e7c14deae6e916e47d76c1cc776c6dfcd67a50082e47fd00bf13d07565b2ac?s=96&#038;d=mm&#038;r=g"
                 },
                 "capabilities": [
                     "delete_posts",
@@ -275,6 +387,62 @@
                 "lastName": "Johnson",
                 "locale": "en_US",
                 "metaValue": "contributor",
+                "metaValue2": {
+                    "contributor": true
+                },
+                "meta": {
+                    "nickname": [
+                        "contributor"
+                    ],
+                    "wp_capabilities": [
+                        {
+                            "contributor": true
+                        }
+                    ]
+                },
+                "metaKeys": [
+                    "nickname",
+                    "first_name",
+                    "last_name",
+                    "description",
+                    "rich_editing",
+                    "syntax_highlighting",
+                    "comment_shortcuts",
+                    "admin_color",
+                    "use_ssl",
+                    "show_admin_bar_front",
+                    "locale",
+                    "wp_capabilities",
+                    "wp_user_level",
+                    "dismissed_wp_pointers",
+                    "_application_passwords",
+                    "session_tokens",
+                    "wp_dashboard_quick_press_last_post_id"
+                ],
+                "includingMetaKeys": [
+                    "nickname",
+                    "wp_capabilities"
+                ],
+                "excludingMetaKeys": [
+                    "first_name",
+                    "last_name",
+                    "description",
+                    "rich_editing",
+                    "syntax_highlighting",
+                    "comment_shortcuts",
+                    "admin_color",
+                    "use_ssl",
+                    "show_admin_bar_front",
+                    "locale",
+                    "wp_user_level",
+                    "dismissed_wp_pointers",
+                    "_application_passwords",
+                    "session_tokens",
+                    "wp_dashboard_quick_press_last_post_id"
+                ],
+                "includingAndExcludingMetaKeys": [
+                    "nickname"
+                ],
                 "name": "Contributor Johnson",
                 "nicename": "contributor",
                 "nickname": "contributor",

@@ -464,7 +464,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         return match ($module) {
             self::SCHEMA_BLOCKS => [
                 new DependedOnInactiveWordPressPlugin(
-                    \__('Classic Editor', 'gatographql'),
+                    'Classic Editor',
                     'classic-editor/classic-editor.php',
                 ),
             ],

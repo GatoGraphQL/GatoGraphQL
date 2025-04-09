@@ -21,6 +21,12 @@
                 "id": 1,
                 "isStatus": false,
                 "metaValue": null,
+                "metaValue2": null,
+                "meta": {},
+                "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
+                "includingAndExcludingMetaKeys": [],
                 "rawContent": "<!-- wp:paragraph -->\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n<!-- \/wp:paragraph -->",
                 "slug": "hello-world",
                 "status": "publish",
@@ -48,6 +54,20 @@
                 "id": 2,
                 "isStatus": false,
                 "metaValue": null,
+                "metaValue2": "default",
+                "meta": {
+                    "_wp_page_template": [
+                        "default"
+                    ]
+                },
+                "metaKeys": [
+                    "_wp_page_template"
+                ],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [
+                    "_wp_page_template"
+                ],
+                "includingAndExcludingMetaKeys": [],
                 "rawContent": "<!-- wp:paragraph -->\n<p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>...or something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gatographql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n<!-- \/wp:paragraph -->",
                 "slug": "sample-page",
                 "status": "publish",
@@ -82,6 +102,28 @@
                 "id": 1113,
                 "isStatus": false,
                 "metaValue": "1361",
+                "metaValue2": "default",
+                "meta": {
+                    "_thumbnail_id": [
+                        "1361"
+                    ],
+                    "_wp_page_template": [
+                        "default"
+                    ]
+                },
+                "metaKeys": [
+                    "_thumbnail_id",
+                    "_wp_page_template"
+                ],
+                "includingMetaKeys": [
+                    "_thumbnail_id"
+                ],
+                "excludingMetaKeys": [
+                    "_wp_page_template"
+                ],
+                "includingAndExcludingMetaKeys": [
+                    "_thumbnail_id"
+                ],
                 "rawContent": "<!-- wp:paragraph -->\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:heading -->\n<h2>Image Block (Standard)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:image {\"id\":1755} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<!-- \/wp:image -->",
                 "slug": "released-v0-6-check-it-out",
                 "status": "publish",

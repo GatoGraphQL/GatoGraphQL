@@ -3,6 +3,17 @@
     "__schema": {
       "types": [
         {
+          "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
+          "namespacedName": "AccessToMetaKeyIsNotAllowedErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"Access to the meta key is not allowed\""
+        },
+        {
           "name": "CategoryTermDoesNotExistErrorPayload",
           "namespacedName": "CategoryTermDoesNotExistErrorPayload",
           "fields": [
@@ -119,6 +130,17 @@
           "description": "Error payload for: \"The comment's author name is missing\""
         },
         {
+          "name": "CommentDoesNotExistErrorPayload",
+          "namespacedName": "CommentDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The comment does not exist\""
+        },
+        {
           "name": "CommentParentCommentDoesNotExistErrorPayload",
           "namespacedName": "CommentParentCommentDoesNotExistErrorPayload",
           "fields": [
@@ -161,6 +183,61 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The requested custom post does not exist\""
+        },
+        {
+          "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+          "namespacedName": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested custom post does not have the expected type\""
+        },
+        {
+          "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
+          "namespacedName": "EntityMetaAlreadyHasSingleEntryErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The taxonomy term already has the single meta entry\""
+        },
+        {
+          "name": "EntityMetaEntryAlreadyHasValueErrorPayload",
+          "namespacedName": "EntityMetaEntryAlreadyHasValueErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The taxonomy term already has the meta entry with the provided update value\""
+        },
+        {
+          "name": "EntityMetaKeyDoesNotExistErrorPayload",
+          "namespacedName": "EntityMetaKeyDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The taxonomy term doesn't have a meta entry with that key\""
+        },
+        {
+          "name": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
+          "namespacedName": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The taxonomy term doesn't have a meta entry with that key\""
         },
         {
           "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
@@ -545,6 +622,17 @@
           "description": "Error payload for: \"The logged-in user has no permission to edit taxonomy terms\""
         },
         {
+          "name": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to edit the comment\""
+        },
+        {
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "namespacedName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "fields": [
@@ -565,6 +653,17 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The user has no permission to edit the media item\""
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to edit the user\""
         },
         {
           "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
@@ -769,10 +868,52 @@
           "namespacedName": "MutationRoot",
           "fields": [
             {
+              "name": "addCategoryMeta"
+            },
+            {
+              "name": "addCategoryMetas"
+            },
+            {
+              "name": "addCommentMeta"
+            },
+            {
+              "name": "addCommentMetas"
+            },
+            {
               "name": "addCommentToCustomPost"
             },
             {
               "name": "addCommentToCustomPosts"
+            },
+            {
+              "name": "addCustomPostMeta"
+            },
+            {
+              "name": "addCustomPostMetas"
+            },
+            {
+              "name": "addPostCategoryMeta"
+            },
+            {
+              "name": "addPostCategoryMetas"
+            },
+            {
+              "name": "addPostTagMeta"
+            },
+            {
+              "name": "addPostTagMetas"
+            },
+            {
+              "name": "addTagMeta"
+            },
+            {
+              "name": "addTagMetas"
+            },
+            {
+              "name": "addUserMeta"
+            },
+            {
+              "name": "addUserMetas"
             },
             {
               "name": "createCategories"
@@ -829,13 +970,43 @@
               "name": "deleteCategory"
             },
             {
+              "name": "deleteCategoryMeta"
+            },
+            {
+              "name": "deleteCategoryMetas"
+            },
+            {
+              "name": "deleteCommentMeta"
+            },
+            {
+              "name": "deleteCommentMetas"
+            },
+            {
+              "name": "deleteCustomPostMeta"
+            },
+            {
+              "name": "deleteCustomPostMetas"
+            },
+            {
               "name": "deletePostCategories"
             },
             {
               "name": "deletePostCategory"
             },
             {
+              "name": "deletePostCategoryMeta"
+            },
+            {
+              "name": "deletePostCategoryMetas"
+            },
+            {
               "name": "deletePostTag"
+            },
+            {
+              "name": "deletePostTagMeta"
+            },
+            {
+              "name": "deletePostTagMetas"
             },
             {
               "name": "deletePostTags"
@@ -844,7 +1015,19 @@
               "name": "deleteTag"
             },
             {
+              "name": "deleteTagMeta"
+            },
+            {
+              "name": "deleteTagMetas"
+            },
+            {
               "name": "deleteTags"
+            },
+            {
+              "name": "deleteUserMeta"
+            },
+            {
+              "name": "deleteUserMetas"
             },
             {
               "name": "loginUser"
@@ -877,10 +1060,46 @@
               "name": "setCategoriesOnPosts"
             },
             {
+              "name": "setCategoryMeta"
+            },
+            {
+              "name": "setCategoryMetas"
+            },
+            {
+              "name": "setCommentMeta"
+            },
+            {
+              "name": "setCommentMetas"
+            },
+            {
+              "name": "setCustomPostMeta"
+            },
+            {
+              "name": "setCustomPostMetas"
+            },
+            {
               "name": "setFeaturedImageOnCustomPost"
             },
             {
               "name": "setFeaturedImageOnCustomPosts"
+            },
+            {
+              "name": "setPostCategoryMeta"
+            },
+            {
+              "name": "setPostCategoryMetas"
+            },
+            {
+              "name": "setPostTagMeta"
+            },
+            {
+              "name": "setPostTagMetas"
+            },
+            {
+              "name": "setTagMeta"
+            },
+            {
+              "name": "setTagMetas"
             },
             {
               "name": "setTagsOnCustomPost"
@@ -895,13 +1114,37 @@
               "name": "setTagsOnPosts"
             },
             {
+              "name": "setUserMeta"
+            },
+            {
+              "name": "setUserMetas"
+            },
+            {
               "name": "updateCategories"
             },
             {
               "name": "updateCategory"
             },
             {
+              "name": "updateCategoryMeta"
+            },
+            {
+              "name": "updateCategoryMetas"
+            },
+            {
+              "name": "updateCommentMeta"
+            },
+            {
+              "name": "updateCommentMetas"
+            },
+            {
               "name": "updateCustomPost"
+            },
+            {
+              "name": "updateCustomPostMeta"
+            },
+            {
+              "name": "updateCustomPostMetas"
             },
             {
               "name": "updateCustomPosts"
@@ -928,7 +1171,19 @@
               "name": "updatePostCategory"
             },
             {
+              "name": "updatePostCategoryMeta"
+            },
+            {
+              "name": "updatePostCategoryMetas"
+            },
+            {
               "name": "updatePostTag"
+            },
+            {
+              "name": "updatePostTagMeta"
+            },
+            {
+              "name": "updatePostTagMetas"
             },
             {
               "name": "updatePostTags"
@@ -940,7 +1195,19 @@
               "name": "updateTag"
             },
             {
+              "name": "updateTagMeta"
+            },
+            {
+              "name": "updateTagMetas"
+            },
+            {
               "name": "updateTags"
+            },
+            {
+              "name": "updateUserMeta"
+            },
+            {
+              "name": "updateUserMetas"
             }
           ],
           "kind": "OBJECT",
@@ -1569,10 +1836,52 @@
           "namespacedName": "Root",
           "fields": [
             {
+              "name": "addCategoryMeta"
+            },
+            {
+              "name": "addCategoryMetas"
+            },
+            {
+              "name": "addCommentMeta"
+            },
+            {
+              "name": "addCommentMetas"
+            },
+            {
               "name": "addCommentToCustomPost"
             },
             {
               "name": "addCommentToCustomPosts"
+            },
+            {
+              "name": "addCustomPostMeta"
+            },
+            {
+              "name": "addCustomPostMetas"
+            },
+            {
+              "name": "addPostCategoryMeta"
+            },
+            {
+              "name": "addPostCategoryMetas"
+            },
+            {
+              "name": "addPostTagMeta"
+            },
+            {
+              "name": "addPostTagMetas"
+            },
+            {
+              "name": "addTagMeta"
+            },
+            {
+              "name": "addTagMetas"
+            },
+            {
+              "name": "addUserMeta"
+            },
+            {
+              "name": "addUserMetas"
             },
             {
               "name": "capabilities"
@@ -1662,13 +1971,43 @@
               "name": "deleteCategory"
             },
             {
+              "name": "deleteCategoryMeta"
+            },
+            {
+              "name": "deleteCategoryMetas"
+            },
+            {
+              "name": "deleteCommentMeta"
+            },
+            {
+              "name": "deleteCommentMetas"
+            },
+            {
+              "name": "deleteCustomPostMeta"
+            },
+            {
+              "name": "deleteCustomPostMetas"
+            },
+            {
               "name": "deletePostCategories"
             },
             {
               "name": "deletePostCategory"
             },
             {
+              "name": "deletePostCategoryMeta"
+            },
+            {
+              "name": "deletePostCategoryMetas"
+            },
+            {
               "name": "deletePostTag"
+            },
+            {
+              "name": "deletePostTagMeta"
+            },
+            {
+              "name": "deletePostTagMetas"
             },
             {
               "name": "deletePostTags"
@@ -1677,7 +2016,19 @@
               "name": "deleteTag"
             },
             {
+              "name": "deleteTagMeta"
+            },
+            {
+              "name": "deleteTagMetas"
+            },
+            {
               "name": "deleteTags"
+            },
+            {
+              "name": "deleteUserMeta"
+            },
+            {
+              "name": "deleteUserMetas"
             },
             {
               "name": "globalID"
@@ -1857,10 +2208,46 @@
               "name": "setCategoriesOnPosts"
             },
             {
+              "name": "setCategoryMeta"
+            },
+            {
+              "name": "setCategoryMetas"
+            },
+            {
+              "name": "setCommentMeta"
+            },
+            {
+              "name": "setCommentMetas"
+            },
+            {
+              "name": "setCustomPostMeta"
+            },
+            {
+              "name": "setCustomPostMetas"
+            },
+            {
               "name": "setFeaturedImageOnCustomPost"
             },
             {
               "name": "setFeaturedImageOnCustomPosts"
+            },
+            {
+              "name": "setPostCategoryMeta"
+            },
+            {
+              "name": "setPostCategoryMetas"
+            },
+            {
+              "name": "setPostTagMeta"
+            },
+            {
+              "name": "setPostTagMetas"
+            },
+            {
+              "name": "setTagMeta"
+            },
+            {
+              "name": "setTagMetas"
             },
             {
               "name": "setTagsOnCustomPost"
@@ -1873,6 +2260,12 @@
             },
             {
               "name": "setTagsOnPosts"
+            },
+            {
+              "name": "setUserMeta"
+            },
+            {
+              "name": "setUserMetas"
             },
             {
               "name": "siteLanguage"
@@ -1902,7 +2295,25 @@
               "name": "updateCategory"
             },
             {
+              "name": "updateCategoryMeta"
+            },
+            {
+              "name": "updateCategoryMetas"
+            },
+            {
+              "name": "updateCommentMeta"
+            },
+            {
+              "name": "updateCommentMetas"
+            },
+            {
               "name": "updateCustomPost"
+            },
+            {
+              "name": "updateCustomPostMeta"
+            },
+            {
+              "name": "updateCustomPostMetas"
             },
             {
               "name": "updateCustomPosts"
@@ -1929,7 +2340,19 @@
               "name": "updatePostCategory"
             },
             {
+              "name": "updatePostCategoryMeta"
+            },
+            {
+              "name": "updatePostCategoryMetas"
+            },
+            {
               "name": "updatePostTag"
+            },
+            {
+              "name": "updatePostTagMeta"
+            },
+            {
+              "name": "updatePostTagMetas"
             },
             {
               "name": "updatePostTags"
@@ -1941,7 +2364,19 @@
               "name": "updateTag"
             },
             {
+              "name": "updateTagMeta"
+            },
+            {
+              "name": "updateTagMetas"
+            },
+            {
               "name": "updateTags"
+            },
+            {
+              "name": "updateUserMeta"
+            },
+            {
+              "name": "updateUserMetas"
             },
             {
               "name": "useGutenbergEditorWithCustomPostType"
@@ -1963,6 +2398,26 @@
           "description": "Root type, starting from which the query is executed"
         },
         {
+          "name": "RootAddCommentMetaMutationPayload",
+          "namespacedName": "RootAddCommentMetaMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of adding meta to a comment"
+        },
+        {
           "name": "RootAddCommentToCustomPostMutationPayload",
           "namespacedName": "RootAddCommentToCustomPostMutationPayload",
           "fields": [
@@ -1981,6 +2436,126 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of adding a comment to a custom post"
+        },
+        {
+          "name": "RootAddGenericCategoryTermMetaMutationPayload",
+          "namespacedName": "RootAddGenericCategoryTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of adding meta to a category term"
+        },
+        {
+          "name": "RootAddGenericCustomPostMetaMutationPayload",
+          "namespacedName": "RootAddGenericCustomPostMetaMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of adding meta to a custom post"
+        },
+        {
+          "name": "RootAddGenericTagTermMetaMutationPayload",
+          "namespacedName": "RootAddGenericTagTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of adding meta to a tag term"
+        },
+        {
+          "name": "RootAddPostCategoryTermMetaMutationPayload",
+          "namespacedName": "RootAddPostCategoryTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of adding meta to a posts's category term"
+        },
+        {
+          "name": "RootAddPostTagTermMetaMutationPayload",
+          "namespacedName": "RootAddPostTagTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of adding meta to a posts's tag term"
+        },
+        {
+          "name": "RootAddUserMetaMutationPayload",
+          "namespacedName": "RootAddUserMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of adding meta to a user"
         },
         {
           "name": "RootCreateCustomPostMutationPayload",
@@ -2143,6 +2718,46 @@
           "description": "Payload of creating a post tag term"
         },
         {
+          "name": "RootDeleteCommentMetaMutationPayload",
+          "namespacedName": "RootDeleteCommentMetaMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete meta mutation on a comment"
+        },
+        {
+          "name": "RootDeleteGenericCategoryTermMetaMutationPayload",
+          "namespacedName": "RootDeleteGenericCategoryTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete meta mutation on a category term"
+        },
+        {
           "name": "RootDeleteGenericCategoryTermMutationPayload",
           "namespacedName": "RootDeleteGenericCategoryTermMutationPayload",
           "fields": [
@@ -2155,6 +2770,46 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing a delete mutation on a category term"
+        },
+        {
+          "name": "RootDeleteGenericCustomPostMetaMutationPayload",
+          "namespacedName": "RootDeleteGenericCustomPostMetaMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete meta mutation on a custom post"
+        },
+        {
+          "name": "RootDeleteGenericTagTermMetaMutationPayload",
+          "namespacedName": "RootDeleteGenericTagTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete meta mutation on a tag term"
         },
         {
           "name": "RootDeleteGenericTagTermMutationPayload",
@@ -2171,6 +2826,26 @@
           "description": "Payload of executing a delete mutation on a tag term"
         },
         {
+          "name": "RootDeletePostCategoryTermMetaMutationPayload",
+          "namespacedName": "RootDeletePostCategoryTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete meta mutation on a post's category term"
+        },
+        {
           "name": "RootDeletePostCategoryTermMutationPayload",
           "namespacedName": "RootDeletePostCategoryTermMutationPayload",
           "fields": [
@@ -2185,6 +2860,26 @@
           "description": "Payload of executing a delete mutation on a post category term"
         },
         {
+          "name": "RootDeletePostTagTermMetaMutationPayload",
+          "namespacedName": "RootDeletePostTagTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete meta mutation on a post's tag term"
+        },
+        {
           "name": "RootDeletePostTagTermMutationPayload",
           "namespacedName": "RootDeletePostTagTermMutationPayload",
           "fields": [
@@ -2197,6 +2892,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing a delete mutation on a post tag term"
+        },
+        {
+          "name": "RootDeleteUserMetaMutationPayload",
+          "namespacedName": "RootDeleteUserMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete meta mutation on a user"
         },
         {
           "name": "RootLoginUserMutationPayload",
@@ -2319,6 +3034,26 @@
           "description": "Payload of setting categories on a post"
         },
         {
+          "name": "RootSetCommentMetaMutationPayload",
+          "namespacedName": "RootSetCommentMetaMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a set meta mutation on a comment"
+        },
+        {
           "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
           "namespacedName": "RootSetFeaturedImageOnCustomPostMutationPayload",
           "fields": [
@@ -2337,6 +3072,106 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of setting the featured image to a custom post"
+        },
+        {
+          "name": "RootSetGenericCategoryTermMetaMutationPayload",
+          "namespacedName": "RootSetGenericCategoryTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a set meta mutation on a category term"
+        },
+        {
+          "name": "RootSetGenericCustomPostMetaMutationPayload",
+          "namespacedName": "RootSetGenericCustomPostMetaMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a set meta mutation on a custom post"
+        },
+        {
+          "name": "RootSetGenericTagTermMetaMutationPayload",
+          "namespacedName": "RootSetGenericTagTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a set meta mutation on a tag term"
+        },
+        {
+          "name": "RootSetPostCategoryTermMetaMutationPayload",
+          "namespacedName": "RootSetPostCategoryTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a set meta mutation on a post's category term"
+        },
+        {
+          "name": "RootSetPostTagTermMetaMutationPayload",
+          "namespacedName": "RootSetPostTagTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a set meta mutation on a post's tag term"
         },
         {
           "name": "RootSetTagsOnCustomPostMutationPayload",
@@ -2379,6 +3214,46 @@
           "description": "Payload of setting tags on a post"
         },
         {
+          "name": "RootSetUserMetaMutationPayload",
+          "namespacedName": "RootSetUserMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a set meta mutation on a user"
+        },
+        {
+          "name": "RootUpdateCommentMetaMutationPayload",
+          "namespacedName": "RootUpdateCommentMetaMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update meta mutation on a comment"
+        },
+        {
           "name": "RootUpdateCustomPostMutationPayload",
           "namespacedName": "RootUpdateCustomPostMutationPayload",
           "fields": [
@@ -2399,6 +3274,26 @@
           "description": "Payload of executing an update mutation on a custom post"
         },
         {
+          "name": "RootUpdateGenericCategoryTermMetaMutationPayload",
+          "namespacedName": "RootUpdateGenericCategoryTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update meta mutation on a category term"
+        },
+        {
           "name": "RootUpdateGenericCategoryTermMutationPayload",
           "namespacedName": "RootUpdateGenericCategoryTermMutationPayload",
           "fields": [
@@ -2417,6 +3312,46 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing an update mutation on a category term"
+        },
+        {
+          "name": "RootUpdateGenericCustomPostMetaMutationPayload",
+          "namespacedName": "RootUpdateGenericCustomPostMetaMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update meta mutation on a custom post"
+        },
+        {
+          "name": "RootUpdateGenericTagTermMetaMutationPayload",
+          "namespacedName": "RootUpdateGenericTagTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update meta mutation on a tag term"
         },
         {
           "name": "RootUpdateGenericTagTermMutationPayload",
@@ -2479,6 +3414,26 @@
           "description": "Payload of executing an update mutation on a page"
         },
         {
+          "name": "RootUpdatePostCategoryTermMetaMutationPayload",
+          "namespacedName": "RootUpdatePostCategoryTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update meta mutation on a post's category term"
+        },
+        {
           "name": "RootUpdatePostCategoryTermMutationPayload",
           "namespacedName": "RootUpdatePostCategoryTermMutationPayload",
           "fields": [
@@ -2519,6 +3474,26 @@
           "description": "Payload of executing an update mutation on a post"
         },
         {
+          "name": "RootUpdatePostTagTermMetaMutationPayload",
+          "namespacedName": "RootUpdatePostTagTermMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update meta mutation on a post's tag term"
+        },
+        {
           "name": "RootUpdatePostTagTermMutationPayload",
           "namespacedName": "RootUpdatePostTagTermMutationPayload",
           "fields": [
@@ -2537,6 +3512,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing an update mutation on a post tag term"
+        },
+        {
+          "name": "RootUpdateUserMetaMutationPayload",
+          "namespacedName": "RootUpdateUserMetaMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update meta mutation on a user"
         },
         {
           "name": "TagTermDoesNotExistErrorPayload",
@@ -3167,6 +4162,13 @@
           "description": "Menu Locations, with possible values: `\"footer\"`, `\"primary\"`."
         },
         {
+          "name": "NullableListValueJSONObject",
+          "namespacedName": "NullableListValueJSONObject",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Custom scalar representing a JSON Object where values are lists (of anything) or null"
+        },
+        {
           "name": "Numeric",
           "namespacedName": "Numeric",
           "fields": null,
@@ -3720,6 +4722,13 @@
           "description": "Input to sort custom posts"
         },
         {
+          "name": "MetaKeysFilterInput",
+          "namespacedName": "MetaKeysFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter the 'metaKeys' field"
+        },
+        {
           "name": "MetaQueryCompareByArrayValueInput",
           "namespacedName": "MetaQueryCompareByArrayValueInput",
           "fields": null,
@@ -3818,11 +4827,46 @@
           "description": "Oneof input to specify the property and data to fetch a tag"
         },
         {
+          "name": "RootAddCategoryMetaInput",
+          "namespacedName": "RootAddCategoryMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to add meta to a category term"
+        },
+        {
+          "name": "RootAddCommentMetaInput",
+          "namespacedName": "RootAddCommentMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to add meta to a comment"
+        },
+        {
           "name": "RootAddCommentToCustomPostInput",
           "namespacedName": "RootAddCommentToCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add a comment to a custom post"
+        },
+        {
+          "name": "RootAddCustomPostMetaInput",
+          "namespacedName": "RootAddCustomPostMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to add meta to a custom post"
+        },
+        {
+          "name": "RootAddTagMetaInput",
+          "namespacedName": "RootAddTagMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to add meta to a tag term"
+        },
+        {
+          "name": "RootAddUserMetaInput",
+          "namespacedName": "RootAddUserMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to add meta to a user"
         },
         {
           "name": "RootCategoriesFilterInput",
@@ -3909,6 +4953,27 @@
           "description": "Input to filter custom posts"
         },
         {
+          "name": "RootDeleteCategoryMetaInput",
+          "namespacedName": "RootDeleteCategoryMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a category term's meta entry"
+        },
+        {
+          "name": "RootDeleteCommentMetaInput",
+          "namespacedName": "RootDeleteCommentMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a comment's meta entry"
+        },
+        {
+          "name": "RootDeleteCustomPostMetaInput",
+          "namespacedName": "RootDeleteCustomPostMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a custom post's meta entry"
+        },
+        {
           "name": "RootDeleteGenericCategoryInput",
           "namespacedName": "RootDeleteGenericCategoryInput",
           "fields": null,
@@ -3935,6 +5000,20 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete a tag term"
+        },
+        {
+          "name": "RootDeleteTagMetaInput",
+          "namespacedName": "RootDeleteTagMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a tag term's meta entry"
+        },
+        {
+          "name": "RootDeleteUserMetaInput",
+          "namespacedName": "RootDeleteUserMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a user's meta entry"
         },
         {
           "name": "RootMediaItemPaginationInput",
@@ -4056,11 +5135,39 @@
           "description": "Input to set categories on a custom post"
         },
         {
+          "name": "RootSetCategoryMetaInput",
+          "namespacedName": "RootSetCategoryMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to set a category term's meta entries"
+        },
+        {
+          "name": "RootSetCommentMetaInput",
+          "namespacedName": "RootSetCommentMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to set entries on a comment"
+        },
+        {
+          "name": "RootSetCustomPostMetaInput",
+          "namespacedName": "RootSetCustomPostMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to set entries on a custom post"
+        },
+        {
           "name": "RootSetFeaturedImageOnCustomPostInput",
           "namespacedName": "RootSetFeaturedImageOnCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set the featured image on a custom post"
+        },
+        {
+          "name": "RootSetTagMetaInput",
+          "namespacedName": "RootSetTagMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to set a tag term's meta entries"
         },
         {
           "name": "RootSetTagsOnCustomPostInput",
@@ -4077,6 +5184,13 @@
           "description": "Input to set tags on a custom post"
         },
         {
+          "name": "RootSetUserMetaInput",
+          "namespacedName": "RootSetUserMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to set entries on a user"
+        },
+        {
           "name": "RootTagsFilterInput",
           "namespacedName": "RootTagsFilterInput",
           "fields": null,
@@ -4084,11 +5198,32 @@
           "description": "Input to filter tags"
         },
         {
+          "name": "RootUpdateCategoryMetaInput",
+          "namespacedName": "RootUpdateCategoryMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a category term's meta"
+        },
+        {
+          "name": "RootUpdateCommentMetaInput",
+          "namespacedName": "RootUpdateCommentMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a comment's meta"
+        },
+        {
           "name": "RootUpdateCustomPostInput",
           "namespacedName": "RootUpdateCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post"
+        },
+        {
+          "name": "RootUpdateCustomPostMetaInput",
+          "namespacedName": "RootUpdateCustomPostMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a custom post's meta"
         },
         {
           "name": "RootUpdateGenericCategoryInput",
@@ -4138,6 +5273,20 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a tag term"
+        },
+        {
+          "name": "RootUpdateTagMetaInput",
+          "namespacedName": "RootUpdateTagMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a tag term's meta"
+        },
+        {
+          "name": "RootUpdateUserMetaInput",
+          "namespacedName": "RootUpdateUserMetaInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a user's meta"
         },
         {
           "name": "TagByFilterInput",
@@ -4413,11 +5562,60 @@
           "description": "Union of 'custom post' type resolvers"
         },
         {
+          "name": "RootAddCommentMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddCommentMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when adding meta on a comment"
+        },
+        {
           "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
           "namespacedName": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding a comment to a custom post"
+        },
+        {
+          "name": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when adding meta on a category term"
+        },
+        {
+          "name": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when adding meta on a custom post"
+        },
+        {
+          "name": "RootAddGenericTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddGenericTagTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when adding meta on a tag term"
+        },
+        {
+          "name": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when adding meta on a post's category term"
+        },
+        {
+          "name": "RootAddPostTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddPostTagTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when adding meta on a post's tag term"
+        },
+        {
+          "name": "RootAddUserMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddUserMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when adding meta on a user"
         },
         {
           "name": "RootCreateCustomPostMutationErrorPayloadUnion",
@@ -4476,11 +5674,39 @@
           "description": "Union of 'Error Payload' types when creating a post tag term"
         },
         {
+          "name": "RootDeleteCommentMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteCommentMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting meta on a comment"
+        },
+        {
+          "name": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting meta on a category term"
+        },
+        {
           "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
           "namespacedName": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting a category term"
+        },
+        {
+          "name": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting meta on a custom post"
+        },
+        {
+          "name": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting meta on a tag term"
         },
         {
           "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
@@ -4490,6 +5716,13 @@
           "description": "Union of 'Error Payload' types when deleting a tag term"
         },
         {
+          "name": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting meta on a post's category term"
+        },
+        {
           "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
           "namespacedName": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
           "fields": null,
@@ -4497,11 +5730,25 @@
           "description": "Union of 'Error Payload' types when deleting a post category term"
         },
         {
+          "name": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting meta on a post's tag term"
+        },
+        {
           "name": "RootDeletePostTagTermMutationErrorPayloadUnion",
           "namespacedName": "RootDeletePostTagTermMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting a post tag term"
+        },
+        {
+          "name": "RootDeleteUserMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteUserMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting meta on a user"
         },
         {
           "name": "RootLoginUserMutationErrorPayloadUnion",
@@ -4546,11 +5793,53 @@
           "description": "Union of 'Error Payload' types when setting categories on a post"
         },
         {
+          "name": "RootSetCommentMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetCommentMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting meta on a comment"
+        },
+        {
           "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
           "namespacedName": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting a featured image to a custom post"
+        },
+        {
+          "name": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting meta on a category term"
+        },
+        {
+          "name": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting meta on a custom post"
+        },
+        {
+          "name": "RootSetGenericTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetGenericTagTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting meta on a tag term"
+        },
+        {
+          "name": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting meta on a post's category term"
+        },
+        {
+          "name": "RootSetPostTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetPostTagTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting meta on a post's tag term"
         },
         {
           "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
@@ -4567,6 +5856,20 @@
           "description": "Union of 'Error Payload' types when setting tags on a post"
         },
         {
+          "name": "RootSetUserMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetUserMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when setting meta on a user"
+        },
+        {
+          "name": "RootUpdateCommentMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateCommentMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating meta on a comment"
+        },
+        {
           "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
           "namespacedName": "RootUpdateCustomPostMutationErrorPayloadUnion",
           "fields": null,
@@ -4574,11 +5877,32 @@
           "description": "Union of 'Error Payload' types when updating a custom post"
         },
         {
+          "name": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating meta on a category term"
+        },
+        {
           "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
           "namespacedName": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating a category term"
+        },
+        {
+          "name": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating meta on a custom post"
+        },
+        {
+          "name": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating meta on a tag term"
         },
         {
           "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
@@ -4602,6 +5926,13 @@
           "description": "Union of 'Error Payload' types when updating a page"
         },
         {
+          "name": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating meta on a post's category term"
+        },
+        {
           "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
           "namespacedName": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
           "fields": null,
@@ -4616,11 +5947,25 @@
           "description": "Union of 'Error Payload' types when updating a post"
         },
         {
+          "name": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating meta on a post's tag term"
+        },
+        {
           "name": "RootUpdatePostTagTermMutationErrorPayloadUnion",
           "namespacedName": "RootUpdatePostTagTermMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating a post tag term"
+        },
+        {
+          "name": "RootUpdateUserMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateUserMetaMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating meta on a user"
         },
         {
           "name": "TagUnion",

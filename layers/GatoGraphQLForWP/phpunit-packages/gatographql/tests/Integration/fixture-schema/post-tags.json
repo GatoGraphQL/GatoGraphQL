@@ -10,6 +10,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "zoroastro",
                 "postCount": 0,
                 "posts": [],
@@ -26,6 +28,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "xcel",
                 "postCount": 0,
                 "posts": [],
@@ -42,6 +46,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "wordpress",
                 "postCount": 2,
                 "posts": [
@@ -67,6 +73,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Security",
                 "postCount": 1,
                 "posts": [
@@ -88,6 +96,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "release",
                 "postCount": 1,
                 "posts": [
@@ -109,6 +119,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "plugin",
                 "postCount": 3,
                 "posts": [
@@ -138,6 +150,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "ideas",
                 "postCount": 1,
                 "posts": [
@@ -159,6 +173,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "GraphQL",
                 "postCount": 1,
                 "posts": [
@@ -180,6 +196,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "features",
                 "postCount": 4,
                 "posts": [
@@ -213,6 +231,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Also never used",
                 "postCount": 0,
                 "posts": [],
@@ -231,6 +251,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "zoroastro",
                 "postCount": 0,
                 "posts": [],
@@ -247,6 +269,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "xcel",
                 "postCount": 0,
                 "posts": [],
@@ -263,6 +287,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "wordpress",
                 "postCount": 2,
                 "posts": [
@@ -288,6 +314,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Security",
                 "postCount": 1,
                 "posts": [
@@ -309,6 +337,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "release",
                 "postCount": 1,
                 "posts": [
@@ -330,6 +360,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "plugin",
                 "postCount": 3,
                 "posts": [
@@ -359,6 +391,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "ideas",
                 "postCount": 1,
                 "posts": [
@@ -380,6 +414,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "GraphQL",
                 "postCount": 1,
                 "posts": [
@@ -401,6 +437,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "features",
                 "postCount": 4,
                 "posts": [
@@ -434,6 +472,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Also never used",
                 "postCount": 0,
                 "posts": [],
@@ -452,6 +492,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Racing cars",
                 "postCount": 1,
                 "posts": [
@@ -473,6 +515,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Horses",
                 "postCount": 1,
                 "posts": [
@@ -496,6 +540,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "zoroastro",
                 "postCount": 0,
                 "posts": [],
@@ -512,6 +558,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "xcel",
                 "postCount": 0,
                 "posts": [],
@@ -528,6 +576,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "wordpress",
                 "postCount": 2,
                 "posts": [
@@ -553,6 +603,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Security",
                 "postCount": 1,
                 "posts": [
@@ -574,6 +626,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "release",
                 "postCount": 1,
                 "posts": [
@@ -595,6 +649,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Racing cars",
                 "postCount": 1,
                 "posts": [
@@ -616,6 +672,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "plugin",
                 "postCount": 3,
                 "posts": [
@@ -645,6 +703,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "ideas",
                 "postCount": 1,
                 "posts": [
@@ -666,6 +726,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Horses",
                 "postCount": 1,
                 "posts": [
@@ -687,6 +749,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "GraphQL",
                 "postCount": 1,
                 "posts": [
@@ -745,6 +809,8 @@
                     "metaValues": null,
                     "meta": {},
                     "metaKeys": [],
+                    "includingMetaKeys": [],
+                    "excludingMetaKeys": [],
                     "name": "Security",
                     "postCount": 1,
                     "posts": [
@@ -766,6 +832,8 @@
                     "metaValues": null,
                     "meta": {},
                     "metaKeys": [],
+                    "includingMetaKeys": [],
+                    "excludingMetaKeys": [],
                     "name": "features",
                     "postCount": 4,
                     "posts": [
@@ -801,6 +869,8 @@
                     "metaValues": null,
                     "meta": {},
                     "metaKeys": [],
+                    "includingMetaKeys": [],
+                    "excludingMetaKeys": [],
                     "name": "Racing cars",
                     "postCount": 1,
                     "posts": [
@@ -1158,6 +1228,8 @@
             "metaValues": null,
             "meta": {},
             "metaKeys": [],
+            "includingMetaKeys": [],
+            "excludingMetaKeys": [],
             "name": "wordpress",
             "postCount": 2,
             "posts": [
@@ -1183,6 +1255,8 @@
             "metaValues": null,
             "meta": {},
             "metaKeys": [],
+            "includingMetaKeys": [],
+            "excludingMetaKeys": [],
             "name": "wordpress",
             "postCount": 2,
             "posts": [

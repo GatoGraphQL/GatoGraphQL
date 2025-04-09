@@ -299,9 +299,10 @@
                     {
                         "name": "core\/separator",
                         "attributes": {
-                            "opacity": "css"
+                            "opacity": "css",
+                            "tagName": "hr"
                         },
-                        "contentSource": "<!-- wp:separator {\"opacity\":\"css\"} -->\n<hr class=\"wp-block-separator has-css-opacity\"\/>\n<!-- \/wp:separator -->",
+                        "contentSource": "<!-- wp:separator {\"opacity\":\"css\",\"tagName\":\"hr\"} -->\n<hr class=\"wp-block-separator has-css-opacity\"\/>\n<!-- \/wp:separator -->",
                         "innerBlocks": null
                     },
                     {
@@ -862,7 +863,8 @@
                     {
                         "name": "core\/separator",
                         "attributes": {
-                            "opacity": "css"
+                            "opacity": "css",
+                            "tagName": "hr"
                         }
                     },
                     {
@@ -1352,7 +1354,8 @@
                     {
                         "name": "core\/separator",
                         "attributes": {
-                            "opacity": "css"
+                            "opacity": "css",
+                            "tagName": "hr"
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -2324,9 +2327,10 @@
                     {
                         "name": "core\/separator",
                         "attributes": {
-                            "opacity": "alpha-channel"
+                            "opacity": "alpha-channel",
+                            "tagName": "hr"
                         },
-                        "contentSource": "<!-- wp:separator {\"opacity\":\"alpha-channel\"} -->\n<hr class=\"wp-block-separator\"\/>\n<!-- \/wp:separator -->",
+                        "contentSource": "<!-- wp:separator {\"opacity\":\"alpha-channel\",\"tagName\":\"hr\"} -->\n<hr class=\"wp-block-separator\"\/>\n<!-- \/wp:separator -->",
                         "innerBlocks": null
                     },
                     {
@@ -2426,7 +2430,8 @@
                     {
                         "name": "core\/separator",
                         "attributes": {
-                            "opacity": "alpha-channel"
+                            "opacity": "alpha-channel",
+                            "tagName": "hr"
                         }
                     },
                     {
@@ -2532,7 +2537,8 @@
                     {
                         "name": "core\/separator",
                         "attributes": {
-                            "opacity": "alpha-channel"
+                            "opacity": "alpha-channel",
+                            "tagName": "hr"
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -7977,9 +7983,10 @@
                 {
                     "name": "core\/separator",
                     "attributes": {
-                        "opacity": "css"
+                        "opacity": "css",
+                        "tagName": "hr"
                     },
-                    "contentSource": "<!-- wp:separator {\"opacity\":\"css\"} -->\n<hr class=\"wp-block-separator has-css-opacity\"\/>\n<!-- \/wp:separator -->",
+                    "contentSource": "<!-- wp:separator {\"opacity\":\"css\",\"tagName\":\"hr\"} -->\n<hr class=\"wp-block-separator has-css-opacity\"\/>\n<!-- \/wp:separator -->",
                     "innerBlocks": null
                 },
                 {
@@ -8540,7 +8547,8 @@
                 {
                     "name": "core\/separator",
                     "attributes": {
-                        "opacity": "css"
+                        "opacity": "css",
+                        "tagName": "hr"
                     }
                 },
                 {
@@ -9030,7 +9038,8 @@
                 {
                     "name": "core\/separator",
                     "attributes": {
-                        "opacity": "css"
+                        "opacity": "css",
+                        "tagName": "hr"
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null

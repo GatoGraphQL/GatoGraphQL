@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserMeta\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPCMSSchema\Meta\FieldResolvers\ObjectType\EntityObjectTypeFieldResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\UserMeta\Module;
 use PoPCMSSchema\UserMeta\ModuleConfiguration;
@@ -17,6 +18,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
+    use EntityObjectTypeFieldResolverTrait;
+
     private ?UserMetaTypeAPIInterface $userMetaTypeAPI = null;
 
     final protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
@@ -76,14 +79,38 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                     }
                     $metaKeys[] = $key;
                 }
-                return $metaKeys;
+                return $this->resolveMetaKeysValue(
+                    $metaKeys,
+                    $fieldDataAccessor,
+                );
             case 'metaValue':
-            case 'metaValues':
-                return $this->getUserMetaTypeAPI()->getUserMeta(
+                $metaValue = $this->getUserMetaTypeAPI()->getUserMeta(
                     $user,
                     $fieldDataAccessor->getValue('key'),
-                    $fieldDataAccessor->getFieldName() === 'metaValue'
+                    true
                 );
+                // If it's an array, it must be a JSON object
+                if (is_array($metaValue)) {
+                    return (object) $metaValue;
+                }
+                return $metaValue;
+            case 'metaValues':
+                $metaValues = $this->getUserMetaTypeAPI()->getUserMeta(
+                    $user,
+                    $fieldDataAccessor->getValue('key'),
+                    false
+                );
+                if (!is_array($metaValues)) {
+                    return $metaValues;
+                }
+                foreach ($metaValues as $index => $metaValue) {
+                    // If it's an array, it must be a JSON object
+                    if (!is_array($metaValue)) {
+                        continue;
+                    }
+                    $metaValues[$index] = (object) $metaValue;
+                }
+                return $metaValues;
             case 'meta':
                 $meta = [];
                 $allMeta = $this->getUserMetaTypeAPI()->getAllUserMeta($user);

@@ -16,13 +16,13 @@
                 },
                 "caption": "",
                 "description": "",
-                "height": 144,
-                "mimeType": "image\/png",
-                "sizes": "(max-width: 364px) 100vw, 364px",
-                "slug": "another-browser-png",
+                "height": 620,
+                "mimeType": "image\/webp",
+                "sizes": "(max-width: 620px) 100vw, 620px",
+                "slug": "another-browser-webp",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/another-browser.webp",
                 "title": "another-browser.webp",
-                "width": 364
+                "width": 620
             }
         },
         "createMediaItems": [
@@ -38,13 +38,13 @@
                     },
                     "caption": "",
                     "description": "",
-                    "height": 144,
-                    "mimeType": "image\/png",
-                    "sizes": "(max-width: 364px) 100vw, 364px",
-                    "slug": "another-browser-png",
+                    "height": 620,
+                    "mimeType": "image\/webp",
+                    "sizes": "(max-width: 620px) 100vw, 620px",
+                    "slug": "another-browser-webp",
                     "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/another-browser-1.webp",
                     "title": "another-browser.webp",
-                    "width": 364
+                    "width": 620
                 }
             },
             {
@@ -59,13 +59,13 @@
                     },
                     "caption": "",
                     "description": "",
-                    "height": 144,
-                    "mimeType": "image\/png",
-                    "sizes": "(max-width: 364px) 100vw, 364px",
-                    "slug": "another-browser-png",
+                    "height": 620,
+                    "mimeType": "image\/webp",
+                    "sizes": "(max-width: 620px) 100vw, 620px",
+                    "slug": "another-browser-webp",
                     "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/another-browser.webp",
                     "title": "another-browser.webp",
-                    "width": 364
+                    "width": 620
                 }
             }
         ],

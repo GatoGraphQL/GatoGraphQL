@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulExcept
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
@@ -169,7 +170,10 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractBasicServ
             throw new LicenseOperationNotSuccessfulException(
                 $this->__('The license is for test mode, but the extension is not on development mode', 'gatographql'),
             );
-        } elseif (!$isTestMode && $isExtensionOnDevelopmentMode) {
+        } elseif (!PluginStaticModuleConfiguration::canDevModePluginUseProdModeLicense()
+            && !$isTestMode
+            && $isExtensionOnDevelopmentMode
+        ) {
             throw new LicenseOperationNotSuccessfulException(
                 $this->__('The license is not for test mode, but the extension is on development mode', 'gatographql'),
             );

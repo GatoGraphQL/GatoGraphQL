@@ -16,13 +16,13 @@
                 },
                 "caption": "Browser pic from WordPress",
                 "description": "",
-                "height": 144,
-                "mimeType": "image\/png",
-                "sizes": "(max-width: 364px) 100vw, 364px",
-                "slug": "browser-png",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser.webp",
-                "title": "browser.webp",
-                "width": 364
+                "height": 620,
+                "mimeType": "image\/webp",
+                "sizes": "(max-width: 620px) 100vw, 620px",
+                "slug": "nurse-webp",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/nurse.webp",
+                "title": "nurse.webp",
+                "width": 620
             }
         },
         "createMediaItems": [
@@ -38,13 +38,13 @@
                     },
                     "caption": "Browser pic from WordPress",
                     "description": "",
-                    "height": 144,
-                    "mimeType": "image\/png",
-                    "sizes": "(max-width: 364px) 100vw, 364px",
-                    "slug": "browser-png",
-                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser-1.webp",
-                    "title": "browser.webp",
-                    "width": 364
+                    "height": 620,
+                    "mimeType": "image\/webp",
+                    "sizes": "(max-width: 620px) 100vw, 620px",
+                    "slug": "nurse-webp",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/nurse-1.webp",
+                    "title": "nurse.webp",
+                    "width": 620
                 }
             },
             {
@@ -59,13 +59,13 @@
                     },
                     "caption": "Browser pic from WordPress",
                     "description": "",
-                    "height": 144,
-                    "mimeType": "image\/png",
-                    "sizes": "(max-width: 364px) 100vw, 364px",
-                    "slug": "browser-png",
-                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser.webp",
-                    "title": "browser.webp",
-                    "width": 364
+                    "height": 620,
+                    "mimeType": "image\/webp",
+                    "sizes": "(max-width: 620px) 100vw, 620px",
+                    "slug": "nurse-webp",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/nurse.webp",
+                    "title": "nurse.webp",
+                    "width": 620
                 }
             }
         ],

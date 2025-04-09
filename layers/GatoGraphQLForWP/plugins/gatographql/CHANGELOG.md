@@ -35,10 +35,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Made meta field `metaValue` handle any scalar type (previously only `String`) (#3061)
 - Made meta field `metaValues` handle any scalar type (previously only built-in ones), such as `JSONObject` (#3061)
 - Allow to hook inputs into tag/category mutations (#3062)
+- Tested up WordPress 6.8
 
 ### Fixed
 
 - Passing a non-`post` CPT to `updatePost` will show an error (#3070)
+- Translation loading error message in WordPress 6.8 (73a9f11)
 
 ## 11.2.0 - 15/03/2025
 

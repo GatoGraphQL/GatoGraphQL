@@ -29,6 +29,12 @@ query {
     isStatus(status: pending)
     menuOrder
     metaValue(key: "_thumbnail_id")
+    metaValue2: metaValue(key: "_wp_page_template")
+    meta(keys: ["_thumbnail_id", "_wp_page_template"])
+    metaKeys
+    includingMetaKeys: metaKeys(filter: { include: ["_thumbnail_id", "_edit_last", "_wp_page_template"] })
+    excludingMetaKeys: metaKeys(filter: { exclude: ["_thumbnail_id", "_edit_last", "_wp_page_template"] })
+    includingAndExcludingMetaKeys: metaKeys(filter: { include: ["_thumbnail_id", "_edit_last", "_wp_page_template"], exclude: ["_edit_last", "_wp_page_template"] })
     # These ones produce the value of data being inserted to DB, so can't save fixed value for testing
     # modifiedDate
     # modifiedDateStr(format: "m-d")

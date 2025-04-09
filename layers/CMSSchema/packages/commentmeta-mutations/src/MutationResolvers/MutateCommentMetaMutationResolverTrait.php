@@ -33,4 +33,13 @@ trait MutateCommentMetaMutationResolverTrait
     ): bool {
         return in_array($value, $this->getCommentMetaTypeAPI()->getCommentMeta($entityID, $key, false));
     }
+
+    protected function doesMetaEntryHaveValue(
+        string|int $entityID,
+        string $key,
+        mixed $value,
+    ): bool {
+        $existingValue = $this->getCommentMetaTypeAPI()->getCommentMeta($entityID, $key, false);
+        return $existingValue === [$value];
+    }
 }

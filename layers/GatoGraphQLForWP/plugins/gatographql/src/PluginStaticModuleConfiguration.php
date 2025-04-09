@@ -82,4 +82,9 @@ class PluginStaticModuleConfiguration
     {
         return false;
     }
+
+    public static function canDevModePluginUseProdModeLicense(): bool
+    {
+        return true;
+    }
 }

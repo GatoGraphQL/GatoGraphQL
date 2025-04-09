@@ -14,6 +14,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E3 = 'e3';
     public final const E4 = 'e4';
     public final const E5 = 'e5';
+    public final const E6 = 'e6';
 
     /**
      * @return string[]
@@ -26,6 +27,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3,
             self::E4,
             self::E5,
+            self::E6,
         ];
     }
 
@@ -37,6 +39,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3 => $this->__('Meta keys \'%s\' are not allowed', 'taxonomymeta-mutations'),
             self::E4 => $this->__('The term with ID \'%s\' has no entry with meta key \'%s\'', 'taxonomymeta-mutations'),
             self::E5 => $this->__('The term with ID \'%s\' has no entry with meta key \'%s\' and value \'%s\'', 'taxonomymeta-mutations'),
+            self::E6 => $this->__('The term with ID \'%s\' already has entry with meta key \'%s\' and value \'%s\'', 'taxonomymeta-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

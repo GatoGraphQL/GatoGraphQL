@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMeta\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPCMSSchema\Meta\FieldResolvers\ObjectType\EntityObjectTypeFieldResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 use PoPCMSSchema\TaxonomyMeta\Module;
@@ -17,6 +18,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
+    use EntityObjectTypeFieldResolverTrait;
+
     private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
 
     final protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
@@ -76,14 +79,38 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                     }
                     $metaKeys[] = $key;
                 }
-                return $metaKeys;
+                return $this->resolveMetaKeysValue(
+                    $metaKeys,
+                    $fieldDataAccessor,
+                );
             case 'metaValue':
-            case 'metaValues':
-                return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
+                $metaValue = $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
                     $taxonomyTerm,
                     $fieldDataAccessor->getValue('key'),
-                    $fieldDataAccessor->getFieldName() === 'metaValue'
+                    true
                 );
+                // If it's an array, it must be a JSON object
+                if (is_array($metaValue)) {
+                    return (object) $metaValue;
+                }
+                return $metaValue;
+            case 'metaValues':
+                $metaValues = $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
+                    $taxonomyTerm,
+                    $fieldDataAccessor->getValue('key'),
+                    false
+                );
+                if (!is_array($metaValues)) {
+                    return $metaValues;
+                }
+                foreach ($metaValues as $index => $metaValue) {
+                    // If it's an array, it must be a JSON object
+                    if (!is_array($metaValue)) {
+                        continue;
+                    }
+                    $metaValues[$index] = (object) $metaValue;
+                }
+                return $metaValues;
             case 'meta':
                 $meta = [];
                 $allMeta = $this->getTaxonomyMetaTypeAPI()->getAllTaxonomyTermMeta($taxonomyTerm);

@@ -7,6 +7,7 @@ namespace PoPCMSSchema\MetaMutations\MutationResolvers;
 use PoPCMSSchema\MetaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MetaMutations\ObjectModels\AccessToMetaKeyIsNotAllowedErrorPayload;
 use PoPCMSSchema\MetaMutations\ObjectModels\EntityMetaAlreadyHasSingleEntryErrorPayload;
+use PoPCMSSchema\MetaMutations\ObjectModels\EntityMetaEntryAlreadyHasValueErrorPayload;
 use PoPCMSSchema\MetaMutations\ObjectModels\EntityMetaKeyDoesNotExistErrorPayload;
 use PoPCMSSchema\MetaMutations\ObjectModels\EntityMetaKeyWithValueDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -52,6 +53,12 @@ trait PayloadableMetaMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
             ] => new EntityMetaKeyWithValueDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
+            ] => new EntityMetaEntryAlreadyHasValueErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => null,
