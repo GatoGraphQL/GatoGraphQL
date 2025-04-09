@@ -170,7 +170,8 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractBasicServ
             throw new LicenseOperationNotSuccessfulException(
                 $this->__('The license is for test mode, but the extension is not on development mode', 'gatographql'),
             );
-        } elseif (!PluginStaticModuleConfiguration::canDevModePluginUseProdModeLicense()
+        } elseif (
+            !PluginStaticModuleConfiguration::canDevModePluginUseProdModeLicense()
             && !$isTestMode
             && $isExtensionOnDevelopmentMode
         ) {
