@@ -19,7 +19,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
     use EntityObjectTypeFieldResolverTrait;
-    
+
     private ?CommentMetaTypeAPIInterface $commentMetaTypeAPI = null;
 
     final protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface

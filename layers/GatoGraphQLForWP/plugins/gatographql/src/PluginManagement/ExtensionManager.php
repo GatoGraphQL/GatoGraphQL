@@ -419,12 +419,12 @@ class ExtensionManager extends AbstractPluginManager
         ?string $messagePlaceholderCode = null,
     ): void {
         \add_action('admin_notices', function () use ($extensionName, $messagePlaceholderCode) {
-            $messagePlaceholder = match($messagePlaceholderCode) {
+            $messagePlaceholder = match ($messagePlaceholderCode) {
                 'invalid' => __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql'),
                 'unmatching' => __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql'),
                 default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
             };
-            
+
             // /**
             //  * Do not print the warnings in the Settings page
             //  */

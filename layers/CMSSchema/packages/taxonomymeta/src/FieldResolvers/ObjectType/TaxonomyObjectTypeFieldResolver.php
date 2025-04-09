@@ -19,7 +19,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
     use EntityObjectTypeFieldResolverTrait;
-    
+
     private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
 
     final protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
