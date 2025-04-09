@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMeta\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPCMSSchema\Meta\FieldResolvers\ObjectType\EntityObjectTypeFieldResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeResolvers\ObjectType\AbstractTaxonomyObjectTypeResolver;
 use PoPCMSSchema\TaxonomyMeta\Module;
@@ -17,6 +18,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
+    use EntityObjectTypeFieldResolverTrait;
+    
     private ?TaxonomyMetaTypeAPIInterface $taxonomyMetaTypeAPI = null;
 
     final protected function getTaxonomyMetaTypeAPI(): TaxonomyMetaTypeAPIInterface
@@ -76,7 +79,10 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                     }
                     $metaKeys[] = $key;
                 }
-                return $metaKeys;
+                return $this->resolveMetaKeysValue(
+                    $metaKeys,
+                    $fieldDataAccessor,
+                );
             case 'metaValue':
             case 'metaValues':
                 return $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(

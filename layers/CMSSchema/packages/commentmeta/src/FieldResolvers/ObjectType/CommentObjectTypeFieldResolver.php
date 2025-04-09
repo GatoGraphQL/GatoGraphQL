@@ -9,6 +9,7 @@ use PoPCMSSchema\CommentMeta\ModuleConfiguration;
 use PoPCMSSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPCMSSchema\Meta\FieldResolvers\ObjectType\EntityObjectTypeFieldResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -17,6 +18,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
+    use EntityObjectTypeFieldResolverTrait;
+    
     private ?CommentMetaTypeAPIInterface $commentMetaTypeAPI = null;
 
     final protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface
@@ -76,7 +79,10 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
                     }
                     $metaKeys[] = $key;
                 }
-                return $metaKeys;
+                return $this->resolveMetaKeysValue(
+                    $metaKeys,
+                    $fieldDataAccessor,
+                );
             case 'metaValue':
             case 'metaValues':
                 return $this->getCommentMetaTypeAPI()->getCommentMeta(

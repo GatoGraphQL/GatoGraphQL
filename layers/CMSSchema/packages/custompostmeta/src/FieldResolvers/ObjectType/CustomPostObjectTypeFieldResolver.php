@@ -9,6 +9,7 @@ use PoPCMSSchema\CustomPostMeta\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\CustomPostMetaTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPCMSSchema\Meta\FieldResolvers\ObjectType\EntityObjectTypeFieldResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -17,6 +18,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
+    use EntityObjectTypeFieldResolverTrait;
+    
     private ?CustomPostMetaTypeAPIInterface $customPostMetaTypeAPI = null;
 
     final protected function getCustomPostMetaTypeAPI(): CustomPostMetaTypeAPIInterface
@@ -76,7 +79,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                     }
                     $metaKeys[] = $key;
                 }
-                return $metaKeys;
+                return $this->resolveMetaKeysValue(
+                    $metaKeys,
+                    $fieldDataAccessor,
+                );
             case 'metaValue':
             case 'metaValues':
                 return $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(

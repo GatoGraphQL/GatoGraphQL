@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserMeta\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPCMSSchema\Meta\FieldResolvers\ObjectType\EntityObjectTypeFieldResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoPCMSSchema\UserMeta\Module;
 use PoPCMSSchema\UserMeta\ModuleConfiguration;
@@ -17,6 +18,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
+    use EntityObjectTypeFieldResolverTrait;
+
     private ?UserMetaTypeAPIInterface $userMetaTypeAPI = null;
 
     final protected function getUserMetaTypeAPI(): UserMetaTypeAPIInterface
@@ -76,7 +79,10 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                     }
                     $metaKeys[] = $key;
                 }
-                return $metaKeys;
+                return $this->resolveMetaKeysValue(
+                    $metaKeys,
+                    $fieldDataAccessor,
+                );
             case 'metaValue':
             case 'metaValues':
                 return $this->getUserMetaTypeAPI()->getUserMeta(
