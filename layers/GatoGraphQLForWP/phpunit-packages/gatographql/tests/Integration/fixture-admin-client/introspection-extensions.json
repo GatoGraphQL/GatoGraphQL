@@ -9,7 +9,7 @@
                     "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
                     "extensions": {
                         "elementName": "AccessToMetaKeyIsNotAllowedErrorPayload",
-                        "namespacedName": "PoPCMSSchema_MetaMutations_AccessToMetaKeyIsNotAllowedErrorPayload",
+                        "namespacedName": "AccessToMetaKeyIsNotAllowedErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -499,7 +499,7 @@
                     "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
                     "extensions": {
                         "elementName": "EntityMetaAlreadyHasSingleEntryErrorPayload",
-                        "namespacedName": "PoPCMSSchema_MetaMutations_EntityMetaAlreadyHasSingleEntryErrorPayload",
+                        "namespacedName": "EntityMetaAlreadyHasSingleEntryErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -520,7 +520,7 @@
                     "name": "EntityMetaEntryAlreadyHasValueErrorPayload",
                     "extensions": {
                         "elementName": "EntityMetaEntryAlreadyHasValueErrorPayload",
-                        "namespacedName": "PoPCMSSchema_MetaMutations_EntityMetaEntryAlreadyHasValueErrorPayload",
+                        "namespacedName": "EntityMetaEntryAlreadyHasValueErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -541,7 +541,7 @@
                     "name": "EntityMetaKeyDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "EntityMetaKeyDoesNotExistErrorPayload",
-                        "namespacedName": "PoPCMSSchema_MetaMutations_EntityMetaKeyDoesNotExistErrorPayload",
+                        "namespacedName": "EntityMetaKeyDoesNotExistErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -562,7 +562,7 @@
                     "name": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
-                        "namespacedName": "PoPCMSSchema_MetaMutations_EntityMetaKeyWithValueDoesNotExistErrorPayload",
+                        "namespacedName": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -1883,7 +1883,7 @@
                     "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
-                        "namespacedName": "PoPCMSSchema_UserMutations_LoggedInUserHasNoPermissionToEditUserErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -10860,7 +10860,7 @@
                     "name": "RootAddCommentMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootAddCommentMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootAddCommentMetaMutationPayload",
+                        "namespacedName": "RootAddCommentMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -10950,7 +10950,7 @@
                     "name": "RootAddGenericCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootAddGenericCategoryTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootAddGenericCategoryTermMetaMutationPayload",
+                        "namespacedName": "RootAddGenericCategoryTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -10995,7 +10995,7 @@
                     "name": "RootAddGenericCustomPostMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootAddGenericCustomPostMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootAddGenericCustomPostMetaMutationPayload",
+                        "namespacedName": "RootAddGenericCustomPostMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11040,7 +11040,7 @@
                     "name": "RootAddGenericTagTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootAddGenericTagTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootAddGenericTagTermMetaMutationPayload",
+                        "namespacedName": "RootAddGenericTagTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11085,7 +11085,7 @@
                     "name": "RootAddPostCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootAddPostCategoryTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootAddPostCategoryTermMetaMutationPayload",
+                        "namespacedName": "RootAddPostCategoryTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11130,7 +11130,7 @@
                     "name": "RootAddPostTagTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootAddPostTagTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootAddPostTagTermMetaMutationPayload",
+                        "namespacedName": "RootAddPostTagTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11175,7 +11175,7 @@
                     "name": "RootAddUserMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootAddUserMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootAddUserMetaMutationPayload",
+                        "namespacedName": "RootAddUserMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11580,7 +11580,7 @@
                     "name": "RootDeleteCommentMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeleteCommentMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootDeleteCommentMetaMutationPayload",
+                        "namespacedName": "RootDeleteCommentMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11625,7 +11625,7 @@
                     "name": "RootDeleteGenericCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeleteGenericCategoryTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootDeleteGenericCategoryTermMetaMutationPayload",
+                        "namespacedName": "RootDeleteGenericCategoryTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11699,7 +11699,7 @@
                     "name": "RootDeleteGenericCustomPostMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeleteGenericCustomPostMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootDeleteGenericCustomPostMetaMutationPayload",
+                        "namespacedName": "RootDeleteGenericCustomPostMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11744,7 +11744,7 @@
                     "name": "RootDeleteGenericTagTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeleteGenericTagTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootDeleteGenericTagTermMetaMutationPayload",
+                        "namespacedName": "RootDeleteGenericTagTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11818,7 +11818,7 @@
                     "name": "RootDeletePostCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeletePostCategoryTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootDeletePostCategoryTermMetaMutationPayload",
+                        "namespacedName": "RootDeletePostCategoryTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11892,7 +11892,7 @@
                     "name": "RootDeletePostTagTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeletePostTagTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootDeletePostTagTermMetaMutationPayload",
+                        "namespacedName": "RootDeletePostTagTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11966,7 +11966,7 @@
                     "name": "RootDeleteUserMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeleteUserMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootDeleteUserMetaMutationPayload",
+                        "namespacedName": "RootDeleteUserMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12281,7 +12281,7 @@
                     "name": "RootSetCommentMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootSetCommentMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootSetCommentMetaMutationPayload",
+                        "namespacedName": "RootSetCommentMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12371,7 +12371,7 @@
                     "name": "RootSetGenericCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootSetGenericCategoryTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootSetGenericCategoryTermMetaMutationPayload",
+                        "namespacedName": "RootSetGenericCategoryTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12416,7 +12416,7 @@
                     "name": "RootSetGenericCustomPostMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootSetGenericCustomPostMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootSetGenericCustomPostMetaMutationPayload",
+                        "namespacedName": "RootSetGenericCustomPostMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12461,7 +12461,7 @@
                     "name": "RootSetGenericTagTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootSetGenericTagTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootSetGenericTagTermMetaMutationPayload",
+                        "namespacedName": "RootSetGenericTagTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12506,7 +12506,7 @@
                     "name": "RootSetPostCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootSetPostCategoryTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootSetPostCategoryTermMetaMutationPayload",
+                        "namespacedName": "RootSetPostCategoryTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12551,7 +12551,7 @@
                     "name": "RootSetPostTagTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootSetPostTagTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootSetPostTagTermMetaMutationPayload",
+                        "namespacedName": "RootSetPostTagTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12686,7 +12686,7 @@
                     "name": "RootSetUserMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootSetUserMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootSetUserMetaMutationPayload",
+                        "namespacedName": "RootSetUserMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12731,7 +12731,7 @@
                     "name": "RootUpdateCommentMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdateCommentMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootUpdateCommentMetaMutationPayload",
+                        "namespacedName": "RootUpdateCommentMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12821,7 +12821,7 @@
                     "name": "RootUpdateGenericCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdateGenericCategoryTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootUpdateGenericCategoryTermMetaMutationPayload",
+                        "namespacedName": "RootUpdateGenericCategoryTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12911,7 +12911,7 @@
                     "name": "RootUpdateGenericCustomPostMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdateGenericCustomPostMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootUpdateGenericCustomPostMetaMutationPayload",
+                        "namespacedName": "RootUpdateGenericCustomPostMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -12956,7 +12956,7 @@
                     "name": "RootUpdateGenericTagTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdateGenericTagTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootUpdateGenericTagTermMetaMutationPayload",
+                        "namespacedName": "RootUpdateGenericTagTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -13136,7 +13136,7 @@
                     "name": "RootUpdatePostCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdatePostCategoryTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootUpdatePostCategoryTermMetaMutationPayload",
+                        "namespacedName": "RootUpdatePostCategoryTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -13271,7 +13271,7 @@
                     "name": "RootUpdatePostTagTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdatePostTagTermMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootUpdatePostTagTermMetaMutationPayload",
+                        "namespacedName": "RootUpdatePostTagTermMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -13361,7 +13361,7 @@
                     "name": "RootUpdateUserMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdateUserMetaMutationPayload",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootUpdateUserMetaMutationPayload",
+                        "namespacedName": "RootUpdateUserMetaMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -17307,7 +17307,7 @@
                     "name": "RootAddCategoryMetaInput",
                     "extensions": {
                         "elementName": "RootAddCategoryMetaInput",
-                        "namespacedName": "PoPCMSSchema_CategoryMetaMutations_RootAddCategoryMetaInput",
+                        "namespacedName": "RootAddCategoryMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -17344,7 +17344,7 @@
                     "name": "RootAddCommentMetaInput",
                     "extensions": {
                         "elementName": "RootAddCommentMetaInput",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootAddCommentMetaInput",
+                        "namespacedName": "RootAddCommentMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -17436,7 +17436,7 @@
                     "name": "RootAddCustomPostMetaInput",
                     "extensions": {
                         "elementName": "RootAddCustomPostMetaInput",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootAddCustomPostMetaInput",
+                        "namespacedName": "RootAddCustomPostMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -17473,7 +17473,7 @@
                     "name": "RootAddTagMetaInput",
                     "extensions": {
                         "elementName": "RootAddTagMetaInput",
-                        "namespacedName": "PoPCMSSchema_TagMetaMutations_RootAddTagMetaInput",
+                        "namespacedName": "RootAddTagMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -17510,7 +17510,7 @@
                     "name": "RootAddUserMetaInput",
                     "extensions": {
                         "elementName": "RootAddUserMetaInput",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootAddUserMetaInput",
+                        "namespacedName": "RootAddUserMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -18333,7 +18333,7 @@
                     "name": "RootDeleteCategoryMetaInput",
                     "extensions": {
                         "elementName": "RootDeleteCategoryMetaInput",
-                        "namespacedName": "PoPCMSSchema_CategoryMetaMutations_RootDeleteCategoryMetaInput",
+                        "namespacedName": "RootDeleteCategoryMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -18358,7 +18358,7 @@
                     "name": "RootDeleteCommentMetaInput",
                     "extensions": {
                         "elementName": "RootDeleteCommentMetaInput",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootDeleteCommentMetaInput",
+                        "namespacedName": "RootDeleteCommentMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -18383,7 +18383,7 @@
                     "name": "RootDeleteCustomPostMetaInput",
                     "extensions": {
                         "elementName": "RootDeleteCustomPostMetaInput",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootDeleteCustomPostMetaInput",
+                        "namespacedName": "RootDeleteCustomPostMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -18508,7 +18508,7 @@
                     "name": "RootDeleteTagMetaInput",
                     "extensions": {
                         "elementName": "RootDeleteTagMetaInput",
-                        "namespacedName": "PoPCMSSchema_TagMetaMutations_RootDeleteTagMetaInput",
+                        "namespacedName": "RootDeleteTagMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -18533,7 +18533,7 @@
                     "name": "RootDeleteUserMetaInput",
                     "extensions": {
                         "elementName": "RootDeleteUserMetaInput",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootDeleteUserMetaInput",
+                        "namespacedName": "RootDeleteUserMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -19469,7 +19469,7 @@
                     "name": "RootSetCategoryMetaInput",
                     "extensions": {
                         "elementName": "RootSetCategoryMetaInput",
-                        "namespacedName": "PoPCMSSchema_CategoryMetaMutations_RootSetCategoryMetaInput",
+                        "namespacedName": "RootSetCategoryMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -19494,7 +19494,7 @@
                     "name": "RootSetCommentMetaInput",
                     "extensions": {
                         "elementName": "RootSetCommentMetaInput",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootSetCommentMetaInput",
+                        "namespacedName": "RootSetCommentMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -19519,7 +19519,7 @@
                     "name": "RootSetCustomPostMetaInput",
                     "extensions": {
                         "elementName": "RootSetCustomPostMetaInput",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootSetCustomPostMetaInput",
+                        "namespacedName": "RootSetCustomPostMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -19569,7 +19569,7 @@
                     "name": "RootSetTagMetaInput",
                     "extensions": {
                         "elementName": "RootSetTagMetaInput",
-                        "namespacedName": "PoPCMSSchema_TagMetaMutations_RootSetTagMetaInput",
+                        "namespacedName": "RootSetTagMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -19662,7 +19662,7 @@
                     "name": "RootSetUserMetaInput",
                     "extensions": {
                         "elementName": "RootSetUserMetaInput",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootSetUserMetaInput",
+                        "namespacedName": "RootSetUserMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -19736,7 +19736,7 @@
                     "name": "RootUpdateCategoryMetaInput",
                     "extensions": {
                         "elementName": "RootUpdateCategoryMetaInput",
-                        "namespacedName": "PoPCMSSchema_CategoryMetaMutations_RootUpdateCategoryMetaInput",
+                        "namespacedName": "RootUpdateCategoryMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -19773,7 +19773,7 @@
                     "name": "RootUpdateCommentMetaInput",
                     "extensions": {
                         "elementName": "RootUpdateCommentMetaInput",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootUpdateCommentMetaInput",
+                        "namespacedName": "RootUpdateCommentMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -19907,7 +19907,7 @@
                     "name": "RootUpdateCustomPostMetaInput",
                     "extensions": {
                         "elementName": "RootUpdateCustomPostMetaInput",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootUpdateCustomPostMetaInput",
+                        "namespacedName": "RootUpdateCustomPostMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -20395,7 +20395,7 @@
                     "name": "RootUpdateTagMetaInput",
                     "extensions": {
                         "elementName": "RootUpdateTagMetaInput",
-                        "namespacedName": "PoPCMSSchema_TagMetaMutations_RootUpdateTagMetaInput",
+                        "namespacedName": "RootUpdateTagMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -20432,7 +20432,7 @@
                     "name": "RootUpdateUserMetaInput",
                     "extensions": {
                         "elementName": "RootUpdateUserMetaInput",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootUpdateUserMetaInput",
+                        "namespacedName": "RootUpdateUserMetaInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22209,7 +22209,7 @@
                     "name": "RootAddCommentMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootAddCommentMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootAddCommentMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootAddCommentMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22233,7 +22233,7 @@
                     "name": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22245,7 +22245,7 @@
                     "name": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22257,7 +22257,7 @@
                     "name": "RootAddGenericTagTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootAddGenericTagTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootAddGenericTagTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootAddGenericTagTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22269,7 +22269,7 @@
                     "name": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22281,7 +22281,7 @@
                     "name": "RootAddPostTagTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootAddPostTagTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootAddPostTagTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootAddPostTagTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22293,7 +22293,7 @@
                     "name": "RootAddUserMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootAddUserMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootAddUserMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootAddUserMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22401,7 +22401,7 @@
                     "name": "RootDeleteCommentMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeleteCommentMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootDeleteCommentMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteCommentMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22413,7 +22413,7 @@
                     "name": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22437,7 +22437,7 @@
                     "name": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22449,7 +22449,7 @@
                     "name": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22473,7 +22473,7 @@
                     "name": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22497,7 +22497,7 @@
                     "name": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootDeletePostTagTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22521,7 +22521,7 @@
                     "name": "RootDeleteUserMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeleteUserMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootDeleteUserMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteUserMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22605,7 +22605,7 @@
                     "name": "RootSetCommentMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootSetCommentMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootSetCommentMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetCommentMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22629,7 +22629,7 @@
                     "name": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22641,7 +22641,7 @@
                     "name": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22653,7 +22653,7 @@
                     "name": "RootSetGenericTagTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootSetGenericTagTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootSetGenericTagTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetGenericTagTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22665,7 +22665,7 @@
                     "name": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22677,7 +22677,7 @@
                     "name": "RootSetPostTagTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootSetPostTagTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootSetPostTagTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetPostTagTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22713,7 +22713,7 @@
                     "name": "RootSetUserMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootSetUserMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootSetUserMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootSetUserMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22725,7 +22725,7 @@
                     "name": "RootUpdateCommentMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdateCommentMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootUpdateCommentMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateCommentMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22749,7 +22749,7 @@
                     "name": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22773,7 +22773,7 @@
                     "name": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22785,7 +22785,7 @@
                     "name": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22833,7 +22833,7 @@
                     "name": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22869,7 +22869,7 @@
                     "name": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -22893,7 +22893,7 @@
                     "name": "RootUpdateUserMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdateUserMetaMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_UserMetaMutations_RootUpdateUserMetaMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateUserMetaMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },

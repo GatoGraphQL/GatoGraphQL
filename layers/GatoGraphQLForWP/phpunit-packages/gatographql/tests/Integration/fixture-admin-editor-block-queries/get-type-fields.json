@@ -4,7 +4,7 @@
       "types": [
         {
           "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
-          "namespacedName": "PoPCMSSchema_MetaMutations_AccessToMetaKeyIsNotAllowedErrorPayload",
+          "namespacedName": "AccessToMetaKeyIsNotAllowedErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -197,7 +197,7 @@
         },
         {
           "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
-          "namespacedName": "PoPCMSSchema_MetaMutations_EntityMetaAlreadyHasSingleEntryErrorPayload",
+          "namespacedName": "EntityMetaAlreadyHasSingleEntryErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -208,7 +208,7 @@
         },
         {
           "name": "EntityMetaEntryAlreadyHasValueErrorPayload",
-          "namespacedName": "PoPCMSSchema_MetaMutations_EntityMetaEntryAlreadyHasValueErrorPayload",
+          "namespacedName": "EntityMetaEntryAlreadyHasValueErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -219,7 +219,7 @@
         },
         {
           "name": "EntityMetaKeyDoesNotExistErrorPayload",
-          "namespacedName": "PoPCMSSchema_MetaMutations_EntityMetaKeyDoesNotExistErrorPayload",
+          "namespacedName": "EntityMetaKeyDoesNotExistErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -230,7 +230,7 @@
         },
         {
           "name": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
-          "namespacedName": "PoPCMSSchema_MetaMutations_EntityMetaKeyWithValueDoesNotExistErrorPayload",
+          "namespacedName": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -656,7 +656,7 @@
         },
         {
           "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
-          "namespacedName": "PoPCMSSchema_UserMutations_LoggedInUserHasNoPermissionToEditUserErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -2399,7 +2399,7 @@
         },
         {
           "name": "RootAddCommentMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootAddCommentMetaMutationPayload",
+          "namespacedName": "RootAddCommentMetaMutationPayload",
           "fields": [
             {
               "name": "comment"
@@ -2439,7 +2439,7 @@
         },
         {
           "name": "RootAddGenericCategoryTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootAddGenericCategoryTermMetaMutationPayload",
+          "namespacedName": "RootAddGenericCategoryTermMetaMutationPayload",
           "fields": [
             {
               "name": "category"
@@ -2459,7 +2459,7 @@
         },
         {
           "name": "RootAddGenericCustomPostMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootAddGenericCustomPostMetaMutationPayload",
+          "namespacedName": "RootAddGenericCustomPostMetaMutationPayload",
           "fields": [
             {
               "name": "customPost"
@@ -2479,7 +2479,7 @@
         },
         {
           "name": "RootAddGenericTagTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootAddGenericTagTermMetaMutationPayload",
+          "namespacedName": "RootAddGenericTagTermMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -2499,7 +2499,7 @@
         },
         {
           "name": "RootAddPostCategoryTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootAddPostCategoryTermMetaMutationPayload",
+          "namespacedName": "RootAddPostCategoryTermMetaMutationPayload",
           "fields": [
             {
               "name": "category"
@@ -2519,7 +2519,7 @@
         },
         {
           "name": "RootAddPostTagTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootAddPostTagTermMetaMutationPayload",
+          "namespacedName": "RootAddPostTagTermMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -2539,7 +2539,7 @@
         },
         {
           "name": "RootAddUserMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootAddUserMetaMutationPayload",
+          "namespacedName": "RootAddUserMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -2719,7 +2719,7 @@
         },
         {
           "name": "RootDeleteCommentMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootDeleteCommentMetaMutationPayload",
+          "namespacedName": "RootDeleteCommentMetaMutationPayload",
           "fields": [
             {
               "name": "comment"
@@ -2739,7 +2739,7 @@
         },
         {
           "name": "RootDeleteGenericCategoryTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootDeleteGenericCategoryTermMetaMutationPayload",
+          "namespacedName": "RootDeleteGenericCategoryTermMetaMutationPayload",
           "fields": [
             {
               "name": "category"
@@ -2773,7 +2773,7 @@
         },
         {
           "name": "RootDeleteGenericCustomPostMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootDeleteGenericCustomPostMetaMutationPayload",
+          "namespacedName": "RootDeleteGenericCustomPostMetaMutationPayload",
           "fields": [
             {
               "name": "customPost"
@@ -2793,7 +2793,7 @@
         },
         {
           "name": "RootDeleteGenericTagTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootDeleteGenericTagTermMetaMutationPayload",
+          "namespacedName": "RootDeleteGenericTagTermMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -2827,7 +2827,7 @@
         },
         {
           "name": "RootDeletePostCategoryTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootDeletePostCategoryTermMetaMutationPayload",
+          "namespacedName": "RootDeletePostCategoryTermMetaMutationPayload",
           "fields": [
             {
               "name": "category"
@@ -2861,7 +2861,7 @@
         },
         {
           "name": "RootDeletePostTagTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootDeletePostTagTermMetaMutationPayload",
+          "namespacedName": "RootDeletePostTagTermMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -2895,7 +2895,7 @@
         },
         {
           "name": "RootDeleteUserMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootDeleteUserMetaMutationPayload",
+          "namespacedName": "RootDeleteUserMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -3035,7 +3035,7 @@
         },
         {
           "name": "RootSetCommentMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootSetCommentMetaMutationPayload",
+          "namespacedName": "RootSetCommentMetaMutationPayload",
           "fields": [
             {
               "name": "comment"
@@ -3075,7 +3075,7 @@
         },
         {
           "name": "RootSetGenericCategoryTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootSetGenericCategoryTermMetaMutationPayload",
+          "namespacedName": "RootSetGenericCategoryTermMetaMutationPayload",
           "fields": [
             {
               "name": "category"
@@ -3095,7 +3095,7 @@
         },
         {
           "name": "RootSetGenericCustomPostMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootSetGenericCustomPostMetaMutationPayload",
+          "namespacedName": "RootSetGenericCustomPostMetaMutationPayload",
           "fields": [
             {
               "name": "customPost"
@@ -3115,7 +3115,7 @@
         },
         {
           "name": "RootSetGenericTagTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootSetGenericTagTermMetaMutationPayload",
+          "namespacedName": "RootSetGenericTagTermMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -3135,7 +3135,7 @@
         },
         {
           "name": "RootSetPostCategoryTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootSetPostCategoryTermMetaMutationPayload",
+          "namespacedName": "RootSetPostCategoryTermMetaMutationPayload",
           "fields": [
             {
               "name": "category"
@@ -3155,7 +3155,7 @@
         },
         {
           "name": "RootSetPostTagTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootSetPostTagTermMetaMutationPayload",
+          "namespacedName": "RootSetPostTagTermMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -3215,7 +3215,7 @@
         },
         {
           "name": "RootSetUserMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootSetUserMetaMutationPayload",
+          "namespacedName": "RootSetUserMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -3235,7 +3235,7 @@
         },
         {
           "name": "RootUpdateCommentMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootUpdateCommentMetaMutationPayload",
+          "namespacedName": "RootUpdateCommentMetaMutationPayload",
           "fields": [
             {
               "name": "comment"
@@ -3275,7 +3275,7 @@
         },
         {
           "name": "RootUpdateGenericCategoryTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootUpdateGenericCategoryTermMetaMutationPayload",
+          "namespacedName": "RootUpdateGenericCategoryTermMetaMutationPayload",
           "fields": [
             {
               "name": "category"
@@ -3315,7 +3315,7 @@
         },
         {
           "name": "RootUpdateGenericCustomPostMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootUpdateGenericCustomPostMetaMutationPayload",
+          "namespacedName": "RootUpdateGenericCustomPostMetaMutationPayload",
           "fields": [
             {
               "name": "customPost"
@@ -3335,7 +3335,7 @@
         },
         {
           "name": "RootUpdateGenericTagTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootUpdateGenericTagTermMetaMutationPayload",
+          "namespacedName": "RootUpdateGenericTagTermMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -3415,7 +3415,7 @@
         },
         {
           "name": "RootUpdatePostCategoryTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootUpdatePostCategoryTermMetaMutationPayload",
+          "namespacedName": "RootUpdatePostCategoryTermMetaMutationPayload",
           "fields": [
             {
               "name": "category"
@@ -3475,7 +3475,7 @@
         },
         {
           "name": "RootUpdatePostTagTermMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootUpdatePostTagTermMetaMutationPayload",
+          "namespacedName": "RootUpdatePostTagTermMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -3515,7 +3515,7 @@
         },
         {
           "name": "RootUpdateUserMetaMutationPayload",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootUpdateUserMetaMutationPayload",
+          "namespacedName": "RootUpdateUserMetaMutationPayload",
           "fields": [
             {
               "name": "errors"
@@ -4821,14 +4821,14 @@
         },
         {
           "name": "RootAddCategoryMetaInput",
-          "namespacedName": "PoPCMSSchema_CategoryMetaMutations_RootAddCategoryMetaInput",
+          "namespacedName": "RootAddCategoryMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add meta to a category term"
         },
         {
           "name": "RootAddCommentMetaInput",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootAddCommentMetaInput",
+          "namespacedName": "RootAddCommentMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add meta to a comment"
@@ -4842,21 +4842,21 @@
         },
         {
           "name": "RootAddCustomPostMetaInput",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootAddCustomPostMetaInput",
+          "namespacedName": "RootAddCustomPostMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add meta to a custom post"
         },
         {
           "name": "RootAddTagMetaInput",
-          "namespacedName": "PoPCMSSchema_TagMetaMutations_RootAddTagMetaInput",
+          "namespacedName": "RootAddTagMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add meta to a tag term"
         },
         {
           "name": "RootAddUserMetaInput",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootAddUserMetaInput",
+          "namespacedName": "RootAddUserMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add meta to a user"
@@ -4947,21 +4947,21 @@
         },
         {
           "name": "RootDeleteCategoryMetaInput",
-          "namespacedName": "PoPCMSSchema_CategoryMetaMutations_RootDeleteCategoryMetaInput",
+          "namespacedName": "RootDeleteCategoryMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete a category term's meta entry"
         },
         {
           "name": "RootDeleteCommentMetaInput",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootDeleteCommentMetaInput",
+          "namespacedName": "RootDeleteCommentMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete a comment's meta entry"
         },
         {
           "name": "RootDeleteCustomPostMetaInput",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootDeleteCustomPostMetaInput",
+          "namespacedName": "RootDeleteCustomPostMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete a custom post's meta entry"
@@ -4996,14 +4996,14 @@
         },
         {
           "name": "RootDeleteTagMetaInput",
-          "namespacedName": "PoPCMSSchema_TagMetaMutations_RootDeleteTagMetaInput",
+          "namespacedName": "RootDeleteTagMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete a tag term's meta entry"
         },
         {
           "name": "RootDeleteUserMetaInput",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootDeleteUserMetaInput",
+          "namespacedName": "RootDeleteUserMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete a user's meta entry"
@@ -5129,21 +5129,21 @@
         },
         {
           "name": "RootSetCategoryMetaInput",
-          "namespacedName": "PoPCMSSchema_CategoryMetaMutations_RootSetCategoryMetaInput",
+          "namespacedName": "RootSetCategoryMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set a category term's meta entries"
         },
         {
           "name": "RootSetCommentMetaInput",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootSetCommentMetaInput",
+          "namespacedName": "RootSetCommentMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set entries on a comment"
         },
         {
           "name": "RootSetCustomPostMetaInput",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootSetCustomPostMetaInput",
+          "namespacedName": "RootSetCustomPostMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set entries on a custom post"
@@ -5157,7 +5157,7 @@
         },
         {
           "name": "RootSetTagMetaInput",
-          "namespacedName": "PoPCMSSchema_TagMetaMutations_RootSetTagMetaInput",
+          "namespacedName": "RootSetTagMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set a tag term's meta entries"
@@ -5178,7 +5178,7 @@
         },
         {
           "name": "RootSetUserMetaInput",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootSetUserMetaInput",
+          "namespacedName": "RootSetUserMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set entries on a user"
@@ -5192,14 +5192,14 @@
         },
         {
           "name": "RootUpdateCategoryMetaInput",
-          "namespacedName": "PoPCMSSchema_CategoryMetaMutations_RootUpdateCategoryMetaInput",
+          "namespacedName": "RootUpdateCategoryMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a category term's meta"
         },
         {
           "name": "RootUpdateCommentMetaInput",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootUpdateCommentMetaInput",
+          "namespacedName": "RootUpdateCommentMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a comment's meta"
@@ -5213,7 +5213,7 @@
         },
         {
           "name": "RootUpdateCustomPostMetaInput",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootUpdateCustomPostMetaInput",
+          "namespacedName": "RootUpdateCustomPostMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post's meta"
@@ -5269,14 +5269,14 @@
         },
         {
           "name": "RootUpdateTagMetaInput",
-          "namespacedName": "PoPCMSSchema_TagMetaMutations_RootUpdateTagMetaInput",
+          "namespacedName": "RootUpdateTagMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a tag term's meta"
         },
         {
           "name": "RootUpdateUserMetaInput",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootUpdateUserMetaInput",
+          "namespacedName": "RootUpdateUserMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a user's meta"
@@ -5556,7 +5556,7 @@
         },
         {
           "name": "RootAddCommentMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootAddCommentMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddCommentMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding meta on a comment"
@@ -5570,42 +5570,42 @@
         },
         {
           "name": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding meta on a category term"
         },
         {
           "name": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding meta on a custom post"
         },
         {
           "name": "RootAddGenericTagTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootAddGenericTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddGenericTagTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding meta on a tag term"
         },
         {
           "name": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding meta on a post's category term"
         },
         {
           "name": "RootAddPostTagTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootAddPostTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddPostTagTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding meta on a post's tag term"
         },
         {
           "name": "RootAddUserMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootAddUserMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootAddUserMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding meta on a user"
@@ -5668,14 +5668,14 @@
         },
         {
           "name": "RootDeleteCommentMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootDeleteCommentMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteCommentMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting meta on a comment"
         },
         {
           "name": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting meta on a category term"
@@ -5689,14 +5689,14 @@
         },
         {
           "name": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting meta on a custom post"
         },
         {
           "name": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting meta on a tag term"
@@ -5710,7 +5710,7 @@
         },
         {
           "name": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting meta on a post's category term"
@@ -5724,7 +5724,7 @@
         },
         {
           "name": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootDeletePostTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting meta on a post's tag term"
@@ -5738,7 +5738,7 @@
         },
         {
           "name": "RootDeleteUserMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootDeleteUserMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteUserMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting meta on a user"
@@ -5787,7 +5787,7 @@
         },
         {
           "name": "RootSetCommentMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootSetCommentMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetCommentMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting meta on a comment"
@@ -5801,35 +5801,35 @@
         },
         {
           "name": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting meta on a category term"
         },
         {
           "name": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting meta on a custom post"
         },
         {
           "name": "RootSetGenericTagTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootSetGenericTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetGenericTagTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting meta on a tag term"
         },
         {
           "name": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting meta on a post's category term"
         },
         {
           "name": "RootSetPostTagTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootSetPostTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetPostTagTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting meta on a post's tag term"
@@ -5850,14 +5850,14 @@
         },
         {
           "name": "RootSetUserMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootSetUserMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootSetUserMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting meta on a user"
         },
         {
           "name": "RootUpdateCommentMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CommentMetaMutations_RootUpdateCommentMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateCommentMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating meta on a comment"
@@ -5871,7 +5871,7 @@
         },
         {
           "name": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostCategoryMetaMutations_RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating meta on a category term"
@@ -5885,14 +5885,14 @@
         },
         {
           "name": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostMetaMutations_RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating meta on a custom post"
         },
         {
           "name": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_CustomPostTagMetaMutations_RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating meta on a tag term"
@@ -5920,7 +5920,7 @@
         },
         {
           "name": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_PostCategoryMetaMutations_RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating meta on a post's category term"
@@ -5941,7 +5941,7 @@
         },
         {
           "name": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_PostTagMetaMutations_RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating meta on a post's tag term"
@@ -5955,7 +5955,7 @@
         },
         {
           "name": "RootUpdateUserMetaMutationErrorPayloadUnion",
-          "namespacedName": "PoPCMSSchema_UserMetaMutations_RootUpdateUserMetaMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateUserMetaMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating meta on a user"
