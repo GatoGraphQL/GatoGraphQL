@@ -3,6 +3,7 @@
 ## Fixed
 
 - Passing a non-`post` CPT to `updatePost` will show an error ([#3070](https://github.com/GatoGraphQL/GatoGraphQL/pull/3070))
+- Translation loading error message in WordPress 6.8 ([73a9f11](https://github.com/GatoGraphQL/GatoGraphQL/commit/73a9f1138be03486129526553a932ad42888c625))
 
 ## Improvements
 
