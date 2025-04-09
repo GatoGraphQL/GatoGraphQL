@@ -12,6 +12,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Uncategorized",
                 "parent": null,
                 "postCount": 4,
@@ -51,6 +53,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Special topic",
                 "parent": {
                     "id": 4
@@ -81,6 +85,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Most special topic",
                         "parent": {
                             "id": 6
@@ -111,6 +117,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Resource",
                 "parent": {
                     "id": 3
@@ -151,6 +159,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Special topic",
                         "parent": {
                             "id": 4
@@ -183,6 +193,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Never used",
                 "parent": null,
                 "postCount": 0,
@@ -203,6 +215,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Most special topic",
                 "parent": {
                     "id": 6
@@ -232,6 +246,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Blog",
                 "parent": null,
                 "postCount": 5,
@@ -274,6 +290,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Resource",
                         "parent": {
                             "id": 3
@@ -314,6 +332,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Advanced",
                 "parent": null,
                 "postCount": 3,
@@ -349,6 +369,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Uncategorized",
                 "parent": null,
                 "postCount": 4,
@@ -388,6 +410,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Special topic",
                 "parent": {
                     "id": 4
@@ -418,6 +442,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Most special topic",
                         "parent": {
                             "id": 6
@@ -448,6 +474,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Resource",
                 "parent": {
                     "id": 3
@@ -488,6 +516,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Special topic",
                         "parent": {
                             "id": 4
@@ -520,6 +550,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Never used",
                 "parent": null,
                 "postCount": 0,
@@ -540,6 +572,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Most special topic",
                 "parent": {
                     "id": 6
@@ -569,6 +603,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Blog",
                 "parent": null,
                 "postCount": 5,
@@ -611,6 +647,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Resource",
                         "parent": {
                             "id": 3
@@ -651,6 +689,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Advanced",
                 "parent": null,
                 "postCount": 3,
@@ -688,6 +728,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Swimming",
                 "parent": null,
                 "postCount": 1,
@@ -712,6 +754,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Diving",
                         "parent": {
                             "id": 33
@@ -740,6 +784,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Foosball",
                 "parent": null,
                 "postCount": 1,
@@ -765,6 +811,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Diving",
                 "parent": {
                     "id": 33
@@ -794,6 +842,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Uncategorized",
                 "parent": null,
                 "postCount": 4,
@@ -833,6 +883,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Swimming",
                 "parent": null,
                 "postCount": 1,
@@ -857,6 +909,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Diving",
                         "parent": {
                             "id": 33
@@ -887,6 +941,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Special topic",
                 "parent": {
                     "id": 4
@@ -917,6 +973,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Most special topic",
                         "parent": {
                             "id": 6
@@ -947,6 +1005,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Resource",
                 "parent": {
                     "id": 3
@@ -987,6 +1047,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Special topic",
                         "parent": {
                             "id": 4
@@ -1019,6 +1081,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Never used",
                 "parent": null,
                 "postCount": 0,
@@ -1039,6 +1103,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Most special topic",
                 "parent": {
                     "id": 6
@@ -1066,6 +1132,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Foosball",
                 "parent": null,
                 "postCount": 1,
@@ -1091,6 +1159,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Diving",
                 "parent": {
                     "id": 33
@@ -1120,6 +1190,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Blog",
                 "parent": null,
                 "postCount": 5,
@@ -1162,6 +1234,8 @@
                         "metaValues": null,
                         "meta": {},
                         "metaKeys": [],
+                        "includingMetaKeys": [],
+                        "excludingMetaKeys": [],
                         "name": "Resource",
                         "parent": {
                             "id": 3
@@ -1202,6 +1276,8 @@
                 "metaValues": null,
                 "meta": {},
                 "metaKeys": [],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [],
                 "name": "Advanced",
                 "parent": null,
                 "postCount": 3,
@@ -1266,6 +1342,8 @@
                     "metaValues": null,
                     "meta": {},
                     "metaKeys": [],
+                    "includingMetaKeys": [],
+                    "excludingMetaKeys": [],
                     "name": "Resource",
                     "parent": {
                         "id": 3
@@ -1306,6 +1384,8 @@
                             "metaValues": null,
                             "meta": {},
                             "metaKeys": [],
+                            "includingMetaKeys": [],
+                            "excludingMetaKeys": [],
                             "name": "Special topic",
                             "parent": {
                                 "id": 4
@@ -1340,6 +1420,8 @@
                     "metaValues": null,
                     "meta": {},
                     "metaKeys": [],
+                    "includingMetaKeys": [],
+                    "excludingMetaKeys": [],
                     "name": "Blog",
                     "parent": null,
                     "postCount": 5,
@@ -1382,6 +1464,8 @@
                             "metaValues": null,
                             "meta": {},
                             "metaKeys": [],
+                            "includingMetaKeys": [],
+                            "excludingMetaKeys": [],
                             "name": "Resource",
                             "parent": {
                                 "id": 3
@@ -1422,6 +1506,8 @@
                     "metaValues": null,
                     "meta": {},
                     "metaKeys": [],
+                    "includingMetaKeys": [],
+                    "excludingMetaKeys": [],
                     "name": "Advanced",
                     "parent": null,
                     "postCount": 3,
@@ -1459,6 +1545,8 @@
                     "metaValues": null,
                     "meta": {},
                     "metaKeys": [],
+                    "includingMetaKeys": [],
+                    "excludingMetaKeys": [],
                     "name": "Swimming",
                     "parent": null,
                     "postCount": 1,
@@ -1483,6 +1571,8 @@
                             "metaValues": null,
                             "meta": {},
                             "metaKeys": [],
+                            "includingMetaKeys": [],
+                            "excludingMetaKeys": [],
                             "name": "Diving",
                             "parent": {
                                 "id": 33
@@ -1511,6 +1601,8 @@
                     "metaValues": null,
                     "meta": {},
                     "metaKeys": [],
+                    "includingMetaKeys": [],
+                    "excludingMetaKeys": [],
                     "name": "Diving",
                     "parent": {
                         "id": 33
@@ -1950,6 +2042,8 @@
             "metaValues": null,
             "meta": {},
             "metaKeys": [],
+            "includingMetaKeys": [],
+            "excludingMetaKeys": [],
             "name": "Uncategorized",
             "parent": null,
             "postCount": 4,
@@ -1988,6 +2082,8 @@
             "metaValues": null,
             "meta": {},
             "metaKeys": [],
+            "includingMetaKeys": [],
+            "excludingMetaKeys": [],
             "name": "Resource",
             "parent": {
                 "id": 3
