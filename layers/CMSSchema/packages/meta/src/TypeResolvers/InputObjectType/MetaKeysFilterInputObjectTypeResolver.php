@@ -38,7 +38,7 @@ class MetaKeysFilterInputObjectTypeResolver extends AbstractInputObjectTypeResol
      */
     public function getInputFieldNameTypeResolvers(): array
     {
-        return[
+        return [
             'include' => $this->getStringScalarTypeResolver(),
             'exclude' => $this->getStringScalarTypeResolver(),
         ];
