@@ -84,12 +84,33 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
                     $fieldDataAccessor,
                 );
             case 'metaValue':
-            case 'metaValues':
-                return $this->getCommentMetaTypeAPI()->getCommentMeta(
+                $metaValue = $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $comment,
                     $fieldDataAccessor->getValue('key'),
-                    $fieldDataAccessor->getFieldName() === 'metaValue'
+                    true
                 );
+                // If it's an array, it must be a JSON object
+                if (is_array($metaValue)) {
+                    return (object) $metaValue;
+                }
+                return $metaValue;
+            case 'metaValues':
+                $metaValues = $this->getCommentMetaTypeAPI()->getCommentMeta(
+                    $comment,
+                    $fieldDataAccessor->getValue('key'),
+                    false
+                );
+                if (!is_array($metaValues)) {
+                    return $metaValues;
+                }
+                foreach ($metaValues as $index => $metaValue) {
+                    // If it's an array, it must be a JSON object
+                    if (!is_array($metaValue)) {
+                        continue;
+                    }
+                    $metaValues[$index] = (object) $metaValue;
+                }
+                return $metaValues;
             case 'meta':
                 $meta = [];
                 $allMeta = $this->getCommentMetaTypeAPI()->getAllCommentMeta($comment);
