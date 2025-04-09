@@ -83,6 +83,11 @@
                 "lastName": "Smith",
                 "locale": "en_US",
                 "metaValue": "editor",
+                "metaValues": [
+                    {
+                        "editor": true
+                    }
+                ],
                 "meta": {
                     "nickname": [
                         "editor"
@@ -256,6 +261,11 @@
                 "lastName": "Marquez",
                 "locale": "en_US",
                 "metaValue": "author",
+                "metaValues": [
+                    {
+                        "author": true
+                    }
+                ],
                 "meta": {
                     "nickname": [
                         "author"
@@ -381,6 +391,11 @@
                 "lastName": "Johnson",
                 "locale": "en_US",
                 "metaValue": "contributor",
+                "metaValues": [
+                    {
+                        "contributor": true
+                    }
+                ],
                 "meta": {
                     "nickname": [
                         "contributor"
