@@ -187,6 +187,8 @@ fragment PostCategoryData on PostCategory {
   metaValues(key: "also-not-existing")
   meta(keys: ["not-existing"])
   metaKeys
+  includingMetaKeys: metaKeys(filter: { include: ["description"] })
+  excludingMetaKeys: metaKeys(filter: { exclude: ["description"] })
   name
   parent {
     id

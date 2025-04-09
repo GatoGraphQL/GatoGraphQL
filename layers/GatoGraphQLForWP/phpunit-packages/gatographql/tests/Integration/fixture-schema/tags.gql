@@ -225,6 +225,8 @@ fragment TagData on Tag {
   metaValues(key: "also-not-existing")
   meta(keys: ["not-existing"])
   metaKeys
+  includingMetaKeys: metaKeys(filter: { include: ["description"] })
+  excludingMetaKeys: metaKeys(filter: { exclude: ["description"] })
   name
   slug
   url
