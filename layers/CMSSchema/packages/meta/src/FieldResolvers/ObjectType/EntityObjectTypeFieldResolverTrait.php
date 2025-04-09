@@ -22,10 +22,14 @@ trait EntityObjectTypeFieldResolverTrait
             return $metaKeys;
         }
         if (isset($filter->include)) {
-            $metaKeys = array_values(array_intersect($metaKeys, $filter->include));
+            /** @var string[] */
+            $include = $filter->include;
+            $metaKeys = array_values(array_intersect($metaKeys, $include));
         }
         if (isset($filter->exclude)) {
-            $metaKeys = array_values(array_diff($metaKeys, $filter->exclude));
+            /** @var string[] */
+            $exclude = $filter->exclude;
+            $metaKeys = array_values(array_diff($metaKeys, $exclude));
         }
         return $metaKeys;
     }
