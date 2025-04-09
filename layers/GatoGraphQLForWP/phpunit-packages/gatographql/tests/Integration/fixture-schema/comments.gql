@@ -108,6 +108,10 @@ fragment CommentData on Comment {
   id
   karma
   metaValue(key: "description")
+  meta(keys: ["description"])
+  metaKeys
+  includingMetaKeys: metaKeys(filter: { include: ["description"] })
+  excludingMetaKeys: metaKeys(filter: { exclude: ["description"] })
   parent {
     id
   }

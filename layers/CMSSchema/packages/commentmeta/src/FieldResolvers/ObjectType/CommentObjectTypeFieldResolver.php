@@ -9,6 +9,7 @@ use PoPCMSSchema\CommentMeta\ModuleConfiguration;
 use PoPCMSSchema\CommentMeta\TypeAPIs\CommentMetaTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\Meta\FieldResolvers\ObjectType\AbstractWithMetaObjectTypeFieldResolver;
+use PoPCMSSchema\Meta\FieldResolvers\ObjectType\EntityObjectTypeFieldResolverTrait;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -17,6 +18,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
 {
+    use EntityObjectTypeFieldResolverTrait;
+
     private ?CommentMetaTypeAPIInterface $commentMetaTypeAPI = null;
 
     final protected function getCommentMetaTypeAPI(): CommentMetaTypeAPIInterface
@@ -76,14 +79,38 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
                     }
                     $metaKeys[] = $key;
                 }
-                return $metaKeys;
+                return $this->resolveMetaKeysValue(
+                    $metaKeys,
+                    $fieldDataAccessor,
+                );
             case 'metaValue':
-            case 'metaValues':
-                return $this->getCommentMetaTypeAPI()->getCommentMeta(
+                $metaValue = $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $comment,
                     $fieldDataAccessor->getValue('key'),
-                    $fieldDataAccessor->getFieldName() === 'metaValue'
+                    true
                 );
+                // If it's an array, it must be a JSON object
+                if (is_array($metaValue)) {
+                    return (object) $metaValue;
+                }
+                return $metaValue;
+            case 'metaValues':
+                $metaValues = $this->getCommentMetaTypeAPI()->getCommentMeta(
+                    $comment,
+                    $fieldDataAccessor->getValue('key'),
+                    false
+                );
+                if (!is_array($metaValues)) {
+                    return $metaValues;
+                }
+                foreach ($metaValues as $index => $metaValue) {
+                    // If it's an array, it must be a JSON object
+                    if (!is_array($metaValue)) {
+                        continue;
+                    }
+                    $metaValues[$index] = (object) $metaValue;
+                }
+                return $metaValues;
             case 'meta':
                 $meta = [];
                 $allMeta = $this->getCommentMetaTypeAPI()->getAllCommentMeta($comment);

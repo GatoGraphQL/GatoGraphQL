@@ -4722,6 +4722,13 @@
           "description": "Input to sort custom posts"
         },
         {
+          "name": "MetaKeysFilterInput",
+          "namespacedName": "MetaKeysFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter the 'metaKeys' field"
+        },
+        {
           "name": "MetaQueryCompareByArrayValueInput",
           "namespacedName": "MetaQueryCompareByArrayValueInput",
           "fields": null,

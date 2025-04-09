@@ -808,6 +808,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "MetaKeysFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "MetaQueryCompareByArrayValueInput"
         },
         {
