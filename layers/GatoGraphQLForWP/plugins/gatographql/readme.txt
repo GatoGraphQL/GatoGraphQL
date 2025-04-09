@@ -100,7 +100,7 @@ The Gato GraphQL website contains extensive documentation:
 Sure you can. There are videos demonstrating how to use Gato GraphQL in:
 
 - The [Demos](https://gatographql.com/demos) page on gatographql.com
-- The [@GatoGraphQL YouTube channel](https://www.youtube.com/@GatoGraphQL)
+- The [@GatoPlugins YouTube channel](https://www.youtube.com/@GatoPlugins)
 
 = Can I extend the GraphQL schema with my custom types and fields? =
 
