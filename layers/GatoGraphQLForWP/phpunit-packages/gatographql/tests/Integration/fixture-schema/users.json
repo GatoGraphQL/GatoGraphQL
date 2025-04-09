@@ -83,11 +83,9 @@
                 "lastName": "Smith",
                 "locale": "en_US",
                 "metaValue": "editor",
-                "metaValues": [
-                    {
-                        "editor": true
-                    }
-                ],
+                "metaValue2": {
+                    "editor": true
+                },
                 "meta": {
                     "nickname": [
                         "editor"
@@ -261,11 +259,9 @@
                 "lastName": "Marquez",
                 "locale": "en_US",
                 "metaValue": "author",
-                "metaValues": [
-                    {
-                        "author": true
-                    }
-                ],
+                "metaValue2": {
+                    "author": true
+                },
                 "meta": {
                     "nickname": [
                         "author"
@@ -391,11 +387,9 @@
                 "lastName": "Johnson",
                 "locale": "en_US",
                 "metaValue": "contributor",
-                "metaValues": [
-                    {
-                        "contributor": true
-                    }
-                ],
+                "metaValue2": {
+                    "contributor": true
+                },
                 "meta": {
                     "nickname": [
                         "contributor"
