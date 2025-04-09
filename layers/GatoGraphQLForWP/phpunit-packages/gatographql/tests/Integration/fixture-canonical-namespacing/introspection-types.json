@@ -4,6 +4,10 @@
       "types": [
         {
           "kind": "OBJECT",
+          "name": "AccessToMetaKeyIsNotAllowedErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "CategoryTermDoesNotExistErrorPayload"
         },
         {
@@ -20,6 +24,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CommentDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "CommentParentCommentDoesNotExistErrorPayload"
         },
         {
@@ -33,6 +41,26 @@
         {
           "kind": "OBJECT",
           "name": "CustomPostDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "EntityMetaAlreadyHasSingleEntryErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "EntityMetaEntryAlreadyHasValueErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "EntityMetaKeyDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "EntityMetaKeyWithValueDoesNotExistErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -92,11 +120,19 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToEditCommentErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
         },
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -156,7 +192,35 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootAddCommentMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootAddCommentToCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootAddGenericCategoryTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootAddGenericCustomPostMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootAddGenericTagTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootAddPostCategoryTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootAddPostTagTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootAddUserMetaMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -192,7 +256,23 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootDeleteCommentMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteGenericCategoryTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootDeleteGenericCategoryTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteGenericCustomPostMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteGenericTagTermMetaMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -200,11 +280,23 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootDeletePostCategoryTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootDeletePostCategoryTermMutationPayload"
         },
         {
           "kind": "OBJECT",
+          "name": "RootDeletePostTagTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootDeletePostTagTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteUserMetaMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -232,7 +324,31 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootSetCommentMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootSetFeaturedImageOnCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetGenericCategoryTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetGenericCustomPostMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetGenericTagTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetPostCategoryTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootSetPostTagTermMetaMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -244,11 +360,31 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootSetUserMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateCommentMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootUpdateCustomPostMutationPayload"
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdateGenericCategoryTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootUpdateGenericCategoryTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateGenericCustomPostMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateGenericTagTermMetaMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -264,6 +400,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdatePostCategoryTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootUpdatePostCategoryTermMutationPayload"
         },
         {
@@ -272,7 +412,15 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdatePostTagTermMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootUpdatePostTagTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateUserMetaMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -417,6 +565,10 @@
         {
           "kind": "SCALAR",
           "name": "MenuLocationEnumString"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "NullableListValueJSONObject"
         },
         {
           "kind": "SCALAR",
@@ -712,7 +864,27 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootAddCategoryMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootAddCommentMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootAddCommentToCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootAddCustomPostMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootAddTagMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootAddUserMetaInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -764,6 +936,18 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootDeleteCategoryMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteCommentMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteCustomPostMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootDeleteGenericCategoryInput"
         },
         {
@@ -777,6 +961,14 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootDeletePostTagInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteTagMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteUserMetaInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -848,7 +1040,23 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootSetCategoryMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootSetCommentMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootSetCustomPostMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootSetFeaturedImageOnCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootSetTagMetaInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -860,11 +1068,27 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootSetUserMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootTagsFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootUpdateCategoryMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateCommentMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootUpdateCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateCustomPostMetaInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -893,6 +1117,14 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootUpdatePostTagInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateTagMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateUserMetaInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -1052,7 +1284,35 @@
         },
         {
           "kind": "UNION",
+          "name": "RootAddCommentMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootAddGenericTagTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootAddPostTagTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootAddUserMetaMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
@@ -1088,7 +1348,23 @@
         },
         {
           "kind": "UNION",
+          "name": "RootDeleteCommentMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
@@ -1096,11 +1372,23 @@
         },
         {
           "kind": "UNION",
+          "name": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
+          "name": "RootDeletePostTagTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootDeletePostTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteUserMetaMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
@@ -1128,7 +1416,31 @@
         },
         {
           "kind": "UNION",
+          "name": "RootSetCommentMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetGenericTagTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootSetPostTagTermMetaMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
@@ -1140,11 +1452,31 @@
         },
         {
           "kind": "UNION",
+          "name": "RootSetUserMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateCommentMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootUpdateCustomPostMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
+          "name": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
@@ -1160,6 +1492,10 @@
         },
         {
           "kind": "UNION",
+          "name": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion"
         },
         {
@@ -1168,7 +1504,15 @@
         },
         {
           "kind": "UNION",
+          "name": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootUpdatePostTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateUserMetaMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
