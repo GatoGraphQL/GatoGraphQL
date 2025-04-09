@@ -58,7 +58,7 @@ class MetaKeysFilterInputObjectTypeResolver extends AbstractInputObjectTypeResol
         return match ($inputFieldName) {
             'include',
             'exclude'
-            => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getInputFieldTypeModifiers($inputFieldName),
         };
