@@ -29,6 +29,11 @@ query {
       id
       isStatus(status: pending)
       metaValue(key: "_thumbnail_id")
+      meta(keys: ["_thumbnail_id"])
+      metaKeys
+      includingMetaKeys: metaKeys(filter: { include: ["_thumbnail_id", "_edit_last"] })
+      excludingMetaKeys: metaKeys(filter: { exclude: ["_thumbnail_id", "_edit_last"] })
+      includingAndExcludingMetaKeys: metaKeys(filter: { include: ["_thumbnail_id", "_edit_last"]: exclude: ["_edit_last"] })
       # These ones produce the value of data being inserted to DB, so can't save fixed value for testing
       # modifiedDate
       # modifiedDateStr(format: "m-d")
