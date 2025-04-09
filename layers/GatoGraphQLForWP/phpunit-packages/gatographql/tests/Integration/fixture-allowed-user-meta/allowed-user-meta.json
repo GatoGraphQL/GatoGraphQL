@@ -40,11 +40,7 @@
         "_application_passwords",
         "app_password",
         "session_tokens",
-        "wp_user-settings",
-        "wp_user-settings-time",
-        "wp_dashboard_quick_press_last_post_id",
-        "community-events-location",
-        "wp_persisted_preferences"
+        "wp_dashboard_quick_press_last_post_id"
       ]
     }
   }
