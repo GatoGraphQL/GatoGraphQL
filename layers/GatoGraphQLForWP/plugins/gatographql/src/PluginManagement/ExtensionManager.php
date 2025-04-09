@@ -388,7 +388,7 @@ class ExtensionManager extends AbstractPluginManager
         ) {
             $this->showAdminWarningNotice(
                 $extensionName,
-                __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql')
+                'invalid',
             );
             $this->nonActivatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = $extensionData;
             return false;
@@ -400,7 +400,7 @@ class ExtensionManager extends AbstractPluginManager
         if ($extensionCommercialExtensionActivatedLicenseObjectProperties->productName !== $extensionProductName) {
             $this->showAdminWarningNotice(
                 $extensionName,
-                __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql')
+                'unmatching',
             );
             $this->nonActivatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = $extensionData;
             return false;
@@ -416,10 +416,15 @@ class ExtensionManager extends AbstractPluginManager
      */
     protected function showAdminWarningNotice(
         string $extensionName,
-        ?string $messagePlaceholder = null,
+        ?string $messagePlaceholderCode = null,
     ): void {
-        $messagePlaceholder ??= __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql');
-        \add_action('admin_notices', function () use ($extensionName, $messagePlaceholder) {
+        \add_action('admin_notices', function () use ($extensionName, $messagePlaceholderCode) {
+            $messagePlaceholder = match($messagePlaceholderCode) {
+                'invalid' => __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql'),
+                'unmatching' => __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql'),
+                default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
+            };
+            
             // /**
             //  * Do not print the warnings in the Settings page
             //  */
