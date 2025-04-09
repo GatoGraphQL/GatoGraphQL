@@ -63,7 +63,10 @@
         "_application_passwords",
         "app_password",
         "session_tokens",
-        "community-events-location"
+        "wp_user-settings",
+        "wp_user-settings-time",
+        "community-events-location",
+        "wp_persisted_preferences"
       ]
     }
   }
