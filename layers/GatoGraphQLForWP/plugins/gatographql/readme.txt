@@ -223,6 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Made meta field `metaValue` handle any scalar type (previously only `String`) (#3061)
 * Made meta field `metaValues` handle any scalar type (previously only built-in ones), such as `JSONObject` (#3061)
 * Allow to hook inputs into tag/category mutations (#3062)
+* Tested up WordPress 6.8
 * Fixed: Passing a non-`post` CPT to `updatePost` will show an error (#3070)
 * Fixed: Translation loading error message in WordPress 6.8 (73a9f11)
 
