@@ -370,7 +370,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -1315,7 +1326,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -2185,7 +2207,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -2943,7 +2976,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -10342,7 +10386,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -11412,7 +11467,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -12196,7 +12262,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -12603,7 +12680,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -28146,7 +28234,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -31833,7 +31932,18 @@
                         {
                             "name": "metaKeys",
                             "description": "List of allowed meta keys set on the entity.",
-                            "args": [],
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter meta keys",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MetaKeysFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String]",
@@ -33948,6 +34058,53 @@
                                 "ofType": null
                             },
                             "defaultValue": "\"DESC\""
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "MetaKeysFilterInput",
+                    "description": "Input to filter the 'metaKeys' field",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "exclude",
+                            "description": "Exclude provided meta keys",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "include",
+                            "description": "Only include provided meta keys",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
                         }
                     ],
                     "interfaces": null,
