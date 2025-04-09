@@ -53,7 +53,7 @@ add_action(
          * @gatographql-readonly-code
          */
         $extensionVersion = '11.3.0-dev';
-        $extensionName = \__('Gato GraphQL - Testing Schema', 'gatographql-testing-schema');
+        $extensionName = \__('Gato GraphQL - Testing Schema');
         /**
          * Important: Do not modify the formatting of this PHP code!
          * A regex will search for this exact pattern, to update the

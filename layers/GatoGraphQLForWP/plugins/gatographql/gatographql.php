@@ -49,7 +49,7 @@ if (!defined('ABSPATH')) {
  * @gatographql-readonly-code
  */
 $pluginVersion = '11.3.0-dev';
-$pluginName = __('Gato GraphQL', 'gatographql');
+$pluginName = 'Gato GraphQL';
 
 /**
  * If the plugin is already registered, halt loading
