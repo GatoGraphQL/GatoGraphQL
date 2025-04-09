@@ -31,7 +31,7 @@ query {
     metaKeys
     includingMetaKeys: metaKeys(filter: { include: ["nickname", "wp_capabilities"] })
     excludingMetaKeys: metaKeys(filter: { exclude: ["nickname", "wp_capabilities"] })
-    includingAndExcludingMetaKeys: metaKeys(filter: { include: ["nickname", "wp_capabilities"]: exclude: ["wp_capabilities"] })
+    includingAndExcludingMetaKeys: metaKeys(filter: { include: ["nickname", "wp_capabilities"], exclude: ["wp_capabilities"] })
     name
     nicename
     nickname
