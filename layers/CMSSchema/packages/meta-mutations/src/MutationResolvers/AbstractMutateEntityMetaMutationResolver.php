@@ -317,7 +317,7 @@ abstract class AbstractMutateEntityMetaMutationResolver extends AbstractMutation
     /**
      * @throws EntityMetaCRUDMutationException If there was an error (eg: entity term does not exist)
      */
-    abstract protected function executeDeleteEntityMeta(string|int $entityID, string $key): void;
+    abstract protected function executeDeleteEntityMeta(string|int $entityID, string $key, mixed $value = null): void;
 
     /**
      * @return string|int The ID of the entity term
