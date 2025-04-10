@@ -307,7 +307,7 @@ abstract class AbstractMutateEntityMetaMutationResolver extends AbstractMutation
     ): string|int {
         /** @var string|int */
         $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        $metaData = $this->getUpdateMetaData($fieldDataAccessor);
+        $metaData = $this->getDeleteMetaData($fieldDataAccessor);
         $this->executeDeleteEntityMeta($entityID, $metaData['key']);
 
         return $entityID;
