@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMetaMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoPCMSSchema\MetaMutations\TypeResolvers\InputObjectType\DeleteEntityMetaInputObjectTypeResolverInterface;
 
-interface DeleteCommentMetaInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
+interface DeleteCommentMetaInputObjectTypeResolverInterface extends DeleteEntityMetaInputObjectTypeResolverInterface
 {
 }
