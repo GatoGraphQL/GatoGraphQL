@@ -249,6 +249,7 @@ abstract class AbstractMutateEntityMetaMutationResolver extends AbstractMutation
     {
         return [
             'key' => $fieldDataAccessor->getValue(MutationInputProperties::KEY),
+            'value' => $fieldDataAccessor->getValue(MutationInputProperties::VALUE),
         ];
     }
 
@@ -308,7 +309,7 @@ abstract class AbstractMutateEntityMetaMutationResolver extends AbstractMutation
         /** @var string|int */
         $entityID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $metaData = $this->getDeleteMetaData($fieldDataAccessor);
-        $this->executeDeleteEntityMeta($entityID, $metaData['key']);
+        $this->executeDeleteEntityMeta($entityID, $metaData['key'], $metaData['value']);
 
         return $entityID;
     }
