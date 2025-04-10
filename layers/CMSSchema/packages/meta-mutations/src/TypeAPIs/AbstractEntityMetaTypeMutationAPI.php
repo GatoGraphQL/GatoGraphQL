@@ -148,7 +148,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
     public function deleteEntityMeta(
         string|int $entityID,
         string $key,
-        mixed $value,
+        mixed $value = null,
     ): void {
         $result = $this->executeDeleteEntityMeta($entityID, $key, $value);
         $this->handleMaybeError($result);
