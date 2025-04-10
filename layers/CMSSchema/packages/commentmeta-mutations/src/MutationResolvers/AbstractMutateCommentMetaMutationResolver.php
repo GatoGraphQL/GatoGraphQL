@@ -354,9 +354,9 @@ abstract class AbstractMutateCommentMetaMutationResolver extends AbstractMutateE
     /**
      * @throws CommentMetaCRUDMutationException If there was an error (eg: comment does not exist)
      */
-    protected function executeDeleteEntityMeta(string|int $commentID, string $key): void
+    protected function executeDeleteEntityMeta(string|int $commentID, string $key, mixed $value = null): void
     {
-        $this->getCommentMetaTypeMutationAPI()->deleteCommentMeta($commentID, $key);
+        $this->getCommentMetaTypeMutationAPI()->deleteCommentMeta($commentID, $key, $value);
     }
 
     /**

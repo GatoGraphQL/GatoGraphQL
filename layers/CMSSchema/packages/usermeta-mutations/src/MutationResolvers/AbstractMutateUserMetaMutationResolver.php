@@ -345,9 +345,9 @@ abstract class AbstractMutateUserMetaMutationResolver extends AbstractMutateEnti
     /**
      * @throws UserMetaCRUDMutationException If there was an error (eg: user does not exist)
      */
-    protected function executeDeleteEntityMeta(string|int $userID, string $key): void
+    protected function executeDeleteEntityMeta(string|int $userID, string $key, mixed $value = null): void
     {
-        $this->getUserMetaTypeMutationAPI()->deleteUserMeta($userID, $key);
+        $this->getUserMetaTypeMutationAPI()->deleteUserMeta($userID, $key, $value);
     }
 
     /**

@@ -74,10 +74,12 @@ abstract class AbstractCommentMetaTypeMutationAPI extends AbstractEntityMetaType
     public function deleteCommentMeta(
         string|int $commentID,
         string $key,
+        mixed $value = null,
     ): void {
         $this->deleteEntityMeta(
             $commentID,
             $key,
+            $value,
         );
     }
 }

@@ -312,9 +312,9 @@ abstract class AbstractMutateCustomPostMetaMutationResolver extends AbstractMuta
     /**
      * @throws CustomPostMetaCRUDMutationException If there was an error (eg: custom post does not exist)
      */
-    protected function executeDeleteEntityMeta(string|int $customPostID, string $key): void
+    protected function executeDeleteEntityMeta(string|int $customPostID, string $key, mixed $value = null): void
     {
-        $this->getCustomPostMetaTypeMutationAPI()->deleteCustomPostMeta($customPostID, $key);
+        $this->getCustomPostMetaTypeMutationAPI()->deleteCustomPostMeta($customPostID, $key, $value);
     }
 
     /**

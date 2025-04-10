@@ -74,10 +74,12 @@ abstract class AbstractUserMetaTypeMutationAPI extends AbstractEntityMetaTypeMut
     public function deleteUserMeta(
         string|int $userID,
         string $key,
+        mixed $value = null,
     ): void {
         $this->deleteEntityMeta(
             $userID,
             $key,
+            $value,
         );
     }
 }

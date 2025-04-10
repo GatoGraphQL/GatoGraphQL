@@ -34,7 +34,8 @@ class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
     protected function executeDeleteEntityMeta(
         string|int $entityID,
         string $key,
+        mixed $value = null,
     ): bool {
-        return delete_term_meta((int) $entityID, $key);
+        return delete_term_meta((int) $entityID, $key, $value ?? '');
     }
 }

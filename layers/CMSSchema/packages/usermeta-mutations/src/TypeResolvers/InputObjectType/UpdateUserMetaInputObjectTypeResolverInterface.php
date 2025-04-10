@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserMetaMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoPCMSSchema\MetaMutations\TypeResolvers\InputObjectType\UpdateEntityMetaInputObjectTypeResolverInterface;
 
-interface UpdateUserMetaInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
+interface UpdateUserMetaInputObjectTypeResolverInterface extends UpdateEntityMetaInputObjectTypeResolverInterface
 {
 }
