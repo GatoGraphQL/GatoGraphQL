@@ -62,7 +62,8 @@ class TagMetaTypeMutationAPI extends TaxonomyMetaTypeMutationAPI implements TagM
     public function deleteTagTermMeta(
         string|int $taxonomyTermID,
         string $key,
+        mixed $value = null,
     ): void {
-        $this->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+        $this->deleteTaxonomyTermMeta($taxonomyTermID, $key, $value);
     }
 }

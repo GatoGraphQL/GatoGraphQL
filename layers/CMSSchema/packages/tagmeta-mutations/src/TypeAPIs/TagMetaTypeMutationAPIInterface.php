@@ -45,5 +45,6 @@ interface TagMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationAPIInt
     public function deleteTagTermMeta(
         string|int $taxonomyTermID,
         string $key,
+        mixed $value = null,
     ): void;
 }

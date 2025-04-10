@@ -46,5 +46,6 @@ interface UserMetaTypeMutationAPIInterface extends EntityMetaTypeMutationAPIInte
     public function deleteUserMeta(
         string|int $userID,
         string $key,
+        mixed $value = null,
     ): void;
 }
