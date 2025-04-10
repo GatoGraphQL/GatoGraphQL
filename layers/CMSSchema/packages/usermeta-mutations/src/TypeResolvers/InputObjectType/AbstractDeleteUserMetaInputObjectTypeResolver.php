@@ -13,7 +13,7 @@ abstract class AbstractDeleteUserMetaInputObjectTypeResolver extends AbstractDel
     {
         return $this->__('Input to delete a user\'s meta entry', 'usermeta-mutations');
     }
-    
+
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {

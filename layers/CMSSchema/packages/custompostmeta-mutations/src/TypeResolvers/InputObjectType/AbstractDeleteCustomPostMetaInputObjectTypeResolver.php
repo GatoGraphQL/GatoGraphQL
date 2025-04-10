@@ -13,7 +13,7 @@ abstract class AbstractDeleteCustomPostMetaInputObjectTypeResolver extends Abstr
     {
         return $this->__('Input to delete a custom post\'s meta entry', 'custompostmeta-mutations');
     }
-    
+
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {

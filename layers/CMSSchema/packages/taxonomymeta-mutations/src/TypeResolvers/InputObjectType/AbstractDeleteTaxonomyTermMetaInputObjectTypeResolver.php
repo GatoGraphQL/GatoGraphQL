@@ -13,7 +13,7 @@ abstract class AbstractDeleteTaxonomyTermMetaInputObjectTypeResolver extends Abs
     {
         return $this->__('Input to delete a taxonomy term\'s meta entry', 'taxonomymeta-mutations');
     }
-    
+
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
