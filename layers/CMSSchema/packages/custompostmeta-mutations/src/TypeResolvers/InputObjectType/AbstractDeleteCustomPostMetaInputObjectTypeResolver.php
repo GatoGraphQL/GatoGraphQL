@@ -8,6 +8,7 @@ use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
@@ -15,6 +16,7 @@ abstract class AbstractDeleteCustomPostMetaInputObjectTypeResolver extends Abstr
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
 
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -34,6 +36,15 @@ abstract class AbstractDeleteCustomPostMetaInputObjectTypeResolver extends Abstr
         }
         return $this->stringScalarTypeResolver;
     }
+    final protected function getAnyScalarScalarTypeResolver(): AnyScalarScalarTypeResolver
+    {
+        if ($this->anyScalarScalarTypeResolver === null) {
+            /** @var AnyScalarScalarTypeResolver */
+            $anyScalarScalarTypeResolver = $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class);
+            $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
+        }
+        return $this->anyScalarScalarTypeResolver;
+    }
 
     public function getTypeDescription(): ?string
     {
@@ -51,6 +62,7 @@ abstract class AbstractDeleteCustomPostMetaInputObjectTypeResolver extends Abstr
             ] : [],
             [
                 MutationInputProperties::KEY => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::VALUE => $this->getAnyScalarScalarTypeResolver(),
             ]
         );
     }
@@ -62,6 +74,7 @@ abstract class AbstractDeleteCustomPostMetaInputObjectTypeResolver extends Abstr
         return match ($inputFieldName) {
             MutationInputProperties::ID => $this->__('The ID of the custom post', 'custompostmeta-mutations'),
             MutationInputProperties::KEY => $this->__('The meta key', 'custompostmeta-mutations'),
+            MutationInputProperties::VALUE => $this->__('The specific meta value to delete, to avoid removing duplicate entries for that key', 'custompostmeta-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
