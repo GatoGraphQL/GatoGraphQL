@@ -37,7 +37,8 @@ class UserMetaTypeMutationAPI extends AbstractUserMetaTypeMutationAPI
     protected function executeDeleteEntityMeta(
         string|int $entityID,
         string $key,
+        mixed $value = null,
     ): bool {
-        return delete_user_meta((int) $entityID, $key);
+        return delete_user_meta((int) $entityID, $key, $value ?? '');
     }
 }
