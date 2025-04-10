@@ -161,5 +161,6 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
     abstract protected function executeDeleteEntityMeta(
         string|int $entityID,
         string $key,
+        mixed $value = null,
     ): bool;
 }
