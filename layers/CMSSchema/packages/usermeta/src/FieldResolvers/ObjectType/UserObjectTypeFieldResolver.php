@@ -14,6 +14,7 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolver
@@ -91,7 +92,7 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                 );
                 // If it's an array, it must be a JSON object
                 if (is_array($metaValue)) {
-                    return (object) $metaValue;
+                    return MethodHelpers::recursivelyConvertAssociativeArrayToStdClass($metaValue);
                 }
                 return $metaValue;
             case 'metaValues':
@@ -108,7 +109,7 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                     if (!is_array($metaValue)) {
                         continue;
                     }
-                    $metaValues[$index] = (object) $metaValue;
+                    $metaValues[$index] = MethodHelpers::recursivelyConvertAssociativeArrayToStdClass($metaValue);
                 }
                 return $metaValues;
             case 'meta':
