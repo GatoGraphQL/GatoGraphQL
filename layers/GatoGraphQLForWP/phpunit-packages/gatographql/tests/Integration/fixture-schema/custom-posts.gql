@@ -163,8 +163,4 @@ query {
       customPostType
     }
   }
-
-  customPostWithObjectMeta: customPost(by: { id: 1361 }) {
-    metaValue(key: "_wp_attachment_metadata")
-  }
 }
