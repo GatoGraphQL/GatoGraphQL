@@ -177,12 +177,15 @@
                     ]
                 },
                 "metaKeys": [
-                    "_thumbnail_id"
+                    "_thumbnail_id",
+                    "meta_with_object_value"
                 ],
                 "includingMetaKeys": [
                     "_thumbnail_id"
                 ],
-                "excludingMetaKeys": [],
+                "excludingMetaKeys": [
+                    "meta_with_object_value"
+                ],
                 "includingAndExcludingMetaKeys": [
                     "_thumbnail_id"
                 ],
@@ -428,6 +431,70 @@
                 "id": 1113,
                 "title": "Released v0.6, check it out"
             }
-        ]
+        ],
+        "postWithObjectMeta": {
+            "metaValue": {
+                "_edit_lock": {
+                    "to": {
+                        "111": [
+                            "1743667747:1"
+                        ]
+                    }
+                },
+                "_pingme": {
+                    "to": {
+                        "111": [
+                            "1"
+                        ]
+                    }
+                },
+                "some_property_to_translate": {
+                    "to": {
+                        "111": [
+                            "Messi won another cup for more than 4 times by now, bleh\r\nAnd with another sentence"
+                        ]
+                    }
+                },
+                "some_property": {
+                    "to": {
+                        "111": [
+                            "Nothing about Diego?"
+                        ]
+                    }
+                }
+            },
+            "metaValues": [
+                {
+                    "_edit_lock": {
+                        "to": {
+                            "111": [
+                                "1743667747:1"
+                            ]
+                        }
+                    },
+                    "_pingme": {
+                        "to": {
+                            "111": [
+                                "1"
+                            ]
+                        }
+                    },
+                    "some_property_to_translate": {
+                        "to": {
+                            "111": [
+                                "Messi won another cup for more than 4 times by now, bleh\r\nAnd with another sentence"
+                            ]
+                        }
+                    },
+                    "some_property": {
+                        "to": {
+                            "111": [
+                                "Nothing about Diego?"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
     }
 }

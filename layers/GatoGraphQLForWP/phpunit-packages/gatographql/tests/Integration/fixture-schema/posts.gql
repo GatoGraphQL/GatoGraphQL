@@ -130,4 +130,9 @@ query {
     id
     title
   }
+
+  postWithObjectMeta: post(by: { id: 1116 }) {
+    metaValue(key: "meta_with_object_value")
+    metaValues(key: "meta_with_object_value")
+  }
 }
