@@ -590,6 +590,10 @@
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[meta_with_object_value]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:6:{s:5:"width";i:1291;s:6:"height";i:784;s:4:"file";s:34:"2022/06/GatoGraphQL-logo.webp";s:8:"filesize";i:192180;s:5:"sizes";a:4:{s:6:"medium";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-300x182.jpg";s:5:"width";i:300;s:6:"height";i:182;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:12601;}s:5:"large";a:5:{s:4:"file";s:35:"GatoGraphQL-logo-1024x622.jpg";s:5:"width";i:1024;s:6:"height";i:622;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:97030;}s:9:"thumbnail";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:6101;}s:12:"medium_large";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-768x466.jpg";s:5:"width";i:768;s:6:"height";i:466;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:60271;}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+		</wp:postmeta>
 							</item>
 					<item>
 		<title><![CDATA[Nested mutations are a must have]]></title>
