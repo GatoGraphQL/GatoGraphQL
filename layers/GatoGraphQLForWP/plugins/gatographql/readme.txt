@@ -86,6 +86,12 @@ The plugins are:
 
 == Frequently Asked Questions ==
 
+= Can I use Gato GraphQL with popular plugins (WooCommerce, ACF, Yoast, etc)? =
+
+Yes, you can. Either there are specific integrations for them (eg: Polylang), of there are elements in the GraphQL schema to interact with generic elements.
+
+For instance, you can use field `customPost` to retrieve WooCommerce products, and field `metaValue` to retrieve Advanced Custom Fields and Yoast SEO metadata.
+
 = Does the plugin provide documentation? =
 
 The Gato GraphQL website contains extensive documentation:
