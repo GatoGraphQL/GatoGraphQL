@@ -14,13 +14,13 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/user-avatars": "^11.3",
-        "pop-cms-schema/users-wp": "^11.3"
+        "pop-cms-schema/user-avatars": "^11.4",
+        "pop-cms-schema/users-wp": "^11.4"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
         "phpunit/phpunit": "^10.2",
-        "pop-cms-schema/user-state-wp": "^11.3",
+        "pop-cms-schema/user-state-wp": "^11.4",
         "rector/rector": "^0.18",
         "squizlabs/php_codesniffer": "^3.6",
         "szepeviktor/phpstan-wordpress": "^1.0",
@@ -214,7 +214,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "11.3-dev"
+            "dev-master": "11.4-dev"
         }
     },
     "config": {
