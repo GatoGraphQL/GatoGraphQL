@@ -542,7 +542,7 @@
             "text_field_metaValue": "This is a text field value for ACF",
             "number_field_metaValue": "22",
             "date_field_metaValue": "20250426",
-            "textarea_field_metaValue": "CAponga\nNadonma\nMaronga",
+            "textarea_field_metaValue": "This is a textarea field value for ACF, line 1\nline 2\nthird line",
             "relationship_post_id_metaValue": "27",
             "relationship_post_ids_metaValue": [
                 "1",
