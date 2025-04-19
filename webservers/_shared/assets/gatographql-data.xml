@@ -597,7 +597,7 @@ And with another sentence";}}}s:13:"some_property";a:1:{s:2:"to";a:1:{i:111;a:1:
 		</wp:postmeta>
 		<wp:postmeta>
 		<wp:meta_key><![CDATA[text_field]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Songa taronga]]></wp:meta_value>
+		<wp:meta_value><![CDATA[This is a text field value for ACF]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_text_field]]></wp:meta_key>
@@ -621,9 +621,9 @@ And with another sentence";}}}s:13:"some_property";a:1:{s:2:"to";a:1:{i:111;a:1:
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[textarea_field]]></wp:meta_key>
-		<wp:meta_value><![CDATA[CAponga
-Nadonma
-Maronga]]></wp:meta_value>
+		<wp:meta_value><![CDATA[This is a textarea field value for ACF, line 1
+line 2
+third line]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_textarea_field]]></wp:meta_key>
