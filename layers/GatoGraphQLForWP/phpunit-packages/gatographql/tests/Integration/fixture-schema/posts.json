@@ -432,8 +432,8 @@
                 "title": "Released v0.6, check it out"
             }
         ],
-        "postWithObjectMeta": {
-            "metaValue": {
+        "postWithMeta": {
+            "objectMetaValue": {
                 "_edit_lock": {
                     "to": {
                         "111": [
@@ -463,7 +463,7 @@
                     }
                 }
             },
-            "metaValues": [
+            "objectMetaValues": [
                 {
                     "_edit_lock": {
                         "to": {

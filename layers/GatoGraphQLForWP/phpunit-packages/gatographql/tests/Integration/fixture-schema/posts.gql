@@ -131,8 +131,8 @@ query {
     title
   }
 
-  postWithObjectMeta: post(by: { id: 1116 }) {
-    metaValue(key: "meta_with_object_value")
-    metaValues(key: "meta_with_object_value")
+  postWithMeta: post(by: { id: 1116 }) {
+    objectMetaValue: metaValue(key: "meta_with_object_value")
+    objectMetaValues: metaValues(key: "meta_with_object_value")
   }
 }
