@@ -12,25 +12,14 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\AnyScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
-    private ?AnyScalarScalarTypeResolver $anyScalarScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?ListValueJSONObjectScalarTypeResolver $listValueJSONObjectScalarTypeResolver = null;
     private ?MetaKeysFilterInputObjectTypeResolver $metaKeysFilterInputObjectTypeResolver = null;
 
-    final protected function getAnyScalarScalarTypeResolver(): AnyScalarScalarTypeResolver
-    {
-        if ($this->anyScalarScalarTypeResolver === null) {
-            /** @var AnyScalarScalarTypeResolver */
-            $anyScalarScalarTypeResolver = $this->instanceManager->getInstance(AnyScalarScalarTypeResolver::class);
-            $this->anyScalarScalarTypeResolver = $anyScalarScalarTypeResolver;
-        }
-        return $this->anyScalarScalarTypeResolver;
-    }
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
         if ($this->stringScalarTypeResolver === null) {
@@ -88,7 +77,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
                 => $this->getStringScalarTypeResolver(),
             'metaValue',
             'metaValues'
-                => $this->getAnyScalarScalarTypeResolver(),
+                => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             'meta'
                 => $this->getListValueJSONObjectScalarTypeResolver(),
             default

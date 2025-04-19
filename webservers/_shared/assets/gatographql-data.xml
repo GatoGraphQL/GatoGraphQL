@@ -595,6 +595,96 @@
 		<wp:meta_value><![CDATA[a:4:{s:10:"_edit_lock";a:1:{s:2:"to";a:1:{i:111;a:1:{i:0;s:12:"1743667747:1";}}}s:7:"_pingme";a:1:{s:2:"to";a:1:{i:111;a:1:{i:0;s:1:"1";}}}s:26:"some_property_to_translate";a:1:{s:2:"to";a:1:{i:111;a:1:{i:0;s:83:"Messi won another cup for more than 4 times by now, bleh
 And with another sentence";}}}s:13:"some_property";a:1:{s:2:"to";a:1:{i:111;a:1:{i:0;s:20:"Nothing about Diego?";}}}}]]></wp:meta_value>
 		</wp:postmeta>
+		<wp:postmeta>
+		<wp:meta_key><![CDATA[text_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[This is a text field value for ACF]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_text_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035729d74e2]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[number_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[22]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_number_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035744d74e3]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[date_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[20250426]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_date_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035756d74e4]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[textarea_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[This is a textarea field value for ACF, line 1
+line 2
+third line]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_textarea_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035779d74e5]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[relationship_post_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[27]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_relationship_post_id]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035832d74e6]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[relationship_post_ids]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:2:{i:0;s:1:"1";i:1;s:2:"56";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_relationship_post_ids]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_6803584fd74e7]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[repeater_list_field_0_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[first value]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_repeater_list_field_0_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035a733a130]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[repeater_list_field_1_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[second value]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_repeater_list_field_1_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035a733a130]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[repeater_list_field_2_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[third value]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_repeater_list_field_2_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035a733a130]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[repeater_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[4]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_repeater_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035a3b3a12f]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[repeater_list_field_3_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[fourth value]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_repeater_list_field_3_list_field]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_68035a733a130]]></wp:meta_value>
+		</wp:postmeta>
 							</item>
 					<item>
 		<title><![CDATA[Nested mutations are a must have]]></title>

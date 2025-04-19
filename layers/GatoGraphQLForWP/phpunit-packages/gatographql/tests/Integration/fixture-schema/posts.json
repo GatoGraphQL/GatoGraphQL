@@ -178,13 +178,57 @@
                 },
                 "metaKeys": [
                     "_thumbnail_id",
-                    "meta_with_object_value"
+                    "meta_with_object_value",
+                    "text_field",
+                    "_text_field",
+                    "number_field",
+                    "_number_field",
+                    "date_field",
+                    "_date_field",
+                    "textarea_field",
+                    "_textarea_field",
+                    "relationship_post_id",
+                    "_relationship_post_id",
+                    "relationship_post_ids",
+                    "_relationship_post_ids",
+                    "repeater_list_field_0_list_field",
+                    "_repeater_list_field_0_list_field",
+                    "repeater_list_field_1_list_field",
+                    "_repeater_list_field_1_list_field",
+                    "repeater_list_field_2_list_field",
+                    "_repeater_list_field_2_list_field",
+                    "repeater_list_field",
+                    "_repeater_list_field",
+                    "repeater_list_field_3_list_field",
+                    "_repeater_list_field_3_list_field"
                 ],
                 "includingMetaKeys": [
                     "_thumbnail_id"
                 ],
                 "excludingMetaKeys": [
-                    "meta_with_object_value"
+                    "meta_with_object_value",
+                    "text_field",
+                    "_text_field",
+                    "number_field",
+                    "_number_field",
+                    "date_field",
+                    "_date_field",
+                    "textarea_field",
+                    "_textarea_field",
+                    "relationship_post_id",
+                    "_relationship_post_id",
+                    "relationship_post_ids",
+                    "_relationship_post_ids",
+                    "repeater_list_field_0_list_field",
+                    "_repeater_list_field_0_list_field",
+                    "repeater_list_field_1_list_field",
+                    "_repeater_list_field_1_list_field",
+                    "repeater_list_field_2_list_field",
+                    "_repeater_list_field_2_list_field",
+                    "repeater_list_field",
+                    "_repeater_list_field",
+                    "repeater_list_field_3_list_field",
+                    "_repeater_list_field_3_list_field"
                 ],
                 "includingAndExcludingMetaKeys": [
                     "_thumbnail_id"
@@ -432,8 +476,8 @@
                 "title": "Released v0.6, check it out"
             }
         ],
-        "postWithObjectMeta": {
-            "metaValue": {
+        "postWithMeta": {
+            "object_metaValue": {
                 "_edit_lock": {
                     "to": {
                         "111": [
@@ -463,7 +507,7 @@
                     }
                 }
             },
-            "metaValues": [
+            "object_metaValues": [
                 {
                     "_edit_lock": {
                         "to": {
@@ -494,6 +538,15 @@
                         }
                     }
                 }
+            ],
+            "text_field_metaValue": "This is a text field value for ACF",
+            "number_field_metaValue": "22",
+            "date_field_metaValue": "20250426",
+            "textarea_field_metaValue": "This is a textarea field value for ACF, line 1\nline 2\nthird line",
+            "relationship_post_id_metaValue": "27",
+            "relationship_post_ids_metaValue": [
+                "1",
+                "56"
             ]
         }
     }

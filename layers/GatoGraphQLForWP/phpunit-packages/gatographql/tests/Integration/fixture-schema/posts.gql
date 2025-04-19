@@ -131,8 +131,16 @@ query {
     title
   }
 
-  postWithObjectMeta: post(by: { id: 1116 }) {
-    metaValue(key: "meta_with_object_value")
-    metaValues(key: "meta_with_object_value")
+  postWithMeta: post(by: { id: 1116 }) {
+    object_metaValue: metaValue(key: "meta_with_object_value")
+    object_metaValues: metaValues(key: "meta_with_object_value")
+
+    text_field_metaValue: metaValue(key: "text_field")
+    number_field_metaValue: metaValue(key: "number_field")
+    date_field_metaValue: metaValue(key: "date_field")
+    textarea_field_metaValue: metaValue(key: "textarea_field")
+    relationship_post_id_metaValue: metaValue(key: "relationship_post_id")
+    relationship_post_ids_metaValue: metaValue(key: "relationship_post_ids")
+
   }
 }
