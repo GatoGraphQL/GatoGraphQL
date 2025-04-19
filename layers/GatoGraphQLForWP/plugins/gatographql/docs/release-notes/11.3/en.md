@@ -11,6 +11,7 @@
 - Made meta field `metaValues` handle any scalar type (previously only built-in ones), such as `JSONObject` ([#3061](https://github.com/GatoGraphQL/GatoGraphQL/pull/3061))
 - Allow to hook inputs into tag/category mutations ([#3062](https://github.com/GatoGraphQL/GatoGraphQL/pull/3062))
 - Tested up WordPress 6.8
+- Use `DangerouslyNonSpecificScalar` instead of `AnyScalarScalar` type for `metaValue` field, to allow retrieving lists (eg: for ACF) ([#3080](https://github.com/GatoGraphQL/GatoGraphQL/pull/3080)) (`v11.3.1`)
 
 ## Added
 
