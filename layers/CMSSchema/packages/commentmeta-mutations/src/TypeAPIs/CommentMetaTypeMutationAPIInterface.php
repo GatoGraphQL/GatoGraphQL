@@ -46,5 +46,6 @@ interface CommentMetaTypeMutationAPIInterface extends EntityMetaTypeMutationAPII
     public function deleteCommentMeta(
         string|int $commentID,
         string $key,
+        mixed $value = null,
     ): void;
 }

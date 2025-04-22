@@ -75,10 +75,12 @@ abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractEntityMetaTyp
     public function deleteTaxonomyTermMeta(
         string|int $taxonomyTermID,
         string $key,
+        mixed $value = null,
     ): void {
         $this->deleteEntityMeta(
             $taxonomyTermID,
             $key,
+            $value,
         );
     }
 }

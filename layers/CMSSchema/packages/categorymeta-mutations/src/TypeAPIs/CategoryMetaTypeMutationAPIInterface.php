@@ -45,5 +45,6 @@ interface CategoryMetaTypeMutationAPIInterface extends TaxonomyMetaTypeMutationA
     public function deleteCategoryTermMeta(
         string|int $taxonomyTermID,
         string $key,
+        mixed $value = null,
     ): void;
 }

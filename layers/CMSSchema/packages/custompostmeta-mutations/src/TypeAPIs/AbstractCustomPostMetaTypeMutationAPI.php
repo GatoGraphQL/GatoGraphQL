@@ -74,10 +74,12 @@ abstract class AbstractCustomPostMetaTypeMutationAPI extends AbstractEntityMetaT
     public function deleteCustomPostMeta(
         string|int $customPostID,
         string $key,
+        mixed $value = null,
     ): void {
         $this->deleteEntityMeta(
             $customPostID,
             $key,
+            $value,
         );
     }
 }

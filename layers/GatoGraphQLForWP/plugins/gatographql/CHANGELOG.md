@@ -16,7 +16,25 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 - Renamed `getCommentPostID` to `getCommentCustomPostID` (#3073)
 
-## 11.3.0 - DATE
+## 12.0.0 - DATE
+
+### Added
+
+- Documentation for new Elementor Premium Extension (#3052)
+
+### Breaking changes
+
+- Plugin constructor signature receives nullable `commitHash` param (#3056)
+- Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
+- Renamed `getCommentPostID` to `getCommentCustomPostID` (#3073)
+
+## 11.3.1 - 19/04/2025
+
+### Improvements
+
+- Use `DangerouslyNonSpecificScalar` instead of `AnyScalarScalar` type for `metaValue` field, to allow retrieving lists (eg: for ACF) (#3080)
+
+## 11.3.0 - 13/04/2025
 
 ### Added
 

@@ -44,5 +44,6 @@ interface EntityMetaTypeMutationAPIInterface
     public function deleteEntityMeta(
         string|int $entityID,
         string $key,
+        mixed $value = null,
     ): void;
 }

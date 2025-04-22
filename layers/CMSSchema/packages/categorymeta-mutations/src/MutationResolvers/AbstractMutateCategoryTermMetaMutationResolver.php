@@ -49,9 +49,9 @@ abstract class AbstractMutateCategoryTermMetaMutationResolver extends AbstractMu
     /**
      * @throws CategoryTermMetaCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeDeleteEntityMeta(string|int $taxonomyTermID, string $key): void
+    protected function executeDeleteEntityMeta(string|int $taxonomyTermID, string $key, mixed $value = null): void
     {
-        $this->getCategoryMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $key);
+        $this->getCategoryMetaTypeMutationAPI()->deleteTaxonomyTermMeta($taxonomyTermID, $key, $value);
     }
 
     /**

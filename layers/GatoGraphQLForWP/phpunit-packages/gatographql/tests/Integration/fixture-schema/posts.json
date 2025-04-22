@@ -177,12 +177,59 @@
                     ]
                 },
                 "metaKeys": [
-                    "_thumbnail_id"
+                    "_thumbnail_id",
+                    "meta_with_object_value",
+                    "text_field",
+                    "_text_field",
+                    "number_field",
+                    "_number_field",
+                    "date_field",
+                    "_date_field",
+                    "textarea_field",
+                    "_textarea_field",
+                    "relationship_post_id",
+                    "_relationship_post_id",
+                    "relationship_post_ids",
+                    "_relationship_post_ids",
+                    "repeater_list_field_0_list_field",
+                    "_repeater_list_field_0_list_field",
+                    "repeater_list_field_1_list_field",
+                    "_repeater_list_field_1_list_field",
+                    "repeater_list_field_2_list_field",
+                    "_repeater_list_field_2_list_field",
+                    "repeater_list_field",
+                    "_repeater_list_field",
+                    "repeater_list_field_3_list_field",
+                    "_repeater_list_field_3_list_field"
                 ],
                 "includingMetaKeys": [
                     "_thumbnail_id"
                 ],
-                "excludingMetaKeys": [],
+                "excludingMetaKeys": [
+                    "meta_with_object_value",
+                    "text_field",
+                    "_text_field",
+                    "number_field",
+                    "_number_field",
+                    "date_field",
+                    "_date_field",
+                    "textarea_field",
+                    "_textarea_field",
+                    "relationship_post_id",
+                    "_relationship_post_id",
+                    "relationship_post_ids",
+                    "_relationship_post_ids",
+                    "repeater_list_field_0_list_field",
+                    "_repeater_list_field_0_list_field",
+                    "repeater_list_field_1_list_field",
+                    "_repeater_list_field_1_list_field",
+                    "repeater_list_field_2_list_field",
+                    "_repeater_list_field_2_list_field",
+                    "repeater_list_field",
+                    "_repeater_list_field",
+                    "repeater_list_field_3_list_field",
+                    "_repeater_list_field_3_list_field"
+                ],
                 "includingAndExcludingMetaKeys": [
                     "_thumbnail_id"
                 ],
@@ -428,6 +475,79 @@
                 "id": 1113,
                 "title": "Released v0.6, check it out"
             }
-        ]
+        ],
+        "postWithMeta": {
+            "object_metaValue": {
+                "_edit_lock": {
+                    "to": {
+                        "111": [
+                            "1743667747:1"
+                        ]
+                    }
+                },
+                "_pingme": {
+                    "to": {
+                        "111": [
+                            "1"
+                        ]
+                    }
+                },
+                "some_property_to_translate": {
+                    "to": {
+                        "111": [
+                            "Messi won another cup for more than 4 times by now, bleh\r\nAnd with another sentence"
+                        ]
+                    }
+                },
+                "some_property": {
+                    "to": {
+                        "111": [
+                            "Nothing about Diego?"
+                        ]
+                    }
+                }
+            },
+            "object_metaValues": [
+                {
+                    "_edit_lock": {
+                        "to": {
+                            "111": [
+                                "1743667747:1"
+                            ]
+                        }
+                    },
+                    "_pingme": {
+                        "to": {
+                            "111": [
+                                "1"
+                            ]
+                        }
+                    },
+                    "some_property_to_translate": {
+                        "to": {
+                            "111": [
+                                "Messi won another cup for more than 4 times by now, bleh\r\nAnd with another sentence"
+                            ]
+                        }
+                    },
+                    "some_property": {
+                        "to": {
+                            "111": [
+                                "Nothing about Diego?"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "text_field_metaValue": "This is a text field value for ACF",
+            "number_field_metaValue": "22",
+            "date_field_metaValue": "20250426",
+            "textarea_field_metaValue": "This is a textarea field value for ACF, line 1\nline 2\nthird line",
+            "relationship_post_id_metaValue": "27",
+            "relationship_post_ids_metaValue": [
+                "1",
+                "56"
+            ]
+        }
     }
 }

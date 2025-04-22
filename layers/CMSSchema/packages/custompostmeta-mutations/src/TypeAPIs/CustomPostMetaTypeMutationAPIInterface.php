@@ -46,5 +46,6 @@ interface CustomPostMetaTypeMutationAPIInterface extends EntityMetaTypeMutationA
     public function deleteCustomPostMeta(
         string|int $customPostID,
         string $key,
+        mixed $value = null,
     ): void;
 }

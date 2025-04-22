@@ -37,7 +37,8 @@ class CommentMetaTypeMutationAPI extends AbstractCommentMetaTypeMutationAPI
     protected function executeDeleteEntityMeta(
         string|int $entityID,
         string $key,
+        mixed $value = null,
     ): bool {
-        return delete_comment_meta((int) $entityID, $key);
+        return delete_comment_meta((int) $entityID, $key, $value ?? '');
     }
 }

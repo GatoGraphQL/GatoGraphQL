@@ -1,9 +1,9 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
-Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, astro, wpgraphql, Next.js
+Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, astro, wpgraphql, nextjs
 Requires at least: 6.1
 Tested up to: 6.8
-Stable tag: 11.2.0
+Stable tag: 11.3.1
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -87,6 +87,12 @@ The plugins are:
 [Gato AI Translations for Polylang](https://gatoplugins.com/plugins/ai-translations-for-polylang): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, DeepSeek, Mistral AI, DeepL, and Google Translate.
 
 == Frequently Asked Questions ==
+
+= Can I use Gato GraphQL with popular plugins (WooCommerce, ACF, Yoast, etc)? =
+
+Yes, you can. Either there are specific integrations for them (eg: Polylang), of there are elements in the GraphQL schema to interact with generic elements.
+
+For instance, you can use field `customPost` to retrieve WooCommerce products, and field `metaValue` to retrieve Advanced Custom Fields and Yoast SEO metadata.
 
 = Does the plugin provide documentation? =
 
@@ -217,6 +223,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking change: Plugin constructor signature receives nullable `commitHash` param (#3056)
 * Breaking change: Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 * Breaking change: Renamed `getCommentPostID` to `getCommentCustomPostID` (#3073)
+
+= 11.3.1 =
+* Use `DangerouslyNonSpecificScalar` instead of `AnyScalarScalar` type for `metaValue` field, to allow retrieving lists (eg: for ACF) (#3080)
 
 = 11.3.0 =
 * Added fields `meta: ListValueJSONObject!` and `metaKeys: [String!]!` for types `Comment/CustomPost/TaxonomyTerm/User` (#3060)
