@@ -222,13 +222,13 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'reply':
                 /** @var stdClass */
                 $input = &$fieldArgsForMutationForObject[MutationInputProperties::INPUT];
-                $input->{MutationInputProperties::CUSTOMPOST_ID} = $this->getCommentTypeAPI()->getCommentPostID($comment);
+                $input->{MutationInputProperties::CUSTOMPOST_ID} = $this->getCommentTypeAPI()->getCommentCustomPostID($comment);
                 $input->{MutationInputProperties::PARENT_COMMENT_ID} = $objectTypeResolver->getID($comment);
                 break;
             case 'replyWithComments':
                 /** @var stdClass[] */
                 $inputs = $fieldArgsForMutationForObject[SchemaCommonsMutationInputProperties::INPUTS];
-                $customPostID = $this->getCommentTypeAPI()->getCommentPostID($comment);
+                $customPostID = $this->getCommentTypeAPI()->getCommentCustomPostID($comment);
                 $parentCommentID = $objectTypeResolver->getID($comment);
                 foreach ($inputs as &$input) {
                     $input->{MutationInputProperties::CUSTOMPOST_ID} = $customPostID;

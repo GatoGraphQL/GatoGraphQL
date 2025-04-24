@@ -52,21 +52,26 @@ interface UserSettingsManagerInterface
     public function storeLicenseCheckTimestamp(): void;
 
     /**
-     * Timestamp of the latest activation of any commercial license
+     * Retrieve the extension names whose commercial license has
+     * just been activated.
+     *
+     * @return string[]|null The license-just-activated extension names
      */
-    public function getLicenseActivationTimestamp(): ?int;
+    public function getJustActivatedLicenseTransientExtensionNames(): ?array;
 
     /**
-     * Store the current time to indicate the latest activation
-     * of any commercial license
+     * Store the extension names whose commercial license has
+     * just been activated.
+     *
+     * @param string[] $extensionSlugs
      */
-    public function storeLicenseActivationTimestamp(): void;
+    public function storeJustActivatedLicenseTransient(array $extensionSlugs): void;
 
     /**
-     * Remove the flag to indicate the latest activation
-     * of any commercial license
+     * Remove the flag to indicate the extension names whose commercial
+     * license has just been activated.
      */
-    public function removeLicenseActivationTimestamp(): void;
+    public function removeJustActivatedLicenseTransient(): void;
 
     public function hasSetting(string $module, string $option): bool;
     public function getSetting(string $module, string $option): mixed;

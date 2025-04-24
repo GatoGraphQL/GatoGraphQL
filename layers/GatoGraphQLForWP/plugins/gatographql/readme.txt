@@ -66,6 +66,8 @@ The available premium extensions are:
 
 [Automation](https://gatographql.com/extensions/automation): Use GraphQL to automate tasks in your app: Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron.
 
+[Elementor](https://gatographql.com/extensions/elementor): Integration with the Elementor plugin, to parse and update data in Elementor pages and templates.
+
 [Events Manager](https://gatographql.com/extensions/events-manager): Integration with the Events Manager plugin, to fetch event data.
 
 [MultilingualPress](https://gatographql.com/extensions/multilingualpress): Integration with the MultilingualPress plugin, to fetch multilingual data.
@@ -215,6 +217,12 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 12.0.0 =
+* Added documentation for new Elementor Premium Extension (#3052)
+* Breaking change: Plugin constructor signature receives nullable `commitHash` param (#3056)
+* Breaking change: Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
+* Breaking change: Renamed `getCommentPostID` to `getCommentCustomPostID` (#3073)
 
 = 11.3.1 =
 * Use `DangerouslyNonSpecificScalar` instead of `AnyScalarScalar` type for `metaValue` field, to allow retrieving lists (eg: for ACF) (#3080)
