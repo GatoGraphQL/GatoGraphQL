@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType;
 
+use PoPSchema\ExtendedSchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -46,7 +49,19 @@ abstract class AbstractListValueJSONObjectScalarTypeResolver extends JSONObjectS
              * Check the value is an array, or null (if allowed)
              */
             if (!(is_array($value) || ($canValueBeNullable && $value === null))) {
-                $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            InputValueCoercionErrorFeedbackItemProvider::class,
+                            InputValueCoercionErrorFeedbackItemProvider::E3,
+                            [
+                                $this->getMaybeNamespacedTypeName(),
+                                is_array($inputValue) || $inputValue instanceof stdClass ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($inputValue) : $inputValue,
+                            ]
+                        ),
+                        $astNode,
+                    ),
+                );
                 return null;
             }
             $inputValue->$key = $value;

@@ -11,7 +11,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
 {
     public final const E1 = 'e1';
     public final const E2 = 'e2';
-
+    public final const E3 = 'e3';
     /**
      * @return string[]
      */
@@ -20,6 +20,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
         return [
             self::E1,
             self::E2,
+            self::E3,
         ];
     }
 
@@ -28,6 +29,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
         return match ($code) {
             self::E1 => $this->__('The format for type \'%s\' is not correct: it must be satisfied via regex /(\+{1}[0-9]{1,3}[0-9]{8,9})/', 'extended-schema-commons'),
             self::E2 => $this->__('The format for type \'%s\' is not correct: it must be satisfied via regex /^{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}}?$/', 'extended-schema-commons'),
+            self::E3 => $this->__('Type \'%s\' must receive arrays as values (even for single item values, eg: ` { some_key: [ "some value" ] } `), but received: `%s`', 'extended-schema-commons'),
             default => parent::getMessagePlaceholder($code),
         };
     }
