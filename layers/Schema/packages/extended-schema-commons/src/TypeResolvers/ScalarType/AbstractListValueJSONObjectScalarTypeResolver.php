@@ -56,7 +56,7 @@ abstract class AbstractListValueJSONObjectScalarTypeResolver extends JSONObjectS
                             InputValueCoercionErrorFeedbackItemProvider::E3,
                             [
                                 $this->getMaybeNamespacedTypeName(),
-                                is_array($inputValue) || $inputValue instanceof stdClass ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($inputValue) : $inputValue,
+                                $this->getOutputService()->jsonEncodeArrayOrStdClassValue($inputValue),
                             ]
                         ),
                         $astNode,
