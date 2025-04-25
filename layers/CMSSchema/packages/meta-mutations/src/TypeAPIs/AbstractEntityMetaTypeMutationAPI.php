@@ -120,7 +120,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         }
         return array_map(
             MethodHelpers::recursivelyConvertStdClassToAssociativeArray(...),
-            $value
+            (array) $value
         );
     }
 
