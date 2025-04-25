@@ -6,8 +6,10 @@ namespace PoPCMSSchema\MetaMutations\TypeAPIs;
 
 use PoPCMSSchema\MetaMutations\Exception\EntityMetaCRUDMutationException;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
+use stdClass;
 
 abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService implements EntityMetaTypeMutationAPIInterface
 {
@@ -113,9 +115,13 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
      */
     protected function maybeConvertStdClassToArray(mixed $value): mixed
     {
-        
-        
-        return $value;
+        if (!(is_array($value) || ($value instanceof stdClass))) {
+            return $value;
+        }
+        return array_map(
+            MethodHelpers::recursivelyConvertStdClassToAssociativeArray(...),
+            $value
+        );
     }
 
     abstract protected function executeAddEntityMeta(
