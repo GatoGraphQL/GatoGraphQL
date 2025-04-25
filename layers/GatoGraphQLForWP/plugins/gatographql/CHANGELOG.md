@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Convert stdClass to associative array when storing meta in the DB (#3082)
+- Improve error message when casting to `NullableListValueJSONObject` fails (#3083)
 
 ### Breaking changes
 
