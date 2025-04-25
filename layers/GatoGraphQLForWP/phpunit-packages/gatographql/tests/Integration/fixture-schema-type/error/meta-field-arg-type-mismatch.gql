@@ -1,0 +1,27 @@
+mutation {
+  setCustomPostMeta(input: {
+    id: 1116,
+    entries: {
+      converting_stdclass_to_array: {
+        some_key_again: "some_value_again",
+        some_other_key_again: {
+          some_other_key_value_again: "some_other_value_again",
+          some_other_key_value_2_again: "some_other_value_2_again",
+        }
+      }
+    }
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    customPost {
+      __typename
+      id
+      metaValue(key: "converting_stdclass_to_array")
+    }
+  }
+}
