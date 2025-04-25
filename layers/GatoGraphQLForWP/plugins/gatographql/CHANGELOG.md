@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Documentation for new Elementor Premium Extension (#3052)
 
+### Improvements
+
+- Convert stdClass to associative array when storing meta in the DB (#3082)
+
 ### Breaking changes
 
 - Plugin constructor signature receives nullable `commitHash` param (#3056)

@@ -6,8 +6,10 @@ namespace PoPCMSSchema\MetaMutations\TypeAPIs;
 
 use PoPCMSSchema\MetaMutations\Exception\EntityMetaCRUDMutationException;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
+use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
+use stdClass;
 
 abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService implements EntityMetaTypeMutationAPIInterface
 {
@@ -96,6 +98,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         mixed $value,
         bool $single = false,
     ): int {
+        $value = $this->maybeConvertStdClassToArray($value);
         $result = $this->executeAddEntityMeta($entityID, $key, $value, $single);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
@@ -105,6 +108,17 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         $this->handleMaybeError($result);
         /** @var int $result */
         return $result;
+    }
+
+    /**
+     * Do not store stdClass objects in the database, convert them to arrays
+     */
+    protected function maybeConvertStdClassToArray(mixed $value): mixed
+    {
+        if (!(is_array($value) || ($value instanceof stdClass))) {
+            return $value;
+        }
+        return MethodHelpers::recursivelyConvertStdClassToAssociativeArray($value);
     }
 
     abstract protected function executeAddEntityMeta(
@@ -124,6 +138,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         mixed $value,
         mixed $prevValue = null,
     ): string|int|bool {
+        $value = $this->maybeConvertStdClassToArray($value);
         $result = $this->executeUpdateEntityMeta($entityID, $key, $value, $prevValue ?? '');
         $this->handleMaybeError($result);
         if ($result === false) {
