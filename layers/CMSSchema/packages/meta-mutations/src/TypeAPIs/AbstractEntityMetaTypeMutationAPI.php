@@ -96,6 +96,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         mixed $value,
         bool $single = false,
     ): int {
+        $value = $this->maybeConvertStdClassToArray($value);
         $result = $this->executeAddEntityMeta($entityID, $key, $value, $single);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
@@ -105,6 +106,16 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         $this->handleMaybeError($result);
         /** @var int $result */
         return $result;
+    }
+
+    /**
+     * Do not store stdClass objects in the database, convert them to arrays
+     */
+    protected function maybeConvertStdClassToArray(mixed $value): mixed
+    {
+        
+        
+        return $value;
     }
 
     abstract protected function executeAddEntityMeta(
@@ -124,6 +135,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         mixed $value,
         mixed $prevValue = null,
     ): string|int|bool {
+        $value = $this->maybeConvertStdClassToArray($value);
         $result = $this->executeUpdateEntityMeta($entityID, $key, $value, $prevValue ?? '');
         $this->handleMaybeError($result);
         if ($result === false) {
