@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoPSchema\ExtendedSchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -165,11 +164,11 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
-                    InputValueCoercionErrorFeedbackItemProvider::class,
-                    InputValueCoercionErrorFeedbackItemProvider::E3,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                    InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_16,
                     [
-                        $this->getMaybeNamespacedTypeName(),
                         is_array($inputValue) || $inputValue instanceof stdClass ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($inputValue) : $inputValue,
+                        $this->getMaybeNamespacedTypeName(),
                     ]
                 ),
                 $astNode,
