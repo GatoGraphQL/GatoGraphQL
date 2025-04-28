@@ -214,7 +214,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             $allowQueryingPrivateCPTs = $options[QueryOptions::ALLOW_QUERYING_PRIVATE_CPTS] ?? $moduleConfiguration->allowQueryingPrivateCPTs();
             $customPostTypeOptions = $allowQueryingPrivateCPTs ? [] : ['publicly-queryable' => true];
-            $query['post_type'] = $this->getCustomPostTypes($customPostTypeOptions);
+            /**
+             * Merge with the queryable custom post types, because "page" is not publicly queryable!
+             * Then, doing `customPost` as a result of a mutation on a page would fail loading the entity.
+             */
+            $query['post_type'] = array_values(array_unique([
+                ...$moduleConfiguration->getQueryableCustomPostTypes(),
+                ...$this->getCustomPostTypes($customPostTypeOptions)
+            ]));
         }
         // Querying "attachment" doesn't work in an array!
         if (is_array($query['post_type']) && count($query['post_type']) === 1) {
