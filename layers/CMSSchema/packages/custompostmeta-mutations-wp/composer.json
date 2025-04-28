@@ -88,7 +88,6 @@
         "pop-cms-schema/custompostmedia-mutations-wp": "<11.3.1",
         "pop-cms-schema/user-mutations": "<11.3.1",
         "pop-cms-schema/commentmeta-mutations": "<11.3.1",
-        "pop-cms-schema/postmeta-mutations": "<11.3.1",
         "pop-cms-schema/user-avatars": "<11.3.1",
         "pop-cms-schema/comments-wp": "<11.3.1",
         "pop-cms-schema/metaquery-wp": "<11.3.1",
