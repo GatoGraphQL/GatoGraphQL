@@ -38,6 +38,7 @@
         "pop-cms-schema/media-mutations-wp": "^11.4",
         "pop-cms-schema/page-mutations-wp": "^11.4",
         "pop-cms-schema/pagemedia-mutations": "^11.4",
+        "pop-cms-schema/pagemeta-mutations": "^11.4",
         "pop-cms-schema/post-categories-wp": "^11.4",
         "pop-cms-schema/post-category-mutations": "^11.4",
         "pop-cms-schema/post-categorymeta-mutations": "^11.4",
