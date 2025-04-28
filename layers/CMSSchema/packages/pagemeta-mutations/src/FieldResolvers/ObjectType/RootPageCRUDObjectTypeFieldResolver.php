@@ -21,7 +21,7 @@ use PoP\Root\App;
  */
 abstract class RootPageCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObjectTypeFieldResolver
 {
-    private ?PageObjectTypeResolver $postObjectTypeResolver = null;
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?RootDeletePageMetaMutationPayloadObjectTypeResolver $rootDeletePageMetaMutationPayloadObjectTypeResolver = null;
     private ?RootSetPageMetaMutationPayloadObjectTypeResolver $rootSetPageMetaMutationPayloadObjectTypeResolver = null;
     private ?RootUpdatePageMetaMutationPayloadObjectTypeResolver $rootUpdatePageMetaMutationPayloadObjectTypeResolver = null;
@@ -29,12 +29,12 @@ abstract class RootPageCRUDObjectTypeFieldResolver extends AbstractRootCustomPos
 
     final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
-        if ($this->postObjectTypeResolver === null) {
+        if ($this->pageObjectTypeResolver === null) {
             /** @var PageObjectTypeResolver */
-            $postObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
-            $this->postObjectTypeResolver = $postObjectTypeResolver;
+            $pageObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+            $this->pageObjectTypeResolver = $pageObjectTypeResolver;
         }
-        return $this->postObjectTypeResolver;
+        return $this->pageObjectTypeResolver;
     }
     final protected function getRootDeletePageMetaMutationPayloadObjectTypeResolver(): RootDeletePageMetaMutationPayloadObjectTypeResolver
     {

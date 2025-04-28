@@ -16,12 +16,12 @@ Adds meta mutations to the `Page` type
 Via Composer
 
 ``` bash
-composer require pop-cms-schema/postmeta-mutations
+composer require pop-cms-schema/pagemeta-mutations
 ```
 
 ## Development
 
-The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Schema/packages/postmeta-mutations`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Schema/packages/postmeta-mutations).
+The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Schema/packages/pagemeta-mutations`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Schema/packages/pagemeta-mutations).
 
 ## Usage
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/postmeta-mutations.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-cms-schema/pagemeta-mutations.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/pop-cms-schema/postmeta-mutations/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/postmeta-mutations.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/postmeta-mutations.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/postmeta-mutations.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-cms-schema/pagemeta-mutations/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-cms-schema/pagemeta-mutations.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-cms-schema/pagemeta-mutations.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-cms-schema/pagemeta-mutations.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/pop-cms-schema/postmeta-mutations
-[link-travis]: https://travis-ci.org/pop-cms-schema/postmeta-mutations
-[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/postmeta-mutations/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/postmeta-mutations
-[link-downloads]: https://packagist.org/packages/pop-cms-schema/postmeta-mutations
+[link-packagist]: https://packagist.org/packages/pop-cms-schema/pagemeta-mutations
+[link-travis]: https://travis-ci.org/pop-cms-schema/pagemeta-mutations
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-cms-schema/pagemeta-mutations/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-cms-schema/pagemeta-mutations
+[link-downloads]: https://packagist.org/packages/pop-cms-schema/pagemeta-mutations
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

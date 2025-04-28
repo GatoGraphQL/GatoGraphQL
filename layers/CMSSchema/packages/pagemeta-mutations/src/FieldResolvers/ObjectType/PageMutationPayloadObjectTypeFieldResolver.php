@@ -12,16 +12,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class PageMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationPayloadObjectTypeFieldResolver
 {
-    private ?PageObjectTypeResolver $postObjectTypeResolver = null;
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
 
     final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
-        if ($this->postObjectTypeResolver === null) {
+        if ($this->pageObjectTypeResolver === null) {
             /** @var PageObjectTypeResolver */
-            $postObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
-            $this->postObjectTypeResolver = $postObjectTypeResolver;
+            $pageObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+            $this->pageObjectTypeResolver = $pageObjectTypeResolver;
         }
-        return $this->postObjectTypeResolver;
+        return $this->pageObjectTypeResolver;
     }
 
     /**
@@ -36,7 +36,7 @@ class PageMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationP
 
     protected function getObjectFieldName(): string
     {
-        return 'post';
+        return 'page';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

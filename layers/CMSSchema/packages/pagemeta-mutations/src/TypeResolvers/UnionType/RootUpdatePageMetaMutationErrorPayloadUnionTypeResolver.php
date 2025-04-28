@@ -29,7 +29,7 @@ class RootUpdatePageMetaMutationErrorPayloadUnionTypeResolver extends AbstractRo
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating meta on a post', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating meta on a page', 'page-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

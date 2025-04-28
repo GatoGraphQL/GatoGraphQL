@@ -12,16 +12,16 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class PageUpdateMetaMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
 {
-    private ?PageUpdateMetaMutationErrorPayloadUnionTypeResolver $postUpdateMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?PageUpdateMetaMutationErrorPayloadUnionTypeResolver $pageUpdateMetaMutationErrorPayloadUnionTypeResolver = null;
 
     final protected function getPageUpdateMetaMutationErrorPayloadUnionTypeResolver(): PageUpdateMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->postUpdateMetaMutationErrorPayloadUnionTypeResolver === null) {
+        if ($this->pageUpdateMetaMutationErrorPayloadUnionTypeResolver === null) {
             /** @var PageUpdateMetaMutationErrorPayloadUnionTypeResolver */
-            $postUpdateMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PageUpdateMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->postUpdateMetaMutationErrorPayloadUnionTypeResolver = $postUpdateMetaMutationErrorPayloadUnionTypeResolver;
+            $pageUpdateMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PageUpdateMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->pageUpdateMetaMutationErrorPayloadUnionTypeResolver = $pageUpdateMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->postUpdateMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->pageUpdateMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     /**

@@ -18,56 +18,56 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class PageObjectTypeFieldResolver extends AbstractCustomPostObjectTypeFieldResolver
 {
-    private ?PageObjectTypeResolver $postObjectTypeResolver = null;
-    private ?PageDeleteMetaMutationPayloadObjectTypeResolver $postDeleteMetaMutationPayloadObjectTypeResolver = null;
-    private ?PageAddMetaMutationPayloadObjectTypeResolver $postCreateMutationPayloadObjectTypeResolver = null;
-    private ?PageUpdateMetaMutationPayloadObjectTypeResolver $postUpdateMetaMutationPayloadObjectTypeResolver = null;
-    private ?PageSetMetaMutationPayloadObjectTypeResolver $postSetMetaMutationPayloadObjectTypeResolver = null;
+    private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
+    private ?PageDeleteMetaMutationPayloadObjectTypeResolver $pageDeleteMetaMutationPayloadObjectTypeResolver = null;
+    private ?PageAddMetaMutationPayloadObjectTypeResolver $pageCreateMutationPayloadObjectTypeResolver = null;
+    private ?PageUpdateMetaMutationPayloadObjectTypeResolver $pageUpdateMetaMutationPayloadObjectTypeResolver = null;
+    private ?PageSetMetaMutationPayloadObjectTypeResolver $pageSetMetaMutationPayloadObjectTypeResolver = null;
 
     final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
-        if ($this->postObjectTypeResolver === null) {
+        if ($this->pageObjectTypeResolver === null) {
             /** @var PageObjectTypeResolver */
-            $postObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
-            $this->postObjectTypeResolver = $postObjectTypeResolver;
+            $pageObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
+            $this->pageObjectTypeResolver = $pageObjectTypeResolver;
         }
-        return $this->postObjectTypeResolver;
+        return $this->pageObjectTypeResolver;
     }
     final protected function getPageDeleteMetaMutationPayloadObjectTypeResolver(): PageDeleteMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->postDeleteMetaMutationPayloadObjectTypeResolver === null) {
+        if ($this->pageDeleteMetaMutationPayloadObjectTypeResolver === null) {
             /** @var PageDeleteMetaMutationPayloadObjectTypeResolver */
-            $postDeleteMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PageDeleteMetaMutationPayloadObjectTypeResolver::class);
-            $this->postDeleteMetaMutationPayloadObjectTypeResolver = $postDeleteMetaMutationPayloadObjectTypeResolver;
+            $pageDeleteMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PageDeleteMetaMutationPayloadObjectTypeResolver::class);
+            $this->pageDeleteMetaMutationPayloadObjectTypeResolver = $pageDeleteMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->postDeleteMetaMutationPayloadObjectTypeResolver;
+        return $this->pageDeleteMetaMutationPayloadObjectTypeResolver;
     }
     final protected function getPageAddMetaMutationPayloadObjectTypeResolver(): PageAddMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->postCreateMutationPayloadObjectTypeResolver === null) {
+        if ($this->pageCreateMutationPayloadObjectTypeResolver === null) {
             /** @var PageAddMetaMutationPayloadObjectTypeResolver */
-            $postCreateMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PageAddMetaMutationPayloadObjectTypeResolver::class);
-            $this->postCreateMutationPayloadObjectTypeResolver = $postCreateMutationPayloadObjectTypeResolver;
+            $pageCreateMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PageAddMetaMutationPayloadObjectTypeResolver::class);
+            $this->pageCreateMutationPayloadObjectTypeResolver = $pageCreateMutationPayloadObjectTypeResolver;
         }
-        return $this->postCreateMutationPayloadObjectTypeResolver;
+        return $this->pageCreateMutationPayloadObjectTypeResolver;
     }
     final protected function getPageUpdateMetaMutationPayloadObjectTypeResolver(): PageUpdateMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->postUpdateMetaMutationPayloadObjectTypeResolver === null) {
+        if ($this->pageUpdateMetaMutationPayloadObjectTypeResolver === null) {
             /** @var PageUpdateMetaMutationPayloadObjectTypeResolver */
-            $postUpdateMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PageUpdateMetaMutationPayloadObjectTypeResolver::class);
-            $this->postUpdateMetaMutationPayloadObjectTypeResolver = $postUpdateMetaMutationPayloadObjectTypeResolver;
+            $pageUpdateMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PageUpdateMetaMutationPayloadObjectTypeResolver::class);
+            $this->pageUpdateMetaMutationPayloadObjectTypeResolver = $pageUpdateMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->postUpdateMetaMutationPayloadObjectTypeResolver;
+        return $this->pageUpdateMetaMutationPayloadObjectTypeResolver;
     }
     final protected function getPageSetMetaMutationPayloadObjectTypeResolver(): PageSetMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->postSetMetaMutationPayloadObjectTypeResolver === null) {
+        if ($this->pageSetMetaMutationPayloadObjectTypeResolver === null) {
             /** @var PageSetMetaMutationPayloadObjectTypeResolver */
-            $postSetMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PageSetMetaMutationPayloadObjectTypeResolver::class);
-            $this->postSetMetaMutationPayloadObjectTypeResolver = $postSetMetaMutationPayloadObjectTypeResolver;
+            $pageSetMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(PageSetMetaMutationPayloadObjectTypeResolver::class);
+            $this->pageSetMetaMutationPayloadObjectTypeResolver = $pageSetMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->postSetMetaMutationPayloadObjectTypeResolver;
+        return $this->pageSetMetaMutationPayloadObjectTypeResolver;
     }
 
     /**

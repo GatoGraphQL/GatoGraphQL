@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class PageUpdateMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostUpdateMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?PageUpdateMetaMutationErrorPayloadUnionTypeDataLoader $postUpdateMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?PageUpdateMetaMutationErrorPayloadUnionTypeDataLoader $pageUpdateMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
     final protected function getPageUpdateMetaMutationErrorPayloadUnionTypeDataLoader(): PageUpdateMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->postUpdateMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+        if ($this->pageUpdateMetaMutationErrorPayloadUnionTypeDataLoader === null) {
             /** @var PageUpdateMetaMutationErrorPayloadUnionTypeDataLoader */
-            $postUpdateMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PageUpdateMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->postUpdateMetaMutationErrorPayloadUnionTypeDataLoader = $postUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
+            $pageUpdateMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PageUpdateMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->pageUpdateMetaMutationErrorPayloadUnionTypeDataLoader = $pageUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->postUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->pageUpdateMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -29,7 +29,7 @@ class PageUpdateMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustom
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating meta on a post (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating meta on a page (using nested mutations)', 'page-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

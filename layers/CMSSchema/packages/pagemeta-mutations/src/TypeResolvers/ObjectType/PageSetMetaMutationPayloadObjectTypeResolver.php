@@ -13,6 +13,6 @@ class PageSetMetaMutationPayloadObjectTypeResolver extends AbstractPageMetaMutat
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a set meta nested mutation on a post', 'custompost-mutations');
+        return $this->__('Payload of executing a set meta nested mutation on a page', 'custompage-mutations');
     }
 }

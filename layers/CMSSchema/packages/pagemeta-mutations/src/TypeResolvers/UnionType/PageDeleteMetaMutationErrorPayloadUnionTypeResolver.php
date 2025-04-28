@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class PageDeleteMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostDeleteMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?PageDeleteMetaMutationErrorPayloadUnionTypeDataLoader $postDeleteMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?PageDeleteMetaMutationErrorPayloadUnionTypeDataLoader $pageDeleteMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
     final protected function getPageDeleteMetaMutationErrorPayloadUnionTypeDataLoader(): PageDeleteMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->postDeleteMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+        if ($this->pageDeleteMetaMutationErrorPayloadUnionTypeDataLoader === null) {
             /** @var PageDeleteMetaMutationErrorPayloadUnionTypeDataLoader */
-            $postDeleteMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PageDeleteMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->postDeleteMetaMutationErrorPayloadUnionTypeDataLoader = $postDeleteMetaMutationErrorPayloadUnionTypeDataLoader;
+            $pageDeleteMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PageDeleteMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->pageDeleteMetaMutationErrorPayloadUnionTypeDataLoader = $pageDeleteMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->postDeleteMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->pageDeleteMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -29,7 +29,7 @@ class PageDeleteMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustom
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when deleting meta on a post (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when deleting meta on a page (using nested mutations)', 'page-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

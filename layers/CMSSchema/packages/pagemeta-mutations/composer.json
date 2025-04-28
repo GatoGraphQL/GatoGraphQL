@@ -1,9 +1,9 @@
 {
-    "name": "pop-cms-schema/postmeta-mutations",
+    "name": "pop-cms-schema/pagemeta-mutations",
     "type": "library",
     "description": "Adds meta mutations to the `Page` type",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "postmeta-mutations"],
-    "homepage": "https://github.com/PoPCMSSchema/postmeta-mutations",
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "pagemeta-mutations"],
+    "homepage": "https://github.com/PoPCMSSchema/pagemeta-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -14,8 +14,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/custompostmeta-mutations": "^11.4",
-        "pop-cms-schema/post-mutations": "^11.4"
+        "pop-cms-schema/custompagemeta-mutations": "^11.4",
+        "pop-cms-schema/page-mutations": "^11.4"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",

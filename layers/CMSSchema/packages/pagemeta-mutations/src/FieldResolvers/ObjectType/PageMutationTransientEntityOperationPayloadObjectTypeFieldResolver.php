@@ -12,7 +12,7 @@ class PageMutationTransientEntityOperationPayloadObjectTypeFieldResolver extends
 {
     protected function getObjectIDFieldName(): string
     {
-        return 'postID';
+        return 'pageID';
     }
 
     /**

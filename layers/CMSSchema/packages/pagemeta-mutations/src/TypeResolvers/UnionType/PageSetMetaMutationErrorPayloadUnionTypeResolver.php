@@ -10,16 +10,16 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 
 class PageSetMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostSetMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?PageSetMetaMutationErrorPayloadUnionTypeDataLoader $postSetMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?PageSetMetaMutationErrorPayloadUnionTypeDataLoader $pageSetMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
     final protected function getPageSetMetaMutationErrorPayloadUnionTypeDataLoader(): PageSetMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->postSetMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+        if ($this->pageSetMetaMutationErrorPayloadUnionTypeDataLoader === null) {
             /** @var PageSetMetaMutationErrorPayloadUnionTypeDataLoader */
-            $postSetMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PageSetMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->postSetMetaMutationErrorPayloadUnionTypeDataLoader = $postSetMetaMutationErrorPayloadUnionTypeDataLoader;
+            $pageSetMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PageSetMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->pageSetMetaMutationErrorPayloadUnionTypeDataLoader = $pageSetMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->postSetMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->pageSetMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
@@ -29,7 +29,7 @@ class PageSetMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPos
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when setting meta on a post (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when setting meta on a page (using nested mutations)', 'page-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

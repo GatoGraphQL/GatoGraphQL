@@ -10,16 +10,16 @@ use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class PageSetMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?PageSetMetaMutationErrorPayloadUnionTypeResolver $postSetMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?PageSetMetaMutationErrorPayloadUnionTypeResolver $pageSetMetaMutationErrorPayloadUnionTypeResolver = null;
 
     final protected function getPageSetMetaMutationErrorPayloadUnionTypeResolver(): PageSetMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->postSetMetaMutationErrorPayloadUnionTypeResolver === null) {
+        if ($this->pageSetMetaMutationErrorPayloadUnionTypeResolver === null) {
             /** @var PageSetMetaMutationErrorPayloadUnionTypeResolver */
-            $postSetMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PageSetMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->postSetMetaMutationErrorPayloadUnionTypeResolver = $postSetMetaMutationErrorPayloadUnionTypeResolver;
+            $pageSetMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(PageSetMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->pageSetMetaMutationErrorPayloadUnionTypeResolver = $pageSetMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->postSetMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->pageSetMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
