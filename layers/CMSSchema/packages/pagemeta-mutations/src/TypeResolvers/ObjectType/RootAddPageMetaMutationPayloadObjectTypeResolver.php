@@ -13,6 +13,6 @@ class RootAddPageMetaMutationPayloadObjectTypeResolver extends AbstractPageMetaM
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of adding meta to a pages\'s custom post', 'custompage-mutations');
+        return $this->__('Payload of adding meta to a pages\'s custom post', 'pagemeta-mutations');
     }
 }
