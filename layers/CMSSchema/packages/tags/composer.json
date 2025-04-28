@@ -14,12 +14,12 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/taxonomies": "^12.0"
+        "pop-cms-schema/taxonomies": "^12.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.2",
-        "pop-api/api": "^12.0",
+        "pop-api/api": "^12.1",
         "rector/rector": "^0.18",
         "squizlabs/php_codesniffer": "^3.6"
     },
@@ -212,7 +212,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "12.0-dev"
+            "dev-master": "12.1-dev"
         }
     },
     "config": {
