@@ -415,7 +415,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -442,10 +442,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -1371,7 +1371,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1398,10 +1398,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -2252,7 +2252,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -2279,10 +2279,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -3021,7 +3021,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -3048,10 +3048,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -6260,7 +6260,7 @@
                             "args": [
                                 {
                                     "name": "input",
-                                    "description": "Input to delete a comment's meta entry",
+                                    "description": "Input to delete an entity's meta entry",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": "RootDeleteCommentMetaInput!",
@@ -6291,7 +6291,7 @@
                             "args": [
                                 {
                                     "name": "inputs",
-                                    "description": "Input to delete a comment's meta entry",
+                                    "description": "Input to delete an entity's meta entry",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": "[RootDeleteCommentMetaInput!]!",
@@ -10431,7 +10431,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -10458,10 +10458,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -11512,7 +11512,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -11539,10 +11539,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -12307,7 +12307,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -12334,10 +12334,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -12725,7 +12725,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -12752,10 +12752,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -17922,7 +17922,7 @@
                             "args": [
                                 {
                                     "name": "input",
-                                    "description": "Input to delete a comment's meta entry",
+                                    "description": "Input to delete an entity's meta entry",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": "RootDeleteCommentMetaInput!",
@@ -17953,7 +17953,7 @@
                             "args": [
                                 {
                                     "name": "inputs",
-                                    "description": "Input to delete a comment's meta entry",
+                                    "description": "Input to delete an entity's meta entry",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": "[RootDeleteCommentMetaInput!]!",
@@ -28279,7 +28279,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -28306,10 +28306,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -30381,6 +30381,16 @@
                 },
                 {
                     "kind": "SCALAR",
+                    "name": "DangerouslyNonSpecificScalar",
+                    "description": "Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`).",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
                     "name": "Date",
                     "description": "Date scalar. It follows the ISO 8601 specification, with format \"Y-m-d\")",
                     "fields": null,
@@ -31977,7 +31987,7 @@
                             ],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "AnyScalar",
+                                "name": "DangerouslyNonSpecificScalar",
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -32004,10 +32014,10 @@
                             ],
                             "type": {
                                 "kind": "LIST",
-                                "name": "[AnyScalar]",
+                                "name": "[DangerouslyNonSpecificScalar]",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "AnyScalar",
+                                    "name": "DangerouslyNonSpecificScalar",
                                     "ofType": null
                                 }
                             },
@@ -35995,6 +36005,16 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "meta",
+                            "description": "The meta to set",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "NullableListValueJSONObject",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "slug",
                             "description": "The slug of the custom post",
                             "type": {
@@ -36530,6 +36550,16 @@
                                 }
                             },
                             "defaultValue": null
+                        },
+                        {
+                            "name": "value",
+                            "description": "The specific meta value to delete, to avoid removing duplicate entries for that key",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "AnyScalar",
+                                "ofType": null
+                            },
+                            "defaultValue": null
                         }
                     ],
                     "interfaces": null,
@@ -36539,7 +36569,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeleteCommentMetaInput",
-                    "description": "Input to delete a comment's meta entry",
+                    "description": "Input to delete an entity's meta entry",
                     "fields": null,
                     "inputFields": [
                         {
@@ -36567,6 +36597,16 @@
                                     "name": "String",
                                     "ofType": null
                                 }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "value",
+                            "description": "The specific meta value to delete, to avoid removing duplicate entries for that key",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "AnyScalar",
+                                "ofType": null
                             },
                             "defaultValue": null
                         }
@@ -36606,6 +36646,16 @@
                                     "name": "String",
                                     "ofType": null
                                 }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "value",
+                            "description": "The specific meta value to delete, to avoid removing duplicate entries for that key",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "AnyScalar",
+                                "ofType": null
                             },
                             "defaultValue": null
                         }
@@ -36787,6 +36837,16 @@
                                 }
                             },
                             "defaultValue": null
+                        },
+                        {
+                            "name": "value",
+                            "description": "The specific meta value to delete, to avoid removing duplicate entries for that key",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "AnyScalar",
+                                "ofType": null
+                            },
+                            "defaultValue": null
                         }
                     ],
                     "interfaces": null,
@@ -36824,6 +36884,16 @@
                                     "name": "String",
                                     "ofType": null
                                 }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "value",
+                            "description": "The specific meta value to delete, to avoid removing duplicate entries for that key",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "AnyScalar",
+                                "ofType": null
                             },
                             "defaultValue": null
                         }
@@ -39866,6 +39936,16 @@
                                     "name": "ID",
                                     "ofType": null
                                 }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "meta",
+                            "description": "The meta to set",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "NullableListValueJSONObject",
+                                "ofType": null
                             },
                             "defaultValue": null
                         },
@@ -43071,6 +43151,16 @@
                     "possibleTypes": [
                         {
                             "kind": "OBJECT",
+                            "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "GenericErrorPayload",
                             "ofType": null
                         },
@@ -44780,12 +44870,22 @@
                     "possibleTypes": [
                         {
                             "kind": "OBJECT",
+                            "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "CustomPostDoesNotExistErrorPayload",
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
                             "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
                             "ofType": null
                         },
                         {

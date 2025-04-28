@@ -14917,6 +14917,18 @@
                     "enumValues": null
                 },
                 {
+                    "name": "DangerouslyNonSpecificScalar",
+                    "extensions": {
+                        "elementName": "DangerouslyNonSpecificScalar",
+                        "namespacedName": "DangerouslyNonSpecificScalar",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "Date",
                     "extensions": {
                         "elementName": "Date",
@@ -18136,6 +18148,12 @@
                             }
                         },
                         {
+                            "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "slug",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -18445,6 +18463,12 @@
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
+                        },
+                        {
+                            "name": "value",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
                         }
                     ],
                     "enumValues": null
@@ -18470,6 +18494,12 @@
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
+                        },
+                        {
+                            "name": "value",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
                         }
                     ],
                     "enumValues": null
@@ -18492,6 +18522,12 @@
                         },
                         {
                             "name": "key",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "value",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -18620,6 +18656,12 @@
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
+                        },
+                        {
+                            "name": "value",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
                         }
                     ],
                     "enumValues": null
@@ -18642,6 +18684,12 @@
                         },
                         {
                             "name": "key",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "value",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -20260,6 +20308,12 @@
                         },
                         {
                             "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "meta",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

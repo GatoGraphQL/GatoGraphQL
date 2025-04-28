@@ -40,7 +40,8 @@
         "_application_passwords",
         "app_password",
         "session_tokens",
-        "wp_dashboard_quick_press_last_post_id"
+        "wp_dashboard_quick_press_last_post_id",
+        "community-events-location"
       ]
     }
   }
