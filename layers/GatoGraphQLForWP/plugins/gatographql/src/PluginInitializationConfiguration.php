@@ -1168,8 +1168,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META_MUTATIONS => [
                 \PoPCMSSchema\CustomPostMetaMutations\Module::class,
                 \PoPCMSSchema\CustomPostMetaMutationsWP\Module::class,
-                \PoPCMSSchema\PostMetaMutations\Module::class,
-                \PoPCMSSchema\PageMetaMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_PAGE_MUTATIONS => [
                 \PoPCMSSchema\PageMutations\Module::class,
@@ -1177,6 +1175,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_MUTATIONS => [
                 \PoPCMSSchema\PostMutations\Module::class,
+            ],
+            MutationSchemaTypeModuleResolver::SCHEMA_POST_META_MUTATIONS => [
+                \PoPCMSSchema\PostMetaMutations\Module::class,
+            ],
+            MutationSchemaTypeModuleResolver::SCHEMA_PAGE_META_MUTATIONS => [
+                \PoPCMSSchema\PageMetaMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_MEDIA_MUTATIONS => [
                 \PoPCMSSchema\MediaMutations\Module::class,

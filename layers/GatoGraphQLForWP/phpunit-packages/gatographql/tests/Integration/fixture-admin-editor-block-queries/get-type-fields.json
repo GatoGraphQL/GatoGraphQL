@@ -4099,6 +4099,13 @@
           "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`."
         },
         {
+          "name": "DangerouslyNonSpecificScalar",
+          "namespacedName": "DangerouslyNonSpecificScalar",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`)."
+        },
+        {
           "name": "Date",
           "namespacedName": "Date",
           "fields": null,
@@ -4964,7 +4971,7 @@
           "namespacedName": "RootDeleteCommentMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Input to delete a comment's meta entry"
+          "description": "Input to delete an entity's meta entry"
         },
         {
           "name": "RootDeleteCustomPostMetaInput",

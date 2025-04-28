@@ -223,6 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Convert stdClass to associative array when storing meta in the DB (#3082)
 * Improve error message when casting to `NullableListValueJSONObject` fails (#3083)
 * Added `meta` input field to the `createPage` mutation (#3085)
+* Added "Post Meta Mutations" and "Page Meta Mutations" modules (#3086)
 * Breaking change: Plugin constructor signature receives nullable `commitHash` param (#3056)
 * Breaking change: Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 * Breaking change: Renamed `getCommentPostID` to `getCommentCustomPostID` (#3073)

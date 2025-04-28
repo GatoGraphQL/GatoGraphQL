@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Convert stdClass to associative array when storing meta in the DB (#3082)
 - Improve error message when casting to `NullableListValueJSONObject` fails (#3083)
 - Added `meta` input field to the `createPage` mutation (#3085)
+- Added "Post Meta Mutations" and "Page Meta Mutations" modules (#3086)
 
 ### Breaking changes
 
