@@ -228,6 +228,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking change: Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 * Breaking change: Renamed `getCommentPostID` to `getCommentCustomPostID` (#3073)
 * Fixed: Avoid `_load_textdomain_just_in_time` error message in WP 6.8 (#3084)
+* Fixed: Loading page entity in `customPost` field as result of mutation (#3087)
 
 = 11.3.1 =
 * Use `DangerouslyNonSpecificScalar` instead of `AnyScalarScalar` type for `metaValue` field, to allow retrieving lists (eg: for ACF) (#3080)

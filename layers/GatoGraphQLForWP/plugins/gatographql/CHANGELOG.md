@@ -26,6 +26,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Avoid `_load_textdomain_just_in_time` error message in WP 6.8 (#3084)
+- Loading page entity in `customPost` field as result of mutation (#3087)
 
 ## 11.3.1 - 19/04/2025
 
