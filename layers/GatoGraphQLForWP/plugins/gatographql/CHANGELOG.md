@@ -21,6 +21,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Store the extension names whose license has just been activated (instead of a timestamp) to install setup data (#3057)
 - Renamed `getCommentPostID` to `getCommentCustomPostID` (#3073)
 
+### Fixed
+
+- Avoid `_load_textdomain_just_in_time` error message in WP 6.8 (#3084)
+
 ## 11.3.1 - 19/04/2025
 
 ### Improvements
