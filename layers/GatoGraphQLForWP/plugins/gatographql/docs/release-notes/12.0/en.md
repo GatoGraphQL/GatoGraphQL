@@ -8,6 +8,7 @@
 
 - Convert stdClass to associative array when storing meta in the DB ([#3082](https://github.com/GatoGraphQL/GatoGraphQL/pull/3082))
 - Improve error message when casting to `NullableListValueJSONObject` fails ([#3083](https://github.com/GatoGraphQL/GatoGraphQL/pull/3083))
+- Added `meta` input field to the `createPage` mutation ([#3085](https://github.com/GatoGraphQL/GatoGraphQL/pull/3085))
 
 ## Breaking changes
 
