@@ -3,17 +3,17 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\:
+    PoPCMSSchema\PageMetaMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
 
-    PoPCMSSchema\PostMetaMutations\FieldResolvers\:
+    PoPCMSSchema\PageMetaMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
-    PoPCMSSchema\PostMetaMutations\TypeResolvers\:
+    PoPCMSSchema\PageMetaMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
-    PoPCMSSchema\PostMetaMutations\SchemaHooks\:
+    PoPCMSSchema\PageMetaMutations\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
 
-    PoPCMSSchema\PostMetaMutations\ObjectTypeResolverPickers\:
+    PoPCMSSchema\PageMetaMutations\ObjectTypeResolverPickers\:
         resource: '../src/ObjectTypeResolverPickers/*'

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\PageMetaMutations\TypeResolvers\ObjectType;
 
-class PostSetMetaMutationPayloadObjectTypeResolver extends AbstractPostMetaMutationPayloadObjectTypeResolver
+class PageSetMetaMutationPayloadObjectTypeResolver extends AbstractPageMetaMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'PostSetMetaMutationPayload';
+        return 'PageSetMetaMutationPayload';
     }
 
     public function getTypeDescription(): ?string

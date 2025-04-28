@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\PageMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\CustomPostMetaMutations\FieldResolvers\ObjectType\AbstractRootCustomPostCRUDObjectTypeFieldResolver;
 use PoPCMSSchema\CustomPostMetaMutations\Module;
 use PoPCMSSchema\CustomPostMetaMutations\ModuleConfiguration;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\RootAddPostMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\RootDeletePostMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\RootSetPostMetaMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\RootUpdatePostMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PageMetaMutations\TypeResolvers\ObjectType\RootAddPageMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PageMetaMutations\TypeResolvers\ObjectType\RootDeletePageMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PageMetaMutations\TypeResolvers\ObjectType\RootSetPageMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PageMetaMutations\TypeResolvers\ObjectType\RootUpdatePageMetaMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\App;
@@ -19,62 +19,62 @@ use PoP\Root\App;
 /**
  * Made abstract to not initialize class (it's disabled)
  */
-abstract class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObjectTypeFieldResolver
+abstract class RootPageCRUDObjectTypeFieldResolver extends AbstractRootCustomPostCRUDObjectTypeFieldResolver
 {
-    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
-    private ?RootDeletePostMetaMutationPayloadObjectTypeResolver $rootDeletePostMetaMutationPayloadObjectTypeResolver = null;
-    private ?RootSetPostMetaMutationPayloadObjectTypeResolver $rootSetPostMetaMutationPayloadObjectTypeResolver = null;
-    private ?RootUpdatePostMetaMutationPayloadObjectTypeResolver $rootUpdatePostMetaMutationPayloadObjectTypeResolver = null;
-    private ?RootAddPostMetaMutationPayloadObjectTypeResolver $rootAddPostMetaMutationPayloadObjectTypeResolver = null;
+    private ?PageObjectTypeResolver $postObjectTypeResolver = null;
+    private ?RootDeletePageMetaMutationPayloadObjectTypeResolver $rootDeletePageMetaMutationPayloadObjectTypeResolver = null;
+    private ?RootSetPageMetaMutationPayloadObjectTypeResolver $rootSetPageMetaMutationPayloadObjectTypeResolver = null;
+    private ?RootUpdatePageMetaMutationPayloadObjectTypeResolver $rootUpdatePageMetaMutationPayloadObjectTypeResolver = null;
+    private ?RootAddPageMetaMutationPayloadObjectTypeResolver $rootAddPageMetaMutationPayloadObjectTypeResolver = null;
 
-    final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
         if ($this->postObjectTypeResolver === null) {
-            /** @var PostObjectTypeResolver */
-            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            /** @var PageObjectTypeResolver */
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
             $this->postObjectTypeResolver = $postObjectTypeResolver;
         }
         return $this->postObjectTypeResolver;
     }
-    final protected function getRootDeletePostMetaMutationPayloadObjectTypeResolver(): RootDeletePostMetaMutationPayloadObjectTypeResolver
+    final protected function getRootDeletePageMetaMutationPayloadObjectTypeResolver(): RootDeletePageMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootDeletePostMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootDeletePostMetaMutationPayloadObjectTypeResolver */
-            $rootDeletePostMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootDeletePostMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootDeletePostMetaMutationPayloadObjectTypeResolver = $rootDeletePostMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootDeletePageMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootDeletePageMetaMutationPayloadObjectTypeResolver */
+            $rootDeletePageMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootDeletePageMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootDeletePageMetaMutationPayloadObjectTypeResolver = $rootDeletePageMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootDeletePostMetaMutationPayloadObjectTypeResolver;
+        return $this->rootDeletePageMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootSetPostMetaMutationPayloadObjectTypeResolver(): RootSetPostMetaMutationPayloadObjectTypeResolver
+    final protected function getRootSetPageMetaMutationPayloadObjectTypeResolver(): RootSetPageMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootSetPostMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootSetPostMetaMutationPayloadObjectTypeResolver */
-            $rootSetPostMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootSetPostMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootSetPostMetaMutationPayloadObjectTypeResolver = $rootSetPostMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootSetPageMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootSetPageMetaMutationPayloadObjectTypeResolver */
+            $rootSetPageMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootSetPageMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootSetPageMetaMutationPayloadObjectTypeResolver = $rootSetPageMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootSetPostMetaMutationPayloadObjectTypeResolver;
+        return $this->rootSetPageMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootUpdatePostMetaMutationPayloadObjectTypeResolver(): RootUpdatePostMetaMutationPayloadObjectTypeResolver
+    final protected function getRootUpdatePageMetaMutationPayloadObjectTypeResolver(): RootUpdatePageMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootUpdatePostMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootUpdatePostMetaMutationPayloadObjectTypeResolver */
-            $rootUpdatePostMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootUpdatePostMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootUpdatePostMetaMutationPayloadObjectTypeResolver = $rootUpdatePostMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootUpdatePageMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootUpdatePageMetaMutationPayloadObjectTypeResolver */
+            $rootUpdatePageMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootUpdatePageMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootUpdatePageMetaMutationPayloadObjectTypeResolver = $rootUpdatePageMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootUpdatePostMetaMutationPayloadObjectTypeResolver;
+        return $this->rootUpdatePageMetaMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootAddPostMetaMutationPayloadObjectTypeResolver(): RootAddPostMetaMutationPayloadObjectTypeResolver
+    final protected function getRootAddPageMetaMutationPayloadObjectTypeResolver(): RootAddPageMetaMutationPayloadObjectTypeResolver
     {
-        if ($this->rootAddPostMetaMutationPayloadObjectTypeResolver === null) {
-            /** @var RootAddPostMetaMutationPayloadObjectTypeResolver */
-            $rootAddPostMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootAddPostMetaMutationPayloadObjectTypeResolver::class);
-            $this->rootAddPostMetaMutationPayloadObjectTypeResolver = $rootAddPostMetaMutationPayloadObjectTypeResolver;
+        if ($this->rootAddPageMetaMutationPayloadObjectTypeResolver === null) {
+            /** @var RootAddPageMetaMutationPayloadObjectTypeResolver */
+            $rootAddPageMetaMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootAddPageMetaMutationPayloadObjectTypeResolver::class);
+            $this->rootAddPageMetaMutationPayloadObjectTypeResolver = $rootAddPageMetaMutationPayloadObjectTypeResolver;
         }
-        return $this->rootAddPostMetaMutationPayloadObjectTypeResolver;
+        return $this->rootAddPageMetaMutationPayloadObjectTypeResolver;
     }
 
     /**
-     * Disable because we don't need `addPostMeta` and
+     * Disable because we don't need `addPageMeta` and
      * `addCustomPostMeta`, it's too confusing
      */
     public function isServiceEnabled(): bool
@@ -84,46 +84,46 @@ abstract class RootPostCRUDObjectTypeFieldResolver extends AbstractRootCustomPos
 
     protected function getCustomPostEntityName(): string
     {
-        return 'Post';
+        return 'Page';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        $customPostEntityName = $this->getCustomPostEntityName();
+        $customPageEntityName = $this->getCustomPostEntityName();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMetaMutations = $moduleConfiguration->usePayloadableCustomPostMetaMutations();
         if ($usePayloadableCustomPostMetaMutations) {
             return match ($fieldName) {
-                'add' . $customPostEntityName . 'Meta',
-                'add' . $customPostEntityName . 'Metas',
-                'add' . $customPostEntityName . 'MetaMutationPayloadObjects'
-                    => $this->getRootAddPostMetaMutationPayloadObjectTypeResolver(),
-                'update' . $customPostEntityName . 'Meta',
-                'update' . $customPostEntityName . 'Metas',
-                'update' . $customPostEntityName . 'MetaMutationPayloadObjects'
-                    => $this->getRootUpdatePostMetaMutationPayloadObjectTypeResolver(),
-                'delete' . $customPostEntityName . 'Meta',
-                'delete' . $customPostEntityName . 'Metas',
-                'delete' . $customPostEntityName . 'MetaMutationPayloadObjects'
-                    => $this->getRootDeletePostMetaMutationPayloadObjectTypeResolver(),
-                'set' . $customPostEntityName . 'Meta',
-                'set' . $customPostEntityName . 'Metas',
-                'set' . $customPostEntityName . 'MetaMutationPayloadObjects'
-                    => $this->getRootSetPostMetaMutationPayloadObjectTypeResolver(),
+                'add' . $customPageEntityName . 'Meta',
+                'add' . $customPageEntityName . 'Metas',
+                'add' . $customPageEntityName . 'MetaMutationPayloadObjects'
+                    => $this->getRootAddPageMetaMutationPayloadObjectTypeResolver(),
+                'update' . $customPageEntityName . 'Meta',
+                'update' . $customPageEntityName . 'Metas',
+                'update' . $customPageEntityName . 'MetaMutationPayloadObjects'
+                    => $this->getRootUpdatePageMetaMutationPayloadObjectTypeResolver(),
+                'delete' . $customPageEntityName . 'Meta',
+                'delete' . $customPageEntityName . 'Metas',
+                'delete' . $customPageEntityName . 'MetaMutationPayloadObjects'
+                    => $this->getRootDeletePageMetaMutationPayloadObjectTypeResolver(),
+                'set' . $customPageEntityName . 'Meta',
+                'set' . $customPageEntityName . 'Metas',
+                'set' . $customPageEntityName . 'MetaMutationPayloadObjects'
+                    => $this->getRootSetPageMetaMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'add' . $customPostEntityName . 'Meta',
-            'add' . $customPostEntityName . 'Metas',
-            'update' . $customPostEntityName . 'Meta',
-            'update' . $customPostEntityName . 'Metas',
-            'delete' . $customPostEntityName . 'Meta',
-            'delete' . $customPostEntityName . 'Metas',
-            'set' . $customPostEntityName . 'Meta',
-            'set' . $customPostEntityName . 'Metas'
-                => $this->getPostObjectTypeResolver(),
+            'add' . $customPageEntityName . 'Meta',
+            'add' . $customPageEntityName . 'Metas',
+            'update' . $customPageEntityName . 'Meta',
+            'update' . $customPageEntityName . 'Metas',
+            'delete' . $customPageEntityName . 'Meta',
+            'delete' . $customPageEntityName . 'Metas',
+            'set' . $customPageEntityName . 'Meta',
+            'set' . $customPageEntityName . 'Metas'
+                => $this->getPageObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

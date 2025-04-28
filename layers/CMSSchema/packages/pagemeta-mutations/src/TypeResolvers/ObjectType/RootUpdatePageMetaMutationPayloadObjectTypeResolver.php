@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\PageMetaMutations\TypeResolvers\ObjectType;
 
-class RootUpdatePostMetaMutationPayloadObjectTypeResolver extends AbstractPostMetaMutationPayloadObjectTypeResolver
+class RootUpdatePageMetaMutationPayloadObjectTypeResolver extends AbstractPageMetaMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'RootUpdatePostMetaMutationPayload';
+        return 'RootUpdatePageMetaMutationPayload';
     }
 
     public function getTypeDescription(): ?string

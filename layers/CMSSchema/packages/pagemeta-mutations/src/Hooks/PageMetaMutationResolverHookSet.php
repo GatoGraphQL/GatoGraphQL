@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\Hooks;
+namespace PoPCMSSchema\PageMetaMutations\Hooks;
 
 use PoPCMSSchema\CustomPostMetaMutations\Hooks\AbstractCustomPostMetaMutationResolverHookSet;
-use PoPCMSSchema\PostMutations\Constants\PostCRUDHookNames;
+use PoPCMSSchema\PageMutations\Constants\PageCRUDHookNames;
 
-class PostMetaMutationResolverHookSet extends AbstractCustomPostMetaMutationResolverHookSet
+class PageMetaMutationResolverHookSet extends AbstractCustomPostMetaMutationResolverHookSet
 {
     protected function getValidateCreateHookName(): string
     {
-        return PostCRUDHookNames::VALIDATE_CREATE;
+        return PageCRUDHookNames::VALIDATE_CREATE;
     }
     protected function getValidateUpdateHookName(): ?string
     {
-        return PostCRUDHookNames::VALIDATE_UPDATE;
+        return PageCRUDHookNames::VALIDATE_UPDATE;
     }
     protected function getExecuteCreateOrUpdateHookName(): string
     {
-        return PostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
+        return PageCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
     }
 }

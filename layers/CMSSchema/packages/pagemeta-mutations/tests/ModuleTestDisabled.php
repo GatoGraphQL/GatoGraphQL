@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations;
+namespace PoPCMSSchema\PageMetaMutations;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

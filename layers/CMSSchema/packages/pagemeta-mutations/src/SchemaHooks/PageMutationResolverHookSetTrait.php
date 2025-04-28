@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\SchemaHooks;
+namespace PoPCMSSchema\PageMetaMutations\SchemaHooks;
 
-use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\CreatePostInputObjectTypeResolverInterface;
-use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\UpdatePostInputObjectTypeResolverInterface;
+use PoPCMSSchema\PageMutations\TypeResolvers\InputObjectType\CreatePageInputObjectTypeResolverInterface;
+use PoPCMSSchema\PageMutations\TypeResolvers\InputObjectType\UpdatePageInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
-trait PostMutationResolverHookSetTrait
+trait PageMutationResolverHookSetTrait
 {
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        return $inputObjectTypeResolver instanceof CreatePostInputObjectTypeResolverInterface
-            || $inputObjectTypeResolver instanceof UpdatePostInputObjectTypeResolverInterface;
+        return $inputObjectTypeResolver instanceof CreatePageInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdatePageInputObjectTypeResolverInterface;
     }
 }

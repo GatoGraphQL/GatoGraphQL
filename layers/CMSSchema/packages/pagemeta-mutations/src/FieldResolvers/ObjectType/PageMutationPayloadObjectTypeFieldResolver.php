@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\PageMetaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\ObjectType\AbstractPostMetaMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
+use PoPCMSSchema\PageMetaMutations\TypeResolvers\ObjectType\AbstractPageMetaMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class PostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationPayloadObjectTypeFieldResolver
+class PageMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationPayloadObjectTypeFieldResolver
 {
-    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?PageObjectTypeResolver $postObjectTypeResolver = null;
 
-    final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
         if ($this->postObjectTypeResolver === null) {
-            /** @var PostObjectTypeResolver */
-            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            /** @var PageObjectTypeResolver */
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
             $this->postObjectTypeResolver = $postObjectTypeResolver;
         }
         return $this->postObjectTypeResolver;
@@ -30,7 +30,7 @@ class PostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationP
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractPostMetaMutationPayloadObjectTypeResolver::class,
+            AbstractPageMetaMutationPayloadObjectTypeResolver::class,
         ];
     }
 
@@ -42,7 +42,7 @@ class PostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationP
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            $this->getObjectFieldName() => $this->getPostObjectTypeResolver(),
+            $this->getObjectFieldName() => $this->getPageObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

@@ -167,7 +167,7 @@
         "pop-wp-schema/media": "<11.3.1"
     },
     "type": "library",
-    "description": "Adds meta mutations to the `Post` type",
+    "description": "Adds meta mutations to the `Page` type",
     "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "postmeta-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/postmeta-mutations",
     "license": "GPL-2.0-or-later",
@@ -191,12 +191,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PoPCMSSchema\\PostMetaMutations\\": "src"
+            "PoPCMSSchema\\PageMetaMutations\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PoPCMSSchema\\PostMetaMutations\\": "tests"
+            "PoPCMSSchema\\PageMetaMutations\\": "tests"
         }
     },
     "scripts": {

@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType;
+namespace PoPCMSSchema\PageMetaMutations\TypeResolvers\UnionType;
 
 use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractRootSetCustomPostMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType\RootSetPostMetaMutationErrorPayloadUnionTypeDataLoader;
+use PoPCMSSchema\PageMetaMutations\RelationalTypeDataLoaders\UnionType\RootSetPageMetaMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class RootSetPostMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootSetCustomPostMetaMutationErrorPayloadUnionTypeResolver
+class RootSetPageMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootSetCustomPostMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?RootSetPostMetaMutationErrorPayloadUnionTypeDataLoader $rootSetPostMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?RootSetPageMetaMutationErrorPayloadUnionTypeDataLoader $rootSetPageMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final protected function getRootSetPostMetaMutationErrorPayloadUnionTypeDataLoader(): RootSetPostMetaMutationErrorPayloadUnionTypeDataLoader
+    final protected function getRootSetPageMetaMutationErrorPayloadUnionTypeDataLoader(): RootSetPageMetaMutationErrorPayloadUnionTypeDataLoader
     {
-        if ($this->rootSetPostMetaMutationErrorPayloadUnionTypeDataLoader === null) {
-            /** @var RootSetPostMetaMutationErrorPayloadUnionTypeDataLoader */
-            $rootSetPostMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootSetPostMetaMutationErrorPayloadUnionTypeDataLoader::class);
-            $this->rootSetPostMetaMutationErrorPayloadUnionTypeDataLoader = $rootSetPostMetaMutationErrorPayloadUnionTypeDataLoader;
+        if ($this->rootSetPageMetaMutationErrorPayloadUnionTypeDataLoader === null) {
+            /** @var RootSetPageMetaMutationErrorPayloadUnionTypeDataLoader */
+            $rootSetPageMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(RootSetPageMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            $this->rootSetPageMetaMutationErrorPayloadUnionTypeDataLoader = $rootSetPageMetaMutationErrorPayloadUnionTypeDataLoader;
         }
-        return $this->rootSetPostMetaMutationErrorPayloadUnionTypeDataLoader;
+        return $this->rootSetPageMetaMutationErrorPayloadUnionTypeDataLoader;
     }
 
     public function getTypeName(): string
     {
-        return 'RootSetPostMetaMutationErrorPayloadUnion';
+        return 'RootSetPageMetaMutationErrorPayloadUnion';
     }
 
     public function getTypeDescription(): ?string
@@ -34,6 +34,6 @@ class RootSetPostMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootS
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getRootSetPostMetaMutationErrorPayloadUnionTypeDataLoader();
+        return $this->getRootSetPageMetaMutationErrorPayloadUnionTypeDataLoader();
     }
 }

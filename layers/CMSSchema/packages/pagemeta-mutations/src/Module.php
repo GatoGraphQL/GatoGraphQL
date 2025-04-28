@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations;
+namespace PoPCMSSchema\PageMetaMutations;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
@@ -15,7 +15,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\PostMutations\Module::class,
+            \PoPCMSSchema\PageMutations\Module::class,
             \PoPCMSSchema\CustomPostMetaMutations\Module::class,
         ];
     }

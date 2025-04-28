@@ -1,4 +1,4 @@
-# Post CustomPost Meta Mutations
+# Page CustomPost Meta Mutations
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Adds meta mutations to the `Post` type
+Adds meta mutations to the `Page` type
 
 ## Install
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPCMSSchema\PostMetaMutations\Module::class,
+    \PoPCMSSchema\PageMetaMutations\Module::class,
 ]);
 ```
 

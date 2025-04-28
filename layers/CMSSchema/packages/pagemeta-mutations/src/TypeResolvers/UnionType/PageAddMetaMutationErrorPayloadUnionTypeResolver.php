@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType;
+namespace PoPCMSSchema\PageMetaMutations\TypeResolvers\UnionType;
 
 use PoPCMSSchema\CustomPostMetaMutations\TypeResolvers\UnionType\AbstractCustomPostAddMetaMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType\PostAddMetaMutationErrorPayloadUnionTypeDataLoader;
+use PoPCMSSchema\PageMetaMutations\RelationalTypeDataLoaders\UnionType\PageAddMetaMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class PostAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostAddMetaMutationErrorPayloadUnionTypeResolver
+class PageAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostAddMetaMutationErrorPayloadUnionTypeResolver
 {
-    private ?PostAddMetaMutationErrorPayloadUnionTypeDataLoader $postAddMetaMutationErrorPayloadUnionTypeDataLoader = null;
+    private ?PageAddMetaMutationErrorPayloadUnionTypeDataLoader $postAddMetaMutationErrorPayloadUnionTypeDataLoader = null;
 
-    final protected function getPostAddMetaMutationErrorPayloadUnionTypeDataLoader(): PostAddMetaMutationErrorPayloadUnionTypeDataLoader
+    final protected function getPageAddMetaMutationErrorPayloadUnionTypeDataLoader(): PageAddMetaMutationErrorPayloadUnionTypeDataLoader
     {
         if ($this->postAddMetaMutationErrorPayloadUnionTypeDataLoader === null) {
-            /** @var PostAddMetaMutationErrorPayloadUnionTypeDataLoader */
-            $postAddMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PostAddMetaMutationErrorPayloadUnionTypeDataLoader::class);
+            /** @var PageAddMetaMutationErrorPayloadUnionTypeDataLoader */
+            $postAddMetaMutationErrorPayloadUnionTypeDataLoader = $this->instanceManager->getInstance(PageAddMetaMutationErrorPayloadUnionTypeDataLoader::class);
             $this->postAddMetaMutationErrorPayloadUnionTypeDataLoader = $postAddMetaMutationErrorPayloadUnionTypeDataLoader;
         }
         return $this->postAddMetaMutationErrorPayloadUnionTypeDataLoader;
@@ -24,7 +24,7 @@ class PostAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPos
 
     public function getTypeName(): string
     {
-        return 'PostAddMetaMutationErrorPayloadUnion';
+        return 'PageAddMetaMutationErrorPayloadUnion';
     }
 
     public function getTypeDescription(): ?string
@@ -34,6 +34,6 @@ class PostAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustomPos
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
     {
-        return $this->getPostAddMetaMutationErrorPayloadUnionTypeDataLoader();
+        return $this->getPageAddMetaMutationErrorPayloadUnionTypeDataLoader();
     }
 }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\ObjectTypeResolverPickers;
+namespace PoPCMSSchema\PageMetaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\PostUpdateMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootCreatePostMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootUpdatePostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PageMutations\TypeResolvers\UnionType\PageUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PageMutations\TypeResolvers\UnionType\RootCreatePageMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PageMutations\TypeResolvers\UnionType\RootUpdatePageMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MetaMutations\ObjectTypeResolverPickers\AbstractEntityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -18,9 +18,9 @@ class EntityMetaAlreadyHasSingleEntryErrorPayloadObjectTypeResolverPicker extend
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootCreatePostMutationErrorPayloadUnionTypeResolver::class,
-            RootUpdatePostMutationErrorPayloadUnionTypeResolver::class,
-            PostUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreatePageMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdatePageMutationErrorPayloadUnionTypeResolver::class,
+            PageUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

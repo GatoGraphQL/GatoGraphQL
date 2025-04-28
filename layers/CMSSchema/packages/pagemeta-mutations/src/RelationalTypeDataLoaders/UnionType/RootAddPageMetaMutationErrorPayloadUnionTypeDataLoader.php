@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\RelationalTypeDataLoaders\UnionType;
+namespace PoPCMSSchema\PageMetaMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\PostMetaMutations\TypeResolvers\UnionType\RootAddPostMetaMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PageMetaMutations\TypeResolvers\UnionType\RootAddPageMetaMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class RootAddPostMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class RootAddPageMetaMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
-    private ?RootAddPostMetaMutationErrorPayloadUnionTypeResolver $rootAddPostMetaMutationErrorPayloadUnionTypeResolver = null;
+    private ?RootAddPageMetaMutationErrorPayloadUnionTypeResolver $rootAddPageMetaMutationErrorPayloadUnionTypeResolver = null;
 
-    final protected function getRootAddPostMetaMutationErrorPayloadUnionTypeResolver(): RootAddPostMetaMutationErrorPayloadUnionTypeResolver
+    final protected function getRootAddPageMetaMutationErrorPayloadUnionTypeResolver(): RootAddPageMetaMutationErrorPayloadUnionTypeResolver
     {
-        if ($this->rootAddPostMetaMutationErrorPayloadUnionTypeResolver === null) {
-            /** @var RootAddPostMetaMutationErrorPayloadUnionTypeResolver */
-            $rootAddPostMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootAddPostMetaMutationErrorPayloadUnionTypeResolver::class);
-            $this->rootAddPostMetaMutationErrorPayloadUnionTypeResolver = $rootAddPostMetaMutationErrorPayloadUnionTypeResolver;
+        if ($this->rootAddPageMetaMutationErrorPayloadUnionTypeResolver === null) {
+            /** @var RootAddPageMetaMutationErrorPayloadUnionTypeResolver */
+            $rootAddPageMetaMutationErrorPayloadUnionTypeResolver = $this->instanceManager->getInstance(RootAddPageMetaMutationErrorPayloadUnionTypeResolver::class);
+            $this->rootAddPageMetaMutationErrorPayloadUnionTypeResolver = $rootAddPageMetaMutationErrorPayloadUnionTypeResolver;
         }
-        return $this->rootAddPostMetaMutationErrorPayloadUnionTypeResolver;
+        return $this->rootAddPageMetaMutationErrorPayloadUnionTypeResolver;
     }
 
     protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
-        return $this->getRootAddPostMetaMutationErrorPayloadUnionTypeResolver();
+        return $this->getRootAddPageMetaMutationErrorPayloadUnionTypeResolver();
     }
 }

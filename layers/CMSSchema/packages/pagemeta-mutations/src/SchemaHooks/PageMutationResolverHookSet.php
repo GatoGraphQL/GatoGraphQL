@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMetaMutations\SchemaHooks;
+namespace PoPCMSSchema\PageMetaMutations\SchemaHooks;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
-use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\CustomPostMetaMutations\SchemaHooks\AbstractCustomPostMutationResolverHookSet;
 
-class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
+class PageMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    use PostMutationResolverHookSetTrait;
+    use PageMutationResolverHookSetTrait;
 
-    private ?PostObjectTypeResolver $postObjectTypeResolver = null;
+    private ?PageObjectTypeResolver $postObjectTypeResolver = null;
 
-    final protected function getPostObjectTypeResolver(): PostObjectTypeResolver
+    final protected function getPageObjectTypeResolver(): PageObjectTypeResolver
     {
         if ($this->postObjectTypeResolver === null) {
-            /** @var PostObjectTypeResolver */
-            $postObjectTypeResolver = $this->instanceManager->getInstance(PostObjectTypeResolver::class);
+            /** @var PageObjectTypeResolver */
+            $postObjectTypeResolver = $this->instanceManager->getInstance(PageObjectTypeResolver::class);
             $this->postObjectTypeResolver = $postObjectTypeResolver;
         }
         return $this->postObjectTypeResolver;
@@ -26,6 +26,6 @@ class PostMutationResolverHookSet extends AbstractCustomPostMutationResolverHook
 
     protected function getCustomPostTypeResolver(): CustomPostObjectTypeResolverInterface
     {
-        return $this->getPostObjectTypeResolver();
+        return $this->getPageObjectTypeResolver();
     }
 }
