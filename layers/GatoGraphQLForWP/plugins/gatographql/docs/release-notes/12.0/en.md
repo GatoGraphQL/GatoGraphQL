@@ -14,3 +14,7 @@
 - Plugin constructor signature receives nullable `commitHash` param ([#3056](https://github.com/GatoGraphQL/GatoGraphQL/pull/3056))
 - Store the extension names whose license has just been activated (instead of a timestamp) to install setup data ([#3057](https://github.com/GatoGraphQL/GatoGraphQL/pull/3057))
 - Renamed `getCommentPostID` to `getCommentCustomPostID` ([#3073](https://github.com/GatoGraphQL/GatoGraphQL/pull/3073))
+
+## Fixed
+
+- Avoid `_load_textdomain_just_in_time` error message in WP 6.8 ([#3084](https://github.com/GatoGraphQL/GatoGraphQL/pull/3084))
