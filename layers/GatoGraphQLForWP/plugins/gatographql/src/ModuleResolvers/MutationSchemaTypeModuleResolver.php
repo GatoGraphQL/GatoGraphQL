@@ -24,6 +24,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public final const SCHEMA_CUSTOMPOST_META_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-meta-mutations';
     public final const SCHEMA_PAGE_MUTATIONS = Plugin::NAMESPACE . '\schema-page-mutations';
     public final const SCHEMA_POST_MUTATIONS = Plugin::NAMESPACE . '\schema-post-mutations';
+    public final const SCHEMA_POST_META_MUTATIONS = Plugin::NAMESPACE . '\schema-post-meta-mutations';
+    public final const SCHEMA_PAGE_META_MUTATIONS = Plugin::NAMESPACE . '\schema-page-meta-mutations';
     public final const SCHEMA_MEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-media-mutations';
     public final const SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-custompostmedia-mutations';
     public final const SCHEMA_PAGEMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-pagemedia-mutations';
@@ -74,6 +76,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOST_META_MUTATIONS,
             self::SCHEMA_PAGE_MUTATIONS,
             self::SCHEMA_POST_MUTATIONS,
+            self::SCHEMA_POST_META_MUTATIONS,
+            self::SCHEMA_PAGE_META_MUTATIONS,
             self::SCHEMA_MEDIA_MUTATIONS,
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS,
             self::SCHEMA_PAGEMEDIA_MUTATIONS,
@@ -165,6 +169,24 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     ],
                     [
                         self::SCHEMA_CUSTOMPOST_MUTATIONS,
+                    ],
+                ];
+            case self::SCHEMA_POST_META_MUTATIONS:
+                return [
+                    [
+                        self::SCHEMA_POST_MUTATIONS,
+                    ],
+                    [
+                        self::SCHEMA_CUSTOMPOST_META_MUTATIONS,
+                    ],
+                ];
+            case self::SCHEMA_PAGE_META_MUTATIONS:
+                return [
+                    [
+                        self::SCHEMA_PAGE_MUTATIONS,
+                    ],
+                    [
+                        self::SCHEMA_CUSTOMPOST_META_MUTATIONS,
                     ],
                 ];
             case self::SCHEMA_MEDIA_MUTATIONS:
@@ -350,6 +372,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOST_META_MUTATIONS => \__('Custom Post Meta Mutations', 'gatographql'),
             self::SCHEMA_PAGE_MUTATIONS => \__('Page Mutations', 'gatographql'),
             self::SCHEMA_POST_MUTATIONS => \__('Post Mutations', 'gatographql'),
+            self::SCHEMA_POST_META_MUTATIONS => \__('Post Meta Mutations', 'gatographql'),
+            self::SCHEMA_PAGE_META_MUTATIONS => \__('Page Meta Mutations', 'gatographql'),
             self::SCHEMA_MEDIA_MUTATIONS => \__('Media Mutations', 'gatographql'),
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Custom Post Media Mutations', 'gatographql'),
             self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Page Media Mutations', 'gatographql'),
@@ -383,6 +407,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOST_META_MUTATIONS => \__('Mutate custom post meta', 'gatographql'),
             self::SCHEMA_PAGE_MUTATIONS => \__('Execute mutations on pages', 'gatographql'),
             self::SCHEMA_POST_MUTATIONS => \__('Execute mutations on posts', 'gatographql'),
+            self::SCHEMA_POST_META_MUTATIONS => \__('Mutate post meta', 'gatographql'),
+            self::SCHEMA_PAGE_META_MUTATIONS => \__('Mutate page meta', 'gatographql'),
             self::SCHEMA_MEDIA_MUTATIONS => \__('Execute mutations concerning media items', 'gatographql'),
             self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Execute mutations concerning media items on custom posts', 'gatographql'),
             self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Execute mutations concerning media items on pages', 'gatographql'),
@@ -418,6 +444,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_META_MUTATIONS:
             case self::SCHEMA_PAGE_MUTATIONS:
             case self::SCHEMA_POST_MUTATIONS:
+            case self::SCHEMA_POST_META_MUTATIONS:
+            case self::SCHEMA_PAGE_META_MUTATIONS:
             case self::SCHEMA_MEDIA_MUTATIONS:
             case self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS:
             case self::SCHEMA_PAGEMEDIA_MUTATIONS:
