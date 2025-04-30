@@ -414,5 +414,5 @@ Running this query:
 
 Update the Elementor data for a custom post via these mutations:
 
-- `elementorSetCustomPostElementDatas`: sets the Elementor data for the custom post, expecting a JSON with the same format by Elementor
-- `elementorMergeCustomPostElementDataItems`: override the value of specific elements from a custom post's Elementor data
+- `elementorSetCustomPostElementData`: sets the Elementor data for the custom post, expecting a JSON with the same format by Elementor
+- `elementorMergeCustomPostElementDataItem`: override the value of specific elements from a custom post's Elementor data
