@@ -21,3 +21,4 @@
 
 - Avoid `_load_textdomain_just_in_time` error message in WP 6.8 ([#3084](https://github.com/GatoGraphQL/GatoGraphQL/pull/3084))
 - Loading page entity in `customPost` field as result of mutation ([#3087](https://github.com/GatoGraphQL/GatoGraphQL/pull/3087))
+- Convert stdClass to array also on `meta` mutation input (`v12.0.1`) ([#3087](https://github.com/GatoGraphQL/GatoGraphQL/pull/3087))

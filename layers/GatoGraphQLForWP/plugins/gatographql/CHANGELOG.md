@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+# 12.0.1 - DATE
+
+### Fixed
+
+- Convert stdClass to array also on `meta` mutation input (#3088)
+
 ## 12.0.0 - 28/04/2025
 
 ### Added

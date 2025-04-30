@@ -218,6 +218,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 12.0.1 =
+* Fixed: Convert stdClass to array also on `meta` mutation input (#3088)
+
 = 12.0.0 =
 * Added documentation for new Elementor Premium Extension (#3052)
 * Convert stdClass to associative array when storing meta in the DB (#3082)
