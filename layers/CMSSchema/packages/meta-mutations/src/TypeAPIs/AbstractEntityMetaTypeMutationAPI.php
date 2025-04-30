@@ -76,6 +76,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
                     $this->executeDeleteEntityMeta($entityID, $key);
                     continue;
                 }
+                $value = $this->maybeConvertStdClassToArray($value);
                 $this->executeUpdateEntityMeta($entityID, $key, $value);
                 continue;
             }
@@ -83,6 +84,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
             // $numberItems > 1
             $this->executeDeleteEntityMeta($entityID, $key);
             foreach ($values as $value) {
+                $value = $this->maybeConvertStdClassToArray($value);
                 $this->executeAddEntityMeta($entityID, $key, $value, false);
             }
         }
