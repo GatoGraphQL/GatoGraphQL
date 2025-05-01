@@ -16,6 +16,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public final const SERVER_CONFIGURATION = Plugin::NAMESPACE . '\server-configuration';
     public final const PLUGIN_CONFIGURATION = Plugin::NAMESPACE . '\plugin-configuration';
     public final const SERVICE_CONFIGURATION = Plugin::NAMESPACE . '\service-configuration';
+    public final const PLUGIN_INTEGRATION_CONFIGURATION = Plugin::NAMESPACE . '\plugin-integration-configuration';
     public final const API_KEYS = Plugin::NAMESPACE . '\api-keys';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
 
@@ -43,6 +44,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::SERVER_CONFIGURATION,
             self::PLUGIN_CONFIGURATION,
             self::SERVICE_CONFIGURATION,
+            self::PLUGIN_INTEGRATION_CONFIGURATION,
             self::API_KEYS,
             self::PLUGIN_MANAGEMENT,
         ];
@@ -57,6 +59,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::SERVER_CONFIGURATION => $this->__('Server Configuration', 'gatographql'),
             self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'gatographql'),
             self::SERVICE_CONFIGURATION => $this->__('Service Configuration', 'gatographql'),
+            self::PLUGIN_INTEGRATION_CONFIGURATION => $this->__('Plugin Integration Configuration', 'gatographql'),
             self::API_KEYS => $this->__('API Keys', 'gatographql'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'gatographql'),
             default => parent::getName($settingsCategory),
@@ -72,6 +75,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::SERVER_CONFIGURATION => Options::SERVER_CONFIGURATION,
             self::PLUGIN_CONFIGURATION => Options::PLUGIN_CONFIGURATION,
             self::SERVICE_CONFIGURATION => Options::SERVICE_CONFIGURATION,
+            self::PLUGIN_INTEGRATION_CONFIGURATION => Options::PLUGIN_INTEGRATION_CONFIGURATION,
             self::API_KEYS => Options::API_KEYS,
             self::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,
             default => parent::getDBOptionName($settingsCategory),
@@ -88,6 +92,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::SERVER_CONFIGURATION => 70,
             self::PLUGIN_CONFIGURATION => 60,
             self::SERVICE_CONFIGURATION => 50,
+            self::PLUGIN_INTEGRATION_CONFIGURATION => 45,
             self::API_KEYS => 40,
             self::PLUGIN_MANAGEMENT => 30,
             default => parent::getPriority($settingsCategory),
