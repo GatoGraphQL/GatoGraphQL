@@ -4,7 +4,7 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 12.1.0
+## 12.1.0 - DATE
 
 ### Improvements
 
