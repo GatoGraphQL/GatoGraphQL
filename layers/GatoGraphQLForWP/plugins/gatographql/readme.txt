@@ -218,6 +218,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 12.1.0 =
+* Added a Plugin Integration Configuration category on Settings (#3089)
+
 = 12.0.1 =
 * Fixed: Convert stdClass to array also on `meta` mutation input (#3088)
 
