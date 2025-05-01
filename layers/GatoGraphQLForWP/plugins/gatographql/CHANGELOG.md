@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 12.1.0
+
+### Improvements
+
+- Added a Plugin Integration Configuration category on Settings (#3089)
+
 ## 12.0.1 - 30/04/2025
 
 ### Fixed

@@ -37,6 +37,10 @@ class Options
      */
     public final const SERVICE_CONFIGURATION = 'service-configuration';
     /**
+     * Option name under which to store the Plugin Integration Configuration, defined by the user
+     */
+    public final const PLUGIN_INTEGRATION_CONFIGURATION = 'plugin-integration-configuration';
+    /**
      * Option name under which to store the License Keys, defined by the user
      */
     public final const API_KEYS = 'api-keys';
