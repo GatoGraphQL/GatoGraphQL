@@ -17,7 +17,7 @@ class OutputService extends AbstractBasicService implements OutputServiceInterfa
     public function jsonEncodeArrayOrStdClassValue(array|stdClass $value): string
     {
         return mb_strimwidth(
-            (string)json_encode($value),
+            (string)json_encode($value, JSON_UNESCAPED_SLASHES),
             0,
             500,
             $this->__('...', 'graphql-parser')
