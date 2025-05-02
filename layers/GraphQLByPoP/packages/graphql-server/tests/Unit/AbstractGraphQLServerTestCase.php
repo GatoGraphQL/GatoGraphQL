@@ -86,7 +86,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         ?string $operationName = null
     ): void {
         $response = self::getGraphQLServer()->execute($queryOrExecutableDocument, $variables, $operationName);
-        $expectedResponseJSON = json_encode($expectedResponse, JSON_UNESCAPED_SLASHES);
+        $expectedResponseJSON = json_encode($expectedResponse, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         if ($expectedResponseJSON === false) {
             throw new RuntimeException('Encoding the expected response as JSON failed');
         }
