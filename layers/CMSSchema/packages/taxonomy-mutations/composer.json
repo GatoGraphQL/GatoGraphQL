@@ -187,9 +187,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/taxonomies": "^12.1",
-        "pop-cms-schema/user-roles": "^12.1",
-        "pop-cms-schema/user-state-mutations": "^12.1"
+        "pop-cms-schema/taxonomies": "^12.2",
+        "pop-cms-schema/user-roles": "^12.2",
+        "pop-cms-schema/user-state-mutations": "^12.2"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -215,7 +215,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "12.1-dev"
+            "dev-master": "12.2-dev"
         }
     },
     "config": {
