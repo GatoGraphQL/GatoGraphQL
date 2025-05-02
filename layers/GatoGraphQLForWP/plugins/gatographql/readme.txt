@@ -221,6 +221,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 12.1.0 =
 * Added a Plugin Integration Configuration category on Settings (#3089)
 * Don't escape HTML forward slashes in GraphQL response errors (#3090)
+* Encode multibyte Unicode characters in GraphQL response errors (#3091)
 
 = 12.0.1 =
 * Fixed: Convert stdClass to array also on `meta` mutation input (#3088)

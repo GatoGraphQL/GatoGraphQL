@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added a Plugin Integration Configuration category on Settings (#3089)
 - Don't escape HTML forward slashes in GraphQL response errors (#3090)
+- Encode multibyte Unicode characters in GraphQL response errors (#3091)
 
 ## 12.0.1 - 30/04/2025
 
