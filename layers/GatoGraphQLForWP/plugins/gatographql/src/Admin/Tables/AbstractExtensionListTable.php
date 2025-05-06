@@ -259,6 +259,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     protected function adaptDisplayRowsHTML(string $html): string
     {
         foreach ((array) $this->items as $plugin) {
+            $plugin = (array) $plugin;
             /**
              * Change the "More information" link to open the
              * extension website, and not the plugin page
