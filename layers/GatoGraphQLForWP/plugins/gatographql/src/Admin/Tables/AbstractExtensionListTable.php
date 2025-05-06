@@ -267,7 +267,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
              */
             // Code copied from `display_rows` in the parent class
             $details_link = self_admin_url(
-                'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] .
+                'plugin-install.php?tab=plugin-information&amp;plugin=' . ($plugin['slug'] ?? '') .
                 '&amp;TB_iframe=true&amp;width=600&amp;height=550'
             );
             // Replace it with this other link.
@@ -282,7 +282,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
              * @var string
              */
             $pluginName = $plugin['name'];
-            $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug']);
+            $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug'] ?? '');
             $pos = strpos($html, $pluginCardClassname);
             if ($pos === false) {
                 continue;
