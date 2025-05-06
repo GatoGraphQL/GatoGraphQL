@@ -180,7 +180,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
          *
          * @var string
          */
-        $pluginName = $plugin['name'];
+        $pluginName = $plugin['name'] ?? '';
         $this->pluginActionLinks[$pluginName] = $actionLinks;
         /**
          * Replace the "Install Now" action message
@@ -192,11 +192,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         ) {
             $actionLinks[0] = sprintf(
                 '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s</a>',
-                esc_attr($plugin['slug']),
-                esc_url($plugin['homepage']),
+                esc_attr($plugin['slug'] ?? ''),
+                esc_url($plugin['homepage'] ?? ''),
                 /* translators: %s: Plugin name and version. */
-                esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
-                esc_attr($plugin['name']),
+                esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'] ?? '')),
+                esc_attr($plugin['name'] ?? ''),
                 '_blank',
                 $this->getPluginInstallActionLabel($plugin)
             );
