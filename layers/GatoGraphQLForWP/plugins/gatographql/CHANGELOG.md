@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 12.2.0 - 07/05/2025
+
+### Fixed
+
+- Exception when clicking on Extensions link (#3092)
+
 ## 12.1.1 - 06/05/2025
 
 (Empty - Version sync with PRO)

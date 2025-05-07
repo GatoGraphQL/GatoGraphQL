@@ -218,6 +218,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 12.2.0 =
+* Fixed: Exception when clicking on Extensions link (#3092)
+
 = 12.1.0 =
 * Added a Plugin Integration Configuration category on Settings (#3089)
 * Don't escape HTML forward slashes in GraphQL response errors (#3090)
