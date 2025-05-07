@@ -180,7 +180,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
          *
          * @var string
          */
-        $pluginName = $plugin['name'];
+        $pluginName = $plugin['name'] ?? '';
         $this->pluginActionLinks[$pluginName] = $actionLinks;
         /**
          * Replace the "Install Now" action message
@@ -192,11 +192,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         ) {
             $actionLinks[0] = sprintf(
                 '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s</a>',
-                esc_attr($plugin['slug']),
-                esc_url($plugin['homepage']),
+                esc_attr($plugin['slug'] ?? ''),
+                esc_url($plugin['homepage'] ?? ''),
                 /* translators: %s: Plugin name and version. */
-                esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
-                esc_attr($plugin['name']),
+                esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'] ?? '')),
+                esc_attr($plugin['name'] ?? ''),
                 '_blank',
                 $this->getPluginInstallActionLabel($plugin)
             );
@@ -259,6 +259,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     protected function adaptDisplayRowsHTML(string $html): string
     {
         foreach ((array) $this->items as $plugin) {
+            $plugin = (array) $plugin;
             /**
              * Change the "More information" link to open the
              * extension website, and not the plugin page
@@ -266,7 +267,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
              */
             // Code copied from `display_rows` in the parent class
             $details_link = self_admin_url(
-                'plugin-install.php?tab=plugin-information&amp;plugin=' . $plugin['slug'] .
+                'plugin-install.php?tab=plugin-information&amp;plugin=' . ($plugin['slug'] ?? '') .
                 '&amp;TB_iframe=true&amp;width=600&amp;height=550'
             );
             // Replace it with this other link.
@@ -280,8 +281,8 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             /**
              * @var string
              */
-            $pluginName = $plugin['name'];
-            $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug']);
+            $pluginName = $plugin['name'] ?? '';
+            $pluginCardClassname = 'plugin-card-' . sanitize_html_class($plugin['slug'] ?? '');
             $pos = strpos($html, $pluginCardClassname);
             if ($pos === false) {
                 continue;
