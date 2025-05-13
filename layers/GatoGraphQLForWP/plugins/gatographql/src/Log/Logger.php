@@ -22,12 +22,17 @@ class Logger implements LoggerInterface
             return;
         }
 
-        if ($severity === LoggerSeverity::INFO || $severity === LoggerSeverity::SUCCESS || $severity === LoggerSeverity::WARNING) {
-            $this->logInfo($message);
-            return;
-        }
-
-        throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
+        $sign = match ($severity) {
+            LoggerSeverity::INFO => LoggerSigns::INFO,
+            LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
+            LoggerSeverity::WARNING => LoggerSigns::WARNING,
+            default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
+        };
+        $this->logInfo(
+            $this->__('%s %s', 'gatographql'),
+            $sign,
+            $message,
+        );
     }
     
     protected function logError(string $message): void
