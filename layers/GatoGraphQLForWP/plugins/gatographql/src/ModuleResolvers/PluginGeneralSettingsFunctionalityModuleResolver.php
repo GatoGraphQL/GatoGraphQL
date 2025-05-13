@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
+use GatoGraphQL\GatoGraphQL\Constants\SettingsValues;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -202,6 +203,17 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
 
+                $keyLabels = [
+                    LoggerSeverity::ERROR => \__('Error', 'gatographql'),
+                    LoggerSeverity::WARNING => \__('Warning', 'gatographql'),
+                    LoggerSeverity::INFO => \__('Info', 'gatographql'),
+                    LoggerSeverity::SUCCESS => \__('Success', 'gatographql'),
+                ];
+                $enableDisablePossibleValues = [
+                    SettingsValues::ENABLED => \__('Enabled', 'gatographql'),
+                    SettingsValues::DISABLED => \__('Disabled', 'gatographql'),
+                ];
+
                 $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
                 // Build all the possible values by fetching all the corresponding custom posts
                 $possibleValues = [
@@ -217,10 +229,10 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $option
                     ),
                     Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
-                    Properties::DESCRIPTION => \__('Indicate entries of what severities to log', 'gatographql'),
-                    Properties::TYPE => Properties::TYPE_ARRAY,
-                    Properties::IS_MULTIPLE => true,
-                    Properties::POSSIBLE_VALUES => $possibleValues,
+                    Properties::DESCRIPTION => \__('Indicate which severities are enabled for logging', 'gatographql'),
+                    Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
+                    Properties::KEY_LABELS => $keyLabels,
+                    Properties::POSSIBLE_VALUES => $enableDisablePossibleValues,
                 ];
             }
 
