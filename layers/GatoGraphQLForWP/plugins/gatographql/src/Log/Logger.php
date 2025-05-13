@@ -86,13 +86,4 @@ class Logger implements LoggerInterface
 
         return true;
     }
-
-    public function getExceptionMessage(Exception $exception): string
-    {
-        return sprintf(
-            '%s - Stack trace: %s',
-            $exception->getMessage(),
-            str_replace(PHP_EOL, '\n', $exception->getTraceAsString())
-        );
-    }
 }
