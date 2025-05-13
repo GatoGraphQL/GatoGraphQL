@@ -21,6 +21,17 @@ class Logger implements LoggerInterface
             $this->logSystemError($message);
         }
 
+        // Check if the Log is enabled, via the Settings
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableLogs()) {
+            return;
+        }
+
+        if (!in_array($severity, $moduleConfiguration->enableLogsBySeverity())) {
+            return;
+        }
+
         $sign = match ($severity) {
             LoggerSeverity::ERROR => LoggerSigns::ERROR,
             LoggerSeverity::INFO => LoggerSigns::INFO,
@@ -36,7 +47,7 @@ class Logger implements LoggerInterface
             )
         );
     }
-    
+
     protected function logSystemError(string $message): void
     {
         \error_log(sprintf(
@@ -51,13 +62,6 @@ class Logger implements LoggerInterface
      */
     protected function logOwnStream(string $message): void
     {
-        // Check if the Log is enabled, via the Settings
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableLogs()) {
-            return;
-        }
-
         $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {

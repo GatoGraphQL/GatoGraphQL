@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -30,6 +32,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      */
     public final const OPTION_ENABLE_SCHEMA_TUTORIAL = 'hide-tutorial-page';
     public final const OPTION_ENABLE_LOGS = 'enable-logs';
+    public final const OPTION_ENABLE_LOGS_BY_SEVERITY = 'enable-logs-by-severity';
     public final const OPTION_INSTALL_PLUGIN_SETUP_DATA = 'install-plugin-setup-data';
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
@@ -124,6 +127,12 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             self::GENERAL => [
                 self::OPTION_ENABLE_SCHEMA_TUTORIAL => false,
                 self::OPTION_ENABLE_LOGS => RootEnvironment::isApplicationEnvironmentDev(),
+                self::OPTION_ENABLE_LOGS_BY_SEVERITY => [
+                    LoggerSeverity::ERROR => true,
+                    LoggerSeverity::WARNING => true,
+                    LoggerSeverity::INFO => true,
+                    LoggerSeverity::SUCCESS => true,
+                ],
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
@@ -192,6 +201,28 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $relativeLogFile
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+
+                $placeholder = \__('%s %s', 'gatographql');
+                $keyLabels = [
+                    LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
+                    LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
+                    LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
+                    LoggerSeverity::SUCCESS => sprintf($placeholder, LoggerSigns::SUCCESS, \__('Success', 'gatographql')),
+                ];
+
+                $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
+                    Properties::DESCRIPTION => \__('Indicate which severities are enabled for logging', 'gatographql'),
+                    Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
+                    Properties::KEY_LABELS => $keyLabels,
+                    Properties::SUBTYPE => Properties::TYPE_BOOL,
                 ];
             }
 
@@ -297,21 +328,21 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
              */
             $option = self::OPTION_EDITING_ACCESS_SCHEME;
             $moduleSettings[] = [
-            Properties::INPUT => $option,
-            Properties::NAME => $this->getSettingOptionName(
-                $module,
-                $option
-            ),
-            Properties::TITLE => \__('Which users can edit the schema?', 'gatographql'),
-            Properties::DESCRIPTION => sprintf(
-                \__('Indicate which users can edit the schema (i.e. creating and updating Persisted Queries, Custom Endpoints, and others)<br/><span class="more-info">%s</span>', 'gatographql'),
-                $this->getSettingsItemHelpLinkHTML(
-                    'https://gatographql.com/guides/config/managing-who-can-edit-the-schema',
-                    \__('Managing who can edit the schema', 'gatographql')
-                )
-            ),
-            Properties::TYPE => Properties::TYPE_STRING,
-            Properties::POSSIBLE_VALUES => $possibleValues,
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Which users can edit the schema?', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Indicate which users can edit the schema (i.e. creating and updating Persisted Queries, Custom Endpoints, and others)<br/><span class="more-info">%s</span>', 'gatographql'),
+                    $this->getSettingsItemHelpLinkHTML(
+                        'https://gatographql.com/guides/config/managing-who-can-edit-the-schema',
+                        \__('Managing who can edit the schema', 'gatographql')
+                    )
+                ),
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => $possibleValues,
             ];
         }
         return $moduleSettings;
