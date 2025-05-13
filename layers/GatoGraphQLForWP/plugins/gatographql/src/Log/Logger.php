@@ -28,6 +28,10 @@ class Logger implements LoggerInterface
             return;
         }
 
+        if (!in_array($severity, $moduleConfiguration->enableLogsBySeverity())) {
+            return;
+        }
+
         $sign = match ($severity) {
             LoggerSeverity::ERROR => LoggerSigns::ERROR,
             LoggerSeverity::INFO => LoggerSigns::INFO,
