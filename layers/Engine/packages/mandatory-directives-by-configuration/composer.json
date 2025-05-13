@@ -182,7 +182,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^12.2.2"
+        "getpop/component-model": "^12.3"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -208,7 +208,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "12.2-dev"
+            "dev-master": "12.3-dev"
         }
     },
     "config": {
