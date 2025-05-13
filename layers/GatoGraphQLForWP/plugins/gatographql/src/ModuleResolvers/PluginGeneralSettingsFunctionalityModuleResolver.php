@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -202,11 +203,12 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
 
+                $placeholder = \__('%s %s', 'gatographql');
                 $keyLabels = [
-                    LoggerSeverity::ERROR => \__('Error', 'gatographql'),
-                    LoggerSeverity::WARNING => \__('Warning', 'gatographql'),
-                    LoggerSeverity::INFO => \__('Info', 'gatographql'),
-                    LoggerSeverity::SUCCESS => \__('Success', 'gatographql'),
+                    LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
+                    LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
+                    LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
+                    LoggerSeverity::SUCCESS => sprintf($placeholder, LoggerSigns::SUCCESS, \__('Success', 'gatographql')),
                 ];
 
                 $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
