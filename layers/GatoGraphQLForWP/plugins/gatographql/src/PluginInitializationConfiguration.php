@@ -136,9 +136,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => function (array $keyValues): array {
                     $values = [];
                     foreach ($keyValues as $key => $value) {
-                        if ($value === SettingsValues::ENABLED) {
-                            $values[] = $key;
+                        if ($value !== SettingsValues::ENABLED) {
+                            continue;
                         }
+                        $values[] = $key;
                     }
                     return $values;
                 },
