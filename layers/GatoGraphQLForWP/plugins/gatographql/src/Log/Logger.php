@@ -29,7 +29,7 @@ class Logger implements LoggerInterface
             default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
         $this->logInfo(
-            $this->__('%s %s', 'gatographql'),
+            \__('%s %s', 'gatographql'),
             $sign,
             $message,
         );
