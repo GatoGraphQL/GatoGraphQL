@@ -47,7 +47,7 @@ class Logger implements LoggerInterface
             )
         );
     }
-    
+
     protected function logSystemError(string $message): void
     {
         \error_log(sprintf(
