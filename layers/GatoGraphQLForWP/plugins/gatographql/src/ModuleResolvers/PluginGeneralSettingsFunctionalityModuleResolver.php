@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -30,6 +31,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      */
     public final const OPTION_ENABLE_SCHEMA_TUTORIAL = 'hide-tutorial-page';
     public final const OPTION_ENABLE_LOGS = 'enable-logs';
+    public final const OPTION_ENABLE_LOGS_BY_SEVERITY = 'enable-logs-by-severity';
     public final const OPTION_INSTALL_PLUGIN_SETUP_DATA = 'install-plugin-setup-data';
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
@@ -124,6 +126,12 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             self::GENERAL => [
                 self::OPTION_ENABLE_SCHEMA_TUTORIAL => false,
                 self::OPTION_ENABLE_LOGS => RootEnvironment::isApplicationEnvironmentDev(),
+                self::OPTION_ENABLE_LOGS_BY_SEVERITY => [
+                    LoggerSeverity::ERROR,
+                    LoggerSeverity::WARNING,
+                    LoggerSeverity::INFO,
+                    LoggerSeverity::SUCCESS,
+                ],
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
@@ -192,6 +200,27 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $relativeLogFile
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+
+                $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
+                // Build all the possible values by fetching all the corresponding custom posts
+                $possibleValues = [
+                    LoggerSeverity::ERROR,
+                    LoggerSeverity::WARNING,
+                    LoggerSeverity::INFO,
+                    LoggerSeverity::SUCCESS,
+                ];
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
+                    Properties::DESCRIPTION => \__('Indicate which entries to logged by severity', 'gatographql'),
+                    Properties::TYPE => Properties::TYPE_ARRAY,
+                    Properties::IS_MULTIPLE => true,
+                    Properties::POSSIBLE_VALUES => $possibleValues,
                 ];
             }
 
