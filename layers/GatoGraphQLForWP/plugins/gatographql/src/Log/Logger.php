@@ -28,7 +28,7 @@ class Logger implements LoggerInterface
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
             default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
-        $this->logInfo(
+        $this->logOwnStream(
             sprintf(
                 \__('%s %s', 'gatographql'),
                 $sign,
@@ -49,7 +49,7 @@ class Logger implements LoggerInterface
     /**
      * @see https://stackoverflow.com/a/7655379
      */
-    protected function logInfo(string $message): void
+    protected function logOwnStream(string $message): void
     {
         // Check if the Log is enabled, via the Settings
         /** @var ModuleConfiguration */
