@@ -7,7 +7,6 @@ namespace GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
-use GatoGraphQL\GatoGraphQL\Constants\SettingsValues;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -136,7 +135,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => function (array $keyValues): array {
                     $values = [];
                     foreach ($keyValues as $key => $value) {
-                        if ($value !== SettingsValues::ENABLED) {
+                        if ($value !== true) {
                             continue;
                         }
                         $values[] = $key;
