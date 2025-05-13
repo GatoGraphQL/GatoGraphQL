@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Log;
 
-use Exception;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
@@ -33,7 +33,7 @@ class Logger implements LoggerInterface
     protected function logError(string $message): void
     {
         \error_log(sprintf(
-            '[%s] %s',
+            LoggerSigns::ERROR . ' [%s] %s',
             PluginApp::getMainPlugin()->getPluginName(),
             $message
         ));
