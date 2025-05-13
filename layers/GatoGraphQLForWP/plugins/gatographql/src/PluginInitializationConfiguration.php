@@ -132,16 +132,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::ENABLE_LOGS_BY_SEVERITY,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOGS_BY_SEVERITY,
-                'callback' => function (array $keyValues): array {
-                    $values = [];
-                    foreach ($keyValues as $key => $value) {
-                        if ($value !== true) {
-                            continue;
-                        }
-                        $values[] = $key;
-                    }
-                    return $values;
-                },
+                'callback' => fn (array $value) => array_keys(array_filter($value)),
             ],
             // Install Plugin Setup Data
             [
