@@ -30,7 +30,7 @@ class Logger implements LoggerInterface
         throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
     }
     
-    public function logError(string $message): void
+    protected function logError(string $message): void
     {
         \error_log(sprintf(
             '[%s] %s',
@@ -42,7 +42,7 @@ class Logger implements LoggerInterface
     /**
      * @see https://stackoverflow.com/a/7655379
      */
-    public function logInfo(string $message): void
+    protected function logInfo(string $message): void
     {
         // Check if the Log is enabled, via the Settings
         /** @var ModuleConfiguration */

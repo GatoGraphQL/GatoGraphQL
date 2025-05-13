@@ -13,7 +13,7 @@ class Logger extends UpstreamLogger
      * Send the error to the response headers,
      * so we can test it
      */
-    public function logError(string $message): void
+    protected function logError(string $message): void
     {
         parent::logError($message);
 
@@ -27,7 +27,7 @@ class Logger extends UpstreamLogger
      * Send the error to the response headers,
      * so we can test it
      */
-    public function logInfo(string $message): void
+    protected function logInfo(string $message): void
     {
         parent::logInfo($message);
 
