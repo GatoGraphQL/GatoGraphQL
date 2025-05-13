@@ -18,7 +18,7 @@ class Logger implements LoggerInterface
     public function log(string $severity, string $message): void
     {
         if ($severity === LoggerSeverity::ERROR) {
-            $this->logError($message);
+            $this->logSystemError($message);
         }
 
         $sign = match ($severity) {
@@ -37,7 +37,7 @@ class Logger implements LoggerInterface
         );
     }
     
-    protected function logError(string $message): void
+    protected function logSystemError(string $message): void
     {
         \error_log(sprintf(
             LoggerSigns::ERROR . ' [%s] %s',
@@ -80,13 +80,13 @@ class Logger implements LoggerInterface
 
         $dir = \dirname($filename);
         if (!is_dir($dir) && @mkdir($dir, 0777, true) === false) {
-            $this->logError('Can\'t create directory to store log files, under path ' . $dir);
+            $this->logSystemError('Can\'t create directory to store log files, under path ' . $dir);
             return false;
         }
 
         $handle = fopen($filename, "w");
         if ($handle === false) {
-            $this->logError('Can\'t create log file under path ' . $filename);
+            $this->logSystemError('Can\'t create log file under path ' . $filename);
             return false;
         }
         fclose($handle);

@@ -13,9 +13,9 @@ class Logger extends UpstreamLogger
      * Send the error to the response headers,
      * so we can test it
      */
-    protected function logError(string $message): void
+    protected function logSystemError(string $message): void
     {
-        parent::logError($message);
+        parent::logSystemError($message);
 
         header(sprintf(
             '%s: %s',
