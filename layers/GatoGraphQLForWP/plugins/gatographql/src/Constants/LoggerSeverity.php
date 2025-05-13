@@ -6,8 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\Constants;
 
 class LoggerSeverity
 {
-    public final const INFO = 'INFO';
-    public final const SUCCESS = 'SUCCESS';
-    public final const WARNING = 'WARNING';
-    public final const ERROR = 'ERROR';
+    public final const INFO = 'info';
+    public final const SUCCESS = 'success';
+    public final const WARNING = 'warning';
+    public final const ERROR = 'error';
 }
