@@ -30,7 +30,7 @@ class Logger implements LoggerInterface
         };
         $this->logInfo(
             sprintf(
-            \__('%s %s', 'gatographql'),
+                \__('%s %s', 'gatographql'),
                 $sign,
                 $message,
             )
