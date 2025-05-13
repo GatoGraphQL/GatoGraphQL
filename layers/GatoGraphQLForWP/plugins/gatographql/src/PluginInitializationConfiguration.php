@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Constants\SettingsValues;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -132,6 +133,15 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::ENABLE_LOGS_BY_SEVERITY,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOGS_BY_SEVERITY,
+                'callback' => function (array $keyValues): array {
+                    $values = [];
+                    foreach ($keyValues as $key => $value) {
+                        if ($value === SettingsValues::ENABLED) {
+                            $values[] = $key;
+                        }
+                    }
+                    return $values;
+                },
             ],
             // Install Plugin Setup Data
             [
