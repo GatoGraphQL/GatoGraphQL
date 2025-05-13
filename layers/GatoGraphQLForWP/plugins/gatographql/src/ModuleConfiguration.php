@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
@@ -200,7 +201,12 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function enableLogsBySeverity(): array
     {
         $envVariable = Environment::ENABLE_LOGS_BY_SEVERITY;
-        $defaultValue = [];
+        $defaultValue = [
+            LoggerSeverity::ERROR,
+            LoggerSeverity::WARNING,
+            LoggerSeverity::INFO,
+            LoggerSeverity::SUCCESS,
+        ];
         $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
