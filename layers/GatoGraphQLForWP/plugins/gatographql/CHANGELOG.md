@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Replaced methods in `Logger`: `logInfo` and `logError` => `log(severity: ...)` (#3093)
 
+### Added
+
+- Enable logs by severity in the Settings (#3095)
+
 ## 12.2.2 - 13/05/2025
 
 (Empty - Version sync with PRO)
