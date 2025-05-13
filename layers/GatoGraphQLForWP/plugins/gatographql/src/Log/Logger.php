@@ -19,10 +19,10 @@ class Logger implements LoggerInterface
     {
         if ($severity === LoggerSeverity::ERROR) {
             $this->logError($message);
-            return;
         }
 
         $sign = match ($severity) {
+            LoggerSeverity::ERROR => LoggerSigns::ERROR,
             LoggerSeverity::INFO => LoggerSigns::INFO,
             LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
