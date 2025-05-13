@@ -218,6 +218,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 13.0.0 =
+* Breaking changes: Replaced methods in `Logger`: `logInfo` and `logError` => `log(severity: ...)` (#3093)
+
 = 12.2.0 =
 * Fixed: Exception when clicking on Extensions link (#3092)
 

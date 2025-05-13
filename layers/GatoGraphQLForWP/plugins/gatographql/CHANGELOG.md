@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 13.0.0 - DATE
 
+### Breaking changes
+
+- Replaced methods in `Logger`: `logInfo` and `logError` => `log(severity: ...)` (#3093)
+
 ## 12.2.2 - 13/05/2025
 
 (Empty - Version sync with PRO)
