@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Log;
 
-use Exception;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
@@ -22,18 +22,25 @@ class Logger implements LoggerInterface
             return;
         }
 
-        if ($severity === LoggerSeverity::INFO || $severity === LoggerSeverity::SUCCESS || $severity === LoggerSeverity::WARNING) {
-            $this->logInfo($message);
-            return;
-        }
-
-        throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
+        $sign = match ($severity) {
+            LoggerSeverity::INFO => LoggerSigns::INFO,
+            LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
+            LoggerSeverity::WARNING => LoggerSigns::WARNING,
+            default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
+        };
+        $this->logInfo(
+            sprintf(
+                \__('%s %s', 'gatographql'),
+                $sign,
+                $message,
+            )
+        );
     }
     
     protected function logError(string $message): void
     {
         \error_log(sprintf(
-            '[%s] %s',
+            LoggerSigns::ERROR . ' [%s] %s',
             PluginApp::getMainPlugin()->getPluginName(),
             $message
         ));
