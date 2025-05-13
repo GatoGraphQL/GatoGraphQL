@@ -217,7 +217,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $option
                     ),
                     Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
-                    Properties::DESCRIPTION => \__('Indicate which entries to logged by severity', 'gatographql'),
+                    Properties::DESCRIPTION => \__('Indicate entries of what severities to log', 'gatographql'),
                     Properties::TYPE => Properties::TYPE_ARRAY,
                     Properties::IS_MULTIPLE => true,
                     Properties::POSSIBLE_VALUES => $possibleValues,
