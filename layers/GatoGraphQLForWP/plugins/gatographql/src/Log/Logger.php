@@ -5,15 +5,32 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Log;
 
 use Exception;
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
+use InvalidArgumentException;
 use PoP\ComponentModel\App;
 
 class Logger implements LoggerInterface
 {
-    public function logError(string $message): void
+    public function log(string $severity, string $message): void
+    {
+        if ($severity === LoggerSeverity::ERROR) {
+            $this->logError($message);
+            return;
+        }
+
+        if ($severity === LoggerSeverity::INFO || $severity === LoggerSeverity::SUCCESS || $severity === LoggerSeverity::WARNING) {
+            $this->logInfo($message);
+            return;
+        }
+
+        throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
+    }
+    
+    protected function logError(string $message): void
     {
         \error_log(sprintf(
             '[%s] %s',
@@ -25,7 +42,7 @@ class Logger implements LoggerInterface
     /**
      * @see https://stackoverflow.com/a/7655379
      */
-    public function logInfo(string $message): void
+    protected function logInfo(string $message): void
     {
         // Check if the Log is enabled, via the Settings
         /** @var ModuleConfiguration */
@@ -68,14 +85,5 @@ class Logger implements LoggerInterface
         fclose($handle);
 
         return true;
-    }
-
-    public function getExceptionMessage(Exception $exception): string
-    {
-        return sprintf(
-            '%s - Stack trace: %s',
-            $exception->getMessage(),
-            str_replace(PHP_EOL, '\n', $exception->getTraceAsString())
-        );
     }
 }
