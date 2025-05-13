@@ -5,14 +5,31 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Log;
 
 use Exception;
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
+use InvalidArgumentException;
 use PoP\ComponentModel\App;
 
 class Logger implements LoggerInterface
 {
+    public function log(string $severity, string $message): void
+    {
+        if ($severity === LoggerSeverity::ERROR) {
+            $this->logError($message);
+            return;
+        }
+
+        if ($severity === LoggerSeverity::INFO || $severity === LoggerSeverity::SUCCESS || $severity === LoggerSeverity::WARNING) {
+            $this->logInfo($message);
+            return;
+        }
+
+        throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
+    }
+    
     public function logError(string $message): void
     {
         \error_log(sprintf(

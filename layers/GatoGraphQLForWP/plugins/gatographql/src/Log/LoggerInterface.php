@@ -8,6 +8,7 @@ use Exception;
 
 interface LoggerInterface
 {
+    public function log(string $severity, string $message): void;
     public function logError(string $message): void;
     public function logInfo(string $info): void;
     public function getExceptionMessage(Exception $exception): string;
