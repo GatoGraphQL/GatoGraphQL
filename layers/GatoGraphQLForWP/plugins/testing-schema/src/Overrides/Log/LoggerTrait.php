@@ -12,11 +12,11 @@ trait LoggerTrait
      * Send the error to the response headers,
      * so we can test it
      */
-    protected function sendCustomHeader(string $message): void
+    protected function sendCustomHeader(string $message, string $headerName): void
     {
         header(sprintf(
             '%s: %s',
-            CustomHeaders::GATOGRAPHQL_INFO,
+            $headerName,
             str_replace(PHP_EOL, '\n', $message)
         ));
     }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Log\Logger as UpstreamLogger;
+use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
 class Logger extends UpstreamLogger
 {
@@ -18,10 +20,11 @@ class Logger extends UpstreamLogger
     {
         parent::logMessage($severity, $message);
 
-        if ($this->addSeverityToMessage()) {
-            $message = $this->getMessageWithLogSeverity($severity, $message);
-        }
-
-        $this->sendCustomHeader($message);
+        $this->sendCustomHeader(
+            $message, 
+            $severity === LoggerSeverity::ERROR
+                ? CustomHeaders::GATOGRAPHQL_ERRORS
+                : CustomHeaders::GATOGRAPHQL_INFO,
+        );
     }
 }

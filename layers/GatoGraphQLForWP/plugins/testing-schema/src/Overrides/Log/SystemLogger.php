@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
 use GatoGraphQL\GatoGraphQL\Log\SystemLogger as UpstreamSystemLogger;
+use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
 class SystemLogger extends UpstreamSystemLogger
 {
@@ -18,6 +19,6 @@ class SystemLogger extends UpstreamSystemLogger
     {
         parent::log($message);
 
-        $this->sendCustomHeader($message);
+        $this->sendCustomHeader($message, CustomHeaders::GATOGRAPHQL_ERRORS);
     }
 }
