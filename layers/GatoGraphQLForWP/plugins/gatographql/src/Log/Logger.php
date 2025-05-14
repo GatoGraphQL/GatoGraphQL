@@ -53,7 +53,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
         }
 
         if (!$this->addLoggerSignToMessage($severity, $message)) {
-            return $message;
+            return sprintf(
+                \__('%s %s', 'gatographql'),
+                $severity,
+                $message,
+            );
         }
 
         $sign = match ($severity) {
@@ -63,8 +67,9 @@ class Logger extends AbstractBasicService implements LoggerInterface
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
         };
         return sprintf(
-            \__('%s %s', 'gatographql'),
+            \__('%s %s %s', 'gatographql'),
             $sign,
+            $severity,
             $message,
         );
     }
