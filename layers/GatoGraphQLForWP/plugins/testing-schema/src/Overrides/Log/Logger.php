@@ -18,6 +18,10 @@ class Logger extends UpstreamLogger
     {
         parent::logMessage($severity, $message);
 
+        if ($this->addSeverityToMessage()) {
+            $message = $this->getMessageWithLogSeverity($severity, $message);
+        }
+
         $this->sendCustomHeader($message);
     }
 }
