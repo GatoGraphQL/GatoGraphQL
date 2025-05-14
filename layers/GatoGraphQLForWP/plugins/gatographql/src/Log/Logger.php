@@ -17,10 +17,6 @@ class Logger implements LoggerInterface
 {
     public function log(string $severity, string $message): void
     {
-        if ($severity === LoggerSeverity::ERROR) {
-            $this->logSystemError($message);
-        }
-
         // Check if the Log is enabled, via the Settings
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
