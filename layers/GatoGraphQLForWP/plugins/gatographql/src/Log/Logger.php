@@ -51,12 +51,12 @@ class Logger extends AbstractBasicService implements LoggerInterface
         if (!in_array($severity, LoggerSeverity::ALL)) {
             throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
         }
+
         $sign = match ($severity) {
             LoggerSeverity::ERROR => LoggerSigns::ERROR,
             LoggerSeverity::INFO => LoggerSigns::INFO,
             LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
-            default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
         return sprintf(
             \__('%s %s', 'gatographql'),
