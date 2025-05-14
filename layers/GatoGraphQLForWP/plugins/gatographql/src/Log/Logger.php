@@ -48,6 +48,9 @@ class Logger extends AbstractBasicService implements LoggerInterface
 
     public function addLogSeverityToMessage(string $severity, string $message): string
     {
+        if (!in_array($severity, LoggerSeverity::ALL)) {
+            throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
+        }
         $sign = match ($severity) {
             LoggerSeverity::ERROR => LoggerSigns::ERROR,
             LoggerSeverity::INFO => LoggerSigns::INFO,
