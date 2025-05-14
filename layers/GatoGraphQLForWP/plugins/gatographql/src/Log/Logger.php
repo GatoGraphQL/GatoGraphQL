@@ -49,13 +49,12 @@ class Logger extends AbstractBasicService implements LoggerInterface
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
             default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
-        $this->logOwnStream(
-            sprintf(
-                \__('%s %s', 'gatographql'),
-                $sign,
-                $message,
-            )
+        $message = sprintf(
+            \__('%s %s', 'gatographql'),
+            $sign,
+            $message,
         );
+        $this->logOwnStream($message);
     }
 
     /**
