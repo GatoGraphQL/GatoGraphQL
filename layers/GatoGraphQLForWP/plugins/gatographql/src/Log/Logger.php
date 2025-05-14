@@ -51,16 +51,16 @@ class Logger extends AbstractBasicService implements LoggerInterface
      */
     protected function logMessage(string $severity, string $message): void
     {
-        if ($this->addSeverityToMessage()) {
-            $message = $this->getMessageWithLogSeverity($severity, $message);
-        }
-        
         $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
         }
 
+        if ($this->addSeverityToMessage()) {
+            $message = $this->getMessageWithLogSeverity($severity, $message);
+        }
+        
         $date = date('Y-m-d H:i:s');
         error_log(sprintf(
             '[%s] %s' . PHP_EOL,
