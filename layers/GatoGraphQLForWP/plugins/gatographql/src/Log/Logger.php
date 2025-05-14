@@ -14,6 +14,7 @@ use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
 
 use function error_log;
+use function str_pad;
 
 class Logger extends AbstractBasicService implements LoggerInterface
 {
@@ -42,19 +43,55 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        $sign = match ($severity) {
+        if ($this->addSeverityToMessage()) {
+            $message = $this->getMessageWithLogSeverity($severity, $message);
+        }
+        $this->logOwnStream($message);
+    }
+
+    protected function addSeverityToMessage(): bool
+    {
+        return true;
+    }
+
+    protected function getMessageWithLogSeverity(string $severity, string $message): string
+    {
+        if (!in_array($severity, LoggerSeverity::ALL)) {
+            throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
+        }
+
+        $padLength = max(array_map('strlen', LoggerSeverity::ALL));
+
+        if (!$this->addLoggerSignToMessage($severity, $message)) {
+            return sprintf(
+                \__('%s %s', 'gatographql'),
+                str_pad($severity, $padLength),
+                $message,
+            );
+        }
+
+        return sprintf(
+            \__('%s %s %s', 'gatographql'),
+            $this->getLoggerSeveritySign($severity),
+            str_pad($severity, $padLength),
+            $message,
+        );
+    }
+
+    protected function addLoggerSignToMessage(): bool
+    {
+        return true;
+    }
+
+    protected function getLoggerSeveritySign(string $severity): string
+    {
+        return match ($severity) {
             LoggerSeverity::ERROR => LoggerSigns::ERROR,
             LoggerSeverity::INFO => LoggerSigns::INFO,
             LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
             default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
-        $message = sprintf(
-            \__('%s %s', 'gatographql'),
-            $sign,
-            $message,
-        );
-        $this->logOwnStream($message);
     }
 
     /**

@@ -11,6 +11,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Replaced methods in `Logger`: `logInfo` and `logError` => `log(severity: ...)` (#3093)
 - Split `Logger` service into `Logger` and `SystemLogger` (#3098)
 
+## Added
+
+- Enable logs by severity in the Settings (#3095)
+
+### Improvements
+
+- Print the severity (`SUCCESS`/`INFO`/`WARNING`/`ERROR`) in the logs (#3099)
+
 ## 12.2.2 - 13/05/2025
 
 (Empty - Version sync with PRO)

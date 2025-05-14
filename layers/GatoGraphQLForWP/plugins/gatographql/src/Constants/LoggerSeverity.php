@@ -10,4 +10,14 @@ class LoggerSeverity
     public final const SUCCESS = 'SUCCESS';
     public final const WARNING = 'WARNING';
     public final const ERROR = 'ERROR';
+
+    /**
+     * @return string[]
+     */
+    public final const ALL = [
+        self::INFO,
+        self::SUCCESS,
+        self::WARNING,
+        self::ERROR,
+    ];
 }
