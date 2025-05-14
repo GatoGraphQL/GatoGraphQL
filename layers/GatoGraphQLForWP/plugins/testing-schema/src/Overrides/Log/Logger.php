@@ -14,9 +14,9 @@ class Logger extends UpstreamLogger
      * Send the error to the response headers,
      * so we can test it
      */
-    protected function logOwnStream(string $message): void
+    protected function logMessage(string $message): void
     {
-        parent::logOwnStream($message);
+        parent::logMessage($message);
 
         $this->sendCustomHeader($message);
     }

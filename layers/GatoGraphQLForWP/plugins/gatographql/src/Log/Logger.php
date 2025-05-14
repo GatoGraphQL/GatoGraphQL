@@ -46,7 +46,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         if ($this->addSeverityToMessage()) {
             $message = $this->getMessageWithLogSeverity($severity, $message);
         }
-        $this->logOwnStream($message);
+        $this->logMessage($message);
     }
 
     protected function addSeverityToMessage(): bool
@@ -97,7 +97,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
     /**
      * @see https://stackoverflow.com/a/7655379
      */
-    protected function logOwnStream(string $message): void
+    protected function logMessage(string $message): void
     {
         $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
         $hasLogFile = $this->maybeCreateLogFile($logFile);
