@@ -43,10 +43,30 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
+        $this->logMessage($severity, $message);
+    }
+
+    /**
+     * @see https://stackoverflow.com/a/7655379
+     */
+    protected function logMessage(string $severity, string $message): void
+    {
         if ($this->addSeverityToMessage()) {
             $message = $this->getMessageWithLogSeverity($severity, $message);
         }
-        $this->logMessage($message);
+        
+        $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
+        $hasLogFile = $this->maybeCreateLogFile($logFile);
+        if (!$hasLogFile) {
+            return;
+        }
+
+        $date = date('Y-m-d H:i:s');
+        error_log(sprintf(
+            '[%s] %s' . PHP_EOL,
+            $date,
+            $message
+        ), 3, $logFile);
     }
 
     protected function addSeverityToMessage(): bool
@@ -92,25 +112,6 @@ class Logger extends AbstractBasicService implements LoggerInterface
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
             default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
-    }
-
-    /**
-     * @see https://stackoverflow.com/a/7655379
-     */
-    protected function logMessage(string $message): void
-    {
-        $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
-        $hasLogFile = $this->maybeCreateLogFile($logFile);
-        if (!$hasLogFile) {
-            return;
-        }
-
-        $date = date('Y-m-d H:i:s');
-        error_log(sprintf(
-            '[%s] %s' . PHP_EOL,
-            $date,
-            $message
-        ), 3, $logFile);
     }
 
     protected function maybeCreateLogFile(string $filename): bool
