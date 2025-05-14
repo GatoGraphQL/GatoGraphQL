@@ -42,8 +42,15 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        $message = $this->getMessageWithLogSeverity($severity, $message);
+        if ($this->addSeverityToMessage()) {
+            $message = $this->getMessageWithLogSeverity($severity, $message);
+        }
         $this->logOwnStream($message);
+    }
+
+    protected function addSeverityToMessage(): bool
+    {
+        return true;
     }
 
     protected function getMessageWithLogSeverity(string $severity, string $message): string
