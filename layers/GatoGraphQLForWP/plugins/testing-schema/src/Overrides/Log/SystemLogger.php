@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
-use GatoGraphQL\GatoGraphQL\Log\Logger as UpstreamLogger;
+use GatoGraphQL\GatoGraphQL\Log\SystemLogger as UpstreamSystemLogger;
 use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
-class Logger extends UpstreamLogger
+class SystemLogger extends UpstreamSystemLogger
 {
     /**
      * Send the error to the response headers,
      * so we can test it
      */
-    protected function logOwnStream(string $message): void
+    public function log(string $message): void
     {
-        parent::logOwnStream($message);
+        parent::log($message);
 
         header(sprintf(
             '%s: %s',
-            CustomHeaders::GATOGRAPHQL_INFO,
+            CustomHeaders::GATOGRAPHQL_ERRORS,
             str_replace(PHP_EOL, '\n', $message)
         ));
     }

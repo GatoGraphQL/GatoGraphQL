@@ -6,3 +6,6 @@ services:
 
     GatoGraphQL\GatoGraphQL\Log\LoggerInterface:
         class: \GatoGraphQL\TestingSchema\Overrides\Log\Logger
+
+    GatoGraphQL\GatoGraphQL\Log\SystemLoggerInterface:
+        class: \GatoGraphQL\TestingSchema\Overrides\Log\SystemLogger
