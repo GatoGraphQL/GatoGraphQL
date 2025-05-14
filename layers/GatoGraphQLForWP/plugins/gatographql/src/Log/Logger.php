@@ -13,6 +13,8 @@ use InvalidArgumentException;
 use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
 
+use function error_log;
+
 class Logger extends AbstractBasicService implements LoggerInterface
 {
     private ?SystemLoggerInterface $systemLogger = null;
@@ -68,7 +70,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         }
 
         $date = date('Y-m-d H:i:s');
-        \error_log(sprintf(
+        error_log(sprintf(
             '[%s] %s' . PHP_EOL,
             $date,
             $message
