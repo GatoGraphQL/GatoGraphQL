@@ -60,7 +60,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
             throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
         }
 
-        $padLength = strlen(LoggerSeverity::SUCCESS);
+        $padLength = max(array_map('strlen', LoggerSeverity::ALL));
 
         if (!$this->addLoggerSignToMessage($severity, $message)) {
             return sprintf(
