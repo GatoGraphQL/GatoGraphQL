@@ -60,10 +60,12 @@ class Logger extends AbstractBasicService implements LoggerInterface
             throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
         }
 
+        $padLength = strlen(LoggerSeverity::SUCCESS);
+
         if (!$this->addLoggerSignToMessage($severity, $message)) {
             return sprintf(
                 \__('%s %s', 'gatographql'),
-                str_pad($severity, 10),
+                str_pad($severity, $padLength),
                 $message,
             );
         }
@@ -71,7 +73,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         return sprintf(
             \__('%s %s %s', 'gatographql'),
             $this->getLoggerSeveritySign($severity),
-            str_pad($severity, 10),
+            str_pad($severity, $padLength),
             $message,
         );
     }
