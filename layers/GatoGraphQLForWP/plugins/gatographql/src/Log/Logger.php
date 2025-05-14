@@ -46,10 +46,14 @@ class Logger extends AbstractBasicService implements LoggerInterface
         $this->logOwnStream($message);
     }
 
-    public function addLogSeverityToMessage(string $severity, string $message): string
+    protected function addLogSeverityToMessage(string $severity, string $message): string
     {
         if (!in_array($severity, LoggerSeverity::ALL)) {
             throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
+        }
+
+        if (!$this->addLoggerSignToMessage($severity, $message)) {
+            return $message;
         }
 
         $sign = match ($severity) {
@@ -63,6 +67,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
             $sign,
             $message,
         );
+    }
+
+    protected function addLoggerSignToMessage(): bool
+    {
+        return true;
     }
 
     /**
