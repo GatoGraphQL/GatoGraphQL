@@ -8,3 +8,7 @@
 ## Added
 
 - Enable logs by severity in the Settings ([#3095](https://github.com/GatoGraphQL/GatoGraphQL/pull/3095))
+
+### Improvements
+
+- Print the severity (`SUCCESS`/`INFO`/`WARNING`/`ERROR`) in the logs ([#3099](https://github.com/GatoGraphQL/GatoGraphQL/pull/3099))
