@@ -60,15 +60,9 @@ class Logger extends AbstractBasicService implements LoggerInterface
             );
         }
 
-        $sign = match ($severity) {
-            LoggerSeverity::ERROR => LoggerSigns::ERROR,
-            LoggerSeverity::INFO => LoggerSigns::INFO,
-            LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
-            LoggerSeverity::WARNING => LoggerSigns::WARNING,
-        };
         return sprintf(
             \__('%s %s %s', 'gatographql'),
-            $sign,
+            $this->getLoggerSeveritySign($severity),
             $severity,
             $message,
         );
@@ -77,6 +71,17 @@ class Logger extends AbstractBasicService implements LoggerInterface
     protected function addLoggerSignToMessage(): bool
     {
         return true;
+    }
+
+    protected function getLoggerSeveritySign(string $severity): string
+    {
+        return match ($severity) {
+            LoggerSeverity::ERROR => LoggerSigns::ERROR,
+            LoggerSeverity::INFO => LoggerSigns::INFO,
+            LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
+            LoggerSeverity::WARNING => LoggerSigns::WARNING,
+            default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
+        };
     }
 
     /**
