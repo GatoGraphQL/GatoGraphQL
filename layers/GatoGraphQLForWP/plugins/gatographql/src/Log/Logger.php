@@ -8,13 +8,27 @@ use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use InvalidArgumentException;
 use PoP\ComponentModel\App;
+use PoP\Root\Services\AbstractBasicService;
 
-class Logger implements LoggerInterface
+use function error_log;
+
+class Logger extends AbstractBasicService implements LoggerInterface
 {
+    private ?SystemLoggerInterface $systemLogger = null;
+
+    final protected function getSystemLogger(): SystemLoggerInterface
+    {
+        if ($this->systemLogger === null) {
+            /** @var SystemLoggerInterface */
+            $systemLogger = $this->instanceManager->getInstance(SystemLoggerInterface::class);
+            $this->systemLogger = $systemLogger;
+        }
+        return $this->systemLogger;
+    }
+
     public function log(string $severity, string $message): void
     {
         // Check if the Log is enabled, via the Settings
@@ -35,22 +49,12 @@ class Logger implements LoggerInterface
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
             default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
-        $this->logOwnStream(
-            sprintf(
-                \__('%s %s', 'gatographql'),
-                $sign,
-                $message,
-            )
+        $message = sprintf(
+            \__('%s %s', 'gatographql'),
+            $sign,
+            $message,
         );
-    }
-
-    public function logSystemError(string $message): void
-    {
-        \error_log(sprintf(
-            LoggerSigns::ERROR . ' [%s] %s',
-            PluginApp::getMainPlugin()->getPluginName(),
-            $message
-        ));
+        $this->logOwnStream($message);
     }
 
     /**
@@ -65,7 +69,7 @@ class Logger implements LoggerInterface
         }
 
         $date = date('Y-m-d H:i:s');
-        \error_log(sprintf(
+        error_log(sprintf(
             '[%s] %s' . PHP_EOL,
             $date,
             $message
@@ -80,13 +84,13 @@ class Logger implements LoggerInterface
 
         $dir = \dirname($filename);
         if (!is_dir($dir) && @mkdir($dir, 0777, true) === false) {
-            $this->logSystemError('Can\'t create directory to store log files, under path ' . $dir);
+            $this->getSystemLogger()->log('Can\'t create directory to store log files, under path ' . $dir);
             return false;
         }
 
         $handle = fopen($filename, "w");
         if ($handle === false) {
-            $this->logSystemError('Can\'t create log file under path ' . $filename);
+            $this->getSystemLogger()->log('Can\'t create log file under path ' . $filename);
             return false;
         }
         fclose($handle);
