@@ -14,6 +14,7 @@ use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
 
 use function error_log;
+use function str_pad;
 
 class Logger extends AbstractBasicService implements LoggerInterface
 {
@@ -62,7 +63,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         if (!$this->addLoggerSignToMessage($severity, $message)) {
             return sprintf(
                 \__('%s %s', 'gatographql'),
-                $severity,
+                str_pad($severity, 10),
                 $message,
             );
         }
@@ -70,7 +71,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         return sprintf(
             \__('%s %s %s', 'gatographql'),
             $this->getLoggerSeveritySign($severity),
-            $severity,
+            str_pad($severity, 10),
             $message,
         );
     }
