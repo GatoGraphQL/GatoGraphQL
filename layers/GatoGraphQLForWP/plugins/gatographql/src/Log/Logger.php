@@ -42,11 +42,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        $message = $this->addLogSeverityToMessage($severity, $message);
+        $message = $this->getMessageWithLogSeverity($severity, $message);
         $this->logOwnStream($message);
     }
 
-    protected function addLogSeverityToMessage(string $severity, string $message): string
+    protected function getMessageWithLogSeverity(string $severity, string $message): string
     {
         if (!in_array($severity, LoggerSeverity::ALL)) {
             throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
