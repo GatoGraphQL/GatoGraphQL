@@ -61,7 +61,10 @@ class Logger extends AbstractBasicService implements LoggerInterface
             $message = $this->getMessageWithLogSeverity($severity, $message);
         }
         
-        $date = date('Y-m-d H:i:s');
+        /**
+         * Use an ISO 8601 date string in local (WordPress) timezone.
+         */
+        $date = date(DATE_ATOM);
         error_log(sprintf(
             '[%s] %s' . PHP_EOL,
             $date,
