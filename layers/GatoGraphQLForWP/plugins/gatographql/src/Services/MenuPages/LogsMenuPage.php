@@ -597,7 +597,7 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 			$segments[1] = sprintf(
 				'<span class="%1$s">%2$s</span>',
 				esc_attr( 'log-level log-level--' . strtolower( $segments[1] ) ),
-				esc_html( $segments[1])
+				esc_html( ucwords(strtolower($segments[1])))
 			);
 			$has_level   = true;
 		}
