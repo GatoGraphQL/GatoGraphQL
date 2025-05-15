@@ -68,7 +68,6 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 					return;
 				}
 
-				// @todo Fix this
 				$this->file_controller = new FileController();
 
 				$params = $this->get_query_params( array( 'view' ) );
