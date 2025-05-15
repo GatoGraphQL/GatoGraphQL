@@ -110,8 +110,7 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 	public function get_logs_tab_url(): string {
 		return add_query_arg(
 			array(
-				'page' => 'wc-status',
-				'tab'  => 'logs',
+				'page' => $this->getScreenID(),
 			),
 			admin_url( 'admin.php' )
 		);
