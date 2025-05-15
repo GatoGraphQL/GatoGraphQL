@@ -9,5 +9,5 @@ class LoggerSigns
     public final const ERROR = '🔴';
     public final const WARNING = '🟡';
     public final const INFO = '🔵';
-    public final const SUCCESS = '🟢';
+    public final const DEBUG = '🟢';
 }

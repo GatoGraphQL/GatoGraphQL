@@ -131,7 +131,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     LoggerSeverity::ERROR => true,
                     LoggerSeverity::WARNING => true,
                     LoggerSeverity::INFO => true,
-                    LoggerSeverity::SUCCESS => true,
+                    LoggerSeverity::DEBUG => true,
                 ],
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
@@ -208,7 +208,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
                     LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
                     LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
-                    LoggerSeverity::SUCCESS => sprintf($placeholder, LoggerSigns::SUCCESS, \__('Success', 'gatographql')),
+                    LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
                 ];
 
                 $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;

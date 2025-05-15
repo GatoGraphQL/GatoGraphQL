@@ -9,7 +9,7 @@ class LoggerSeverity
     public final const ERROR = 'ERROR';
     public final const WARNING = 'WARNING';
     public final const INFO = 'INFO';
-    public final const SUCCESS = 'SUCCESS';
+    public final const DEBUG = 'DEBUG';
 
     /**
      * @return string[]
@@ -18,6 +18,6 @@ class LoggerSeverity
         self::ERROR,
         self::WARNING,
         self::INFO,
-        self::SUCCESS,
+        self::DEBUG,
     ];
 }

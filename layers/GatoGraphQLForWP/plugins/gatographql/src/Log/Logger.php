@@ -110,9 +110,9 @@ class Logger extends AbstractBasicService implements LoggerInterface
     {
         return match ($severity) {
             LoggerSeverity::ERROR => LoggerSigns::ERROR,
-            LoggerSeverity::INFO => LoggerSigns::INFO,
-            LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
+            LoggerSeverity::INFO => LoggerSigns::INFO,
+            LoggerSeverity::DEBUG => LoggerSigns::DEBUG,
             default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
     }
