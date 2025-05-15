@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Log;
 
+use DateTimeInterface;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -11,8 +12,8 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use InvalidArgumentException;
 use PoP\ComponentModel\App;
-use PoP\Root\Services\AbstractBasicService;
 
+use PoP\Root\Services\AbstractBasicService;
 use function error_log;
 use function str_pad;
 
@@ -64,7 +65,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         /**
          * Use an ISO 8601 date string in local (WordPress) timezone.
          */
-        $date = date(DATE_ATOM);
+        $date = date(DateTimeInterface::ATOM);
         error_log(sprintf(
             '[%s] %s' . PHP_EOL,
             $date,
