@@ -4,12 +4,13 @@ declare( strict_types=1 );
 namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs;
 
 use Automattic\Jetpack\Constants;
-use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\File;
-use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\LogHandlerFileV2;
-use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\FileController;
 use Automattic\WooCommerce\Internal\Utilities\FilesystemUtil;
 use Automattic\WooCommerce\Proxies\LegacyProxy;
 use Exception;
+use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\File;
+use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\FileController;
+use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\LogHandlerFileV2;
+use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use WC_Admin_Settings;
 use WC_Log_Handler_DB, WC_Log_Handler_File, WC_Log_Levels;
 use WP_Filesystem_Direct;
@@ -56,21 +57,7 @@ class Settings {
 	 * @return string The full directory path, with trailing slash.
 	 */
 	public static function get_log_directory( bool $create_dir = true ): string {
-		if ( true === Constants::get_constant( 'WC_LOG_DIR_CUSTOM' ) ) {
-			$dir = Constants::get_constant( 'WC_LOG_DIR' );
-		} else {
-			$upload_dir = wc_get_container()->get( LegacyProxy::class )->call_function( 'wp_upload_dir', null, $create_dir );
-
-			/**
-			 * Filter to change the directory for storing WooCommerce's log files.
-			 *
-			 * @param string $dir The full directory path, with trailing slash.
-			 *
-			 * @since 8.8.0
-			 */
-			$dir = apply_filters( 'woocommerce_log_directory', $upload_dir['basedir'] . '/wc-logs/' );
-		}
-
+		$dir = PluginEnvironment::getLogsDir();
 		$dir = trailingslashit( $dir );
 
 		if ( true === $create_dir ) {
