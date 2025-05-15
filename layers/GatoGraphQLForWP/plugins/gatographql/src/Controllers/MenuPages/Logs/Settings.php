@@ -4,7 +4,7 @@ declare( strict_types=1 );
 namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs;
 
 use Automattic\Jetpack\Constants;
-use Automattic\WooCommerce\Internal\Utilities\FilesystemUtil;
+use GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities\FilesystemUtil;
 use Automattic\WooCommerce\Proxies\LegacyProxy;
 use Exception;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\File;
