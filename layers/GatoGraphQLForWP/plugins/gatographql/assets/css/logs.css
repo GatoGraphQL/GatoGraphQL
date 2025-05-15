@@ -66,6 +66,8 @@
     word-wrap: break-word;
     line-height: 2.3;
     counter-reset: line;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 .wc-logs-entries .line {
     display: block;
@@ -110,10 +112,11 @@
 }
 .wc-logs-entries .line-content {
     display: block;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 0 1em;
     border-left: 1px solid #c3c4c7;
     background: #fff;
+    white-space: nowrap;
 }
 .wc-logs-entries .log-timestamp {
     font-weight: 700;
