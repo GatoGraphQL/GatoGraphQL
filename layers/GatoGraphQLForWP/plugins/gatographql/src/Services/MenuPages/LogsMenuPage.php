@@ -52,6 +52,31 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
         return parent::isServiceEnabled();
     }
 
+    /**
+     * Initialize the class instance
+     */
+    public function initialize(): void
+    {
+        parent::initialize();
+
+		\add_action(
+			'admin_enqueue_scripts',
+			function(): void {
+				if (!$this->isCurrentScreen()) {
+					return;
+				}
+
+				// @todo Fix this
+				$this->file_controller = new FileController();
+
+				$params = $this->get_query_params( array( 'view' ) );
+
+				$this->setup_screen_options($params['view']);
+				$this->handle_list_table_bulk_actions($params['view']);
+			}
+		);
+    }
+
     public function getMenuPageSlug(): string
     {
         return 'logs';
@@ -69,9 +94,6 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
      */
     public function print(): void
     {
-        // @todo Fix this
-        $this->file_controller = new FileController();
-
         ?>
         <div class="wrap woocommerce">
             <h1 class="screen-reader-text"><?php _e( 'Logs', 'gatographql' ); ?></h1>
