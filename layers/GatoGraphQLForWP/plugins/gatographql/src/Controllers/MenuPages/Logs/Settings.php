@@ -65,16 +65,17 @@ class Settings {
 			if ( false === $realpath ) {
 				$result = wp_mkdir_p( $dir );
 
-				if ( true === $result ) {
-					// Create infrastructure to prevent listing contents of the logs directory.
-					try {
-						$filesystem = FilesystemUtil::get_wp_filesystem();
-						$filesystem->put_contents( $dir . '.htaccess', 'deny from all' );
-						$filesystem->put_contents( $dir . 'index.html', '' );
-					} catch ( Exception $exception ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-						// Creation failed.
-					}
-				}
+				// @todo Check this code and uncomment/do something with it.
+				// if ( true === $result ) {
+				// 	// Create infrastructure to prevent listing contents of the logs directory.
+				// 	try {
+				// 		$filesystem = FilesystemUtil::get_wp_filesystem();
+				// 		$filesystem->put_contents( $dir . '.htaccess', 'deny from all' );
+				// 		$filesystem->put_contents( $dir . 'index.html', '' );
+				// 	} catch ( Exception $exception ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+				// 		// Creation failed.
+				// 	}
+				// }
 			}
 		}
 
