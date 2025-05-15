@@ -82,7 +82,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
 
         $padLength = max(array_map('strlen', LoggerSeverity::ALL));
 
-        if (!$this->addLoggerSignToMessage($severity, $message)) {
+        if (!$this->addLoggerSignToMessage()) {
             return sprintf(
                 \__('%s %s', 'gatographql'),
                 str_pad($severity, $padLength),
