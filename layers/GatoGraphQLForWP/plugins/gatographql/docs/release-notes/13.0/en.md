@@ -8,6 +8,7 @@
 ## Added
 
 - Enable logs by severity in the Settings ([#3095](https://github.com/GatoGraphQL/GatoGraphQL/pull/3095))
+- Add Logs page to the menu, to browse the logs ([#3100](https://github.com/GatoGraphQL/GatoGraphQL/pull/3100))
 
 ### Improvements
 
