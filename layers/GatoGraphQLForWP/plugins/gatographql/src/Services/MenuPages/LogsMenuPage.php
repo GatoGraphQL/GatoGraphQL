@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\{ File, FileController, FileListTable, SearchListTable };
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\PageController;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\Settings;
@@ -591,11 +592,11 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 			$has_timestamp = true;
 		}
 
-		if ( isset( $segments[1] )/* && WC_Log_Levels::is_valid_level( strtolower( $segments[1] ) ) */) {
+		if ( isset( $segments[1] ) && in_array($segments[1], LoggerSeverity::ALL) ) {
 			$segments[1] = sprintf(
 				'<span class="%1$s">%2$s</span>',
 				esc_attr( 'log-level log-level--' . strtolower( $segments[1] ) ),
-				'@todo Fix here!!!' /*esc_html( WC_Log_Levels::get_level_label( strtolower( $segments[1] ) ) )*/
+				esc_html( $segments[1])
 			);
 			$has_level   = true;
 		}
