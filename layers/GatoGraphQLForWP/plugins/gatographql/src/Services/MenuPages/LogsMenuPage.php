@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\PageController;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\Settings;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\ComponentModel\App;
 use WP_List_Table;
@@ -704,5 +705,25 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 			<?php
 		}
 	}
+
+    /**
+     * Enqueue the required assets and initialize the localized scripts
+     */
+    protected function enqueueAssets(): void
+    {
+        parent::enqueueAssets();
+
+        $mainPlugin = PluginApp::getMainPlugin();
+        $mainPluginURL = $mainPlugin->getPluginURL();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
+
+        // CSS
+        \wp_enqueue_style(
+            'gatographql-logs',
+            $mainPluginURL . 'assets/css/logs.css',
+            array(),
+            $mainPluginVersion
+        );
+    }
         
 }
