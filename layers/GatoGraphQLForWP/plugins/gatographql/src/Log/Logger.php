@@ -67,7 +67,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
          */
         $date = date(DateTimeInterface::ATOM);
         error_log(sprintf(
-            '[%s] %s' . PHP_EOL,
+            '%s %s' . PHP_EOL,
             $date,
             $message
         ), 3, $logFile);
