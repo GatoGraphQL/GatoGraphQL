@@ -183,7 +183,8 @@
 }
 .log-level--critical,
 .log-level--error {
-    border-color: #ff851b;
+    /* border-color: #ff851b; */
+    border-color: #ff4136;
 }
 .log-level--notice,
 .log-level--warning {
