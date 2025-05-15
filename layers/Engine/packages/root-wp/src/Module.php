@@ -99,7 +99,9 @@ class Module extends AbstractModule
          *     "brain/cortex": "1.0.0-alpha.9"
          *   }
          *   ```
+         *
+         * @todo: Uncomment this line below if decide to use Cortex again
          */
-        Cortex::boot();
+        // Cortex::boot();
     }
 }
