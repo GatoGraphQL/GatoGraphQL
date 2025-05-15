@@ -88,6 +88,7 @@
     left: 0;
     background: #f6f7f7;
     z-index: 2;
+    border-right: 1px solid #c3c4c7;
 }
 .wc-logs-entries .line:target {
     box-shadow: 0 0.16em 0.16em -0.16em #c3c4c7,
@@ -120,7 +121,6 @@
 .wc-logs-entries .line-content {
     display: block;
     padding: 0 1em;
-    border-left: 1px solid #c3c4c7;
     background: #fff;
     white-space: nowrap;
     margin-left: 4.5em;
