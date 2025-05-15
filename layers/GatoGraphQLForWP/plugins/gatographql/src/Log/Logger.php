@@ -100,7 +100,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
 
     protected function addLoggerSignToMessage(): bool
     {
-        return true;
+        return false;
     }
 
     protected function getLoggerSeveritySign(string $severity): string
