@@ -23,13 +23,6 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 	private $file_controller;
 
 	/**
-	 * Instance of Settings.
-	 *
-	 * @var Settings
-	 */
-	private $settings;
-
-	/**
 	 * Instance of FileListTable or SearchListTable.
 	 *
 	 * @var FileListTable|SearchListTable
@@ -78,7 +71,6 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
     {
         // @todo Fix this
         $this->file_controller = new FileController();
-		$this->settings        = new Settings();
 
         ?>
         <div class="wrap woocommerce">
@@ -432,19 +424,11 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 	 * @internal For exclusive usage of WooCommerce core, backwards compatibility not guaranteed.
 	 */
 	public function setup_screen_options( string $view ): void {
-		$handler    = $this->settings->get_default_handler();
 		$list_table = null;
 
-		// switch ( $handler ) {
-		// 	case LogHandlerFileV2::class:
-				if ( in_array( $view, array( 'list_files', 'search_results' ), true ) ) {
-					$list_table = $this->get_list_table( $view );
-				}
-				// break;
-			// case 'WC_Log_Handler_DB':
-			// 		$list_table = WC_Admin_Status::get_db_log_list_table();
-			// 	break;
-		// }
+		if ( in_array( $view, array( 'list_files', 'search_results' ), true ) ) {
+			$list_table = $this->get_list_table( $view );
+		}
 
 		if ( $list_table instanceof WP_List_Table ) {
 			// Ensure list table columns are initialized early enough to enable column hiding, if available.
@@ -470,11 +454,6 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 	 * @internal For exclusive usage of WooCommerce core, backwards compatibility not guaranteed.
 	 */
 	public function handle_list_table_bulk_actions( string $view ): void {
-		// // Bail if we're not using the file handler.
-		// if ( LogHandlerFileV2::class !== $this->settings->get_default_handler() ) {
-		// 	return;
-		// }
-
 		$params = $this->get_query_params( array( 'file_id' ) );
 
 		// Bail if this is not the list table view.
