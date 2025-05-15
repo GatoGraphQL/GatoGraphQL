@@ -46,7 +46,7 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableLogs()) {
+        if (!$moduleConfiguration->enableLogs() || !$moduleConfiguration->displayEnableLogsSettingsOption()) {
             return false;
         }
         return parent::isServiceEnabled();
