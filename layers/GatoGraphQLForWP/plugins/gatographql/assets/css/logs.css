@@ -68,6 +68,7 @@
     counter-reset: line;
     overflow-x: auto;
     white-space: nowrap;
+    position: relative;
 }
 .wc-logs-entries .line {
     display: block;
@@ -83,6 +84,10 @@
     padding: 0 1em 0 0.5em;
     width: 3em;
     text-align: right;
+    position: sticky;
+    left: 0;
+    background: #f6f7f7;
+    z-index: 2;
 }
 .wc-logs-entries .line:target {
     box-shadow: 0 0.16em 0.16em -0.16em #c3c4c7,
@@ -109,14 +114,16 @@
     display: block;
     height: 100%;
     width: 4.5em;
+    z-index: 3;
+    left: 0;
 }
 .wc-logs-entries .line-content {
     display: block;
-    /* overflow: hidden; */
     padding: 0 1em;
     border-left: 1px solid #c3c4c7;
     background: #fff;
     white-space: nowrap;
+    margin-left: 4.5em;
 }
 .wc-logs-entries .log-timestamp {
     font-weight: 700;
