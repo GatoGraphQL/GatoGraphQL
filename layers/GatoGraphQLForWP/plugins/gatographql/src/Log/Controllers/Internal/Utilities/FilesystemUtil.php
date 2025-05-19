@@ -3,10 +3,10 @@ declare( strict_types = 1 );
 
 namespace GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Utilities;
 
-use Automattic\Jetpack\Constants;
-use Automattic\WooCommerce\Proxies\LegacyProxy;
 use Exception;
 use WP_Filesystem_Base;
+
+use function get_filesystem_method;
 
 /**
  * FilesystemUtil class.
@@ -38,15 +38,12 @@ class FilesystemUtil {
 	 * @return string|false The name of the WP filesystem method to use.
 	 */
 	public static function get_wp_filesystem_method_or_direct() {
-		// $proxy = wc_get_container()->get( LegacyProxy::class );
-		// if ( ! self::constant_exists( 'FS_METHOD' ) && false === $proxy->call_function( 'get_option', 'ftp_credentials' ) && ! self::constant_exists( 'FTP_HOST' ) ) {
-		// 	return 'direct';
-		// }
-
-		// $method = $proxy->call_function( 'get_filesystem_method' );
-		// if ( $method ) {
-		// 	return $method;
-		// }
+		if (function_exists( 'get_filesystem_method' )) {
+			$method = get_filesystem_method();
+			if ( $method ) {
+				return $method;
+			}
+		}
 
 		return 'direct';
 	}
