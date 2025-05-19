@@ -5,6 +5,7 @@ namespace GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler;
 
 use GatoGraphQL\GatoGraphQL\Log\Controllers\PageController;
 
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_List_Table;
 
 /**
@@ -16,7 +17,7 @@ class FileListTable extends WP_List_Table {
 	 *
 	 * @const string
 	 */
-	public const PER_PAGE_USER_OPTION_KEY = 'woocommerce_logging_file_list_per_page';
+	public const PER_PAGE_USER_OPTION_KEY = 'logging_file_list_per_page';
 
 	/**
 	 * Instance of FileController.
@@ -338,6 +339,7 @@ class FileListTable extends WP_List_Table {
 	 * @return string
 	 */
 	public function getPerPageUserOptionKey(): string {
-		return self::PER_PAGE_USER_OPTION_KEY;
+		$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
+		return $pluginNamespace . '_' . self::PER_PAGE_USER_OPTION_KEY;
 	}
 }
