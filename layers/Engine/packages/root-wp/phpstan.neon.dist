@@ -16,6 +16,6 @@ parameters:
 		- 
 			message: '#Instantiated class Brain\\Cortex\\Route\\QueryRoute not found\.#'
 			path: src/Hooks/SetupCortexRoutingHookSet.php
-		- 
-			message: '#Call to static method boot\(\) on an unknown class Brain\\Cortex\.#'
-			path: src/Module.php
+#		- 
+#			message: '#Call to static method boot\(\) on an unknown class Brain\\Cortex\.#'
+#			path: src/Module.php
