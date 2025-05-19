@@ -7,7 +7,6 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
-use GatoGraphQL\GatoGraphQL\Log\LoggerSources;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -183,11 +182,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 $moduleConfiguration->displayEnableLogsSettingsOption()
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
-                $logFile = PluginEnvironment::getLogsFilePath(LoggerSources::INFO);
-                $relativeLogFile = str_replace(
+                $logFolder = PluginEnvironment::getLogsDir();
+                $relativeLogFolder = str_replace(
                     constant('ABSPATH'),
                     '',
-                    $logFile
+                    $logFolder
                 );
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -197,8 +196,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     ),
                     Properties::TITLE => \__('Enable logs?', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Enable storing GraphQL execution logs, under file <code>%s</code>', 'gatographql'),
-                        $relativeLogFile
+                        \__('Enable storing GraphQL execution logs, under folder <code>%s</code>', 'gatographql'),
+                        $relativeLogFolder
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
