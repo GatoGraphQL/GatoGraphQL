@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2;
 
 use GatoGraphQL\GatoGraphQL\Controllers\Internal\Caching\CacheHelper;
-use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\Settings;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use PclZip;
 use WP_Error;
