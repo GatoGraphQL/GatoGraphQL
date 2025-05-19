@@ -5,14 +5,13 @@ namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs;
 
 use Automattic\Jetpack\Constants;
 use GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities\FilesystemUtil;
-use Automattic\WooCommerce\Proxies\LegacyProxy;
 use Exception;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\File;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\FileController;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\LogHandlerFileV2;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use WC_Admin_Settings;
-use WC_Log_Handler_DB, WC_Log_Handler_File, WC_Log_Levels;
+use WC_Log_Handler_File, WC_Log_Levels;
 use WP_Filesystem_Direct;
 
 /**
@@ -119,8 +118,6 @@ class Settings {
 			$default_handler = $this->get_default_handler();
 			if ( in_array( $default_handler, array( LogHandlerFileV2::class, WC_Log_Handler_File::class ), true ) ) {
 				$settings += $this->get_filesystem_settings_definitions();
-			} elseif ( WC_Log_Handler_DB::class === $default_handler ) {
-				$settings += $this->get_database_settings_definitions();
 			}
 		}
 
@@ -135,7 +132,6 @@ class Settings {
 	private function get_default_handler_setting_definition(): array {
 		$handler_options = array(
 			LogHandlerFileV2::class  => __( 'File system (default)', 'woocommerce' ),
-			WC_Log_Handler_DB::class => __( 'Database (not recommended on live sites)', 'woocommerce' ),
 		);
 
 		/**
