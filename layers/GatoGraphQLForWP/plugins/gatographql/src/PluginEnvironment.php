@@ -73,8 +73,8 @@ class PluginEnvironment
         return static::getGatoGraphQLDynamicFileStorageDir() . \DIRECTORY_SEPARATOR . 'logs';
     }
 
-    public static function getLogsFilePath(string $filename): string
+    public static function getLogsFilePath(string $filename, ?string $extension = 'log'): string
     {
-        return static::getLogsDir() . \DIRECTORY_SEPARATOR . $filename;
+        return static::getLogsDir() . \DIRECTORY_SEPARATOR . $filename . ($extension !== null ? '.' . $extension : '');
     }
 }
