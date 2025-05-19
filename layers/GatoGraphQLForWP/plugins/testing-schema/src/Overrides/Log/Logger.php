@@ -25,7 +25,7 @@ class Logger extends UpstreamLogger
         parent::logMessage($severity, $message, $loggerSource);
 
         $this->sendCustomHeader(
-            $message, 
+            $message,
             $severity === LoggerSeverity::ERROR
                 ? CustomHeaders::GATOGRAPHQL_ERRORS
                 : CustomHeaders::GATOGRAPHQL_INFO,

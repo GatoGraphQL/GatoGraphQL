@@ -12,9 +12,9 @@ use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use InvalidArgumentException;
-
 use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
+
 use function error_log;
 use function str_pad;
 
@@ -68,7 +68,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         if ($this->addSeverityToMessage()) {
             $message = $this->getMessageWithLogSeverity($severity, $message);
         }
-        
+
         /**
          * Use an ISO 8601 date string in local (WordPress) timezone.
          */
@@ -81,17 +81,18 @@ class Logger extends AbstractBasicService implements LoggerInterface
     }
 
     /**
-	 * Generate the full name of a file based on source and date values.
-	 *
-	 * @param string $loggerSource The source property of a log entry, which determines the filename.
-	 * @param int    $time   The time of the log entry as a Unix timestamp.
-	 */
-	private function generateLogFilename(string $loggerSource, int $time): string {
-		$file_id = File::generate_file_id($loggerSource, null, $time);
-		$hash = File::generate_hash($file_id);
+     * Generate the full name of a file based on source and date values.
+     *
+     * @param string $loggerSource The source property of a log entry, which determines the filename.
+     * @param int    $time   The time of the log entry as a Unix timestamp.
+     */
+    private function generateLogFilename(string $loggerSource, int $time): string
+    {
+        $file_id = File::generate_file_id($loggerSource, null, $time);
+        $hash = File::generate_hash($file_id);
 
-		return "$file_id-$hash.log";
-	}
+        return "$file_id-$hash.log";
+    }
 
     protected function addSeverityToMessage(): bool
     {

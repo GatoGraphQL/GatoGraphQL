@@ -2,6 +2,7 @@
 
 namespace GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Caching;
 
-class CacheHelper {
-	use CacheNameSpaceTrait;
+class CacheHelper
+{
+    use CacheNameSpaceTrait;
 }

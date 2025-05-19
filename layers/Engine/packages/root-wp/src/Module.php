@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\RootWP;
 
-use Brain\Cortex;
 use PoP\Root\App;
 use PoP\Root\Environment;
 use PoP\Root\Module as RootModule;

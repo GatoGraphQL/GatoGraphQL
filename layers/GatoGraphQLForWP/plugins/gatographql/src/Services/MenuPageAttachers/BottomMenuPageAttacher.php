@@ -24,8 +24,8 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
-
 use PoP\Root\App;
+
 use function add_submenu_page;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
