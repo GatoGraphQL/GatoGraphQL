@@ -196,8 +196,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     ),
                     Properties::TITLE => \__('Enable logs?', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Enable storing GraphQL execution logs, under folder <code>%s</code>', 'gatographql'),
-                        $relativeLogFolder
+                        \__('Enable storing GraphQL execution logs (under folder <code>%s</code>), accessible via the <strong>%s</strong> menu', 'gatographql'),
+                        $relativeLogFolder,
+                        \__('Logs', 'gatographql')
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
