@@ -13,8 +13,12 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
 use PoP\ComponentModel\App;
+
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_List_Table;
+use function get_plugin_page_hook;
 
 /**
  * This file is based on WooCommerce.
@@ -73,21 +77,25 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     {
         parent::initialize();
 
-        \add_action(
-            'admin_enqueue_scripts',
-            function (): void {
-                if (!$this->isCurrentScreen()) {
-                    return;
-                }
+		add_action('admin_init', function() {
 
-                $this->file_controller = new FileController();
+			$pageHook = get_plugin_page_hook($this->getScreenID(), 'admin.php');
+			\add_action(
+				"load-{$pageHook}",
+				function (): void {
+					if (!$this->isCurrentScreen()) {
+					    return;
+					}
 
-                $params = $this->get_query_params(array( 'view' ));
+					$this->file_controller = new FileController();
 
-                $this->setup_screen_options($params['view']);
-                $this->handle_list_table_bulk_actions($params['view']);
-            }
-        );
+					$params = $this->get_query_params(array( 'view' ));
+
+					$this->setup_screen_options($params['view']);
+					$this->handle_list_table_bulk_actions($params['view']);
+				}
+			);
+		});
     }
 
     public function getMenuPageSlug(): string
