@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
-use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\{ File, FileController, FileListTable, SearchListTable };
+use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileHandler\{ File, FileController, FileListTable, SearchListTable };
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\PageController;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
@@ -343,7 +343,7 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 	}
 
 	/**
-	 * Get the default values for URL query params for FileV2 views.
+	 * Get the default values for URL query params for FileHandler views.
 	 *
 	 * @return string[]
 	 */
@@ -359,7 +359,7 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 	}
 
 	/**
-	 * Get and validate URL query params for FileV2 views.
+	 * Get and validate URL query params for FileHandler views.
 	 *
 	 * @param array $param_keys Optional. The names of the params you want to get.
 	 *
