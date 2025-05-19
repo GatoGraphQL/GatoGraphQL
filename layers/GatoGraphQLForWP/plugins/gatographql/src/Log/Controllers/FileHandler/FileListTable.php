@@ -150,7 +150,7 @@ class FileListTable extends WP_List_Table {
 	 */
 	public function prepare_items(): void {
 		$per_page = $this->get_items_per_page(
-			self::PER_PAGE_USER_OPTION_KEY,
+			$this->getPerPageUserOptionKey(),
 			$this->get_per_page_default()
 		);
 
@@ -330,5 +330,14 @@ class FileListTable extends WP_List_Table {
 	 */
 	public function get_per_page_default(): int {
 		return $this->file_controller::DEFAULTS_GET_FILES['per_page'];
+	}
+
+	/**
+	 * Get the user option key for saving the preferred number of files displayed per page.
+	 *
+	 * @return string
+	 */
+	public function getPerPageUserOptionKey(): string {
+		return self::PER_PAGE_USER_OPTION_KEY;
 	}
 }

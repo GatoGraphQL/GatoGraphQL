@@ -470,7 +470,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 				'per_page',
 				array(
 					'default' => $list_table->get_per_page_default(),
-					'option'  => $list_table::PER_PAGE_USER_OPTION_KEY,
+					'option'  => $list_table->getPerPageUserOptionKey(),
 				)
 			);
 		}
