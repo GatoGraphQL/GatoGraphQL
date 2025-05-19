@@ -6,7 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs;
 use Automattic\Jetpack\Constants;
 use GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities\FilesystemUtil;
 use Exception;
-use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\File;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\FileController;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\LogHandlerFileV2;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
@@ -37,13 +36,6 @@ class Settings {
 	 * @const string
 	 */
 	private const PREFIX = 'woocommerce_logs_';
-
-	/**
-	 * Class Settings.
-	 */
-	public function __construct() {
-		add_action( 'wc_logs_load_tab', array( $this, 'save_settings' ) );
-	}
 
 	/**
 	 * Get the directory for storing log files.
@@ -365,60 +357,6 @@ class Settings {
 				'type' => 'sectionend',
 			),
 		);
-	}
-
-	/**
-	 * Handle the submission of the settings form and update the settings values.
-	 *
-	 * @param string $view The current view within the Logs tab.
-	 *
-	 * @return void
-	 *
-	 * @internal For exclusive usage of WooCommerce core, backwards compatibility not guaranteed.
-	 */
-	public function save_settings( string $view ): void {
-		$is_saving = 'settings' === $view && isset( $_POST['save_settings'] );
-
-		if ( $is_saving ) {
-			check_admin_referer( self::PREFIX . 'settings' );
-
-			if ( ! current_user_can( 'manage_woocommerce' ) ) {
-				wp_die( esc_html__( 'You do not have permission to manage logging settings.', 'woocommerce' ) );
-			}
-
-			$settings = $this->get_settings_definitions();
-
-			WC_Admin_Settings::save_fields( $settings );
-		}
-	}
-
-	/**
-	 * Render the settings page.
-	 *
-	 * @return void
-	 */
-	public function render_form(): void {
-		$settings = $this->get_settings_definitions();
-
-		?>
-		<form id="mainform" class="wc-logs-settings" method="post">
-			<?php WC_Admin_Settings::output_fields( $settings ); ?>
-			<?php
-			/**
-			 * Action fires after the built-in logging settings controls have been rendered.
-			 *
-			 * This is intended as a way to allow other logging settings controls to be added by extensions.
-			 *
-			 * @param bool $enabled True if logging is currently enabled.
-			 *
-			 * @since 8.6.0
-			 */
-			do_action( 'wc_logs_settings_form_fields', $this->logging_is_enabled() );
-			?>
-			<?php wp_nonce_field( self::PREFIX . 'settings' ); ?>
-			<?php submit_button( __( 'Save changes', 'woocommerce' ), 'primary', 'save_settings' ); ?>
-		</form>
-		<?php
 	}
 
 	/**
