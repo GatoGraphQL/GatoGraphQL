@@ -7,4 +7,5 @@ namespace GatoGraphQL\GatoGraphQL\Log;
 class LoggerSources
 {
     public const INFO = 'info';
+    public const QUERY_EXECUTION = 'query-execution';
 }
