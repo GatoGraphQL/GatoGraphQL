@@ -25,7 +25,6 @@ trait CacheNameSpaceTrait {
 	public static function get_cache_prefix( $group ) {
 		$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
 		
-		// Get cache key - uses cache key wc_orders_cache_prefix to invalidate when needed.
 		$prefix = wp_cache_get( "{$pluginNamespace}_" . $group . '_cache_prefix', $group );
 
 		if ( false === $prefix ) {
