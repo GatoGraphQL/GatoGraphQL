@@ -11,6 +11,13 @@ namespace GatoGraphQL\GatoGraphQL\Log\Controllers;
  */
 interface PageController
 {
+	/**
+	 * Get and validate URL query params for FileHandler views.
+	 *
+	 * @param array $param_keys Optional. The names of the params you want to get.
+	 *
+	 * @return array
+	 */
 	public function get_query_params( array $param_keys = array() ): array;
     public function get_logs_tab_url(): string;
 }
