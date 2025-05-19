@@ -43,10 +43,12 @@ class SearchListTable extends WP_List_Table {
 		$this->file_controller = $file_controller;
 		$this->page_controller = $page_controller;
 
+		$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
+
 		parent::__construct(
 			array(
-				'singular' => 'wc-logs-search-result',
-				'plural'   => 'wc-logs-search-results',
+				'singular' => $pluginNamespace . '_logs_search_result',
+				'plural'   => $pluginNamespace . '_logs_search_results',
 				'ajax'     => false,
 			)
 		);
