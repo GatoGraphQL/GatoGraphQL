@@ -2,6 +2,8 @@
 
 namespace GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Caching;
 
+use GatoGraphQL\GatoGraphQL\PluginApp;
+
 /**
  * Implements namespacing algorithm to simulate grouping and namespacing for wp_cache, memcache and other caching engines that don't support grouping natively.
  *
@@ -21,15 +23,17 @@ trait CacheNameSpaceTrait {
 	 * @return string Prefix.
 	 */
 	public static function get_cache_prefix( $group ) {
+		$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
+		
 		// Get cache key - uses cache key wc_orders_cache_prefix to invalidate when needed.
-		$prefix = wp_cache_get( 'wc_' . $group . '_cache_prefix', $group );
+		$prefix = wp_cache_get( "{$pluginNamespace}_" . $group . '_cache_prefix', $group );
 
 		if ( false === $prefix ) {
 			$prefix = microtime();
-			wp_cache_set( 'wc_' . $group . '_cache_prefix', $prefix, $group );
+			wp_cache_set( "{$pluginNamespace}_" . $group . '_cache_prefix', $prefix, $group );
 		}
 
-		return 'wc_cache_' . $prefix . '_';
+		return "{$pluginNamespace}_cache_" . $prefix . '_';
 	}
 
 	/**
@@ -39,7 +43,8 @@ trait CacheNameSpaceTrait {
 	 * @since 3.9.0
 	 */
 	public static function invalidate_cache_group( $group ) {
-		return wp_cache_set( 'wc_' . $group . '_cache_prefix', microtime(), $group );
+		$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
+		return wp_cache_set( "{$pluginNamespace}_" . $group . '_cache_prefix', microtime(), $group );
 	}
 
 	/**
