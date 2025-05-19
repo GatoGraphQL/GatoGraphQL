@@ -7,11 +7,11 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2\{ File, FileController, FileListTable, SearchListTable };
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\PageController;
-use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\Settings;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use PoP\ComponentModel\App;
 use WP_List_Table;
 
@@ -33,6 +33,7 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?UserAuthorizationInterface $userAuthorization = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
@@ -42,6 +43,15 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
+    }
+    final protected function getUserAuthorization(): UserAuthorizationInterface
+    {
+        if ($this->userAuthorization === null) {
+            /** @var UserAuthorizationInterface */
+            $userAuthorization = $this->instanceManager->getInstance(UserAuthorizationInterface::class);
+            $this->userAuthorization = $userAuthorization;
+        }
+        return $this->userAuthorization;
     }
 
     public function isServiceEnabled(): bool
@@ -491,7 +501,9 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 		if ( $action ) {
 			check_admin_referer( 'bulk-log-files' );
 
-			if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			$schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
+
+			if ( ! current_user_can( $schemaEditorAccessCapability ) ) {
 				wp_die( esc_html__( 'You do not have permission to manage log files.', 'woocommerce' ) );
 			}
 
