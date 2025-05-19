@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
-use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
+use GatoGraphQL\GatoGraphQL\Log\LoggerSources;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -183,7 +183,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 $moduleConfiguration->displayEnableLogsSettingsOption()
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
-                $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
+                $logFile = PluginEnvironment::getLogsFilePath(LoggerSources::INFO);
                 $relativeLogFile = str_replace(
                     constant('ABSPATH'),
                     '',

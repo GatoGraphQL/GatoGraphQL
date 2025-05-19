@@ -52,7 +52,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
      */
     protected function logMessage(string $severity, string $message): void
     {
-        $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
+        $logFile = PluginEnvironment::getLogsFilePath(LoggerSources::INFO);
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
