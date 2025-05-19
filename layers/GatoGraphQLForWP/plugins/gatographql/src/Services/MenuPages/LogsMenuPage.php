@@ -168,8 +168,7 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 			<?php $this->render_search_field(); ?>
 		</header>
 		<form id="logs-list-table-form" method="get">
-			<input type="hidden" name="page" value="wc-status" />
-			<input type="hidden" name="tab" value="logs" />
+			<input type="hidden" name="page" value="<?php echo $this->getScreenID(); ?>" />
 			<?php foreach ( $params as $key => $value ) : ?>
 				<?php if ( $value !== $defaults[ $key ] ) : ?>
 					<input
@@ -674,8 +673,7 @@ class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
 			?>
 			<form id="logs-search" class="wc-logs-search" method="get">
 				<fieldset class="wc-logs-search-fieldset">
-					<input type="hidden" name="page" value="wc-status" />
-					<input type="hidden" name="tab" value="logs" />
+					<input type="hidden" name="page" value="<?php echo $this->getScreenID(); ?>" />
 					<input type="hidden" name="view" value="search_results" />
 					<?php foreach ( $params as $key => $value ) : ?>
 						<?php if ( $value !== $defaults[ $key ] ) : ?>
