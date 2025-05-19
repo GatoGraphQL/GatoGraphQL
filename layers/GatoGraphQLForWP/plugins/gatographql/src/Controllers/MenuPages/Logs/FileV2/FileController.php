@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2;
 
 use Automattic\Jetpack\Constants;
+use GatoGraphQL\GatoGraphQL\Controllers\Internal\Caching\CacheHelper;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\Settings;
 use PclZip;
 use WC_Cache_Helper;
@@ -585,9 +586,7 @@ class FileController {
 			)
 		);
 
-		// @todo Fix also this!
-		// $cache_key = WC_Cache_Helper::get_prefixed_key( self::SEARCH_CACHE_KEY, self::CACHE_GROUP );
-		$cache_key = 'pepito';
+		$cache_key = CacheHelper::get_prefixed_key( self::SEARCH_CACHE_KEY, self::CACHE_GROUP );
 		$query     = wp_json_encode( array( $search, $args, $file_args ) );
 		$cache     = wp_cache_get( $cache_key );
 		$is_cached = isset( $cache['query'], $cache['results'] ) && $query === $cache['query'];
