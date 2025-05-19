@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler;
 
 use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Caching\CacheHelper;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use PclZip;
 use WP_Error;
@@ -206,8 +207,9 @@ class FileController {
 		$paths   = glob( trailingslashit(PluginEnvironment::getLogsDir()) . $pattern );
 
 		if ( false === $paths ) {
+			$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
 			return new WP_Error(
-				'wc_log_directory_error',
+				"{$pluginNamespace}_log_directory_error",
 				__( 'Could not access the log file directory.', 'woocommerce' )
 			);
 		}
@@ -349,16 +351,18 @@ class FileController {
 	public function get_file_by_id( string $file_id ) {
 		$result = $this->get_files_by_id( array( $file_id ) );
 
+		$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
+
 		if ( count( $result ) < 1 ) {
 			return new WP_Error(
-				'wc_log_file_error',
+				"{$pluginNamespace}_log_file_error",
 				esc_html__( 'This file does not exist.', 'woocommerce' )
 			);
 		}
 
 		if ( count( $result ) > 1 ) {
 			return new WP_Error(
-				'wc_log_file_error',
+				"{$pluginNamespace}_log_file_error",
 				esc_html__( 'Multiple files match this ID.', 'woocommerce' )
 			);
 		}
@@ -451,8 +455,9 @@ class FileController {
 	public function get_file_sources() {
 		$paths = glob( trailingslashit(PluginEnvironment::getLogsDir()) . '*.log' );
 		if ( false === $paths ) {
+			$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
 			return new WP_Error(
-				'wc_log_directory_error',
+				"{$pluginNamespace}_log_directory_error",
 				__( 'Could not access the log file directory.', 'woocommerce' )
 			);
 		}
@@ -524,9 +529,11 @@ class FileController {
 	public function export_multiple_files( array $file_ids ) {
 		$files = $this->get_files_by_id( $file_ids );
 
+		$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
+
 		if ( count( $files ) < 1 ) {
 			return new WP_Error(
-				'wc_logs_invalid_file',
+				"{$pluginNamespace}_logs_invalid_file",
 				__( 'Could not access the specified files.', 'woocommerce' )
 			);
 		}
@@ -535,7 +542,7 @@ class FileController {
 
 		if ( ! is_dir( $temp_dir ) || ! wp_is_writable( $temp_dir ) ) {
 			return new WP_Error(
-				'wc_logs_invalid_directory',
+				"{$pluginNamespace}_logs_invalid_directory",
 				__( 'Could not write to the temp directory. Try downloading files one at a time instead.', 'woocommerce' )
 			);
 		}

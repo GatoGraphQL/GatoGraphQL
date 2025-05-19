@@ -3,8 +3,9 @@ declare( strict_types=1 );
 
 namespace GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler;
 
-use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Utilities\FilesystemUtil;
 use Exception;
+use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Utilities\FilesystemUtil;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Error;
 
 /**
@@ -58,8 +59,9 @@ class FileExporter {
 		}
 
 		if ( ! $is_readable ) {
+			$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
 			return new WP_Error(
-				'wc_logs_invalid_file',
+				"{$pluginNamespace}_logs_invalid_file",
 				__( 'Could not access file.', 'woocommerce' )
 			);
 		}
