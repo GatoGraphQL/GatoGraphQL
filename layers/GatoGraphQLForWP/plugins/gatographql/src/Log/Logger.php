@@ -31,8 +31,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
         return $this->systemLogger;
     }
 
-    public function log(string $severity, string $message): void
-    {
+    public function log(
+        string $severity,
+        string $message,
+        string $loggerSource = LoggerSources::INFO,
+    ): void {
         // Check if the Log is enabled, via the Settings
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -44,7 +47,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        $this->logMessage($severity, $message);
+        $this->logMessage($severity, $message, $loggerSource);
     }
 
     /**
