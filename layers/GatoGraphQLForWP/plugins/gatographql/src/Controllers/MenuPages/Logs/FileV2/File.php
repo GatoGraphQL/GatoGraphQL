@@ -3,9 +3,9 @@ declare( strict_types = 1 );
 
 namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2;
 
-use Automattic\Jetpack\Constants;
-use GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities\FilesystemUtil;
 use Exception;
+use GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities\FilesystemUtil;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
  * File class.
@@ -187,7 +187,7 @@ class File {
 	 * @return string
 	 */
 	public static function generate_hash( string $file_id ): string {
-		$key = Constants::get_constant( 'AUTH_SALT' ) ?? 'wc-logs';
+		$key = constant('AUTH_SALT') ?? PluginApp::getMainPlugin()->getPluginNamespace();
 
 		return hash_hmac( 'md5', $file_id, $key );
 	}
