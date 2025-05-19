@@ -549,7 +549,7 @@ class FileController {
 
 		require_once ABSPATH . 'wp-admin/includes/class-pclzip.php';
 
-		$path       = trailingslashit( $temp_dir ) . 'woocommerce_logs_' . gmdate( 'Y-m-d_H-i-s' ) . '.zip';
+		$path       = trailingslashit( $temp_dir ) . "{$pluginNamespace}_logs_" . gmdate( 'Y-m-d_H-i-s' ) . '.zip';
 		$file_paths = array_map(
 			fn( $file ) => $file->get_path(),
 			$files
