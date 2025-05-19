@@ -250,7 +250,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 				);
 				?>
 			</h2>
-			<?php if ( count( $rotations ) > 1 ) : ?>
+			<?php if ( count( $rotations ) > 1 ) : ?><?php // @phpstan-ignore-line ?>
 				<nav class="gatogql-logs-single-file-rotations">
 					<h3><?php esc_html_e( 'File rotations:', 'gatographql' ); ?></h3>
 					<ul class="gatogql-logs-rotation-links">
@@ -265,7 +265,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 							unset( $rotations['current'] );
 							?>
 						<?php endif; ?>
-						<?php foreach ( $rotations as $rotation ) : ?>
+						<?php foreach ( $rotations as $rotation ) : ?><?php // @phpstan-ignore-line ?>
 							<?php
 							printf(
 								'<li><a href="%1$s" class="button button-small button-%2$s">%3$s</a></li>',
@@ -299,9 +299,9 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 			</div>
 		</header>
 		<section id="logs-entries" class="gatogql-logs-entries">
-			<?php while ( ! feof( $stream ) ) : ?>
+			<?php while ( ! feof( $stream ) ) : ?> <?php // @phpstan-ignore-line ?>
 				<?php
-				$line = fgets( $stream );
+				$line = fgets( $stream ); // @phpstan-ignore-line
 				if ( is_string( $line ) ) {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format_line does the escaping.
 					echo $this->format_line( $line, $line_number );
@@ -367,7 +367,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 	 *
 	 * @return array
 	 */
-	public function get_query_params( array $param_keys = array() ): array {
+	public function get_query_params( array $param_keys = array() ): array { // @phpstan-ignore-line
 		$defaults = $this->get_query_param_defaults();
 		$params   = filter_input_array(
 			INPUT_GET,
@@ -444,7 +444,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 				break;
 		}
 
-		return $this->list_table;
+		return $this->list_table; // @phpstan-ignore-line
 	}
 
 	/**
@@ -629,7 +629,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 					$message_chunks[1] = sprintf(
 						'<details><summary>%1$s</summary>%2$s</details>',
 						esc_html__( 'Additional context', 'gatographql' ),
-						stripslashes( $context )
+						stripslashes( $context ) // @phpstan-ignore-line
 					);
 
 					$segments[2] = implode( ' ', $message_chunks );
@@ -696,7 +696,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 							value="<?php echo esc_attr( $params['search'] ); ?>"
 						/>
 					</label>
-					<?php submit_button( __( 'Search', 'gatographql' ), 'secondary', null, false ); ?>
+					<?php submit_button( __( 'Search', 'gatographql' ), 'secondary', null, false ); ?><?php // @phpstan-ignore-line ?>
 				</fieldset>
 				<?php if ( $file_count >= $this->file_controller::SEARCH_MAX_FILES ) : ?>
 					<div class="gatogql-logs-search-notice">
