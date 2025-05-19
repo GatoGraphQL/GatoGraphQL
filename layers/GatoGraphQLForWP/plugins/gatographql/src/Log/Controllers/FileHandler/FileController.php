@@ -84,6 +84,8 @@ class FileController {
 	private function get_file_size_limit(): int {
 		$default = 5 * MB_IN_BYTES;
 
+		$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
+		
 		/**
 		 * Filter the threshold size of a log file at which point it will get rotated.
 		 *
@@ -91,7 +93,7 @@ class FileController {
 		 *
 		 * @param int $file_size_limit The file size limit in bytes.
 		 */
-		$file_size_limit = apply_filters( 'woocommerce_log_file_size_limit', $default );
+		$file_size_limit = apply_filters( "{$pluginNamespace}_log_file_size_limit", $default );
 
 		if ( ! is_int( $file_size_limit ) || $file_size_limit < 1 ) {
 			return $default;
