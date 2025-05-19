@@ -1,9 +1,9 @@
 <?php
 declare( strict_types = 1 );
 
-namespace GatoGraphQL\GatoGraphQL\Log\Controllers\MenuPages\Logs\FileHandler;
+namespace GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler;
 
-use GatoGraphQL\GatoGraphQL\Log\Controllers\MenuPages\Logs\PageController;
+use GatoGraphQL\GatoGraphQL\Log\Controllers\PageController;
 
 use WP_List_Table;
 

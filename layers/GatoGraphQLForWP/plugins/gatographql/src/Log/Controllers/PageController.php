@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Log\Controllers\MenuPages\Logs;
+namespace GatoGraphQL\GatoGraphQL\Log\Controllers;
 
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
 
