@@ -49,36 +49,6 @@ class FilesystemUtil {
 	}
 
 	/**
-	 * Recursively creates a directory (if it doesn't exist) and adds an empty index.html and a .htaccess to prevent
-	 * directory listing.
-	 *
-	 * @since 9.3.0
-	 *
-	 * @param string $path Directory to create.
-	 * @throws \Exception In case of error.
-	 */
-	public static function mkdir_p_not_indexable( string $path ): void {
-		$wp_fs = self::get_wp_filesystem();
-
-		if ( $wp_fs->is_dir( $path ) ) {
-			return;
-		}
-
-		if ( ! wp_mkdir_p( $path ) ) {
-			throw new \Exception( esc_html( sprintf( 'Could not create directory: %s.', wp_basename( $path ) ) ) );
-		}
-
-		$files = array(
-			'.htaccess'  => 'deny from all',
-			'index.html' => '',
-		);
-
-		foreach ( $files as $name => $content ) {
-			$wp_fs->put_contents( trailingslashit( $path ) . $name, $content );
-		}
-	}
-
-	/**
 	 * Wrapper to initialize the WP filesystem with defined credentials if they are available.
 	 *
 	 * @return bool True if the $wp_filesystem global was successfully initialized.
@@ -107,53 +77,5 @@ class FilesystemUtil {
 		}
 
 		return is_null( $initialized ) ? false : $initialized;
-	}
-
-	/**
-	 * Validate that a file path is a valid upload path.
-	 *
-	 * @param string $path The path to validate.
-	 * @throws \Exception If the file path is not a valid upload path.
-	 */
-	public static function validate_upload_file_path( string $path ): void {
-		$wp_filesystem = self::get_wp_filesystem();
-
-		// File must exist and be readable.
-		$is_valid_file = $wp_filesystem->is_readable( $path );
-
-		// Check that file is within an allowed location.
-		if ( $is_valid_file ) {
-			$is_valid_file = self::file_is_in_directory( $path, $wp_filesystem->abspath() );
-			if ( ! $is_valid_file ) {
-				$upload_dir    = wp_get_upload_dir();
-				$is_valid_file = false === $upload_dir['error'] && self::file_is_in_directory( $path, $upload_dir['basedir'] );
-			}
-		}
-
-		if ( ! $is_valid_file ) {
-			throw new \Exception( esc_html__( 'File path is not a valid upload path.', 'woocommerce' ) );
-		}
-	}
-
-	/**
-	 * Check if a given file is inside a given directory.
-	 *
-	 * @param string $file_path The full path of the file to check.
-	 * @param string $directory The path of the directory to check.
-	 * @return bool True if the file is inside the directory.
-	 */
-	private static function file_is_in_directory( string $file_path, string $directory ): bool {
-		// Extract protocol if it exists.
-		$protocol = '';
-		if ( preg_match( '#^([a-z0-9]+://)#i', $file_path, $matches ) ) {
-			$protocol  = $matches[1];
-			$file_path = preg_replace( '#^[a-z0-9]+://#i', '', $file_path );
-		}
-
-		$file_path = (string) new URL( $file_path ); // This resolves '/../' sequences.
-		$file_path = preg_replace( '/^file:\\/\\//', $protocol, $file_path );
-		$file_path = preg_replace( '/^file:\\/\\//', '', $file_path );
-
-		return 0 === stripos( wp_normalize_path( $file_path ), trailingslashit( wp_normalize_path( $directory ) ) );
 	}
 }
