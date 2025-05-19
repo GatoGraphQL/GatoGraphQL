@@ -1,6 +1,6 @@
 <?php
 
-namespace GatoGraphQL\GatoGraphQL\Controllers\Internal\Caching;
+namespace GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Caching;
 
 /**
  * Implements namespacing algorithm to simulate grouping and namespacing for wp_cache, memcache and other caching engines that don't support grouping natively.

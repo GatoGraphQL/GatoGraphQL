@@ -1,9 +1,9 @@
 <?php
 declare( strict_types = 1 );
 
-namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileHandler;
+namespace GatoGraphQL\GatoGraphQL\Log\Controllers\MenuPages\Logs\FileHandler;
 
-use GatoGraphQL\GatoGraphQL\Controllers\Internal\Caching\CacheHelper;
+use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Caching\CacheHelper;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use PclZip;
 use WP_Error;

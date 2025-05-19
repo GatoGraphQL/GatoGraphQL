@@ -1,6 +1,6 @@
 <?php
 
-namespace GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities;
+namespace GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Utilities;
 
 /**
  * Provides an easy method of assessing URLs, including filepaths (which will be silently

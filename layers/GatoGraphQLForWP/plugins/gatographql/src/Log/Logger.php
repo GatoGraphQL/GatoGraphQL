@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Log;
 use DateTimeInterface;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
-use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileHandler\File;
+use GatoGraphQL\GatoGraphQL\Log\Controllers\MenuPages\Logs\FileHandler\File;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;

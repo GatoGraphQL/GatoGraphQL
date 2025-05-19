@@ -1,6 +1,6 @@
 <?php
 
-namespace GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities;
+namespace GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Utilities;
 
 use Exception;
 

@@ -1,7 +1,7 @@
 <?php
 declare( strict_types = 1 );
 
-namespace GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities;
+namespace GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Utilities;
 
 use Automattic\Jetpack\Constants;
 use Automattic\WooCommerce\Proxies\LegacyProxy;

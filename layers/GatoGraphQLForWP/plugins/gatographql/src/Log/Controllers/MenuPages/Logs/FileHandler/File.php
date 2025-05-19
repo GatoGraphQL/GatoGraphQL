@@ -1,10 +1,10 @@
 <?php
 declare( strict_types = 1 );
 
-namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileHandler;
+namespace GatoGraphQL\GatoGraphQL\Log\Controllers\MenuPages\Logs\FileHandler;
 
 use Exception;
-use GatoGraphQL\GatoGraphQL\Controllers\Internal\Utilities\FilesystemUtil;
+use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Utilities\FilesystemUtil;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
