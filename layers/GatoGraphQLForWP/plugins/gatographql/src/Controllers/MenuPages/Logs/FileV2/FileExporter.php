@@ -76,8 +76,8 @@ class FileExporter {
 		@ini_set( 'output_buffering', 'Off' ); // phpcs:ignore WordPress.PHP.IniSet.Risky
 		@ini_set( 'output_handler', '' ); // phpcs:ignore WordPress.PHP.IniSet.Risky
 		ignore_user_abort( true );
-		wc_set_time_limit();
-		wc_nocache_headers();
+		@set_time_limit(0);
+		@nocache_headers();
 		// phpcs:enable WordPress.PHP.NoSilencedErrors.Discouraged
 
 		$this->send_headers();
