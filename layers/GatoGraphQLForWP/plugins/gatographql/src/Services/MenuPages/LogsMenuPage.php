@@ -162,7 +162,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 		$list_table->prepare_items();
 
 		?>
-		<header id="logs-header" class="wc-logs-header">
+		<header id="logs-header" class="gatogql-logs-header">
 			<h2>
 				<?php esc_html_e( 'Browse log files', 'gatographql' ); ?>
 			</h2>
@@ -236,7 +236,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 		$line_number = 1;
 
 		?>
-		<header id="logs-header" class="wc-logs-header">
+		<header id="logs-header" class="gatogql-logs-header">
 			<h2>
 				<?php
 				printf(
@@ -250,9 +250,9 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 				?>
 			</h2>
 			<?php if ( count( $rotations ) > 1 ) : ?>
-				<nav class="wc-logs-single-file-rotations">
+				<nav class="gatogql-logs-single-file-rotations">
 					<h3><?php esc_html_e( 'File rotations:', 'gatographql' ); ?></h3>
-					<ul class="wc-logs-rotation-links">
+					<ul class="gatogql-logs-rotation-links">
 						<?php if ( isset( $rotations['current'] ) ) : ?>
 							<?php
 							printf(
@@ -277,7 +277,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 					</ul>
 				</nav>
 			<?php endif; ?>
-			<div class="wc-logs-single-file-actions">
+			<div class="gatogql-logs-single-file-actions">
 				<?php
 				// Download button.
 				printf(
@@ -297,7 +297,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 				?>
 			</div>
 		</header>
-		<section id="logs-entries" class="wc-logs-entries">
+		<section id="logs-entries" class="gatogql-logs-entries">
 			<?php while ( ! feof( $stream ) ) : ?>
 				<?php
 				$line = fgets( $stream );
@@ -335,7 +335,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 		$list_table->prepare_items();
 
 		?>
-		<header id="logs-header" class="wc-logs-header">
+		<header id="logs-header" class="gatogql-logs-header">
 			<h2><?php esc_html_e( 'Search results', 'gatographql' ); ?></h2>
 			<?php $this->render_search_field(); ?>
 		</header>
@@ -672,8 +672,8 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
 		if ( $file_count > 0 ) {
 			?>
-			<form id="logs-search" class="wc-logs-search" method="get">
-				<fieldset class="wc-logs-search-fieldset">
+			<form id="logs-search" class="gatogql-logs-search" method="get">
+				<fieldset class="gatogql-logs-search-fieldset">
 					<input type="hidden" name="page" value="<?php echo $this->getScreenID(); ?>" />
 					<input type="hidden" name="view" value="search_results" />
 					<?php foreach ( $params as $key => $value ) : ?>
@@ -689,7 +689,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 						<?php esc_html_e( 'Search within these files', 'gatographql' ); ?>
 						<input
 							id="logs-search-field"
-							class="wc-logs-search-field"
+							class="gatogql-logs-search-field"
 							type="text"
 							name="search"
 							value="<?php echo esc_attr( $params['search'] ); ?>"
@@ -698,7 +698,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 					<?php submit_button( __( 'Search', 'gatographql' ), 'secondary', null, false ); ?>
 				</fieldset>
 				<?php if ( $file_count >= $this->file_controller::SEARCH_MAX_FILES ) : ?>
-					<div class="wc-logs-search-notice">
+					<div class="gatogql-logs-search-notice">
 						<?php
 						printf(
 							// translators: %s is a number.

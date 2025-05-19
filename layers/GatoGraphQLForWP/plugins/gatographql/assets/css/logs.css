@@ -1,65 +1,65 @@
-.wc-logs-header {
+.gatogql-logs-header {
     margin: 1.5em 0 2em;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
     gap: 1em;
 }
-.wc-logs-header h2 {
+.gatogql-logs-header h2 {
     margin: 0;
 }
-.wc-logs-header .file-id {
+.gatogql-logs-header .file-id {
     padding: 3px 5px;
     background: rgba(0, 0, 0, 0.07);
     font-family: Consolas, Monaco, monospace;
 }
-.wc-logs-single-file-rotations {
+.gatogql-logs-single-file-rotations {
     display: flex;
     align-items: center;
     gap: 0.5em;
 }
-.wc-logs-single-file-rotations h3 {
+.gatogql-logs-single-file-rotations h3 {
     font-size: inherit;
     margin: 0;
 }
-.wc-logs-single-file-rotations .wc-logs-rotation-links {
+.gatogql-logs-single-file-rotations .gatogql-logs-rotation-links {
     list-style: none;
     margin: 0;
     display: flex;
     gap: 0.5em;
 }
-.wc-logs-single-file-rotations .wc-logs-rotation-links li {
+.gatogql-logs-single-file-rotations .gatogql-logs-rotation-links li {
     display: block;
     margin: 0;
 }
-.wc-logs-single-file-actions {
+.gatogql-logs-single-file-actions {
     margin-left: auto;
     display: flex;
     flex-flow: row wrap;
     gap: 0.5em;
 }
-.wc-logs-search {
+.gatogql-logs-search {
     margin-left: auto;
     display: flex;
     flex-flow: column;
 }
-.wc-logs-search-fieldset {
+.gatogql-logs-search-fieldset {
     display: flex;
     gap: 0.5em;
     justify-content: flex-end;
 }
-.wc-logs-search-notice {
+.gatogql-logs-search-notice {
     font-size: 0.9em;
     line-height: 2;
     text-align: right;
     visibility: hidden;
     height: 0;
 }
-.wc-logs-search:focus-within .wc-logs-search-notice {
+.gatogql-logs-search:focus-within .gatogql-logs-search-notice {
     visibility: visible;
     height: auto;
 }
-.wc-logs-entries {
+.gatogql-logs-entries {
     background: #f6f7f7;
     border: 1px solid #c3c4c7;
     font-family: Consolas, Monaco, monospace;
@@ -70,13 +70,13 @@
     white-space: nowrap;
     position: relative;
 }
-.wc-logs-entries .line {
+.gatogql-logs-entries .line {
     display: block;
     width: 100%;
     position: relative;
     white-space: pre-wrap;
 }
-.wc-logs-entries .line:before {
+.gatogql-logs-entries .line:before {
     counter-increment: line;
     content: counter(line);
     display: block;
@@ -90,25 +90,25 @@
     z-index: 2;
     border-right: 1px solid #c3c4c7;
 }
-.wc-logs-entries .line:target {
+.gatogql-logs-entries .line:target {
     box-shadow: 0 0.16em 0.16em -0.16em #c3c4c7,
         0 -0.16em 0.16em -0.16em #c3c4c7;
     z-index: 1;
     scroll-margin-top: 50vh;
 }
-.wc-logs-entries .line:target .line-content {
+.gatogql-logs-entries .line:target .line-content {
     background: #fff8c5;
 }
-.wc-logs-entries .line:target .log-level:before {
+.gatogql-logs-entries .line:target .log-level:before {
     color: #fff8c5;
 }
-.wc-logs-entries .line.has-context summary {
+.gatogql-logs-entries .line.has-context summary {
     cursor: pointer;
 }
-.wc-logs-entries .line.has-context details {
+.gatogql-logs-entries .line.has-context details {
     white-space: pre-wrap;
 }
-.wc-logs-entries .line-anchor {
+.gatogql-logs-entries .line-anchor {
     position: absolute;
     color: inherit;
     text-decoration: none;
@@ -118,48 +118,48 @@
     z-index: 3;
     left: 0;
 }
-.wc-logs-entries .line-content {
+.gatogql-logs-entries .line-content {
     display: block;
     padding: 0 1em;
     background: #fff;
     white-space: nowrap;
     margin-left: 4.5em;
 }
-.wc-logs-entries .log-timestamp {
+.gatogql-logs-entries .log-timestamp {
     font-weight: 700;
 }
-.wc-logs-entries .log-level {
+.gatogql-logs-entries .log-level {
     font-size: 100%;
 }
-.wc-logs-search-results tbody {
+.gatogql-logs-search-results tbody {
     word-wrap: break-word;
 }
-.wc-logs-search-results tbody .column-file_id {
+.gatogql-logs-search-results tbody .column-file_id {
     line-height: 2;
 }
-.wc-logs-search-results tbody .column-line,
-.wc-logs-search-results tbody .column-line_number {
+.gatogql-logs-search-results tbody .column-line,
+.gatogql-logs-search-results tbody .column-line_number {
     line-height: 2.3;
 }
-.wc-logs-search-results tbody .column-line {
+.gatogql-logs-search-results tbody .column-line {
     font-family: Consolas, Monaco, monospace;
 }
-.wc-logs-search-results td {
+.gatogql-logs-search-results td {
     vertical-align: middle;
 }
-.wc-logs-search-results .column-file_id {
+.gatogql-logs-search-results .column-file_id {
     width: 16%;
 }
-.wc-logs-search-results .column-line_number {
+.gatogql-logs-search-results .column-line_number {
     width: 8%;
 }
-.wc-logs-search-results .search-match {
+.gatogql-logs-search-results .search-match {
     background: #fff8c5;
     padding: 0.46em 0;
     border: 1px dashed #c3c4c7;
     line-height: 2.3;
 }
-.wc-logs-settings .wc-settings-row-logs-retention-period-days td {
+.gatogql-logs-settings .gatogql-settings-row-logs-retention-period-days td {
     line-height: 2;
 }
 .log-level {
