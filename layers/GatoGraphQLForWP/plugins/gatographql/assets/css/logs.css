@@ -124,6 +124,8 @@
     background: #fff;
     white-space: nowrap;
     margin-left: 4.5em;
+    min-width: calc(100% - 4.5em);
+    width: max-content;
 }
 .gatogql-logs-entries .log-timestamp {
     font-weight: 700;
