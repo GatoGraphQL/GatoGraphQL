@@ -5,3 +5,6 @@ parameters:
     paths:
         - src/
         - tests/
+    excludePaths:
+        # All these files were copied from WooCommerce and they contain PHPStan errors
+        - src/Log/Controllers/*
