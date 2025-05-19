@@ -20,17 +20,13 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 {
 	/**
 	 * Instance of FileController.
-	 *
-	 * @var FileController
 	 */
-	private $file_controller;
+	private FileController $file_controller;
 
 	/**
 	 * Instance of FileListTable or SearchListTable.
-	 *
-	 * @var FileListTable|SearchListTable
 	 */
-	private $list_table;
+	private FileListTable|SearchListTable|null $list_table = null;
 
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -430,7 +426,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 	 * @return FileListTable|SearchListTable
 	 */
 	private function get_list_table( string $view ) {
-		if ( $this->list_table instanceof WP_List_Table ) {
+		if ( $this->list_table !== null ) {
 			return $this->list_table;
 		}
 
