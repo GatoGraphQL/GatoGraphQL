@@ -57,7 +57,7 @@ class SearchListTable extends WP_List_Table {
 	 * @return void
 	 */
 	public function no_items(): void {
-		esc_html_e( 'No search results.', 'woocommerce' );
+		esc_html_e( 'No search results.', 'gatographql' );
 	}
 
 	/**
@@ -111,7 +111,7 @@ class SearchListTable extends WP_List_Table {
 				'<div class="notice notice-info"><p>%s</p></div>',
 				sprintf(
 					// translators: %s is a number.
-					esc_html__( 'The number of search results has reached the limit of %s. Try refining your search.', 'woocommerce' ),
+					esc_html__( 'The number of search results has reached the limit of %s. Try refining your search.', 'gatographql' ),
 					esc_html( number_format_i18n( $this->file_controller::SEARCH_MAX_RESULTS ) )
 				)
 			);
@@ -137,9 +137,9 @@ class SearchListTable extends WP_List_Table {
 	 */
 	public function get_columns(): array {
 		$columns = array(
-			'file_id'     => esc_html__( 'File', 'woocommerce' ),
-			'line_number' => esc_html__( 'Line #', 'woocommerce' ),
-			'line'        => esc_html__( 'Matched Line', 'woocommerce' ),
+			'file_id'     => esc_html__( 'File', 'gatographql' ),
+			'line_number' => esc_html__( 'Line #', 'gatographql' ),
+			'line'        => esc_html__( 'Matched Line', 'gatographql' ),
 		);
 
 		return $columns;
@@ -180,7 +180,7 @@ class SearchListTable extends WP_List_Table {
 			esc_url( $match_url ),
 			sprintf(
 				// translators: %s is a line number in a file.
-				esc_html__( 'Line %s', 'woocommerce' ),
+				esc_html__( 'Line %s', 'gatographql' ),
 				number_format_i18n( absint( $item['line_number'] ) )
 			)
 		);

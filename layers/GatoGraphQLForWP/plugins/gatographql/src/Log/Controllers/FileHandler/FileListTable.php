@@ -57,7 +57,7 @@ class FileListTable extends WP_List_Table {
 	 * @return void
 	 */
 	public function no_items(): void {
-		esc_html_e( 'No log files found.', 'woocommerce' );
+		esc_html_e( 'No log files found.', 'gatographql' );
 	}
 
 	/**
@@ -67,8 +67,8 @@ class FileListTable extends WP_List_Table {
 	 */
 	protected function get_bulk_actions(): array {
 		return array(
-			'export' => esc_html__( 'Download', 'woocommerce' ),
-			'delete' => esc_html__( 'Delete permanently', 'woocommerce' ),
+			'export' => esc_html__( 'Download', 'gatographql' ),
+			'delete' => esc_html__( 'Delete permanently', 'gatographql' ),
 		);
 	}
 
@@ -104,9 +104,9 @@ class FileListTable extends WP_List_Table {
 		?>
 		<div class="alignleft actions">
 			<?php if ( 'top' === $which ) : ?>
-				<label for="filter-by-source" class="screen-reader-text"><?php esc_html_e( 'Filter by log source', 'woocommerce' ); ?></label>
+				<label for="filter-by-source" class="screen-reader-text"><?php esc_html_e( 'Filter by log source', 'gatographql' ); ?></label>
 				<select name="source" id="filter-by-source">
-					<option<?php selected( $current_source, '' ); ?> value=""><?php esc_html_e( 'All sources', 'woocommerce' ); ?></option>
+					<option<?php selected( $current_source, '' ); ?> value=""><?php esc_html_e( 'All sources', 'gatographql' ); ?></option>
 					<?php foreach ( $all_sources as $source ) : ?>
 						<option<?php selected( $current_source, $source ); ?> value="<?php echo esc_attr( $source ); ?>">
 							<?php echo esc_html( $source ); ?>
@@ -115,7 +115,7 @@ class FileListTable extends WP_List_Table {
 				</select>
 				<?php
 				submit_button(
-					__( 'Filter', 'woocommerce' ),
+					__( 'Filter', 'gatographql' ),
 					'',
 					'filter_action',
 					false,
@@ -195,10 +195,10 @@ class FileListTable extends WP_List_Table {
 	public function get_columns(): array {
 		$columns = array(
 			'cb'       => '<input type="checkbox" />',
-			'source'   => esc_html__( 'Source', 'woocommerce' ),
-			'created'  => esc_html__( 'Date created', 'woocommerce' ),
-			'modified' => esc_html__( 'Date modified', 'woocommerce' ),
-			'size'     => esc_html__( 'File size', 'woocommerce' ),
+			'source'   => esc_html__( 'Source', 'gatographql' ),
+			'created'  => esc_html__( 'Date created', 'gatographql' ),
+			'modified' => esc_html__( 'Date modified', 'gatographql' ),
+			'size'     => esc_html__( 'File size', 'gatographql' ),
 		);
 
 		return $columns;
@@ -241,7 +241,7 @@ class FileListTable extends WP_List_Table {
 				<?php
 				printf(
 					// translators: 1. a date, 2. a slug-style name for a file.
-					esc_html__( 'Select the %1$s log file for %2$s', 'woocommerce' ),
+					esc_html__( 'Select the %1$s log file for %2$s', 'gatographql' ),
 					esc_html( gmdate( get_option( 'date_format' ), $item->get_created_timestamp() ) ),
 					esc_html( $item->get_source() )
 				);

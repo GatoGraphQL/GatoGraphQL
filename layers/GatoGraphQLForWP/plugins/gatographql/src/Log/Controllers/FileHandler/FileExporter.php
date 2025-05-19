@@ -62,7 +62,7 @@ class FileExporter {
 			$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
 			return new WP_Error(
 				"{$pluginNamespace}_logs_invalid_file",
-				__( 'Could not access file.', 'woocommerce' )
+				__( 'Could not access file.', 'gatographql' )
 			);
 		}
 

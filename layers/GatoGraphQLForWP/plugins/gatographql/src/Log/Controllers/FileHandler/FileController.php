@@ -210,7 +210,7 @@ class FileController {
 			$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
 			return new WP_Error(
 				"{$pluginNamespace}_log_directory_error",
-				__( 'Could not access the log file directory.', 'woocommerce' )
+				__( 'Could not access the log file directory.', 'gatographql' )
 			);
 		}
 
@@ -356,14 +356,14 @@ class FileController {
 		if ( count( $result ) < 1 ) {
 			return new WP_Error(
 				"{$pluginNamespace}_log_file_error",
-				esc_html__( 'This file does not exist.', 'woocommerce' )
+				esc_html__( 'This file does not exist.', 'gatographql' )
 			);
 		}
 
 		if ( count( $result ) > 1 ) {
 			return new WP_Error(
 				"{$pluginNamespace}_log_file_error",
-				esc_html__( 'Multiple files match this ID.', 'woocommerce' )
+				esc_html__( 'Multiple files match this ID.', 'gatographql' )
 			);
 		}
 
@@ -458,7 +458,7 @@ class FileController {
 			$pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
 			return new WP_Error(
 				"{$pluginNamespace}_log_directory_error",
-				__( 'Could not access the log file directory.', 'woocommerce' )
+				__( 'Could not access the log file directory.', 'gatographql' )
 			);
 		}
 
@@ -534,7 +534,7 @@ class FileController {
 		if ( count( $files ) < 1 ) {
 			return new WP_Error(
 				"{$pluginNamespace}_logs_invalid_file",
-				__( 'Could not access the specified files.', 'woocommerce' )
+				__( 'Could not access the specified files.', 'gatographql' )
 			);
 		}
 
@@ -543,7 +543,7 @@ class FileController {
 		if ( ! is_dir( $temp_dir ) || ! wp_is_writable( $temp_dir ) ) {
 			return new WP_Error(
 				"{$pluginNamespace}_logs_invalid_directory",
-				__( 'Could not write to the temp directory. Try downloading files one at a time instead.', 'woocommerce' )
+				__( 'Could not write to the temp directory. Try downloading files one at a time instead.', 'gatographql' )
 			);
 		}
 

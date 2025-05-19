@@ -164,7 +164,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 		?>
 		<header id="logs-header" class="wc-logs-header">
 			<h2>
-				<?php esc_html_e( 'Browse log files', 'woocommerce' ); ?>
+				<?php esc_html_e( 'Browse log files', 'gatographql' ); ?>
 			</h2>
 			<?php $this->render_search_field(); ?>
 		</header>
@@ -201,7 +201,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 				printf(
 					'<p><a href="%1$s">%2$s</a></p>',
 					esc_url( $this->get_logs_tab_url() ),
-					esc_html__( 'Return to the file list.', 'woocommerce' )
+					esc_html__( 'Return to the file list.', 'gatographql' )
 				);
 				?>
 			</div>
@@ -229,7 +229,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 		);
 		$delete_confirmation_js = sprintf(
 			"return window.confirm( '%s' )",
-			esc_js( __( 'Delete this log file permanently?', 'woocommerce' ) )
+			esc_js( __( 'Delete this log file permanently?', 'gatographql' ) )
 		);
 
 		$stream      = $file->get_stream();
@@ -241,7 +241,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 				<?php
 				printf(
 					// translators: %s is the name of a log file.
-					esc_html__( 'Viewing log file %s', 'woocommerce' ),
+					esc_html__( 'Viewing log file %s', 'gatographql' ),
 					sprintf(
 						'<span class="file-id">%s</span>',
 						esc_html( $file->get_file_id() )
@@ -251,7 +251,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 			</h2>
 			<?php if ( count( $rotations ) > 1 ) : ?>
 				<nav class="wc-logs-single-file-rotations">
-					<h3><?php esc_html_e( 'File rotations:', 'woocommerce' ); ?></h3>
+					<h3><?php esc_html_e( 'File rotations:', 'gatographql' ); ?></h3>
 					<ul class="wc-logs-rotation-links">
 						<?php if ( isset( $rotations['current'] ) ) : ?>
 							<?php
@@ -259,7 +259,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 								'<li><a href="%1$s" class="button button-small button-%2$s">%3$s</a></li>',
 								esc_url( add_query_arg( 'file_id', $rotations['current']->get_file_id(), $rotation_url_base ) ),
 								$file->get_file_id() === $rotations['current']->get_file_id() ? 'primary' : 'secondary',
-								esc_html__( 'Current', 'woocommerce' )
+								esc_html__( 'Current', 'gatographql' )
 							);
 							unset( $rotations['current'] );
 							?>
@@ -283,7 +283,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 				printf(
 					'<a href="%1$s" class="button button-secondary">%2$s</a>',
 					esc_url( $download_url ),
-					esc_html__( 'Download', 'woocommerce' )
+					esc_html__( 'Download', 'gatographql' )
 				);
 				?>
 				<?php
@@ -292,7 +292,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 					'<a href="%1$s" class="button button-secondary" onclick="%2$s">%3$s</a>',
 					esc_url( $delete_url ),
 					esc_attr( $delete_confirmation_js ),
-					esc_html__( 'Delete permanently', 'woocommerce' )
+					esc_html__( 'Delete permanently', 'gatographql' )
 				);
 				?>
 			</div>
@@ -336,7 +336,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
 		?>
 		<header id="logs-header" class="wc-logs-header">
-			<h2><?php esc_html_e( 'Search results', 'woocommerce' ); ?></h2>
+			<h2><?php esc_html_e( 'Search results', 'gatographql' ); ?></h2>
 			<?php $this->render_search_field(); ?>
 		</header>
 		<?php $list_table->display(); ?>
@@ -504,7 +504,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 			$schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
 
 			if ( ! current_user_can( $schemaEditorAccessCapability ) ) {
-				wp_die( esc_html__( 'You do not have permission to manage log files.', 'woocommerce' ) );
+				wp_die( esc_html__( 'You do not have permission to manage log files.', 'gatographql' ) );
 			}
 
 			$sendback = remove_query_arg( array( 'deleted' ), wp_get_referer() );
@@ -563,7 +563,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 							<?php
 							printf(
 							// translators: %s is a number of files.
-								esc_html( _n( '%s log file deleted.', '%s log files deleted.', $deleted, 'woocommerce' ) ),
+								esc_html( _n( '%s log file deleted.', '%s log files deleted.', $deleted, 'gatographql' ) ),
 								esc_html( number_format_i18n( $deleted ) )
 							);
 							?>
@@ -627,7 +627,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
 					$message_chunks[1] = sprintf(
 						'<details><summary>%1$s</summary>%2$s</details>',
-						esc_html__( 'Additional context', 'woocommerce' ),
+						esc_html__( 'Additional context', 'gatographql' ),
 						stripslashes( $context )
 					);
 
@@ -686,7 +686,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 						<?php endif; ?>
 					<?php endforeach; ?>
 					<label for="logs-search-field">
-						<?php esc_html_e( 'Search within these files', 'woocommerce' ); ?>
+						<?php esc_html_e( 'Search within these files', 'gatographql' ); ?>
 						<input
 							id="logs-search-field"
 							class="wc-logs-search-field"
@@ -695,7 +695,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 							value="<?php echo esc_attr( $params['search'] ); ?>"
 						/>
 					</label>
-					<?php submit_button( __( 'Search', 'woocommerce' ), 'secondary', null, false ); ?>
+					<?php submit_button( __( 'Search', 'gatographql' ), 'secondary', null, false ); ?>
 				</fieldset>
 				<?php if ( $file_count >= $this->file_controller::SEARCH_MAX_FILES ) : ?>
 					<div class="wc-logs-search-notice">
@@ -704,7 +704,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 							// translators: %s is a number.
 							esc_html__(
 								'⚠️ Only %s files can be searched at one time. Try filtering the file list before searching.',
-								'woocommerce'
+								'gatographql'
 							),
 							esc_html( number_format_i18n( $this->file_controller::SEARCH_MAX_FILES ) )
 						);
