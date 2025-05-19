@@ -83,10 +83,8 @@ class Logger extends AbstractBasicService implements LoggerInterface
     /**
 	 * Generate the full name of a file based on source and date values.
 	 *
-	 * @param string $source The source property of a log entry, which determines the filename.
+	 * @param string $loggerSource The source property of a log entry, which determines the filename.
 	 * @param int    $time   The time of the log entry as a Unix timestamp.
-	 *
-	 * @return string
 	 */
 	private function generateLogFilename(string $loggerSource, int $time): string {
 		$file_id = File::generate_file_id($loggerSource, null, $time);
