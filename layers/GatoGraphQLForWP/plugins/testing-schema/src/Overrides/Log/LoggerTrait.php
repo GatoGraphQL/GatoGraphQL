@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
-use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
-
 trait LoggerTrait
 {
     /**

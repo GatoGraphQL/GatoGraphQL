@@ -7,7 +7,6 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
-use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -131,7 +130,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     LoggerSeverity::ERROR => true,
                     LoggerSeverity::WARNING => true,
                     LoggerSeverity::INFO => true,
-                    LoggerSeverity::SUCCESS => true,
+                    LoggerSeverity::DEBUG => true,
                 ],
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
@@ -183,11 +182,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 $moduleConfiguration->displayEnableLogsSettingsOption()
                 && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
             ) {
-                $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
-                $relativeLogFile = str_replace(
+                $logFolder = PluginEnvironment::getLogsDir();
+                $relativeLogFolder = str_replace(
                     constant('ABSPATH'),
                     '',
-                    $logFile
+                    $logFolder
                 );
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -197,8 +196,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     ),
                     Properties::TITLE => \__('Enable logs?', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Enable storing GraphQL execution logs, under file <code>%s</code>', 'gatographql'),
-                        $relativeLogFile
+                        \__('Enable storing GraphQL execution logs (under folder <code>%s</code>), accessible via the <strong>%s</strong> menu', 'gatographql'),
+                        $relativeLogFolder,
+                        \__('Logs', 'gatographql')
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -208,7 +208,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
                     LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
                     LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
-                    LoggerSeverity::SUCCESS => sprintf($placeholder, LoggerSigns::SUCCESS, \__('Success', 'gatographql')),
+                    LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
                 ];
 
                 $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;

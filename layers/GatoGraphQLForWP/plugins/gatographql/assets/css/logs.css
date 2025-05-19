@@ -1,0 +1,256 @@
+.gatogql-logs-header {
+    margin: 1.5em 0 2em;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 1em;
+}
+.gatogql-logs-header h2 {
+    margin: 0;
+}
+.gatogql-logs-header .file-id {
+    padding: 3px 5px;
+    background: rgba(0, 0, 0, 0.07);
+    font-family: Consolas, Monaco, monospace;
+}
+.gatogql-logs-single-file-rotations {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.gatogql-logs-single-file-rotations h3 {
+    font-size: inherit;
+    margin: 0;
+}
+.gatogql-logs-single-file-rotations .gatogql-logs-rotation-links {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    gap: 0.5em;
+}
+.gatogql-logs-single-file-rotations .gatogql-logs-rotation-links li {
+    display: block;
+    margin: 0;
+}
+.gatogql-logs-single-file-actions {
+    margin-left: auto;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.5em;
+}
+.gatogql-logs-search {
+    margin-left: auto;
+    display: flex;
+    flex-flow: column;
+}
+.gatogql-logs-search-fieldset {
+    display: flex;
+    gap: 0.5em;
+    justify-content: flex-end;
+}
+.gatogql-logs-search-notice {
+    font-size: 0.9em;
+    line-height: 2;
+    text-align: right;
+    visibility: hidden;
+    height: 0;
+}
+.gatogql-logs-search:focus-within .gatogql-logs-search-notice {
+    visibility: visible;
+    height: auto;
+}
+.gatogql-logs-entries {
+    background: #f6f7f7;
+    border: 1px solid #c3c4c7;
+    font-family: Consolas, Monaco, monospace;
+    word-wrap: break-word;
+    line-height: 2.3;
+    counter-reset: line;
+    overflow-x: auto;
+    white-space: nowrap;
+    position: relative;
+}
+.gatogql-logs-entries .line {
+    display: block;
+    width: 100%;
+    position: relative;
+    white-space: pre-wrap;
+}
+.gatogql-logs-entries .line:before {
+    counter-increment: line;
+    content: counter(line);
+    display: block;
+    float: left;
+    padding: 0 1em 0 0.5em;
+    width: 3em;
+    text-align: right;
+    position: sticky;
+    left: 0;
+    background: #f6f7f7;
+    z-index: 2;
+    border-right: 1px solid #c3c4c7;
+}
+.gatogql-logs-entries .line:target {
+    box-shadow: 0 0.16em 0.16em -0.16em #c3c4c7,
+        0 -0.16em 0.16em -0.16em #c3c4c7;
+    z-index: 1;
+    scroll-margin-top: 50vh;
+}
+.gatogql-logs-entries .line:target .line-content {
+    background: #fff8c5;
+}
+.gatogql-logs-entries .line:target .log-level:before {
+    color: #fff8c5;
+}
+.gatogql-logs-entries .line.has-context summary {
+    cursor: pointer;
+}
+.gatogql-logs-entries .line.has-context details {
+    white-space: pre-wrap;
+}
+.gatogql-logs-entries .line-anchor {
+    position: absolute;
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    height: 100%;
+    width: 4.5em;
+    z-index: 3;
+    left: 0;
+}
+.gatogql-logs-entries .line-content {
+    display: block;
+    padding: 0 1em;
+    background: #fff;
+    white-space: nowrap;
+    margin-left: 4.5em;
+    min-width: calc(100% - 4.5em);
+    width: max-content;
+}
+.gatogql-logs-entries .log-timestamp {
+    font-weight: 700;
+}
+.gatogql-logs-entries .log-level {
+    font-size: 100%;
+}
+.gatogql-logs-search-results tbody {
+    word-wrap: break-word;
+}
+.gatogql-logs-search-results tbody .column-file_id {
+    line-height: 2;
+}
+.gatogql-logs-search-results tbody .column-line,
+.gatogql-logs-search-results tbody .column-line_number {
+    line-height: 2.3;
+}
+.gatogql-logs-search-results tbody .column-line {
+    font-family: Consolas, Monaco, monospace;
+}
+.gatogql-logs-search-results td {
+    vertical-align: middle;
+}
+.gatogql-logs-search-results .column-file_id {
+    width: 16%;
+}
+.gatogql-logs-search-results .column-line_number {
+    width: 8%;
+}
+.gatogql-logs-search-results .search-match {
+    background: #fff8c5;
+    padding: 0.46em 0;
+    border: 1px dashed #c3c4c7;
+    line-height: 2.3;
+}
+.gatogql-logs-settings .gatogql-settings-row-logs-retention-period-days td {
+    line-height: 2;
+}
+.log-level {
+    display: inline;
+    padding: 0 0.5em;
+    font-size: 80%;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    background: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-style: solid;
+    border-width: 0.16em 0.16em 0.16em 1em;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
+.log-level:before {
+    content: "•";
+    color: #fff;
+    margin-left: -1.3em;
+    margin-right: 0.7em;
+}
+.log-level:empty {
+    display: none;
+}
+.log-level--alert,
+.log-level--emergency {
+    border-color: #ff4136;
+}
+.log-level--critical,
+.log-level--error {
+    /* border-color: #ff851b; */
+    border-color: #ff4136;
+}
+.log-level--notice,
+.log-level--warning {
+    color: #222;
+    border-color: #ffdc00;
+}
+.log-level--info {
+    border-color: #0074d9;
+}
+.log-level--debug {
+    border-color: #3d9970;
+}
+@media screen and (min-width: 783px) {
+    .wp-list-table.logs .column-timestamp {
+        width: 18%;
+    }
+    .wp-list-table.logs .column-level {
+        width: 14%;
+    }
+    .wp-list-table.logs .column-source {
+        width: 15%;
+    }
+    .wp-list-table.logs .column-context {
+        width: 10%;
+    }
+}
+.wp-list-table.logs .column-message pre {
+    margin: 0;
+    white-space: pre-wrap;
+}
+.wp-list-table.logs .column-context .button span {
+    line-height: 1.3;
+}
+.wp-list-table.logs .log-context {
+    display: none;
+}
+.wp-list-table.logs .log-context pre {
+    white-space: pre-wrap;
+}
+#log-viewer-select {
+    padding: 10px 0 8px;
+    line-height: 28px;
+}
+#log-viewer-select h2 a {
+    vertical-align: middle;
+}
+#log-viewer {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    padding: 5px 20px;
+}
+#log-viewer pre {
+    font-family: monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

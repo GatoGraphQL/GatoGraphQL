@@ -6,5 +6,9 @@ namespace GatoGraphQL\GatoGraphQL\Log;
 
 interface LoggerInterface
 {
-    public function log(string $severity, string $message): void;
+    public function log(
+        string $severity,
+        string $message,
+        string $loggerSource = LoggerSources::INFO,
+    ): void;
 }

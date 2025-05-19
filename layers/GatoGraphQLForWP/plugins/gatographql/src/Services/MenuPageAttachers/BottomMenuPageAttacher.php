@@ -16,6 +16,7 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionDocModuleDocumentationMe
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionDocsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\LogsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\MenuPageInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
@@ -43,6 +44,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     private ?ExtensionDocsMenuPage $extensionDocsMenuPage = null;
     private ?TutorialMenuPage $tutorialMenuPage = null;
+    private ?LogsMenuPage $logsMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
     private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
 
@@ -153,6 +155,15 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->tutorialMenuPage = $tutorialMenuPage;
         }
         return $this->tutorialMenuPage;
+    }
+    final protected function getLogsMenuPage(): LogsMenuPage
+    {
+        if ($this->logsMenuPage === null) {
+            /** @var LogsMenuPage */
+            $logsMenuPage = $this->instanceManager->getInstance(LogsMenuPage::class);
+            $this->logsMenuPage = $logsMenuPage;
+        }
+        return $this->logsMenuPage;
     }
     final protected function getAboutMenuPage(): AboutMenuPage
     {
@@ -357,6 +368,23 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 )
             ) {
                 $tutorialMenuPage->setHookName($hookName);
+            }
+        }
+
+        $logsMenuPage = $this->getLogsMenuPage();
+        if ($logsMenuPage->isServiceEnabled()) {
+            $logsMenuPageTitle = $logsMenuPage->getMenuPageTitle();
+            if (
+                $hookName = add_submenu_page(
+                    $menuName,
+                    $logsMenuPageTitle,
+                    $logsMenuPageTitle,
+                    'manage_options',
+                    $logsMenuPage->getScreenID(),
+                    [$logsMenuPage, 'print']
+                )
+            ) {
+                $logsMenuPage->setHookName($hookName);
             }
         }
 

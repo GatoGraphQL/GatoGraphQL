@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Log;
 
+use DateTimeInterface;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
+use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\File;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
@@ -30,8 +32,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
         return $this->systemLogger;
     }
 
-    public function log(string $severity, string $message): void
-    {
+    public function log(
+        string $severity,
+        string $message,
+        string $loggerSource = LoggerSources::INFO,
+    ): void {
         // Check if the Log is enabled, via the Settings
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -43,15 +48,18 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        $this->logMessage($severity, $message);
+        $this->logMessage($severity, $message, $loggerSource);
     }
 
     /**
      * @see https://stackoverflow.com/a/7655379
      */
-    protected function logMessage(string $severity, string $message): void
-    {
-        $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
+    protected function logMessage(
+        string $severity,
+        string $message,
+        string $loggerSource = LoggerSources::INFO,
+    ): void {
+        $logFile = PluginEnvironment::getLogsDir() . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource, time());
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
@@ -60,13 +68,30 @@ class Logger extends AbstractBasicService implements LoggerInterface
         if ($this->addSeverityToMessage()) {
             $message = $this->getMessageWithLogSeverity($severity, $message);
         }
-        
-        $date = date('Y-m-d H:i:s');
+
+        /**
+         * Use an ISO 8601 date string in local (WordPress) timezone.
+         */
+        $date = date(DateTimeInterface::ATOM);
         error_log(sprintf(
-            '[%s] %s' . PHP_EOL,
+            '%s %s' . PHP_EOL,
             $date,
             $message
         ), 3, $logFile);
+    }
+
+    /**
+     * Generate the full name of a file based on source and date values.
+     *
+     * @param string $loggerSource The source property of a log entry, which determines the filename.
+     * @param int    $time   The time of the log entry as a Unix timestamp.
+     */
+    private function generateLogFilename(string $loggerSource, int $time): string
+    {
+        $file_id = File::generate_file_id($loggerSource, null, $time);
+        $hash = File::generate_hash($file_id);
+
+        return "$file_id-$hash.log";
     }
 
     protected function addSeverityToMessage(): bool
@@ -100,16 +125,16 @@ class Logger extends AbstractBasicService implements LoggerInterface
 
     protected function addLoggerSignToMessage(): bool
     {
-        return true;
+        return false;
     }
 
     protected function getLoggerSeveritySign(string $severity): string
     {
         return match ($severity) {
             LoggerSeverity::ERROR => LoggerSigns::ERROR,
-            LoggerSeverity::INFO => LoggerSigns::INFO,
-            LoggerSeverity::SUCCESS => LoggerSigns::SUCCESS,
             LoggerSeverity::WARNING => LoggerSigns::WARNING,
+            LoggerSeverity::INFO => LoggerSigns::INFO,
+            LoggerSeverity::DEBUG => LoggerSigns::DEBUG,
             default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
         };
     }

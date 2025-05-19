@@ -205,7 +205,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             LoggerSeverity::ERROR,
             LoggerSeverity::WARNING,
             LoggerSeverity::INFO,
-            LoggerSeverity::SUCCESS,
+            LoggerSeverity::DEBUG,
         ];
         $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
 
