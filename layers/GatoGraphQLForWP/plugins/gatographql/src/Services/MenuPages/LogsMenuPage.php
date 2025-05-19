@@ -12,10 +12,11 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
 use PoP\ComponentModel\App;
 use WP_List_Table;
 
-class LogsMenuPage extends PageController/*AbstractPluginMenuPage*/
+class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 {
 	/**
 	 * Instance of FileController.
