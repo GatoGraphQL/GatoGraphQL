@@ -3,11 +3,9 @@ declare( strict_types = 1 );
 
 namespace GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\FileV2;
 
-use Automattic\Jetpack\Constants;
 use GatoGraphQL\GatoGraphQL\Controllers\Internal\Caching\CacheHelper;
 use GatoGraphQL\GatoGraphQL\Controllers\MenuPages\Logs\Settings;
 use PclZip;
-use WC_Cache_Helper;
 use WP_Error;
 
 /**
