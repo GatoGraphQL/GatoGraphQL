@@ -16,6 +16,11 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
 use PoP\ComponentModel\App;
 use WP_List_Table;
 
+/**
+ * This file is based on WooCommerce.
+ *
+ * @see https://github.com/woocommerce/woocommerce/blob/9.8.5/plugins/woocommerce/includes/admin/views/html-admin-page-status.php#L37
+ */
 class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 {
 	/**
@@ -98,7 +103,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     /**
      * Copied from WooCommerce
      *
-     * @see plugins/woocommerce/includes/admin/views/html-admin-page-status.php
+	 * @see https://github.com/woocommerce/woocommerce/blob/9.8.5/plugins/woocommerce/includes/admin/views/html-admin-page-status.php#L37
      */
     public function print(): void
     {
