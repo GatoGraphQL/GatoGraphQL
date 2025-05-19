@@ -676,8 +676,6 @@ class FileController {
 	 * @return bool True on successfully invalidating the cache.
 	 */
 	public function invalidate_cache(): bool {
-		// @todo Fix also this and this!
-		return true;
-		// return WC_Cache_Helper::invalidate_cache_group( self::CACHE_GROUP );
+		return CacheHelper::invalidate_cache_group( self::CACHE_GROUP );
 	}
 }
