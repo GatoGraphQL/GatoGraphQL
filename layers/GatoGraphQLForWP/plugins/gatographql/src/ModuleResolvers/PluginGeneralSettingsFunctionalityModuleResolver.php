@@ -315,9 +315,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Enable log count badges?', 'gatographql'),
+                Properties::TITLE => \__('Enable log notifications?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Show badges with the number of logs in the <strong>%s</strong> menu', 'gatographql'),
+                    \__('Show a badge with the number of log entries in the <strong>%s</strong> menu', 'gatographql'),
                     \__('Logs', 'gatographql')
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -330,8 +330,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Enable log count badges by severity', 'gatographql'),
-                Properties::DESCRIPTION => \__('Indicate which severities are enabled for showing the badge', 'gatographql'),
+                Properties::TITLE => \__('Enable log notifications by severity', 'gatographql'),
+                Properties::DESCRIPTION => \__('Indicate which severities are included in the badge\'s count', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                 Properties::KEY_LABELS => $keyLabels,
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
