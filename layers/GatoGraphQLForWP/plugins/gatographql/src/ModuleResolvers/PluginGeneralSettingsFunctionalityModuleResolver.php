@@ -131,8 +131,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 self::OPTION_ENABLE_LOGS_BY_SEVERITY => [
                     LoggerSeverity::ERROR => true,
                     LoggerSeverity::WARNING => true,
-                    LoggerSeverity::INFO => true,
-                    LoggerSeverity::DEBUG => true,
+                    LoggerSeverity::INFO => $isApplicationEnvironmentDev,
+                    LoggerSeverity::DEBUG => $isApplicationEnvironmentDev,
                 ],
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
