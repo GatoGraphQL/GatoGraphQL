@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Replaced methods in `Logger`: `logInfo` and `logError` => `log(severity: ...)` (#3093)
 - Split `Logger` service into `Logger` and `SystemLogger` (#3098)
+- Moved "Logs" from "General" tab to new "Logs" tab in the Settings (#3103)
 
 ## Added
 
