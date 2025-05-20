@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    GatoGraphQL\GatoGraphQL\Log\LoggerInterface:
+    PoPSchema\Logger\Log\LoggerInterface:
         class: \GatoGraphQL\TestingSchema\Overrides\Log\Logger
 
-    GatoGraphQL\GatoGraphQL\Log\SystemLoggerInterface:
+    PoPSchema\Logger\Log\SystemLoggerInterface:
         class: \GatoGraphQL\TestingSchema\Overrides\Log\SystemLogger
