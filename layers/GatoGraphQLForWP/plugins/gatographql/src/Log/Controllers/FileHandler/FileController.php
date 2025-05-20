@@ -6,7 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler;
 
 use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Caching\CacheHelper;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use PclZip;
 use PoPSchema\Logger\Module as LoggerModule;
 use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
