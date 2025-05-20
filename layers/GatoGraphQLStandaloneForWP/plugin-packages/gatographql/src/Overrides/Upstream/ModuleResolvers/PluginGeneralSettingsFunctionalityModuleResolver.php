@@ -35,6 +35,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     public function getModulesToResolve(): array
     {
         $modules = parent::getModulesToResolve();
+        /** @var int */
         $pos = array_search(self::LOGS, $modules);
         array_splice($modules, $pos, 1);
         array_unshift($modules, self::LOGS);
