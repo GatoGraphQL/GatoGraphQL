@@ -10,6 +10,17 @@ use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
+    public function getLogsDir(): ?string
+    {
+        $envVariable = Environment::LOGS_DIR;
+        $defaultValue = null;
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+
     public function enableLogs(): bool
     {
         $envVariable = Environment::ENABLE_LOGS;
