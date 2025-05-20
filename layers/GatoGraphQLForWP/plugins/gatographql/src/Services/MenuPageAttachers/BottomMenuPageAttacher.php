@@ -24,17 +24,17 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\Menus\LogCountBadgeMenuTrait;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
-
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
-use PoP\Root\App;
-use PoPSchema\Logger\Constants\LoggerSeverity;
 
+use PoP\Root\App;
 use function add_submenu_page;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
     use WithSettingsPageMenuPageAttacherTrait;
+    use LogCountBadgeMenuTrait;
 
     private ?MenuPageHelper $menuPageHelper = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -385,14 +385,9 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $logsMenuPageTitle = $logsMenuPage->getMenuPageTitle();
             $logsMenuPageMenuTitle = $logsMenuPageTitle;
 
-            // Check if the Log Count Badges are enabled, via the Settings
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            if ($moduleConfiguration->enableLogCountBadges()) {
-                $logCount = $this->getLogEntryCounterSettingsManager()->getLogCount($moduleConfiguration->enableLogCountBadgesBySeverity());
-                if ($logCount > 0) {
-                    $logsMenuPageMenuTitle .= ' <span class="awaiting-mod update-plugins remaining-tasks-badge"><span class="count-' . esc_attr( $logCount ) . '">' . $logCount . '</span></span>';
-                }
+            $logCountBadge = $this->getLogCountBadge();
+            if ($logCountBadge !== null) {
+                $logsMenuPageMenuTitle .= ' ' . $logCountBadge;
             }
 
             if (
