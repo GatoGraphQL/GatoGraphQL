@@ -35,11 +35,6 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
         return $logCount;
     }
 
-    public function getLogCounts(): array
-    {
-        return get_option($this->namespaceOption(Options::LOG_COUNTS), []);
-    }
-
     protected function namespaceOption(string $option): string
     {
         return $this->getOptionNamespacer()->namespaceOption($option);
