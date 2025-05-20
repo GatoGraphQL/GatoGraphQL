@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
+use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -24,7 +25,10 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
+
+use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use PoP\Root\App;
+use PoPSchema\Logger\Constants\LoggerSeverity;
 
 use function add_submenu_page;
 
@@ -47,6 +51,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?LogsMenuPage $logsMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
     private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
+    private ?LogEntryCounterSettingsManagerInterface $logEntryCounterSettingsManager = null;
 
     final protected function getMenuPageHelper(): MenuPageHelper
     {
@@ -182,6 +187,10 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->graphQLEndpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy;
         }
         return $this->graphQLEndpointCategoryTaxonomy;
+    }
+    final protected function getLogEntryCounterSettingsManager(): LogEntryCounterSettingsManagerInterface
+    {
+        return $this->logEntryCounterSettingsManager ??= LogEntryCounterSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -374,11 +383,19 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         $logsMenuPage = $this->getLogsMenuPage();
         if ($logsMenuPage->isServiceEnabled()) {
             $logsMenuPageTitle = $logsMenuPage->getMenuPageTitle();
+            $logsMenuPageMenuTitle = $logsMenuPageTitle;
+
+            // @todo Fix with the correct logic
+            $logCount = $this->getLogEntryCounterSettingsManager()->getLogCount(LoggerSeverity::DEBUG);
+            if ($logCount > 0) {
+                $logsMenuPageMenuTitle .= ' <span class="awaiting-mod update-plugins remaining-tasks-badge"><span class="count-' . esc_attr( $logCount ) . '">' . $logCount . '</span></span>';
+            }
+
             if (
                 $hookName = add_submenu_page(
                     $menuName,
                     $logsMenuPageTitle,
-                    $logsMenuPageTitle,
+                    $logsMenuPageMenuTitle,
                     'manage_options',
                     $logsMenuPage->getScreenID(),
                     [$logsMenuPage, 'print']
