@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Settings;
 
-use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
-
 use GatoGraphQL\GatoGraphQL\Facades\TransientSettingsManagerFacade;
+
 use function get_option;
 use function uniqid;
 use function update_option;
@@ -30,7 +29,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
     private ?TransientSettingsManagerInterface $transientSettingsManager = null;
-    private ?LogEntryCounterSettingsManagerInterface $logEntryCounterSettingsManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
     final protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
@@ -40,10 +38,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
     final protected function getTransientSettingsManager(): TransientSettingsManagerInterface
     {
         return $this->transientSettingsManager ??= TransientSettingsManagerFacade::getInstance();
-    }
-    final protected function getLogEntryCounterSettingsManager(): LogEntryCounterSettingsManagerInterface
-    {
-        return $this->logEntryCounterSettingsManager ??= LogEntryCounterSettingsManagerFacade::getInstance();
     }
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {
