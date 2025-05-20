@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 interface LogEntryCounterSettingsManagerInterface
 {
     public function getLogCount(string $severity): int;
-    public function storeLogCount(string $severity, int $timestamp): void;
+    public function storeLogCount(string $severity, int $logCount): void;
     /**
      * @param array<string,int> $severityLogCounts Key: severity, Value: logCount
      */
