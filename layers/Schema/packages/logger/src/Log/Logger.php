@@ -46,19 +46,6 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        $this->logMessage($severity, $message, $loggerSource);
-    }
-
-    /**
-     * @see https://stackoverflow.com/a/7655379
-     */
-    protected function logMessage(
-        string $severity,
-        string $message,
-        string $loggerSource = LoggerSources::INFO,
-    ): void {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         /** @var string */
         $logsDir = $moduleConfiguration->getLogsDir();
         $logFile = $logsDir . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource);
@@ -67,10 +54,18 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        if ($this->addSeverityToMessage()) {
-            $message = $this->getMessageWithLogSeverity($severity, $message);
-        }
+        $message = $this->getMessageWithLogSeverity($severity, $message);
+        $this->logMessage($logFile, $message, $severity);
+    }
 
+    /**
+     * @see https://stackoverflow.com/a/7655379
+     */
+    protected function logMessage(
+        string $logFile,
+        string $message,
+        string $severity,
+    ): void {
         /**
          * Use an ISO 8601 date string in local (WordPress) timezone.
          */
@@ -91,11 +86,6 @@ class Logger extends AbstractBasicService implements LoggerInterface
     protected function generateLogFilename(string $loggerSource, array $options = []): string
     {
         return "$loggerSource.log";
-    }
-
-    protected function addSeverityToMessage(): bool
-    {
-        return true;
     }
 
     protected function getMessageWithLogSeverity(string $severity, string $message): string

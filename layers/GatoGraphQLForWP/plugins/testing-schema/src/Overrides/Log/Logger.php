@@ -6,7 +6,6 @@ namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Overrides\Logger\Log\Logger as UpstreamLogger;
-use PoPSchema\Logger\Log\LoggerSources;
 use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
 class Logger extends UpstreamLogger
@@ -18,11 +17,11 @@ class Logger extends UpstreamLogger
      * so we can test it
      */
     protected function logMessage(
-        string $severity,
+        string $logFile,
         string $message,
-        string $loggerSource = LoggerSources::INFO,
+        string $severity,
     ): void {
-        parent::logMessage($severity, $message, $loggerSource);
+        parent::logMessage($logFile, $message, $severity);
 
         $this->sendCustomHeader(
             $message,

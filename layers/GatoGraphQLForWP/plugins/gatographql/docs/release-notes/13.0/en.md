@@ -11,6 +11,7 @@
 - Enable logs by severity in the Settings ([#3095](https://github.com/GatoGraphQL/GatoGraphQL/pull/3095))
 - Add Logs page to the menu, to browse the logs ([#3100](https://github.com/GatoGraphQL/GatoGraphQL/pull/3100))
 - Split Logs by sources and date ([#3100](https://github.com/GatoGraphQL/GatoGraphQL/pull/3100))
+- Logs count badge in the Logs menu link ([#3105](https://github.com/GatoGraphQL/GatoGraphQL/pull/3105))
 
 ### Improvements
 

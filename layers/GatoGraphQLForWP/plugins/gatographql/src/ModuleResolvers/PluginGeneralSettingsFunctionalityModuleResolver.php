@@ -37,6 +37,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
     public final const OPTION_ENABLE_LOGS = 'enable-logs';
     public final const OPTION_ENABLE_LOGS_BY_SEVERITY = 'enable-logs-by-severity';
+    public final const OPTION_ENABLE_LOG_COUNT_BADGES = 'enable-log-count-badges';
+    public final const OPTION_ENABLE_LOG_COUNT_BADGES_BY_SEVERITY = 'enable-log-count-badges-by-severity';
     public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
     public final const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
 
@@ -145,6 +147,13 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     LoggerSeverity::WARNING => true,
                     LoggerSeverity::INFO => $isApplicationEnvironmentDev,
                     LoggerSeverity::DEBUG => $isApplicationEnvironmentDev,
+                ],
+                self::OPTION_ENABLE_LOG_COUNT_BADGES => true,
+                self::OPTION_ENABLE_LOG_COUNT_BADGES_BY_SEVERITY => [
+                    LoggerSeverity::ERROR => true,
+                    LoggerSeverity::WARNING => true,
+                    LoggerSeverity::INFO => false,
+                    LoggerSeverity::DEBUG => false,
                 ],
             ],
             self::SERVER_IP_CONFIGURATION => [
@@ -292,8 +301,37 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
+                Properties::TITLE => \__('Enable logs by severity', 'gatographql'),
                 Properties::DESCRIPTION => \__('Indicate which severities are enabled for logging', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
+                Properties::KEY_LABELS => $keyLabels,
+                Properties::SUBTYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::OPTION_ENABLE_LOG_COUNT_BADGES;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable log notifications?', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Show a badge with the number of log entries in the <strong>%s</strong> menu', 'gatographql'),
+                    \__('Logs', 'gatographql')
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::OPTION_ENABLE_LOG_COUNT_BADGES_BY_SEVERITY;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable log notifications by severity', 'gatographql'),
+                Properties::DESCRIPTION => \__('Indicate which severities are included in the badge\'s count', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                 Properties::KEY_LABELS => $keyLabels,
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
