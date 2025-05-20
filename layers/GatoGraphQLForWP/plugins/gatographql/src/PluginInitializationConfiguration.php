@@ -753,12 +753,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
             ],
             [
-                'class' => Module::class,
-                'envVariable' => Environment::ENABLE_LOGS,
+                'class' => LoggerModule::class,
+                'envVariable' => LoggerEnvironment::ENABLE_LOGS,
             ],
             [
-                'class' => Module::class,
-                'envVariable' => Environment::ENABLE_LOGS_BY_SEVERITY,
+                'class' => LoggerModule::class,
+                'envVariable' => LoggerEnvironment::ENABLE_LOGS_BY_SEVERITY,
             ],
             [
                 'class' => Module::class,
