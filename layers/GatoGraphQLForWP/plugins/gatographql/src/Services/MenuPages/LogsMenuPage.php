@@ -13,11 +13,9 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
-use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
 use PoP\ComponentModel\App;
-
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_List_Table;
+
 use function get_plugin_page_hook;
 
 /**
