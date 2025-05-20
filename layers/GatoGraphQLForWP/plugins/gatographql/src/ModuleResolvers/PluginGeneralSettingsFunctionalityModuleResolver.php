@@ -33,9 +33,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public final const OPTION_ENABLE_SCHEMA_TUTORIAL = 'hide-tutorial-page';
     public final const OPTION_INSTALL_PLUGIN_SETUP_DATA = 'install-plugin-setup-data';
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
+    public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
     public final const OPTION_ENABLE_LOGS = 'enable-logs';
     public final const OPTION_ENABLE_LOGS_BY_SEVERITY = 'enable-logs-by-severity';
-    public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
     public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
     public final const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
 
