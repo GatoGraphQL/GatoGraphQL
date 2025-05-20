@@ -249,57 +249,51 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
-        } elseif ($module === self::LOGS) {
-            $generalTabDisplayableOptionNames = $this->getGeneralTabDisplayableOptionNames();
-
+        } elseif ($module === self::LOGS && $moduleConfiguration->displayEnableLogsSettingsOption()) {
+            $logFolder = PluginEnvironment::getLogsDir();
+            $relativeLogFolder = str_replace(
+                constant('ABSPATH'),
+                '',
+                $logFolder
+            );
+            
             $option = self::OPTION_ENABLE_LOGS;
-            if (
-                $moduleConfiguration->displayEnableLogsSettingsOption()
-                && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
-            ) {
-                $logFolder = PluginEnvironment::getLogsDir();
-                $relativeLogFolder = str_replace(
-                    constant('ABSPATH'),
-                    '',
-                    $logFolder
-                );
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Enable logs?', 'gatographql'),
-                    Properties::DESCRIPTION => sprintf(
-                        \__('Enable storing GraphQL execution logs (under folder <code>%s</code>), accessible via the <strong>%s</strong> menu', 'gatographql'),
-                        $relativeLogFolder,
-                        \__('Logs', 'gatographql')
-                    ),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable logs?', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Enable storing GraphQL execution logs (under folder <code>%s</code>), accessible via the <strong>%s</strong> menu', 'gatographql'),
+                    $relativeLogFolder,
+                    \__('Logs', 'gatographql')
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
 
-                $placeholder = \__('%s %s', 'gatographql');
-                $keyLabels = [
-                    LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
-                    LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
-                    LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
-                    LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
-                ];
+            $placeholder = \__('%s %s', 'gatographql');
+            $keyLabels = [
+                LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
+                LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
+                LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
+                LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
+            ];
 
-                $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
-                    Properties::DESCRIPTION => \__('Indicate which severities are enabled for logging', 'gatographql'),
-                    Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
-                    Properties::KEY_LABELS => $keyLabels,
-                    Properties::SUBTYPE => Properties::TYPE_BOOL,
-                ];
-            }
+            $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
+                Properties::DESCRIPTION => \__('Indicate which severities are enabled for logging', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
+                Properties::KEY_LABELS => $keyLabels,
+                Properties::SUBTYPE => Properties::TYPE_BOOL,
+            ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
             if ($moduleConfiguration->enableSettingClientIPAddressServerPropertyName()) {
