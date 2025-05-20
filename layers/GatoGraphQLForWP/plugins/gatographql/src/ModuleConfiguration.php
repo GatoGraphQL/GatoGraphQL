@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
-use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
