@@ -23,6 +23,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function enableLogs(): bool
     {
+        if ($this->getLogsDir() === null) {
+            return false;
+        }
+
         $envVariable = Environment::ENABLE_LOGS;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
