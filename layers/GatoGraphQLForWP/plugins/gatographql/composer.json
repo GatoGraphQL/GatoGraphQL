@@ -56,6 +56,7 @@
         "pop-cms-schema/usermeta-mutations-wp": "^12.3",
         "pop-schema/directive-commons": "^12.3",
         "pop-schema/http-requests": "^12.3",
+        "pop-schema/logger": "^12.3",
         "pop-wp-schema/blocks": "^12.3",
         "pop-wp-schema/commentmeta": "^12.3",
         "pop-wp-schema/comments": "^12.3",
