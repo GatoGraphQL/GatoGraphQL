@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Log;
+namespace PoPSchema\Logger\Log;
 
 class LoggerSources
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Constants;
+namespace PoPSchema\Logger\Constants;
 
 class LoggerSigns
 {

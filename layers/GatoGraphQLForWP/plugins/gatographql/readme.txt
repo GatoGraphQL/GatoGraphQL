@@ -226,6 +226,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Print the severity (`SUCCESS`/`INFO`/`WARNING`/`ERROR`) in the logs (#3099)
 * Add Logs page to the menu, to browse the logs (#3100)
 * Split Logs by sources and date (#3100)
+* Use the Logger also when using plugin as standalone (without WordPress) (#3104)
 
 = 12.2.0 =
 * Fixed: Exception when clicking on Extensions link (#3092)

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Log;
+namespace PoPSchema\Logger\Log;
 
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
+use PoPSchema\Logger\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 
 use function error_log;

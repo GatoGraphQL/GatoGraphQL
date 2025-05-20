@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
-use GatoGraphQL\GatoGraphQL\Log\SystemLogger as UpstreamSystemLogger;
+use PoPSchema\Logger\Log\SystemLogger as UpstreamSystemLogger;
 use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
 class SystemLogger extends UpstreamSystemLogger

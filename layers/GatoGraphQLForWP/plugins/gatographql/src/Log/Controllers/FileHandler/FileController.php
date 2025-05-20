@@ -6,8 +6,10 @@ namespace GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler;
 
 use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Caching\CacheHelper;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use PclZip;
+use PoPSchema\Logger\Module as LoggerModule;
+use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
+use PoP\ComponentModel\App;
 use WP_Error;
 
 /**
@@ -134,11 +136,18 @@ class FileController
         }
 
         if (! $file instanceof File) {
-            $new_path = trailingslashit(PluginEnvironment::getLogsDir()) . $this->generate_filename($source, $time);
+            $new_path = $this->getLogsDir() . $this->generate_filename($source, $time);
             $file     = new File($new_path);
         }
 
         return $file->write($text);
+    }
+
+    protected function getLogsDir(): string
+    {
+        /** @var LoggerModuleConfiguration */
+        $loggerModuleConfiguration = App::getModule(LoggerModule::class)->getConfiguration();
+        return trailingslashit($loggerModuleConfiguration->getLogsDir());
     }
 
     /**
@@ -213,7 +222,7 @@ class FileController
         $args = wp_parse_args($args, self::DEFAULTS_GET_FILES);
 
         $pattern = $args['source'] . '*.log';
-        $paths   = glob(trailingslashit(PluginEnvironment::getLogsDir()) . $pattern);
+        $paths   = glob($this->getLogsDir() . $pattern);
 
         if (false === $paths) {
             $pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
@@ -330,7 +339,7 @@ class FileController
      */
     public function get_files_by_id(array $file_ids): array
     {
-        $log_directory = trailingslashit(PluginEnvironment::getLogsDir());
+        $log_directory = $this->getLogsDir();
         $paths         = array();
 
         foreach ($file_ids as $file_id) {
@@ -426,7 +435,7 @@ class FileController
 
         $created_pattern = $created ? '-' . gmdate('Y-m-d', $created) . '-' : '';
 
-        $rotation_pattern = trailingslashit(PluginEnvironment::getLogsDir()) . $source . $rotations_pattern . $created_pattern . '*.log';
+        $rotation_pattern = $this->getLogsDir() . $source . $rotations_pattern . $created_pattern . '*.log';
         $rotation_paths   = glob($rotation_pattern);
         $rotation_files   = $this->convert_paths_to_objects($rotation_paths);
         foreach ($rotation_files as $rotation_file) {
@@ -467,7 +476,7 @@ class FileController
      */
     public function get_file_sources()
     {
-        $paths = glob(trailingslashit(PluginEnvironment::getLogsDir()) . '*.log');
+        $paths = glob($this->getLogsDir() . '*.log');
         if (false === $paths) {
             $pluginNamespace = PluginApp::getMainPlugin()->getPluginNamespace();
             return new WP_Error(
@@ -681,7 +690,7 @@ class FileController
     public function get_log_directory_size(): int
     {
         $bytes = 0;
-        $path  = realpath(trailingslashit(PluginEnvironment::getLogsDir()));
+        $path  = realpath($this->getLogsDir());
 
         if (wp_is_writable($path)) {
             $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CATCH_GET_CHILD);

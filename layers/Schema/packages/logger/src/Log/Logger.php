@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Log;
+namespace PoPSchema\Logger\Log;
 
 use DateTimeInterface;
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
-use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\File;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\PluginEnvironment;
+use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Constants\LoggerSigns;
+use PoPSchema\Logger\Module;
+use PoPSchema\Logger\ModuleConfiguration;
 use InvalidArgumentException;
 use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
@@ -59,7 +57,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
         string $message,
         string $loggerSource = LoggerSources::INFO,
     ): void {
-        $logFile = PluginEnvironment::getLogsDir() . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource, time());
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        /** @var string */
+        $logsDir = $moduleConfiguration->getLogsDir();
+        $logFile = $logsDir . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource, time());
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
@@ -86,12 +88,9 @@ class Logger extends AbstractBasicService implements LoggerInterface
      * @param string $loggerSource The source property of a log entry, which determines the filename.
      * @param int    $time   The time of the log entry as a Unix timestamp.
      */
-    private function generateLogFilename(string $loggerSource, int $time): string
+    protected function generateLogFilename(string $loggerSource, int $time): string
     {
-        $file_id = File::generate_file_id($loggerSource, null, $time);
-        $hash = File::generate_hash($file_id);
-
-        return "$file_id-$hash.log";
+        return "$loggerSource.log";
     }
 
     protected function addSeverityToMessage(): bool

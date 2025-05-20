@@ -28,9 +28,6 @@ services:
     GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\EndpointExecuterRegistry
 
-    GatoGraphQL\GatoGraphQL\Log\LoggerInterface:
-        class: \GatoGraphQL\GatoGraphQL\Log\Logger
-
     GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface:
         class: \GatoGraphQL\GatoGraphQL\Container\ContainerManager
 

@@ -59,6 +59,8 @@ use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
 use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
 use PoPCMSSchema\Users\Module as UsersModule;
+use PoPSchema\Logger\Module as LoggerModule;
+use PoPSchema\Logger\Environment as LoggerEnvironment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPWPSchema\Blocks\Environment as BlocksEnvironment;
 use PoPWPSchema\Blocks\Module as BlocksModule;
@@ -122,14 +124,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Enable Logs?
             [
-                'class' => Module::class,
-                'envVariable' => Environment::ENABLE_LOGS,
+                'class' => LoggerModule::class,
+                'envVariable' => LoggerEnvironment::ENABLE_LOGS,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::LOGS,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOGS,
             ],
             [
-                'class' => Module::class,
-                'envVariable' => Environment::ENABLE_LOGS_BY_SEVERITY,
+                'class' => LoggerModule::class,
+                'envVariable' => LoggerEnvironment::ENABLE_LOGS_BY_SEVERITY,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::LOGS,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOGS_BY_SEVERITY,
                 'callback' => fn (array $value) => array_keys(array_filter($value)),
@@ -751,12 +753,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::ENABLE_SCHEMA_TUTORIAL_PAGE,
             ],
             [
-                'class' => Module::class,
-                'envVariable' => Environment::ENABLE_LOGS,
+                'class' => LoggerModule::class,
+                'envVariable' => LoggerEnvironment::ENABLE_LOGS,
             ],
             [
-                'class' => Module::class,
-                'envVariable' => Environment::ENABLE_LOGS_BY_SEVERITY,
+                'class' => LoggerModule::class,
+                'envVariable' => LoggerEnvironment::ENABLE_LOGS_BY_SEVERITY,
             ],
             [
                 'class' => Module::class,
@@ -832,6 +834,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $moduleClassConfiguration[GuzzleHTTPModule::class] = [
             // Set the referer
             GuzzleHTTPEnvironment::GUZZLE_REQUEST_REFERER => home_url(),
+        ];
+        $moduleClassConfiguration[LoggerModule::class] = [
+            LoggerEnvironment::LOGS_DIR => PluginEnvironment::getLogsDir(),
         ];
 
         return $moduleClassConfiguration;

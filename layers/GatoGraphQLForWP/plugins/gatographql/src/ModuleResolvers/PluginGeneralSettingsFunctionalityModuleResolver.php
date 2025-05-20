@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
+use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
-use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\UserAuthorizationSchemeRegistryInterface;
 use PoP\ComponentModel\App;
 use PoP\Root\Environment as RootEnvironment;
+use PoPSchema\Logger\Module as LoggerModule;
+use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
 
 class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -250,11 +251,14 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 ];
             }
         } elseif ($module === self::LOGS && $moduleConfiguration->displayEnableLogsSettingsOption()) {
-            $logFolder = PluginEnvironment::getLogsDir();
+            /** @var LoggerModuleConfiguration */
+            $loggerModuleConfiguration = App::getModule(LoggerModule::class)->getConfiguration();
+            /** @var string */
+            $logsDir = $loggerModuleConfiguration->getLogsDir();
             $relativeLogFolder = str_replace(
                 constant('ABSPATH'),
                 '',
-                $logFolder
+                $logsDir
             );
 
             $option = self::OPTION_ENABLE_LOGS;

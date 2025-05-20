@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
+use PoPSchema\Logger\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\{ File, FileController, FileListTable, SearchListTable };
 use GatoGraphQL\GatoGraphQL\Log\Controllers\PageController;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -14,6 +14,8 @@ use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
 use PoP\ComponentModel\App;
+use PoPSchema\Logger\Module as LoggerModule;
+use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
 use WP_List_Table;
 
 use function get_plugin_page_hook;
@@ -60,11 +62,18 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
     public function isServiceEnabled(): bool
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableLogs() || !$moduleConfiguration->displayEnableLogsSettingsOption()) {
+        /** @var LoggerModuleConfiguration */
+        $loggerModuleConfiguration = App::getModule(LoggerModule::class)->getConfiguration();
+        if (!$loggerModuleConfiguration->enableLogs()) {
             return false;
         }
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->displayEnableLogsSettingsOption()) {
+            return false;
+        }
+
         return parent::isServiceEnabled();
     }
 

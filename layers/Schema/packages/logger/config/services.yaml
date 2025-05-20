@@ -5,7 +5,7 @@ services:
         autoconfigure: true
 
     PoPSchema\Logger\Log\LoggerInterface:
-        class: \GatoGraphQL\TestingSchema\Overrides\Log\Logger
+        class: \PoPSchema\Logger\Log\Logger
 
     PoPSchema\Logger\Log\SystemLoggerInterface:
-        class: \GatoGraphQL\TestingSchema\Overrides\Log\SystemLogger
+        class: \PoPSchema\Logger\Log\SystemLogger
