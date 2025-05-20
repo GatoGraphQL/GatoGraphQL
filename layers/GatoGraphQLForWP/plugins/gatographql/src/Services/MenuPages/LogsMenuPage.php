@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
+use PoPSchema\Logger\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\{ File, FileController, FileListTable, SearchListTable };
 use GatoGraphQL\GatoGraphQL\Log\Controllers\PageController;
 use GatoGraphQL\GatoGraphQL\Module;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
+use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoPSchema\Logger\Log\Logger as UpstreamLogger;
 use PoPSchema\Logger\Log\LoggerSources;
 use GatoGraphQL\TestingSchema\Constants\CustomHeaders;

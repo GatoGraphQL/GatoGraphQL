@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\Logger\Log;
 
 use DateTimeInterface;
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
+use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\File;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSeverity;
-use GatoGraphQL\GatoGraphQL\Constants\LoggerSigns;
+use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Constants\LoggerSigns;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
