@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPSchema\Logger\HelperServices\HTTPRequestHelperServiceInterface:
+        class: \PoPSchema\Logger\HelperServices\HTTPRequestHelperService
+        
