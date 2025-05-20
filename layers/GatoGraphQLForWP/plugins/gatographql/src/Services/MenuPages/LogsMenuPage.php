@@ -116,10 +116,37 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
         ?>
         <div class="wrap woocommerce">
             <h1 class="screen-reader-text"><?php _e('Logs', 'gatographql'); ?></h1>
+            <?php $this->render_section_nav(); ?>
             <?php $this->render(); ?>
         </div>
         <?php
     }
+    
+	/**
+	 * Render navigation to switch between logs browsing and settings.
+	 *
+	 * @return void
+	 */
+	private function render_section_nav(): void {
+		$params       = $this->get_query_params( array( 'view' ) );
+		$browse_url   = $this->get_logs_tab_url();
+
+		?>
+		<ul class="subsubsub">
+			<li>
+				<?php
+				printf(
+					'<a href="%1$s"%2$s>%3$s</a>',
+					esc_url( $browse_url ),
+					' class="current"',
+					esc_html__( 'Browse all logs', 'gatographql' )
+				);
+				?>
+			</li>
+		</ul>
+		<br class="clear">
+		<?php
+	}
 
     /**
      * Get the canonical URL for the Logs tab of the Status admin page.
