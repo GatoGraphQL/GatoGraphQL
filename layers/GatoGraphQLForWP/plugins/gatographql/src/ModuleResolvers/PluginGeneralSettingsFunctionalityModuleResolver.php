@@ -279,9 +279,14 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 ),
                 Properties::TITLE => \__('Enable logs?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Enable storing GraphQL execution logs (under folder <code>%s</code>), accessible via the <strong>%s</strong> menu', 'gatographql'),
-                    $relativeLogFolder,
-                    \__('Logs', 'gatographql')
+                    \__('Enable storing GraphQL execution logs, accessible via the <strong>%s</strong> menu. %s', 'gatographql'),
+                    \__('Logs', 'gatographql'),
+                    $this->getCollapsible(
+                        sprintf(
+                            \__('<br/>Log files are stored under folder <code>%s</code>.<br/></br><strong>Important:</strong> Log files can be very large, so it\'s recommended to clear them after a while.', 'gatographql'),
+                            $relativeLogFolder,
+                        ),
+                    )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
