@@ -23,7 +23,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
     {
         /** @var array<string,int> */
         $logCounts = get_option($this->namespaceOption(Options::LOG_COUNTS), []);
-        return $logCounts[$severity] ?? 0;
+        return $logCounts[strtolower($severity)] ?? 0;
     }
 
     protected function namespaceOption(string $option): string
@@ -59,7 +59,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
          */
         $logCounts = array_merge(
             $logCounts,
-            $severityLogCounts
+            array_change_key_case($severityLogCounts, CASE_LOWER)
         );
         update_option($option, $logCounts);
     }
@@ -78,7 +78,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
          */
         $logCounts = get_option($option, []);
         foreach ($severities as $severity) {
-            unset($logCounts[$severity]);
+            unset($logCounts[strtolower($severity)]);
         }
 
         /**
