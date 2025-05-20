@@ -124,13 +124,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             [
                 'class' => Module::class,
                 'envVariable' => Environment::ENABLE_LOGS,
-                'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::LOGS,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOGS,
             ],
             [
                 'class' => Module::class,
                 'envVariable' => Environment::ENABLE_LOGS_BY_SEVERITY,
-                'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::LOGS,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOGS_BY_SEVERITY,
                 'callback' => fn (array $value) => array_keys(array_filter($value)),
             ],

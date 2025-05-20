@@ -220,7 +220,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 13.0.0 =
 * Breaking change: Replaced methods in `Logger`: `logInfo` and `logError` => `log(severity: ...)` (#3093)
-* Breaking change:  Split `Logger` service into `Logger` and `SystemLogger` (#3098)
+* Breaking change: Split `Logger` service into `Logger` and `SystemLogger` (#3098)
+* Breaking change: Moved "Logs" from "General" tab to new "Logs" tab in the Settings (#3103)
 * Enable logs by severity in the Settings (#3095)
 * Print the severity (`SUCCESS`/`INFO`/`WARNING`/`ERROR`) in the logs (#3099)
 * Add Logs page to the menu, to browse the logs (#3100)

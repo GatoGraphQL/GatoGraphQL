@@ -27,6 +27,20 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     //     };
     // }
 
+    /**
+     * Print logs before general
+     *
+     * @return string[]
+     */
+    public function getModulesToResolve(): array
+    {
+        $modules = parent::getModulesToResolve();
+        $pos = array_search(self::LOGS, $modules);
+        array_splice($modules, $pos, 1);
+        array_unshift($modules, self::LOGS);
+        return $modules;
+    }
+
     public function isHidden(string $module): bool
     {
         return match ($module) {
@@ -46,7 +60,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     public function getGeneralTabDisplayableOptionNames(): ?array
     {
         return [
-            self::OPTION_ENABLE_LOGS,
             self::OPTION_USE_ADVANCED_MODE,
         ];
     }

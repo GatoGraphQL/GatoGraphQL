@@ -23,6 +23,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     use PluginGeneralSettingsFunctionalityModuleResolverTrait;
 
     public final const GENERAL = Plugin::NAMESPACE . '\general';
+    public final const LOGS = Plugin::NAMESPACE . '\logs';
     public final const SERVER_IP_CONFIGURATION = Plugin::NAMESPACE . '\server-ip-configuration';
     public final const SCHEMA_EDITING_ACCESS = Plugin::NAMESPACE . '\schema-editing-access';
 
@@ -30,11 +31,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      * Setting options
      */
     public final const OPTION_ENABLE_SCHEMA_TUTORIAL = 'hide-tutorial-page';
-    public final const OPTION_ENABLE_LOGS = 'enable-logs';
-    public final const OPTION_ENABLE_LOGS_BY_SEVERITY = 'enable-logs-by-severity';
     public final const OPTION_INSTALL_PLUGIN_SETUP_DATA = 'install-plugin-setup-data';
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
+    public final const OPTION_ENABLE_LOGS = 'enable-logs';
+    public final const OPTION_ENABLE_LOGS_BY_SEVERITY = 'enable-logs-by-severity';
     public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
     public final const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
 
@@ -67,6 +68,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         return [
             self::GENERAL,
+            self::LOGS,
             self::SERVER_IP_CONFIGURATION,
             self::SCHEMA_EDITING_ACCESS,
         ];
@@ -76,6 +78,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         return match ($module) {
             self::GENERAL,
+            self::LOGS,
             self::SERVER_IP_CONFIGURATION
                 => true,
             default => parent::isPredefinedEnabledOrDisabled($module),
@@ -86,6 +89,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         return match ($module) {
             self::GENERAL,
+            self::LOGS,
             self::SERVER_IP_CONFIGURATION
                 => true,
             default => parent::isHidden($module),
@@ -96,6 +100,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         return match ($module) {
             self::GENERAL => \__('General', 'gatographql'),
+            self::LOGS => \__('Logs', 'gatographql'),
             self::SERVER_IP_CONFIGURATION => \__('Server IP Configuration', 'gatographql'),
             self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'gatographql'),
             default => $module,
@@ -106,6 +111,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         return match ($module) {
             self::GENERAL => \__('General options for the plugin', 'gatographql'),
+            self::LOGS => \__('Store and browse plugin logs', 'gatographql'),
             self::SERVER_IP_CONFIGURATION => \__('Configure retrieving the Client IP depending on the platform/environment', 'gatographql'),
             self::SCHEMA_EDITING_ACCESS => \__('Grant access to users other than admins to edit the GraphQL schema', 'gatographql'),
             default => parent::getDescription($module),
@@ -127,6 +133,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         $defaultValues = [
             self::GENERAL => [
                 self::OPTION_ENABLE_SCHEMA_TUTORIAL => false,
+                self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
+                self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
+                self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
+            ],
+            self::LOGS => [
                 self::OPTION_ENABLE_LOGS => $isApplicationEnvironmentDev,
                 self::OPTION_ENABLE_LOGS_BY_SEVERITY => [
                     LoggerSeverity::ERROR => true,
@@ -134,9 +145,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     LoggerSeverity::INFO => $isApplicationEnvironmentDev,
                     LoggerSeverity::DEBUG => $isApplicationEnvironmentDev,
                 ],
-                self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
-                self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
-                self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
             ],
             self::SERVER_IP_CONFIGURATION => [
                 self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME => 'REMOTE_ADDR',
@@ -176,55 +184,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         )
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-            }
-
-            $option = self::OPTION_ENABLE_LOGS;
-            if (
-                $moduleConfiguration->displayEnableLogsSettingsOption()
-                && ($generalTabDisplayableOptionNames === null || in_array($option, $generalTabDisplayableOptionNames))
-            ) {
-                $logFolder = PluginEnvironment::getLogsDir();
-                $relativeLogFolder = str_replace(
-                    constant('ABSPATH'),
-                    '',
-                    $logFolder
-                );
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Enable logs?', 'gatographql'),
-                    Properties::DESCRIPTION => sprintf(
-                        \__('Enable storing GraphQL execution logs (under folder <code>%s</code>), accessible via the <strong>%s</strong> menu', 'gatographql'),
-                        $relativeLogFolder,
-                        \__('Logs', 'gatographql')
-                    ),
-                    Properties::TYPE => Properties::TYPE_BOOL,
-                ];
-
-                $placeholder = \__('%s %s', 'gatographql');
-                $keyLabels = [
-                    LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
-                    LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
-                    LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
-                    LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
-                ];
-
-                $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
-                $moduleSettings[] = [
-                    Properties::INPUT => $option,
-                    Properties::NAME => $this->getSettingOptionName(
-                        $module,
-                        $option
-                    ),
-                    Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
-                    Properties::DESCRIPTION => \__('Indicate which severities are enabled for logging', 'gatographql'),
-                    Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
-                    Properties::KEY_LABELS => $keyLabels,
-                    Properties::SUBTYPE => Properties::TYPE_BOOL,
                 ];
             }
 
@@ -290,6 +249,51 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
+        } elseif ($module === self::LOGS && $moduleConfiguration->displayEnableLogsSettingsOption()) {
+            $logFolder = PluginEnvironment::getLogsDir();
+            $relativeLogFolder = str_replace(
+                constant('ABSPATH'),
+                '',
+                $logFolder
+            );
+
+            $option = self::OPTION_ENABLE_LOGS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable logs?', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Enable storing GraphQL execution logs (under folder <code>%s</code>), accessible via the <strong>%s</strong> menu', 'gatographql'),
+                    $relativeLogFolder,
+                    \__('Logs', 'gatographql')
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $placeholder = \__('%s %s', 'gatographql');
+            $keyLabels = [
+                LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
+                LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
+                LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
+                LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
+            ];
+
+            $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable logs by severity', 'gatographql-access-control'),
+                Properties::DESCRIPTION => \__('Indicate which severities are enabled for logging', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
+                Properties::KEY_LABELS => $keyLabels,
+                Properties::SUBTYPE => Properties::TYPE_BOOL,
+            ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
             if ($moduleConfiguration->enableSettingClientIPAddressServerPropertyName()) {
