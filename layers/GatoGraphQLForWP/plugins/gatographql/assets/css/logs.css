@@ -98,6 +98,9 @@
 }
 .gatogql-logs-entries .line:target .line-content {
     background: #fff8c5;
+    width: auto;
+    min-width: auto;
+    white-space: normal;
 }
 .gatogql-logs-entries .line:target .log-level:before {
     color: #fff8c5;
