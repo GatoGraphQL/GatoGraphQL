@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Enable logs by severity in the Settings (#3095)
 - Add Logs page to the menu, to browse the logs (#3100)
 - Split Logs by sources and date (#3100)
+- Logs count badge in the Logs menu link (#3105)
 
 ### Improvements
 
