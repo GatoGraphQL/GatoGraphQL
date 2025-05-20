@@ -62,13 +62,18 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
     public function isServiceEnabled(): bool
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         /** @var LoggerModuleConfiguration */
         $loggerModuleConfiguration = App::getModule(LoggerModule::class)->getConfiguration();
-        if (!$loggerModuleConfiguration->enableLogs() || !$moduleConfiguration->displayEnableLogsSettingsOption()) {
+        if (!$loggerModuleConfiguration->enableLogs()) {
             return false;
         }
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->displayEnableLogsSettingsOption()) {
+            return false;
+        }
+
         return parent::isServiceEnabled();
     }
 
