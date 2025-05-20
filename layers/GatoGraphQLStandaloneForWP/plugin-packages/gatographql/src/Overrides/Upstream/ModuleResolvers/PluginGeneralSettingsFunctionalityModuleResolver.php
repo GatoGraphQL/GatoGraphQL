@@ -46,7 +46,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
     public function getGeneralTabDisplayableOptionNames(): ?array
     {
         return [
-            self::OPTION_ENABLE_LOGS,
             self::OPTION_USE_ADVANCED_MODE,
         ];
     }
