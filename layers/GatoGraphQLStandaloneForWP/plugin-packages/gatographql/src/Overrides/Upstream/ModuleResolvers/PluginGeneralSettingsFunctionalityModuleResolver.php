@@ -29,7 +29,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends UpstreamPluginGen
 
     /**
      * Print logs before general
-     * 
+     *
      * @return string[]
      */
     public function getModulesToResolve(): array
