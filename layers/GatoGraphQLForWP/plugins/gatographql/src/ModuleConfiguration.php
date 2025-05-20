@@ -182,40 +182,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function enableLogs(): bool
-    {
-        $envVariable = Environment::ENABLE_LOGS;
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
-    /**
-     * @return string[]
-     */
-    public function enableLogsBySeverity(): array
-    {
-        $envVariable = Environment::ENABLE_LOGS_BY_SEVERITY;
-        $defaultValue = [
-            LoggerSeverity::ERROR,
-            LoggerSeverity::WARNING,
-            LoggerSeverity::INFO,
-            LoggerSeverity::DEBUG,
-        ];
-        $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function installPluginSetupData(): bool
     {
         $envVariable = Environment::INSTALL_PLUGIN_SETUP_DATA;

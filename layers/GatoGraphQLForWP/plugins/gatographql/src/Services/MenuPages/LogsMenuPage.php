@@ -14,6 +14,8 @@ use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
 use PoP\ComponentModel\App;
+use PoPSchema\Logger\Module as LoggerModule;
+use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
 use WP_List_Table;
 
 use function get_plugin_page_hook;
@@ -62,7 +64,9 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableLogs() || !$moduleConfiguration->displayEnableLogsSettingsOption()) {
+        /** @var LoggerModuleConfiguration */
+        $loggerModuleConfiguration = App::getModule(LoggerModule::class)->getConfiguration();
+        if (!$loggerModuleConfiguration->enableLogs() || !$moduleConfiguration->displayEnableLogsSettingsOption()) {
             return false;
         }
         return parent::isServiceEnabled();
