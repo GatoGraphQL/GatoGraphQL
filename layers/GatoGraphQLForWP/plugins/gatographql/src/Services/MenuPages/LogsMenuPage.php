@@ -124,13 +124,15 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     
 	/**
 	 * Render navigation to switch between logs browsing and settings.
-	 *
-	 * @return void
 	 */
-	private function render_section_nav(): void {
+	private function render_section_nav(): void
+    {
 		$params       = $this->get_query_params( array( 'view' ) );
-		$browse_url   = $this->get_logs_tab_url();
+        if ($params['view'] === 'list_files') {
+            return;
+        }
 
+        $browse_url   = $this->get_logs_tab_url();
 		?>
 		<ul class="subsubsub">
 			<li>
