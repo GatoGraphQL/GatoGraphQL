@@ -122,15 +122,17 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             return $defaultUserAuthorizationScheme->getName();
         }
 
+        $isApplicationEnvironmentDev = RootEnvironment::isApplicationEnvironmentDev();
+
         $defaultValues = [
             self::GENERAL => [
                 self::OPTION_ENABLE_SCHEMA_TUTORIAL => false,
-                self::OPTION_ENABLE_LOGS => RootEnvironment::isApplicationEnvironmentDev(),
+                self::OPTION_ENABLE_LOGS => $isApplicationEnvironmentDev,
                 self::OPTION_ENABLE_LOGS_BY_SEVERITY => [
                     LoggerSeverity::ERROR => true,
                     LoggerSeverity::WARNING => true,
-                    LoggerSeverity::INFO => true,
-                    LoggerSeverity::DEBUG => true,
+                    LoggerSeverity::INFO => $isApplicationEnvironmentDev,
+                    LoggerSeverity::DEBUG => $isApplicationEnvironmentDev,
                 ],
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
