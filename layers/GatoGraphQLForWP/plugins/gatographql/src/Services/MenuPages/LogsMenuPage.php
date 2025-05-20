@@ -288,8 +288,8 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                 );
                 ?>
             </h2>
-            <?php if (count($rotations) > 1) :
-                ?><?php // @phpstan-ignore-line ?>
+            <?php if (count($rotations) > 1) : // @phpstan-ignore-line
+                ?>
                 <nav class="gatogql-logs-single-file-rotations">
                     <h3><?php esc_html_e('File rotations:', 'gatographql'); ?></h3>
                     <ul class="gatogql-logs-rotation-links">
@@ -304,9 +304,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                             unset($rotations['current']);
                             ?>
                         <?php endif; ?>
-                        <?php foreach ($rotations as $rotation) :
-                            ?><?php // @phpstan-ignore-line ?>
-                            <?php
+                        <?php foreach ($rotations as $rotation) : // @phpstan-ignore-line
                             printf(
                                 '<li><a href="%1$s" class="button button-small button-%2$s">%3$s</a></li>',
                                 esc_url(add_query_arg('file_id', $rotation->get_file_id(), $rotation_url_base)),
@@ -339,9 +337,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             </div>
         </header>
         <section id="logs-entries" class="gatogql-logs-entries">
-            <?php while (! feof($stream)) :
-                ?> <?php // @phpstan-ignore-line ?>
-                <?php
+            <?php while (! feof($stream)) : // @phpstan-ignore-line
                 $line = fgets($stream); // @phpstan-ignore-line
                 if (is_string($line)) {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format_line does the escaping.
@@ -410,9 +406,8 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
      *
      * @return array
      */
-    public function get_query_params(array $param_keys = array()): array
+    public function get_query_params(array $param_keys = array()): array // @phpstan-ignore-line
     {
- // @phpstan-ignore-line
         $defaults = $this->get_query_param_defaults();
         $params   = filter_input_array(
             INPUT_GET,
