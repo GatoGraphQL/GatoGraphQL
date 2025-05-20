@@ -139,7 +139,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
             ],
             self::LOGS => [
-                self::OPTION_ENABLE_LOGS => $isApplicationEnvironmentDev,
+                self::OPTION_ENABLE_LOGS => true,
                 self::OPTION_ENABLE_LOGS_BY_SEVERITY => [
                     LoggerSeverity::ERROR => true,
                     LoggerSeverity::WARNING => true,
