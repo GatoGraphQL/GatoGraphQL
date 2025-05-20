@@ -32,6 +32,6 @@ trait LogCountBadgeMenuTrait
             return null;
         }
 
-        return '<span class="awaiting-mod update-plugins remaining-tasks-badge"><span class="count-' . esc_attr( $logCount ) . '">' . $logCount . '</span></span>';
+        return '<span class="awaiting-mod update-plugins remaining-tasks-badge"><span class="count-' . $logCount . '">' . $logCount . '</span></span>';
     }
 }
