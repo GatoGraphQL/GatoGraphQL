@@ -75,25 +75,25 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     {
         parent::initialize();
 
-		add_action('admin_init', function() {
+        add_action('admin_init', function () {
 
-			$pageHook = get_plugin_page_hook($this->getScreenID(), 'admin.php');
-			\add_action(
-				"load-{$pageHook}",
-				function (): void {
-					if (!$this->isCurrentScreen()) {
-					    return;
-					}
+            $pageHook = get_plugin_page_hook($this->getScreenID(), 'admin.php');
+            \add_action(
+                "load-{$pageHook}",
+                function (): void {
+                    if (!$this->isCurrentScreen()) {
+                        return;
+                    }
 
-					$this->file_controller = new FileController();
+                    $this->file_controller = new FileController();
 
-					$params = $this->get_query_params(array( 'view' ));
+                    $params = $this->get_query_params(array( 'view' ));
 
-					$this->setup_screen_options($params['view']);
-					$this->handle_list_table_bulk_actions($params['view']);
-				}
-			);
-		});
+                    $this->setup_screen_options($params['view']);
+                    $this->handle_list_table_bulk_actions($params['view']);
+                }
+            );
+        });
     }
 
     public function getMenuPageSlug(): string
@@ -121,33 +121,33 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
         </div>
         <?php
     }
-    
-	/**
-	 * Render navigation to switch between logs browsing and settings.
-	 */
-	private function render_section_nav(): void
+
+    /**
+     * Render navigation to switch between logs browsing and settings.
+     */
+    private function render_section_nav(): void
     {
-		$params       = $this->get_query_params( array( 'view' ) );
+        $params       = $this->get_query_params(array( 'view' ));
         if ($params['view'] === 'list_files') {
             return;
         }
 
         $browse_url   = $this->get_logs_tab_url();
-		?>
-		<ul class="subsubsub">
-			<li>
-				<?php
-				printf(
-					'<a href="%1$s">%2$s</a>',
-					esc_url( $browse_url ),
-					esc_html__( '← Browse log files', 'gatographql' )
-				);
-				?>
-			</li>
-		</ul>
-		<br class="clear">
-		<?php
-	}
+        ?>
+        <ul class="subsubsub">
+            <li>
+                <?php
+                printf(
+                    '<a href="%1$s">%2$s</a>',
+                    esc_url($browse_url),
+                    esc_html__('← Browse log files', 'gatographql')
+                );
+                ?>
+            </li>
+        </ul>
+        <br class="clear">
+        <?php
+    }
 
     /**
      * Get the canonical URL for the Logs tab of the Status admin page.
