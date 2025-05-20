@@ -835,6 +835,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Set the referer
             GuzzleHTTPEnvironment::GUZZLE_REQUEST_REFERER => home_url(),
         ];
+        $moduleClassConfiguration[LoggerModule::class] = [
+            LoggerEnvironment::LOGS_DIR => PluginEnvironment::getLogsDir(),
+        ];
 
         return $moduleClassConfiguration;
     }
