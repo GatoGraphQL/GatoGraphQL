@@ -61,7 +61,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         /** @var string */
         $logsDir = $moduleConfiguration->getLogsDir();
-        $logFile = $logsDir . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource, time());
+        $logFile = $logsDir . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource);
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
@@ -86,9 +86,9 @@ class Logger extends AbstractBasicService implements LoggerInterface
      * Generate the full name of a file based on source and date values.
      *
      * @param string $loggerSource The source property of a log entry, which determines the filename.
-     * @param int    $time   The time of the log entry as a Unix timestamp.
+     * @param array<string,mixed> $options
      */
-    protected function generateLogFilename(string $loggerSource, int $time): string
+    protected function generateLogFilename(string $loggerSource, array $options = []): string
     {
         return "$loggerSource.log";
     }
