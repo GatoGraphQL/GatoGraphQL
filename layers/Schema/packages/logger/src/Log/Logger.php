@@ -7,7 +7,6 @@ namespace PoPSchema\Logger\Log;
 use DateTimeInterface;
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoPSchema\Logger\Constants\LoggerSigns;
-use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\File;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
@@ -88,10 +87,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
      */
     protected function generateLogFilename(string $loggerSource, int $time): string
     {
-        $file_id = File::generate_file_id($loggerSource, null, $time);
-        $hash = File::generate_hash($file_id);
-
-        return "$file_id-$hash.log";
+        return "$loggerSource.log";
     }
 
     protected function addSeverityToMessage(): bool
