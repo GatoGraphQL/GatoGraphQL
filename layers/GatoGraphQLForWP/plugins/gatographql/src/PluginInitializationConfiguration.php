@@ -136,6 +136,20 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOGS_BY_SEVERITY,
                 'callback' => fn (array $value) => array_keys(array_filter($value)),
             ],
+            // Enable Log Count Badges?
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::ENABLE_LOG_COUNT_BADGES,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::LOGS,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOG_COUNT_BADGES,
+            ],
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::ENABLE_LOG_COUNT_BADGES_BY_SEVERITY,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::LOGS,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOG_COUNT_BADGES_BY_SEVERITY,
+                'callback' => fn (array $value) => array_keys(array_filter($value)),
+            ],
             // Install Plugin Setup Data
             [
                 'class' => Module::class,
