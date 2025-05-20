@@ -17,7 +17,7 @@ class Logger extends UpstreamLogger
     {
         return $this->logEntryCounterSettingsManager ??= LogEntryCounterSettingsManagerFacade::getInstance();
     }
-    
+
     /**
      * Generate the full name of a file based on source and date values.
      *
