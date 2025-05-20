@@ -65,7 +65,6 @@ class Logger extends AbstractBasicService implements LoggerInterface
         string $message,
         string $logFile,
     ): void {
-
         if ($this->addSeverityToMessage()) {
             $message = $this->getMessageWithLogSeverity($severity, $message);
         }
