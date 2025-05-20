@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use PoPSchema\Logger\Constants\LoggerSeverity;
+use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\{ File, FileController, FileListTable, SearchListTable };
 use GatoGraphQL\GatoGraphQL\Log\Controllers\PageController;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -13,11 +13,13 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
-use PoP\ComponentModel\App;
+use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
+use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoPSchema\Logger\Module as LoggerModule;
 use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
-use WP_List_Table;
 
+use PoP\ComponentModel\App;
+use WP_List_Table;
 use function get_plugin_page_hook;
 
 /**
@@ -41,6 +43,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?LogEntryCounterSettingsManagerInterface $logEntryCounterSettingsManager = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
@@ -59,6 +62,10 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             $this->userAuthorization = $userAuthorization;
         }
         return $this->userAuthorization;
+    }
+    final protected function getLogEntryCounterSettingsManager(): LogEntryCounterSettingsManagerInterface
+    {
+        return $this->logEntryCounterSettingsManager ??= LogEntryCounterSettingsManagerFacade::getInstance();
     }
 
     public function isServiceEnabled(): bool
@@ -94,6 +101,9 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                     if (!$this->isCurrentScreen()) {
                         return;
                     }
+
+                    // Clear the log counts
+                    $this->getLogEntryCounterSettingsManager()->removeLogCounts(LoggerSeverity::ALL);
 
                     $this->file_controller = new FileController();
 
