@@ -9,7 +9,6 @@ use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoPSchema\Logger\Constants\LoggerSigns;
 use PoPSchema\Logger\Module;
 use PoPSchema\Logger\ModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use InvalidArgumentException;
 use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
@@ -58,7 +57,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
         string $message,
         string $loggerSource = LoggerSources::INFO,
     ): void {
-        $logFile = PluginEnvironment::getLogsDir() . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource, time());
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        /** @var string */
+        $logsDir = $moduleConfiguration->getLogsDir();
+        $logFile = $logsDir . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource, time());
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
