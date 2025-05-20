@@ -86,7 +86,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
      * @param string $loggerSource The source property of a log entry, which determines the filename.
      * @param int    $time   The time of the log entry as a Unix timestamp.
      */
-    private function generateLogFilename(string $loggerSource, int $time): string
+    protected function generateLogFilename(string $loggerSource, int $time): string
     {
         $file_id = File::generate_file_id($loggerSource, null, $time);
         $hash = File::generate_hash($file_id);
