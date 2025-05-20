@@ -385,10 +385,14 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $logsMenuPageTitle = $logsMenuPage->getMenuPageTitle();
             $logsMenuPageMenuTitle = $logsMenuPageTitle;
 
-            // @todo Fix with the correct logic
-            $logCount = $this->getLogEntryCounterSettingsManager()->getLogCount(LoggerSeverity::DEBUG);
-            if ($logCount > 0) {
-                $logsMenuPageMenuTitle .= ' <span class="awaiting-mod update-plugins remaining-tasks-badge"><span class="count-' . esc_attr( $logCount ) . '">' . $logCount . '</span></span>';
+            // Check if the Log Count Badges are enabled, via the Settings
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->enableLogCountBadges()) {
+                $logCount = $this->getLogEntryCounterSettingsManager()->getLogCount($moduleConfiguration->enableLogCountBadgesBySeverity());
+                if ($logCount > 0) {
+                    $logsMenuPageMenuTitle .= ' <span class="awaiting-mod update-plugins remaining-tasks-badge"><span class="count-' . esc_attr( $logCount ) . '">' . $logCount . '</span></span>';
+                }
             }
 
             if (
