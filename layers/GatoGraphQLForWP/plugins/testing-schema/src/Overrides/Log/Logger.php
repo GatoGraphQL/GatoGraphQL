@@ -6,7 +6,6 @@ namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Overrides\Logger\Log\Logger as UpstreamLogger;
-use PoPSchema\Logger\Log\LoggerSources;
 use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
 class Logger extends UpstreamLogger
