@@ -28,7 +28,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         }
 
         $envVariable = Environment::ENABLE_LOGS;
-        $defaultValue = false;
+        $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
