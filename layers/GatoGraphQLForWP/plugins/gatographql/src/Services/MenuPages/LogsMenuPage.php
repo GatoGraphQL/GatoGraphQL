@@ -75,25 +75,25 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     {
         parent::initialize();
 
-		add_action('admin_init', function() {
+        add_action('admin_init', function () {
 
-			$pageHook = get_plugin_page_hook($this->getScreenID(), 'admin.php');
-			\add_action(
-				"load-{$pageHook}",
-				function (): void {
-					if (!$this->isCurrentScreen()) {
-					    return;
-					}
+            $pageHook = get_plugin_page_hook($this->getScreenID(), 'admin.php');
+            \add_action(
+                "load-{$pageHook}",
+                function (): void {
+                    if (!$this->isCurrentScreen()) {
+                        return;
+                    }
 
-					$this->file_controller = new FileController();
+                    $this->file_controller = new FileController();
 
-					$params = $this->get_query_params(array( 'view' ));
+                    $params = $this->get_query_params(array( 'view' ));
 
-					$this->setup_screen_options($params['view']);
-					$this->handle_list_table_bulk_actions($params['view']);
-				}
-			);
-		});
+                    $this->setup_screen_options($params['view']);
+                    $this->handle_list_table_bulk_actions($params['view']);
+                }
+            );
+        });
     }
 
     public function getMenuPageSlug(): string
@@ -116,8 +116,36 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
         ?>
         <div class="wrap woocommerce">
             <h1 class="screen-reader-text"><?php _e('Logs', 'gatographql'); ?></h1>
+            <?php $this->render_section_nav(); ?>
             <?php $this->render(); ?>
         </div>
+        <?php
+    }
+
+    /**
+     * Render navigation to switch between logs browsing and settings.
+     */
+    private function render_section_nav(): void
+    {
+        $params       = $this->get_query_params(array( 'view' ));
+        if ($params['view'] === 'list_files') {
+            return;
+        }
+
+        $browse_url   = $this->get_logs_tab_url();
+        ?>
+        <ul class="subsubsub">
+            <li>
+                <?php
+                printf(
+                    '<a href="%1$s">%2$s</a>',
+                    esc_url($browse_url),
+                    esc_html__('← Browse log files', 'gatographql')
+                );
+                ?>
+            </li>
+        </ul>
+        <br class="clear">
         <?php
     }
 
@@ -260,8 +288,8 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                 );
                 ?>
             </h2>
-            <?php if (count($rotations) > 1) :
-                ?><?php // @phpstan-ignore-line ?>
+            <?php if (count($rotations) > 1) : // @phpstan-ignore-line
+                ?>
                 <nav class="gatogql-logs-single-file-rotations">
                     <h3><?php esc_html_e('File rotations:', 'gatographql'); ?></h3>
                     <ul class="gatogql-logs-rotation-links">
@@ -276,9 +304,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                             unset($rotations['current']);
                             ?>
                         <?php endif; ?>
-                        <?php foreach ($rotations as $rotation) :
-                            ?><?php // @phpstan-ignore-line ?>
-                            <?php
+                        <?php foreach ($rotations as $rotation) : // @phpstan-ignore-line
                             printf(
                                 '<li><a href="%1$s" class="button button-small button-%2$s">%3$s</a></li>',
                                 esc_url(add_query_arg('file_id', $rotation->get_file_id(), $rotation_url_base)),
@@ -311,9 +337,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             </div>
         </header>
         <section id="logs-entries" class="gatogql-logs-entries">
-            <?php while (! feof($stream)) :
-                ?> <?php // @phpstan-ignore-line ?>
-                <?php
+            <?php while (! feof($stream)) : // @phpstan-ignore-line
                 $line = fgets($stream); // @phpstan-ignore-line
                 if (is_string($line)) {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format_line does the escaping.
@@ -382,9 +406,8 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
      *
      * @return array
      */
-    public function get_query_params(array $param_keys = array()): array
+    public function get_query_params(array $param_keys = array()): array // @phpstan-ignore-line
     {
- // @phpstan-ignore-line
         $defaults = $this->get_query_param_defaults();
         $params   = filter_input_array(
             INPUT_GET,
