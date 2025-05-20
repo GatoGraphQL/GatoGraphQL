@@ -23,10 +23,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
     {
         /** @var array<string,int> */
         $logCounts = get_option($this->namespaceOption(Options::LOG_COUNTS), []);
-        if (!array_key_exists($severity, $logCounts)) {
-            return 0;
-        }
-        return $logCounts[$severity];
+        return $logCounts[$severity] ?? 0;
     }
 
     protected function namespaceOption(string $option): string
