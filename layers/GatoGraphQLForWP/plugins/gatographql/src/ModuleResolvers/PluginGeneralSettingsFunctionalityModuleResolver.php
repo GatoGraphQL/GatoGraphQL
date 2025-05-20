@@ -308,6 +308,15 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
             ];
 
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'divider'
+                ),
+                Properties::DESCRIPTION => '<hr/>',
+                Properties::TYPE => Properties::TYPE_NULL,
+            ];
+
             $option = self::OPTION_ENABLE_LOG_COUNT_BADGES;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
