@@ -51,7 +51,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
     }
 
     /**
-     * @param array<string,string> $severityLogCounts Key: severity, Value: logCount
+     * @param array<string,int> $severityLogCounts Key: severity, Value: logCount
      */
     public function storeLogCounts(array $severityLogCounts): void
     {
