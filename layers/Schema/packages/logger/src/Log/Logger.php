@@ -46,7 +46,15 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        $this->logMessage($severity, $message, $loggerSource);
+        /** @var string */
+        $logsDir = $moduleConfiguration->getLogsDir();
+        $logFile = $logsDir . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource);
+        $hasLogFile = $this->maybeCreateLogFile($logFile);
+        if (!$hasLogFile) {
+            return;
+        }
+
+        $this->logMessage($severity, $message, $logFile);
     }
 
     /**
@@ -55,17 +63,8 @@ class Logger extends AbstractBasicService implements LoggerInterface
     protected function logMessage(
         string $severity,
         string $message,
-        string $loggerSource = LoggerSources::INFO,
+        string $logFile,
     ): void {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        /** @var string */
-        $logsDir = $moduleConfiguration->getLogsDir();
-        $logFile = $logsDir . \DIRECTORY_SEPARATOR . $this->generateLogFilename($loggerSource);
-        $hasLogFile = $this->maybeCreateLogFile($logFile);
-        if (!$hasLogFile) {
-            return;
-        }
 
         if ($this->addSeverityToMessage()) {
             $message = $this->getMessageWithLogSeverity($severity, $message);

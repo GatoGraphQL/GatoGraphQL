@@ -20,9 +20,9 @@ class Logger extends UpstreamLogger
     protected function logMessage(
         string $severity,
         string $message,
-        string $loggerSource = LoggerSources::INFO,
+        string $logFile,
     ): void {
-        parent::logMessage($severity, $message, $loggerSource);
+        parent::logMessage($severity, $message, $logFile);
 
         $this->sendCustomHeader(
             $message,
