@@ -46,7 +46,7 @@ class Logger extends UpstreamLogger
 
         // @todo Fix with the correct logic
         if (true) {
-            $this->getLogEntryCounterSettingsManager()->storeLogCount($severity, 1);
+            $this->getLogEntryCounterSettingsManager()->increaseLogCount($severity);
         }
     }
 }
