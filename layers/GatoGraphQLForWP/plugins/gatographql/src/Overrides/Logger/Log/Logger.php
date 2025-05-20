@@ -6,11 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\Overrides\Logger\Log;
 
 use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\File;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use PoPSchema\Logger\Log\Logger as UpstreamLogger;
-use PoP\ComponentModel\App;
 
 class Logger extends UpstreamLogger
 {
@@ -37,8 +34,7 @@ class Logger extends UpstreamLogger
     }
 
     /**
-     * Send the error to the response headers,
-     * so we can test it
+     * Increase the log count for the given severity.
      */
     protected function logMessage(
         string $logFile,
@@ -46,17 +42,6 @@ class Logger extends UpstreamLogger
         string $severity,
     ): void {
         parent::logMessage($logFile, $message, $severity);
-
-        // Check if the Log Count Badges are enabled, via the Settings
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableLogCountBadges()) {
-            return;
-        }
-
-        if (!in_array($severity, $moduleConfiguration->enableLogCountBadgesBySeverity())) {
-            return;
-        }
 
         $this->getLogEntryCounterSettingsManager()->increaseLogCount($severity);
     }
