@@ -18,11 +18,11 @@ class Logger extends UpstreamLogger
      * so we can test it
      */
     protected function logMessage(
-        string $severity,
-        string $message,
         string $logFile,
+        string $message,
+        string $severity,
     ): void {
-        parent::logMessage($severity, $message, $logFile);
+        parent::logMessage($logFile, $message, $severity);
 
         $this->sendCustomHeader(
             $message,
