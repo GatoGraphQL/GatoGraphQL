@@ -136,9 +136,8 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 			<li>
 				<?php
 				printf(
-					'<a href="%1$s"%2$s>%3$s</a>',
+					'<a href="%1$s">%2$s</a>',
 					esc_url( $browse_url ),
-					' class="current"',
 					esc_html__( 'Browse all logs', 'gatographql' )
 				);
 				?>
