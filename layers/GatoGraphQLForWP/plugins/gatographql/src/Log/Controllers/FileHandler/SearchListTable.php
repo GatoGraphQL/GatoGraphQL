@@ -9,6 +9,8 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_List_Table;
 
 /**
+ * @phpcs:ignoreFile
+ * 
  * SearchListTable class.
  */
 class SearchListTable extends WP_List_Table

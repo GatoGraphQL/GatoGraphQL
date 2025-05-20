@@ -21,6 +21,8 @@ use WP_List_Table;
 use function get_plugin_page_hook;
 
 /**
+ * @phpcs:ignoreFile
+ *
  * This file is based on WooCommerce.
  *
  * @see https://github.com/woocommerce/woocommerce/blob/9.8.5/plugins/woocommerce/includes/admin/views/html-admin-page-status.php#L37
@@ -36,7 +38,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
      * Instance of FileListTable or SearchListTable.
      */
     private FileListTable|SearchListTable|null $list_table = null;
-
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserAuthorizationInterface $userAuthorization = null;

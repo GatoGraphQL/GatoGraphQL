@@ -13,6 +13,8 @@ use PoP\ComponentModel\App;
 use WP_Error;
 
 /**
+ * @phpcs:ignoreFile
+ * 
  * FileController class.
  */
 class FileController

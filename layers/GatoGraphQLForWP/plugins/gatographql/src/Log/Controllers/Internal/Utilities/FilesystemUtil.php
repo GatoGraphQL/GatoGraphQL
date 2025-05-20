@@ -10,6 +10,8 @@ use WP_Filesystem_Base;
 use function get_filesystem_method;
 
 /**
+ * @phpcs:ignoreFile
+ * 
  * FilesystemUtil class.
  */
 class FilesystemUtil

@@ -10,6 +10,8 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use WP_Error;
 
 /**
+ * @phpcs:ignoreFile
+ * 
  * FileExport class.
  */
 class FileExporter

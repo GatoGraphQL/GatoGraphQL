@@ -9,6 +9,8 @@ use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Utilities\FilesystemUtil;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
+ * @phpcs:ignoreFile
+ * 
  * File class.
  *
  * An object representation of a single log file.
