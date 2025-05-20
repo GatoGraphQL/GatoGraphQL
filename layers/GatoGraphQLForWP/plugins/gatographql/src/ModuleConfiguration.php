@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
+use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
@@ -248,5 +249,37 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             default
                 => parent::enableHook($envVariable),
         };
+    }
+
+    public function enableLogCountBadges(): bool
+    {
+        $envVariable = Environment::ENABLE_LOG_COUNT_BADGES;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    public function enableLogCountBadgesBySeverity(): array
+    {
+        $envVariable = Environment::ENABLE_LOG_COUNT_BADGES_BY_SEVERITY;
+        $defaultValue = [
+            LoggerSeverity::ERROR,
+            LoggerSeverity::WARNING,
+        ];
+        $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
     }
 }
