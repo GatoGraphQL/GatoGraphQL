@@ -8,6 +8,7 @@ interface LogEntryCounterSettingsManagerInterface
 {
     public function getLogCount(string $severity): int;
     public function storeLogCount(string $severity, int $logCount): void;
+    public function increaseLogCount(string $severity): void;
     /**
      * @param array<string,int> $severityLogCounts Key: severity, Value: logCount
      */

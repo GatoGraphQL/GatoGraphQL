@@ -36,6 +36,11 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
         $this->storeLogCounts([$severity => $logCount]);
     }
 
+    public function increaseLogCount(string $severity): void
+    {
+        $this->storeLogCount($severity, $this->getLogCount($severity) + 1);
+    }
+
     /**
      * @param array<string,string> $severityLogCounts Key: severity, Value: logCount
      */
