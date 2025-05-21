@@ -15,6 +15,7 @@ use PoP\Root\Services\AbstractBasicService;
 
 use function error_log;
 use function str_pad;
+use function json_encode;
 
 class Logger extends AbstractBasicService implements LoggerInterface
 {
@@ -72,6 +73,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
          * Use an ISO 8601 date string in local (WordPress) timezone.
          */
         $date = date(DateTimeInterface::ATOM);
+        
+        if ($context !== null) {
+            $message .= ' CONTEXT: ' . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        }
+        
         error_log(sprintf(
             '%s %s' . PHP_EOL,
             $date,
