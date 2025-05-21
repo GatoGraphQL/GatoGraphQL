@@ -12,7 +12,7 @@ use PoPSchema\Logger\ModuleConfiguration;
 use InvalidArgumentException;
 use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
-use PoPSchema\Logger\Constants\Context;
+use PoPSchema\Logger\Constants\LoggerContext;
 
 use function error_log;
 use function str_pad;
@@ -78,7 +78,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         $date = date(DateTimeInterface::ATOM);
         
         if ($context !== null && $context !== []) {
-            $message .= $this->__(' ', 'logger') . Context::SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $message .= $this->__(' ', 'logger') . LoggerContext::SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         
         error_log(sprintf(

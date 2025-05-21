@@ -17,7 +17,7 @@ use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoPSchema\Logger\Module as LoggerModule;
 use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
-use PoPSchema\Logger\Constants\Context;
+use PoPSchema\Logger\Constants\LoggerContext;
 
 use PoP\ComponentModel\App;
 use WP_List_Table;
@@ -680,7 +680,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
         }
 
         if (isset($segments[2]) && $has_timestamp && $has_level) {
-            $message_chunks = explode(Context::SEPARATOR, $segments[2], 2);
+            $message_chunks = explode(LoggerContext::SEPARATOR, $segments[2], 2);
             if (isset($message_chunks[1])) {
                 try {
                     // Original code doesn't work, so we use this instead:
