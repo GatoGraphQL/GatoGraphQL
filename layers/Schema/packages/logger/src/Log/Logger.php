@@ -34,6 +34,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         string $severity,
         string $message,
         string $loggerSource = LoggerSources::INFO,
+        ?array $context = null,
     ): void {
         // Check if the Log is enabled, via the Settings
         /** @var ModuleConfiguration */

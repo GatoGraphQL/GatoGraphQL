@@ -10,5 +10,6 @@ interface LoggerInterface
         string $severity,
         string $message,
         string $loggerSource = LoggerSources::INFO,
+        ?array $context = null,
     ): void;
 }
