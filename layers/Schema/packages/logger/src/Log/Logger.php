@@ -107,12 +107,14 @@ class Logger extends AbstractBasicService implements LoggerInterface
 
         if ($this->addSpacePaddingToLogSeverity()) {
             $padLength = max(array_map('strlen', LoggerSeverity::ALL));
-            $severity = str_pad($severity, $padLength);
+            $messageSeverity = str_pad($severity, $padLength);
+        } else {
+            $messageSeverity = $severity;
         }
 
         $message = sprintf(
             \__('%s %s', 'gatographql'),
-            $severity,
+            $messageSeverity,
             $message,
         );
 
