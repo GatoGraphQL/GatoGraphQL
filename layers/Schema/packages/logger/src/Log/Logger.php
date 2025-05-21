@@ -56,7 +56,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         }
 
         $message = $this->getMessageWithLogSeverity($severity, $message);
-        $this->logMessage($logFile, $message, $severity);
+        $this->logMessage($logFile, $message, $severity, $context);
     }
 
     /**
@@ -66,6 +66,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         string $logFile,
         string $message,
         string $severity,
+        ?array $context = null,
     ): void {
         /**
          * Use an ISO 8601 date string in local (WordPress) timezone.
