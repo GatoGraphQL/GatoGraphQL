@@ -14,7 +14,9 @@ class Logger extends UpstreamLogger
 
     /**
      * Send the error to the response headers,
-     * so we can test it
+     * so we can test it.
+     *
+     * @param array<string,mixed>|null $context
      */
     protected function logMessage(
         string $logFile,

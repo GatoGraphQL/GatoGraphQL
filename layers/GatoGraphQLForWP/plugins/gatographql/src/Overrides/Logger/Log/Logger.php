@@ -35,6 +35,8 @@ class Logger extends UpstreamLogger
 
     /**
      * Increase the log count for the given severity.
+     *
+     * @param array<string,mixed>|null $context
      */
     protected function logMessage(
         string $logFile,

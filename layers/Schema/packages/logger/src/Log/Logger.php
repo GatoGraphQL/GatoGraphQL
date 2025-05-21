@@ -34,6 +34,9 @@ class Logger extends AbstractBasicService implements LoggerInterface
         return $this->systemLogger;
     }
 
+    /**
+     * @param array<string,mixed>|null $context
+     */
     public function log(
         string $severity,
         string $message,
@@ -65,6 +68,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
 
     /**
      * @see https://stackoverflow.com/a/7655379
+     * @param array<string,mixed>|null $context
      */
     protected function logMessage(
         string $logFile,
