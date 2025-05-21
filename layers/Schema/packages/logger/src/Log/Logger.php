@@ -80,11 +80,11 @@ class Logger extends AbstractBasicService implements LoggerInterface
          * Use an ISO 8601 date string in local (WordPress) timezone.
          */
         $date = date(DateTimeInterface::ATOM);
-        
+
         if ($context !== null && $context !== []) {
             $message .= $this->__(' ', 'logger') . LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
-        
+
         error_log(sprintf(
             '%s %s' . PHP_EOL,
             $date,
