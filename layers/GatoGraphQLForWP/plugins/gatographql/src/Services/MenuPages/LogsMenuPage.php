@@ -683,8 +683,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             $message_chunks = explode(LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR, $segments[2], 2);
             if (isset($message_chunks[1])) {
                 try {
-                    // Original code doesn't work, so we use this instead:
-                    // $maybe_json = html_entity_decode(addslashes(trim($message_chunks[1])));
                     $maybe_json = html_entity_decode(trim($message_chunks[1]));
 
                     // Decode for validation.
@@ -696,7 +694,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                     $message_chunks[1] = sprintf(
                         '<details><summary>%1$s</summary>%2$s</details>',
                         esc_html__('Additional context', 'gatographql'),
-                        esc_html(stripslashes($context)) // @phpstan-ignore-line
+                        esc_html($context) // @phpstan-ignore-line
                     );
 
                     $segments[2] = implode(' ', $message_chunks);
