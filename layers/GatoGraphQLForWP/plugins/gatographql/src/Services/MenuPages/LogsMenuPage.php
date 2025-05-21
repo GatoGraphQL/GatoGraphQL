@@ -680,7 +680,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
         }
 
         if (isset($segments[2]) && $has_timestamp && $has_level) {
-            $message_chunks = explode(LoggerContext::SEPARATOR, $segments[2], 2);
+            $message_chunks = explode(LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR, $segments[2], 2);
             if (isset($message_chunks[1])) {
                 try {
                     // Original code doesn't work, so we use this instead:
