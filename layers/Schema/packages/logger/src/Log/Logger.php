@@ -74,7 +74,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
          */
         $date = date(DateTimeInterface::ATOM);
         
-        if ($context !== null) {
+        if ($context !== null && $context !== []) {
             $message .= ' CONTEXT: ' . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         
