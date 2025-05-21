@@ -14,14 +14,17 @@ class Logger extends UpstreamLogger
 
     /**
      * Send the error to the response headers,
-     * so we can test it
+     * so we can test it.
+     *
+     * @param array<string,mixed>|null $context
      */
     protected function logMessage(
         string $logFile,
         string $message,
         string $severity,
+        ?array $context = null,
     ): void {
-        parent::logMessage($logFile, $message, $severity);
+        parent::logMessage($logFile, $message, $severity, $context);
 
         $this->sendCustomHeader(
             $message,

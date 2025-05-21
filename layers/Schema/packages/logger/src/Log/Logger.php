@@ -12,12 +12,16 @@ use PoPSchema\Logger\ModuleConfiguration;
 use InvalidArgumentException;
 use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
+use PoPSchema\Logger\Constants\LoggerContext;
 
 use function error_log;
 use function str_pad;
+use function json_encode;
 
 class Logger extends AbstractBasicService implements LoggerInterface
 {
+    public const CONTEXT_SEPARATOR = 'CONTEXT: ';
+
     private ?SystemLoggerInterface $systemLogger = null;
 
     final protected function getSystemLogger(): SystemLoggerInterface
@@ -30,10 +34,14 @@ class Logger extends AbstractBasicService implements LoggerInterface
         return $this->systemLogger;
     }
 
+    /**
+     * @param array<string,mixed>|null $context
+     */
     public function log(
         string $severity,
         string $message,
         string $loggerSource = LoggerSources::INFO,
+        ?array $context = null,
     ): void {
         // Check if the Log is enabled, via the Settings
         /** @var ModuleConfiguration */
@@ -55,21 +63,28 @@ class Logger extends AbstractBasicService implements LoggerInterface
         }
 
         $message = $this->getMessageWithLogSeverity($severity, $message);
-        $this->logMessage($logFile, $message, $severity);
+        $this->logMessage($logFile, $message, $severity, $context);
     }
 
     /**
      * @see https://stackoverflow.com/a/7655379
+     * @param array<string,mixed>|null $context
      */
     protected function logMessage(
         string $logFile,
         string $message,
         string $severity,
+        ?array $context = null,
     ): void {
         /**
          * Use an ISO 8601 date string in local (WordPress) timezone.
          */
         $date = date(DateTimeInterface::ATOM);
+
+        if ($context !== null && $context !== []) {
+            $message .= $this->__(' ', 'logger') . LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        }
+
         error_log(sprintf(
             '%s %s' . PHP_EOL,
             $date,
@@ -94,25 +109,36 @@ class Logger extends AbstractBasicService implements LoggerInterface
             throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
         }
 
-        $padLength = max(array_map('strlen', LoggerSeverity::ALL));
+        if ($this->addSpacePaddingToLogSeverity()) {
+            $padLength = max(array_map('strlen', LoggerSeverity::ALL));
+            $messageSeverity = str_pad($severity, $padLength);
+        } else {
+            $messageSeverity = $severity;
+        }
 
-        if (!$this->addLoggerSignToMessage()) {
-            return sprintf(
+        $message = sprintf(
+            \__('%s %s', 'gatographql'),
+            $messageSeverity,
+            $message,
+        );
+
+        if ($this->addLoggerSignToMessage()) {
+            $message = sprintf(
                 \__('%s %s', 'gatographql'),
-                str_pad($severity, $padLength),
+                $this->getLoggerSeveritySign($severity),
                 $message,
             );
         }
 
-        return sprintf(
-            \__('%s %s %s', 'gatographql'),
-            $this->getLoggerSeveritySign($severity),
-            str_pad($severity, $padLength),
-            $message,
-        );
+        return $message;
     }
 
     protected function addLoggerSignToMessage(): bool
+    {
+        return false;
+    }
+
+    protected function addSpacePaddingToLogSeverity(): bool
     {
         return false;
     }

@@ -35,13 +35,16 @@ class Logger extends UpstreamLogger
 
     /**
      * Increase the log count for the given severity.
+     *
+     * @param array<string,mixed>|null $context
      */
     protected function logMessage(
         string $logFile,
         string $message,
         string $severity,
+        ?array $context = null,
     ): void {
-        parent::logMessage($logFile, $message, $severity);
+        parent::logMessage($logFile, $message, $severity, $context);
 
         $this->getLogEntryCounterSettingsManager()->increaseLogCount($severity);
     }
