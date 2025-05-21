@@ -19,6 +19,8 @@ use function json_encode;
 
 class Logger extends AbstractBasicService implements LoggerInterface
 {
+    public const CONTEXT_SEPARATOR = 'CONTEXT: ';
+
     private ?SystemLoggerInterface $systemLogger = null;
 
     final protected function getSystemLogger(): SystemLoggerInterface
@@ -75,7 +77,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         $date = date(DateTimeInterface::ATOM);
         
         if ($context !== null && $context !== []) {
-            $message .= ' CONTEXT: ' . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $message .= $this->__(' ', 'logger') . self::CONTEXT_SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         
         error_log(sprintf(
