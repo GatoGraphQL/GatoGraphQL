@@ -692,7 +692,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                     $context = wp_json_encode($context, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
                     $message_chunks[1] = sprintf(
-                        '<details><summary>%1$s</summary>%2$s</details>',
+                        '<details><summary>%1$s</summary><pre><code>%2$s</code></pre></details>',
                         esc_html__('Additional context', 'gatographql'),
                         esc_html($context) // @phpstan-ignore-line
                     );
