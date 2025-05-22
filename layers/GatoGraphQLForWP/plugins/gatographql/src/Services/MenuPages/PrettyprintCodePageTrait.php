@@ -13,8 +13,10 @@ trait PrettyprintCodePageTrait
 {
     /**
      * Enqueue the required assets
+     *
+     * @param string[]|null $languages
      */
-    protected function enqueueHighlightJSAssets(): void
+    protected function enqueueHighlightJSAssets(?array $languages = null): void
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $mainPluginURL = $mainPlugin->getPluginURL();
@@ -54,46 +56,56 @@ trait PrettyprintCodePageTrait
             true
         );
         \wp_enqueue_script(
-            'highlight-language-graphql',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/graphql.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'highlight-language-json',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/json.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'highlight-language-bash',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/bash.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'highlight-language-xml',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/xml.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'highlight-language-diff',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/diff.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
             'highlight-run',
             $mainPluginURL . 'assets/js/run_highlight.js',
             array('highlight'),
             $mainPluginVersion,
             true
         );
+        if ($languages === null || in_array('graphql', $languages)) {
+            \wp_enqueue_script(
+                'highlight-language-graphql',
+                $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/graphql.min.js',
+                array('highlight'),
+                $mainPluginVersion,
+                true
+            );
+        }
+        if ($languages === null || in_array('json', $languages)) {
+            \wp_enqueue_script(
+                'highlight-language-json',
+                $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/json.min.js',
+                array('highlight'),
+                $mainPluginVersion,
+                true
+            );
+        }
+        if ($languages === null || in_array('bash', $languages)) {
+            \wp_enqueue_script(
+                'highlight-language-bash',
+                $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/bash.min.js',
+                array('highlight'),
+                $mainPluginVersion,
+                true
+            );
+        }
+        if ($languages === null || in_array('xml', $languages)) {
+            \wp_enqueue_script(
+                'highlight-language-xml',
+                $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/xml.min.js',
+                array('highlight'),
+                $mainPluginVersion,
+                true
+            );
+        }
+        if ($languages === null || in_array('diff', $languages)) {
+            \wp_enqueue_script(
+                'highlight-language-diff',
+                $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/diff.min.js',
+                array('highlight'),
+                $mainPluginVersion,
+                true
+            );
+        }
     }
 }
