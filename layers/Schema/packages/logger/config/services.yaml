@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPSchema\Logger\Log\LoggerInterface:
+        class: \PoPSchema\Logger\Log\Logger
+
+    PoPSchema\Logger\Log\SystemLoggerInterface:
+        class: \PoPSchema\Logger\Log\SystemLogger

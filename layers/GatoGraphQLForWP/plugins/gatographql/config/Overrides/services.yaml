@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoPSchema\Logger\Log\LoggerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Overrides\Logger\Log\Logger
+
     # Make sure the GraphiQL client is used, without the Explorer
     # Because if isGraphiQLExplorerEnabled might be true, the explorer is enabled
     # but if disabled for the single endpoint, then it must not

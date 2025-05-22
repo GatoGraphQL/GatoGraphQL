@@ -64,6 +64,7 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
             \PoPCMSSchema\UserStateWP\Module::class,
             \PoPCMSSchema\UserMetaMutationsWP\Module::class,
+            \PoPSchema\Logger\Module::class,
             \PoPWPSchema\CommentMeta\Module::class,
             \PoPWPSchema\Comments\Module::class,
             \PoPWPSchema\CustomPostMeta\Module::class,

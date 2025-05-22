@@ -14,6 +14,8 @@ use function add_menu_page;
  */
 class PluginMenu extends AbstractMenu
 {
+    use LogCountBadgeMenuTrait;
+
     private ?UserAuthorizationInterface $userAuthorization = null;
 
     final protected function getUserAuthorization(): UserAuthorizationInterface
@@ -35,9 +37,16 @@ class PluginMenu extends AbstractMenu
     {
         $menuName = $this->getMenuName();
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
+
+        $menuNameTitle = $menuName;
+        $logCountBadge = $this->getLogCountBadge();
+        if ($logCountBadge !== null) {
+            $menuNameTitle .= ' ' . $logCountBadge;
+        }
+
         add_menu_page(
             $menuName,
-            $menuName,
+            $menuNameTitle,
             $schemaEditorAccessCapability,
             $this->getName(),
             function (): void {

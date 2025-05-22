@@ -4,37 +4,33 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
-use GatoGraphQL\GatoGraphQL\Log\Logger as UpstreamLogger;
+use PoPSchema\Logger\Constants\LoggerSeverity;
+use GatoGraphQL\GatoGraphQL\Overrides\Logger\Log\Logger as UpstreamLogger;
 use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
 class Logger extends UpstreamLogger
 {
+    use LoggerTrait;
+
     /**
      * Send the error to the response headers,
-     * so we can test it
+     * so we can test it.
+     *
+     * @param array<string,mixed>|null $context
      */
-    public function logError(string $message): void
-    {
-        parent::logError($message);
+    protected function logMessage(
+        string $logFile,
+        string $message,
+        string $severity,
+        ?array $context = null,
+    ): void {
+        parent::logMessage($logFile, $message, $severity, $context);
 
-        header(sprintf(
-            '%s: %s',
-            CustomHeaders::GATOGRAPHQL_ERRORS,
-            str_replace(PHP_EOL, '\n', $message)
-        ));
-    }
-    /**
-     * Send the error to the response headers,
-     * so we can test it
-     */
-    public function logInfo(string $message): void
-    {
-        parent::logInfo($message);
-
-        header(sprintf(
-            '%s: %s',
-            CustomHeaders::GATOGRAPHQL_INFO,
-            str_replace(PHP_EOL, '\n', $message)
-        ));
+        $this->sendCustomHeader(
+            $message,
+            $severity === LoggerSeverity::ERROR
+                ? CustomHeaders::GATOGRAPHQL_ERRORS
+                : CustomHeaders::GATOGRAPHQL_INFO,
+        );
     }
 }

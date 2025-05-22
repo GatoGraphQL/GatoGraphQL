@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
+use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -16,13 +17,16 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionDocModuleDocumentationMe
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionDocsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\LogsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\MenuPageInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\Menus\LogCountBadgeMenuTrait;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
+use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use PoP\Root\App;
 
 use function add_submenu_page;
@@ -30,6 +34,7 @@ use function add_submenu_page;
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
     use WithSettingsPageMenuPageAttacherTrait;
+    use LogCountBadgeMenuTrait;
 
     private ?MenuPageHelper $menuPageHelper = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -43,8 +48,10 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     private ?ExtensionDocsMenuPage $extensionDocsMenuPage = null;
     private ?TutorialMenuPage $tutorialMenuPage = null;
+    private ?LogsMenuPage $logsMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
     private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
+    private ?LogEntryCounterSettingsManagerInterface $logEntryCounterSettingsManager = null;
 
     final protected function getMenuPageHelper(): MenuPageHelper
     {
@@ -154,6 +161,15 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->tutorialMenuPage;
     }
+    final protected function getLogsMenuPage(): LogsMenuPage
+    {
+        if ($this->logsMenuPage === null) {
+            /** @var LogsMenuPage */
+            $logsMenuPage = $this->instanceManager->getInstance(LogsMenuPage::class);
+            $this->logsMenuPage = $logsMenuPage;
+        }
+        return $this->logsMenuPage;
+    }
     final protected function getAboutMenuPage(): AboutMenuPage
     {
         if ($this->aboutMenuPage === null) {
@@ -171,6 +187,10 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->graphQLEndpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy;
         }
         return $this->graphQLEndpointCategoryTaxonomy;
+    }
+    final protected function getLogEntryCounterSettingsManager(): LogEntryCounterSettingsManagerInterface
+    {
+        return $this->logEntryCounterSettingsManager ??= LogEntryCounterSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -357,6 +377,30 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
                 )
             ) {
                 $tutorialMenuPage->setHookName($hookName);
+            }
+        }
+
+        $logsMenuPage = $this->getLogsMenuPage();
+        if ($logsMenuPage->isServiceEnabled()) {
+            $logsMenuPageTitle = $logsMenuPage->getMenuPageTitle();
+            $logsMenuPageMenuTitle = $logsMenuPageTitle;
+
+            $logCountBadge = $this->getLogCountBadge();
+            if ($logCountBadge !== null) {
+                $logsMenuPageMenuTitle .= ' ' . $logCountBadge;
+            }
+
+            if (
+                $hookName = add_submenu_page(
+                    $menuName,
+                    $logsMenuPageTitle,
+                    $logsMenuPageMenuTitle,
+                    'manage_options',
+                    $logsMenuPage->getScreenID(),
+                    [$logsMenuPage, 'print']
+                )
+            ) {
+                $logsMenuPage->setHookName($hookName);
             }
         }
 
