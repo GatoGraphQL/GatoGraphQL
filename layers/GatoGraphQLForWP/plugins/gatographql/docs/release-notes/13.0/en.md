@@ -17,3 +17,7 @@
 
 - Print the severity (`SUCCESS`/`INFO`/`WARNING`/`ERROR`) in the logs ([#3099](https://github.com/GatoGraphQL/GatoGraphQL/pull/3099))
 - Use the Logger also when using plugin as standalone (without WordPress) ([#3104](https://github.com/GatoGraphQL/GatoGraphQL/pull/3104))
+
+### Fixed
+
+- Error type for "Custom post does not exist" was missing from union types ([#3109](https://github.com/GatoGraphQL/GatoGraphQL/pull/3109))
