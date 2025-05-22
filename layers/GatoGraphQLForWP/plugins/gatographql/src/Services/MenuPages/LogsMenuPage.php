@@ -804,6 +804,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             $mainPluginVersion
         );
 
-        $this->enqueueHighlightJSAssets();
+        $this->enqueueHighlightJSAssets(['json']);
     }
 }
