@@ -65,7 +65,7 @@ trait PrettyprintCodePageTrait
 
         $languageFiles = [
             'graphql' => 'graphql.min.js',
-            'json' => 'json.min.js', 
+            'json' => 'json.min.js',
             'bash' => 'bash.min.js',
             'xml' => 'xml.min.js',
             'diff' => 'diff.min.js'
