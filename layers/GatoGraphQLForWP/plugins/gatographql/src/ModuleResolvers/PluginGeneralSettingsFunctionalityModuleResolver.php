@@ -151,7 +151,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 self::OPTION_ENABLE_LOG_COUNT_BADGES => true,
                 self::OPTION_ENABLE_LOG_COUNT_BADGES_BY_SEVERITY => [
                     LoggerSeverity::ERROR => true,
-                    LoggerSeverity::WARNING => true,
+                    LoggerSeverity::WARNING => false,
                     LoggerSeverity::INFO => false,
                     LoggerSeverity::DEBUG => false,
                 ],
