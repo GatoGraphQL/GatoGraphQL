@@ -104,7 +104,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         $result = $this->executeAddEntityMeta($entityID, $key, $value, $single);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                \__('Error adding meta', 'meta-mutations')
+                $this->__('Error adding meta', 'meta-mutations')
             );
         }
         $this->handleMaybeError($result);
@@ -145,7 +145,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                \__('Error updating meta', 'meta-mutations')
+                $this->__('Error updating meta', 'meta-mutations')
             );
         }
         /** @var int|bool $result */
@@ -171,7 +171,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                \__('Error deleting meta', 'meta-mutations')
+                $this->__('Error deleting meta', 'meta-mutations')
             );
         }
     }
