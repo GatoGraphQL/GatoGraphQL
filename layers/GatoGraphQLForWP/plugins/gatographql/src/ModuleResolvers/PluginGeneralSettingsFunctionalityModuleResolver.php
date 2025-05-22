@@ -415,7 +415,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
 
     /**
      * Get the descriptions for each log severity level
-     * 
+     *
      * @return array<string,string> Array of severity => description
      */
     protected function getLogSeverityDescriptions(): array
@@ -457,7 +457,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
 
     /**
      * Get the key labels for each severity level
-     * 
+     *
      * @return array<string,string> Array of severity => label
      */
     protected function getSeverityKeyLabels(): array
