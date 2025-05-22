@@ -291,15 +291,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
-            $placeholder = \__('%s %s', 'gatographql');
-            $keyLabels = [
-                LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
-                LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
-                LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
-                LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
-            ];
-
             $option = self::OPTION_ENABLE_LOGS_BY_SEVERITY;
+            $severityKeyLabels = $this->getSeverityKeyLabels();
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -309,7 +302,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TITLE => \__('Enable logs by severity', 'gatographql'),
                 Properties::DESCRIPTION => $this->getEnableLogsBySeverityDescription(),
                 Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
-                Properties::KEY_LABELS => $keyLabels,
+                Properties::KEY_LABELS => $severityKeyLabels,
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
             ];
 
@@ -347,7 +340,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TITLE => \__('Enable log notifications by severity', 'gatographql'),
                 Properties::DESCRIPTION => \__('Indicate which severities are included in the badge\'s count', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
-                Properties::KEY_LABELS => $keyLabels,
+                Properties::KEY_LABELS => $severityKeyLabels,
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
@@ -421,25 +414,60 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     }
 
     /**
+     * Get the descriptions for each log severity level
+     * 
+     * @return array<string,string> Array of severity => description
+     */
+    protected function getLogSeverityDescriptions(): array
+    {
+        return [
+            LoggerSeverity::ERROR => \__('Critical issues that prevent the operation from completing', 'gatographql'),
+            LoggerSeverity::WARNING => \__('Non-critical issues that may affect the operation', 'gatographql'),
+            LoggerSeverity::INFO => \__('General information about the operation', 'gatographql'),
+            LoggerSeverity::DEBUG => \__('Detailed information for debugging purposes', 'gatographql'),
+        ];
+    }
+
+    /**
      * Get the description for enabling logs by severity
      */
     protected function getEnableLogsBySeverityDescription(): string
     {
+        $severityDescriptions = $this->getLogSeverityDescriptions();
+        $severityKeyLabels = $this->getSeverityKeyLabels();
+        $severityItems = [];
+        foreach ($severityDescriptions as $severity => $description) {
+            $severityItems[] = sprintf(
+                '<li><strong>%s</strong>: %s</li>',
+                $severityKeyLabels[$severity],
+                $description
+            );
+        }
+
         return sprintf(
             \__('Indicate which severities are enabled for logging. %s', 'gatographql'),
             $this->getCollapsible(
                 sprintf(
-                    \__('<br/>Available severities:<br/><ul><li><strong>%s</strong>: %s</li><li><strong>%s</strong>: %s</li><li><strong>%s</strong>: %s</li><li><strong>%s</strong>: %s</li></ul>', 'gatographql'),
-                    LoggerSigns::ERROR . ' ' . \__('Error', 'gatographql'),
-                    \__('Critical issues that prevent the operation from completing', 'gatographql'),
-                    LoggerSigns::WARNING . ' ' . \__('Warning', 'gatographql'),
-                    \__('Non-critical issues that may affect the operation', 'gatographql'),
-                    LoggerSigns::INFO . ' ' . \__('Info', 'gatographql'),
-                    \__('General information about the operation', 'gatographql'),
-                    LoggerSigns::DEBUG . ' ' . \__('Debug', 'gatographql'),
-                    \__('Detailed information for debugging purposes', 'gatographql')
+                    \__('<br/>Available severities:<br/><ul>%s</ul>', 'gatographql'),
+                    implode('', $severityItems)
                 )
             )
         );
+    }
+
+    /**
+     * Get the key labels for each severity level
+     * 
+     * @return array<string,string> Array of severity => label
+     */
+    protected function getSeverityKeyLabels(): array
+    {
+        $placeholder = \__('%s %s', 'gatographql');
+        return [
+            LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
+            LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
+            LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
+            LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
+        ];
     }
 }
