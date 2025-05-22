@@ -32,6 +32,8 @@ use function get_plugin_page_hook;
  */
 class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 {
+    use PrettyprintCodePageTrait;
+
     /**
      * Instance of FileController.
      */
@@ -692,7 +694,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                     $context = wp_json_encode($context, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
                     $message_chunks[1] = sprintf(
-                        '<details><summary>%1$s</summary>%2$s</details>',
+                        '<details><summary>%1$s</summary><pre><code class="prettyprint hljs language-json">%2$s</code></pre></details>',
                         esc_html__('Additional context', 'gatographql'),
                         esc_html($context) // @phpstan-ignore-line
                     );
@@ -801,5 +803,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             array(),
             $mainPluginVersion
         );
+
+        $this->enqueueHighlightJSAssets(['json']);
     }
 }

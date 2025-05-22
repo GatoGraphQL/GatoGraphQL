@@ -13,8 +13,10 @@ trait PrettyprintCodePageTrait
 {
     /**
      * Enqueue the required assets
+     *
+     * @param string[]|null $languages
      */
-    protected function enqueueHighlightJSAssets(): void
+    protected function enqueueHighlightJSAssets(?array $languages = null): void
     {
         $mainPlugin = PluginApp::getMainPlugin();
         $mainPluginURL = $mainPlugin->getPluginURL();
@@ -54,46 +56,30 @@ trait PrettyprintCodePageTrait
             true
         );
         \wp_enqueue_script(
-            'highlight-language-graphql',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/graphql.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'highlight-language-json',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/json.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'highlight-language-bash',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/bash.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'highlight-language-xml',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/xml.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'highlight-language-diff',
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/diff.min.js',
-            array('highlight'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
             'highlight-run',
             $mainPluginURL . 'assets/js/run_highlight.js',
             array('highlight'),
             $mainPluginVersion,
             true
         );
+
+        $languageFiles = [
+            'graphql' => 'graphql.min.js',
+            'json' => 'json.min.js', 
+            'bash' => 'bash.min.js',
+            'xml' => 'xml.min.js',
+            'diff' => 'diff.min.js'
+        ];
+        foreach ($languageFiles as $language => $file) {
+            if ($languages === null || in_array($language, $languages)) {
+                \wp_enqueue_script(
+                    "highlight-language-{$language}",
+                    $mainPluginURL . "assets/js/vendors/highlight-11.6.0/languages/{$file}",
+                    array('highlight'),
+                    $mainPluginVersion,
+                    true
+                );
+            }
+        }
     }
 }
