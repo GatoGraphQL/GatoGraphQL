@@ -117,14 +117,14 @@ class Logger extends AbstractBasicService implements LoggerInterface
         }
 
         $message = sprintf(
-            \__('%s %s', 'gatographql'),
+            $this->__('%s %s', 'gatographql'),
             $messageSeverity,
             $message,
         );
 
         if ($this->addLoggerSignToMessage()) {
             $message = sprintf(
-                \__('%s %s', 'gatographql'),
+                $this->__('%s %s', 'gatographql'),
                 $this->getLoggerSeveritySign($severity),
                 $message,
             );
