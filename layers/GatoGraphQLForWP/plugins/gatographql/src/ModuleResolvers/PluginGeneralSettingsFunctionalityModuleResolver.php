@@ -307,7 +307,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $option
                 ),
                 Properties::TITLE => \__('Enable logs by severity', 'gatographql'),
-                Properties::DESCRIPTION => \__('Indicate which severities are enabled for logging', 'gatographql'),
+                Properties::DESCRIPTION => $this->getEnableLogsBySeverityDescription(),
                 Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                 Properties::KEY_LABELS => $keyLabels,
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
@@ -418,5 +418,28 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public function getGeneralTabDisplayableOptionNames(): ?array
     {
         return null;
+    }
+
+    /**
+     * Get the description for enabling logs by severity
+     */
+    protected function getEnableLogsBySeverityDescription(): string
+    {
+        return sprintf(
+            \__('Indicate which severities are enabled for logging. %s', 'gatographql'),
+            $this->getCollapsible(
+                sprintf(
+                    \__('<br/>Available severities:<br/><ul><li><strong>%s</strong>: %s</li><li><strong>%s</strong>: %s</li><li><strong>%s</strong>: %s</li><li><strong>%s</strong>: %s</li></ul>', 'gatographql'),
+                    LoggerSigns::ERROR . ' ' . \__('Error', 'gatographql'),
+                    \__('Critical issues that prevent the operation from completing', 'gatographql'),
+                    LoggerSigns::WARNING . ' ' . \__('Warning', 'gatographql'),
+                    \__('Non-critical issues that may affect the operation', 'gatographql'),
+                    LoggerSigns::INFO . ' ' . \__('Info', 'gatographql'),
+                    \__('General information about the operation', 'gatographql'),
+                    LoggerSigns::DEBUG . ' ' . \__('Debug', 'gatographql'),
+                    \__('Detailed information for debugging purposes', 'gatographql')
+                )
+            )
+        );
     }
 }
