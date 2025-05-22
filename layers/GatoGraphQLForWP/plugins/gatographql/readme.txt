@@ -228,6 +228,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Logs count badge in the Logs menu link (#3105)
 * Print the severity (`SUCCESS`/`INFO`/`WARNING`/`ERROR`) in the logs (#3099)
 * Use the Logger also when using plugin as standalone (without WordPress) (#3104)
+* Fixed: Error type for "Custom post does not exist" was missing from union types (#3109)
 
 = 12.2.0 =
 * Fixed: Exception when clicking on Extensions link (#3092)

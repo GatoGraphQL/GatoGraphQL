@@ -24,6 +24,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Print the severity (`SUCCESS`/`INFO`/`WARNING`/`ERROR`) in the logs (#3099)
 - Use the Logger also when using plugin as standalone (without WordPress) (#3104)
 
+### Fixed
+
+- Error type for "Custom post does not exist" was missing from union types (#3109)
+
 ## 12.2.2 - 13/05/2025
 
 (Empty - Version sync with PRO)
