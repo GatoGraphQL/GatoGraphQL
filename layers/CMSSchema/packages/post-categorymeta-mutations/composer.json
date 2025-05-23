@@ -182,10 +182,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/categories": "^13.0",
-        "pop-cms-schema/categorymeta-mutations": "^13.0",
-        "pop-cms-schema/post-category-mutations": "^13.0",
-        "pop-cms-schema/taxonomymeta-mutations": "^13.0"
+        "pop-cms-schema/categories": "^13.1",
+        "pop-cms-schema/categorymeta-mutations": "^13.1",
+        "pop-cms-schema/post-category-mutations": "^13.1",
+        "pop-cms-schema/taxonomymeta-mutations": "^13.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -211,7 +211,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "13.0-dev"
+            "dev-master": "13.1-dev"
         }
     },
     "config": {
