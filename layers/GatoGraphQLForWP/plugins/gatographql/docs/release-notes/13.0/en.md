@@ -21,3 +21,4 @@
 ### Fixed
 
 - Error type for "Custom post does not exist" was missing from union types ([#3109](https://github.com/GatoGraphQL/GatoGraphQL/pull/3109))
+- Do not show the notification count badge in the plugin menu if the Logs page is not enabled (`v13.0.2`) ([#3112](https://github.com/GatoGraphQL/GatoGraphQL/pull/3112))
