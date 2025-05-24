@@ -6,8 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\Services\Menus;
 
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
-
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\LogsMenuPage;
+
 use function add_menu_page;
 
 /**
