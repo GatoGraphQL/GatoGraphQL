@@ -218,6 +218,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 13.0.2 =
+* Fixed: Do not show the notification count badge in the plugin menu if the Logs page is not enabled (#3112)
+
 = 13.0.0 =
 * Breaking change: Replaced methods in `Logger`: `logInfo` and `logError` => `log(severity: ...)` (#3093)
 * Breaking change: Split `Logger` service into `Logger` and `SystemLogger` (#3098)
@@ -288,7 +291,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed: Do not remove the Screen Options tab on the post list page (#3046)
 
 = 11.0.0 =
-* Important: If you have any extension installed (eg: the **“Power Extensions” bundle**), you need to update **Gato GraphQL** first! Otherwise the application will throw an exception.
+* Important: If you have any extension installed (eg: the **"Power Extensions" bundle**), you need to update **Gato GraphQL** first! Otherwise the application will throw an exception.
 * Breaking change: Register `changelogURL` for the extensions, to show the new version's changelog when updating them (#3042)
 * Updated documentation for the **Translation** extension, adding new translation providers: **Mistral AI** (#3043) and **DeepSeek** (#3044)
 
@@ -621,8 +624,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added predefined custom endpoint "Nested mutations + Entity as mutation payload type"
 * Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
 * Renamed page "Recipes" to "Tutorial", and added settings to hide it
-* Renamed existing bundles (“Application Glue & Automator” bundle => “Tailored WordPress Automator” bundle, “Content Translation” bundle => “Simplest WordPress Content Translation” bundle and “Public API” bundle => “Responsible WordPress Public API” bundle)
-* Added documentation for new bundles (“Automated Content Translation & Sync for WordPress Multisite” bundle, “Better WordPress Webhooks” bundle, “Easy WordPress Bulk Transform & Update” bundle, “Private GraphQL Server for WordPress” bundle, “Selective Content Import, Export & Sync for WordPress” bundle, “Unhindered WordPress Email Notifications” bundle and “Versatile WordPress Request API” bundle)
+* Renamed existing bundles ("Application Glue & Automator" bundle => "Tailored WordPress Automator" bundle, "Content Translation" bundle => "Simplest WordPress Content Translation" bundle and "Public API" bundle => "Responsible WordPress Public API" bundle)
+* Added documentation for new bundles ("Automated Content Translation & Sync for WordPress Multisite" bundle, "Better WordPress Webhooks" bundle, "Easy WordPress Bulk Transform & Update" bundle, "Private GraphQL Server for WordPress" bundle, "Selective Content Import, Export & Sync for WordPress" bundle, "Unhindered WordPress Email Notifications" bundle and "Versatile WordPress Request API" bundle)
 * Fixed HTML codes were printed in select inputs in the WordPress editor, now removed
 
 = 1.3.0 =

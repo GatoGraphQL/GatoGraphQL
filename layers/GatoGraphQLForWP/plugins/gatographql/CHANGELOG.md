@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 13.0.2 - 25/05/2025
+
+### Fixed
+
+- Do not show the notification count badge in the plugin menu if the Logs page is not enabled (#3112)
+
 ## 13.0.1 - 24/05/2025
 
 (Empty - Version sync with PRO)

@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\Menus;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\LogsMenuPage;
 use function add_menu_page;
 
 /**
@@ -17,6 +18,7 @@ class PluginMenu extends AbstractMenu
     use LogCountBadgeMenuTrait;
 
     private ?UserAuthorizationInterface $userAuthorization = null;
+    private ?LogsMenuPage $logsMenuPage = null;
 
     final protected function getUserAuthorization(): UserAuthorizationInterface
     {
@@ -26,6 +28,15 @@ class PluginMenu extends AbstractMenu
             $this->userAuthorization = $userAuthorization;
         }
         return $this->userAuthorization;
+    }
+    final protected function getLogsMenuPage(): LogsMenuPage
+    {
+        if ($this->logsMenuPage === null) {
+            /** @var LogsMenuPage */
+            $logsMenuPage = $this->instanceManager->getInstance(LogsMenuPage::class);
+            $this->logsMenuPage = $logsMenuPage;
+        }
+        return $this->logsMenuPage;
     }
 
     public function getName(): string
@@ -39,9 +50,12 @@ class PluginMenu extends AbstractMenu
         $schemaEditorAccessCapability = $this->getUserAuthorization()->getSchemaEditorAccessCapability();
 
         $menuNameTitle = $menuName;
-        $logCountBadge = $this->getLogCountBadge();
-        if ($logCountBadge !== null) {
-            $menuNameTitle .= ' ' . $logCountBadge;
+        $logsMenuPage = $this->getLogsMenuPage();
+        if ($logsMenuPage->isServiceEnabled()) {
+            $logCountBadge = $this->getLogCountBadge();
+            if ($logCountBadge !== null) {
+                $menuNameTitle .= ' ' . $logCountBadge;
+            }
         }
 
         add_menu_page(
