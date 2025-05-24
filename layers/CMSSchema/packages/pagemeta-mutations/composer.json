@@ -182,8 +182,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/custompostmeta-mutations": "^13.0.2",
-        "pop-cms-schema/page-mutations": "^13.0.2"
+        "pop-cms-schema/custompostmeta-mutations": "^13.1",
+        "pop-cms-schema/page-mutations": "^13.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -209,7 +209,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "13.0-dev"
+            "dev-master": "13.1-dev"
         }
     },
     "config": {
