@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 13.1.0 - DATE
 
+### Improvements
+
+- Enable extensions if required theme is active (#3113)
+
 ## 13.0.2 - 24/05/2025
 
 ### Fixed
