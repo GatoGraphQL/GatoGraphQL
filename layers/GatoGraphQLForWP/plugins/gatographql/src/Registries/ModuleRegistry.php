@@ -163,6 +163,11 @@ class ModuleRegistry implements ModuleRegistryInterface
             return false;
         }
 
+        // Check that all depended-upon themes are active
+        if (!$this->areDependedThemesActive($module)) {
+            return false;
+        }
+
         // Check if the value has been saved on the DB
         $moduleID = $moduleResolver->getID($module);
         if ($this->getUserSettingsManager()->hasSetModuleEnabled($moduleID)) {
@@ -276,6 +281,54 @@ class ModuleRegistry implements ModuleRegistryInterface
         }
 
         return $moduleResolver->areDependedPluginsActive($module);
+    }
+
+    /**
+     * Indicate if a module's depended-upon themes are all active
+     */
+    protected function areDependedThemesActive(string $module): bool
+    {
+        $moduleResolver = $this->getModuleResolver($module);
+
+        /**
+         * Check that all required themes are active, and possibly
+         * satisfying some version constraint (as Composer semver).
+         *
+         * @see https://getcomposer.org/doc/articles/versions.md
+         */
+        foreach ($moduleResolver->getDependentOnActiveWordPressThemes($module) as $dependedActiveTheme) {
+            // Check that all required themes are active
+            $activeSlug = null;
+            if (PluginStaticHelpers::isWordPressThemeActive($dependedActiveTheme->slug)) {
+                $activeSlug = $dependedActiveTheme->slug;
+            } else {
+                foreach ($dependedActiveTheme->alternativeSlugs as $alternativeSlug) {
+                    if (PluginStaticHelpers::isWordPressThemeActive($alternativeSlug)) {
+                        $activeSlug = $alternativeSlug;
+                        break;
+                    }
+                }
+            }
+            if ($activeSlug === null) {
+                return false;
+            }
+
+            // Check the version constraint (as Composer semver)
+            if ($dependedActiveTheme->versionConstraint === null || $dependedActiveTheme->versionConstraint === '') {
+                continue;
+            }
+
+            if (
+                !PluginStaticHelpers::doesActiveThemeSatisfyVersionConstraint(
+                    $activeSlug,
+                    $dependedActiveTheme->versionConstraint
+                )
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
