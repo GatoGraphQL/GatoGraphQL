@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressTheme;
 
 interface ModuleResolverInterface
 {
@@ -44,6 +45,11 @@ interface ModuleResolverInterface
      * @return DependedOnInactiveWordPressPlugin[]
      */
     public function getDependentOnInactiveWordPressPlugins(string $module): array;
+
+    /**
+     * @return DependedOnActiveWordPressTheme[]
+     */
+    public function getDependentOnActiveWordPressThemes(string $module): array;
 
     /**
      * Indicates if a module has all requirements satisfied (such as version of WordPress) to be enabled
@@ -117,4 +123,5 @@ interface ModuleResolverInterface
      */
     public function getDocumentation(string $module): ?string;
     public function areDependedPluginsActive(string $module): bool;
+    public function areDependedThemesActive(string $module): bool;
 }

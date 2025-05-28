@@ -8,6 +8,7 @@ use Exception;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressTheme;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
@@ -156,6 +157,10 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             'dependsOnInactivePlugins' => array_map(
                 fn (DependedOnInactiveWordPressPlugin $dependedOnInactiveWordPressPlugin) => $dependedOnInactiveWordPressPlugin->name,
                 $moduleResolver->getDependentOnInactiveWordPressPlugins($module)
+            ),
+            'dependsOnActiveThemes' => array_map(
+                fn (DependedOnActiveWordPressTheme $dependedOnActiveWordPressTheme) => $dependedOnActiveWordPressTheme->name,
+                $moduleResolver->getDependentOnActiveWordPressThemes($module)
             ),
             // 'url' => $moduleResolver->getURL($module),
             'slug' => $moduleResolver->getSlug($module),
