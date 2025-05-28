@@ -363,6 +363,11 @@ class ModuleRegistry implements ModuleRegistryInterface
             return false;
         }
 
+        // Check that all depended-upon plugins are active
+        if (!$this->areDependedThemesActive($module)) {
+            return false;
+        }
+
         return true;
     }
 
