@@ -67,6 +67,28 @@ class PluginStaticHelpers
         return SemverWrapper::satisfies($pluginVersion, $versionConstraint);
     }
 
+    public static function doesActiveThemeSatisfyVersionConstraint(
+        string $themeSlug,
+        string $versionConstraint
+    ): bool {
+        // Use "*" to mean "any version" (so it's always allowed)
+        if ($versionConstraint === '*') {
+            return true;
+        }
+
+        $theme = wp_get_theme($themeSlug);
+        if (!$theme->exists()) {
+            return false;
+        }
+
+        $themeVersion = $theme->get('Version');
+        if ($themeVersion === '') {
+            return false;
+        }
+
+        return SemverWrapper::satisfies($themeVersion, $versionConstraint);
+    }
+
     /**
      * Convert the response header entries, from:
      *
