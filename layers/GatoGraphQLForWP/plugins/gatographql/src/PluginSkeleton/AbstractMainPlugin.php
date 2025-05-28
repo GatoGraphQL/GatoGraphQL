@@ -32,6 +32,7 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use WP_Upgrader;
+use WP_Theme;
 
 use function __;
 use function add_action;
@@ -182,7 +183,43 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * When updating a plugin from the wp-admin Updates screen,
+     * This method dumps the container whenever activating/deactivating
+     * a theme that Gato GraphQL or its extensions depend on.
+     *
+     * When activating/deactivating a theme that Gato GraphQL or any
+     * extension depends on, the cached service container must be dumped,
+     * so that it can be regenerated with the new theme's configuration.
+     */
+    public function maybeRegenerateContainerWhenThemeActivatedOrDeactivated(string $themeSlug): bool
+    {
+        if (in_array($themeSlug, $this->getDependentOnThemeSlugs())) {
+            $this->purgeContainer();
+            return true;
+        }
+
+        $extensionManager = PluginApp::getExtensionManager();
+        if (in_array($themeSlug, $extensionManager->getInactiveExtensionsDependedUponThemeSlugs())) {
+            $this->purgeContainer();
+            return true;
+        }
+
+        /**
+         * Check that the activated/deactivated theme is
+         * depended upon by any extension.
+         */
+        $extensionBaseNameInstances = $extensionManager->getExtensions();
+        foreach ($extensionBaseNameInstances as $extensionInstance) {
+            if (in_array($themeSlug, $extensionInstance->getDependentOnThemeSlugs())) {
+                $this->purgeContainer();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * When updating a plugin or theme from the wp-admin Updates screen,
      * purge the container to avoid the plugin being inactive,
      * yet the compiled container still loads its code.
      *
@@ -190,18 +227,34 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      *
      * @see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/
      */
-    public function maybeRegenerateContainerWhenPluginUpdated(
+    public function maybeRegenerateContainerWhenPluginOrThemeUpdated(
         WP_Upgrader $upgrader_object,
         array $options,
     ): void {
-        if ($options['action'] !== 'update' || $options['type'] !== 'plugin') {
+        if ($options['action'] !== 'update') {
             return;
         }
-        /** @var string $pluginFile */
-        foreach ($options['plugins'] as $pluginFile) {
-            $purgedContainer = $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
-            if ($purgedContainer) {
-                return;
+
+        // Handle plugin updates
+        if ($options['type'] === 'plugin') {
+            /** @var string $pluginFile */
+            foreach ($options['plugins'] as $pluginFile) {
+                $purgedContainer = $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+                if ($purgedContainer) {
+                    return;
+                }
+            }
+            return;
+        }
+
+        // Handle theme updates
+        if ($options['type'] === 'theme') {
+            /** @var string $themeSlug */
+            foreach ($options['themes'] as $themeSlug) {
+                $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($themeSlug);
+                if ($purgedContainer) {
+                    return;
+                }
             }
         }
     }
@@ -374,7 +427,35 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
         add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
 
-        add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
+        /**
+         * Operations to do when activating/deactivating themes
+         */
+        add_action(
+            'switch_theme',
+            function (string $newThemeName, WP_Theme $newTheme, WP_Theme $oldTheme): void {
+                $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($newTheme->get_stylesheet());
+                if ($purgedContainer) {
+                    return;
+                }
+                if ($newTheme->get_stylesheet() !== $newTheme->get_template()) {
+                    $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($newTheme->get_template());
+                    if ($purgedContainer) {
+                        return;
+                    }
+                }
+                $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($oldTheme->get_stylesheet());
+                if ($purgedContainer) {
+                    return;
+                }
+                if ($oldTheme->get_stylesheet() !== $oldTheme->get_template()) {
+                    $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($oldTheme->get_template());
+                }
+            },
+            10,
+            3
+        );
+
+        add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginOrThemeUpdated(...), 10, 2);
 
         add_filter('plugin_action_links_' . PluginApp::getMainPlugin()->getPluginBaseName(), $this->getPluginActionLinks(...), 10, 1);
 

@@ -15,8 +15,10 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFac
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ObjectModels\AbstractDependedOnWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\AbstractDependedOnWordPressTheme;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
+use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressTheme;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
@@ -102,6 +104,7 @@ class ModuleListTable extends AbstractItemListTable
                     'depends-on-modules' => $moduleResolver->getDependedModuleLists($module),
                     'depends-on-active-plugins' => $moduleResolver->getDependentOnActiveWordPressPlugins($module),
                     'depends-on-inactive-plugins' => $moduleResolver->getDependentOnInactiveWordPressPlugins($module),
+                    'depends-on-active-themes' => $moduleResolver->getDependentOnActiveWordPressThemes($module),
                     // 'url' => $moduleResolver->getURL($module),
                     'slug' => $moduleResolver->getSlug($module),
                     'has-docs' => $moduleResolver->hasDocumentation($module),
@@ -258,13 +261,16 @@ class ModuleListTable extends AbstractItemListTable
                 $dependsOnActivePlugins = $item['depends-on-active-plugins'];
                 /** @var DependedOnInactiveWordPressPlugin[] */
                 $dependsOnInactivePlugins = $item['depends-on-inactive-plugins'];
-                if (!$dependedModuleLists && !$dependsOnActivePlugins && !$dependsOnInactivePlugins) {
+                /** @var DependedOnActiveWordPressTheme[] */
+                $dependsOnActiveThemes = $item['depends-on-active-themes'];
+                if (!$dependedModuleLists && !$dependsOnActivePlugins && !$dependsOnInactivePlugins && !$dependsOnActiveThemes) {
                     return \__('-', 'gatographql');
                 }
 
                 $moduleItems = [];
                 $activePluginItems = [];
                 $inactivePluginItems = [];
+                $activeThemeItems = [];
                 $moduleRegistry = ModuleRegistryFacade::getInstance();
 
                 /**
@@ -320,7 +326,7 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependsOnActivePlugins as $dependedPlugin) {
-                    $dependedPluginHTML = $this->getDependedPluginHTML($dependedPlugin);
+                    $dependedPluginHTML = $this->getDependedPluginOrThemeHTML($dependedPlugin);
                     if ($dependedPlugin->versionConstraint !== null) {
                         $dependedPluginHTML = sprintf(
                             \__('%s (version constraint: <code>%s</code>)', 'gatographql'),
@@ -340,7 +346,7 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependsOnInactivePlugins as $dependedPlugin) {
-                    $dependedPluginHTML = $this->getDependedPluginHTML($dependedPlugin);
+                    $dependedPluginHTML = $this->getDependedPluginOrThemeHTML($dependedPlugin);
                     $inactivePluginItems[] = sprintf(
                         '%1$s %2$s',
                         '☒',
@@ -348,7 +354,27 @@ class ModuleListTable extends AbstractItemListTable
                     );
                 }
 
-                return implode('<br/>', array_merge($moduleItems, $activePluginItems, $inactivePluginItems));
+                /**
+                 * List of WordPress theme slugs that must be active
+                 * for the module to be enabled
+                 */
+                foreach ($dependsOnActiveThemes as $dependedTheme) {
+                    $dependedThemeHTML = $this->getDependedPluginOrThemeHTML($dependedTheme);
+                    if ($dependedTheme->versionConstraint !== null) {
+                        $dependedThemeHTML = sprintf(
+                            \__('%s (version constraint: <code>%s</code>)', 'gatographql'),
+                            $dependedThemeHTML,
+                            $dependedTheme->versionConstraint
+                        );
+                    }
+                    $activeThemeItems[] = sprintf(
+                        '%1$s %2$s',
+                        '🎨',
+                        $dependedThemeHTML
+                    );
+                }
+
+                return implode('<br/>', array_merge($moduleItems, $activePluginItems, $inactivePluginItems, $activeThemeItems));
 
             case 'enabled':
                 return \sprintf(
@@ -360,15 +386,15 @@ class ModuleListTable extends AbstractItemListTable
         return '';
     }
 
-    protected function getDependedPluginHTML(AbstractDependedOnWordPressPlugin $dependedPlugin): string
+    protected function getDependedPluginOrThemeHTML(AbstractDependedOnWordPressPlugin|AbstractDependedOnWordPressTheme $dependedPluginOrTheme): string
     {
-        return $dependedPlugin->url === ''
-            ? $dependedPlugin->name
+        return $dependedPluginOrTheme->url === ''
+            ? $dependedPluginOrTheme->name
             : sprintf(
                 '<a href="%s" target="%s">%s%s</a>',
-                $dependedPlugin->url,
+                $dependedPluginOrTheme->url,
                 '_blank',
-                $dependedPlugin->name,
+                $dependedPluginOrTheme->name,
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
     }
@@ -531,11 +557,12 @@ class ModuleListTable extends AbstractItemListTable
             [
                 'desc' => \__('Description', 'gatographql'),
                 'depends-on' => sprintf(
-                    \__('%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s', 'gatographql'),
+                    \__('%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s', 'gatographql'),
                     \__('Depends on:', 'gatographql'),
                     \__('▹ active module', 'gatographql'),
                     \__('☑︎ active plugin', 'gatographql'),
                     \__('☒ inactive plugin', 'gatographql'),
+                    \__('🎨 active theme', 'gatographql'),
                 ),
             ]
         );

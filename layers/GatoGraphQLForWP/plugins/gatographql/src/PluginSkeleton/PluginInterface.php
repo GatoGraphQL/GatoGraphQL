@@ -66,6 +66,13 @@ interface PluginInterface
     public function getDependentOnPluginFiles(): array;
 
     /**
+     * Get the list of theme slugs that this extension depends on
+     *
+     * @return string[]
+     */
+    public function getDependentOnThemeSlugs(): array;
+
+    /**
      * Commit hash when merging PR in repo, injected during the CI run
      * when generating the .zip plugin.
      */
