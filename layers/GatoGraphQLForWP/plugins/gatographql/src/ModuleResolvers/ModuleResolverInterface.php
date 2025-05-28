@@ -123,4 +123,5 @@ interface ModuleResolverInterface
      */
     public function getDocumentation(string $module): ?string;
     public function areDependedPluginsActive(string $module): bool;
+    public function areDependedThemesActive(string $module): bool;
 }

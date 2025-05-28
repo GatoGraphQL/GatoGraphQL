@@ -328,7 +328,7 @@ class ModuleRegistry implements ModuleRegistryInterface
             }
         }
 
-        return true;
+        return $moduleResolver->areDependedThemesActive($module);
     }
 
     /**

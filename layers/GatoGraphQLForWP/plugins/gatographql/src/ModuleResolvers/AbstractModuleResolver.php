@@ -226,4 +226,9 @@ abstract class AbstractModuleResolver extends AbstractBasicService implements Mo
     {
         return true;
     }
+
+    public function areDependedThemesActive(string $module): bool
+    {
+        return true;
+    }
 }
