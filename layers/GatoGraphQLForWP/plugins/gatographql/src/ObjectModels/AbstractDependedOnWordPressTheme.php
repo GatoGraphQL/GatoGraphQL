@@ -9,7 +9,7 @@ abstract class AbstractDependedOnWordPressTheme
     public readonly string $url;
 
     /**
-     * @param string[] $alternativeFiles
+     * @param string[] $alternativeSlugs
      */
     public function __construct(
         public readonly string $name,

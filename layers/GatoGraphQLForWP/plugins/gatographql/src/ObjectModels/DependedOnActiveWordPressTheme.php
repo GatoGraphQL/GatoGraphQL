@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\ObjectModels;
 final class DependedOnActiveWordPressTheme extends AbstractDependedOnWordPressTheme
 {
     /**
-     * @param string[] $alternativeFiles
+     * @param string[] $alternativeSlugs
      */
     public function __construct(
         string $name,
