@@ -18,7 +18,8 @@ class WordPressStaticHelpers
      * @var string[]|null
      */
     private static ?array $activeWordPressPluginSlugs = null;
-    private static ?string $activeWordPressThemeSlug = null;
+    private static ?string $activeWordPressThemeStylesheet = null;
+    private static ?string $activeWordPressThemeTemplate = null;
 
     /**
      * If param $pluginFileOrSlug ends with ".php", then it's the
@@ -74,22 +75,34 @@ class WordPressStaticHelpers
     }
 
     /**
-     * Check if a theme is active by its slug
+     * Check if a theme is active by its slug or template slug (child theme)
      */
     public static function isWordPressThemeActive(string $themeSlug): bool
     {
-        return $themeSlug === static::getActiveWordPressThemeSlug();
+        return $themeSlug === static::getActiveWordPressThemeStylesheet() || $themeSlug === static::getActiveWordPressThemeTemplate();
     }
 
     /**
      * Get the active theme slug
      */
-    protected static function getActiveWordPressThemeSlug(): string
+    protected static function getActiveWordPressThemeStylesheet(): string
     {
-        if (self::$activeWordPressThemeSlug === null) {
+        if (self::$activeWordPressThemeStylesheet === null) {
             $theme = wp_get_theme();
-            self::$activeWordPressThemeSlug = $theme->get_stylesheet();
+            self::$activeWordPressThemeStylesheet = $theme->get_stylesheet();
         }
-        return self::$activeWordPressThemeSlug;
+        return self::$activeWordPressThemeStylesheet;
+    }
+
+    /**
+     * Get the active theme template slug
+     */
+    protected static function getActiveWordPressThemeTemplate(): string
+    {
+        if (self::$activeWordPressThemeTemplate === null) {
+            $theme = wp_get_theme();
+            self::$activeWordPressThemeTemplate = $theme->get_template();
+        }
+        return self::$activeWordPressThemeTemplate;
     }
 }
