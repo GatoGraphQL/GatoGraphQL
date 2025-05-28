@@ -219,7 +219,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * When updating a plugin from the wp-admin Updates screen,
+     * When updating a plugin or theme from the wp-admin Updates screen,
      * purge the container to avoid the plugin being inactive,
      * yet the compiled container still loads its code.
      *
@@ -227,18 +227,34 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      *
      * @see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/
      */
-    public function maybeRegenerateContainerWhenPluginUpdated(
+    public function maybeRegenerateContainerWhenPluginOrThemeUpdated(
         WP_Upgrader $upgrader_object,
         array $options,
     ): void {
-        if ($options['action'] !== 'update' || $options['type'] !== 'plugin') {
+        if ($options['action'] !== 'update') {
             return;
         }
-        /** @var string $pluginFile */
-        foreach ($options['plugins'] as $pluginFile) {
-            $purgedContainer = $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
-            if ($purgedContainer) {
-                return;
+
+        // Handle plugin updates
+        if ($options['type'] === 'plugin') {
+            /** @var string $pluginFile */
+            foreach ($options['plugins'] as $pluginFile) {
+                $purgedContainer = $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+                if ($purgedContainer) {
+                    return;
+                }
+            }
+            return;
+        }
+
+        // Handle theme updates
+        if ($options['type'] === 'theme') {
+            /** @var string $themeSlug */
+            foreach ($options['themes'] as $themeSlug) {
+                $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($themeSlug);
+                if ($purgedContainer) {
+                    return;
+                }
             }
         }
     }
@@ -430,7 +446,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             3
         );
 
-        add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
+        add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginOrThemeUpdated(...), 10, 2);
 
         add_filter('plugin_action_links_' . PluginApp::getMainPlugin()->getPluginBaseName(), $this->getPluginActionLinks(...), 10, 1);
 
