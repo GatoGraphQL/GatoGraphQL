@@ -43,6 +43,11 @@ class PluginStaticHelpers
         return WordPressStaticHelpers::isWordPressPluginActive($pluginFileOrSlug);
     }
 
+    public static function isWordPressThemeActive(string $themeSlug): bool
+    {
+        return WordPressStaticHelpers::isWordPressThemeActive($themeSlug);
+    }
+
     public static function doesActivePluginSatisfyVersionConstraint(
         string $pluginFile,
         string $versionConstraint
