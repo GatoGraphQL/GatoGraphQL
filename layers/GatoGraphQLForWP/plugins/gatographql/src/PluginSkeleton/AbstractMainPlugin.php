@@ -32,6 +32,7 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use WP_Upgrader;
+use WP_Theme;
 
 use function __;
 use function add_action;
@@ -173,6 +174,42 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $extensionBaseName === $pluginFile
                 || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
             ) {
+                $this->purgeContainer();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * This method dumps the container whenever activating/deactivating
+     * a theme that Gato GraphQL or its extensions depend on.
+     *
+     * When activating/deactivating a theme that Gato GraphQL or any
+     * extension depends on, the cached service container must be dumped,
+     * so that it can be regenerated with the new theme's configuration.
+     */
+    public function maybeRegenerateContainerWhenThemeActivatedOrDeactivated(string $themeSlug): bool
+    {
+        if (in_array($themeSlug, $this->getDependentOnThemeSlugs())) {
+            $this->purgeContainer();
+            return true;
+        }
+
+        $extensionManager = PluginApp::getExtensionManager();
+        if (in_array($themeSlug, $extensionManager->getInactiveExtensionsDependedUponThemeSlugs())) {
+            $this->purgeContainer();
+            return true;
+        }
+
+        /**
+         * Check that the activated/deactivated theme is
+         * depended upon by any extension.
+         */
+        $extensionBaseNameInstances = $extensionManager->getExtensions();
+        foreach ($extensionBaseNameInstances as $extensionInstance) {
+            if (in_array($themeSlug, $extensionInstance->getDependentOnThemeSlugs())) {
                 $this->purgeContainer();
                 return true;
             }
@@ -373,6 +410,25 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             }
         );
         add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
+
+        /**
+         * Operations to do when activating/deactivating themes
+         */
+        add_action(
+            'switch_theme',
+            function (string $newThemeName, WP_Theme $newTheme, WP_Theme $oldTheme): void {
+                $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($newTheme->get_stylesheet());
+                if ($newTheme->get_stylesheet() !== $newTheme->get_template()) {
+                    $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($newTheme->get_template());
+                }
+                $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($oldTheme->get_stylesheet());
+                if ($oldTheme->get_stylesheet() !== $oldTheme->get_template()) {
+                    $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($oldTheme->get_template());
+                }
+            },
+            10,
+            3
+        );
 
         add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
 
