@@ -6,6 +6,7 @@ namespace PoPWPSchema\SchemaCommons\StaticHelpers;
 
 use function is_multisite;
 use function get_option;
+use function wp_get_theme;
 
 class WordPressStaticHelpers
 {
@@ -17,6 +18,7 @@ class WordPressStaticHelpers
      * @var string[]|null
      */
     private static ?array $activeWordPressPluginSlugs = null;
+    private static ?string $activeWordPressThemeSlug = null;
 
     /**
      * If param $pluginFileOrSlug ends with ".php", then it's the
@@ -69,5 +71,25 @@ class WordPressStaticHelpers
             );
         }
         return self::$activeWordPressPluginSlugs;
+    }
+
+    /**
+     * Check if a theme is active by its slug
+     */
+    public static function isWordPressThemeActive(string $themeSlug): bool
+    {
+        return $themeSlug === static::getActiveWordPressThemeSlug();
+    }
+
+    /**
+     * Get the active theme slug
+     */
+    protected static function getActiveWordPressThemeSlug(): string
+    {
+        if (self::$activeWordPressThemeSlug === null) {
+            $theme = wp_get_theme();
+            self::$activeWordPressThemeSlug = $theme->get_stylesheet();
+        }
+        return self::$activeWordPressThemeSlug;
     }
 }
