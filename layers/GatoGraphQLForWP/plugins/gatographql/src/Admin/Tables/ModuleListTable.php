@@ -326,7 +326,7 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependsOnActivePlugins as $dependedPlugin) {
-                    $dependedPluginHTML = $this->getDependedPluginHTML($dependedPlugin);
+                    $dependedPluginHTML = $this->getDependedPluginOrThemeHTML($dependedPlugin);
                     if ($dependedPlugin->versionConstraint !== null) {
                         $dependedPluginHTML = sprintf(
                             \__('%s (version constraint: <code>%s</code>)', 'gatographql'),
@@ -346,7 +346,7 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependsOnInactivePlugins as $dependedPlugin) {
-                    $dependedPluginHTML = $this->getDependedPluginHTML($dependedPlugin);
+                    $dependedPluginHTML = $this->getDependedPluginOrThemeHTML($dependedPlugin);
                     $inactivePluginItems[] = sprintf(
                         '%1$s %2$s',
                         '☒',
@@ -359,7 +359,7 @@ class ModuleListTable extends AbstractItemListTable
                  * for the module to be enabled
                  */
                 foreach ($dependsOnActiveThemes as $dependedTheme) {
-                    $dependedThemeHTML = $this->getDependedThemeHTML($dependedTheme);
+                    $dependedThemeHTML = $this->getDependedPluginOrThemeHTML($dependedTheme);
                     if ($dependedTheme->versionConstraint !== null) {
                         $dependedThemeHTML = sprintf(
                             \__('%s (version constraint: <code>%s</code>)', 'gatographql'),
@@ -386,28 +386,15 @@ class ModuleListTable extends AbstractItemListTable
         return '';
     }
 
-    protected function getDependedPluginHTML(AbstractDependedOnWordPressPlugin $dependedPlugin): string
+    protected function getDependedPluginOrThemeHTML(AbstractDependedOnWordPressPlugin|AbstractDependedOnWordPressTheme $dependedPluginOrTheme): string
     {
-        return $dependedPlugin->url === ''
-            ? $dependedPlugin->name
+        return $dependedPluginOrTheme->url === ''
+            ? $dependedPluginOrTheme->name
             : sprintf(
                 '<a href="%s" target="%s">%s%s</a>',
-                $dependedPlugin->url,
+                $dependedPluginOrTheme->url,
                 '_blank',
-                $dependedPlugin->name,
-                HTMLCodes::OPEN_IN_NEW_WINDOW
-            );
-    }
-
-    protected function getDependedThemeHTML(AbstractDependedOnWordPressTheme $dependedTheme): string
-    {
-        return $dependedTheme->url === ''
-            ? $dependedTheme->name
-            : sprintf(
-                '<a href="%s" target="%s">%s%s</a>',
-                $dependedTheme->url,
-                '_blank',
-                $dependedTheme->name,
+                $dependedPluginOrTheme->name,
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             );
     }
