@@ -369,7 +369,7 @@ class ModuleListTable extends AbstractItemListTable
                     }
                     $activeThemeItems[] = sprintf(
                         '%1$s %2$s',
-                        '🎨',
+                        '☑︎',
                         $dependedThemeHTML
                     );
                 }
