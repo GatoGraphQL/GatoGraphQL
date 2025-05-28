@@ -433,13 +433,22 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action(
             'switch_theme',
             function (string $newThemeName, WP_Theme $newTheme, WP_Theme $oldTheme): void {
-                $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($newTheme->get_stylesheet());
-                if ($newTheme->get_stylesheet() !== $newTheme->get_template()) {
-                    $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($newTheme->get_template());
+                $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($newTheme->get_stylesheet());
+                if ($purgedContainer) {
+                    return;
                 }
-                $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($oldTheme->get_stylesheet());
+                if ($newTheme->get_stylesheet() !== $newTheme->get_template()) {
+                    $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($newTheme->get_template());
+                    if ($purgedContainer) {
+                        return;
+                    }
+                }
+                $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($oldTheme->get_stylesheet());
+                if ($purgedContainer) {
+                    return;
+                }
                 if ($oldTheme->get_stylesheet() !== $oldTheme->get_template()) {
-                    $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($oldTheme->get_template());
+                    $purgedContainer = $this->maybeRegenerateContainerWhenThemeActivatedOrDeactivated($oldTheme->get_template());
                 }
             },
             10,
