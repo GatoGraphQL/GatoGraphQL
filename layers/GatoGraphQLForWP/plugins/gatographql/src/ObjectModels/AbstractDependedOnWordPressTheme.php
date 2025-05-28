@@ -34,4 +34,4 @@ abstract class AbstractDependedOnWordPressTheme
             $slug
         );
     }
-} 
+}
