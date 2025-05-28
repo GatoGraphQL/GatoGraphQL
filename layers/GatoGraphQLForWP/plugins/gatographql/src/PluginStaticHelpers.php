@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use PoPWPSchema\SchemaCommons\StaticHelpers\WordPressStaticHelpers;
 
 use function get_file_data;
+use function wp_get_theme;
 
 class PluginStaticHelpers
 {
