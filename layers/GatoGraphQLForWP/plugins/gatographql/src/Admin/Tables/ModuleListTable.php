@@ -369,7 +369,7 @@ class ModuleListTable extends AbstractItemListTable
                     }
                     $activeThemeItems[] = sprintf(
                         '%1$s %2$s',
-                        '☑︎',
+                        '✎',
                         $dependedThemeHTML
                     );
                 }
@@ -562,7 +562,7 @@ class ModuleListTable extends AbstractItemListTable
                     \__('▹ active module', 'gatographql'),
                     \__('☑︎ active plugin', 'gatographql'),
                     \__('☒ inactive plugin', 'gatographql'),
-                    \__('☑︎ active theme', 'gatographql'),
+                    \__('✎ active theme', 'gatographql'),
                 ),
             ]
         );
