@@ -105,6 +105,16 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
+     * Get the list of theme slugs that this extension depends on
+     *
+     * @return string[]
+     */
+    public function getDependentOnThemeSlugs(): array
+    {
+        return [];
+    }
+
+    /**
      * Plugin version
      */
     public function getPluginVersion(): string
