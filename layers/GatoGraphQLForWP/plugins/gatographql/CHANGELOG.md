@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Enable extensions if required theme is active (#3113)
+- Allow extension dependencies on themes (#3115)
 
 ## 13.0.2 - 24/05/2025
 

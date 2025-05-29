@@ -26,7 +26,7 @@ class PluginApp implements PluginAppInterface
          * on WordPress' "plugins_loaded" hook
          */
         \add_action(
-            'plugins_loaded',
+            'after_setup_theme',
             fn () => do_action(
                 PluginAppHooks::INITIALIZE_APP,
                 PluginAppGraphQLServerNames::EXTERNAL,
