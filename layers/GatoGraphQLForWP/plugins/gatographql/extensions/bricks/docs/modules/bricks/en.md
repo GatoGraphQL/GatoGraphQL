@@ -2,7 +2,7 @@
 
 <!-- @todo: Complete Bricks docs -->
 
-Integration with the [Bricks](https://wordpress.org/plugins/bricks/) plugin.
+Integration with the <a href="https://bricksbuilder.io/" target="_blank" rel="nofollow">Bricks</a> plugin.
 
 The GraphQL schema is provided with fields and mutations to fetch and update Bricks data from pages and templates.
 

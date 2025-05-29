@@ -1,6 +1,6 @@
 # Bricks
 
-Integration with the [Bricks](https://wordpress.org/plugins/bricks/) plugin.
+Integration with the <a href="https://bricksbuilder.io/" target="_blank" rel="nofollow">Bricks</a> plugin.
 
 <!-- [Watch “How to use the Bricks extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
 
