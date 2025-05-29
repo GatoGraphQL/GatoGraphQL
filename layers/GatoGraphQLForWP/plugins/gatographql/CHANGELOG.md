@@ -6,10 +6,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 13.1.0 - DATE
 
-### Improvements
+### Added
 
-- Enable extensions if required theme is active (#3113)
+- Enable extensions if required theme is active (#3114)
 - Allow extension dependencies on themes (#3115)
+- Documentation for new Bricks Premium Extension (#3117)
 
 ## 13.0.2 - 24/05/2025
 

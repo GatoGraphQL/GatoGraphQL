@@ -66,6 +66,8 @@ The available premium extensions are:
 
 [Automation](https://gatographql.com/extensions/automation): Use GraphQL to automate tasks in your app: Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron.
 
+[Bricks](https://gatographql.com/extensions/bricks): Integration with the Bricks plugin, to parse and update data in Bricks pages and templates.
+
 [Elementor](https://gatographql.com/extensions/elementor): Integration with the Elementor plugin, to parse and update data in Elementor pages and templates.
 
 [Events Manager](https://gatographql.com/extensions/events-manager): Integration with the Events Manager plugin, to fetch event data.
@@ -219,8 +221,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 13.1.0 =
-- Enable extensions if required theme is active (#3113)
-- Allow extension dependencies on themes (#3115)
+* Enable extensions if required theme is active (#3114)
+* Allow extension dependencies on themes (#3115)
+* Documentation for new Bricks Premium Extension (#3117)
 
 = 13.0.2 =
 * Fixed: Do not show the notification count badge in the plugin menu if the Logs page is not enabled (#3112)

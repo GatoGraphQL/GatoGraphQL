@@ -13,6 +13,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     use PremiumExtensionModuleResolverTrait;
 
     public const AUTOMATION = Plugin::NAMESPACE . '\\bundle-extensions\\automation';
+    public const BRICKS = Plugin::NAMESPACE . '\\bundle-extensions\\bricks';
     public const ELEMENTOR = Plugin::NAMESPACE . '\\bundle-extensions\\elementor';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\bundle-extensions\\events-manager';
     public const MULTILINGUALPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\multilingualpress';
@@ -29,6 +30,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
         }
         return [
             self::AUTOMATION,
+            self::BRICKS,
             self::ELEMENTOR,
             self::EVENTS_MANAGER,
             self::MULTILINGUALPRESS,
@@ -41,6 +43,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     {
         return match ($module) {
             self::AUTOMATION => \__('Automation', 'gatographql'),
+            self::BRICKS => \__('Bricks', 'gatographql'),
             self::ELEMENTOR => \__('Elementor', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
             self::MULTILINGUALPRESS => \__('MultilingualPress', 'gatographql'),
@@ -54,6 +57,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     {
         return match ($module) {
             self::AUTOMATION => \__('Use GraphQL to automate tasks in your app: Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron. (The Internal GraphQL Server extension is required).', 'gatographql'),
+            self::BRICKS => \__('Integration with plugin "Bricks", adding fields to parse and update data in Bricks pages and templates.', 'gatographql'),
             self::ELEMENTOR => \__('Integration with plugin "Elementor", adding fields to parse and update data in Elementor pages and templates.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
@@ -74,6 +78,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
         $imagePathURL = $pluginURL . 'assets/img/extension-logos';
         return match ($module) {
             self::AUTOMATION => $imagePathURL . '/automation.svg',
+            self::BRICKS => $imagePathURL . '/bricks.svg',
             self::ELEMENTOR => $imagePathURL . '/elementor.svg',
             self::EVENTS_MANAGER => $imagePathURL . '/events-manager.webp',
             self::MULTILINGUALPRESS => $imagePathURL . '/multilingualpress.webp',
@@ -91,6 +96,9 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
         return match ($module) {
             self::AUTOMATION => [
                 PremiumExtensionModuleResolver::AUTOMATION,
+            ],
+            self::BRICKS => [
+                PremiumExtensionModuleResolver::BRICKS,
             ],
             self::ELEMENTOR => [
                 PremiumExtensionModuleResolver::ELEMENTOR,
