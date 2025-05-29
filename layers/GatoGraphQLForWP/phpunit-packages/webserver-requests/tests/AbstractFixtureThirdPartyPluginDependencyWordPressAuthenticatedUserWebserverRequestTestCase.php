@@ -55,24 +55,28 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                     $filePath
                 );
             }
+            
+            $relativePath = substr($filePath, strlen(($responseFixtureFolder !== null ? $responseFixtureFolder : $fixtureFolder) . '/'));
+            $fixtureName = $relativePath . '/' . $fileName;
+            
             $pluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':enabled.json';
             if (!\file_exists($pluginEnabledGraphQLResponseFile)) {
                 static::throwFileNotExistsException($pluginEnabledGraphQLResponseFile);
             }
             $pluginDisabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':disabled.json';
-            if (!\file_exists($pluginDisabledGraphQLResponseFile)) {
+            if (!static::canSkipDisabledFixtureTest($fixtureName) && !\file_exists($pluginDisabledGraphQLResponseFile)) {
                 static::throwFileNotExistsException($pluginDisabledGraphQLResponseFile);
             }
             $pluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
             $pluginGraphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
 
-            $relativePath = substr($filePath, strlen(($responseFixtureFolder !== null ? $responseFixtureFolder : $fixtureFolder) . '/'));
-            $fixtureName = $relativePath . '/' . $fileName;
             $pluginEntries[$fixtureName] = [
                 'query' => $query,
                 'response-enabled' => file_get_contents($pluginEnabledGraphQLResponseFile),
-                'response-disabled' => file_get_contents($pluginDisabledGraphQLResponseFile),
             ];
+            if (\file_exists($pluginDisabledGraphQLResponseFile)) {
+                $pluginEntries[$fixtureName]['response-disabled'] = file_get_contents($pluginDisabledGraphQLResponseFile);
+            }
             if (\file_exists($pluginOnlyOneEnabledGraphQLResponseFile)) {
                 $pluginEntries[$fixtureName]['response-only-one-enabled'] = file_get_contents($pluginOnlyOneEnabledGraphQLResponseFile);
             }
@@ -120,6 +124,11 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             }
         }
         return static::customizePluginNameEntries($pluginEntries);
+    }
+
+    protected static function canSkipDisabledFixtureTest(string $fixtureName): bool
+    {
+        return false;
     }
 
     /**
