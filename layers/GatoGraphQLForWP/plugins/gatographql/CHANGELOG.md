@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Enable extensions if required theme is active (#3114)
 - Allow extension dependencies on themes (#3115)
-- Documentation for new Bricks Premium Extension (#...)
+- Documentation for new Bricks Premium Extension (#3116)
 
 ## 13.0.2 - 24/05/2025
 
