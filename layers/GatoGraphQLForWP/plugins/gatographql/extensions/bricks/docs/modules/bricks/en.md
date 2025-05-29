@@ -1,7 +1,5 @@
 # Bricks
 
-<!-- @todo: Complete Bricks docs -->
-
 Integration with the <a href="https://bricksbuilder.io/" target="_blank" rel="nofollow">Bricks</a> plugin.
 
 The GraphQL schema is provided with fields and mutations to fetch and update Bricks data from pages and templates.
@@ -32,173 +30,230 @@ Running this query:
     "post": {
       "bricksData": [
         {
-          "id": "164e55c4",
-          "elType": "container",
-          "settings": {
-            "layout": "full_width",
-            "flex_gap": {
-              "size": 0,
-              "unit": "px",
-              "column": "0",
-              "row": "0",
-              "isLinked": true
-            },
-            "min_height": {
-              "unit": "vh",
-              "size": 100,
-              "sizes": []
-            },
-            "flex_align_items": "stretch",
-            "content_position": "middle",
-            "structure": "20",
-            "margin": {
-              "unit": "%",
-              "top": "",
-              "right": 0,
-              "bottom": "",
-              "left": 0,
-              "isLinked": true
-            },
-            "padding": {
-              "unit": "%",
-              "top": "0",
-              "right": "6",
-              "bottom": "0",
-              "left": "6",
-              "isLinked": false
-            },
-            "margin_tablet": {
-              "unit": "%",
-              "top": "12",
-              "right": 0,
-              "bottom": "0",
-              "left": 0,
-              "isLinked": false
-            },
-            "margin_mobile": {
-              "unit": "%",
-              "top": "20",
-              "right": 0,
-              "bottom": "0",
-              "left": 0,
-              "isLinked": false
-            },
-            "padding_tablet": {
-              "unit": "%",
-              "top": "",
-              "right": "",
-              "bottom": "",
-              "left": "",
-              "isLinked": true
-            },
-            "z_index": 1,
-            "_title": "Hero",
-            "flex_direction": "row",
-            "content_width": "full",
-            "flex_direction_tablet": "column"
-          },
-          "elements": [
-            {
-              "id": "600c1786",
-              "elType": "container",
-              "settings": {
-                "_column_size": 50,
-                "width": {
-                  "size": 50,
-                  "unit": "%"
-                },
-                "padding": {
-                  "unit": "%",
-                  "top": "0",
-                  "right": "12",
-                  "bottom": "0",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "width_tablet": {
-                  "size": 100,
-                  "unit": "%"
-                },
-                "align_tablet": "center",
-                "flex_gap": {
-                  "size": 20,
-                  "unit": "px",
-                  "column": "20",
-                  "row": "20",
-                  "isLinked": true
-                },
-                "padding_tablet": {
-                  "unit": "%",
-                  "top": "0",
-                  "right": "15",
-                  "bottom": "0",
-                  "left": "15",
-                  "isLinked": false
-                },
-                "padding_mobile": {
-                  "unit": "px",
-                  "top": "0",
-                  "right": "0",
-                  "bottom": "0",
-                  "left": "0",
-                  "isLinked": false
-                },
-                "content_width": "full",
-                "flex_direction": "column",
-                "flex_justify_content": "center",
-                "flex_align_items": "flex-start",
-                "flex_align_items_tablet": "center"
-              },
-              "elements": [
-                {
-                  "id": "db84e33",
-                  "elType": "widget",
-                  "settings": {
-                    "title": "Your health, <br><b>on your time<\/b>",
-                    "header_size": "h1",
-                    "title_color": "#0D3276",
-                    "typography_typography": "custom",
-                    "typography_font_family": "Poppins",
-                    "typography_font_size": {
-                      "unit": "px",
-                      "size": 76,
-                      "sizes": []
-                    },
-                    "typography_font_weight": "400",
-                    "typography_text_transform": "capitalize",
-                    "typography_font_style": "normal",
-                    "typography_text_decoration": "none",
-                    "typography_line_height": {
-                      "unit": "em",
-                      "size": 1,
-                      "sizes": []
-                    },
-                    "typography_letter_spacing": {
-                      "unit": "px",
-                      "size": 0,
-                      "sizes": []
-                    },
-                    "_z_index": 1,
-                    "align_tablet": "center",
-                    "typography_font_size_tablet": {
-                      "unit": "px",
-                      "size": 55,
-                      "sizes": []
-                    },
-                    "typography_font_size_mobile": {
-                      "unit": "px",
-                      "size": 40,
-                      "sizes": []
-                    }
-                  },
-                  "elements": [],
-                  "widgetType": "heading",
-                  "htmlCache": "\t\t<div class=\"bricks-widget-container\">\n\t\t\t\t\t<h1 class=\"bricks-heading-title bricks-size-default\">Your health, <br><b>on your time<\/b><\/h1>\t\t\t\t<\/div>\n\t\t"
-                }
-              ]
-            }
+          "id": "oleqdy",
+          "name": "section",
+          "parent": 0,
+          "children": [
+            "uuiyqj"
           ],
-          "isInner": false
+          "settings": []
+        },
+        {
+          "id": "uuiyqj",
+          "name": "container",
+          "parent": "oleqdy",
+          "children": [
+            "ejfwpo",
+            "czivwt",
+            "ucuzdk",
+            "wzcyug",
+            "ipoorm",
+            "zvgqxx",
+            "yrambp",
+            "hywkos",
+            "gdoiqo",
+            "tyksto",
+            "nquple",
+            "typize",
+            "fjiwqp"
+          ],
+          "settings": []
+        },
+        {
+          "id": "ejfwpo",
+          "name": "post-title",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "tag": "h1"
+          }
+        },
+        {
+          "id": "czivwt",
+          "name": "post-excerpt",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": []
+        },
+        {
+          "id": "fjiwqp",
+          "name": "post-toc",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": []
+        },
+        {
+          "id": "typize",
+          "name": "post-reading-progress-bar",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": []
+        },
+        {
+          "id": "nquple",
+          "name": "post-reading-time",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "prefix": "Reading time: ",
+            "suffix": " minutes"
+          }
+        },
+        {
+          "id": "tyksto",
+          "name": "post-navigation",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "label": true,
+            "title": true,
+            "prevArrow": {
+              "library": "ionicons",
+              "icon": "ion-ios-arrow-back"
+            },
+            "nextArrow": {
+              "library": "ionicons",
+              "icon": "ion-ios-arrow-forward"
+            },
+            "image": true
+          }
+        },
+        {
+          "id": "gdoiqo",
+          "name": "post-taxonomy",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "taxonomy": "post_tag",
+            "style": "dark"
+          }
+        },
+        {
+          "id": "hywkos",
+          "name": "post-comments",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "title": true,
+            "avatar": true,
+            "formTitle": true,
+            "label": true,
+            "submitButtonStyle": "primary"
+          }
+        },
+        {
+          "id": "yrambp",
+          "name": "post-author",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "avatar": true,
+            "name": true,
+            "website": true,
+            "bio": true,
+            "postsLink": true,
+            "postsStyle": "primary"
+          }
+        },
+        {
+          "id": "zvgqxx",
+          "name": "related-posts",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "taxonomies": [
+              "category",
+              "post_tag"
+            ],
+            "content": [
+              {
+                "dynamicData": "{post_title:link}",
+                "tag": "h3",
+                "dynamicMargin": {
+                  "top": 10
+                },
+                "id": "a667d0"
+              },
+              {
+                "dynamicData": "{post_date}",
+                "id": "5bb1b2"
+              },
+              {
+                "dynamicData": "{post_excerpt:20}",
+                "dynamicMargin": {
+                  "top": 10
+                },
+                "id": "80e288"
+              }
+            ]
+          }
+        },
+        {
+          "id": "ipoorm",
+          "name": "post-sharing",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "items": [
+              {
+                "service": "facebook"
+              },
+              {
+                "service": "twitter"
+              },
+              {
+                "service": "linkedin"
+              },
+              {
+                "service": "whatsapp"
+              },
+              {
+                "service": "pinterest"
+              },
+              {
+                "service": "telegram"
+              },
+              {
+                "service": "vkontakte"
+              },
+              {
+                "service": "bluesky"
+              },
+              {
+                "service": "email"
+              }
+            ],
+            "brandColors": true
+          }
+        },
+        {
+          "id": "wzcyug",
+          "name": "post-content",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": []
+        },
+        {
+          "id": "ucuzdk",
+          "name": "post-meta",
+          "parent": "uuiyqj",
+          "children": [],
+          "settings": {
+            "meta": [
+              {
+                "dynamicData": "{author_name}",
+                "id": "e94a49"
+              },
+              {
+                "dynamicData": "{post_date}",
+                "id": "77550d"
+              },
+              {
+                "dynamicData": "{post_comments}",
+                "id": "4ef114"
+              }
+            ]
+          }
         }
       ]
     }
