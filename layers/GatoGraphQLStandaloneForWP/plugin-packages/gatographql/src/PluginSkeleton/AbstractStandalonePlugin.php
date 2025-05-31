@@ -66,17 +66,10 @@ abstract class AbstractStandalonePlugin extends Plugin
         return 30;
     }
 
-    protected function doRegenerateContainerWhenPluginOrThemeActivatedOrDeactivated(): void
-    {
-        parent::doRegenerateContainerWhenPluginOrThemeActivatedOrDeactivated();
-
-        $this->installPluginSetupDataWhenPluginOrThemeActivatedOrDeactivated();
-    }
-
     /**
      * Method to override
      */
-    protected function installPluginSetupDataWhenPluginOrThemeActivatedOrDeactivated(): void
+    protected function dependedUponPluginOrThemeJustActivatedOrDeactivated(): void
     {
     }
 }
