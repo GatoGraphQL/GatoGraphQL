@@ -457,13 +457,17 @@ abstract class AbstractPlugin implements PluginInterface
          *
          * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
          */
-        \add_action(
-            'init',
-            function (): void {
-                $this->maybeInstallPluginSetupData();
-            },
-            $this->getInstallPluginSetupDataInitHookPriority()
-        );
+        if (\did_action('init')) {
+            $this->maybeInstallPluginSetupData();
+        } else {
+            \add_action(
+                'init',
+                function (): void {
+                    $this->maybeInstallPluginSetupData();
+                },
+                $this->getInstallPluginSetupDataInitHookPriority()
+            );
+        }
     }
 
     /**
