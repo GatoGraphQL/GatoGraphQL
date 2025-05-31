@@ -12,6 +12,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow extension dependencies on themes (#3115)
 - Documentation for new Bricks Premium Extension (#3117)
 
+### Improvements
+
+- Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
+
 ## 13.0.2 - 24/05/2025
 
 ### Fixed

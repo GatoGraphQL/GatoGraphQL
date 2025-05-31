@@ -19,6 +19,7 @@ class UserSettingsManager implements UserSettingsManagerInterface
     private const TIMESTAMP_CONTAINER = 'container';
     private const TIMESTAMP_OPERATIONAL = 'operational';
     private const TRANSIENT_LICENSE_ACTIVATION = 'license-activation';
+    private const TRANSIENT_PLUGIN_OR_THEME_STATUS_CHANGE = 'plugin-or-theme-status-change';
     private const TIMESTAMP_LICENSE_CHECK = 'license-check';
     /**
      * Cache the values in memory
@@ -206,6 +207,39 @@ class UserSettingsManager implements UserSettingsManagerInterface
     {
         $this->getTransientSettingsManager()->removeTransients([
             self::TRANSIENT_LICENSE_ACTIVATION,
+        ]);
+    }
+
+    /**
+     * Retrieve the plugin files or theme slugs with status change (active/inactive).
+     *
+     * @return string[]|null The plugin files or theme slugs with status change
+     */
+    public function getPluginOrThemeStatusChangeTransient(): ?array
+    {
+        return $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_PLUGIN_OR_THEME_STATUS_CHANGE);
+    }
+
+    /**
+     * Store the plugin files or theme slugs with status change (active/inactive).
+     *
+     * @param string[] $pluginFilesOrThemeSlugs
+     */
+    public function storePluginOrThemeStatusChangeTransient(array $pluginFilesOrThemeSlugs): void
+    {
+        $this->getTransientSettingsManager()->storeTransient(
+            self::TRANSIENT_PLUGIN_OR_THEME_STATUS_CHANGE,
+            $pluginFilesOrThemeSlugs
+        );
+    }
+
+    /**
+     * Remove the plugin or theme status change transient.
+     */
+    public function removePluginOrThemeStatusChangeTransient(): void
+    {
+        $this->getTransientSettingsManager()->removeTransients([
+            self::TRANSIENT_PLUGIN_OR_THEME_STATUS_CHANGE,
         ]);
     }
 

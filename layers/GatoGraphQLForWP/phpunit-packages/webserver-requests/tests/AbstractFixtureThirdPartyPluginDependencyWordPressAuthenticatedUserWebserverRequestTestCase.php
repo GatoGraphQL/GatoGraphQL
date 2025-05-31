@@ -55,10 +55,10 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                     $filePath
                 );
             }
-            
+
             $relativePath = substr($filePath, strlen(($responseFixtureFolder !== null ? $responseFixtureFolder : $fixtureFolder) . '/'));
             $fixtureName = $relativePath . '/' . $fileName;
-            
+
             $pluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':enabled.json';
             if (!\file_exists($pluginEnabledGraphQLResponseFile)) {
                 static::throwFileNotExistsException($pluginEnabledGraphQLResponseFile);

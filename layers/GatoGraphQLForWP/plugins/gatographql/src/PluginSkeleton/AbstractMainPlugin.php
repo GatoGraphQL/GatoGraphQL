@@ -21,6 +21,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
@@ -31,8 +32,8 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
-use WP_Upgrader;
 use WP_Theme;
+use WP_Upgrader;
 
 use function __;
 use function add_action;
@@ -51,6 +52,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     private ?Exception $initializationException = null;
 
     protected MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration;
+
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
 
     public function __construct(
         string $pluginFile, /** The main plugin file */
@@ -153,13 +161,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): bool
     {
         if (in_array($pluginFile, $this->getDependentOnPluginFiles())) {
-            $this->purgeContainer();
+            $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated([$pluginFile]);
+            $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
             return true;
         }
 
         $extensionManager = PluginApp::getExtensionManager();
         if (in_array($pluginFile, $extensionManager->getInactiveExtensionsDependedUponPluginFiles())) {
-            $this->purgeContainer();
+            $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated([$pluginFile]);
+            $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
             return true;
         }
 
@@ -174,12 +184,26 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $extensionBaseName === $pluginFile
                 || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
             ) {
-                $this->purgeContainer();
+                $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated([$pluginFile]);
+                $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
                 return true;
             }
         }
 
         return false;
+    }
+
+    protected function doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated(): void
+    {
+        $this->purgeContainer();
+    }
+
+    /**
+     * @param string[] $pluginFiles
+     */
+    protected function doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated(array $pluginFiles): void
+    {
+        $this->getUserSettingsManager()->storePluginOrThemeStatusChangeTransient($pluginFiles);
     }
 
     /**
@@ -193,13 +217,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function maybeRegenerateContainerWhenThemeActivatedOrDeactivated(string $themeSlug): bool
     {
         if (in_array($themeSlug, $this->getDependentOnThemeSlugs())) {
-            $this->purgeContainer();
+            $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated([$themeSlug]);
+            $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
             return true;
         }
 
         $extensionManager = PluginApp::getExtensionManager();
         if (in_array($themeSlug, $extensionManager->getInactiveExtensionsDependedUponThemeSlugs())) {
-            $this->purgeContainer();
+            $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated([$themeSlug]);
+            $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
             return true;
         }
 
@@ -210,12 +236,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $extensionBaseNameInstances = $extensionManager->getExtensions();
         foreach ($extensionBaseNameInstances as $extensionInstance) {
             if (in_array($themeSlug, $extensionInstance->getDependentOnThemeSlugs())) {
-                $this->purgeContainer();
+                $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated([$themeSlug]);
+                $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * @param string[] $themeSlugs
+     */
+    protected function doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated(array $themeSlugs): void
+    {
+        $this->getUserSettingsManager()->storePluginOrThemeStatusChangeTransient($themeSlugs);
     }
 
     /**
@@ -314,8 +349,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $this->removeCachedFolders();
 
         // Regenerate the timestamp
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->storeContainerTimestamp();
+        $this->getUserSettingsManager()->storeContainerTimestamp();
 
         // Store empty settings
         $this->maybeStoreEmptySettings();
@@ -390,8 +424,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function removeTimestamps(): void
     {
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $userSettingsManager->removeTimestamps();
+        $this->getUserSettingsManager()->removeTimestamps();
     }
 
     /**
@@ -508,7 +541,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  *
                  * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Marketplace/LicenseValidationService.php `activateDeactivateValidateGatoGraphQLCommercialExtensions`
                  */
-                $userSettingsManager = UserSettingsManagerFacade::getInstance();
+                $userSettingsManager = $this->getUserSettingsManager();
                 $justActivatedLicenseExtensionNames = $userSettingsManager->getJustActivatedLicenseTransientExtensionNames();
                 if ($justActivatedLicenseExtensionNames !== null && $justActivatedLicenseExtensionNames !== []) {
                     $userSettingsManager->removeJustActivatedLicenseTransient();
@@ -536,6 +569,32 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                                     continue;
                                 }
                                 $extensionInstance->isLicenseJustActivated();
+                            }
+                        },
+                        PluginLifecyclePriorities::AFTER_EVERYTHING
+                    );
+                }
+
+                $pluginFilesOrThemeSlugsWithStatusChange = $userSettingsManager->getPluginOrThemeStatusChangeTransient();
+                if ($pluginFilesOrThemeSlugsWithStatusChange !== null && $pluginFilesOrThemeSlugsWithStatusChange !== []) {
+                    $userSettingsManager->removePluginOrThemeStatusChangeTransient();
+
+                    /**
+                     * Allow to execute actions after a depended-upon plugin or theme's status has changed
+                     */
+                    add_action(
+                        PluginAppHooks::INITIALIZE_APP,
+                        function (string $pluginAppGraphQLServerName) use ($registeredExtensionBaseNameInstances, $pluginFilesOrThemeSlugsWithStatusChange): void {
+                            if (
+                                $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                                || $this->initializationException !== null
+                            ) {
+                                return;
+                            }
+
+                            $this->dependedUponPluginOrThemeStatusJustChanged($pluginFilesOrThemeSlugsWithStatusChange);
+                            foreach ($registeredExtensionBaseNameInstances as $extensionInstance) {
+                                $extensionInstance->dependedUponPluginOrThemeStatusJustChanged($pluginFilesOrThemeSlugsWithStatusChange);
                             }
                         },
                         PluginLifecyclePriorities::AFTER_EVERYTHING
@@ -709,12 +768,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             return;
         }
 
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-
         // Check if the X number of days have already passes
         $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses = $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses * 86400;
         $now = time();
-        $licenseCheckTimestamp = $userSettingsManager->getLicenseCheckTimestamp() ?? 0; // If `null`, execute the license check
+        $licenseCheckTimestamp = $this->getUserSettingsManager()->getLicenseCheckTimestamp() ?? 0; // If `null`, execute the license check
         if (($now - $licenseCheckTimestamp) < $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses) {
             return;
         }
