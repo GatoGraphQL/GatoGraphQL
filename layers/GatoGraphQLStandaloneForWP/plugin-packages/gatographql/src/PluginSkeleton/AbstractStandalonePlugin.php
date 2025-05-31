@@ -70,18 +70,13 @@ abstract class AbstractStandalonePlugin extends Plugin
     {
         parent::doRegenerateContainerWhenPluginOrThemeActivatedOrDeactivated();
 
-        if ($this->installPluginSetupDataWhenPluginOrThemeActivatedOrDeactivated()) {
-            $this->doInstallPluginSetupDataWhenPluginOrThemeActivatedOrDeactivated();
-        }
+        $this->installPluginSetupDataWhenPluginOrThemeActivatedOrDeactivated();
     }
 
-    protected function installPluginSetupDataWhenPluginOrThemeActivatedOrDeactivated(): bool
+    /**
+     * Method to override
+     */
+    protected function installPluginSetupDataWhenPluginOrThemeActivatedOrDeactivated(): void
     {
-        return false;
-    }
-
-    protected function doInstallPluginSetupDataWhenPluginOrThemeActivatedOrDeactivated(): void
-    {
-        $this->triggerInstallPluginSetupData();
     }
 }
