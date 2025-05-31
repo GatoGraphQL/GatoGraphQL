@@ -459,15 +459,15 @@ abstract class AbstractPlugin implements PluginInterface
          */
         if (\did_action('init')) {
             $this->maybeInstallPluginSetupData();
-        } else {
-            \add_action(
-                'init',
-                function (): void {
-                    $this->maybeInstallPluginSetupData();
-                },
-                $this->getInstallPluginSetupDataInitHookPriority()
-            );
+            return;
         }
+        \add_action(
+            'init',
+            function (): void {
+                $this->maybeInstallPluginSetupData();
+            },
+            $this->getInstallPluginSetupDataInitHookPriority()
+        );
     }
 
     /**
