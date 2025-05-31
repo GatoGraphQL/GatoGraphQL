@@ -38,7 +38,7 @@ interface PluginInterface
      *
      * @param string[] $pluginFilesOrThemeSlugsWithStatusChange The plugin files or theme slugs with status change
      */
-    public function isPluginOrThemeStatusChanged(array $pluginFilesOrThemeSlugsWithStatusChange): void;
+    public function dependedUponPluginOrThemeStatusJustChanged(array $pluginFilesOrThemeSlugsWithStatusChange): void;
 
     /**
      * Plugin name

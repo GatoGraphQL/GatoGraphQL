@@ -592,9 +592,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                                 return;
                             }
 
-                            $this->isPluginOrThemeStatusChanged($pluginFilesOrThemeSlugsWithStatusChange);
+                            $this->dependedUponPluginOrThemeStatusJustChanged($pluginFilesOrThemeSlugsWithStatusChange);
                             foreach ($registeredExtensionBaseNameInstances as $extensionInstance) {
-                                $extensionInstance->isPluginOrThemeStatusChanged($pluginFilesOrThemeSlugsWithStatusChange);
+                                $extensionInstance->dependedUponPluginOrThemeStatusJustChanged($pluginFilesOrThemeSlugsWithStatusChange);
                             }
                         },
                         PluginLifecyclePriorities::AFTER_EVERYTHING
