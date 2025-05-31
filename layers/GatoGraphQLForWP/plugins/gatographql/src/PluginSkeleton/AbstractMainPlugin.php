@@ -33,8 +33,8 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use WP_Theme;
-
 use WP_Upgrader;
+
 use function __;
 use function add_action;
 use function do_action;
@@ -52,7 +52,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     private ?Exception $initializationException = null;
 
     protected MainPluginInitializationConfigurationInterface $pluginInitializationConfiguration;
-    
+
     private ?UserSettingsManagerInterface $userSettingsManager = null;
 
     final protected function getUserSettingsManager(): UserSettingsManagerInterface
