@@ -449,7 +449,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Trigger the installation of the plugin setup data
      */
-    protected function triggerInstallPluginSetupData(): void
+    public function triggerInstallPluginSetupData(): void
     {
         /**
          * Taxonomies are registered on "init", hence must insert

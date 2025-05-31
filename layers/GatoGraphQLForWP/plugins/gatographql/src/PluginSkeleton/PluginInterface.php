@@ -27,6 +27,11 @@ interface PluginInterface
     public function pluginJustUpdated(string $newVersion, string $previousVersion): void;
 
     /**
+     * Trigger the installation of the plugin setup data
+     */
+    public function triggerInstallPluginSetupData(): void;
+
+    /**
      * Allow to install plugin setup data after
      * a commercial license has been activated
      */
