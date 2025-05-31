@@ -231,6 +231,18 @@ class Plugin
         );
 
         \register_taxonomy(
+            'dummy-tag-four',
+            [],
+            $this->getTaxonomyArgs(
+                false,
+                __('Dummy Tag (Four)'),
+                __('Dummy Tags (Four)'),
+                __('dummy tag (four)'),
+                __('dummy tags (four)'),
+            )
+        );
+
+        \register_taxonomy(
             'dummy-category',
             [],
             $this->getTaxonomyArgs(
@@ -278,6 +290,18 @@ class Plugin
             )
         );
 
+        \register_taxonomy(
+            'dummy-category-four',
+            [],
+            $this->getTaxonomyArgs(
+                true,
+                __('Dummy Category (Four)'),
+                __('Dummy Categories (Four)'),
+                __('dummy category (four)'),
+                __('dummy categories (four)'),
+            )
+        );
+
         \register_post_type(
             'dummy-cpt',
             $this->getCustomPostTypeArgs(
@@ -316,6 +340,19 @@ class Plugin
                 __('Dummy CPT (Three)'),
                 __('Dummy CPTs (Three)'),
                 __('dummy CPTs (three)'),
+            )
+        );
+
+        \register_post_type(
+            'dummy-cpt-four',
+            $this->getCustomPostTypeArgs(
+                [
+                    'dummy-tag-four',
+                    'dummy-category-four',
+                ],
+                __('Dummy CPT (Four)'),
+                __('Dummy CPTs (Four)'),
+                __('dummy CPTs (four)'),
             )
         );
     }
