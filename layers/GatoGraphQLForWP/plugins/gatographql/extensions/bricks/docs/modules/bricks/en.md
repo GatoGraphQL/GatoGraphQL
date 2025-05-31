@@ -267,3 +267,4 @@ Update the Bricks data for a custom post via these mutations:
 
 - `bricksSetCustomPostElementData`: sets the Bricks data for the custom post, expecting a JSON with the same format by Bricks
 - `bricksMergeCustomPostElementDataItem`: override the value of specific elements from a custom post's Bricks data
+- `bricksRegenerateCustomPostElementIDSet`: regenerates the element IDs on a custom post's Bricks data
