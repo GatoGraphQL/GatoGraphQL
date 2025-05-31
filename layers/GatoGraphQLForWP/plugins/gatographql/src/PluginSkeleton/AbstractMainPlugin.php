@@ -161,14 +161,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): bool
     {
         if (in_array($pluginFile, $this->getDependentOnPluginFiles())) {
-            $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated();
+            $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated([$pluginFile]);
             $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
             return true;
         }
 
         $extensionManager = PluginApp::getExtensionManager();
         if (in_array($pluginFile, $extensionManager->getInactiveExtensionsDependedUponPluginFiles())) {
-            $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated();
+            $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated([$pluginFile]);
             $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
             return true;
         }
@@ -184,7 +184,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $extensionBaseName === $pluginFile
                 || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
             ) {
-                $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated();
+                $this->doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated([$pluginFile]);
                 $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
                 return true;
             }
@@ -198,8 +198,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $this->purgeContainer();
     }
 
-    protected function doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated(): void
+    /**
+     * @param string[] $pluginFiles
+     */
+    protected function doRegenerateContainerWhenDependedUponPluginActivatedOrDeactivated(array $pluginFiles): void
     {
+        $this->getUserSettingsManager()->storePluginOrThemeStatusChangeTransient($pluginFiles);
     }
 
     /**
@@ -213,14 +217,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function maybeRegenerateContainerWhenThemeActivatedOrDeactivated(string $themeSlug): bool
     {
         if (in_array($themeSlug, $this->getDependentOnThemeSlugs())) {
-            $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated();
+            $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated([$themeSlug]);
             $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
             return true;
         }
 
         $extensionManager = PluginApp::getExtensionManager();
         if (in_array($themeSlug, $extensionManager->getInactiveExtensionsDependedUponThemeSlugs())) {
-            $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated();
+            $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated([$themeSlug]);
             $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
             return true;
         }
@@ -232,7 +236,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $extensionBaseNameInstances = $extensionManager->getExtensions();
         foreach ($extensionBaseNameInstances as $extensionInstance) {
             if (in_array($themeSlug, $extensionInstance->getDependentOnThemeSlugs())) {
-                $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated();
+                $this->doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated([$themeSlug]);
                 $this->doRegenerateContainerWhenDependedUponPluginOrThemeActivatedOrDeactivated();
                 return true;
             }
@@ -241,8 +245,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         return false;
     }
 
-    protected function doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated(): void
+    /**
+     * @param string[] $themeSlugs
+     */
+    protected function doRegenerateContainerWhenDependedUponThemeActivatedOrDeactivated(array $themeSlugs): void
     {
+        $this->getUserSettingsManager()->storePluginOrThemeStatusChangeTransient($themeSlugs);
     }
 
     /**
