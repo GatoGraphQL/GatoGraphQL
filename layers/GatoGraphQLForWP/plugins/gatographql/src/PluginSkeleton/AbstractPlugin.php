@@ -443,6 +443,14 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function pluginJustActivated(): void
     {
+        $this->triggerInstallPluginSetupData();
+    }
+
+    /**
+     * Trigger the installation of the plugin setup data
+     */
+    protected function triggerInstallPluginSetupData(): void
+    {
         /**
          * Taxonomies are registered on "init", hence must insert
          * data only after that.
