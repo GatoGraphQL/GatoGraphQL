@@ -443,24 +443,12 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function pluginJustActivated(): void
     {
-        $this->triggerInstallPluginSetupData();
-    }
-
-    /**
-     * Trigger the installation of the plugin setup data
-     */
-    public function triggerInstallPluginSetupData(): void
-    {
         /**
          * Taxonomies are registered on "init", hence must insert
          * data only after that.
          *
          * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
          */
-        if (\did_action('init')) {
-            $this->maybeInstallPluginSetupData();
-            return;
-        }
         \add_action(
             'init',
             function (): void {
