@@ -153,13 +153,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): bool
     {
         if (in_array($pluginFile, $this->getDependentOnPluginFiles())) {
-            $this->purgeContainer();
+            $this->doRegenerateContainerWhenPluginActivatedOrDeactivated();
             return true;
         }
 
         $extensionManager = PluginApp::getExtensionManager();
         if (in_array($pluginFile, $extensionManager->getInactiveExtensionsDependedUponPluginFiles())) {
-            $this->purgeContainer();
+            $this->doRegenerateContainerWhenPluginActivatedOrDeactivated();
             return true;
         }
 
@@ -174,12 +174,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $extensionBaseName === $pluginFile
                 || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
             ) {
-                $this->purgeContainer();
+                $this->doRegenerateContainerWhenPluginActivatedOrDeactivated();
                 return true;
             }
         }
 
         return false;
+    }
+
+    protected function doRegenerateContainerWhenPluginActivatedOrDeactivated(): void
+    {
+        $this->purgeContainer();
     }
 
     /**
