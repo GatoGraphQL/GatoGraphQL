@@ -18,6 +18,7 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Helpers\ScopingHelpers;
 use PoP\Root\Module\ModuleInterface;
 
+use function add_action;
 use function get_option;
 use function flush_rewrite_rules;
 
@@ -449,7 +450,7 @@ abstract class AbstractPlugin implements PluginInterface
          *
          * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
          */
-        \add_action(
+        add_action(
             'init',
             function (): void {
                 $this->maybeInstallPluginSetupData();
@@ -499,7 +500,7 @@ abstract class AbstractPlugin implements PluginInterface
          *
          * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
          */
-        \add_action(
+        add_action(
             'init',
             function () use ($previousVersion): void {
                 // The version could contain the hash commit. Remove it!
