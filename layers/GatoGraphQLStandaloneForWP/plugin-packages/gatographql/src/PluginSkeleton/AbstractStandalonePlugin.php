@@ -65,11 +65,4 @@ abstract class AbstractStandalonePlugin extends Plugin
     {
         return 30;
     }
-
-    /**
-     * Method to override
-     */
-    protected function dependedUponPluginOrThemeJustActivatedOrDeactivated(): void
-    {
-    }
 }
