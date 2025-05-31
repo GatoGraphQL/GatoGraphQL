@@ -480,6 +480,19 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
+     * Method to override.
+     *
+     * Execute actions when the depended-upon plugin or theme's
+     * status has changed (activated/deactivated).
+     *
+     * @param string[] $pluginFilesOrThemeSlugsWithStatusChange The plugin files or theme slugs with status change
+     */
+    public function isPluginOrThemeStatusChanged(array $pluginFilesOrThemeSlugsWithStatusChange): void
+    {
+        // Override this method
+    }
+
+    /**
      * Allow functionality to be executed after
      */
     protected function getInstallPluginSetupDataInitHookPriority(): int

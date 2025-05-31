@@ -561,6 +561,32 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     );
                 }
 
+                $pluginFilesOrThemeSlugsWithStatusChange = $userSettingsManager->getPluginOrThemeStatusChangeTransient();
+                if ($pluginFilesOrThemeSlugsWithStatusChange !== null && $pluginFilesOrThemeSlugsWithStatusChange !== []) {
+                    $userSettingsManager->removePluginOrThemeStatusChangeTransient();
+
+                    /**
+                     * Allow to execute actions after a depended-upon plugin or theme's status has changed
+                     */
+                    add_action(
+                        PluginAppHooks::INITIALIZE_APP,
+                        function (string $pluginAppGraphQLServerName) use ($registeredExtensionBaseNameInstances, $pluginFilesOrThemeSlugsWithStatusChange): void {
+                            if (
+                                $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                                || $this->initializationException !== null
+                            ) {
+                                return;
+                            }
+
+                            $this->isPluginOrThemeStatusChanged($pluginFilesOrThemeSlugsWithStatusChange);
+                            foreach ($registeredExtensionBaseNameInstances as $extensionInstance) {
+                                $extensionInstance->isPluginOrThemeStatusChanged($pluginFilesOrThemeSlugsWithStatusChange);
+                            }
+                        },
+                        PluginLifecyclePriorities::AFTER_EVERYTHING
+                    );
+                }
+
                 $optionNamespacer = OptionNamespacerFacade::getInstance();
                 $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
                 $storedPluginVersions = get_option($option, []);

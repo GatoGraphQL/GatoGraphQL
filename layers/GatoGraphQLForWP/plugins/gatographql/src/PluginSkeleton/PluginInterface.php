@@ -38,6 +38,14 @@ interface PluginInterface
     public function isLicenseJustActivated(): void;
 
     /**
+     * Execute actions when the depended-upon plugin or theme's
+     * status has changed (activated/deactivated).
+     *
+     * @param string[] $pluginFilesOrThemeSlugsWithStatusChange The plugin files or theme slugs with status change
+     */
+    public function isPluginOrThemeStatusChanged(array $pluginFilesOrThemeSlugsWithStatusChange): void;
+
+    /**
      * Plugin name
      */
     public function getPluginName(): string;
