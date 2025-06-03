@@ -225,6 +225,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Allow extension dependencies on themes (#3115)
 * Documentation for new Bricks Premium Extension (#3117)
 * Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
+* Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 
 = 13.0.2 =
 * Fixed: Do not show the notification count badge in the plugin menu if the Logs page is not enabled (#3112)

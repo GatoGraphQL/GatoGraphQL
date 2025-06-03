@@ -47,8 +47,12 @@ abstract class AbstractCreateOrUpdateGenericCustomPostInputObjectTypeResolver ex
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CUSTOMPOST_TYPE => SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::CUSTOMPOST_TYPE => $this->isCustomPostTypeFieldMandatory()
+                ? SchemaTypeModifiers::MANDATORY
+                : SchemaTypeModifiers::NONE,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
+
+    abstract protected function isCustomPostTypeFieldMandatory(): bool;
 }

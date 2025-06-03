@@ -9,3 +9,4 @@
 ## Improvements
 
 - Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated ([#3119](https://github.com/GatoGraphQL/GatoGraphQL/pull/3119))
+- Made `customPostType` param on the `updateCustomPost` mutation optional ([#3120](https://github.com/GatoGraphQL/GatoGraphQL/pull/3120))

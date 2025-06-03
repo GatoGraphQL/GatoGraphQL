@@ -15,4 +15,9 @@ class RootUpdateGenericCustomPostInputObjectTypeResolver extends AbstractCreateO
     {
         return true;
     }
+
+    protected function isCustomPostTypeFieldMandatory(): bool
+    {
+        return false;
+    }
 }

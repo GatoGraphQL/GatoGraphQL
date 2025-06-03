@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
+- Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 
 ## 13.0.2 - 24/05/2025
 
