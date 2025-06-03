@@ -72,59 +72,6 @@ Running this query:
           "settings": []
         },
         {
-          "id": "fjiwqp",
-          "name": "post-toc",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": []
-        },
-        {
-          "id": "typize",
-          "name": "post-reading-progress-bar",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": []
-        },
-        {
-          "id": "nquple",
-          "name": "post-reading-time",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": {
-            "prefix": "Reading time: ",
-            "suffix": " minutes"
-          }
-        },
-        {
-          "id": "tyksto",
-          "name": "post-navigation",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": {
-            "label": true,
-            "title": true,
-            "prevArrow": {
-              "library": "ionicons",
-              "icon": "ion-ios-arrow-back"
-            },
-            "nextArrow": {
-              "library": "ionicons",
-              "icon": "ion-ios-arrow-forward"
-            },
-            "image": true
-          }
-        },
-        {
-          "id": "gdoiqo",
-          "name": "post-taxonomy",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": {
-            "taxonomy": "post_tag",
-            "style": "dark"
-          }
-        },
-        {
           "id": "hywkos",
           "name": "post-comments",
           "parent": "uuiyqj",
@@ -180,73 +127,6 @@ Running this query:
                   "top": 10
                 },
                 "id": "80e288"
-              }
-            ]
-          }
-        },
-        {
-          "id": "ipoorm",
-          "name": "post-sharing",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": {
-            "items": [
-              {
-                "service": "facebook"
-              },
-              {
-                "service": "twitter"
-              },
-              {
-                "service": "linkedin"
-              },
-              {
-                "service": "whatsapp"
-              },
-              {
-                "service": "pinterest"
-              },
-              {
-                "service": "telegram"
-              },
-              {
-                "service": "vkontakte"
-              },
-              {
-                "service": "bluesky"
-              },
-              {
-                "service": "email"
-              }
-            ],
-            "brandColors": true
-          }
-        },
-        {
-          "id": "wzcyug",
-          "name": "post-content",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": []
-        },
-        {
-          "id": "ucuzdk",
-          "name": "post-meta",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": {
-            "meta": [
-              {
-                "dynamicData": "{author_name}",
-                "id": "e94a49"
-              },
-              {
-                "dynamicData": "{post_date}",
-                "id": "77550d"
-              },
-              {
-                "dynamicData": "{post_comments}",
-                "id": "4ef114"
               }
             ]
           }

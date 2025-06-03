@@ -76,59 +76,6 @@ Running this query:
           "settings": []
         },
         {
-          "id": "fjiwqp",
-          "name": "post-toc",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": []
-        },
-        {
-          "id": "typize",
-          "name": "post-reading-progress-bar",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": []
-        },
-        {
-          "id": "nquple",
-          "name": "post-reading-time",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": {
-            "prefix": "Reading time: ",
-            "suffix": " minutes"
-          }
-        },
-        {
-          "id": "tyksto",
-          "name": "post-navigation",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": {
-            "label": true,
-            "title": true,
-            "prevArrow": {
-              "library": "ionicons",
-              "icon": "ion-ios-arrow-back"
-            },
-            "nextArrow": {
-              "library": "ionicons",
-              "icon": "ion-ios-arrow-forward"
-            },
-            "image": true
-          }
-        },
-        {
-          "id": "gdoiqo",
-          "name": "post-taxonomy",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": {
-            "taxonomy": "post_tag",
-            "style": "dark"
-          }
-        },
-        {
           "id": "hywkos",
           "name": "post-comments",
           "parent": "uuiyqj",
@@ -187,72 +134,57 @@ Running this query:
               }
             ]
           }
-        },
+        }
+      ]
+    }
+  }
+}
+```
+
+We can also filter elements by name via param `filterBy`, which accepts `include` and `exclude`.
+
+Running this query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    bricksData(filterBy: {include: ["post-comments", "post-author"]})
+  }
+}
+```
+
+...will produce this response:
+
+```json
+{
+  "data": {
+    "post": {
+      "bricksData": [
         {
-          "id": "ipoorm",
-          "name": "post-sharing",
+          "id": "hywkos",
+          "name": "post-comments",
           "parent": "uuiyqj",
           "children": [],
           "settings": {
-            "items": [
-              {
-                "service": "facebook"
-              },
-              {
-                "service": "twitter"
-              },
-              {
-                "service": "linkedin"
-              },
-              {
-                "service": "whatsapp"
-              },
-              {
-                "service": "pinterest"
-              },
-              {
-                "service": "telegram"
-              },
-              {
-                "service": "vkontakte"
-              },
-              {
-                "service": "bluesky"
-              },
-              {
-                "service": "email"
-              }
-            ],
-            "brandColors": true
+            "title": true,
+            "avatar": true,
+            "formTitle": true,
+            "label": true,
+            "submitButtonStyle": "primary"
           }
         },
         {
-          "id": "wzcyug",
-          "name": "post-content",
-          "parent": "uuiyqj",
-          "children": [],
-          "settings": []
-        },
-        {
-          "id": "ucuzdk",
-          "name": "post-meta",
+          "id": "yrambp",
+          "name": "post-author",
           "parent": "uuiyqj",
           "children": [],
           "settings": {
-            "meta": [
-              {
-                "dynamicData": "{author_name}",
-                "id": "e94a49"
-              },
-              {
-                "dynamicData": "{post_date}",
-                "id": "77550d"
-              },
-              {
-                "dynamicData": "{post_comments}",
-                "id": "4ef114"
-              }
-            ]
+            "avatar": true,
+            "name": true,
+            "website": true,
+            "bio": true,
+            "postsLink": true,
+            "postsStyle": "primary"
           }
         }
       ]
