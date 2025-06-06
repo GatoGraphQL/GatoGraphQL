@@ -134,7 +134,7 @@ This will produce:
 
 ## `@passResolvedValueOnwards`
 
-`@passResolvedValueOnwards` is similar to `@passOnwards`, but it accepts passing the value of any resolved field in the object, by passing either the alias or the field name under the `property` arg.
+Directive `@passResolvedValueOnwards` is similar to `@passOnwards`, but it accepts passing the value of any resolved field in the object, by passing either the alias or the field name under the `property` arg.
 
 For instance, in this query, we access the resolved value by the field name `id`, or the alias `second`, and export that value via a dynamic variable to print it on a subsequent query:
 
