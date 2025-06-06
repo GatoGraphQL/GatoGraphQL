@@ -224,6 +224,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Enable extensions if required theme is active (#3114)
 * Allow extension dependencies on themes (#3115)
 * Documentation for new Bricks Premium Extension (#3117)
+* Documentation for the new `@exportFrom` directive from **Multiple Query Execution** (#3121)
 * Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
 * Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 
