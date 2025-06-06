@@ -31,6 +31,7 @@ When Multiple query execution is enabled, the following directives are made avai
 
 - `@depends` (operation directive): To have an operation (whether a `query` or `mutation`) indicate what other operations must be executed before
 - `@export` (field directive): To export some field value from one query as a dynamic variable, to be input to some field or directive in another query
+- `@exportFrom` (field directive): Similar to `@export` but to export the value of a scoped dynamic variable (passed via `@passOnwards(as: "...")` or `@applyField(passOnwardsAs: "...")`)
 - `@deferredExport` (field directive): Similar to `@export` but to be used with **Multi-Field Directives**
 
 In addition, directives `@include` and `@skip` are also made available as operation directives (they are normally only field directives), and these can be used to conditionally execute an operation if it satisfies some condition.
@@ -121,6 +122,56 @@ query GetLoggedInUserName {
 query FindPosts @depends(on: "GetLoggedInUserName") {
   posts(filter: { search: $loggedInUserName }) {
     id
+  }
+}
+```
+
+## `@exportFrom`
+
+It is similar to `@export`, but instead of exporting the field value, it exports the value of a scoped dynamic variable, passed via `@passOnwards(as: "...")` or `@applyField(passOnwardsAs: "...")`.
+
+For instance, in this query we use `@applyField` to modify the elements in the array and assign this new value to the scoped dynamic variable `$replaced`. Then, we use `@exportFrom` to make that value globally accessible via dynamic variable `$replacedList`, so it can be retrieved from a subsequent query.
+
+```graphql
+query One {    
+  originalList: _echo(value: ["Hello everyone", "How are you?"])
+    @underEachArrayItem(
+      passValueOnwardsAs: "value"
+      affectDirectivesUnderPos: [1, 2]
+    )
+      @applyField(
+        name: "_strReplace"
+        arguments: {
+          search: " "
+          replaceWith: "-"
+          in: $value
+        },
+        passOnwardsAs: "replaced"
+      )
+      @exportFrom(
+        scopedDynamicVariable: $replaced,
+        as: "replacedList"
+      )
+}
+
+query Two @depends(on: "One") {
+  transformedList: _echo(value: $replacedList)
+}
+```
+
+This will produce:
+
+```json
+{
+  "data": {
+    "originalList": [
+      "Hello everyone",
+      "How are you?"
+    ],
+    "transformedList": [
+      "Hello-everyone",
+      "How-are-you?"
+    ]
   }
 }
 ```
