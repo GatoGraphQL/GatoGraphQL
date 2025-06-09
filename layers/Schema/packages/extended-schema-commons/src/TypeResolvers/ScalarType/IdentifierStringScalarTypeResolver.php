@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType;
 
+use PoPSchema\ExtendedSchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
@@ -47,7 +50,19 @@ class IdentifierStringScalarTypeResolver extends StringScalarTypeResolver
         
         // Validate identifier pattern: [a-zA-Z_][a-zA-Z0-9_]*
         if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $castInputValue)) {
-            $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E4,
+                        [
+                            $inputValue,
+                            $this->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    $astNode,
+                ),
+            );
             return null;
         }
         
