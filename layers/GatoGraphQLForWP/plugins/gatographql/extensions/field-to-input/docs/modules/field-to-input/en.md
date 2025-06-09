@@ -132,9 +132,7 @@ This will produce:
 }
 ```
 
-## `@passResolvedValueOnwards`
-
-Directive `@passResolvedValueOnwards` is similar to `@passOnwards`, but it accepts passing the value of any resolved field in the object, by passing either the alias or the field name under the `property` arg.
+We can also retrieve the value of any resolved field in the object, by passing either the alias or the field name under the `property` arg.
 
 For instance, in this query, we access the resolved value by the field name `id`, or the alias `second`, and export that value via a dynamic variable to print it on a subsequent query:
 
@@ -142,7 +140,7 @@ For instance, in this query, we access the resolved value by the field name `id`
 query One {
   id
   second: _echo(value: 2)
-    @passResolvedValueOnwards(
+    @passOnwards(
       property: "id",
       as: "resolvedFirstValue"
     )
@@ -151,7 +149,7 @@ query One {
       as: "firstValue"
     )
   third: _echo(value: 3)
-    @passResolvedValueOnwards(
+    @passOnwards(
       property: "second",
       as: "resolvedSecondValue"
     )

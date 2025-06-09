@@ -12,7 +12,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow extension dependencies on themes (#3115)
 - Documentation for new Bricks Premium Extension (#3117)
 - Documentation for the new `@exportFrom` directive from **Multiple Query Execution** (#3121)
-- Documentation for the new `@passResolvedValueOnwards` directive from **Field to Input** (#3122)
+- Documentation for the updated `@passOnwards` directive from **Field to Input** (#3122)
 
 ### Improvements
 
