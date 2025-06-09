@@ -231,6 +231,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
 * Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 * Avoid overriding logic: Querying "attachment" doesn't work in an array (#3123)
+* Use `NonEmptyString` for `slug` on custom post mutations (#3126)
 
 = 13.0.2 =
 * Fixed: Do not show the notification count badge in the plugin menu if the Logs page is not enabled (#3112)
