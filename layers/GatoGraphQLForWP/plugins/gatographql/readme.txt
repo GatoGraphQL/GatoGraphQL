@@ -228,6 +228,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Documentation for the updated `@passOnwards` directive from **Field to Input** (#3122)
 * Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
 * Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
+* Avoid overriding logic: Querying "attachment" doesn't work in an array (#3123)
 
 = 13.0.2 =
 * Fixed: Do not show the notification count badge in the plugin menu if the Logs page is not enabled (#3112)

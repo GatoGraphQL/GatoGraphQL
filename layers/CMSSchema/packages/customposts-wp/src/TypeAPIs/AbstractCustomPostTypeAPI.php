@@ -223,10 +223,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
                 ...$this->getCustomPostTypes($customPostTypeOptions)
             ]));
         }
-        // Querying "attachment" doesn't work in an array!
-        if (is_array($query['post_type']) && count($query['post_type']) === 1) {
-            $query['post_type'] = $query['post_type'][0];
-        }
         if (isset($query['offset'])) {
             // Same param name, so do nothing
         }
@@ -272,11 +268,18 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             unset($query['date-to']);
         }
 
-        return App::applyFilters(
+        $query = App::applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
         );
+
+        // Querying "attachment" doesn't work in an array!
+        if (is_array($query['post_type']) && count($query['post_type']) === 1) {
+            $query['post_type'] = $query['post_type'][0];
+        }
+
+        return $query;
     }
 
     /**
