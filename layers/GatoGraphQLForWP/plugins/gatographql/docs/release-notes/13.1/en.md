@@ -7,6 +7,7 @@
 - Documentation for new Bricks Premium Extension ([#3117](https://github.com/GatoGraphQL/GatoGraphQL/pull/3117))
 - Documentation for the new `@exportFrom` directive from **Multiple Query Execution** ([#3121](https://github.com/GatoGraphQL/GatoGraphQL/pull/3121))
 - Documentation for the updated `@passOnwards` directive from **Field to Input** ([#3122](https://github.com/GatoGraphQL/GatoGraphQL/pull/3122))
+- Added `NonEmptyString` custom scalar ([#3124](https://github.com/GatoGraphQL/GatoGraphQL/pull/3124))
 
 ## Improvements
 
