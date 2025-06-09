@@ -19,6 +19,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
 - Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 
+### Fixed
+
+- Avoid overriding logic: Querying "attachment" doesn't work in an array (#3123)
+
 ## 13.0.2 - 24/05/2025
 
 ### Fixed
