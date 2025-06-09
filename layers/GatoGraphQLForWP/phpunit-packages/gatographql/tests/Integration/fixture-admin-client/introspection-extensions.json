@@ -14906,6 +14906,8 @@
                         "namespacedName": "CustomPostEnumString",
                         "possibleValues": [
                             "dummy-cpt",
+                            "dummy-cpt-four",
+                            "dummy-cpt-three",
                             "dummy-cpt-two",
                             "page",
                             "post"
@@ -15033,6 +15035,18 @@
                             "footer",
                             "primary"
                         ],
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "NonEmptyString",
+                    "extensions": {
+                        "elementName": "NonEmptyString",
+                        "namespacedName": "NonEmptyString",
+                        "possibleValues": null,
                         "isOneOf": false
                     },
                     "fields": null,

@@ -6,6 +6,8 @@
         "extensions": {
           "possibleValues": [
             "dummy-cpt",
+            "dummy-cpt-four",
+            "dummy-cpt-three",
             "dummy-cpt-two",
             "page",
             "post"

@@ -4096,7 +4096,7 @@
           "namespacedName": "CustomPostEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`."
+          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`."
         },
         {
           "name": "DangerouslyNonSpecificScalar",
@@ -4167,6 +4167,13 @@
           "fields": null,
           "kind": "SCALAR",
           "description": "Menu Locations, with possible values: `\"footer\"`, `\"primary\"`."
+        },
+        {
+          "name": "NonEmptyString",
+          "namespacedName": "NonEmptyString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "A non-empty string scalar type that validates the string is not empty."
         },
         {
           "name": "NullableListValueJSONObject",

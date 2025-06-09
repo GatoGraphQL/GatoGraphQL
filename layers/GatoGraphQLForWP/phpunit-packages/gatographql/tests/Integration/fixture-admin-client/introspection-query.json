@@ -13377,7 +13377,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                                 },
                                 {
                                     "name": "by",
@@ -13991,7 +13991,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                                 },
                                 {
                                     "name": "by",
@@ -17625,7 +17625,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                                 },
                                 {
                                     "name": "by",
@@ -19298,7 +19298,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                                 },
                                 {
                                     "name": "by",
@@ -30372,7 +30372,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "CustomPostEnumString",
-                    "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`.",
+                    "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30473,6 +30473,16 @@
                     "kind": "SCALAR",
                     "name": "MenuLocationEnumString",
                     "description": "Menu Locations, with possible values: `\"footer\"`, `\"primary\"`.",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
+                    "name": "NonEmptyString",
+                    "description": "A non-empty string scalar type that validates the string is not empty.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -35341,7 +35351,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -35635,7 +35645,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -36019,7 +36029,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -36219,7 +36229,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -36380,7 +36390,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37228,7 +37238,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37439,7 +37449,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37681,7 +37691,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37840,7 +37850,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -39402,13 +39412,9 @@
                             "name": "customPostType",
                             "description": "The custom post type",
                             "type": {
-                                "kind": "NON_NULL",
-                                "name": "CustomPostEnumString!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "CustomPostEnumString",
-                                    "ofType": null
-                                }
+                                "kind": "SCALAR",
+                                "name": "CustomPostEnumString",
+                                "ofType": null
                             },
                             "defaultValue": null
                         },
@@ -39481,7 +39487,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -39954,7 +39960,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -40174,7 +40180,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -40597,7 +40603,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -41002,7 +41008,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
                         },
                         {
                             "name": "dateQuery",
