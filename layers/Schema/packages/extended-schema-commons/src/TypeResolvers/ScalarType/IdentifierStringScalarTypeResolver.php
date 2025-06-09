@@ -47,7 +47,7 @@ class IdentifierStringScalarTypeResolver extends StringScalarTypeResolver
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
             return null;
         }
-        
+
         // Validate identifier pattern: [a-zA-Z_][a-zA-Z0-9_]*
         if (!preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $castInputValue)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -65,7 +65,7 @@ class IdentifierStringScalarTypeResolver extends StringScalarTypeResolver
             );
             return null;
         }
-        
+
         return $castInputValue;
     }
-} 
+}

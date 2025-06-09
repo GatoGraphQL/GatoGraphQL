@@ -46,4 +46,4 @@ class NonEmptyStringScalarTypeResolver extends StringScalarTypeResolver
         }
         return $castInputValue;
     }
-} 
+}
