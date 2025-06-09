@@ -226,6 +226,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Documentation for new Bricks Premium Extension (#3117)
 * Documentation for the new `@exportFrom` directive from **Multiple Query Execution** (#3121)
 * Documentation for the updated `@passOnwards` directive from **Field to Input** (#3122)
+* Added `NonEmptyString` custom scalar (#3124)
 * Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
 * Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 * Avoid overriding logic: Querying "attachment" doesn't work in an array (#3123)

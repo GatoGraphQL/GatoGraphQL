@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Documentation for new Bricks Premium Extension (#3117)
 - Documentation for the new `@exportFrom` directive from **Multiple Query Execution** (#3121)
 - Documentation for the updated `@passOnwards` directive from **Field to Input** (#3122)
+- Added `NonEmptyString` custom scalar (#3124)
 
 ### Improvements
 
@@ -182,7 +183,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Required actions
 
-- **Important:** If you have any extension installed (eg: the **“Power Extensions” bundle**), you need to update **Gato GraphQL** first! Otherwise the application will throw an exception.
+- **Important:** If you have any extension installed (eg: the **"Power Extensions" bundle**), you need to update **Gato GraphQL** first! Otherwise the application will throw an exception.
 
 ### Breaking changes
 
@@ -737,17 +738,17 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
 - Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
 - Renamed page "Recipes" to "Tutorial", and added settings to hide it
 - Renamed existing bundles:
-  - “Application Glue & Automator” bundle => “Tailored WordPress Automator” bundle
-  - “Content Translation” bundle => “Simplest WordPress Content Translation” bundle
-  - “Public API” bundle => “Responsible WordPress Public API” bundle
+  - "Application Glue & Automator" bundle => "Tailored WordPress Automator" bundle
+  - "Content Translation" bundle => "Simplest WordPress Content Translation" bundle
+  - "Public API" bundle => "Responsible WordPress Public API" bundle
 - Added documentation for new bundles:
-  - “Automated Content Translation & Sync for WordPress Multisite” bundle
-  - “Better WordPress Webhooks” bundle
-  - “Easy WordPress Bulk Transform & Update” bundle
-  - “Private GraphQL Server for WordPress” bundle
-  - “Selective Content Import, Export & Sync for WordPress” bundle
-  - “Unhindered WordPress Email Notifications” bundle
-  - “Versatile WordPress Request API” bundle
+  - "Automated Content Translation & Sync for WordPress Multisite" bundle
+  - "Better WordPress Webhooks" bundle
+  - "Easy WordPress Bulk Transform & Update" bundle
+  - "Private GraphQL Server for WordPress" bundle
+  - "Selective Content Import, Export & Sync for WordPress" bundle
+  - "Unhindered WordPress Email Notifications" bundle
+  - "Versatile WordPress Request API" bundle
 
 ### Fixed
 
@@ -874,9 +875,9 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
 - Send custom headers in the GraphQL response
 - Added field `Category.slugPath`
 - Added field `CustomPost.wpAdminEditURL`
-- Added several "raw content" fields, made them all “sensitive”
+- Added several "raw content" fields, made them all "sensitive"
 - Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
-- Mutations `createPost` and `updatePost` now have input `authorBy`, as a “sensitive” data element
+- Mutations `createPost` and `updatePost` now have input `authorBy`, as a "sensitive" data element
 - Mutations setting tags and categories on custom posts can now receive IDs or slugs via a oneof input
 - Filter custom posts by `any` status
 - Related inputs in filters have been grouped under input objects
@@ -1033,7 +1034,7 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
   - `search: String`
   - `types: [String!]`
 - Comment mutations: support creating comments by non logged-in users
-- Filter users by email (considered as “sensitive” data)
+- Filter users by email (considered as "sensitive" data)
 - Query properties for users:
   - `User.nicename: String!`
   - `User.nickname: String!`
@@ -1045,7 +1046,7 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
   - `User.hasAnyRole: Bool!`
   - `User.hasCapability: Bool!`
   - `User.hasAnyCapability: Bool!`
-- Added arguments `roles` and `excludeRoles` to filter by user roles (“sensitive” input fields)
+- Added arguments `roles` and `excludeRoles` to filter by user roles ("sensitive" input fields)
 - Fetch children from Categories:
   - `PostCategory.children: [PostCategory]!`
   - `PostCategory.childNames: [String]!`
@@ -1187,8 +1188,8 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
 - All `date` fields (such as `Post.date`, `Media.date` and `Comment.date`) and `modified` fields are now of type `DateTime` (before they had type `String`)
 - Must update `content(format:PLAIN_TEXT)` to `rawContent`
 - Must update the inputs for mutations
-- Merged the “sensitive” fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Expose Sensitive Data in the Schema` is enabled
-- `User.email` is treated as “sensitive” field
+- Merged the "sensitive" fields with the non-admin versions: instead of having fields `posts` and `unrestrainedPosts`, now there is only field `posts`, and its `filter` argument can also receive input `status` when `Expose Sensitive Data in the Schema` is enabled
+- `User.email` is treated as "sensitive" field
 - Mutations now return a "Payload" type
 - Removed modules: Access Control, Cache Control, Public/Private Schema Mode, and Low-Level Persisted Query Editing
 - Module "GraphiQL Explorer" has been hidden
@@ -1300,11 +1301,6 @@ Whenever creating a new release of the Gato GraphQL plugin, automatically deploy
   - `Root.replyComment`
   - `Root.loginUser`
   - `Root.logoutUser`
-  - `CustomPost.update` (nested)
-  - `CustomPost.setFeaturedImage` (nested)
-  - `CustomPost.removeFeaturedImage` (nested)
-  - `CustomPost.addComment` (nested)
-  - `Comment.reply` (nested)
 - Support for PHP 8.0
 
 ### Updated
