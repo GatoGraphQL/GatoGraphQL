@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Documentation for the new `@exportFrom` directive from **Multiple Query Execution** (#3121)
 - Documentation for the updated `@passOnwards` directive from **Field to Input** (#3122)
 - Added `NonEmptyString` custom scalar (#3124)
+- Added `IdentifierString` custom scalar (#3125)
 
 ### Improvements
 
