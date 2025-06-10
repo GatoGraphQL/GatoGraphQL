@@ -410,6 +410,216 @@ Running this query:
 }
 ```
 
+We can also filter elements by type or widget name via param `filterBy`, which accepts `include` and `exclude`.
+
+Running this query:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    elementorContainerFlattenedDataItems: elementorFlattenedDataItems(filterBy: {include: ["container"]})
+    elementorHeadingFlattenedDataItems: elementorFlattenedDataItems(filterBy: {include: ["heading"]})
+  }
+}
+```
+
+...will produce this response:
+
+```json
+{
+  "data": {
+    "post": {
+      "elementorContainerFlattenedDataItems": [
+        {
+          "id": "164e55c4",
+          "elType": "container",
+          "settings": {
+            "layout": "full_width",
+            "flex_gap": {
+              "size": 0,
+              "unit": "px",
+              "column": "0",
+              "row": "0",
+              "isLinked": true
+            },
+            "min_height": {
+              "unit": "vh",
+              "size": 100,
+              "sizes": []
+            },
+            "flex_align_items": "stretch",
+            "content_position": "middle",
+            "structure": "20",
+            "margin": {
+              "unit": "%",
+              "top": "",
+              "right": 0,
+              "bottom": "",
+              "left": 0,
+              "isLinked": true
+            },
+            "padding": {
+              "unit": "%",
+              "top": "0",
+              "right": "6",
+              "bottom": "0",
+              "left": "6",
+              "isLinked": false
+            },
+            "margin_tablet": {
+              "unit": "%",
+              "top": "12",
+              "right": 0,
+              "bottom": "0",
+              "left": 0,
+              "isLinked": false
+            },
+            "margin_mobile": {
+              "unit": "%",
+              "top": "20",
+              "right": 0,
+              "bottom": "0",
+              "left": 0,
+              "isLinked": false
+            },
+            "padding_tablet": {
+              "unit": "%",
+              "top": "",
+              "right": "",
+              "bottom": "",
+              "left": "",
+              "isLinked": true
+            },
+            "z_index": 1,
+            "_title": "Hero",
+            "flex_direction": "row",
+            "content_width": "full",
+            "flex_direction_tablet": "column"
+          },
+          "isInner": false,
+          "innerElementIds": [
+            "600c1786",
+            "5b451d4"
+          ],
+          "parentElementId": null
+        },
+        {
+          "id": "600c1786",
+          "elType": "container",
+          "settings": {
+            "_column_size": 50,
+            "width": {
+              "size": 50,
+              "unit": "%"
+            },
+            "padding": {
+              "unit": "%",
+              "top": "0",
+              "right": "12",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "width_tablet": {
+              "size": 100,
+              "unit": "%"
+            },
+            "align_tablet": "center",
+            "flex_gap": {
+              "size": 20,
+              "unit": "px",
+              "column": "20",
+              "row": "20",
+              "isLinked": true
+            },
+            "padding_tablet": {
+              "unit": "%",
+              "top": "0",
+              "right": "15",
+              "bottom": "0",
+              "left": "15",
+              "isLinked": false
+            },
+            "padding_mobile": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "content_width": "full",
+            "flex_direction": "column",
+            "flex_justify_content": "center",
+            "flex_align_items": "flex-start",
+            "flex_align_items_tablet": "center"
+          },
+          "isInner": true,
+          "parentElementId": "164e55c4",
+          "innerElementIds": [
+            "db84e33",
+            "7fe7b508",
+            "314da60",
+            "7b7e33ce",
+            "7ff4508"
+          ]
+        }
+      ]
+    },
+    {
+      "elementorHeadingFlattenedDataItems": [
+        {
+          "id": "db84e33",
+          "elType": "widget",
+          "settings": {
+            "title": "Your health, <br><b>on your time<\/b>",
+            "header_size": "h1",
+            "title_color": "#0D3276",
+            "typography_typography": "custom",
+            "typography_font_family": "Poppins",
+            "typography_font_size": {
+              "unit": "px",
+              "size": 76,
+              "sizes": []
+            },
+            "typography_font_weight": "400",
+            "typography_text_transform": "capitalize",
+            "typography_font_style": "normal",
+            "typography_text_decoration": "none",
+            "typography_line_height": {
+              "unit": "em",
+              "size": 1,
+              "sizes": []
+            },
+            "typography_letter_spacing": {
+              "unit": "px",
+              "size": 0,
+              "sizes": []
+            },
+            "_z_index": 1,
+            "align_tablet": "center",
+            "typography_font_size_tablet": {
+              "unit": "px",
+              "size": 55,
+              "sizes": []
+            },
+            "typography_font_size_mobile": {
+              "unit": "px",
+              "size": 40,
+              "sizes": []
+            }
+          },
+          "widgetType": "heading",
+          "htmlCache": "\t\t<div class=\"elementor-widget-container\">\n\t\t\t\t\t<h1 class=\"elementor-heading-title elementor-size-default\">Your health, <br><b>on your time<\/b><\/h1>\t\t\t\t<\/div>\n\t\t",
+          "parentElementId": "600c1786",
+          "innerElementIds": []
+        }
+      ]
+    }
+  }
+}
+```
+
 ## Mutations
 
 Update the Elementor data for a custom post via these mutations:
