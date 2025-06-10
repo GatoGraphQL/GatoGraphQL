@@ -116,7 +116,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
          * does always work.
          *
          * According to Cursor AI:
-         * 
+         *
          *   > The issue occurs because some custom post types (like "bricks_template")
          *   > have special handling in WordPress core that expects them to be queried
          *   > individually, not as part of an array. When you pass an array like
