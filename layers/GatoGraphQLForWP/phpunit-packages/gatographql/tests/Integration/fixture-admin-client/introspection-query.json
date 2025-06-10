@@ -1598,10 +1598,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -1629,10 +1629,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -1660,10 +1660,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -9846,10 +9846,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -9877,10 +9877,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -9908,10 +9908,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -10830,10 +10830,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -10861,10 +10861,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -10892,10 +10892,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -32129,53 +32129,6 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
-                    "name": "BlockFilterByInput",
-                    "description": "Oneof input to filter blocks",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "exclude",
-                            "description": "Names of blocks to be excluded",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[String!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "String!",
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "include",
-                            "description": "Names of blocks to be included",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[String!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "String!",
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": null
-                        }
-                    ],
-                    "interfaces": null,
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "INPUT_OBJECT",
                     "name": "CategoriesByInput",
                     "description": null,
                     "fields": null,
@@ -33884,6 +33837,53 @@
                                 }
                             },
                             "defaultValue": "\"post_tag\""
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "IncludeExcludeFilterInput",
+                    "description": "Oneof input to filter by including or excluding items",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "exclude",
+                            "description": "Names to be excluded",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "include",
+                            "description": "Names to be included",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
                         }
                     ],
                     "interfaces": null,

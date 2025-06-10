@@ -111,4 +111,4 @@ class IncludeExcludeFilterInputObjectTypeResolver extends AbstractOneofQueryable
                 => parent::isOneOfInputPropertyNullable($propertyName)
         };
     }
-} 
+}

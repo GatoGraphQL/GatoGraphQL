@@ -4463,13 +4463,6 @@
           "description": "Oneof input to specify the custom post author"
         },
         {
-          "name": "BlockFilterByInput",
-          "namespacedName": "BlockFilterByInput",
-          "fields": null,
-          "kind": "INPUT_OBJECT",
-          "description": "Oneof input to filter blocks"
-        },
-        {
           "name": "CategoriesByInput",
           "namespacedName": "CategoriesByInput",
           "fields": null,
@@ -4692,6 +4685,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter custom posts by tags"
+        },
+        {
+          "name": "IncludeExcludeFilterInput",
+          "namespacedName": "IncludeExcludeFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to filter by including or excluding items"
         },
         {
           "name": "LoginCredentialsInput",
