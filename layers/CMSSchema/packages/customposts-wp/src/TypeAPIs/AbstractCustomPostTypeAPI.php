@@ -107,7 +107,27 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return [];
         }
 
-        return get_posts($query);
+        $results = get_posts($query);
+
+        /**
+         * Watch out: When fetching a CPT entry of type "template_bricks"
+         * passing "post_type" => ["post", "bricks_template"] sometimes
+         * doesn't work, while passing "post_type" => "bricks_template"
+         * does work.
+         *
+         * According to Cursor AI:
+         * 
+         *   > The issue occurs because some custom post types (like "bricks_template")
+         *   > have special handling in WordPress core that expects them to be queried
+         *   > individually, not as part of an array. When you pass an array like
+         *   > ["post", "bricks_template"], WordPress sometimes fails to properly
+         *   > handle the mixed query.
+         *
+         * Solution: if there are no results, and more than 1 CPT is passed,
+         * then merge the results from querying each CPT individually.
+         */
+
+        return $results;
     }
 
     /**
