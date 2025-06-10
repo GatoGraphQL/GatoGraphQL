@@ -130,8 +130,15 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             /** @var string[] */
             $customPostTypes = $query['post_type'];
             foreach ($customPostTypes as $customPostType) {
-                $query['post_type'] = $customPostType;
-                $results = array_merge($results, get_posts($query));
+                $results = [
+                    ...$results,
+                    ...get_posts(
+                        [
+                            ...$query,
+                            'post_type' => $customPostType,
+                        ]
+                    )
+                ];
             }
         }
 
