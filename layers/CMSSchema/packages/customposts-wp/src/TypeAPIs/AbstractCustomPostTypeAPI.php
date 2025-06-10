@@ -126,6 +126,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
          * Solution: if there are no results, and more than 1 CPT is passed,
          * then merge the results from querying each CPT individually.
          */
+        if ($results === [] && is_array($query['post_type']) && count($query['post_type']) > 1) {
+            /** @var string[] */
+            $customPostTypes = $query['post_type'];
+            foreach ($customPostTypes as $customPostType) {
+                $query['post_type'] = $customPostType;
+                $results = array_merge($results, get_posts($query));
+            }
+        }
 
         return $results;
     }
