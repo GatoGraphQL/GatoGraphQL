@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
+namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;

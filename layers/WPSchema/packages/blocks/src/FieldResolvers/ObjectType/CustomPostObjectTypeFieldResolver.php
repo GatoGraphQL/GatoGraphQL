@@ -18,7 +18,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
-use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\IncludeExcludeFilterInputObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\IncludeExcludeFilterInputObjectTypeResolver;
 use PoPWPSchema\BlockContentParser\BlockContentParserInterface;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\Blocks\Constants\HookNames;
