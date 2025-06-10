@@ -9,6 +9,7 @@
 - Documentation for the updated `@passOnwards` directive from **Field to Input** ([#3122](https://github.com/GatoGraphQL/GatoGraphQL/pull/3122))
 - Added `NonEmptyString` custom scalar ([#3124](https://github.com/GatoGraphQL/GatoGraphQL/pull/3124))
 - Added `IdentifierString` custom scalar ([#3125](https://github.com/GatoGraphQL/GatoGraphQL/pull/3125))
+- Added new input `IncludeExcludeFilterInput` ([#3127](https://github.com/GatoGraphQL/GatoGraphQL/pull/3127))
 
 ## Improvements
 
