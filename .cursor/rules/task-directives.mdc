@@ -3,6 +3,14 @@ description: When a user request begins with "TASK:" (including the colon), this
 globs: *.php
 alwaysApply: true
 ---
+# CHANGELOG: Directive Handler
+
+When a user request begins with "CHANGELOG:", add a changelog entry based on the provided prompt, on the following files:
+
+- [readme.txt](mdc:layers/GatoGraphQLForWP/plugins/gatographql/readme.txt)
+- [CHANGELOG.md](mdc:layers/GatoGraphQLForWP/plugins/gatographql/CHANGELOG.md)
+- the latest version number doc under [release-notes](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes) (eg: [en.md](mdc:layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/13.1/en.md))
+
 # TASK: Directive Handler
 
 When a user request begins with "TASK:", follow this structured workflow:
