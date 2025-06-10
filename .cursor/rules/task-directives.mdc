@@ -11,7 +11,9 @@ When a user request begins with "CHANGELOG:", add a changelog entry based on the
 - [CHANGELOG.md](mdc:layers/GatoGraphQLForWP/plugins/gatographql/CHANGELOG.md)
 - the latest version number doc under [release-notes](mdc:layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes) (eg: [en.md](mdc:layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/13.1/en.md))
 
-Check what's the latest PR number in the repo (https://github.com/GatoGraphQL/GatoGraphQL) and attach the next version to the log entry.
+Check what's the latest PR number in the repo (https://github.com/GatoGraphQL/GatoGraphQL) and attach that number + 1 to the log entry.
+
+Add the log entry on the latest version number in the file.
 
 # TASK: Directive Handler
 

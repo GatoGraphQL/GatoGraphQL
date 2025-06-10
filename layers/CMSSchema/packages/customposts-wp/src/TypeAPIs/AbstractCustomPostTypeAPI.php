@@ -113,7 +113,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
          * Watch out: When fetching a CPT entry of type "template_bricks"
          * passing "post_type" => ["post", "bricks_template"] sometimes
          * doesn't work, while passing "post_type" => "bricks_template"
-         * does work.
+         * does always work.
          *
          * According to Cursor AI:
          * 
@@ -126,20 +126,22 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
          * Solution: if there are no results, and more than 1 CPT is passed,
          * then merge the results from querying each CPT individually.
          */
-        if ($results === [] && is_array($query['post_type']) && count($query['post_type']) > 1) {
-            /** @var string[] */
-            $customPostTypes = $query['post_type'];
-            foreach ($customPostTypes as $customPostType) {
-                $results = [
-                    ...$results,
-                    ...get_posts(
-                        [
-                            ...$query,
-                            'post_type' => $customPostType,
-                        ]
-                    )
-                ];
-            }
+        if (!($results === [] && is_array($query['post_type']) && count($query['post_type']) > 1)) {
+            return $results;
+        }
+
+        /** @var string[] */
+        $customPostTypes = $query['post_type'];
+        foreach ($customPostTypes as $customPostType) {
+            $results = [
+                ...$results,
+                ...get_posts(
+                    [
+                        ...$query,
+                        'post_type' => $customPostType,
+                    ]
+                )
+            ];
         }
 
         return $results;
