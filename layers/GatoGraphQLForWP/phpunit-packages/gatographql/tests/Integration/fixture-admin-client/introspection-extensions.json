@@ -15793,31 +15793,6 @@
                     "enumValues": null
                 },
                 {
-                    "name": "BlockFilterByInput",
-                    "extensions": {
-                        "elementName": "BlockFilterByInput",
-                        "namespacedName": "BlockFilterByInput",
-                        "possibleValues": null,
-                        "isOneOf": true
-                    },
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "exclude",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "include",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        }
-                    ],
-                    "enumValues": null
-                },
-                {
                     "name": "CategoriesByInput",
                     "extensions": {
                         "elementName": "CategoriesByInput",
@@ -16850,6 +16825,31 @@
                         },
                         {
                             "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "IncludeExcludeFilterInput",
+                    "extensions": {
+                        "elementName": "IncludeExcludeFilterInput",
+                        "namespacedName": "IncludeExcludeFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "exclude",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "include",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

@@ -660,10 +660,6 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "BlockFilterByInput"
-        },
-        {
-          "kind": "INPUT_OBJECT",
           "name": "CategoriesByInput"
         },
         {
@@ -789,6 +785,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "FilterPostsByTagsInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "IncludeExcludeFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
