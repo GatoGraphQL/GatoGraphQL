@@ -56,7 +56,7 @@ class IdentifierStringScalarTypeResolver extends StringScalarTypeResolver
                         InputValueCoercionErrorFeedbackItemProvider::class,
                         InputValueCoercionErrorFeedbackItemProvider::E4,
                         [
-                            $inputValue,
+                            $castInputValue,
                             $this->getMaybeNamespacedTypeName(),
                         ]
                     ),
