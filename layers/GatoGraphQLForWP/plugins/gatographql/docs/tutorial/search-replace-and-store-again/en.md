@@ -12,6 +12,8 @@ The [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functi
 - `_strReplaceMultiple`: Replace a list of strings with another list of strings
 - `_strRegexReplace`: Search for the string to replace using a regular expression
 - `_strRegexReplaceMultiple`: Search for the strings to replace using a list of regular expressions
+- `_strArrayReplace`: Replace a string with another string in an array
+- `_strArrayReplaceMultiple`: Replace a list of strings with another list of strings in an array
 
 </div>
 
