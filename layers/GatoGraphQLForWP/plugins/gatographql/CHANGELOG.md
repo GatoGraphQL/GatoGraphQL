@@ -23,6 +23,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
 - Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 - Use `NonEmptyString` for `slug` on custom post mutations (#3126)
+- Assign default value to configuration items added after the Settings was saved to DB (#3130)
 
 ### Fixed
 
