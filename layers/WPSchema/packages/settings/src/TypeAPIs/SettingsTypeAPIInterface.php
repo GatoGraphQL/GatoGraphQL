@@ -7,4 +7,5 @@ namespace PoPWPSchema\Settings\TypeAPIs;
 interface SettingsTypeAPIInterface
 {
     public function isGutenbergEditorEnabled(): bool;
+    public function useGutenbergEditorWithCustomPostType(string $customPostType): bool;
 }

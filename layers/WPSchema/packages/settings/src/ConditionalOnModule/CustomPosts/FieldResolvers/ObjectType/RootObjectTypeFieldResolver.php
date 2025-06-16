@@ -16,8 +16,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-use function use_block_editor_for_post_type;
-
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
@@ -130,12 +128,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'useGutenbergEditorWithCustomPostType':
-                if (!$this->getSettingsTypeAPI()->isGutenbergEditorEnabled()) {
-                    return false;
-                }
                 /** @var string */
                 $customPostType = $fieldDataAccessor->getValue('customPostType');
-                return use_block_editor_for_post_type($customPostType);
+                return $this->getSettingsTypeAPI()->useGutenbergEditorWithCustomPostType($customPostType);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
