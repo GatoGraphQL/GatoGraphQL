@@ -22,3 +22,4 @@
 
 - Avoid overriding logic: Querying "attachment" doesn't work in an array ([#3123](https://github.com/GatoGraphQL/GatoGraphQL/pull/3123))
 - Returning no results from `get_posts` when passing many CPTs ([#3128](https://github.com/GatoGraphQL/GatoGraphQL/pull/3128))
+- Assign default value to configuration items added after the Settings was saved to DB ([#3130](https://github.com/GatoGraphQL/GatoGraphQL/pull/3130))
