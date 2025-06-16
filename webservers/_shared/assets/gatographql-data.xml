@@ -1802,7 +1802,11 @@ https://wordpress.org/about/
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
 https://www.youtube.com/watch?v=7Nmz3IjtPh0
 </div><figcaption class="wp-element-caption">At this year's WCEU Keynote address in Athens, Greece. <a href="https://www.youtube.com/hashtag/wordpress">#WordPress</a> co-founder, Matt Mullenweg, Gutenberg Architect, Matías Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.</figcaption></figure>
-<!-- /wp:embed -->]]></content:encoded>
+<!-- /wp:embed -->
+
+<!-- wp:html -->
+<p>Custom HTML here, maybe need to process, maybe not</p>
+<!-- /wp:html -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
 		<wp:post_date><![CDATA[2023-06-12 09:20:44]]></wp:post_date>
