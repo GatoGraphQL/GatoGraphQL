@@ -5,7 +5,7 @@
                 "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 315,
+                        "line": 317,
                         "column": 7
                     }
                 ],
@@ -26,7 +26,7 @@
                 "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 318,
+                        "line": 320,
                         "column": 7
                     }
                 ],
@@ -47,7 +47,7 @@
                 "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 319,
+                        "line": 321,
                         "column": 7
                     }
                 ],
@@ -68,7 +68,7 @@
                 "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 345,
+                        "line": 347,
                         "column": 7
                     }
                 ],
@@ -89,7 +89,7 @@
                 "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 348,
+                        "line": 350,
                         "column": 7
                     }
                 ],
@@ -110,7 +110,7 @@
                 "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 349,
+                        "line": 351,
                         "column": 7
                     }
                 ],
@@ -131,7 +131,7 @@
                 "message": "Block type \"gatographql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 360,
+                        "line": 362,
                         "column": 7
                     }
                 ],
@@ -152,7 +152,7 @@
                 "message": "Block type \"gatographql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 363,
+                        "line": 365,
                         "column": 7
                     }
                 ],
@@ -173,7 +173,7 @@
                 "message": "Block type \"gatographql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 364,
+                        "line": 366,
                         "column": 7
                     }
                 ],
@@ -197,7 +197,7 @@
             "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 300,
+                    "line": 302,
                     "column": 7
                 }
             ],
@@ -218,7 +218,7 @@
             "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 303,
+                    "line": 305,
                     "column": 7
                 }
             ],
@@ -239,7 +239,7 @@
             "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 304,
+                    "line": 306,
                     "column": 7
                 }
             ],
@@ -6063,7 +6063,33 @@
             {
                 "id": 1132,
                 "blocks": [
-                    237
+                    {
+                        "name": "core\/group",
+                        "attributes": {
+                            "tagName": "div"
+                        },
+                        "contentSource": "<!-- wp:group {\"tagName\":\"div\"} -->\n<div class=\"wp-block-group\">\n\t<!-- wp:group {\"tagName\":\"div\"} -->\n\t<div class=\"wp-block-group\">\n\t\t<!-- wp:paragraph {\"content\":\"p1\",\"dropCap\":false} -->\n\t\t<p>p1<\/p>\n\t\t<!-- \/wp:paragraph -->\n\t<\/div>\n\t<!-- \/wp:group -->\n<\/div>\n<!-- \/wp:group -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/group",
+                                "attributes": {
+                                    "tagName": "div"
+                                },
+                                "contentSource": "<!-- wp:group {\"tagName\":\"div\"} -->\n\t<div class=\"wp-block-group\">\n\t\t<!-- wp:paragraph {\"content\":\"p1\",\"dropCap\":false} -->\n\t\t<p>p1<\/p>\n\t\t<!-- \/wp:paragraph -->\n\t<\/div>\n\t<!-- \/wp:group -->",
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/paragraph",
+                                        "attributes": {
+                                            "content": "p1",
+                                            "dropCap": false
+                                        },
+                                        "contentSource": "<!-- wp:paragraph {\"content\":\"p1\",\"dropCap\":false} -->\n\t\t<p>p1<\/p>\n\t\t<!-- \/wp:paragraph -->",
+                                        "innerBlocks": null
+                                    }
+                                ]
+                            }
+                        ]
+                    }
                 ],
                 "blockDataItems": [
                     {
@@ -6125,8 +6151,24 @@
             {
                 "id": 1136,
                 "blocks": [
-                    238,
-                    239
+                    {
+                        "name": "core\/heading",
+                        "attributes": {
+                            "content": "The best rock &amp; roll band in the world (global heading)",
+                            "level": 2
+                        },
+                        "contentSource": "<!-- wp:heading {\"content\":\"The best rock \\u0026amp; roll band in the world (global heading)\",\"level\":2} -->\n<h2 class=\"wp-block-heading\">The best rock &amp; roll band in the world (global heading)<\/h2>\n<!-- \/wp:heading -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "That's Queen! (global content paragraph)",
+                            "dropCap": false
+                        },
+                        "contentSource": "<!-- wp:paragraph {\"content\":\"That's Queen! (global content paragraph)\",\"dropCap\":false} -->\n<p>That's Queen! (global content paragraph)<\/p>\n<!-- \/wp:paragraph -->",
+                        "innerBlocks": null
+                    }
                 ],
                 "blockDataItems": [
                     {
