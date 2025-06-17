@@ -237,6 +237,36 @@
     )
   }
 
+  includeReusableBlockFilter: post(by: { id: 1119 }) {
+    id
+    blocks(
+      filterBy: {
+        include: "core/block"
+      }
+    ) {
+      ...BlockData
+    }
+    blockDataItems(
+      filterBy: {
+        include: "core/block"
+      }
+    )
+    blockFlattenedDataItems(
+      filterBy: {
+        include: "core/block"
+      }
+    )
+  }
+
+  reusableBlocks: customPosts(filter: { ids: [1132, 1136], customPostTypes: "wp_block", status: any }) {
+    id
+    blocks {
+      ...BlockData
+    }
+    blockDataItems
+    blockFlattenedDataItems
+  }
+
   page(by: { id: 2 }) {
     id
     title
