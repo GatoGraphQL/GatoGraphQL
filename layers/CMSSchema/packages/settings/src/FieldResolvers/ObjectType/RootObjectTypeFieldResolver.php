@@ -210,7 +210,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return (object) $value;
                 }
                 if ($fieldDataAccessor->getFieldName() === 'optionObjectValues') {
-                    return array_values(array_map(fn (array|object $valueItem) => (object) $valueItem, $value));
+                    return array_values(array_map(fn (mixed $valueItem) => is_array($valueItem) ? (object) $valueItem : $valueItem, $value));
                 }
                 return $value;
         }
