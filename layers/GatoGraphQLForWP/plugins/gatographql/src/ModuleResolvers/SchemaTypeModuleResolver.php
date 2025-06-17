@@ -1115,10 +1115,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_SETTINGS => sprintf(
                     \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
                     sprintf(
-                        \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'gatographql'),
+                        \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'gatographql'),
                         'optionValue',
                         'optionValues',
-                        'optionObjectValue'
+                        'optionObjectValue',
+                        'optionObjectValues'
                     ),
                     $headsUpDesc,
                     sprintf(
