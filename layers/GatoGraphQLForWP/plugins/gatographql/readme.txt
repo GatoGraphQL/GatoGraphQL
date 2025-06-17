@@ -230,6 +230,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added `IdentifierString` custom scalar (#3125)
 * Added new input `IncludeExcludeFilterInput` (#3127)
 * Added documentation for new fields `_strArrayReplace` and `_strArrayReplaceMultiple` from the **PHP Functions via Schema** extension (#3129)
+* Added field `optionObjectValues` (#3133)
 * Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
 * Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 * Use `NonEmptyString` for `slug` on custom post mutations (#3126)

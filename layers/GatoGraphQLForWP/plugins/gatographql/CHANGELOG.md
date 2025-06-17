@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added `IdentifierString` custom scalar (#3125)
 - Added new input `IncludeExcludeFilterInput` (#3127)
 - Added documentation for new fields `_strArrayReplace` and `_strArrayReplaceMultiple` from the **PHP Functions via Schema** extension (#3129)
+- Added field `optionObjectValues` (#3133)
 
 ### Improvements
 

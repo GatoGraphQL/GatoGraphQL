@@ -11,6 +11,7 @@
 - Added `IdentifierString` custom scalar ([#3125](https://github.com/GatoGraphQL/GatoGraphQL/pull/3125))
 - Added new input `IncludeExcludeFilterInput` ([#3127](https://github.com/GatoGraphQL/GatoGraphQL/pull/3127))
 - Added documentation for new fields `_strArrayReplace` and `_strArrayReplaceMultiple` from the **PHP Functions via Schema** extension ([#3129](https://github.com/GatoGraphQL/GatoGraphQL/pull/3129))
+- Added field `optionObjectValues` ([#3133](https://github.com/GatoGraphQL/GatoGraphQL/pull/3133))
 
 ## Improvements
 
