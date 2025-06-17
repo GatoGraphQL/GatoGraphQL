@@ -5,7 +5,7 @@
   nonExistingArray: optionValues(name: "nonExisting")
   existingObject: optionObjectValue(name: "wp_user_roles")
   nonExistingObject: optionObjectValue(name: "nonExisting")
-  existingObjects: optionObjectValues(name: "widget_block")
+  existingObjects: optionObjectValues(name: "list_of_objects")
   nonExistingObjects: optionObjectValues(name: "nonExisting")
   isGutenbergEditorEnabled
   isGutenbergEditorEnabledForPost: useGutenbergEditorWithCustomPostType(customPostType: "post")
