@@ -83,6 +83,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValue',
             'optionValues',
             'optionObjectValue',
+            'optionObjectValues',
         ];
     }
 
@@ -92,6 +93,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValue' => $this->__('Single-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'pop-settings'),
             'optionValues' => $this->__('Array-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'pop-settings'),
             'optionObjectValue' => $this->__('Object-value option saved in the DB, or `null` if entry does not exist', 'pop-settings'),
+            'optionObjectValues' => $this->__('Array of object-value options saved in the DB, or `null` if entry does not exist', 'pop-settings'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -102,6 +104,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValue' => $this->getStringScalarTypeResolver(),
             'optionValues' => $this->getAnyBuiltInScalarScalarTypeResolver(),
             'optionObjectValue' => $this->getJSONObjectScalarTypeResolver(),
+            'optionObjectValues' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -109,8 +112,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'optionValues' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'optionValues',
+            'optionObjectValues'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -122,7 +128,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'optionValue',
             'optionValues',
-            'optionObjectValue'
+            'optionObjectValue',
+            'optionObjectValues'
                 => [
                     'name' => $this->getStringScalarTypeResolver(),
                 ],
@@ -160,6 +167,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
+            case 'optionObjectValues':
                 if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldDataAccessor->getValue('name'))) {
                     $field = $fieldDataAccessor->getField();
                     $objectTypeFieldResolutionFeedbackStore->addError(
@@ -189,6 +197,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
+            case 'optionObjectValues':
                 $value = $this->getSettingsTypeAPI()->getOption($fieldDataAccessor->getValue('name'));
                 if ($value === null) {
                     return null;
@@ -199,6 +208,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 }
                 if ($fieldDataAccessor->getFieldName() === 'optionObjectValue') {
                     return (object) $value;
+                }
+                if ($fieldDataAccessor->getFieldName() === 'optionObjectValues') {
+                    return array_values(array_map(fn (array|object $valueItem) => (object) $valueItem, $value));
                 }
                 return $value;
         }
