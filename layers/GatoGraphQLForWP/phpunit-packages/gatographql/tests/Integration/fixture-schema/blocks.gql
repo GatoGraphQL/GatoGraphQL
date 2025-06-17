@@ -360,6 +360,34 @@
     blockDataItems
     blockFlattenedDataItems
   }
+
+  reusableBlockFilter: post(by: { id: 1119 }) {
+    id
+    blocks(
+      filterBy: {
+        include: "core/block"
+      }
+    ) {
+      ...BlockData
+    }
+    blockDataItems(
+      filterBy: {
+        include: "core/block"
+      }
+    )
+    blockFlattenedDataItems(
+      filterBy: {
+        include: "core/block"
+      }
+    )
+  }
+
+  reusableBlocks: customPosts(filter: { ids: [1132, 1136], customPostTypes: "wp_block", status: any }) {
+    id
+    blocks
+    blockDataItems
+    blockFlattenedDataItems
+  }
 }
 
 fragment BlockData on Block {
@@ -408,33 +436,5 @@ fragment BlockData on Block {
         }
       }
     }
-  }
-
-  reusableBlockFilter: post(by: { id: 1119 }) {
-    id
-    blocks(
-      filterBy: {
-        include: "core/block"
-      }
-    ) {
-      ...BlockData
-    }
-    blockDataItems(
-      filterBy: {
-        include: "core/block"
-      }
-    )
-    blockFlattenedDataItems(
-      filterBy: {
-        include: "core/block"
-      }
-    )
-  }
-
-  reusableBlocks: customPosts(filter: { ids: [1132, 1136], customPostTypes: "wp_block", status: any }) {
-    id
-    blocks
-    blockDataItems
-    blockFlattenedDataItems
   }
 }
