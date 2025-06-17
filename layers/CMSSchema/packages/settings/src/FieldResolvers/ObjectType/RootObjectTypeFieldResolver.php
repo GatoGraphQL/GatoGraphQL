@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Settings\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\Settings\FeedbackItemProviders\FeedbackItemProvider;
+use PoPCMSSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\Settings\FeedbackItemProviders\FeedbackItemProvider;
-use PoPCMSSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
