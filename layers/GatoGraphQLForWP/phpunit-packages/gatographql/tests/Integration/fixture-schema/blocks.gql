@@ -258,6 +258,13 @@
     )
   }
 
+  reusableBlocks: customPosts(filter: { ids: [1132, 1136], customPostTypes: "wp_block", status: any }) {
+    id
+    blocks
+    blockDataItems
+    blockFlattenedDataItems
+  }
+
   page(by: { id: 2 }) {
     id
     title
