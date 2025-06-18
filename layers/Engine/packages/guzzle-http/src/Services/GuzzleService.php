@@ -141,7 +141,7 @@ class GuzzleService implements GuzzleServiceInterface
 
         return $this->createRequestException(
             $exception->getRequest(),
-            $exception->getResponse(),
+            new ResponseWrapper($exception->getResponse()),
             $exception->getPrevious(),
             $exception->getHandlerContext(),
         );
