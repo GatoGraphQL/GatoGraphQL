@@ -25,6 +25,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 - Use `NonEmptyString` for `slug` on custom post mutations (#3126)
 - Assign default value to configuration items added after the Settings was saved to DB (#3130)
+- Print errors before warnings in the response (#3134)
 
 ### Fixed
 
