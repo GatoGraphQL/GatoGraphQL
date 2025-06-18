@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace PoP\GuzzleHTTP\Services;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use PoP\GuzzleHTTP\Exception\GuzzleHTTPRequestException;
 use PoP\GuzzleHTTP\ObjectModels\RequestInput;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseInterface;
+use Psr\Http\Message\RequestInterface;
+use Throwable;
 
 interface GuzzleServiceInterface
 {
@@ -29,4 +32,13 @@ interface GuzzleServiceInterface
      * @throws GuzzleHTTPRequestException
      */
     public function sendAsyncHTTPRequest(array $requestInputs): array;
+
+    public function createRequestException(
+        RequestInterface $request,
+        ?ResponseInterface $response = null,
+        ?Throwable $previous = null,
+        array $handlerContext = [],
+    ): RequestException;
+
+    public function createRequest(RequestInput $requestInput): RequestInterface;
 }
