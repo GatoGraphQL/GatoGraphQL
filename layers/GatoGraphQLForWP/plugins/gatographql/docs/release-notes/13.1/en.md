@@ -19,6 +19,7 @@
 - Made `customPostType` param on the `updateCustomPost` mutation optional ([#3120](https://github.com/GatoGraphQL/GatoGraphQL/pull/3120))
 - Use `NonEmptyString` for `slug` on custom post mutations([#3126](https://github.com/GatoGraphQL/GatoGraphQL/pull/3126))
 - Assign default value to configuration items added after the Settings was saved to DB ([#3130](https://github.com/GatoGraphQL/GatoGraphQL/pull/3130))
+- Print errors before warnings in the response ([#3134](https://github.com/GatoGraphQL/GatoGraphQL/pull/3134))
 
 ## Fixed
 
