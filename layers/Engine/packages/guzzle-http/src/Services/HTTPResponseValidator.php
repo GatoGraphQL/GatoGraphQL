@@ -15,10 +15,9 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
      * @return array<string,mixed>|stdClass
      * @throws GuzzleHTTPInvalidResponseException
      */
-    public function validateAndDecodeJSONResponse(
+    public function validateJSONResponse(
         ResponseInterface $response,
-        bool $associative = false,
-    ): array|stdClass {
+    ): void {
         /**
          * Validate the response was successful, i.e. if its
          * status code is in the 200s range, but ignore codes
@@ -35,7 +34,16 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
                 )
             );
         }
+    }
 
+    /**
+     * @return array<string,mixed>|stdClass
+     * @throws GuzzleHTTPInvalidResponseException
+     */
+    public function decodeJSONResponse(
+        ResponseInterface $response,
+        bool $associative = false,
+    ): array|stdClass {
         /**
          * It must be a JSON content type, for which it's either
          * `application/json` or one of its opinionated variants,
@@ -79,5 +87,17 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
         }
 
         return $decodedJSON;
+    }
+
+    /**
+     * @return array<string,mixed>|stdClass
+     * @throws GuzzleHTTPInvalidResponseException
+     */
+    public function validateAndDecodeJSONResponse(
+        ResponseInterface $response,
+        bool $associative = false,
+    ): array|stdClass {
+        $this->validateJSONResponse($response);
+        return $this->decodeJSONResponse($response, $associative);
     }
 }
