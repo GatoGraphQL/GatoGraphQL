@@ -32,7 +32,6 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
                 sprintf(
                     $this->__('Only status codes `200`, `201`, `202` and `203` are accepted, but the response has status code \'%s\'', 'guzzle-http'),
                     $statusCode,
-                    200
                 )
             );
         }
