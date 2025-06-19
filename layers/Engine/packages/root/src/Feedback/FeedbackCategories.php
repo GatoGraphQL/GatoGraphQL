@@ -12,9 +12,9 @@ class FeedbackCategories
      * - Errors
      * - Partial errors
      *
-     * The difference is that partial errors are not bubbled up,
-     * then they won't necessarily set the whole field to `null`,
-     * eg: using nested directives.
+     * The difference is that partial errors do not set the field in `null`.
+     * As such, their errors state is not bubbled up,
+     * and they won't set any wrapping meta directive's value as `null`.
      *
      * For instance, in this query:
      *
@@ -25,9 +25,7 @@ class FeedbackCategories
      *       fr: ["how are you", "my friend?"],
      *       de: ["everything good?", "really?"]
      *     })
-     *       @underEachJSONObjectProperty(
-     *       passKeyOnwardsAs: "toLang",
-     *       )
+     *       @underEachJSONObjectProperty(passKeyOnwardsAs: "toLang")
      *       @underEachArrayItem
      *         @strTranslate(
      *           from: "en",
@@ -38,8 +36,7 @@ class FeedbackCategories
      *
      * When the API request for a single language fails, if using ->addError
      * in `@strTranslate`, then the whole field will be set to `null`, whereas
-     * using ->addPartialError will set the field to `null` only for the
-     * language that failed.
+     * using ->addPartialError will allow the translation of all other languages.
      */
     public final const ERROR = 'error';
     public final const DEPRECATION = 'deprecation';
