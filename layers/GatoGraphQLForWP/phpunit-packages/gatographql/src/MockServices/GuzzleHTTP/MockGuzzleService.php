@@ -14,6 +14,7 @@ use PoP\GuzzleHTTP\ObjectModels\RequestInput;
 use PoP\GuzzleHTTP\Services\GuzzleServiceInterface;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseInterface;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface as UpstreamResponseInterface;
 use Throwable;
 
 /**
@@ -86,7 +87,7 @@ class MockGuzzleService implements MockGuzzleServiceInterface
      */
     public function createRequestException(
         RequestInterface $request,
-        ?ResponseInterface $response = null,
+        ?UpstreamResponseInterface $response = null,
         ?Throwable $previous = null,
         array $handlerContext = [],
     ): RequestException {

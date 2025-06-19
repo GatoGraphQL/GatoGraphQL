@@ -28,4 +28,5 @@ use Psr\Http\Message\ResponseInterface as UpstreamResponseInterface;
  */
 interface ResponseInterface extends UpstreamResponseInterface
 {
+    public function getUpstreamResponse(): UpstreamResponseInterface;
 }
