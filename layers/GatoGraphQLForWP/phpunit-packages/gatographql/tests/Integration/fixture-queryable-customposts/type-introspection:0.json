@@ -24,7 +24,8 @@
                         "dummy-cpt-three",
                         "dummy-cpt-two",
                         "page",
-                        "post"
+                        "post",
+                        "wp_block"
                     ]
                 }
             }

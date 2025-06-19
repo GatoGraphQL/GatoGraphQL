@@ -1732,6 +1732,9 @@
               "name": "optionObjectValue"
             },
             {
+              "name": "optionObjectValues"
+            },
+            {
               "name": "optionValue"
             },
             {
@@ -2122,6 +2125,9 @@
             },
             {
               "name": "optionObjectValue"
+            },
+            {
+              "name": "optionObjectValues"
             },
             {
               "name": "optionValue"
@@ -4096,7 +4102,7 @@
           "namespacedName": "CustomPostEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`."
+          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`, `\"wp_block\"`."
         },
         {
           "name": "DangerouslyNonSpecificScalar",

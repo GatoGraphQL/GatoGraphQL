@@ -6863,6 +6863,21 @@
                             ]
                         },
                         {
+                            "name": "optionObjectValues",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "optionValue",
                             "extensions": {
                                 "isMutation": false,
@@ -9228,6 +9243,21 @@
                         },
                         {
                             "name": "optionObjectValue",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "optionObjectValues",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -14910,7 +14940,8 @@
                             "dummy-cpt-three",
                             "dummy-cpt-two",
                             "page",
-                            "post"
+                            "post",
+                            "wp_block"
                         ],
                         "isOneOf": false
                     },

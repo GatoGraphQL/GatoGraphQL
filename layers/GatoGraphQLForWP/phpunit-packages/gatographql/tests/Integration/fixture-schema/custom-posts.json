@@ -272,14 +272,14 @@
                 "title": "HTTP caching improves performance"
             },
             {
-                "__typename": "Post",
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
+                "__typename": "GenericCustomPost",
+                "id": 1132,
+                "title": "Synced pattern with nested blocks"
             },
             {
                 "__typename": "GenericCustomPost",
-                "id": 1613,
-                "title": "Dolor facilis repellat pariatur veniam at"
+                "id": 1136,
+                "title": "Global synced pattern"
             }
         ],
         "customPostsByExcludeIDs": [
@@ -319,19 +319,19 @@
                 "title": "Public or Private API mode, for extra security"
             },
             {
+                "__typename": "GenericCustomPost",
+                "id": 1132,
+                "title": "Synced pattern with nested blocks"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1136,
+                "title": "Global synced pattern"
+            },
+            {
                 "__typename": "Post",
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1613,
-                "title": "Dolor facilis repellat pariatur veniam at"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
             }
         ],
         "customPostsByHasPassword": [],

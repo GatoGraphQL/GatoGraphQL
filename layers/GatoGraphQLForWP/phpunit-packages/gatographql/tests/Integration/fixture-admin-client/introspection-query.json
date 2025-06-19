@@ -13377,7 +13377,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -13991,7 +13991,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -14492,6 +14492,37 @@
                                 "kind": "SCALAR",
                                 "name": "JSONObject",
                                 "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "optionObjectValues",
+                            "description": "Array of object-value options saved in the DB, or `null` if entry does not exist",
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "description": "The option name",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[JSONObject]",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
+                                    "ofType": null
+                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -17625,7 +17656,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -19298,7 +19329,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -19799,6 +19830,37 @@
                                 "kind": "SCALAR",
                                 "name": "JSONObject",
                                 "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "optionObjectValues",
+                            "description": "Array of object-value options saved in the DB, or `null` if entry does not exist",
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "description": "The option name",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[JSONObject]",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
+                                    "ofType": null
+                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -30372,7 +30434,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "CustomPostEnumString",
-                    "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`.",
+                    "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`, `\"wp_block\"`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -35351,7 +35413,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -36390,7 +36452,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37238,7 +37300,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37449,7 +37511,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37691,7 +37753,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37850,7 +37912,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -40603,7 +40665,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -41008,7 +41070,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",

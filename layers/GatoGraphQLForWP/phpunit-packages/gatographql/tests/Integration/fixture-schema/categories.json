@@ -3704,6 +3704,16 @@
         ],
         "customPostsExcludeByCategoryIDs": [
             {
+                "id": 1132,
+                "title": "Synced pattern with nested blocks",
+                "categories": []
+            },
+            {
+                "id": 1136,
+                "title": "Global synced pattern",
+                "categories": []
+            },
+            {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
@@ -3772,16 +3782,6 @@
             {
                 "id": 1660,
                 "title": "Dummy CPT with non server-side-registered block",
-                "categories": []
-            },
-            {
-                "id": 1680,
-                "title": "Dummy CPT with server-side-registered block",
-                "categories": []
-            },
-            {
-                "id": 1636,
-                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
                 "categories": []
             }
         ],
@@ -3873,6 +3873,16 @@
         ],
         "customPostsExcludeByCategorySlugs": [
             {
+                "id": 1132,
+                "title": "Synced pattern with nested blocks",
+                "categories": []
+            },
+            {
+                "id": 1136,
+                "title": "Global synced pattern",
+                "categories": []
+            },
+            {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
@@ -3941,16 +3951,6 @@
             {
                 "id": 1660,
                 "title": "Dummy CPT with non server-side-registered block",
-                "categories": []
-            },
-            {
-                "id": 1680,
-                "title": "Dummy CPT with server-side-registered block",
-                "categories": []
-            },
-            {
-                "id": 1636,
-                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
                 "categories": []
             }
         ],
