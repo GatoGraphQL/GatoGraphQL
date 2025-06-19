@@ -12,6 +12,8 @@ class SchemaFeedbackStore
     /** @var SchemaFeedbackInterface[] */
     private array $errors = [];
     /** @var SchemaFeedbackInterface[] */
+    private array $partialErrors = [];
+    /** @var SchemaFeedbackInterface[] */
     private array $warnings = [];
     /** @var SchemaFeedbackInterface[] */
     private array $deprecations = [];
@@ -28,6 +30,10 @@ class SchemaFeedbackStore
         $this->errors = array_merge(
             $this->errors,
             $schemaFeedbackStore->getErrors()
+        );
+        $this->partialErrors = array_merge(
+            $this->partialErrors,
+            $schemaFeedbackStore->getPartialErrors()
         );
         $this->warnings = array_merge(
             $this->warnings,
@@ -62,6 +68,13 @@ class SchemaFeedbackStore
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackError,
+                $relationalTypeResolver,
+                $fields,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getPartialErrors() as $objectTypeFieldResolutionFeedbackPartialError) {
+            $this->partialErrors[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackPartialError,
                 $relationalTypeResolver,
                 $fields,
             );
@@ -127,6 +140,32 @@ class SchemaFeedbackStore
     public function setErrors(array $errors): void
     {
         $this->errors = $errors;
+    }
+
+    public function getPartialErrorCount(): int
+    {
+        return count($this->getPartialErrors());
+    }
+
+    /**
+     * @return SchemaFeedbackInterface[]
+     */
+    public function getPartialErrors(): array
+    {
+        return $this->partialErrors;
+    }
+
+    public function addPartialError(SchemaFeedbackInterface $partialError): void
+    {
+        $this->partialErrors[] = $partialError;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $partialErrors
+     */
+    public function setPartialErrors(array $partialErrors): void
+    {
+        $this->partialErrors = $partialErrors;
     }
 
     /**
