@@ -12,8 +12,9 @@ class FeedbackCategories
      * - Errors
      * - Partial errors
      *
-     * The difference is that partial errors do not set the whole field to `null`,
-     * but only the part that failed.
+     * The difference is that partial errors are not bubbled up,
+     * then they won't necessarily set the whole field to `null`,
+     * eg: using nested directives.
      *
      * For instance, in this query:
      *
