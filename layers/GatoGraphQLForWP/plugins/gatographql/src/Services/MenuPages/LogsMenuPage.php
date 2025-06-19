@@ -703,6 +703,13 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             // Gato GraphQL - custom addition: Convert Markdown to HTML
             if ($this->supportMarkdownFormat()) {
                 $message_chunks[0] = $this->getMarkdownConvertor()->convertMarkdownToHTML($message_chunks[0]);
+                // Remove the <p> tag
+                $message_chunks[0] = preg_replace('/^<p[^>]*>(.*)<\/p>$/is', '$1', $message_chunks[0]);
+                $message_chunks[0] = sprintf(
+                    '<span class="%1$s">%2$s</span>',
+                    esc_attr('log-message'),
+                    $message_chunks[0]
+                );
             }
 
             if (isset($message_chunks[1])) {
