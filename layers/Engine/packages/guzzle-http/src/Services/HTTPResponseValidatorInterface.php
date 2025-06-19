@@ -11,7 +11,6 @@ use stdClass;
 interface HTTPResponseValidatorInterface
 {
     /**
-     * @return array<string,mixed>|stdClass
      * @throws GuzzleHTTPInvalidResponseException
      */
     public function validateJSONResponse(

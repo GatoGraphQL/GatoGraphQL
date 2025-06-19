@@ -81,6 +81,9 @@ class MockGuzzleService implements MockGuzzleServiceInterface
         return $this->mockHandler;
     }
 
+    /**
+     * @param mixed[] $handlerContext
+     */
     public function createRequestException(
         RequestInterface $request,
         ?ResponseInterface $response = null,

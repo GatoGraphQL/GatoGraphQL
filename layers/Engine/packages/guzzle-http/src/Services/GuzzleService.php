@@ -139,9 +139,11 @@ class GuzzleService implements GuzzleServiceInterface
             return $exception;
         }
 
+        /** @var ResponseInterface */
+        $response = $exception->getResponse();
         return $this->createRequestException(
             $exception->getRequest(),
-            new ResponseWrapper($exception->getResponse()),
+            new ResponseWrapper($response),
             $exception->getPrevious(),
             $exception->getHandlerContext(),
         );
@@ -160,6 +162,9 @@ class GuzzleService implements GuzzleServiceInterface
         );
     }
 
+    /**
+     * @param mixed[] $handlerContext
+     */
     public function createRequestException(
         RequestInterface $request,
         ?ResponseInterface $response = null,

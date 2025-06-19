@@ -12,7 +12,6 @@ use stdClass;
 class HTTPResponseValidator extends AbstractBasicService implements HTTPResponseValidatorInterface
 {
     /**
-     * @return array<string,mixed>|stdClass
      * @throws GuzzleHTTPInvalidResponseException
      */
     public function validateJSONResponse(

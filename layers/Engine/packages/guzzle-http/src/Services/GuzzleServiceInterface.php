@@ -33,6 +33,9 @@ interface GuzzleServiceInterface
      */
     public function sendAsyncHTTPRequest(array $requestInputs): array;
 
+    /**
+     * @param mixed[] $handlerContext
+     */
     public function createRequestException(
         RequestInterface $request,
         ?ResponseInterface $response = null,
