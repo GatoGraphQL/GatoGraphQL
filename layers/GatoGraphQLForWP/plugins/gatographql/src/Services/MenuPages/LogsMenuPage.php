@@ -14,12 +14,13 @@ use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
+use PoPSchema\Logger\Constants\LoggerContext;
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoPSchema\Logger\Module as LoggerModule;
 use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
-use PoPSchema\Logger\Constants\LoggerContext;
 
 use PoP\ComponentModel\App;
+use PoP\MarkdownConvertor\MarkdownConvertorInterface;
 use WP_List_Table;
 use function get_plugin_page_hook;
 
@@ -47,6 +48,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserAuthorizationInterface $userAuthorization = null;
     private ?LogEntryCounterSettingsManagerInterface $logEntryCounterSettingsManager = null;
+    private ?MarkdownConvertorInterface $markdownConvertor = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
@@ -69,6 +71,15 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     final protected function getLogEntryCounterSettingsManager(): LogEntryCounterSettingsManagerInterface
     {
         return $this->logEntryCounterSettingsManager ??= LogEntryCounterSettingsManagerFacade::getInstance();
+    }
+    final protected function getMarkdownConvertor(): MarkdownConvertorInterface
+    {
+        if ($this->markdownConvertor === null) {
+            /** @var MarkdownConvertorInterface */
+            $markdownConvertor = $this->instanceManager->getInstance(MarkdownConvertorInterface::class);
+            $this->markdownConvertor = $markdownConvertor;
+        }
+        return $this->markdownConvertor;
     }
 
     public function isServiceEnabled(): bool
@@ -127,6 +138,11 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     public function getMenuPageTitle(): string
     {
         return __('Logs', 'gatographql');
+    }
+
+    protected function supportMarkdownFormat(): bool
+    {
+        return true;
     }
 
     /**
@@ -683,6 +699,19 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
         if (isset($segments[2]) && $has_timestamp && $has_level) {
             $message_chunks = explode(LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR, $segments[2], 2);
+            
+            // Gato GraphQL - custom addition: Convert Markdown to HTML
+            if ($this->supportMarkdownFormat()) {
+                $message_chunks[0] = $this->getMarkdownConvertor()->convertMarkdownToHTML($message_chunks[0]);
+                // Remove the <p> tag
+                $message_chunks[0] = preg_replace('/^<p[^>]*>(.*)<\/p>$/is', '$1', $message_chunks[0]);
+                $message_chunks[0] = sprintf(
+                    '<span class="%1$s">%2$s</span>',
+                    esc_attr('log-message'),
+                    $message_chunks[0]
+                );
+            }
+
             if (isset($message_chunks[1])) {
                 try {
                     $maybe_json = html_entity_decode(trim($message_chunks[1]));

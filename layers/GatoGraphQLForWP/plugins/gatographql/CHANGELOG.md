@@ -19,6 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added documentation for new fields `_strArrayReplace` and `_strArrayReplaceMultiple` from the **PHP Functions via Schema** extension (#3129)
 - Added field `optionObjectValues` (#3133)
 - Support for "partial" errors (shown in the response, but not bubbled up on nested directives) (#3135)
+- Support markdown in logs (#3136)
 
 ### Improvements
 
