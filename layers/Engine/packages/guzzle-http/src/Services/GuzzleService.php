@@ -18,6 +18,7 @@ use PoP\GuzzleHTTP\ObjectModels\RequestInput;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseInterface;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseWrapper;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface as UpstreamResponseInterface;
 use Throwable;
 
 class GuzzleService implements GuzzleServiceInterface
@@ -139,11 +140,9 @@ class GuzzleService implements GuzzleServiceInterface
             return $exception;
         }
 
-        /** @var ResponseInterface */
-        $response = $exception->getResponse();
         return $this->createRequestException(
             $exception->getRequest(),
-            new ResponseWrapper($response),
+            $exception->getResponse(),
             $exception->getPrevious(),
             $exception->getHandlerContext(),
         );
@@ -167,13 +166,13 @@ class GuzzleService implements GuzzleServiceInterface
      */
     public function createRequestException(
         RequestInterface $request,
-        ?ResponseInterface $response = null,
+        ?UpstreamResponseInterface $response = null,
         ?Throwable $previous = null,
         array $handlerContext = [],
     ): RequestException {
         return RequestException::create(
             $request,
-            $response,
+            ($response instanceof ResponseInterface) ? $response->getUpstreamResponse() : $response,
             $previous,
             $handlerContext,
             new BodySummarizer(1200)
