@@ -435,7 +435,8 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
         );
 
         // 3. Add the output in the DB
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []
+        if (
+            $objectTypeFieldResolutionFeedbackStore->getErrors() !== []
             || $objectTypeFieldResolutionFeedbackStore->getPartialErrors() !== []
         ) {
             // Set the response for the failing field as null
