@@ -411,7 +411,11 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     ): void {
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationSchemaErrors = new SplObjectStorage();
-        foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
+        $schemaFeedbackErrors = array_merge(
+            $schemaFeedbackStore->getErrors(),
+            $schemaFeedbackStore->getPartialErrors(),
+        );
+        foreach ($schemaFeedbackErrors as $schemaFeedbackError) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackError,
                 $iterationSchemaErrors,
