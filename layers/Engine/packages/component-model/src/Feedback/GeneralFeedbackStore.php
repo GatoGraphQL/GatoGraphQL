@@ -9,6 +9,8 @@ class GeneralFeedbackStore
     /** @var GeneralFeedbackInterface[] */
     private array $errors = [];
     /** @var GeneralFeedbackInterface[] */
+    private array $partialErrors = [];
+    /** @var GeneralFeedbackInterface[] */
     private array $warnings = [];
     /** @var GeneralFeedbackInterface[] */
     private array $deprecations = [];
@@ -43,6 +45,32 @@ class GeneralFeedbackStore
     public function setErrors(array $errors): void
     {
         $this->errors = $errors;
+    }
+
+    public function getPartialErrorCount(): int
+    {
+        return count($this->getPartialErrors());
+    }
+
+    /**
+     * @return GeneralFeedbackInterface[]
+     */
+    public function getPartialErrors(): array
+    {
+        return $this->partialErrors;
+    }
+
+    public function addPartialError(GeneralFeedbackInterface $partialError): void
+    {
+        $this->partialErrors[] = $partialError;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $partialErrors
+     */
+    public function setPartialErrors(array $partialErrors): void
+    {
+        $this->partialErrors = $partialErrors;
     }
 
     /**

@@ -13,6 +13,8 @@ class ObjectResolutionFeedbackStore
     /** @var ObjectResolutionFeedbackInterface[] */
     private array $errors = [];
     /** @var ObjectResolutionFeedbackInterface[] */
+    private array $partialErrors = [];
+    /** @var ObjectResolutionFeedbackInterface[] */
     private array $warnings = [];
     /** @var ObjectResolutionFeedbackInterface[] */
     private array $deprecations = [];
@@ -29,6 +31,10 @@ class ObjectResolutionFeedbackStore
         $this->errors = array_merge(
             $this->errors,
             $objectResolutionFeedbackStore->getErrors()
+        );
+        $this->partialErrors = array_merge(
+            $this->partialErrors,
+            $objectResolutionFeedbackStore->getPartialErrors()
         );
         $this->warnings = array_merge(
             $this->warnings,
@@ -64,6 +70,14 @@ class ObjectResolutionFeedbackStore
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackError,
+                $relationalTypeResolver,
+                $directive,
+                $idFieldSet,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getPartialErrors() as $objectTypeFieldResolutionFeedbackPartialError) {
+            $this->errors[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackPartialError,
                 $relationalTypeResolver,
                 $directive,
                 $idFieldSet,
@@ -135,6 +149,32 @@ class ObjectResolutionFeedbackStore
     public function setErrors(array $errors): void
     {
         $this->errors = $errors;
+    }
+
+    public function getPartialErrorCount(): int
+    {
+        return count($this->getPartialErrors());
+    }
+
+    /**
+     * @return ObjectResolutionFeedbackInterface[]
+     */
+    public function getPartialErrors(): array
+    {
+        return $this->partialErrors;
+    }
+
+    public function addPartialError(ObjectResolutionFeedbackInterface $partialError): void
+    {
+        $this->partialErrors[] = $partialError;
+    }
+
+    /**
+     * @param ObjectResolutionFeedbackInterface[] $partialErrors
+     */
+    public function setPartialErrors(array $partialErrors): void
+    {
+        $this->partialErrors = $partialErrors;
     }
 
     /**

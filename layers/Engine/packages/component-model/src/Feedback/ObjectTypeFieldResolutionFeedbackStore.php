@@ -9,6 +9,8 @@ class ObjectTypeFieldResolutionFeedbackStore
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $errors = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
+    private array $partialErrors = [];
+    /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $warnings = [];
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $deprecations = [];
@@ -25,6 +27,10 @@ class ObjectTypeFieldResolutionFeedbackStore
         $this->errors = array_merge(
             $this->errors,
             $objectTypeFieldResolutionFeedbackStore->getErrors()
+        );
+        $this->partialErrors = array_merge(
+            $this->partialErrors,
+            $objectTypeFieldResolutionFeedbackStore->getPartialErrors()
         );
         $this->warnings = array_merge(
             $this->warnings,
@@ -72,6 +78,32 @@ class ObjectTypeFieldResolutionFeedbackStore
     public function setErrors(array $errors): void
     {
         $this->errors = $errors;
+    }
+
+    public function getPartialErrorCount(): int
+    {
+        return count($this->getPartialErrors());
+    }
+
+    /**
+     * @return ObjectTypeFieldResolutionFeedbackInterface[]
+     */
+    public function getPartialErrors(): array
+    {
+        return $this->partialErrors;
+    }
+
+    public function addPartialError(ObjectTypeFieldResolutionFeedbackInterface $partialError): void
+    {
+        $this->partialErrors[] = $partialError;
+    }
+
+    /**
+     * @param ObjectTypeFieldResolutionFeedbackInterface[] $partialErrors
+     */
+    public function setPartialErrors(array $partialErrors): void
+    {
+        $this->partialErrors = $partialErrors;
     }
 
     /**

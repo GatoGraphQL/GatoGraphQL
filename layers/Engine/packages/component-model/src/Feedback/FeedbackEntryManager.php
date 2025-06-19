@@ -69,11 +69,11 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
 
         // Errors
         $generalFeedbackStore = App::getFeedbackStore()->generalFeedbackStore;
-        if ($generalErrors = $generalFeedbackStore->getErrors()) {
+        if ($generalErrors = [...$generalFeedbackStore->getErrors(), ...$generalFeedbackStore->getPartialErrors()]) {
             $data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] = $this->getGeneralFeedbackEntriesForOutput($generalErrors);
         }
         $documentFeedbackStore = App::getFeedbackStore()->documentFeedbackStore;
-        if ($documentErrors = $documentFeedbackStore->getErrors()) {
+        if ($documentErrors = [...$documentFeedbackStore->getErrors(), ...$documentFeedbackStore->getPartialErrors()]) {
             $data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] = $this->getDocumentFeedbackEntriesForOutput($documentErrors);
         }
 
@@ -227,7 +227,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     ): void {
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationObjectErrors = new SplObjectStorage();
-        foreach ($objectResolutionFeedbackStore->getErrors() as $objectFeedbackError) {
+        foreach ([...$objectResolutionFeedbackStore->getErrors(), ...$objectResolutionFeedbackStore->getPartialErrors()] as $objectFeedbackError) {
             $this->transferObjectFeedbackEntries(
                 $objectFeedbackError,
                 $iterationObjectErrors,
@@ -411,7 +411,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     ): void {
         /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
         $iterationSchemaErrors = new SplObjectStorage();
-        foreach ($schemaFeedbackStore->getErrors() as $schemaFeedbackError) {
+        foreach ([...$schemaFeedbackStore->getErrors(), ...$schemaFeedbackStore->getPartialErrors()] as $schemaFeedbackError) {
             $this->transferSchemaFeedbackEntries(
                 $schemaFeedbackError,
                 $iterationSchemaErrors,
