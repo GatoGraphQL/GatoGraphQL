@@ -27,3 +27,4 @@
 
 - Avoid overriding logic: Querying "attachment" doesn't work in an array ([#3123](https://github.com/GatoGraphQL/GatoGraphQL/pull/3123))
 - Returning no results from `get_posts` when passing many CPTs ([#3128](https://github.com/GatoGraphQL/GatoGraphQL/pull/3128))
+- Exception thrown when multiple fields have errors ([#3137](https://github.com/GatoGraphQL/GatoGraphQL/pull/3137))

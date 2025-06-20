@@ -33,6 +33,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Avoid overriding logic: Querying "attachment" doesn't work in an array (#3123)
 - Returning no results from `get_posts` when passing many CPTs (#3128)
+- Exception thrown when multiple fields have errors (#3137)
 
 ## 13.0.2 - 24/05/2025
 

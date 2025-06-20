@@ -238,8 +238,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
 * Use `NonEmptyString` for `slug` on custom post mutations (#3126)
 * Assign default value to configuration items added after the Settings was saved to DB (#3130)
-* Avoid overriding logic: Querying "attachment" doesn't work in an array (#3123)
 * Fixed: Returning no results from `get_posts` when passing many CPTs (#3128)
+* Fixed: Exception thrown when multiple fields have errors (#3137)
 
 = 13.0.2 =
 * Fixed: Do not show the notification count badge in the plugin menu if the Logs page is not enabled (#3112)
