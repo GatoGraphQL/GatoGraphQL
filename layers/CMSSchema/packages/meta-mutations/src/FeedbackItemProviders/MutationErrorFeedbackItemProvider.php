@@ -34,12 +34,12 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The term with ID \'%s\' already has meta entry for key \'%s\'', 'taxonomymeta-mutations'),
+            self::E1 => $this->__('The entity with ID \'%s\' already has meta entry for key \'%s\'', 'taxonomymeta-mutations'),
             self::E2 => $this->__('Meta key \'%s\' is not allowed', 'taxonomymeta-mutations'),
             self::E3 => $this->__('Meta keys \'%s\' are not allowed', 'taxonomymeta-mutations'),
-            self::E4 => $this->__('The term with ID \'%s\' has no entry with meta key \'%s\'', 'taxonomymeta-mutations'),
-            self::E5 => $this->__('The term with ID \'%s\' has no entry with meta key \'%s\' and value \'%s\'', 'taxonomymeta-mutations'),
-            self::E6 => $this->__('The term with ID \'%s\' already has entry with meta key \'%s\' and value \'%s\'', 'taxonomymeta-mutations'),
+            self::E4 => $this->__('The entity with ID \'%s\' has no entry with meta key \'%s\'', 'taxonomymeta-mutations'),
+            self::E5 => $this->__('The entity with ID \'%s\' has no entry with meta key \'%s\' and value \'%s\'', 'taxonomymeta-mutations'),
+            self::E6 => $this->__('The entity with ID \'%s\' already has entry with meta key \'%s\' and value \'%s\'', 'taxonomymeta-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }
