@@ -434,11 +434,13 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             [$id => new EngineIterationFieldSet([$field])]
         );
 
-        // 3. Add the output in the DB
-        if (
-            $objectTypeFieldResolutionFeedbackStore->getErrors() !== []
-            || $objectTypeFieldResolutionFeedbackStore->getPartialErrors() !== []
-        ) {
+        /**
+         * 3. Add the output in the DB
+         *
+         * Please notice: this is only for Errors.
+         * Partial errors do not set the field to `null`!
+         */
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // Set the response for the failing field as null
             $resolvedIDFieldValues[$id][$field] = null;
             $this->setAppStateForFieldValuePromises(
