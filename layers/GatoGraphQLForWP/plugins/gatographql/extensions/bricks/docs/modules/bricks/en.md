@@ -197,6 +197,16 @@ Running this query:
 }
 ```
 
+You can replace any Bricks global component with the corresponding Bricks elements, by passing param `replaceComponents: true`:
+
+```graphql
+{
+  post(by: { id: 1 }) {
+    bricksData(replaceComponents: true)
+  }
+}
+```
+
 ### `bricksComponents`
 
 Field `Root.bricksComponents: [JSONObject!]!` retrieves the Bricks data for the global components, as stored by Bricks under option `bricks_components`.
