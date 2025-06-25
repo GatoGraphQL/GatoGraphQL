@@ -11,6 +11,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     use PremiumExtensionModuleResolverTrait;
 
     public const AUTOMATION = Plugin::NAMESPACE . '\\extensions\\automation';
+    public const BRICKS = Plugin::NAMESPACE . '\\extensions\\bricks';
     public const CHATGPT_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\chatgpt-translation';
     public const CLAUDE_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\claude-translation';
     public const DEEPL = Plugin::NAMESPACE . '\\extensions\\deepl';
@@ -30,6 +31,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return [
             self::AUTOMATION,
+            self::BRICKS,
             self::CHATGPT_TRANSLATION,
             self::CLAUDE_TRANSLATION,
             self::DEEPL,
@@ -48,6 +50,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return match ($module) {
             self::AUTOMATION => \__('Automation', 'gatographql'),
+            self::BRICKS => \__('Bricks', 'gatographql'),
             self::CHATGPT_TRANSLATION => \__('ChatGPT Translation', 'gatographql'),
             self::CLAUDE_TRANSLATION => \__('Claude Translation', 'gatographql'),
             self::DEEPL => \__('DeepL', 'gatographql'),
@@ -67,6 +70,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     {
         return match ($module) {
             self::AUTOMATION => \__('Use GraphQL to automate tasks in your app: Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron. (The Internal GraphQL Server extension is required).', 'gatographql'),
+            self::BRICKS => \__('Integration with plugin "Bricks", adding fields to parse and update data in Bricks pages and templates.', 'gatographql'),
             self::CHATGPT_TRANSLATION => \__('Translate content to multiple languages using the ChatGPT API.', 'gatographql'),
             self::CLAUDE_TRANSLATION => \__('Translate content to multiple languages using the Claude API.', 'gatographql'),
             self::DEEPL => \__('Translate content to multiple languages using the DeepL API.', 'gatographql'),

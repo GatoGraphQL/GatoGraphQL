@@ -19,6 +19,11 @@ final class ResponseWrapper implements ResponseInterface
     ) {
     }
 
+    public function getUpstreamResponse(): UpstreamResponseInterface
+    {
+        return $this->response;
+    }
+
     /**
      * Retrieves the HTTP protocol version as a string.
      *

@@ -22,7 +22,7 @@ if (!class_exists(App::class)) {
  * Wait until all plugins are loaded, so that Components can decide to be resolved
  * or not based on their required plugins being active.
  */
-\add_action('plugins_loaded', function(): void {
+\add_action('after_setup_theme', function(): void {
     App::setAppThread(new AppThread());
     App::initialize(
         new AppLoader(),

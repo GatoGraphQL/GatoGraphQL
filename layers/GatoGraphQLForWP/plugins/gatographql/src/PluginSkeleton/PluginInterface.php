@@ -33,6 +33,14 @@ interface PluginInterface
     public function isLicenseJustActivated(): void;
 
     /**
+     * Execute actions when the depended-upon plugin or theme's
+     * status has changed (activated/deactivated).
+     *
+     * @param string[] $pluginFilesOrThemeSlugsWithStatusChange The plugin files or theme slugs with status change
+     */
+    public function dependedUponPluginOrThemeStatusJustChanged(array $pluginFilesOrThemeSlugsWithStatusChange): void;
+
+    /**
      * Plugin name
      */
     public function getPluginName(): string;
@@ -64,6 +72,13 @@ interface PluginInterface
      * @return string[]
      */
     public function getDependentOnPluginFiles(): array;
+
+    /**
+     * Get the list of theme slugs that this extension depends on
+     *
+     * @return string[]
+     */
+    public function getDependentOnThemeSlugs(): array;
 
     /**
      * Commit hash when merging PR in repo, injected during the CI run

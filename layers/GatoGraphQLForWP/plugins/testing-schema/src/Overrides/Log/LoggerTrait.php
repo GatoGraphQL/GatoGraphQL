@@ -15,7 +15,7 @@ trait LoggerTrait
         header(sprintf(
             '%s: %s',
             $headerName,
-            str_replace(PHP_EOL, '\n', $message)
+            str_replace(["\r", "\n"], ['\r', '\n'], $message)
         ));
     }
 }

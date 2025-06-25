@@ -132,6 +132,53 @@ This will produce:
 }
 ```
 
+We can also retrieve the value of any resolved field in the object, by passing either the alias or the field name under the `property` arg.
+
+For instance, in this query, we access the resolved value by the field name `id`, or the alias `second`, and export that value via a dynamic variable to print it on a subsequent query:
+
+```graphql
+query One {
+  id
+  second: _echo(value: 2)
+    @passOnwards(
+      property: "id",
+      as: "resolvedFirstValue"
+    )
+    @exportFrom(
+      scopedDynamicVariable: $resolvedFirstValue,
+      as: "firstValue"
+    )
+  third: _echo(value: 3)
+    @passOnwards(
+      property: "second",
+      as: "resolvedSecondValue"
+    )
+    @exportFrom(
+      scopedDynamicVariable: $resolvedSecondValue,
+      as: "secondValue"
+    )
+}
+
+query Two @depends(on: "One") {
+  firstValue: _echo(value: $firstValue)
+  secondValue: _echo(value: $secondValue)
+}
+```
+
+This will produce:
+
+```json
+{
+  "data": {
+    "id": "root",
+    "second": 2,
+    "third": 3,
+    "firstValue": "root",
+    "secondValue": 2
+  }
+}
+```
+
 ## Examples
 
 If the post's excerpt is empty, use the title instead:

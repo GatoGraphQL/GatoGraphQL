@@ -9,6 +9,8 @@ class DocumentFeedbackStore
     /** @var DocumentFeedbackInterface[] */
     private array $errors = [];
     /** @var DocumentFeedbackInterface[] */
+    private array $partialErrors = [];
+    /** @var DocumentFeedbackInterface[] */
     private array $warnings = [];
     /** @var DocumentFeedbackInterface[] */
     private array $deprecations = [];
@@ -43,6 +45,32 @@ class DocumentFeedbackStore
     public function setErrors(array $errors): void
     {
         $this->errors = $errors;
+    }
+
+    public function getPartialErrorCount(): int
+    {
+        return count($this->getPartialErrors());
+    }
+
+    /**
+     * @return DocumentFeedbackInterface[]
+     */
+    public function getPartialErrors(): array
+    {
+        return $this->partialErrors;
+    }
+
+    public function addPartialError(DocumentFeedbackInterface $partialError): void
+    {
+        $this->partialErrors[] = $partialError;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $partialErrors
+     */
+    public function setPartialErrors(array $partialErrors): void
+    {
+        $this->partialErrors = $partialErrors;
     }
 
     /**

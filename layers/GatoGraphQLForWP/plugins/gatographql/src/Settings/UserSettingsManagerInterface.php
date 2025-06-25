@@ -73,6 +73,25 @@ interface UserSettingsManagerInterface
      */
     public function removeJustActivatedLicenseTransient(): void;
 
+    /**
+     * Retrieve the plugin files or theme slugs with status change (active/inactive).
+     *
+     * @return string[]|null The plugin files or theme slugs with status change
+     */
+    public function getPluginOrThemeStatusChangeTransient(): ?array;
+
+    /**
+     * Store the plugin files or theme slugs with status change (active/inactive).
+     *
+     * @param string[] $pluginFilesOrThemeSlugs
+     */
+    public function storePluginOrThemeStatusChangeTransient(array $pluginFilesOrThemeSlugs): void;
+
+    /**
+     * Remove the plugin or theme status change transient.
+     */
+    public function removePluginOrThemeStatusChangeTransient(): void;
+
     public function hasSetting(string $module, string $option): bool;
     public function getSetting(string $module, string $option): mixed;
     public function setSetting(string $module, string $option, mixed $value): void;

@@ -147,6 +147,27 @@
             }
         },
         "nonExistingObject": null,
+        "existingObjects": [
+            {
+                "id": "nfpllg",
+                "category": "",
+                "desc": "",
+                "properties": [],
+                "_created": 1750156925,
+                "_user_id": 1,
+                "_version": "2.0-beta"
+            },
+            {
+                "id": "fufxfs",
+                "category": "",
+                "desc": "",
+                "properties": [],
+                "_created": 1750156913,
+                "_user_id": 1,
+                "_version": "2.0-beta"
+            }
+        ],
+        "nonExistingObjects": null,
         "isGutenbergEditorEnabled": true,
         "isGutenbergEditorEnabledForPost": true,
         "isGutenbergEditorEnabledForDummyCPT": true

@@ -769,7 +769,9 @@ third line]]></wp:meta_value>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:column --></div>
-<!-- /wp:columns -->]]></content:encoded>
+<!-- /wp:columns -->
+
+<!-- wp:block {"ref":1132} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1119</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:00:36]]></wp:post_date>
@@ -1626,11 +1628,76 @@ https://wordpress.org/about/
 		<wp:is_sticky>0</wp:is_sticky>
 														</item>
 					<item>
+		<title><![CDATA[Synced pattern with nested blocks]]></title>
+		<link>https://gatographql.lndo.site/synced-pattern-with-nested-blocks/</link>
+		<pubDate>Tue, 17 Jun 2025 06:34:58 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://gatographql.lndo.site/synced-pattern-with-nested-blocks/</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:group -->
+<div class="wp-block-group">
+	<!-- wp:group -->
+	<div class="wp-block-group">
+		<!-- wp:paragraph -->
+		<p>p1</p>
+		<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:group -->
+</div>
+<!-- /wp:group -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>1132</wp:post_id>
+		<wp:post_date><![CDATA[2025-06-17 06:34:58]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2025-06-17 06:34:58]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2025-06-17 06:35:29]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2025-06-17 06:35:29]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[synced-pattern-with-nested-blocks]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[wp_block]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+														</item>
+					<item>
+		<title><![CDATA[Global synced pattern]]></title>
+		<link>https://gatographql.lndo.site/global-synced-pattern/</link>
+		<pubDate>Mon, 16 Jun 2025 08:36:49 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://gatographql.lndo.site/global-synced-pattern/</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:heading -->
+<h2 class="wp-block-heading">The best rock &amp; roll band in the world (global heading)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>That's Queen! (global content paragraph)</p>
+<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>1136</wp:post_id>
+		<wp:post_date><![CDATA[2025-06-16 08:36:49]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2025-06-16 08:36:49]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2025-06-16 08:37:52]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2025-06-16 08:37:52]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[global-synced-pattern]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[wp_block]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="language" nicename="en"><![CDATA[English]]></category>
+						</item>
+					<item>
 		<title><![CDATA[Welcome to a single post full of blocks!]]></title>
 		<link>https://gatographql.lndo.site/single-post-with-a-lot-of-blocks/</link>
 		<pubDate>Mon, 12 Jun 2023 09:20:44 +0000</pubDate>
 		<dc:creator><![CDATA[editor]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1242</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1136</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>When I look back on my past and think how much time I wasted on nothing, how much time has been lost in futilities, errors, laziness, incapacity to live; how little I appreciated it, how many times I sinned against my heart and soul-then my heart bleeds. <strong>Life is a gift, life is happiness, every minute can be an eternity of happiness</strong>. (<a href="https://www.azquotes.com/author/4085-Fyodor_Dostoevsky" target="_blank" rel="noopener">Quote by Fyodor Dostoevsky</a>)<br></p>
@@ -1802,7 +1869,13 @@ https://wordpress.org/about/
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
 https://www.youtube.com/watch?v=7Nmz3IjtPh0
 </div><figcaption class="wp-element-caption">At this year's WCEU Keynote address in Athens, Greece. <a href="https://www.youtube.com/hashtag/wordpress">#WordPress</a> co-founder, Matt Mullenweg, Gutenberg Architect, Matías Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.</figcaption></figure>
-<!-- /wp:embed -->]]></content:encoded>
+<!-- /wp:embed -->
+
+<!-- wp:html -->
+<p>Custom HTML here, maybe need to process, maybe not</p>
+<!-- /wp:html -->
+
+<!-- wp:block {"ref":1136} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
 		<wp:post_date><![CDATA[2023-06-12 09:20:44]]></wp:post_date>

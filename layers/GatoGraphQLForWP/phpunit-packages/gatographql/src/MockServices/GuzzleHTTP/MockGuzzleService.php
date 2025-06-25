@@ -5,13 +5,17 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\MockServices\GuzzleHTTP;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Handler\MockHandler;
 // use PoP\GuzzleHTTP\Services\GuzzleService;
+use GuzzleHttp\Handler\MockHandler;
 use PoP\GuzzleHTTP\Exception\GuzzleHTTPRequestException;
 use PoP\GuzzleHTTP\ObjectModels\RequestInput;
 use PoP\GuzzleHTTP\Services\GuzzleServiceInterface;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface as UpstreamResponseInterface;
+use Throwable;
 
 /**
  * Mock the response from the Guzzle client.
@@ -76,5 +80,27 @@ class MockGuzzleService implements MockGuzzleServiceInterface
             $this->mockHandler = new MockHandler();
         }
         return $this->mockHandler;
+    }
+
+    /**
+     * @param mixed[] $handlerContext
+     */
+    public function createRequestException(
+        RequestInterface $request,
+        ?UpstreamResponseInterface $response = null,
+        ?Throwable $previous = null,
+        array $handlerContext = [],
+    ): RequestException {
+        return $this->guzzleService->createRequestException(
+            $request,
+            $response,
+            $previous,
+            $handlerContext,
+        );
+    }
+
+    public function createRequest(RequestInput $requestInput): RequestInterface
+    {
+        return $this->guzzleService->createRequest($requestInput);
     }
 }

@@ -219,6 +219,30 @@ class Plugin
         );
 
         \register_taxonomy(
+            'dummy-tag-three',
+            [],
+            $this->getTaxonomyArgs(
+                false,
+                __('Dummy Tag (Three)'),
+                __('Dummy Tags (Three)'),
+                __('dummy tag (three)'),
+                __('dummy tags (three)'),
+            )
+        );
+
+        \register_taxonomy(
+            'dummy-tag-four',
+            [],
+            $this->getTaxonomyArgs(
+                false,
+                __('Dummy Tag (Four)'),
+                __('Dummy Tags (Four)'),
+                __('dummy tag (four)'),
+                __('dummy tags (four)'),
+            )
+        );
+
+        \register_taxonomy(
             'dummy-category',
             [],
             $this->getTaxonomyArgs(
@@ -254,6 +278,30 @@ class Plugin
             )
         );
 
+        \register_taxonomy(
+            'dummy-category-three',
+            [],
+            $this->getTaxonomyArgs(
+                true,
+                __('Dummy Category (Three)'),
+                __('Dummy Categories (Three)'),
+                __('dummy category (three)'),
+                __('dummy categories (three)'),
+            )
+        );
+
+        \register_taxonomy(
+            'dummy-category-four',
+            [],
+            $this->getTaxonomyArgs(
+                true,
+                __('Dummy Category (Four)'),
+                __('Dummy Categories (Four)'),
+                __('dummy category (four)'),
+                __('dummy categories (four)'),
+            )
+        );
+
         \register_post_type(
             'dummy-cpt',
             $this->getCustomPostTypeArgs(
@@ -279,6 +327,32 @@ class Plugin
                 __('Dummy CPT (Two)'),
                 __('Dummy CPTs (Two)'),
                 __('dummy CPTs (two)'),
+            )
+        );
+
+        \register_post_type(
+            'dummy-cpt-three',
+            $this->getCustomPostTypeArgs(
+                [
+                    'dummy-tag-three',
+                    'dummy-category-three',
+                ],
+                __('Dummy CPT (Three)'),
+                __('Dummy CPTs (Three)'),
+                __('dummy CPTs (three)'),
+            )
+        );
+
+        \register_post_type(
+            'dummy-cpt-four',
+            $this->getCustomPostTypeArgs(
+                [
+                    'dummy-tag-four',
+                    'dummy-category-four',
+                ],
+                __('Dummy CPT (Four)'),
+                __('Dummy CPTs (Four)'),
+                __('dummy CPTs (four)'),
             )
         );
     }

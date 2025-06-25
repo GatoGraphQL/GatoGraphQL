@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Settings\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\Settings\FeedbackItemProviders\FeedbackItemProvider;
+use PoPCMSSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\Settings\FeedbackItemProviders\FeedbackItemProvider;
-use PoPCMSSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -83,6 +83,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValue',
             'optionValues',
             'optionObjectValue',
+            'optionObjectValues',
         ];
     }
 
@@ -92,6 +93,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValue' => $this->__('Single-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'pop-settings'),
             'optionValues' => $this->__('Array-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'pop-settings'),
             'optionObjectValue' => $this->__('Object-value option saved in the DB, or `null` if entry does not exist', 'pop-settings'),
+            'optionObjectValues' => $this->__('Array of object-value options saved in the DB, or `null` if entry does not exist', 'pop-settings'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -102,6 +104,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValue' => $this->getStringScalarTypeResolver(),
             'optionValues' => $this->getAnyBuiltInScalarScalarTypeResolver(),
             'optionObjectValue' => $this->getJSONObjectScalarTypeResolver(),
+            'optionObjectValues' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -109,8 +112,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'optionValues' => SchemaTypeModifiers::IS_ARRAY,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'optionValues',
+            'optionObjectValues'
+                => SchemaTypeModifiers::IS_ARRAY,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -122,7 +128,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'optionValue',
             'optionValues',
-            'optionObjectValue'
+            'optionObjectValue',
+            'optionObjectValues'
                 => [
                     'name' => $this->getStringScalarTypeResolver(),
                 ],
@@ -160,6 +167,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
+            case 'optionObjectValues':
                 if (!$this->getSettingsTypeAPI()->validateIsOptionAllowed($fieldDataAccessor->getValue('name'))) {
                     $field = $fieldDataAccessor->getField();
                     $objectTypeFieldResolutionFeedbackStore->addError(
@@ -189,6 +197,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'optionValue':
             case 'optionValues':
             case 'optionObjectValue':
+            case 'optionObjectValues':
                 $value = $this->getSettingsTypeAPI()->getOption($fieldDataAccessor->getValue('name'));
                 if ($value === null) {
                     return null;
@@ -198,7 +207,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return array_values($value);
                 }
                 if ($fieldDataAccessor->getFieldName() === 'optionObjectValue') {
-                    return (object) $value;
+                    return is_array($value) ? (object) $value : $value;
+                }
+                if ($fieldDataAccessor->getFieldName() === 'optionObjectValues') {
+                    return array_values(array_map(fn (mixed $valueItem) => is_array($valueItem) ? (object) $valueItem : $valueItem, $value));
                 }
                 return $value;
         }

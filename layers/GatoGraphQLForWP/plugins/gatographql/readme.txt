@@ -66,6 +66,8 @@ The available premium extensions are:
 
 [Automation](https://gatographql.com/extensions/automation): Use GraphQL to automate tasks in your app: Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron.
 
+[Bricks](https://gatographql.com/extensions/bricks): Integration with the Bricks plugin, to parse and update data in Bricks pages and templates.
+
 [Elementor](https://gatographql.com/extensions/elementor): Integration with the Elementor plugin, to parse and update data in Elementor pages and templates.
 
 [Events Manager](https://gatographql.com/extensions/events-manager): Integration with the Events Manager plugin, to fetch event data.
@@ -217,6 +219,27 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 13.1.0 =
+* Enable extensions if required theme is active (#3114)
+* Allow extension dependencies on themes (#3115)
+* Documentation for new Bricks Premium Extension (#3117)
+* Documentation for the new `@exportFrom` directive from **Multiple Query Execution** (#3121)
+* Documentation for the updated `@passOnwards` directive from **Field to Input** (#3122)
+* Added `NonEmptyString` custom scalar (#3124)
+* Added `IdentifierString` custom scalar (#3125)
+* Added new input `IncludeExcludeFilterInput` (#3127)
+* Added documentation for new fields `_strArrayReplace` and `_strArrayReplaceMultiple` from the **PHP Functions via Schema** extension (#3129)
+* Added field `optionObjectValues` (#3133)
+* Support for "partial" errors (shown in the response, but not bubbled up on nested directives) (#3135)
+* Support markdown in logs (#3136)
+* Print errors before warnings in the response (#3134)
+* Allow reinstalling plugin initial data when plugin/theme dependency is activated/deactivated (#3119)
+* Made `customPostType` param on the `updateCustomPost` mutation optional (#3120)
+* Use `NonEmptyString` for `slug` on custom post mutations (#3126)
+* Assign default value to configuration items added after the Settings was saved to DB (#3130)
+* Fixed: Returning no results from `get_posts` when passing many CPTs (#3128)
+* Fixed: Exception thrown when multiple fields have errors (#3137)
 
 = 13.0.2 =
 * Fixed: Do not show the notification count badge in the plugin menu if the Logs page is not enabled (#3112)

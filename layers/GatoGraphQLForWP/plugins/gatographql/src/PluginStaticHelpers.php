@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use PoPWPSchema\SchemaCommons\StaticHelpers\WordPressStaticHelpers;
 
 use function get_file_data;
+use function wp_get_theme;
 
 class PluginStaticHelpers
 {
@@ -43,6 +44,11 @@ class PluginStaticHelpers
         return WordPressStaticHelpers::isWordPressPluginActive($pluginFileOrSlug);
     }
 
+    public static function isWordPressThemeActive(string $themeSlug): bool
+    {
+        return WordPressStaticHelpers::isWordPressThemeActive($themeSlug);
+    }
+
     public static function doesActivePluginSatisfyVersionConstraint(
         string $pluginFile,
         string $versionConstraint
@@ -60,6 +66,28 @@ class PluginStaticHelpers
             return false;
         }
         return SemverWrapper::satisfies($pluginVersion, $versionConstraint);
+    }
+
+    public static function doesActiveThemeSatisfyVersionConstraint(
+        string $themeSlug,
+        string $versionConstraint
+    ): bool {
+        // Use "*" to mean "any version" (so it's always allowed)
+        if ($versionConstraint === '*') {
+            return true;
+        }
+
+        $theme = wp_get_theme($themeSlug);
+        if (!$theme->exists()) {
+            return false;
+        }
+
+        $themeVersion = $theme->get('Version');
+        if ($themeVersion === '') {
+            return false;
+        }
+
+        return SemverWrapper::satisfies($themeVersion, $versionConstraint);
     }
 
     /**

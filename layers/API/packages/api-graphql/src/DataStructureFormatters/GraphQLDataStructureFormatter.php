@@ -87,8 +87,6 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             unset($resultData[self::ADDITIONAL_FEEDBACK]);
         }
 
-        $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
-
         /**
          * Print the feedback at the top
          */
@@ -101,6 +99,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($errors !== []) {
             $ret['errors'] = $errors;
         }
+
+        // Add the "extensions" entry
+        $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
 
         if ($resultData) {
             $ret['data'] = $resultData;

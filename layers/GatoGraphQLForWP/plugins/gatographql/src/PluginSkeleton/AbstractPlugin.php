@@ -18,6 +18,7 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Helpers\ScopingHelpers;
 use PoP\Root\Module\ModuleInterface;
 
+use function add_action;
 use function get_option;
 use function flush_rewrite_rules;
 
@@ -100,6 +101,16 @@ abstract class AbstractPlugin implements PluginInterface
      * @return string[]
      */
     public function getDependentOnPluginFiles(): array
+    {
+        return [];
+    }
+
+    /**
+     * Get the list of theme slugs that this extension depends on
+     *
+     * @return string[]
+     */
+    public function getDependentOnThemeSlugs(): array
     {
         return [];
     }
@@ -439,7 +450,7 @@ abstract class AbstractPlugin implements PluginInterface
          *
          * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
          */
-        \add_action(
+        add_action(
             'init',
             function (): void {
                 $this->maybeInstallPluginSetupData();
@@ -455,6 +466,19 @@ abstract class AbstractPlugin implements PluginInterface
     public function isLicenseJustActivated(): void
     {
         // Override
+    }
+
+    /**
+     * Method to override.
+     *
+     * Execute actions when the depended-upon plugin or theme's
+     * status has changed (activated/deactivated).
+     *
+     * @param string[] $pluginFilesOrThemeSlugsWithStatusChange The plugin files or theme slugs with status change
+     */
+    public function dependedUponPluginOrThemeStatusJustChanged(array $pluginFilesOrThemeSlugsWithStatusChange): void
+    {
+        // Override this method
     }
 
     /**
@@ -476,7 +500,7 @@ abstract class AbstractPlugin implements PluginInterface
          *
          * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
          */
-        \add_action(
+        add_action(
             'init',
             function () use ($previousVersion): void {
                 // The version could contain the hash commit. Remove it!

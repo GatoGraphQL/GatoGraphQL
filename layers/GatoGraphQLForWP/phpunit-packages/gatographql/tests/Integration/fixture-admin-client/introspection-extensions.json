@@ -6863,6 +6863,21 @@
                             ]
                         },
                         {
+                            "name": "optionObjectValues",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "optionValue",
                             "extensions": {
                                 "isMutation": false,
@@ -9228,6 +9243,21 @@
                         },
                         {
                             "name": "optionObjectValue",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "optionObjectValues",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -14906,9 +14936,12 @@
                         "namespacedName": "CustomPostEnumString",
                         "possibleValues": [
                             "dummy-cpt",
+                            "dummy-cpt-four",
+                            "dummy-cpt-three",
                             "dummy-cpt-two",
                             "page",
-                            "post"
+                            "post",
+                            "wp_block"
                         ],
                         "isOneOf": false
                     },
@@ -15033,6 +15066,18 @@
                             "footer",
                             "primary"
                         ],
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "NonEmptyString",
+                    "extensions": {
+                        "elementName": "NonEmptyString",
+                        "namespacedName": "NonEmptyString",
+                        "possibleValues": null,
                         "isOneOf": false
                     },
                     "fields": null,
@@ -15771,31 +15816,6 @@
                         },
                         {
                             "name": "username",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        }
-                    ],
-                    "enumValues": null
-                },
-                {
-                    "name": "BlockFilterByInput",
-                    "extensions": {
-                        "elementName": "BlockFilterByInput",
-                        "namespacedName": "BlockFilterByInput",
-                        "possibleValues": null,
-                        "isOneOf": true
-                    },
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "exclude",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "include",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -16836,6 +16856,31 @@
                         },
                         {
                             "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "IncludeExcludeFilterInput",
+                    "extensions": {
+                        "elementName": "IncludeExcludeFilterInput",
+                        "namespacedName": "IncludeExcludeFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "exclude",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "include",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

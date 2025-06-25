@@ -9,6 +9,7 @@ use GuzzleHttp\BodySummarizer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
+use GuzzleHttp\Psr7\Request;
 use PoP\ComponentModel\App;
 use PoP\GuzzleHTTP\Exception\GuzzleHTTPRequestException;
 use PoP\GuzzleHTTP\Module;
@@ -16,6 +17,9 @@ use PoP\GuzzleHTTP\ModuleConfiguration;
 use PoP\GuzzleHTTP\ObjectModels\RequestInput;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseInterface;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseWrapper;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface as UpstreamResponseInterface;
+use Throwable;
 
 class GuzzleService implements GuzzleServiceInterface
 {
@@ -136,12 +140,11 @@ class GuzzleService implements GuzzleServiceInterface
             return $exception;
         }
 
-        return RequestException::create(
+        return $this->createRequestException(
             $exception->getRequest(),
             $exception->getResponse(),
             $exception->getPrevious(),
             $exception->getHandlerContext(),
-            new BodySummarizer(1200)
         );
     }
 
@@ -156,5 +159,28 @@ class GuzzleService implements GuzzleServiceInterface
             0,
             $exception
         );
+    }
+
+    /**
+     * @param mixed[] $handlerContext
+     */
+    public function createRequestException(
+        RequestInterface $request,
+        ?UpstreamResponseInterface $response = null,
+        ?Throwable $previous = null,
+        array $handlerContext = [],
+    ): RequestException {
+        return RequestException::create(
+            $request,
+            ($response instanceof ResponseInterface) ? $response->getUpstreamResponse() : $response,
+            $previous,
+            $handlerContext,
+            new BodySummarizer(1200)
+        );
+    }
+
+    public function createRequest(RequestInput $requestInput): RequestInterface
+    {
+        return new Request($requestInput->method, $requestInput->url);
     }
 }

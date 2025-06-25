@@ -117,7 +117,7 @@ class WPDataModelProvider extends AbstractBasicService implements WPDataModelPro
             'revision',
             'user_request',
             'wp_area',
-            'wp_block',
+            // 'wp_block', <= It's just a CPT, so allow querying it
             'wp_global_styles',
             'wp_navigation',
             'wp_template_part',

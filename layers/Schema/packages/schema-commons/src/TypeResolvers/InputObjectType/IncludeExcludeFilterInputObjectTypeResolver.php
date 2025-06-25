@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Blocks\TypeResolvers\InputObjectType;
+namespace PoPSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInput
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
-class BlockFilterByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+class IncludeExcludeFilterInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IncludeFilterInput $includeFilterInput = null;
@@ -48,12 +48,12 @@ class BlockFilterByOneofInputObjectTypeResolver extends AbstractOneofQueryableIn
 
     public function getTypeName(): string
     {
-        return 'BlockFilterByInput';
+        return 'IncludeExcludeFilterInput';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to filter blocks', 'blocks');
+        return $this->__('Oneof input to filter by including or excluding items', 'schema-commons');
     }
 
     protected function isOneInputValueMandatory(): bool
@@ -75,8 +75,8 @@ class BlockFilterByOneofInputObjectTypeResolver extends AbstractOneofQueryableIn
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'include' => $this->__('Names of blocks to be included', 'blocks'),
-            'exclude' => $this->__('Names of blocks to be excluded', 'blocks'),
+            'include' => $this->__('Names to be included', 'schema-commons'),
+            'exclude' => $this->__('Names to be excluded', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

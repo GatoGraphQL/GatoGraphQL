@@ -26,6 +26,7 @@ class Module extends AbstractModule
             \PoPCMSSchema\CustomPosts\Module::class,
             \PoPCMSSchema\UserRoles\Module::class,
             \PoPCMSSchema\UserStateMutations\Module::class,
+            \PoPSchema\ExtendedSchemaCommons\Module::class,
         ];
     }
 

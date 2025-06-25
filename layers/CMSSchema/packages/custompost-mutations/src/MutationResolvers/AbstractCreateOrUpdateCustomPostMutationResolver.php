@@ -194,7 +194,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
-        $customPostType = $this->getCustomPostType();
+        $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
         if ($customPostType !== '') {
             $this->validateIsCustomPostType(
                 $customPostID,
@@ -218,8 +218,10 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
-        /** @var string */
-        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        if ($customPostType === '') {
+            /** @var string */
+            $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        }
         $this->triggerValidateUpdateHook(
             $customPostID,
             $customPostType,

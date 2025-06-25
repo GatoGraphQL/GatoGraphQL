@@ -1598,10 +1598,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -1629,10 +1629,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -1660,10 +1660,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -9846,10 +9846,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -9877,10 +9877,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -9908,10 +9908,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -10830,10 +10830,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -10861,10 +10861,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -10892,10 +10892,10 @@
                             "args": [
                                 {
                                     "name": "filterBy",
-                                    "description": "Oneof input to filter blocks",
+                                    "description": "Oneof input to filter by including or excluding items",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "BlockFilterByInput",
+                                        "name": "IncludeExcludeFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -13377,7 +13377,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -13991,7 +13991,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -14492,6 +14492,37 @@
                                 "kind": "SCALAR",
                                 "name": "JSONObject",
                                 "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "optionObjectValues",
+                            "description": "Array of object-value options saved in the DB, or `null` if entry does not exist",
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "description": "The option name",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[JSONObject]",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
+                                    "ofType": null
+                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -17625,7 +17656,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -19298,7 +19329,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -19799,6 +19830,37 @@
                                 "kind": "SCALAR",
                                 "name": "JSONObject",
                                 "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "optionObjectValues",
+                            "description": "Array of object-value options saved in the DB, or `null` if entry does not exist",
+                            "args": [
+                                {
+                                    "name": "name",
+                                    "description": "The option name",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[JSONObject]",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
+                                    "ofType": null
+                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -30372,7 +30434,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "CustomPostEnumString",
-                    "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`.",
+                    "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`, `\"wp_block\"`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30473,6 +30535,16 @@
                     "kind": "SCALAR",
                     "name": "MenuLocationEnumString",
                     "description": "Menu Locations, with possible values: `\"footer\"`, `\"primary\"`.",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
+                    "name": "NonEmptyString",
+                    "description": "A non-empty string scalar type that validates the string is not empty.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -32109,53 +32181,6 @@
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
-                            },
-                            "defaultValue": null
-                        }
-                    ],
-                    "interfaces": null,
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "INPUT_OBJECT",
-                    "name": "BlockFilterByInput",
-                    "description": "Oneof input to filter blocks",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "exclude",
-                            "description": "Names of blocks to be excluded",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[String!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "String!",
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "include",
-                            "description": "Names of blocks to be included",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[String!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "String!",
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
-                                    }
-                                }
                             },
                             "defaultValue": null
                         }
@@ -33882,6 +33907,53 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
+                    "name": "IncludeExcludeFilterInput",
+                    "description": "Oneof input to filter by including or excluding items",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "exclude",
+                            "description": "Names to be excluded",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "include",
+                            "description": "Names to be included",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
                     "name": "LoginCredentialsInput",
                     "description": null,
                     "fields": null,
@@ -35341,7 +35413,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -35635,7 +35707,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -36019,7 +36091,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -36219,7 +36291,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -36380,7 +36452,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37228,7 +37300,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37439,7 +37511,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37681,7 +37753,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -37840,7 +37912,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -39402,13 +39474,9 @@
                             "name": "customPostType",
                             "description": "The custom post type",
                             "type": {
-                                "kind": "NON_NULL",
-                                "name": "CustomPostEnumString!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "CustomPostEnumString",
-                                    "ofType": null
-                                }
+                                "kind": "SCALAR",
+                                "name": "CustomPostEnumString",
+                                "ofType": null
                             },
                             "defaultValue": null
                         },
@@ -39481,7 +39549,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -39954,7 +40022,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -40174,7 +40242,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "String",
+                                "name": "NonEmptyString",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -40597,7 +40665,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -41002,7 +41070,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
+                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",

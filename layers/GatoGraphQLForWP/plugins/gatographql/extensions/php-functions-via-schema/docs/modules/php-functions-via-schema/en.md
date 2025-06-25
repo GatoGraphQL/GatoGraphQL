@@ -485,6 +485,14 @@ Replace placeholders inside a string with provided values.
 
 Append a string to another string.
 
+### `_strArrayReplace`
+
+Replace a string with another string in an array.
+
+### `_strArrayReplaceMultiple`
+
+Replace a list of strings with another list of strings in an array.
+
 ### `_strBase64Encode`
 
 Encodes data with MIME base64.

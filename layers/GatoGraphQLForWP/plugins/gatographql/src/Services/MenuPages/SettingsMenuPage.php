@@ -915,6 +915,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $subtype = $itemSetting[Properties::SUBTYPE] ?? null;
         $isMultipleBool = empty($possibleValues) && $subtype === Properties::TYPE_BOOL;
         $isPassword = $subtype === Properties::TYPE_PASSWORD;
+        $defaultValue = $itemSetting[Properties::DEFAULT_VALUE] ?? null;
         foreach ($keyLabels as $key => $label) {
             $id = $name . '_' . $key;
             if ($addSpacing) {
@@ -968,7 +969,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
                                 <option
                                     value="<?php echo esc_attr($optionValue) ?>"
-                                    <?php if ($optionValue === ($value[$key] ?? '')) : ?>
+                                    <?php if ($optionValue === ($value[$key] ?? $defaultValue)) : ?>
                                         selected="selected"
                                     <?php endif; ?>
                                 >

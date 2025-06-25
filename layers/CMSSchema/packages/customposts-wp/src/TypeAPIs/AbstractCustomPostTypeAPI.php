@@ -107,7 +107,44 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return [];
         }
 
-        return get_posts($query);
+        $results = get_posts($query);
+
+        /**
+         * Watch out: When fetching a CPT entry of type "template_bricks"
+         * passing "post_type" => ["post", "bricks_template"] sometimes
+         * doesn't work, while passing "post_type" => "bricks_template"
+         * does always work.
+         *
+         * According to Cursor AI:
+         *
+         *   > The issue occurs because some custom post types (like "bricks_template")
+         *   > have special handling in WordPress core that expects them to be queried
+         *   > individually, not as part of an array. When you pass an array like
+         *   > ["post", "bricks_template"], WordPress sometimes fails to properly
+         *   > handle the mixed query.
+         *
+         * Solution: if there are no results, and more than 1 CPT is passed,
+         * then merge the results from querying each CPT individually.
+         */
+        if (!($results === [] && is_array($query['post_type']) && count($query['post_type']) > 1)) {
+            return $results;
+        }
+
+        /** @var string[] */
+        $customPostTypes = $query['post_type'];
+        foreach ($customPostTypes as $customPostType) {
+            $results = [
+                ...$results,
+                ...get_posts(
+                    [
+                        ...$query,
+                        'post_type' => $customPostType,
+                    ]
+                )
+            ];
+        }
+
+        return $results;
     }
 
     /**
@@ -223,10 +260,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
                 ...$this->getCustomPostTypes($customPostTypeOptions)
             ]));
         }
-        // Querying "attachment" doesn't work in an array!
-        if (is_array($query['post_type']) && count($query['post_type']) === 1) {
-            $query['post_type'] = $query['post_type'][0];
-        }
         if (isset($query['offset'])) {
             // Same param name, so do nothing
         }
@@ -272,11 +305,18 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             unset($query['date-to']);
         }
 
-        return App::applyFilters(
+        $query = App::applyFilters(
             self::HOOK_QUERY,
             $query,
             $options
         );
+
+        // Querying "attachment" doesn't work in an array!
+        if (is_array($query['post_type']) && count($query['post_type']) === 1) {
+            $query['post_type'] = $query['post_type'][0];
+        }
+
+        return $query;
     }
 
     /**

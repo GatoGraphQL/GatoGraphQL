@@ -5,69 +5,6 @@
                 "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 287,
-                        "column": 7
-                    }
-                ],
-                "extensions": {
-                    "path": [
-                        "blocks { ... }",
-                        "...on GenericCustomPost { ... }",
-                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
-                        "query { ... }"
-                    ],
-                    "type": "GenericCustomPost",
-                    "field": "blocks { ... }",
-                    "id": 1656,
-                    "code": "PoP\/ComponentModel@w1"
-                }
-            },
-            {
-                "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
-                "locations": [
-                    {
-                        "line": 290,
-                        "column": 7
-                    }
-                ],
-                "extensions": {
-                    "path": [
-                        "blockDataItems",
-                        "...on GenericCustomPost { ... }",
-                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
-                        "query { ... }"
-                    ],
-                    "type": "GenericCustomPost",
-                    "field": "blockDataItems",
-                    "id": 1656,
-                    "code": "PoP\/ComponentModel@w1"
-                }
-            },
-            {
-                "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
-                "locations": [
-                    {
-                        "line": 291,
-                        "column": 7
-                    }
-                ],
-                "extensions": {
-                    "path": [
-                        "blockFlattenedDataItems",
-                        "...on GenericCustomPost { ... }",
-                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
-                        "query { ... }"
-                    ],
-                    "type": "GenericCustomPost",
-                    "field": "blockFlattenedDataItems",
-                    "id": 1656,
-                    "code": "PoP\/ComponentModel@w1"
-                }
-            },
-            {
-                "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
-                "locations": [
-                    {
                         "line": 317,
                         "column": 7
                     }
@@ -76,17 +13,17 @@
                     "path": [
                         "blocks { ... }",
                         "...on GenericCustomPost { ... }",
-                        "serverSideRegisteredBlocks: customPost(by: {id: 1680}) { ... }",
+                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
                     "field": "blocks { ... }",
-                    "id": 1680,
+                    "id": 1656,
                     "code": "PoP\/ComponentModel@w1"
                 }
             },
             {
-                "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
+                "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
                         "line": 320,
@@ -97,6 +34,69 @@
                     "path": [
                         "blockDataItems",
                         "...on GenericCustomPost { ... }",
+                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
+                        "query { ... }"
+                    ],
+                    "type": "GenericCustomPost",
+                    "field": "blockDataItems",
+                    "id": 1656,
+                    "code": "PoP\/ComponentModel@w1"
+                }
+            },
+            {
+                "message": "Block type \"core\/nonexisting\" is not server-side registered. Sourced block attributes will not be available.",
+                "locations": [
+                    {
+                        "line": 321,
+                        "column": 7
+                    }
+                ],
+                "extensions": {
+                    "path": [
+                        "blockFlattenedDataItems",
+                        "...on GenericCustomPost { ... }",
+                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
+                        "query { ... }"
+                    ],
+                    "type": "GenericCustomPost",
+                    "field": "blockFlattenedDataItems",
+                    "id": 1656,
+                    "code": "PoP\/ComponentModel@w1"
+                }
+            },
+            {
+                "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
+                "locations": [
+                    {
+                        "line": 347,
+                        "column": 7
+                    }
+                ],
+                "extensions": {
+                    "path": [
+                        "blocks { ... }",
+                        "...on GenericCustomPost { ... }",
+                        "serverSideRegisteredBlocks: customPost(by: {id: 1680}) { ... }",
+                        "query { ... }"
+                    ],
+                    "type": "GenericCustomPost",
+                    "field": "blocks { ... }",
+                    "id": 1680,
+                    "code": "PoP\/ComponentModel@w1"
+                }
+            },
+            {
+                "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
+                "locations": [
+                    {
+                        "line": 350,
+                        "column": 7
+                    }
+                ],
+                "extensions": {
+                    "path": [
+                        "blockDataItems",
+                        "...on GenericCustomPost { ... }",
                         "serverSideRegisteredBlocks: customPost(by: {id: 1680}) { ... }",
                         "query { ... }"
                     ],
@@ -110,7 +110,7 @@
                 "message": "Block type \"gatographql\/server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 321,
+                        "line": 351,
                         "column": 7
                     }
                 ],
@@ -131,7 +131,7 @@
                 "message": "Block type \"gatographql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 332,
+                        "line": 362,
                         "column": 7
                     }
                 ],
@@ -152,7 +152,7 @@
                 "message": "Block type \"gatographql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 335,
+                        "line": 365,
                         "column": 7
                     }
                 ],
@@ -173,7 +173,7 @@
                 "message": "Block type \"gatographql\/not-server-side-registered-block-schema-testing\" is not server-side registered. Sourced block attributes will not be available.",
                 "locations": [
                     {
-                        "line": 336,
+                        "line": 366,
                         "column": 7
                     }
                 ],
@@ -197,7 +197,7 @@
             "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 272,
+                    "line": 302,
                     "column": 7
                 }
             ],
@@ -218,7 +218,7 @@
             "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 275,
+                    "line": 305,
                     "column": 7
                 }
             ],
@@ -239,7 +239,7 @@
             "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
-                    "line": 276,
+                    "line": 306,
                     "column": 7
                 }
             ],
@@ -830,6 +830,23 @@
                         },
                         "contentSource": "<!-- wp:embed {\"url\":\"https:\/\/www.youtube.com\/watch?v=7Nmz3IjtPh0\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true,\"className\":\"wp-embed-aspect-16-9 wp-has-aspect-ratio\",\"caption\":\"At this year's WCEU Keynote address in Athens, Greece. \\u003ca href=\\u0022https:\/\/www.youtube.com\/hashtag\/wordpress\\u0022\\u003e#WordPress\\u003c\/a\\u003e co-founder, Matt Mullenweg, Gutenberg Architect, Mat\u00edas Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.\",\"allowResponsive\":true,\"previewable\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio\"><div class=\"wp-block-embed__wrapper\">\nhttps:\/\/www.youtube.com\/watch?v=7Nmz3IjtPh0\n<\/div><figcaption class=\"wp-element-caption\">At this year's WCEU Keynote address in Athens, Greece. <a href=\"https:\/\/www.youtube.com\/hashtag\/wordpress\">#WordPress<\/a> co-founder, Matt Mullenweg, Gutenberg Architect, Mat\u00edas Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.<\/figcaption><\/figure>\n<!-- \/wp:embed -->",
                         "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/html",
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eCustom HTML here, maybe need to process, maybe not\\u003c\/p\\u003e\"} -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/block",
+                        "attributes": {
+                            "ref": 1136,
+                            "content": []
+                        },
+                        "contentSource": "<!-- wp:block {\"ref\":1136,\"content\":[]} \/-->",
+                        "innerBlocks": null
                     }
                 ],
                 "blockDataItems": [
@@ -1314,6 +1331,19 @@
                             "caption": "At this year's WCEU Keynote address in Athens, Greece. <a href=\"https:\/\/www.youtube.com\/hashtag\/wordpress\">#WordPress<\/a> co-founder, Matt Mullenweg, Gutenberg Architect, Mat\u00edas Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.",
                             "allowResponsive": true,
                             "previewable": true
+                        }
+                    },
+                    {
+                        "name": "core\/html",
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        }
+                    },
+                    {
+                        "name": "core\/block",
+                        "attributes": {
+                            "ref": 1136,
+                            "content": []
                         }
                     }
                 ],
@@ -1908,6 +1938,23 @@
                             "caption": "At this year's WCEU Keynote address in Athens, Greece. <a href=\"https:\/\/www.youtube.com\/hashtag\/wordpress\">#WordPress<\/a> co-founder, Matt Mullenweg, Gutenberg Architect, Mat\u00edas Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.",
                             "allowResponsive": true,
                             "previewable": true
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/html",
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/block",
+                        "attributes": {
+                            "ref": 1136,
+                            "content": []
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -3347,6 +3394,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "name": "core\/block",
+                        "attributes": {
+                            "ref": 1132,
+                            "content": []
+                        },
+                        "contentSource": "<!-- wp:block {\"ref\":1132,\"content\":[]} \/-->",
+                        "innerBlocks": null
                     }
                 ],
                 "blockDataItems": [
@@ -3569,6 +3625,13 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "name": "core\/block",
+                        "attributes": {
+                            "ref": 1132,
+                            "content": []
+                        }
                     }
                 ],
                 "blockFlattenedDataItems": [
@@ -3848,6 +3911,15 @@
                         },
                         "parentBlockPosition": 23,
                         "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/block",
+                        "attributes": {
+                            "ref": 1132,
+                            "content": []
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
                     }
                 ]
             }
@@ -4796,6 +4868,15 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    },
+                    "contentSource": "<!-- wp:block {\"ref\":1132,\"content\":[]} \/-->",
+                    "innerBlocks": null
                 }
             ],
             "blockDataItems": [
@@ -4979,6 +5060,13 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    }
                 }
             ],
             "blockFlattenedDataItems": [
@@ -5141,6 +5229,13 @@
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
                         "alt": ""
+                    }
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
                     }
                 }
             ]
@@ -5199,6 +5294,15 @@
                     },
                     "contentSource": "<!-- wp:list {\"ordered\":false,\"values\":\"\\u003cli\\u003eList item 1\\u003c\/li\\u003e\\u003cli\\u003eList item 2\\u003c\/li\\u003e\\u003cli\\u003eList item 3\\u003c\/li\\u003e\\u003cli\\u003eList item 4\\u003c\/li\\u003e\"} -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->",
                     "innerBlocks": null
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    },
+                    "contentSource": "<!-- wp:block {\"ref\":1132,\"content\":[]} \/-->",
+                    "innerBlocks": null
                 }
             ],
             "blockDataItems": [
@@ -5248,6 +5352,13 @@
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
+                    }
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
                     }
                 }
             ],
@@ -5388,6 +5499,13 @@
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
                         "alt": ""
                     }
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    }
                 }
             ]
         },
@@ -5445,6 +5563,15 @@
                     },
                     "contentSource": "<!-- wp:list {\"ordered\":false,\"values\":\"\\u003cli\\u003eList item 1\\u003c\/li\\u003e\\u003cli\\u003eList item 2\\u003c\/li\\u003e\\u003cli\\u003eList item 3\\u003c\/li\\u003e\\u003cli\\u003eList item 4\\u003c\/li\\u003e\"} -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->",
                     "innerBlocks": null
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    },
+                    "contentSource": "<!-- wp:block {\"ref\":1132,\"content\":[]} \/-->",
+                    "innerBlocks": null
                 }
             ],
             "blockDataItems": [
@@ -5494,6 +5621,13 @@
                     "attributes": {
                         "ordered": false,
                         "values": "<li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li>"
+                    }
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
                     }
                 }
             ],
@@ -5597,6 +5731,13 @@
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
                         "alt": ""
+                    }
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
                     }
                 }
             ]
@@ -5671,6 +5812,15 @@
                     },
                     "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><\/div>\n<!-- \/wp:columns -->",
                     "innerBlocks": null
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    },
+                    "contentSource": "<!-- wp:block {\"ref\":1132,\"content\":[]} \/-->",
+                    "innerBlocks": null
                 }
             ],
             "blockDataItems": [
@@ -5732,6 +5882,13 @@
                     "name": "core\/columns",
                     "attributes": {
                         "isStackedOnMobile": true
+                    }
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
                     }
                 }
             ],
@@ -5860,9 +6017,197 @@
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
                         "alt": ""
                     }
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    }
                 }
             ]
         },
+        "includeReusableBlockFilter": {
+            "id": 1119,
+            "blocks": [
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    },
+                    "contentSource": "<!-- wp:block {\"ref\":1132,\"content\":[]} \/-->",
+                    "innerBlocks": null
+                }
+            ],
+            "blockDataItems": [
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    }
+                }
+            ],
+            "blockFlattenedDataItems": [
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    }
+                }
+            ]
+        },
+        "reusableBlocks": [
+            {
+                "id": 1132,
+                "blocks": [
+                    {
+                        "name": "core\/group",
+                        "attributes": {
+                            "tagName": "div"
+                        },
+                        "contentSource": "<!-- wp:group {\"tagName\":\"div\"} -->\n<div class=\"wp-block-group\">\n\t<!-- wp:group {\"tagName\":\"div\"} -->\n\t<div class=\"wp-block-group\">\n\t\t<!-- wp:paragraph {\"content\":\"p1\",\"dropCap\":false} -->\n\t\t<p>p1<\/p>\n\t\t<!-- \/wp:paragraph -->\n\t<\/div>\n\t<!-- \/wp:group -->\n<\/div>\n<!-- \/wp:group -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/group",
+                                "attributes": {
+                                    "tagName": "div"
+                                },
+                                "contentSource": "<!-- wp:group {\"tagName\":\"div\"} -->\n\t<div class=\"wp-block-group\">\n\t\t<!-- wp:paragraph {\"content\":\"p1\",\"dropCap\":false} -->\n\t\t<p>p1<\/p>\n\t\t<!-- \/wp:paragraph -->\n\t<\/div>\n\t<!-- \/wp:group -->",
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/paragraph",
+                                        "attributes": {
+                                            "content": "p1",
+                                            "dropCap": false
+                                        },
+                                        "contentSource": "<!-- wp:paragraph {\"content\":\"p1\",\"dropCap\":false} -->\n\t\t<p>p1<\/p>\n\t\t<!-- \/wp:paragraph -->",
+                                        "innerBlocks": null
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "blockDataItems": [
+                    {
+                        "name": "core\/group",
+                        "attributes": {
+                            "tagName": "div"
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/group",
+                                "attributes": {
+                                    "tagName": "div"
+                                },
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/paragraph",
+                                        "attributes": {
+                                            "content": "p1",
+                                            "dropCap": false
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "blockFlattenedDataItems": [
+                    {
+                        "name": "core\/group",
+                        "attributes": {
+                            "tagName": "div"
+                        },
+                        "innerBlockPositions": [
+                            1
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/group",
+                        "attributes": {
+                            "tagName": "div"
+                        },
+                        "parentBlockPosition": 0,
+                        "innerBlockPositions": [
+                            2
+                        ]
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "p1",
+                            "dropCap": false
+                        },
+                        "parentBlockPosition": 1,
+                        "innerBlockPositions": null
+                    }
+                ]
+            },
+            {
+                "id": 1136,
+                "blocks": [
+                    {
+                        "name": "core\/heading",
+                        "attributes": {
+                            "content": "The best rock &amp; roll band in the world (global heading)",
+                            "level": 2
+                        },
+                        "contentSource": "<!-- wp:heading {\"content\":\"The best rock \\u0026amp; roll band in the world (global heading)\",\"level\":2} -->\n<h2 class=\"wp-block-heading\">The best rock &amp; roll band in the world (global heading)<\/h2>\n<!-- \/wp:heading -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "That's Queen! (global content paragraph)",
+                            "dropCap": false
+                        },
+                        "contentSource": "<!-- wp:paragraph {\"content\":\"That's Queen! (global content paragraph)\",\"dropCap\":false} -->\n<p>That's Queen! (global content paragraph)<\/p>\n<!-- \/wp:paragraph -->",
+                        "innerBlocks": null
+                    }
+                ],
+                "blockDataItems": [
+                    {
+                        "name": "core\/heading",
+                        "attributes": {
+                            "content": "The best rock &amp; roll band in the world (global heading)",
+                            "level": 2
+                        }
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "That's Queen! (global content paragraph)",
+                            "dropCap": false
+                        }
+                    }
+                ],
+                "blockFlattenedDataItems": [
+                    {
+                        "name": "core\/heading",
+                        "attributes": {
+                            "content": "The best rock &amp; roll band in the world (global heading)",
+                            "level": 2
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "That's Queen! (global content paragraph)",
+                            "dropCap": false
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    }
+                ]
+            }
+        ],
         "page": {
             "id": 2,
             "title": "Sample Page",
@@ -8514,6 +8859,23 @@
                     },
                     "contentSource": "<!-- wp:embed {\"url\":\"https:\/\/www.youtube.com\/watch?v=7Nmz3IjtPh0\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true,\"className\":\"wp-embed-aspect-16-9 wp-has-aspect-ratio\",\"caption\":\"At this year's WCEU Keynote address in Athens, Greece. \\u003ca href=\\u0022https:\/\/www.youtube.com\/hashtag\/wordpress\\u0022\\u003e#WordPress\\u003c\/a\\u003e co-founder, Matt Mullenweg, Gutenberg Architect, Mat\u00edas Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.\",\"allowResponsive\":true,\"previewable\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio\"><div class=\"wp-block-embed__wrapper\">\nhttps:\/\/www.youtube.com\/watch?v=7Nmz3IjtPh0\n<\/div><figcaption class=\"wp-element-caption\">At this year's WCEU Keynote address in Athens, Greece. <a href=\"https:\/\/www.youtube.com\/hashtag\/wordpress\">#WordPress<\/a> co-founder, Matt Mullenweg, Gutenberg Architect, Mat\u00edas Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.<\/figcaption><\/figure>\n<!-- \/wp:embed -->",
                     "innerBlocks": null
+                },
+                {
+                    "name": "core\/html",
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    },
+                    "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eCustom HTML here, maybe need to process, maybe not\\u003c\/p\\u003e\"} -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1136,
+                        "content": []
+                    },
+                    "contentSource": "<!-- wp:block {\"ref\":1136,\"content\":[]} \/-->",
+                    "innerBlocks": null
                 }
             ],
             "blockDataItems": [
@@ -8998,6 +9360,19 @@
                         "caption": "At this year's WCEU Keynote address in Athens, Greece. <a href=\"https:\/\/www.youtube.com\/hashtag\/wordpress\">#WordPress<\/a> co-founder, Matt Mullenweg, Gutenberg Architect, Mat\u00edas Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.",
                         "allowResponsive": true,
                         "previewable": true
+                    }
+                },
+                {
+                    "name": "core\/html",
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    }
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1136,
+                        "content": []
                     }
                 }
             ],
@@ -9592,6 +9967,23 @@
                         "caption": "At this year's WCEU Keynote address in Athens, Greece. <a href=\"https:\/\/www.youtube.com\/hashtag\/wordpress\">#WordPress<\/a> co-founder, Matt Mullenweg, Gutenberg Architect, Mat\u00edas Ventura, and Executive Director, Josepha Haden Chomphosy reflect on WordPress in 2023 and aspirations for the coming year.",
                         "allowResponsive": true,
                         "previewable": true
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/html",
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/block",
+                    "attributes": {
+                        "ref": 1136,
+                        "content": []
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
