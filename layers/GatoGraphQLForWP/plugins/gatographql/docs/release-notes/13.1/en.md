@@ -27,4 +27,5 @@
 
 - Avoid overriding logic: Querying "attachment" doesn't work in an array ([#3123](https://github.com/GatoGraphQL/GatoGraphQL/pull/3123))
 - Returning no results from `get_posts` when passing many CPTs ([#3128](https://github.com/GatoGraphQL/GatoGraphQL/pull/3128))
-- Exception thrown when multiple fields have errors ([#3137](https://github.com/GatoGraphQL/GatoGraphQL/pull/3137))
+- Handle empty response when LemonSqueezy service is down (#3139)
+- Exception thrown when multiple fields have errors (`v13.1.1`) ([#3139](https://github.com/GatoGraphQL/GatoGraphQL/pull/3139))
