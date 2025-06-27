@@ -220,6 +220,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 13.1.1 =
+* Handle empty response when LemonSqueezy service is down (#3139)
+
 = 13.1.0 =
 * Enable extensions if required theme is active (#3114)
 * Allow extension dependencies on themes (#3115)
