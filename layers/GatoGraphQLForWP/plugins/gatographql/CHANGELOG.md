@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Handle empty response when LemonSqueezy service is down (#3139)
+- Exception in Extensions page (#3140)
 
 ## 13.1.0 - 25/06/2025
 

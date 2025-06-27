@@ -29,3 +29,4 @@
 - Returning no results from `get_posts` when passing many CPTs ([#3128](https://github.com/GatoGraphQL/GatoGraphQL/pull/3128))
 - Handle empty response when LemonSqueezy service is down (#3139)
 - Exception thrown when multiple fields have errors (`v13.1.1`) ([#3139](https://github.com/GatoGraphQL/GatoGraphQL/pull/3139))
+- Exception in Extensions page (`v13.1.1`) ([#3140](https://github.com/GatoGraphQL/GatoGraphQL/pull/3140))
