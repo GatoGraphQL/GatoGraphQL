@@ -106,7 +106,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractBasicServ
         /** @var string|null */
         $error = $body['error'] ?? null;
         if ($status === null) {
-            throw new LicenseOperationNotSuccessfulException($error ?? $this->__('LemonSqueezy service is not available, please try again later', 'gatographql'));
+            throw new LicenseOperationNotSuccessfulException($error ?? $this->__('Unknown error', 'gatographql'));
         }
 
         $status = $this->convertStatus($status);
