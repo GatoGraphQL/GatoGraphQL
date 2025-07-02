@@ -35,7 +35,7 @@ class EnvironmentValueHelpers
      *
      * @param string $value environment value
      */
-    public static function toPositiveIntOrNull(string $value): ?int
+    public static function toPositiveIntOrNull(string|int $value): ?int
     {
         $intValue = (int) $value;
         if ($intValue <= 0) {
