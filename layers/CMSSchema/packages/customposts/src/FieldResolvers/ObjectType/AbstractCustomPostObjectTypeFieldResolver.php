@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType;
 
 use DateTime;
+use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\FieldResolvers\InterfaceType\CustomPostInterfaceTypeFieldResolver;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
@@ -87,7 +88,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     ): mixed {
         $customPostTypeAPI = $this->getCustomPostTypeAPI();
         $customPost = $object;
-        switch ($fieldDataAccessor->getFieldName()) {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
             case 'url':
                 return $customPostTypeAPI->getPermalink($customPost);
 
@@ -105,7 +107,16 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
                 return $customPostTypeAPI->getRawContent($customPost);
 
             case 'status':
-                return $customPostTypeAPI->getStatus($customPost);
+            case 'rawStatus':
+                $status = $customPostTypeAPI->getStatus($customPost);
+                if ($fieldName === 'status') {
+                    return $status;
+                }
+                // `rawStatus`
+                if ($status === CustomPostStatus::FUTURE) {
+                    return CustomPostStatus::PUBLISH; // `future` is stored as `publish` in the DB
+                }
+                return $status;
 
             case 'isStatus':
                 return $fieldDataAccessor->getValue('status') === $customPostTypeAPI->getStatus($customPost);
