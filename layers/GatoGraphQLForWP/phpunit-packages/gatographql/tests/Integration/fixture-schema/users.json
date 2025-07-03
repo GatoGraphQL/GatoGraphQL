@@ -111,9 +111,7 @@
                     "wp_capabilities",
                     "wp_user_level",
                     "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
+                    "_application_passwords"
                 ],
                 "includingMetaKeys": [
                     "nickname",
@@ -132,9 +130,7 @@
                     "locale",
                     "wp_user_level",
                     "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
+                    "_application_passwords"
                 ],
                 "includingAndExcludingMetaKeys": [
                     "nickname"
@@ -287,9 +283,7 @@
                     "wp_capabilities",
                     "wp_user_level",
                     "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
+                    "_application_passwords"
                 ],
                 "includingMetaKeys": [
                     "nickname",
@@ -308,9 +302,7 @@
                     "locale",
                     "wp_user_level",
                     "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
+                    "_application_passwords"
                 ],
                 "includingAndExcludingMetaKeys": [
                     "nickname"
@@ -415,9 +407,7 @@
                     "wp_capabilities",
                     "wp_user_level",
                     "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
+                    "_application_passwords"
                 ],
                 "includingMetaKeys": [
                     "nickname",
@@ -436,9 +426,7 @@
                     "locale",
                     "wp_user_level",
                     "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
+                    "_application_passwords"
                 ],
                 "includingAndExcludingMetaKeys": [
                     "nickname"
