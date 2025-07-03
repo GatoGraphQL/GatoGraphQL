@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPosts\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
+use PoPWPSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPWPSchema\CustomPosts\Module;
 use PoPWPSchema\CustomPosts\ModuleConfiguration;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -22,6 +26,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
 
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -41,6 +47,24 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         }
         return $this->htmlScalarTypeResolver;
     }
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
+    }
+    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    {
+        if ($this->customPostStatusEnumTypeResolver === null) {
+            /** @var CustomPostStatusEnumTypeResolver */
+            $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
+            $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        }
+        return $this->customPostStatusEnumTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -58,6 +82,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldNamesToResolve(): array
     {
         return [
+            'rawStatus',
             'wpAdminEditURL',
         ];
     }
@@ -79,6 +104,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
+            'rawStatus' => $this->__('Custom post raw status (as it exists in the database, eg: `publish` instead of `future`)', 'customposts'),
             'wpAdminEditURL' => $this->__('The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -87,9 +113,19 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
+            'rawStatus' => $this->getCustomPostStatusEnumTypeResolver(),
             'wpAdminEditURL' => $this->getHTMLScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        switch ($fieldName) {
+            case 'rawStatus':
+                return SchemaTypeModifiers::NON_NULLABLE;
+        }
+        return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
     }
 
     public function resolveValue(
@@ -100,7 +136,14 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     ): mixed {
         /** @var WP_Post */
         $customPost = $object;
-        switch ($fieldDataAccessor->getFieldName()) {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case 'rawStatus':
+                $status = $this->getCustomPostTypeAPI()->getStatus($customPost);
+                if ($status === CustomPostStatus::FUTURE) {
+                    return CustomPostStatus::PUBLISH; // `future` is stored as `publish` in the DB
+                }
+                return $status;
             case 'wpAdminEditURL':
                 // Validate the user can edit the post
                 if (!App::getState('is-user-logged-in')) {
