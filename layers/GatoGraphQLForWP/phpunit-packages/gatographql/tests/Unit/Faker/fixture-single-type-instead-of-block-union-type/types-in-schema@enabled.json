@@ -132,6 +132,12 @@
                             }
                         },
                         {
+                            "name": "rawStatus",
+                            "type": {
+                                "name": "CustomPostStatusEnum!"
+                            }
+                        },
+                        {
                             "name": "self",
                             "type": {
                                 "name": "Post!"

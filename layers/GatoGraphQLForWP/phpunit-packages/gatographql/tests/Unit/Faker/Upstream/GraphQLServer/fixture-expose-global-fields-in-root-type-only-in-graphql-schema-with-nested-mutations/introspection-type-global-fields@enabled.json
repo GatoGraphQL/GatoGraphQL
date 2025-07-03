@@ -86,6 +86,9 @@
                         "name": "parent"
                     },
                     {
+                        "name": "rawStatus"
+                    },
+                    {
                         "name": "self"
                     },
                     {

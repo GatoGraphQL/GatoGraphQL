@@ -204,6 +204,12 @@
                             }
                         },
                         {
+                            "name": "rawStatus",
+                            "type": {
+                                "name": "CustomPostStatusEnum!"
+                            }
+                        },
+                        {
                             "name": "self",
                             "type": {
                                 "name": "Page!"
@@ -339,6 +345,12 @@
                             "name": "postFormat",
                             "type": {
                                 "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "rawStatus",
+                            "type": {
+                                "name": "CustomPostStatusEnum!"
                             }
                         },
                         {
