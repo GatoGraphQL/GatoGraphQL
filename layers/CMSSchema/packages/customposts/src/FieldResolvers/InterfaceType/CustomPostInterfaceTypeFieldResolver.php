@@ -130,6 +130,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'content',
             'rawContent',
             'status',
+            'rawStatus',
             'isStatus',
             'date',
             'dateStr',
@@ -179,7 +180,8 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
                 => $this->getHTMLScalarTypeResolver(),
             'customPostType'
                 => $this->getCustomPostEnumStringScalarTypeResolver(),
-            'status'
+            'status',
+            'rawStatus'
                 => $this->getCustomPostStatusEnumTypeResolver(),
             default
                 => parent::getFieldTypeResolver($fieldName),
@@ -196,6 +198,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             case 'content':
             case 'rawContent':
             case 'status':
+            case 'rawStatus':
             case 'isStatus':
             case 'date':
             case 'dateStr':
@@ -220,6 +223,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'content' => $this->__('Custom post content', 'customposts'),
             'rawContent' => $this->__('Custom post content in raw format (as it exists in the database)', 'customposts'),
             'status' => $this->__('Custom post status', 'customposts'),
+            'rawStatus' => $this->__('Custom post raw status (as it exists in the database, eg: `publish` instead of `future`)', 'customposts'),
             'isStatus' => $this->__('Is the custom post in the given status?', 'customposts'),
             'date' => $this->__('Custom post published date', 'customposts'),
             'dateStr' => $this->__('Custom post published date, in String format', 'customposts'),
