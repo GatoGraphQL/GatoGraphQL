@@ -131,7 +131,7 @@ query {
     title
   }
 
-  futurePost: post(by: { id: 1121 }) {
+  futurePost: post(by: { id: 1128 }) {
     status
     rawStatus
   }
