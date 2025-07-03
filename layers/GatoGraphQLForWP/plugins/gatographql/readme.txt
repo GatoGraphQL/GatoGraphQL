@@ -221,7 +221,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 13.2.0 =
-* Added field `CustomPost.rawStatus` (similar to `status`, but returning `publish` instead of `future`)
+* Added field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) (#3142)
 
 = 13.1.1 =
 * Handle empty response when LemonSqueezy service is down (#3139)

@@ -2,4 +2,4 @@
 
 ## Added
 
-- Field `CustomPost.rawStatus` (similar to `status`, but returning `publish` instead of `future`) ([#3142](https://github.com/GatoGraphQL/GatoGraphQL/pull/3142))
+- Field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) ([#3142](https://github.com/GatoGraphQL/GatoGraphQL/pull/3142))

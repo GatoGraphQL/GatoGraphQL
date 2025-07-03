@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Field `CustomPost.rawStatus` (similar to `status`, but returning `publish` instead of `future`) (#3142)
+- Field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) (#3142)
 
 ## 13.1.1 - 02/07/2025
 
