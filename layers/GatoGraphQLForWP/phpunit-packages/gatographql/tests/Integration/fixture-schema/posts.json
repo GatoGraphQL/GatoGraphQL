@@ -476,6 +476,10 @@
                 "title": "Released v0.6, check it out"
             }
         ],
+        "futurePost": {
+            "rawStatus": "publish",
+            "status": "future"
+        },
         "postWithMeta": {
             "object_metaValue": {
                 "_edit_lock": {
