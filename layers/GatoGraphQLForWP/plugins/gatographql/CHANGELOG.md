@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) (#3142)
 
+### Improvements
+
+- Added `future` and `inherit` statuses to the `CustomPostStatus` enum (#3142)
+
 ## 13.1.1 - 02/07/2025
 
 ### Fixed
