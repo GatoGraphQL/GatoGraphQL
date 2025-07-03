@@ -16,26 +16,6 @@
                 ]
             },
             {
-                "id": 1634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "tags": [
-                    {
-                        "id": 30
-                    },
-                    {
-                        "id": 24
-                    }
-                ],
-                "categories": [
-                    {
-                        "id": 28
-                    },
-                    {
-                        "id": 19
-                    }
-                ]
-            },
-            {
                 "id": 1654,
                 "title": "Dummy CPT with blocks",
                 "tags": [
@@ -78,6 +58,26 @@
             {
                 "id": 1658,
                 "title": "Dummy CPT with no content",
+                "tags": [
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 24
+                    }
+                ],
+                "categories": [
+                    {
+                        "id": 28
+                    },
+                    {
+                        "id": 19
+                    }
+                ]
+            },
+            {
+                "id": 1634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "tags": [
                     {
                         "id": 30

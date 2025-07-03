@@ -131,6 +131,11 @@ query {
     title
   }
 
+  futurePost: post(by: { id: 1138 }, status: future) {
+    status
+    rawStatus
+  }
+
   postWithMeta: post(by: { id: 1116 }) {
     object_metaValue: metaValue(key: "meta_with_object_value")
     object_metaValues: metaValues(key: "meta_with_object_value")
