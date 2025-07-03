@@ -57,7 +57,7 @@ query {
     urlPath
   }
 
-  postsByAuthorIDs: posts(filter: { author: { ids: 5 } }) {
+  postsByAuthorIDs: posts(filter: { author: { ids: 5 }, status: any }) {
     id
     title
   }
@@ -89,7 +89,7 @@ query {
     id
     title
   }
-  postsByIds: posts(filter: { ids: [1, 1128] }) {
+  postsByIds: posts(filter: { ids: [1, 1128], status: any }) {
     id
     title
   }
