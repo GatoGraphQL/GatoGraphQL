@@ -15,6 +15,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added `future` and `inherit` statuses to the `CustomPostStatus` enum (#3142)
 
+### Fixed
+
+- Don't validate promises inside array of arrays (#3144)
+
 ## 13.1.1 - 02/07/2025
 
 ### Fixed

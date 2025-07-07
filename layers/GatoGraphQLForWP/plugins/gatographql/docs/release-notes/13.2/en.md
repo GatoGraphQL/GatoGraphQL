@@ -8,3 +8,7 @@
 ## Improvements
 
 - Added `future` and `inherit` statuses to the `CustomPostStatus` enum ([#3142](https://github.com/GatoGraphQL/GatoGraphQL/pull/3142))
+
+## Fixed
+
+- Don't validate promises inside array of arrays ([#3144](https://github.com/GatoGraphQL/GatoGraphQL/pull/3144))
