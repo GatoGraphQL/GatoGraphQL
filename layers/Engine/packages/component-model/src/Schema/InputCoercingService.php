@@ -242,6 +242,10 @@ class InputCoercingService extends AbstractBasicService implements InputCoercing
             && is_array($inputValue)
             && array_filter(
                 $inputValue,
+                fn (mixed $arrayItem) => $arrayItem instanceof ValueResolutionPromiseInterface
+            ) === []
+            && array_filter(
+                $inputValue,
                 fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
                     $arrayItem,
                     fn ($arrayItemItem) => $arrayItemItem === null
