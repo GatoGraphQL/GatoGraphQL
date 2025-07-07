@@ -448,6 +448,18 @@
                 "title": "Released v0.6, check it out"
             }
         ],
+        "postsBySlugs": [
+            {
+                "id": 1,
+                "title": "Hello world!",
+                "slug": "hello-world"
+            },
+            {
+                "id": 1113,
+                "title": "Released v0.6, check it out",
+                "slug": "released-v0-6-check-it-out"
+            }
+        ],
         "postsSortedASC": [
             {
                 "id": 1121,
@@ -477,8 +489,8 @@
             }
         ],
         "futurePost": {
-            "rawStatus": "publish",
-            "status": "future"
+            "status": "future",
+            "rawStatus": "publish"
         },
         "postWithMeta": {
             "object_metaValue": {
