@@ -280,6 +280,10 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $query['name'] = $query['slug'];
             unset($query['slug']);
         }
+        if (isset($query['slugs'])) {
+            $query['post_name__in'] = $query['slugs'];
+            unset($query['slugs']);
+        }
         if (isset($query['post-not-in'])) {
             $query['post__not_in'] = $query['post-not-in'];
             unset($query['post-not-in']);

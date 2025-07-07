@@ -53,6 +53,11 @@ query {
     title
     date
   }
+  mediaItemsBySlugs: mediaItems(sort: { by: ID, order: ASC }, filter: { slugs: ["graphql-api-search-results", "non-existing", "license", "funny-dog"], mimeTypes: "*" }) {
+    id
+    title
+    slug
+  }
 
   mediaItemById: mediaItem(by: { id: 1361 }) {
     id

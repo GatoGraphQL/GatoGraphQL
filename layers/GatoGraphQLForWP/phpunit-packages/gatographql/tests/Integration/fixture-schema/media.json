@@ -264,6 +264,23 @@
                 "date": "2022-05-25T05:13:32+00:00"
             }
         ],
+        "mediaItemsBySlugs": [
+            {
+                "id": 1362,
+                "title": "graphql-api-search-results",
+                "slug": "graphql-api-search-results"
+            },
+            {
+                "id": 1363,
+                "title": "LICENSE",
+                "slug": "license"
+            },
+            {
+                "id": 1380,
+                "title": "Funny-Dog",
+                "slug": "funny-dog"
+            }
+        ],
         "mediaItemById": {
             "id": 1361,
             "title": "graphql-api-header",

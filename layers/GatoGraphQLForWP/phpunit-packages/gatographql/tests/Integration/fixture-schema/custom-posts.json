@@ -425,6 +425,18 @@
                 "title": "Privacy Policy"
             }
         ],
+        "customPostsBySlugs": [
+            {
+                "id": 1,
+                "title": "Hello world!",
+                "slug": "hello-world"
+            },
+            {
+                "id": 1113,
+                "title": "Released v0.6, check it out",
+                "slug": "released-v0-6-check-it-out"
+            }
+        ],
         "customPostsSortedASC": [
             {
                 "__typename": "GenericCustomPost",
