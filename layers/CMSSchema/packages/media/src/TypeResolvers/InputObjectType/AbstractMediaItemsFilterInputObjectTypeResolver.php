@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\FilterInputs\FilterInputInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Media\FilterInputs\MimeTypesFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\SearchFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugsFilterInput;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\DateQueryInputObjectTypeResolver;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver implements MediaItemsFilterInputObjectTypeResolverInterface
 {
@@ -19,6 +20,7 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?MimeTypesFilterInput $mimeTypesFilterInput = null;
     private ?SearchFilterInput $searchFilterInput = null;
+    private ?SlugsFilterInput $slugsFilterInput = null;
 
     final protected function getDateQueryInputObjectTypeResolver(): DateQueryInputObjectTypeResolver
     {
@@ -56,6 +58,15 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
         }
         return $this->searchFilterInput;
     }
+    final protected function getSlugsFilterInput(): SlugsFilterInput
+    {
+        if ($this->slugsFilterInput === null) {
+            /** @var SlugsFilterInput */
+            $slugsFilterInput = $this->instanceManager->getInstance(SlugsFilterInput::class);
+            $this->slugsFilterInput = $slugsFilterInput;
+        }
+        return $this->slugsFilterInput;
+    }
 
     /**
      * @return array<string,InputTypeResolverInterface>
@@ -68,6 +79,7 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
                 'search' => $this->getStringScalarTypeResolver(),
                 'dateQuery' => $this->getDateQueryInputObjectTypeResolver(),
                 'mimeTypes' => $this->getStringScalarTypeResolver(),
+                'slugs' => $this->getStringScalarTypeResolver(),
             ]
         );
     }
@@ -78,6 +90,7 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
             'search' => $this->__('Search for comments containing the given string', 'comments'),
             'dateQuery' => $this->__('Filter comments based on date', 'comments'),
             'mimeTypes' => $this->__('Filter comments based on type', 'comments'),
+            'slugs' => $this->__('Filter comments based on slugs', 'comments'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -95,8 +108,11 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            'mimeTypes' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName)
+            'mimeTypes',
+            'slugs'
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getInputFieldTypeModifiers($inputFieldName)
         };
     }
 
@@ -105,6 +121,7 @@ abstract class AbstractMediaItemsFilterInputObjectTypeResolver extends AbstractO
         return match ($inputFieldName) {
             'search' => $this->getSearchFilterInput(),
             'mimeTypes' => $this->getMimeTypesFilterInput(),
+            'slugs' => $this->getSlugsFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
