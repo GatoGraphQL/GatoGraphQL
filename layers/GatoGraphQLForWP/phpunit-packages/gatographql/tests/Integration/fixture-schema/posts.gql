@@ -121,7 +121,12 @@ query {
     id
     title
   }
-
+  postsBySlugs: posts(sort: { by: ID, order: ASC }, filter: { slugs: ["hello-world", "non-existing", "released-v0-6-check-it-out"] }) {
+    id
+    title
+    slug
+  }
+  
   postsSortedASC: posts(pagination: { limit: 3 }, sort: { by: TITLE, order: ASC}) {
     id
     title

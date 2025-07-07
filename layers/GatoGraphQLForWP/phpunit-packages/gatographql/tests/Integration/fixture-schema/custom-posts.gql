@@ -138,6 +138,11 @@ query {
       title
     }
   }
+  customPostsBySlugs: customPosts(sort: { by: ID, order: ASC }, filter: { slugs: ["hello-world", "non-existing", "released-v0-6-check-it-out", "graphql-api-search-results"] }) {
+    id
+    title
+    slug
+  }
   
   customPostsSortedASC: customPosts(pagination: { limit: 3 }, sort: { by: TITLE, order: ASC}) {
     __typename

@@ -53,7 +53,7 @@ query {
     title
     date
   }
-  mediaItemsBySlugs: mediaItems(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { slugs: ["graphql-api-search-results", "non-existing", "license", "funny-dog"] }) {
+  mediaItemsBySlugs: mediaItems(sort: { by: ID, order: ASC }, filter: { slugs: ["graphql-api-search-results", "non-existing", "license", "funny-dog"] }) {
     id
     title
     slug
