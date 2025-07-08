@@ -244,6 +244,7 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
     public function customizeHTTPRequestArgsDoNotRejectUnsafeURLs(array $args): array
     {
         $args['reject_unsafe_urls'] = false;
+        $args['sslverify'] = false;
         return $args;
     }
 
