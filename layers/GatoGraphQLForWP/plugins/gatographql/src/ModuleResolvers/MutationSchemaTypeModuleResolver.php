@@ -50,6 +50,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
      * Setting options
      */
     public final const OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA = 'treat-author-input-in-custompost-mutation-as-sensitive-data';
+    public final const OPTION_REJECT_UNSAFE_URLS = 'reject-unsafe-urls';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -479,6 +480,9 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => [
                 self::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA => true,
             ],
+            self::SCHEMA_MEDIA_MUTATIONS => [
+                self::OPTION_REJECT_UNSAFE_URLS => true,
+            ],
         ];
         return $defaultValues[$module][$option] ?? null;
     }
@@ -509,6 +513,18 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $sensitiveDataDescPlaceholder,
                     \__('<code>authorID</code> input (when creating/updating custom posts)', 'gatographql'),
                 ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        } elseif ($module === self::SCHEMA_MEDIA_MUTATIONS) {
+            $option = self::OPTION_REJECT_UNSAFE_URLS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Reject unsafe URLs', 'gatographql'),
+                Properties::DESCRIPTION => \__('Do not allow creating media items from unsafe URLs (such as <code>https://testing-site.local</code>)', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }

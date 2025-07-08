@@ -723,6 +723,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_USER_MUTATIONS,
                 'option' => MutationSchemaTypeModuleResolver::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA,
             ],
+            [
+                'class' => \PoPCMSSchema\MediaMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\MediaMutations\Environment::REJECT_UNSAFE_URLS,
+                'module' => MutationSchemaTypeModuleResolver::SCHEMA_MEDIA_MUTATIONS,
+                'option' => MutationSchemaTypeModuleResolver::OPTION_REJECT_UNSAFE_URLS,
+            ],
         ];
     }
 
