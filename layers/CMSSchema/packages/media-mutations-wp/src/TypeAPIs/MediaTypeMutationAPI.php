@@ -9,10 +9,10 @@ use PoPCMSSchema\MediaMutations\Module;
 use PoPCMSSchema\MediaMutations\ModuleConfiguration;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use PoP\ComponentModel\App;
-
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
+
 use function add_filter;
 use function add_post_meta;
 use function download_url;
