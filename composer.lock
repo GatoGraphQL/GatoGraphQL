@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e04441539e06a87e2604dccc16bdc6d8",
+    "content-hash": "b876e6bbd1395aacadeeecdae0f24d1b",
     "packages": [
         {
             "name": "antecedent/patchwork",
@@ -53,75 +53,6 @@
                 "source": "https://github.com/antecedent/patchwork/tree/2.1.26"
             },
             "time": "2023-09-18T08:18:37+00:00"
-        },
-        {
-            "name": "boxuk/wp-muplugin-loader",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/boxuk/wp-muplugin-loader.git",
-                "reference": "1d3029dffd1b2bbbd3fbc9a77aa84bb2b1d60f41"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/boxuk/wp-muplugin-loader/zipball/1d3029dffd1b2bbbd3fbc9a77aa84bb2b1d60f41",
-                "reference": "1d3029dffd1b2bbbd3fbc9a77aa84bb2b1d60f41",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0 || ^2.0",
-                "ext-json": "*",
-                "php": "^7.4 || ^8.0 || ^8.1 || ^8.2"
-            },
-            "require-dev": {
-                "10up/wp_mock": "^1.0",
-                "composer/composer": "^1.10 || ^2.0",
-                "composer/pcre": "^3.1",
-                "mockery/mockery": "~1.3",
-                "phpunit/phpunit": "^9",
-                "psr/container": "1.1.2"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "LkWdwrd\\MuPluginLoader\\Composer\\MuLoaderPlugin",
-                "branch-alias": {
-                    "dev-main": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Util/util.php"
-                ],
-                "psr-4": {
-                    "LkWdwrd\\MuPluginLoader\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Box UK",
-                    "email": "developers@boxuk.com"
-                },
-                {
-                    "name": "Luke Woodward",
-                    "email": "woodward.lucas@gmail.com"
-                }
-            ],
-            "description": "A drop-in MU Plugin loader for WordPress",
-            "keywords": [
-                "loader",
-                "muplugin",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/boxuk/wp-muplugin-loader/issues",
-                "source": "https://github.com/boxuk/wp-muplugin-loader/tree/2.2.0"
-            },
-            "abandoned": "roots/bedrock-autoloader",
-            "time": "2023-08-03T15:23:10+00:00"
         },
         {
             "name": "brain/monkey",
@@ -1663,6 +1594,80 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "roots/bedrock-autoloader",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/roots/bedrock-autoloader.git",
+                "reference": "f508348a3365ab5ce7e045f5fd4ee9f0a30dd70f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/roots/bedrock-autoloader/zipball/f508348a3365ab5ce7e045f5fd4ee9f0a30dd70f",
+                "reference": "f508348a3365ab5ce7e045f5fd4ee9f0a30dd70f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "10up/wp_mock": "^0.4.2",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Roots\\Bedrock\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nick Fox",
+                    "email": "nick@foxaii.com",
+                    "homepage": "https://github.com/foxaii"
+                },
+                {
+                    "name": "Scott Walkinshaw",
+                    "email": "scott.walkinshaw@gmail.com",
+                    "homepage": "https://github.com/swalkinshaw"
+                },
+                {
+                    "name": "Austin Pray",
+                    "email": "austin@austinpray.com",
+                    "homepage": "https://github.com/austinpray"
+                }
+            ],
+            "description": "An autoloader that enables standard plugins to be required just like must-use plugins",
+            "keywords": [
+                "autoloader",
+                "bedrock",
+                "mu-plugin",
+                "must-use",
+                "plugin",
+                "wordpress"
+            ],
+            "support": {
+                "forum": "https://discourse.roots.io/",
+                "issues": "https://github.com/roots/bedrock-autoloader/issues",
+                "source": "https://github.com/roots/bedrock-autoloader/tree/1.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/roots",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/rootsdev",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-12-04T15:59:12+00:00"
         },
         {
             "name": "symfony/cache",
