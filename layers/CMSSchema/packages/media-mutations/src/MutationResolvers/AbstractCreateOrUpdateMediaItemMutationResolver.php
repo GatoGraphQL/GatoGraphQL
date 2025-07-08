@@ -266,6 +266,7 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             'altText' => $fieldDataAccessor->getValue(MutationInputProperties::ALT_TEXT),
             'mimeType' => $fieldDataAccessor->getValue(MutationInputProperties::MIME_TYPE),
             'date' => $fieldDataAccessor->getValue(MutationInputProperties::DATE),
+            'gmtDate' => $fieldDataAccessor->getValue(MutationInputProperties::GMT_DATE),
         ];
 
         if ($this->addMediaItemInputField()) {

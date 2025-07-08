@@ -79,6 +79,7 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
                 MutationInputProperties::ALT_TEXT => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::MIME_TYPE => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::DATE => $this->getDateScalarTypeResolver(),
+                MutationInputProperties::GMT_DATE => $this->getDateScalarTypeResolver(),
             ]
         );
 
@@ -109,6 +110,7 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
             MutationInputProperties::ALT_TEXT => $this->__('Image alternative information', 'media-mutations'),
             MutationInputProperties::MIME_TYPE => $this->__('Mime type to use for the attachment, when this information can\'t be deduced from the filename (because it has no extension)', 'media-mutations'),
             MutationInputProperties::DATE => $this->__('Date to use for the attachment', 'media-mutations'),
+            MutationInputProperties::GMT_DATE => $this->__('GMT date to use for the attachment', 'media-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 
