@@ -21,7 +21,7 @@
         "league/pipeline": "^1.0",
         "leoloso/faker": "^1.2",
         "masterminds/html5": "^2.7",
-        "michelf/php-markdown": "^1.9",
+        "michelf/php-markdown": "^2.0",
         "psr/cache": "^3.0",
         "psr/simple-cache": "^3.0",
         "symfony/cache": "^6.0",
