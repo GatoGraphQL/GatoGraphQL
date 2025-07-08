@@ -524,7 +524,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Reject unsafe URLs', 'gatographql'),
-                Properties::DESCRIPTION => \__('Do not allow creating media items from unsafe URLs (such as "https://testing-site.local")', 'gatographql'),
+                Properties::DESCRIPTION => \__('Do not allow creating media items from unsafe URLs (such as <code>https://testing-site.local</code>)', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }
