@@ -21,7 +21,6 @@ use PoP\Root\StateManagers\ModuleManager;
 use PoP\Root\StateManagers\ModuleManagerInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\InputBag;
 
 /**
