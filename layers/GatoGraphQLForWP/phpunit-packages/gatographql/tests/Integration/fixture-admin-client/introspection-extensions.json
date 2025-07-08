@@ -1290,6 +1290,14 @@
                             "args": []
                         },
                         {
+                            "name": "rawStatus",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "rawTitle",
                             "extensions": {
                                 "isMutation": false,
@@ -4945,6 +4953,14 @@
                             "args": []
                         },
                         {
+                            "name": "rawStatus",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "rawTitle",
                             "extensions": {
                                 "isMutation": false,
@@ -5472,6 +5488,14 @@
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawStatus",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
                             },
                             "args": []
                         },
@@ -17284,6 +17308,12 @@
                             }
                         },
                         {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "status",
                             "extensions": {
                                 "isSensitiveDataElement": true
@@ -18473,6 +18503,12 @@
                             }
                         },
                         {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "status",
                             "extensions": {
                                 "isSensitiveDataElement": true
@@ -18812,6 +18848,12 @@
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
+                        },
+                        {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
                         }
                     ],
                     "enumValues": null
@@ -19046,6 +19088,12 @@
                             }
                         },
                         {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "status",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -19090,6 +19138,12 @@
                         },
                         {
                             "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -19151,6 +19205,12 @@
                         },
                         {
                             "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -19224,6 +19284,12 @@
                         },
                         {
                             "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -19315,6 +19381,12 @@
                         },
                         {
                             "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -19498,6 +19570,12 @@
                         },
                         {
                             "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -20824,6 +20902,12 @@
                             }
                         },
                         {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "status",
                             "extensions": {
                                 "isSensitiveDataElement": true
@@ -21034,6 +21118,12 @@
                         },
                         {
                             "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -21483,6 +21573,18 @@
                     "enumValues": [
                         {
                             "name": "draft",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "future",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "inherit",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

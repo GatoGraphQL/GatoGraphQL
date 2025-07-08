@@ -424,6 +424,9 @@
               "name": "rawExcerpt"
             },
             {
+              "name": "rawStatus"
+            },
+            {
               "name": "rawTitle"
             },
             {
@@ -1308,6 +1311,9 @@
               "name": "rawExcerpt"
             },
             {
+              "name": "rawStatus"
+            },
+            {
               "name": "rawTitle"
             },
             {
@@ -1442,6 +1448,9 @@
             },
             {
               "name": "rawExcerpt"
+            },
+            {
+              "name": "rawStatus"
             },
             {
               "name": "rawTitle"

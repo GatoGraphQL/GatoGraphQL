@@ -2398,6 +2398,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "rawStatus",
+                            "description": "Custom post raw status (as it exists in the database, eg: `publish` instead of `future`)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "CustomPostStatusEnum!",
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "CustomPostStatusEnum",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "rawTitle",
                             "description": "Custom post title in raw format (as it exists in the database)",
                             "args": [],
@@ -10589,6 +10605,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "rawStatus",
+                            "description": "Custom post raw status (as it exists in the database, eg: `publish` instead of `future`)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "CustomPostStatusEnum!",
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "CustomPostStatusEnum",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "rawTitle",
                             "description": "Custom post title in raw format (as it exists in the database)",
                             "args": [],
@@ -11667,6 +11699,22 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "rawStatus",
+                            "description": "Custom post raw status (as it exists in the database, eg: `publish` instead of `future`)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "CustomPostStatusEnum!",
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "CustomPostStatusEnum",
                                     "ofType": null
                                 }
                             },
@@ -34554,6 +34602,24 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "status",
                             "description": "Custom post status",
                             "type": {
@@ -36557,6 +36623,24 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "status",
                             "description": "Custom post status",
                             "type": {
@@ -37102,6 +37186,24 @@
                                 "ofType": null
                             },
                             "defaultValue": null
+                        },
+                        {
+                            "name": "slugs",
+                            "description": "Filter comments based on slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
                         }
                     ],
                     "interfaces": null,
@@ -37616,6 +37718,24 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "status",
                             "description": "Custom post status",
                             "type": {
@@ -37723,6 +37843,24 @@
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slugs",
+                            "description": "Filter comments based on slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
                             },
                             "defaultValue": null
                         }
@@ -37854,6 +37992,24 @@
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
                             },
                             "defaultValue": null
                         },
@@ -38013,6 +38169,24 @@
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
                             },
                             "defaultValue": null
                         },
@@ -38210,6 +38384,24 @@
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
                             },
                             "defaultValue": null
                         },
@@ -38595,6 +38787,24 @@
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
                             },
                             "defaultValue": null
                         },
@@ -40770,6 +40980,24 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "status",
                             "description": "Custom post status",
                             "type": {
@@ -41171,6 +41399,24 @@
                                 "kind": "SCALAR",
                                 "name": "String",
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
                             },
                             "defaultValue": null
                         },
@@ -41745,6 +41991,18 @@
                         {
                             "name": "draft",
                             "description": "Draft content",
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "future",
+                            "description": "Future content",
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "inherit",
+                            "description": "Inherit content",
                             "isDeprecated": false,
                             "deprecationReason": null
                         },
