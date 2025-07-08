@@ -10,12 +10,15 @@ use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use WP_Error;
 
+use function add_filter;
 use function add_post_meta;
+use function download_url;
 use function get_allowed_mime_types;
 use function get_attached_file;
 use function get_post_meta;
 use function get_post;
 use function is_wp_error;
+use function remove_filter;
 use function update_attached_file;
 use function update_post_meta;
 use function wp_check_filetype;
@@ -154,7 +157,13 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
     ): string|int {
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
-        $downloadedFileOrError = \download_url($url);
+        if (true) {
+            add_filter('http_request_args', $this->customizeHTTPRequestArgsDoNotRejectUnsafeURLs(...), PHP_INT_MAX);
+        }
+        $downloadedFileOrError = download_url($url);
+        if (true) {
+            remove_filter('http_request_args', $this->customizeHTTPRequestArgsDoNotRejectUnsafeURLs(...), PHP_INT_MAX);
+        }
 
         if (is_wp_error($downloadedFileOrError)) {
             /** @var WP_Error */
@@ -208,6 +217,16 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         \unlink($downloadedFile);
 
         return $mediaItemID;
+    }
+
+    /**
+     * @param array<string,mixed> $args
+     * @return array<string,mixed>
+     */
+    public function customizeHTTPRequestArgsDoNotRejectUnsafeURLs(array $args): array
+    {
+        $args['reject_unsafe_urls'] = false;
+        return $args;
     }
 
     /**
