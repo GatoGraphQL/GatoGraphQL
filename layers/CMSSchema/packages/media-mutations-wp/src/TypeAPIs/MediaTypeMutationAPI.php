@@ -154,17 +154,18 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         string $url,
         ?string $filename,
         array $mediaItemData,
+        bool $doNotRejectUnsafeURLs = false,
     ): string|int {
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         /**
          * Allow to import an image from an URL such as "https://playground-dev.local"
          */
-        if (true) {
+        if ($doNotRejectUnsafeURLs) {
             add_filter('http_request_args', $this->customizeHTTPRequestArgsDoNotRejectUnsafeURLs(...), PHP_INT_MAX);
         }
         $downloadedFileOrError = download_url($url);
-        if (true) {
+        if ($doNotRejectUnsafeURLs) {
             remove_filter('http_request_args', $this->customizeHTTPRequestArgsDoNotRejectUnsafeURLs(...), PHP_INT_MAX);
         }
 
