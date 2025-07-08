@@ -165,12 +165,12 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
          */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $doNotRejectUnsafeURLs = $moduleConfiguration->doNotRejectUnsafeURLs();
-        if ($doNotRejectUnsafeURLs) {
+        $rejectUnsafeURLs = $moduleConfiguration->rejectUnsafeURLs();
+        if (!$rejectUnsafeURLs) {
             add_filter('http_request_args', $this->customizeHTTPRequestArgsDoNotRejectUnsafeURLs(...), PHP_INT_MAX);
         }
         $downloadedFileOrError = download_url($url);
-        if ($doNotRejectUnsafeURLs) {
+        if (!$rejectUnsafeURLs) {
             remove_filter('http_request_args', $this->customizeHTTPRequestArgsDoNotRejectUnsafeURLs(...), PHP_INT_MAX);
         }
 

@@ -43,10 +43,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function doNotRejectUnsafeURLs(): bool
+    public function rejectUnsafeURLs(): bool
     {
-        $envVariable = Environment::DO_NOT_REJECT_UNSAFE_URLS;
-        $defaultValue = false;
+        $envVariable = Environment::REJECT_UNSAFE_URLS;
+        $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
