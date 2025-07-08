@@ -803,7 +803,7 @@ To report a bug or request a new feature please do it on the [GatoGraphQL monore
 
 ## Security issues
 
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. <a href="https://patchstack.com/database/vdp/9e5fbfdf-3f7c-4ab9-bcee-87a59e98564b" target="_blank" rel="nofollow">Report a security vulnerability</a>.
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability](https://patchstack.com/database/vdp/9e5fbfdf-3f7c-4ab9-bcee-87a59e98564b).
 
 ## Contributing
 
