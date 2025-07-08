@@ -13,3 +13,10 @@
 # and the "php-error" class is added on the WP dashboard, adding an annoying whiteline
 # when WP_DEBUG is true. Then, comment out triggering that deprecation
 sed -i 's/trigger_deprecation/\/\/trigger_deprecation/' vendor/symfony/dependency-injection/Compiler/AutowireRequiredMethodsPass.php
+
+# There's a bug when downgrading named parameters, where this code:
+#   Target::parseName($parameter, parsedName: $parsedName);
+# is downgraded like this:
+#   $name = Target::parseName($parameter, &null, $parsedName);
+# Fix it
+sed -i 's/&null/null/' vendor/symfony/dependency-injection/Compiler/ResolveBindingsPass.php

@@ -184,7 +184,7 @@
     "require": {
         "php": "^8.1",
         "getpop/component-model": "^13.2",
-        "michelf/php-markdown": "^1.9"
+        "michelf/php-markdown": "^2.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",

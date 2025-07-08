@@ -417,7 +417,23 @@ class AppThread implements AppThreadInterface
          * @see https://symfony.com/doc/current/components/http_foundation.html#accessing-request-data
          */
         try {
-            return $this->request->query->get($key, $default);
+            $item = $this->request->query->get($key, $default);
+            /**
+             * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/3146
+             * @see "mutation" test in tests/Integration/CacheControlListsWebserverRequestTest.php
+             *
+             * Solution below by Cursor AI
+             */
+            if (is_string($item)) {
+                // Handle multiple layers of escaping
+                // 1. Remove JSON wrapping quotes if present
+                if (str_starts_with($item, '"') && str_ends_with($item, '"')) {
+                    $item = substr($item, 1, -1);
+                }
+                // 2. Unescape backslashes multiple times to handle all layers
+                $item = stripslashes(stripslashes(stripslashes($item)));
+            }
+            return $item;
         } catch (BadRequestException) {
             return $this->request->query->all($key);
         }
