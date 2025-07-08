@@ -6,6 +6,7 @@ namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MediaMutations\Constants\MediaCRUDHookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
@@ -18,6 +19,7 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CreateMediaItemFromOneofInputObjectTypeResolver $createMediaItemFromOneofInputObjectTypeResolver = null;
+    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -46,6 +48,15 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
         }
         return $this->createMediaItemFromOneofInputObjectTypeResolver;
     }
+    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
+    {
+        if ($this->dateScalarTypeResolver === null) {
+            /** @var DateScalarTypeResolver */
+            $dateScalarTypeResolver = $this->instanceManager->getInstance(DateScalarTypeResolver::class);
+            $this->dateScalarTypeResolver = $dateScalarTypeResolver;
+        }
+        return $this->dateScalarTypeResolver;
+    }
 
     /**
      * @return array<string,InputTypeResolverInterface>
@@ -67,6 +78,8 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
                 MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::ALT_TEXT => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::MIME_TYPE => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::DATE => $this->getDateScalarTypeResolver(),
+                MutationInputProperties::GMT_DATE => $this->getDateScalarTypeResolver(),
             ]
         );
 
@@ -96,6 +109,8 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
             MutationInputProperties::DESCRIPTION => $this->__('Attachment description', 'media-mutations'),
             MutationInputProperties::ALT_TEXT => $this->__('Image alternative information', 'media-mutations'),
             MutationInputProperties::MIME_TYPE => $this->__('Mime type to use for the attachment, when this information can\'t be deduced from the filename (because it has no extension)', 'media-mutations'),
+            MutationInputProperties::DATE => $this->__('Date to use for the attachment', 'media-mutations'),
+            MutationInputProperties::GMT_DATE => $this->__('GMT date to use for the attachment', 'media-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 

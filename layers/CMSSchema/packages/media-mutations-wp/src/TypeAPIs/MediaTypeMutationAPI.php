@@ -402,6 +402,14 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
             $mediaItemData['post_mime_type'] = $mediaItemData['mimeType'];
             unset($mediaItemData['mimeType']);
         }
+        if (isset($mediaItemData['date'])) {
+            $mediaItemData['post_date'] = $mediaItemData['date'];
+            unset($mediaItemData['date']);
+        }
+        if (isset($mediaItemData['gmtDate'])) {
+            $mediaItemData['post_date_gmt'] = $mediaItemData['gmtDate'];
+            unset($mediaItemData['gmtDate']);
+        }
         if (isset($mediaItemData['customPostID'])) {
             $mediaItemData['post_parent'] = $mediaItemData['customPostID'];
             unset($mediaItemData['customPostID']);

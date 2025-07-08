@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) (#3142)
 - Filter custom posts and media items by "slugs" (#3143)
+- Date parameter to `createMediaItem` mutation (#3146)
 
 ### Improvements
 
