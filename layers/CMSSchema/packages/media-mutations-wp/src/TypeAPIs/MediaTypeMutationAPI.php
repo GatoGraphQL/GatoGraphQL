@@ -161,7 +161,12 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         /**
-         * Allow to import an image from an URL such as "https://playground-dev.local"
+         * WordPress does not allow creating media items from unsafe URLs,
+         * such as "https://playground-dev.local".
+         *
+         * @see wordpress/wp-includes/class-wp-http.php method `request`
+         *
+         * Allow to override this behavior!
          */
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
