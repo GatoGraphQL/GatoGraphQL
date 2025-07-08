@@ -161,7 +161,11 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         /**
-         * WordPress does not allow creating media items from unsafe URLs,
+         * When creating a media item from an URL, WordPress sets
+         * "reject_unsafe_urls" to `true`, because `download_url`
+         * calls `wp_safe_remote_get`.
+         *
+         * This way, by default we can't create media items from unsafe URLs,
          * such as "https://playground-dev.local".
          *
          * @see wordpress/wp-includes/class-wp-http.php method `request`
