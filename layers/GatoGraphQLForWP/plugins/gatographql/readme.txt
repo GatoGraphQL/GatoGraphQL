@@ -224,6 +224,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) (#3142)
 * Added `future` and `inherit` statuses to the `CustomPostStatus` enum (#3142)
 * Added - Filter custom posts and media items by "slugs" (#3143)
+* Added - Date parameter to `createMediaItem` mutation (#3146)
 * Updated dependencies to latest version (#3145)
 * Fixed - Don't validate promises inside array of arrays (#3144)
 
