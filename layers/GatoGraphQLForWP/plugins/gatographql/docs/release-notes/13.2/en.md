@@ -8,6 +8,7 @@
 ## Improvements
 
 - Added `future` and `inherit` statuses to the `CustomPostStatus` enum ([#3142](https://github.com/GatoGraphQL/GatoGraphQL/pull/3142))
+- Updated dependencies to latest version ([#3145](https://github.com/GatoGraphQL/GatoGraphQL/pull/3145))
 
 ## Fixed
 
