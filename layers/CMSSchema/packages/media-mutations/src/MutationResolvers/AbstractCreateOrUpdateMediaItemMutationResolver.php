@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
+use DateTime;
 use DateTimeInterface;
 use PoPCMSSchema\MediaMutations\Constants\MediaCRUDHookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
