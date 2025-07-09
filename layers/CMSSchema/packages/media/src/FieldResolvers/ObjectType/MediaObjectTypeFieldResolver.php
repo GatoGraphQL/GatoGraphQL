@@ -115,10 +115,13 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return [
             'src',
+            'srcs',
             'srcPath',
             'srcSet',
             'width',
+            'widths',
             'height',
+            'heights',
             'sizes',
             'title',
             'caption',
@@ -136,10 +139,13 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return match ($fieldName) {
             'src' => $this->getURLScalarTypeResolver(),
+            'srcs' => $this->getURLScalarTypeResolver(),
             'srcPath' => $this->getURLAbsolutePathScalarTypeResolver(),
             'srcSet' => $this->getStringScalarTypeResolver(),
             'width' => $this->getIntScalarTypeResolver(),
+            'widths' => $this->getIntScalarTypeResolver(),
             'height' => $this->getIntScalarTypeResolver(),
+            'heights' => $this->getIntScalarTypeResolver(),
             'sizes' => $this->getStringScalarTypeResolver(),
             'title' => $this->getStringScalarTypeResolver(),
             'caption' => $this->getStringScalarTypeResolver(),
@@ -164,6 +170,11 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             'modifiedDate',
             'modifiedDateStr'
                 => SchemaTypeModifiers::NON_NULLABLE,
+            'srcs'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            'widths',
+            'heights'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -173,10 +184,13 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return match ($fieldName) {
             'src' => $this->__('Media item URL source', 'pop-media'),
+            'srcs' => $this->__('Media item URL sources for several sizes (returned in the same order as the sizes)', 'pop-media'),
             'srcPath' => $this->__('Media item URL source path', 'pop-media'),
             'srcSet' => $this->__('Media item URL srcset', 'pop-media'),
             'width' => $this->__('Media item\'s width', 'pop-media'),
+            'widths' => $this->__('Media item\'s width for several sizes (returned in the same order as the sizes)', 'pop-media'),
             'height' => $this->__('Media item\'s height', 'pop-media'),
+            'heights' => $this->__('Media item\'s height for several sizes (returned in the same order as the sizes)', 'pop-media'),
             'sizes' => $this->__('Media item\'s ‘sizes’ attribute value for an image', 'pop-media'),
             'title' => $this->__('Media item title', 'pop-media'),
             'caption' => $this->__('Media item caption', 'pop-media'),
@@ -206,6 +220,12 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 => [
                     'size' => $this->getStringScalarTypeResolver(),
                 ],
+            'srcs',
+            'widths',
+            'heights'
+                => [
+                    'sizes' => $this->getStringScalarTypeResolver(),
+                ],
             default
                 => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -215,7 +235,23 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return match ($fieldArgName) {
             'size' => $this->__('Size of the image', 'pop-media'),
+            'sizes' => $this->__('Sizes of the image', 'pop-media'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ([$fieldName => $fieldArgName]) {
+            ['srcs' => 'sizes'],
+            ['widths' => 'sizes'],
+            ['heights' => 'sizes']
+                => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -237,19 +273,34 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $media = $object;
-        $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
-        switch ($fieldDataAccessor->getFieldName()) {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 $imgSrc = $this->getMediaTypeAPI()->getImageSrc($media, $size);
                 if ($imgSrc !== null) {
                     return $imgSrc;
                 }
                 return $this->getMediaTypeAPI()->getMediaItemSrc($media);
+            case 'srcs':
+                /** @var string[] */
+                $sizes = $fieldDataAccessor->getValue('sizes');
+                $srcs = [];
+                foreach ($sizes as $size) {
+                    $imgSrc = $this->getMediaTypeAPI()->getImageSrc($media, $size);
+                    if ($imgSrc !== null) {
+                        $srcs[] = $imgSrc;
+                        continue;
+                    }
+                    $srcs[] = $this->getMediaTypeAPI()->getMediaItemSrc($media);
+                }
+                return $srcs;
             case 'srcPath':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 $imgSrcPath = $this->getMediaTypeAPI()->getImageSrcPath($media, $size);
                 if ($imgSrcPath !== null) {
                     return $imgSrcPath;
@@ -257,11 +308,28 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 return $this->getMediaTypeAPI()->getMediaItemSrcPath($media);
             case 'width':
             case 'height':
-                $properties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
-                return $properties[$fieldDataAccessor->getFieldName()] ?? null;
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
+                $imageProperties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
+                return $imageProperties[$fieldName] ?? null;
+            case 'widths':
+            case 'heights':
+                /** @var string[] */
+                $sizes = $fieldDataAccessor->getValue('sizes');
+                $properties = [];
+                $propertyNames = [
+                    'widths' => 'width',
+                    'heights' => 'height',
+                ];
+                foreach ($sizes as $size) {
+                    $imageProperties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
+                    $properties[] = $imageProperties[$propertyNames[$fieldName]] ?? null;
+                }
+                return $properties;
             case 'srcSet':
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 return $this->getMediaTypeAPI()->getImageSrcSet($media, $size);
             case 'sizes':
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 return $this->getMediaTypeAPI()->getImageSizes($media, $size);
             case 'title':
                 return $this->getMediaTypeAPI()->getTitle($media);

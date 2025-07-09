@@ -12,6 +12,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filter custom posts and media items by "slugs" (#3143)
 - Date parameter to `createMediaItem` mutation (#3146)
 - Option to create media items from unsafe URLs (#3149)
+- Fields `srcs`, `widths`, and `heights` (to fetch data for several `sizes`) to type `Media` (#3149)
 
 ### Improvements
 

@@ -13,16 +13,31 @@
                 "dateStr": "May 25",
                 "description": "",
                 "height": 190,
+                "heights": [
+                    150,
+                    110,
+                    190
+                ],
                 "id": 1361,
                 "mimeType": "image\/webp",
                 "sizes": "(max-width: 520px) 100vw, 520px",
                 "slug": "graphql-api-header",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp",
+                "srcs": [
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-150x150.webp",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-300x110.webp",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp"
+                ],
                 "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp 520w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-300x110.webp 300w",
                 "title": "graphql-api-header",
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-header\/",
                 "urlPath": "\/graphql-api-header\/",
-                "width": 520
+                "width": 520,
+                "widths": [
+                    150,
+                    300,
+                    520
+                ]
             },
             {
                 "parentCustomPost": null,
@@ -36,16 +51,31 @@
                 "dateStr": "May 25",
                 "description": "",
                 "height": 500,
+                "heights": [
+                    150,
+                    300,
+                    500
+                ],
                 "id": 1362,
                 "mimeType": "image\/webp",
                 "sizes": "(max-width: 500px) 100vw, 500px",
                 "slug": "graphql-api-search-results",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.webp",
+                "srcs": [
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-150x150.webp",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-300x300.webp",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.webp"
+                ],
                 "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.webp 500w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-300x300.webp 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-150x150.webp 150w",
                 "title": "graphql-api-search-results",
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-search-results\/",
                 "urlPath": "\/graphql-api-search-results\/",
-                "width": 500
+                "width": 500,
+                "widths": [
+                    150,
+                    300,
+                    500
+                ]
             },
             {
                 "parentCustomPost": {
@@ -62,16 +92,31 @@
                 "dateStr": "June 15",
                 "description": "",
                 "height": 1200,
+                "heights": [
+                    150,
+                    225,
+                    563
+                ],
                 "id": 1380,
                 "mimeType": "image\/jpeg",
                 "sizes": "(max-width: 1600px) 100vw, 1600px",
                 "slug": "funny-dog",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
+                "srcs": [
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-150x150.jpg",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-300x225.jpg",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1024x768.jpg"
+                ],
                 "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg 1600w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-300x225.jpg 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1024x768.jpg 1024w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-768x576.jpg 768w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1536x1152.jpg 1536w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1568x1176.jpg 1568w",
                 "title": "Funny-Dog",
                 "url": "https:\/\/gatographql.lndo.site\/single-post-with-a-lot-of-blocks\/funny-dog\/",
                 "urlPath": "\/single-post-with-a-lot-of-blocks\/funny-dog\/",
-                "width": 1600
+                "width": 1600,
+                "widths": [
+                    150,
+                    300,
+                    750
+                ]
             }
         ],
         "anyMimeTypeMediaItems": [
@@ -87,16 +132,31 @@
                 "dateStr": "May 25",
                 "description": "",
                 "height": 190,
+                "heights": [
+                    150,
+                    110,
+                    190
+                ],
                 "id": 1361,
                 "mimeType": "image\/webp",
                 "sizes": "(max-width: 520px) 100vw, 520px",
                 "slug": "graphql-api-header",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp",
+                "srcs": [
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-150x150.webp",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-300x110.webp",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp"
+                ],
                 "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp 520w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-300x110.webp 300w",
                 "title": "graphql-api-header",
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-header\/",
                 "urlPath": "\/graphql-api-header\/",
-                "width": 520
+                "width": 520,
+                "widths": [
+                    150,
+                    300,
+                    520
+                ]
             },
             {
                 "parentCustomPost": null,
@@ -110,16 +170,31 @@
                 "dateStr": "May 25",
                 "description": "",
                 "height": 500,
+                "heights": [
+                    150,
+                    300,
+                    500
+                ],
                 "id": 1362,
                 "mimeType": "image\/webp",
                 "sizes": "(max-width: 500px) 100vw, 500px",
                 "slug": "graphql-api-search-results",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.webp",
+                "srcs": [
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-150x150.webp",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-300x300.webp",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.webp"
+                ],
                 "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.webp 500w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-300x300.webp 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-150x150.webp 150w",
                 "title": "graphql-api-search-results",
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-search-results\/",
                 "urlPath": "\/graphql-api-search-results\/",
-                "width": 500
+                "width": 500,
+                "widths": [
+                    150,
+                    300,
+                    500
+                ]
             },
             {
                 "parentCustomPost": null,
@@ -133,16 +208,31 @@
                 "dateStr": "May 26",
                 "description": "",
                 "height": null,
+                "heights": [
+                    null,
+                    null,
+                    null
+                ],
                 "id": 1363,
                 "mimeType": "text\/plain",
                 "sizes": null,
                 "slug": "license",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/LICENSE.txt",
+                "srcs": [
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/LICENSE.txt",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/LICENSE.txt",
+                    "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/LICENSE.txt"
+                ],
                 "srcSet": null,
                 "title": "LICENSE",
                 "url": "https:\/\/gatographql.lndo.site\/license\/",
                 "urlPath": "\/license\/",
-                "width": null
+                "width": null,
+                "widths": [
+                    null,
+                    null,
+                    null
+                ]
             }
         ],
         "mediaItemsByAuthorIDs": [
@@ -173,6 +263,10 @@
             {
                 "id": 1362,
                 "title": "graphql-api-search-results"
+            },
+            {
+                "id": 1797,
+                "title": "Funny-Dog"
             }
         ],
         "mediaItemsByExcludeAuthorIDs": [
@@ -232,19 +326,19 @@
         ],
         "mediaItemsSortedASC": [
             {
+                "id": 1797,
+                "title": "Funny-Dog",
+                "date": "2015-01-22T06:15:35+00:00"
+            },
+            {
+                "id": 1798,
+                "title": "Funny-Dog",
+                "date": "2015-01-22T06:15:35+00:00"
+            },
+            {
                 "id": 1361,
                 "title": "graphql-api-header",
                 "date": "2022-05-25T05:13:32+00:00"
-            },
-            {
-                "id": 1362,
-                "title": "graphql-api-search-results",
-                "date": "2022-05-25T05:13:35+00:00"
-            },
-            {
-                "id": 1382,
-                "title": "Funny-Dog-again",
-                "date": "2022-06-15T04:24:00+00:00"
             }
         ],
         "mediaItemsSortedDESC": [
@@ -292,6 +386,40 @@
             "slug": "graphql-api-search-results"
         },
         "nonExistingMediaItemById": null,
-        "nonExistingMediaItemBySlug": null
+        "nonExistingMediaItemBySlug": null,
+        "mediaItemPropertiesBySize": {
+            "id": 1361,
+            "title": "graphql-api-header",
+            "heights": [
+                150,
+                110,
+                190
+            ],
+            "invertedHeights": [
+                190,
+                110,
+                150
+            ],
+            "srcs": [
+                "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-150x150.webp",
+                "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-300x110.webp",
+                "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp"
+            ],
+            "invertedSrcs": [
+                "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp",
+                "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-300x110.webp",
+                "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-150x150.webp"
+            ],
+            "widths": [
+                150,
+                300,
+                520
+            ],
+            "invertedWidths": [
+                520,
+                300,
+                150
+            ]
+        }
     }
 }

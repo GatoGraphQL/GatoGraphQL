@@ -79,6 +79,17 @@ query {
     title
     slug
   }
+
+  mediaItemPropertiesBySize: mediaItem(by: { id: 1361 }) {
+    id
+    title
+    heights(sizes: ["thumbnail", "medium", "large"])
+    invertedHeights: heights(sizes: ["large", "medium", "thumbnail"])
+    srcs(sizes: ["thumbnail", "medium", "large"])
+    invertedSrcs: srcs(sizes: ["large", "medium", "thumbnail"])
+    widths(sizes: ["thumbnail", "medium", "large"])
+    invertedWidths: widths(sizes: ["large", "medium", "thumbnail"])
+  }
 }
 
 fragment MediaItemData on Media {
@@ -96,6 +107,7 @@ fragment MediaItemData on Media {
   dateStr(format: "F j")
   description
   height
+  heights(sizes: ["thumbnail", "medium", "large"])
   id
   mimeType
   # modifiedDate
@@ -103,9 +115,11 @@ fragment MediaItemData on Media {
   sizes
   slug
   src
+  srcs(sizes: ["thumbnail", "medium", "large"])
   srcSet
   title
   url
   urlPath
   width
+  widths(sizes: ["thumbnail", "medium", "large"])
 }

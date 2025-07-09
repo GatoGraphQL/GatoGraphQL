@@ -6,6 +6,7 @@
 - Filter custom posts and media items by "slugs" ([#3143](https://github.com/GatoGraphQL/GatoGraphQL/pull/3143))
 - Date parameter to `createMediaItem` mutation ([#3146](https://github.com/GatoGraphQL/GatoGraphQL/pull/3146))
 - Option to create media items from unsafe URLs ([#3149](https://github.com/GatoGraphQL/GatoGraphQL/pull/3149))
+- Fields `srcs`, `widths`, and `heights` (to fetch data for several `sizes`) to type `Media` ([#3149](https://github.com/GatoGraphQL/GatoGraphQL/pull/3149))
 
 ## Improvements
 
