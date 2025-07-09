@@ -184,13 +184,13 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     {
         return match ($fieldName) {
             'src' => $this->__('Media item URL source', 'pop-media'),
-            'srcs' => $this->__('Media item URL sources', 'pop-media'),
+            'srcs' => $this->__('Media item URL sources for several sizes (returned in the same order as the sizes)', 'pop-media'),
             'srcPath' => $this->__('Media item URL source path', 'pop-media'),
             'srcSet' => $this->__('Media item URL srcset', 'pop-media'),
             'width' => $this->__('Media item\'s width', 'pop-media'),
-            'widths' => $this->__('Media item\'s widths', 'pop-media'),
+            'widths' => $this->__('Media item\'s width for several sizes (returned in the same order as the sizes)', 'pop-media'),
             'height' => $this->__('Media item\'s height', 'pop-media'),
-            'heights' => $this->__('Media item\'s heights', 'pop-media'),
+            'heights' => $this->__('Media item\'s height for several sizes (returned in the same order as the sizes)', 'pop-media'),
             'sizes' => $this->__('Media item\'s ‘sizes’ attribute value for an image', 'pop-media'),
             'title' => $this->__('Media item title', 'pop-media'),
             'caption' => $this->__('Media item caption', 'pop-media'),
