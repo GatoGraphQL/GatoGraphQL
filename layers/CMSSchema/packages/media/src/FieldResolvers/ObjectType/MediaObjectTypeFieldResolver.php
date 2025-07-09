@@ -316,9 +316,13 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 /** @var string[] */
                 $sizes = $fieldDataAccessor->getValue('sizes');
                 $properties = [];
+                $propertyNames = [
+                    'widths' => 'width',
+                    'heights' => 'height',
+                ];
                 foreach ($sizes as $size) {
                     $imageProperties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
-                    $properties[] = $imageProperties[$fieldName] ?? null;
+                    $properties[] = $imageProperties[$propertyNames[$fieldName]] ?? null;
                 }
                 return $properties;
             case 'srcSet':
