@@ -226,6 +226,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Filter custom posts and media items by "slugs" (#3143)
 * Added - Date parameter to `createMediaItem` mutation (#3146)
 * Added - Option to create media items from unsafe URLs (#3149)
+* Added - Fields `srcs`, `widths`, and `heights` (to fetch data for several `sizes`) to type `Media` (#3149)
 * Updated dependencies to latest version (#3145)
 * Fixed - Don't validate promises inside array of arrays (#3144)
 
