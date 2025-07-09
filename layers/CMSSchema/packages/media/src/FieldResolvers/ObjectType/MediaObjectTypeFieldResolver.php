@@ -245,10 +245,10 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
      */
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        return match ($fieldName) {
-            'srcs',
-            'widths',
-            'heights'
+        return match ([$fieldName => $fieldArgName]) {
+            ['srcs' => 'sizes'],
+            ['widths' => 'sizes'],
+            ['heights' => 'sizes']
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
