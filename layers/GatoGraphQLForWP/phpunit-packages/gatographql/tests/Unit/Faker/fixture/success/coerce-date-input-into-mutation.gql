@@ -3,7 +3,7 @@
 # that inputting the corresponding object into the mutation
 # is handled property
 ################################################
-mutation CreateOrUpdateCustomPost(
+mutation CreateCustomPostWithDate(
     $gmtDate: DateTime!
 ) {
   loginUser(by: {
