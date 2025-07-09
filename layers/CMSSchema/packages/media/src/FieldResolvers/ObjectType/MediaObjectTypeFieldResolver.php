@@ -273,7 +273,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $media = $object;
-        switch ($fieldDataAccessor->getFieldName()) {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
@@ -309,7 +310,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
             case 'height':
                 $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 $imageProperties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
-                return $imageProperties[$fieldDataAccessor->getFieldName()] ?? null;
+                return $imageProperties[$fieldName] ?? null;
             case 'widths':
             case 'heights':
                 /** @var string[] */
@@ -317,7 +318,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 $properties = [];
                 foreach ($sizes as $size) {
                     $imageProperties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
-                    $properties[] = $imageProperties[$fieldDataAccessor->getFieldName()] ?? null;
+                    $properties[] = $imageProperties[$fieldName] ?? null;
                 }
                 return $properties;
             case 'srcSet':
