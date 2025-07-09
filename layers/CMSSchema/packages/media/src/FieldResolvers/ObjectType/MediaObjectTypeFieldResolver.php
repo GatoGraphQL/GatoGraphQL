@@ -273,19 +273,35 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $media = $object;
-        $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'src':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 $imgSrc = $this->getMediaTypeAPI()->getImageSrc($media, $size);
                 if ($imgSrc !== null) {
                     return $imgSrc;
                 }
                 return $this->getMediaTypeAPI()->getMediaItemSrc($media);
+            case 'srcs':
+                // The media item may be an image, or a video or audio.
+                // If image, $imgSrc will have a value. Otherwise, get the URL
+                /** @var string[] */
+                $sizes = $fieldDataAccessor->getValue('sizes');
+                $srcs = [];
+                foreach ($sizes as $size) {
+                    $imgSrc = $this->getMediaTypeAPI()->getImageSrc($media, $size);
+                    if ($imgSrc !== null) {
+                        $srcs[] = $imgSrc;
+                        continue;
+                    }
+                    $srcs[] = $this->getMediaTypeAPI()->getMediaItemSrc($media);
+                }
+                return $srcs;
             case 'srcPath':
                 // The media item may be an image, or a video or audio.
                 // If image, $imgSrc will have a value. Otherwise, get the URL
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 $imgSrcPath = $this->getMediaTypeAPI()->getImageSrcPath($media, $size);
                 if ($imgSrcPath !== null) {
                     return $imgSrcPath;
@@ -293,11 +309,14 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
                 return $this->getMediaTypeAPI()->getMediaItemSrcPath($media);
             case 'width':
             case 'height':
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 $properties = $this->getMediaTypeAPI()->getImageProperties($media, $size);
                 return $properties[$fieldDataAccessor->getFieldName()] ?? null;
             case 'srcSet':
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 return $this->getMediaTypeAPI()->getImageSrcSet($media, $size);
             case 'sizes':
+                $size = $this->obtainImageSizeFromParameters($fieldDataAccessor);
                 return $this->getMediaTypeAPI()->getImageSizes($media, $size);
             case 'title':
                 return $this->getMediaTypeAPI()->getTitle($media);
