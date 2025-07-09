@@ -96,7 +96,7 @@ fragment MediaItemData on Media {
   dateStr(format: "F j")
   description
   height
-  heights(sizes: ["medium", "large"])
+  heights(sizes: ["thumbnail", "medium", "large"])
   id
   mimeType
   # modifiedDate
@@ -104,11 +104,11 @@ fragment MediaItemData on Media {
   sizes
   slug
   src
-  srcs(sizes: ["medium", "large"])
+  srcs(sizes: ["thumbnail", "medium", "large"])
   srcSet
   title
   url
   urlPath
   width
-  widths(sizes: ["medium", "large"])
+  widths(sizes: ["thumbnail", "medium", "large"])
 }
