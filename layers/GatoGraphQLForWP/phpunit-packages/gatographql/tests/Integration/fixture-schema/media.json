@@ -14,9 +14,9 @@
                 "description": "",
                 "height": 190,
                 "heights": [
-                    null,
-                    null,
-                    null
+                    150,
+                    110,
+                    190
                 ],
                 "id": 1361,
                 "mimeType": "image\/webp",
@@ -34,9 +34,9 @@
                 "urlPath": "\/graphql-api-header\/",
                 "width": 520,
                 "widths": [
-                    null,
-                    null,
-                    null
+                    150,
+                    300,
+                    520
                 ]
             },
             {
@@ -52,9 +52,9 @@
                 "description": "",
                 "height": 500,
                 "heights": [
-                    null,
-                    null,
-                    null
+                    150,
+                    300,
+                    500
                 ],
                 "id": 1362,
                 "mimeType": "image\/webp",
@@ -72,9 +72,9 @@
                 "urlPath": "\/graphql-api-search-results\/",
                 "width": 500,
                 "widths": [
-                    null,
-                    null,
-                    null
+                    150,
+                    300,
+                    500
                 ]
             },
             {
@@ -93,9 +93,9 @@
                 "description": "",
                 "height": 1200,
                 "heights": [
-                    null,
-                    null,
-                    null
+                    150,
+                    225,
+                    563
                 ],
                 "id": 1380,
                 "mimeType": "image\/jpeg",
@@ -113,9 +113,9 @@
                 "urlPath": "\/single-post-with-a-lot-of-blocks\/funny-dog\/",
                 "width": 1600,
                 "widths": [
-                    null,
-                    null,
-                    null
+                    150,
+                    300,
+                    750
                 ]
             }
         ],
@@ -133,9 +133,9 @@
                 "description": "",
                 "height": 190,
                 "heights": [
-                    null,
-                    null,
-                    null
+                    150,
+                    110,
+                    190
                 ],
                 "id": 1361,
                 "mimeType": "image\/webp",
@@ -153,9 +153,9 @@
                 "urlPath": "\/graphql-api-header\/",
                 "width": 520,
                 "widths": [
-                    null,
-                    null,
-                    null
+                    150,
+                    300,
+                    520
                 ]
             },
             {
@@ -171,9 +171,9 @@
                 "description": "",
                 "height": 500,
                 "heights": [
-                    null,
-                    null,
-                    null
+                    150,
+                    300,
+                    500
                 ],
                 "id": 1362,
                 "mimeType": "image\/webp",
@@ -191,9 +191,9 @@
                 "urlPath": "\/graphql-api-search-results\/",
                 "width": 500,
                 "widths": [
-                    null,
-                    null,
-                    null
+                    150,
+                    300,
+                    500
                 ]
             },
             {
@@ -391,14 +391,14 @@
             "id": 1361,
             "title": "graphql-api-header",
             "heights": [
-                null,
-                null,
-                null
+                150,
+                110,
+                190
             ],
             "invertedHeights": [
-                null,
-                null,
-                null
+                190,
+                110,
+                150
             ],
             "srcs": [
                 "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-150x150.webp",
@@ -411,14 +411,14 @@
                 "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-150x150.webp"
             ],
             "widths": [
-                null,
-                null,
-                null
+                150,
+                300,
+                520
             ],
             "invertedWidths": [
-                null,
-                null,
-                null
+                520,
+                300,
+                150
             ]
         }
     }
