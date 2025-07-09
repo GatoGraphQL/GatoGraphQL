@@ -1,0 +1,18 @@
+{
+    "data": {
+        "loginUser": {
+            "userID": 1
+        },
+        "createCustomPost": {
+            "status": "SUCCESS",
+            "errors": null,
+            "customPost": {
+                "title": "Some post with a gmtDate",
+                "date": "2018-10-20T20:03:48+00:00"
+            }
+        },
+        "logoutUser": {
+            "userID": 1
+        }
+    }
+}
