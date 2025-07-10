@@ -384,6 +384,10 @@ class InputCoercingService extends AbstractBasicService implements InputCoercing
              * In that case, check if the inputValue is already the expected type,
              * and if so, return it as is.
              */
+            if ($inputTypeResolver->isAlreadyCoercedValue($inputValue)) {
+                return $inputValue;
+            }
+
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
