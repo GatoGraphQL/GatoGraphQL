@@ -108,4 +108,13 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         /** @var DateTimeInterface $scalarValue */
         return $scalarValue->format($this->getDateTimeFormat());
     }
+
+    /**
+     * Check if the input value is already coerced.
+     */
+    public function isAlreadyCoercedValue(
+        object $inputValue,
+    ): bool {
+        return $inputValue instanceof DateTimeInterface;
+    }
 }
