@@ -38,4 +38,11 @@ interface InputTypeResolverInterface extends TypeResolverInterface
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null;
+
+    /**
+     * Check if the input value is already coerced.
+     */
+    public function isAlreadyCoercedValue(
+        object $inputValue,
+    ): bool;
 }

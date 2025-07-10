@@ -699,4 +699,13 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
     }
+
+    /**
+     * Check if the input value is already coerced.
+     */
+    public function isAlreadyCoercedValue(
+        object $inputValue,
+    ): bool {
+        return false;
+    }
 }

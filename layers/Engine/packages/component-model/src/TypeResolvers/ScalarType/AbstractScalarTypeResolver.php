@@ -176,4 +176,13 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
             ),
         );
     }
+
+    /**
+     * Check if the input value is already coerced.
+     */
+    public function isAlreadyCoercedValue(
+        object $inputValue,
+    ): bool {
+        return false;
+    }
 }

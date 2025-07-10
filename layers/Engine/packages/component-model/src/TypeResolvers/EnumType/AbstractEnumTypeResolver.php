@@ -330,4 +330,13 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         );
         return $this->consolidatedEnumValueExtensionsCache[$enumValue];
     }
+
+    /**
+     * Check if the input value is already coerced.
+     */
+    public function isAlreadyCoercedValue(
+        object $inputValue,
+    ): bool {
+        return false;
+    }
 }
