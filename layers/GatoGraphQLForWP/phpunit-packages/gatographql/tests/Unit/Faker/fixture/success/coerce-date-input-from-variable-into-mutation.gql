@@ -1,0 +1,41 @@
+################################################
+# As `date` is a DateTime object, this test validates
+# that inputting the corresponding object into the mutation
+# is handled property
+################################################
+mutation CreateCustomPostWithDate(
+    $gmtDate: DateTime!
+) {
+  loginUser(by: {
+    credentials: {
+      usernameOrEmail: "admin",
+      password: "password"
+    }
+  }) {
+    userID
+  }
+
+  createCustomPost(input: {
+    customPostType: post,
+    title: "Some post with a gmtDate",
+    gmtDate: $gmtDate,
+    status: trash
+  })
+  {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    customPost {
+      title
+      date(gmt: true)
+    }
+  }
+
+  logoutUser {
+    userID
+  }
+}

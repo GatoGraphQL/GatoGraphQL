@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Response\OutputServiceInterface;
@@ -15,7 +16,6 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ValueResolutionPromiseInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 
@@ -349,6 +349,45 @@ class InputCoercingService extends AbstractBasicService implements InputCoercing
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
         if (is_object($inputValue) && !($inputValue instanceof stdClass)) {
+            /**
+             * Watch out! Here we can also receive an already-coerced value.
+             * That happens when the input contains a promise, and a
+             * custom scalar that resolves to an object.
+             *
+             * For instance:
+             *
+             *   query ExportData {
+             *     limit: _echo(value: 3)
+             *       @export(as: "limit")
+             *   }
+             *
+             *   query GetPosts($date: Date!)
+             *     @depends(on: "ExportData")
+             *   {
+             *     posts(
+             *       pagination: {
+             *         limit: $limit # This is a promise
+             *       }
+             *       filter: {
+             *         dateQuery: {
+             *           after: $date # This is a custom scalar that resolves to an object (DateTime)
+             *         }
+             *       }
+             *     ) {
+             *       id
+             *       title
+             *     }
+             *   }
+             *
+             * @see tests/Unit/Faker/fixture/success/coerce-date-input-from-variable.gql
+             *
+             * In that case, check if the inputValue is already the expected type,
+             * and if so, return it as is.
+             */
+            if ($inputTypeResolver->isAlreadyCoercedValue($inputValue)) {
+                return $inputValue;
+            }
+
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
