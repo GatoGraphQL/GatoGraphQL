@@ -22,6 +22,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Don't validate promises inside array of arrays (#3144)
+- Don't fail validation for already-coerced values on inputs containing both a dynamic variable and a custom scalar (#3150)
 
 ## 13.1.1 - 02/07/2025
 
