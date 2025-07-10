@@ -355,12 +355,12 @@ class InputCoercingService extends AbstractBasicService implements InputCoercing
              * custom scalar that resolves to an object.
              *
              * For instance:
-             * 
+             *
              *   query ExportData {
              *     limit: _echo(value: 3)
              *       @export(as: "limit")
              *   }
-             *   
+             *
              *   query GetPosts($date: Date!)
              *     @depends(on: "ExportData")
              *   {
@@ -380,7 +380,7 @@ class InputCoercingService extends AbstractBasicService implements InputCoercing
              *   }
              *
              * @see tests/Unit/Faker/fixture/success/coerce-date-input-from-variable.gql
-             * 
+             *
              * In that case, check if the inputValue is already the expected type,
              * and if so, return it as is.
              */
