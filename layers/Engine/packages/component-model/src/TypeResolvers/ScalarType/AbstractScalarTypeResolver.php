@@ -179,6 +179,8 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
 
     /**
      * Check if the input value is already coerced.
+     *
+     * @param object $inputValue the object value, of any type other than stdClass
      */
     public function isAlreadyCoercedValue(
         object $inputValue,

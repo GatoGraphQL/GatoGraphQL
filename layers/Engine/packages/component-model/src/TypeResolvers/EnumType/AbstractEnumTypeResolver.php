@@ -333,6 +333,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
 
     /**
      * Check if the input value is already coerced.
+     *
+     * @param object $inputValue the object value, of any type other than stdClass
      */
     public function isAlreadyCoercedValue(
         object $inputValue,
