@@ -14,7 +14,7 @@ interface TaxonomyTermTypeAPIInterface
      */
     public function getTermTaxonomyName(object $taxonomyTerm): string;
     public function taxonomyTermExists(int|string $id, ?string $taxonomy = null): bool;
-    public function getTaxonomyTermID(string $taxonomyTermSlug, ?string $taxonomy = null): string|int|null;
+    public function getTaxonomyTermIDBySlug(string $taxonomyTermSlug, ?string $taxonomy = null): string|int|null;
     public function getTaxonomyTermTaxonomy(int|string $taxonomyTermID): string|null;
     public function getTaxonomyTerm(int|string $taxonomyTermID, ?string $taxonomy = null): object|null;
     public function canUserEditTaxonomy(string|int $userID, string $taxonomyName): bool;
@@ -27,4 +27,29 @@ interface TaxonomyTermTypeAPIInterface
      */
     public function getCustomPostTypeTaxonomyNames(string $customPostType): array;
     public function isTaxonomyHierarchical(string $taxonomyName): ?bool;
+
+    /**
+     * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function getTaxonomyTerms(array $query, array $options = []): array;
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function getTaxonomyTermCount(array $query = [], array $options = []): int;
+    // @todo Re-add this method to interface
+    // /**
+    //  * @param array<string,mixed> $query
+    //  * @param array<string,mixed> $options
+    //  * @return array<string|int>|object[]
+    //  */
+    // public function getCustomPostTaxonomyTerms(string|int|object $customPostObjectOrID, array $query = [], array $options = []): array;
+    // @todo Re-add this method to interface
+    // /**
+    //  * @param array<string,mixed> $query
+    //  * @param array<string,mixed> $options
+    //  */
+    // public function getCustomPostTaxonomyTermCount(string|int|object $customPostObjectOrID, array $query = [], array $options = []): ?int;
 }

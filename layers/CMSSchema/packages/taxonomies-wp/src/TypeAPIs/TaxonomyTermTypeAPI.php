@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 use WP_Taxonomy;
-use WP_Term;
 
-use function get_term;
+use WP_Term;
 use function get_object_taxonomies;
 use function get_taxonomy;
+use function get_term;
 
-class TaxonomyTermTypeAPI extends AbstractBasicService implements TaxonomyTermTypeAPIInterface
+class TaxonomyTermTypeAPI extends AbstractTaxonomyOrTaxonomyTermTypeAPI/*AbstractBasicService*/ implements TaxonomyTermTypeAPIInterface
 {
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
@@ -29,7 +30,7 @@ class TaxonomyTermTypeAPI extends AbstractBasicService implements TaxonomyTermTy
         $taxonomyTermExists = term_exists($taxonomyTermIDOrSlug, $taxonomy ?? '');
         return $taxonomyTermExists !==  null;
     }
-    public function getTaxonomyTermID(string $taxonomyTermSlug, ?string $taxonomy = null): string|int|null
+    public function getTaxonomyTermIDBySlug(string $taxonomyTermSlug, ?string $taxonomy = null): string|int|null
     {
         /** @var array<string,string|int>|string|int|null */
         $taxonomyTerm = term_exists($taxonomyTermSlug, $taxonomy ?? '');
@@ -114,5 +115,70 @@ class TaxonomyTermTypeAPI extends AbstractBasicService implements TaxonomyTermTy
             return null;
         }
         return $taxonomy->hierarchical;
+    }
+    
+    
+    
+    
+    /**
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function getTaxonomyTermCount(array $query = [], array $options = []): int
+    {
+        /** @var int */
+        return $this->getTaxonomyCount($query, $options);
+    }
+
+    /**
+     * @return array<string|int>|object[]
+     * @param array<string,mixed> $query
+     * @param array<string,mixed> $options
+     */
+    public function getTaxonomyTerms(array $query, array $options = []): array
+    {
+        $query = $this->convertTaxonomyTermsQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return [];
+        }
+
+        $tags = get_tags($query);
+        if ($tags instanceof WP_Error) {
+            return [];
+        }
+        /** @var object[] */
+        return $tags;
+    }
+
+    // @todo Remove commented code!?
+    // /**
+    //  * @return array<string,mixed>
+    //  * @param array<string,mixed> $query
+    //  * @param array<string,mixed> $options
+    //  */
+    // protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
+    // {
+    //     /**
+    //      * Allow to set the taxonomy in advance via a fieldArg.
+    //      * Eg: { customPosts { tags(taxonomy: nav_menu) { id } }
+    //      */
+    //     // @todo Check if this is needed
+    //     // if (!isset($query['taxonomy'])) {
+    //     //     $query['taxonomy'] = $this->getTaxonomyTermTaxonomyNames();
+    //     // }
+    //     $query = parent::convertTaxonomyTermsQuery($query, $options);
+    //     return App::applyFilters(
+    //         self::HOOK_QUERY,
+    //         $query,
+    //         $options
+    //     );
+    // }
+
+    // @todo Check to remove this
+    protected function isHierarchical(): bool
+    {
+        return false;
     }
 }

@@ -5,3 +5,12 @@ services:
 
     PoPCMSSchema\Taxonomies\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\Taxonomies\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\Taxonomies\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\Taxonomies\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'

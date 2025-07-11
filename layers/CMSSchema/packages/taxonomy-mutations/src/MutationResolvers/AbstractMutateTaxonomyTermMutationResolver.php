@@ -324,7 +324,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
                         $taxonomyData['parent-id'] = null;
                     } else {
                         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
-                        $taxonomyData['parent-id'] = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyParentSlug, $taxonomyName);
+                        $taxonomyData['parent-id'] = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermIDBySlug($taxonomyParentSlug, $taxonomyName);
                     }
                 }
             }

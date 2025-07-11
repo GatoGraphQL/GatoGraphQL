@@ -7,14 +7,14 @@ namespace PoPCMSSchema\TaxonomyMetaWP\Hooks;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\MetaQueryWP\Helpers\MetaQueryHelpers;
-use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
+use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyOrTaxonomyTermTypeAPI;
 
 class QueryHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         App::addFilter(
-            AbstractTaxonomyTypeAPI::HOOK_QUERY,
+            AbstractTaxonomyOrTaxonomyTermTypeAPI::HOOK_QUERY,
             MetaQueryHelpers::convertMetaQuery(...)
         );
     }
