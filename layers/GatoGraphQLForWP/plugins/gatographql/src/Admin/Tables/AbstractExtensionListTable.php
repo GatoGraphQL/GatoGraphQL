@@ -41,6 +41,17 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      */
     public function prepare_items()
     {
+        /**
+         * Remove all hooks from all other plugins, to avoid conflicts.
+         *
+         * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/3151
+         */
+        \remove_all_filters('install_plugins_tabs');
+        \remove_all_filters('install_plugins_nonmenu_tabs');
+        \remove_all_filters('plugins_api');
+        \remove_all_filters('plugins_api_result');
+        \remove_all_filters('plugin_install_action_links');
+
         \add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...), PHP_INT_MAX);
         \add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...), PHP_INT_MAX);
         \add_filter('plugins_api', $this->overridePluginsAPI(...), PHP_INT_MAX);
