@@ -55,17 +55,17 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         remove_all_filters('plugins_api_result');
         remove_all_filters('plugin_install_action_links');
 
-        add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...), PHP_INT_MAX);
-        add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...), PHP_INT_MAX);
-        add_filter('plugins_api', $this->overridePluginsAPI(...), PHP_INT_MAX);
-        add_filter('plugins_api_result', $this->overridePluginsAPIResult(...), PHP_INT_MAX);
-        add_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), PHP_INT_MAX, 2);
+        add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
+        add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
+        add_filter('plugins_api', $this->overridePluginsAPI(...));
+        add_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
+        add_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), 10, 2);
         parent::prepare_items();
-        remove_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), PHP_INT_MAX);
-        remove_filter('plugins_api_result', $this->overridePluginsAPIResult(...), PHP_INT_MAX);
-        remove_filter('plugins_api', $this->overridePluginsAPI(...), PHP_INT_MAX);
-        remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...), PHP_INT_MAX);
-        remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...), PHP_INT_MAX);
+        remove_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), 10);
+        remove_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
+        remove_filter('plugins_api', $this->overridePluginsAPI(...));
+        remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
+        remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
     }
 
     /**
