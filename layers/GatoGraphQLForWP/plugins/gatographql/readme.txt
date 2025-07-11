@@ -230,6 +230,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Updated dependencies to latest version (#3145)
 * Fixed - Don't validate promises inside array of arrays (#3144)
 * Fixed - Don't fail validation for already-coerced values on inputs containing both a dynamic variable and a custom scalar (#3150)
+* Fixed exception in Extensions page (#3151)
 
 = 13.1.1 =
 * Handle empty response when LemonSqueezy service is down (#3139)

@@ -17,3 +17,4 @@
 
 - Don't validate promises inside array of arrays ([#3144](https://github.com/GatoGraphQL/GatoGraphQL/pull/3144))
 - Don't fail validation for already-coerced values on inputs containing both a dynamic variable and a custom scalar ([#3150](https://github.com/GatoGraphQL/GatoGraphQL/pull/3150))
+- Exception in Extensions page ([#3151](https://github.com/GatoGraphQL/GatoGraphQL/pull/3151))
