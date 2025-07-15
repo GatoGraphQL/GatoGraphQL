@@ -448,6 +448,64 @@ This query:
 }
 ```
 
+### `_arrayDeepFlatten`
+
+Extract all values from a mixed array containing single values, arrays, and objects, up to their deepest level, and return them as a flattened array.
+
+This field is similar to `_arrayFlatten`, but it handles mixed types and recursively flattens nested structures at any depth. It can process:
+
+- Single values (strings, numbers, booleans, null)
+- Arrays (recursively flattened)
+- Objects (converted to arrays and flattened)
+
+This query:
+
+```graphql
+{
+  _arrayDeepFlatten(array: [
+    "single string",
+    ["array", "of", "strings"],
+    {
+      key1: "value1",
+      key2: "value2"
+    },
+    42,
+    true,
+    null,
+    ["nested", ["deep", "array"]],
+    {
+      nested: {
+        inner: "value"
+      }
+    }
+  ])
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "_arrayDeepFlatten": [
+      "single string",
+      "array",
+      "of",
+      "strings",
+      "value1",
+      "value2",
+      42,
+      true,
+      null,
+      "nested",
+      "deep",
+      "array",
+      "value"
+    ]
+  }
+}
+```
+
 ### `_arrayFlatten`
 
 Flatten an array of arrays into an array.

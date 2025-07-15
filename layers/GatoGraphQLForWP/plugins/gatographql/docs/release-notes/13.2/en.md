@@ -7,6 +7,7 @@
 - Date parameter to `createMediaItem` mutation ([#3146](https://github.com/GatoGraphQL/GatoGraphQL/pull/3146))
 - Option to create media items from unsafe URLs ([#3149](https://github.com/GatoGraphQL/GatoGraphQL/pull/3149))
 - Fields `srcs`, `widths`, and `heights` (to fetch data for several `sizes`) to type `Media` ([#3149](https://github.com/GatoGraphQL/GatoGraphQL/pull/3149))
+- Documentation for new field `_arrayDeepFlatten` from the **Helper Function Collection** extension ([#3153](https://github.com/GatoGraphQL/GatoGraphQL/pull/3153))
 
 ## Improvements
 

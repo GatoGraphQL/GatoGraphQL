@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Date parameter to `createMediaItem` mutation (#3146)
 - Option to create media items from unsafe URLs (#3149)
 - Fields `srcs`, `widths`, and `heights` (to fetch data for several `sizes`) to type `Media` (#3149)
+- Documentation for new field `_arrayDeepFlatten` from the **Helper Function Collection** extension (#3153)
 
 ### Improvements
 
