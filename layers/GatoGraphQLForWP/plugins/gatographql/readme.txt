@@ -227,6 +227,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Date parameter to `createMediaItem` mutation (#3146)
 * Added - Option to create media items from unsafe URLs (#3149)
 * Added - Fields `srcs`, `widths`, and `heights` (to fetch data for several `sizes`) to type `Media` (#3149)
+* Added documentation for new field `_arrayDeepFlatten` from the **Helper Function Collection** extension (#3153)
 * Updated dependencies to latest version (#3145)
 * Fixed - Don't validate promises inside array of arrays (#3144)
 * Fixed - Don't fail validation for already-coerced values on inputs containing both a dynamic variable and a custom scalar (#3150)
