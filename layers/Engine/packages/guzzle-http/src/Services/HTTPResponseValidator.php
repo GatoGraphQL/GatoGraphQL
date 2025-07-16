@@ -28,7 +28,7 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
         if (!($statusCode >= 200 && $statusCode <= 203)) {
             throw new GuzzleHTTPInvalidResponseException(
                 sprintf(
-                    $this->__('Only status codes `200`, `201`, `202` and `203` are accepted, but the response has status code \'%s\'', 'guzzle-http'),
+                    $this->__('Response has status code \'%s\'', 'guzzle-http'),
                     $statusCode,
                 )
             );
