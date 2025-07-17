@@ -6,6 +6,7 @@ Add a directive `@strTranslate` to translate a field value using your selected s
 - <a href="https://www.anthropic.com/claude" target="_blank">Claude API</a>
 - <a href="https://www.deepseek.com/" target="_blank">DeepSeek API</a>
 - <a href="https://mistral.ai/" target="_blank">Mistral API</a>
+- <a href="https://openrouter.ai" target="_blank">OpenRouter</a>
 - <a href="https://www.deepl.com/en/products/api" target="_blank">DeepL API</a>
 - <a href="https://cloud.google.com/translate" target="_blank">Google Translate API</a>
 
@@ -21,6 +22,7 @@ Use directive `@strTranslate` to translate the field values in your GraphQL quer
 - `deepseek`
 - `google_translate`
 - `mistral`
+- `openrouter`
 
 For instance, this query translates the post's `title` and `excerpt` fields from English to French using the **DeepL API**:
 

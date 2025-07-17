@@ -119,6 +119,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
                 PremiumExtensionModuleResolver::DEEPSEEK_TRANSLATION,
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
                 PremiumExtensionModuleResolver::MISTRALAI_TRANSLATION,
+                PremiumExtensionModuleResolver::OPENROUTER_TRANSLATION,
                 PremiumExtensionModuleResolver::TRANSLATION,
             ],
             default => [],
