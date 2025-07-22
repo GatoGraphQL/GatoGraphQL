@@ -26,18 +26,17 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
          */
         $statusCode = $response->getStatusCode();
         if (!($statusCode >= 200 && $statusCode <= 203)) {
-            $errorMessage = sprintf(
-                $this->__('Response has status code \'%s\'', 'guzzle-http'),
-                $statusCode,
-            );
             $bodyResponse = $response->getBody()->__toString();
-            if (!empty($bodyResponse)) {
-                $errorMessage = sprintf(
-                    $this->__('%s. Response: %s', 'guzzle-http'),
-                    $errorMessage,
+            $errorMessage = !empty($bodyResponse)
+                ? sprintf(
+                    $this->__('Response with status code \'%s\': %s', 'guzzle-http'),
+                    $statusCode,
                     $bodyResponse,
+                )
+                : sprintf(
+                    $this->__('Response has status code \'%s\'', 'guzzle-http'),
+                    $statusCode,
                 );
-            }
             throw new GuzzleHTTPInvalidResponseException($errorMessage);
         }
     }
