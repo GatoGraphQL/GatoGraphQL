@@ -220,6 +220,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 13.3.0 =
+* Print body of failing requests in error logs (#3155)
+
 = 13.2.0 =
 * Added field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) (#3142)
 * Added `future` and `inherit` statuses to the `CustomPostStatus` enum (#3142)
