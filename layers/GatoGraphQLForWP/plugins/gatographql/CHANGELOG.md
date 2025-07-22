@@ -6,6 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 13.3.0 - DATE
 
+- Print body of failing requests in error logs (#3155)
+
 ## 13.2.0 - 21/07/2025
 
 ### Added
