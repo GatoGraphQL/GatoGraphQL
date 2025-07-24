@@ -237,7 +237,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
 
     /**
      * Allow to register a different form to
-     * Execute Action with Custom Settings
+     * Execute Action with custom Settings
      */
     protected function getOptionsFormNamePrefix(): string
     {
