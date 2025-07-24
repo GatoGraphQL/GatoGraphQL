@@ -39,4 +39,14 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
     * @return string[]
     */
     abstract protected function getPossibleTargets(): array;
+
+    /**
+     * Get the submit button label for a settings category
+     */
+    protected function getSubmitButtonLabel($settingsCategoryResolver, string $settingsCategory): string
+    {
+        return $this->getActionName();
+    }
+
+    abstract protected function getActionName(): string;
 }
