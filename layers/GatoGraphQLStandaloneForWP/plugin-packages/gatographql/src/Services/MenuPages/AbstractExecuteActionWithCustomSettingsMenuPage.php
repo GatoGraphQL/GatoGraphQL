@@ -48,6 +48,9 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $bulkActionOriginURL
         );
 
+        $sendbackURL = App::request('bulk_action_origin_sendback_url') ?? App::query('bulk_action_origin_sendback_url') ?? '';
+        $sendbackURL = rawurldecode($sendbackURL);
+
         ?>
         <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
             <?php echo $content; ?>
@@ -56,6 +59,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php wp_nonce_field( 'bulk-' . 'posts' ); ?>
             <input type="hidden" name="action" value="gatompl-translate-custom-impl" />
             <input type="hidden" name="action2" value="gatompl-translate-custom-impl" />
+            <input type="hidden" name="bulk_action_origin_sendback_url" value="<?php echo esc_attr($sendbackURL); ?>" />
         </form>
         <?php
     }
