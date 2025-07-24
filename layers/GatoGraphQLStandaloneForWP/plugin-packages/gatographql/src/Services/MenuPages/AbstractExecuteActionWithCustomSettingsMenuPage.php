@@ -41,7 +41,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         // Convert the custom bulk action URL to the standard bulk action URL
         $bulkActionOriginURL = GeneralUtils::addQueryArgs(
             [
-                '_wpnonce' => \wp_create_nonce('gatompl-translate'),
+                '_wpnonce' => \wp_create_nonce('bulk-posts'),
                 'action' => 'gatompl-translate',
                 'action2' => 'gatompl-translate',
             ],
@@ -49,7 +49,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         );
 
         ?>
-        <form method="post" action="<?php echo $bulkActionOriginURL; ?>">
+        <form method="post" action="<?php echo esc_url($bulkActionOriginURL); ?>">
             <?php echo $content; ?>
         </form>
         <?php
