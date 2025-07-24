@@ -72,6 +72,16 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
+     * Get all settings items
+     *
+     * @return array<array<string,mixed>>
+     */
+    final protected function getSettingsItems(): array
+    {
+        return $this->getSettingsNormalizer()->getAllSettingsItems();
+    }
+
+    /**
      * Initialize the class instance
      */
     public function initialize(): void
@@ -91,7 +101,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                  * then catch it and do nothing (i.e. don't let the app explode)
                  */
                 try {
-                    $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+                    $settingsItems = $this->getSettingsItems();
                     foreach ($settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers() as $settingsCategory => $settingsCategoryResolver) {
                         $categorySettingsItems = array_values(array_filter(
                             $settingsItems,
@@ -204,7 +214,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      */
     public function print(): void
     {
-        $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+        $settingsItems = $this->getSettingsItems();
         if (!$settingsItems) {
             esc_html_e('There are no items to be configured', 'gatographql');
             return;
