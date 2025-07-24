@@ -40,6 +40,26 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
 
         $queryParams = GeneralUtils::getURLQueryParams($bulkActionOriginURL);
         $bulkActionName = $queryParams['action'] ?? $queryParams['action2'] ?? '';
+        $bulkActionSelectedIdsString = App::request('bulk_action_selected_ids') ?? App::query('bulk_action_selected_ids') ?? '';
+        $bulkActionSelectedIds = empty($bulkActionSelectedIdsString)
+            ? []
+            : explode(',', $bulkActionSelectedIdsString);
+
+        $bulkActionSelectedIdsCount = count($bulkActionSelectedIds);
+        if ($bulkActionSelectedIdsCount === 0) {
+            printf(
+                '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+                __('No IDs were selected.', 'gato-ai-translations-for-polylang')
+            );
+        } else {
+            printf(
+                '<div class="updated notice is-dismissible"><p>%s</p></div>',
+                sprintf(
+                    __('The following IDs were selected: %s', 'gato-ai-translations-for-polylang'),
+                    implode(', ', $bulkActionSelectedIds)
+                )
+            );
+        }
 
         $bulkActionOriginURL = GeneralUtils::removeQueryArgs(
             [
