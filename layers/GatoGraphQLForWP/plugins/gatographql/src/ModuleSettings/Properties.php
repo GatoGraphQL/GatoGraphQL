@@ -6,10 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\ModuleSettings;
 
 class Properties
 {
-    /**
-     * Used to define additional Settings pages that the item can be printed on.
-     */
-    public final const TARGETS = 'targets';
     public final const NAME = 'name';
     public final const INPUT = 'input';
     public final const TITLE = 'title';
@@ -17,6 +13,8 @@ class Properties
     public final const POSSIBLE_VALUES = 'possibleValues';
     public final const CAN_BE_EMPTY = 'canBeEmpty';
     public final const DEFAULT_VALUE = 'defaultValue';
+    // Used to define additional Settings pages that the item can be printed on.
+    public final const ADDITIONAL_TARGETS = 'additionalTargets';
     // Used for Property Array
     public final const KEY_LABELS = 'keyLabels';
     // Used for Select inputs
