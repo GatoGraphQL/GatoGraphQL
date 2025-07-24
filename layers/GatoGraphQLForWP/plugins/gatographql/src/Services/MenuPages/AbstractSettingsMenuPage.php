@@ -76,7 +76,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      *
      * @return array<array<string,mixed>>
      */
-    final protected function getSettingsItems(): array
+    protected function getSettingsItems(): array
     {
         return $this->getSettingsNormalizer()->getAllSettingsItems();
     }
