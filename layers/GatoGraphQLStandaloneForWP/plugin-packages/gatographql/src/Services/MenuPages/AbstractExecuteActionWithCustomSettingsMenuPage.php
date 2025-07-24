@@ -7,6 +7,7 @@ namespace GatoGraphQLStandalone\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
+use PoP\ComponentModel\App;
 
 abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractSettingsMenuPage
 {
@@ -31,8 +32,26 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $content
         );
 
+        $bulkActionOriginURL = App::request('bulk_action_origin_url') ?? App::query('bulk_action_origin_url') ?? '';
+        if ($bulkActionOriginURL) {
+            $bulkActionOriginURL = rawurldecode($bulkActionOriginURL);
+        }
+
+        // Convert the custom bulk action URL to the standard bulk action URL
+        $bulkActionOriginURL = str_replace(
+            [
+                'action=gatompl-translate-custom',
+                'action2=gatompl-translate-custom',
+            ],
+            [
+                'action=gatompl-translate',
+                'action2=gatompl-translate',
+            ],
+            $bulkActionOriginURL,
+        );
+
         ?>
-        <form method="post" action="options.php">
+        <form method="post" action="<?php echo $bulkActionOriginURL; ?>">
             <?php echo $content; ?>
         </form>
         <?php
