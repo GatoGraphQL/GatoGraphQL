@@ -109,14 +109,6 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     }
 
     /**
-     * Any Settings item without defining this value will go to the Settings page.
-     */
-    protected function getSettingsItemFormName(): ?string
-    {
-        return null;
-    }
-
-    /**
      * Initialize the class instance
      */
     public function initialize(): void
