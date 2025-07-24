@@ -38,6 +38,9 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $bulkActionOriginURL = rawurldecode($bulkActionOriginURL);
         }
 
+        $queryParams = GeneralUtils::getURLQueryParams($bulkActionOriginURL);
+        $bulkActionName = $queryParams['action'] ?? $queryParams['action2'] ?? '';
+
         $bulkActionOriginURL = GeneralUtils::removeQueryArgs(
             [
                 '_wpnonce',
@@ -60,8 +63,8 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Print the nonce field at the end!!! */ ?>
             <?php /** Because the previous form has the nonce fields, so override them! */ ?>
             <?php wp_nonce_field( 'bulk-' . 'posts' ); ?>
-            <input type="hidden" name="action" value="gatompl-translate-custom-impl" />
-            <input type="hidden" name="action2" value="gatompl-translate-custom-impl" />
+            <input type="hidden" name="action" value="<?php echo esc_attr($bulkActionName . '-impl'); ?>" />
+            <input type="hidden" name="action2" value="<?php echo esc_attr($bulkActionName . '-impl'); ?>" />
             <input type="hidden" name="bulk_action_origin_sendback_url" value="<?php echo esc_attr($sendbackURL); ?>" />
         </form>
         <?php
