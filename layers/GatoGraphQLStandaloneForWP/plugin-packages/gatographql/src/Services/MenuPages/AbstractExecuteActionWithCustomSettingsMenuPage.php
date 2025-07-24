@@ -40,10 +40,11 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
 
         $bulkActionOriginURL = GeneralUtils::removeQueryArgs(
             [
-                'action',
-                'action2',
                 '_wpnonce',
                 '_wp_http_referer',
+                'action',
+                'action2',
+                'bulk_action_origin_sendback_url',
             ],
             $bulkActionOriginURL
         );
