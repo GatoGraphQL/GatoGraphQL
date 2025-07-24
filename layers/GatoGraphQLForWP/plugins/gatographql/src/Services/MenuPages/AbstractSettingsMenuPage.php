@@ -43,6 +43,11 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
 
     public final const FORM_ORIGIN = 'form-origin';
     public final const FORM_FIELD_LAST_SAVED_TIMESTAMP = 'last_saved_timestamp';
+
+    /**
+     * @var array<array<string,mixed>>
+     */
+    protected ?array $settingsItems = null;
     
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
@@ -78,7 +83,10 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function getSettingsItems(): array
     {
-        return $this->getSettingsNormalizer()->getAllSettingsItems();
+        if ($this->settingsItems === null) {
+            $this->settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+        }
+        return $this->settingsItems;
     }
 
     /**
