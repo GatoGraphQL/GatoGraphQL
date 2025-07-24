@@ -44,6 +44,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
                 '_wp_http_referer',
                 'action',
                 'action2',
+                'bulk_action_origin_url',
                 'bulk_action_origin_sendback_url',
             ],
             $bulkActionOriginURL
