@@ -10,7 +10,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
@@ -24,15 +23,10 @@ use function update_option;
  */
 class SettingsMenuPage extends AbstractSettingsMenuPage
 {
-    use UseTabpanelMenuPageTrait;
-    use UseDocsMenuPageTrait;
-    use UseCollapsibleContentMenuPageTrait;
-
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
     public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
 
     private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
-    private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
     private ?ContainerManagerInterface $containerManager = null;
