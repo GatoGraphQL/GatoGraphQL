@@ -11,6 +11,34 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
 abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractSettingsMenuPage
 {
     /**
+     * The upstream method will print several <form> tags,
+     * for the different settings categories.
+     * 
+     * Combine them all into a single <form> tag.
+     */
+    public function print(): void
+    {
+        ob_start();
+        parent::print();
+        $content = ob_get_clean();
+
+        $content = preg_replace(
+            [
+                '/<form[^>]*>/', // '<form method="post" action="options.php">'
+                '#</form>#',
+            ],
+            '',
+            $content
+        );
+
+        ?>
+        <form method="post" action="options.php">
+            <?php echo $content; ?>
+        </form>
+        <?php
+    }
+
+    /**
      * Get the settings items which have this target
      *
      * @return array<array<string,mixed>>
