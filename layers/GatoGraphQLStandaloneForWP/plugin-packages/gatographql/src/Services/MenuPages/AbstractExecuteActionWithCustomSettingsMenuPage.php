@@ -22,10 +22,10 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         foreach ($upstreamSettingsItems as $settingItem) {
             $settingItem['settings'] = array_values(array_filter(
                 $settingItem['settings'] ?? [],
-                fn (array $item) => in_array(
-                    $this->getTarget(),
+                fn (array $item) => array_intersect(
+                    $this->getPossibleTargets(),
                     $item[Properties::ADDITIONAL_TARGETS] ?? []
-                )
+                ) !== []
             ));
             if ($settingItem['settings'] === []) {
                 continue;
@@ -35,5 +35,8 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         return $settingsItems;
     }
 
-    abstract protected function getTarget(): string;
+    /**
+    * @return string[]
+    */
+    abstract protected function getPossibleTargets(): array;
 }
