@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractSettingsMenuPage
 {
@@ -38,16 +39,12 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         }
 
         // Convert the custom bulk action URL to the standard bulk action URL
-        $bulkActionOriginURL = str_replace(
+        $bulkActionOriginURL = GeneralUtils::addQueryArgs(
             [
-                'action=gatompl-translate-custom',
-                'action2=gatompl-translate-custom',
+                'action' => 'gatompl-translate',
+                'action2' => 'gatompl-translate',
             ],
-            [
-                'action=gatompl-translate',
-                'action2=gatompl-translate',
-            ],
-            $bulkActionOriginURL,
+            $bulkActionOriginURL
         );
 
         ?>
