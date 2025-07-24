@@ -102,6 +102,11 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
         return __('Settings', 'gatographql');
     }
 
+    protected function getOptionsFormNamePrefix(): string
+    {
+        return '';
+    }
+
     /**
      * Initialize the class instance
      */

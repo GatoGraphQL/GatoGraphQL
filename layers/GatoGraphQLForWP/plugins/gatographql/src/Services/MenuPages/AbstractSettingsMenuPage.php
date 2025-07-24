@@ -116,7 +116,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                             /** @param array<string,mixed> $item */
                             fn (array $item) => $item['settings-category'] === $settingsCategory
                         ));
-                        $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                        $optionsFormName = $this->getOptionsFormName($settingsCategoryResolver, $settingsCategory);
                         foreach ($categorySettingsItems as $item) {
                             $optionsFormModuleSectionName = $this->getOptionsFormModuleSectionName($optionsFormName, $item['id']);
                             $module = $item['module'];
@@ -215,6 +215,24 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         return $optionsFormName . '-' . $moduleID;
     }
 
+    /**
+     * Get the options form name for a settings category
+     */
+    protected function getOptionsFormName($settingsCategoryResolver, string $settingsCategory): string
+    {
+        $prefix = $this->getOptionsFormNamePrefix();
+        return (empty($prefix) ? '' : $prefix . '-') . $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+    }
+
+    /**
+     * Allow to register a different form to
+     * Execute Action with Custom Settings
+     */
+    protected function getOptionsFormNamePrefix(): string
+    {
+        return $this->getMenuPageSlug();
+    }
+
     abstract protected function printModuleSettingsWithTabs(): bool;
 
     /**
@@ -311,7 +329,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                         <?php
                         foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
-                            $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                            $optionsFormName = $this->getOptionsFormName($settingsCategoryResolver, $settingsCategory);
                             $sectionStyle = sprintf(
                                 'display: %s;',
                                 $settingsCategoryID === $activeCategoryID ? 'block' : 'none'
