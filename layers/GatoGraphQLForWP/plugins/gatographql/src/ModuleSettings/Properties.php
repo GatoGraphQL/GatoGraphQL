@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleSettings;
 
 class Properties
 {
+    public final const FORM_NAME = 'formName';
     public final const NAME = 'name';
     public final const INPUT = 'input';
     public final const TITLE = 'title';

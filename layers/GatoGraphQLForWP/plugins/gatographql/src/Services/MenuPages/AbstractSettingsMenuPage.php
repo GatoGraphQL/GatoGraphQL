@@ -79,8 +79,11 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     final protected function getSettingsItems(): array
     {
         $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
-        return $settingsItems;
+        $formName = $this->getSettingsItemFormName();
+        return array_filter($settingsItems, fn (array $item) => ($item['settings'][Properties::FORM_NAME] ?? null) === $formName);
     }
+
+    abstract protected function getSettingsItemFormName(): ?string;
 
     /**
      * Initialize the class instance
