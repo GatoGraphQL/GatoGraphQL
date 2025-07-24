@@ -7,7 +7,6 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
@@ -26,21 +25,11 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
     public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
 
-    private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
     private ?ContainerManagerInterface $containerManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
-    final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
-    {
-        if ($this->PluginGeneralSettingsFunctionalityModuleResolver === null) {
-            /** @var PluginGeneralSettingsFunctionalityModuleResolver */
-            $PluginGeneralSettingsFunctionalityModuleResolver = $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
-            $this->PluginGeneralSettingsFunctionalityModuleResolver = $PluginGeneralSettingsFunctionalityModuleResolver;
-        }
-        return $this->PluginGeneralSettingsFunctionalityModuleResolver;
-    }
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
         if ($this->moduleRegistry === null) {
@@ -314,21 +303,5 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
             $regenerateContainer = true;
         }
         $this->getContainerManager()->flushContainer(true, $regenerateContainer);
-    }
-
-    /**
-     * The user can define this behavior through the Settings.
-     *
-     * - If `true`, print the module sections using tabs
-     * - If `false`, print the module sections one below the other
-     *
-     * The outer sections, i.e. settings category, always uses tabs
-     */
-    protected function printModuleSettingsWithTabs(): bool
-    {
-        return $this->getUserSettingsManager()->getSetting(
-            PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-            PluginGeneralSettingsFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
-        );
     }
 }

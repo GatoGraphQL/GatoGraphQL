@@ -8,6 +8,7 @@ use Exception;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
@@ -52,6 +53,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
+    private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
 
     final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
@@ -74,6 +76,15 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             $this->settingsCategoryRegistry = $settingsCategoryRegistry;
         }
         return $this->settingsCategoryRegistry;
+    }
+    final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
+    {
+        if ($this->PluginGeneralSettingsFunctionalityModuleResolver === null) {
+            /** @var PluginGeneralSettingsFunctionalityModuleResolver */
+            $PluginGeneralSettingsFunctionalityModuleResolver = $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
+            $this->PluginGeneralSettingsFunctionalityModuleResolver = $PluginGeneralSettingsFunctionalityModuleResolver;
+        }
+        return $this->PluginGeneralSettingsFunctionalityModuleResolver;
     }
 
     /**
@@ -233,7 +244,21 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         return $this->getMenuPageSlug();
     }
 
-    abstract protected function printModuleSettingsWithTabs(): bool;
+    /**
+     * The user can define this behavior through the Settings.
+     *
+     * - If `true`, print the module sections using tabs
+     * - If `false`, print the module sections one below the other
+     *
+     * The outer sections, i.e. settings category, always uses tabs
+     */
+    protected function printModuleSettingsWithTabs(): bool
+    {
+        return $this->getUserSettingsManager()->getSetting(
+            PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+            PluginGeneralSettingsFunctionalityModuleResolver::OPTION_PRINT_SETTINGS_WITH_TABS
+        );
+    }
 
     /**
      * Print the settings form
