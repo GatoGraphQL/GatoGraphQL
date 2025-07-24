@@ -22,10 +22,10 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         parent::print();
         $content = ob_get_clean();
 
-        $content = preg_replace(
+        $content = str_replace(
             [
-                '/<form[^>]*>/', // '<form method="post" action="options.php">'
-                '#</form>#',
+                '<form method="post" action="options.php">',
+                '</form>',
             ],
             '',
             $content
