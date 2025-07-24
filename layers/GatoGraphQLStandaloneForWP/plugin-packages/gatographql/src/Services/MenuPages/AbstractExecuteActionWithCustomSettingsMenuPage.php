@@ -38,19 +38,24 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $bulkActionOriginURL = rawurldecode($bulkActionOriginURL);
         }
 
-        // Convert the custom bulk action URL to the standard bulk action URL
-        $bulkActionOriginURL = GeneralUtils::addQueryArgs(
+        $bulkActionOriginURL = GeneralUtils::removeQueryArgs(
             [
-                '_wpnonce' => \wp_create_nonce('bulk-posts'),
-                'action' => 'gatompl-translate',
-                'action2' => 'gatompl-translate',
+                'action',
+                'action2',
+                '_wpnonce',
+                '_wp_http_referer',
             ],
             $bulkActionOriginURL
         );
 
         ?>
-        <form method="post" action="<?php echo esc_url($bulkActionOriginURL); ?>">
+        <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
             <?php echo $content; ?>
+            <?php /** Print the nonce field at the end!!! */ ?>
+            <?php /** Because the previous form has the nonce fields, so override them! */ ?>
+            <?php wp_nonce_field( 'bulk-' . 'posts' ); ?>
+            <input type="hidden" name="action" value="gatompl-translate" />
+            <input type="hidden" name="action2" value="gatompl-translate" />
         </form>
         <?php
     }
