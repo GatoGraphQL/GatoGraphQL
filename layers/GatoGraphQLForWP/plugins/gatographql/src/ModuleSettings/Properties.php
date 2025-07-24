@@ -6,7 +6,10 @@ namespace GatoGraphQL\GatoGraphQL\ModuleSettings;
 
 class Properties
 {
-    public final const FORM_NAME = 'formName';
+    /**
+     * Used to define additional Settings pages that the item can be printed on.
+     */
+    public final const TARGETS = 'targets';
     public final const NAME = 'name';
     public final const INPUT = 'input';
     public final const TITLE = 'title';
