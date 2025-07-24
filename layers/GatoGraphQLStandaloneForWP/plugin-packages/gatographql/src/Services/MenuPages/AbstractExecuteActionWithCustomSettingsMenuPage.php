@@ -53,7 +53,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             );
         } else {
             printf(
-                '<div class="updated notice is-dismissible"><p>%s</p></div>',
+                '<div class="notice notice-info is-dismissible"><p>%s</p></div>',
                 sprintf(
                     __('The following IDs were selected: <strong>%s</strong>', 'gato-ai-translations-for-polylang'),
                     implode('</strong>, <strong>', $bulkActionSelectedIds)
