@@ -485,11 +485,20 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
 
     protected function getPageTitle(): string
     {
-        return sprintf(
-            __('%s — %s', 'gatographql'),
-            PluginApp::getMainPlugin()->getPluginName(),
-            $this->getMenuPageTitle()
-        );
+        $pageTitle = $this->getMenuPageTitle();
+        if ($this->addPluginNameToPageTitle()) {
+            $pageTitle = sprintf(
+                __('%s — %s', 'gatographql'),
+                PluginApp::getMainPlugin()->getPluginName(),
+                $pageTitle
+            );
+        }
+        return $pageTitle;
+    }
+
+    protected function addPluginNameToPageTitle(): bool
+    {
+        return false;
     }
 
     /**

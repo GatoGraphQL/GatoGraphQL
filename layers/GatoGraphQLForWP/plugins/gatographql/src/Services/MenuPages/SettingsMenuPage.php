@@ -304,4 +304,9 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
         }
         $this->getContainerManager()->flushContainer(true, $regenerateContainer);
     }
+
+    protected function addPluginNameToPageTitle(): bool
+    {
+        return true;
+    }
 }
