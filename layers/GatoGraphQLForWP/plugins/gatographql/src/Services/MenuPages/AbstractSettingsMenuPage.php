@@ -460,10 +460,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                     }
                                                     if ($settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory)) {
                                                         submit_button(
-                                                            sprintf(
-                                                                __('Save All Changes (\'%s\' tab)', 'gatographql'),
-                                                                $settingsCategoryResolver->getName($settingsCategory)
-                                                            )
+                                                            $this->getSubmitButtonLabel($settingsCategoryResolver, $settingsCategory)
                                                         );
                                                     }
                                                     ?>
@@ -826,5 +823,16 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 <?php echo $label_safe; ?>
             </label>
         <?php
+    }
+
+    /**
+     * Get the submit button label for a settings category
+     */
+    protected function getSubmitButtonLabel($settingsCategoryResolver, string $settingsCategory): string
+    {
+        return sprintf(
+            __('Save All Changes (\'%s\' tab)', 'gatographql'),
+            $settingsCategoryResolver->getName($settingsCategory)
+        );
     }
 }
