@@ -54,8 +54,8 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Print the nonce field at the end!!! */ ?>
             <?php /** Because the previous form has the nonce fields, so override them! */ ?>
             <?php wp_nonce_field( 'bulk-' . 'posts' ); ?>
-            <input type="hidden" name="action" value="gatompl-translate" />
-            <input type="hidden" name="action2" value="gatompl-translate" />
+            <input type="hidden" name="action" value="gatompl-translate-custom-impl" />
+            <input type="hidden" name="action2" value="gatompl-translate-custom-impl" />
         </form>
         <?php
     }
