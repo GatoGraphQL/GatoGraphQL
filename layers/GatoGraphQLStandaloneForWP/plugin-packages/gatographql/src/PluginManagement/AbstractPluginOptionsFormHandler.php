@@ -107,9 +107,4 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
      * @return string[]
      */
     abstract protected function getExecuteActionWithCustomSettingsBulkActions(): array;
-
-    /**
-     * @return string[]
-     */
-    abstract protected function getExecuteActionWithCustomSettingsFormTargets(): array;
 }
