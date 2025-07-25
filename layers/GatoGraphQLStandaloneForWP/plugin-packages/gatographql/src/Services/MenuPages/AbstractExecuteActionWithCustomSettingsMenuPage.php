@@ -39,7 +39,6 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         }
 
         $queryParams = GeneralUtils::getURLQueryParams($bulkActionOriginURL);
-        $bulkActionName = $queryParams['action'] ?? $queryParams['action2'] ?? '';
         $bulkActionSelectedIdsString = App::request('bulk_action_selected_ids') ?? App::query('bulk_action_selected_ids') ?? '';
         $bulkActionSelectedIds = empty($bulkActionSelectedIdsString)
             ? []
@@ -80,13 +79,19 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         ?>
         <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
             <?php echo $content; ?>
+            
             <?php /** Print the nonce field at the end!!! */ ?>
             <?php /** Because the previous form has the nonce fields, so override them! */ ?>
-            <?php wp_nonce_field( 'bulk-' . 'posts' ); ?>
-            <input type="hidden" name="action" value="<?php echo esc_attr($bulkActionName); ?>" />
-            <input type="hidden" name="action2" value="<?php echo esc_attr($bulkActionName); ?>" />
-            <input type="hidden" name="bulk_action_origin_sendback_url" value="<?php echo esc_attr($sendbackURL); ?>" />
+            <input type="hidden" name="_wpnonce" value="<?php echo esc_attr($queryParams['_wpnonce'] ?? ''); ?>" />
+            <input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr($queryParams['_wp_http_referer'] ?? ''); ?>" />
+            
+            <?php /** Point to the same bulk action, but adding "execute_action" to the query params */ ?>
+            <input type="hidden" name="action" value="<?php echo esc_attr($queryParams['action'] ?? ''); ?>" />
+            <input type="hidden" name="action2" value="<?php echo esc_attr($queryParams['action2'] ?? ''); ?>" />
             <input type="hidden" name="execute_action" value="1" />
+
+            <?php /** Add the original sendback URL */ ?>
+            <input type="hidden" name="bulk_action_origin_sendback_url" value="<?php echo esc_attr($sendbackURL); ?>" />
             </form>
         <?php
     }
