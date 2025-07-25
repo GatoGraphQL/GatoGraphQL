@@ -7,7 +7,7 @@ namespace GatoGraphQLStandalone\GatoGraphQL\PluginManagement;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler as UpstreamPluginOptionsFormHandler;
 use PoP\ComponentModel\App;
 
-class PluginOptionsFormHandler extends UpstreamPluginOptionsFormHandler
+abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFormHandler
 {
     /**
      * Also override the value from the form when doing
@@ -26,6 +26,11 @@ class PluginOptionsFormHandler extends UpstreamPluginOptionsFormHandler
         }
 
         // Check we are executing the bulk action with the custom settings
+        $bulkAction = App::request('action') ?? App::query('action') ?? App::request('action2') ?? App::query('action2');
+        if (!in_array($bulkAction, $this->getSupportedBulkActionWithCustomSettingsNames())) {
+            return parent::maybeOverrideValueFromForm($value, $module, $option);
+        }
+
         $executeAction = App::request('execute_action') ?? App::query('execute_action', false);
         if (!$executeAction) {
             return parent::maybeOverrideValueFromForm($value, $module, $option);
@@ -45,4 +50,9 @@ class PluginOptionsFormHandler extends UpstreamPluginOptionsFormHandler
             'edit-tags.php', // Taxonomies
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    abstract protected function getSupportedBulkActionWithCustomSettingsNames(): array;
 }
