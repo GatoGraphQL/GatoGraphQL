@@ -15,7 +15,6 @@ use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
-use PoP\ComponentModel\Constants\FrameworkParams;
 
 use function __;
 use function add_action;
@@ -427,10 +426,10 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                         @see wp-includes/option.php
                                                     -->
                                                     <input type="hidden" name="<?php echo esc_attr($optionsFormName)?>[<?php echo esc_attr(self::FORM_FIELD_LAST_SAVED_TIMESTAMP) ?>]" value="<?php echo esc_attr((string)$time) ?>">
-                                                    <?php if (RequestHelpers::isRequestingXDebug()) : ?>
-                                                        <input type="hidden" name="<?php echo esc_attr(FrameworkParams::XDEBUG_TRIGGER) ?>" value="1">
-                                                        <input type="hidden" name="<?php echo esc_attr(FrameworkParams::XDEBUG_SESSION_STOP) ?>" value="1">
-                                                    <?php endif; ?>
+                                                    
+                                                    <?php /** Support for XDebug */ ?>
+                                                    <?php RequestHelpers::maybePrintXDebugInputsInForm() ?>
+                                                    
                                                     <!-- Panels -->
                                                     <?php
                                                     $sectionClass = $printModuleSettingsWithTabs ? 'tab-content' : '';
