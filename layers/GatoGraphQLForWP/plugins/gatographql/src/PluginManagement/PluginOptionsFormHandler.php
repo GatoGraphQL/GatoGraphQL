@@ -97,14 +97,14 @@ class PluginOptionsFormHandler
             return $value;
         }
 
-        if (!$this->checkIsExpectedSubmittedForm($module)) {
+        if (!$this->checkIsExpectedSubmittedForm($module, $option)) {
             return $value;
         }
 
         return $this->doOverrideValueFromForm($value, $module, $option);
     }
 
-    protected function checkIsExpectedSubmittedForm(string $module): bool
+    protected function checkIsExpectedSubmittedForm(string $module, string $option): bool
     {
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
         return $formOrigin === $this->getSettingsCategoryOptionsFormName($module);

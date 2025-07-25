@@ -40,6 +40,11 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }
 
+        return $this->doOverrideValueFromForm($value, $module, $option);
+    }
+
+    protected function checkIsExpectedSubmittedForm(string $module, string $option): bool
+    {
         // Check this option is added to the target form
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
@@ -49,21 +54,16 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
             fn (array $setting) => $setting[Properties::INPUT] === $option
         ))[0] ?? null;
         if ($setting === null) {
-            return parent::maybeOverrideValueFromForm($value, $module, $option);
+            return false;
         }
 
         $additionalTargets = $setting[Properties::ADDITIONAL_TARGETS] ?? [];
-        if (!in_array($additionalTargets, $this->getExecuteActionWithCustomSettingsBulkActions())) {
-            return parent::maybeOverrideValueFromForm($value, $module, $option);
+        if ($additionalTargets === []) {
+            return false;
         }
 
-        return $this->doOverrideValueFromForm($value, $module, $option);
-    }
-
-    protected function checkIsExpectedSubmittedForm(string $module): bool
-    {
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-        return $formOrigin === FormOrigins::EXECUTE_ACTION_WITH_CUSTOM_SETTINGS;
+        return in_array($formOrigin, $additionalTargets);
     }
 
     /**
@@ -107,4 +107,9 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
      * @return string[]
      */
     abstract protected function getExecuteActionWithCustomSettingsBulkActions(): array;
+
+    /**
+     * @return string[]
+     */
+    abstract protected function getExecuteActionWithCustomSettingsFormTargets(): array;
 }

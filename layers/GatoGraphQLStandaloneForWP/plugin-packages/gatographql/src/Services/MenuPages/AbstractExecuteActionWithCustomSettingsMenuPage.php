@@ -85,7 +85,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Because the previous form has these same fields, override them! */ ?>
 
             <?php /** Because fields belong to different forms, unify them under a new origin */ ?>
-            <input type="hidden" name="<?php echo esc_attr(self::FORM_ORIGIN) ?>" value="<?php echo esc_attr(FormOrigins::EXECUTE_ACTION_WITH_CUSTOM_SETTINGS) ?>" />
+            <input type="hidden" name="<?php echo esc_attr(self::FORM_ORIGIN) ?>" value="<?php echo esc_attr($this->getFormOrigin()) ?>" />
             
             <?php /** Use the same nonce fields as the previous form */ ?>
             <input type="hidden" name="_wpnonce" value="<?php echo esc_attr($queryParams['_wpnonce'] ?? ''); ?>" />
@@ -133,7 +133,17 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
     /**
     * @return string[]
     */
-    abstract protected function getPossibleTargets(): array;
+    protected function getPossibleTargets(): array
+    {
+        return [
+            $this->getFormOrigin(),
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function getFormOrigin(): string;
 
     /**
      * Get the submit button label for a settings category
