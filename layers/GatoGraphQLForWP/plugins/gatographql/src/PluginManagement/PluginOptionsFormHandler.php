@@ -106,14 +106,19 @@ class PluginOptionsFormHandler
 
     protected function checkSubmittedFormCorrespondsToSettingsCategory(string $module): bool
     {
+        $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
+        return $formOrigin === $this->getSettingsCategoryOptionsFormName($module);
+    }
+
+    protected function getSettingsCategoryOptionsFormName(string $module): string
+    {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
 
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $settingsCategory = $moduleResolver->getSettingsCategory($module);
         
-        $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-        return $formOrigin === $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory);
+        return $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory);
     }
     
     protected function doOverrideValueFromForm(
