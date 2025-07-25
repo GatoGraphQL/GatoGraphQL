@@ -107,8 +107,10 @@ class PluginOptionsFormHandler
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
+
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $settingsCategory = $moduleResolver->getSettingsCategory($module);
+        
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
         return $formOrigin === $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory);
     }
