@@ -83,10 +83,11 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Print the nonce field at the end!!! */ ?>
             <?php /** Because the previous form has the nonce fields, so override them! */ ?>
             <?php wp_nonce_field( 'bulk-' . 'posts' ); ?>
-            <input type="hidden" name="action" value="<?php echo esc_attr($bulkActionName . '-impl'); ?>" />
-            <input type="hidden" name="action2" value="<?php echo esc_attr($bulkActionName . '-impl'); ?>" />
+            <input type="hidden" name="action" value="<?php echo esc_attr($bulkActionName); ?>" />
+            <input type="hidden" name="action2" value="<?php echo esc_attr($bulkActionName); ?>" />
             <input type="hidden" name="bulk_action_origin_sendback_url" value="<?php echo esc_attr($sendbackURL); ?>" />
-        </form>
+            <input type="hidden" name="execute_action" value="1" />
+            </form>
         <?php
     }
 
