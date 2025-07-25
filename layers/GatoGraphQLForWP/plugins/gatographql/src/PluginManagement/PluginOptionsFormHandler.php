@@ -99,9 +99,8 @@ class PluginOptionsFormHandler
         return $this->doOverrideValueFromForm($value, $module, $option);
     }
 
-    protected function checkSubmittedFormCorrespondsToSettingsCategory(
-        string $module,
-    ): bool {
+    protected function checkSubmittedFormCorrespondsToSettingsCategory(string $module): bool
+    {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
