@@ -44,11 +44,36 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
      */
     protected function getSupportedBulkActionPages(): array
     {
-        return [
-            'edit.php', // Posts
-            'upload.php', // Media
-            'edit-tags.php', // Taxonomies
-        ];
+        $pages = [];
+        
+        if ($this->supportBulkActionsOnCustomPosts()) {
+            $pages[] = 'edit.php'; // Posts
+        }
+        
+        if ($this->supportBulkActionsOnMedia()) {
+            $pages[] = 'upload.php'; // Media
+        }
+        
+        if ($this->supportBulkActionsOnTaxonomies()) {
+            $pages[] = 'edit-tags.php'; // Taxonomies
+        }
+        
+        return $pages;
+    }
+
+    protected function supportBulkActionsOnCustomPosts(): bool
+    {
+        return true;
+    }
+
+    protected function supportBulkActionsOnMedia(): bool
+    {
+        return true;
+    }
+
+    protected function supportBulkActionsOnTaxonomies(): bool
+    {
+        return true;
     }
 
     /**
