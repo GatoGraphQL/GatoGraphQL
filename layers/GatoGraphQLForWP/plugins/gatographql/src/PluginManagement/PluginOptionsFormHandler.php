@@ -99,24 +99,35 @@ class PluginOptionsFormHandler
         return $this->doOverrideValueFromForm($value, $module, $option);
     }
 
-    protected function doOverrideValueFromForm(
-        mixed $value,
+    protected function checkSubmittedFormCorrespondsToSettingsCategory(
         string $module,
-        string $option,
-    ): mixed {
+    ): bool {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $settingsCategory = $moduleResolver->getSettingsCategory($module);
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-        if ($formOrigin !== $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory)) {
+        return $formOrigin === $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory);
+    }
+    
+    protected function doOverrideValueFromForm(
+        mixed $value,
+        string $module,
+        string $option,
+    ): mixed {
+        if (!$this->checkSubmittedFormCorrespondsToSettingsCategory($module)) {
             return $value;
         }
+
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $settingsCategory = $moduleResolver->getSettingsCategory($module);
 
         $value = $this->getNormalizedModuleOptionValues(
             $settingsCategory,
             $module,
         );
+
         // Return the specific value to this module/option
         $optionName = $moduleResolver->getSettingOptionName($module, $option);
         return $value[$optionName];
