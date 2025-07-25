@@ -20,14 +20,22 @@ class PluginOptionsFormHandler extends UpstreamPluginOptionsFormHandler
         string $option,
     ): mixed {
         global $pagenow;
-        if (!in_array($pagenow, [
-            'edit.php', // Posts
-            'upload.php', // Media
-            'edit-tags.php', // Taxonomies
-        ])) {
+        if (!in_array($pagenow, $this->getSupportedBulkActionPages())) {
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }
 
         return $this->doOverrideValueFromForm($value, $module, $option);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getSupportedBulkActionPages(): array
+    {
+        return [
+            'edit.php', // Posts
+            'upload.php', // Media
+            'edit-tags.php', // Taxonomies
+        ];
     }
 }
