@@ -73,7 +73,8 @@ class PluginOptionsFormHandler
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
         $settingsCategoryResolver = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory);
         $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
-        return App::getRequest()->request->all()[$optionsFormName] ?? [];
+        $submittedFormOptionValues = App::getRequest()->request->all();
+        return $submittedFormOptionValues[$optionsFormName] ?? [];
     }
 
     /**
