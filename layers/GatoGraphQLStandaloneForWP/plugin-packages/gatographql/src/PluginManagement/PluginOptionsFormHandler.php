@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQLStandalone\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler as UpstreamPluginOptionsFormHandler;
+use PoP\ComponentModel\App;
 
 class PluginOptionsFormHandler extends UpstreamPluginOptionsFormHandler
 {
@@ -21,6 +22,12 @@ class PluginOptionsFormHandler extends UpstreamPluginOptionsFormHandler
     ): mixed {
         global $pagenow;
         if (!in_array($pagenow, $this->getSupportedBulkActionPages())) {
+            return parent::maybeOverrideValueFromForm($value, $module, $option);
+        }
+
+        // Check we are executing the bulk action with the custom settings
+        $executeAction = App::request('execute_action') ?? App::query('execute_action', false);
+        if (!$executeAction) {
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }
 
