@@ -8,6 +8,8 @@ use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Configuration\RequestHelpers;
+use PoP\ComponentModel\Constants\FrameworkParams;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractSettingsMenuPage
@@ -92,6 +94,11 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
 
             <?php /** Add the original sendback URL */ ?>
             <input type="hidden" name="bulk_action_origin_sendback_url" value="<?php echo esc_attr($sendbackURL); ?>" />
+            
+            <?php if (RequestHelpers::isRequestingXDebug()) : ?>
+                <input type="hidden" name="<?php echo esc_attr(FrameworkParams::XDEBUG_TRIGGER) ?>" value="1">
+                <input type="hidden" name="<?php echo esc_attr(FrameworkParams::XDEBUG_SESSION_STOP) ?>" value="1">
+            <?php endif; ?>
             </form>
         <?php
     }
