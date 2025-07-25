@@ -96,6 +96,14 @@ class PluginOptionsFormHandler
             return $value;
         }
 
+        return $this->doOverrideValueFromForm($value, $module, $option);
+    }
+
+    protected function doOverrideValueFromForm(
+        mixed $value,
+        string $module,
+        string $option,
+    ): mixed {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
