@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQLStandalone\GatoGraphQL\PluginManagement;
 
+use GatoGraphQLStandalone\GatoGraphQL\Constants\FormOrigins;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler as UpstreamPluginOptionsFormHandler;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use PoP\ComponentModel\App;
 
 abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFormHandler
@@ -37,6 +39,12 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
         }
 
         return $this->doOverrideValueFromForm($value, $module, $option);
+    }
+
+    protected function checkIsExpectedSubmittedForm(string $module): bool
+    {
+        $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
+        return $formOrigin === FormOrigins::EXECUTE_ACTION_WITH_CUSTOM_SETTINGS;
     }
 
     /**

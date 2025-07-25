@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GatoGraphQLStandalone\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
-
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
+use GatoGraphQLStandalone\GatoGraphQL\Constants\FormOrigins;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -80,9 +80,14 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         ?>
         <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
             <?php echo $content; ?>
+
+            <?php /** Print all these inputs below at the end!!! */ ?>
+            <?php /** Because the previous form has these same fields, override them! */ ?>
+
+            <?php /** Because fields belong to different forms, unify them under a new origin */ ?>
+            <input type="hidden" name="<?php echo esc_attr(self::FORM_ORIGIN) ?>" value="<?php echo esc_attr(FormOrigins::EXECUTE_ACTION_WITH_CUSTOM_SETTINGS) ?>" />
             
-            <?php /** Print the nonce field at the end!!! */ ?>
-            <?php /** Because the previous form has the nonce fields, so override them! */ ?>
+            <?php /** Use the same nonce fields as the previous form */ ?>
             <input type="hidden" name="_wpnonce" value="<?php echo esc_attr($queryParams['_wpnonce'] ?? ''); ?>" />
             <input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr($queryParams['_wp_http_referer'] ?? ''); ?>" />
             
