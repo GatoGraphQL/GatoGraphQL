@@ -96,6 +96,10 @@ class PluginOptionsFormHandler
             return $value;
         }
 
+        if (!$this->checkSubmittedFormCorrespondsToSettingsCategory($module)) {
+            return $value;
+        }
+
         return $this->doOverrideValueFromForm($value, $module, $option);
     }
 
@@ -114,10 +118,6 @@ class PluginOptionsFormHandler
         string $module,
         string $option,
     ): mixed {
-        if (!$this->checkSubmittedFormCorrespondsToSettingsCategory($module)) {
-            return $value;
-        }
-
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $settingsCategory = $moduleResolver->getSettingsCategory($module);
