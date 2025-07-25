@@ -27,7 +27,7 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
 
         // Check we are executing the bulk action with the custom settings
         $bulkAction = App::request('action') ?? App::query('action') ?? App::request('action2') ?? App::query('action2');
-        if (!in_array($bulkAction, $this->getBulkActionWithCustomSettingsNames())) {
+        if (!in_array($bulkAction, $this->getExecuteActionWithCustomSettingsBulkActions())) {
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }
 
@@ -79,5 +79,5 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
     /**
      * @return string[]
      */
-    abstract protected function getBulkActionWithCustomSettingsNames(): array;
+    abstract protected function getExecuteActionWithCustomSettingsBulkActions(): array;
 }
