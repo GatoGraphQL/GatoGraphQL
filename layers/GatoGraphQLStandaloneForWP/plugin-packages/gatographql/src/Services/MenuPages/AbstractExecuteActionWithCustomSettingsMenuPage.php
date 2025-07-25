@@ -119,7 +119,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
                 $settingItem['settings'] ?? [],
                 fn (array $item) => array_intersect(
                     $this->getPossibleTargets(),
-                    $item[Properties::ADDITIONAL_TARGETS] ?? []
+                    $item[Properties::ADDITIONAL_FORM_TARGETS] ?? []
                 ) !== []
             ));
             if ($settingItem['settings'] === []) {

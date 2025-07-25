@@ -6,20 +6,20 @@ namespace GatoGraphQLStandalone\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 
-trait SettingsAdditionalTargetModuleResolverTrait
+trait SettingsAdditionalFormTargetsModuleResolverTrait
 {
     /**
      * @param array<array<string,mixed>> $settings
-     * @param array<string> $additionalTargets
+     * @param array<string> $additionalFormTargets
      * @return array<array<string,mixed>>
      */
-    protected function addAdditionalTargetToSettingsItems(array $settings, array $additionalTargets): array
+    protected function addAdditionalFormTargetsToSettingsItems(array $settings, array $additionalFormTargets): array
     {
         // Also add the target to the settings
         foreach ($settings as &$setting) {
-            $setting[Properties::ADDITIONAL_TARGETS] = [
-                ...($setting[Properties::ADDITIONAL_TARGETS] ?? []),
-                ...$additionalTargets,
+            $setting[Properties::ADDITIONAL_FORM_TARGETS] = [
+                ...($setting[Properties::ADDITIONAL_FORM_TARGETS] ?? []),
+                ...$additionalFormTargets,
             ];
         }
         return $settings;

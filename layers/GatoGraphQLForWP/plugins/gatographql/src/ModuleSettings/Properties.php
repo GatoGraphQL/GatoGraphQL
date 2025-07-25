@@ -14,7 +14,7 @@ class Properties
     public final const CAN_BE_EMPTY = 'canBeEmpty';
     public final const DEFAULT_VALUE = 'defaultValue';
     // Used to define additional Settings pages that the item can be printed on.
-    public final const ADDITIONAL_TARGETS = 'additionalTargets';
+    public final const ADDITIONAL_FORM_TARGETS = 'additionalFormTargets';
     // Used for Property Array
     public final const KEY_LABELS = 'keyLabels';
     // Used for Select inputs

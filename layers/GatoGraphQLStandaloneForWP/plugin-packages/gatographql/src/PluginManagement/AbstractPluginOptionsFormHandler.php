@@ -61,13 +61,13 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
             return false;
         }
 
-        $additionalTargets = $setting[Properties::ADDITIONAL_TARGETS] ?? [];
-        if ($additionalTargets === []) {
+        $additionalFormTargets = $setting[Properties::ADDITIONAL_FORM_TARGETS] ?? [];
+        if ($additionalFormTargets === []) {
             return false;
         }
 
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-        return in_array($formOrigin, $additionalTargets);
+        return in_array($formOrigin, $additionalFormTargets);
     }
 
     /**
