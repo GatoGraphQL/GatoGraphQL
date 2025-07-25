@@ -126,7 +126,8 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                             /** @param array<string,mixed> $item */
                             fn (array $item) => $item['settings-category'] === $settingsCategory
                         ));
-                        $optionsFormName = $this->getOptionsFormName($settingsCategoryResolver, $settingsCategory);
+                        $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                        $optionsFormOrigin = $this->getOptionsFormOrigin($settingsCategoryResolver, $settingsCategory);
                         foreach ($categorySettingsItems as $item) {
                             $optionsFormModuleSectionName = $this->getOptionsFormModuleSectionName($optionsFormName, $item['id']);
                             $module = $item['module'];
@@ -136,7 +137,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                 '',
                                 function (): void {
                                 },
-                                $optionsFormName
+                                $optionsFormOrigin
                             );
                             foreach ($item['settings'] as $itemSetting) {
                                 add_settings_field(
@@ -169,7 +170,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                             </div>
                                         <?php
                                     },
-                                    $optionsFormName,
+                                    $optionsFormOrigin,
                                     $optionsFormModuleSectionName,
                                     [
                                         'label' => $itemSetting[Properties::DESCRIPTION] ?? '',
@@ -183,7 +184,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                          * Finally register all the settings
                          */
                         register_setting(
-                            $optionsFormName,
+                            $optionsFormOrigin,
                             $settingsCategoryResolver->getDBOptionName($settingsCategory),
                             [
                                 'type' => 'array',
@@ -226,9 +227,14 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
-     * Get the options form name for a settings category
+     * The same form can be used for several targets:
+     *
+     * - Settings
+     * - Execute Action with custom Settings
+     *
+     * This function ensures the form name is unique for each target.
      */
-    protected function getOptionsFormName($settingsCategoryResolver, string $settingsCategory): string
+    protected function getOptionsFormOrigin($settingsCategoryResolver, string $settingsCategory): string
     {
         $prefix = $this->getOptionsFormNamePrefix();
         return (empty($prefix) ? '' : $prefix . '-') . $settingsCategoryResolver->getOptionsFormName($settingsCategory);
@@ -353,7 +359,8 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                         <?php
                         foreach ($primarySettingsCategorySettingsCategoryResolvers as $settingsCategory => $settingsCategoryResolver) {
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
-                            $optionsFormName = $this->getOptionsFormName($settingsCategoryResolver, $settingsCategory);
+                            $optionsFormName = $settingsCategoryResolver->getOptionsFormName($settingsCategory);
+                            $optionsFormOrigin = $this->getOptionsFormOrigin($settingsCategoryResolver, $settingsCategory);
                             $sectionStyle = sprintf(
                                 'display: %s;',
                                 $settingsCategoryID === $activeCategoryID ? 'block' : 'none'
@@ -417,7 +424,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                     <?php endif; ?>
                                                 <form method="post" action="options.php">
                                                     <!-- Artificial input as flag that the form belongs to this plugin -->
-                                                    <input type="hidden" name="<?php echo esc_attr(self::FORM_ORIGIN) ?>" value="<?php echo esc_attr($optionsFormName) ?>" />
+                                                    <input type="hidden" name="<?php echo esc_attr(self::FORM_ORIGIN) ?>" value="<?php echo esc_attr($optionsFormOrigin) ?>" />
                                                     <!--
                                                         Artificial input to trigger the update of the form always, as to always purge the container/operational cache
                                                         (eg: to include 3rd party extensions in the service container, or new Gutenberg blocks)
@@ -433,7 +440,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                     <!-- Panels -->
                                                     <?php
                                                     $sectionClass = $printModuleSettingsWithTabs ? 'tab-content' : '';
-                                                    settings_fields($optionsFormName);
+                                                    settings_fields($optionsFormOrigin);
                                                     foreach ($categorySettingsItems as $item) {
                                                         $sectionStyle = '';
                                                         if ($printModuleSettingsWithTabs) {
@@ -450,7 +457,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                                 <br/><h2 id="<?php echo esc_attr($item['id']) ?>"><?php echo esc_html($item['name']) ?></h2>
                                                             <?php } ?>
                                                             <table class="form-table">
-                                                                <?php do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
+                                                                <?php do_settings_fields($optionsFormOrigin, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
                                                             <br/>
                                                             <hr/>
