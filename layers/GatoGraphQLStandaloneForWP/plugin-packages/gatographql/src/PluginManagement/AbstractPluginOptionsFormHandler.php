@@ -40,10 +40,14 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }
 
+        if (!$this->checkIsExpectedSubmittedExecuteActionForm($module, $option)) {
+            return parent::maybeOverrideValueFromForm($value, $module, $option);
+        }
+
         return $this->doOverrideValueFromForm($value, $module, $option);
     }
 
-    protected function checkIsExpectedSubmittedForm(string $module, string $option): bool
+    protected function checkIsExpectedSubmittedExecuteActionForm(string $module, string $option): bool
     {
         // Check this option is added to the target form
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
