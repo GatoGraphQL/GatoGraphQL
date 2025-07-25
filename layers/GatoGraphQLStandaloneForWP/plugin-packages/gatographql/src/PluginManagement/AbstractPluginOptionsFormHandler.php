@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GatoGraphQLStandalone\GatoGraphQL\PluginManagement;
 
 use GatoGraphQLStandalone\GatoGraphQL\Constants\FormOrigins;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler as UpstreamPluginOptionsFormHandler;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use PoP\ComponentModel\App;
@@ -35,6 +37,23 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
 
         $executeAction = App::request('execute_action') ?? App::query('execute_action', false);
         if (!$executeAction) {
+            return parent::maybeOverrideValueFromForm($value, $module, $option);
+        }
+
+        // Check this option is added to the target form
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $settings = $moduleResolver->getSettings($module);
+        $setting = array_values(array_filter(
+            $settings,
+            fn (array $setting) => $setting[Properties::INPUT] === $option
+        ))[0] ?? null;
+        if ($setting === null) {
+            return parent::maybeOverrideValueFromForm($value, $module, $option);
+        }
+
+        $additionalTargets = $setting[Properties::ADDITIONAL_TARGETS] ?? [];
+        if (!in_array($additionalTargets, $this->getExecuteActionWithCustomSettingsBulkActions())) {
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }
 
