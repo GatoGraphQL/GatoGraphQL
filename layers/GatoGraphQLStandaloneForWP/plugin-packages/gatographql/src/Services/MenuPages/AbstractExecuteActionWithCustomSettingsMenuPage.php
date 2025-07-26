@@ -78,10 +78,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
 
         $bulkActionOriginURL = GeneralUtils::removeQueryArgs(
             [
-                '_wpnonce',
-                '_wp_http_referer',
-                'action',
-                'action2',
+                ...array_keys($queryParams),
                 Params::BULK_ACTION_SELECTED_IDS,
                 Params::BULK_ACTION_ORIGIN_URL,
                 Params::BULK_ACTION_ORIGIN_SENDBACK_URL,
@@ -96,27 +93,37 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
             <?php echo $content; ?>
 
+            <?php /** Re-add all the same inputs as in the request (that includes the nonce, and the action) */ ?>
+            <?php
+            foreach ($queryParams as $key => $value) {
+                if ($value === null || is_object($value)) {
+                    continue;
+                }
+                if (is_array($value)) {
+                    foreach ($value as $subValue) {
+                        ?>
+                        <input type="hidden" name="<?php echo esc_attr($key); ?>[]" value="<?php echo esc_attr($subValue); ?>" />
+                        <?php
+                    }
+                    continue;
+                }
+                ?>
+                <input type="hidden" name="<?php echo esc_attr($key); ?>" value="<?php echo esc_attr($value); ?>" />
+                <?php
+            } ?>
+
             <?php /** Print all these inputs below at the end!!! */ ?>
             <?php /** Because the previous form has these same fields, override them! */ ?>
 
             <?php /** Because fields belong to different forms, unify them under a new origin */ ?>
             <input type="hidden" name="<?php echo esc_attr(self::FORM_ORIGIN) ?>" value="<?php echo esc_attr($this->getFormOrigin()) ?>" />
             
-            <?php /** Use the same nonce fields as the previous form */ ?>
-            <input type="hidden" name="_wpnonce" value="<?php echo esc_attr($queryParams['_wpnonce'] ?? ''); ?>" />
-            <input type="hidden" name="_wp_http_referer" value="<?php echo esc_attr($queryParams['_wp_http_referer'] ?? ''); ?>" />
-            
             <?php /** Point to the same bulk action, but adding "execute_action" to the query params */ ?>
-            <input type="hidden" name="action" value="<?php echo esc_attr($queryParams['action'] ?? ''); ?>" />
-            <input type="hidden" name="action2" value="<?php echo esc_attr($queryParams['action2'] ?? ''); ?>" />
             <input type="hidden" name="<?php echo Params::BULK_ACTION_EXECUTE ?>" value="1" />
 
             <?php /** Add the original sendback URL */ ?>
-            <input type="hidden" name="<?php echo Params::BULK_ACTION_ORIGIN_SENDBACK_URL ?>" value="<?php echo esc_attr($sendbackURL); ?>" />
-            
-            <?php /** Support for XDebug */ ?>
-            <?php RequestHelpers::maybePrintXDebugInputsInForm() ?>
-            </form>
+            <input type="hidden" name="<?php echo Params::BULK_ACTION_ORIGIN_SENDBACK_URL ?>" value="<?php echo esc_attr($sendbackURL); ?>" />            
+        </form>
         <?php
     }
 
