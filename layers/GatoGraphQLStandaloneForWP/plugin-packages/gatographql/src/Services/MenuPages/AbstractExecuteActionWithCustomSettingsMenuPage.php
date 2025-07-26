@@ -97,7 +97,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <input type="hidden" name="execute_action" value="1" />
 
             <?php /** Add the original sendback URL */ ?>
-            <input type="hidden" name="bulk_action_origin_sendback_url" value="<?php echo esc_attr($sendbackURL); ?>" />
+            <input type="hidden" name="<?php echo Params::BULK_ACTION_ORIGIN_SENDBACK_URL ?>" value="<?php echo esc_attr($sendbackURL); ?>" />
             
             <?php /** Support for XDebug */ ?>
             <?php RequestHelpers::maybePrintXDebugInputsInForm() ?>
