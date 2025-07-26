@@ -23,12 +23,12 @@ class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
         string $originURL,
         string $sendbackURL,
     ): string {
-        $customBulkActionURLPlaceholder = 'admin.php?page=%s&%s=%s&%s=%s&%s=%s';
+        $urlPlaceholder = 'admin.php?page=%s&%s=%s&%s=%s&%s=%s';
         if (RequestHelpers::isRequestingXDebug()) {
-            $customBulkActionURLPlaceholder .= '&' . FrameworkParams::XDEBUG_TRIGGER . '=1';
+            $urlPlaceholder .= '&' . FrameworkParams::XDEBUG_TRIGGER . '=1';
         }
         return admin_url(sprintf(
-            $customBulkActionURLPlaceholder,
+            $urlPlaceholder,
             $screenID,
             Params::BULK_ACTION_SELECTED_IDS,
             implode(',', $entityIDs),
