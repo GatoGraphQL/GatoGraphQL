@@ -32,6 +32,7 @@ class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
         }
 
         // Preserve all $_REQUEST values
+        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
         $originRequestParams = add_query_arg($_REQUEST, '');
 
         return admin_url(sprintf(
