@@ -6,6 +6,8 @@ namespace GatoGraphQLStandalone\GatoGraphQL\Helpers;
 
 use GatoGraphQLStandalone\GatoGraphQL\Constants\Params;
 
+use PoP\ComponentModel\Configuration\RequestHelpers;
+use PoP\ComponentModel\Constants\FrameworkParams;
 use function admin_url;
 
 class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
@@ -22,6 +24,9 @@ class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
         string $sendbackURL,
     ): string {
         $customBulkActionURLPlaceholder = 'admin.php?page=%s&%s=%s&%s=%s&%s=%s';
+        if (RequestHelpers::isRequestingXDebug()) {
+            $customBulkActionURLPlaceholder .= '&' . FrameworkParams::XDEBUG_TRIGGER . '=1';
+        }
         return admin_url(sprintf(
             $customBulkActionURLPlaceholder,
             $screenID,
