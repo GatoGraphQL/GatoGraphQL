@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQLStandalone\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQLStandalone\GatoGraphQL\Constants\FormOrigins;
 use GatoGraphQLStandalone\GatoGraphQL\Constants\Params;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
