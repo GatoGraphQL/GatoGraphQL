@@ -34,6 +34,21 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $content
         );
 
+        // Remove the inputs from the content that will be overridden
+        $inputNamesToRemove = [
+            '_wpnonce',
+            '_wp_http_referer',
+            'action',
+            'action2',
+            self::FORM_ORIGIN,
+        ];
+        $inputNamesPattern = implode('|', array_map('preg_quote', $inputNamesToRemove));
+        $content = preg_replace(
+            '/<input[^>]+name="(' . $inputNamesPattern . ')"[^>]*>/',
+            '',
+            $content
+        );
+
         $bulkActionOriginURL = App::request(Params::BULK_ACTION_ORIGIN_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_URL) ?? '';
         if ($bulkActionOriginURL) {
             $bulkActionOriginURL = rawurldecode($bulkActionOriginURL);
