@@ -81,16 +81,6 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             );
         }
 
-        // $bulkActionOriginURL = GeneralUtils::removeQueryArgs(
-        //     [
-        //         ...array_keys($originRequestParams),
-        //         Params::BULK_ACTION_SELECTED_IDS,
-        //         Params::BULK_ACTION_ORIGIN_URL,
-        //         Params::BULK_ACTION_ORIGIN_SENDBACK_URL,
-        //     ],
-        //     $bulkActionOriginURL
-        // );
-
         $sendbackURL = App::request(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? '';
         $sendbackURL = rawurldecode($sendbackURL);
 
