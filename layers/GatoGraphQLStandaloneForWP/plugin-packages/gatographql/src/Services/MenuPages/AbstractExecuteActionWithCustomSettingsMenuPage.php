@@ -54,7 +54,12 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $bulkActionOriginURL = rawurldecode($bulkActionOriginURL);
         }
 
-        $queryParams = GeneralUtils::getURLQueryParams($bulkActionOriginURL);
+        $originRequestParamsAsString = App::request(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? App::query(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? '';
+        if ($originRequestParamsAsString) {
+            $originRequestParamsAsString = rawurldecode($originRequestParamsAsString);
+        }
+
+        $originRequestParams = GeneralUtils::getURLQueryParams($originRequestParamsAsString);
         $bulkActionSelectedIdsString = App::request(Params::BULK_ACTION_SELECTED_IDS) ?? App::query(Params::BULK_ACTION_SELECTED_IDS) ?? '';
         $bulkActionSelectedIds = empty($bulkActionSelectedIdsString)
             ? []
@@ -76,15 +81,15 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             );
         }
 
-        $bulkActionOriginURL = GeneralUtils::removeQueryArgs(
-            [
-                ...array_keys($queryParams),
-                Params::BULK_ACTION_SELECTED_IDS,
-                Params::BULK_ACTION_ORIGIN_URL,
-                Params::BULK_ACTION_ORIGIN_SENDBACK_URL,
-            ],
-            $bulkActionOriginURL
-        );
+        // $bulkActionOriginURL = GeneralUtils::removeQueryArgs(
+        //     [
+        //         ...array_keys($originRequestParams),
+        //         Params::BULK_ACTION_SELECTED_IDS,
+        //         Params::BULK_ACTION_ORIGIN_URL,
+        //         Params::BULK_ACTION_ORIGIN_SENDBACK_URL,
+        //     ],
+        //     $bulkActionOriginURL
+        // );
 
         $sendbackURL = App::request(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? '';
         $sendbackURL = rawurldecode($sendbackURL);
@@ -95,7 +100,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
 
             <?php /** Re-add all the same inputs as in the request (that includes the nonce, and the action) */ ?>
             <?php
-            foreach ($queryParams as $key => $value) {
+            foreach ($originRequestParams as $key => $value) {
                 if ($value === null || is_object($value)) {
                     continue;
                 }
