@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace GatoGraphQLStandalone\GatoGraphQL\Helpers;
 
 use GatoGraphQLStandalone\GatoGraphQL\Constants\Params;
-
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Constants\FrameworkParams;
+
 use function admin_url;
 
 class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface

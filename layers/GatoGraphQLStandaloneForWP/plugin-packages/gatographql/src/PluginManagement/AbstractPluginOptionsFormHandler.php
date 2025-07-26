@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQLStandalone\GatoGraphQL\PluginManagement;
 
-use GatoGraphQLStandalone\GatoGraphQL\Constants\FormOrigins;
 use GatoGraphQLStandalone\GatoGraphQL\Constants\Params;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -77,19 +76,19 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
     protected function getSupportedBulkActionPages(): array
     {
         $pages = [];
-        
+
         if ($this->supportBulkActionsOnCustomPosts()) {
             $pages[] = 'edit.php'; // Posts
         }
-        
+
         if ($this->supportBulkActionsOnMedia()) {
             $pages[] = 'upload.php'; // Media
         }
-        
+
         if ($this->supportBulkActionsOnTaxonomies()) {
             $pages[] = 'edit-tags.php'; // Taxonomies
         }
-        
+
         return $pages;
     }
 

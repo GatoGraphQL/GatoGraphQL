@@ -15,8 +15,8 @@ use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
-
 use PoP\ComponentModel\Configuration\RequestHelpers;
+
 use function __;
 use function add_action;
 use function add_settings_field;
@@ -49,7 +49,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      * @var array<array<string,mixed>>
      */
     protected ?array $settingsItems = null;
-    
+
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;

@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractSettingsMenuPage
@@ -17,7 +16,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
     /**
      * The upstream method will print several <form> tags,
      * for the different settings categories.
-     * 
+     *
      * Combine them all into a single <form> tag.
      */
     public function print(): void

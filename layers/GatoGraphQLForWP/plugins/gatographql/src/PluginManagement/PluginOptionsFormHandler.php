@@ -117,10 +117,10 @@ class PluginOptionsFormHandler
 
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $settingsCategory = $moduleResolver->getSettingsCategory($module);
-        
+
         return $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory);
     }
-    
+
     protected function doOverrideValueFromForm(
         mixed $value,
         string $module,
