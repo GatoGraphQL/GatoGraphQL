@@ -27,6 +27,10 @@ class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
         if (RequestHelpers::isRequestingXDebug()) {
             $urlPlaceholder .= '&' . FrameworkParams::XDEBUG_TRIGGER . '=1';
         }
+
+        // Preserve all $_REQUEST values
+        $originURL = add_query_arg($_REQUEST, $originURL);
+
         return admin_url(sprintf(
             $urlPlaceholder,
             $screenID,
