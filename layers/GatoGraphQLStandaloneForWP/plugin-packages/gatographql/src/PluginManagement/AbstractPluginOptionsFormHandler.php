@@ -56,7 +56,7 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
         $settings = $moduleResolver->getSettings($module);
         $setting = array_values(array_filter(
             $settings,
-            fn (array $setting) => $setting[Properties::INPUT] === $option
+            fn (array $setting) => $setting[Properties::INPUT] ?? null === $option
         ))[0] ?? null;
         if ($setting === null) {
             return false;
