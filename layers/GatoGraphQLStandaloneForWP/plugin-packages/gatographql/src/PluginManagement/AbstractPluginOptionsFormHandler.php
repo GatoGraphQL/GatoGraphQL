@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQLStandalone\GatoGraphQL\PluginManagement;
 
 use GatoGraphQLStandalone\GatoGraphQL\Constants\FormOrigins;
+use GatoGraphQLStandalone\GatoGraphQL\Constants\Params;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler as UpstreamPluginOptionsFormHandler;
@@ -35,7 +36,7 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }
 
-        $executeAction = App::request('execute_action') ?? App::query('execute_action', false);
+        $executeAction = App::request(Params::BULK_ACTION_EXECUTE) ?? App::query(Params::BULK_ACTION_EXECUTE, false);
         if (!$executeAction) {
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }

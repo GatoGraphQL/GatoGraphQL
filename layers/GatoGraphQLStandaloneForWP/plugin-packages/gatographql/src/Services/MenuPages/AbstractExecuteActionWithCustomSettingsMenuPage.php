@@ -94,7 +94,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Point to the same bulk action, but adding "execute_action" to the query params */ ?>
             <input type="hidden" name="action" value="<?php echo esc_attr($queryParams['action'] ?? ''); ?>" />
             <input type="hidden" name="action2" value="<?php echo esc_attr($queryParams['action2'] ?? ''); ?>" />
-            <input type="hidden" name="execute_action" value="1" />
+            <input type="hidden" name="<?php echo Params::BULK_ACTION_EXECUTE ?>" value="1" />
 
             <?php /** Add the original sendback URL */ ?>
             <input type="hidden" name="<?php echo Params::BULK_ACTION_ORIGIN_SENDBACK_URL ?>" value="<?php echo esc_attr($sendbackURL); ?>" />
