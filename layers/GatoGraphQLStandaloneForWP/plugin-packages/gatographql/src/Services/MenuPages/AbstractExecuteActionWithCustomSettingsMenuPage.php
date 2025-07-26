@@ -7,6 +7,7 @@ namespace GatoGraphQLStandalone\GatoGraphQL\Services\MenuPages;
 use GatoGraphQLStandalone\GatoGraphQL\Constants\Params;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -24,6 +25,10 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         ob_start();
         parent::print();
         $content = ob_get_clean();
+
+        if ($content === false) {
+            return;
+        }
 
         $content = str_replace(
             [
@@ -49,11 +54,13 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $content
         );
 
+        /** @var string */
         $bulkActionOriginURL = App::request(Params::BULK_ACTION_ORIGIN_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_URL) ?? '';
         if ($bulkActionOriginURL) {
             $bulkActionOriginURL = rawurldecode($bulkActionOriginURL);
         }
 
+        /** @var string */
         $originRequestParamsAsString = App::request(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? App::query(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? '';
         if ($originRequestParamsAsString) {
             $originRequestParamsAsString = rawurldecode($originRequestParamsAsString);
@@ -81,6 +88,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             );
         }
 
+        /** @var string */
         $sendbackURL = App::request(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? '';
         $sendbackURL = rawurldecode($sendbackURL);
 
@@ -157,15 +165,12 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         ];
     }
 
-    /**
-     * @return string
-     */
     abstract protected function getFormOrigin(): string;
 
     /**
      * Get the submit button label for a settings category
      */
-    protected function getSubmitButtonLabel($settingsCategoryResolver, string $settingsCategory): string
+    protected function getSubmitButtonLabel(SettingsCategoryResolverInterface $settingsCategoryResolver, string $settingsCategory): string
     {
         return $this->getActionName();
     }

@@ -7,6 +7,10 @@ namespace GatoGraphQLStandalone\GatoGraphQL\Helpers;
 interface ExecuteBulkActionHelperInterface
 {
     public function getExecuteTranslationWithCustomSettingsBulkActionName(string $bulkActionName): string;
+
+    /**
+     * @param array<string,int> $entityIDs
+     */
     public function getExecuteActionWithCustomSettingsPageURL(
         string $screenID,
         array $entityIDs,

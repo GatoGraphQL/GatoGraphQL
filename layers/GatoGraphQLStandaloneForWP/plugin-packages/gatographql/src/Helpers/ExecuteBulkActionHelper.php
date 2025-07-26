@@ -17,6 +17,9 @@ class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
         return $bulkActionName . '-custom';
     }
 
+    /**
+     * @param array<string|int> $entityIDs
+     */
     public function getExecuteActionWithCustomSettingsPageURL(
         string $screenID,
         array $entityIDs,

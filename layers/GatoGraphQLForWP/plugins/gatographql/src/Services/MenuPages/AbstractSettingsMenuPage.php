@@ -12,10 +12,11 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityMo
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
+use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
-use PoP\ComponentModel\Configuration\RequestHelpers;
 
+use PoP\ComponentModel\Configuration\RequestHelpers;
 use function __;
 use function add_action;
 use function add_settings_field;
@@ -234,7 +235,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      *
      * This function ensures the form name is unique for each target.
      */
-    protected function getOptionsFormOrigin($settingsCategoryResolver, string $settingsCategory): string
+    protected function getOptionsFormOrigin(SettingsCategoryResolverInterface $settingsCategoryResolver, string $settingsCategory): string
     {
         $prefix = $this->getOptionsFormNamePrefix();
         return (empty($prefix) ? '' : $prefix . '-') . $settingsCategoryResolver->getOptionsFormName($settingsCategory);
@@ -834,7 +835,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     /**
      * Get the submit button label for a settings category
      */
-    protected function getSubmitButtonLabel($settingsCategoryResolver, string $settingsCategory): string
+    protected function getSubmitButtonLabel(SettingsCategoryResolverInterface $settingsCategoryResolver, string $settingsCategory): string
     {
         return sprintf(
             __('Save All Changes (\'%s\' tab)', 'gatographql'),
