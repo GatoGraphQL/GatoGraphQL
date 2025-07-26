@@ -44,6 +44,7 @@ class Module extends AbstractModule
             $skipSchemaModuleClasses
         );
 
+        $this->initServices(dirname(__DIR__));
         $this->initServices(dirname(__DIR__), '/Overrides/Upstream');
         $this->initServices(dirname(__DIR__), '/Overrides/Upstream', 'module-services.yaml');
     }

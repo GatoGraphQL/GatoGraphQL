@@ -6,7 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 13.3.0 - DATE
 
+### Improvements
+
 - Print body of failing requests in error logs (#3155)
+- Support executing bulk actions with custom settings (#3156)
 
 ## 13.2.0 - 21/07/2025
 

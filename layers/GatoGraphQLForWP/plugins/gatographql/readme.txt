@@ -222,6 +222,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 13.3.0 =
 * Print body of failing requests in error logs (#3155)
+* Support executing bulk actions with custom settings (#3156)
 
 = 13.2.0 =
 * Added field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) (#3142)
