@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQLStandalone\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQLStandalone\GatoGraphQL\Constants\FormOrigins;
+use GatoGraphQLStandalone\GatoGraphQL\Constants\Params;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractSettingsMenuPage;
-use GatoGraphQLStandalone\GatoGraphQL\Constants\FormOrigins;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -34,13 +35,13 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $content
         );
 
-        $bulkActionOriginURL = App::request('bulk_action_origin_url') ?? App::query('bulk_action_origin_url') ?? '';
+        $bulkActionOriginURL = App::request(Params::BULK_ACTION_ORIGIN_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_URL) ?? '';
         if ($bulkActionOriginURL) {
             $bulkActionOriginURL = rawurldecode($bulkActionOriginURL);
         }
 
         $queryParams = GeneralUtils::getURLQueryParams($bulkActionOriginURL);
-        $bulkActionSelectedIdsString = App::request('bulk_action_selected_ids') ?? App::query('bulk_action_selected_ids') ?? '';
+        $bulkActionSelectedIdsString = App::request(Params::BULK_ACTION_SELECTED_IDS) ?? App::query(Params::BULK_ACTION_SELECTED_IDS) ?? '';
         $bulkActionSelectedIds = empty($bulkActionSelectedIdsString)
             ? []
             : explode(',', $bulkActionSelectedIdsString);
@@ -67,14 +68,14 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
                 '_wp_http_referer',
                 'action',
                 'action2',
-                'bulk_action_selected_ids',
-                'bulk_action_origin_url',
-                'bulk_action_origin_sendback_url',
+                Params::BULK_ACTION_SELECTED_IDS,
+                Params::BULK_ACTION_ORIGIN_URL,
+                Params::BULK_ACTION_ORIGIN_SENDBACK_URL,
             ],
             $bulkActionOriginURL
         );
 
-        $sendbackURL = App::request('bulk_action_origin_sendback_url') ?? App::query('bulk_action_origin_sendback_url') ?? '';
+        $sendbackURL = App::request(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? '';
         $sendbackURL = rawurldecode($sendbackURL);
 
         ?>

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQLStandalone\GatoGraphQL\Helpers;
 
+use GatoGraphQLStandalone\GatoGraphQL\Constants\Params;
+
 use function admin_url;
 
 class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
@@ -19,12 +21,15 @@ class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
         string $originURL,
         string $sendbackURL,
     ): string {
-        $customBulkActionURLPlaceholder = 'admin.php?page=%1$s&bulk_action_selected_ids=%2$s&bulk_action_origin_url=%3$s&bulk_action_origin_sendback_url=%4$s';        
+        $customBulkActionURLPlaceholder = 'admin.php?page=%s&%s=%s&%s=%s&%s=%s';
         return admin_url(sprintf(
             $customBulkActionURLPlaceholder,
             $screenID,
+            Params::BULK_ACTION_SELECTED_IDS,
             implode(',', $entityIDs),
+            Params::BULK_ACTION_ORIGIN_URL,
             rawurlencode($originURL),
+            Params::BULK_ACTION_ORIGIN_SENDBACK_URL,
             rawurlencode($sendbackURL)
         ));
     }
