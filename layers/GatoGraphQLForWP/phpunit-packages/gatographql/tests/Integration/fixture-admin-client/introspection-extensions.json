@@ -2079,6 +2079,21 @@
                             ]
                         },
                         {
+                            "name": "heights",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "sizes",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "id",
                             "extensions": {
                                 "isMutation": false,
@@ -2215,6 +2230,21 @@
                             ]
                         },
                         {
+                            "name": "srcs",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "sizes",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "title",
                             "extensions": {
                                 "isMutation": false,
@@ -2247,6 +2277,21 @@
                             "args": [
                                 {
                                     "name": "size",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "widths",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "sizes",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -18144,6 +18189,12 @@
                             }
                         },
                         {
+                            "name": "date",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "description",
                             "extensions": {
                                 "isSensitiveDataElement": false
@@ -18151,6 +18202,12 @@
                         },
                         {
                             "name": "from",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "gmtDate",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -20351,7 +20408,19 @@
                             }
                         },
                         {
+                            "name": "date",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "gmtDate",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

@@ -719,6 +719,9 @@
               "name": "height"
             },
             {
+              "name": "heights"
+            },
+            {
               "name": "id"
             },
             {
@@ -752,6 +755,9 @@
               "name": "srcSet"
             },
             {
+              "name": "srcs"
+            },
+            {
               "name": "title"
             },
             {
@@ -762,6 +768,9 @@
             },
             {
               "name": "width"
+            },
+            {
+              "name": "widths"
             }
           ],
           "kind": "OBJECT",

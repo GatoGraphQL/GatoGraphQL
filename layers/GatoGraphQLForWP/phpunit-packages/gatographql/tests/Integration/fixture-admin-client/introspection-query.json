@@ -3828,6 +3828,49 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "heights",
+                            "description": "Media item's height for several sizes (returned in the same order as the sizes)",
+                            "args": [
+                                {
+                                    "name": "sizes",
+                                    "description": "Sizes of the image",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[String!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[Int]!",
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[Int]",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "Int",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "id",
                             "description": "The object's unique identifier for its type",
                             "args": [],
@@ -4076,6 +4119,53 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "srcs",
+                            "description": "Media item URL sources for several sizes (returned in the same order as the sizes)",
+                            "args": [
+                                {
+                                    "name": "sizes",
+                                    "description": "Sizes of the image",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[String!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[URL!]!",
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[URL!]",
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "URL!",
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "URL",
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "title",
                             "description": "Media item title",
                             "args": [],
@@ -4138,6 +4228,49 @@
                                 "kind": "SCALAR",
                                 "name": "Int",
                                 "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "widths",
+                            "description": "Media item's width for several sizes (returned in the same order as the sizes)",
+                            "args": [
+                                {
+                                    "name": "sizes",
+                                    "description": "Sizes of the image",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[String!]",
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[Int]!",
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[Int]",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "Int",
+                                        "ofType": null
+                                    }
+                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -36018,6 +36151,16 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "date",
+                            "description": "Date to use for the attachment",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Date",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "description",
                             "description": "Attachment description",
                             "type": {
@@ -36038,6 +36181,16 @@
                                     "name": "CreateMediaItemFromInput",
                                     "ofType": null
                                 }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "gmtDate",
+                            "description": "GMT date to use for the attachment",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Date",
+                                "ofType": null
                             },
                             "defaultValue": null
                         },
@@ -40079,11 +40232,31 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "date",
+                            "description": "Date to use for the attachment",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Date",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "description",
                             "description": "Attachment description",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "gmtDate",
+                            "description": "GMT date to use for the attachment",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Date",
                                 "ofType": null
                             },
                             "defaultValue": null
