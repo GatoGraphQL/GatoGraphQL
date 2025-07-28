@@ -21,7 +21,7 @@ class BottomMenuPageAttacher extends UpstreamBottomMenuPageAttacher
 
         global $submenu;
         $menuName = $this->getMenuName();
-        if ($submenu[$menuName][0][0] === $this->getPluginMenu()->getMenuName()) {
+        if (($submenu[$menuName][0][0] ?? null) === $this->getPluginMenu()->getMenuName()) {
             unset($submenu[$menuName][0]);
         }
     }
