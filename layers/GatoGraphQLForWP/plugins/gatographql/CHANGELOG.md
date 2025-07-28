@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Print body of failing requests in error logs (#3155)
 - Support executing bulk actions with custom settings (#3156)
+- Support reading just-updated plugin settings in options.php (#3157)
 
 ## 13.2.0 - 21/07/2025
 
