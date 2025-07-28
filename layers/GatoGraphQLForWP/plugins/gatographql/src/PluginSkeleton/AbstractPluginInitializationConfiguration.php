@@ -8,9 +8,9 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
+use GatoGraphQL\GatoGraphQL\Facades\Instances\PluginOptionsFormHandlerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginEnvironmentHelpers;
@@ -39,8 +39,6 @@ use function apply_filters;
  */
 abstract class AbstractPluginInitializationConfiguration implements PluginInitializationConfigurationInterface
 {
-    protected ?PluginOptionsFormHandler $pluginOptionsFormHandler = null;
-
     /**
      * Initialize all configuration
      */
@@ -162,7 +160,8 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             App::addFilter(
                 $hookName,
                 function () use ($userSettingsManager, $optionModule, $option, $callback) {
-                    $value = $this->getPluginOptionsFormHandler()->maybeOverrideValueFromForm(null, $optionModule, $option)
+                    $pluginOptionsFormHandler = PluginOptionsFormHandlerFacade::getInstance();
+                    $value = $pluginOptionsFormHandler->maybeOverrideValueFromForm(null, $optionModule, $option)
                         ?? $userSettingsManager->getSetting($optionModule, $option);
                     if ($callback !== null) {
                         return $callback($value);
@@ -171,19 +170,6 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                 }
             );
         }
-    }
-
-    protected function getPluginOptionsFormHandler(): PluginOptionsFormHandler
-    {
-        if ($this->pluginOptionsFormHandler === null) {
-            $this->pluginOptionsFormHandler = $this->doGetPluginOptionsFormHandler();
-        }
-        return $this->pluginOptionsFormHandler;
-    }
-
-    protected function doGetPluginOptionsFormHandler(): PluginOptionsFormHandler
-    {
-        return new PluginOptionsFormHandler();
     }
 
     /**

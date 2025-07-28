@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Facades\Instances\PluginOptionsFormHandlerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
@@ -17,7 +18,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\MutationSchemaTypeModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
-use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
@@ -59,8 +59,8 @@ use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
 use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
 use PoPCMSSchema\Users\Module as UsersModule;
-use PoPSchema\Logger\Module as LoggerModule;
 use PoPSchema\Logger\Environment as LoggerEnvironment;
+use PoPSchema\Logger\Module as LoggerModule;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPWPSchema\Blocks\Environment as BlocksEnvironment;
 use PoPWPSchema\Blocks\Module as BlocksModule;
@@ -72,11 +72,11 @@ use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Engine\Module as EngineModule;
 use PoP\GraphQLParser\Environment as GraphQLParserEnvironment;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
-use PoP\GuzzleHTTP\Module as GuzzleHTTPModule;
 use PoP\GuzzleHTTP\Environment as GuzzleHTTPEnvironment;
+use PoP\GuzzleHTTP\Module as GuzzleHTTPModule;
 use PoP\Root\Environment as RootEnvironment;
-use PoP\Root\Module\ModuleInterface;
 
+use PoP\Root\Module\ModuleInterface;
 use function get_post_types;
 use function get_taxonomies;
 use function home_url;
@@ -99,7 +99,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     protected function getEnvironmentConstantsFromSettingsMapping(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $pluginOptionsFormHandler = new PluginOptionsFormHandler();
+        $pluginOptionsFormHandler = PluginOptionsFormHandlerFacade::getInstance();
         return [
             // Client IP Server's Property Name
             [
