@@ -265,7 +265,7 @@
                 "title": "graphql-api-search-results"
             },
             {
-                "id": 1797,
+                "id": 1762,
                 "title": "Funny-Dog"
             }
         ],
@@ -326,12 +326,7 @@
         ],
         "mediaItemsSortedASC": [
             {
-                "id": 1797,
-                "title": "Funny-Dog",
-                "date": "2015-01-22T06:15:35+00:00"
-            },
-            {
-                "id": 1798,
+                "id": 1762,
                 "title": "Funny-Dog",
                 "date": "2015-01-22T06:15:35+00:00"
             },
@@ -339,6 +334,11 @@
                 "id": 1361,
                 "title": "graphql-api-header",
                 "date": "2022-05-25T05:13:32+00:00"
+            },
+            {
+                "id": 1362,
+                "title": "graphql-api-search-results",
+                "date": "2022-05-25T05:13:35+00:00"
             }
         ],
         "mediaItemsSortedDESC": [
