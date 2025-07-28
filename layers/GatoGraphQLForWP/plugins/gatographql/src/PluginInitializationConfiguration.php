@@ -75,8 +75,8 @@ use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GuzzleHTTP\Environment as GuzzleHTTPEnvironment;
 use PoP\GuzzleHTTP\Module as GuzzleHTTPModule;
 use PoP\Root\Environment as RootEnvironment;
-
 use PoP\Root\Module\ModuleInterface;
+
 use function get_post_types;
 use function get_taxonomies;
 use function home_url;
