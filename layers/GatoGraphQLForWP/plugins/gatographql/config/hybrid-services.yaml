@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandlerInterface:
+        class: \GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler
+
     GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\ModuleRegistry
 

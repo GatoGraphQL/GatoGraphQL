@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 use GatoGraphQL\GatoGraphQL\Constants\ResetSettingsOptions;
+use GatoGraphQL\GatoGraphQL\Facades\Instances\PluginOptionsFormHandlerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
-use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
 
 class BehaviorHelpers
 {
@@ -24,7 +24,7 @@ class BehaviorHelpers
 
     protected static function doAreRestrictiveDefaultsEnabled(): bool
     {
-        $pluginOptionsFormHandler = new PluginOptionsFormHandler();
+        $pluginOptionsFormHandler = PluginOptionsFormHandlerFacade::getInstance();
 
         /**
          * If Settings => Reset Settings was just submitted

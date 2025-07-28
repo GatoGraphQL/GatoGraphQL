@@ -15,7 +15,7 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 /**
  * Helper class with functions to set the configuration in PoP components.
  */
-class PluginOptionsFormHandler
+class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
 {
     /**
      * Cache the options after normalizing them
