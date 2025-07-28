@@ -7,4 +7,4 @@
 
 ## Improvements
 
-- Support plugin settings in options.php ([#3157](https://github.com/GatoGraphQL/GatoGraphQL/pull/3157))
+- Support reading just-updated plugin settings in options.php ([#3157](https://github.com/GatoGraphQL/GatoGraphQL/pull/3157))
