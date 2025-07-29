@@ -221,8 +221,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 13.3.0 =
-* Added - Added `parent` field to `CustomPost` (#3158)
-* Added - Pass parent on custom post mutations (#3159)
+* Added - Added `parent` field to `CustomPost` (#3159)
+* Added - Pass parent on custom post mutations (#3160)
 * Print body of failing requests in error logs (#3155)
 * Support executing bulk actions with custom settings (#3156)
 * Support reading just-updated plugin settings in options.php (#3157)
