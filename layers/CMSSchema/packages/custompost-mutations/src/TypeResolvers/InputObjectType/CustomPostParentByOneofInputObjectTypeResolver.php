@@ -57,7 +57,7 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
     {
         return [
             MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
-            MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::SLUG_PATH => $this->getStringScalarTypeResolver(),
         ];
     }
 
@@ -65,7 +65,7 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
     {
         return match ($inputFieldName) {
             MutationInputProperties::ID => $this->__('Provide the custom post parent ID', 'custompost-mutations'),
-            MutationInputProperties::SLUG => $this->__('Provide the custom post parent slug', 'custompost-mutations'),
+            MutationInputProperties::SLUG_PATH => $this->__('Provide the custom post parent slug path (including all ancestor slugs, eg: "ancestor-slug/post-slug")', 'custompost-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
