@@ -44,6 +44,7 @@ query {
       title
       url
       urlPath
+      slugPath
     }
   }
 
@@ -156,6 +157,14 @@ query {
     ...on CustomPost {
       id
       title
+    }
+  }
+  customPostsWtihSlugPath: customPosts(filter: { ids: [1682, 1684, 1688] }, sort: { by: ID, order: ASC }) {
+    __typename
+    ...on CustomPost {
+      id
+      title
+      slugPath
     }
   }
 
