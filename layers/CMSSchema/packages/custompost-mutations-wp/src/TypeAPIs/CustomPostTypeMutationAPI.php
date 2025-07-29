@@ -10,8 +10,9 @@ use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
-
 use WP_Error;
+use WP_Post;
+
 use function get_post_type_object;
 use function user_can;
 use function wp_insert_post;
