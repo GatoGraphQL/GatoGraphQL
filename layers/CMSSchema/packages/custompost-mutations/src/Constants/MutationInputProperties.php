@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostMutations\Constants;
 class MutationInputProperties
 {
     public final const ID = 'id';
+    public final const PARENT_ID = 'parentId';
     public final const TITLE = 'title';
     public final const CONTENT_AS = 'contentAs';
     public final const EXCERPT = 'excerpt';
