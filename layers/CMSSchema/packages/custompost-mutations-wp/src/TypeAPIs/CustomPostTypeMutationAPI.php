@@ -45,6 +45,14 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
             $query['post_parent'] = $query['parent-id'];
             unset($query['parent-id']);
         }
+        if (isset($query['parent-slug'])) {
+            /** @var WP_Post|null */
+            $parentPost = get_page_by_path($query['parent-slug'], OBJECT, $query['post_type'] ?? 'page');
+            if ($parentPost !== null) {
+                $query['post_parent'] = $parentPost->ID;
+            }
+            unset($query['parent-slug']);
+        }
         // Passing `0` as parent means "remove the parent", so it's already handled above
         // elseif (array_key_exists('parent-id', $query)) {
         //     // If passing `null` then remove the parent
