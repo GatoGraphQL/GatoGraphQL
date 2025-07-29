@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 13.3.0 - DATE
 
+### Added
+
+- Added `parent` field to `CustomPost` (#3158)
+
 ### Improvements
 
 - Print body of failing requests in error logs (#3155)
