@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
@@ -55,16 +56,16 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'id' => $this->getIDScalarTypeResolver(),
-            'slug' => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
+            MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Provide the custom post parent ID', 'custompost-mutations'),
-            'slug' => $this->__('Provide the custom post parent slug', 'custompost-mutations'),
+            MutationInputProperties::ID => $this->__('Provide the custom post parent ID', 'custompost-mutations'),
+            MutationInputProperties::SLUG => $this->__('Provide the custom post parent slug', 'custompost-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
