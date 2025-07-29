@@ -15,4 +15,9 @@ class RootCreateCustomPostInputObjectTypeResolver extends AbstractCreateOrUpdate
     {
         return false;
     }
+
+    protected function addCustomPostParentInputField(): bool
+    {
+        return true;
+    }
 }
