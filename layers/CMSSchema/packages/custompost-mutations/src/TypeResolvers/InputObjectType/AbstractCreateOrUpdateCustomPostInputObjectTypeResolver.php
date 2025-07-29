@@ -119,7 +119,7 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
     {
         return match ($inputFieldName) {
             MutationInputProperties::ID => $this->__('The ID of the custom post to update', 'custompost-mutations'),
-            MutationInputProperties::PARENT_ID => $this->__('The parent of the custom post. Pass `null` to remove the parent', 'custompost-mutations'),
+            MutationInputProperties::PARENT_ID => $this->__('The parent of the custom post. Pass `0` to remove the parent', 'custompost-mutations'),
             MutationInputProperties::TITLE => $this->__('The title of the custom post', 'custompost-mutations'),
             MutationInputProperties::CONTENT_AS => $this->__('The content of the custom post', 'custompost-mutations'),
             MutationInputProperties::EXCERPT => $this->__('The excerpt of the custom post', 'custompost-mutations'),
