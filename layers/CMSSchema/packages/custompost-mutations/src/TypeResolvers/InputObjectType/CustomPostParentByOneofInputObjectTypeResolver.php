@@ -32,6 +32,11 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
         return $this->__('Oneof input to specify the custom post parent', 'custompost-mutations');
     }
 
+    protected function isOneInputValueMandatory(): bool
+    {
+        return false;
+    }
+
     /**
      * @return array<string,InputTypeResolverInterface>
      */
