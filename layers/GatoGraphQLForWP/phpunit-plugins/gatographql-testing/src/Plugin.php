@@ -490,6 +490,7 @@ class Plugin
                 'thumbnail',
                 'comments',
                 'custom-fields',
+                'page-attributes', // Allow to set the parent post
             ],
             // 'rewrite' => ['slug' => $slugBase],
             'taxonomies' => $taxonomies,

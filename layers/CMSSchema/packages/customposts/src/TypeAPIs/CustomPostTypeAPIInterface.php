@@ -38,6 +38,7 @@ interface CustomPostTypeAPIInterface
      */
     public function getCustomPost(int|string $id): ?object;
     public function getCustomPostType(string|int|object $customPostObjectOrID): ?string;
+    public function getParentCustomPostID(string|int|object $customPostObjectOrID): int|string|null;
     /**
      * If param "status" in $query is not passed, it defaults to "publish"
      *

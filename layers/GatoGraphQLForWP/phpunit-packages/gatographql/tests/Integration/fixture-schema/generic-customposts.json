@@ -1,0 +1,30 @@
+{
+    "data": {
+        "customPostsWithParent": [
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1682,
+                "title": "Dummy CPT with several levels of children",
+                "parent": null
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1684,
+                "title": "Dummy CPT with parent and children",
+                "parent": {
+                    "id": 1682,
+                    "title": "Dummy CPT with several levels of children"
+                }
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1688,
+                "title": "Dummy CPT with parent only",
+                "parent": {
+                    "id": 1684,
+                    "title": "Dummy CPT with parent and children"
+                }
+            }
+        ]
+    }
+}

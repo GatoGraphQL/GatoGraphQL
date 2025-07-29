@@ -1,0 +1,13 @@
+query {
+  customPostsWithParent: customPosts(filter: { ids: [1682, 1684, 1688] }, sort: { by: ID, order: ASC }) {
+    __typename
+    ...on GenericCustomPost {
+      id
+      title
+      parent {
+        id
+        title
+      }
+    }
+  }
+}
