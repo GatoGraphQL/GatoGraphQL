@@ -23,6 +23,11 @@ abstract class AbstractCreateOrUpdateGenericCustomPostInputObjectTypeResolver ex
         return $this->customPostEnumStringScalarTypeResolver;
     }
 
+    protected function addCustomPostParentInputField(): bool
+    {
+        return true;
+    }
+
     /**
      * @return array<string,InputTypeResolverInterface>
      */

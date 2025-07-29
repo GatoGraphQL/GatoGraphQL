@@ -92,6 +92,9 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
             $this->addCustomPostInputField() ? [
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
+            $this->addCustomPostParentInputField() ? [
+                MutationInputProperties::PARENT_ID => $this->getIDScalarTypeResolver(),
+            ] : [],
             [
                 MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::CONTENT_AS => $this->getContentAsOneofInputObjectTypeResolver(),
@@ -110,11 +113,13 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
     }
 
     abstract protected function addCustomPostInputField(): bool;
+    abstract protected function addCustomPostParentInputField(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
             MutationInputProperties::ID => $this->__('The ID of the custom post to update', 'custompost-mutations'),
+            MutationInputProperties::PARENT_ID => $this->__('The parent of the custom post. Pass `0` to remove the parent', 'custompost-mutations'),
             MutationInputProperties::TITLE => $this->__('The title of the custom post', 'custompost-mutations'),
             MutationInputProperties::CONTENT_AS => $this->__('The content of the custom post', 'custompost-mutations'),
             MutationInputProperties::EXCERPT => $this->__('The excerpt of the custom post', 'custompost-mutations'),

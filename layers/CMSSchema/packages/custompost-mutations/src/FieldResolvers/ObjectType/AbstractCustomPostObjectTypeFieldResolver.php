@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostMutations\Module;
+use PoPCMSSchema\CustomPostMutations\ModuleConfiguration;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractCustomPostUpdateInputObjectTypeResolver;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -12,26 +17,11 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostMutations\Module;
-use PoPCMSSchema\CustomPostMutations\ModuleConfiguration;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CustomPostUpdateInputObjectTypeResolver;
-use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?CustomPostUpdateInputObjectTypeResolver $customPostUpdateInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final protected function getCustomPostUpdateInputObjectTypeResolver(): CustomPostUpdateInputObjectTypeResolver
-    {
-        if ($this->customPostUpdateInputObjectTypeResolver === null) {
-            /** @var CustomPostUpdateInputObjectTypeResolver */
-            $customPostUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostUpdateInputObjectTypeResolver::class);
-            $this->customPostUpdateInputObjectTypeResolver = $customPostUpdateInputObjectTypeResolver;
-        }
-        return $this->customPostUpdateInputObjectTypeResolver;
-    }
     final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
     {
         if ($this->userLoggedInCheckpoint === null) {
@@ -89,6 +79,8 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
+
+    abstract protected function getCustomPostUpdateInputObjectTypeResolver(): AbstractCustomPostUpdateInputObjectTypeResolver;
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {

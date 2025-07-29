@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Added `parent` field to `CustomPost` (#3158)
+- Pass parent on custom post mutations (#3159)
 
 ### Improvements
 
