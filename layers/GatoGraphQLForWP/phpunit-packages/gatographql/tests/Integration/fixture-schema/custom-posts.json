@@ -32,7 +32,8 @@
                 "status": "publish",
                 "title": "Hello world!",
                 "url": "https:\/\/gatographql.lndo.site\/hello-world\/",
-                "urlPath": "\/hello-world\/"
+                "urlPath": "\/hello-world\/",
+                "slugPath": "hello-world"
             },
             {
                 "__typename": "Page",
@@ -73,7 +74,8 @@
                 "status": "publish",
                 "title": "Sample Page",
                 "url": "https:\/\/gatographql.lndo.site\/sample-page\/",
-                "urlPath": "\/sample-page\/"
+                "urlPath": "\/sample-page\/",
+                "slugPath": "sample-page"
             },
             {
                 "__typename": "Post",
@@ -129,7 +131,8 @@
                 "status": "publish",
                 "title": "Released v0.6, check it out",
                 "url": "https:\/\/gatographql.lndo.site\/released-v0-6-check-it-out\/",
-                "urlPath": "\/released-v0-6-check-it-out\/"
+                "urlPath": "\/released-v0-6-check-it-out\/",
+                "slugPath": "released-v0-6-check-it-out"
             }
         ],
         "customPostsByAuthorIDs": [
@@ -216,6 +219,21 @@
                 "__typename": "Page",
                 "id": 1666,
                 "title": "Another Page"
+            },
+            {
+                "__typename": "Page",
+                "id": 1701,
+                "title": "Page with several levels of children"
+            },
+            {
+                "__typename": "Page",
+                "id": 1703,
+                "title": "Page with parent and children"
+            },
+            {
+                "__typename": "Page",
+                "id": 1705,
+                "title": "Page with parent only"
             }
         ],
         "customPostsByDateQuery": [
@@ -469,6 +487,26 @@
                 "__typename": "GenericCustomPost",
                 "id": 1631,
                 "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
+            }
+        ],
+        "customPostsWtihSlugPath": [
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1682,
+                "title": "Dummy CPT with several levels of children",
+                "slugPath": "dummy-cpt-with-children"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1684,
+                "title": "Dummy CPT with parent and children",
+                "slugPath": "dummy-cpt-with-children\/dummy-cpt-with-parent-and-children"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1688,
+                "title": "Dummy CPT with parent only",
+                "slugPath": "dummy-cpt-with-children\/dummy-cpt-with-parent-and-children\/dummy-cpt-with-parent-only"
             }
         ],
         "singleCustomPost": {

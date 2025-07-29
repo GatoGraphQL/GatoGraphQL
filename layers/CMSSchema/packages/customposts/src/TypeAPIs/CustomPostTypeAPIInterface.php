@@ -26,6 +26,7 @@ interface CustomPostTypeAPIInterface
     public function getPermalink(string|int|object $customPostObjectOrID): ?string;
     public function getPermalinkPath(string|int|object $customPostObjectOrID): ?string;
     public function getSlug(string|int|object $customPostObjectOrID): ?string;
+    public function getSlugPath(string|int|object $customPostObjectOrID): ?string;
     public function getStatus(string|int|object $customPostObjectOrID): ?string;
     public function getPublishedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string;
     public function getModifiedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string;

@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added `parent` field to `CustomPost` (#3159)
 - Pass parent on custom post mutations (#3160)
+- Added `slugPath` field to CustomPost (comprising the slug for all ancestor posts) (#3163)
 
 ### Improvements
 
