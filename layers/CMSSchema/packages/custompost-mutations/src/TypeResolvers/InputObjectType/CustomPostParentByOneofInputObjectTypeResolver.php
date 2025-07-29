@@ -7,10 +7,12 @@ namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -20,6 +22,16 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
+    }
+
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
     }
 
     public function getTypeName(): string
@@ -44,6 +56,7 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
     {
         return [
             'id' => $this->getIDScalarTypeResolver(),
+            'slug' => $this->getStringScalarTypeResolver(),
         ];
     }
 
@@ -51,6 +64,7 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
     {
         return match ($inputFieldName) {
             'id' => $this->__('Provide the custom post parent ID', 'custompost-mutations'),
+            'slug' => $this->__('Provide the custom post parent slug', 'custompost-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
