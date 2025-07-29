@@ -275,8 +275,12 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 $customPostData['content'] = $contentAs->{MutationInputProperties::HTML};
             }
         }
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_ID)) {
-            $customPostData['parent-id'] = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_ID);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_BY)) {
+            /** @var stdClass */
+            $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
+            if (isset($parentBy->{MutationInputProperties::ID})) {
+                $customPostData['parent-id'] = $parentBy->{MutationInputProperties::ID};
+            }
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::EXCERPT)) {
             $customPostData['excerpt'] = $fieldDataAccessor->getValue(MutationInputProperties::EXCERPT);
