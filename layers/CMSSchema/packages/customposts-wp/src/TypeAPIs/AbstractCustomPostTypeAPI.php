@@ -555,7 +555,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPost === null) {
             return null;
         }
-        /** @var WP_Post $customPost */
+
         $parentID = $customPost->post_parent;
         if ($parentID === 0) {
             return null;
