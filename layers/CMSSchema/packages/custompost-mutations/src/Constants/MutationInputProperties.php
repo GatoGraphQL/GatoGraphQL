@@ -18,4 +18,5 @@ class MutationInputProperties
     public final const GMT_DATE = 'gmtDate';
 
     public final const HTML = 'html';
+    public final const SLUG_PATH = 'slugPath';
 }
