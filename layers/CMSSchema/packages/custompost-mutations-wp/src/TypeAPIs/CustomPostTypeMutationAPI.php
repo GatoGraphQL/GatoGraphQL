@@ -6,11 +6,12 @@ namespace PoPCMSSchema\CustomPostMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
-use WP_Error;
 
+use WP_Error;
 use function get_post_type_object;
 use function user_can;
 use function wp_insert_post;
@@ -25,6 +26,18 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
     use TypeMutationAPITrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
+
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
+    }
 
     /**
      * @param array<string,mixed> $query
@@ -70,6 +83,18 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
         if (isset($query['custompost-type'])) {
             $query['post_type'] = $query['custompost-type'];
             unset($query['custompost-type']);
+        }
+        if (isset($query['parent-slug'])) {
+            /** @var WP_Post|null */
+            $parentPost = get_page_by_path(
+                $query['parent-slug'],
+                OBJECT,
+                $query['post_type'] ?? $this->getCustomPostTypeAPI()->getCustomPostTypes()
+            );
+            if ($parentPost !== null) {
+                $query['post_parent'] = $parentPost->ID;
+            }
+            unset($query['parent-slug']);
         }
         if (isset($query['date'])) {
             $query['post_date'] = $query['date'];
