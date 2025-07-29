@@ -98,6 +98,9 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             case 'slug':
                 return $customPostTypeAPI->getSlug($customPost);
 
+            case 'slugPath':
+                return $customPostTypeAPI->getSlugPath($customPost);
+
             case 'content':
                 return $customPostTypeAPI->getContent($customPost);
 

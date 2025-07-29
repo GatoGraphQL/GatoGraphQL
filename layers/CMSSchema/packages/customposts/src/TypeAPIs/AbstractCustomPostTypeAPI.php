@@ -29,4 +29,33 @@ abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements
         }
         return $this->getCMSHelperService()->getLocalURLPath($permalink);
     }
+
+    /**
+     * Get the full slug path including all ancestor slugs
+     */
+    public function getSlugPath(string|int|object $customPostObjectOrID): ?string
+    {
+        $slugPath = [];
+        
+        // Start with the current post
+        $currentPostObjectOrID = $customPostObjectOrID;
+        
+        // Traverse up the hierarchy
+        while ($currentPostObjectOrID !== null) {
+            $slug = $this->getSlug($currentPostObjectOrID);
+            if ($slug !== null && $slug !== '') {
+                array_unshift($slugPath, $slug);
+            }
+            
+            // Get the parent
+            $parentID = $this->getParentCustomPostID($currentPostObjectOrID);
+            if ($parentID === null || $parentID === 0) {
+                break;
+            }
+            
+            $currentPostObjectOrID = $this->getCustomPost($parentID);
+        }
+        
+        return implode('/', $slugPath);
+    }
 }

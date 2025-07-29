@@ -127,6 +127,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'url',
             'urlPath',
             'slug',
+            'slugPath',
             'content',
             'rawContent',
             'status',
@@ -172,7 +173,8 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'excerpt',
             'rawExcerpt',
             'dateStr',
-            'modifiedDateStr'
+            'modifiedDateStr',
+            'slugPath',
                 => $this->getStringScalarTypeResolver(),
             'content',
             'rawContent'
@@ -206,6 +208,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             case 'rawTitle':
             case 'excerpt':
             case 'rawExcerpt':
+            case 'slugPath':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getFieldTypeModifiers($fieldName);
@@ -217,6 +220,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'url' => $this->__('Custom post URL', 'customposts'),
             'urlPath' => $this->__('Custom post URL path', 'customposts'),
             'slug' => $this->__('Custom post slug', 'customposts'),
+            'slugPath' => $this->__('Custom post slug path (comprising all ancestors)', 'customposts'),
             'content' => $this->__('Custom post content', 'customposts'),
             'rawContent' => $this->__('Custom post content in raw format (as it exists in the database)', 'customposts'),
             'status' => $this->__('Custom post status', 'customposts'),
