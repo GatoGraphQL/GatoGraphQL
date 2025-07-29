@@ -1362,7 +1362,7 @@ Dolorum quo neque.]]></excerpt:encoded>
 		<title><![CDATA[Dummy CPT with several levels of children]]></title>
 		<link>https://gatographql.lndo.site/dummy-cpt/dummy-cpt-with-children/</link>
 		<pubDate>Tue, 29 Jul 2025 05:56:13 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
+		<dc:creator><![CDATA[author]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=dummy-cpt&#038;p=1682</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
@@ -1393,7 +1393,7 @@ Dolorum quo neque.]]></excerpt:encoded>
 		<title><![CDATA[Dummy CPT with parent and children]]></title>
 		<link>https://gatographql.lndo.site/dummy-cpt/dummy-cpt-with-children/dummy-cpt-with-parent-and-children/</link>
 		<pubDate>Tue, 29 Jul 2025 05:56:48 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
+		<dc:creator><![CDATA[author]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=dummy-cpt&#038;p=1684</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
@@ -1424,7 +1424,7 @@ Dolorum quo neque.]]></excerpt:encoded>
 		<title><![CDATA[Dummy CPT with parent only]]></title>
 		<link>https://gatographql.lndo.site/dummy-cpt/dummy-cpt-with-children/dummy-cpt-with-parent-and-children/dummy-cpt-with-parent-only/</link>
 		<pubDate>Tue, 29 Jul 2025 05:57:56 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
+		<dc:creator><![CDATA[author]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=dummy-cpt&#038;p=1688</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
@@ -1455,7 +1455,7 @@ Dolorum quo neque.]]></excerpt:encoded>
 		<title><![CDATA[Page with several levels of children]]></title>
 		<link>https://gatographql.lndo.site/page-with-several-levels-of-children/</link>
 		<pubDate>Tue, 29 Jul 2025 06:40:54 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
+		<dc:creator><![CDATA[author]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?page_id=1701</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
@@ -1481,7 +1481,7 @@ Dolorum quo neque.]]></excerpt:encoded>
 		<title><![CDATA[Page with parent and children]]></title>
 		<link>https://gatographql.lndo.site/page-with-several-levels-of-children/page-with-parent-and-children/</link>
 		<pubDate>Tue, 29 Jul 2025 06:41:18 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
+		<dc:creator><![CDATA[author]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?page_id=1703</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
@@ -1507,7 +1507,7 @@ Dolorum quo neque.]]></excerpt:encoded>
 		<title><![CDATA[Page with parent only]]></title>
 		<link>https://gatographql.lndo.site/page-with-several-levels-of-children/page-with-parent-and-children/page-with-parent-only/</link>
 		<pubDate>Tue, 29 Jul 2025 06:41:45 +0000</pubDate>
-		<dc:creator><![CDATA[admin]]></dc:creator>
+		<dc:creator><![CDATA[author]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?page_id=1705</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
