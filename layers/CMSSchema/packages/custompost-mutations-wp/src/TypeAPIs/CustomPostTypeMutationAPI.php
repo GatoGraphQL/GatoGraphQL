@@ -44,6 +44,10 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
         if (isset($query['parent-id'])) {
             $query['post_parent'] = $query['parent-id'];
             unset($query['parent-id']);
+        } elseif (array_key_exists('parent-id', $query)) {
+            // If passing `null` then remove the parent
+            $query['post_parent'] = 0;
+            unset($query['parent-id']);
         }
         if (isset($query['content'])) {
             $query['post_content'] = $query['content'];
