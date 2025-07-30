@@ -12,6 +12,12 @@
                     "possibleTypes": null,
                     "fields": [
                         {
+                            "name": "ancestors",
+                            "type": {
+                                "name": "[Page!]"
+                            }
+                        },
+                        {
                             "name": "childCount",
                             "type": {
                                 "name": "Int!"
@@ -1177,11 +1183,6 @@
                     "fields": null
                 },
                 {
-                    "name": "WithParentCustomPostChildrenFilterInput",
-                    "possibleTypes": null,
-                    "fields": null
-                },
-                {
                     "name": "PagePaginationInput",
                     "possibleTypes": null,
                     "fields": null
@@ -1208,6 +1209,11 @@
                 },
                 {
                     "name": "RootPostsFilterInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "WithParentCustomPostChildrenFilterInput",
                     "possibleTypes": null,
                     "fields": null
                 },
