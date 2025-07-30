@@ -10091,7 +10091,7 @@
                                     "description": "Input to filter the page children",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "PageChildrenFilterInput",
+                                        "name": "WithParentCustomPostChildrenFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -10118,7 +10118,7 @@
                                     "description": "Input to filter the page children",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "PageChildrenFilterInput",
+                                        "name": "WithParentCustomPostChildrenFilterInput",
                                         "ofType": null
                                     },
                                     "defaultValue": null
@@ -34618,7 +34618,7 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
-                    "name": "PageChildrenFilterInput",
+                    "name": "WithParentCustomPostChildrenFilterInput",
                     "description": "Input to filter the page children",
                     "fields": null,
                     "inputFields": [

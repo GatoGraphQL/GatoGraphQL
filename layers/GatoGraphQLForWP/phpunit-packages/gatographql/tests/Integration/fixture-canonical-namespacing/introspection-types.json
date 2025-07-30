@@ -844,7 +844,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "PageChildrenFilterInput"
+          "name": "WithParentCustomPostChildrenFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
