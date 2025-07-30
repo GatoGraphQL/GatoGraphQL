@@ -127,27 +127,29 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         }
 
         // Validate that the parent exists
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_BY)) {
-            /** @var stdClass|null */
-            $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
-            if ($parentBy !== null) {
-                $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();                
-                if (isset($parentBy->{MutationInputProperties::ID})) {
-                    $parentID = $parentBy->{MutationInputProperties::ID};
-                    $this->validateParentExists(
-                        $parentID,
-                        $customPostType,
-                        $fieldDataAccessor,
-                        $objectTypeFieldResolutionFeedbackStore,
-                    );
-                } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
-                    $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
-                    $this->validateCustomPostBySlugPathExists(
-                        $parentSlugPath,
-                        $customPostType,
-                        $fieldDataAccessor,
-                        $objectTypeFieldResolutionFeedbackStore,
-                    );
+        if ($this->supportsCustomPostParent()) {
+            if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_BY)) {
+                /** @var stdClass|null */
+                $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
+                if ($parentBy !== null) {
+                    $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();                
+                    if (isset($parentBy->{MutationInputProperties::ID})) {
+                        $parentID = $parentBy->{MutationInputProperties::ID};
+                        $this->validateParentExists(
+                            $parentID,
+                            $customPostType,
+                            $fieldDataAccessor,
+                            $objectTypeFieldResolutionFeedbackStore,
+                        );
+                    } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
+                        $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
+                        $this->validateCustomPostBySlugPathExists(
+                            $parentSlugPath,
+                            $customPostType,
+                            $fieldDataAccessor,
+                            $objectTypeFieldResolutionFeedbackStore,
+                        );
+                    }
                 }
             }
         }
@@ -157,6 +159,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
+
+    /**
+     * Whether this mutation resolver supports custom post parent functionality
+     */
+    abstract protected function supportsCustomPostParent(): bool;
 
     protected function triggerValidateCreateOrUpdateHook(
         FieldDataAccessorInterface $fieldDataAccessor,

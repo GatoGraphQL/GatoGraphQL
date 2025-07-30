@@ -17,6 +17,11 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
         return '';
     }
 
+    protected function supportsCustomPostParent(): bool
+    {
+        return true;
+    }
+
     protected function triggerValidateCreateOrUpdateHook(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

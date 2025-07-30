@@ -30,6 +30,11 @@ abstract class AbstractCreateOrUpdatePostMutationResolver extends AbstractCreate
         return $this->getPostTypeAPI()->getPostCustomPostType();
     }
 
+    protected function supportsCustomPostParent(): bool
+    {
+        return false;
+    }
+
     protected function triggerValidateCreateOrUpdateHook(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

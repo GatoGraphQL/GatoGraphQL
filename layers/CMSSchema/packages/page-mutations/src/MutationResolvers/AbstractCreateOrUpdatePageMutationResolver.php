@@ -34,6 +34,11 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
         return $this->getPageTypeAPI()->getPageCustomPostType();
     }
 
+    protected function supportsCustomPostParent(): bool
+    {
+        return true;
+    }
+
     protected function validateCanLoggedInUserEditCustomPosts(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
