@@ -192,6 +192,11 @@ fragment PostCategoryData on PostCategory {
   name
   parent {
     id
+    name
+  }
+  ancestors {
+    id
+    name
   }
   postCount
   posts {

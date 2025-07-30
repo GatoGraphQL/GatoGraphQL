@@ -51,6 +51,12 @@ class UniversalCategoryTypeAPI extends AbstractTaxonomyTypeAPI implements Univer
         return $this->getTaxonomyTermParentID($catObjectOrID);
     }
 
+    public function getCategoryAncestorIDs(string|int|object $catObjectOrID): ?array
+    {
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermAncestorIDs($catObjectOrID);
+    }
+
     public function getCategoryDescription(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */

@@ -16,6 +16,7 @@
                 "excludingMetaKeys": [],
                 "name": "Uncategorized",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 4,
                 "posts": [
                     {
@@ -57,8 +58,19 @@
                 "excludingMetaKeys": [],
                 "name": "Special topic",
                 "parent": {
-                    "id": 4
+                    "id": 4,
+                    "name": "Resource"
                 },
+                "ancestors": [
+                    {
+                        "id": 4,
+                        "name": "Resource"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 2,
                 "posts": [
                     {
@@ -89,8 +101,23 @@
                         "excludingMetaKeys": [],
                         "name": "Most special topic",
                         "parent": {
-                            "id": 6
+                            "id": 6,
+                            "name": "Special topic"
                         },
+                        "ancestors": [
+                            {
+                                "id": 6,
+                                "name": "Special topic"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Resource"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 1,
                         "posts": [
                             {
@@ -121,8 +148,15 @@
                 "excludingMetaKeys": [],
                 "name": "Resource",
                 "parent": {
-                    "id": 3
+                    "id": 3,
+                    "name": "Blog"
                 },
+                "ancestors": [
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 4,
                 "posts": [
                     {
@@ -163,8 +197,19 @@
                         "excludingMetaKeys": [],
                         "name": "Special topic",
                         "parent": {
-                            "id": 4
+                            "id": 4,
+                            "name": "Resource"
                         },
+                        "ancestors": [
+                            {
+                                "id": 4,
+                                "name": "Resource"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 2,
                         "posts": [
                             {
@@ -197,6 +242,7 @@
                 "excludingMetaKeys": [],
                 "name": "Never used",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 0,
                 "posts": [],
                 "slug": "never-used",
@@ -219,8 +265,23 @@
                 "excludingMetaKeys": [],
                 "name": "Most special topic",
                 "parent": {
-                    "id": 6
+                    "id": 6,
+                    "name": "Special topic"
                 },
+                "ancestors": [
+                    {
+                        "id": 6,
+                        "name": "Special topic"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Resource"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 1,
                 "posts": [
                     {
@@ -250,6 +311,7 @@
                 "excludingMetaKeys": [],
                 "name": "Blog",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 5,
                 "posts": [
                     {
@@ -294,8 +356,15 @@
                         "excludingMetaKeys": [],
                         "name": "Resource",
                         "parent": {
-                            "id": 3
+                            "id": 3,
+                            "name": "Blog"
                         },
+                        "ancestors": [
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 4,
                         "posts": [
                             {
@@ -336,6 +405,7 @@
                 "excludingMetaKeys": [],
                 "name": "Advanced",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 3,
                 "posts": [
                     {
@@ -373,6 +443,7 @@
                 "excludingMetaKeys": [],
                 "name": "Uncategorized",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 4,
                 "posts": [
                     {
@@ -414,8 +485,19 @@
                 "excludingMetaKeys": [],
                 "name": "Special topic",
                 "parent": {
-                    "id": 4
+                    "id": 4,
+                    "name": "Resource"
                 },
+                "ancestors": [
+                    {
+                        "id": 4,
+                        "name": "Resource"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 2,
                 "posts": [
                     {
@@ -446,8 +528,23 @@
                         "excludingMetaKeys": [],
                         "name": "Most special topic",
                         "parent": {
-                            "id": 6
+                            "id": 6,
+                            "name": "Special topic"
                         },
+                        "ancestors": [
+                            {
+                                "id": 6,
+                                "name": "Special topic"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Resource"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 1,
                         "posts": [
                             {
@@ -478,8 +575,15 @@
                 "excludingMetaKeys": [],
                 "name": "Resource",
                 "parent": {
-                    "id": 3
+                    "id": 3,
+                    "name": "Blog"
                 },
+                "ancestors": [
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 4,
                 "posts": [
                     {
@@ -520,8 +624,19 @@
                         "excludingMetaKeys": [],
                         "name": "Special topic",
                         "parent": {
-                            "id": 4
+                            "id": 4,
+                            "name": "Resource"
                         },
+                        "ancestors": [
+                            {
+                                "id": 4,
+                                "name": "Resource"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 2,
                         "posts": [
                             {
@@ -554,6 +669,7 @@
                 "excludingMetaKeys": [],
                 "name": "Never used",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 0,
                 "posts": [],
                 "slug": "never-used",
@@ -576,8 +692,23 @@
                 "excludingMetaKeys": [],
                 "name": "Most special topic",
                 "parent": {
-                    "id": 6
+                    "id": 6,
+                    "name": "Special topic"
                 },
+                "ancestors": [
+                    {
+                        "id": 6,
+                        "name": "Special topic"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Resource"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 1,
                 "posts": [
                     {
@@ -607,6 +738,7 @@
                 "excludingMetaKeys": [],
                 "name": "Blog",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 5,
                 "posts": [
                     {
@@ -651,8 +783,15 @@
                         "excludingMetaKeys": [],
                         "name": "Resource",
                         "parent": {
-                            "id": 3
+                            "id": 3,
+                            "name": "Blog"
                         },
+                        "ancestors": [
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 4,
                         "posts": [
                             {
@@ -693,6 +832,7 @@
                 "excludingMetaKeys": [],
                 "name": "Advanced",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 3,
                 "posts": [
                     {
@@ -732,6 +872,7 @@
                 "excludingMetaKeys": [],
                 "name": "Swimming",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 1,
                 "posts": [
                     {
@@ -758,8 +899,15 @@
                         "excludingMetaKeys": [],
                         "name": "Diving",
                         "parent": {
-                            "id": 33
+                            "id": 33,
+                            "name": "Swimming"
                         },
+                        "ancestors": [
+                            {
+                                "id": 33,
+                                "name": "Swimming"
+                            }
+                        ],
                         "postCount": 1,
                         "posts": [
                             {
@@ -788,6 +936,7 @@
                 "excludingMetaKeys": [],
                 "name": "Foosball",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 1,
                 "posts": [
                     {
@@ -815,8 +964,15 @@
                 "excludingMetaKeys": [],
                 "name": "Diving",
                 "parent": {
-                    "id": 33
+                    "id": 33,
+                    "name": "Swimming"
                 },
+                "ancestors": [
+                    {
+                        "id": 33,
+                        "name": "Swimming"
+                    }
+                ],
                 "postCount": 1,
                 "posts": [
                     {
@@ -846,6 +1002,7 @@
                 "excludingMetaKeys": [],
                 "name": "Uncategorized",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 4,
                 "posts": [
                     {
@@ -887,6 +1044,7 @@
                 "excludingMetaKeys": [],
                 "name": "Swimming",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 1,
                 "posts": [
                     {
@@ -913,8 +1071,15 @@
                         "excludingMetaKeys": [],
                         "name": "Diving",
                         "parent": {
-                            "id": 33
+                            "id": 33,
+                            "name": "Swimming"
                         },
+                        "ancestors": [
+                            {
+                                "id": 33,
+                                "name": "Swimming"
+                            }
+                        ],
                         "postCount": 1,
                         "posts": [
                             {
@@ -945,8 +1110,19 @@
                 "excludingMetaKeys": [],
                 "name": "Special topic",
                 "parent": {
-                    "id": 4
+                    "id": 4,
+                    "name": "Resource"
                 },
+                "ancestors": [
+                    {
+                        "id": 4,
+                        "name": "Resource"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 2,
                 "posts": [
                     {
@@ -977,8 +1153,23 @@
                         "excludingMetaKeys": [],
                         "name": "Most special topic",
                         "parent": {
-                            "id": 6
+                            "id": 6,
+                            "name": "Special topic"
                         },
+                        "ancestors": [
+                            {
+                                "id": 6,
+                                "name": "Special topic"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Resource"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 1,
                         "posts": [
                             {
@@ -1009,8 +1200,15 @@
                 "excludingMetaKeys": [],
                 "name": "Resource",
                 "parent": {
-                    "id": 3
+                    "id": 3,
+                    "name": "Blog"
                 },
+                "ancestors": [
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 4,
                 "posts": [
                     {
@@ -1051,8 +1249,19 @@
                         "excludingMetaKeys": [],
                         "name": "Special topic",
                         "parent": {
-                            "id": 4
+                            "id": 4,
+                            "name": "Resource"
                         },
+                        "ancestors": [
+                            {
+                                "id": 4,
+                                "name": "Resource"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 2,
                         "posts": [
                             {
@@ -1085,6 +1294,7 @@
                 "excludingMetaKeys": [],
                 "name": "Never used",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 0,
                 "posts": [],
                 "slug": "never-used",
@@ -1107,8 +1317,23 @@
                 "excludingMetaKeys": [],
                 "name": "Most special topic",
                 "parent": {
-                    "id": 6
+                    "id": 6,
+                    "name": "Special topic"
                 },
+                "ancestors": [
+                    {
+                        "id": 6,
+                        "name": "Special topic"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Resource"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Blog"
+                    }
+                ],
                 "postCount": 1,
                 "posts": [
                     {
@@ -1136,6 +1361,7 @@
                 "excludingMetaKeys": [],
                 "name": "Foosball",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 1,
                 "posts": [
                     {
@@ -1163,8 +1389,15 @@
                 "excludingMetaKeys": [],
                 "name": "Diving",
                 "parent": {
-                    "id": 33
+                    "id": 33,
+                    "name": "Swimming"
                 },
+                "ancestors": [
+                    {
+                        "id": 33,
+                        "name": "Swimming"
+                    }
+                ],
                 "postCount": 1,
                 "posts": [
                     {
@@ -1194,6 +1427,7 @@
                 "excludingMetaKeys": [],
                 "name": "Blog",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 5,
                 "posts": [
                     {
@@ -1238,8 +1472,15 @@
                         "excludingMetaKeys": [],
                         "name": "Resource",
                         "parent": {
-                            "id": 3
+                            "id": 3,
+                            "name": "Blog"
                         },
+                        "ancestors": [
+                            {
+                                "id": 3,
+                                "name": "Blog"
+                            }
+                        ],
                         "postCount": 4,
                         "posts": [
                             {
@@ -1280,6 +1521,7 @@
                 "excludingMetaKeys": [],
                 "name": "Advanced",
                 "parent": null,
+                "ancestors": [],
                 "postCount": 3,
                 "posts": [
                     {
@@ -1346,8 +1588,15 @@
                     "excludingMetaKeys": [],
                     "name": "Resource",
                     "parent": {
-                        "id": 3
+                        "id": 3,
+                        "name": "Blog"
                     },
+                    "ancestors": [
+                        {
+                            "id": 3,
+                            "name": "Blog"
+                        }
+                    ],
                     "postCount": 4,
                     "posts": [
                         {
@@ -1388,8 +1637,19 @@
                             "excludingMetaKeys": [],
                             "name": "Special topic",
                             "parent": {
-                                "id": 4
+                                "id": 4,
+                                "name": "Resource"
                             },
+                            "ancestors": [
+                                {
+                                    "id": 4,
+                                    "name": "Resource"
+                                },
+                                {
+                                    "id": 3,
+                                    "name": "Blog"
+                                }
+                            ],
                             "postCount": 2,
                             "posts": [
                                 {
@@ -1424,6 +1684,7 @@
                     "excludingMetaKeys": [],
                     "name": "Blog",
                     "parent": null,
+                    "ancestors": [],
                     "postCount": 5,
                     "posts": [
                         {
@@ -1468,8 +1729,15 @@
                             "excludingMetaKeys": [],
                             "name": "Resource",
                             "parent": {
-                                "id": 3
+                                "id": 3,
+                                "name": "Blog"
                             },
+                            "ancestors": [
+                                {
+                                    "id": 3,
+                                    "name": "Blog"
+                                }
+                            ],
                             "postCount": 4,
                             "posts": [
                                 {
@@ -1510,6 +1778,7 @@
                     "excludingMetaKeys": [],
                     "name": "Advanced",
                     "parent": null,
+                    "ancestors": [],
                     "postCount": 3,
                     "posts": [
                         {
@@ -1549,6 +1818,7 @@
                     "excludingMetaKeys": [],
                     "name": "Swimming",
                     "parent": null,
+                    "ancestors": [],
                     "postCount": 1,
                     "posts": [
                         {
@@ -1575,8 +1845,15 @@
                             "excludingMetaKeys": [],
                             "name": "Diving",
                             "parent": {
-                                "id": 33
+                                "id": 33,
+                                "name": "Swimming"
                             },
+                            "ancestors": [
+                                {
+                                    "id": 33,
+                                    "name": "Swimming"
+                                }
+                            ],
                             "postCount": 1,
                             "posts": [
                                 {
@@ -1605,8 +1882,15 @@
                     "excludingMetaKeys": [],
                     "name": "Diving",
                     "parent": {
-                        "id": 33
+                        "id": 33,
+                        "name": "Swimming"
                     },
+                    "ancestors": [
+                        {
+                            "id": 33,
+                            "name": "Swimming"
+                        }
+                    ],
                     "postCount": 1,
                     "posts": [
                         {
@@ -2046,6 +2330,7 @@
             "excludingMetaKeys": [],
             "name": "Uncategorized",
             "parent": null,
+            "ancestors": [],
             "postCount": 4,
             "posts": [
                 {
@@ -2086,8 +2371,15 @@
             "excludingMetaKeys": [],
             "name": "Resource",
             "parent": {
-                "id": 3
+                "id": 3,
+                "name": "Blog"
             },
+            "ancestors": [
+                {
+                    "id": 3,
+                    "name": "Blog"
+                }
+            ],
             "postCount": 4,
             "posts": [
                 {
