@@ -552,19 +552,21 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $customPostTypes
         );
         
-        if ($parentPost === null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E11,
-                        [
-                            $parentSlugPath,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
+        if ($parentPost !== null) {
+            return;
         }
+        
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E11,
+                    [
+                        $parentSlugPath,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
+        );
     }
 }
