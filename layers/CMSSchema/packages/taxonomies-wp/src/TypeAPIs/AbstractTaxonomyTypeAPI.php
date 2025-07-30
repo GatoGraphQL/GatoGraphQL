@@ -485,4 +485,39 @@ abstract class AbstractTaxonomyTypeAPI extends AbstractBasicService implements T
         }
         return null;
     }
+
+    /**
+     * @return array<int|string>|null
+     */
+    protected function getTaxonomyTermAncestorIDs(
+        string|int|WP_Term $taxonomyTermObjectOrID,
+        ?string $taxonomy = null,
+    ): ?array {
+        $taxonomyTerm = $this->getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
+        if ($taxonomyTerm === null) {
+            return null;
+        }
+
+        $ancestors = [];
+        $currentTerm = $taxonomyTerm;
+
+        // Traverse up the hierarchy
+        while ($currentTerm->parent !== 0) {
+            $parentID = $currentTerm->parent;
+            $ancestors[] = $parentID;
+            
+            // Get the parent term
+            $parentTerm = get_term($parentID, $currentTerm->taxonomy);
+            if ($parentTerm === null || $parentTerm instanceof WP_Error) {
+                break;
+            }
+            
+            $currentTerm = $parentTerm;
+        }
+
+        return $ancestors;
+    }
 }

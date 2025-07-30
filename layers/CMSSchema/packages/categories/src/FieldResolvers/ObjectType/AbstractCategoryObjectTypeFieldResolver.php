@@ -115,15 +115,20 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             // Own
             'taxonomy',
             'parent',
+            'ancestors',
         ];
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'taxonomy' => $this->getTaxonomyFieldTypeResolver(),
-            'parent' => $this->getCategoryTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'taxonomy'
+                => $this->getTaxonomyFieldTypeResolver(),
+            'parent',
+            'ancestors'
+                => $this->getCategoryTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
@@ -137,6 +142,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'slug' => $this->__('Category slug', 'pop-categories'),
             'taxonomy' => $this->__('Category taxonomy', 'pop-categories'),
             'parent' => $this->__('Parent category (if this category is a child of another one)', 'pop-categories'),
+            'ancestors' => $this->__('List of all ancestor categories (parent, grandparent, etc.)', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -145,6 +151,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return match ($fieldName) {
             'taxonomy' => SchemaTypeModifiers::NON_NULLABLE,
+            'ancestors' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -186,6 +193,10 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
 
             case 'parent':
                 return $this->getUniversalCategoryTypeAPI()->getCategoryParentID($category);
+
+            case 'ancestors':
+                /** @var array<int|string> */
+                return $this->getUniversalCategoryTypeAPI()->getCategoryAncestorIDs($category);
 
             case 'count':
                 /** @var int */
