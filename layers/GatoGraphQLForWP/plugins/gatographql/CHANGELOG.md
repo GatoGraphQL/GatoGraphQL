@@ -18,6 +18,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Support executing bulk actions with custom settings (#3156)
 - Support reading just-updated plugin settings in options.php (#3157)
 
+### Fixed
+
+- Querying `post(by: { id: 0 })` returns `null` (instead of the post in the loop) (#3165)
+
 ## 13.2.0 - 21/07/2025
 
 ### Added
