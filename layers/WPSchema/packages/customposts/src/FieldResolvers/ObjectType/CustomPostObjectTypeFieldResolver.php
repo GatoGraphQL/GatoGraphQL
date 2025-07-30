@@ -18,6 +18,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Post;
@@ -28,6 +29,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
 
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -65,6 +67,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         }
         return $this->customPostStatusEnumTypeResolver;
     }
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -84,6 +95,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return [
             'rawStatus',
             'wpAdminEditURL',
+            'menuOrder',
         ];
     }
 
@@ -106,6 +118,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return match ($fieldName) {
             'rawStatus' => $this->__('Custom post raw status (as it exists in the database, eg: `publish` instead of `future`)', 'customposts'),
             'wpAdminEditURL' => $this->__('The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it', 'customposts'),
+            'menuOrder' => $this->__('Menu order', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -115,17 +128,20 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         return match ($fieldName) {
             'rawStatus' => $this->getCustomPostStatusEnumTypeResolver(),
             'wpAdminEditURL' => $this->getHTMLScalarTypeResolver(),
+            'menuOrder' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
-        switch ($fieldName) {
-            case 'rawStatus':
-                return SchemaTypeModifiers::NON_NULLABLE;
-        }
-        return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'rawStatus',
+            'menuOrder'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+        };
     }
 
     public function resolveValue(
@@ -155,6 +171,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     return null;
                 }
                 return \get_edit_post_link($customPost);
+            case 'menuOrder':
+                return $customPost->menu_order;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
