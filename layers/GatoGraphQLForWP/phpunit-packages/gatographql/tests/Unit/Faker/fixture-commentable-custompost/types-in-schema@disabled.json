@@ -210,6 +210,12 @@
                             }
                         },
                         {
+                            "name": "menuOrder",
+                            "type": {
+                                "name": "Int!"
+                            }
+                        },
+                        {
                             "name": "modifiedDate",
                             "type": {
                                 "name": "DateTime!"
