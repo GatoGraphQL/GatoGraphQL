@@ -132,7 +132,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 /** @var stdClass|null */
                 $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
                 if ($parentBy !== null) {
-                    $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();                
+                    $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
                     if (isset($parentBy->{MutationInputProperties::ID})) {
                         $parentID = $parentBy->{MutationInputProperties::ID};
                         $this->validateParentExists(
