@@ -827,6 +827,39 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "CustomPostAncestorRecursionErrorPayload",
+                    "description": "Error payload for: \"The custom post is an ancestor of itself\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "CustomPostDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested custom post does not exist\"",
                     "fields": [
@@ -1142,6 +1175,26 @@
                     "name": "GenericCategory",
                     "description": "A category that does not have its own type in the schema",
                     "fields": [
+                        {
+                            "name": "ancestors",
+                            "description": "List of all ancestor categories (parent, grandparent, etc.)",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[GenericCategory!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "GenericCategory!",
+                                    "ofType": {
+                                        "kind": "OBJECT",
+                                        "name": "GenericCategory",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "count",
                             "description": "Number of custom posts containing this category",
@@ -1561,6 +1614,26 @@
                     "description": "A custom post that does not have its own type in the schema",
                     "fields": [
                         {
+                            "name": "ancestors",
+                            "description": "List of all ancestor custom posts (parent, grandparent, etc.)",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[CustomPostUnion!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "CustomPostUnion!",
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "CustomPostUnion",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "areCommentsOpen",
                             "description": "Are comments open to be added to the custom post",
                             "args": [],
@@ -1844,6 +1917,88 @@
                                         "ofType": {
                                             "kind": "SCALAR",
                                             "name": "String",
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "childCount",
+                            "description": "Number of child custom posts",
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter the custom post children",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "WithParentCustomPostChildrenFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "children",
+                            "description": "Child custom posts",
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter the custom post children",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "WithParentCustomPostChildrenFilterInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "pagination",
+                                    "description": "Input to paginate custom posts",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "CustomPostPaginationInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "sort",
+                                    "description": "Input to sort custom posts",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "CustomPostSortInput",
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[CustomPostUnion!]!",
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[CustomPostUnion!]",
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "CustomPostUnion!",
+                                        "ofType": {
+                                            "kind": "UNION",
+                                            "name": "CustomPostUnion",
                                             "ofType": null
                                         }
                                     }
@@ -2166,6 +2321,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "Menu order",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "meta",
                             "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
@@ -2366,6 +2537,18 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "parent",
+                            "description": "Parent custom post",
+                            "args": [],
+                            "type": {
+                                "kind": "UNION",
+                                "name": "CustomPostUnion",
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "rawContent",
                             "description": "Custom post content in raw format (as it exists in the database)",
                             "args": [],
@@ -2448,6 +2631,22 @@
                         {
                             "name": "slug",
                             "description": "URL's slug",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "slugPath",
+                            "description": "Custom post slug path (comprising all ancestors)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -9958,6 +10157,26 @@
                     "description": "Representation of a page",
                     "fields": [
                         {
+                            "name": "ancestors",
+                            "description": "List of all ancestor pages (parent, grandparent, etc.)",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[Page!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "Page!",
+                                    "ofType": {
+                                        "kind": "OBJECT",
+                                        "name": "Page",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "areCommentsOpen",
                             "description": "Are comments open to be added to the custom post",
                             "args": [],
@@ -10088,7 +10307,7 @@
                             "args": [
                                 {
                                     "name": "filter",
-                                    "description": "Input to filter the page children",
+                                    "description": "Input to filter the custom post children",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "WithParentCustomPostChildrenFilterInput",
@@ -10115,7 +10334,7 @@
                             "args": [
                                 {
                                     "name": "filter",
-                                    "description": "Input to filter the page children",
+                                    "description": "Input to filter the custom post children",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "WithParentCustomPostChildrenFilterInput",
@@ -10788,6 +11007,22 @@
                         {
                             "name": "slug",
                             "description": "URL's slug",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "slugPath",
+                            "description": "Custom post slug path (comprising all ancestors)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -11591,6 +11826,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "Menu order",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Int!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "meta",
                             "description": "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).",
                             "args": [
@@ -11889,6 +12140,22 @@
                         {
                             "name": "slug",
                             "description": "URL's slug",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "slugPath",
+                            "description": "Custom post slug path (comprising all ancestors)",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -12204,6 +12471,26 @@
                     "name": "PostCategory",
                     "description": "Representation of a category, added to a post (taxonomy: \"category\")",
                     "fields": [
+                        {
+                            "name": "ancestors",
+                            "description": "List of all ancestor categories (parent, grandparent, etc.)",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[PostCategory!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "PostCategory!",
+                                    "ofType": {
+                                        "kind": "OBJECT",
+                                        "name": "PostCategory",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
                         {
                             "name": "childCount",
                             "description": "Number of child categories",
@@ -31411,6 +31698,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "slugPath",
+                            "description": "Custom post slug path (comprising all ancestors)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "status",
                             "description": "Custom post status",
                             "args": [],
@@ -31566,6 +31869,11 @@
                         {
                             "kind": "OBJECT",
                             "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostAncestorRecursionErrorPayload",
                             "ofType": null
                         },
                         {
@@ -33400,6 +33708,37 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
+                    "name": "CustomPostParentByInput",
+                    "description": "Oneof input to specify the custom post parent",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "description": "Provide the custom post parent ID",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slugPath",
+                            "description": "Provide the custom post parent slug path (including all ancestor slugs, eg: \"ancestor-slug\/post-slug\")",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
                     "name": "CustomPostSortInput",
                     "description": "Input to sort custom posts",
                     "fields": null,
@@ -34618,165 +34957,6 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
-                    "name": "WithParentCustomPostChildrenFilterInput",
-                    "description": "Input to filter the page children",
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "author",
-                            "description": "Filter by author",
-                            "type": {
-                                "kind": "INPUT_OBJECT",
-                                "name": "FilterByAuthorInput",
-                                "ofType": null
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "dateQuery",
-                            "description": "Filter custom posts based on date",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[DateQueryInput!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "DateQueryInput!",
-                                    "ofType": {
-                                        "kind": "INPUT_OBJECT",
-                                        "name": "DateQueryInput",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "excludeIDs",
-                            "description": "Exclude elements with the given IDs",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[ID!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "ID!",
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "ID",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "hasPassword",
-                            "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
-                            "type": {
-                                "kind": "SCALAR",
-                                "name": "Boolean",
-                                "ofType": null
-                            },
-                            "defaultValue": "false"
-                        },
-                        {
-                            "name": "ids",
-                            "description": "Limit results to elements with the given IDs",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[ID!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "ID!",
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "ID",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "metaQuery",
-                            "description": "Filter elements by meta key and value",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[CustomPostMetaQueryInput!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "CustomPostMetaQueryInput!",
-                                    "ofType": {
-                                        "kind": "INPUT_OBJECT",
-                                        "name": "CustomPostMetaQueryInput",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "password",
-                            "description": "Include custom posts protected by a specific password",
-                            "type": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "search",
-                            "description": "Search for custom posts containing the given string",
-                            "type": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "slugs",
-                            "description": "Search for custom posts with the given slugs",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[String!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "String!",
-                                    "ofType": {
-                                        "kind": "SCALAR",
-                                        "name": "String",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": null
-                        },
-                        {
-                            "name": "status",
-                            "description": "Custom post status",
-                            "type": {
-                                "kind": "LIST",
-                                "name": "[FilterCustomPostStatusEnum!]",
-                                "ofType": {
-                                    "kind": "NON_NULL",
-                                    "name": "FilterCustomPostStatusEnum!",
-                                    "ofType": {
-                                        "kind": "ENUM",
-                                        "name": "FilterCustomPostStatusEnum",
-                                        "ofType": null
-                                    }
-                                }
-                            },
-                            "defaultValue": "[\"publish\"]"
-                        }
-                    ],
-                    "interfaces": null,
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "INPUT_OBJECT",
                     "name": "PageContentInput",
                     "description": null,
                     "fields": null,
@@ -35892,11 +36072,31 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "The menu order",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "meta",
                             "description": "The meta to set",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "NullableListValueJSONObject",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "parentBy",
+                            "description": "The parent of the custom post. Pass `null` to remove the parent",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "CustomPostParentByInput",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -36296,11 +36496,31 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "The menu order",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "meta",
                             "description": "The meta to set",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "NullableListValueJSONObject",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "parentBy",
+                            "description": "The parent of the custom post. Pass `null` to remove the parent",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "CustomPostParentByInput",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -36496,11 +36716,31 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "The menu order",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "meta",
                             "description": "The meta to set",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "NullableListValueJSONObject",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "parentBy",
+                            "description": "The parent of the custom post. Pass `null` to remove the parent",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "CustomPostParentByInput",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -39898,11 +40138,31 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "The menu order",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "meta",
                             "description": "The meta to set",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "NullableListValueJSONObject",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "parentBy",
+                            "description": "The parent of the custom post. Pass `null` to remove the parent",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "CustomPostParentByInput",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -40391,11 +40651,31 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "The menu order",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "meta",
                             "description": "The meta to set",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "NullableListValueJSONObject",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "parentBy",
+                            "description": "The parent of the custom post. Pass `null` to remove the parent",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "CustomPostParentByInput",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -40611,11 +40891,31 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "menuOrder",
+                            "description": "The menu order",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "meta",
                             "description": "The meta to set",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "NullableListValueJSONObject",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "parentBy",
+                            "description": "The parent of the custom post. Pass `null` to remove the parent",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "CustomPostParentByInput",
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -41899,6 +42199,145 @@
                                 "ofType": null
                             },
                             "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "WithParentCustomPostChildrenFilterInput",
+                    "description": "Input to filter the custom post children",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "author",
+                            "description": "Filter by author",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "FilterByAuthorInput",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "dateQuery",
+                            "description": "Filter custom posts based on date",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[DateQueryInput!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "DateQueryInput!",
+                                    "ofType": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "DateQueryInput",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "excludeIDs",
+                            "description": "Exclude elements with the given IDs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[ID!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "ID!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "ID",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "ids",
+                            "description": "Limit results to elements with the given IDs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[ID!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "ID!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "ID",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "metaQuery",
+                            "description": "Filter elements by meta key and value",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[CustomPostMetaQueryInput!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "CustomPostMetaQueryInput!",
+                                    "ofType": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "CustomPostMetaQueryInput",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "search",
+                            "description": "Search for custom posts containing the given string",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slugs",
+                            "description": "Search for custom posts with the given slugs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Custom post status",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[FilterCustomPostStatusEnum!]",
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "FilterCustomPostStatusEnum!",
+                                    "ofType": {
+                                        "kind": "ENUM",
+                                        "name": "FilterCustomPostStatusEnum",
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": "[\"publish\"]"
                         }
                     ],
                     "interfaces": null,
@@ -43451,6 +43890,16 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "CustomPostDoesNotExistErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
                             "ofType": null
                         },
@@ -43651,6 +44100,16 @@
                         {
                             "kind": "OBJECT",
                             "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotExistErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
                             "ofType": null
                         },
                         {
@@ -45027,6 +45486,11 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "CustomPostAncestorRecursionErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "CustomPostDoesNotExistErrorPayload",
                             "ofType": null
                         },
@@ -45374,6 +45838,11 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "CustomPostAncestorRecursionErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "CustomPostDoesNotExistErrorPayload",
                             "ofType": null
                         },
@@ -45538,6 +46007,11 @@
                         {
                             "kind": "OBJECT",
                             "name": "CategoryTermDoesNotExistErrorPayload",
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostAncestorRecursionErrorPayload",
                             "ofType": null
                         },
                         {

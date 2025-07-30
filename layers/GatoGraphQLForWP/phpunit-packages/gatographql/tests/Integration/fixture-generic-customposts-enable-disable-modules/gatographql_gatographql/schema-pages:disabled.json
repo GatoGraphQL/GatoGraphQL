@@ -2,6 +2,24 @@
     "data": {
         "customPosts": [
             {
+                "id": 1705,
+                "title": "Page with parent only",
+                "customPostType": "page",
+                "__typename": "GenericCustomPost"
+            },
+            {
+                "id": 1703,
+                "title": "Page with parent and children",
+                "customPostType": "page",
+                "__typename": "GenericCustomPost"
+            },
+            {
+                "id": 1701,
+                "title": "Page with several levels of children",
+                "customPostType": "page",
+                "__typename": "GenericCustomPost"
+            },
+            {
                 "id": 1666,
                 "title": "Another Page",
                 "customPostType": "page",

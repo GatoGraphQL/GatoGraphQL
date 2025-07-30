@@ -3704,6 +3704,33 @@
         ],
         "customPostsExcludeByCategoryIDs": [
             {
+                "id": 1705,
+                "title": "Page with parent only"
+            },
+            {
+                "id": 1703,
+                "title": "Page with parent and children"
+            },
+            {
+                "id": 1701,
+                "title": "Page with several levels of children"
+            },
+            {
+                "id": 1688,
+                "title": "Dummy CPT with parent only",
+                "categories": []
+            },
+            {
+                "id": 1684,
+                "title": "Dummy CPT with parent and children",
+                "categories": []
+            },
+            {
+                "id": 1682,
+                "title": "Dummy CPT with several levels of children",
+                "categories": []
+            },
+            {
                 "id": 1132,
                 "title": "Synced pattern with nested blocks",
                 "categories": []
@@ -3720,68 +3747,6 @@
             {
                 "id": 1649,
                 "title": "Nulla numquam totam eaque",
-                "categories": []
-            },
-            {
-                "id": 1619,
-                "title": "Error debitis nulla vel est",
-                "categories": [
-                    {
-                        "id": 20
-                    }
-                ]
-            },
-            {
-                "id": 1634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1656,
-                "title": "Dummy CPT with non-existing block",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1658,
-                "title": "Dummy CPT with no content",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1660,
-                "title": "Dummy CPT with non server-side-registered block",
                 "categories": []
             }
         ],
@@ -3873,6 +3838,33 @@
         ],
         "customPostsExcludeByCategorySlugs": [
             {
+                "id": 1705,
+                "title": "Page with parent only"
+            },
+            {
+                "id": 1703,
+                "title": "Page with parent and children"
+            },
+            {
+                "id": 1701,
+                "title": "Page with several levels of children"
+            },
+            {
+                "id": 1688,
+                "title": "Dummy CPT with parent only",
+                "categories": []
+            },
+            {
+                "id": 1684,
+                "title": "Dummy CPT with parent and children",
+                "categories": []
+            },
+            {
+                "id": 1682,
+                "title": "Dummy CPT with several levels of children",
+                "categories": []
+            },
+            {
                 "id": 1132,
                 "title": "Synced pattern with nested blocks",
                 "categories": []
@@ -3890,71 +3882,24 @@
                 "id": 1649,
                 "title": "Nulla numquam totam eaque",
                 "categories": []
-            },
-            {
-                "id": 1619,
-                "title": "Error debitis nulla vel est",
-                "categories": [
-                    {
-                        "id": 20
-                    }
-                ]
-            },
-            {
-                "id": 1634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1656,
-                "title": "Dummy CPT with non-existing block",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1658,
-                "title": "Dummy CPT with no content",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1660,
-                "title": "Dummy CPT with non server-side-registered block",
-                "categories": []
             }
         ],
         "customPostsExcludeByCategorySlugsOnCPT": [
+            {
+                "id": 1688,
+                "title": "Dummy CPT with parent only",
+                "categories": []
+            },
+            {
+                "id": 1684,
+                "title": "Dummy CPT with parent and children",
+                "categories": []
+            },
+            {
+                "id": 1682,
+                "title": "Dummy CPT with several levels of children",
+                "categories": []
+            },
             {
                 "id": 1649,
                 "title": "Nulla numquam totam eaque",
@@ -4014,28 +3959,6 @@
                         "id": 28
                     }
                 ]
-            },
-            {
-                "id": 1634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 28
-                    }
-                ]
-            },
-            {
-                "id": 1636,
-                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
-                "categories": []
-            },
-            {
-                "id": 1641,
-                "title": "Impedit necessitatibus dolor est",
-                "categories": []
             }
         ],
         "postCategories": [

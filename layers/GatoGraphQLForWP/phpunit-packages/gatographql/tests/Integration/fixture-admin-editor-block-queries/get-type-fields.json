@@ -174,6 +174,17 @@
           "description": "Error payload for: \"Comments are not supported by the custom post type\""
         },
         {
+          "name": "CustomPostAncestorRecursionErrorPayload",
+          "namespacedName": "CustomPostAncestorRecursionErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The custom post is an ancestor of itself\""
+        },
+        {
           "name": "CustomPostDoesNotExistErrorPayload",
           "namespacedName": "CustomPostDoesNotExistErrorPayload",
           "fields": [
@@ -275,6 +286,9 @@
           "namespacedName": "GenericCategory",
           "fields": [
             {
+              "name": "ancestors"
+            },
+            {
               "name": "count"
             },
             {
@@ -337,6 +351,9 @@
           "namespacedName": "GenericCustomPost",
           "fields": [
             {
+              "name": "ancestors"
+            },
+            {
               "name": "areCommentsOpen"
             },
             {
@@ -359,6 +376,12 @@
             },
             {
               "name": "categoryNames"
+            },
+            {
+              "name": "childCount"
+            },
+            {
+              "name": "children"
             },
             {
               "name": "commentCount"
@@ -400,6 +423,9 @@
               "name": "isStatus"
             },
             {
+              "name": "menuOrder"
+            },
+            {
               "name": "meta"
             },
             {
@@ -418,6 +444,9 @@
               "name": "modifiedDateStr"
             },
             {
+              "name": "parent"
+            },
+            {
               "name": "rawContent"
             },
             {
@@ -434,6 +463,9 @@
             },
             {
               "name": "slug"
+            },
+            {
+              "name": "slugPath"
             },
             {
               "name": "status"
@@ -1230,6 +1262,9 @@
           "namespacedName": "Page",
           "fields": [
             {
+              "name": "ancestors"
+            },
+            {
               "name": "areCommentsOpen"
             },
             {
@@ -1332,6 +1367,9 @@
               "name": "slug"
             },
             {
+              "name": "slugPath"
+            },
+            {
               "name": "status"
             },
             {
@@ -1432,6 +1470,9 @@
               "name": "isSticky"
             },
             {
+              "name": "menuOrder"
+            },
+            {
               "name": "meta"
             },
             {
@@ -1471,6 +1512,9 @@
               "name": "slug"
             },
             {
+              "name": "slugPath"
+            },
+            {
               "name": "status"
             },
             {
@@ -1502,6 +1546,9 @@
           "name": "PostCategory",
           "namespacedName": "PostCategory",
           "fields": [
+            {
+              "name": "ancestors"
+            },
             {
               "name": "childCount"
             },
@@ -4360,6 +4407,9 @@
               "name": "slug"
             },
             {
+              "name": "slugPath"
+            },
+            {
               "name": "status"
             },
             {
@@ -4627,6 +4677,13 @@
           "description": "Input to paginate custom posts"
         },
         {
+          "name": "CustomPostParentByInput",
+          "namespacedName": "CustomPostParentByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to specify the custom post parent"
+        },
+        {
           "name": "CustomPostSortInput",
           "namespacedName": "CustomPostSortInput",
           "fields": null,
@@ -4807,13 +4864,6 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Oneof input to specify the property and data to fetch a page"
-        },
-        {
-          "name": "WithParentCustomPostChildrenFilterInput",
-          "namespacedName": "WithParentCustomPostChildrenFilterInput",
-          "fields": null,
-          "kind": "INPUT_OBJECT",
-          "description": "Input to filter the page children"
         },
         {
           "name": "PageContentInput",
@@ -5430,6 +5480,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter users"
+        },
+        {
+          "name": "WithParentCustomPostChildrenFilterInput",
+          "namespacedName": "WithParentCustomPostChildrenFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter the custom post children"
         },
         {
           "name": "CommentOrderByEnum",

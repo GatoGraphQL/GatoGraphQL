@@ -461,6 +461,27 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CustomPostAncestorRecursionErrorPayload",
+                    "extensions": {
+                        "elementName": "CustomPostAncestorRecursionErrorPayload",
+                        "namespacedName": "CustomPostAncestorRecursionErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "CustomPostDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "CustomPostDoesNotExistErrorPayload",
@@ -661,6 +682,14 @@
                         "isOneOf": false
                     },
                     "fields": [
+                        {
+                            "name": "ancestors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
                         {
                             "name": "count",
                             "extensions": {
@@ -873,6 +902,14 @@
                     },
                     "fields": [
                         {
+                            "name": "ancestors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "areCommentsOpen",
                             "extensions": {
                                 "isMutation": false,
@@ -1000,6 +1037,48 @@
                                         "isSensitiveDataElement": false
                                     }
                                 },
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "pagination",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "childCount",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "children",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
                                 {
                                     "name": "filter",
                                     "extensions": {
@@ -1178,6 +1257,14 @@
                             ]
                         },
                         {
+                            "name": "menuOrder",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "meta",
                             "extensions": {
                                 "isMutation": false,
@@ -1274,6 +1361,14 @@
                             ]
                         },
                         {
+                            "name": "parent",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "rawContent",
                             "extensions": {
                                 "isMutation": false,
@@ -1315,6 +1410,14 @@
                         },
                         {
                             "name": "slug",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "slugPath",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -4610,6 +4713,14 @@
                     },
                     "fields": [
                         {
+                            "name": "ancestors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "areCommentsOpen",
                             "extensions": {
                                 "isMutation": false,
@@ -5030,6 +5141,14 @@
                             "args": []
                         },
                         {
+                            "name": "slugPath",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "status",
                             "extensions": {
                                 "isMutation": false,
@@ -5417,6 +5536,14 @@
                             "args": []
                         },
                         {
+                            "name": "menuOrder",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "meta",
                             "extensions": {
                                 "isMutation": false,
@@ -5569,6 +5696,14 @@
                             "args": []
                         },
                         {
+                            "name": "slugPath",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "status",
                             "extensions": {
                                 "isMutation": false,
@@ -5708,6 +5843,14 @@
                         "isOneOf": false
                     },
                     "fields": [
+                        {
+                            "name": "ancestors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
                         {
                             "name": "childCount",
                             "extensions": {
@@ -15579,6 +15722,14 @@
                             "args": []
                         },
                         {
+                            "name": "slugPath",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "status",
                             "extensions": {
                                 "isMutation": false,
@@ -16513,6 +16664,31 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CustomPostParentByInput",
+                    "extensions": {
+                        "elementName": "CustomPostParentByInput",
+                        "namespacedName": "CustomPostParentByInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugPath",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "CustomPostSortInput",
                     "extensions": {
                         "elementName": "CustomPostSortInput",
@@ -17295,79 +17471,6 @@
                     "enumValues": null
                 },
                 {
-                    "name": "WithParentCustomPostChildrenFilterInput",
-                    "extensions": {
-                        "elementName": "WithParentCustomPostChildrenFilterInput",
-                        "namespacedName": "WithParentCustomPostChildrenFilterInput",
-                        "possibleValues": null,
-                        "isOneOf": false
-                    },
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "author",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "dateQuery",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "excludeIDs",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "hasPassword",
-                            "extensions": {
-                                "isSensitiveDataElement": true
-                            }
-                        },
-                        {
-                            "name": "ids",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "metaQuery",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "password",
-                            "extensions": {
-                                "isSensitiveDataElement": true
-                            }
-                        },
-                        {
-                            "name": "search",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "slugs",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "status",
-                            "extensions": {
-                                "isSensitiveDataElement": true
-                            }
-                        }
-                    ],
-                    "enumValues": null
-                },
-                {
                     "name": "PageContentInput",
                     "extensions": {
                         "elementName": "PageContentInput",
@@ -18024,7 +18127,19 @@
                             }
                         },
                         {
+                            "name": "menuOrder",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -18280,7 +18395,19 @@
                             }
                         },
                         {
+                            "name": "menuOrder",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -18408,7 +18535,19 @@
                             }
                         },
                         {
+                            "name": "menuOrder",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -20194,7 +20333,19 @@
                             }
                         },
                         {
+                            "name": "menuOrder",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -20505,7 +20656,19 @@
                             }
                         },
                         {
+                            "name": "menuOrder",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -20645,7 +20808,19 @@
                             }
                         },
                         {
+                            "name": "menuOrder",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -21368,6 +21543,67 @@
                             "name": "searchBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "WithParentCustomPostChildrenFilterInput",
+                    "extensions": {
+                        "elementName": "WithParentCustomPostChildrenFilterInput",
+                        "namespacedName": "WithParentCustomPostChildrenFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "author",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "dateQuery",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "excludeIDs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "ids",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "metaQuery",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isSensitiveDataElement": true
                             }
                         }
                     ],

@@ -40,6 +40,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CustomPostAncestorRecursionErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "CustomPostDoesNotExistErrorPayload"
         },
         {
@@ -740,6 +744,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CustomPostParentByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CustomPostSortInput"
         },
         {
@@ -841,10 +849,6 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "PageByInput"
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "WithParentCustomPostChildrenFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -1197,6 +1201,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "UsersFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "WithParentCustomPostChildrenFilterInput"
         },
         {
           "kind": "ENUM",

@@ -5236,6 +5236,25 @@
                 "id": 1680,
                 "title": "Dummy CPT with server-side-registered block",
                 "tags": []
+            },
+            {
+                "id": 1682,
+                "title": "Dummy CPT with several levels of children",
+                "tags": []
+            },
+            {
+                "id": 1684,
+                "title": "Dummy CPT with parent and children",
+                "tags": []
+            },
+            {
+                "id": 1688,
+                "title": "Dummy CPT with parent only",
+                "tags": []
+            },
+            {
+                "id": 1701,
+                "title": "Page with several levels of children"
             }
         ],
         "customPostsExcludeByTagSlugsOnCPT": [
@@ -5256,6 +5275,21 @@
             {
                 "id": 1680,
                 "title": "Dummy CPT with server-side-registered block",
+                "tags": []
+            },
+            {
+                "id": 1682,
+                "title": "Dummy CPT with several levels of children",
+                "tags": []
+            },
+            {
+                "id": 1684,
+                "title": "Dummy CPT with parent and children",
+                "tags": []
+            },
+            {
+                "id": 1688,
+                "title": "Dummy CPT with parent only",
                 "tags": []
             }
         ],
