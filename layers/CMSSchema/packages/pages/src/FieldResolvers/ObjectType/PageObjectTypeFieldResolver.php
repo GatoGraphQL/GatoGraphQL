@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Pages\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
-use PoPCMSSchema\Pages\TypeResolvers\InputObjectType\PageChildrenFilterInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\WithParentCustomPostChildrenFilterInputObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\InputObjectType\PagePaginationInputObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -29,7 +29,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
-    private ?PageChildrenFilterInputObjectTypeResolver $pageChildrenFilterInputObjectTypeResolver = null;
+    private ?WithParentCustomPostChildrenFilterInputObjectTypeResolver $withParentCustomPostChildrenFilterInputObjectTypeResolver = null;
     private ?PagePaginationInputObjectTypeResolver $pagePaginationInputObjectTypeResolver = null;
     private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
 
@@ -60,14 +60,14 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->pageTypeAPI;
     }
-    final protected function getPageChildrenFilterInputObjectTypeResolver(): PageChildrenFilterInputObjectTypeResolver
+    final protected function getWithParentCustomPostChildrenFilterInputObjectTypeResolver(): WithParentCustomPostChildrenFilterInputObjectTypeResolver
     {
-        if ($this->pageChildrenFilterInputObjectTypeResolver === null) {
-            /** @var PageChildrenFilterInputObjectTypeResolver */
-            $pageChildrenFilterInputObjectTypeResolver = $this->instanceManager->getInstance(PageChildrenFilterInputObjectTypeResolver::class);
-            $this->pageChildrenFilterInputObjectTypeResolver = $pageChildrenFilterInputObjectTypeResolver;
+        if ($this->withParentCustomPostChildrenFilterInputObjectTypeResolver === null) {
+            /** @var WithParentCustomPostChildrenFilterInputObjectTypeResolver */
+            $withParentCustomPostChildrenFilterInputObjectTypeResolver = $this->instanceManager->getInstance(WithParentCustomPostChildrenFilterInputObjectTypeResolver::class);
+            $this->withParentCustomPostChildrenFilterInputObjectTypeResolver = $withParentCustomPostChildrenFilterInputObjectTypeResolver;
         }
-        return $this->pageChildrenFilterInputObjectTypeResolver;
+        return $this->withParentCustomPostChildrenFilterInputObjectTypeResolver;
     }
     final protected function getPagePaginationInputObjectTypeResolver(): PagePaginationInputObjectTypeResolver
     {
@@ -156,7 +156,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'children' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getPageChildrenFilterInputObjectTypeResolver(),
+                    'filter' => $this->getWithParentCustomPostChildrenFilterInputObjectTypeResolver(),
                     'pagination' => $this->getPagePaginationInputObjectTypeResolver(),
                     'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
                 ]
@@ -164,7 +164,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'childCount' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getPageChildrenFilterInputObjectTypeResolver(),
+                    'filter' => $this->getWithParentCustomPostChildrenFilterInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,

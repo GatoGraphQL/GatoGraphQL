@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -12,7 +12,7 @@ use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeParentIDsFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\ParentIDsFilterInput;
 
-abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver implements PagesFilterInputObjectTypeResolverInterface
+abstract class AbstractWithParentCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver implements WithParentCustomPostsFilterInputObjectTypeResolverInterface
 {
     private ?ParentIDFilterInput $parentIDFilterInput = null;
     private ?ParentIDsFilterInput $parentIDsFilterInput = null;
@@ -66,9 +66,9 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractCustom
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'parentID' => $this->__('Filter pages with the given parent IDs. \'0\' means \'no parent\'', 'pages'),
-            'parentIDs' => $this->__('Filter pages with the given parent ID. \'0\' means \'no parent\'', 'pages'),
-            'excludeParentIDs' => $this->__('Exclude pages with the given parent IDs', 'pages'),
+            'parentID' => $this->__('Filter custom posts with the given parent IDs. \'0\' means \'no parent\'', 'customposts'),
+            'parentIDs' => $this->__('Filter custom posts with the given parent ID. \'0\' means \'no parent\'', 'customposts'),
+            'excludeParentIDs' => $this->__('Exclude custom posts with the given parent IDs', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
