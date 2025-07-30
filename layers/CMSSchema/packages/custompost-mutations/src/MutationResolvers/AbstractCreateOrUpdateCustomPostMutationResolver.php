@@ -543,7 +543,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E10,
+                        MutationErrorFeedbackItemProvider::E5,
                         [
                             $parentID,
                             $customPostType,
@@ -574,7 +574,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E11,
+                    MutationErrorFeedbackItemProvider::E10,
                     [
                         $slugPath,
                         $customPostType,
