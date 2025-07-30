@@ -121,4 +121,17 @@ query {
     id
     title
   }
+
+  pagesWithAncestors: pages(filter: { ids: [1705, 1703, 1701] }, sort: { by: ID, order: ASC }) {
+    id
+    title
+    parent {
+      id
+      title
+    }
+    ancestors {
+      id
+      title
+    }
+  }
 }
