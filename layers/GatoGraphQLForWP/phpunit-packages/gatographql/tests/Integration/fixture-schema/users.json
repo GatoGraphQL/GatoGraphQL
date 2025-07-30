@@ -224,8 +224,38 @@
                     "read",
                     "upload_files"
                 ],
-                "customPostCount": 4,
+                "customPostCount": 10,
                 "customPosts": [
+                    {
+                        "__typename": "Page",
+                        "id": 1705,
+                        "title": "Page with parent only"
+                    },
+                    {
+                        "__typename": "Page",
+                        "id": 1703,
+                        "title": "Page with parent and children"
+                    },
+                    {
+                        "__typename": "Page",
+                        "id": 1701,
+                        "title": "Page with several levels of children"
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1688,
+                        "title": "Dummy CPT with parent only"
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1684,
+                        "title": "Dummy CPT with parent and children"
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 1682,
+                        "title": "Dummy CPT with several levels of children"
+                    },
                     {
                         "__typename": "GenericCustomPost",
                         "id": 1619,
