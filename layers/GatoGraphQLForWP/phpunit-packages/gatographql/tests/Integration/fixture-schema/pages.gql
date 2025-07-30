@@ -42,6 +42,10 @@ query {
       id
       title
     }
+    ancestors {
+      id
+      title
+    }
     rawContent
     rawTitle
     rawExcerpt
