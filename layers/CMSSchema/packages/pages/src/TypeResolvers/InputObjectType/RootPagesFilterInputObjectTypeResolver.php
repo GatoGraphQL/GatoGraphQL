@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractWithParentCustomPostsFilterInputObjectTypeResolver;
-
-class RootPagesFilterInputObjectTypeResolver extends AbstractWithParentCustomPostsFilterInputObjectTypeResolver
+class RootPagesFilterInputObjectTypeResolver extends AbstractPagesFilterInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
