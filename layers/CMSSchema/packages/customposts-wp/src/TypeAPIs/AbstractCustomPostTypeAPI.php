@@ -308,7 +308,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             ];
             unset($query['date-to']);
         }
-        
+
         // A page can have an ancestor
         if (isset($query['parent-id'])) {
             $query['post_parent'] = $query['parent-id'];

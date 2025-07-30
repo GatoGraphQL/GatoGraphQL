@@ -70,7 +70,7 @@ abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements
         }
 
         $ancestorIDs = [];
-        
+
         // Start with the current post
         $currentPostObjectOrID = $customPostObjectOrID;
 
