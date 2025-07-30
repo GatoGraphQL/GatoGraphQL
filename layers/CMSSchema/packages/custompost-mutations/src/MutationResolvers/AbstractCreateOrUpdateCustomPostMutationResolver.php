@@ -132,6 +132,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 /** @var stdClass|null */
                 $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
                 if ($parentBy !== null) {
+                    $parentCustomPostID = null;
                     $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
                     /**
                      * If there's no custom post type, then it's a nested update mutation,
@@ -143,21 +144,48 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                         $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
                     }
                     if (isset($parentBy->{MutationInputProperties::ID})) {
-                        $parentID = $parentBy->{MutationInputProperties::ID};
+                        $parentCustomPostID = $parentBy->{MutationInputProperties::ID};
                         $this->validateParentCustomPostExists(
-                            $parentID,
+                            $parentCustomPostID,
                             $customPostType,
                             $fieldDataAccessor,
                             $objectTypeFieldResolutionFeedbackStore,
                         );
                     } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
                         $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
-                        $this->validateCustomPostBySlugPathExists(
+                        $parentCustomPostID = $this->validateCustomPostBySlugPathExists(
                             $parentSlugPath,
                             $customPostType,
                             $fieldDataAccessor,
                             $objectTypeFieldResolutionFeedbackStore,
                         );
+                    }
+
+                    if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+                        return;
+                    }
+
+                    // Validate the parent does not create a recursion
+                    if ($parentCustomPostID !== null) {
+                        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+                        if ($customPostID === $parentCustomPostID) {
+                            $objectTypeFieldResolutionFeedbackStore->addError(
+                                new ObjectTypeFieldResolutionFeedback(
+                                    new FeedbackItemResolution(
+                                        MutationErrorFeedbackItemProvider::class,
+                                        MutationErrorFeedbackItemProvider::E11,
+                                    ),
+                                    $fieldDataAccessor->getField(),
+                                )
+                            );
+                        } elseif ($customPostID !== null) {
+                            $this->validateParentCustomPostDoesNotCreateRecursion(
+                                $parentCustomPostID,
+                                $customPostID,
+                                $fieldDataAccessor,
+                                $objectTypeFieldResolutionFeedbackStore,
+                            );
+                        }
                     }
                 }
             }
@@ -564,14 +592,14 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        $parentPost = $this->getCustomPostTypeAPI()->getCustomPostBySlugPath(
+    ): string|int|null {
+        $parentCustomPost = $this->getCustomPostTypeAPI()->getCustomPostBySlugPath(
             $slugPath,
             $customPostType
         );
 
-        if ($parentPost !== null) {
-            return;
+        if ($parentCustomPost !== null) {
+            return $this->getCustomPostTypeAPI()->getID($parentCustomPost);
         }
 
         $objectTypeFieldResolutionFeedbackStore->addError(
@@ -582,6 +610,38 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                     [
                         $slugPath,
                         $customPostType,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
+        );
+
+        return null;
+    }
+
+    protected function validateParentCustomPostDoesNotCreateRecursion(
+        string|int $parentCustomPostID,
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $parentCustomPostAncestorIDs = $this->getCustomPostTypeAPI()->getCustomPostAncestorIDs($parentCustomPostID);
+        if ($parentCustomPostAncestorIDs === null) {
+            return;
+        }
+
+        if (!in_array($customPostID, $parentCustomPostAncestorIDs)) {
+            return;
+        }
+
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E12,
+                    [
+                        $parentCustomPostID,
+                        $customPostID,
                     ]
                 ),
                 $fieldDataAccessor->getField(),

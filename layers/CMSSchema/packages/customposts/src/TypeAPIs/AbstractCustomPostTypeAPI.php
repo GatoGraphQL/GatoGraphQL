@@ -62,7 +62,7 @@ abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements
     /**
      * @return array<int|string>|null
      */
-    public function getAncestorCustomPostIDs(string|int|object $customPostObjectOrID): ?array
+    public function getCustomPostAncestorIDs(string|int|object $customPostObjectOrID): ?array
     {
         $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
@@ -70,7 +70,7 @@ abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements
         }
 
         $ancestorIDs = [];
-        
+
         // Start with the current post
         $currentPostObjectOrID = $customPostObjectOrID;
 

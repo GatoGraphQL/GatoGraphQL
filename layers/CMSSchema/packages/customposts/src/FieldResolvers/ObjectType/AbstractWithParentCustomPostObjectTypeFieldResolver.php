@@ -165,7 +165,7 @@ abstract class AbstractWithParentCustomPostObjectTypeFieldResolver extends Abstr
                 return $customPostTypeAPI->getCustomPostParentID($customPost);
             case 'ancestors':
                 /** @var array<int|string> */
-                return $customPostTypeAPI->getAncestorCustomPostIDs($customPost);
+                return $customPostTypeAPI->getCustomPostAncestorIDs($customPost);
         }
 
         $query = array_merge(

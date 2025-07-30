@@ -508,13 +508,13 @@ abstract class AbstractTaxonomyTypeAPI extends AbstractBasicService implements T
         while ($currentTerm->parent !== 0) {
             $parentID = $currentTerm->parent;
             $ancestors[] = $parentID;
-            
+
             // Get the parent term
             $parentTerm = get_term($parentID, $currentTerm->taxonomy);
             if ($parentTerm === null || $parentTerm instanceof WP_Error) {
                 break;
             }
-            
+
             $currentTerm = $parentTerm;
         }
 

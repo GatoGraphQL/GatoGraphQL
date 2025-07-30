@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostAncestorRecursionErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotHaveExpectedTypeErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload;
@@ -69,6 +70,18 @@ trait PayloadableCustomPostMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E10,
             ] => new CustomPostDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E11,
+            ] => new CustomPostAncestorRecursionErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E12,
+            ] => new CustomPostAncestorRecursionErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
