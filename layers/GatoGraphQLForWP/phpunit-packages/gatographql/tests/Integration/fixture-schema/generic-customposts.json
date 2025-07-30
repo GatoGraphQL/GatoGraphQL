@@ -5,7 +5,8 @@
                 "__typename": "GenericCustomPost",
                 "id": 1682,
                 "title": "Dummy CPT with several levels of children",
-                "parent": null
+                "parent": null,
+                "ancestors": []
             },
             {
                 "__typename": "GenericCustomPost",
