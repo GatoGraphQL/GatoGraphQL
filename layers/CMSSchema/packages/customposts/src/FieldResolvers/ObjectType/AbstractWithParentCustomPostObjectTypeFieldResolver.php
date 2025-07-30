@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\WithParentCustomPostChildrenFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -21,6 +23,9 @@ abstract class AbstractWithParentCustomPostObjectTypeFieldResolver extends Abstr
 {
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?WithParentCustomPostChildrenFilterInputObjectTypeResolver $withParentCustomPostChildrenFilterInputObjectTypeResolver = null;
+    private ?CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver = null;
+    private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
 
     final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
     {
@@ -39,6 +44,33 @@ abstract class AbstractWithParentCustomPostObjectTypeFieldResolver extends Abstr
             $this->intScalarTypeResolver = $intScalarTypeResolver;
         }
         return $this->intScalarTypeResolver;
+    }
+    final protected function getWithParentCustomPostChildrenFilterInputObjectTypeResolver(): WithParentCustomPostChildrenFilterInputObjectTypeResolver
+    {
+        if ($this->withParentCustomPostChildrenFilterInputObjectTypeResolver === null) {
+            /** @var WithParentCustomPostChildrenFilterInputObjectTypeResolver */
+            $withParentCustomPostChildrenFilterInputObjectTypeResolver = $this->instanceManager->getInstance(WithParentCustomPostChildrenFilterInputObjectTypeResolver::class);
+            $this->withParentCustomPostChildrenFilterInputObjectTypeResolver = $withParentCustomPostChildrenFilterInputObjectTypeResolver;
+        }
+        return $this->withParentCustomPostChildrenFilterInputObjectTypeResolver;
+    }
+    final protected function getCustomPostPaginationInputObjectTypeResolver(): CustomPostPaginationInputObjectTypeResolver
+    {
+        if ($this->customPostPaginationInputObjectTypeResolver === null) {
+            /** @var CustomPostPaginationInputObjectTypeResolver */
+            $customPostPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostPaginationInputObjectTypeResolver::class);
+            $this->customPostPaginationInputObjectTypeResolver = $customPostPaginationInputObjectTypeResolver;
+        }
+        return $this->customPostPaginationInputObjectTypeResolver;
+    }
+    final protected function getCustomPostSortInputObjectTypeResolver(): CustomPostSortInputObjectTypeResolver
+    {
+        if ($this->customPostSortInputObjectTypeResolver === null) {
+            /** @var CustomPostSortInputObjectTypeResolver */
+            $customPostSortInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostSortInputObjectTypeResolver::class);
+            $this->customPostSortInputObjectTypeResolver = $customPostSortInputObjectTypeResolver;
+        }
+        return $this->customPostSortInputObjectTypeResolver;
     }
 
     /**
@@ -88,6 +120,31 @@ abstract class AbstractWithParentCustomPostObjectTypeFieldResolver extends Abstr
             'children' => $this->__('Child custom posts', 'customposts'),
             'childCount' => $this->__('Number of child custom posts', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
+        };
+    }
+
+    /**
+     * @return array<string,InputTypeResolverInterface>
+     */
+    public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    {
+        $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        return match ($fieldName) {
+            'children' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getWithParentCustomPostChildrenFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getCustomPostPaginationInputObjectTypeResolver(),
+                    'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
+                ]
+            ),
+            'childCount' => array_merge(
+                $fieldArgNameTypeResolvers,
+                [
+                    'filter' => $this->getWithParentCustomPostChildrenFilterInputObjectTypeResolver(),
+                ]
+            ),
+            default => $fieldArgNameTypeResolvers,
         };
     }
 
