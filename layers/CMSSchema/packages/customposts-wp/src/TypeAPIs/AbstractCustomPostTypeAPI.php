@@ -572,6 +572,34 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $parentID;
     }
 
+    public function getAncestors(string|int|object $customPostObjectOrID): array
+    {
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return [];
+        }
+
+        $ancestors = [];
+        $currentPost = $customPost;
+
+        // Traverse up the hierarchy
+        while ($currentPost->post_parent !== 0) {
+            $parentID = $currentPost->post_parent;
+            $ancestors[] = $parentID;
+            
+            // Get the parent post
+            $parentPost = get_post($parentID);
+            if ($parentPost === null) {
+                break;
+            }
+            
+            $currentPost = $parentPost;
+        }
+
+        return $ancestors;
+    }
+
     public function getCustomPostBySlugPath(string $slugPath, string $customPostType): ?object
     {
         // If no custom post types specified, use all available types
