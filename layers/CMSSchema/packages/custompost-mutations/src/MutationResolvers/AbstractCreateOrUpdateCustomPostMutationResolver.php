@@ -152,7 +152,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                         );
                     } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
                         $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
-                        $this->validateCustomPostBySlugPathExists(
+                        $parentCustomPostID = $this->validateCustomPostBySlugPathExists(
                             $parentSlugPath,
                             $customPostType,
                             $fieldDataAccessor,
@@ -564,14 +564,14 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
+    ): string|int|null {
         $parentCustomPost = $this->getCustomPostTypeAPI()->getCustomPostBySlugPath(
             $slugPath,
             $customPostType
         );
 
         if ($parentCustomPost !== null) {
-            return;
+            return $parentCustomPost->ID;
         }
 
         $objectTypeFieldResolutionFeedbackStore->addError(
@@ -587,5 +587,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 $fieldDataAccessor->getField(),
             )
         );
+
+        return null;
     }
 }
