@@ -168,7 +168,17 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                     // Validate the parent does not create a recursion
                     if ($parentCustomPostID !== null) {
                         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-                        if ($customPostID !== null) {
+                        if ($customPostID === $parentCustomPostID) {
+                            $objectTypeFieldResolutionFeedbackStore->addError(
+                                new ObjectTypeFieldResolutionFeedback(
+                                    new FeedbackItemResolution(
+                                        MutationErrorFeedbackItemProvider::class,
+                                        MutationErrorFeedbackItemProvider::E11,
+                                    ),
+                                    $fieldDataAccessor->getField(),
+                                )
+                            );
+                        } elseif ($customPostID !== null) {
                             $this->validateParentCustomPostDoesNotCreateRecursion(
                                 $parentCustomPostID,
                                 $customPostID,
@@ -628,7 +638,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             new ObjectTypeFieldResolutionFeedback(
                 new FeedbackItemResolution(
                     MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E11,
+                    MutationErrorFeedbackItemProvider::E12,
                     [
                         $parentCustomPostID,
                         $customPostID,
