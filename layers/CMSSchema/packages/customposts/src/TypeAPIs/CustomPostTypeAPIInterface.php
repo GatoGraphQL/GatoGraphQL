@@ -45,7 +45,7 @@ interface CustomPostTypeAPIInterface
      *
      * @return array<int|string>
      */
-    public function getAncestors(string|int|object $customPostObjectOrID): array;
+    public function getAncestorCustomPostIDs(string|int|object $customPostObjectOrID): array;
     /**
      * Get the custom post with provided slug path or, if it doesn't exist, null
      *
