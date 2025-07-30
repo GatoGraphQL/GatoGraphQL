@@ -143,9 +143,9 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                         $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
                     }
                     if (isset($parentBy->{MutationInputProperties::ID})) {
-                        $parentID = $parentBy->{MutationInputProperties::ID};
+                        $parentCustomPostID = $parentBy->{MutationInputProperties::ID};
                         $this->validateParentCustomPostExists(
-                            $parentID,
+                            $parentCustomPostID,
                             $customPostType,
                             $fieldDataAccessor,
                             $objectTypeFieldResolutionFeedbackStore,
