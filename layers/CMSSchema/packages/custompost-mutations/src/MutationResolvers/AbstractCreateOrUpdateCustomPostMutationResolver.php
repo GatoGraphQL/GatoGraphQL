@@ -132,24 +132,18 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             /** @var stdClass|null */
             $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
             if ($parentBy !== null) {
-                $parentID = null;
-                $parentSlugPath = null;
                 $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
                 
                 if (isset($parentBy->{MutationInputProperties::ID})) {
                     $parentID = $parentBy->{MutationInputProperties::ID};
-                } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
-                    $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
-                }
-                
-                if ($parentID !== null) {
                     $this->validateParentExists(
                         $parentID,
                         $customPostType,
                         $fieldDataAccessor,
                         $objectTypeFieldResolutionFeedbackStore,
                     );
-                } elseif ($parentSlugPath !== null) {
+                } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
+                    $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
                     $this->validateParentBySlugPathExists(
                         $parentSlugPath,
                         $fieldDataAccessor,
