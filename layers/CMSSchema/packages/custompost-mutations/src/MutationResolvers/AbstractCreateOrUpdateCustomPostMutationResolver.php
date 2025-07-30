@@ -143,7 +143,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                     );
                 } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
                     $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
-                    $this->validateParentBySlugPathExists(
+                    $this->validateCustomPostBySlugPathExists(
                         $parentSlugPath,
                         $customPostType,
                         $fieldDataAccessor,
@@ -555,7 +555,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         }
     }
 
-    protected function validateParentBySlugPathExists(
+    protected function validateCustomPostBySlugPathExists(
         string $slugPath,
         string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
