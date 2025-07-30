@@ -544,10 +544,15 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     public function getCustomPost(int|string $id): ?object
     {
+        if ($id === '') {
+            return null;
+        }
+
         $id = (int) $id;
         if ($id === 0) {
             return null;
         }
+
         /** @var object|null */
         return get_post($id);
     }
