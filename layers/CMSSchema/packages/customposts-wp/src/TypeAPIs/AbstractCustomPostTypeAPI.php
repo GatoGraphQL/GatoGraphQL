@@ -440,7 +440,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         } else {
             $customPostID = $customPostObjectOrID;
             /** @var WP_Post|null */
-            $customPost = \get_post((int)$customPostID);
+            $customPost = $this->getCustomPost((int)$customPostID);
         }
         return [
             $customPost,
@@ -455,7 +455,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         }
         /** @var string|int */
         $customPostID = $customPostObjectOrID;
-        return \get_post((int)$customPostID);
+        return $this->getCustomPost((int)$customPostID);
     }
 
     protected function getCustomPostID(string|int|object $customPostObjectOrID): int
