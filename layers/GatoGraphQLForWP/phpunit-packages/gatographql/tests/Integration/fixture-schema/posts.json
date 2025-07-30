@@ -31,6 +31,7 @@
                 "id": 1,
                 "isStatus": false,
                 "isSticky": false,
+                "menuOrder": 0,
                 "metaValue": null,
                 "metaValue2": null,
                 "meta": {},
@@ -88,6 +89,7 @@
                 "id": 1113,
                 "isStatus": false,
                 "isSticky": false,
+                "menuOrder": 0,
                 "metaValue": "1361",
                 "metaValue2": "default",
                 "meta": {
@@ -169,6 +171,7 @@
                 "id": 1116,
                 "isStatus": false,
                 "isSticky": false,
+                "menuOrder": 0,
                 "metaValue": "1361",
                 "metaValue2": null,
                 "meta": {
