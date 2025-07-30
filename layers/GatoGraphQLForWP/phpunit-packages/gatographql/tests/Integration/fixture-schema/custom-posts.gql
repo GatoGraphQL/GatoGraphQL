@@ -28,6 +28,7 @@ query {
       }
       id
       isStatus(status: pending)
+      menuOrder
       metaValue(key: "_thumbnail_id")
       metaValue2: metaValue(key: "_wp_page_template")
       meta(keys: ["_thumbnail_id", "_wp_page_template"])
