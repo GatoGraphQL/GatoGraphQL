@@ -132,6 +132,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 /** @var stdClass|null */
                 $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
                 if ($parentBy !== null) {
+                    $parentCustomPostID = null;
                     $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
                     /**
                      * If there's no custom post type, then it's a nested update mutation,
@@ -158,6 +159,23 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                             $fieldDataAccessor,
                             $objectTypeFieldResolutionFeedbackStore,
                         );
+                    }
+
+                    if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+                        return;
+                    }
+
+                    // Validate the parent does not create a recursion
+                    if ($parentCustomPostID !== null) {
+                        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+                        if ($customPostID !== null) {
+                            $this->validateParentCustomPostDoesNotCreateRecursion(
+                                $parentCustomPostID,
+                                $customPostID,
+                                $fieldDataAccessor,
+                                $objectTypeFieldResolutionFeedbackStore,
+                            );
+                        }
                     }
                 }
             }
@@ -589,5 +607,35 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         );
 
         return null;
+    }
+
+    protected function validateParentCustomPostDoesNotCreateRecursion(
+        string|int $parentCustomPostID,
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $ancestorIDs = $this->getCustomPostTypeAPI()->getCustomPostAncestorIDs($parentCustomPostID);
+        if ($ancestorIDs === null) {
+            return;
+        }
+
+        if (!in_array($customPostID, $ancestorIDs)) {
+            return;
+        }
+
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E11,
+                    [
+                        $parentCustomPostID,
+                        $customPostID,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
+        );
     }
 }
