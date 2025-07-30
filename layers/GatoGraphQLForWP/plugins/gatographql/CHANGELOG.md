@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added `slugPath` field to CustomPost (comprising the slug for all ancestor posts) (#3163)
 - Added fields `GenericCustomPost.ancestors` and `Page.ancestors` (#3167)
 - Added fields `children` and `childCount` to `GenericCustomPost` (#3168)
+- Added field `Category.ancestors` (#3169)
 
 ### Improvements
 
