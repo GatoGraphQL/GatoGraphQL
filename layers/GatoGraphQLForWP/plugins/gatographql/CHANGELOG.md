@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added fields `GenericCustomPost.ancestors` and `Page.ancestors` (#3167)
 - Added fields `children` and `childCount` to `GenericCustomPost` (#3168)
 - Added field `Category.ancestors` (#3169)
+- Added field `CustomPost.menuOrder` (#3172)
 
 ### Improvements
 

@@ -98,8 +98,8 @@
             {
                 "areCommentsOpen": false,
                 "author": {
-                    "id": 1,
-                    "name": "admin"
+                    "id": 5,
+                    "name": "Author Marquez"
                 },
                 "children": [
                     {
@@ -124,13 +124,9 @@
                 "metaValue": null,
                 "metaValue2": null,
                 "meta": {},
-                "metaKeys": [
-                    "_edit_lock"
-                ],
+                "metaKeys": [],
                 "includingMetaKeys": [],
-                "excludingMetaKeys": [
-                    "_edit_lock"
-                ],
+                "excludingMetaKeys": [],
                 "includingAndExcludingMetaKeys": [],
                 "parent": null,
                 "ancestors": [],

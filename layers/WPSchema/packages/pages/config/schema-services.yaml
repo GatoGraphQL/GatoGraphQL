@@ -3,8 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPWPSchema\Pages\FieldResolvers\:
-        resource: '../src/FieldResolvers/*'
-
     PoPWPSchema\Pages\SchemaHooks\:
         resource: '../src/SchemaHooks/*'
