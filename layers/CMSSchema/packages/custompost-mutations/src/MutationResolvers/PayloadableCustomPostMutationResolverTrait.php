@@ -67,6 +67,12 @@ trait PayloadableCustomPostMutationResolverTrait
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E10,
+            ] => new CustomPostDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
             ] => new CustomPostDoesNotHaveExpectedTypeErrorPayload(
                 $feedbackItemResolution->getMessage(),
