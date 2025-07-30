@@ -545,12 +545,10 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
-        $customPostTypes = $customPostType !== '' ? [$customPostType] : $this->getCustomPostTypeAPI()->getCustomPostTypes();
+        $customPostTypes = $customPostType !== '' ? [$customPostType] : [];
         
-        /** @var WP_Post|null */
-        $parentPost = get_page_by_path(
+        $parentPost = $this->getCustomPostTypeAPI()->getCustomPostBySlugPath(
             $parentSlugPath,
-            OBJECT,
             $customPostTypes
         );
         
