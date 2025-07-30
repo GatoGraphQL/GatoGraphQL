@@ -14,7 +14,13 @@
                 "parent": {
                     "id": 1682,
                     "title": "Dummy CPT with several levels of children"
-                }
+                },
+                "ancestors": [
+                    {
+                        "id": 1682,
+                        "title": "Dummy CPT with several levels of children"
+                    }
+                ]
             },
             {
                 "__typename": "GenericCustomPost",
@@ -23,7 +29,17 @@
                 "parent": {
                     "id": 1684,
                     "title": "Dummy CPT with parent and children"
-                }
+                },
+                "ancestors": [
+                    {
+                        "id": 1684,
+                        "title": "Dummy CPT with parent and children"
+                    },
+                    {
+                        "id": 1682,
+                        "title": "Dummy CPT with several levels of children"
+                    }
+                ]
             }
         ]
     }
