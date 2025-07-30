@@ -625,12 +625,12 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $ancestorIDs = $this->getCustomPostTypeAPI()->getCustomPostAncestorIDs($parentCustomPostID);
-        if ($ancestorIDs === null) {
+        $parentCustomPostAncestorIDs = $this->getCustomPostTypeAPI()->getCustomPostAncestorIDs($parentCustomPostID);
+        if ($parentCustomPostAncestorIDs === null) {
             return;
         }
 
-        if (!in_array($customPostID, $ancestorIDs)) {
+        if (!in_array($customPostID, $parentCustomPostAncestorIDs)) {
             return;
         }
 
