@@ -589,7 +589,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $ancestors[] = $parentID;
             
             // Get the parent post
-            $parentPost = get_post($parentID);
+            $parentPost = $this->getCustomPost($parentID);
             if ($parentPost === null) {
                 break;
             }
