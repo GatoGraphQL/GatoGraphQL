@@ -308,7 +308,23 @@
                 "id": 1701,
                 "title": "Page with several levels of children",
                 "parent": null,
-                "ancestors": []
+                "ancestors": [],
+                "children": [
+                    {
+                        "id": 1703,
+                        "title": "Page with parent and children"
+                    }
+                ],
+                "draftChildren": [],
+                "publishedChildren": [
+                    {
+                        "id": 1703,
+                        "title": "Page with parent and children"
+                    }
+                ],
+                "childCount": 1,
+                "draftChildCount": 0,
+                "publishedChildCount": 1
             },
             {
                 "id": 1703,
@@ -322,7 +338,23 @@
                         "id": 1701,
                         "title": "Page with several levels of children"
                     }
-                ]
+                ],
+                "children": [
+                    {
+                        "id": 1705,
+                        "title": "Page with parent only"
+                    }
+                ],
+                "draftChildren": [],
+                "publishedChildren": [
+                    {
+                        "id": 1705,
+                        "title": "Page with parent only"
+                    }
+                ],
+                "childCount": 1,
+                "draftChildCount": 0,
+                "publishedChildCount": 1
             },
             {
                 "id": 1705,
@@ -340,7 +372,13 @@
                         "id": 1701,
                         "title": "Page with several levels of children"
                     }
-                ]
+                ],
+                "children": [],
+                "draftChildren": [],
+                "publishedChildren": [],
+                "childCount": 0,
+                "draftChildCount": 0,
+                "publishedChildCount": 0
             }
         ]
     }

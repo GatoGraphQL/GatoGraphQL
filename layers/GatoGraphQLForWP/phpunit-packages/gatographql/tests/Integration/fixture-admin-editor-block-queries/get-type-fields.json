@@ -4809,8 +4809,8 @@
           "description": "Oneof input to specify the property and data to fetch a page"
         },
         {
-          "name": "PageChildrenFilterInput",
-          "namespacedName": "PageChildrenFilterInput",
+          "name": "WithParentCustomPostChildrenFilterInput",
+          "namespacedName": "WithParentCustomPostChildrenFilterInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter the page children"

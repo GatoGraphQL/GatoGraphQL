@@ -1432,7 +1432,7 @@
                     "fields": null
                 },
                 {
-                    "name": "PageChildrenFilterInput",
+                    "name": "WithParentCustomPostChildrenFilterInput",
                     "possibleTypes": null,
                     "fields": null
                 },

@@ -48,7 +48,7 @@ abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements
             }
 
             // Get the parent
-            $parentID = $this->getParentCustomPostID($currentPostObjectOrID);
+            $parentID = $this->getCustomPostParentID($currentPostObjectOrID);
             if ($parentID === null || $parentID === 0) {
                 break;
             }
@@ -77,7 +77,7 @@ abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements
         // Traverse up the hierarchy
         while ($currentPostObjectOrID !== null) {
             // Get the parent
-            $parentID = $this->getParentCustomPostID($currentPostObjectOrID);
+            $parentID = $this->getCustomPostParentID($currentPostObjectOrID);
             if ($parentID === null || $parentID === 0) {
                 break;
             }

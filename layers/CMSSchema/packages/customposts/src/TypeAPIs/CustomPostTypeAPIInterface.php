@@ -39,7 +39,7 @@ interface CustomPostTypeAPIInterface
      */
     public function getCustomPost(int|string $id): ?object;
     public function getCustomPostType(string|int|object $customPostObjectOrID): ?string;
-    public function getParentCustomPostID(string|int|object $customPostObjectOrID): int|string|null;
+    public function getCustomPostParentID(string|int|object $customPostObjectOrID): int|string|null;
     /**
      * Get the list of ancestor IDs (parent, grandparent, etc.)
      *

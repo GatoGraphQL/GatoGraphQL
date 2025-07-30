@@ -17295,10 +17295,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "PageChildrenFilterInput",
+                    "name": "WithParentCustomPostChildrenFilterInput",
                     "extensions": {
-                        "elementName": "PageChildrenFilterInput",
-                        "namespacedName": "PageChildrenFilterInput",
+                        "elementName": "WithParentCustomPostChildrenFilterInput",
+                        "namespacedName": "WithParentCustomPostChildrenFilterInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },

@@ -13,7 +13,16 @@
                         "title": "Dummy CPT with parent and children"
                     }
                 ],
-                "childCount": 1
+                "draftChildren": [],
+                "publishedChildren": [
+                    {
+                        "id": 1684,
+                        "title": "Dummy CPT with parent and children"
+                    }
+                ],
+                "childCount": 1,
+                "draftChildCount": 0,
+                "publishedChildCount": 1
             },
             {
                 "__typename": "GenericCustomPost",
@@ -35,7 +44,16 @@
                         "title": "Dummy CPT with parent only"
                     }
                 ],
-                "childCount": 1
+                "draftChildren": [],
+                "publishedChildren": [
+                    {
+                        "id": 1688,
+                        "title": "Dummy CPT with parent only"
+                    }
+                ],
+                "childCount": 1,
+                "draftChildCount": 0,
+                "publishedChildCount": 1
             },
             {
                 "__typename": "GenericCustomPost",
@@ -56,7 +74,11 @@
                     }
                 ],
                 "children": [],
-                "childCount": 0
+                "draftChildren": [],
+                "publishedChildren": [],
+                "childCount": 0,
+                "draftChildCount": 0,
+                "publishedChildCount": 0
             }
         ]
     }

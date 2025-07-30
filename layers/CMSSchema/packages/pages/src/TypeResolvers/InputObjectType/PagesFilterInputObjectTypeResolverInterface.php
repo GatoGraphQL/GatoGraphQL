@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\QueryableInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\WithParentCustomPostsFilterInputObjectTypeResolverInterface;
 
-interface PagesFilterInputObjectTypeResolverInterface extends QueryableInputObjectTypeResolverInterface
+interface PagesFilterInputObjectTypeResolverInterface extends WithParentCustomPostsFilterInputObjectTypeResolverInterface
 {
 }
