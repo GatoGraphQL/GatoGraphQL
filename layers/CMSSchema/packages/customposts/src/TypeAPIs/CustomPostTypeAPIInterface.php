@@ -41,6 +41,13 @@ interface CustomPostTypeAPIInterface
     public function getCustomPostType(string|int|object $customPostObjectOrID): ?string;
     public function getParentCustomPostID(string|int|object $customPostObjectOrID): int|string|null;
     /**
+     * Get the custom post with provided slug path or, if it doesn't exist, null
+     * 
+     * @param string $slugPath The slug path (including all ancestor slugs, eg: "ancestor-slug/post-slug")
+     * @param string $customPostType The custom post type to search in
+     */
+    public function getCustomPostBySlugPath(string $slugPath, string $customPostType): ?object;
+    /**
      * If param "status" in $query is not passed, it defaults to "publish"
      *
      * @param array<string,mixed> $query

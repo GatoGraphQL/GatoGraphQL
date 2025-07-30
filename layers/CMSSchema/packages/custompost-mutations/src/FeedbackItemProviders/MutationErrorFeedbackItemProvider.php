@@ -17,6 +17,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E7 = 'e7';
     public final const E8 = 'e8';
     public final const E9 = 'e9';
+    public final const E10 = 'e10';
 
     /**
      * @return string[]
@@ -32,6 +33,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7,
             self::E8,
             self::E9,
+            self::E10,
         ];
     }
 
@@ -46,6 +48,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7 => $this->__('There is no custom post with ID \'%s\'', 'custompost-mutations'),
             self::E8 => $this->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
             self::E9 => $this->__('You don\'t have permission to edit custom post type \'%s\'', 'custompost-mutations'),
+            self::E10 => $this->__('There is no custom post with slug path \'%s\' of type \'%s\'', 'custompost-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

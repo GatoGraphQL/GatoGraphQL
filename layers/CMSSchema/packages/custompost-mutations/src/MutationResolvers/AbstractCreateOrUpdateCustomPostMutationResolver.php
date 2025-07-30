@@ -9,10 +9,13 @@ use DateTimeInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
+use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -123,11 +126,53 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
+        // Validate that the parent exists
+        if ($this->supportsCustomPostParent()) {
+            if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_BY)) {
+                /** @var stdClass|null */
+                $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
+                if ($parentBy !== null) {
+                    $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
+                    /**
+                     * If there's no custom post type, then it's a nested update mutation,
+                     * then get the CPT from the custom post
+                     */
+                    if ($customPostType === '') {
+                        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+                        /** @var string */
+                        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+                    }
+                    if (isset($parentBy->{MutationInputProperties::ID})) {
+                        $parentID = $parentBy->{MutationInputProperties::ID};
+                        $this->validateParentCustomPostExists(
+                            $parentID,
+                            $customPostType,
+                            $fieldDataAccessor,
+                            $objectTypeFieldResolutionFeedbackStore,
+                        );
+                    } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
+                        $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
+                        $this->validateCustomPostBySlugPathExists(
+                            $parentSlugPath,
+                            $customPostType,
+                            $fieldDataAccessor,
+                            $objectTypeFieldResolutionFeedbackStore,
+                        );
+                    }
+                }
+            }
+        }
+
         $this->triggerValidateCreateOrUpdateHook(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
+
+    /**
+     * Whether this mutation resolver supports custom post parent functionality
+     */
+    abstract protected function supportsCustomPostParent(): bool;
 
     protected function triggerValidateCreateOrUpdateHook(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -481,6 +526,66 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function validateParentCustomPostExists(
+        string|int $parentCustomPostID,
+        string $customPostType,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!$this->getCustomPostTypeAPI()->customPostExists($parentCustomPostID)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E7,
+                        [
+                            $parentCustomPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return;
+        }
+
+        $this->validateIsCustomPostType(
+            $parentCustomPostID,
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function validateCustomPostBySlugPathExists(
+        string $slugPath,
+        string $customPostType,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $parentPost = $this->getCustomPostTypeAPI()->getCustomPostBySlugPath(
+            $slugPath,
+            $customPostType
+        );
+        
+        if ($parentPost !== null) {
+            return;
+        }
+
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E10,
+                    [
+                        $slugPath,
+                        $customPostType,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
         );
     }
 }
