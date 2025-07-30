@@ -569,7 +569,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $slugPath,
             $customPostType
         );
-        
+
         if ($parentPost !== null) {
             return;
         }

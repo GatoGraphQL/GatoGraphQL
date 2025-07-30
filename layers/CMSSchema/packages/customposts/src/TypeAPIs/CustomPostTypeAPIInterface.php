@@ -42,7 +42,7 @@ interface CustomPostTypeAPIInterface
     public function getParentCustomPostID(string|int|object $customPostObjectOrID): int|string|null;
     /**
      * Get the custom post with provided slug path or, if it doesn't exist, null
-     * 
+     *
      * @param string $slugPath The slug path (including all ancestor slugs, eg: "ancestor-slug/post-slug")
      * @param string $customPostType The custom post type to search in
      */
