@@ -9,16 +9,20 @@ use DateTimeInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
+use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use stdClass;
+use WP_Post;
 
 abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
 {
@@ -121,6 +125,36 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
+        }
+
+        // Validate that the parent exists
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_BY)) {
+            /** @var stdClass|null */
+            $parentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
+            if ($parentBy !== null) {
+                $parentID = null;
+                $parentSlugPath = null;
+                
+                if (isset($parentBy->{MutationInputProperties::ID})) {
+                    $parentID = $parentBy->{MutationInputProperties::ID};
+                } elseif (isset($parentBy->{MutationInputProperties::SLUG_PATH})) {
+                    $parentSlugPath = $parentBy->{MutationInputProperties::SLUG_PATH};
+                }
+                
+                if ($parentID !== null) {
+                    $this->validateParentExists(
+                        $parentID,
+                        $fieldDataAccessor,
+                        $objectTypeFieldResolutionFeedbackStore,
+                    );
+                } elseif ($parentSlugPath !== null) {
+                    $this->validateParentBySlugPathExists(
+                        $parentSlugPath,
+                        $fieldDataAccessor,
+                        $objectTypeFieldResolutionFeedbackStore,
+                    );
+                }
+            }
         }
 
         $this->triggerValidateCreateOrUpdateHook(
@@ -482,5 +516,57 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+    }
+
+    protected function validateParentExists(
+        string|int $parentID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!$this->getCustomPostTypeAPI()->customPostExists($parentID)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E10,
+                        [
+                            $parentID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateParentBySlugPathExists(
+        string $parentSlugPath,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
+        $customPostTypes = $customPostType !== '' ? [$customPostType] : $this->getCustomPostTypeAPI()->getCustomPostTypes();
+        
+        /** @var WP_Post|null */
+        $parentPost = get_page_by_path(
+            $parentSlugPath,
+            OBJECT,
+            $customPostTypes
+        );
+        
+        if ($parentPost === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E11,
+                        [
+                            $parentSlugPath,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
     }
 }
