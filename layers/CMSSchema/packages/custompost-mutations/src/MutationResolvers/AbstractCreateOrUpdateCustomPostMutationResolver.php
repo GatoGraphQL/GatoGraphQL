@@ -135,7 +135,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                     $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
                     if (isset($parentBy->{MutationInputProperties::ID})) {
                         $parentID = $parentBy->{MutationInputProperties::ID};
-                        $this->validateParentExists(
+                        $this->validateParentCustomPostExists(
                             $parentID,
                             $customPostType,
                             $fieldDataAccessor,
@@ -520,20 +520,20 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         );
     }
 
-    protected function validateParentExists(
-        string|int $parentID,
+    protected function validateParentCustomPostExists(
+        string|int $parentCustomPostID,
         string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$this->getCustomPostTypeAPI()->customPostExists($parentID)) {
+        if (!$this->getCustomPostTypeAPI()->customPostExists($parentCustomPostID)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
                         MutationErrorFeedbackItemProvider::E7,
                         [
-                            $parentID,
+                            $parentCustomPostID,
                         ]
                     ),
                     $fieldDataAccessor->getField(),
@@ -543,22 +543,12 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         }
 
         // Validate that the parent is of the same type as the custom post
-        $parentCustomPostType = $this->getCustomPostTypeAPI()->getCustomPostType($parentID);
-        if ($parentCustomPostType !== $customPostType) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E5,
-                        [
-                            $parentID,
-                            $customPostType,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
+        $this->validateIsCustomPostType(
+            $parentCustomPostID,
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function validateCustomPostBySlugPathExists(
