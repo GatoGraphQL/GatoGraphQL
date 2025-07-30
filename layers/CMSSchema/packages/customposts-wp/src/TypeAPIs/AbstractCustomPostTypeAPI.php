@@ -563,13 +563,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return $parentID;
     }
 
-    public function getCustomPostBySlugPath(string $slugPath, array $customPostTypes = []): ?object
+    public function getCustomPostBySlugPath(string $slugPath, string $customPostType): ?object
     {
         // If no custom post types specified, use all available types
-        if (empty($customPostTypes)) {
+        if (empty($customPostType)) {
             $customPostTypes = $this->getCustomPostTypes();
+        } else {
+            $customPostTypes = [$customPostType];
         }
-
         /** @var WP_Post|null */
         $customPost = get_page_by_path(
             $slugPath,

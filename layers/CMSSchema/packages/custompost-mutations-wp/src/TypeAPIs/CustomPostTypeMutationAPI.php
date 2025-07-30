@@ -86,10 +86,10 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
             unset($query['custompost-type']);
         }
         if (isset($query['parent-slug-path'])) {
-            $customPostTypes = $query['post_type'] ?? $this->getCustomPostTypeAPI()->getCustomPostTypes();
+            $customPostType = $query['post_type'] ?? '';
             $parentPost = $this->getCustomPostTypeAPI()->getCustomPostBySlugPath(
                 $query['parent-slug-path'],
-                is_array($customPostTypes) ? $customPostTypes : [$customPostTypes]
+                $customPostType
             );
             if ($parentPost !== null) {
                 $query['post_parent'] = $parentPost->ID;
