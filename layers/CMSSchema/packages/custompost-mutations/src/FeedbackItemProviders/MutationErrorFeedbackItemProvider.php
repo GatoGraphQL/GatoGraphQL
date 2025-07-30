@@ -51,7 +51,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E8 => $this->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
             self::E9 => $this->__('You don\'t have permission to edit custom post type \'%s\'', 'custompost-mutations'),
             self::E10 => $this->__('The custom post parent with ID \'%s\' is not of type \'%s\'', 'custompost-mutations'),
-            self::E11 => $this->__('There is no custom post with slug path \'%s\'', 'custompost-mutations'),
+            self::E11 => $this->__('There is no custom post with slug path \'%s\' of type \'%s\'', 'custompost-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

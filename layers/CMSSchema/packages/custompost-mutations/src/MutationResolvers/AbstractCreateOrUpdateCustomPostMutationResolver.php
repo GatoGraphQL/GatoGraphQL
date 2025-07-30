@@ -577,6 +577,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                     MutationErrorFeedbackItemProvider::E11,
                     [
                         $slugPath,
+                        $customPostType,
                     ]
                 ),
                 $fieldDataAccessor->getField(),
