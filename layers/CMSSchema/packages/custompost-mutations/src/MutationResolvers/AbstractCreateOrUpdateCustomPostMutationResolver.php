@@ -599,7 +599,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         );
 
         if ($parentCustomPost !== null) {
-            return $parentCustomPost->ID;
+            return $this->getCustomPostTypeAPI()->getID($parentCustomPost);
         }
 
         $objectTypeFieldResolutionFeedbackStore->addError(
