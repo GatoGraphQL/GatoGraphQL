@@ -62,20 +62,6 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
      */
     protected function convertPagesQuery(array $query, array $options = []): array
     {
-        // A page can have an ancestor
-        if (isset($query['parent-id'])) {
-            $query['post_parent'] = $query['parent-id'];
-            unset($query['parent-id']);
-        }
-        if (isset($query['parent-ids'])) {
-            $query['post_parent__in'] = $query['parent-ids'];
-            unset($query['parent-ids']);
-        }
-        if (isset($query['exclude-parent-ids'])) {
-            $query['post_parent__not_in'] = $query['exclude-parent-ids'];
-            unset($query['exclude-parent-ids']);
-        }
-
         return $query;
     }
 
