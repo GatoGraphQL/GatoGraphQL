@@ -159,7 +159,7 @@ query {
       title
     }
   }
-  customPostsWtihSlugPath: customPosts(filter: { ids: [1682, 1684, 1688] }, sort: { by: ID, order: ASC }) {
+  customPostsWithSlugPath: customPosts(filter: { ids: [1682, 1684, 1688] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       id

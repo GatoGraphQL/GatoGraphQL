@@ -114,6 +114,12 @@
                             }
                         },
                         {
+                            "name": "slugPath",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
                             "name": "status",
                             "type": {
                                 "name": "CustomPostStatusEnum!"
@@ -229,6 +235,12 @@
                         },
                         {
                             "name": "slug",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "slugPath",
                             "type": {
                                 "name": "String!"
                             }
@@ -988,6 +1000,12 @@
                         },
                         {
                             "name": "slug",
+                            "type": {
+                                "name": "String!"
+                            }
+                        },
+                        {
+                            "name": "slugPath",
                             "type": {
                                 "name": "String!"
                             }

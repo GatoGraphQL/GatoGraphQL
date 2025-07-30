@@ -11,3 +11,7 @@
 ## Improvements
 
 - Support reading just-updated plugin settings in options.php ([#3157](https://github.com/GatoGraphQL/GatoGraphQL/pull/3157))
+
+## Fixed
+
+- Querying `post(by: { id: 0 })` returns `null` (instead of the post in the loop) ([#3165](https://github.com/GatoGraphQL/GatoGraphQL/pull/3165))

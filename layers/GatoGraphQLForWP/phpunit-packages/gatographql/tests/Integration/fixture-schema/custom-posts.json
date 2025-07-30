@@ -489,7 +489,7 @@
                 "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
             }
         ],
-        "customPostsWtihSlugPath": [
+        "customPostsWithSlugPath": [
             {
                 "__typename": "GenericCustomPost",
                 "id": 1682,
