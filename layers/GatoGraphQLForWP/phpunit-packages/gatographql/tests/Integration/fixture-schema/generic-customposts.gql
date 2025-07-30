@@ -12,11 +12,29 @@ query {
         id
         title
       }
+      # draftAncestors: ancestors(filter: { status: draft }) {
+      #   id
+      #   title
+      # }
+      # publishedAncestors: ancestors(filter: { status: publish }) {
+      #   id
+      #   title
+      # }
       children {
         id
         title
       }
+      draftChildren: children(filter: { status: draft }) {
+        id
+        title
+      }
+      publishedChildren: children(filter: { status: publish }) {
+        id
+        title
+      }
       childCount
+      draftChildCount: childCount(filter: { status: draft })
+      publishedChildCount: childCount(filter: { status: publish })
     }
   }
 }
