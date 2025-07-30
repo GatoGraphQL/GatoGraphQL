@@ -561,7 +561,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return get_post($id);
     }
 
-    public function getParentCustomPostID(string|int|object $customPostObjectOrID): int|string|null
+    public function getCustomPostParentID(string|int|object $customPostObjectOrID): int|string|null
     {
         /** @var WP_Post|null */
         $customPost = $this->getCustomPostObject($customPostObjectOrID);

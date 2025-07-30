@@ -161,7 +161,7 @@ abstract class AbstractWithParentCustomPostObjectTypeFieldResolver extends Abstr
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'parent':
-                return $customPostTypeAPI->getParentCustomPostID($customPost);
+                return $customPostTypeAPI->getCustomPostParentID($customPost);
             case 'ancestors':
                 /** @var array<int|string> */
                 return $customPostTypeAPI->getAncestorCustomPostIDs($customPost);
