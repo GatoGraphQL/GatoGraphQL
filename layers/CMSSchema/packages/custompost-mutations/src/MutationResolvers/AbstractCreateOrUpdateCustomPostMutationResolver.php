@@ -542,7 +542,17 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             return;
         }
 
-        // Validate that the parent is of the same type as the custom post
+        /**
+         * Validate that the parent is of the same type as the custom post.
+         *
+         * If there's no custom post type, then it's a nested update mutation,
+         * then get the CPT from the custom post
+         */
+        if ($customPostType === '') {
+            $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+            /** @var string */
+            $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        }
         $this->validateIsCustomPostType(
             $parentCustomPostID,
             $customPostType,
