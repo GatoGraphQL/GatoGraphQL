@@ -38,6 +38,7 @@
                 "excludingMetaKeys": [],
                 "includingAndExcludingMetaKeys": [],
                 "parent": null,
+                "ancestors": [],
                 "rawContent": "<!-- wp:paragraph -->\n<p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>...or something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gatographql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n<!-- \/wp:paragraph -->",
                 "rawTitle": "Sample Page",
                 "rawExcerpt": "",
@@ -84,6 +85,7 @@
                 "excludingMetaKeys": [],
                 "includingAndExcludingMetaKeys": [],
                 "parent": null,
+                "ancestors": [],
                 "rawContent": "<!-- wp:paragraph -->\n<p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>...or something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gatographql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n<!-- \/wp:paragraph -->",
                 "rawTitle": "Another Page",
                 "rawExcerpt": "",
@@ -92,6 +94,54 @@
                 "title": "Another Page",
                 "url": "https:\/\/gatographql.lndo.site\/another-page\/",
                 "urlPath": "\/another-page\/"
+            },
+            {
+                "areCommentsOpen": false,
+                "author": {
+                    "id": 1,
+                    "name": "admin"
+                },
+                "children": [
+                    {
+                        "id": 1703,
+                        "title": "Page with parent and children"
+                    }
+                ],
+                "childCount": 1,
+                "commentCount": 0,
+                "comments": [],
+                "content": "\n<p>I am the most ancestor page<\/p>\n",
+                "customPostType": "page",
+                "date": "2025-07-29T06:40:54+00:00",
+                "dateStr": "July 29, 2025",
+                "excerpt": "I am the most ancestor page",
+                "featuredImage": null,
+                "hasComments": false,
+                "hasFeaturedImage": false,
+                "id": 1701,
+                "isStatus": false,
+                "menuOrder": 0,
+                "metaValue": null,
+                "metaValue2": null,
+                "meta": {},
+                "metaKeys": [
+                    "_edit_lock"
+                ],
+                "includingMetaKeys": [],
+                "excludingMetaKeys": [
+                    "_edit_lock"
+                ],
+                "includingAndExcludingMetaKeys": [],
+                "parent": null,
+                "ancestors": [],
+                "rawContent": "<!-- wp:paragraph -->\n<p>I am the most ancestor page<\/p>\n<!-- \/wp:paragraph -->",
+                "rawTitle": "Page with several levels of children",
+                "rawExcerpt": "",
+                "slug": "page-with-several-levels-of-children",
+                "status": "publish",
+                "title": "Page with several levels of children",
+                "url": "https:\/\/gatographql.lndo.site\/page-with-several-levels-of-children\/",
+                "urlPath": "\/page-with-several-levels-of-children\/"
             }
         ],
         "pagesByAuthorIDs": [
@@ -120,8 +170,33 @@
                 "title": "Sample Page"
             }
         ],
-        "pagesByExcludeAuthorIDs": [],
+        "pagesByExcludeAuthorIDs": [
+            {
+                "id": 1705,
+                "title": "Page with parent only"
+            },
+            {
+                "id": 1703,
+                "title": "Page with parent and children"
+            },
+            {
+                "id": 1701,
+                "title": "Page with several levels of children"
+            }
+        ],
         "pagesByExcludeIDs": [
+            {
+                "id": 1705,
+                "title": "Page with parent only"
+            },
+            {
+                "id": 1703,
+                "title": "Page with parent and children"
+            },
+            {
+                "id": 1701,
+                "title": "Page with several levels of children"
+            },
             {
                 "id": 1666,
                 "title": "Another Page"
@@ -140,6 +215,18 @@
             }
         ],
         "pagesByMetaQuery": [
+            {
+                "id": 1705,
+                "title": "Page with parent only"
+            },
+            {
+                "id": 1703,
+                "title": "Page with parent and children"
+            },
+            {
+                "id": 1701,
+                "title": "Page with several levels of children"
+            },
             {
                 "id": 1666,
                 "title": "Another Page"
@@ -170,6 +257,18 @@
                 "title": "Another Page"
             },
             {
+                "id": 1703,
+                "title": "Page with parent and children"
+            },
+            {
+                "id": 1705,
+                "title": "Page with parent only"
+            },
+            {
+                "id": 1701,
+                "title": "Page with several levels of children"
+            },
+            {
                 "id": 3,
                 "title": "Privacy Policy"
             },
@@ -188,8 +287,60 @@
                 "title": "Privacy Policy"
             },
             {
+                "id": 1701,
+                "title": "Page with several levels of children"
+            },
+            {
+                "id": 1705,
+                "title": "Page with parent only"
+            },
+            {
+                "id": 1703,
+                "title": "Page with parent and children"
+            },
+            {
                 "id": 1666,
                 "title": "Another Page"
+            }
+        ],
+        "pagesWithAncestors": [
+            {
+                "id": 1701,
+                "title": "Page with several levels of children",
+                "parent": null,
+                "ancestors": []
+            },
+            {
+                "id": 1703,
+                "title": "Page with parent and children",
+                "parent": {
+                    "id": 1701,
+                    "title": "Page with several levels of children"
+                },
+                "ancestors": [
+                    {
+                        "id": 1701,
+                        "title": "Page with several levels of children"
+                    }
+                ]
+            },
+            {
+                "id": 1705,
+                "title": "Page with parent only",
+                "parent": {
+                    "id": 1703,
+                    "title": "Page with parent and children"
+                },
+                "ancestors": [
+                    {
+                        "id": 1703,
+                        "title": "Page with parent and children"
+                    },
+                    {
+                        "id": 1701,
+                        "title": "Page with several levels of children"
+                    }
+                ]
             }
         ]
     }

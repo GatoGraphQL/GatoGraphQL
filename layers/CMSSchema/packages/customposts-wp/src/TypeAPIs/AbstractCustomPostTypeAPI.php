@@ -448,16 +448,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         ];
     }
 
-    protected function getCustomPostObject(string|int|object $customPostObjectOrID): ?object
-    {
-        if (is_object($customPostObjectOrID)) {
-            return $customPostObjectOrID;
-        }
-        /** @var string|int */
-        $customPostID = $customPostObjectOrID;
-        return $this->getCustomPost((int)$customPostID);
-    }
-
     protected function getCustomPostID(string|int|object $customPostObjectOrID): int
     {
         if (is_object($customPostObjectOrID)) {

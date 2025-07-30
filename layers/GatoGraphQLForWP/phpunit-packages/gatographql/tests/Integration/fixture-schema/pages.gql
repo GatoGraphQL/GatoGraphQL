@@ -42,6 +42,10 @@ query {
       id
       title
     }
+    ancestors {
+      id
+      title
+    }
     rawContent
     rawTitle
     rawExcerpt
@@ -116,5 +120,18 @@ query {
   pagesSortedDESC: pages(filter: { status: [publish, draft] }, sort: { by: TITLE, order: DESC}) {
     id
     title
+  }
+
+  pagesWithAncestors: pages(filter: { ids: [1705, 1703, 1701] }, sort: { by: ID, order: ASC }) {
+    id
+    title
+    parent {
+      id
+      title
+    }
+    ancestors {
+      id
+      title
+    }
   }
 }

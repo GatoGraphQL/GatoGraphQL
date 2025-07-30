@@ -9,6 +9,7 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -34,6 +35,7 @@ abstract class AbstractGenericCustomPostObjectTypeFieldResolver extends Abstract
     {
         return [
             'parent',
+            'ancestors',
         ];
     }
 
@@ -41,7 +43,16 @@ abstract class AbstractGenericCustomPostObjectTypeFieldResolver extends Abstract
     {
         return match ($fieldName) {
             'parent' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
+            'ancestors' => CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        return match ($fieldName) {
+            'ancestors' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -49,6 +60,7 @@ abstract class AbstractGenericCustomPostObjectTypeFieldResolver extends Abstract
     {
         return match ($fieldName) {
             'parent' => $this->__('Parent custom post', 'customposts'),
+            'ancestors' => $this->__('List of all ancestor custom posts (parent, grandparent, etc.)', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -64,6 +76,9 @@ abstract class AbstractGenericCustomPostObjectTypeFieldResolver extends Abstract
         switch ($fieldDataAccessor->getFieldName()) {
             case 'parent':
                 return $customPostTypeAPI->getParentCustomPostID($customPost);
+            case 'ancestors':
+                /** @var array<int|string> */
+                return $customPostTypeAPI->getAncestorCustomPostIDs($customPost);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);

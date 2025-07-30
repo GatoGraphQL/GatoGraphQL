@@ -105,6 +105,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return [
             'parent',
+            'ancestors',
             'children',
             'childCount',
         ];
@@ -114,6 +115,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'parent' => $this->__('Parent page', 'pages'),
+            'ancestors' => $this->__('List of all ancestor pages (parent, grandparent, etc.)', 'pages'),
             'children' => $this->__('Child pages', 'pages'),
             'childCount' => $this->__('Number of child pages', 'pages'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -124,6 +126,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'parent',
+            'ancestors',
             'children'
                 => $this->getPageObjectTypeResolver(),
             'childCount'
@@ -137,6 +140,7 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'childCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'ancestors' => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             'children' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -177,6 +181,9 @@ class PageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         switch ($fieldDataAccessor->getFieldName()) {
             case 'parent':
                 return $this->getPageTypeAPI()->getParentPageID($page);
+            case 'ancestors':
+                /** @var array<int|string> */
+                return $this->getPageTypeAPI()->getAncestorCustomPostIDs($page);
         }
 
         $query = array_merge(
