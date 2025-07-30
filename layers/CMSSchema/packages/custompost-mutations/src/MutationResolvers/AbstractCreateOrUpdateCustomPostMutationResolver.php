@@ -134,6 +134,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             if ($parentBy !== null) {
                 $parentID = null;
                 $parentSlugPath = null;
+                $customPostType = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE) ?? $this->getCustomPostType();
                 
                 if (isset($parentBy->{MutationInputProperties::ID})) {
                     $parentID = $parentBy->{MutationInputProperties::ID};
@@ -144,6 +145,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                 if ($parentID !== null) {
                     $this->validateParentExists(
                         $parentID,
+                        $customPostType,
                         $fieldDataAccessor,
                         $objectTypeFieldResolutionFeedbackStore,
                     );
@@ -520,6 +522,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
     protected function validateParentExists(
         string|int $parentID,
+        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -536,11 +539,12 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                     $fieldDataAccessor->getField(),
                 )
             );
+            return;
         }
 
         // Validate that the parent is of the same type as the custom post
         $parentCustomPostType = $this->getCustomPostTypeAPI()->getCustomPostType($parentID);
-        if ($parentCustomPostType !== $this->getCustomPostType()) {
+        if ($parentCustomPostType !== $customPostType) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -548,7 +552,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
                         MutationErrorFeedbackItemProvider::E10,
                         [
                             $parentID,
-                            $this->getCustomPostType(),
+                            $customPostType,
                         ]
                     ),
                     $fieldDataAccessor->getField(),
