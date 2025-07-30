@@ -77,6 +77,7 @@ abstract class AbstractGenericCustomPostObjectTypeFieldResolver extends Abstract
             case 'parent':
                 return $customPostTypeAPI->getParentCustomPostID($customPost);
             case 'ancestors':
+                /** @var array<int|string> */
                 return $customPostTypeAPI->getAncestorCustomPostIDs($customPost);
         }
 

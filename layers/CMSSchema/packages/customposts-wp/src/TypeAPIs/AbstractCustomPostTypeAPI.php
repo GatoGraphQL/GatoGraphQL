@@ -448,16 +448,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         ];
     }
 
-    protected function getCustomPostObject(string|int|object $customPostObjectOrID): ?object
-    {
-        if (is_object($customPostObjectOrID)) {
-            return $customPostObjectOrID;
-        }
-        /** @var string|int */
-        $customPostID = $customPostObjectOrID;
-        return $this->getCustomPost((int)$customPostID);
-    }
-
     protected function getCustomPostID(string|int|object $customPostObjectOrID): int
     {
         if (is_object($customPostObjectOrID)) {
@@ -570,37 +560,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         return $parentID;
-    }
-
-    /**
-     * @return array<int|string>
-     */
-    public function getAncestorCustomPostIDs(string|int|object $customPostObjectOrID): array
-    {
-        /** @var WP_Post|null */
-        $customPost = $this->getCustomPostObject($customPostObjectOrID);
-        if ($customPost === null) {
-            return [];
-        }
-
-        $ancestors = [];
-        $currentPost = $customPost;
-
-        // Traverse up the hierarchy
-        while ($currentPost->post_parent !== 0) {
-            $parentID = $currentPost->post_parent;
-            $ancestors[] = $parentID;
-            
-            // Get the parent post
-            $parentPost = $this->getCustomPost($parentID);
-            if ($parentPost === null) {
-                break;
-            }
-            
-            $currentPost = $parentPost;
-        }
-
-        return $ancestors;
     }
 
     public function getCustomPostBySlugPath(string $slugPath, string $customPostType): ?object

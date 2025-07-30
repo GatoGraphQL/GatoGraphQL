@@ -58,4 +58,45 @@ abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements
 
         return implode('/', $slugPath);
     }
+
+    /**
+     * @return array<int|string>|null
+     */
+    public function getAncestorCustomPostIDs(string|int|object $customPostObjectOrID): ?array
+    {
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
+
+        $ancestorIDs = [];
+        
+        // Start with the current post
+        $currentPostObjectOrID = $customPostObjectOrID;
+
+        // Traverse up the hierarchy
+        while ($currentPostObjectOrID !== null) {
+            // Get the parent
+            $parentID = $this->getParentCustomPostID($currentPostObjectOrID);
+            if ($parentID === null || $parentID === 0) {
+                break;
+            }
+
+            $ancestorIDs[] = $parentID;
+
+            $currentPostObjectOrID = $parentID;
+        }
+
+        return $ancestorIDs;
+    }
+
+    protected function getCustomPostObject(string|int|object $customPostObjectOrID): ?object
+    {
+        if (is_object($customPostObjectOrID)) {
+            return $customPostObjectOrID;
+        }
+        /** @var string|int */
+        $customPostID = $customPostObjectOrID;
+        return $this->getCustomPost((int)$customPostID);
+    }
 }
