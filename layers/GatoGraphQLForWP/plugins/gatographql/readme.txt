@@ -228,6 +228,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added fields `children` and `childCount` to `GenericCustomPost` (#3168)
 * Added field `Category.ancestors` (#3169)
 * Added field `CustomPost.menuOrder` (#3172)
+* Added `menuOrder` arg to custom post mutations (#3173)
 * Print body of failing requests in error logs (#3155)
 * Support executing bulk actions with custom settings (#3156)
 * Support reading just-updated plugin settings in options.php (#3157)
