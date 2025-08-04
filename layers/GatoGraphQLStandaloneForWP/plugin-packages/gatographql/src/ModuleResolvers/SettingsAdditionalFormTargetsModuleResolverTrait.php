@@ -10,16 +10,16 @@ trait SettingsAdditionalFormTargetsModuleResolverTrait
 {
     /**
      * @param array<array<string,mixed>> $settings
-     * @param array<string> $additionalFormTargets
+     * @param array<string> $formTargets
      * @return array<array<string,mixed>>
      */
-    protected function addAdditionalFormTargetsToSettingsItems(array $settings, array $additionalFormTargets): array
+    protected function addFormTargetsToSettingsItems(array $settings, array $formTargets): array
     {
         // Also add the target to the settings
         foreach ($settings as &$setting) {
-            $setting[Properties::ADDITIONAL_FORM_TARGETS] = [
-                ...($setting[Properties::ADDITIONAL_FORM_TARGETS] ?? []),
-                ...$additionalFormTargets,
+            $setting[Properties::FORM_TARGETS] = [
+                ...($setting[Properties::FORM_TARGETS] ?? []),
+                ...$formTargets,
             ];
         }
         return $settings;

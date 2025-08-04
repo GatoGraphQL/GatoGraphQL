@@ -138,16 +138,16 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
      *
      * @return array<array<string,mixed>>
      */
-    protected function getSettingsItems(): array
+    protected function doGetSettingsItems(): array
     {
-        $upstreamSettingsItems = parent::getSettingsItems();
+        $upstreamSettingsItems = parent::doGetSettingsItems();
         $settingsItems = [];
         foreach ($upstreamSettingsItems as $settingItem) {
             $settingItem['settings'] = array_values(array_filter(
                 $settingItem['settings'] ?? [],
                 fn (array $item) => array_intersect(
                     $this->getPossibleTargets(),
-                    $item[Properties::ADDITIONAL_FORM_TARGETS] ?? []
+                    $item[Properties::FORM_TARGETS] ?? []
                 ) !== []
             ));
             if ($settingItem['settings'] === []) {
