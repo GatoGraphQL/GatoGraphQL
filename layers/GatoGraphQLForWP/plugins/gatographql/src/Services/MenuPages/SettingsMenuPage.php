@@ -8,6 +8,8 @@ use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Targets;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
@@ -94,6 +96,31 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     protected function getOptionsFormNamePrefix(): string
     {
         return '';
+    }
+
+    /**
+     * Get the settings items which have this target
+     *
+     * @return array<array<string,mixed>>
+     */
+    protected function doGetSettingsItems(): array
+    {
+        $upstreamSettingsItems = parent::doGetSettingsItems();
+        $settingsItems = [];
+        foreach ($upstreamSettingsItems as $settingItem) {
+            $settingItem['settings'] = array_values(array_filter(
+                $settingItem['settings'] ?? [],
+                fn (array $item) => in_array(
+                    Targets::SETTINGS_PAGE,
+                    $item[Properties::FORM_TARGETS] ?? [Targets::SETTINGS_PAGE]
+                )
+            ));
+            if ($settingItem['settings'] === []) {
+                continue;
+            }
+            $settingsItems[] = $settingItem;
+        }
+        return $settingsItems;
     }
 
     /**
