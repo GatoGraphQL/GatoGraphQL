@@ -13,7 +13,7 @@ trait SettingsAdditionalFormTargetsModuleResolverTrait
      * @param array<string> $formTargets
      * @return array<array<string,mixed>>
      */
-    protected function addAdditionalFormTargetsToSettingsItems(array $settings, array $formTargets): array
+    protected function addFormTargetsToSettingsItems(array $settings, array $formTargets): array
     {
         // Also add the target to the settings
         foreach ($settings as &$setting) {
