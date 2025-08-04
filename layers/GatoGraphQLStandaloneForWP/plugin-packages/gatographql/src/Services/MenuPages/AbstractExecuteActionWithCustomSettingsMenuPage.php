@@ -138,9 +138,9 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
      *
      * @return array<array<string,mixed>>
      */
-    protected function getSettingsItems(): array
+    protected function doGetSettingsItems(): array
     {
-        $upstreamSettingsItems = parent::getSettingsItems();
+        $upstreamSettingsItems = parent::doGetSettingsItems();
         $settingsItems = [];
         foreach ($upstreamSettingsItems as $settingItem) {
             $settingItem['settings'] = array_values(array_filter(

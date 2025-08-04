@@ -95,9 +95,19 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     protected function getSettingsItems(): array
     {
         if ($this->settingsItems === null) {
-            $this->settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
+            $this->settingsItems = $this->doGetSettingsItems();
         }
         return $this->settingsItems;
+    }
+
+    /**
+     * Get the settings items which have this target
+     *
+     * @return array<array<string,mixed>>
+     */
+    protected function doGetSettingsItems(): array
+    {
+        return $this->getSettingsNormalizer()->getAllSettingsItems();
     }
 
     /**
