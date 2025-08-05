@@ -17,7 +17,7 @@ class ErrorFeedbackItemProvider extends UpstreamErrorFeedbackItemProvider
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($code) {
             self::E9 => $moduleConfiguration->overrideErrorFeedbackItemProviderObjectNotFoundErrorMessage()
-                ? $this->__('Object with ID \'%2$s\' (of type \'%1$s\') cannot be loaded. Please check if referencing this ID is stale data, still stored on the WordPress database, but pointing to a non-existing object.', 'component-model')
+                ? $this->__('Object with ID \'%2$s\' (of type \'%1$s\') cannot be loaded. Please check if referencing this ID is stale data (i.e. still stored on the WordPress database, but pointing to a non-existing object) and, if so, remove it or fix it.', 'component-model')
                 : parent::getMessagePlaceholder($code),
             default => parent::getMessagePlaceholder($code),
         };
