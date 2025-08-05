@@ -18,3 +18,6 @@ services:
 
     GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy:
         class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy
+
+    PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider:
+        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\FeedbackItemProviders\ErrorFeedbackItemProvider
