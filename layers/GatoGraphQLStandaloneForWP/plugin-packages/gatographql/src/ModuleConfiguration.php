@@ -42,4 +42,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function overrideErrorFeedbackItemProviderObjectNotFoundErrorMessage(): bool
+    {
+        $envVariable = Environment::OVERRIDE_ERROR_FEEDBACK_ITEM_PROVIDER_OBJECT_NOT_FOUND_ERROR_MESSAGE;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }
