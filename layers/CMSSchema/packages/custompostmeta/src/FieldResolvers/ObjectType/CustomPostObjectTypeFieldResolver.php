@@ -80,9 +80,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                     }
                     $metaKeys[] = $key;
                 }
-                return $this->resolveMetaKeysValue(
+                return $this->resolveMetaKeysValueForEntity(
                     $metaKeys,
+                    $objectTypeResolver,
+                    $object,
                     $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
                 );
             case 'metaValue':
                 $metaValue = $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(
@@ -127,5 +130,22 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * @param string[] $metaKeys
+     * @return string[]
+     */
+    public function resolveMetaKeysValueForEntity(
+        array $metaKeys,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
+        return $this->resolveMetaKeysValue(
+            $metaKeys,
+            $fieldDataAccessor,
+        );
     }
 }
