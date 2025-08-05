@@ -131,21 +131,4 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
-
-    /**
-     * @param string[] $metaKeys
-     * @return string[]
-     */
-    public function resolveMetaKeysValueForEntity(
-        array $metaKeys,
-        ObjectTypeResolverInterface $objectTypeResolver,
-        object $object,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): array {
-        return $this->resolveMetaKeysValue(
-            $metaKeys,
-            $fieldDataAccessor,
-        );
-    }
 }
