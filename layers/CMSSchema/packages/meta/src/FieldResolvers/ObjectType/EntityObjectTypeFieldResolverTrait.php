@@ -15,7 +15,7 @@ trait EntityObjectTypeFieldResolverTrait
      * @param string[] $metaKeys
      * @return string[]
      */
-    public function resolveMetaKeysValueForEntity(
+    public function resolveMetaKeysValueForObject(
         array $metaKeys,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
