@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQLStandalone\GatoGraphQL\FeedbackItemProviders;
+namespace GatoGraphQLStandalone\GatoGraphQL\Overrides\FeedbackItemProviders;
 
 use GatoGraphQLStandalone\GatoGraphQL\Module;
 use GatoGraphQLStandalone\GatoGraphQL\ModuleConfiguration;
