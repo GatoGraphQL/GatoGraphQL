@@ -4,11 +4,30 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use stdClass;
 
 trait EntityObjectTypeFieldResolverTrait
 {
+    /**
+     * @param string[] $metaKeys
+     * @return string[]
+     */
+    public function resolveMetaKeysValueForObject(
+        array $metaKeys,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
+        return $this->resolveMetaKeysValue(
+            $metaKeys,
+            $fieldDataAccessor,
+        );
+    }
+
     /**
      * @param string[] $metaKeys
      */

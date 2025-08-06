@@ -80,9 +80,12 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                     }
                     $metaKeys[] = $key;
                 }
-                return $this->resolveMetaKeysValue(
+                return $this->resolveMetaKeysValueForObject(
                     $metaKeys,
+                    $objectTypeResolver,
+                    $object,
                     $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
                 );
             case 'metaValue':
                 $metaValue = $this->getCustomPostMetaTypeAPI()->getCustomPostMeta(

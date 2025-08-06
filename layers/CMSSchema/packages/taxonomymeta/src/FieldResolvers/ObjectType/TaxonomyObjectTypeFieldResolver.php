@@ -80,9 +80,12 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                     }
                     $metaKeys[] = $key;
                 }
-                return $this->resolveMetaKeysValue(
+                return $this->resolveMetaKeysValueForObject(
                     $metaKeys,
+                    $objectTypeResolver,
+                    $object,
                     $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
                 );
             case 'metaValue':
                 $metaValue = $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
