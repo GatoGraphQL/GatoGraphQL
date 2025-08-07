@@ -6,7 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\Constants;
 
 class ModuleSettingOptions
 {
-    public final const ENABLE = 'enable';
     public final const LIST_DEFAULT_LIMIT = 'list-default-limit';
     public final const LIST_MAX_LIMIT = 'list-max-limit';
     public final const CUSTOMPOST_TYPES = 'custompost-types';
