@@ -30,7 +30,18 @@ abstract class AbstractThemeHookSet extends AbstractHookSet
     {
         // Check that the theme is currently loaded by WordPress
         $currentTheme = wp_get_theme();
-        return $currentTheme->get_stylesheet() === $this->getThemeStylesheetSlug();
+        if ($currentTheme->get_stylesheet() !== $this->getThemeStylesheetSlug()) {
+            return false;
+        }
+
+        /**
+         * Check that we're in not live preview mode.
+         *
+         * Otherwise the container services for the theme may not have been loaded,
+         * as the customizer doesn't purge the container services.
+         */
+        global $wp_customize;
+        return !($wp_customize && $wp_customize->is_preview());
     }
 
     abstract protected function getThemeStylesheetSlug(): string;
