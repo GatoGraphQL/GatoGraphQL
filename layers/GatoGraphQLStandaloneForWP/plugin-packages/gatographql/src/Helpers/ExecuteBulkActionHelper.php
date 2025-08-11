@@ -12,7 +12,7 @@ use function admin_url;
 
 class ExecuteBulkActionHelper implements ExecuteBulkActionHelperInterface
 {
-    public function getExecuteTranslationWithCustomSettingsBulkActionName(string $bulkActionName): string
+    public function getExecuteActionWithCustomSettingsBulkActionName(string $bulkActionName): string
     {
         return $bulkActionName . '-custom';
     }

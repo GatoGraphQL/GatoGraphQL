@@ -6,7 +6,7 @@ namespace GatoGraphQLStandalone\GatoGraphQL\Helpers;
 
 interface ExecuteBulkActionHelperInterface
 {
-    public function getExecuteTranslationWithCustomSettingsBulkActionName(string $bulkActionName): string;
+    public function getExecuteActionWithCustomSettingsBulkActionName(string $bulkActionName): string;
 
     /**
      * @param array<string,int> $entityIDs
