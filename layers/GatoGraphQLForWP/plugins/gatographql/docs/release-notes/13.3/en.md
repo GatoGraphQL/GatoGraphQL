@@ -1,5 +1,9 @@
 # Release Notes: 13.3
 
+## Breaking changes
+
+- Pass `object` param to `resolveMetaKeysValue` ([#3177](https://github.com/GatoGraphQL/GatoGraphQL/pull/3177))
+
 ## Added
 
 - Added fields `GenericCustomPost.ancestors` and `Page.ancestors` ([#3167](https://github.com/GatoGraphQL/GatoGraphQL/pull/3167))

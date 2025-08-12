@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 13.3.0 - DATE
 
+### Breaking changes
+
+- Pass `object` param to `resolveMetaKeysValue` (#3177)
+
 ### Added
 
 - Added `parent` field to `CustomPost` (#3159)
