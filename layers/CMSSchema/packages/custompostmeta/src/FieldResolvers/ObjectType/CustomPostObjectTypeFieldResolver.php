@@ -80,7 +80,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                     }
                     $metaKeys[] = $key;
                 }
-                return $this->resolveMetaKeysValueForObject(
+                return $this->resolveMetaKeysValue(
                     $metaKeys,
                     $objectTypeResolver,
                     $object,

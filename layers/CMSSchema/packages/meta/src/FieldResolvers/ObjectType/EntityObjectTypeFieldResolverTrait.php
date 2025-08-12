@@ -15,26 +15,13 @@ trait EntityObjectTypeFieldResolverTrait
      * @param string[] $metaKeys
      * @return string[]
      */
-    public function resolveMetaKeysValueForObject(
+    public function resolveMetaKeysValue(
         array $metaKeys,
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): array {
-        return $this->resolveMetaKeysValue(
-            $metaKeys,
-            $fieldDataAccessor,
-        );
-    }
-
-    /**
-     * @param string[] $metaKeys
-     */
-    public function resolveMetaKeysValue(
-        array $metaKeys,
-        FieldDataAccessorInterface $fieldDataAccessor,
-    ): mixed {
         /** @var stdClass|null */
         $filter = $fieldDataAccessor->getValue('filter');
         if ($filter === null) {
