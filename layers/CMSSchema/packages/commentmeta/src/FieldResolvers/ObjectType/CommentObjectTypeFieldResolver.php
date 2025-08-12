@@ -80,7 +80,7 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
                     }
                     $metaKeys[] = $key;
                 }
-                return $this->resolveMetaKeysValueForObject(
+                return $this->resolveMetaKeysValue(
                     $metaKeys,
                     $objectTypeResolver,
                     $object,

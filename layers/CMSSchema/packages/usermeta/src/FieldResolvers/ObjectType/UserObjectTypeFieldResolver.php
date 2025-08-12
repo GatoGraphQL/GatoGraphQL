@@ -80,7 +80,7 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                     }
                     $metaKeys[] = $key;
                 }
-                return $this->resolveMetaKeysValueForObject(
+                return $this->resolveMetaKeysValue(
                     $metaKeys,
                     $objectTypeResolver,
                     $object,
