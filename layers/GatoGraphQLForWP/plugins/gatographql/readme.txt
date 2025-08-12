@@ -220,7 +220,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 13.3.0 =
+= 14.0.0 =
 * Breaking change: Pass `object` param to `resolveMetaKeysValue` (#3177)
 * Added `parent` field to `CustomPost` (#3159)
 * Pass parent on custom post mutations (#3160)
