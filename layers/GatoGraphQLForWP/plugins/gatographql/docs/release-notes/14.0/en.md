@@ -14,12 +14,13 @@
 - Added field `CustomPost.menuOrder` ([#3172](https://github.com/GatoGraphQL/GatoGraphQL/pull/3172))
 - Added `menuOrder` arg to custom post mutations ([#3173](https://github.com/GatoGraphQL/GatoGraphQL/pull/3173))
 - Pass parent on custom post mutations ([#3160](https://github.com/GatoGraphQL/GatoGraphQL/pull/3160))
-- Print body of failing requests in error logs ([#3155](https://github.com/GatoGraphQL/GatoGraphQL/pull/3155))
-- Support executing bulk actions with custom settings ([#3156](https://github.com/GatoGraphQL/GatoGraphQL/pull/3156))
 
 ## Improvements
 
+- Print body of failing requests in error logs ([#3155](https://github.com/GatoGraphQL/GatoGraphQL/pull/3155))
+- Support executing bulk actions with custom settings ([#3156](https://github.com/GatoGraphQL/GatoGraphQL/pull/3156))
 - Support reading just-updated plugin settings in options.php ([#3157](https://github.com/GatoGraphQL/GatoGraphQL/pull/3157))
+- Append selected option value in dropdown in Settings if it doesn't exist ([#3178](https://github.com/GatoGraphQL/GatoGraphQL/pull/3178))
 
 ## Fixed
 
