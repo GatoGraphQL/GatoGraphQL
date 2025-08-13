@@ -12,6 +12,8 @@ class Properties
     public final const DESCRIPTION = 'description';
     public final const POSSIBLE_VALUES = 'possibleValues';
     public final const CAN_BE_EMPTY = 'canBeEmpty';
+    public final const SORT_VALUES = 'sortValues';
+    public final const APPEND_VALUE_IF_NON_EXISTING = 'appendValueIfNonExisting';
     public final const DEFAULT_VALUE = 'defaultValue';
     // Used to define additional Settings pages that the item can be printed on.
     public final const FORM_TARGETS = 'formTargets';

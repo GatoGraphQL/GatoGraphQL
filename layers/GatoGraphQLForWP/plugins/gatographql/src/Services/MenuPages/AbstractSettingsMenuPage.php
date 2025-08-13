@@ -790,6 +790,19 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
+        $appendValueIfNonExisting = $itemSetting[Properties::APPEND_VALUE_IF_NON_EXISTING] ?? false;
+        if ($appendValueIfNonExisting) {
+            foreach ($value as $item) {
+                if (isset($possibleValues[$item])) {
+                    continue;
+                }
+                $possibleValues[$item] = $item;
+            }
+        }
+        $sortValues = $itemSetting[Properties::SORT_VALUES] ?? false;
+        if ($sortValues) {
+            ksort($possibleValues);
+        }
         ?>
             <label for="<?php echo esc_attr($name); ?>">
                 <select
