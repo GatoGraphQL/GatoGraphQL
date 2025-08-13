@@ -793,7 +793,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $appendValueIfNonExisting = $itemSetting[Properties::APPEND_VALUE_IF_NON_EXISTING] ?? false;
         if ($appendValueIfNonExisting) {
             foreach ($value as $item) {
-                if (in_array($item, $possibleValues)) {
+                if (isset($possibleValues[$item])) {
                     continue;
                 }
                 $possibleValues[$item] = $item;
