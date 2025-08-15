@@ -25,7 +25,6 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
      */
     public function getJSONData(string $name, ?array $defaultValue = null): ?array
     {
-        /** @var array<string,mixed[]> */
         $jsonData = get_option($this->namespaceOption(Options::JSON_DATA), []);
         if (!array_key_exists($name, $jsonData)) {
             return $defaultValue;
@@ -33,6 +32,7 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
         if (!is_array($jsonData[$name])) {
             return $defaultValue;
         }
+        /** @var array<string,mixed[]> $jsonData */
         return $jsonData[$name];
     }
 

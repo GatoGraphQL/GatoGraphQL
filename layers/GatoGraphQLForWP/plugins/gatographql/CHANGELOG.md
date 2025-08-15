@@ -28,6 +28,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Support reading just-updated plugin settings in options.php (#3157)
 - Append selected option value in dropdown in Settings if it doesn't exist (#3178)
 - Allow storing JSON data for options in Settings (#3179)
+- Added convenient method to handle Ajax Requests (#3180)
 
 ### Fixed
 
