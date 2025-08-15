@@ -19,9 +19,14 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
         return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
     }
 
+    /**
+     * @param string $name
+     * @param mixed[]|null $defaultValue
+     * @return mixed[]|null
+     */
     public function getJSONData(string $name, ?array $defaultValue = null): ?array
     {
-        /** @var array<string,array<mixed>> */
+        /** @var array<string,mixed[]> */
         $jsonData = get_option($this->namespaceOption(Options::JSON_DATA), []);
         if (!array_key_exists($name, $jsonData)) {
             return $defaultValue;
@@ -34,13 +39,17 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
         return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
+    /**
+     * @param string $name
+     * @param mixed[] $data
+     */
     public function storeJSONData(string $name, array $data): void
     {
         $this->storeJSONDataMultiple([$name => $data]);
     }
 
     /**
-     * @param array<string,array<mixed>> $nameData Key: name, Value: data
+     * @param array<string,mixed[]> $nameData Key: name, Value: data
      */
     public function storeJSONDataMultiple(array $nameData): void
     {
@@ -48,7 +57,7 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
 
         /**
          * Get the current JSON data from the DB
-         * @var array<string,array<mixed>>
+         * @var array<string,mixed[]>
          */
         $jsonData = get_option($option, []);
 
@@ -72,7 +81,7 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
         /**
          * Remove only the provided keys
          *
-         * @var array<string,array<mixed>>
+         * @var array<string,mixed[]>
          */
         $jsonData = get_option($option, []);
         foreach ($names as $name) {

@@ -6,12 +6,24 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 
 interface JSONDataOptionSettingsManagerInterface
 {
-    public function getJSONData(string $name, ?array $defaultValue = null): ?array;
-    public function storeJSONData(string $name, array $data): void;
     /**
-     * @param array<string,array<mixed>> $nameData Key: name, Value: data
+     * @param string $name
+     * @param mixed[]|null $defaultValue
+     * @return mixed[]|null
+     */
+    public function getJSONData(string $name, ?array $defaultValue = null): ?array;
+    
+    /**
+     * @param string $name
+     * @param mixed[] $data
+     */
+    public function storeJSONData(string $name, array $data): void;
+    
+    /**
+     * @param array<string,mixed[]> $nameData Key: name, Value: data
      */
     public function storeJSONDataMultiple(array $nameData): void;
+    
     /**
      * @param string[] $names
      */
