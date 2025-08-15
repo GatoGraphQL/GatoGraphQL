@@ -23,7 +23,7 @@ abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantia
     }
 
     public function processAjaxRequest(): void
-    {        
+    {
         if (!current_user_can($this->getRequiredCapability())) {
             wp_send_json_error(['message' => 'Unauthorized'], 403);
         }
@@ -43,7 +43,7 @@ abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantia
     }
 
     public function getAjaxNonce(): string
-    {   
+    {
         return $this->getAjaxAction() . '_nonce';
     }
 

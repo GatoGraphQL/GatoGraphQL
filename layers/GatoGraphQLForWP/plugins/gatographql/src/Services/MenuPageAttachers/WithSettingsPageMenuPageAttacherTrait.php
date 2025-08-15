@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
-
 use GatoGraphQL\GatoGraphQL\StaticHelpers\CapabilityHelpers;
+
 use function add_submenu_page;
 
 trait WithSettingsPageMenuPageAttacherTrait
