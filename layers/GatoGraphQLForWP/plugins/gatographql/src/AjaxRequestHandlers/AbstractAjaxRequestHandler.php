@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\AjaxRequestHandlers;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
+use function add_action;
 use function check_ajax_referer;
 use function nocache_headers;
 use function wp_cache_delete;
@@ -17,26 +18,29 @@ abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantia
     {
         add_action(
             'wp_ajax_' . $this->getAjaxAction(),
-            function (): void {
-                if (!current_user_can($this->getRequiredCapability())) {
-                    wp_send_json_error(['message' => 'Unauthorized'], 403);
-                    return;
-                }
-
-                check_ajax_referer($this->getAjaxNonce());
-
-                if (function_exists('wp_cache_delete')) {
-                    wp_cache_delete('alloptions', 'options');
-                    wp_cache_delete('notoptions', 'options');
-                }
-
-                nocache_headers();
-                header('Cache-Control: no-store, no-cache, must-revalidate, max-age=zero');
-                header('Pragma: no-cache');
-
-                wp_send_json_success($this->getAjaxResponse());
-            }
+            [$this, 'processAjaxRequest']
         );
+    }
+
+    public function processAjaxRequest(): void
+    {        
+        if (!current_user_can($this->getRequiredCapability())) {
+            wp_send_json_error(['message' => 'Unauthorized'], 403);
+            return;
+        }
+
+        check_ajax_referer($this->getAjaxNonce());
+
+        if (function_exists('wp_cache_delete')) {
+            wp_cache_delete('alloptions', 'options');
+            wp_cache_delete('notoptions', 'options');
+        }
+
+        nocache_headers();
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=zero');
+        header('Pragma: no-cache');
+
+        wp_send_json_success($this->getAjaxResponse());
     }
 
     public function getAjaxNonce(): string
