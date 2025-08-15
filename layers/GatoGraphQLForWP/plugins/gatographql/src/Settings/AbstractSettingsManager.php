@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\Facades\TransientSettingsManagerFacade;
 
 use function uniqid;
 
-abstract class AbstractSettingsManager implements UserSettingsManagerInterface
+abstract class AbstractSettingsManager
 {
     private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
     private ?TransientSettingsManagerInterface $transientSettingsManager = null;
