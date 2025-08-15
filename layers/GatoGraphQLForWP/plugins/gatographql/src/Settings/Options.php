@@ -61,6 +61,10 @@ class Options
      */
     public final const TIMESTAMPS = 'timestamps';
     /**
+     * Option name under which to store JSON data for options
+     */
+    public final const JSON_DATA = 'json-data';
+    /**
      * Option name under which to store the Log entries count
      */
     public final const LOG_COUNTS = 'log-counts';
