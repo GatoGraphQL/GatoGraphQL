@@ -233,6 +233,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Append selected option value in dropdown in Settings if it doesn't exist (#3178)
 * Allow storing JSON data for options in Settings (#3179)
 * Print body of failing requests in error logs (#3155)
+* Added convenient method to handle Ajax Requests (#3180)
 * Support executing bulk actions with custom settings (#3156)
 * Support reading just-updated plugin settings in options.php (#3157)
 * Fixed bug where querying `post(by: { id: 0 })` returns `null` (instead of the post in the loop) (#3165)
