@@ -20,7 +20,6 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
     }
 
     /**
-     * @param string $name
      * @param mixed[]|null $defaultValue
      * @return mixed[]|null
      */
@@ -40,7 +39,6 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
     }
 
     /**
-     * @param string $name
      * @param mixed[] $data
      */
     public function storeJSONData(string $name, array $data): void
