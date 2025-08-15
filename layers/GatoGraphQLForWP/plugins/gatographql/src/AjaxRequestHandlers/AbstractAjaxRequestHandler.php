@@ -26,7 +26,6 @@ abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantia
     {        
         if (!current_user_can($this->getRequiredCapability())) {
             wp_send_json_error(['message' => 'Unauthorized'], 403);
-            return;
         }
 
         check_ajax_referer($this->getAjaxNonce());
