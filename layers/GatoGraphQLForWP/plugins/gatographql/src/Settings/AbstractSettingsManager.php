@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Settings;
 
+use GatoGraphQL\GatoGraphQL\Facades\JSONDataOptionSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\Facades\TransientSettingsManagerFacade;
 
+use GatoGraphQL\GatoGraphQL\Facades\TransientSettingsManagerFacade;
 use function uniqid;
 
 abstract class AbstractSettingsManager implements UserSettingsManagerInterface
 {
     private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
     private ?TransientSettingsManagerInterface $transientSettingsManager = null;
+    private ?JSONDataOptionSettingsManagerInterface $jsonDataOptionSettingsManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
     final protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
@@ -23,6 +25,10 @@ abstract class AbstractSettingsManager implements UserSettingsManagerInterface
     final protected function getTransientSettingsManager(): TransientSettingsManagerInterface
     {
         return $this->transientSettingsManager ??= TransientSettingsManagerFacade::getInstance();
+    }
+    final protected function getJSONDataOptionSettingsManager(): JSONDataOptionSettingsManagerInterface
+    {
+        return $this->jsonDataOptionSettingsManager ??= JSONDataOptionSettingsManagerFacade::getInstance();
     }
     final protected function getOptionNamespacer(): OptionNamespacerInterface
     {
