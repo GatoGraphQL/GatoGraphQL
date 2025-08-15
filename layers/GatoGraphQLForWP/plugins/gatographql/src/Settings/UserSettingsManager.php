@@ -6,15 +6,11 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
-use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
-use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\Facades\TransientSettingsManagerFacade;
 
 use function get_option;
-use function uniqid;
 use function update_option;
 
-class UserSettingsManager implements UserSettingsManagerInterface
+class UserSettingsManager extends AbstractSettingsManager implements UserSettingsManagerInterface
 {
     private const TIMESTAMP_CONTAINER = 'container';
     private const TIMESTAMP_OPERATIONAL = 'operational';
@@ -28,61 +24,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
      */
     protected array $options = [];
 
-    private ?TimestampSettingsManagerInterface $timestampSettingsManager = null;
-    private ?TransientSettingsManagerInterface $transientSettingsManager = null;
-    private ?OptionNamespacerInterface $optionNamespacer = null;
-
-    final protected function getTimestampSettingsManager(): TimestampSettingsManagerInterface
-    {
-        return $this->timestampSettingsManager ??= TimestampSettingsManagerFacade::getInstance();
-    }
-    final protected function getTransientSettingsManager(): TransientSettingsManagerInterface
-    {
-        return $this->transientSettingsManager ??= TransientSettingsManagerFacade::getInstance();
-    }
-    final protected function getOptionNamespacer(): OptionNamespacerInterface
-    {
-        return $this->optionNamespacer ??= OptionNamespacerFacade::getInstance();
-    }
-
-    /**
-     * Timestamp of latest executed write to DB, concerning plugin activation,
-     * module enabled/disabled, user settings updated.
-     *
-     * If there is not timestamp yet, then we just installed the plugin.
-     *
-     * In that case, we must return a random `time()` timestamp and not
-     * a fixed value such as `0`, because the service container
-     * will be generated on each interaction with WordPress,
-     * including WP-CLI.
-     *
-     * Using `0` as the default value, when installing the plugin
-     * and an extension via WP-CLI (before accessing wp-admin)
-     * it will throw errors, because after installing the main plugin
-     * the container cache is generated and cached with timestamp `0`,
-     * and it would be loaded again when installing the extension,
-     * however the cache does not contain the services from the extension.
-     *
-     * By providing `time()`, the cached service container is always
-     * a one-time-use before accessing the wp-admin and
-     * having a new timestamp generated via `purgeContainer`.
-     */
-    protected function getOptionUniqueTimestamp(string $key): string
-    {
-        /** @var string */
-        $timestamp = $this->getTimestampSettingsManager()->getTimestamp($key, $this->getUniqueIdentifier());
-        return $timestamp;
-    }
-
-    /**
-     * Add a random number to `time()` to make it truly unique,
-     * as to avoid a bug when 2 requests with different schema
-     * configuration come in at the same time (i.e. with same `time()`).
-     */
-    protected function getUniqueIdentifier(): string
-    {
-        return uniqid();
-    }
     /**
      * Static timestamp, reflecting when the service container has been regenerated.
      * Should change not so often
@@ -148,15 +89,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $this->getTimestamp(self::TIMESTAMP_LICENSE_CHECK);
     }
 
-    protected function getTimestamp(string $timestampName): ?int
-    {
-        $timestamp = $this->getTimestampSettingsManager()->getTimestamp($timestampName);
-        if ($timestamp === null) {
-            return null;
-        }
-        return (int) $timestamp;
-    }
-
     /**
      * Store the current time to indicate the latest executed
      * validation of the commercial licenses
@@ -164,14 +96,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
     public function storeLicenseCheckTimestamp(): void
     {
         $this->storeTimestamp(self::TIMESTAMP_LICENSE_CHECK);
-    }
-
-    protected function storeTimestamp(string $timestampName): void
-    {
-        $this->getTimestampSettingsManager()->storeTimestamp(
-            $timestampName,
-            (string) time()
-        );
     }
 
     /**
@@ -310,11 +234,6 @@ class UserSettingsManager implements UserSettingsManagerInterface
     public function hasSetModuleEnabled(string $moduleID): bool
     {
         return $this->hasItem($this->namespaceOption(Options::MODULES), $moduleID);
-    }
-
-    protected function namespaceOption(string $option): string
-    {
-        return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
     public function isModuleEnabled(string $moduleID): bool
