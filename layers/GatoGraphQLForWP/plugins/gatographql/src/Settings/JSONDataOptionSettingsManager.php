@@ -30,6 +30,9 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
         if (!array_key_exists($name, $jsonData)) {
             return $defaultValue;
         }
+        if (!is_array($jsonData[$name])) {
+            return $defaultValue;
+        }
         return $jsonData[$name];
     }
 
