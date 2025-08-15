@@ -389,15 +389,15 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
                                 // If passing a tab, focus on that one, if the module exists
-                                if ($activeModule !== null) {
-                                    $moduleIDs = array_map(
-                                        fn ($item) => $item['id'],
-                                        $categorySettingsItems
-                                    );
-                                    if (in_array($activeModule, $moduleIDs)) {
-                                        $activeModuleID = $activeModule;
-                                    }
+                            if ($activeModule !== null) {
+                                $moduleIDs = array_map(
+                                    fn ($item) => $item['id'],
+                                    $categorySettingsItems
+                                );
+                                if (in_array($activeModule, $moduleIDs)) {
+                                    $activeModuleID = $activeModule;
                                 }
+                            }
                             ?>
                                 <div class="<?php echo esc_attr($class) ?>">
                                     <?php if ($printModuleSettingsWithTabs) : ?>
