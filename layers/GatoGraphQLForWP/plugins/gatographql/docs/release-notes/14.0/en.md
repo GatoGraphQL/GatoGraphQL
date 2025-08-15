@@ -21,6 +21,7 @@
 - Support executing bulk actions with custom settings ([#3156](https://github.com/GatoGraphQL/GatoGraphQL/pull/3156))
 - Support reading just-updated plugin settings in options.php ([#3157](https://github.com/GatoGraphQL/GatoGraphQL/pull/3157))
 - Append selected option value in dropdown in Settings if it doesn't exist ([#3178](https://github.com/GatoGraphQL/GatoGraphQL/pull/3178))
+- Allow storing JSON data for options in Settings ([#3179](https://github.com/GatoGraphQL/GatoGraphQL/pull/3179))
 
 ## Fixed
 
