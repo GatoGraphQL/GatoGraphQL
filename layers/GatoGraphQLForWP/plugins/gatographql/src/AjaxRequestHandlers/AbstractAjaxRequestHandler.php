@@ -6,7 +6,12 @@ namespace GatoGraphQL\GatoGraphQL\AjaxRequestHandlers;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
-abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantiatedService
+use function check_ajax_referer;
+use function nocache_headers;
+use function wp_cache_delete;
+use function wp_send_json_success;
+
+abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantiatedService implements AjaxRequestHandlerInterface
 {
     final public function initialize(): void
     {
@@ -32,17 +37,15 @@ abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantia
         );
     }
 
-    /**
-     * Ajax action name, without `wp_ajax_` prefix
-     */
-    abstract protected function getAjaxAction(): string;
+    public function getAjaxNonce(): string
+    {   
+        return $this->getAjaxAction() . '_nonce';
+    }
 
     protected function getRequiredCapability(): string
     {
         return 'manage_options';
     }
-
-    abstract protected function getAjaxNonce(): string;
 
     /**
      * Return the response to send to the client
@@ -50,8 +53,4 @@ abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantia
      * @return array<string, mixed>
      */
     abstract protected function getAjaxResponse(): array;
-
-    /**
-     * Return the option name to get the data from
-     */
 }
