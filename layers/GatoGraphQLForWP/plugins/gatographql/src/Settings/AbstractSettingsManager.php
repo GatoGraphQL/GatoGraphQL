@@ -7,8 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 use GatoGraphQL\GatoGraphQL\Facades\JSONDataOptionSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\TimestampSettingsManagerFacade;
-
 use GatoGraphQL\GatoGraphQL\Facades\TransientSettingsManagerFacade;
+
 use function uniqid;
 
 abstract class AbstractSettingsManager implements UserSettingsManagerInterface
