@@ -91,6 +91,29 @@ abstract class AbstractSettingsManager implements UserSettingsManagerInterface
         );
     }
 
+    /**
+     * @return mixed[]|null
+     */
+    protected function getJSONData(string $optionName): ?array
+    {
+        $jsonData = $this->getJSONDataOptionSettingsManager()->getJSONData($optionName);
+        if ($jsonData === null) {
+            return null;
+        }
+        return $jsonData;
+    }
+
+    /**
+     * @param mixed[] $jsonData
+     */
+    protected function storeJSONData(string $optionName, array $jsonData): void
+    {
+        $this->getJSONDataOptionSettingsManager()->storeJSONData(
+            $optionName,
+            $jsonData
+        );
+    }
+
     protected function namespaceOption(string $option): string
     {
         return $this->getOptionNamespacer()->namespaceOption($option);
