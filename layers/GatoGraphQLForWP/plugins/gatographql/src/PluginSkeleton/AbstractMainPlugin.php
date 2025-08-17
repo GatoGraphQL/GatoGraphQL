@@ -768,7 +768,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             return;
         }
 
-        // Check if the X number of days have already passes
+        // Check if the X number of days have already passed
         $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses = $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses * 86400;
         $now = time();
         $licenseCheckTimestamp = $this->getUserSettingsManager()->getLicenseCheckTimestamp() ?? 0; // If `null`, execute the license check
