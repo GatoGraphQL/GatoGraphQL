@@ -34,8 +34,12 @@ class TimestampSettingsManager implements TimestampSettingsManagerInterface
         return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
-    public function storeTimestamp(string $name, string $timestamp): void
+    /**
+     * @param string|null $timestamp If null, use the current time
+     */
+    public function storeTimestamp(string $name, ?string $timestamp = null): void
     {
+        $timestamp ??= (string) time();
         $this->storeTimestamps([$name => $timestamp]);
     }
 

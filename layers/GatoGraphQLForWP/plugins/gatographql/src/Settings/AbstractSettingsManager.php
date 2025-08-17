@@ -85,10 +85,7 @@ abstract class AbstractSettingsManager
 
     protected function storeTimestamp(string $timestampName): void
     {
-        $this->getTimestampSettingsManager()->storeTimestamp(
-            $timestampName,
-            (string) time()
-        );
+        $this->getTimestampSettingsManager()->storeTimestamp($timestampName);
     }
 
     /**
