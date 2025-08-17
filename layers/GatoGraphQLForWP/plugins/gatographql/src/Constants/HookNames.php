@@ -19,4 +19,6 @@ class HookNames
     public final const SUPPORTED_ADMIN_ENDPOINT_GROUPS = __CLASS__ . ':supported-admin-endpoint-groups';
 
     public final const FORBID_ACCESS = __CLASS__ . ':forbid-access';
+
+    public final const EXECUTE_SETTINGS_PAGE_FUNCTIONALITY = __CLASS__ . ':execute-settings-page-functionality';
 }

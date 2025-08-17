@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use Exception;
 use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
@@ -26,6 +27,7 @@ use function error_log;
 use function esc_attr;
 use function esc_html;
 use function esc_url;
+use function get_plugin_page_hook;
 use function register_setting;
 use function settings_errors;
 use function settings_fields;
@@ -217,6 +219,24 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     // Log the error, but otherwise do nothing
                     error_log($exception->__toString());
                 }
+
+                /**
+                 * Allow to execute further functionality on the Settings page
+                 * (eg: to fetch the models data from the AI service)
+                 */
+                $pageHook = get_plugin_page_hook($this->getScreenID(), 'admin.php');
+                add_action(
+                    "load-{$pageHook}",
+                    function (): void {
+                        if (!$this->isCurrentScreen()) {
+                            return;
+                        }
+                        App::doAction(
+                            HookNames::EXECUTE_SETTINGS_PAGE_FUNCTIONALITY,
+                            $this
+                        );
+                    }
+                );
             }
         );
     }
