@@ -24,4 +24,4 @@ sed -i 's/&null/null/' vendor/symfony/dependency-injection/Compiler/ResolveBindi
 # This file in Symfony keeps a private parameter, it doesn't work on PHP 7.4
 #    public function __construct(private array $factories)
 # Fix it
-sed -i 's/__construct\(private array \$factories\)/__construct(array $factories)/' vendor/symfony/service-contracts/ServiceLocatorTrait.php
+sed -i 's/__construct(private array $factories)/__construct(array $factories)/' vendor/symfony/service-contracts/ServiceLocatorTrait.php
