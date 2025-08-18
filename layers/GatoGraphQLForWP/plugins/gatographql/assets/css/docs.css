@@ -31,6 +31,11 @@ ul.plugin-action-buttons {
     padding: 1em;
 }
 
+.doc-config-highlight.warning-style {
+    border-left: 4px solid #dba617;
+    color: #6b4e00;
+}
+
 /**
  * Make large images fit within the page
  */
