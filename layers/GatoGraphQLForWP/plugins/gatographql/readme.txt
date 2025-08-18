@@ -238,6 +238,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Support executing bulk actions with custom settings (#3156)
 * Support reading just-updated plugin settings in options.php (#3157)
 * Fixed bug where querying `post(by: { id: 0 })` returns `null` (instead of the post in the loop) (#3165)
+* Fixed plugin not working with PHP 7.4 (#3182)
 
 = 13.2.0 =
 * Added field `CustomPost.rawStatus` (as it exists in the database, eg: `publish` instead of `future`) (#3142)
