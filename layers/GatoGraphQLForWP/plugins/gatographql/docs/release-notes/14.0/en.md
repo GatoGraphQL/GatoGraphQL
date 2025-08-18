@@ -28,3 +28,4 @@
 ## Fixed
 
 - Querying `post(by: { id: 0 })` returns `null` (instead of the post in the loop) ([#3165](https://github.com/GatoGraphQL/GatoGraphQL/pull/3165))
+- Plugin not working with PHP 7.4 ([#3182](https://github.com/GatoGraphQL/GatoGraphQL/pull/3182))

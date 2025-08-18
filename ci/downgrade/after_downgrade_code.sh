@@ -20,3 +20,8 @@ sed -i 's/trigger_deprecation/\/\/trigger_deprecation/' vendor/symfony/dependenc
 #   $name = Target::parseName($parameter, &null, $parsedName);
 # Fix it
 sed -i 's/&null/null/' vendor/symfony/dependency-injection/Compiler/ResolveBindingsPass.php
+
+# This file in Symfony keeps a private parameter, it doesn't work on PHP 7.4
+#    public function __construct(private array $factories)
+# Fix it
+sed -i 's/__construct(private array $factories)/__construct(array $factories)/' vendor/symfony/service-contracts/ServiceLocatorTrait.php
