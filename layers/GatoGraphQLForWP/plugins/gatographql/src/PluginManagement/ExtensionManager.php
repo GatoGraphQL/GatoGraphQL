@@ -339,14 +339,14 @@ class ExtensionManager extends AbstractPluginManager
         return $this->inactiveExtensionDependedUponThemeSlugs;
     }
 
-    public function isExtensionBundled(string $bundledExtensionClass): bool
+    public function isExtensionBundled(string $extensionClass): bool
     {
-        return $this->getBundlingExtension($bundledExtensionClass) !== null;
+        return $this->getBundlingExtension($extensionClass) !== null;
     }
 
-    public function getBundlingExtension(string $bundledExtensionClass): ?BundleExtensionInterface
+    public function getBundlingExtension(string $extensionClass): ?BundleExtensionInterface
     {
-        return $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] ?? null;
+        return $this->bundledExtensionClassBundlingExtensionClasses[$extensionClass] ?? null;
     }
 
     /**
