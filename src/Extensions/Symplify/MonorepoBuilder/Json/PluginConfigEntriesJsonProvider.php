@@ -106,6 +106,9 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['dist_repo_organization'] ??= '';
             $entryConfig['dist_repo_name'] ??= '';
 
+            // Distribute to Edge repo (via the `distribute_plugins_to_edge_repo.yml` workflow, if it exists)
+            $entryConfig['dist_edge_repo_name'] ??= '';
+
             // Merge all rector configs as a string
             $entryConfig['additional_rector_before_configs'] = implode(' ', $entryConfig['additional_rector_before_configs'] ?? []);
             $entryConfig['additional_rector_after_configs'] = implode(' ', $entryConfig['additional_rector_after_configs'] ?? []);
