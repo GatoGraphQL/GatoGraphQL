@@ -106,7 +106,7 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['dist_repo_organization'] ??= '';
             $entryConfig['dist_repo_name'] ??= '';
 
-            // Distribute to Edge repo (via the `distribute_plugins_to_edge_repo.yml` workflow, if it exists)
+            // Distribute to Edge repo (via the `distribute_plugins_to_source_repo.yml` workflow, if it exists)
             $entryConfig['dist_source_repo_name'] ??= '';
 
             // Merge all rector configs as a string
@@ -126,7 +126,7 @@ final class PluginConfigEntriesJsonProvider
             // Copy folder .wordpress-org to the DIST repo
             $entryConfig['include_folders_for_dist_repo'] ??= '';
             
-            // Distribute to Edge repo (via the `distribute_plugins_to_edge_repo.yml` workflow, if it exists)
+            // Distribute to Edge repo (via the `distribute_plugins_to_source_repo.yml` workflow, if it exists)
             $entryConfig['include_folders_for_dist_source_repo'] ??= '';
 
             $pluginConfigEntries[] = $entryConfig;
