@@ -125,6 +125,9 @@ final class PluginConfigEntriesJsonProvider
 
             // Copy folder .wordpress-org to the DIST repo
             $entryConfig['include_folders_for_dist_repo'] ??= '';
+            
+            // Distribute to Edge repo (via the `distribute_plugins_to_edge_repo.yml` workflow, if it exists)
+            $entryConfig['include_folders_for_dist_source_repo'] ??= '';
 
             $pluginConfigEntries[] = $entryConfig;
         }
