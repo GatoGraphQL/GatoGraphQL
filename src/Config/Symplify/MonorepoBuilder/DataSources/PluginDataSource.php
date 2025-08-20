@@ -41,8 +41,10 @@ class PluginDataSource
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
                 ]),
                 'dist_enabled' => true,
+                'dist_source_enabled' => true,
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-dist',
+                'dist_source_repo_name' => 'gatographql-source',
                 'additional_rector_before_configs' => [
                     $this->rootDir . '/config/rector/downgrade/plugins/gatographql/chained-rules/rector-change-if-or-return-earlyreturn.php',
                 ],
