@@ -30,6 +30,7 @@ class PluginDataSource
                 'plugin_slug' => 'gatographql',
                 'main_file' => 'gatographql.php',
                 'exclude_files' => implode(' ', [
+                    '.github-source-repo/\*',
                     '.wordpress-org/\*',
                     'dev-helpers/\*',
                     'block-config/\*',
