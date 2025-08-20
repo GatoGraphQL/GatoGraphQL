@@ -772,7 +772,7 @@ composer fix-style
 
 ## Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [CHANGELOG](layers/GatoGraphQLForWP/plugins/gatographql/CHANGELOG.md) for more information on what has changed recently.
 
 ## Testing
 

@@ -30,6 +30,7 @@ class PluginDataSource
                 'plugin_slug' => 'gatographql',
                 'main_file' => 'gatographql.php',
                 'exclude_files' => implode(' ', [
+                    '.github-source-repo/\*',
                     '.wordpress-org/\*',
                     'dev-helpers/\*',
                     'block-config/\*',
@@ -41,8 +42,10 @@ class PluginDataSource
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
                 ]),
                 'dist_enabled' => true,
+                'dist_source_enabled' => true,
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-dist',
+                'dist_source_repo_name' => 'gatographql-source',
                 'additional_rector_before_configs' => [
                     $this->rootDir . '/config/rector/downgrade/plugins/gatographql/chained-rules/rector-change-if-or-return-earlyreturn.php',
                 ],
@@ -68,6 +71,10 @@ class PluginDataSource
                     '.github',
                     // Copy all assets for the plugin directory
                     '.wordpress-org',
+                ]),
+                'include_folders_for_dist_source_repo' => implode(' ', [
+                    // Copy the README.md file for the Source repo
+                    '.github-source-repo/README.md',
                 ]),
             ],
 

@@ -1,0 +1,214 @@
+####################################################################################
+# GitHub Action:
+# Distribute the plugin source code to another GitHub repo,
+# keeping the source code as is: PHP 8.1, and no scoping.
+####################################################################################
+# You can filter what .zip files to generate by type, by setting variable
+# `GENERATE_PLUGINS_FILTER` with any of these values:
+#   - extension
+#   - bundle
+#   - standalone-plugin
+#
+# You can filter what .zip files to generate by plugin slug, by setting variable
+# `GENERATE_PLUGINS_SLUGS`
+####################################################################################
+name: Distribute plugin code to Source repo 
+on:
+    release:
+        types: [published]
+    push:
+        branches:
+            - master
+            - versions/*
+    pull_request: null
+
+env:
+    CHECKOUT_SUBMODULES: ""
+    GENERATE_PLUGINS_FILTER: ""
+    GENERATE_PLUGINS_SLUGS: ""
+    # see https://github.com/composer/composer/issues/9368#issuecomment-718112361
+    COMPOSER_ROOT_VERSION: dev-master
+
+jobs:
+    provide_data:
+        name: Provide configuration to generate plugins
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v4
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   uses: ramsey/composer-install@v3
+
+            -   id: output_data
+                run: |
+                    quote=\'
+                    filter_arg="--filter=$(echo '${{ env.GENERATE_PLUGINS_FILTER }}' | sed -e 's/ / --filter=/g')"
+                    slugs_arg="--slugs=$(echo '${{ env.GENERATE_PLUGINS_SLUGS }}' | sed -e 's/ / --slugs=/g')"
+                    echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json $(echo $filter_arg) $(echo $slugs_arg) --config=config/monorepo-builder/plugin-config-entries-json.php)" >> $GITHUB_OUTPUT
+                    echo "retention_days_for_generated_plugins=$(vendor/bin/monorepo-builder env-var RETENTION_DAYS_FOR_GENERATED_PLUGINS --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "local_package_owners=$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)" >> $GITHUB_OUTPUT
+                    echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_user_name=$(vendor/bin/monorepo-builder env-var GIT_USER_NAME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+        outputs:
+            plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
+            retention_days: ${{ steps.output_data.outputs.retention_days_for_generated_plugins }}
+            local_package_owners: ${{ steps.output_data.outputs.local_package_owners }}
+            git_base_branch: ${{ steps.output_data.outputs.git_base_branch }}
+            git_user_name: ${{ steps.output_data.outputs.git_user_name }}
+            git_user_email: ${{ steps.output_data.outputs.git_user_email }}
+
+    # Build plugin => downgrade => (maybe) scope => (maybe) upload to release and deploy to dist repo
+    process:
+        name: Generate plugin "${{ matrix.pluginConfig.plugin_slug }}"
+        needs: provide_data
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v4
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
+
+            -   name: Create build folder
+                run: mkdir build && mkdir build/dist-plugin
+
+            -   name: Install zip
+                uses: montudor/action-zip@v1.0.0
+
+            # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
+            -   name: Use PHP 8.1
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    coverage: none
+                    ini-values: pcre.jit=0
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   name: Install root dependencies
+                uses: ramsey/composer-install@v3
+
+    ###########################################################################
+    # Downgrade plugin
+    ###########################################################################
+
+            # "custom-bump-interdependency" temporarily needed because of bug:
+            # https://github.com/symplify/symplify/issues/2773
+            -   name: Localize package paths
+                run: |
+                    vendor/bin/monorepo-builder custom-bump-interdependency --config=config/monorepo-builder/custom-bump-interdependency.php "dev-${{ needs.provide_data.outputs.git_base_branch }}"
+                    vendor/bin/monorepo-builder localize-composer-paths --config=config/monorepo-builder/localize-composer-paths.php ${{ matrix.pluginConfig.path }}/composer.json --ansi
+
+            ###########################################################################
+            # When building bundles (i.e. containing 2 or more extension plugins), if 2 extensions
+            # contain the same entry under "replace" in composer.json, then "require"ing both of
+            # them in the bundle fails.
+            #
+            # For instance, several plugins replace "pop-schema/schema-commons", producing
+            # the following error message:
+            #
+            #   > Only one of these can be installed: pop-schema/schema-commons[dev-master], gatographql-pro/php-constants-and-environment-variables-via-schema[dev-master], gatographql-pro/helper-function-collection[dev-master]. [gatographql-pro/php-constants-and-environment-variables-via-schema, gatographql-pro/helper-function-collection] replace pop-schema/schema-commons and thus cannot coexist with it.
+            #
+            # As a solution, when generating the bundle plugin, remove all the "replace" entries
+            # in the composer.json for the included plugins, and move them to the bundle composer.json
+            ###########################################################################
+            -   name: "Bundles: Transfer the 'replace' entries in composer.json, from the contained plugins to the bundle"
+                run: |
+                    vendor/bin/monorepo-builder transfer-composer-replace-entries-from-plugins-to-bundle --config=config/monorepo-builder/transfer-composer-replace-entries-from-plugins-to-bundle.php "${{ matrix.pluginConfig.path }}/composer.json" --exclude-replace="${{ matrix.pluginConfig.exclude_replace }}"
+                if: ${{ matrix.pluginConfig.is_bundle }}
+
+            ###########################################################################
+            # When building standalone plugins, the "replace" entries from the bundled
+            # extensions must be ignored, as these must also be contained within the
+            # standalone plugin (which also contains Gato GraphQL).
+            #
+            # Because standalone plugins are bundles, in the previous step the
+            # "replace" entries have been moved up from the bundled extensions
+            # to the bundle's composer.json. Now, remove them.
+            ###########################################################################
+            -   name: "Standalone plugins: Remove the 'replace' entries in composer.json (originally from the contained plugins, now in the bundle)"
+                run: |
+                    vendor/bin/monorepo-builder remove-composer-replace-entries --config=config/monorepo-builder/remove-composer-replace-entries.php "${{ matrix.pluginConfig.path }}/composer.json"
+                if: ${{ matrix.pluginConfig.is_standalone_plugin }}
+
+            -   name: Install plugin dependencies, avoiding v2 platform check
+                run: |
+                    composer config platform-check false --no-interaction --ansi
+                    composer install --no-progress --no-interaction --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
+            ################################################################################
+
+            # Add the commit hash to the plugin version, to regenerate the container when testing the generated plugin
+            -   name: Append the the commit hash to the plugin/extension version
+                run: |
+                    sed -i "s/$commitHash = null;/$commitHash = '${{ github.sha }}';/" ${{ matrix.pluginConfig.main_file }}
+                working-directory: ${{ matrix.pluginConfig.path }}
+
+            -   name: Build project for production
+                run: composer install --no-dev --optimize-autoloader --no-progress --no-interaction --ansi
+                working-directory: ${{ matrix.pluginConfig.path }}
+
+    ###########################################################################
+    # Generate plugin, and Upload as artifact
+    ###########################################################################
+
+            -   name: Create plugin as zip
+                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }}.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* vendor/**/phpstan.neon vendor/**/phpstan.neon.dist vendor/**/phpunit.xml.dist vendor/**/composer.json vendor/**/README.md vendor/**/LICENSE.md vendor/**/CHANGELOG.md tests/\* **/tests/\* **/test/\* **/Test/\* ${{ matrix.pluginConfig.exclude_files }}
+                working-directory: ${{ matrix.pluginConfig.path }}
+
+            -   name: Uncompress plugin zip contents into new folder
+                uses: montudor/action-zip@v1.0.0
+                with:
+                    args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}.zip -d build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}
+
+            -   name: Upload plugin zip as artifact
+                uses: actions/upload-artifact@v4
+                with:
+                    name: ${{ matrix.pluginConfig.zip_file }}
+                    path: build/dist-plugin/
+                    retention-days: ${{ needs.provide_data.outputs.retention_days }}
+
+    ###########################################################################
+    # Upload and Deploy
+    #   Only when doing a release
+    ###########################################################################
+
+            -   name: Create release folder
+                run: mkdir build/release-plugin
+                if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_source_repo_organization && matrix.pluginConfig.dist_source_repo_name }}
+
+            -   name: Create release plugin as .zip file (containing a root folder with the plugin name)
+                run: zip -X -r $GITHUB_WORKSPACE/build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip .
+                working-directory: build/dist-plugin
+                if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_source_repo_organization && matrix.pluginConfig.dist_source_repo_name }}
+
+            -   name: Include (previously excluded) folders for DIST repo
+                run: sudo rsync -av ${{ matrix.pluginConfig.include_folders_for_dist_source_repo }} $GITHUB_WORKSPACE/build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }} --quiet
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ matrix.pluginConfig.include_folders_for_dist_source_repo != '' && matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_source_repo_organization && matrix.pluginConfig.dist_source_repo_name }}
+
+            -   name: Publish to DIST repo
+                uses: symplify/monorepo-split-github-action@1.1
+                env:
+                    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                with:
+                    branch: ${{ matrix.pluginConfig.dist_repo_branch }}
+                    package-directory: 'build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}'
+                    split-repository-organization: ${{ matrix.pluginConfig.dist_source_repo_organization }}
+                    split-repository-name: ${{ matrix.pluginConfig.dist_source_repo_name }}
+                    user-name: "${{ needs.provide_data.outputs.git_user_name }}"
+                    user-email: "${{ needs.provide_data.outputs.git_user_email }}"
+                if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_source_repo_organization && matrix.pluginConfig.dist_source_repo_name }}
+
