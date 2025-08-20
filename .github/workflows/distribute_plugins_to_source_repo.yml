@@ -187,17 +187,17 @@ jobs:
 
             -   name: Create release folder
                 run: mkdir build/release-plugin
-                if: ${{ matrix.pluginConfig.dist_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
+                if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
 
             -   name: Create release plugin as .zip file (containing a root folder with the plugin name)
                 run: zip -X -r $GITHUB_WORKSPACE/build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip .
                 working-directory: build/dist-plugin
-                if: ${{ matrix.pluginConfig.dist_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
+                if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
 
             -   name: Include (previously excluded) folders for DIST repo
                 run: sudo rsync -av ${{ matrix.pluginConfig.include_folders_for_dist_source_repo }} $GITHUB_WORKSPACE/build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }} --quiet
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.include_folders_for_dist_source_repo != '' && matrix.pluginConfig.dist_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
+                if: ${{ matrix.pluginConfig.include_folders_for_dist_source_repo != '' && matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
 
             -   name: Publish to DIST repo
                 uses: symplify/monorepo-split-github-action@1.1
@@ -210,5 +210,5 @@ jobs:
                     split-repository-name: ${{ matrix.pluginConfig.dist_repo_name }}
                     user-name: "${{ needs.provide_data.outputs.git_user_name }}"
                     user-email: "${{ needs.provide_data.outputs.git_user_email }}"
-                if: ${{ matrix.pluginConfig.dist_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
+                if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
 
