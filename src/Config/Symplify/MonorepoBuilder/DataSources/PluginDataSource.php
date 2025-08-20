@@ -71,6 +71,10 @@ class PluginDataSource
                     // Copy all assets for the plugin directory
                     '.wordpress-org',
                 ]),
+                'include_folders_for_dist_source_repo' => implode(' ', [
+                    // Copy the README.md file for the Source repo
+                    '.github-source-repo/README.md',
+                ]),
             ],
 
             // Gato GraphQL - Testing Schema <= To run integration tests
