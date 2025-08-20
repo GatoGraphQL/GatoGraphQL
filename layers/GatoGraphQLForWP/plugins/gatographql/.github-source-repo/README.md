@@ -1,6 +1,6 @@
 # Gato GraphQL - DEV Source
 
-Here you will find the DEV version of the **Gato GraphQL** plugin.
+Here you will find the DEV version of the [Gato GraphQL](https://gatographql.com) plugin.
 
 Use this repo to:
 
