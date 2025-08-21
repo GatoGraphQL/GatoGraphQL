@@ -15,6 +15,11 @@ interface LogEntryCounterSettingsManagerInterface
      * @return array<string,int>
      */
     public function getLogCountBySeverity(array $severities): array;
+    /**
+     * @param string[] $severities
+     * @return string[]
+     */
+    public function sortSeveritiesByHighestLevel(array $severities): array;
     public function storeLogCount(string $severity, int $logCount): void;
     public function increaseLogCount(string $severity): void;
     /**
