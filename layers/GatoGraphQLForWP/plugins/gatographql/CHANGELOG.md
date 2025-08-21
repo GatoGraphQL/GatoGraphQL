@@ -30,6 +30,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow storing JSON data for options in Settings (#3179)
 - Added convenient method to handle Ajax Requests (#3180)
 - Allow executing further functionality on the Settings page (#3181)
+- Show notification labels in different colors for different severities (#3184)
 
 ### Fixed
 
