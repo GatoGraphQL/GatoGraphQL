@@ -24,15 +24,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
      */
     public function getLogCount(string|array $severityOrSeverities): int
     {
-        $severities = is_array($severityOrSeverities) ? $severityOrSeverities : [$severityOrSeverities];
-        /** @var array<string,int> */
-        $logCounts = get_option($this->namespaceOption(Options::LOG_COUNTS), []);
-
-        $logCount = 0;
-        foreach ($severities as $severity) {
-            $logCount += $logCounts[strtolower($severity)] ?? 0;
-        }
-        return $logCount;
+        return array_sum($this->getLogCountBySeverity($severityOrSeverities));
     }
 
     /**
