@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Settings;
 
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
-
 use PoPSchema\Logger\Constants\LoggerSeverity;
+
 use function delete_option;
 use function get_option;
 use function update_option;
