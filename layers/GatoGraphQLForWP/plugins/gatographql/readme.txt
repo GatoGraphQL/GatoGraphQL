@@ -236,6 +236,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added convenient method to handle Ajax Requests (#3180)
 * Allow executing further functionality on the Settings page (#3181)
 * Show notification labels in different colors for different severities (#3184)
+* Enable log notifications for warnings by default (#3185)
 * Support executing bulk actions with custom settings (#3156)
 * Support reading just-updated plugin settings in options.php (#3157)
 * Fixed bug where querying `post(by: { id: 0 })` returns `null` (instead of the post in the loop) (#3165)
