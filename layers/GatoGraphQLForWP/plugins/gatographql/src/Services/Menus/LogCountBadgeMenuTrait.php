@@ -38,7 +38,7 @@ trait LogCountBadgeMenuTrait
         }
 
         $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severities)[0];
-        $severityClass = 'badge-severity-' . $highestLevelSeverity;
+        $severityClass = 'badge-severity-' . strtolower($highestLevelSeverity);
 
         return '<span class="awaiting-mod update-plugins remaining-tasks-badge ' . $severityClass . '"><span class="count-' . $logCount . '">' . $logCount . '</span></span>';
     }
