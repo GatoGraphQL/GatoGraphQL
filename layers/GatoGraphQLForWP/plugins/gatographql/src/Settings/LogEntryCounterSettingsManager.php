@@ -51,10 +51,10 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
      */
     public function sortSeveritiesByHighestLevel(array $severities): array
     {
-        return array_intersect(
+        return array_values(array_intersect(
             LoggerSeverity::ALL,
             $severities,
-        );
+        ));
     }
 
     protected function namespaceOption(string $option): string
