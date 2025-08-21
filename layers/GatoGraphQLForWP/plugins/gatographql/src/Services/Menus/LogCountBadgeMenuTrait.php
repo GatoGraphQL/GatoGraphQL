@@ -33,14 +33,21 @@ trait LogCountBadgeMenuTrait
         }
 
         $logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity($severities);
-        $logCount = array_sum($logCountBySeverity);
-        if ($logCount === 0) {
+        if ($logCountBySeverity === []) {
             return null;
         }
 
         $severitiesWithLogCount = array_keys(array_filter($logCountBySeverity, fn (int $logCount): bool => $logCount > 0));
+        if ($severitiesWithLogCount === []) {
+            return null;
+        }
+
         $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severitiesWithLogCount)[0];
         $severityClass = 'badge-severity-' . strtolower($highestLevelSeverity);
+        $logCount = (string) $logCountBySeverity[$highestLevelSeverity];
+        if (count($severitiesWithLogCount) > 1) {
+            $logCount .= '+';
+        }
 
         return '<span class="awaiting-mod update-plugins remaining-tasks-badge ' . $severityClass . '"><span class="count-' . $logCount . '">' . $logCount . '</span></span>';
     }
