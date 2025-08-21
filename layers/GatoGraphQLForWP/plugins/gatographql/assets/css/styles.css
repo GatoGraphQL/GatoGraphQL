@@ -1,17 +1,17 @@
 /* Badge Severity Styles */
 
 .badge-severity-debug {
-    background-color: #07ba33 !important;
+    background-color: #3d9970 !important;
 }
 
 .badge-severity-info {
-    background-color: #3495f0 !important;
+    background-color: #0074d9 !important;
 }
 
 .badge-severity-warning {
     background-color: #ccad55 !important;
 }
 
-/* .badge-severity-error {
-    background-color: #d63638 !important;
-} */
+.badge-severity-error {
+    background-color: #ff4136 !important;
+}
