@@ -25,6 +25,7 @@
 - Added convenient method to handle Ajax Requests ([#3180](https://github.com/GatoGraphQL/GatoGraphQL/pull/3180))
 - Allow executing further functionality on the Settings page ([#3181](https://github.com/GatoGraphQL/GatoGraphQL/pull/3181))
 - Show notification labels in different colors for different severities ([#3184](https://github.com/GatoGraphQL/GatoGraphQL/pull/3184))
+- Enable log notifications for warnings by default ([#3185](https://github.com/GatoGraphQL/GatoGraphQL/pull/3185))
 
 ## Fixed
 
