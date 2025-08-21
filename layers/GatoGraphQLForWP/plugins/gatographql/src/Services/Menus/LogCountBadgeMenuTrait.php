@@ -27,10 +27,17 @@ trait LogCountBadgeMenuTrait
             return null;
         }
 
-        $logCount = $this->getLogEntryCounterSettingsManager()->getLogCount($moduleConfiguration->enableLogCountBadgesBySeverity());
+        $severities = $moduleConfiguration->enableLogCountBadgesBySeverity();
+        if ($severities === []) {
+            return null;
+        }
+
+        $logCount = $this->getLogEntryCounterSettingsManager()->getLogCount($severities);
         if ($logCount === 0) {
             return null;
         }
+
+        $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severities)[0];
 
         return '<span class="awaiting-mod update-plugins remaining-tasks-badge"><span class="count-' . $logCount . '">' . $logCount . '</span></span>';
     }
