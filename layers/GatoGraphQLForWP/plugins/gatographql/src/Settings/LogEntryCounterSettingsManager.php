@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Settings;
 
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 
+use PoPSchema\Logger\Constants\LoggerSeverity;
 use function delete_option;
 use function get_option;
 use function update_option;
@@ -25,14 +26,35 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
     public function getLogCount(string|array $severityOrSeverities): int
     {
         $severities = is_array($severityOrSeverities) ? $severityOrSeverities : [$severityOrSeverities];
+        return array_sum($this->getLogCountBySeverity($severities));
+    }
+
+    /**
+     * @param string[] $severities
+     * @return array<string,int>
+     */
+    public function getLogCountBySeverity(array $severities): array
+    {
         /** @var array<string,int> */
         $logCounts = get_option($this->namespaceOption(Options::LOG_COUNTS), []);
 
-        $logCount = 0;
+        $logCountsBySeverity = [];
         foreach ($severities as $severity) {
-            $logCount += $logCounts[strtolower($severity)] ?? 0;
+            $logCountsBySeverity[$severity] = $logCounts[strtolower($severity)] ?? 0;
         }
-        return $logCount;
+        return $logCountsBySeverity;
+    }
+
+    /**
+     * @param string[] $severities
+     * @return string[]
+     */
+    public function sortSeveritiesByHighestLevel(array $severities): array
+    {
+        return array_values(array_intersect(
+            LoggerSeverity::ALL,
+            $severities,
+        ));
     }
 
     protected function namespaceOption(string $option): string

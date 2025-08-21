@@ -12,6 +12,9 @@ class LoggerSeverity
     public final const DEBUG = 'DEBUG';
 
     /**
+     * Important: The order of the severities is important,
+     * as it determines the level of the severity.
+     *
      * @return string[]
      */
     public final const ALL = [
