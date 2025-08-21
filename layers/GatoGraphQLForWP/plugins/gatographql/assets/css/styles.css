@@ -1,15 +1,15 @@
 /* Badge Severity Styles */
 
-.badge-severity-success {
-    background-color: #00a32a !important;
+.badge-severity-debug {
+    background-color: #07ba33 !important;
 }
 
 .badge-severity-info {
-    background-color: #72aee6 !important;
+    background-color: #3495f0 !important;
 }
 
 .badge-severity-warning {
-    background-color: #dba617 !important;
+    background-color: #856404 !important;
 }
 
 /* .badge-severity-error {
