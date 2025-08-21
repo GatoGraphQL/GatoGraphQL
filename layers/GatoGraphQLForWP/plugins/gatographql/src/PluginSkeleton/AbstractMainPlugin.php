@@ -42,6 +42,7 @@ use function get_called_class;
 use function get_option;
 use function is_admin;
 use function update_option;
+use function wp_enqueue_style;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
@@ -491,6 +492,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginOrThemeUpdated(...), 10, 2);
 
         add_filter('plugin_action_links_' . PluginApp::getMainPlugin()->getPluginBaseName(), $this->getPluginActionLinks(...), 10, 1);
+
+        // Load CSS assets
+        add_action('admin_enqueue_scripts', function (): void {
+            $mainPlugin = PluginApp::getMainPlugin();
+            $mainPluginURL = $mainPlugin->getPluginURL();
+            $mainPluginVersion = $mainPlugin->getPluginVersion();
+
+            wp_enqueue_style(
+                'gatographql-styles',
+                $mainPluginURL . 'assets/css/styles.css',
+                array(),
+                $mainPluginVersion
+            );
+        });
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
