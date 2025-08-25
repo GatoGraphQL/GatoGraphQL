@@ -15,14 +15,24 @@ class AppLoader extends UpstreamAppLoader
      */
     public function bootApplicationModules(): void
     {
-        foreach ($this->getBootApplicationHooks() as $actionHook) {
+        foreach ($this->getBootApplicationActionHooks() as $filterHook) {
             App::addAction(
-                $actionHook,
+                $filterHook,
                 fn () => parent::bootApplicationModules(),
                 /**
                  * Execute at the beginning, only to tell developers that,
                  * starting from these hooks on, the GraphQL server is ready
                  */
+                0
+            );
+        }
+        foreach ($this->getBootApplicationFilterHooks() as $filterHook) {
+            App::addFilter(
+                $filterHook,
+                function (mixed $value): mixed {
+                    parent::bootApplicationModules();
+                    return $value;
+                },
                 0
             );
         }
@@ -53,8 +63,13 @@ class AppLoader extends UpstreamAppLoader
      *
      * @return string[]
      */
-    protected function getBootApplicationHooks(): array
+    protected function getBootApplicationActionHooks(): array
     {
-        return \is_admin() ? [AppHooks::BOOT_APP_IN_ADMIN] : [AppHooks::BOOT_APP_IN_REST, AppHooks::BOOT_APP_IN_FRONTEND];
+        return \is_admin() ? [AppHooks::BOOT_APP_IN_ADMIN] : [AppHooks::BOOT_APP_IN_FRONTEND];
+    }
+
+    protected function getBootApplicationFilterHooks(): array
+    {
+        return \is_admin() ? [] : [AppHooks::BOOT_APP_IN_REST];
     }
 }

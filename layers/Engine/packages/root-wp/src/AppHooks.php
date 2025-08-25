@@ -13,7 +13,7 @@ class AppHooks
     /**
      * WordPress hook to boot the App when in the WP REST API
      */
-    public final const BOOT_APP_IN_REST = 'rest_api_init';
+    public final const BOOT_APP_IN_REST = 'rest_jsonp_enabled';
     /**
      * WordPress hook to boot the App when in the frontend
      */
