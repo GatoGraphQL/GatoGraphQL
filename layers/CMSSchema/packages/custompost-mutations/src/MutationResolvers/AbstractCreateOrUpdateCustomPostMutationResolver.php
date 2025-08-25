@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use DateTime;
-use DateTimeInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
@@ -375,14 +374,14 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             /** @var DateTime|null */
             $dateTime = $fieldDataAccessor->getValue(MutationInputProperties::DATE);
             if ($dateTime !== null) {
-                $customPostData['date'] = $dateTime->format(DateTimeInterface::ATOM);
+                $customPostData['date'] = $dateTime->format('Y-m-d H:i:s');
             }
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::GMT_DATE)) {
             /** @var DateTime|null */
             $gmtDateTime = $fieldDataAccessor->getValue(MutationInputProperties::GMT_DATE);
             if ($gmtDateTime !== null) {
-                $customPostData['gmtDate'] = $gmtDateTime->format(DateTimeInterface::ATOM);
+                $customPostData['gmtDate'] = $gmtDateTime->format('Y-m-d H:i:s');
             }
         }
 

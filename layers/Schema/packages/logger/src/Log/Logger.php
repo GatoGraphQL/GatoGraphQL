@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPSchema\Logger\Log;
 
-use DateTimeInterface;
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoPSchema\Logger\Constants\LoggerSigns;
 use PoPSchema\Logger\Module;
@@ -79,7 +78,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         /**
          * Use an ISO 8601 date string in local (WordPress) timezone.
          */
-        $date = date(DateTimeInterface::ATOM);
+        $date = date('Y-m-d H:i:s');
 
         if ($context !== null && $context !== []) {
             $message .= $this->__(' ', 'logger') . LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
