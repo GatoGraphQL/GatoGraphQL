@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 
-use GatoStandalone\GatoAITranslationsForPolylang\Gato;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\UserMetaKeys;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\BulkPluginActivationDeactivationExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GatoGraphQLAdminEndpointsTestExecuter;
@@ -13,8 +12,8 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Endpoints\AdminRESTAPIEndpo
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Settings\Options;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Webserver\LandoAdapter;
-
 use WP_REST_Response;
+
 use function add_action;
 use function delete_option;
 use function flush_rewrite_rules;
