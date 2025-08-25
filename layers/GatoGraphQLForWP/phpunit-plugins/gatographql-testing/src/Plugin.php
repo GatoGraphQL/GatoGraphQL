@@ -64,16 +64,6 @@ class Plugin
 
         add_action('init', $this->registerTestingTaxonomies(...));
         add_action('init', $this->registerRESTFields(...));
-
-        add_action('wp_loaded', function () {
-            // Gato::translateCustomPosts([
-            //     48811,
-            //     48805,
-            // ]);
-            // Gato::translateTaxonomyTerms([
-            //     1179,
-            // ]);
-        });
     }
 
     /**
