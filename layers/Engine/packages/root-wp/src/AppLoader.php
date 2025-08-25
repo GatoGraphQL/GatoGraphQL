@@ -7,6 +7,8 @@ namespace PoP\RootWP;
 use PoP\Root\App;
 use PoP\Root\AppLoader as UpstreamAppLoader;
 
+use function is_admin;
+
 class AppLoader extends UpstreamAppLoader
 {
     /**
@@ -65,11 +67,14 @@ class AppLoader extends UpstreamAppLoader
      */
     protected function getBootApplicationActionHooks(): array
     {
-        return \is_admin() ? [AppHooks::BOOT_APP_IN_ADMIN] : [AppHooks::BOOT_APP_IN_FRONTEND];
+        return is_admin() ? [AppHooks::BOOT_APP_IN_ADMIN] : [AppHooks::BOOT_APP_IN_FRONTEND];
     }
 
+    /**
+     * @return string[]
+     */
     protected function getBootApplicationFilterHooks(): array
     {
-        return \is_admin() ? [] : [AppHooks::BOOT_APP_IN_REST];
+        return is_admin() ? [] : [AppHooks::BOOT_APP_IN_REST];
     }
 }
