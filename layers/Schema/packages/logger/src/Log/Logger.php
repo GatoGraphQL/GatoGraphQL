@@ -12,8 +12,8 @@ use PoPSchema\Logger\Constants\LoggerSigns;
 use PoPSchema\Logger\Module;
 use PoPSchema\Logger\ModuleConfiguration;
 use PoP\ComponentModel\App;
-
 use PoP\Root\Services\AbstractBasicService;
+
 use function error_log;
 use function json_encode;
 use function str_pad;
