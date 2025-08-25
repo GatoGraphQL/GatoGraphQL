@@ -9,6 +9,8 @@ use GatoGraphQL\GatoGraphQL\PluginManagement\MainPluginManager;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInterface;
 
+use function add_action;
+
 class PluginApp implements PluginAppInterface
 {
     protected static MainPluginManager $mainPluginManager;
@@ -25,7 +27,7 @@ class PluginApp implements PluginAppInterface
          * Trigger the plugin's AppInitialization hook
          * on WordPress' "plugins_loaded" hook
          */
-        \add_action(
+        add_action(
             'after_setup_theme',
             fn () => do_action(
                 PluginAppHooks::INITIALIZE_APP,
