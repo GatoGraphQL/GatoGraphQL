@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Hooks;
 
 use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface;
 use PoP\ComponentModel\Engine\EngineHookNames;
@@ -41,6 +42,14 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
             $this->prematureRequestService = $prematureRequestService;
         }
         return $this->prematureRequestService;
+    }
+
+    public function isServiceEnabled(): bool
+    {
+        if (!AppHelpers::isMainAppThread()) {
+            return false;
+        }
+        return parent::isServiceEnabled();
     }
 
     protected function init(): void
