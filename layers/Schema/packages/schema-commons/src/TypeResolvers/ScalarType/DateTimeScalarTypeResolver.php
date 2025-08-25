@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use DateTimeInterface;
+
 class DateTimeScalarTypeResolver extends AbstractDateTimeScalarTypeResolver
 {
     public function getTypeName(): string
@@ -13,6 +15,6 @@ class DateTimeScalarTypeResolver extends AbstractDateTimeScalarTypeResolver
 
     protected function getDateTimeFormat(): string
     {
-        return 'Y-m-d H:i:s';
+        return DateTimeInterface::ATOM;
     }
 }

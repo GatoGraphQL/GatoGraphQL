@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
+use DateTimeInterface;
+
 class DateScalarTypeResolver extends AbstractDateTimeScalarTypeResolver
 {
     public function getTypeName(): string
@@ -24,7 +26,7 @@ class DateScalarTypeResolver extends AbstractDateTimeScalarTypeResolver
         return array_merge(
             parent::getDateTimeInputFormats(),
             [
-                'Y-m-d H:i:s',
+                DateTimeInterface::ATOM,
             ]
         );
     }
