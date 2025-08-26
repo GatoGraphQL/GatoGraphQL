@@ -32,6 +32,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow executing further functionality on the Settings page (#3181)
 - Show notification labels in different colors for different severities (#3184)
 - Enable log notifications for warnings by default (#3185)
+- Support executing WP-CLI commands (#3188)
 
 ### Fixed
 
