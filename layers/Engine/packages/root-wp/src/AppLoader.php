@@ -67,7 +67,7 @@ class AppLoader extends UpstreamAppLoader
      */
     protected function getBootApplicationActionHooks(): array
     {
-        return is_admin() ? [AppHooks::BOOT_APP_IN_ADMIN] : [AppHooks::BOOT_APP_IN_FRONTEND];
+        return (is_admin() || (defined('WP_CLI') && constant('WP_CLI') && class_exists('WP_CLI'))) ? [AppHooks::BOOT_APP_IN_ADMIN] : [AppHooks::BOOT_APP_IN_FRONTEND];
     }
 
     /**
@@ -75,6 +75,6 @@ class AppLoader extends UpstreamAppLoader
      */
     protected function getBootApplicationFilterHooks(): array
     {
-        return is_admin() ? [] : [AppHooks::BOOT_APP_IN_REST];
+        return (is_admin() || (defined('WP_CLI') && constant('WP_CLI') && class_exists('WP_CLI'))) ? [] : [AppHooks::BOOT_APP_IN_REST];
     }
 }
