@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
 use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\LogsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use WP_CLI;
 
@@ -159,5 +161,32 @@ abstract class AbstractWPCLICommand
             $logCountBySeverityDelta[$severity] = $logCountBySeverity[$severity] - ($this->logCountBySeverity[$severity] ?? 0);
         }
         return $logCountBySeverityDelta;
+    }
+
+    /**
+     * @param array<string,int> $logCountBySeverityDelta
+     */
+    protected function maybeAddLogs(string $message, array $logCountBySeverityDelta): string
+    {
+        $severitiesWithLogCountDelta = array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
+        if ($severitiesWithLogCountDelta === []) {
+            return $message;
+        }
+
+        $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severitiesWithLogCountDelta)[0];
+        $logCountDelta = (string) $logCountBySeverityDelta[$highestLevelSeverity];
+
+        /** @var LogsMenuPage */
+        $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
+        return sprintf(
+            __('%s There are %d new Log entries with severity %s (%s).', 'gatographql-ai-translations-for-polylang'),
+            $message,
+            $logCountDelta,
+            $highestLevelSeverity,
+            admin_url(sprintf(
+                'admin.php?page=%s',
+                $logsMenuPage->getScreenID()
+            ))
+        );
     }
 }
