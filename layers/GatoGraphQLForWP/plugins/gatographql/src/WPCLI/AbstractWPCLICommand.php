@@ -40,7 +40,7 @@ abstract class AbstractWPCLICommand
     }
 
     /**
-     * Parse comma-separated IDs into an array of integers
+     * Parse IDs separated by commas or spaces into an array of integers
      *
      * @param string $idsString
      * @return int[]
