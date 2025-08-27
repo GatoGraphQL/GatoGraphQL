@@ -4,14 +4,30 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
+use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\LogsMenuPage;
+use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
-
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use PoPSchema\Logger\Constants\LoggerSeverity;
 use WP_CLI;
 
 use function __;
 
 abstract class AbstractWPCLICommand
 {
+    /**
+     * @var array<string,int>
+     */
+    protected array $logCountBySeverity = [];
+    
+    private ?LogEntryCounterSettingsManagerInterface $logEntryCounterSettingsManager = null;
+
+    final protected function getLogEntryCounterSettingsManager(): LogEntryCounterSettingsManagerInterface
+    {
+        return $this->logEntryCounterSettingsManager ??= LogEntryCounterSettingsManagerFacade::getInstance();
+    }
+
     /**
      * Parse comma-separated IDs into an array of integers
      *
@@ -62,7 +78,7 @@ abstract class AbstractWPCLICommand
 
         $decoded = json_decode($json, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            $this->warning(sprintf(__('Invalid JSON format for \'%s\'. Ignoring this parameter.', 'gatographql-ai-translations-for-polylang'), $json));
+            $this->warning(sprintf(__('Invalid JSON format for \'%s\'. Ignoring this parameter.', 'gatographql'), $json));
             return null;
         }
 
@@ -124,5 +140,58 @@ abstract class AbstractWPCLICommand
         }
         call_user_func(WP_CLI::error(...), $message);
         exit(1);
+    }
+
+    protected function storeLogsBySeverity(): void
+    {
+        $this->logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity(LoggerSeverity::ALL);
+    }
+
+    /**
+     * Compute the number of Log messages added during the execution of the
+     * WP-CLI command, for all severities.
+     *
+     * @return array<string,int> Number of new Log messages for each severity
+     */
+    protected function computeLogsBySeverityDelta(): array
+    {
+        $logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity(LoggerSeverity::ALL);
+        $logCountBySeverityDelta = [];
+        foreach (LoggerSeverity::ALL as $severity) {
+            $logCountBySeverityDelta[$severity] = $logCountBySeverity[$severity] - ($this->logCountBySeverity[$severity] ?? 0);
+        }
+        return $logCountBySeverityDelta;
+    }
+
+    /**
+     * @param array<string,int> $logCountBySeverityDelta
+     */
+    protected function maybePrintLogsMessage(array $logCountBySeverityDelta): void
+    {
+        $severitiesWithLogCountDelta = array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
+        if ($severitiesWithLogCountDelta === []) {
+            return;
+        }
+
+        $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severitiesWithLogCountDelta)[0];
+        $logCountDelta = (string) $logCountBySeverityDelta[$highestLevelSeverity];
+
+        /** @var LogsMenuPage */
+        $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
+        $message = sprintf(
+            __('There are %d new log entries with severity %s (%s).', 'gatographql'),
+            $logCountDelta,
+            $highestLevelSeverity,
+            admin_url(sprintf(
+                'admin.php?page=%s',
+                $logsMenuPage->getScreenID()
+            ))
+        );
+
+        if ($highestLevelSeverity === LoggerSeverity::ERROR || $highestLevelSeverity === LoggerSeverity::WARNING) {
+            $this->warning($message);
+            return;
+        }        
+        $this->log($message);
     }
 }
