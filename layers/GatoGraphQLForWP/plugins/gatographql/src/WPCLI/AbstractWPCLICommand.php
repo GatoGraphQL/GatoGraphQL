@@ -4,14 +4,20 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
+use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
-
+use PoPSchema\Logger\Constants\LoggerSeverity;
 use WP_CLI;
 
 use function __;
 
 abstract class AbstractWPCLICommand
 {
+    /**
+     * @var array<string,int>
+     */
+    protected array $logCountBySeverity = [];
+
     /**
      * Parse comma-separated IDs into an array of integers
      *
@@ -124,5 +130,12 @@ abstract class AbstractWPCLICommand
         }
         call_user_func(WP_CLI::error(...), $message);
         exit(1);
+    }
+
+    protected function storeLogsBySeverity(): void
+    {
+        $severities = LoggerSeverity::ALL;
+        $logEntryCounterSettingsManager = LogEntryCounterSettingsManagerFacade::getInstance();
+        $this->logCountBySeverity = $logEntryCounterSettingsManager->getLogCountBySeverity($severities);
     }
 }
