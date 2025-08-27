@@ -17,6 +17,17 @@ use function __;
 abstract class AbstractWPCLICommand
 {
     /**
+     * Color name constants
+     */
+    protected const LOG_COLOR_BLUE = 'blue';
+    protected const LOG_COLOR_RED = 'red';
+    protected const LOG_COLOR_GREEN = 'green';
+    protected const LOG_COLOR_YELLOW = 'yellow';
+    protected const LOG_COLOR_CYAN = 'cyan';
+    protected const LOG_COLOR_MAGENTA = 'magenta';
+    protected const LOG_COLOR_WHITE = 'white';
+
+    /**
      * @var array<string,int>
      */
     protected array $logCountBySeverity = [];
@@ -83,6 +94,31 @@ abstract class AbstractWPCLICommand
         }
 
         return $decoded;
+    }
+
+    /**
+     * Colorize a message for WP-CLI output
+     *
+     * @param string $message
+     * @param string $color
+     * @return string
+     */
+    protected function colorizeMessage(string $message, string $color): string
+    {
+        if (!WPCLIHelpers::isWPCLIActive()) {
+            return $message;
+        }
+        $colorCode = match ($color) {
+            self::LOG_COLOR_BLUE => '%B',
+            self::LOG_COLOR_RED => '%R',
+            self::LOG_COLOR_GREEN => '%G',
+            self::LOG_COLOR_YELLOW => '%Y',
+            self::LOG_COLOR_CYAN => '%C',
+            self::LOG_COLOR_MAGENTA => '%M',
+            self::LOG_COLOR_WHITE => '%W',
+            default => '%n',
+        };
+        return WP_CLI::colorize($colorCode . $message . '%n');
     }
 
     /**
@@ -176,18 +212,33 @@ abstract class AbstractWPCLICommand
         $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severitiesWithLogCountDelta)[0];
         $logCountDelta = (string) $logCountBySeverityDelta[$highestLevelSeverity];
 
-        /** @var LogsMenuPage */
-        $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
         $message = sprintf(
             $logCountDelta > 1
-                ? __('There are %d new log entries with severity %s (%s).', 'gatographql')
-                : __('There is %d new log entry with severity %s (%s).', 'gatographql'),
+                ? __('There are %d new log entries with severity %s', 'gatographql')
+                : __('There is %d new log entry with severity %s', 'gatographql'),
             $logCountDelta,
-            $highestLevelSeverity,
-            admin_url(sprintf(
-                'admin.php?page=%s',
-                $logsMenuPage->getScreenID()
-            ))
+            $highestLevelSeverity
+        );
+
+        if ($highestLevelSeverity === LoggerSeverity::ERROR) {
+            $message = $this->colorizeMessage($message, self::LOG_COLOR_RED);
+        } elseif ($highestLevelSeverity === LoggerSeverity::WARNING) {
+            $message = $this->colorizeMessage($message, self::LOG_COLOR_YELLOW);
+        } elseif ($highestLevelSeverity === LoggerSeverity::INFO) {
+            $message = $this->colorizeMessage($message, self::LOG_COLOR_BLUE);
+        } else {
+            $message = $this->colorizeMessage($message, self::LOG_COLOR_MAGENTA);
+        }
+
+        /** @var LogsMenuPage */
+        $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
+        $logsMenuPageURL = admin_url(sprintf(
+            'admin.php?page=%s',
+            $logsMenuPage->getScreenID()
+        ));
+        $message .= sprintf(
+            __(' (%s)', 'gatographql'),
+            $this->colorizeMessage($logsMenuPageURL, self::LOG_COLOR_CYAN)
         );
 
         if ($highestLevelSeverity === LoggerSeverity::ERROR || $highestLevelSeverity === LoggerSeverity::WARNING) {
