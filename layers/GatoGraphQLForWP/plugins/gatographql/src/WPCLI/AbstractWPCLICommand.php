@@ -224,8 +224,10 @@ abstract class AbstractWPCLICommand
             $message = $this->colorizeMessage($message, self::LOG_COLOR_RED);
         } elseif ($highestLevelSeverity === LoggerSeverity::WARNING) {
             $message = $this->colorizeMessage($message, self::LOG_COLOR_YELLOW);
-        } else {
+        } elseif ($highestLevelSeverity === LoggerSeverity::INFO) {
             $message = $this->colorizeMessage($message, self::LOG_COLOR_BLUE);
+        } else {
+            $message = $this->colorizeMessage($message, self::LOG_COLOR_MAGENTA);
         }
 
         /** @var LogsMenuPage */
