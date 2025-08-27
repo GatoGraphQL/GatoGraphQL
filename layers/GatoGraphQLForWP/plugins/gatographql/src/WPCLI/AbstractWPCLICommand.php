@@ -86,6 +86,21 @@ abstract class AbstractWPCLICommand
     }
 
     /**
+     * Colorize a message for WP-CLI output
+     *
+     * @param string $message
+     * @param string $color
+     * @return string
+     */
+    protected function colorizeMessage(string $message, string $color): string
+    {
+        if (!WPCLIHelpers::isWPCLIActive()) {
+            return $message;
+        }
+        return WP_CLI::colorize($color . $message . '%n');
+    }
+
+    /**
      * Log a message (WP-CLI compatible)
      *
      * @param string $message
