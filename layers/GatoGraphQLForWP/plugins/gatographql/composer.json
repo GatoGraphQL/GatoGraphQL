@@ -77,6 +77,7 @@
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
         "phpstan/phpstan": "^1.8",
+        "php-stubs/wp-cli-stubs": "^2.12.0",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^0.18",
         "squizlabs/php_codesniffer": "^3.6",
