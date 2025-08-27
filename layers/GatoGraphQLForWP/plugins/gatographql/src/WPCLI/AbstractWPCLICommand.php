@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
 use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use WP_CLI;
@@ -17,6 +18,13 @@ abstract class AbstractWPCLICommand
      * @var array<string,int>
      */
     protected array $logCountBySeverity = [];
+    
+    private ?LogEntryCounterSettingsManagerInterface $logEntryCounterSettingsManager = null;
+
+    final protected function getLogEntryCounterSettingsManager(): LogEntryCounterSettingsManagerInterface
+    {
+        return $this->logEntryCounterSettingsManager ??= LogEntryCounterSettingsManagerFacade::getInstance();
+    }
 
     /**
      * Parse comma-separated IDs into an array of integers
@@ -134,8 +142,7 @@ abstract class AbstractWPCLICommand
 
     protected function storeLogsBySeverity(): void
     {
-        $logEntryCounterSettingsManager = LogEntryCounterSettingsManagerFacade::getInstance();
-        $this->logCountBySeverity = $logEntryCounterSettingsManager->getLogCountBySeverity(LoggerSeverity::ALL);
+        $this->logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity(LoggerSeverity::ALL);
     }
 
     /**
@@ -146,8 +153,7 @@ abstract class AbstractWPCLICommand
      */
     protected function computeLogsBySeverityDelta(): array
     {
-        $logEntryCounterSettingsManager = LogEntryCounterSettingsManagerFacade::getInstance();
-        $logCountBySeverity = $logEntryCounterSettingsManager->getLogCountBySeverity(LoggerSeverity::ALL);
+        $logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity(LoggerSeverity::ALL);
         $logCountBySeverityDelta = [];
         foreach (LoggerSeverity::ALL as $severity) {
             $logCountBySeverityDelta[$severity] = $logCountBySeverity[$severity] - ($this->logCountBySeverity[$severity] ?? 0);
