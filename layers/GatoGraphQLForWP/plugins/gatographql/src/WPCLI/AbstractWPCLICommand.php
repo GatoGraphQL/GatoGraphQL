@@ -188,11 +188,7 @@ abstract class AbstractWPCLICommand
             ))
         );
 
-        if ($highestLevelSeverity === LoggerSeverity::ERROR) {
-            $this->error($message);
-            return;
-        }
-        if ($highestLevelSeverity === LoggerSeverity::WARNING) {
+        if ($highestLevelSeverity === LoggerSeverity::ERROR || $highestLevelSeverity === LoggerSeverity::WARNING) {
             $this->warning($message);
             return;
         }        
