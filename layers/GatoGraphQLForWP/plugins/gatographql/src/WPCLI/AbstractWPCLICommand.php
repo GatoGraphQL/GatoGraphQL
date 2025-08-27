@@ -179,7 +179,7 @@ abstract class AbstractWPCLICommand
         /** @var LogsMenuPage */
         $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
         return sprintf(
-            __('%s There are %d new Log entries with severity %s (%s).', 'gatographql-ai-translations-for-polylang'),
+            __('%s There are %d new log entries with severity %s (%s).', 'gatographql-ai-translations-for-polylang'),
             $message,
             $logCountDelta,
             $highestLevelSeverity,
