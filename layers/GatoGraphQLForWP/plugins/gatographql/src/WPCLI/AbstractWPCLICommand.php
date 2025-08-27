@@ -54,7 +54,7 @@ abstract class AbstractWPCLICommand
         // Split by comma first, then by space for each comma-separated part
         $commaParts = explode(',', $idsString);
         $ids = [];
-        
+
         foreach ($commaParts as $part) {
             $spaceParts = explode(' ', trim($part));
             foreach ($spaceParts as $id) {
@@ -64,7 +64,7 @@ abstract class AbstractWPCLICommand
                 }
             }
         }
-        
+
         $validIds = [];
 
         foreach ($ids as $id) {
