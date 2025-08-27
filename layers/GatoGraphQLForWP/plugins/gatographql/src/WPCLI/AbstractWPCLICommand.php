@@ -206,19 +206,29 @@ abstract class AbstractWPCLICommand
         $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severitiesWithLogCountDelta)[0];
         $logCountDelta = (string) $logCountBySeverityDelta[$highestLevelSeverity];
 
-        /** @var LogsMenuPage */
-        $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
         $message = sprintf(
             $logCountDelta > 1
-                ? __('There are %d new log entries with severity %s (%s).', 'gatographql')
-                : __('There is %d new log entry with severity %s (%s).', 'gatographql'),
+                ? __('There are %d new log entries with severity %s', 'gatographql')
+                : __('There is %d new log entry with severity %s', 'gatographql'),
             $logCountDelta,
-            $highestLevelSeverity,
-            admin_url(sprintf(
-                'admin.php?page=%s',
-                $logsMenuPage->getScreenID()
-            ))
+            $highestLevelSeverity
         );
+
+        if ($highestLevelSeverity === LoggerSeverity::ERROR) {
+            $message = $this->colorizeMessage($message, self::LOG_COLOR_RED);
+        } elseif ($highestLevelSeverity === LoggerSeverity::WARNING) {
+            $message = $this->colorizeMessage($message, self::LOG_COLOR_YELLOW);
+        } else {
+            $message = $this->colorizeMessage($message, self::LOG_COLOR_BLUE);
+        }
+
+        /** @var LogsMenuPage */
+        $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
+        $logsMenuPageURL = admin_url(sprintf(
+            'admin.php?page=%s',
+            $logsMenuPage->getScreenID()
+        ));
+        $message .= sprintf(__(' (%s)', 'gatographql'), $logsMenuPageURL);
 
         if ($highestLevelSeverity === LoggerSeverity::ERROR || $highestLevelSeverity === LoggerSeverity::WARNING) {
             $this->warning($message);
