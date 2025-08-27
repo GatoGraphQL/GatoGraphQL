@@ -187,6 +187,15 @@ abstract class AbstractWPCLICommand
                 $logsMenuPage->getScreenID()
             ))
         );
+
+        if ($highestLevelSeverity === LoggerSeverity::ERROR) {
+            $this->error($message);
+            return;
+        }
+        if ($highestLevelSeverity === LoggerSeverity::WARNING) {
+            $this->warning($message);
+            return;
+        }        
         $this->log($message);
     }
 }
