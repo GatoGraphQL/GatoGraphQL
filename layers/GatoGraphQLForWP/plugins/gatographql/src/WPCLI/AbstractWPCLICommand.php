@@ -166,11 +166,11 @@ abstract class AbstractWPCLICommand
     /**
      * @param array<string,int> $logCountBySeverityDelta
      */
-    protected function maybeAddLogs(string $message, array $logCountBySeverityDelta): string
+    protected function maybePrintLogsWarning(array $logCountBySeverityDelta): void
     {
         $severitiesWithLogCountDelta = array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
         if ($severitiesWithLogCountDelta === []) {
-            return $message;
+            return;
         }
 
         $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severitiesWithLogCountDelta)[0];
@@ -178,9 +178,8 @@ abstract class AbstractWPCLICommand
 
         /** @var LogsMenuPage */
         $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
-        return sprintf(
-            __('%s There are %d new log entries with severity %s (%s).', 'gatographql'),
-            $message,
+        $message = sprintf(
+            __('There are %d new log entries with severity %s (%s).', 'gatographql'),
             $logCountDelta,
             $highestLevelSeverity,
             admin_url(sprintf(
@@ -188,5 +187,6 @@ abstract class AbstractWPCLICommand
                 $logsMenuPage->getScreenID()
             ))
         );
+        $this->warning($message);
     }
 }
