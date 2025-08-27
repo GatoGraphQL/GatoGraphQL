@@ -62,7 +62,7 @@ abstract class AbstractWPCLICommand
 
         $decoded = json_decode($json, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            $this->warning(__('Invalid JSON format for language-providers. Ignoring this parameter.', 'gatographql-ai-translations-for-polylang'));
+            $this->warning(sprintf(__('Invalid JSON format for \'%s\'. Ignoring this parameter.', 'gatographql-ai-translations-for-polylang'), $json));
             return null;
         }
 
