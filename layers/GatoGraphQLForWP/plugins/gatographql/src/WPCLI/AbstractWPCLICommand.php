@@ -51,7 +51,20 @@ abstract class AbstractWPCLICommand
             return [];
         }
 
-        $ids = array_map('trim', explode(',', $idsString));
+        // Split by comma first, then by space for each comma-separated part
+        $commaParts = explode(',', $idsString);
+        $ids = [];
+        
+        foreach ($commaParts as $part) {
+            $spaceParts = explode(' ', trim($part));
+            foreach ($spaceParts as $id) {
+                $id = trim($id);
+                if (!empty($id)) {
+                    $ids[] = $id;
+                }
+            }
+        }
+        
         $validIds = [];
 
         foreach ($ids as $id) {
