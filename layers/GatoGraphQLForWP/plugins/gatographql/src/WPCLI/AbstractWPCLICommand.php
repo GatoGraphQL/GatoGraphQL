@@ -17,6 +17,14 @@ use function __;
 abstract class AbstractWPCLICommand
 {
     /**
+     * Color name constants
+     */
+    protected const LOG_COLOR_BLUE = 'blue';
+    protected const LOG_COLOR_RED = 'red';
+    protected const LOG_COLOR_GREEN = 'green';
+    protected const LOG_COLOR_YELLOW = 'yellow';
+
+    /**
      * @var array<string,int>
      */
     protected array $logCountBySeverity = [];
@@ -98,10 +106,10 @@ abstract class AbstractWPCLICommand
             return $message;
         }
         $colorCode = match ($color) {
-            'blue' => '%B',
-            'red' => '%R',
-            'green' => '%G',
-            'yellow' => '%Y',
+            self::LOG_COLOR_BLUE => '%B',
+            self::LOG_COLOR_RED => '%R',
+            self::LOG_COLOR_GREEN => '%G',
+            self::LOG_COLOR_YELLOW => '%Y',
             default => '%n',
         };
         return WP_CLI::colorize($colorCode . $message . '%n');
