@@ -78,7 +78,7 @@ abstract class AbstractWPCLICommand
 
         $decoded = json_decode($json, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            $this->warning(sprintf(__('Invalid JSON format for \'%s\'. Ignoring this parameter.', 'gatographql-ai-translations-for-polylang'), $json));
+            $this->warning(sprintf(__('Invalid JSON format for \'%s\'. Ignoring this parameter.', 'gatographql'), $json));
             return null;
         }
 
@@ -179,7 +179,7 @@ abstract class AbstractWPCLICommand
         /** @var LogsMenuPage */
         $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
         return sprintf(
-            __('%s There are %d new log entries with severity %s (%s).', 'gatographql-ai-translations-for-polylang'),
+            __('%s There are %d new log entries with severity %s (%s).', 'gatographql'),
             $message,
             $logCountDelta,
             $highestLevelSeverity,
