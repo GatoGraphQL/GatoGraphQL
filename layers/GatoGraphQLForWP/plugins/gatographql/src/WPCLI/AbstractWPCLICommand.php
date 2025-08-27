@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
+use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
+
 use WP_CLI;
 
 use function __;
@@ -74,16 +76,11 @@ abstract class AbstractWPCLICommand
      */
     protected function log(string $message): void
     {
-        if (!$this->isWPCLIActive()) {
+        if (!WPCLIHelpers::isWPCLIActive()) {
             echo $message . "\n";
             return;
         }
         call_user_func(WP_CLI::log(...), $message);
-    }
-
-    protected function isWPCLIActive(): bool
-    {
-        return defined('WP_CLI') && constant('WP_CLI') && class_exists('WP_CLI');
     }
 
     /**
@@ -93,7 +90,7 @@ abstract class AbstractWPCLICommand
      */
     protected function success(string $message): void
     {
-        if (!$this->isWPCLIActive()) {
+        if (!WPCLIHelpers::isWPCLIActive()) {
             echo "SUCCESS: " . $message . "\n";
             return;
         }
@@ -107,7 +104,7 @@ abstract class AbstractWPCLICommand
      */
     protected function warning(string $message): void
     {
-        if (!$this->isWPCLIActive()) {
+        if (!WPCLIHelpers::isWPCLIActive()) {
             echo "WARNING: " . $message . "\n";
             return;
         }
@@ -121,7 +118,7 @@ abstract class AbstractWPCLICommand
      */
     protected function error(string $message): void
     {
-        if (!$this->isWPCLIActive()) {
+        if (!WPCLIHelpers::isWPCLIActive()) {
             echo "ERROR: " . $message . "\n";
             exit(1);
         }

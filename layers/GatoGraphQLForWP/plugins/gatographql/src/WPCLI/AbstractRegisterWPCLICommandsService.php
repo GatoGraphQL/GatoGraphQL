@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
+use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_CLI;
 
@@ -12,7 +13,7 @@ abstract class AbstractRegisterWPCLICommandsService extends AbstractAutomaticall
     public function initialize(): void
     {
         // Only register WP-CLI commands if WP-CLI is available
-        if (!defined('WP_CLI') || !constant('WP_CLI') || !class_exists('WP_CLI')) {
+        if (!WPCLIHelpers::isWPCLIActive()) {
             return;
         }
 
