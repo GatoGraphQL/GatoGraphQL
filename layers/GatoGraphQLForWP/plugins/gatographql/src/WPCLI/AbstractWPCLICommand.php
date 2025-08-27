@@ -134,8 +134,7 @@ abstract class AbstractWPCLICommand
 
     protected function storeLogsBySeverity(): void
     {
-        $severities = LoggerSeverity::ALL;
         $logEntryCounterSettingsManager = LogEntryCounterSettingsManagerFacade::getInstance();
-        $this->logCountBySeverity = $logEntryCounterSettingsManager->getLogCountBySeverity($severities);
+        $this->logCountBySeverity = $logEntryCounterSettingsManager->getLogCountBySeverity(LoggerSeverity::ALL);
     }
 }
