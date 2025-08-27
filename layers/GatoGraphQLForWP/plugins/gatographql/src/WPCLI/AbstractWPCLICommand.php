@@ -55,12 +55,12 @@ abstract class AbstractWPCLICommand
 
     /**
      * Parse boolean string to actual boolean
-     *
-     * @param string $value
-     * @return bool
      */
-    protected function parseBool(string $value): bool
+    protected function parseBool(?string $value): ?bool
     {
+        if ($value === null) {
+            return null;
+        }
         return in_array(strtolower($value), ['true', '1', 'yes', 'on'], true);
     }
 
