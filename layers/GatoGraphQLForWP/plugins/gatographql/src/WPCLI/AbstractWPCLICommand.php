@@ -97,7 +97,14 @@ abstract class AbstractWPCLICommand
         if (!WPCLIHelpers::isWPCLIActive()) {
             return $message;
         }
-        return WP_CLI::colorize($color . $message . '%n');
+        $colorCode = match ($color) {
+            'blue' => '%B',
+            'red' => '%R',
+            'green' => '%G',
+            'yellow' => '%Y',
+            default => '%n',
+        };
+        return WP_CLI::colorize($colorCode . $message . '%n');
     }
 
     /**
