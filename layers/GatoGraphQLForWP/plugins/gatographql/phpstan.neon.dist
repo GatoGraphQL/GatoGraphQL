@@ -8,3 +8,6 @@ parameters:
     excludePaths:
         # All these files were copied from WooCommerce and they contain PHPStan errors
         - src/Log/Controllers/*
+    scanFiles:
+        - %currentWorkingDirectory%/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+        - %currentWorkingDirectory%/vendor/php-stubs/wp-cli-stubs/wp-cli-stubs.php
