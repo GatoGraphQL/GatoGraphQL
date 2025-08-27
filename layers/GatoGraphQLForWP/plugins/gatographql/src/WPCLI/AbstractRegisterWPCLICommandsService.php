@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\PluginSkeleton\WPCLI;
+namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use WP_CLI;
@@ -25,6 +25,7 @@ abstract class AbstractRegisterWPCLICommandsService extends AbstractAutomaticall
     }
 
     abstract protected function getCommandName(): string;
+
     /**
      * @return class-string<AbstractWPCLICommand>
      */

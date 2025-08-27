@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\PluginSkeleton\WPCLI;
+namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
 use WP_CLI;
 
