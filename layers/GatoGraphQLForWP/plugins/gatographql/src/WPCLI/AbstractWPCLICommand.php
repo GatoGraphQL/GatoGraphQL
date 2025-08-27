@@ -166,7 +166,7 @@ abstract class AbstractWPCLICommand
     /**
      * @param array<string,int> $logCountBySeverityDelta
      */
-    protected function maybePrintLogsWarning(array $logCountBySeverityDelta): void
+    protected function maybePrintLogsMessage(array $logCountBySeverityDelta): void
     {
         $severitiesWithLogCountDelta = array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
         if ($severitiesWithLogCountDelta === []) {
@@ -187,6 +187,6 @@ abstract class AbstractWPCLICommand
                 $logsMenuPage->getScreenID()
             ))
         );
-        $this->warning($message);
+        $this->log($message);
     }
 }
