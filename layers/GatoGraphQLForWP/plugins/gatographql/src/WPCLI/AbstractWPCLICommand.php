@@ -137,4 +137,21 @@ abstract class AbstractWPCLICommand
         $logEntryCounterSettingsManager = LogEntryCounterSettingsManagerFacade::getInstance();
         $this->logCountBySeverity = $logEntryCounterSettingsManager->getLogCountBySeverity(LoggerSeverity::ALL);
     }
+
+    /**
+     * Compute the number of Log messages added during the execution of the
+     * WP-CLI command, for all severities.
+     *
+     * @return array<string,int> Number of new Log messages for each severity
+     */
+    protected function computeLogsBySeverityDelta(): array
+    {
+        $logEntryCounterSettingsManager = LogEntryCounterSettingsManagerFacade::getInstance();
+        $logCountBySeverity = $logEntryCounterSettingsManager->getLogCountBySeverity(LoggerSeverity::ALL);
+        $logCountBySeverityDelta = [];
+        foreach (LoggerSeverity::ALL as $severity) {
+            $logCountBySeverityDelta[$severity] = $logCountBySeverity[$severity] - ($this->logCountBySeverity[$severity] ?? 0);
+        }
+        return $logCountBySeverityDelta;
+    }
 }
