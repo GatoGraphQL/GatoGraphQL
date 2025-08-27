@@ -20,7 +20,7 @@ abstract class AbstractWPCLICommand
      * @var array<string,int>
      */
     protected array $logCountBySeverity = [];
-    
+
     private ?LogEntryCounterSettingsManagerInterface $logEntryCounterSettingsManager = null;
 
     final protected function getLogEntryCounterSettingsManager(): LogEntryCounterSettingsManagerInterface
@@ -191,7 +191,7 @@ abstract class AbstractWPCLICommand
         if ($highestLevelSeverity === LoggerSeverity::ERROR || $highestLevelSeverity === LoggerSeverity::WARNING) {
             $this->warning($message);
             return;
-        }        
+        }
         $this->log($message);
     }
 }
