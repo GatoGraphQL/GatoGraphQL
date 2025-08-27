@@ -179,7 +179,9 @@ abstract class AbstractWPCLICommand
         /** @var LogsMenuPage */
         $logsMenuPage = InstanceManagerFacade::getInstance()->getInstance(LogsMenuPage::class);
         $message = sprintf(
-            __('There are %d new log entries with severity %s (%s).', 'gatographql'),
+            $logCountDelta > 1
+                ? __('There are %d new log entries with severity %s (%s).', 'gatographql')
+                : __('There is %d new log entry with severity %s (%s).', 'gatographql'),
             $logCountDelta,
             $highestLevelSeverity,
             admin_url(sprintf(
