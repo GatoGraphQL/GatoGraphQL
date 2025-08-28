@@ -52,14 +52,14 @@ class AppLoader extends UpstreamAppLoader
      * Watch out:
      *
      * - "wp" doesn't trigger in the admin() => use "wp_loaded" instead.
-     * - "wp" doesn't trigger in REST => use "rest_api_init" instead.
+     * - "wp" doesn't trigger in REST => use "rest_jsonp_enabled" instead.
      *
      * (Eg for the latter: when editing an ACL in the WordPress editor
      * and clicking on Update, it uses a REST call.)
      *
      * Because we don't know yet if the current request is a REST call or not
      * (must wait until hook "parse_request" for that), simply
-     * load the hook for both 'rest_api_init' and 'wp', knowing
+     * load the hook for both 'rest_jsonp_enabled' and 'wp', knowing
      * that only one of them will be called anyway.
      *
      * @see https://stackoverflow.com/questions/41101294/check-whether-request-is-wp-rest-api-request
