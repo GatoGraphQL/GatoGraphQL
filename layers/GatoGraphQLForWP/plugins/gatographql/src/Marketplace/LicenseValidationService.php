@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
+use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseDomainNotValidException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
@@ -17,8 +18,8 @@ use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Services\AbstractBasicService;
 
+use PoP\Root\Services\AbstractBasicService;
 use function add_settings_error;
 use function get_option;
 use function home_url;
@@ -122,12 +123,15 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
             $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
+            /** @var string */
+            $instanceName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME];
             try {
+                $this->validateLicenseDomain($instanceName);
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                     $licenseKey,
                     $instanceID,
                 );
-            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e) {
                 $errorMessage = sprintf(
                     /*\__(*/'Validating license for "%s" produced error: %s'/*, 'gatographql')*/,
                     $extensionName,
@@ -580,5 +584,36 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             $activeLicenseKeys,
             $formSettingName,
         );
+    }
+
+    /**
+     * @throws LicenseDomainNotValidException If the license domain is not valid
+     */
+    protected function validateLicenseDomain(string $instanceName): void
+    {
+        $instanceDomain = GeneralUtils::getHost(home_url());
+        $licenseDomain = $this->getLicenseDomain($instanceName);
+        if ($instanceDomain === $licenseDomain) {
+            return;
+        }
+        throw new LicenseDomainNotValidException(
+            sprintf(
+                /*\__(*/'The license was registered for another domain: %s'/*, 'gatographql')*/,
+                $instanceDomain
+            )
+        );
+    }
+
+    /**
+     * The instance name is composed by:
+     *
+     * - The site's domain
+     * - The extension slug
+     *
+     * These two are separated by a space. Therefore, the license domain is the site's domain
+     */
+    protected function getLicenseDomain(string $instanceName): string
+    {
+        return explode(' ', $instanceName)[0];
     }
 }
