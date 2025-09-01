@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
+use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseDomainNotValidException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
@@ -19,6 +20,7 @@ use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\AbstractBasicService;
 
+use function add_action;
 use function add_settings_error;
 use function get_option;
 use function home_url;
@@ -122,14 +124,17 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
             $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
+            /** @var string */
+            $instanceName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME];
             try {
+                $this->validateLicenseDomain($instanceName);
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                     $licenseKey,
                     $instanceID,
                 );
-            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e) {
                 $errorMessage = sprintf(
-                    /*\__(*/'Validating license for "%s" produced error: %s'/*, 'gatographql')*/,
+                    /*\__(*/                    'Validating license for "%s" produced error: %s'/*, 'gatographql')*/,
                     $extensionName,
                     $e->getMessage()
                 );
@@ -138,14 +143,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                     $extensionSlug,
                     $e,
                 );
-                if ($formSettingName !== null) {
-                    $this->showAdminMessagesOnLicenseOperationError(
-                        $extensionSlug,
-                        $errorMessage,
-                        $e,
-                        $formSettingName,
-                    );
-                }
+                $this->showAdminMessagesOnLicenseOperationError(
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                    $formSettingName,
+                );
                 continue;
             }
 
@@ -198,7 +201,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
-                    /*\__(*/'Deactivating license for "%s" produced error: %s'/*, 'gatographql')*/,
+                    /*\__(*/                    'Deactivating license for "%s" produced error: %s'/*, 'gatographql')*/,
                     $extensionName,
                     $e->getMessage()
                 );
@@ -207,14 +210,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                     $extensionSlug,
                     $e,
                 );
-                if ($formSettingName !== null) {
-                    $this->showAdminMessagesOnLicenseOperationError(
-                        $extensionSlug,
-                        $errorMessage,
-                        $e,
-                        $formSettingName,
-                    );
-                }
+                $this->showAdminMessagesOnLicenseOperationError(
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                    $formSettingName,
+                );
                 continue;
             }
 
@@ -253,7 +254,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
-                    /*\__(*/'Activating license for "%s" produced error: %s'/*, 'gatographql')*/,
+                    /*\__(*/                    'Activating license for "%s" produced error: %s'/*, 'gatographql')*/,
                     $extensionName,
                     $e->getMessage()
                 );
@@ -262,14 +263,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                     $extensionSlug,
                     $e,
                 );
-                if ($formSettingName !== null) {
-                    $this->showAdminMessagesOnLicenseOperationError(
-                        $extensionSlug,
-                        $errorMessage,
-                        $e,
-                        $formSettingName,
-                    );
-                }
+                $this->showAdminMessagesOnLicenseOperationError(
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                    $formSettingName,
+                );
                 continue;
             }
 
@@ -340,9 +339,9 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     protected function handleLicenseOperationError(
         array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
-        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
+        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e,
     ): array {
-        if ($e instanceof LicenseOperationNotSuccessfulException) {
+        if ($e instanceof LicenseOperationNotSuccessfulException || $e instanceof LicenseDomainNotValidException) {
             unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
         }
 
@@ -352,20 +351,27 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     protected function showAdminMessagesOnLicenseOperationError(
         string $extensionSlug,
         string $errorMessage,
-        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
-        string $formSettingName,
+        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e,
+        ?string $formSettingName,
     ): void {
+        add_action('admin_notices', function () use ($errorMessage) {
+            printf(
+                '<div class="notice notice-error"><p>%s</p></div>',
+                $errorMessage
+            );
+        });
+
         /**
          * Show the error message to the admin.
          *
          * Make sure this method is invoked only when
          * this function is loaded, in the Settings page.
          */
-        if (!function_exists('add_settings_error')) {
+        if ($formSettingName === null || !function_exists('add_settings_error')) {
             return;
         }
 
-        $type = $e instanceof LicenseOperationNotSuccessfulException ? 'error' : 'warning';
+        $type = ($e instanceof LicenseOperationNotSuccessfulException || $e instanceof LicenseDomainNotValidException) ? 'error' : 'warning';
         add_settings_error(
             $formSettingName,
             'license_activation_' . $extensionSlug,
@@ -560,9 +566,51 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     {
         return sprintf(
             '%s (%s)',
-            GeneralUtils::getHost(home_url()),
+            $this->getSiteDomain(),
             $extensionSlug
         );
+    }
+
+    /**
+     * Use as the instance name:
+     *
+     * - The site's domain: to understand on what domain it was installed
+     * - Extension slug: to make sure the right license key was provided
+     */
+    protected function getSiteDomain(): string
+    {
+        return GeneralUtils::getHost(home_url());
+    }
+
+    /**
+     * @throws LicenseDomainNotValidException If the license domain is not valid
+     */
+    protected function validateLicenseDomain(string $instanceName): void
+    {
+        $instanceDomain = $this->getSiteDomain();
+        $licenseDomain = $this->getLicenseDomain($instanceName);
+        if ($instanceDomain === $licenseDomain) {
+            return;
+        }
+        throw new LicenseDomainNotValidException(
+            sprintf(
+                /*\__(*/                'The license was registered for another domain: %s'/*, 'gatographql')*/,
+                $instanceDomain
+            )
+        );
+    }
+
+    /**
+     * The instance name is composed by:
+     *
+     * - The site's domain
+     * - The extension slug
+     *
+     * These two are separated by a space. Therefore, the license domain is the site's domain
+     */
+    protected function getLicenseDomain(string $instanceName): string
+    {
+        return explode(' ', $instanceName)[0];
     }
 
     /**

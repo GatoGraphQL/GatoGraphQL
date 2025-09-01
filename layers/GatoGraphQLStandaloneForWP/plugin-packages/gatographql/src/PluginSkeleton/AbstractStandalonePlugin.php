@@ -7,6 +7,7 @@ namespace GatoGraphQLStandalone\GatoGraphQL\PluginSkeleton;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInitializationConfigurationInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInfoInterface;
+use PoP\Root\Environment as RootEnvironment;
 
 /**
  * This class is not used by Gato GraphQL.
@@ -58,11 +59,11 @@ abstract class AbstractStandalonePlugin extends Plugin
     }
 
     /**
-     * Revalidate the license after 7 days
+     * Revalidate the license after 1 day
      * (while the license is active)
      */
     protected function getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses(): ?int
     {
-        return 7;
+        return RootEnvironment::isApplicationEnvironmentDev() ? 7 : 1;
     }
 }
