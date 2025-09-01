@@ -58,11 +58,11 @@ abstract class AbstractStandalonePlugin extends Plugin
     }
 
     /**
-     * Revalidate the license after 30 days
+     * Revalidate the license after 7 days
      * (while the license is active)
      */
     protected function getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses(): ?int
     {
-        return 30;
+        return 7;
     }
 }
