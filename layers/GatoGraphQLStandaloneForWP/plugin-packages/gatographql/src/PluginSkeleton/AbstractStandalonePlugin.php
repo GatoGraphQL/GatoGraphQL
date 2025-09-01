@@ -64,6 +64,6 @@ abstract class AbstractStandalonePlugin extends Plugin
      */
     protected function getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses(): ?int
     {
-        return RootEnvironment::isApplicationEnvironmentDev() ? 3 : 1;
+        return RootEnvironment::isApplicationEnvironmentDev() ? 7 : 1;
     }
 }
