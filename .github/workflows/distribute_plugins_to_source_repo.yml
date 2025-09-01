@@ -34,7 +34,7 @@ jobs:
         name: Provide configuration to generate plugins
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v4
+            -   uses: actions/checkout@v5
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
@@ -77,7 +77,7 @@ jobs:
                 pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v4
+                uses: actions/checkout@v5
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
