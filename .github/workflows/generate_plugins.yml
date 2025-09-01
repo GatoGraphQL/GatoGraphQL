@@ -49,9 +49,9 @@ env:
 jobs:
     provide_data:
         name: Provide configuration to generate plugins
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v5
+            -   uses: actions/checkout@v4
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
@@ -87,14 +87,14 @@ jobs:
     process:
         name: Generate plugin "${{ matrix.pluginConfig.plugin_slug }}"
         needs: provide_data
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
                 pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v5
+                uses: actions/checkout@v4
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
