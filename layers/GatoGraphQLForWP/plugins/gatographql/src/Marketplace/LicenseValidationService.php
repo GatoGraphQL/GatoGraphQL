@@ -369,7 +369,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             return;
         }
 
-        $type = $e instanceof LicenseOperationNotSuccessfulException || $e instanceof LicenseDomainNotValidException ? 'error' : 'warning';
+        $type = ($e instanceof LicenseOperationNotSuccessfulException || $e instanceof LicenseDomainNotValidException) ? 'error' : 'warning';
         add_settings_error(
             $formSettingName,
             'license_activation_' . $extensionSlug,
