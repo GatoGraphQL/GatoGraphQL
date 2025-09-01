@@ -344,9 +344,9 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     protected function handleLicenseOperationError(
         array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
-        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
+        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e,
     ): array {
-        if ($e instanceof LicenseOperationNotSuccessfulException) {
+        if ($e instanceof LicenseOperationNotSuccessfulException || $e instanceof LicenseDomainNotValidException) {
             unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
         }
 
@@ -356,7 +356,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     protected function showAdminMessagesOnLicenseOperationError(
         string $extensionSlug,
         string $errorMessage,
-        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
+        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e,
         string $formSettingName,
     ): void {
         /**
@@ -369,7 +369,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             return;
         }
 
-        $type = $e instanceof LicenseOperationNotSuccessfulException ? 'error' : 'warning';
+        $type = $e instanceof LicenseOperationNotSuccessfulException || $e instanceof LicenseDomainNotValidException ? 'error' : 'warning';
         add_settings_error(
             $formSettingName,
             'license_activation_' . $extensionSlug,
