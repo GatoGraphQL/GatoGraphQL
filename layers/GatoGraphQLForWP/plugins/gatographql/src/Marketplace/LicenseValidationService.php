@@ -570,23 +570,6 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     }
 
     /**
-     * Re-validate the Gato GraphQL Extensions against the
-     * marketplace provider's API.
-     *
-     * @param array<string,string> $activeLicenseKeys Key: Extension Slug, Value: License Key
-     */
-    public function validateGatoGraphQLCommercialExtensions(
-        array $activeLicenseKeys,
-        ?string $formSettingName = null,
-    ): void {
-        $this->activateDeactivateValidateGatoGraphQLCommercialExtensions(
-            $activeLicenseKeys,
-            $activeLicenseKeys,
-            $formSettingName,
-        );
-    }
-
-    /**
      * @throws LicenseDomainNotValidException If the license domain is not valid
      */
     protected function validateLicenseDomain(string $instanceName): void
@@ -601,6 +584,23 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                 /*\__(*/'The license was registered for another domain: %s'/*, 'gatographql')*/,
                 $instanceDomain
             )
+        );
+    }
+
+    /**
+     * Re-validate the Gato GraphQL Extensions against the
+     * marketplace provider's API.
+     *
+     * @param array<string,string> $activeLicenseKeys Key: Extension Slug, Value: License Key
+     */
+    public function validateGatoGraphQLCommercialExtensions(
+        array $activeLicenseKeys,
+        ?string $formSettingName = null,
+    ): void {
+        $this->activateDeactivateValidateGatoGraphQLCommercialExtensions(
+            $activeLicenseKeys,
+            $activeLicenseKeys,
+            $formSettingName,
         );
     }
 
