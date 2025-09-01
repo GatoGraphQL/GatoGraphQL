@@ -564,9 +564,20 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     {
         return sprintf(
             '%s (%s)',
-            GeneralUtils::getHost(home_url()),
+            $this->getSiteDomain(),
             $extensionSlug
         );
+    }
+
+    /**
+     * Use as the instance name:
+     *
+     * - The site's domain: to understand on what domain it was installed
+     * - Extension slug: to make sure the right license key was provided
+     */
+    protected function getSiteDomain(): string
+    {
+        return GeneralUtils::getHost(home_url());
     }
 
     /**
@@ -574,7 +585,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
      */
     protected function validateLicenseDomain(string $instanceName): void
     {
-        $instanceDomain = GeneralUtils::getHost(home_url());
+        $instanceDomain = $this->getSiteDomain();
         $licenseDomain = $this->getLicenseDomain($instanceName);
         if ($instanceDomain === $licenseDomain) {
             return;
@@ -585,6 +596,19 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                 $instanceDomain
             )
         );
+    }
+
+    /**
+     * The instance name is composed by:
+     *
+     * - The site's domain
+     * - The extension slug
+     *
+     * These two are separated by a space. Therefore, the license domain is the site's domain
+     */
+    protected function getLicenseDomain(string $instanceName): string
+    {
+        return explode(' ', $instanceName)[0];
     }
 
     /**
@@ -602,18 +626,5 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             $activeLicenseKeys,
             $formSettingName,
         );
-    }
-
-    /**
-     * The instance name is composed by:
-     *
-     * - The site's domain
-     * - The extension slug
-     *
-     * These two are separated by a space. Therefore, the license domain is the site's domain
-     */
-    protected function getLicenseDomain(string $instanceName): string
-    {
-        return explode(' ', $instanceName)[0];
     }
 }
