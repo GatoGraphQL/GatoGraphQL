@@ -143,14 +143,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                     $extensionSlug,
                     $e,
                 );
-                if ($formSettingName !== null) {
-                    $this->showAdminMessagesOnLicenseOperationError(
-                        $extensionSlug,
-                        $errorMessage,
-                        $e,
-                        $formSettingName,
-                    );
-                }
+                $this->showAdminMessagesOnLicenseOperationError(
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                    $formSettingName,
+                );
                 continue;
             }
 
@@ -212,14 +210,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                     $extensionSlug,
                     $e,
                 );
-                if ($formSettingName !== null) {
-                    $this->showAdminMessagesOnLicenseOperationError(
-                        $extensionSlug,
-                        $errorMessage,
-                        $e,
-                        $formSettingName,
-                    );
-                }
+                $this->showAdminMessagesOnLicenseOperationError(
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                    $formSettingName,
+                );
                 continue;
             }
 
@@ -267,14 +263,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                     $extensionSlug,
                     $e,
                 );
-                if ($formSettingName !== null) {
-                    $this->showAdminMessagesOnLicenseOperationError(
-                        $extensionSlug,
-                        $errorMessage,
-                        $e,
-                        $formSettingName,
-                    );
-                }
+                $this->showAdminMessagesOnLicenseOperationError(
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                    $formSettingName,
+                );
                 continue;
             }
 
@@ -358,7 +352,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         string $extensionSlug,
         string $errorMessage,
         HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e,
-        string $formSettingName,
+        ?string $formSettingName,
     ): void {
         add_action('admin_notices', function () use ($errorMessage) {
             printf(
@@ -373,7 +367,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
          * Make sure this method is invoked only when
          * this function is loaded, in the Settings page.
          */
-        if (!function_exists('add_settings_error')) {
+        if ($formSettingName === null || !function_exists('add_settings_error')) {
             return;
         }
 
