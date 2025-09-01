@@ -20,6 +20,7 @@ use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\AbstractBasicService;
 
+use function add_action;
 use function add_settings_error;
 use function get_option;
 use function home_url;
@@ -359,6 +360,13 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e,
         string $formSettingName,
     ): void {
+        add_action('admin_notices', function () use ($errorMessage) {
+            printf(
+                '<div class="notice notice-error"><p>%s</p></div>',
+                $errorMessage
+            );
+        });
+
         /**
          * Show the error message to the admin.
          *
