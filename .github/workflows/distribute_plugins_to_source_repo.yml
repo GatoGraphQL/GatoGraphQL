@@ -194,6 +194,18 @@ jobs:
                 working-directory: build/dist-plugin
                 if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_source_repo_organization && matrix.pluginConfig.dist_source_repo_name }}
 
+            -   name: Upload to release
+                uses: softprops/action-gh-release@v2
+                with:
+                    files: build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                if: github.event_name == 'release'
+
+            -   id: previous_tag
+                uses: WyriHaximus/github-action-get-previous-tag@master
+                if: ${{ github.event_name == 'release' && matrix.pluginConfig.include_folders_for_dist_source_repo != '' && matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_source_repo_organization && matrix.pluginConfig.dist_source_repo_name }}
+
             -   name: Include (previously excluded) folders for DIST repo
                 run: sudo rsync -av ${{ matrix.pluginConfig.include_folders_for_dist_source_repo }} $GITHUB_WORKSPACE/build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }} --quiet
                 working-directory: ${{ matrix.pluginConfig.path }}
@@ -208,6 +220,7 @@ jobs:
                     package-directory: 'build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}'
                     split-repository-organization: ${{ matrix.pluginConfig.dist_source_repo_organization }}
                     split-repository-name: ${{ matrix.pluginConfig.dist_source_repo_name }}
+                    tag: ${{ steps.previous_tag.outputs.tag }}
                     user-name: "${{ needs.provide_data.outputs.git_user_name }}"
                     user-email: "${{ needs.provide_data.outputs.git_user_email }}"
                 if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_source_repo_organization && matrix.pluginConfig.dist_source_repo_name }}
