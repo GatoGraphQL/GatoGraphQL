@@ -134,7 +134,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e) {
                 $errorMessage = sprintf(
-                    /*\__(*/'Validating license for "%s" produced error: %s'/*, 'gatographql')*/,
+                    /*\__(*/                    'Validating license for "%s" produced error: %s'/*, 'gatographql')*/,
                     $extensionName,
                     $e->getMessage()
                 );
@@ -201,7 +201,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
-                    /*\__(*/'Deactivating license for "%s" produced error: %s'/*, 'gatographql')*/,
+                    /*\__(*/                    'Deactivating license for "%s" produced error: %s'/*, 'gatographql')*/,
                     $extensionName,
                     $e->getMessage()
                 );
@@ -254,7 +254,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
-                    /*\__(*/'Activating license for "%s" produced error: %s'/*, 'gatographql')*/,
+                    /*\__(*/                    'Activating license for "%s" produced error: %s'/*, 'gatographql')*/,
                     $extensionName,
                     $e->getMessage()
                 );
@@ -594,7 +594,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         }
         throw new LicenseDomainNotValidException(
             sprintf(
-                /*\__(*/'The license was registered for another domain: %s'/*, 'gatographql')*/,
+                /*\__(*/                'The license was registered for another domain: %s'/*, 'gatographql')*/,
                 $instanceDomain
             )
         );
