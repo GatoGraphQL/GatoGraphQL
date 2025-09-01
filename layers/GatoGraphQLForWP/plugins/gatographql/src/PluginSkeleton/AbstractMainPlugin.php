@@ -786,7 +786,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // Check if the X number of days have already passed
         $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses = $numberOfDaysToRevalidateCommercialExtensionActivatedLicenses * 86400;
         $now = time();
-        $licenseCheckTimestamp = $this->getUserSettingsManager()->getLicenseCheckTimestamp() ?? 0; // If `null`, execute the license check
+        /**
+         * If `null`, do not execute the license check yet,
+         * allowing InstaWP to create clones from the snapshot
+         */
+        $licenseCheckTimestamp = $this->getUserSettingsManager()->getLicenseCheckTimestamp() ?? $now;
         if (($now - $licenseCheckTimestamp) < $numberOfSecondsToRevalidateCommercialExtensionActivatedLicenses) {
             return;
         }
