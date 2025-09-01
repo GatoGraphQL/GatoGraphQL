@@ -599,7 +599,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         throw new LicenseDomainNotValidException(
             sprintf(
                 /*\__(*/                'The license was registered for another domain: %s'/*, 'gatographql')*/,
-                $instanceDomain
+                $licenseDomain
             )
         );
     }
