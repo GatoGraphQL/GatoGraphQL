@@ -49,7 +49,7 @@ env:
 jobs:
     provide_data:
         name: Provide configuration to generate plugins
-        runs-on: ubuntu-24.04-arm
+        runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v4
                 with:
@@ -87,7 +87,7 @@ jobs:
     process:
         name: Generate plugin "${{ matrix.pluginConfig.plugin_slug }}"
         needs: provide_data
-        runs-on: ubuntu-24.04-arm
+        runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
