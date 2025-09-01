@@ -127,11 +127,11 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             /** @var string */
             $instanceName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME];
             try {
-                $this->validateLicenseDomain($instanceName);
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                     $licenseKey,
                     $instanceID,
                 );
+                $this->validateLicenseDomain($commercialExtensionActivatedLicenseObjectProperties->instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException | LicenseDomainNotValidException $e) {
                 $errorMessage = sprintf(
                     /*\__(*/                    'Validating license for "%s" produced error: %s'/*, 'gatographql')*/,
@@ -585,8 +585,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     /**
      * @throws LicenseDomainNotValidException If the license domain is not valid
      */
-    protected function validateLicenseDomain(string $instanceName): void
+    protected function validateLicenseDomain(?string $instanceName): void
     {
+        if ($instanceName === null) {
+            throw new LicenseDomainNotValidException(/*\__(*/'The license instance name is empty'/*, 'gatographql')*/);
+        }
+
         $instanceDomain = $this->getSiteDomain();
         $licenseDomain = $this->getLicenseDomain($instanceName);
         if ($instanceDomain === $licenseDomain) {
