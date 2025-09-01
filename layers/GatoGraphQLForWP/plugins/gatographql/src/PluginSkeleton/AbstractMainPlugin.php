@@ -785,7 +785,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         /**
          * Check if the X number of days have already passed.
-         * 
+         *
          * If the license check timestamp is `null`, do not execute
          * the license check yet, allowing InstaWP to create clones
          * from the snapshot (while using a different domain name).
