@@ -144,7 +144,7 @@ class ExtensionManager extends AbstractPluginManager
             $installedExtensionVersion = $this->extensionClassInstances[$extensionClass]->getPluginVersion();
             if ($installedExtensionVersion !== $extensionVersion) {
                 $errorMessage = sprintf(
-                    /*\__(*/                    'Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.'/*, 'gatographql')*/,
+                    /*\__(*/'Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.'/*, 'gatographql')*/,
                     $extensionName,
                     $installedExtensionVersion,
                     $extensionVersion,
@@ -167,7 +167,7 @@ class ExtensionManager extends AbstractPluginManager
         ) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    /*\__(*/                    'Plugin <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The plugin has not been loaded.<br/>(If you have just updated <strong>%2$s</strong>, notice that the corresponding version for <strong>%1$s</strong> will be already available; please <a href="%5$s" target="_blank">download it%6$s</a> and install it.)'/*, 'gatographql')*/,
+                    /*\__(*/'Plugin <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The plugin has not been loaded.<br/>(If you have just updated <strong>%2$s</strong>, notice that the corresponding version for <strong>%1$s</strong> will be already available; please <a href="%5$s" target="_blank">download it%6$s</a> and install it.)'/*, 'gatographql')*/,
                     $extensionName,
                     $mainPlugin->getPluginName(),
                     $mainPluginVersionConstraint,
@@ -210,7 +210,7 @@ class ExtensionManager extends AbstractPluginManager
         if (!isset($this->extensionClassInstances[$dependedUponExtensionClass])) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    /*\__(*/                    'Extension <strong>%1$s</strong> depends on extension with class <strong>%2$s</strong> to be installed and active, but it is not. The extension has not been loaded.'/*, 'gatographql')*/,
+                    /*\__(*/'Extension <strong>%1$s</strong> depends on extension with class <strong>%2$s</strong> to be installed and active, but it is not. The extension has not been loaded.'/*, 'gatographql')*/,
                     $extensionName,
                     $dependedUponExtensionClass,
                 )
@@ -231,7 +231,7 @@ class ExtensionManager extends AbstractPluginManager
         ) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    /*\__(*/                    'Extension <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The extension has not been loaded.'/*, 'gatographql')*/,
+                    /*\__(*/'Extension <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The extension has not been loaded.'/*, 'gatographql')*/,
                     $extensionName,
                     $dependedUponExtension->getPluginName(),
                     $dependedUponExtensionVersionConstraint,
