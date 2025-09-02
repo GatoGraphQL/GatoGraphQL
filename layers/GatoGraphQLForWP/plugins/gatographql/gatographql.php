@@ -181,6 +181,12 @@ PluginApp::getMainPluginManager()->register(new Plugin(
  * Moreover, we can't even retrieve the stored value for the GraphQL endpoint paths from the DB,
  * so we must hardcode the paths here: If any path was updated in the plugin Settings,
  * then the user must also provide that path here, via a hook.
+ *
+ * And we assume all public endpoints are exposed:
+ *
+ * - Single endpoint
+ * - Custom endpoints
+ * - Persisted query endpoints
  */
 add_filter(
     'application_password_is_api_request',
