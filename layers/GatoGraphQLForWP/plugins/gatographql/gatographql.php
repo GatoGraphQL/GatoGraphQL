@@ -202,6 +202,8 @@ add_filter(
         }
 
         $requestURI = EndpointUtils::slashURI($requestURI);
+
+        // @todo Inject this via extensions/filters
         $graphQLEndpointPaths = [
             'graphql', // Single endpoint
             'graphql', // Custom endpoint
