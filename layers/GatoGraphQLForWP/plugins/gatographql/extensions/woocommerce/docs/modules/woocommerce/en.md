@@ -1,4 +1,4 @@
-# Bricks
+# WooCommerce
 
 Integration with <a href="https://woocommerce.com" target="_blank" rel="nofollow">WooCommerce</a>.
 
