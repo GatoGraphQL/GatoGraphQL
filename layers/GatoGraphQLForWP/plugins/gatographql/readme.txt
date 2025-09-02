@@ -78,6 +78,8 @@ The available premium extensions are:
 
 [Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, DeepSeek, Mistral AI, DeepL, and Google Translate.
 
+[WooCommerce](https://gatographql.com/extensions/woocommerce): Integration with WooCommerce, to fetch product data.
+
 == Built with Gato GraphQL ==
 
 All the plugins by [Gato Plugins](https://gatoplugins.com) use Gato GraphQL under the hook.
