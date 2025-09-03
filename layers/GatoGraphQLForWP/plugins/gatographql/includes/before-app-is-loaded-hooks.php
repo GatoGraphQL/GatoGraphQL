@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPIncludes\GatoGraphQL;
 
-use PoPAPI\APIEndpoints\EndpointUtils;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 
+use PoPAPI\APIEndpoints\EndpointUtils;
 use function add_filter;
+use function apply_filters;
 use function remove_filter;
 
 class BeforeAppIsLoadedHooks {
@@ -139,12 +141,18 @@ class BeforeAppIsLoadedHooks {
      */
     protected static function getGraphQLEndpointPaths(): array
     {
-        // @todo Inject this via extensions/filters
-
-        return [
-            'graphql', // Single endpoint
-            'graphql', // Custom endpoint
-            'graphql-query', // Persisted query endpoint
-        ];
+        /**
+         * This will resolve to:
+         * "gatographql:before-app-is-loaded:graphql-endpoint-paths"
+         */
+        $hookName = PluginApp::getMainPlugin()->getPluginNamespace() . ':before-app-is-loaded:graphql-endpoint-paths';
+        return apply_filters(
+            $hookName,
+            [
+                'graphql', // Single endpoint
+                'graphql', // Custom endpoint
+                'graphql-query', // Persisted query endpoint
+            ]
+        );
     }
 }
