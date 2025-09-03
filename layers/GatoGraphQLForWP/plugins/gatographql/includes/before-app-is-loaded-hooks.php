@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPIncludes\GatoGraphQL;
 
 use GatoGraphQL\GatoGraphQL\PluginApp;
-
 use PoPAPI\APIEndpoints\EndpointUtils;
+
 use function add_filter;
 use function apply_filters;
 use function remove_filter;
@@ -166,5 +166,13 @@ class BeforeAppIsLoadedHooks {
     protected static function getGraphQLEndpointPathsHookName(): string
     {
         return PluginApp::getMainPlugin()->getPluginNamespace() . ':before-app-is-loaded:graphql-endpoint-paths';
+    }
+
+    public static function addGraphQLEndpointPath(string $graphQLEndpointPath): void
+    {
+        add_filter(
+            static::getGraphQLEndpointPathsHookName(),
+            fn (array $graphQLEndpointPaths) => array_values(array_unique(array_merge($graphQLEndpointPaths, [$graphQLEndpointPath])))
+        );
     }
 }
