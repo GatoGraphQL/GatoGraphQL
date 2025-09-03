@@ -17,7 +17,7 @@ class BeforeAppIsLoadedHooks {
      */
     public static function executeAllBeforeAppIsLoadedHooks(): void
     {
-        self::setApplicationPasswordHooks();
+        static::setApplicationPasswordHooks();
     }
 
     /**
@@ -105,7 +105,7 @@ class BeforeAppIsLoadedHooks {
     {
         add_filter(
             'application_password_is_api_request',
-            self::applicationPasswordIsAPIRequest(...),
+            static::applicationPasswordIsAPIRequest(...),
             PHP_INT_MAX - 1 // Execute almost last
         );
     }
@@ -114,7 +114,7 @@ class BeforeAppIsLoadedHooks {
     {
         remove_filter(
             'application_password_is_api_request',
-            self::applicationPasswordIsAPIRequest(...),
+            static::applicationPasswordIsAPIRequest(...),
             PHP_INT_MAX - 1
         );
     }
@@ -132,7 +132,7 @@ class BeforeAppIsLoadedHooks {
 
         $requestURI = EndpointUtils::slashURI($requestURI);
 
-        $graphQLEndpointPaths = self::getGraphQLEndpointPaths();
+        $graphQLEndpointPaths = static::getGraphQLEndpointPaths();
 
         foreach ($graphQLEndpointPaths as $graphQLEndpointPath) {
             $graphQLEndpointPath = EndpointUtils::slashURI($graphQLEndpointPath);
@@ -149,18 +149,22 @@ class BeforeAppIsLoadedHooks {
      */
     protected static function getGraphQLEndpointPaths(): array
     {
-        /**
-         * This will resolve to:
-         * "gatographql:before-app-is-loaded:graphql-endpoint-paths"
-         */
-        $hookName = PluginApp::getMainPlugin()->getPluginNamespace() . ':before-app-is-loaded:graphql-endpoint-paths';
         return apply_filters(
-            $hookName,
+            static::getGraphQLEndpointPathsHookName(),
             [
                 'graphql', // Single endpoint
                 'graphql', // Custom endpoint
                 'graphql-query', // Persisted query endpoint
             ]
         );
+    }
+    
+    /**
+     * This will resolve to:
+     * "gatographql:before-app-is-loaded:graphql-endpoint-paths"
+     */
+    protected static function getGraphQLEndpointPathsHookName(): string
+    {
+        return PluginApp::getMainPlugin()->getPluginNamespace() . ':before-app-is-loaded:graphql-endpoint-paths';
     }
 }
