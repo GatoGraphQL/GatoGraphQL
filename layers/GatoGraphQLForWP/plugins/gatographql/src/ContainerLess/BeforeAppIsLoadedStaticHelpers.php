@@ -127,6 +127,11 @@ class BeforeAppIsLoadedStaticHelpers {
         );
     }
 
+    /**
+     * Replicates the logic in PrematureRequestService::isPubliclyExposedGraphQLAPIRequest()
+     *
+     * @see PrematureRequestService::isPubliclyExposedGraphQLAPIRequest()
+     */
     public static function applicationPasswordIsAPIRequest(bool $isAPIRequest): bool
     {
         if ($isAPIRequest) {
