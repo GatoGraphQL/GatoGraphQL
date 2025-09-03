@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\ContainerLess;
 use GatoGraphQL\GatoGraphQL\Constants\GraphQLEndpointPaths;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 
+use GatoGraphQL\GatoGraphQL\Services\Helpers\HookNamespacingHelpers;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use function add_filter;
 use function remove_filter;
@@ -190,7 +191,12 @@ class BeforeAppIsLoadedStaticHelpers
      */
     final protected static function getGraphQLEndpointPathsHookName(): string
     {
-        return PluginApp::getMainPlugin()->getPluginNamespace() . ':before-app-is-loaded:graphql-endpoint-paths';
+        /** 
+         * Because this class does not depend on the service container,
+         * it can be initialized directly
+         */
+        $hookNamespacingHelpers = new HookNamespacingHelpers();
+        return $hookNamespacingHelpers->namespaceHook('before-app-is-loaded:graphql-endpoint-paths');
     }
 
     public static function addGraphQLEndpointPath(string $graphQLEndpointPath): void
