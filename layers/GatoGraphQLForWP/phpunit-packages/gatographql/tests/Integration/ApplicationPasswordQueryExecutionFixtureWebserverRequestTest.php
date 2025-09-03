@@ -10,7 +10,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\RequestPluginRESTAPIWebserverRequest
 class ApplicationPasswordQueryExecutionFixtureWebserverRequestTest extends AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase
 {
     use RequestPluginRESTAPIWebserverRequestTestTrait;
-    
+
     protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-application-password';
