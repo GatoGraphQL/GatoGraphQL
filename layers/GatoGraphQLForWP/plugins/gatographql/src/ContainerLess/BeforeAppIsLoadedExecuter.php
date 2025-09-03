@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPIncludes\GatoGraphQL;
+namespace GatoGraphQL\GatoGraphQL\ContainerLess;
 
 use GatoGraphQL\GatoGraphQL\Constants\GraphQLEndpointPaths;
 use GatoGraphQL\GatoGraphQL\PluginApp;
@@ -12,11 +12,15 @@ use function add_filter;
 use function apply_filters;
 use function remove_filter;
 
-class BeforeAppIsLoadedHooks {
+/**
+ * These methods cannot rely on the container,
+ * as the container is not yet initialized.
+ */
+class BeforeAppIsLoadedExecuter {
     /**
      * Execute all before-app-is-loaded hooks.
      */
-    public static function executeAllBeforeAppIsLoadedHooks(): void
+    public static function executeBeforeAppIsLoadedMethods(): void
     {
         static::setApplicationPasswordHooks();
     }

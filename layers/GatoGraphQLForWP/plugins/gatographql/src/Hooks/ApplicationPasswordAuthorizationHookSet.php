@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Hooks;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedExecuter;
 use GatoGraphQL\GatoGraphQL\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface;
 use PoP\ComponentModel\Engine\EngineHookNames;
@@ -13,9 +14,8 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\RootWP\Exception\WPErrorDataProcessorTrait;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPIncludes\GatoGraphQL\BeforeAppIsLoadedHooks;
-use WP_Error;
 
+use WP_Error;
 use function add_action;
 use function add_filter;
 
@@ -69,7 +69,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         /**
          * As we've now loaded the proper logic, we can remove the workaround hooks
          */
-        BeforeAppIsLoadedHooks::removeApplicationPasswordHooks();
+        BeforeAppIsLoadedExecuter::removeApplicationPasswordHooks();
     }
 
     /**
