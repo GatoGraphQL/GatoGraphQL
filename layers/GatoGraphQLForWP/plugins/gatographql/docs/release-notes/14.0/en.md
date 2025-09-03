@@ -36,3 +36,4 @@
 - Plugin not working with PHP 7.4 ([#3182](https://github.com/GatoGraphQL/GatoGraphQL/pull/3182))
 - Updating posts storing wrong date ([#3186](https://github.com/GatoGraphQL/GatoGraphQL/pull/3186))
 - User authentication when executing query triggered via the WP REST API ([#3187](https://github.com/GatoGraphQL/GatoGraphQL/pull/3187))
+- Requesting GraphQL endpoint using Application Passwords didn't work when WooCommerce is installed ([#3195](https://github.com/GatoGraphQL/GatoGraphQL/pull/3195))

@@ -9,6 +9,7 @@ use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Exception\IOExcepti
 use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppThread;
+use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
@@ -443,6 +444,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function setup(): void
     {
         parent::setup();
+
+        /**
+         * Logic to execute before the App is loaded
+         */
+        BeforeAppIsLoadedStaticHelpers::executeBeforeAppIsLoadedMethods();
 
         /**
          * Operations to do when activating/deactivating plugins

@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GuzzleHttp\RequestOptions;
+use PHPUnitForGatoGraphQL\WebserverRequests\RequestPluginRESTAPIWebserverRequestTestTrait;
 
 class ApplicationPasswordQueryExecutionFixtureWebserverRequestTest extends AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase
 {
+    use RequestPluginRESTAPIWebserverRequestTestTrait;
+
     protected static function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture-application-password';
@@ -16,6 +19,35 @@ class ApplicationPasswordQueryExecutionFixtureWebserverRequestTest extends Abstr
     protected static function getEndpoint(): string
     {
         return 'graphql';
+    }
+
+    /**
+     * Disable WooCommerce before running the tests
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        if ($this->isWooCommercePluginEnabledByDefault()) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin('woocommerce/woocommerce', 'inactive');
+        }
+    }
+
+    /**
+     * Enable WooCommerce after running the tests
+     */
+    protected function tearDown(): void
+    {
+        if ($this->isWooCommercePluginEnabledByDefault()) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin('woocommerce/woocommerce', 'active');
+        }
+
+        parent::tearDown();
+    }
+
+    protected function isWooCommercePluginEnabledByDefault(): bool
+    {
+        return true;
     }
 
     /**
