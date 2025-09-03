@@ -34,8 +34,8 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use WP_Theme;
-
 use WP_Upgrader;
+
 use function __;
 use function add_action;
 use function do_action;

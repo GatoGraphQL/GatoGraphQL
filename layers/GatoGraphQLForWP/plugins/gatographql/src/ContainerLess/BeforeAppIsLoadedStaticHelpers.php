@@ -16,7 +16,8 @@ use function remove_filter;
  * These methods cannot rely on the container,
  * as the container is not yet initialized.
  */
-class BeforeAppIsLoadedStaticHelpers {
+class BeforeAppIsLoadedStaticHelpers
+{
     /**
      * Execute all "before app is loaded" methods.
      */
@@ -28,7 +29,7 @@ class BeforeAppIsLoadedStaticHelpers {
     /**
      * This is a workaround to fix a bug: Application Passwords for Gato GraphQL
      * are not set when WooCommerce is installed.
-     * 
+     *
      * That happens because the "application_password_is_api_request" filter
      * is triggered by WooCommerce, when doing this:
      *
@@ -46,7 +47,7 @@ class BeforeAppIsLoadedStaticHelpers {
      *       // Allow features to be loaded in frontend for admin users. This is needed for the use case such as the coming soon footer banner.
      *       current_user_can( 'manage_woocommerce' )
      *     );
-     * 
+     *
      *     // ...
      *   }
      *
@@ -82,7 +83,7 @@ class BeforeAppIsLoadedStaticHelpers {
      *   #25 /app/wordpress/index.php(17): require('/app/wordpress/...')
      *
      * But we can't execute logic here in this plugin by then!
-     * 
+     *
      * That's because extensions are initialized on "plugins_loaded" hook (sometimes with priority 15).
      * In addition, we still don't have the service container (not even the System container),
      * as that is initialized on "after_setup_theme" hook. And it can't be pushed forward
@@ -137,7 +138,7 @@ class BeforeAppIsLoadedStaticHelpers {
         if ($isAPIRequest) {
             return $isAPIRequest;
         }
-        
+
         $requestURI = $_SERVER['REQUEST_URI'] ?? '';
         if (empty($requestURI)) {
             return $isAPIRequest;
@@ -169,7 +170,7 @@ class BeforeAppIsLoadedStaticHelpers {
             ]
         );
     }
-    
+
     /**
      * This will resolve to:
      * "gatographql:before-app-is-loaded:graphql-endpoint-paths"
