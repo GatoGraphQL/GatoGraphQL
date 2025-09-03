@@ -6,6 +6,9 @@ namespace PoPIncludes\GatoGraphQL;
 
 use PoPAPI\APIEndpoints\EndpointUtils;
 
+use function add_filter;
+use function remove_filter;
+
 class BeforeAppIsLoadedHooks {
     /**
      * This is a workaround to fix a bug: Application Passwords for Gato GraphQL
@@ -89,6 +92,15 @@ class BeforeAppIsLoadedHooks {
             'application_password_is_api_request',
             self::applicationPasswordIsAPIRequest(...),
             PHP_INT_MAX // Execute last
+        );
+    }
+
+    public static function removeApplicationPasswordHooks(): void
+    {
+        remove_filter(
+            'application_password_is_api_request',
+            self::applicationPasswordIsAPIRequest(...),
+            PHP_INT_MAX
         );
     }
 
