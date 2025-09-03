@@ -96,7 +96,7 @@ class BeforeAppIsLoadedHooks {
         add_filter(
             'application_password_is_api_request',
             self::applicationPasswordIsAPIRequest(...),
-            PHP_INT_MAX // Execute last
+            PHP_INT_MAX - 1 // Execute almost last
         );
     }
 
@@ -105,7 +105,7 @@ class BeforeAppIsLoadedHooks {
         remove_filter(
             'application_password_is_api_request',
             self::applicationPasswordIsAPIRequest(...),
-            PHP_INT_MAX
+            PHP_INT_MAX - 1
         );
     }
 
