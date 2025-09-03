@@ -13,6 +13,7 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\RootWP\Exception\WPErrorDataProcessorTrait;
 use PoP\Root\Hooks\AbstractHookSet;
+use PoPIncludes\GatoGraphQL\BeforeAppIsLoadedHooks;
 use WP_Error;
 
 use function add_action;
@@ -64,6 +65,11 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
             'application_password_failed_authentication',
             $this->handleError(...)
         );
+
+        /**
+         * As we've now loaded the proper logic, we can remove the workaround hooks
+         */
+        BeforeAppIsLoadedHooks::removeApplicationPasswordHooks();
     }
 
     /**
