@@ -77,12 +77,6 @@ require_once __DIR__ . '/includes/schema-editing-access-capabilities.php';
 );
 
 /**
- * Logic to execute before the App is loaded
- */
-require_once __DIR__ . '/includes/before-app-is-loaded-hooks.php';
-\PoPIncludes\GatoGraphQL\BeforeAppIsLoadedHooks::executeAllBeforeAppIsLoadedHooks();
-
-/**
  * The commit hash is added to the plugin version 
  * through the CI when merging the PR.
  *
@@ -112,3 +106,9 @@ PluginApp::getMainPluginManager()->register(new Plugin(
     $pluginName,
     $commitHash
 ))->setup();
+
+/**
+ * Logic to execute before the App is loaded
+ */
+require_once __DIR__ . '/includes/before-app-is-loaded-hooks.php';
+\PoPIncludes\GatoGraphQL\BeforeAppIsLoadedHooks::executeAllBeforeAppIsLoadedHooks();
