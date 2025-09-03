@@ -16,7 +16,7 @@ use function remove_filter;
  * These methods cannot rely on the container,
  * as the container is not yet initialized.
  */
-class BeforeAppIsLoadedExecuter {
+class BeforeAppIsLoadedStaticHelpers {
     /**
      * Execute all before-app-is-loaded hooks.
      */

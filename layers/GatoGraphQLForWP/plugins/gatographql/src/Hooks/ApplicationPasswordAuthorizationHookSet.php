@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Hooks;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
-use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedExecuter;
+use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedStaticHelpers;
 use GatoGraphQL\GatoGraphQL\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface;
 use PoP\ComponentModel\Engine\EngineHookNames;
@@ -69,7 +69,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         /**
          * As we've now loaded the proper logic, we can remove the workaround hooks
          */
-        BeforeAppIsLoadedExecuter::removeApplicationPasswordHooks();
+        BeforeAppIsLoadedStaticHelpers::removeApplicationPasswordHooks();
     }
 
     /**
