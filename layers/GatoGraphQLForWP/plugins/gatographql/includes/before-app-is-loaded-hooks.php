@@ -6,8 +6,8 @@ namespace PoPIncludes\GatoGraphQL;
 
 use GatoGraphQL\GatoGraphQL\Constants\GraphQLEndpointPaths;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-
 use PoPAPI\APIEndpoints\EndpointUtils;
+
 use function add_filter;
 use function apply_filters;
 use function remove_filter;
