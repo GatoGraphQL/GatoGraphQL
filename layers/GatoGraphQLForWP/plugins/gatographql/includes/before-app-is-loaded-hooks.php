@@ -66,7 +66,10 @@ class BeforeAppIsLoadedHooks {
      *   #24 /app/wordpress/wp-blog-header.php(13): require_once('/app/wordpress/...')
      *   #25 /app/wordpress/index.php(17): require('/app/wordpress/...')
      *
-     * But by then we still don't have the container (not even the System container),
+     * But we can't execute logic here in this plugin by then!
+     * 
+     * That's because extensions are initialized on "plugins_loaded" hook (sometimes with priority 15).
+     * In addition, we still don't have the service container (not even the System container),
      * as that is initialized on "after_setup_theme" hook. And it can't be pushed forward
      * to "plugins_loaded", because then we couldn't initialize services based on themes,
      * such as Bricks.
