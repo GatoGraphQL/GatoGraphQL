@@ -115,6 +115,9 @@ class BeforeAppIsLoadedStaticHelpers {
         );
     }
 
+    /**
+     * Once the container is initialized, we can remove these hooks.
+     */
     public static function removeApplicationPasswordHooks(): void
     {
         remove_filter(
