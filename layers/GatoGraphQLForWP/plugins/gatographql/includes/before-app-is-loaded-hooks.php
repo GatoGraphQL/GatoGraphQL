@@ -117,12 +117,7 @@ class BeforeAppIsLoadedHooks {
 
         $requestURI = EndpointUtils::slashURI($requestURI);
 
-        // @todo Inject this via extensions/filters
-        $graphQLEndpointPaths = [
-            'graphql', // Single endpoint
-            'graphql', // Custom endpoint
-            'graphql-query', // Persisted query endpoint
-        ];
+        $graphQLEndpointPaths = self::getGraphQLEndpointPaths();
 
         foreach ($graphQLEndpointPaths as $graphQLEndpointPath) {
             $graphQLEndpointPath = EndpointUtils::slashURI($graphQLEndpointPath);
@@ -132,5 +127,19 @@ class BeforeAppIsLoadedHooks {
         }
 
         return false;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected static function getGraphQLEndpointPaths(): array
+    {
+        // @todo Inject this via extensions/filters
+
+        return [
+            'graphql', // Single endpoint
+            'graphql', // Custom endpoint
+            'graphql-query', // Persisted query endpoint
+        ];
     }
 }
