@@ -74,20 +74,22 @@ class BeforeAppIsLoadedHooks {
      * to "plugins_loaded", because then we couldn't initialize services based on themes,
      * such as Bricks.
      *
-     * That's why we can't just execute this logic:
+     * That's why we can't just execute this logic here:
      *
      *   $prematureRequestService = App::getSystemContainer()->get(PrematureRequestServiceInterface::class);
      *   return $prematureRequestService->isPubliclyExposedGraphQLAPIRequest();
      *
      * Moreover, we can't even retrieve the stored value for the GraphQL endpoint paths from the DB,
-     * so we must hardcode the paths here: If any path was updated in the plugin Settings,
-     * then the user must also provide that path here, via a hook.
+     * as those are registered in the service container. Then, we must hardcode the paths here:
+     * If any path was updated in the plugin Settings, then the user must also provide that path here,
+     * via a hook. And if that public endpoint was disabled (eg: the Single Endpoint module was disabled),
+     * then the user must also remove that path here, via a hook.
      *
-     * And we assume all public endpoints are exposed:
+     * By default, public endpoints are exposed, under their default path:
      *
-     * - Single endpoint
-     * - Custom endpoints
-     * - Persisted query endpoints
+     * - Single endpoint => "graphql"
+     * - Custom endpoints (provided via extension) => "graphql"
+     * - Persisted query endpoints (provided via extension) => "graphql-query"
      */
     public static function setApplicationPasswordHooks(): void
     {
