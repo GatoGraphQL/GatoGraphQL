@@ -24,6 +24,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         getPriority as getUpstreamPriority;
     }
 
+    public final const SCHEMA_META = Plugin::NAMESPACE . '\schema-meta';
     public final const SCHEMA_CUSTOMPOST_META = Plugin::NAMESPACE . '\schema-custompost-meta';
     public final const SCHEMA_USER_META = Plugin::NAMESPACE . '\schema-user-meta';
     public final const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
@@ -102,6 +103,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getModulesToResolve(): array
     {
         return [
+            self::SCHEMA_META,
             self::SCHEMA_CUSTOMPOST_META,
             self::SCHEMA_USER_META,
             self::SCHEMA_COMMENT_META,
@@ -120,6 +122,8 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getDependedModuleLists(string $module): array
     {
         switch ($module) {
+            case self::SCHEMA_META:
+                return [];
             case self::SCHEMA_CUSTOMPOST_META:
                 return [
                     [
@@ -152,6 +156,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
+            self::SCHEMA_META => \__('Meta', 'gatographql'),
             self::SCHEMA_CUSTOMPOST_META => \__('Custom Post Meta', 'gatographql'),
             self::SCHEMA_USER_META => \__('User Meta', 'gatographql'),
             self::SCHEMA_COMMENT_META => \__('Comment Meta', 'gatographql'),
@@ -163,6 +168,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getDescription(string $module): string
     {
         return match ($module) {
+            self::SCHEMA_META => \__('Query meta values', 'gatographql'),
             self::SCHEMA_CUSTOMPOST_META => sprintf(
                 \__('Query meta values from custom posts (such as type <code>%1$s</code>)', 'gatographql'),
                 $this->getPostObjectTypeResolver()->getTypeName()
@@ -196,6 +202,9 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             self::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA => true,
         ];
         $defaultValues = [
+            self::SCHEMA_META => [
+                self::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA => true,
+            ],
             self::SCHEMA_CUSTOMPOST_META => $defaultMetaValues,
             self::SCHEMA_USER_META => $defaultMetaValues,
             self::SCHEMA_COMMENT_META => $defaultMetaValues,
@@ -215,6 +224,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 
         if (
             in_array($module, [
+                self::SCHEMA_META,
                 self::SCHEMA_CUSTOMPOST_META,
                 self::SCHEMA_USER_META,
                 self::SCHEMA_COMMENT_META,
@@ -328,44 +338,54 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
             ];
             $entityNames = [
+                self::SCHEMA_META => \__('WithMeta (interface)', 'gatographql'),
                 self::SCHEMA_CUSTOMPOST_META => \__('custom post', 'gatographql'),
                 self::SCHEMA_USER_META => \__('user', 'gatographql'),
                 self::SCHEMA_COMMENT_META => \__('comment', 'gatographql'),
                 self::SCHEMA_TAXONOMY_META => \__('taxonomy', 'gatographql'),
             ];
 
-            $option = ModuleSettingOptions::ENTRIES;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => $entriesTitle,
-                Properties::DESCRIPTION => $moduleDescriptions[$module],
-                Properties::TYPE => Properties::TYPE_ARRAY,
-            ];
+            if (
+                in_array($module, [
+                    self::SCHEMA_CUSTOMPOST_META,
+                    self::SCHEMA_USER_META,
+                    self::SCHEMA_COMMENT_META,
+                    self::SCHEMA_TAXONOMY_META,
+                ])
+            ) {
+                $option = ModuleSettingOptions::ENTRIES;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => $entriesTitle,
+                    Properties::DESCRIPTION => $moduleDescriptions[$module],
+                    Properties::TYPE => Properties::TYPE_ARRAY,
+                ];
 
-            $option = ModuleSettingOptions::BEHAVIOR;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Behavior', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    '%s %s%s',
-                    \__('Are the entries being allowed or denied access to?', 'gatographql'),
-                    \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'gatographql'),
-                    $defaultValueDesc,
-                ),
-                Properties::TYPE => Properties::TYPE_STRING,
-                Properties::POSSIBLE_VALUES => [
-                    Behaviors::ALLOW => \__('Allow access', 'gatographql'),
-                    Behaviors::DENY => \__('Deny access', 'gatographql'),
-                ],
-            ];
+                $option = ModuleSettingOptions::BEHAVIOR;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('Behavior', 'gatographql'),
+                    Properties::DESCRIPTION => sprintf(
+                        '%s %s%s',
+                        \__('Are the entries being allowed or denied access to?', 'gatographql'),
+                        \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'gatographql'),
+                        $defaultValueDesc,
+                    ),
+                    Properties::TYPE => Properties::TYPE_STRING,
+                    Properties::POSSIBLE_VALUES => [
+                        Behaviors::ALLOW => \__('Allow access', 'gatographql'),
+                        Behaviors::DENY => \__('Deny access', 'gatographql'),
+                    ],
+                ];
+            }
 
             $option = self::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA;
             $moduleSettings[] = [

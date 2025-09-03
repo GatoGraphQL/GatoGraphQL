@@ -598,7 +598,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             [
                 'class' => MetaModule::class,
                 'envVariable' => MetaEnvironment::TREAT_ENTITY_META_KEYS_AS_SENSITIVE_DATA,
-                'module' => MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META,
+                'module' => MetaSchemaTypeModuleResolver::SCHEMA_META,
                 'option' => MetaSchemaTypeModuleResolver::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA,
             ],
             [
