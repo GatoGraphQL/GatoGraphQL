@@ -109,6 +109,9 @@ class BeforeAppIsLoadedStaticHelpers
      * - Single endpoint => "graphql"
      * - Custom endpoints => "graphql" (provided via extension)
      * - Persisted query endpoints => "graphql-query" (provided via extension)
+     *
+     * If the Application Password fails authentication, these methods will also not print
+     * the error message on the GraphQL response (using the "application_password_failed_authentication" hook).
      */
     public static function setApplicationPasswordHooks(): void
     {
