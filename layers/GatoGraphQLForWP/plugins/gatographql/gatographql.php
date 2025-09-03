@@ -16,7 +16,6 @@ Domain Path: /languages
 GitHub Plugin URI: GatoGraphQL/gatographql-dist
 */
 
-use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 
@@ -107,8 +106,3 @@ PluginApp::getMainPluginManager()->register(new Plugin(
     $pluginName,
     $commitHash
 ))->setup();
-
-/**
- * Logic to execute before the App is loaded
- */
-BeforeAppIsLoadedStaticHelpers::executeBeforeAppIsLoadedMethods();
