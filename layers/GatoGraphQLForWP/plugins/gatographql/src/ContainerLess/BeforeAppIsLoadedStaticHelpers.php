@@ -18,7 +18,7 @@ use function remove_filter;
  */
 class BeforeAppIsLoadedStaticHelpers {
     /**
-     * Execute all before-app-is-loaded hooks.
+     * Execute all "before app is loaded" methods.
      */
     public static function executeBeforeAppIsLoadedMethods(): void
     {
