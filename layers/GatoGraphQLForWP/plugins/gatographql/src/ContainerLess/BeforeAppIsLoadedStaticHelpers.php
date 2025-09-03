@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ContainerLess;
 
 use GatoGraphQL\GatoGraphQL\Constants\GraphQLEndpointPaths;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoPAPI\APIEndpoints\EndpointUtils;
 
 use function add_filter;
-use function apply_filters;
 use function remove_filter;
 
 /**
@@ -18,6 +16,11 @@ use function remove_filter;
  */
 class BeforeAppIsLoadedStaticHelpers
 {
+    /**
+     * @var string[]
+     */
+    protected static array $graphQLEndpointPaths = [];
+
     /**
      * Execute all "before app is loaded" methods.
      */
@@ -109,6 +112,7 @@ class BeforeAppIsLoadedStaticHelpers
      */
     public static function setApplicationPasswordHooks(): void
     {
+        static::addGraphQLEndpointPath(GraphQLEndpointPaths::SINGLE_ENDPOINT);
         add_filter(
             'application_password_is_api_request',
             static::applicationPasswordIsAPIRequest(...),
@@ -146,9 +150,7 @@ class BeforeAppIsLoadedStaticHelpers
 
         $requestURI = EndpointUtils::slashURI($requestURI);
 
-        $graphQLEndpointPaths = static::getGraphQLEndpointPaths();
-
-        foreach ($graphQLEndpointPaths as $graphQLEndpointPath) {
+        foreach (self::$graphQLEndpointPaths as $graphQLEndpointPath) {
             $graphQLEndpointPath = EndpointUtils::slashURI($graphQLEndpointPath);
             if (str_starts_with($requestURI, $graphQLEndpointPath)) {
                 return true;
@@ -158,33 +160,8 @@ class BeforeAppIsLoadedStaticHelpers
         return false;
     }
 
-    /**
-     * @return string[]
-     */
-    protected static function getGraphQLEndpointPaths(): array
-    {
-        return apply_filters(
-            static::getGraphQLEndpointPathsHookName(),
-            [
-                GraphQLEndpointPaths::SINGLE_ENDPOINT,
-            ]
-        );
-    }
-
-    /**
-     * This will resolve to:
-     * "gatographql:before-app-is-loaded:graphql-endpoint-paths"
-     */
-    final protected static function getGraphQLEndpointPathsHookName(): string
-    {
-        return PluginApp::getMainPlugin()->getPluginNamespace() . ':before-app-is-loaded:graphql-endpoint-paths';
-    }
-
     public static function addGraphQLEndpointPath(string $graphQLEndpointPath): void
     {
-        add_filter(
-            static::getGraphQLEndpointPathsHookName(),
-            fn (array $graphQLEndpointPaths) => array_merge($graphQLEndpointPaths, [$graphQLEndpointPath])
-        );
+        self::$graphQLEndpointPaths[] = $graphQLEndpointPath;
     }
 }
