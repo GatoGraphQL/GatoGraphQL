@@ -171,7 +171,7 @@ class BeforeAppIsLoadedHooks {
     {
         add_filter(
             static::getGraphQLEndpointPathsHookName(),
-            fn (array $graphQLEndpointPaths) => array_values(array_unique(array_merge($graphQLEndpointPaths, [$graphQLEndpointPath])))
+            fn (array $graphQLEndpointPaths) => array_merge($graphQLEndpointPaths, [$graphQLEndpointPath])
         );
     }
 }
