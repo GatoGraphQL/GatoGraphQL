@@ -103,8 +103,8 @@ class BeforeAppIsLoadedStaticHelpers {
      * By default, public endpoints are exposed, under their default path:
      *
      * - Single endpoint => "graphql"
-     * - Custom endpoints (provided via extension) => "graphql"
-     * - Persisted query endpoints (provided via extension) => "graphql-query"
+     * - Custom endpoints => "graphql" (provided via extension)
+     * - Persisted query endpoints => "graphql-query" (provided via extension)
      */
     public static function setApplicationPasswordHooks(): void
     {
