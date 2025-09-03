@@ -41,6 +41,8 @@ use PoPCMSSchema\Media\Environment as MediaEnvironment;
 use PoPCMSSchema\Media\Module as MediaModule;
 use PoPCMSSchema\Menus\Environment as MenusEnvironment;
 use PoPCMSSchema\Menus\Module as MenusModule;
+use PoPCMSSchema\Meta\Environment as MetaEnvironment;
+use PoPCMSSchema\Meta\Module as MetaModule;
 use PoPCMSSchema\Pages\Environment as PagesEnvironment;
 use PoPCMSSchema\Pages\Module as PagesModule;
 use PoPCMSSchema\Posts\Environment as PostsEnvironment;
@@ -593,6 +595,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA,
             ],
             // Meta keys
+            [
+                'class' => MetaModule::class,
+                'envVariable' => MetaEnvironment::TREAT_ENTITY_META_KEYS_AS_SENSITIVE_DATA,
+                'module' => MetaSchemaTypeModuleResolver::SCHEMA_META,
+                'option' => MetaSchemaTypeModuleResolver::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA,
+            ],
             [
                 'class' => CommentMetaModule::class,
                 'envVariable' => CommentMetaEnvironment::TREAT_COMMENT_META_KEYS_AS_SENSITIVE_DATA,
