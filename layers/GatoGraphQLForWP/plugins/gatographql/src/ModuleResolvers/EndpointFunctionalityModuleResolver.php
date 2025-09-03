@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Constants\GraphQLEndpointPaths;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptionValues;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
@@ -143,7 +144,7 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
             self::SINGLE_ENDPOINT => [
-                ModuleSettingOptions::PATH => 'graphql',
+                ModuleSettingOptions::PATH => GraphQLEndpointPaths::SINGLE_ENDPOINT,
                 ModuleSettingOptions::SCHEMA_CONFIGURATION => ModuleSettingOptionValues::NO_VALUE_ID,
             ],
         ];

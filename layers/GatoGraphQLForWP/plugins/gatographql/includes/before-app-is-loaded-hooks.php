@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPIncludes\GatoGraphQL;
 
+use GatoGraphQL\GatoGraphQL\Constants\GraphQLEndpointPaths;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use PoPAPI\APIEndpoints\EndpointUtils;
 
+use PoPAPI\APIEndpoints\EndpointUtils;
 use function add_filter;
 use function apply_filters;
 use function remove_filter;
@@ -152,9 +153,7 @@ class BeforeAppIsLoadedHooks {
         return apply_filters(
             static::getGraphQLEndpointPathsHookName(),
             [
-                'graphql', // Single endpoint
-                'graphql', // Custom endpoint
-                'graphql-query', // Persisted query endpoint
+                GraphQLEndpointPaths::SINGLE_ENDPOINT,
             ]
         );
     }
