@@ -167,6 +167,12 @@ class BeforeAppIsLoadedStaticHelpers
     }
 
     /**
+     * If either modifying the path of any public endpoint via
+     * the plugin Settings, the same modification must be done here via the hook.
+     *
+     * If disabling any public endpoint Module, the corresponding path must
+     * be removed here via the hook.
+     *
      * @return string[]
      */
     protected static function getGraphQLEndpointPaths(): array
