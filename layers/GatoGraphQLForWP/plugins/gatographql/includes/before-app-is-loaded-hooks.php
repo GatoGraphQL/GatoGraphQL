@@ -13,6 +13,14 @@ use function remove_filter;
 
 class BeforeAppIsLoadedHooks {
     /**
+     * Execute all before-app-is-loaded hooks.
+     */
+    public static function executeAllBeforeAppIsLoadedHooks(): void
+    {
+        self::setApplicationPasswordHooks();
+    }
+
+    /**
      * This is a workaround to fix a bug: Application Passwords for Gato GraphQL
      * are not set when WooCommerce is installed.
      * 
