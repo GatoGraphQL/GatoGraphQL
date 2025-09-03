@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
@@ -35,6 +36,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
      */
     public final const OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA = 'treat-meta-keys-as-sensitive-data';
 
+    private ?WithMetaInterfaceTypeResolver $withMetaInterfaceTypeResolver = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
@@ -42,6 +44,15 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     private ?UserObjectTypeResolver $userObjectTypeResolver = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
+    final protected function getWithMetaInterfaceTypeResolver(): WithMetaInterfaceTypeResolver
+    {
+        if ($this->withMetaInterfaceTypeResolver === null) {
+            /** @var WithMetaInterfaceTypeResolver */
+            $withMetaInterfaceTypeResolver = $this->instanceManager->getInstance(WithMetaInterfaceTypeResolver::class);
+            $this->withMetaInterfaceTypeResolver = $withMetaInterfaceTypeResolver;
+        }
+        return $this->withMetaInterfaceTypeResolver;
+    }
     final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
     {
         if ($this->commentObjectTypeResolver === null) {
@@ -338,7 +349,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
             ];
             $entityNames = [
-                self::SCHEMA_META => \__('WithMeta (interface)', 'gatographql'),
+                self::SCHEMA_META => sprintf(\__('%s (interface)', 'gatographql'), $this->getWithMetaInterfaceTypeResolver()->getTypeName()),
                 self::SCHEMA_CUSTOMPOST_META => \__('custom post', 'gatographql'),
                 self::SCHEMA_USER_META => \__('user', 'gatographql'),
                 self::SCHEMA_COMMENT_META => \__('comment', 'gatographql'),
