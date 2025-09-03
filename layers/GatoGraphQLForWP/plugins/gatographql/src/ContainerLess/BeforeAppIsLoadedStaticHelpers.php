@@ -174,7 +174,7 @@ class BeforeAppIsLoadedStaticHelpers {
      * This will resolve to:
      * "gatographql:before-app-is-loaded:graphql-endpoint-paths"
      */
-    protected static function getGraphQLEndpointPathsHookName(): string
+    final protected static function getGraphQLEndpointPathsHookName(): string
     {
         return PluginApp::getMainPlugin()->getPluginNamespace() . ':before-app-is-loaded:graphql-endpoint-paths';
     }
