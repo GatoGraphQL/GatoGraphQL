@@ -124,7 +124,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      * Plugin set-up, executed after Gato GraphQL is loaded,
      * and before it is initialized
      */
-    final public function setup(): void
+    public function setup(): void
     {
         parent::setup();
 

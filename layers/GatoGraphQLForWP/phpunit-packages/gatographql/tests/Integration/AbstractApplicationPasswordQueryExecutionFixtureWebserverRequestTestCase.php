@@ -9,7 +9,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 use RuntimeException;
 
-abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
+abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase implements ApplicationPasswordUsersInterface
 {
     use WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 
@@ -19,12 +19,6 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
      * @see webservers/gatographql/setup/add-user-application-passwords.sh
      */
     public const USER_STORING_APP_PASSWORDS_IN_META_USER_ID = 2;
-
-    public const USER_ADMIN = 'admin';
-    public const USER_EDITOR = 'editor';
-    public const USER_AUTHOR = 'author';
-    public const USER_CONTRIBUTOR = 'contributor';
-    public const USER_SUBSCRIBER = 'subscriber';
 
     /** @var array<string,string> Key: role, Value: application password */
     protected static array $applicationPasswords;

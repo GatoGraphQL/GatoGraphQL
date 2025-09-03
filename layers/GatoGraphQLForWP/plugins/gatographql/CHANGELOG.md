@@ -42,6 +42,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Plugin not working with PHP 7.4 (#3182)
 - Updating posts storing wrong date (#3186)
 - User authentication when executing query triggered via the WP REST API (#3187)
+- Requesting GraphQL endpoint using Application Passwords didn't work when WooCommerce is installed (#3195)
 
 ## 13.2.0 - 21/07/2025
 
