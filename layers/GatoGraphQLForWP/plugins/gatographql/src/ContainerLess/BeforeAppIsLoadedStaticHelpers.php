@@ -179,7 +179,8 @@ class BeforeAppIsLoadedStaticHelpers
 
     /**
      * This will resolve to:
-     * "gatographql:before-app-is-loaded:graphql-endpoint-paths"
+     * 
+     *   gatographql:before-app-is-loaded:graphql-endpoint-paths
      */
     final protected static function getGraphQLEndpointPathsHookName(): string
     {
