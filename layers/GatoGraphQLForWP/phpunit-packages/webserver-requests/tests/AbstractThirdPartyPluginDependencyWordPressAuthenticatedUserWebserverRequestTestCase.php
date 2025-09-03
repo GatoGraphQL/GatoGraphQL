@@ -20,7 +20,7 @@ use RuntimeException;
  */
 abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase
 {
-    use RequestRESTAPIWebserverRequestTestTrait;
+    use RequestPluginRESTAPIWebserverRequestTestTrait;
 
     protected function setUp(): void
     {
@@ -137,37 +137,6 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         string $fixtureFolder,
         ?string $responseFixtureFolder = null,
     ): array;
-
-    /**
-     * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
-     */
-    protected function executeRESTEndpointToEnableOrDisablePlugin(string $pluginName, string $status): void
-    {
-        $client = static::getClient();
-        $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
-        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $client->post(
-            sprintf(
-                $endpointURLPlaceholder,
-                $pluginName,
-                $status
-            ),
-            static::getEnableDisablePluginsRESTEndpointRequestOptions()
-        );
-    }
-
-    /**
-     * Enable/disable plugins as the admin user,
-     * to allow testing with subscribers
-     *
-     * @return array<string,mixed>
-     */
-    protected function getEnableDisablePluginsRESTEndpointRequestOptions(): array
-    {
-        $options = static::getRESTEndpointRequestOptions();
-        $options[RequestOptions::HEADERS]['Authorization'] = static::getApplicationPasswordAuthorizationHeader(static::USER_ADMIN);
-        return $options;
-    }
 
     /**
      * The tests have this shape:
