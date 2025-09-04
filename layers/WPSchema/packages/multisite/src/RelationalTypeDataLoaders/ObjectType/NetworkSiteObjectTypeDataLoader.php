@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Multisite\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPCMSSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderTrait;
 use PoPWPSchema\Multisite\TypeAPIs\MultisiteTypeAPIInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
 class NetworkSiteObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    use ObjectTypeQueryableDataLoaderTrait;
+
     public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
 
     private ?MultisiteTypeAPIInterface $multisiteTypeAPI = null;
@@ -53,17 +54,5 @@ class NetworkSiteObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoa
     public function executeQuery(array $query, array $options = []): array
     {
         return $this->getMultisiteTypeAPI()->getNetworkSites($query, $options);
-    }
-
-    /**
-     * @param array<string,mixed> $query
-     * @return array<string|int>
-     */
-    public function executeQueryIDs(array $query): array
-    {
-        $options = [
-            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
-        ];
-        return $this->executeQuery($query, $options);
     }
 }
