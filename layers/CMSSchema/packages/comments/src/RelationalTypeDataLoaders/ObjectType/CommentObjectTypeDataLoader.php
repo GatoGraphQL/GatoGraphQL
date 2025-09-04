@@ -8,13 +8,14 @@ use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPCMSSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderTrait;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
 class CommentObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    use ObjectTypeQueryableDataLoaderTrait;
+
     public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
 
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
@@ -77,17 +78,5 @@ class CommentObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     public function executeQuery(array $query, array $options = []): array
     {
         return $this->getCommentTypeAPI()->getComments($query, $options);
-    }
-
-    /**
-     * @param array<string,mixed> $query
-     * @return array<string|int>
-     */
-    public function executeQueryIDs(array $query): array
-    {
-        $options = [
-            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
-        ];
-        return $this->executeQuery($query, $options);
     }
 }

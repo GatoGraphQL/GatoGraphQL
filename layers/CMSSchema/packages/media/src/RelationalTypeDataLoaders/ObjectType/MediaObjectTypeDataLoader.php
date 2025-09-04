@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Media\RelationalTypeDataLoaders\ObjectType;
 
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPCMSSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderTrait;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
 class MediaObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    use ObjectTypeQueryableDataLoaderTrait;
+
     public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
 
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
@@ -49,17 +50,5 @@ class MediaObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
     public function executeQuery(array $query, array $options = []): array
     {
         return $this->getMediaTypeAPI()->getMediaItems($query, $options);
-    }
-
-    /**
-     * @param array<string,mixed> $query
-     * @return array<string|int>
-     */
-    public function executeQueryIDs(array $query): array
-    {
-        $options = [
-            QueryOptions::RETURN_TYPE => ReturnTypes::IDS,
-        ];
-        return $this->executeQuery($query, $options);
     }
 }
