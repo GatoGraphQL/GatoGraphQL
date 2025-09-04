@@ -12,7 +12,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQu
 abstract class AbstractCategoryObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
     use ObjectTypeQueryableDataLoaderTrait;
-    
+
     public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
 
     abstract public function getCategoryTypeAPI(): CategoryTypeAPIInterface;
