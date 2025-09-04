@@ -38,10 +38,7 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
      * @param array<string,mixed> $query
      * @return array<string|int>
      */
-    public function executeQueryIDs(array $query): array
-    {
-        return $this->executeQuery($query);
-    }
+    abstract public function executeQueryIDs(array $query): array;
 
     /**
      * @param array<string,mixed> $query_args
