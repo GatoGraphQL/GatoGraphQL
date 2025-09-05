@@ -13,6 +13,7 @@
                     "kind": "OBJECT",
                     "name": "MutationRoot",
                     "description": "Mutation type, starting from which mutations are executed",
+                    "isOneOf": false,
                     "fields": [],
                     "inputFields": null,
                     "interfaces": [],
@@ -23,6 +24,7 @@
                     "kind": "OBJECT",
                     "name": "QueryRoot",
                     "description": "Query type, starting from which the query is executed",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "globalID",
@@ -136,6 +138,7 @@
                     "kind": "OBJECT",
                     "name": "Root",
                     "description": "Root type, starting from which the query is executed",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "globalID",
@@ -249,6 +252,7 @@
                     "kind": "OBJECT",
                     "name": "_DirectiveExtensions",
                     "description": "Extensions (custom metadata) added to the directive",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "fieldDirectiveSupportedTypeNamesOrDescriptions",
@@ -344,6 +348,7 @@
                     "kind": "OBJECT",
                     "name": "_EnumValueExtensions",
                     "description": "Extensions (custom metadata) added to the enum value",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isSensitiveDataElement",
@@ -419,6 +424,7 @@
                     "kind": "OBJECT",
                     "name": "_FieldExtensions",
                     "description": "Extensions (custom metadata) added to the field",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isGlobal",
@@ -526,6 +532,7 @@
                     "kind": "OBJECT",
                     "name": "_InputValueExtensions",
                     "description": "Extensions (custom metadata) added to the input value",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isSensitiveDataElement",
@@ -601,6 +608,7 @@
                     "kind": "OBJECT",
                     "name": "_NamedTypeExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject)",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "elementName",
@@ -612,22 +620,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "isOneOf",
-                            "description": "`true` for OneOf Input Objects, `false` otherwise",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "Boolean!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             },
@@ -728,6 +720,7 @@
                     "kind": "OBJECT",
                     "name": "_SchemaExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL schema",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isNamespaced",
@@ -803,6 +796,7 @@
                     "kind": "OBJECT",
                     "name": "__Directive",
                     "description": "A GraphQL directive in the data graph",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "args",
@@ -1008,6 +1002,7 @@
                     "kind": "OBJECT",
                     "name": "__EnumValue",
                     "description": "Representation of an Enum value in GraphQL",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "deprecationReason",
@@ -1177,6 +1172,7 @@
                     "kind": "OBJECT",
                     "name": "__Field",
                     "description": "Representation of a GraphQL type's field",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "args",
@@ -1386,6 +1382,7 @@
                     "kind": "OBJECT",
                     "name": "__InputValue",
                     "description": "Representation of an input object in GraphQL",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "defaultValue",
@@ -1555,6 +1552,7 @@
                     "kind": "OBJECT",
                     "name": "__Schema",
                     "description": "Schema type, to implement the introspection fields",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "directives",
@@ -1837,6 +1835,7 @@
                     "kind": "OBJECT",
                     "name": "__Type",
                     "description": "Representation of each GraphQL type in the graph",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "description",
@@ -1997,6 +1996,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "isOneOf",
+                            "description": "`true` for OneOf Input Objects, `false` otherwise",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "kind",
                             "description": "Type's kind as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACqBBCvBAtrC)",
                             "args": [],
@@ -2132,6 +2147,7 @@
                     "kind": "SCALAR",
                     "name": "Boolean",
                     "description": "The Boolean scalar type represents `true` or `false`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2142,6 +2158,7 @@
                     "kind": "SCALAR",
                     "name": "ID",
                     "description": "The ID scalar type represents a unique identifier.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2152,6 +2169,7 @@
                     "kind": "SCALAR",
                     "name": "Int",
                     "description": "The Int scalar type represents non-fractional signed whole numeric values.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2162,6 +2180,7 @@
                     "kind": "SCALAR",
                     "name": "String",
                     "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2172,6 +2191,7 @@
                     "kind": "INTERFACE",
                     "name": "IdentifiableObject",
                     "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "globalID",
@@ -2256,6 +2276,7 @@
                     "kind": "ENUM",
                     "name": "DirectiveKindEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2279,6 +2300,7 @@
                     "kind": "ENUM",
                     "name": "DirectiveLocation",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2404,6 +2426,7 @@
                     "kind": "ENUM",
                     "name": "TypeKind",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,

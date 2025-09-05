@@ -384,12 +384,6 @@
                             }
                         },
                         {
-                            "name": "isOneOf",
-                            "type": {
-                                "name": "Boolean!"
-                            }
-                        },
-                        {
                             "name": "namespacedName",
                             "type": {
                                 "name": "String!"
@@ -735,6 +729,12 @@
                             "name": "interfaces",
                             "type": {
                                 "name": "[__Type!]"
+                            }
+                        },
+                        {
+                            "name": "isOneOf",
+                            "type": {
+                                "name": "Boolean!"
                             }
                         },
                         {
