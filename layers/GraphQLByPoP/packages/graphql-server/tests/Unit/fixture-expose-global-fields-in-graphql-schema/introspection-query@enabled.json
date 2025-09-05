@@ -13,7 +13,6 @@
                     "kind": "OBJECT",
                     "name": "MutationRoot",
                     "description": "Mutation type, starting from which mutations are executed",
-                    "isOneOf": false,
                     "fields": [],
                     "inputFields": null,
                     "interfaces": [],
@@ -24,7 +23,6 @@
                     "kind": "OBJECT",
                     "name": "QueryRoot",
                     "description": "Query type, starting from which the query is executed",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "globalID",
@@ -33,9 +31,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -49,9 +49,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -65,9 +67,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "QueryRoot!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "QueryRoot",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -81,9 +85,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -97,9 +103,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -113,9 +121,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -128,6 +138,7 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ],
@@ -138,7 +149,6 @@
                     "kind": "OBJECT",
                     "name": "Root",
                     "description": "Root type, starting from which the query is executed",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "globalID",
@@ -147,9 +157,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -163,9 +175,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -179,9 +193,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Root!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "Root",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -195,9 +211,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -211,9 +229,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -227,9 +247,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -242,6 +264,7 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ],
@@ -252,7 +275,6 @@
                     "kind": "OBJECT",
                     "name": "_DirectiveExtensions",
                     "description": "Extensions (custom metadata) added to the directive",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "fieldDirectiveSupportedTypeNamesOrDescriptions",
@@ -261,12 +283,15 @@
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String!]",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "NON_NULL",
                                     "name": "String!",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "SCALAR",
                                         "name": "String",
+                                        "isOneOf": false,
                                         "ofType": null
                                     }
                                 }
@@ -281,9 +306,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -297,9 +324,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -313,9 +342,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -329,9 +360,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -348,7 +381,6 @@
                     "kind": "OBJECT",
                     "name": "_EnumValueExtensions",
                     "description": "Extensions (custom metadata) added to the enum value",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isSensitiveDataElement",
@@ -357,9 +389,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -373,9 +407,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -389,9 +425,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -405,9 +443,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -424,7 +464,6 @@
                     "kind": "OBJECT",
                     "name": "_FieldExtensions",
                     "description": "Extensions (custom metadata) added to the field",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isGlobal",
@@ -433,9 +472,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -449,9 +490,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -465,9 +508,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -481,9 +526,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -497,9 +544,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -513,9 +562,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -532,7 +583,6 @@
                     "kind": "OBJECT",
                     "name": "_InputValueExtensions",
                     "description": "Extensions (custom metadata) added to the input value",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isSensitiveDataElement",
@@ -541,9 +591,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -557,9 +609,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -573,9 +627,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -589,9 +645,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -608,7 +666,6 @@
                     "kind": "OBJECT",
                     "name": "_NamedTypeExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject)",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "elementName",
@@ -617,9 +674,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -633,9 +692,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -649,12 +710,15 @@
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String!]",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "NON_NULL",
                                     "name": "String!",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "SCALAR",
                                         "name": "String",
+                                        "isOneOf": false,
                                         "ofType": null
                                     }
                                 }
@@ -669,9 +733,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -685,9 +751,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -701,9 +769,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -720,7 +790,6 @@
                     "kind": "OBJECT",
                     "name": "_SchemaExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL schema",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isNamespaced",
@@ -729,9 +798,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -745,9 +816,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -761,9 +834,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -777,9 +852,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -796,7 +873,6 @@
                     "kind": "OBJECT",
                     "name": "__Directive",
                     "description": "A GraphQL directive in the data graph",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "args",
@@ -805,15 +881,19 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "[__InputValue!]!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "LIST",
                                     "name": "[__InputValue!]",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "NON_NULL",
                                         "name": "__InputValue!",
+                                        "isOneOf": false,
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "__InputValue",
+                                            "isOneOf": false,
                                             "ofType": null
                                         }
                                     }
@@ -829,6 +909,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -841,9 +922,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "_DirectiveExtensions!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "_DirectiveExtensions",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -857,9 +940,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -873,9 +958,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -889,9 +976,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -905,15 +994,19 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "[DirectiveLocation!]!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "LIST",
                                     "name": "[DirectiveLocation!]",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "NON_NULL",
                                         "name": "DirectiveLocation!",
+                                        "isOneOf": false,
                                         "ofType": {
                                             "kind": "ENUM",
                                             "name": "DirectiveLocation",
+                                            "isOneOf": false,
                                             "ofType": null
                                         }
                                     }
@@ -929,9 +1022,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -945,9 +1040,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -961,9 +1058,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -977,9 +1076,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -992,6 +1093,7 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ],
@@ -1002,7 +1104,6 @@
                     "kind": "OBJECT",
                     "name": "__EnumValue",
                     "description": "Representation of an Enum value in GraphQL",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "deprecationReason",
@@ -1011,6 +1112,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1023,6 +1125,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1035,9 +1138,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "_EnumValueExtensions!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "_EnumValueExtensions",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1051,9 +1156,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1067,9 +1174,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1083,9 +1192,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1099,9 +1210,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1115,9 +1228,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1131,9 +1246,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1147,9 +1264,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1162,6 +1281,7 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ],
@@ -1172,7 +1292,6 @@
                     "kind": "OBJECT",
                     "name": "__Field",
                     "description": "Representation of a GraphQL type's field",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "args",
@@ -1181,15 +1300,19 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "[__InputValue!]!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "LIST",
                                     "name": "[__InputValue!]",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "NON_NULL",
                                         "name": "__InputValue!",
+                                        "isOneOf": false,
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "__InputValue",
+                                            "isOneOf": false,
                                             "ofType": null
                                         }
                                     }
@@ -1205,6 +1328,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1217,6 +1341,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1229,9 +1354,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "_FieldExtensions!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "_FieldExtensions",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1245,9 +1372,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1261,9 +1390,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1277,9 +1408,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1293,9 +1426,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1309,9 +1444,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "__Type!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "__Type",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1325,9 +1462,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1341,9 +1480,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1357,9 +1498,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1372,6 +1515,7 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ],
@@ -1382,7 +1526,6 @@
                     "kind": "OBJECT",
                     "name": "__InputValue",
                     "description": "Representation of an input object in GraphQL",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "defaultValue",
@@ -1391,6 +1534,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1403,6 +1547,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1415,9 +1560,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "_InputValueExtensions!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "_InputValueExtensions",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1431,9 +1578,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1447,9 +1596,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1463,9 +1614,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1479,9 +1632,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "__Type!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "__Type",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1495,9 +1650,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1511,9 +1668,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1527,9 +1686,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1542,6 +1703,7 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ],
@@ -1552,7 +1714,6 @@
                     "kind": "OBJECT",
                     "name": "__Schema",
                     "description": "Schema type, to implement the introspection fields",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "directives",
@@ -1564,12 +1725,15 @@
                                     "type": {
                                         "kind": "LIST",
                                         "name": "[DirectiveKindEnum!]",
+                                        "isOneOf": false,
                                         "ofType": {
                                             "kind": "NON_NULL",
                                             "name": "DirectiveKindEnum!",
+                                            "isOneOf": false,
                                             "ofType": {
                                                 "kind": "ENUM",
                                                 "name": "DirectiveKindEnum",
+                                                "isOneOf": false,
                                                 "ofType": null
                                             }
                                         }
@@ -1580,15 +1744,19 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "[__Directive!]!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "LIST",
                                     "name": "[__Directive!]",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "NON_NULL",
                                         "name": "__Directive!",
+                                        "isOneOf": false,
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "__Directive",
+                                            "isOneOf": false,
                                             "ofType": null
                                         }
                                     }
@@ -1604,9 +1772,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "_SchemaExtensions!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "_SchemaExtensions",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1623,6 +1793,7 @@
                                     "type": {
                                         "kind": "SCALAR",
                                         "name": "Boolean",
+                                        "isOneOf": false,
                                         "ofType": null
                                     },
                                     "defaultValue": "false"
@@ -1631,15 +1802,19 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "[__Field!]!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "LIST",
                                     "name": "[__Field!]",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "NON_NULL",
                                         "name": "__Field!",
+                                        "isOneOf": false,
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "__Field",
+                                            "isOneOf": false,
                                             "ofType": null
                                         }
                                     }
@@ -1655,9 +1830,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1671,9 +1848,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1687,6 +1866,7 @@
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "__Type",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1699,9 +1879,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "__Type!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "OBJECT",
                                     "name": "__Type",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1715,6 +1897,7 @@
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "__Type",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1730,9 +1913,11 @@
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": "String!",
+                                        "isOneOf": false,
                                         "ofType": {
                                             "kind": "SCALAR",
                                             "name": "String",
+                                            "isOneOf": false,
                                             "ofType": null
                                         }
                                     },
@@ -1742,6 +1927,7 @@
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "__Type",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1754,15 +1940,19 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "[__Type!]!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "LIST",
                                     "name": "[__Type!]",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "NON_NULL",
                                         "name": "__Type!",
+                                        "isOneOf": false,
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "__Type",
+                                            "isOneOf": false,
                                             "ofType": null
                                         }
                                     }
@@ -1778,9 +1968,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1794,9 +1986,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1810,9 +2004,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1825,6 +2021,7 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ],
@@ -1835,7 +2032,6 @@
                     "kind": "OBJECT",
                     "name": "__Type",
                     "description": "Representation of each GraphQL type in the graph",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "description",
@@ -1844,6 +2040,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1859,6 +2056,7 @@
                                     "type": {
                                         "kind": "SCALAR",
                                         "name": "Boolean",
+                                        "isOneOf": false,
                                         "ofType": null
                                     },
                                     "defaultValue": "false"
@@ -1867,12 +2065,15 @@
                             "type": {
                                 "kind": "LIST",
                                 "name": "[__EnumValue!]",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "NON_NULL",
                                     "name": "__EnumValue!",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "OBJECT",
                                         "name": "__EnumValue",
+                                        "isOneOf": false,
                                         "ofType": null
                                     }
                                 }
@@ -1887,6 +2088,7 @@
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "_NamedTypeExtensions",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -1902,6 +2104,7 @@
                                     "type": {
                                         "kind": "SCALAR",
                                         "name": "Boolean",
+                                        "isOneOf": false,
                                         "ofType": null
                                     },
                                     "defaultValue": "false"
@@ -1910,12 +2113,15 @@
                             "type": {
                                 "kind": "LIST",
                                 "name": "[__Field!]",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "NON_NULL",
                                     "name": "__Field!",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "OBJECT",
                                         "name": "__Field",
+                                        "isOneOf": false,
                                         "ofType": null
                                     }
                                 }
@@ -1930,9 +2136,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1946,9 +2154,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -1962,12 +2172,15 @@
                             "type": {
                                 "kind": "LIST",
                                 "name": "[__InputValue!]",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "NON_NULL",
                                     "name": "__InputValue!",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "OBJECT",
                                         "name": "__InputValue",
+                                        "isOneOf": false,
                                         "ofType": null
                                     }
                                 }
@@ -1982,12 +2195,15 @@
                             "type": {
                                 "kind": "LIST",
                                 "name": "[__Type!]",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "NON_NULL",
                                     "name": "__Type!",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "OBJECT",
                                         "name": "__Type",
+                                        "isOneOf": false,
                                         "ofType": null
                                     }
                                 }
@@ -2002,9 +2218,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -2018,9 +2236,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "TypeKind!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "ENUM",
                                     "name": "TypeKind",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -2034,6 +2254,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -2046,6 +2267,7 @@
                             "type": {
                                 "kind": "OBJECT",
                                 "name": "__Type",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -2058,12 +2280,15 @@
                             "type": {
                                 "kind": "LIST",
                                 "name": "[__Type!]",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "NON_NULL",
                                     "name": "__Type!",
+                                    "isOneOf": false,
                                     "ofType": {
                                         "kind": "OBJECT",
                                         "name": "__Type",
+                                        "isOneOf": false,
                                         "ofType": null
                                     }
                                 }
@@ -2078,6 +2303,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "isDeprecated": false,
@@ -2090,9 +2316,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -2106,9 +2334,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -2122,9 +2352,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "String!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -2137,6 +2369,7 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ],
@@ -2147,7 +2380,6 @@
                     "kind": "SCALAR",
                     "name": "Boolean",
                     "description": "The Boolean scalar type represents `true` or `false`.",
-                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2158,7 +2390,6 @@
                     "kind": "SCALAR",
                     "name": "ID",
                     "description": "The ID scalar type represents a unique identifier.",
-                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2169,7 +2400,6 @@
                     "kind": "SCALAR",
                     "name": "Int",
                     "description": "The Int scalar type represents non-fractional signed whole numeric values.",
-                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2180,7 +2410,6 @@
                     "kind": "SCALAR",
                     "name": "String",
                     "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
-                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2191,7 +2420,6 @@
                     "kind": "INTERFACE",
                     "name": "IdentifiableObject",
                     "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'",
-                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "globalID",
@@ -2200,9 +2428,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -2216,9 +2446,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "ID!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "ID",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -2233,41 +2465,49 @@
                         {
                             "kind": "OBJECT",
                             "name": "QueryRoot",
+                            "isOneOf": false,
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
                             "name": "Root",
+                            "isOneOf": false,
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
                             "name": "__Directive",
+                            "isOneOf": false,
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
                             "name": "__EnumValue",
+                            "isOneOf": false,
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
                             "name": "__Field",
+                            "isOneOf": false,
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
                             "name": "__InputValue",
+                            "isOneOf": false,
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
                             "name": "__Schema",
+                            "isOneOf": false,
                             "ofType": null
                         },
                         {
                             "kind": "OBJECT",
                             "name": "__Type",
+                            "isOneOf": false,
                             "ofType": null
                         }
                     ]
@@ -2276,7 +2516,6 @@
                     "kind": "ENUM",
                     "name": "DirectiveKindEnum",
                     "description": null,
-                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2300,7 +2539,6 @@
                     "kind": "ENUM",
                     "name": "DirectiveLocation",
                     "description": null,
-                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2426,7 +2664,6 @@
                     "kind": "ENUM",
                     "name": "TypeKind",
                     "description": null,
-                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -2497,6 +2734,7 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "Int",
+                                "isOneOf": false,
                                 "ofType": null
                             },
                             "defaultValue": null
@@ -2518,9 +2756,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
@@ -2543,9 +2783,11 @@
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
+                                "isOneOf": false,
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "Boolean",
+                                    "isOneOf": false,
                                     "ofType": null
                                 }
                             },
