@@ -27,7 +27,6 @@ fragment FullType on __Type {
     kind
     name
     description
-    isOneOf
     fields(includeDeprecated: true) {
         name
         description
