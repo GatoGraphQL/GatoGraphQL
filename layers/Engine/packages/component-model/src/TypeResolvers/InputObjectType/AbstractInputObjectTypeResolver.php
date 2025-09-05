@@ -586,6 +586,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             $this->getConsolidatedInputFieldDefaultValue($inputFieldName),
             $this->getConsolidatedInputFieldTypeModifiers($inputFieldName),
         );
+
         $inputFieldSchemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getConsolidatedInputFieldExtensionsSchemaDefinition($inputFieldName);
         $this->schemaDefinitionForInputFieldCache[$inputFieldName] = $inputFieldSchemaDefinition;
         return $this->schemaDefinitionForInputFieldCache[$inputFieldName];

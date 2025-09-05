@@ -68,27 +68,35 @@ fragment InputValue on __InputValue {
 fragment TypeRef on __Type {
     kind
     name
+    isOneOf
     ofType {
         kind
         name
+        isOneOf
         ofType {
             kind
             name
+            isOneOf
             ofType {
                 kind
                 name
+                isOneOf
                 ofType {
                     kind
                     name
+                    isOneOf
                     ofType {
                         kind
                         name
+                        isOneOf
                         ofType {
                             kind
                             name
+                            isOneOf
                             ofType {
                                 kind
                                 name
+                                isOneOf
                             }
                         }
                     }

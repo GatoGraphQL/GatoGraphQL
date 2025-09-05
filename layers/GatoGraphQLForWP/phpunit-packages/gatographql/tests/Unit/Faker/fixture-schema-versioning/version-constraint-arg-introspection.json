@@ -144,10 +144,6 @@
                             "args": []
                         },
                         {
-                            "name": "isOneOf",
-                            "args": []
-                        },
-                        {
                             "name": "namespacedName",
                             "args": []
                         },
@@ -414,6 +410,10 @@
                         },
                         {
                             "name": "interfaces",
+                            "args": []
+                        },
+                        {
+                            "name": "isOneOf",
                             "args": []
                         },
                         {
