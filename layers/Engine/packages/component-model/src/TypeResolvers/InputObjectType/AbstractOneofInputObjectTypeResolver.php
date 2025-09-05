@@ -9,7 +9,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
 /**
- * Oneof InputObject Type, as proposed for the GraphQL spec:
+ * Oneof InputObject Type
  *
  * @see https://github.com/graphql/graphql-spec/pull/825
  */
