@@ -13,6 +13,7 @@
                     "kind": "OBJECT",
                     "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
                     "description": "Error payload for: \"Access to the meta key is not allowed\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -46,6 +47,7 @@
                     "kind": "OBJECT",
                     "name": "CategoryTermDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested category does not exist\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -79,6 +81,7 @@
                     "kind": "OBJECT",
                     "name": "Comment",
                     "description": "Comments added to custom posts",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "approved",
@@ -631,6 +634,7 @@
                     "kind": "OBJECT",
                     "name": "CommentAuthorEmailIsMissingErrorPayload",
                     "description": "Error payload for: \"The comment's author email is missing\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -664,6 +668,7 @@
                     "kind": "OBJECT",
                     "name": "CommentAuthorNameIsMissingErrorPayload",
                     "description": "Error payload for: \"The comment's author name is missing\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -697,6 +702,7 @@
                     "kind": "OBJECT",
                     "name": "CommentDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The comment does not exist\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -730,6 +736,7 @@
                     "kind": "OBJECT",
                     "name": "CommentParentCommentDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The comment's parent does not exist\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -763,6 +770,7 @@
                     "kind": "OBJECT",
                     "name": "CommentsAreNotOpenForCustomPostErrorPayload",
                     "description": "Error payload for: \"Comments are not open for the custom post\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -796,6 +804,7 @@
                     "kind": "OBJECT",
                     "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
                     "description": "Error payload for: \"Comments are not supported by the custom post type\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -829,6 +838,7 @@
                     "kind": "OBJECT",
                     "name": "CustomPostAncestorRecursionErrorPayload",
                     "description": "Error payload for: \"The custom post is an ancestor of itself\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -862,6 +872,7 @@
                     "kind": "OBJECT",
                     "name": "CustomPostDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested custom post does not exist\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -895,6 +906,7 @@
                     "kind": "OBJECT",
                     "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
                     "description": "Error payload for: \"The requested custom post does not have the expected type\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -928,6 +940,7 @@
                     "kind": "OBJECT",
                     "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
                     "description": "Error payload for: \"The taxonomy term already has the single meta entry\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -961,6 +974,7 @@
                     "kind": "OBJECT",
                     "name": "EntityMetaEntryAlreadyHasValueErrorPayload",
                     "description": "Error payload for: \"The taxonomy term already has the meta entry with the provided update value\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -994,6 +1008,7 @@
                     "kind": "OBJECT",
                     "name": "EntityMetaKeyDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The taxonomy term doesn't have a meta entry with that key\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -1027,6 +1042,7 @@
                     "kind": "OBJECT",
                     "name": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The taxonomy term doesn't have a meta entry with that key\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -1060,6 +1076,7 @@
                     "kind": "OBJECT",
                     "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
                     "description": "Error payload for: \"Setting the featured image is not supported by the custom post type\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -1093,6 +1110,7 @@
                     "kind": "OBJECT",
                     "name": "GeneralBlock",
                     "description": "Representation of a Block that works for all blocks, retrieving the block attributes as a non-strictly-typed JSON object",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "attributes",
@@ -1174,6 +1192,7 @@
                     "kind": "OBJECT",
                     "name": "GenericCategory",
                     "description": "A category that does not have its own type in the schema",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "ancestors",
@@ -1612,6 +1631,7 @@
                     "kind": "OBJECT",
                     "name": "GenericCustomPost",
                     "description": "A custom post that does not have its own type in the schema",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "ancestors",
@@ -2949,6 +2969,7 @@
                     "kind": "OBJECT",
                     "name": "GenericErrorPayload",
                     "description": "Generic error payload",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "code",
@@ -3006,6 +3027,7 @@
                     "kind": "OBJECT",
                     "name": "GenericTag",
                     "description": "A tag that does not have its own type in the schema",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "count",
@@ -3400,6 +3422,7 @@
                     "kind": "OBJECT",
                     "name": "InvalidUserEmailErrorPayload",
                     "description": "Error payload for: \"No user is registered with the provided email\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3433,6 +3456,7 @@
                     "kind": "OBJECT",
                     "name": "InvalidUsernameErrorPayload",
                     "description": "Error payload for: \"No user is registered with the provided username\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3466,6 +3490,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to assign terms to a taxonomy\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3499,6 +3524,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to delete a taxonomy term\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3532,6 +3558,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3565,6 +3592,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
                     "description": "Error payload for: \"The user cannot edit media items\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3598,6 +3626,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit pages\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3631,6 +3660,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit taxonomy terms\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3664,6 +3694,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit the comment\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3697,6 +3728,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit the requested custom post\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3730,6 +3762,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
                     "description": "Error payload for: \"The user has no permission to edit the media item\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3763,6 +3796,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit the user\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3796,6 +3830,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to publish custom posts\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3829,6 +3864,7 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to publish pages\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -3862,6 +3898,7 @@
                     "kind": "OBJECT",
                     "name": "Media",
                     "description": "Media elements (such as images, videos, etc), attached to a post or independent",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "altText",
@@ -4495,6 +4532,7 @@
                     "kind": "OBJECT",
                     "name": "MediaItemDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested media item does not exist\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -4528,6 +4566,7 @@
                     "kind": "OBJECT",
                     "name": "Menu",
                     "description": "Representation of a navigation menu",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "count",
@@ -4720,6 +4759,7 @@
                     "kind": "OBJECT",
                     "name": "MenuItem",
                     "description": "Items (links, pages, etc) added to a menu",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "children",
@@ -4945,6 +4985,7 @@
                     "kind": "OBJECT",
                     "name": "MutationRoot",
                     "description": "Mutation type, starting from which mutations are executed",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "addCategoryMeta",
@@ -10155,6 +10196,7 @@
                     "kind": "OBJECT",
                     "name": "Page",
                     "description": "Representation of a page",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "ancestors",
@@ -11158,6 +11200,7 @@
                     "kind": "OBJECT",
                     "name": "PasswordIsIncorrectErrorPayload",
                     "description": "Error payload for: \"The password is incorrect\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -11191,6 +11234,7 @@
                     "kind": "OBJECT",
                     "name": "Post",
                     "description": "Representation of a post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "areCommentsOpen",
@@ -12470,6 +12514,7 @@
                     "kind": "OBJECT",
                     "name": "PostCategory",
                     "description": "Representation of a category, added to a post (taxonomy: \"category\")",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "ancestors",
@@ -13045,6 +13090,7 @@
                     "kind": "OBJECT",
                     "name": "PostTag",
                     "description": "Representation of a tag, added to a post (taxonomy: \"post_tag\")",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "count",
@@ -13439,6 +13485,7 @@
                     "kind": "OBJECT",
                     "name": "QueryRoot",
                     "description": "Query type, starting from which the query is executed",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "capabilities",
@@ -16246,6 +16293,7 @@
                     "kind": "OBJECT",
                     "name": "Root",
                     "description": "Root type, starting from which the query is executed",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "addCategoryMeta",
@@ -24252,6 +24300,7 @@
                     "kind": "OBJECT",
                     "name": "RootAddCommentMetaMutationPayload",
                     "description": "Payload of adding meta to a comment",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "comment",
@@ -24323,6 +24372,7 @@
                     "kind": "OBJECT",
                     "name": "RootAddCommentToCustomPostMutationPayload",
                     "description": "Payload of adding a comment to a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "comment",
@@ -24394,6 +24444,7 @@
                     "kind": "OBJECT",
                     "name": "RootAddGenericCategoryTermMetaMutationPayload",
                     "description": "Payload of adding meta to a category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -24465,6 +24516,7 @@
                     "kind": "OBJECT",
                     "name": "RootAddGenericCustomPostMetaMutationPayload",
                     "description": "Payload of adding meta to a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -24536,6 +24588,7 @@
                     "kind": "OBJECT",
                     "name": "RootAddGenericTagTermMetaMutationPayload",
                     "description": "Payload of adding meta to a tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -24607,6 +24660,7 @@
                     "kind": "OBJECT",
                     "name": "RootAddPostCategoryTermMetaMutationPayload",
                     "description": "Payload of adding meta to a posts's category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -24678,6 +24732,7 @@
                     "kind": "OBJECT",
                     "name": "RootAddPostTagTermMetaMutationPayload",
                     "description": "Payload of adding meta to a posts's tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -24749,6 +24804,7 @@
                     "kind": "OBJECT",
                     "name": "RootAddUserMetaMutationPayload",
                     "description": "Payload of adding meta to a user",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -24820,6 +24876,7 @@
                     "kind": "OBJECT",
                     "name": "RootCreateCustomPostMutationPayload",
                     "description": "Payload of creating a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -24891,6 +24948,7 @@
                     "kind": "OBJECT",
                     "name": "RootCreateGenericCategoryTermMutationPayload",
                     "description": "Payload of creating a category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -24962,6 +25020,7 @@
                     "kind": "OBJECT",
                     "name": "RootCreateGenericTagTermMutationPayload",
                     "description": "Payload of creating a tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25033,6 +25092,7 @@
                     "kind": "OBJECT",
                     "name": "RootCreateMediaItemMutationPayload",
                     "description": "Payload of uploading an attachment",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25104,6 +25164,7 @@
                     "kind": "OBJECT",
                     "name": "RootCreatePageMutationPayload",
                     "description": "Payload of creating a page",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25175,6 +25236,7 @@
                     "kind": "OBJECT",
                     "name": "RootCreatePostCategoryTermMutationPayload",
                     "description": "Payload of creating a post category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -25246,6 +25308,7 @@
                     "kind": "OBJECT",
                     "name": "RootCreatePostMutationPayload",
                     "description": "Payload of creating a post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25317,6 +25380,7 @@
                     "kind": "OBJECT",
                     "name": "RootCreatePostTagTermMutationPayload",
                     "description": "Payload of creating a post tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25388,6 +25452,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeleteCommentMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a comment",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "comment",
@@ -25459,6 +25524,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeleteGenericCategoryTermMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -25530,6 +25596,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeleteGenericCategoryTermMutationPayload",
                     "description": "Payload of executing a delete mutation on a category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25577,6 +25644,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeleteGenericCustomPostMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -25648,6 +25716,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeleteGenericTagTermMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25719,6 +25788,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeleteGenericTagTermMutationPayload",
                     "description": "Payload of executing a delete mutation on a tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25766,6 +25836,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeletePostCategoryTermMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a post's category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -25837,6 +25908,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeletePostCategoryTermMutationPayload",
                     "description": "Payload of executing a delete mutation on a post category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25884,6 +25956,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeletePostTagTermMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a post's tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -25955,6 +26028,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeletePostTagTermMutationPayload",
                     "description": "Payload of executing a delete mutation on a post tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -26002,6 +26076,7 @@
                     "kind": "OBJECT",
                     "name": "RootDeleteUserMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a user",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -26073,6 +26148,7 @@
                     "kind": "OBJECT",
                     "name": "RootLoginUserMutationPayload",
                     "description": "Payload of logging the user in",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -26144,6 +26220,7 @@
                     "kind": "OBJECT",
                     "name": "RootLogoutUserMutationPayload",
                     "description": "Payload of logging the user out",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -26215,6 +26292,7 @@
                     "kind": "OBJECT",
                     "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
                     "description": "Payload of removing the featured image from a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -26286,6 +26364,7 @@
                     "kind": "OBJECT",
                     "name": "RootReplyCommentMutationPayload",
                     "description": "Payload of replying to a comment",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "comment",
@@ -26357,6 +26436,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetCategoriesOnCustomPostMutationPayload",
                     "description": "Payload of setting categories on a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -26428,6 +26508,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetCategoriesOnPostMutationPayload",
                     "description": "Payload of setting categories on a post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -26499,6 +26580,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetCommentMetaMutationPayload",
                     "description": "Payload of executing a set meta mutation on a comment",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "comment",
@@ -26570,6 +26652,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
                     "description": "Payload of setting the featured image to a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -26641,6 +26724,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetGenericCategoryTermMetaMutationPayload",
                     "description": "Payload of executing a set meta mutation on a category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -26712,6 +26796,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetGenericCustomPostMetaMutationPayload",
                     "description": "Payload of executing a set meta mutation on a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -26783,6 +26868,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetGenericTagTermMetaMutationPayload",
                     "description": "Payload of executing a set meta mutation on a tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -26854,6 +26940,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetPostCategoryTermMetaMutationPayload",
                     "description": "Payload of executing a set meta mutation on a post's category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -26925,6 +27012,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetPostTagTermMetaMutationPayload",
                     "description": "Payload of executing a set meta mutation on a post's tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -26996,6 +27084,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetTagsOnCustomPostMutationPayload",
                     "description": "Payload of setting tags on a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -27067,6 +27156,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetTagsOnPostMutationPayload",
                     "description": "Payload of setting tags on a post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -27138,6 +27228,7 @@
                     "kind": "OBJECT",
                     "name": "RootSetUserMetaMutationPayload",
                     "description": "Payload of executing a set meta mutation on a user",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -27209,6 +27300,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateCommentMetaMutationPayload",
                     "description": "Payload of executing an update meta mutation on a comment",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "comment",
@@ -27280,6 +27372,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateCustomPostMutationPayload",
                     "description": "Payload of executing an update mutation on a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -27351,6 +27444,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateGenericCategoryTermMetaMutationPayload",
                     "description": "Payload of executing an update meta mutation on a category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -27422,6 +27516,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateGenericCategoryTermMutationPayload",
                     "description": "Payload of executing an update mutation on a category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -27493,6 +27588,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateGenericCustomPostMetaMutationPayload",
                     "description": "Payload of executing an update meta mutation on a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "customPost",
@@ -27564,6 +27660,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateGenericTagTermMetaMutationPayload",
                     "description": "Payload of executing an update meta mutation on a tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -27635,6 +27732,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateGenericTagTermMutationPayload",
                     "description": "Payload of executing an update mutation on a tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -27706,6 +27804,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateMediaItemMutationPayload",
                     "description": "Payload of updating the metadata for an attachment",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -27777,6 +27876,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdatePageMutationPayload",
                     "description": "Payload of executing an update mutation on a page",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -27848,6 +27948,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdatePostCategoryTermMetaMutationPayload",
                     "description": "Payload of executing an update meta mutation on a post's category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -27919,6 +28020,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdatePostCategoryTermMutationPayload",
                     "description": "Payload of executing an update mutation on a post category term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "category",
@@ -27990,6 +28092,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdatePostMutationPayload",
                     "description": "Payload of executing an update mutation on a post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -28061,6 +28164,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdatePostTagTermMetaMutationPayload",
                     "description": "Payload of executing an update meta mutation on a post's tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -28132,6 +28236,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdatePostTagTermMutationPayload",
                     "description": "Payload of executing an update mutation on a post tag term",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -28203,6 +28308,7 @@
                     "kind": "OBJECT",
                     "name": "RootUpdateUserMetaMutationPayload",
                     "description": "Payload of executing an update meta mutation on a user",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "errors",
@@ -28274,6 +28380,7 @@
                     "kind": "OBJECT",
                     "name": "TagTermDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested tag does not exist\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -28307,6 +28414,7 @@
                     "kind": "OBJECT",
                     "name": "TaxonomyIsNotValidErrorPayload",
                     "description": "Error payload for: \"The requested taxonomy does not exist\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -28340,6 +28448,7 @@
                     "kind": "OBJECT",
                     "name": "User",
                     "description": "Representation of a user",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "avatar",
@@ -29189,6 +29298,7 @@
                     "kind": "OBJECT",
                     "name": "UserAvatar",
                     "description": "User avatar",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "globalID",
@@ -29286,6 +29396,7 @@
                     "kind": "OBJECT",
                     "name": "UserDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The user does not exist\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -29319,6 +29430,7 @@
                     "kind": "OBJECT",
                     "name": "UserHasNoPermissionToUploadFilesErrorPayload",
                     "description": "Error payload for: \"The user has no permission to upload files\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -29352,6 +29464,7 @@
                     "kind": "OBJECT",
                     "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
                     "description": "Error payload for: \"The user has no permission to upload files for other users\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -29385,6 +29498,7 @@
                     "kind": "OBJECT",
                     "name": "UserIsLoggedInErrorPayload",
                     "description": "Error payload for: \"The user is already logged-in\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -29418,6 +29532,7 @@
                     "kind": "OBJECT",
                     "name": "UserIsNotLoggedInErrorPayload",
                     "description": "Error payload for: \"The user is not logged-in\"",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -29451,6 +29566,7 @@
                     "kind": "OBJECT",
                     "name": "UserRole",
                     "description": "User roles",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "capabilities",
@@ -29556,6 +29672,7 @@
                     "kind": "OBJECT",
                     "name": "_DirectiveExtensions",
                     "description": "Extensions (custom metadata) added to the directive",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "fieldDirectiveSupportedTypeNamesOrDescriptions",
@@ -29603,6 +29720,7 @@
                     "kind": "OBJECT",
                     "name": "_EnumValueExtensions",
                     "description": "Extensions (custom metadata) added to the enum value",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isSensitiveDataElement",
@@ -29630,6 +29748,7 @@
                     "kind": "OBJECT",
                     "name": "_FieldExtensions",
                     "description": "Extensions (custom metadata) added to the field",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isGlobal",
@@ -29689,6 +29808,7 @@
                     "kind": "OBJECT",
                     "name": "_InputValueExtensions",
                     "description": "Extensions (custom metadata) added to the input value",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isSensitiveDataElement",
@@ -29716,6 +29836,7 @@
                     "kind": "OBJECT",
                     "name": "_NamedTypeExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject)",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "elementName",
@@ -29727,22 +29848,6 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "String",
-                                    "ofType": null
-                                }
-                            },
-                            "isDeprecated": false,
-                            "deprecationReason": null
-                        },
-                        {
-                            "name": "isOneOf",
-                            "description": "`true` for OneOf Input Objects, `false` otherwise",
-                            "args": [],
-                            "type": {
-                                "kind": "NON_NULL",
-                                "name": "Boolean!",
-                                "ofType": {
-                                    "kind": "SCALAR",
-                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             },
@@ -29795,6 +29900,7 @@
                     "kind": "OBJECT",
                     "name": "_SchemaExtensions",
                     "description": "Extensions (custom metadata) added to the GraphQL schema",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "isNamespaced",
@@ -29822,6 +29928,7 @@
                     "kind": "OBJECT",
                     "name": "__Directive",
                     "description": "A GraphQL directive in the data graph",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "args",
@@ -29979,6 +30086,7 @@
                     "kind": "OBJECT",
                     "name": "__EnumValue",
                     "description": "Representation of an Enum value in GraphQL",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "deprecationReason",
@@ -30100,6 +30208,7 @@
                     "kind": "OBJECT",
                     "name": "__Field",
                     "description": "Representation of a GraphQL type's field",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "args",
@@ -30261,6 +30370,7 @@
                     "kind": "OBJECT",
                     "name": "__InputValue",
                     "description": "Representation of an input object in GraphQL",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "defaultValue",
@@ -30382,6 +30492,7 @@
                     "kind": "OBJECT",
                     "name": "__Schema",
                     "description": "Schema type, to implement the introspection fields",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "directives",
@@ -30616,6 +30727,7 @@
                     "kind": "OBJECT",
                     "name": "__Type",
                     "description": "Representation of each GraphQL type in the graph",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "description",
@@ -30776,6 +30888,22 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "isOneOf",
+                            "description": "`true` for OneOf Input Objects, `false` otherwise",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "kind",
                             "description": "Type's kind as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACqBBCvBAtrC)",
                             "args": [],
@@ -30863,6 +30991,7 @@
                     "kind": "SCALAR",
                     "name": "AnyBuiltInScalar",
                     "description": "Wildcard type representing any of GraphQL's built-in types (String, Int, Boolean, Float or ID)",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30873,6 +31002,7 @@
                     "kind": "SCALAR",
                     "name": "AnyScalar",
                     "description": "Wildcard type representing any of GraphQL's scalar types, including built-in types (String, Int, Boolean, Float or ID) and custom types",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30883,6 +31013,7 @@
                     "kind": "SCALAR",
                     "name": "Boolean",
                     "description": "The Boolean scalar type represents `true` or `false`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30893,6 +31024,7 @@
                     "kind": "SCALAR",
                     "name": "CategoryTaxonomyEnumString",
                     "description": "Category taxonomies (available for querying via the API), with possible values: `\"additional-dummy-category\"`, `\"additional-post-category\"`, `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30903,6 +31035,7 @@
                     "kind": "SCALAR",
                     "name": "CustomPostEnumString",
                     "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`, `\"wp_block\"`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30913,6 +31046,7 @@
                     "kind": "SCALAR",
                     "name": "DangerouslyNonSpecificScalar",
                     "description": "Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`).",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30923,6 +31057,7 @@
                     "kind": "SCALAR",
                     "name": "Date",
                     "description": "Date scalar. It follows the ISO 8601 specification, with format \"Y-m-d\")",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30933,6 +31068,7 @@
                     "kind": "SCALAR",
                     "name": "DateTime",
                     "description": "DateTime scalar. It follows the ISO 8601 specification, with format \"Y-m-d\\TH:i:sP\")",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30943,6 +31079,7 @@
                     "kind": "SCALAR",
                     "name": "Email",
                     "description": "Email scalar, such as leo@mysite.com",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30953,6 +31090,7 @@
                     "kind": "SCALAR",
                     "name": "HTML",
                     "description": "HTML scalar, such as \"<p>Hello <strong>world<\/strong>!<\/p>\"",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30963,6 +31101,7 @@
                     "kind": "SCALAR",
                     "name": "ID",
                     "description": "The ID scalar type represents a unique identifier.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30973,6 +31112,7 @@
                     "kind": "SCALAR",
                     "name": "Int",
                     "description": "The Int scalar type represents non-fractional signed whole numeric values.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30983,6 +31123,7 @@
                     "kind": "SCALAR",
                     "name": "JSONObject",
                     "description": "Custom scalar representing a JSON Object of unrestricted shape",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -30993,6 +31134,7 @@
                     "kind": "SCALAR",
                     "name": "ListValueJSONObject",
                     "description": "Custom scalar representing a JSON Object where values are lists (of anything)",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31003,6 +31145,7 @@
                     "kind": "SCALAR",
                     "name": "MenuLocationEnumString",
                     "description": "Menu Locations, with possible values: `\"footer\"`, `\"primary\"`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31013,6 +31156,7 @@
                     "kind": "SCALAR",
                     "name": "NonEmptyString",
                     "description": "A non-empty string scalar type that validates the string is not empty.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31023,6 +31167,7 @@
                     "kind": "SCALAR",
                     "name": "NullableListValueJSONObject",
                     "description": "Custom scalar representing a JSON Object where values are lists (of anything) or null",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31033,6 +31178,7 @@
                     "kind": "SCALAR",
                     "name": "Numeric",
                     "description": "Wildcard type representing any of the numeric types (Int or Float)",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31043,6 +31189,7 @@
                     "kind": "SCALAR",
                     "name": "PageBuilderProvidersEnumString",
                     "description": "Possible values: `\"\"`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31053,6 +31200,7 @@
                     "kind": "SCALAR",
                     "name": "PostCategoryTaxonomyEnumString",
                     "description": "Post category taxonomies (available for querying via the API), with possible values: `\"additional-post-category\"`, `\"category\"`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31063,6 +31211,7 @@
                     "kind": "SCALAR",
                     "name": "PostTagTaxonomyEnumString",
                     "description": "Post tag taxonomies (available for querying via the API), with possible values: `\"additional-post-tag\"`, `\"post_tag\"`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31073,6 +31222,7 @@
                     "kind": "SCALAR",
                     "name": "String",
                     "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31083,6 +31233,7 @@
                     "kind": "SCALAR",
                     "name": "TagTaxonomyEnumString",
                     "description": "Tag taxonomies (available for querying via the API), with possible values: `\"additional-dummy-tag\"`, `\"additional-post-tag\"`, `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`.",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31093,6 +31244,7 @@
                     "kind": "SCALAR",
                     "name": "URL",
                     "description": "URL scalar, such as https:\/\/mysite.com\/my-fabulous-page",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31103,6 +31255,7 @@
                     "kind": "SCALAR",
                     "name": "URLAbsolutePath",
                     "description": "URL Absolute Path scalar, such as \"\/my-fabulous-page\" in URL \"https:\/\/mysite.com\/my-fabulous-page\". The absolute path starts with \"\/\", followed by the URL relative path",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -31113,6 +31266,7 @@
                     "kind": "INTERFACE",
                     "name": "Block",
                     "description": "Entities representing a Block",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "attributes",
@@ -31194,6 +31348,7 @@
                     "kind": "INTERFACE",
                     "name": "Category",
                     "description": "Entities representing a category",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "count",
@@ -31260,6 +31415,7 @@
                     "kind": "INTERFACE",
                     "name": "Commentable",
                     "description": "The entity can receive comments",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "areCommentsOpen",
@@ -31401,6 +31557,7 @@
                     "kind": "INTERFACE",
                     "name": "CustomPost",
                     "description": "Entities representing a custom post",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "content",
@@ -31809,6 +31966,7 @@
                     "kind": "INTERFACE",
                     "name": "ErrorPayload",
                     "description": "Entities representing an Error payload",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "message",
@@ -32037,6 +32195,7 @@
                     "kind": "INTERFACE",
                     "name": "IdentifiableObject",
                     "description": "An object that can be uniquely identifiable within its type via an 'ID', and within the whole schema via a 'global ID'",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "globalID",
@@ -32191,6 +32350,7 @@
                     "kind": "INTERFACE",
                     "name": "Queryable",
                     "description": "Entities that can be queried through an URL",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "slug",
@@ -32296,6 +32456,7 @@
                     "kind": "INTERFACE",
                     "name": "Tag",
                     "description": "Entities representing a tag",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "count",
@@ -32362,6 +32523,7 @@
                     "kind": "INTERFACE",
                     "name": "WithAuthor",
                     "description": "Entities that have an author",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "author",
@@ -32405,6 +32567,7 @@
                     "kind": "INTERFACE",
                     "name": "WithFeaturedImage",
                     "description": "Fields concerning an entity's featured image",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "featuredImage",
@@ -32460,6 +32623,7 @@
                     "kind": "INTERFACE",
                     "name": "WithMeta",
                     "description": "Fields with meta values",
+                    "isOneOf": false,
                     "fields": [
                         {
                             "name": "meta",
@@ -32641,6 +32805,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "AuthorByInput",
                     "description": "Oneof input to specify the custom post author",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32682,6 +32847,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CategoriesByInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32729,6 +32895,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CategoryByFilterInput",
                     "description": "Oneof input to specify the property and data to fetch a category",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32760,6 +32927,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CategoryByInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32791,6 +32959,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CategoryPaginationInput",
                     "description": "Input to paginate categories",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32822,6 +32991,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CommentByInput",
                     "description": "Oneof input to specify the property and data to fetch a comment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32843,6 +33013,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CommentContentInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32864,6 +33035,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CommentMetaQueryInput",
                     "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32931,6 +33103,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CommentResponsePaginationInput",
                     "description": "Input to paginate response comments",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -32962,6 +33135,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CommentResponsesFilterInput",
                     "description": "Input to filter comment responses",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33091,6 +33265,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CommentSortInput",
                     "description": "Input to sort custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33122,6 +33297,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CreateMediaItemFromContentInput",
                     "description": "Provide the data to create and upload the attachment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33161,6 +33337,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CreateMediaItemFromInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33202,6 +33379,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CreateMediaItemFromURLInput",
                     "description": "Create and upload the attachment from a URL",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33237,6 +33415,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostByInput",
                     "description": "Oneof input to specify the property and data to fetch a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33268,6 +33447,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostCategoriesFilterInput",
                     "description": "Input to filter categories from a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33385,6 +33565,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostCommentPaginationInput",
                     "description": "Input to paginate custom post comments",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33416,6 +33597,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostCommentsFilterInput",
                     "description": "Input to filter comments from custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33591,6 +33773,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostContentInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33612,6 +33795,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostMetaQueryInput",
                     "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33679,6 +33863,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostPaginationInput",
                     "description": "Input to paginate custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33710,6 +33895,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostParentByInput",
                     "description": "Oneof input to specify the custom post parent",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33741,6 +33927,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostSortInput",
                     "description": "Input to sort custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33772,6 +33959,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostTagsFilterInput",
                     "description": "Input to filter tags from a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -33879,6 +34067,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "DateQueryInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34020,6 +34209,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FeaturedImageByInput",
                     "description": "Oneof input to specify the custom post's featured image",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34051,6 +34241,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FilterByAuthorInput",
                     "description": "Filter by author",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34108,6 +34299,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FilterByTaxonomyTermsInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34155,6 +34347,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FilterCommentsByCommentAuthorInput",
                     "description": "Filter comments by comment author",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34202,6 +34395,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FilterCommentsByCustomPostAuthorInput",
                     "description": "Filter comments by custom post author",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34249,6 +34443,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FilterCustomPostsByCategoriesInput",
                     "description": "Input to filter custom posts by categories",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34294,6 +34489,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FilterCustomPostsByTagsInput",
                     "description": "Input to filter custom posts by tags",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34339,6 +34535,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FilterPostsByCategoriesInput",
                     "description": "Input to filter custom posts by categories",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34384,6 +34581,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "FilterPostsByTagsInput",
                     "description": "Input to filter custom posts by tags",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34429,6 +34627,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "IncludeExcludeFilterInput",
                     "description": "Oneof input to filter by including or excluding items",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34476,6 +34675,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "LoginCredentialsInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34515,6 +34715,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "LoginUserByInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34536,6 +34737,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MediaItemByInput",
                     "description": "Oneof input to specify the property and data to fetch a media item",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34567,6 +34769,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MediaItemSortInput",
                     "description": "Input to sort custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34598,6 +34801,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MenuByInput",
                     "description": "Oneof input to specify the property and data to fetch a menu",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34639,6 +34843,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MenuSortInput",
                     "description": "Input to sort custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34670,6 +34875,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MetaKeysFilterInput",
                     "description": "Input to filter the 'metaKeys' field",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34717,6 +34923,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MetaQueryCompareByArrayValueInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34764,6 +34971,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MetaQueryCompareByInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34815,6 +35023,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MetaQueryCompareByKeyInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34840,6 +35049,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MetaQueryCompareByNumericValueInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34879,6 +35089,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "MetaQueryCompareByStringValueInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34918,6 +35129,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "PageByInput",
                     "description": "Oneof input to specify the property and data to fetch a page",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34959,6 +35171,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "PageContentInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -34980,6 +35193,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "PagePaginationInput",
                     "description": "Input to paginate pages",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35011,6 +35225,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "PostByInput",
                     "description": "Oneof input to specify the property and data to fetch a post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35042,6 +35257,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "PostCategoryByFilterInput",
                     "description": "Oneof input to specify the property and data to fetch a category",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35073,6 +35289,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "PostContentInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35094,6 +35311,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "PostPaginationInput",
                     "description": "Input to paginate posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35125,6 +35343,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "PostTagByFilterInput",
                     "description": "Oneof input to specify the property and data to fetch a tag",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35156,6 +35375,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootAddCategoryMetaInput",
                     "description": "Input to add meta to a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35219,6 +35439,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootAddCommentMetaInput",
                     "description": "Input to add meta to a comment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35282,6 +35503,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootAddCommentToCustomPostInput",
                     "description": "Input to add a comment to a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35371,6 +35593,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootAddCustomPostMetaInput",
                     "description": "Input to add meta to a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35434,6 +35657,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootAddTagMetaInput",
                     "description": "Input to add meta to a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35497,6 +35721,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootAddUserMetaInput",
                     "description": "Input to add meta to a user",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35560,6 +35785,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCategoriesFilterInput",
                     "description": "Input to filter categories",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35677,6 +35903,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCommentPaginationInput",
                     "description": "Input to paginate comments",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35708,6 +35935,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCommentsFilterInput",
                     "description": "Input to filter comments",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -35985,6 +36213,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreateCustomPostInput",
                     "description": "Input to update a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -36150,6 +36379,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreateGenericCategoryInput",
                     "description": "Input to create a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -36229,6 +36459,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreateGenericTagInput",
                     "description": "Input to create a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -36308,6 +36539,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreateMediaItemInput",
                     "description": "Input to upload an attachment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -36433,6 +36665,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreatePageInput",
                     "description": "Input to update a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -36564,6 +36797,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreatePostCategoryInput",
                     "description": "Input to create a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -36643,6 +36877,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreatePostInput",
                     "description": "Input to update a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -36794,6 +37029,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreatePostTagInput",
                     "description": "Input to create a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -36873,6 +37109,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootCustomPostsFilterInput",
                     "description": "Input to filter custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37070,6 +37307,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeleteCategoryMetaInput",
                     "description": "Input to delete a category term's meta entry",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37119,6 +37357,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeleteCommentMetaInput",
                     "description": "Input to delete an entity's meta entry",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37168,6 +37407,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeleteCustomPostMetaInput",
                     "description": "Input to delete a custom post's meta entry",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37217,6 +37457,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeleteGenericCategoryInput",
                     "description": "Input to delete a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37252,6 +37493,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeleteGenericTagInput",
                     "description": "Input to delete a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37287,6 +37529,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeletePostCategoryInput",
                     "description": "Input to delete a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37322,6 +37565,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeletePostTagInput",
                     "description": "Input to delete a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37357,6 +37601,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeleteTagMetaInput",
                     "description": "Input to delete a tag term's meta entry",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37406,6 +37651,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootDeleteUserMetaInput",
                     "description": "Input to delete a user's meta entry",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37455,6 +37701,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMediaItemPaginationInput",
                     "description": "Input to paginate media items",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37486,6 +37733,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMediaItemsFilterInput",
                     "description": "Input to filter media items",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37607,6 +37855,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMenuPaginationInput",
                     "description": "Input to paginate menus",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37638,6 +37887,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMenusFilterInput",
                     "description": "Input to filter menus",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37731,6 +37981,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMyCommentsFilterInput",
                     "description": "Input to filter the logged-in user's comments",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -37988,6 +38239,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMyCustomPostsFilterInput",
                     "description": "Input to filter the logged-in user's custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -38155,6 +38407,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMyMediaItemsFilterInput",
                     "description": "Input to filter the logged-in user's media items",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -38266,6 +38519,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMyPagesFilterInput",
                     "description": "Input to filter the logged-in user's pages",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -38433,6 +38687,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootMyPostsFilterInput",
                     "description": "Input to filter the logged-in user's posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -38620,6 +38875,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootPagesFilterInput",
                     "description": "Input to filter pages",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -38825,6 +39081,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootPostCategoriesFilterInput",
                     "description": "Input to filter categories",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -38942,6 +39199,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootPostTagsFilterInput",
                     "description": "Input to filter tags",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39049,6 +39307,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootPostsFilterInput",
                     "description": "Input to filter posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39238,6 +39497,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootRemoveFeaturedImageFromCustomPostInput",
                     "description": "Input to remove the featured image from a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39263,6 +39523,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootReplyCommentInput",
                     "description": "Input to add a comment to a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39342,6 +39603,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetCategoriesOnCustomPostInput",
                     "description": "Input to set categories on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39405,6 +39667,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetCategoriesOnPostInput",
                     "description": "Input to set categories on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39458,6 +39721,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetCategoryMetaInput",
                     "description": "Input to set a category term's meta entries",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39497,6 +39761,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetCommentMetaInput",
                     "description": "Input to set entries on a comment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39536,6 +39801,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetCustomPostMetaInput",
                     "description": "Input to set entries on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39575,6 +39841,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetFeaturedImageOnCustomPostInput",
                     "description": "Input to set the featured image on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39614,6 +39881,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetTagMetaInput",
                     "description": "Input to set a tag term's meta entries",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39653,6 +39921,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetTagsOnCustomPostInput",
                     "description": "Input to set tags on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39716,6 +39985,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetTagsOnPostInput",
                     "description": "Input to set tags on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39769,6 +40039,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootSetUserMetaInput",
                     "description": "Input to set entries on a user",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39808,6 +40079,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootTagsFilterInput",
                     "description": "Input to filter tags",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39915,6 +40187,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateCategoryMetaInput",
                     "description": "Input to update a category term's meta",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -39978,6 +40251,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateCommentMetaInput",
                     "description": "Input to update a comment's meta",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40041,6 +40315,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateCustomPostInput",
                     "description": "Input to update a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40216,6 +40491,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateCustomPostMetaInput",
                     "description": "Input to update a custom post's meta",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40279,6 +40555,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateGenericCategoryInput",
                     "description": "Input to update a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40364,6 +40641,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateGenericTagInput",
                     "description": "Input to update a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40449,6 +40727,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateMediaItemInput",
                     "description": "Input to update the metadata for an attachment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40574,6 +40853,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdatePageInput",
                     "description": "Input to update a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40719,6 +40999,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdatePostCategoryInput",
                     "description": "Input to update a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40804,6 +41085,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdatePostInput",
                     "description": "Input to update a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -40969,6 +41251,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdatePostTagInput",
                     "description": "Input to update a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41054,6 +41337,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateTagMetaInput",
                     "description": "Input to update a tag term's meta",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41117,6 +41401,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "RootUpdateUserMetaInput",
                     "description": "Input to update a user's meta",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41180,6 +41465,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "TagByFilterInput",
                     "description": "Oneof input to specify the property and data to fetch a tag",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41211,6 +41497,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "TagByInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41242,6 +41529,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "TagPaginationInput",
                     "description": "Input to paginate tags",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41273,6 +41561,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "TagsByInput",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41320,6 +41609,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "TaxonomyCustomPostsFilterInput",
                     "description": "Input to filter a taxonomy's custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41497,6 +41787,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "TaxonomyMetaQueryInput",
                     "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41564,6 +41855,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "TaxonomySortInput",
                     "description": "Input to sort custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41595,6 +41887,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "TaxonomyTaxonomiesFilterInput",
                     "description": "Input to filter child taxonomies",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41702,6 +41995,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "UserByInput",
                     "description": "Oneof input to specify the property and data to fetch a user",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41743,6 +42037,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "UserCustomPostsFilterInput",
                     "description": "Input to filter the user's custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41930,6 +42225,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "UserMetaQueryInput",
                     "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -41997,6 +42293,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "UserPaginationInput",
                     "description": "Input to paginate users",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -42028,6 +42325,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "UserSearchByInput",
                     "description": "Oneof input to specify the property and data to search users",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -42067,6 +42365,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "UserSortInput",
                     "description": "Input to sort custom posts",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -42098,6 +42397,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "UsersFilterInput",
                     "description": "Input to filter users",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -42209,6 +42509,7 @@
                     "kind": "INPUT_OBJECT",
                     "name": "WithParentCustomPostChildrenFilterInput",
                     "description": "Input to filter the custom post children",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": [
                         {
@@ -42348,6 +42649,7 @@
                     "kind": "ENUM",
                     "name": "CommentOrderByEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42443,6 +42745,7 @@
                     "kind": "ENUM",
                     "name": "CommentStatusEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42478,6 +42781,7 @@
                     "kind": "ENUM",
                     "name": "CommentTypeEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42507,6 +42811,7 @@
                     "kind": "ENUM",
                     "name": "CustomPostOrderByEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42596,6 +42901,7 @@
                     "kind": "ENUM",
                     "name": "CustomPostStatusEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42649,6 +42955,7 @@
                     "kind": "ENUM",
                     "name": "DirectiveKindEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42678,6 +42985,7 @@
                     "kind": "ENUM",
                     "name": "DirectiveLocation",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42803,6 +43111,7 @@
                     "kind": "ENUM",
                     "name": "FilterCustomPostStatusEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42862,6 +43171,7 @@
                     "kind": "ENUM",
                     "name": "MediaItemOrderByEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42939,6 +43249,7 @@
                     "kind": "ENUM",
                     "name": "MenuOrderByEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -42968,6 +43279,7 @@
                     "kind": "ENUM",
                     "name": "MetaQueryCompareByArrayValueOperatorEnum",
                     "description": "Operators to compare against an array value",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43003,6 +43315,7 @@
                     "kind": "ENUM",
                     "name": "MetaQueryCompareByKeyOperatorEnum",
                     "description": "Operators to compare against the meta key",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43026,6 +43339,7 @@
                     "kind": "ENUM",
                     "name": "MetaQueryCompareByNumericValueOperatorEnum",
                     "description": "Operators to compare against a numeric value",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43073,6 +43387,7 @@
                     "kind": "ENUM",
                     "name": "MetaQueryCompareByStringValueOperatorEnum",
                     "description": "Operators to compare against a string value",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43126,6 +43441,7 @@
                     "kind": "ENUM",
                     "name": "MetaQueryValueTypesEnum",
                     "description": "Custom field type",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43191,6 +43507,7 @@
                     "kind": "ENUM",
                     "name": "OperationStatusEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43214,6 +43531,7 @@
                     "kind": "ENUM",
                     "name": "OrderEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43237,6 +43555,7 @@
                     "kind": "ENUM",
                     "name": "RelationEnum",
                     "description": "The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43260,6 +43579,7 @@
                     "kind": "ENUM",
                     "name": "TaxonomyOrderByEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43331,6 +43651,7 @@
                     "kind": "ENUM",
                     "name": "TypeKind",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43390,6 +43711,7 @@
                     "kind": "ENUM",
                     "name": "UserOrderByEnum",
                     "description": null,
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43467,6 +43789,7 @@
                     "kind": "UNION",
                     "name": "BlockUnion",
                     "description": "Union of 'Block' types",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43483,6 +43806,7 @@
                     "kind": "UNION",
                     "name": "CategoryUnion",
                     "description": "Union of 'category' type resolvers",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43504,6 +43828,7 @@
                     "kind": "UNION",
                     "name": "CustomPostUnion",
                     "description": "Union of 'custom post' type resolvers",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43530,6 +43855,7 @@
                     "kind": "UNION",
                     "name": "RootAddCommentMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when adding meta on a comment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43571,6 +43897,7 @@
                     "kind": "UNION",
                     "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when adding a comment to a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43627,6 +43954,7 @@
                     "kind": "UNION",
                     "name": "RootAddGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when adding meta on a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43668,6 +43996,7 @@
                     "kind": "UNION",
                     "name": "RootAddGenericCustomPostMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when adding meta on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43709,6 +44038,7 @@
                     "kind": "UNION",
                     "name": "RootAddGenericTagTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when adding meta on a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43750,6 +44080,7 @@
                     "kind": "UNION",
                     "name": "RootAddPostCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when adding meta on a post's category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43791,6 +44122,7 @@
                     "kind": "UNION",
                     "name": "RootAddPostTagTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when adding meta on a post's tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43832,6 +44164,7 @@
                     "kind": "UNION",
                     "name": "RootAddUserMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when adding meta on a user",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43873,6 +44206,7 @@
                     "kind": "UNION",
                     "name": "RootCreateCustomPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when creating a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -43959,6 +44293,7 @@
                     "kind": "UNION",
                     "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when creating a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44000,6 +44335,7 @@
                     "kind": "UNION",
                     "name": "RootCreateGenericTagTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when creating a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44041,6 +44377,7 @@
                     "kind": "UNION",
                     "name": "RootCreateMediaItemMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when uploading an attachment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44092,6 +44429,7 @@
                     "kind": "UNION",
                     "name": "RootCreatePageMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when creating a page",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44168,6 +44506,7 @@
                     "kind": "UNION",
                     "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when creating a post category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44209,6 +44548,7 @@
                     "kind": "UNION",
                     "name": "RootCreatePostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when creating a post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44285,6 +44625,7 @@
                     "kind": "UNION",
                     "name": "RootCreatePostTagTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when creating a post tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44326,6 +44667,7 @@
                     "kind": "UNION",
                     "name": "RootDeleteCommentMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a comment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44367,6 +44709,7 @@
                     "kind": "UNION",
                     "name": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44408,6 +44751,7 @@
                     "kind": "UNION",
                     "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44444,6 +44788,7 @@
                     "kind": "UNION",
                     "name": "RootDeleteGenericCustomPostMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44485,6 +44830,7 @@
                     "kind": "UNION",
                     "name": "RootDeleteGenericTagTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44526,6 +44872,7 @@
                     "kind": "UNION",
                     "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44562,6 +44909,7 @@
                     "kind": "UNION",
                     "name": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a post's category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44603,6 +44951,7 @@
                     "kind": "UNION",
                     "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting a post category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44639,6 +44988,7 @@
                     "kind": "UNION",
                     "name": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a post's tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44680,6 +45030,7 @@
                     "kind": "UNION",
                     "name": "RootDeletePostTagTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting a post tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44716,6 +45067,7 @@
                     "kind": "UNION",
                     "name": "RootDeleteUserMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a user",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44757,6 +45109,7 @@
                     "kind": "UNION",
                     "name": "RootLoginUserMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when logging a user in",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44793,6 +45146,7 @@
                     "kind": "UNION",
                     "name": "RootLogoutUserMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when logging a user out",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44814,6 +45168,7 @@
                     "kind": "UNION",
                     "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when removing a featured image from a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44860,6 +45215,7 @@
                     "kind": "UNION",
                     "name": "RootReplyCommentMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when replying to a comment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44906,6 +45262,7 @@
                     "kind": "UNION",
                     "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting categories on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -44957,6 +45314,7 @@
                     "kind": "UNION",
                     "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting categories on a post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45013,6 +45371,7 @@
                     "kind": "UNION",
                     "name": "RootSetCommentMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting meta on a comment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45049,6 +45408,7 @@
                     "kind": "UNION",
                     "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting a featured image to a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45100,6 +45460,7 @@
                     "kind": "UNION",
                     "name": "RootSetGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting meta on a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45136,6 +45497,7 @@
                     "kind": "UNION",
                     "name": "RootSetGenericCustomPostMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting meta on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45172,6 +45534,7 @@
                     "kind": "UNION",
                     "name": "RootSetGenericTagTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting meta on a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45208,6 +45571,7 @@
                     "kind": "UNION",
                     "name": "RootSetPostCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting meta on a post's category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45244,6 +45608,7 @@
                     "kind": "UNION",
                     "name": "RootSetPostTagTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting meta on a post's tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45280,6 +45645,7 @@
                     "kind": "UNION",
                     "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting tags on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45331,6 +45697,7 @@
                     "kind": "UNION",
                     "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting tags on a post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45387,6 +45754,7 @@
                     "kind": "UNION",
                     "name": "RootSetUserMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when setting meta on a user",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45423,6 +45791,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateCommentMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating meta on a comment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45469,6 +45838,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45560,6 +45930,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating meta on a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45606,6 +45977,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating a category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45647,6 +46019,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateGenericCustomPostMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating meta on a custom post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45693,6 +46066,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateGenericTagTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating meta on a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45739,6 +46113,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating a tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45780,6 +46155,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateMediaItemMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating the metadata for an attachment",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45826,6 +46202,7 @@
                     "kind": "UNION",
                     "name": "RootUpdatePageMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating a page",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45907,6 +46284,7 @@
                     "kind": "UNION",
                     "name": "RootUpdatePostCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating meta on a post's category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45953,6 +46331,7 @@
                     "kind": "UNION",
                     "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating a post category term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -45994,6 +46373,7 @@
                     "kind": "UNION",
                     "name": "RootUpdatePostMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating a post",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -46085,6 +46465,7 @@
                     "kind": "UNION",
                     "name": "RootUpdatePostTagTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating meta on a post's tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -46131,6 +46512,7 @@
                     "kind": "UNION",
                     "name": "RootUpdatePostTagTermMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating a post tag term",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -46172,6 +46554,7 @@
                     "kind": "UNION",
                     "name": "RootUpdateUserMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when updating meta on a user",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -46218,6 +46601,7 @@
                     "kind": "UNION",
                     "name": "TagUnion",
                     "description": "Union of 'tag' type resolvers",
+                    "isOneOf": false,
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,

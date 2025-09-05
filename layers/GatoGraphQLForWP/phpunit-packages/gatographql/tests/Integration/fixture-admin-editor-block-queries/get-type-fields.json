@@ -3901,9 +3901,6 @@
               "name": "elementName"
             },
             {
-              "name": "isOneOf"
-            },
-            {
               "name": "namespacedName"
             },
             {
@@ -4114,6 +4111,9 @@
             },
             {
               "name": "interfaces"
+            },
+            {
+              "name": "isOneOf"
             },
             {
               "name": "kind"
