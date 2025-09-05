@@ -315,7 +315,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 if ($type instanceof InputObjectType) {
                     return $type->isOneOfInputObjectType();
                 }
-                return null;
+                return false;
             case 'extensions':
                 // Custom development: this field is not in GraphQL spec yet!
                 // @see https://github.com/graphql/graphql-spec/issues/300
