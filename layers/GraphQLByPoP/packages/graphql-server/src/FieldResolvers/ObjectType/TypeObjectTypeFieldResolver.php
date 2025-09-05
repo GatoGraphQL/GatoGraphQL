@@ -313,7 +313,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 return null;
             case 'isOneOf':
                 if ($type instanceof InputObjectType) {
-                    return $type->getTypeIsOneOfInputObjectType();
+                    return $type->isOneOfInputObjectType();
                 }
                 return null;
             case 'extensions':

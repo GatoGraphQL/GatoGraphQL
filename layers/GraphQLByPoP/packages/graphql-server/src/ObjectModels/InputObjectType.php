@@ -82,7 +82,7 @@ class InputObjectType extends AbstractNamedType
      * > This is represented in introspection with the
      * __Type.isOneOf: Boolean field.
      */
-    public function getTypeIsOneOfInputObjectType(): bool
+    public function isOneOfInputObjectType(): bool
     {
         return $this->schemaDefinition[SchemaDefinition::IS_ONE_OF] ?? false;
     }
