@@ -30,6 +30,7 @@
 - Validate the domain in the active license corresponds to the current site (for commercial extensions) ([#3192](https://github.com/GatoGraphQL/GatoGraphQL/pull/3192))
 - Don't trigger license check if never run before ([#3194](https://github.com/GatoGraphQL/GatoGraphQL/pull/3194))
 - Set `WithMeta.metaKeys` as sensitive field ([#3197](https://github.com/GatoGraphQL/GatoGraphQL/pull/3197))
+- Move `isOneOf` introspection field out of `extensions` (as feature has been merged to GraphQL spec) ([#3198](https://github.com/GatoGraphQL/GatoGraphQL/pull/3198))
 
 ## Fixed
 
