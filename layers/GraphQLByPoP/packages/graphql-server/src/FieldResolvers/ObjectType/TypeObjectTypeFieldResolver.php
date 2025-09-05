@@ -141,6 +141,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'inputFields',
             'ofType',
             'specifiedByURL',
+            'isOneOf',
             'extensions',
         ];
     }
@@ -166,6 +167,8 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 => $this->getInputValueObjectTypeResolver(),
             'kind'
                 => $this->getTypeKindEnumTypeResolver(),
+            'isOneOf'
+                => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -173,7 +176,8 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'kind'
+            'kind',
+            'isOneOf'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'fields',
             'interfaces',
@@ -199,6 +203,7 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'inputFields' => $this->__('Type\'s input Fields (available for InputObject type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLAuDABCBIu9N)', 'graphql-server'),
             'ofType' => $this->__('The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N)', 'graphql-server'),
             'specifiedByURL' => $this->__('A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https://spec.graphql.org/draft/#sel-IAJXNFA0EABABL9N)', 'graphql-server'),
+            'isOneOf' => $this->__('`true` for OneOf Input Objects, `false` otherwise', 'graphql-server'),
             'extensions' => $this->__('Extensions (custom metadata) added to the GraphQL type (for all \'named\' types: Object, Interface, Union, Scalar, Enum and InputObject) (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -306,6 +311,11 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return $type->getSpecifiedByURL();
                 }
                 return null;
+            case 'isOneOf':
+                if ($type instanceof InputObjectType) {
+                    return $type->isOneOfInputObjectType();
+                }
+                return false;
             case 'extensions':
                 // Custom development: this field is not in GraphQL spec yet!
                 // @see https://github.com/graphql/graphql-spec/issues/300

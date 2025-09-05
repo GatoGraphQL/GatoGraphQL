@@ -72,4 +72,18 @@ class InputObjectType extends AbstractNamedType
             $this->getInputFields()
         );
     }
+
+    /**
+     * @see https://github.com/graphql/graphql-spec/pull/825
+     *
+     * > OneOf Input Objects are a special variant of Input Objects
+     * > where the type system asserts that exactly one of the fields
+     * > must be set and non-null, all others being omitted.
+     * > This is represented in introspection with the
+     * __Type.isOneOf: Boolean field.
+     */
+    public function isOneOfInputObjectType(): bool
+    {
+        return $this->schemaDefinition[SchemaDefinition::IS_ONE_OF] ?? false;
+    }
 }
