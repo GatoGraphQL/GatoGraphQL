@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-use Rector\Core\Contract\Rector\RectorInterface;
-use Rector\DowngradePhp80\Rector\FunctionLike\DowngradeMixedTypeDeclarationRector;
+use Rector\Contract\Rector\RectorInterface;
+// use Rector\DowngradePhp80\Rector\FunctionLike\DowngradeMixedTypeDeclarationRector;
 
 /**
  * Hack to fix bug.
@@ -26,7 +26,7 @@ abstract class AbstractArrowFnMixedTypeChainedRuleContainerConfigurationService 
     protected function getRectorRuleClasses(): array
     {
         return [
-            DowngradeMixedTypeDeclarationRector::class,
+            'Rector\DowngradePhp80\Rector\FunctionLike\DowngradeMixedTypeDeclarationRector',
         ];
     }
 }

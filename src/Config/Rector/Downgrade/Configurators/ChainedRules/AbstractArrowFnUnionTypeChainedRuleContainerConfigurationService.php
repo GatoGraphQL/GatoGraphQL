@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-use Rector\Core\Contract\Rector\RectorInterface;
-use Rector\DowngradePhp80\Rector\FunctionLike\DowngradeUnionTypeDeclarationRector;
+use Rector\Contract\Rector\RectorInterface;
+// use Rector\DowngradePhp80\Rector\FunctionLike\DowngradeUnionTypeDeclarationRector;
 
 /**
  * Hack to fix bug.
@@ -26,7 +26,7 @@ abstract class AbstractArrowFnUnionTypeChainedRuleContainerConfigurationService 
     protected function getRectorRuleClasses(): array
     {
         return [
-            DowngradeUnionTypeDeclarationRector::class,
+            'Rector\DowngradePhp80\Rector\FunctionLike\DowngradeUnionTypeDeclarationRector',
         ];
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-use Rector\Core\Contract\Rector\RectorInterface;
+use Rector\Contract\Rector\RectorInterface;
 
 abstract class AbstractChangeIfOrReturnToEarlyReturnChainedRuleContainerConfigurationService extends AbstractChainedRuleContainerConfigurationService
 {
