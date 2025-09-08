@@ -192,7 +192,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             HookNames::ENUM_VALUES,
             $this->getEnumValues(),
             $this,
-        );
+        ) ?? [];
 
         // Exclude the admin enum values, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */

@@ -130,7 +130,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                 } else {
                     /**
                      * Cast object so PHPStan doesn't throw error
-                     * @var string[];
+                     * @var string[]
                      */
                     $typeFieldsForPrint = $typeFieldsForPrint;
                     $fieldTypeContent = sprintf(

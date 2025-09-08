@@ -27,7 +27,7 @@ class CacheControlForAccessControlManager extends AbstractBasicService implement
             $this->supportingCacheControlAccessControlGroups = App::applyFilters(
                 HookNames::SUPPORTING_CACHE_CONTROL_ACCESS_CONTROL_GROUPS,
                 []
-            );
+            ) ?? [];
         }
         return $this->supportingCacheControlAccessControlGroups;
     }

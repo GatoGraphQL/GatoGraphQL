@@ -41,7 +41,8 @@ class WordPressStaticHelpers
     protected static function getActiveWordPressPluginFiles(): array
     {
         if (self::$activeWordPressPluginFiles === null) {
-            self::$activeWordPressPluginFiles = get_option('active_plugins', []);
+            $activePlugins = get_option('active_plugins', []);
+            self::$activeWordPressPluginFiles = is_array($activePlugins) ? $activePlugins : [];
             if (is_multisite()) {
                 /** @var string[] */
                 $activeNetworkWordPressPluginFiles = array_keys(get_network_option(0, 'active_sitewide_plugins', []));

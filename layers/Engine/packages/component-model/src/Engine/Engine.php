@@ -350,7 +350,7 @@ class Engine extends AbstractBasicService implements EngineInterface
         $engineState->extra_routes = App::applyFilters(
             EngineHookNames::EXTRA_ROUTES,
             $engineState->extra_routes
-        );
+        ) ?? [];
 
         return $engineState->extra_routes;
     }
