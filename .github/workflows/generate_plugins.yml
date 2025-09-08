@@ -172,35 +172,39 @@ jobs:
             -   name: Custom bash script to fix items in the code in preparation for the Rector downgrade
                 run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}"
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}
+                if: ${{ matrix.pluginConfig.bashScripts.before_downgrade_code && needs.provide_data.outputs.enable_php_downgrade }}
 
             # additional_rector_after_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.4)
                 run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_before_configs }}" "${{ matrix.pluginConfig.additional_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
+                if: ${{ needs.provide_data.outputs.enable_php_downgrade }}
 
             # after_downgrade_code.sh => Hacks to fix the codebase whenever Rector cannot handle it
             -   name: Custom bash script to fix items in the code that Rector cannot handle
                 run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}"
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}
+                if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code && needs.provide_data.outputs.enable_php_downgrade }}
             ################################################################################
 
             -   name: Replace PHP version in plugin main file
                 run: |
                     sed -i 's/Requires PHP: 8.1/Requires PHP: 7.4/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ needs.provide_data.outputs.enable_php_downgrade }}
 
             -   name: Check if readme.txt exists
                 uses: andstor/file-existence-action@v3
                 id: check_readme_exists
                 with:
                     files: "${{ matrix.pluginConfig.path }}/readme.txt"
+                if: ${{ needs.provide_data.outputs.enable_php_downgrade }}
 
             -   name: Replace PHP version in plugin readme file
                 run: |
                     sed -i 's/Requires PHP: 8.1/Requires PHP: 7.4/' readme.txt
                 if: steps.check_readme_exists.outputs.files_exists == 'true'
                 working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ needs.provide_data.outputs.enable_php_downgrade }}
 
             # Add the commit hash to the plugin version, to regenerate the container when testing the generated plugin
             -   name: Append the the commit hash to the plugin/extension version
