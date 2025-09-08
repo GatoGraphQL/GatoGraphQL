@@ -54,7 +54,7 @@
         "symfony/stopwatch": "^6.0",
         "symfony/var-dumper": "^6.0",
         "symplify/monorepo-builder": "^10.2.2",
-        "szepeviktor/phpstan-wordpress": "^1.0",
+        "szepeviktor/phpstan-wordpress": "^2.0",
         "wp-coding-standards/wpcs": "^3.0"
     },
     "autoload": {
