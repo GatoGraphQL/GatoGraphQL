@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Library\Validator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -23,7 +24,7 @@ use PoP\Root\AbstractTestCase;
 
 class RequestValidatorTest extends AbstractTestCase
 {
-    #[\PHPUnit\Framework\Attributes\DataProvider('invalidRequestProvider')]
+    #[DataProvider('invalidRequestProvider')]
     public function testInvalidRequests(ExecutableDocument $executableDocument): void
     {
         $this->expectException(InvalidRequestException::class);

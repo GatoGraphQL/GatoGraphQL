@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\Exception\Parser\UnsupportedSyntaxErrorParserException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
@@ -154,7 +155,7 @@ GRAPHQL;
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('wrongQueriesProvider')]
+    #[DataProvider('wrongQueriesProvider')]
     public function testWrongQueries(string $query): void
     {
         $this->expectException(SyntaxErrorParserException::class);
@@ -518,7 +519,7 @@ GRAPHQL;
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('mutationProvider')]
+    #[DataProvider('mutationProvider')]
     public function testMutations(
         string $query,
         Document $document,
@@ -644,7 +645,7 @@ GRAPHQL;
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('queryWithVariablesProvider')]
+    #[DataProvider('queryWithVariablesProvider')]
     public function testQueriesWithVariables(
         string $query,
         Document $document,
@@ -745,7 +746,7 @@ GRAPHQL;
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('queryProvider')]
+    #[DataProvider('queryProvider')]
     public function testQueries(
         string $query,
         Document $document,
@@ -1209,7 +1210,7 @@ GRAPHQL;
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('subscriptionProvider')]
+    #[DataProvider('subscriptionProvider')]
     public function testSubscriptions(
         string $query,
         Document $document,
@@ -1258,7 +1259,7 @@ GRAPHQL;
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('queryWithDirectiveProvider')]
+    #[DataProvider('queryWithDirectiveProvider')]
     public function testDirectives(
         string $query,
         Document $document,
@@ -1708,7 +1709,7 @@ GRAPHQL;
     /**
      * @param SplObjectStorage<AstInterface,AstInterface> $astNodeAncestors
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('astNodeAncestorProvider')]
+    #[DataProvider('astNodeAncestorProvider')]
     public function testASTNodeAncestors(
         Document $document,
         SplObjectStorage $astNodeAncestors,
