@@ -30,11 +30,15 @@
         "symfony/dependency-injection": "^6.0",
         "symfony/dom-crawler": "^6.0",
         "symfony/dotenv": "^6.0",
+        "symfony/event-dispatcher": "^6.0",
         "symfony/expression-language": "^6.0",
         "symfony/http-foundation": "^6.0",
         "symfony/polyfill-php74": "^1.24",
         "symfony/polyfill-php80": "^1.24",
         "symfony/property-access": "^6.0",
+        "symfony/property-info": "^6.0",
+        "symfony/string": "^6.0",
+        "symfony/var-exporter": "^6.0",
         "symfony/yaml": "^6.0"
     },
     "require-dev": {
