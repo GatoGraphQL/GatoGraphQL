@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use GuzzleHttp\RequestOptions;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use Psr\Http\Message\ResponseInterface;
@@ -19,7 +20,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * @param array<string,mixed> $params
      * @param array<string,mixed> $variables
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('provideEndpointEntries')]
+    #[DataProvider('provideEndpointEntries')]
     public function testEndpoints(
         string $expectedContentType,
         ?string $expectedResponseBody,
