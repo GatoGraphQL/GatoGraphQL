@@ -36,6 +36,7 @@ interface EntityMetaTypeMutationAPIInterface
         string|int $entityID,
         string $key,
         mixed $value,
+        mixed $prevValue = null,
     ): string|int|bool;
 
     /**

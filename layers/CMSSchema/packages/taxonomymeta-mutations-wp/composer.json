@@ -165,7 +165,6 @@
         "pop-cms-schema/categorymeta-mutations-wp": "<13.2.0",
         "pop-cms-schema/custompost-categorymeta-mutations": "<13.2.0",
         "pop-cms-schema/usermeta-mutations": "<13.2.0",
-        "pop-cms-schema/meta-mutations": "<13.2.0",
         "pop-cms-schema/user-mutations": "<13.2.0",
         "pop-cms-schema/commentmeta-mutations": "<13.2.0",
         "pop-cms-schema/commentmeta-mutations-wp": "<13.2.0",
@@ -189,7 +188,8 @@
     "require": {
         "php": "^8.1",
         "pop-cms-schema/taxonomy-mutations-wp": "^13.3",
-        "pop-cms-schema/taxonomymeta-mutations": "^13.3"
+        "pop-cms-schema/taxonomymeta-mutations": "^13.3",
+        "pop-cms-schema/meta-mutations-wp": "^13.3"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",

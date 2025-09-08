@@ -85,7 +85,6 @@
         "pop-cms-schema/usermeta-mutations": "<13.2.0",
         "pop-cms-schema/post-categories": "<13.2.0",
         "pop-cms-schema/pages-wp": "<13.2.0",
-        "pop-cms-schema/meta-mutations": "<13.2.0",
         "pop-cms-schema/custompostmedia-mutations-wp": "<13.2.0",
         "pop-cms-schema/user-mutations": "<13.2.0",
         "pop-cms-schema/commentmeta-mutations": "<13.2.0",

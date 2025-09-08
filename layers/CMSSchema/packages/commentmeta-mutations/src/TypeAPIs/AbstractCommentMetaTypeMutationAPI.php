@@ -6,9 +6,9 @@ namespace PoPCMSSchema\CommentMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\CommentMetaMutations\Exception\CommentMetaCRUDMutationException;
 use PoPCMSSchema\CommentMetaMutations\TypeAPIs\CommentMetaTypeMutationAPIInterface;
-use PoPCMSSchema\MetaMutations\TypeAPIs\AbstractEntityMetaTypeMutationAPI;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractCommentMetaTypeMutationAPI extends AbstractEntityMetaTypeMutationAPI implements CommentMetaTypeMutationAPIInterface
+abstract class AbstractCommentMetaTypeMutationAPI extends AbstractBasicService implements CommentMetaTypeMutationAPIInterface
 {
     /**
      * @phpstan-return class-string<CommentMetaCRUDMutationException>

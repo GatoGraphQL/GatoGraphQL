@@ -6,9 +6,9 @@ namespace PoPCMSSchema\UserMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\UserMetaMutations\Exception\UserMetaCRUDMutationException;
 use PoPCMSSchema\UserMetaMutations\TypeAPIs\UserMetaTypeMutationAPIInterface;
-use PoPCMSSchema\MetaMutations\TypeAPIs\AbstractEntityMetaTypeMutationAPI;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractUserMetaTypeMutationAPI extends AbstractEntityMetaTypeMutationAPI implements UserMetaTypeMutationAPIInterface
+abstract class AbstractUserMetaTypeMutationAPI extends AbstractBasicService implements UserMetaTypeMutationAPIInterface
 {
     /**
      * @phpstan-return class-string<UserMetaCRUDMutationException>

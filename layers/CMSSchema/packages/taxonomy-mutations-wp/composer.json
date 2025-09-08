@@ -164,7 +164,6 @@
         "pop-cms-schema/categorymeta-mutations-wp": "<13.2.0",
         "pop-cms-schema/custompost-categorymeta-mutations": "<13.2.0",
         "pop-cms-schema/usermeta-mutations": "<13.2.0",
-        "pop-cms-schema/meta-mutations": "<13.2.0",
         "pop-cms-schema/user-mutations": "<13.2.0",
         "pop-cms-schema/commentmeta-mutations": "<13.2.0",
         "pop-cms-schema/commentmeta-mutations-wp": "<13.2.0",
