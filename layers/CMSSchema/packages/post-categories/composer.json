@@ -18,7 +18,7 @@
         "pop-cms-schema/posts": "^13.3"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
         "pop-api/api": "^13.3",
         "pop-api/api-rest": "^13.3",
