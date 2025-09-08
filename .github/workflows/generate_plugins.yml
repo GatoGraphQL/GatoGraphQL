@@ -70,6 +70,7 @@ jobs:
                     filter_arg="--filter=$(echo '${{ env.GENERATE_PLUGINS_FILTER }}' | sed -e 's/ / --filter=/g')"
                     slugs_arg="--slugs=$(echo '${{ env.GENERATE_PLUGINS_SLUGS }}' | sed -e 's/ / --slugs=/g')"
                     echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json $(echo $filter_arg) $(echo $slugs_arg) --config=config/monorepo-builder/plugin-config-entries-json.php)" >> $GITHUB_OUTPUT
+                    echo "enable_php_downgrade=$(vendor/bin/monorepo-builder env-var ENABLE_PHP_DOWNGRADE --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "retention_days_for_generated_plugins=$(vendor/bin/monorepo-builder env-var RETENTION_DAYS_FOR_GENERATED_PLUGINS --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "local_package_owners=$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)" >> $GITHUB_OUTPUT
                     echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
@@ -77,6 +78,7 @@ jobs:
                     echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
+            enable_php_downgrade: ${{ steps.output_data.outputs.enable_php_downgrade }}
             retention_days: ${{ steps.output_data.outputs.retention_days_for_generated_plugins }}
             local_package_owners: ${{ steps.output_data.outputs.local_package_owners }}
             git_base_branch: ${{ steps.output_data.outputs.git_base_branch }}
