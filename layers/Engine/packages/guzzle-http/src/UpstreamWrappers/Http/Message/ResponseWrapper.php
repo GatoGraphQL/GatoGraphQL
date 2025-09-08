@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GuzzleHTTP\UpstreamWrappers\Http\Message;
 
+use InvalidArgumentException;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface as UpstreamResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -156,7 +157,7 @@ final class ResponseWrapper implements ResponseInterface
      * @param string $name Case-insensitive header field name.
      * @param string|string[] $value Header value(s).
      * @return static
-     * @throws \InvalidArgumentException for invalid header names or values.
+     * @throws InvalidArgumentException for invalid header names or values.
      */
     public function withHeader($name, $value): MessageInterface
     {
@@ -177,7 +178,7 @@ final class ResponseWrapper implements ResponseInterface
      * @param string $name Case-insensitive header field name to add.
      * @param string|string[] $value Header value(s).
      * @return static
-     * @throws \InvalidArgumentException for invalid header names or values.
+     * @throws InvalidArgumentException for invalid header names or values.
      */
     public function withAddedHeader($name, $value): MessageInterface
     {
@@ -222,7 +223,7 @@ final class ResponseWrapper implements ResponseInterface
      *
      * @param StreamInterface $body Body.
      * @return static
-     * @throws \InvalidArgumentException When the body is not valid.
+     * @throws InvalidArgumentException When the body is not valid.
      */
     public function withBody(StreamInterface $body): MessageInterface
     {
@@ -263,7 +264,7 @@ final class ResponseWrapper implements ResponseInterface
      *     provided status code; if none is provided, implementations MAY
      *     use the defaults as suggested in the HTTP specification.
      * @return static
-     * @throws \InvalidArgumentException For invalid status code arguments.
+     * @throws InvalidArgumentException For invalid status code arguments.
      */
     public function withStatus($code, $reasonPhrase = ''): ResponseInterface
     {
