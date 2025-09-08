@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 
 /**
@@ -24,7 +25,7 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTestCase extends Ab
      * 1. The client under the new path returns a 200
      * 2. The client under the old path returns a 404
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('providePathEntries')]
+    #[DataProvider('providePathEntries')]
     public function testPathsUpdated(
         string $dataItem,
     ): void {

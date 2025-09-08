@@ -6,8 +6,8 @@ namespace PoPCMSSchema\TaxonomyMetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\MetaMutationsWP\TypeAPIs\EntityMetaTypeMutationAPITrait;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\AbstractTaxonomyMetaTypeMutationAPI;
-
 use WP_Error;
+
 use function add_term_meta;
 use function delete_term_meta;
 use function update_term_meta;
@@ -15,7 +15,7 @@ use function update_term_meta;
 class TaxonomyMetaTypeMutationAPI extends AbstractTaxonomyMetaTypeMutationAPI
 {
     use EntityMetaTypeMutationAPITrait;
-    
+
     protected function executeAddEntityMeta(
         string|int $entityID,
         string $key,

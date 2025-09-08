@@ -6,8 +6,8 @@ namespace PoPCMSSchema\UserMetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\MetaMutationsWP\TypeAPIs\EntityMetaTypeMutationAPITrait;
 use PoPCMSSchema\UserMetaMutations\TypeAPIs\AbstractUserMetaTypeMutationAPI;
-
 use WP_Error;
+
 use function add_user_meta;
 use function delete_user_meta;
 use function update_user_meta;

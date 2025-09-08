@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends AbstractGraphQLServerTestCase
 {
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
@@ -16,7 +18,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
     //     return $this->addFixtureFolderInfo(parent::dataSetAsString());
     // }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('fixtureGraphQLServerExecutionProvider')]
+    #[DataProvider('fixtureGraphQLServerExecutionProvider')]
     public function testFixtureGraphQLServerExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
     {
         $this->assertFixtureGraphQLQueryExecution($queryFile, $expectedResponseFile, $variablesFile, $operationName);

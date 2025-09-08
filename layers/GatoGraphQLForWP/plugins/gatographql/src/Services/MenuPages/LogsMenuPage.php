@@ -190,8 +190,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
     /**
      * Get the canonical URL for the Logs tab of the Status admin page.
-     *
-     * @return string
      */
     public function get_logs_tab_url(): string
     {
@@ -227,8 +225,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
     /**
      * Render the file list view.
-     *
-     * @return void
      */
     private function render_list_files_view(): void
     {
@@ -263,8 +259,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
     /**
      * Render the single file view.
-     *
-     * @return void
      */
     private function render_single_file_view(): void
     {
@@ -402,8 +396,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
     /**
      * Render the search results view.
-     *
-     * @return void
      */
     private function render_search_results_view(): void
     {
@@ -442,8 +434,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
      * Get and validate URL query params for FileHandler views.
      *
      * @param array $param_keys Optional. The names of the params you want to get.
-     *
-     * @return array
      */
     public function get_query_params(array $param_keys = array()): array // @phpstan-ignore-line
     {
@@ -532,7 +522,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
      *
      * @param string $view The current view within the Logs tab.
      *
-     * @return void
      *
      * @internal For exclusive usage of WooCommerce core, backwards compatibility not guaranteed.
      */
@@ -563,7 +552,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
      *
      * @param string $view The current view within the Logs tab.
      *
-     * @return void
      *
      * @internal For exclusive usage of WooCommerce core, backwards compatibility not guaranteed.
      */
@@ -663,8 +651,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
      *
      * @param string $line        The unformatted log file line.
      * @param int    $line_number The line number.
-     *
-     * @return string
      */
     private function format_line(string $line, int $line_number): string
     {
@@ -759,8 +745,6 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
     /**
      * Render a form for searching within log files.
-     *
-     * @return void
      */
     private function render_search_field(): void
     {

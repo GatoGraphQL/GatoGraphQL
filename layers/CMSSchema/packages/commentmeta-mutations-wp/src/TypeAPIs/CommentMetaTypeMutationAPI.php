@@ -6,8 +6,8 @@ namespace PoPCMSSchema\CommentMetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\CommentMetaMutations\TypeAPIs\AbstractCommentMetaTypeMutationAPI;
 use PoPCMSSchema\MetaMutationsWP\TypeAPIs\EntityMetaTypeMutationAPITrait;
-
 use WP_Error;
+
 use function add_comment_meta;
 use function delete_comment_meta;
 use function update_comment_meta;
@@ -18,7 +18,7 @@ use function update_comment_meta;
 class CommentMetaTypeMutationAPI extends AbstractCommentMetaTypeMutationAPI
 {
     use EntityMetaTypeMutationAPITrait;
-    
+
     protected function executeAddEntityMeta(
         string|int $entityID,
         string $key,

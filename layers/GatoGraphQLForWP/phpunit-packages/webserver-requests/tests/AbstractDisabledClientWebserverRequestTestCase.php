@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 /**
  * Test that disabling clients (GraphiQL/Voyager) works well
  */
@@ -11,7 +13,7 @@ abstract class AbstractDisabledClientWebserverRequestTestCase extends AbstractWe
 {
     use ClientWebserverRequestTestCaseTrait;
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('provideDisabledClientEntries')]
+    #[DataProvider('provideDisabledClientEntries')]
     public function testDisabledClients(
         string $clientEndpoint,
         int $expectedStatusCode,

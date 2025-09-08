@@ -18,12 +18,12 @@
         "pop-cms-schema/posts": "^13.3"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
         "pop-api/api": "^13.3",
         "pop-cms-schema/comment-mutations": "^13.3",
         "pop-cms-schema/users": "^13.3",
-        "rector/rector": "^0.18",
+        "rector/rector": "^2.1",
         "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {

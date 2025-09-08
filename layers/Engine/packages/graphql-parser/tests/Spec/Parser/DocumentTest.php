@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -83,7 +84,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('cyclicalFragmentQueryProvider')]
+    #[DataProvider('cyclicalFragmentQueryProvider')]
     public function testNoCyclicalFragments(string $query): void
     {
         $this->expectException(InvalidRequestException::class);
@@ -424,7 +425,7 @@ class DocumentTest extends AbstractTestCase
         $document->validate();
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('duplicateArgumentQueryProvider')]
+    #[DataProvider('duplicateArgumentQueryProvider')]
     public function testDuplicateArgument(string $query): void
     {
         $this->expectException(InvalidRequestException::class);

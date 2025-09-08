@@ -7,17 +7,13 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 // use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 // use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
-use Rector\Core\ValueObject\PhpVersion;
-use Rector\Set\ValueObject\DowngradeLevelSetList;
+use Rector\ValueObject\PhpVersion;
 
 abstract class AbstractDowngradeContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function configureContainer(): void
     {
         $this->rectorConfig->sets([
-            // When this is enabled, generating the plugin in GitHub takes more than 30 min!
-            // CustomDowngradeSetList::BEFORE_DOWNGRADE,
-
             /**
              * Watch out! Here it should use `DOWN_TO_PHP_74` to downgrade to PHP 7.4,
              * but there's a bug in which this code:
@@ -40,11 +36,13 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
              *
              * To avoid this problem, for the time being, use set `DOWN_TO_PHP_73`
              *
-             * @todo Upgrade Rector to v1 and try again
+             * @todo Upgrade Rector to v2.1 and try again
              * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2906
              */
-            // DowngradeLevelSetList::DOWN_TO_PHP_74,
-            DowngradeLevelSetList::DOWN_TO_PHP_73,
+            // Use direct file path for downgrade to PHP 7.4
+            // $this->rootDirectory . '/vendor/rector/rector/vendor/rector/rector-downgrade-php/config/set/level/down-to-php74.php',
+            // Use direct file path for downgrade to PHP 7.3
+            $this->rootDirectory . '/vendor/rector/rector/vendor/rector/rector-downgrade-php/config/set/level/down-to-php73.php',
         ]);
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
