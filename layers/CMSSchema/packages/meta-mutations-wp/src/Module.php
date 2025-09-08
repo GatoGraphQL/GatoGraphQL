@@ -20,16 +20,4 @@ class Module extends AbstractModule
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }
-
-    /**
-     * Initialize services
-     *
-     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
-     */
-    protected function initializeContainerServices(
-        bool $skipSchema,
-        array $skipSchemaModuleClasses,
-    ): void {
-        $this->initServices(dirname(__DIR__));
-    }
 }
