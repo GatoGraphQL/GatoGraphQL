@@ -53,7 +53,7 @@ final class VersionUtils
 
         return str_replace(
             ['<major>', '<minor>'],
-            [(string) $version->getMajor()->getValue() ?? '0', (string) $minor],
+            [(string) ($version->getMajor()->getValue() ?? '0'), (string) $minor],
             $this->packageAliasFormat
         );
     }

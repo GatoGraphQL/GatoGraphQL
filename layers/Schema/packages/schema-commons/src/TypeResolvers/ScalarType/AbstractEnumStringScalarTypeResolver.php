@@ -85,7 +85,7 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
             self::HOOK_POSSIBLE_VALUES,
             $this->getPossibleValues(),
             $this,
-        );
+        ) ?? [];
 
         if ($this->sortPossibleValues()) {
             sort($this->consolidatedPossibleValuesCache);

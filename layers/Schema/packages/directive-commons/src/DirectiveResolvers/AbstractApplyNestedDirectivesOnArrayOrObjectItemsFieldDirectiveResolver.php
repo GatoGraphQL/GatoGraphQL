@@ -353,6 +353,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          * cardinality, but the iterated elements must also receive the
                          * fieldTypeModifiers from the level above, as in this query:
                          *
+                         * ```graphql
+                         *
                          *   {
                          *     post(by: { id: 19 }) {
                          *       blockDataItems
@@ -361,6 +363,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          *             @export(as:"original")
                          *     }
                          *   }
+                         * ```
                          */
                         if (isset($fieldTypeModifiersByField[$field])) {
                             $fieldTypeModifiersByField[$arrayItemField] = $fieldTypeModifiersByField[$field];
