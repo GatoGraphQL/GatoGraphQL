@@ -182,7 +182,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "8.1",
         "gatographql/gatographql": "^13.3"
     },
     "require-dev": {

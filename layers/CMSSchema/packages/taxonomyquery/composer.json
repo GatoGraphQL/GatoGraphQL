@@ -181,7 +181,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "8.1",
         "getpop/engine": "^13.3"
     },
     "require-dev": {

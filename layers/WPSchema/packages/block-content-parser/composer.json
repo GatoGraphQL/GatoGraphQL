@@ -180,7 +180,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "8.1",
         "getpop/dom-crawler": "^13.3",
         "getpop/engine-wp": "^13.3"
     },

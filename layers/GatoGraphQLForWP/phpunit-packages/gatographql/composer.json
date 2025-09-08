@@ -170,7 +170,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "8.1",
         "phpunit-for-gatographql/dummy-schema": "^13.3",
         "phpunit-for-gatographql/dummy-wp-schema": "^13.3",
         "phpunit-for-gatographql/webserver-requests": "^13.3",
