@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
 use Rector\Contract\Rector\RectorInterface;
+
 // use Rector\DowngradePhp80\Rector\FunctionLike\DowngradeMixedTypeDeclarationRector;
 
 /**
