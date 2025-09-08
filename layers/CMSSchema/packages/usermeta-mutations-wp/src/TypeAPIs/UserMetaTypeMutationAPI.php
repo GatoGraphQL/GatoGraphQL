@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserMetaMutationsWP\TypeAPIs;
 
+use PoPCMSSchema\MetaMutationsWP\TypeAPIs\EntityMetaTypeMutationAPITrait;
 use PoPCMSSchema\UserMetaMutations\TypeAPIs\AbstractUserMetaTypeMutationAPI;
-use WP_Error;
 
+use WP_Error;
 use function add_user_meta;
 use function delete_user_meta;
 use function update_user_meta;
@@ -16,6 +17,8 @@ use function update_user_meta;
  */
 class UserMetaTypeMutationAPI extends AbstractUserMetaTypeMutationAPI
 {
+    use EntityMetaTypeMutationAPITrait;
+
     protected function executeAddEntityMeta(
         string|int $entityID,
         string $key,
