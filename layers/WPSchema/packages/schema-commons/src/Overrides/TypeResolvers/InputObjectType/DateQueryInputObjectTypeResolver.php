@@ -102,7 +102,7 @@ class DateQueryInputObjectTypeResolver extends UpstreamDateQueryInputObjectTypeR
      *
      * @see https://developer.wordpress.org/reference/classes/wp_query/#date-parameters
      *
-     * @param array<string,mixed> $query
+     * @param array<mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void

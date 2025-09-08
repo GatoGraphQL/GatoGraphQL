@@ -67,7 +67,7 @@ abstract class AbstractFilterCommentsByAuthorInputObjectTypeResolver extends Abs
     }
 
     /**
-     * @param array<string,mixed> $query
+     * @param array<mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void

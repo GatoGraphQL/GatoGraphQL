@@ -41,7 +41,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
      * The base behavior can only be applied when the value is an stdClass.
      * If it is an array, or array of arrays, then apply this logic recursively.
      *
-     * @param array<string,mixed> $query
+     * @param array<mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void
