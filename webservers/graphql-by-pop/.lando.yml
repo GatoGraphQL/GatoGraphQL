@@ -145,6 +145,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/meta-mutations:/app/vendor/pop-cms-schema/meta-mutations
         - >-
+          ../../layers/CMSSchema/packages/meta-mutations-wp:/app/vendor/pop-cms-schema/meta-mutations-wp
+        - >-
           ../../layers/CMSSchema/packages/metaquery-wp:/app/vendor/pop-cms-schema/metaquery-wp
         - >-
           ../../layers/CMSSchema/packages/page-mutations:/app/vendor/pop-cms-schema/page-mutations
