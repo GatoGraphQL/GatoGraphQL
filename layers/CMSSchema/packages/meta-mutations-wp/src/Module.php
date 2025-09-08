@@ -12,16 +12,6 @@ class Module extends AbstractModule
     /**
      * @return array<class-string<ModuleInterface>>
      */
-    public function getSatisfiedModuleClasses(): array
-    {
-        return [
-            \PoPCMSSchema\MetaMutations\Module::class,
-        ];
-    }
-
-    /**
-     * @return array<class-string<ModuleInterface>>
-     */
     public function getDependedModuleClasses(): array
     {
         return [
