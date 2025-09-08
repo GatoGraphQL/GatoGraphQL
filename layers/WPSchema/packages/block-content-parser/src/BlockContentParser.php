@@ -452,7 +452,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -481,7 +480,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -523,7 +521,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      * @param Crawler $crawler Crawler instance.
      * @param array<string,mixed> $block_attribute_definition Definition of the block attribute.
      *
-     * @return string|null
      *
      * @access private
      *
@@ -551,7 +548,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -617,7 +613,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -647,7 +642,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -680,7 +674,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
