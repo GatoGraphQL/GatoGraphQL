@@ -8,7 +8,7 @@ class BlockUtils
 {
     /**
      * @param array<array<string,mixed>> $blockDataItems
-     * @return array<array{blockName: string, attrs: array, innerBlocks: array<array>, innerHTML: string, innerContent: array}>
+     * @return array<array<string,mixed>>
      */
     public static function addInnerContentToBlockAttrs(array $blockDataItems): array
     {
