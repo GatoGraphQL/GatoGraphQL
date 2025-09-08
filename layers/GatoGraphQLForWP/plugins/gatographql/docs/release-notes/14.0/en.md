@@ -2,6 +2,7 @@
 
 ## Breaking changes
 
+- Upgraded min PHP version from 7.4 to 8.1 ([#3200](https://github.com/GatoGraphQL/GatoGraphQL/pull/3200))
 - Pass `object` param to `resolveMetaKeysValue` ([#3177](https://github.com/GatoGraphQL/GatoGraphQL/pull/3177))
 
 ## Added
