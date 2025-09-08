@@ -119,10 +119,6 @@ jobs:
             -   name: Install root dependencies
                 uses: ramsey/composer-install@v3
 
-    ###########################################################################
-    # Downgrade plugin
-    ###########################################################################
-
             # "custom-bump-interdependency" temporarily needed because of bug:
             # https://github.com/symplify/symplify/issues/2773
             -   name: Localize package paths
@@ -168,6 +164,9 @@ jobs:
                     composer install --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
+    ###########################################################################
+    # Downgrade from PHP 8.1 to 7.4
+    ###########################################################################
             # before_downgrade_code.sh => Hacks to fix the codebase in preparation of the Rector downgrade
             -   name: Custom bash script to fix items in the code in preparation for the Rector downgrade
                 run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}"
@@ -184,7 +183,6 @@ jobs:
                 run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}"
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code && needs.provide_data.outputs.enable_php_downgrade }}
-            ################################################################################
 
             -   name: Replace PHP version in plugin main file
                 run: |
@@ -205,6 +203,7 @@ jobs:
                 if: steps.check_readme_exists.outputs.files_exists == 'true'
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ needs.provide_data.outputs.enable_php_downgrade }}
+    ################################################################################
 
             # Add the commit hash to the plugin version, to regenerate the container when testing the generated plugin
             -   name: Append the the commit hash to the plugin/extension version
