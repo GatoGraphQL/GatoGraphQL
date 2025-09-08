@@ -8,7 +8,7 @@ class BlockUtils
 {
     /**
      * @param array<array<string,mixed>> $blockDataItems
-     * @return array<array<string,mixed>>
+     * @return array<array{blockName: string, attrs: array, innerBlocks: array<array>, innerHTML: string, innerContent: array}>
      */
     public static function addInnerContentToBlockAttrs(array $blockDataItems): array
     {
@@ -19,6 +19,7 @@ class BlockUtils
                 return [
                     ...$blockDataItem,
                     'innerContent' => $innerContentItems,
+                    'innerHTML' => '', // Required for serialize_blocks()
                 ];
             },
             $blockDataItems
