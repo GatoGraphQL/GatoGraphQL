@@ -13,6 +13,7 @@ use GraphQLByPoP\GraphQLServer\Registries\SchemaDefinitionReferenceRegistryInter
 use GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface;
 use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeDataLoader;
+use PoP\Root\Exception\ShouldNotHappenException;
 
 class WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader extends AbstractObjectTypeDataLoader
 {
@@ -78,16 +79,20 @@ class WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader extends Abstra
             }
             $wrappingType = null;
             if ($isNonNullWrappingType) {
-                /** @var TypeInterface */
                 $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
                     $this->getGraphQLSyntaxService()->extractWrappedTypeFromNonNullWrappingType($typeID)
                 );
+                if (! $wrappedType instanceof TypeInterface) {
+                    throw new ShouldNotHappenException(sprintf('Wrapped type %s is not an instance of TypeInterface', $typeID));
+                }
                 $wrappingType = new NonNullWrappingType($wrappedType);
             } else {
-                /** @var TypeInterface */
                 $wrappedType = $this->getWrappingTypeOrSchemaDefinitionReferenceObject(
                     $this->getGraphQLSyntaxService()->extractWrappedTypeFromListWrappingType($typeID)
                 );
+                if (! $wrappedType instanceof TypeInterface) {
+                    throw new ShouldNotHappenException(sprintf('Wrapped type %s is not an instance of TypeInterface', $typeID));
+                }
                 $wrappingType = new ListWrappingType($wrappedType);
             }
             $this->getObjectDictionary()->set($objectTypeResolverClass, $typeID, $wrappingType);
