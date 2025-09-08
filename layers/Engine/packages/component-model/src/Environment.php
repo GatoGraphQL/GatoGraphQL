@@ -38,7 +38,8 @@ class Environment
 
     public static function enableExtraRoutesByParams(): bool
     {
-        return getenv('ENABLE_EXTRA_ROUTES_BY_PARAMS') !== false ? strtolower(getenv('ENABLE_EXTRA_ROUTES_BY_PARAMS')) === "true" : false;
+        $envValue = getenv('ENABLE_EXTRA_ROUTES_BY_PARAMS');
+        return $envValue !== false ? strtolower($envValue) === "true" : false;
     }
 
     /**
@@ -51,6 +52,7 @@ class Environment
             return false;
         }
 
-        return getenv('COMPACT_RESPONSE_JSON_KEYS') !== false ? strtolower(getenv('COMPACT_RESPONSE_JSON_KEYS')) === "true" : false;
+        $envValue = getenv('COMPACT_RESPONSE_JSON_KEYS');
+        return $envValue !== false ? strtolower($envValue) === "true" : false;
     }
 }
