@@ -28,10 +28,6 @@ parameters:
 			path: src/FieldResolvers/ObjectType/AbstractReflectionPropertyObjectTypeFieldResolver.php
 		# Some bug in PHPStan
 		- 
-			message: '#Parameter \#2 \$callback of function array_filter expects \(callable\(int\|string\): mixed\)\|null, Closure\(string\): bool given\.#'
-			path: src/Misc/GeneralUtils.php
-		# Some bug in PHPStan
-		- 
 			message: '#Method PoP\\ComponentModel\\TypeResolvers\\ObjectType\\AbstractTransientObjectObjectTypeResolver::getID\(\) never returns null so it can be removed from the return type\.#'
 			path: src/TypeResolvers/ObjectType/AbstractTransientObjectObjectTypeResolver.php
 		# Some bug in PHPStan
