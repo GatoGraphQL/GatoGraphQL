@@ -225,7 +225,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
                 $scriptName,
                 $url . $style_css,
                 $this->getStyleDependencies(),
-                $modificationTime
+                (string) $modificationTime
             );
             wp_enqueue_style($scriptName);
         }
@@ -240,7 +240,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
                 $scriptName . 'style-index',
                 $url . $style_index_css,
                 $this->getStyleIndexDependencies(),
-                $modificationTime
+                (string) $modificationTime
             );
             wp_enqueue_style($scriptName . 'style-index');
         }
