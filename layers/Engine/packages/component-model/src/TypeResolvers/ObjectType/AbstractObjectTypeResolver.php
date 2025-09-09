@@ -1159,8 +1159,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * Please notice: $fieldName could be for either a Leaf or Relational Field,
              * but just to ask if the FieldResolver can resolve it, this doesn't make a
              * difference, so simply provide a LeafField always to make it simple.
-             *
-             * @var FieldInterface
              */
             $field = new LeafField(
                 $fieldName,
