@@ -33,4 +33,8 @@ parameters:
 		# Some bug in PHPStan
 		- 
 			message: '#Method PoP\\ComponentModel\\TypeResolvers\\ObjectType\\AbstractTransientObjectObjectTypeResolver::getID\(\) never returns null so it can be removed from the return type\.#'
-			path: src/TypeResolvers/ObjectType/AbstractTransientObjectObjectTypeResolver.php   
+			path: src/TypeResolvers/ObjectType/AbstractTransientObjectObjectTypeResolver.php
+		# Some bug in PHPStan
+		- 
+			message: '#Instanceof between array and PoP\\GraphQLParser\\ExtendedSpec\\Execution\\ValueResolutionPromiseInterface will always evaluate to false\.#'
+			path: src/Schema/InputCoercingService.php
