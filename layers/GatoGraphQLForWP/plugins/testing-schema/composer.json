@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^14.0"
+        "getpop/engine": "^14.1"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
@@ -219,7 +219,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "14.0-dev"
+            "dev-master": "14.1-dev"
         }
     },
     "config": {

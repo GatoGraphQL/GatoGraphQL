@@ -184,7 +184,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/root": "^14.0"
+        "getpop/root": "^14.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
@@ -210,7 +210,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "14.0-dev"
+            "dev-master": "14.1-dev"
         }
     },
     "config": {

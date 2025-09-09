@@ -185,7 +185,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "gatographql/gatographql": "^14.0"
+        "gatographql/gatographql": "^14.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
@@ -211,7 +211,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "14.0-dev"
+            "dev-master": "14.1-dev"
         }
     },
     "config": {
