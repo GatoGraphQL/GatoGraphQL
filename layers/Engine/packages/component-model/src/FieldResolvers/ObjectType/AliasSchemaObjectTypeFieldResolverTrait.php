@@ -109,7 +109,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): FieldDataAccessorInterface {
-        /** @var SplObjectStorage<FieldInterface,FieldInterface> */
+        /** @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface> */
         $this->aliasedFieldDataAccessorCache ??= new SplObjectStorage();
         if (!$this->aliasedFieldDataAccessorCache->contains($fieldDataAccessor)) {
             $this->aliasedFieldDataAccessorCache[$fieldDataAccessor] = $objectTypeResolver->createFieldDataAccessor(
