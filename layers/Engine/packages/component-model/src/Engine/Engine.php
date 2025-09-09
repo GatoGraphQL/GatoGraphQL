@@ -1570,6 +1570,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                         $referencer_model_props = &$referencer_model_props[$subcomponentFullName][Props::SUBCOMPONENTS];
                     }
 
+                    $referencer_component_props = [];
                     if (
                         in_array(
                             $datasource,
@@ -2070,9 +2071,13 @@ class Engine extends AbstractBasicService implements EngineInterface
                             }
                             // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
                             $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($componentFieldNode->getField()) && is_array($databases[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()]);
+                            // @phpstan-ignore-next-line
                             $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id] ??= new SplObjectStorage();
+                            // @phpstan-ignore-next-line
                             $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            // @phpstan-ignore-next-line
                             $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id] ??= new SplObjectStorage();
+                            // @phpstan-ignore-next-line
                             $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
@@ -2125,7 +2130,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                          * (that post was already loaded at the beginning)
                          */
                         $this->combineIDsDatafields(
-                            $engineState->relationalTypeOutputKeyIDFieldSets,
+                            $engineState->relationalTypeOutputKeyIDFieldSets, // @phpstan-ignore-line
                             $subcomponentTypeResolver,
                             $subcomponentTypeOutputKey,
                             array($field_id),
@@ -2185,6 +2190,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                         }
                     }
                 }
+                // @phpstan-ignore-next-line
                 $ret[$name] = $combined_databases;
             }
         }
