@@ -107,7 +107,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Override to express the additional type of Exception
      * that can be thrown.
      *
-     * @throws LogicErrorParserException
      * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
      * @throws UnsupportedSyntaxErrorParserException

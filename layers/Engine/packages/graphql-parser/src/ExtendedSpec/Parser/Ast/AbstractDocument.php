@@ -466,6 +466,7 @@ abstract class AbstractDocument extends UpstreamDocument
          */
         if (is_array($argumentValue)) {
             foreach ($argumentValue as $listValue) {
+                // @phpstan-ignore-next-line
                 if (!(is_array($listValue) || $listValue instanceof ObjectResolvedFieldValueReference || $listValue instanceof WithValueInterface)) {
                     continue;
                 }
@@ -478,6 +479,7 @@ abstract class AbstractDocument extends UpstreamDocument
             return $objectResolvedFieldValueReferences;
         }
         /** @var WithAstValueInterface $argumentValue */
+        // @phpstan-ignore-next-line
         $listValues = (array)$argumentValue->getAstValue();
         foreach ($listValues as $listValue) {
             if (!(is_array($listValue) || $listValue instanceof ObjectResolvedFieldValueReference || $listValue instanceof WithValueInterface)) {
