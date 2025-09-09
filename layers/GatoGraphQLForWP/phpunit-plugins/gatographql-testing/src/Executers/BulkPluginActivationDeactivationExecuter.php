@@ -70,6 +70,7 @@ class BulkPluginActivationDeactivationExecuter
             return;
         }
 
+        $skipDeactivatingPlugins = [];
         if ($executeBulkPluginDeactivation) {
             if (!App::getRequest()->query->has(Params::SKIP_DEACTIVATING_PLUGIN_FILES)) {
                 throw new RuntimeException(
