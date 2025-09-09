@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTagMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\TagMutations\Module;
-use PoPCMSSchema\TagMutations\ModuleConfiguration;
-use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\CreatePostTagTermBulkOperationMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\CreatePostTagTermMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\DeletePostTagTermBulkOperationMutationResolver;
@@ -25,8 +22,11 @@ use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\RootUpdatePostTa
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\RootCreatePostTagTermMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\RootDeletePostTagTermMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\RootUpdatePostTagTermMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
+use PoPCMSSchema\TagMutations\Module;
+use PoPCMSSchema\TagMutations\ModuleConfiguration;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -42,6 +42,7 @@ use PoP\Engine\Module as EngineModule;
 use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
+use PoP\Root\Exception\ShouldNotHappenException;
 
 class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -488,7 +489,7 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
                 'deletePostTags',
                 'deletePostTagMutationPayloadObjects'
                     => $this->getRootDeletePostTagTermMutationPayloadObjectTypeResolver(),
-                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+                default => throw new ShouldNotHappenException('No field resolver defined for field ' . $fieldName),
             };
         }
         return match ($fieldName) {
