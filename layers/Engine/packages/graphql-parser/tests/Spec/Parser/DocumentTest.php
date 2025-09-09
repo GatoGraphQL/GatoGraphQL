@@ -62,6 +62,7 @@ class DocumentTest extends AbstractTestCase
             }
         ');
         $document->validate();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -299,6 +300,7 @@ class DocumentTest extends AbstractTestCase
             }
         ');
         $document->validate();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
