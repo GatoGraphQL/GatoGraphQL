@@ -189,7 +189,7 @@ class ModuleSettingsAdminRESTController extends AbstractAdminRESTController
     {
         $item = $this->prepareItem($module);
         $response = rest_ensure_response($item);
-        // @phpstan-ignore-next-line        
+        // @phpstan-ignore-next-line
         if ($response instanceof WP_Error) {
             return $response;
         }

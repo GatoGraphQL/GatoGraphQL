@@ -63,7 +63,7 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
         /**
          * For PayloadObjects the type will always be
          * AbstractObjectMutationPayloadObjectTypeResolver.
-         * 
+         *
          * But as we define for both Payload/non-Payload objects
          * on the same `getFieldTypeResolver` function,
          * check that that's the type
