@@ -235,7 +235,6 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
          */
         if ($this->registerStyleIndexCSS()) {
             $style_index_css = 'build/style-index.css';
-            /** @var string */
             $modificationTime = filemtime("$dir/$style_index_css");
             wp_register_style(
                 $scriptName . 'style-index',
