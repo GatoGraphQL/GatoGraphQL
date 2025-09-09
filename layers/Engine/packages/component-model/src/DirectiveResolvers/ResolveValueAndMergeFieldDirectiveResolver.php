@@ -263,7 +263,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             !in_array($field, $documentObjectResolvedFieldValueReferencedFields)
             && (
                 $staticField === null
-                || ($staticField !== null && !in_array($staticField, $documentObjectResolvedFieldValueReferencedFields))
+                || !in_array($staticField, $documentObjectResolvedFieldValueReferencedFields)
             )
         ) {
             return;
