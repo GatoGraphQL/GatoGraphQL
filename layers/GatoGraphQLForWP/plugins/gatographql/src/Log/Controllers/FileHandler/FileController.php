@@ -574,6 +574,7 @@ class FileController
             );
         }
 
+        // @phpstan-ignore-next-line        
         require_once ABSPATH . 'wp-admin/includes/class-pclzip.php';
 
         $path       = trailingslashit($temp_dir) . "{$pluginNamespace}_logs_" . gmdate('Y-m-d_H-i-s') . '.zip';

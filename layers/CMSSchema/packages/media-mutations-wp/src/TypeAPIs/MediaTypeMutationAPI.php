@@ -158,6 +158,7 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         ?string $filename,
         array $mediaItemData,
     ): string|int {
+        // @phpstan-ignore-next-line        
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         /**
@@ -324,6 +325,7 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         string $mimeType,
         array $mediaItemData
     ): string|int {
+        // @phpstan-ignore-next-line        
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         $fileData = [
@@ -469,6 +471,7 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         string $filename,
         array $mediaItemData
     ): void {
+        // @phpstan-ignore-next-line        
         require_once ABSPATH . 'wp-admin/includes/image.php';
 
         $mediaItemMetaData = \wp_generate_attachment_metadata((int) $mediaItemID, $filename);
