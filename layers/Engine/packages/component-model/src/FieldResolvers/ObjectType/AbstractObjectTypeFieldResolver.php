@@ -245,6 +245,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     ): ObjectTypeFieldSchemaDefinitionResolverInterface | InterfaceTypeFieldSchemaDefinitionResolverInterface {
         if ($interfaceTypeFieldSchemaDefinitionResolver = $this->getInterfaceTypeFieldSchemaDefinitionResolver($objectTypeResolver, $fieldName)) {
             /** @var InterfaceTypeFieldSchemaDefinitionResolverInterface */
+            // @phpstan-ignore-next-line
             return $interfaceTypeFieldSchemaDefinitionResolver;
         }
         return $this;
