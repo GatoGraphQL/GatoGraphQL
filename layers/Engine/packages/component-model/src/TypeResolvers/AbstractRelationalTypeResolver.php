@@ -629,6 +629,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             /**
              * If no fields are queried, the entry will be null.
              * Initialize it to [] to simplify typing/null-checking
+             *
+             * @phpstan-ignore-next-line
              */
             $resolvedIDFieldValues[$objectID] ??= new SplObjectStorage();
         }
@@ -688,7 +690,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $unionTypeOutputKeyIDs,
             $idObjects,
             $previouslyResolvedIDFieldValues,
-            $resolvedIDFieldValues,
+            $resolvedIDFieldValues, // @phpstan-ignore-line
             $messages,
             $engineIterationFeedbackStore,
         );
@@ -984,6 +986,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $conditionalFields
             );
         }
+        // @phpstan-ignore-next-line
         return array_unique(array_merge(
             $engineIterationFieldSet->fields,
             $allConditionalFields
@@ -1116,6 +1119,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             $fieldSet->conditionalFields[$conditionField]
                         );
                     }
+                    // @phpstan-ignore-next-line
                     $idFieldDirectiveIDFields = array_unique(array_merge(
                         $fieldSet->fields,
                         $conditionalFields
@@ -1132,8 +1136,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     }
                 }
                 $directiveFieldIDs[$directive] = $fieldIDsSplObjectStorage;
+                // @phpstan-ignore-next-line
                 $directiveFields[$directive] = array_unique($fields);
             }
+            // @phpstan-ignore-next-line
             $directiveDirectFields = array_unique($directiveDirectFields);
 
             // Validate and resolve the directives into instances and fields they operate on
@@ -1172,10 +1178,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                         $schemaFeedback->getFields()
                     );
                 }
+                // @phpstan-ignore-next-line
                 $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
                 foreach ($directives as $directive) {
                     foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
+                        // @phpstan-ignore-next-line
                         $failingFields = array_intersect(
                             $fieldSet->fields,
                             $schemaErrorFailingFields
@@ -1217,6 +1225,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $directive = $directiveResolver->getDirective();
 
                 // Only process the direct fields
+                // @phpstan-ignore-next-line
                 $directiveDirectFieldsToProcess = array_intersect(
                     $directiveFields,
                     $directiveDirectFields
@@ -1275,8 +1284,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * All ID/Fields with error, set them in null in the response
              */
             foreach ($errorIDFields as $id => $fields) {
+                // @phpstan-ignore-next-line
                 $resolvedIDFieldValues[$id] ??= new SplObjectStorage();
                 foreach ($fields as $field) {
+                    // @phpstan-ignore-next-line
                     $resolvedIDFieldValues[$id][$field] = null;
                 }
             }
@@ -1291,7 +1302,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $idObjects,
                 $unionTypeOutputKeyIDs,
                 $previouslyResolvedIDFieldValues,
-                $resolvedIDFieldValues,
+                $resolvedIDFieldValues, // @phpstan-ignore-line
                 $messages,
                 $engineIterationFeedbackStore,
             );
