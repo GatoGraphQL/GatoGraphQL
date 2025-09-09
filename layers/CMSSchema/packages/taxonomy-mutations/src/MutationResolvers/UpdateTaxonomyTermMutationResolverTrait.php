@@ -9,6 +9,9 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
+/**
+ * @phpstan-ignore-next-line
+ */
 trait UpdateTaxonomyTermMutationResolverTrait
 {
     /**

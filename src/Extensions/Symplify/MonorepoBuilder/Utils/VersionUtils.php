@@ -42,19 +42,18 @@ final class VersionUtils
         $version = $this->normalizeVersion($version);
         $minor = $this->getCurrentMinorNumber($version);
 
-        return '^' . $version->getMajor()->getValue() . '.' . $minor;
+        return '^' . ($version->getMajor()->getValue() ?? '0') . '.' . $minor;
     }
 
     public function getCurrentAliasFormat(Version | string $version): string
     {
         $version = $this->normalizeVersion($version);
 
-        /** @var Version $minor */
         $minor = $this->getCurrentMinorNumber($version);
 
         return str_replace(
             ['<major>', '<minor>'],
-            [$version->getMajor()->getValue(), $minor],
+            [(string) ($version->getMajor()->getValue() ?? '0'), (string) $minor],
             $this->packageAliasFormat
         );
     }
@@ -70,6 +69,6 @@ final class VersionUtils
 
     private function getCurrentMinorNumber(Version $version): int
     {
-        return (int) $version->getMinor()->getValue();
+        return (int) ($version->getMinor()->getValue() ?? 0);
     }
 }

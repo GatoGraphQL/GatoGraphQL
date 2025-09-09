@@ -81,7 +81,7 @@ class DatabaseEntryManager extends AbstractBasicService implements DatabaseEntry
                 self::HOOK_DBNAME_TO_FIELDNAMES,
                 [],
                 $relationalTypeResolver
-            );
+            ) ?? [];
         }
         return $this->dbNameFieldNames;
     }

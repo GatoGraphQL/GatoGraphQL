@@ -8,7 +8,21 @@ class BlockUtils
 {
     /**
      * @param array<array<string,mixed>> $blockDataItems
-     * @return array<array<string,mixed>>
+     * @return mixed[] {
+     *     Array of block structures.
+     *
+     *     @type array ...$0 {
+     *         A representative array of a single parsed block object. See WP_Block_Parser_Block.
+     *
+     *         @type string   $blockName    Name of block.
+     *         @type array    $attrs        Attributes from block comment delimiters.
+     *         @type array[]  $innerBlocks  List of inner blocks. An array of arrays that
+     *                                      have the same structure as this one.
+     *         @type string   $innerHTML    HTML from inside block comment delimiters.
+     *         @type array    $innerContent List of string fragments and null markers where
+     *                                      inner blocks were found.
+     *     }
+     * }
      */
     public static function addInnerContentToBlockAttrs(array $blockDataItems): array
     {
@@ -19,6 +33,7 @@ class BlockUtils
                 return [
                     ...$blockDataItem,
                     'innerContent' => $innerContentItems,
+                    'innerHTML' => '', // Required for serialize_blocks()
                 ];
             },
             $blockDataItems

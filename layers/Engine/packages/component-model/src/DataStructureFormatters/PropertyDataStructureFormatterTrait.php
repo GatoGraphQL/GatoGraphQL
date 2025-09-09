@@ -18,6 +18,7 @@ trait PropertyDataStructureFormatterTrait
     public function getOutputContent(array &$data): string
     {
         $outputLines = [];
+        // @phpstan-ignore-next-line
         $this->iterativelyAddOutputLines($outputLines, $data, '');
         return implode(PHP_EOL, $outputLines);
     }

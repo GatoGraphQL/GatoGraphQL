@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
 
-interface FormInputComponentProcessorInterface
+interface FormInputComponentProcessorInterface extends ComponentProcessorInterface
 {
     /**
      * @param array<string,mixed>|null $source

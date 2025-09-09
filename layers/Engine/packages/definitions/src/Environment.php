@@ -8,14 +8,16 @@ class Environment
 {
     public static function disableDefinitions(): bool
     {
-        return getenv('DISABLE_DEFINITIONS') !== false ?
-            strtolower(getenv('DISABLE_DEFINITIONS')) === "true" :
+        $envValue = getenv('DISABLE_DEFINITIONS');
+        return $envValue !== false ?
+            strtolower($envValue) === "true" :
             false;
     }
     public static function disableDefinitionPersistence(): bool
     {
-        return getenv('DISABLE_DEFINITION_PERSISTENCE') !== false ?
-            strtolower(getenv('DISABLE_DEFINITION_PERSISTENCE')) === "true" :
+        $envValue = getenv('DISABLE_DEFINITION_PERSISTENCE');
+        return $envValue !== false ?
+            strtolower($envValue) === "true" :
             false;
     }
 }

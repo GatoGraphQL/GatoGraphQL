@@ -182,7 +182,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
      *
      * @see https://developer.wordpress.org/reference/classes/wp_meta_query/
      *
-     * @param array<string,mixed> $query
+     * @param array<mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue
      */
     public function integrateInputValueToFilteringQueryArgs(array &$query, stdClass|array $inputValue): void

@@ -91,7 +91,7 @@ trait WithArgumentsTrait
     /**
      * @param array<string,mixed> $values
      */
-    protected function doHasArgumentReferencingPromise(array $values): mixed
+    protected function doHasArgumentReferencingPromise(array $values): bool
     {
         foreach ($values as $value) {
             if ($value instanceof ValueResolutionPromiseInterface) {
@@ -118,7 +118,7 @@ trait WithArgumentsTrait
     /**
      * @param array<string,mixed> $values
      */
-    protected function doHasArgumentReferencingResolvedOnObjectPromise(array $values): mixed
+    protected function doHasArgumentReferencingResolvedOnObjectPromise(array $values): bool
     {
         foreach ($values as $value) {
             if ($value instanceof ValueResolutionPromiseInterface && $value->mustResolveOnObject()) {

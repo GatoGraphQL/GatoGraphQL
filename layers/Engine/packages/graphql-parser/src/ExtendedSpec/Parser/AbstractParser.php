@@ -107,7 +107,6 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Override to express the additional type of Exception
      * that can be thrown.
      *
-     * @throws LogicErrorParserException
      * @throws SyntaxErrorParserException
      * @throws FeatureNotSupportedException
      * @throws UnsupportedSyntaxErrorParserException
@@ -757,6 +756,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      */
     public function getObjectResolvedFieldValueReferencedFields(): array
     {
+        // @phpstan-ignore-next-line
         return array_values(array_unique($this->objectResolvedFieldValueReferencedFields));
     }
 

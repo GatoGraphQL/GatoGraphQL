@@ -6,14 +6,6 @@ parameters:
 	ignoreErrors:
 		# Some bug in PHPStan:
 		- 
-			message: '#Result of \|\| is always true\.#'
-			path: src/Spec/Parser/Ast/Document.php
-		# Some bug in PHPStan:
-		- 
-			message: '#Result of \|\| is always true\.#'
-			path: src/ExtendedSpec/Parser/Ast/AbstractDocument.php
-		# Some bug in PHPStan:
-		- 
 			message: '#If condition is always true\.#'
 			path: src/Spec/Parser/Parser.php
 		# Some bug in PHPStan:

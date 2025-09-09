@@ -147,7 +147,7 @@ trait EntityMetaTypeMutationAPITrait
                 $this->__('Error updating meta', 'meta-mutations')
             );
         }
-        /** @var int|bool $result */
+        /** @var int|true $result */
         return $result;
     }
 

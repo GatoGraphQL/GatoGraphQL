@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
-use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
+use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
@@ -624,6 +624,7 @@ class Document implements DocumentInterface
          */
         if (is_array($argumentValue)) {
             foreach ($argumentValue as $listValue) {
+                // @phpstan-ignore-next-line
                 if (!(is_array($listValue) || $listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
                     continue;
                 }
@@ -636,6 +637,7 @@ class Document implements DocumentInterface
             return $variableReferences;
         }
         /** @var WithAstValueInterface $argumentValue */
+        // @phpstan-ignore-next-line
         $listValues = (array)$argumentValue->getAstValue();
         foreach ($listValues as $listValue) {
             if (!(is_array($listValue) || $listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {

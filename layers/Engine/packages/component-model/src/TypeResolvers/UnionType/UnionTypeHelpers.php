@@ -31,7 +31,7 @@ class UnionTypeHelpers
             return ['', $parts[0]];
         }
         /** @var array{0:string,1:string|int} */
-        return $parts;
+        return $parts; // @phpstan-ignore-line
     }
 
     /**

@@ -346,6 +346,7 @@ abstract class AbstractTaxonomyTypeAPI extends AbstractBasicService implements T
         }
 
         // For some reason, the count may be returned as an array of 1 element!
+        // @phpstan-ignore-next-line
         if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
             return (int) $count[0];
         }

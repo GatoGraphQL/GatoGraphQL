@@ -81,7 +81,7 @@ class PostCategoryTypeAPI extends AbstractCategoryTypeAPI implements PostCategor
             $customPostTypeTaxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
             $this->registeredPostCategoryTaxonomyNames = array_values(array_filter(
                 $customPostTypeTaxonomyNames,
-                fn (string $taxonomyName) => $taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName)
+                fn (string $taxonomyName) => $taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName) ?? false
             ));
         }
         return $this->registeredPostCategoryTaxonomyNames;

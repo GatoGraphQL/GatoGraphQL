@@ -7,6 +7,7 @@ namespace PoP\Root\Module;
 use PoP\Root\App;
 use PoP\Root\Container\Loader\SchemaServiceYamlFileLoader;
 use PoP\Root\Container\Loader\ServiceYamlFileLoader;
+use PoP\Root\Exception\ShouldNotHappenException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -27,8 +28,10 @@ trait InitializeContainerServicesInModuleTrait
         }
 
         // Initialize the ContainerBuilder with this module's service implementations
-        /** @var ContainerBuilder */
         $containerBuilder = App::getContainer();
+        if (!$containerBuilder instanceof ContainerBuilder) {
+            throw new ShouldNotHappenException('Container builder is not an instance of ContainerBuilder');
+        }
         $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $moduleDir, $configPath, $fileName);
     }
 
@@ -73,8 +76,10 @@ trait InitializeContainerServicesInModuleTrait
             return;
         }
 
-        /** @var ContainerBuilder */
         $containerBuilder = App::getContainer();
+        if (!$containerBuilder instanceof ContainerBuilder) {
+            throw new ShouldNotHappenException('Container builder is not an instance of ContainerBuilder');
+        }
         $modulePath = $this->getModulePath($moduleDir, $configPath);
         $autoconfigure = !$skipSchema;
         $loader = new SchemaServiceYamlFileLoader(
@@ -99,8 +104,10 @@ trait InitializeContainerServicesInModuleTrait
         }
 
         // Initialize the ContainerBuilder with this module's service implementations
-        /** @var ContainerBuilder */
         $containerBuilder = App::getSystemContainer();
+        if (!$containerBuilder instanceof ContainerBuilder) {
+            throw new ShouldNotHappenException('Container builder is not an instance of ContainerBuilder');
+        }
         $this->loadServicesFromYAMLConfigIntoContainer($containerBuilder, $moduleDir, $configPath, $fileName);
     }
 }

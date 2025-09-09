@@ -113,7 +113,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         foreach ($mappings as $mapping) {
             /** @var string */
             $module = $mapping['module'];
-            /** @var bool */
+            /** @var string|bool */
             $condition = $mapping['condition'] ?? true;
             // Check if the hook must be executed always (condition => 'any') or with
             // stated enabled (true) or disabled (false). By default, it's enabled

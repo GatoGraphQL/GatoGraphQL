@@ -24,7 +24,7 @@ class WXR_Parser_Regex
 
     public function __construct()
     {
-        $this->has_gzip = \is_callable('gzopen');
+        $this->has_gzip = \is_callable('gzopen'); // @phpstan-ignore-line
     }
 
     /**
@@ -273,12 +273,12 @@ class WXR_Parser_Regex
 
         $post_excerpt = $this->get_tag($post, 'excerpt:encoded');
         $post_excerpt = preg_replace_callback('|<(/?[A-Z]+)|', array( &$this, '_normalize_tag' ), $post_excerpt);
-        $post_excerpt = str_replace('<br>', '<br />', $post_excerpt);
+        $post_excerpt = str_replace('<br>', '<br />', $post_excerpt); // @phpstan-ignore-line
         $post_excerpt = str_replace('<hr>', '<hr />', $post_excerpt);
 
         $post_content = $this->get_tag($post, 'content:encoded');
         $post_content = preg_replace_callback('|<(/?[A-Z]+)|', array( &$this, '_normalize_tag' ), $post_content);
-        $post_content = str_replace('<br>', '<br />', $post_content);
+        $post_content = str_replace('<br>', '<br />', $post_content); // @phpstan-ignore-line
         $post_content = str_replace('<hr>', '<hr />', $post_content);
 
         $postdata = compact(

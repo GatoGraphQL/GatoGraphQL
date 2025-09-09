@@ -62,8 +62,10 @@ trait GraphQLServerTestExecuterTrait
             'Content-Type',
             'application/json'
         ));
-        /** @var string */
         $jsonResponse = json_encode($json);
+        if ($jsonResponse === false) {
+            exit;
+        }
         echo $jsonResponse;
         exit;
     }

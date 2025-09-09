@@ -85,7 +85,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function createInitializationConfiguration(): MainPluginInitializationConfigurationInterface
     {
         $pluginInitializationConfigurationClass = $this->getPluginInitializationConfigurationClass();
-        /** @var AbstractMainPluginInitializationConfiguration $pluginInitializationConfigurationClass */
         return new $pluginInitializationConfigurationClass($this);
     }
 

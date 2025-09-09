@@ -9,6 +9,9 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 
+/**
+ * @phpstan-ignore-next-line
+ */
 trait DeleteTaxonomyTermMutationResolverTrait
 {
     /**

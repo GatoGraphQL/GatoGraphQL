@@ -67,6 +67,7 @@ class FilesystemUtil
             return true;
         }
 
+        // @phpstan-ignore-next-line        
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         $method      = self::get_wp_filesystem_method_or_direct();

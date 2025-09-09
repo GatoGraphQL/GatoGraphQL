@@ -10,6 +10,7 @@ class Environment
 
     public static function disableGatoGraphQL(): bool
     {
-        return getenv('DISABLE_GRAPHQL_API') !== false ? strtolower(getenv('DISABLE_GRAPHQL_API')) === "true" : false;
+        $envValue = getenv('DISABLE_GRAPHQL_API');
+        return $envValue !== false ? strtolower($envValue) === "true" : false;
     }
 }

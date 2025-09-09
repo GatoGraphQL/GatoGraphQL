@@ -44,7 +44,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
             HookNames::INPUT_FIELD_NAME_MUTATION_RESOLVERS,
             $this->getInputFieldNameMutationResolvers(),
             $this,
-        );
+        ) ?? [];
         return $this->consolidatedInputFieldNameMutationResolversCache;
     }
 

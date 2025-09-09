@@ -17,6 +17,10 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 use WP_Error;
 
+use function wp_insert_post;
+use function serialize_blocks;
+use function wp_insert_term;
+
 class PluginDataSetupService implements PluginDataSetupServiceInterface
 {
     use StandaloneServiceTrait;
@@ -136,7 +140,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
         /** @var GraphQLEndpointCategoryTaxonomy */
         $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
 
-        $endpointCategoryTerm = \wp_insert_term(
+        $endpointCategoryTerm = wp_insert_term(
             $name,
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             [

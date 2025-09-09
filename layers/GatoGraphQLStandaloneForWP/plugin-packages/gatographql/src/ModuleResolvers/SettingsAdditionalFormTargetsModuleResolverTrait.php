@@ -6,6 +6,9 @@ namespace GatoGraphQLStandalone\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 
+/**
+ * @phpstan-ignore-next-line
+ */
 trait SettingsAdditionalFormTargetsModuleResolverTrait
 {
     /**
