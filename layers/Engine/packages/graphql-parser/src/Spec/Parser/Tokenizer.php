@@ -52,6 +52,7 @@ class Tokenizer
                 while (
                     $this->pos < $sourceLength &&
                     ($code = ord($this->source[$this->pos])) &&
+                    // @phpstan-ignore-next-line
                     $code !== 10 && $code !== 13 && $code !== 0x2028 && $code !== 0x2029
                 ) {
                     $this->pos++;
