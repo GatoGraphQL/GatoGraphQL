@@ -12,16 +12,17 @@ use PoP\Root\App;
 trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
 {
     /**
-     * @return array<int|string,int|string>
+     * @return array<string,string>
      */
     protected function getCacheReplacements(): array
     {
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
+        // @phpstan-ignore-next-line
         return [
             $moduleInfo->getUniqueID() => CachePlaceholders::UNIQUE_ID,
-            $moduleInfo->getRand() => CachePlaceholders::RAND,
-            $moduleInfo->getTime() => CachePlaceholders::TIME,
+            (string) $moduleInfo->getRand() => CachePlaceholders::RAND,
+            (string) $moduleInfo->getTime() => CachePlaceholders::TIME,
         ];
     }
 
