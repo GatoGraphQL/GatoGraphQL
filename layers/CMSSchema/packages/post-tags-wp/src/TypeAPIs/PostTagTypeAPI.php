@@ -81,7 +81,7 @@ class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterfa
             $customPostTypeTaxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
             $this->registeredPostTagTaxonomyNames = array_values(array_filter(
                 $customPostTypeTaxonomyNames,
-                fn (string $taxonomyName) => !$taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName)
+                fn (string $taxonomyName) => !($taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName) ?? false)
             ));
         }
         return $this->registeredPostTagTaxonomyNames;
