@@ -44,6 +44,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -157,6 +158,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -244,6 +246,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -297,6 +300,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -339,6 +343,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
