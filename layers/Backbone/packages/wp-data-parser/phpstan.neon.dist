@@ -39,10 +39,6 @@ parameters:
 			path: src/Parsers/WXR_Parser_SimpleXML.php
 			count: 4
 		- 
-			message: '#Parameter \#3 \$subject of function str_replace expects array\|string, string\|null given\.#'
-			path: src/Parsers/WXR_Parser_Regex.php
-			count: 2
-		- 
 			message: '#Property PoPBackbone\\WPDataParser\\Parsers\\WXR_Parser_XML::\$(authors|posts|base_url) is never read, only written\.#'
 			path: src/Parsers/WXR_Parser_XML.php
 			count: 3
