@@ -423,20 +423,24 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Validate if the directive can be executed multiple times on each field
             if (!$directiveResolver->isRepeatable()) {
                 // Check if the directive is already processing any of the fields
+                // @phpstan-ignore-next-line
                 $alreadyProcessingFields = array_intersect(
                     $directiveFieldTrack[$directiveName] ?? [],
                     $directiveResolverFields
                 );
+                // @phpstan-ignore-next-line
                 $directiveFieldTrack[$directiveName] = array_unique(array_merge(
                     $directiveFieldTrack[$directiveName] ?? [],
                     $directiveResolverFields
                 ));
                 if ($alreadyProcessingFields) {
                     // Remove the fields from this iteration, and add an error
+                    // @phpstan-ignore-next-line
                     $directiveResolverFields = array_diff(
                         $directiveResolverFields,
                         $alreadyProcessingFields
                     );
+                    // @phpstan-ignore-next-line
                     if ($alreadyProcessingFields !== []) {
                         $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                             new SchemaFeedback(
