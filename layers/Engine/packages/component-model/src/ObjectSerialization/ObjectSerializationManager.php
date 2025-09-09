@@ -24,11 +24,10 @@ class ObjectSerializationManager extends AbstractBasicService implements ObjectS
     {
         // Find the Serialize that serializes this object
         $objectSerializer = null;
-        /** @var string|false */
         $classToSerialize = $object::class;
         while ($objectSerializer === null && $classToSerialize !== false) {
             $objectSerializer = $this->objectSerializers[$classToSerialize] ?? null;
-            $classToSerialize = \get_parent_class($classToSerialize);
+            $classToSerialize = get_parent_class($classToSerialize);
         }
         if ($objectSerializer !== null) {
             return $objectSerializer->serialize($object);
