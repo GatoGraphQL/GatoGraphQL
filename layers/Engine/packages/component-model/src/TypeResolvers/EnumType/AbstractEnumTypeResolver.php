@@ -148,7 +148,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array|stdClass
     {
-        /** @var string|int|float|bool|mixed[] */
+        /** @var string|int|float|bool|stdClass */
         return $scalarValue;
     }
 

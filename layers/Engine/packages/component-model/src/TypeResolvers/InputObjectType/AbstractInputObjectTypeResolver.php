@@ -190,6 +190,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
     }
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     final public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
         AstInterface $astNode,
