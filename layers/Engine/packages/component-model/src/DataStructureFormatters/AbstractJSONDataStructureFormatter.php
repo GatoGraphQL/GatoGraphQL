@@ -57,9 +57,11 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
              * "userstatedatabase", showing different fields on each.
              */
             foreach ($databases as $databaseName => $database) {
+                // @phpstan-ignore-next-line
                 $this->addDatabaseOutput($database, $outputDatabase);
             }
         } elseif ($dboutputmode === DatabasesOutputModes::COMBINED) {
+            // @phpstan-ignore-next-line
             $this->addDatabaseOutput($databases, $outputDatabase);
         }
 
