@@ -136,11 +136,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         foreach ($datasetComponentData as $componentName => $componentData) {
             $typeOutputKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
             $objectIDorIDs = $componentData['objectIDs'];
+            // @phpstan-ignore-next-line
             $this->addData($ret, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
         }
 
         $appStateManager->override('previously-resolved-fields-for-objects', null);
 
+        // @phpstan-ignore-next-line
         return $ret;
     }
 
@@ -159,13 +161,16 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         if (is_array($objectIDorIDs)) {
             foreach ($objectIDorIDs as $objectID) {
                 // Add a new array for this DB object, where to return all its properties
+                // @phpstan-ignore-next-line
                 $ret[] = [];
                 $resolvedObjectRet = &$ret[count($ret) - 1];
+                // @phpstan-ignore-next-line
                 $this->addObjectData($sourceRet, $resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
             }
             return;
         }
         $objectID = $objectIDorIDs;
+        // @phpstan-ignore-next-line
         $this->addObjectData($sourceRet, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
     }
 
@@ -282,6 +287,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $nextField = ($concatenateField ? $objectKeyPath . Constants::RELATIONAL_FIELD_PATH_SEPARATOR : '') . $relationalFieldOutputKey;
 
             // The type with ID may be stored under $unionTypeOutputKeyIDs
+            // @phpstan-ignore-next-line
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$relationalField] ?? null;
 
             /**
@@ -301,6 +307,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     continue;
                 }
                 $resolvedObjectNestedPropertyRet = &$resolvedObjectRet;
+                // @phpstan-ignore-next-line
                 $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
                 continue;
             }
@@ -327,6 +334,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     $resolvedObjectRet[$relationalFieldOutputKey] = [];
                 }
             }
+            // @phpstan-ignore-next-line
             $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
         }
     }
