@@ -207,14 +207,13 @@ services:
 4. Execute `composer update-monorepo` to regenerate `composer.json`
 5. Add the new plugin and packages to the VSCode mapping
 6. Add the new plugin and packages to the Lando webserver config
-7. Create the Rector config files to downgrade the plugin
-8. Update the configuration in `PluginDataSource` to generate the new plugin
-9. Update the configuration in `DataToAppendAndRemoveDataSource` to remove the 3rd-party plugin from `require-dev`
-10. Implement the logic to extend the GraphQL schema for the integration
-11. Add a new module for Gato GraphQL
-12. Add the module documentation
-13. Create integration tests
-14. Execute `composer init-server` to start the Lando webserver
+7. Update the configuration in `PluginDataSource` to generate the new plugin
+8. Update the configuration in `DataToAppendAndRemoveDataSource` to remove the 3rd-party plugin from `require-dev`
+9. Implement the logic to extend the GraphQL schema for the integration
+10. Add a new module for Gato GraphQL
+11. Add the module documentation
+12. Create integration tests
+13. Execute `composer init-server` to start the Lando webserver
 
 ### Security Practices
 
