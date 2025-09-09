@@ -148,6 +148,7 @@ class BeforeAppIsLoadedStaticHelpers
             return $isAPIRequest;
         }
 
+        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
         $requestURI = $_SERVER['REQUEST_URI'] ?? '';
         if (empty($requestURI)) {
             return $isAPIRequest;

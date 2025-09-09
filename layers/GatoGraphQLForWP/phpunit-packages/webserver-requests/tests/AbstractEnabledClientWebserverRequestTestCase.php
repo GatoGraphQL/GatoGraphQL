@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 /**
  * Test that enabling/disabling clients (GraphiQL/Voyager)
  * in Custom Endpoints works well
@@ -12,7 +14,7 @@ abstract class AbstractEnabledClientWebserverRequestTestCase extends AbstractWeb
 {
     use ClientWebserverRequestTestCaseTrait;
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('provideEnabledClientEntries')]
+    #[DataProvider('provideEnabledClientEntries')]
     public function testEnabledClients(
         string $clientEndpoint,
     ): void {

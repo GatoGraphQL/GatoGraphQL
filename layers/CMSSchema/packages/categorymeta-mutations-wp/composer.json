@@ -157,7 +157,6 @@
         "pop-cms-schema/usermeta-mutations-wp": "<13.2.0",
         "pop-cms-schema/tagmeta-mutations-wp": "<13.2.0",
         "pop-cms-schema/usermeta-mutations": "<13.2.0",
-        "pop-cms-schema/meta-mutations": "<13.2.0",
         "pop-cms-schema/user-mutations": "<13.2.0",
         "pop-cms-schema/commentmeta-mutations": "<13.2.0",
         "pop-cms-schema/commentmeta-mutations-wp": "<13.2.0",
@@ -188,11 +187,11 @@
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
-        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
-        "rector/rector": "^0.18",
+        "rector/rector": "^2.1",
         "squizlabs/php_codesniffer": "^3.6",
-        "szepeviktor/phpstan-wordpress": "^1.0",
+        "szepeviktor/phpstan-wordpress": "^2.0",
         "wp-coding-standards/wpcs": "^3.0"
     },
     "autoload": {

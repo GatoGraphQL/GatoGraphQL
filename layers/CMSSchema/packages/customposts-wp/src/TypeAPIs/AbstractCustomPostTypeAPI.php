@@ -395,6 +395,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
         // Function get_sample_permalink comes from the file below, so it must be included
         // Code below copied from `function get_sample_permalink_html`
+        // @phpstan-ignore-next-line
         include_once ABSPATH . 'wp-admin/includes/post.php';
         list($permalink, $post_name) = get_sample_permalink($customPostID, null, null);
         return str_replace(['%pagename%', '%postname%'], $post_name, $permalink);
@@ -417,6 +418,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
         // Function get_sample_permalink comes from the file below, so it must be included
         // Code below copied from `function get_sample_permalink_html`
+        // @phpstan-ignore-next-line
         include_once ABSPATH . 'wp-admin/includes/post.php';
         list($permalink, $post_name) = get_sample_permalink((int)$customPostID, null, null);
         return $post_name;

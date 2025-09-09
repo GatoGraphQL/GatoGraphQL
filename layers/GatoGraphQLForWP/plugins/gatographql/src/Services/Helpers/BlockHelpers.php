@@ -7,12 +7,16 @@ namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
 use WP_Post;
 
+use function parse_blocks;
+use function is_object;
+use function get_post;
+
 class BlockHelpers
 {
     /**
      * After parsing a post, cache its blocks
      *
-     * @var array<int,array<string,mixed>>
+     * @var array<int,array<mixed>>
      */
     protected array $blockCache = [];
 
@@ -24,12 +28,12 @@ class BlockHelpers
     public function getBlocksFromCustomPost(
         WP_Post|int $configurationPostOrID
     ): array {
-        if (\is_object($configurationPostOrID)) {
+        if (is_object($configurationPostOrID)) {
             $configurationPost = $configurationPostOrID;
             $configurationPostID = $configurationPost->ID;
         } else {
             $configurationPostID = $configurationPostOrID;
-            $configurationPost = \get_post($configurationPostID);
+            $configurationPost = get_post($configurationPostID);
         }
         /**
          * If there's either no post or ID, then that object
@@ -47,7 +51,7 @@ class BlockHelpers
         if (isset($this->blockCache[$configurationPostID])) {
             $blocks = $this->blockCache[$configurationPostID];
         } else {
-            $blocks = \parse_blocks($configurationPost->post_content);
+            $blocks = parse_blocks($configurationPost->post_content);
             $this->blockCache[$configurationPostID] = $blocks;
         }
 

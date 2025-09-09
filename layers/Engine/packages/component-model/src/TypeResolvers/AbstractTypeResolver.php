@@ -56,7 +56,6 @@ abstract class AbstractTypeResolver extends AbstractBasicService implements Type
 
     protected function getClassToNamespace(): string
     {
-        /** @var string */
         return get_called_class();
     }
 

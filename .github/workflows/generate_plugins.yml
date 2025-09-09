@@ -51,7 +51,7 @@ jobs:
         name: Provide configuration to generate plugins
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v4
+            -   uses: actions/checkout@v5
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
@@ -70,6 +70,7 @@ jobs:
                     filter_arg="--filter=$(echo '${{ env.GENERATE_PLUGINS_FILTER }}' | sed -e 's/ / --filter=/g')"
                     slugs_arg="--slugs=$(echo '${{ env.GENERATE_PLUGINS_SLUGS }}' | sed -e 's/ / --slugs=/g')"
                     echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json $(echo $filter_arg) $(echo $slugs_arg) --config=config/monorepo-builder/plugin-config-entries-json.php)" >> $GITHUB_OUTPUT
+                    echo "enable_php_downgrade=$(vendor/bin/monorepo-builder env-var ENABLE_PHP_DOWNGRADE --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "retention_days_for_generated_plugins=$(vendor/bin/monorepo-builder env-var RETENTION_DAYS_FOR_GENERATED_PLUGINS --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "local_package_owners=$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)" >> $GITHUB_OUTPUT
                     echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
@@ -77,6 +78,7 @@ jobs:
                     echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
+            enable_php_downgrade: ${{ steps.output_data.outputs.enable_php_downgrade }}
             retention_days: ${{ steps.output_data.outputs.retention_days_for_generated_plugins }}
             local_package_owners: ${{ steps.output_data.outputs.local_package_owners }}
             git_base_branch: ${{ steps.output_data.outputs.git_base_branch }}
@@ -94,7 +96,7 @@ jobs:
                 pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v4
+                uses: actions/checkout@v5
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
@@ -116,10 +118,6 @@ jobs:
 
             -   name: Install root dependencies
                 uses: ramsey/composer-install@v3
-
-    ###########################################################################
-    # Downgrade plugin
-    ###########################################################################
 
             # "custom-bump-interdependency" temporarily needed because of bug:
             # https://github.com/symplify/symplify/issues/2773
@@ -166,39 +164,45 @@ jobs:
                     composer install --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
+    ###########################################################################
+    # Downgrade from PHP 8.1 to 7.4
+    ###########################################################################
             # before_downgrade_code.sh => Hacks to fix the codebase in preparation of the Rector downgrade
             -   name: Custom bash script to fix items in the code in preparation for the Rector downgrade
                 run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}"
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}
+                if: ${{ matrix.pluginConfig.bashScripts.before_downgrade_code && needs.provide_data.outputs.enable_php_downgrade }}
 
             # additional_rector_after_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.4)
                 run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_before_configs }}" "${{ matrix.pluginConfig.additional_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
+                if: ${{ needs.provide_data.outputs.enable_php_downgrade }}
 
             # after_downgrade_code.sh => Hacks to fix the codebase whenever Rector cannot handle it
             -   name: Custom bash script to fix items in the code that Rector cannot handle
                 run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}"
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}
-            ################################################################################
+                if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code && needs.provide_data.outputs.enable_php_downgrade }}
 
             -   name: Replace PHP version in plugin main file
                 run: |
                     sed -i 's/Requires PHP: 8.1/Requires PHP: 7.4/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ needs.provide_data.outputs.enable_php_downgrade }}
 
             -   name: Check if readme.txt exists
                 uses: andstor/file-existence-action@v3
                 id: check_readme_exists
                 with:
                     files: "${{ matrix.pluginConfig.path }}/readme.txt"
+                if: ${{ needs.provide_data.outputs.enable_php_downgrade }}
 
             -   name: Replace PHP version in plugin readme file
                 run: |
                     sed -i 's/Requires PHP: 8.1/Requires PHP: 7.4/' readme.txt
-                if: steps.check_readme_exists.outputs.files_exists == 'true'
                 working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ steps.check_readme_exists.outputs.files_exists == 'true' && needs.provide_data.outputs.enable_php_downgrade }}
+    ################################################################################
 
             # Add the commit hash to the plugin version, to regenerate the container when testing the generated plugin
             -   name: Append the the commit hash to the plugin/extension version

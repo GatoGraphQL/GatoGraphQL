@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\Plugins\ChainedRules;
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\AbstractPluginArrowFnUnionTypeChainedRuleContainerConfigurationService;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\AbstractPluginCovariantReturnTypeChainedRuleContainerConfigurationService;
 use PoP\PoP\Config\Rector\Downgrade\Configurators\Plugins\GatoGraphQLContainerConfigurationServiceTrait;
 
-class GatoGraphQLCovariantReturnTypeChainedRuleContainerConfigurationService extends AbstractPluginArrowFnUnionTypeChainedRuleContainerConfigurationService
+class GatoGraphQLCovariantReturnTypeChainedRuleContainerConfigurationService extends AbstractPluginCovariantReturnTypeChainedRuleContainerConfigurationService
 {
     use GatoGraphQLContainerConfigurationServiceTrait;
 

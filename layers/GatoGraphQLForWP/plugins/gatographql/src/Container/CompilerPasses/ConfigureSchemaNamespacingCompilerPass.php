@@ -77,6 +77,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPCMSSchema\Menus\Module::class,
             \PoPCMSSchema\Meta\Module::class,
             \PoPCMSSchema\MetaMutations\Module::class,
+            \PoPCMSSchema\MetaMutationsWP\Module::class,
             \PoPCMSSchema\PageMutations\Module::class,
             \PoPCMSSchema\PageMutationsWP\Module::class,
             \PoPCMSSchema\PageMetaMutations\Module::class,

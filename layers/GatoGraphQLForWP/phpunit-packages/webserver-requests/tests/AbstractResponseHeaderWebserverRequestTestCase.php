@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 abstract class AbstractResponseHeaderWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
-    #[\PHPUnit\Framework\Attributes\DataProvider('provideResponseHeaderEntries')]
+    #[DataProvider('provideResponseHeaderEntries')]
     public function testResponseHeader(
         string $endpoint,
         string $expectedResponseHeaderValue,

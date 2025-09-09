@@ -100,7 +100,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
             $this->getInputFieldNameTypeResolvers(),
             $this,
-        );
+        ) ?? [];
 
         // Maybe exclude the sensitive input fields
         /** @var ModuleConfiguration */
@@ -132,7 +132,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             HookNames::SENSITIVE_INPUT_FIELD_NAMES,
             $this->getSensitiveInputFieldNames(),
             $this,
-        );
+        ) ?? [];
         return $this->consolidatedSensitiveInputFieldNames;
     }
 
@@ -190,6 +190,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
     }
 
+    /**
+     * @phpstan-ignore-next-line
+     */
     final public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
         AstInterface $astNode,

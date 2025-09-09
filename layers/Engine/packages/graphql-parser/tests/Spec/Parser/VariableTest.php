@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
@@ -15,7 +16,7 @@ class VariableTest extends AbstractTestCase
     /**
      * Test if variable value equals expected value
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('variableProvider')]
+    #[DataProvider('variableProvider')]
     public function testGetValue(mixed $actual, mixed $expected): void
     {
         $var = new Variable('foo', 'bar', false, false, true, false, false, [], new Location(1, 1));

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Ast;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -22,7 +23,7 @@ use stdClass;
 
 class FieldEqualsToTest extends AbstractTestCase
 {
-    #[\PHPUnit\Framework\Attributes\DataProvider('getLeafFieldEqualsToLeafFieldProviderEntries')]
+    #[DataProvider('getLeafFieldEqualsToLeafFieldProviderEntries')]
     public function testLeafFieldEqualsToLeafField(
         LeafField $leafField1,
         LeafField $leafField2
@@ -111,7 +112,7 @@ class FieldEqualsToTest extends AbstractTestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('getLeafFieldDoesNotEqualToLeafFieldProviderEntries')]
+    #[DataProvider('getLeafFieldDoesNotEqualToLeafFieldProviderEntries')]
     public function testLeafFieldDoesNotEqualToLeafField(
         LeafField $leafField1,
         LeafField $leafField2
@@ -227,7 +228,7 @@ class FieldEqualsToTest extends AbstractTestCase
     /**
      * @param Fragment[] $fragments
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('getRelationalFieldEqualsToRelationalFieldProviderEntries')]
+    #[DataProvider('getRelationalFieldEqualsToRelationalFieldProviderEntries')]
     public function testRelationalFieldEqualsToRelationalField(
         RelationalField $relationalField1,
         RelationalField $relationalField2,
@@ -291,7 +292,7 @@ class FieldEqualsToTest extends AbstractTestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries')]
+    #[DataProvider('getRelationalFieldDoesNotEqualToRelationalFieldProviderEntries')]
     public function testRelationalFieldDoesNotEqualToRelationalField(
         RelationalField $relationalField1,
         RelationalField $relationalField2

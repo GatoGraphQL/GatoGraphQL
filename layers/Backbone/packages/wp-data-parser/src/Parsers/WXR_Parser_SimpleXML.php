@@ -32,17 +32,17 @@ class WXR_Parser_SimpleXML
         /**
          * @todo Migrate `libxml_disable_entity_loader`, deprecated in PHP 8.0. Temporarily running code only in lower PHP versions.
          */
-        if (PHP_VERSION_ID < 80000) {
+        if (PHP_VERSION_ID < 80000) { // @phpstan-ignore-line
             if (function_exists('libxml_disable_entity_loader')) {
                 $old_value = libxml_disable_entity_loader(true);
             }
         }
         $success = $dom->loadXML(file_get_contents($file));
-        if (! is_null($old_value)) {
+        if (! is_null($old_value)) { // @phpstan-ignore-line
             /**
              * @todo Migrate `libxml_disable_entity_loader`, deprecated in PHP 8.0. Temporarily running code only in lower PHP versions.
              */
-            if (PHP_VERSION_ID < 80000) {
+            if (PHP_VERSION_ID < 80000) { // @phpstan-ignore-line
                 libxml_disable_entity_loader($old_value);
             }
         }
@@ -77,7 +77,7 @@ class WXR_Parser_SimpleXML
         }
         /** @var SimpleXMLElement[] $wxr_version */
 
-        $wxr_version = (string) trim($wxr_version[0]->__toString());
+        $wxr_version = (string) trim($wxr_version[0]->__toString()); // @phpstan-ignore-line
         /** @var string $wxr_version */
         // confirm that we are dealing with the correct file format
         if (! preg_match('/^\d+\.\d+$/', $wxr_version)) {
@@ -86,13 +86,13 @@ class WXR_Parser_SimpleXML
 
         $base_url = $xml->xpath('/rss/channel/wp:base_site_url');
         /** @var SimpleXMLElement[] $base_url */
-        $base_url = (string) trim(isset($base_url[0]) ? $base_url[0]->__toString() : '');
+        $base_url = (string) trim(isset($base_url[0]) ? $base_url[0]->__toString() : ''); // @phpstan-ignore-line
 
 
         $base_blog_url = $xml->xpath('/rss/channel/wp:base_blog_url');
         if ($base_blog_url) {
             /** @var SimpleXMLElement[] $base_blog_url */
-            $base_blog_url = (string) trim($base_blog_url[0]->__toString());
+            $base_blog_url = (string) trim($base_blog_url[0]->__toString()); // @phpstan-ignore-line
         } else {
             $base_blog_url = $base_url;
         }

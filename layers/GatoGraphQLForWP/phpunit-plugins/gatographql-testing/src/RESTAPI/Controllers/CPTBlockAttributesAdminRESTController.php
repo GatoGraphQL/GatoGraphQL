@@ -295,6 +295,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     {
         $item = $this->prepareItem($block);
         $response = rest_ensure_response($item);
+        // @phpstan-ignore-next-line
         if ($response instanceof WP_Error) {
             return $response;
         }

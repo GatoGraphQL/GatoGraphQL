@@ -160,7 +160,7 @@ class ExtensionManager extends AbstractPluginManager
         $mainPlugin = PluginApp::getMainPluginManager()->getPlugin();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
         if (
-            $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
+            !SemverWrapper::satisfies(
                 $mainPluginVersion,
                 $mainPluginVersionConstraint
             )
@@ -224,7 +224,7 @@ class ExtensionManager extends AbstractPluginManager
         $dependedUponExtension = $this->getExtension($dependedUponExtensionClass);
         $dependedUponExtensionVersion = $dependedUponExtension->getPluginVersion();
         if (
-            $dependedUponExtensionVersionConstraint !== null && !SemverWrapper::satisfies(
+            !SemverWrapper::satisfies(
                 $dependedUponExtensionVersion,
                 $dependedUponExtensionVersionConstraint
             )

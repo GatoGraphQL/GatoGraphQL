@@ -19,8 +19,9 @@ class PluginEnvironment
      */
     public static function isContainerCachingEnabled(): bool
     {
-        if (getenv(self::DISABLE_CONTAINER_CACHING) !== false) {
-            return strtolower(getenv(self::DISABLE_CONTAINER_CACHING)) !== "true";
+        $envValue = getenv(self::DISABLE_CONTAINER_CACHING);
+        if ($envValue !== false) {
+            return strtolower($envValue) !== "true";
         }
 
         if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::DISABLE_CONTAINER_CACHING)) {
@@ -35,8 +36,9 @@ class PluginEnvironment
         $mainPlugin = PluginApp::getMainPlugin();
 
         $baseCacheDir = null;
-        if (getenv(self::CONTAINER_CACHE_DIR) !== false) {
-            $baseCacheDir = rtrim(getenv(self::CONTAINER_CACHE_DIR), '/');
+        $envValue = getenv(self::CONTAINER_CACHE_DIR);
+        if ($envValue !== false) {
+            $baseCacheDir = rtrim($envValue, '/');
         } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::CONTAINER_CACHE_DIR)) {
             $baseCacheDir = rtrim(PluginEnvironmentHelpers::getWPConfigConstantValue(self::CONTAINER_CACHE_DIR), '/');
         } else {

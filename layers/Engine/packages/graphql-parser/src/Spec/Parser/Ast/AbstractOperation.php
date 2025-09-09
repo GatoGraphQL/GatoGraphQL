@@ -77,7 +77,6 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         return sprintf(
             '%s%s{%s}',
             $this->getOperationType(),
-            /** @phpstan-ignore-next-line */
             $operationDefinition !== '' ? sprintf(' %s ', $operationDefinition) : ' ',
             $strOperationFieldsOrFragmentBonds,
         );
@@ -119,7 +118,6 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         return sprintf(
             '%s%s%s { ... }',
             $this->getOperationType(),
-            /** @phpstan-ignore-next-line */
             $operationDefinition !== '' ? ' ' . $operationDefinition : '',
             $strOperationDirectives,
         );

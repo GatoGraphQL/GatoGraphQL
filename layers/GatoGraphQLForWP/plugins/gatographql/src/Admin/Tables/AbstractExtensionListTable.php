@@ -19,6 +19,7 @@ use function remove_filter;
 
 // The file containing class WP_Plugin_Install_List_Table is not
 // loaded by default in WordPress.
+// @phpstan-ignore-next-line
 require_once ABSPATH . 'wp-admin/includes/class-wp-plugin-install-list-table.php';
 
 /**

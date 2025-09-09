@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\CustomPostMetaMutations\TypeAPIs\AbstractCustomPostMetaTypeMutationAPI;
+use PoPCMSSchema\MetaMutationsWP\TypeAPIs\EntityMetaTypeMutationAPITrait;
 use WP_Error;
 
 use function add_post_meta;
@@ -16,6 +17,8 @@ use function update_post_meta;
  */
 class CustomPostMetaTypeMutationAPI extends AbstractCustomPostMetaTypeMutationAPI
 {
+    use EntityMetaTypeMutationAPITrait;
+
     protected function executeAddEntityMeta(
         string|int $entityID,
         string $key,

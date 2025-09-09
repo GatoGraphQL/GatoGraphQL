@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
-interface ObjectTypeQueryableDataLoaderInterface
+use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
+
+interface ObjectTypeQueryableDataLoaderInterface extends RelationalTypeDataLoaderInterface
 {
     /**
      * @param array<string,mixed> $data_properties

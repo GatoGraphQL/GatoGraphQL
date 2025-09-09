@@ -148,7 +148,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array|stdClass
     {
-        /** @var string|int|float|bool|mixed[] */
+        /** @var string|int|float|bool|stdClass */
         return $scalarValue;
     }
 
@@ -192,7 +192,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             HookNames::ENUM_VALUES,
             $this->getEnumValues(),
             $this,
-        );
+        ) ?? [];
 
         // Exclude the admin enum values, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */

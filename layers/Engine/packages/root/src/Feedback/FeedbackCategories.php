@@ -35,7 +35,7 @@ class FeedbackCategories
      *   ```
      *
      * When the API request for a single language fails, if using ->addError
-     * in `@strTranslate`, then the whole field will be set to `null`, whereas
+     * in @strTranslate, then the whole field will be set to null, whereas
      * using ->addPartialError will allow the translation of all other languages.
      */
     public final const ERROR = 'error';

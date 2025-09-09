@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +14,7 @@ class PluginStaticHelpersTest extends TestCase
      * @param string[] $entries
      * @param array<string,string> $responseHeaders
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('provideGetResponseHeadersFromEntries')]
+    #[DataProvider('provideGetResponseHeadersFromEntries')]
     public function testGetResponseHeadersFromEntries(array $entries, array $responseHeaders): void
     {
         $this->assertEquals(

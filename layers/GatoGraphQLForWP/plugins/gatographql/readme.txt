@@ -223,6 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 14.0.0 =
+* Breaking change: Upgraded min PHP version from 7.4 to 8.1 (#3200)
 * Breaking change: Pass `object` param to `resolveMetaKeysValue` (#3177)
 * Added `parent` field to `CustomPost` (#3159)
 * Pass parent on custom post mutations (#3160)
@@ -234,6 +235,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added `menuOrder` arg to custom post mutations (#3173)
 * Append selected option value in dropdown in Settings if it doesn't exist (#3178)
 * Allow storing JSON data for options in Settings (#3179)
+* Upgrade plugin to latest dependencies for PHP 8.1 (#3202)
 * Print body of failing requests in error logs (#3155)
 * Support executing bulk actions with custom settings (#3156)
 * Support reading just-updated plugin settings in options.php (#3157)

@@ -42,7 +42,6 @@ abstract class AbstractWPCLICommand
     /**
      * Parse IDs separated by commas or spaces into an array of integers
      *
-     * @param string $idsString
      * @return int[]
      */
     protected function parseIds(string $idsString): array
@@ -91,7 +90,6 @@ abstract class AbstractWPCLICommand
     /**
      * Parse language providers JSON string
      *
-     * @param string|null $json
      * @return array<string,string>|null
      */
     protected function parseJSON(?string $json): ?array
@@ -111,10 +109,6 @@ abstract class AbstractWPCLICommand
 
     /**
      * Colorize a message for WP-CLI output
-     *
-     * @param string $message
-     * @param string $color
-     * @return string
      */
     protected function colorizeMessage(string $message, string $color): string
     {
@@ -136,8 +130,6 @@ abstract class AbstractWPCLICommand
 
     /**
      * Log a message (WP-CLI compatible)
-     *
-     * @param string $message
      */
     protected function log(string $message): void
     {
@@ -150,8 +142,6 @@ abstract class AbstractWPCLICommand
 
     /**
      * Display success message (WP-CLI compatible)
-     *
-     * @param string $message
      */
     protected function success(string $message): void
     {
@@ -164,8 +154,6 @@ abstract class AbstractWPCLICommand
 
     /**
      * Display warning message (WP-CLI compatible)
-     *
-     * @param string $message
      */
     protected function warning(string $message): void
     {
@@ -178,8 +166,6 @@ abstract class AbstractWPCLICommand
 
     /**
      * Display error message and exit (WP-CLI compatible)
-     *
-     * @param string $message
      */
     protected function error(string $message): void
     {

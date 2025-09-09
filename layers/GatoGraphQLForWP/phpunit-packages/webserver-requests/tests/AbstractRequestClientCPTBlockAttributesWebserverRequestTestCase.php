@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 
@@ -37,7 +38,7 @@ abstract class AbstractRequestClientCPTBlockAttributesWebserverRequestTestCase e
      * The client will always return a 200 status, whether
      * enabled or disabled. The difference is the custom header.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('provideClientEnabledDisabledEntries')]
+    #[DataProvider('provideClientEnabledDisabledEntries')]
     public function testClientEnabledDisabled(bool $enabled): void
     {
         $clientURL = $this->getClientURL();

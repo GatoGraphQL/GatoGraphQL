@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs;
 
 use PoPCMSSchema\MetaMutations\Exception\EntityMetaCRUDMutationException;
-use PoPCMSSchema\MetaMutations\TypeAPIs\AbstractEntityMetaTypeMutationAPI;
 use PoPCMSSchema\TaxonomyMetaMutations\Exception\TaxonomyTermMetaCRUDMutationException;
 use PoPCMSSchema\TaxonomyMetaMutations\TypeAPIs\TaxonomyMetaTypeMutationAPIInterface;
+use PoP\Root\Services\AbstractBasicService;
 
-abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractEntityMetaTypeMutationAPI implements TaxonomyMetaTypeMutationAPIInterface
+abstract class AbstractTaxonomyMetaTypeMutationAPI extends AbstractBasicService implements TaxonomyMetaTypeMutationAPIInterface
 {
     /**
      * @phpstan-return class-string<EntityMetaCRUDMutationException>

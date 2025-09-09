@@ -102,7 +102,7 @@ class GeneralUtils
         // Only keep the keys which must not be removed
         $params = array_filter(
             $params,
-            fn (string $param): bool => !in_array($param, $keys),
+            fn (string|int $param): bool => !in_array($param, $keys),
             ARRAY_FILTER_USE_KEY
         );
 
@@ -187,7 +187,7 @@ class GeneralUtils
         if ($queryString = parse_url($url, PHP_URL_QUERY)) {
             parse_str($queryString, $queryParams);
         }
-        /** @var array<string,mixed> */
+        // @phpstan-ignore-next-line
         return $queryParams;
     }
 

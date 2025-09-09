@@ -27,6 +27,7 @@ class Module extends AbstractModule
         return [
             \PoPCMSSchema\CustomPostMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMetaMutations\Module::class,
+            \PoPCMSSchema\MetaMutationsWP\Module::class,
         ];
     }
 

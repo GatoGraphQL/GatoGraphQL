@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractWPAdminPageWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('providePageEntries')]
+    #[DataProvider('providePageEntries')]
     public function testPagesExist(
         string $endpoint,
     ): void {

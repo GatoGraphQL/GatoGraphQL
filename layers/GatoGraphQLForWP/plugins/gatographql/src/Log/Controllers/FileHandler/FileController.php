@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler;
 
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
+use FilesystemIterator;
 use GatoGraphQL\GatoGraphQL\Log\Controllers\Internal\Caching\CacheHelper;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PclZip;
@@ -84,8 +87,6 @@ class FileController
 
     /**
      * Get the file size limit that determines when to rotate a file.
-     *
-     * @return int
      */
     private function get_file_size_limit(): int
     {
@@ -157,8 +158,6 @@ class FileController
      *
      * @param string $source The source property of a log entry, which determines the filename.
      * @param int    $time   The time of the log entry as a Unix timestamp.
-     *
-     * @return string
      */
     private function generate_filename(string $source, int $time): string
     {
@@ -575,6 +574,7 @@ class FileController
             );
         }
 
+        // @phpstan-ignore-next-line        
         require_once ABSPATH . 'wp-admin/includes/class-pclzip.php';
 
         $path       = trailingslashit($temp_dir) . "{$pluginNamespace}_logs_" . gmdate('Y-m-d_H-i-s') . '.zip';
@@ -686,8 +686,6 @@ class FileController
 
     /**
      * Calculate the size, in bytes, of the log directory.
-     *
-     * @return int
      */
     public function get_log_directory_size(): int
     {
@@ -695,7 +693,7 @@ class FileController
         $path  = realpath($this->getLogsDir());
 
         if (wp_is_writable($path)) {
-            $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS), \RecursiveIteratorIterator::CATCH_GET_CHILD);
+            $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CATCH_GET_CHILD);
 
             foreach ($iterator as $file) {
                 $bytes += $file->getSize();

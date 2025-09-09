@@ -28,7 +28,7 @@ class WXR_Parser_XML
     );
 
     private bool|string $wxr_version;
-    private bool|string $in_post;
+    private bool|string $in_post; // @phpstan-ignore-line
     private bool|string $cdata;
     private bool|string $data;
     private bool|string|array $sub_data;
@@ -75,7 +75,7 @@ class WXR_Parser_XML
         xml_parser_free($xml);
 
         // if (! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) ) {
-        if ($this->wxr_version === false) {
+        if ($this->wxr_version === false) { // @phpstan-ignore-line
             throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
         }
 

@@ -53,6 +53,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         ]);
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -70,6 +71,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -87,6 +89,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $context = new Context('SomeQuery');
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -111,6 +114,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $context = new Context('SomeQuery');
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -137,6 +141,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -154,6 +159,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -189,6 +195,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 

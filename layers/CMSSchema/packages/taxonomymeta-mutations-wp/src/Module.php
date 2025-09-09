@@ -27,6 +27,7 @@ class Module extends AbstractModule
         return [
             \PoPCMSSchema\TaxonomyMutationsWP\Module::class,
             \PoPCMSSchema\TaxonomyMetaMutations\Module::class,
+            \PoPCMSSchema\MetaMutationsWP\Module::class,
         ];
     }
 

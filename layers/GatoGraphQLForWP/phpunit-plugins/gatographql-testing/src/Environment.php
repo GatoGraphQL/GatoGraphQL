@@ -19,12 +19,15 @@ class Environment
      */
     public static function getSupportedPluginNamespaces(): array
     {
-        return getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES') !== false
-            ? array_map(
-                trim(...),
-                explode(',', getenv('INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES'))
-            )
-            : ['GatoGraphQL'];
+        $envVar = self::INTEGRATION_TESTS_SUPPORTED_PLUGIN_NAMESPACES;
+        $envVarValue = getenv($envVar);
+        if ($envVarValue === false) {
+            return ['GatoGraphQL'];
+        }
+        return array_map(
+            trim(...),
+            explode(',', $envVarValue)
+        );
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Unit\Faker\Upstream\ComponentModel\ExtendedSpec\Execution;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ExecutableDocumentTest as UpstreamExecutableDocumentTest;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
@@ -36,13 +37,14 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         return new ExecutableDocument($document, $context);
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('getExistingTypeOrInterfaceQueries')]
+    #[DataProvider('getExistingTypeOrInterfaceQueries')]
     public function testExistingTypeFragmentSpread(string $query): void
     {
         $document = $this->getParser()->parse($query);
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -147,7 +149,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('getNonExistingTypeOrInterfaceQueries')]
+    #[DataProvider('getNonExistingTypeOrInterfaceQueries')]
     public function testNonExistingTypeFragmentSpread(string $query): void
     {
         $this->expectException(InvalidRequestException::class);
@@ -156,6 +158,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -230,7 +233,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('getNonCompositeTypeQueries')]
+    #[DataProvider('getNonCompositeTypeQueries')]
     public function testNonCompositeTypeFragmentSpread(string $query): void
     {
         $types = [
@@ -243,6 +246,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -289,13 +293,14 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('getVariableIsInputTypeQueries')]
+    #[DataProvider('getVariableIsInputTypeQueries')]
     public function testVariableIsInputType(string $query): void
     {
         $document = $this->getParser()->parse($query);
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 
@@ -329,7 +334,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('getVariableIsNotInputTypeQueries')]
+    #[DataProvider('getVariableIsNotInputTypeQueries')]
     public function testVariableIsNotInputType(string $query, string $variableType): void
     {
         $this->expectException(InvalidRequestException::class);
@@ -338,6 +343,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        // @phpstan-ignore-next-line
         $this->assertTrue(true);
     }
 

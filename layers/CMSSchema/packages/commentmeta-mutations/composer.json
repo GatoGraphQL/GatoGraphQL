@@ -84,7 +84,6 @@
         "pop-cms-schema/usermeta-mutations": "<13.2.0",
         "pop-cms-schema/post-categories": "<13.2.0",
         "pop-cms-schema/pages-wp": "<13.2.0",
-        "pop-cms-schema/meta-mutations": "<13.2.0",
         "pop-cms-schema/custompostmedia-mutations-wp": "<13.2.0",
         "pop-cms-schema/user-mutations": "<13.2.0",
         "pop-cms-schema/user-avatars": "<13.2.0",
@@ -186,9 +185,9 @@
         "pop-cms-schema/custompost-mutations": "^13.3"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
-        "rector/rector": "^0.18",
+        "rector/rector": "^2.1",
         "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {

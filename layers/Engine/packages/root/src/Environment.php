@@ -50,8 +50,9 @@ class Environment
      */
     public static function getCacheContainerConfigurationNamespace(): string
     {
-        if (getenv(self::CONTAINER_CONFIGURATION_CACHE_NAMESPACE) !== false) {
-            return getenv(self::CONTAINER_CONFIGURATION_CACHE_NAMESPACE);
+        $envValue = getenv(self::CONTAINER_CONFIGURATION_CACHE_NAMESPACE);
+        if ($envValue !== false) {
+            return $envValue;
         }
         /**
          * SERVER_NAME is used for if several applications are deployed
@@ -66,8 +67,9 @@ class Environment
 
     public static function getCacheContainerConfigurationDirectory(): ?string
     {
-        if (getenv(self::CONTAINER_CONFIGURATION_CACHE_DIRECTORY) !== false) {
-            return getenv(self::CONTAINER_CONFIGURATION_CACHE_DIRECTORY);
+        $envValue = getenv(self::CONTAINER_CONFIGURATION_CACHE_DIRECTORY);
+        if ($envValue !== false) {
+            return $envValue;
         }
         return null;
     }
@@ -92,7 +94,8 @@ class Environment
      */
     public static function getApplicationVersion(): ?string
     {
-        return getenv(self::APPLICATION_VERSION) !== false ? getenv(self::APPLICATION_VERSION) : null;
+        $envValue = getenv(self::APPLICATION_VERSION);
+        return $envValue !== false ? $envValue : null;
     }
 
     /**
@@ -101,7 +104,8 @@ class Environment
     public static function getApplicationEnvironment(): string
     {
         $default = self::APPLICATION_ENVIRONMENT_PROD;
-        $environment = getenv(self::APPLICATION_ENVIRONMENT) !== false ? getenv(self::APPLICATION_ENVIRONMENT) : $default;
+        $envValue = getenv(self::APPLICATION_ENVIRONMENT);
+        $environment = $envValue !== false ? $envValue : $default;
         $environments = [
             self::APPLICATION_ENVIRONMENT_PROD,
             self::APPLICATION_ENVIRONMENT_DEV,

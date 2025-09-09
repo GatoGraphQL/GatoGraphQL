@@ -75,7 +75,7 @@ abstract class AbstractCustomPostTypeAPI extends AbstractBasicService implements
         $currentPostObjectOrID = $customPostObjectOrID;
 
         // Traverse up the hierarchy
-        while ($currentPostObjectOrID !== null) {
+        while (true) {
             // Get the parent
             $parentID = $this->getCustomPostParentID($currentPostObjectOrID);
             if ($parentID === null || $parentID === 0) {

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PageMetaMutations\SchemaHooks;
 
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
-use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\CustomPostMetaMutations\SchemaHooks\AbstractCustomPostMutationResolverHookSet;
+use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
+use PoPCMSSchema\PageMutations\SchemaHooks\PageMutationResolverHookSetTrait;
+use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 
 class PageMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {

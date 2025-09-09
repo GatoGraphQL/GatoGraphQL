@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\MetaMutations\TypeAPIs;
+namespace PoPCMSSchema\MetaMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\MetaMutations\Exception\EntityMetaCRUDMutationException;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
-use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 use stdClass;
 
-abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService implements EntityMetaTypeMutationAPIInterface
+trait EntityMetaTypeMutationAPITrait
 {
     use TypeMutationAPITrait;
 
@@ -148,7 +147,7 @@ abstract class AbstractEntityMetaTypeMutationAPI extends AbstractBasicService im
                 $this->__('Error updating meta', 'meta-mutations')
             );
         }
-        /** @var int|bool $result */
+        /** @var int|true $result */
         return $result;
     }
 

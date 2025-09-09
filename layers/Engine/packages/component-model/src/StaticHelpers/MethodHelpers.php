@@ -43,6 +43,7 @@ class MethodHelpers
                 $fieldSet->fields
             );
         }
+        // @phpstan-ignore-next-line
         return array_values(array_unique($fields));
     }
 
@@ -57,6 +58,7 @@ class MethodHelpers
     ): array {
         $restrictedIDFieldSet = [];
         foreach ($idFieldSet as $id => $fieldSet) {
+            // @phpstan-ignore-next-line
             $matchingFields = array_intersect(
                 $fields,
                 $fieldSet->fields

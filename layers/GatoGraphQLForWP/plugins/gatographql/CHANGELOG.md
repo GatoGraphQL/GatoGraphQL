@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
+- Upgraded min PHP version from 7.4 to 8.1 (#3200)
 - Pass `object` param to `resolveMetaKeysValue` (#3177)
 
 ### Added
@@ -23,6 +24,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- Upgrade plugin to latest dependencies for PHP 8.1 (#3202)
 - Print body of failing requests in error logs (#3155)
 - Support executing bulk actions with custom settings (#3156)
 - Support reading just-updated plugin settings in options.php (#3157)

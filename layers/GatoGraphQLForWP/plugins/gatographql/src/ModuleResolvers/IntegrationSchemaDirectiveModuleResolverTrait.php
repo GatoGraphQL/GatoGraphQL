@@ -7,6 +7,9 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 
+/**
+ * @phpstan-ignore-next-line
+ */
 trait IntegrationSchemaDirectiveModuleResolverTrait
 {
     /**

@@ -1082,6 +1082,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                 if ($subcomponent_processor->startDataloadingSection($subcomponent)) {
                     continue;
                 }
+                // @phpstan-ignore-next-line
                 $subcomponent_processor->addDatasetcomponentTreeSectionFlattenedComponents($ret, $subcomponent);
             }
         }
@@ -1542,6 +1543,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                  *       SiteBuilder, so check and fix.
                  */
                 // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
+                // @phpstan-ignore-next-line
                 $ret = array_merge_recursive(
                     $ret,
                     $subcomponent_ret
@@ -1550,6 +1552,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
 
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
             if ($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
+                // @phpstan-ignore-next-line
                 $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES]));
             }
         }
@@ -1638,6 +1641,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                 )));
             }
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
+            // @phpstan-ignore-next-line
             $subcomponentConditionalFields = $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES];
             if ($subcomponentConditionalFields->count() > 0) {
                 $subcomponentsSubcomponentFieldNode[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();

@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-use Rector\Core\Contract\Rector\RectorInterface;
-use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeCovariantReturnTypeRector;
+use Rector\Contract\Rector\RectorInterface;
+
+// use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeCovariantReturnTypeRector;
 
 /**
  * Covariants in Symfony Definition require 2 passes:
@@ -27,7 +28,7 @@ abstract class AbstractCovariantReturnTypeChainedRuleContainerConfigurationServi
     protected function getRectorRuleClasses(): array
     {
         return [
-            DowngradeCovariantReturnTypeRector::class,
+            'Rector\DowngradePhp74\Rector\ClassMethod\DowngradeCovariantReturnTypeRector',
         ];
     }
 }

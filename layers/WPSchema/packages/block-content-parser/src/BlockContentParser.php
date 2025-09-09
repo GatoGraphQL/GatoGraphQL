@@ -246,7 +246,9 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         try {
             $blocks = parse_blocks($post_content);
             $blocks = array_values(array_filter($blocks, function ($block) {
+                // @phpstan-ignore-next-line
                 $is_whitespace_block = ( null === $block['blockName'] && empty(trim($block['innerHTML'])) );
+                // @phpstan-ignore-next-line
                 return ! $is_whitespace_block;
             }));
 
@@ -452,7 +454,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -481,7 +482,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -523,7 +523,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      * @param Crawler $crawler Crawler instance.
      * @param array<string,mixed> $block_attribute_definition Definition of the block attribute.
      *
-     * @return string|null
      *
      * @access private
      *
@@ -551,7 +550,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -617,7 +615,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -647,7 +644,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *
@@ -680,7 +676,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return string|null
      *
      * @access private
      *

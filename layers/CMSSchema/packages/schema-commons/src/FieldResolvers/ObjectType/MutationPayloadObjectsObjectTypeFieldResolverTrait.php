@@ -13,6 +13,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\DictionaryObjectType
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use stdClass;
 
@@ -59,8 +60,18 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
     ): mixed {
         $fieldName = $fieldDataAccessor->getFieldName();
 
-        /** @var AbstractObjectMutationPayloadObjectTypeResolver */
+        /**
+         * For PayloadObjects the type will always be
+         * AbstractObjectMutationPayloadObjectTypeResolver.
+         *
+         * But as we define for both Payload/non-Payload objects
+         * on the same `getFieldTypeResolver` function,
+         * check that that's the type
+         */
         $objectMutationPayloadObjectTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
+        if (! ($objectMutationPayloadObjectTypeResolver instanceof AbstractObjectMutationPayloadObjectTypeResolver)) {
+            throw new ShouldNotHappenException('Object mutation payload object type resolver must be an instance of ' . AbstractObjectMutationPayloadObjectTypeResolver::class);
+        }
         /** @var DictionaryObjectTypeDataLoaderInterface */
         $dictionaryObjectTypeDataLoader = $objectMutationPayloadObjectTypeResolver->getRelationalTypeDataLoader();
 
@@ -71,7 +82,7 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
     }
 
     /**
-     * @return AbstractObjectMutationPayloadObjectTypeResolver
+     * @return AbstractObjectMutationPayloadObjectTypeResolver|ConcreteTypeResolverInterface
      */
     abstract public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface;
 
