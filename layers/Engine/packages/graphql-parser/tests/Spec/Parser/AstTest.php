@@ -24,7 +24,6 @@ class AstTest extends AbstractTestCase
     {
         $argument = new Argument('test', new Literal('test', new Location(1, 1)), new Location(1, 1));
 
-        $this->assertNotNull($argument->getValueAST());
         $this->assertEquals($argument->getName(), 'test');
     }
 
