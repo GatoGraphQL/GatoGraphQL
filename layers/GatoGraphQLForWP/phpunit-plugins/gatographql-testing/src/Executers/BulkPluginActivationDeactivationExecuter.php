@@ -16,6 +16,10 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\Root\Constants\HookNames;
 use RuntimeException;
 
+use function deactivate_plugins;
+use function activate_plugins;
+use function __;
+
 /**
  * When the corresponding params are passed in the URL,
  * either activate all Gato GraphQL extensions, or deactivate
@@ -70,7 +74,7 @@ class BulkPluginActivationDeactivationExecuter
             if (!App::getRequest()->query->has(Params::SKIP_DEACTIVATING_PLUGIN_FILES)) {
                 throw new RuntimeException(
                     sprintf(
-                        \__('Must provide parameter "%s" when bulk deactivating plugins'),
+                        __('Must provide parameter "%s" when bulk deactivating plugins'),
                         Params::SKIP_DEACTIVATING_PLUGIN_FILES
                     ),
                 );
@@ -105,15 +109,15 @@ class BulkPluginActivationDeactivationExecuter
                 $gatoGraphQLExtensionPluginFiles,
                 $skipDeactivatingPlugins
             );
-            \deactivate_plugins($gatoGraphQLExtensionsToDeactivate);
+            deactivate_plugins($gatoGraphQLExtensionsToDeactivate);
             $message = sprintf(
-                \__('Deactivated plugins: "%s"'),
+                __('Deactivated plugins: "%s"'),
                 implode('", "', $gatoGraphQLExtensionsToDeactivate)
             );
         } else {
-            \activate_plugins($gatoGraphQLExtensionPluginFiles);
+            activate_plugins($gatoGraphQLExtensionPluginFiles);
             $message = sprintf(
-                \__('Activated plugins: "%s"'),
+                __('Activated plugins: "%s"'),
                 implode('", "', $gatoGraphQLExtensionPluginFiles)
             );
         }
