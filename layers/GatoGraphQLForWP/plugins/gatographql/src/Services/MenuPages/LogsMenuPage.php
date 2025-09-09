@@ -337,7 +337,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                             unset($rotations['current']);
                             ?>
                         <?php endif; ?>
-                        <?php foreach ($rotations as $rotation) : // @phpstan-ignore-line
+                        <?php foreach ($rotations as $rotation) :
                             printf(
                                 '<li><a href="%1$s" class="button button-small button-%2$s">%3$s</a></li>',
                                 esc_url(add_query_arg('file_id', $rotation->get_file_id(), $rotation_url_base)),
@@ -665,7 +665,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
         $has_timestamp = false;
         $has_level     = false;
 
-        if (isset($segments[0]) && false !== strtotime($segments[0])) {
+        if (false !== strtotime($segments[0])) {
             $classes[]     = 'log-entry';
             $segments[0]   = sprintf(
                 '<span class="log-timestamp">%s</span>',
