@@ -11,10 +11,7 @@ Use this repo to:
 
 Differences with PROD:
 
-- Source code in PHP 8.1
 - Namespaces are not scoped
-
-(PROD is downgraded to PHP 7.4, and scoped)
 
 ## Installing
 
