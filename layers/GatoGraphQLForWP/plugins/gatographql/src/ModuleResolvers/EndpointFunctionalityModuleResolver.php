@@ -206,7 +206,6 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 ),
                 self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'gatographql'),
-                default => '',
             };
             // Build all the possible values by fetching all the Schema Configuration posts
             $possibleValues = [
