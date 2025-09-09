@@ -65,7 +65,7 @@ abstract class AbstractQueryableInputObjectTypeResolver extends AbstractInputObj
         }
     }
     /**
-     * @param array<string,mixed> $query
+     * @param array<mixed> $query
      */
     protected function integrateInputFieldValueToFilteringQueryArgs(string $inputFieldName, array &$query, mixed $inputFieldValue): void
     {
