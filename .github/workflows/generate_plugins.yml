@@ -85,7 +85,7 @@ jobs:
             git_user_name: ${{ steps.output_data.outputs.git_user_name }}
             git_user_email: ${{ steps.output_data.outputs.git_user_email }}
 
-    # Build plugin => downgrade => (maybe) scope => (maybe) upload to release and deploy to dist repo
+    # Build plugin => (maybe) downgrade => (maybe) scope => (maybe) upload to release and deploy to dist repo
     process:
         name: Generate plugin "${{ matrix.pluginConfig.plugin_slug }}"
         needs: provide_data
