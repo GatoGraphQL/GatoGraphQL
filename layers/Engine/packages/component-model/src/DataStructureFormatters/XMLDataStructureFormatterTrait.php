@@ -22,7 +22,11 @@ trait XMLDataStructureFormatterTrait
         // Code taken from Function taken from https://stackoverflow.com/a/5965940
         $xml_data = new SimpleXMLElement('<?xml version="1.0"?><data></data>');
         $this->arrayToXML($data, $xml_data);
-        return $xml_data->asXML();
+        $xml = $xml_data->asXML();
+        if ($xml === false) {
+            return '';
+        }
+        return $xml;
     }
 
     /**
