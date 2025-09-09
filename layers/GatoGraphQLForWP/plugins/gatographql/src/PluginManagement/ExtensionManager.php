@@ -159,12 +159,10 @@ class ExtensionManager extends AbstractPluginManager
          */
         $mainPlugin = PluginApp::getMainPluginManager()->getPlugin();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
-        if (
-            $mainPluginVersionConstraint !== null && !SemverWrapper::satisfies(
-                $mainPluginVersion,
-                $mainPluginVersionConstraint
-            )
-        ) {
+        if (!SemverWrapper::satisfies(
+            $mainPluginVersion,
+            $mainPluginVersionConstraint
+        )) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
                     /*\__(*/                    'Plugin <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The plugin has not been loaded.<br/>(If you have just updated <strong>%2$s</strong>, notice that the corresponding version for <strong>%1$s</strong> will be already available; please <a href="%5$s" target="_blank">download it%6$s</a> and install it.)'/*, 'gatographql')*/,
@@ -223,12 +221,10 @@ class ExtensionManager extends AbstractPluginManager
          */
         $dependedUponExtension = $this->getExtension($dependedUponExtensionClass);
         $dependedUponExtensionVersion = $dependedUponExtension->getPluginVersion();
-        if (
-            $dependedUponExtensionVersionConstraint !== null && !SemverWrapper::satisfies(
-                $dependedUponExtensionVersion,
-                $dependedUponExtensionVersionConstraint
-            )
-        ) {
+        if (!SemverWrapper::satisfies(
+            $dependedUponExtensionVersion,
+            $dependedUponExtensionVersionConstraint
+        )) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
                     /*\__(*/                    'Extension <strong>%1$s</strong> requires <strong>%2$s</strong> to satisfy version constraint <code>%3$s</code>, but the current version <code>%4$s</code> does not. The extension has not been loaded.'/*, 'gatographql')*/,
