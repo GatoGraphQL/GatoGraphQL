@@ -290,8 +290,8 @@ class Engine extends AbstractBasicService implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $differentiators = array(
             $moduleInfo->getUniqueID(),
-            $moduleInfo->getRand(),
-            $moduleInfo->getTime(),
+            (string) $moduleInfo->getRand(),
+            (string) $moduleInfo->getTime(),
         );
         $commoncode = str_replace($differentiators, '', (string)json_encode($engineState->data));
 

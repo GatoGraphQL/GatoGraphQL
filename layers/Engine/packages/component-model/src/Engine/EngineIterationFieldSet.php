@@ -24,6 +24,7 @@ class EngineIterationFieldSet
      */
     public function addFields(array $fields): void
     {
+        // @phpstan-ignore-next-line
         $this->fields = array_values(array_unique(array_merge(
             $this->fields,
             $fields
@@ -35,6 +36,7 @@ class EngineIterationFieldSet
      */
     public function addConditionalFields(FieldInterface $conditionField, array $conditionalFields): void
     {
+        // @phpstan-ignore-next-line
         $this->conditionalFields[$conditionField] = array_values(array_unique(array_merge(
             $this->conditionalFields[$conditionField] ?? [],
             $conditionalFields
