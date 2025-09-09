@@ -328,12 +328,16 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         // @phpstan-ignore-next-line        
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
+        $filesize = filesize($file);
+        if ($filesize === false) {
+            $filesize = 0;
+        }
         $fileData = [
             'name' => \sanitize_file_name($filename),
             'type' => $mimeType,
             'tmp_name' => $file,
             'error' => 0,
-            'size' => filesize($file),
+            'size' => $filesize,
         ];
 
         $uploadedFile = \wp_handle_sideload(
