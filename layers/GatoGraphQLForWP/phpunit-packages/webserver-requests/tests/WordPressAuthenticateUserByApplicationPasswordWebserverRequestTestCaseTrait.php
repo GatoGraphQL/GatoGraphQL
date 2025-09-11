@@ -21,6 +21,8 @@ trait WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrai
         return $options;
     }
 
+    abstract protected static function getUsernameToLogin(): ?string;
+
     protected static function getApplicationPasswordAuthorizationHeader(string $usernameToLogin): string
     {
         return sprintf(

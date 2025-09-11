@@ -16,7 +16,7 @@ final class MonorepoMetadata
      *
      * @gatographql-readonly-code
      */
-    final public const VERSION = '13.3.0-dev';
+    final public const VERSION = '14.1.0-dev';
     /**
      * This const will reflect the latest published tag in GitHub.
      *
@@ -27,7 +27,7 @@ final class MonorepoMetadata
      *
      * @gatographql-readonly-code
      */
-    final public const LATEST_PROD_VERSION = '13.2.0';
+    final public const LATEST_PROD_VERSION = '14.0.1';
 
     final public const GIT_BASE_BRANCH = 'master';
     final public const GIT_USER_NAME = 'leoloso';
