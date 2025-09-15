@@ -184,10 +184,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/users": "^14.0.2"
+        "pop-cms-schema/users": "^14.1"
     },
     "require-dev": {
-        "getpop/cache-control": "^14.0.2",
+        "getpop/cache-control": "^14.1",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^2.1",
@@ -211,7 +211,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "14.0-dev"
+            "dev-master": "14.1-dev"
         }
     },
     "config": {
