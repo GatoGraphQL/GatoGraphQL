@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- "Service not found" issue (#3206)
+- "Service not found" issue when storing "Schema Elements Configuration" Settings (#3206)
 
 ## 14.0.0 - 09/09/2025
 
