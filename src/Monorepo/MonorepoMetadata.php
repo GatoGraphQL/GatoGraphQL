@@ -27,7 +27,7 @@ final class MonorepoMetadata
      *
      * @gatographql-readonly-code
      */
-    final public const LATEST_PROD_VERSION = '14.0.1';
+    final public const LATEST_PROD_VERSION = '14.0.3';
 
     final public const GIT_BASE_BRANCH = 'master';
     final public const GIT_USER_NAME = 'leoloso';

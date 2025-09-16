@@ -28,8 +28,48 @@ services:
         class: ~
         autoconfigure: false
     
-    # This service is referenced when storing the Settings (via options.php)
+    # These services are referenced when storing the Settings (via options.php)
     GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\Tags\TypeResolvers\UnionType\TagUnionTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver:
+        class: ~
+        autoconfigure: false
+    
+    PoPCMSSchema\Tags\TypeResolvers\ObjectType\GenericTagObjectTypeResolver:
         class: ~
         autoconfigure: false
 

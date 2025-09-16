@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 14.0.3 - 16/09/2025
+
+### Fixed
+
+- "Service not found" issue when storing "Schema Elements Configuration" Settings (#3206)
+
 ## 14.0.0 - 09/09/2025
 
 ### Breaking changes
