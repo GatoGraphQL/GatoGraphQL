@@ -220,6 +220,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 14.0.3 =
+* Fixed "Service not found" issue when storing "Schema Elements Configuration" Settings (#3206)
+
 = 14.0.0 =
 * Breaking change: Upgraded min PHP version from 7.4 to 8.1 (#3200)
 * Breaking change: Pass `object` param to `resolveMetaKeysValue` (#3177)
