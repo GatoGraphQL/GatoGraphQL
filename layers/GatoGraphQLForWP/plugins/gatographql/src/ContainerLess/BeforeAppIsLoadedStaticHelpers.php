@@ -137,21 +137,26 @@ class BeforeAppIsLoadedStaticHelpers
         );
     }
 
-    /**
-     * Replicates the logic in PrematureRequestService::isPubliclyExposedGraphQLAPIRequest()
-     *
-     * @see PrematureRequestService::isPubliclyExposedGraphQLAPIRequest()
-     */
     public static function applicationPasswordIsAPIRequest(bool $isAPIRequest): bool
     {
         if ($isAPIRequest) {
             return $isAPIRequest;
         }
 
+        return static::isPublicGraphQLAPIRequest();
+    }
+
+    /**
+     * Replicates the logic in PrematureRequestService::isPubliclyExposedGraphQLAPIRequest()
+     *
+     * @see PrematureRequestService::isPubliclyExposedGraphQLAPIRequest()
+     */
+    public static function isPublicGraphQLAPIRequest(): bool
+    {
         // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
         $requestURI = $_SERVER['REQUEST_URI'] ?? '';
         if (empty($requestURI)) {
-            return $isAPIRequest;
+            return false;
         }
 
         $requestURI = EndpointUtils::slashURI($requestURI);
