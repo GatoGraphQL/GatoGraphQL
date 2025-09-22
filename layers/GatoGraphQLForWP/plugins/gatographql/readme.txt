@@ -220,6 +220,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 14.1.0 =
+* Add helper methods to check if requesting public GraphQL API (#3207)
+
 = 14.0.3 =
 * Fixed "Service not found" issue when storing "Schema Elements Configuration" Settings (#3206)
 

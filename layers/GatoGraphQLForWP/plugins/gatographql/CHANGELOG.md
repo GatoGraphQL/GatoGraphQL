@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 14.1.0 - DATE
+
+### Improvements
+
+- Add helper methods to check if requesting public GraphQL API (#3207)
+
 ## 14.0.3 - 16/09/2025
 
 ### Fixed
