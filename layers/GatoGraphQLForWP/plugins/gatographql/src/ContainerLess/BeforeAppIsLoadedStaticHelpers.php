@@ -143,7 +143,7 @@ class BeforeAppIsLoadedStaticHelpers
             return $isAPIRequest;
         }
 
-        return static::isGraphQLAPIRequest();
+        return static::isPublicGraphQLAPIRequest();
     }
 
     /**
@@ -151,7 +151,7 @@ class BeforeAppIsLoadedStaticHelpers
      *
      * @see PrematureRequestService::isPubliclyExposedGraphQLAPIRequest()
      */
-    public static function isGraphQLAPIRequest(): bool
+    public static function isPublicGraphQLAPIRequest(): bool
     {
         // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
         $requestURI = $_SERVER['REQUEST_URI'] ?? '';
