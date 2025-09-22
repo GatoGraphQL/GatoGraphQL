@@ -96,7 +96,8 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
 New features released on each version:
 
-- **[13.3](../../release-notes/14.0/en.md)** (current)
+- **[14.1](../../release-notes/14.1/en.md)** (current)
+- [14.0](../../release-notes/14.0/en.md)
 - [13.2](../../release-notes/13.2/en.md)
 - [13.1](../../release-notes/13.1/en.md)
 - [13.0](../../release-notes/13.0/en.md)
