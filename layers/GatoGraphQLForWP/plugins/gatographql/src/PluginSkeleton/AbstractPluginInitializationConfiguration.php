@@ -156,6 +156,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             /** @var callable|null */
             $callback = $mapping['callback'] ?? null;
+            $callbackPriority = $mapping['callback-priority'] ?? 10;
 
             App::addFilter(
                 $hookName,
@@ -168,7 +169,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                     }
                     return $value;
                 },
-                10,
+                $callbackPriority,
                 1
             );
         }
