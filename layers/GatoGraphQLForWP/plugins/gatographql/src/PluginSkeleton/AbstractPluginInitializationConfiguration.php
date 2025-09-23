@@ -159,15 +159,17 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
             App::addFilter(
                 $hookName,
-                function () use ($userSettingsManager, $optionModule, $option, $callback) {
+                function (mixed $previousValue) use ($userSettingsManager, $optionModule, $option, $callback) {
                     $pluginOptionsFormHandler = PluginOptionsFormHandlerFacade::getInstance();
                     $value = $pluginOptionsFormHandler->maybeOverrideValueFromForm(null, $optionModule, $option)
                         ?? $userSettingsManager->getSetting($optionModule, $option);
                     if ($callback !== null) {
-                        return $callback($value);
+                        return $callback($value, $previousValue);
                     }
                     return $value;
-                }
+                },
+                10,
+                1
             );
         }
     }
