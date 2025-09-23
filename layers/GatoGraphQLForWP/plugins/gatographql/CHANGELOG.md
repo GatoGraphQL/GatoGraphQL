@@ -4,6 +4,17 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 15.0.0 - 23/09/2025
+
+### Breaking changes
+
+- Removed the BasicService trait (#3208)
+
+### Improvements
+
+- Add helper methods to check if requesting public GraphQL API (#3207)
+- Chain defining environment settings across extensions (#3209)
+
 ## 14.0.3 - 16/09/2025
 
 ### Fixed

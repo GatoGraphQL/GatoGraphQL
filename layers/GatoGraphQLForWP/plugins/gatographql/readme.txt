@@ -3,7 +3,7 @@ Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, astro, wpgraphql, nextjs
 Requires at least: 6.1
 Tested up to: 6.8
-Stable tag: 14.0.3
+Stable tag: 15.0.0
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -221,6 +221,11 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 14.1.0 =
+* Breaking change: Removed the BasicService trait (#3208)
+* Add helper methods to check if requesting public GraphQL API (#3207)
+* Added - Chain defining environment settings across extensions (#3209)
 
 = 14.0.3 =
 * Fixed "Service not found" issue when storing "Schema Elements Configuration" Settings (#3206)
