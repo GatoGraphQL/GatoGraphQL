@@ -223,6 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 14.1.0 =
 * Breaking change: Removed the BasicService trait (#3208)
 * Add helper methods to check if requesting public GraphQL API (#3207)
+* Added - Chain defining environment settings across extensions (#3209)
 
 = 14.0.3 =
 * Fixed "Service not found" issue when storing "Schema Elements Configuration" Settings (#3206)

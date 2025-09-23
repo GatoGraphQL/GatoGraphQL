@@ -156,18 +156,21 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             /** @var callable|null */
             $callback = $mapping['callback'] ?? null;
+            $callbackPriority = $mapping['callback-priority'] ?? 10;
 
             App::addFilter(
                 $hookName,
-                function () use ($userSettingsManager, $optionModule, $option, $callback) {
+                function (mixed $previousValue) use ($userSettingsManager, $optionModule, $option, $callback) {
                     $pluginOptionsFormHandler = PluginOptionsFormHandlerFacade::getInstance();
                     $value = $pluginOptionsFormHandler->maybeOverrideValueFromForm(null, $optionModule, $option)
                         ?? $userSettingsManager->getSetting($optionModule, $option);
                     if ($callback !== null) {
-                        return $callback($value);
+                        return $callback($value, $previousValue);
                     }
                     return $value;
-                }
+                },
+                $callbackPriority,
+                1
             );
         }
     }
