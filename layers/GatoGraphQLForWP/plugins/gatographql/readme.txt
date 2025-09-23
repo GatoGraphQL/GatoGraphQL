@@ -221,6 +221,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 14.1.0 =
+* Breaking change: Removed the BasicService trait (#3208)
 * Add helper methods to check if requesting public GraphQL API (#3207)
 
 = 14.0.3 =
