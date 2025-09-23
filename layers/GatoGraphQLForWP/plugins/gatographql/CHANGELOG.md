@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Add helper methods to check if requesting public GraphQL API (#3207)
+- Chain defining environment settings across extensions (#3209)
 
 ## 14.0.3 - 16/09/2025
 

@@ -7,3 +7,4 @@
 ## Improvements
 
 - Add helper methods to check if requesting public GraphQL API ([#3207](https://github.com/GatoGraphQL/GatoGraphQL/pull/3207))
+- Chain defining environment settings across extensions ([#3209](https://github.com/GatoGraphQL/GatoGraphQL/pull/3209))
