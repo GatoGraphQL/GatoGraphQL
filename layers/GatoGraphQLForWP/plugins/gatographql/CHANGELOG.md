@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 14.1.0 - DATE
 
+### Breaking changes
+
+- Removed the BasicService trait (#3208)
+
 ### Improvements
 
 - Add helper methods to check if requesting public GraphQL API (#3207)
