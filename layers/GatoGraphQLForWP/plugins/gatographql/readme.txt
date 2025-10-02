@@ -222,7 +222,10 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 14.1.0 =
+= 15.1.0 =
+* Added WooCommerce extension to docs (3195)
+
+= 15.0.0 =
 * Breaking change: Removed the BasicService trait (#3208)
 * Add helper methods to check if requesting public GraphQL API (#3207)
 * Added - Chain defining environment settings across extensions (#3209)

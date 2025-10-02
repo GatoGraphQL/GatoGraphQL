@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 15.1.0 - DATE
+
+### Improvements
+
+- Added WooCommerce extension to docs (3195)
+
 ## 15.0.0 - 23/09/2025
 
 ### Breaking changes
