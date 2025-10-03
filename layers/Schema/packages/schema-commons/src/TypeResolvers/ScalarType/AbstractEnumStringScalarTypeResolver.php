@@ -96,14 +96,35 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
 
     public function getTypeDescription(): string
     {
+        $possibleValues = $this->getConsolidatedPossibleValues();
+        $valueDescriptions = [];
+        
+        foreach ($possibleValues as $value) {
+            $valueDesc = $this->getPossibleValueDescription($value);
+            if ($valueDesc) {
+                $valueDescriptions[] = sprintf(
+                    $this->__('`%s`: %s', 'gatographql'),
+                    $value,
+                    $valueDesc
+                );
+            } else {
+                $valueDescriptions[] = sprintf('`%s`', $value);
+            }
+        }
+        
         return sprintf(
-            $this->__('Possible values: `"%s"`.', 'schema-commons'),
-            implode('"`, `"', $this->getConsolidatedPossibleValues())
+            $this->__('Possible values: %s.', 'gatographql'),
+            implode($this->__(', ', 'gatographql'), $valueDescriptions)
         );
     }
 
     public function sortPossibleValues(): bool
     {
         return true;
+    }
+
+    public function getPossibleValueDescription(string $possibleValue): ?string
+    {
+        return null;
     }
 }
