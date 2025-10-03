@@ -223,7 +223,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 15.1.0 =
-* Added WooCommerce extension to docs (3195)
+* Added WooCommerce extension to docs (#3195)
+* Added `CodeNameJSONObject` input type (#3210)
 
 = 15.0.0 =
 * Breaking change: Removed the BasicService trait (#3208)
