@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 15.1.0 - DATE
 
+### Added
+
+- Added `CodeNameJSONObject` input type (#3210)
+
 ### Improvements
 
 - Added WooCommerce extension to docs (3195)
