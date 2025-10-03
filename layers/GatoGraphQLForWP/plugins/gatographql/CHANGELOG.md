@@ -12,7 +12,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Added WooCommerce extension to docs (3195)
+- Added WooCommerce extension to docs (#3195)
+- Print descriptions in introspection for EnumStringScalarTypes (#3211)
 
 ## 15.0.0 - 23/09/2025
 
