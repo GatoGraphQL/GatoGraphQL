@@ -94,7 +94,7 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
         return $this->consolidatedPossibleValuesCache;
     }
 
-    public function getTypeDescription(): string
+    final public function getTypeDescription(): string
     {
         $possibleValues = $this->getConsolidatedPossibleValues();
         $valueDescriptions = [];
