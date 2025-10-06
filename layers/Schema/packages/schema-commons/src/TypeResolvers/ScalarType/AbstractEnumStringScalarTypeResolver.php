@@ -112,10 +112,21 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
             }
         }
         
-        return sprintf(
+        $possibleValuesDescription = sprintf(
             $this->__('Possible values: %s.', 'gatographql'),
             implode($this->__(', ', 'gatographql'), $valueDescriptions)
         );
+        
+        $enumStringTypeDescription = $this->getEnumStringTypeDescription();
+        
+        return $enumStringTypeDescription !== null 
+            ? sprintf($this->__('%s. %s', 'gatographql'), $enumStringTypeDescription, $possibleValuesDescription)
+            : $possibleValuesDescription;
+    }
+
+    public function getEnumStringTypeDescription(): ?string
+    {
+        return null;
     }
 
     public function sortPossibleValues(): bool
