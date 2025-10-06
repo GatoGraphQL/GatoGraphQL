@@ -111,13 +111,21 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
                 $valueDescriptions[] = sprintf('`%s`', $value);
             }
         }
+
+        $enumStringTypeDescription = $this->getEnumStringTypeDescription();
+
+        // If there are no possible values, return the description + "No values available"
+        if ($valueDescriptions === []) {
+            $noValuesMessage = $this->__('No values available', 'gatographql');
+            return $enumStringTypeDescription !== null 
+                ? sprintf($this->__('%s. %s', 'gatographql'), $enumStringTypeDescription, $noValuesMessage)
+                : $noValuesMessage;
+        }
         
         $possibleValuesDescription = sprintf(
             $this->__('Possible values: %s.', 'gatographql'),
             implode($this->__(', ', 'gatographql'), $valueDescriptions)
-        );
-        
-        $enumStringTypeDescription = $this->getEnumStringTypeDescription();
+        );        
         
         return $enumStringTypeDescription !== null 
             ? sprintf($this->__('%s. %s', 'gatographql'), $enumStringTypeDescription, $possibleValuesDescription)
