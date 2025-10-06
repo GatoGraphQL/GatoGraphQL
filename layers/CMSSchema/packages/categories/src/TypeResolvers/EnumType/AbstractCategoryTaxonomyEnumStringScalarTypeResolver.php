@@ -11,12 +11,9 @@ use PoP\ComponentModel\App;
 
 abstract class AbstractCategoryTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
-    public function getTypeDescription(): string
+    public function getEnumStringTypeDescription(): ?string
     {
-        return sprintf(
-            $this->__('Category taxonomies (available for querying via the API), with possible values: `"%s"`.', 'categories'),
-            implode('"`, `"', $this->getConsolidatedPossibleValues())
-        );
+        return $this->__('Category taxonomies (available for querying via the API)', 'categories');
     }
 
     /**
