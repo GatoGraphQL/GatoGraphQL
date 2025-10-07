@@ -160,6 +160,14 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         // The results can be a single ID or value, or an array of IDs
         if (is_array($objectIDorIDs)) {
             foreach ($objectIDorIDs as $objectID) {
+                /**
+                 * If the object ID is null, then add a null to the result
+                 * (eg: Allow returning null values in field connection of type List)
+                 */
+                if ($objectID === null) {
+                    $ret[] = null;
+                    continue;
+                }
                 // Add a new array for this DB object, where to return all its properties
                 // @phpstan-ignore-next-line
                 $ret[] = [];

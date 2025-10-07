@@ -34858,7 +34858,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "CategoryTaxonomyEnumString",
-                    "description": "Category taxonomies (available for querying via the API), with possible values: `\"additional-dummy-category\"`, `\"additional-post-category\"`, `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`.",
+                    "description": "Category taxonomies (available for querying via the API). Possible values: `additional-dummy-category`, `additional-post-category`, `category`, `dummy-category`, `dummy-category-two`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -34868,7 +34868,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "CustomPostEnumString",
-                    "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-four\"`, `\"dummy-cpt-three\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`, `\"wp_block\"`.",
+                    "description": "Custom post types (available for querying via the API). Possible values: `dummy-cpt`, `dummy-cpt-four`, `dummy-cpt-three`, `dummy-cpt-two`, `page`, `post`, `wp_block`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -34968,7 +34968,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "MenuLocationEnumString",
-                    "description": "Menu Locations, with possible values: `\"footer\"`, `\"primary\"`.",
+                    "description": "Menu Locations. Possible values: `footer`, `primary`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -35008,7 +35008,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "PageBuilderProvidersEnumString",
-                    "description": "Possible values: `\"\"`.",
+                    "description": "Page builder providers. No values available",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -35018,7 +35018,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "PostCategoryTaxonomyEnumString",
-                    "description": "Post category taxonomies (available for querying via the API), with possible values: `\"additional-post-category\"`, `\"category\"`.",
+                    "description": "Post category taxonomies (available for querying via the API). Possible values: `additional-post-category`, `category`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -35028,7 +35028,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "PostTagTaxonomyEnumString",
-                    "description": "Post tag taxonomies (available for querying via the API), with possible values: `\"additional-post-tag\"`, `\"post_tag\"`.",
+                    "description": "Post tag taxonomies (available for querying via the API). Possible values: `additional-post-tag`, `post_tag`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -35048,7 +35048,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "TagTaxonomyEnumString",
-                    "description": "Tag taxonomies (available for querying via the API), with possible values: `\"additional-dummy-tag\"`, `\"additional-post-tag\"`, `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`.",
+                    "description": "Tag taxonomies (available for querying via the API). Possible values: `additional-dummy-tag`, `additional-post-tag`, `dummy-tag`, `dummy-tag-two`, `post_tag`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -41896,7 +41896,7 @@
                         },
                         {
                             "name": "taxonomy",
-                            "description": "Category taxonomies (available for querying via the API), with possible values: `\"additional-dummy-category\"`, `\"additional-post-category\"`, `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`.",
+                            "description": "Category taxonomies (available for querying via the API). Possible values: `additional-dummy-category`, `additional-post-category`, `category`, `dummy-category`, `dummy-category-two`.",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "CategoryTaxonomyEnumString",
@@ -41934,7 +41934,7 @@
                         },
                         {
                             "name": "taxonomy",
-                            "description": "Tag taxonomies (available for querying via the API), with possible values: `\"additional-dummy-tag\"`, `\"additional-post-tag\"`, `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`.",
+                            "description": "Tag taxonomies (available for querying via the API). Possible values: `additional-dummy-tag`, `additional-post-tag`, `dummy-tag`, `dummy-tag-two`, `post_tag`.",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "TagTaxonomyEnumString",
@@ -41972,7 +41972,7 @@
                         },
                         {
                             "name": "taxonomy",
-                            "description": "Post category taxonomies (available for querying via the API), with possible values: `\"additional-post-category\"`, `\"category\"`.",
+                            "description": "Post category taxonomies (available for querying via the API). Possible values: `additional-post-category`, `category`.",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "PostCategoryTaxonomyEnumString",
@@ -42010,7 +42010,7 @@
                         },
                         {
                             "name": "taxonomy",
-                            "description": "Post tag taxonomies (available for querying via the API), with possible values: `\"additional-post-tag\"`, `\"post_tag\"`.",
+                            "description": "Post tag taxonomies (available for querying via the API). Possible values: `additional-post-tag`, `post_tag`.",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "PostTagTaxonomyEnumString",

@@ -42,7 +42,7 @@ class CodeNameJSONObjectScalarTypeResolver extends JSONObjectScalarTypeResolver
         /** @var stdClass $inputValue */
 
         $inputValueArray = (array) $inputValue;
-        
+
         // Validate that the object has exactly 2 properties
         if (count($inputValueArray) !== 2) {
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
@@ -54,13 +54,13 @@ class CodeNameJSONObjectScalarTypeResolver extends JSONObjectScalarTypeResolver
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
             return null;
         }
-        
+
         $codeValue = $inputValueArray['code'];
         if ($codeValue === null || is_array($codeValue) || is_object($codeValue)) {
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
             return null;
         }
-        
+
         // Ensure code is string or int (ID type)
         if (!is_string($codeValue) && !is_int($codeValue)) {
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
@@ -72,13 +72,13 @@ class CodeNameJSONObjectScalarTypeResolver extends JSONObjectScalarTypeResolver
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
             return null;
         }
-        
+
         $nameValue = $inputValueArray['name'];
         if ($nameValue === null || is_array($nameValue) || is_object($nameValue)) {
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
             return null;
         }
-        
+
         // Ensure name is a string
         if (!is_string($nameValue)) {
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
