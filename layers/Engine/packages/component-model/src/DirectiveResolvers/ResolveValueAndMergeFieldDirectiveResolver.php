@@ -118,6 +118,15 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
         foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
             $object = $idObjects[$id];
+
+            /**
+             * If the object is null, then skip.
+             * It may be null if returning a null value
+             * in a field connection of type List
+             */
+            if ($object === null) {
+                continue;
+            }
             $this->resolveValuesForObject(
                 $relationalTypeResolver,
                 $id,
