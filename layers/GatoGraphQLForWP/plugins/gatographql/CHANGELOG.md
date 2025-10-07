@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added WooCommerce extension to docs (#3195)
 - Print descriptions in introspection for EnumStringScalarTypes (#3211)
 - Show "No values available" in description for EnumStrings (#a3dafbf7)
+- Allow returning null values in field connections of type List (#3212)
 
 ## 15.0.0 - 23/09/2025
 

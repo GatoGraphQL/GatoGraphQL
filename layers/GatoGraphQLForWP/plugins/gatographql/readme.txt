@@ -227,6 +227,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added `CodeNameJSONObject` input type (#3210)
 * Print descriptions in introspection for EnumStringScalarTypes (#3211)
 * Show "No values available" in description for EnumStrings (#a3dafbf7)
+* Allow returning null values in field connections of type List (#3212)
 
 = 15.0.0 =
 * Breaking change: Removed the BasicService trait (#3208)
