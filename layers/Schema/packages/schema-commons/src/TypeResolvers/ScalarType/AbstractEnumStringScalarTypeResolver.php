@@ -98,7 +98,7 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
     {
         $possibleValues = $this->getConsolidatedPossibleValues();
         $valueDescriptions = [];
-        
+
         foreach ($possibleValues as $value) {
             $valueDesc = $this->getPossibleValueDescription($value);
             if ($valueDesc) {
@@ -117,17 +117,17 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
         // If there are no possible values, return the description + "No values available"
         if ($valueDescriptions === []) {
             $noValuesMessage = $this->__('No values available', 'gatographql');
-            return $enumStringTypeDescription !== null 
+            return $enumStringTypeDescription !== null
                 ? sprintf($this->__('%s. %s', 'gatographql'), $enumStringTypeDescription, $noValuesMessage)
                 : $noValuesMessage;
         }
-        
+
         $possibleValuesDescription = sprintf(
             $this->__('Possible values: %s.', 'gatographql'),
             implode($this->__(', ', 'gatographql'), $valueDescriptions)
-        );        
-        
-        return $enumStringTypeDescription !== null 
+        );
+
+        return $enumStringTypeDescription !== null
             ? sprintf($this->__('%s. %s', 'gatographql'), $enumStringTypeDescription, $possibleValuesDescription)
             : $possibleValuesDescription;
     }
