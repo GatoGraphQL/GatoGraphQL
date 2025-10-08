@@ -138,11 +138,17 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_CUSTOMPOST_META:
                 return [
                     [
+                        self::SCHEMA_META,
+                    ],
+                    [
                         GatoGraphQLSchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                     ],
                 ];
             case self::SCHEMA_USER_META:
                 return [
+                    [
+                        self::SCHEMA_META,
+                    ],
                     [
                         GatoGraphQLSchemaTypeModuleResolver::SCHEMA_USERS,
                     ],
@@ -150,11 +156,17 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_COMMENT_META:
                 return [
                     [
+                        self::SCHEMA_META,
+                    ],
+                    [
                         GatoGraphQLSchemaTypeModuleResolver::SCHEMA_COMMENTS,
                     ],
                 ];
             case self::SCHEMA_TAXONOMY_META:
                 return [
+                    [
+                        self::SCHEMA_META,
+                    ],
                     [
                         GatoGraphQLSchemaTypeModuleResolver::SCHEMA_TAGS,
                         GatoGraphQLSchemaTypeModuleResolver::SCHEMA_CATEGORIES,
