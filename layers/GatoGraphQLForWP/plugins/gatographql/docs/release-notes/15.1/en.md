@@ -16,3 +16,4 @@
 - Cast post ID to int (for if 3rd-party CPT returns it as string) ([#3213](https://github.com/GatoGraphQL/GatoGraphQL/pull/3213))
 - Meta not returned as array ([#3214](https://github.com/GatoGraphQL/GatoGraphQL/pull/3214))
 - QueryableInterface adapter ([#3215](https://github.com/GatoGraphQL/GatoGraphQL/pull/3215))
+- CustomPostMeta module depends on Meta module ([#3216](https://github.com/GatoGraphQL/GatoGraphQL/pull/3216))
