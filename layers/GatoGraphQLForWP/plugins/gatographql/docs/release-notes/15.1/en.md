@@ -14,3 +14,4 @@
 ## Fixed
 
 - Cast post ID to int (for if 3rd-party CPT returns it as string) ([#3213](https://github.com/GatoGraphQL/GatoGraphQL/pull/3213))
+- Meta not returned as array ([#3214](https://github.com/GatoGraphQL/GatoGraphQL/pull/3214))
