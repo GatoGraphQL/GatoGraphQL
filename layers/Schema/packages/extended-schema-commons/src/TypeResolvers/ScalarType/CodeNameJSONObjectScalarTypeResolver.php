@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\AbstractJSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
-class CodeNameJSONObjectScalarTypeResolver extends JSONObjectScalarTypeResolver
+class CodeNameJSONObjectScalarTypeResolver extends AbstractJSONObjectScalarTypeResolver
 {
     public function getTypeName(): string
     {
