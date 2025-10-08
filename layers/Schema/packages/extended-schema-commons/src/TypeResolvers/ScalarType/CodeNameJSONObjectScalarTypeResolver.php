@@ -56,7 +56,7 @@ class CodeNameJSONObjectScalarTypeResolver extends AbstractJSONObjectScalarTypeR
         }
 
         $codeValue = $inputValueArray['code'];
-        if ($codeValue === null || is_array($codeValue) || is_object($codeValue)) {
+        if (is_array($codeValue) || is_object($codeValue)) {
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
             return null;
         }
@@ -74,7 +74,7 @@ class CodeNameJSONObjectScalarTypeResolver extends AbstractJSONObjectScalarTypeR
         }
 
         $nameValue = $inputValueArray['name'];
-        if ($nameValue === null || is_array($nameValue) || is_object($nameValue)) {
+        if (is_array($nameValue) || is_object($nameValue)) {
             $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
             return null;
         }

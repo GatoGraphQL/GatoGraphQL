@@ -100,7 +100,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<string|int,object> $idObjects
+     * @param array<string|int,object|null> $idObjects The object can be null if returning a null value in a field connection of type List
      * @param array<string,mixed> $messages
      */
     protected function resolveValueForObjects(

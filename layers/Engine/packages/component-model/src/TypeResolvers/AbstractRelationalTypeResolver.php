@@ -115,7 +115,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * @param string|int|array<string|int> $objectIDOrIDs
-     * @return string|int|array<string|int>
+     * @return string|int|array<string|int|null> The object ID inside a list of IDs can be null if returning a null value in a field connection of type List
      */
     public function getQualifiedDBObjectIDOrIDs(string|int|array $objectIDOrIDs): string|int|array
     {

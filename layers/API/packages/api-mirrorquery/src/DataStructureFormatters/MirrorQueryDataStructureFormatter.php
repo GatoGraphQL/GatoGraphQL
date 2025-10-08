@@ -152,7 +152,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param FieldInterface[] $fields
      * @param array<string,array<string|int,array<string,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
-     * @param array<string|int>|string|integer $objectIDorIDs
+     * @param array<string|int|null>|string|integer $objectIDorIDs The object ID inside a list of IDs can be null if returning a null value in a field connection of type List
      * @param array<string> $typeOutputKeyPaths
      */
     private function addData(array &$sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
