@@ -132,6 +132,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             ),
             $objectIDs
         );
+        // @phpstan-ignore-next-line
         return is_array($objectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
     }
 
