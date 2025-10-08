@@ -21,6 +21,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Cast post ID to int (for if 3rd-party CPT returns it as string) (#3213)
 - Meta not returned as array (#3214)
+- QueryableInterface adapter (#3215)
 
 ## 15.0.0 - 23/09/2025
 
