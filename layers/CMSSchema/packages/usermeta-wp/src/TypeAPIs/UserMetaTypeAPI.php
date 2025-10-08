@@ -54,6 +54,11 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
             $userID = $userObjectOrID;
         }
 
+        $meta = get_user_meta((int)$userID) ?? [];
+        if (!is_array($meta)) {
+            return [];
+        }
+
         return array_map(
             /**
              * @param mixed[] $items
@@ -65,7 +70,7 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
                     $items
                 );
             },
-            get_user_meta((int)$userID) ?? []
+            $meta
         );
     }
 

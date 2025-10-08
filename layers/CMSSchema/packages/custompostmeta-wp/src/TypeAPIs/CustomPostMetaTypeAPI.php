@@ -47,6 +47,11 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
             $customPostID = $customPostObjectOrID;
         }
 
+        $meta = get_post_meta((int)$customPostID) ?? [];
+        if (!is_array($meta)) {
+            return [];
+        }
+
         return array_map(
             /**
              * @param mixed[] $items
@@ -58,7 +63,7 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
                     $items
                 );
             },
-            get_post_meta((int)$customPostID) ?? []
+            $meta
         );
     }
 

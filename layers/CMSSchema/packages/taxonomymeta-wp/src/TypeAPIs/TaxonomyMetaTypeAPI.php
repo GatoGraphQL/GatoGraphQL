@@ -47,6 +47,11 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
             $termID = $termObjectOrID;
         }
 
+        $meta = get_term_meta((int)$termID) ?? [];
+        if (!is_array($meta)) {
+            return [];
+        }
+
         return array_map(
             /**
              * @param mixed[] $items
@@ -58,7 +63,7 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
                     $items
                 );
             },
-            get_term_meta((int)$termID) ?? []
+            $meta
         );
     }
 

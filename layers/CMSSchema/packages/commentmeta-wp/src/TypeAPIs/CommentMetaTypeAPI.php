@@ -47,6 +47,11 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
             $commentID = $commentObjectOrID;
         }
 
+        $meta = get_comment_meta((int)$commentID) ?? [];
+        if (!is_array($meta)) {
+            return [];
+        }
+
         return array_map(
             /**
              * @param mixed[] $items
@@ -58,7 +63,7 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
                     $items
                 );
             },
-            get_comment_meta((int)$commentID) ?? []
+            $meta
         );
     }
 
