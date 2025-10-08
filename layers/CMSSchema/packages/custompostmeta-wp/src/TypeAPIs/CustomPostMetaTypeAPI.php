@@ -17,21 +17,28 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
      */
     protected function doGetCustomPostMeta(string|int|object $customPostObjectOrID, string $key, bool $single = false): mixed
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = $customPostObjectOrID;
-        }
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
 
         // This function does not differentiate between a stored empty value,
         // and a non-existing key! So if empty, treat it as non-existent and return null
-        $value = \get_post_meta((int)$customPostID, $key, $single);
+        $value = \get_post_meta($customPostID, $key, $single);
         if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }
         return $value;
+    }
+    
+    /**
+     * Extract the custom post ID from either a WP_Post object or ID
+     */
+    protected function getCustomPostID(string|int|object $customPostObjectOrID): int
+    {
+        if (is_object($customPostObjectOrID)) {
+            /** @var WP_Post */
+            $customPost = $customPostObjectOrID;
+            return $customPost->ID;
+        }
+        return (int) $customPostObjectOrID;
     }
 
     /**
@@ -39,15 +46,9 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
      */
     public function getAllCustomPostMeta(string|int|object $customPostObjectOrID): array
     {
-        if (is_object($customPostObjectOrID)) {
-            /** @var WP_Post */
-            $customPost = $customPostObjectOrID;
-            $customPostID = $customPost->ID;
-        } else {
-            $customPostID = $customPostObjectOrID;
-        }
+        $customPostID = $this->getCustomPostID($customPostObjectOrID);
 
-        $meta = get_post_meta((int)$customPostID) ?? [];
+        $meta = get_post_meta($customPostID) ?? [];
         if (!is_array($meta)) {
             return [];
         }
