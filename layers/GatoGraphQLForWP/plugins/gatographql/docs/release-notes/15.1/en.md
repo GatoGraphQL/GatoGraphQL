@@ -13,4 +13,4 @@
 
 ## Fixed
 
-- Cast post ID to int (for if CPT returns it as string) ([#3213](https://github.com/GatoGraphQL/GatoGraphQL/pull/3213))
+- Cast post ID to int (for if 3rd-party CPT returns it as string) ([#3213](https://github.com/GatoGraphQL/GatoGraphQL/pull/3213))

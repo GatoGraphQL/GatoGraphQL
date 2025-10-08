@@ -19,7 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Cast post ID to int (for if CPT returns it as string) (#3213)
+- Cast post ID to int (for if 3rd-party CPT returns it as string) (#3213)
 
 ## 15.0.0 - 23/09/2025
 
