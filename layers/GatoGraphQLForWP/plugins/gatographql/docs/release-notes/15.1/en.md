@@ -10,3 +10,7 @@
 - Print descriptions in introspection for EnumStringScalarTypes ([#3211](https://github.com/GatoGraphQL/GatoGraphQL/pull/3211))
 - Show "No values available" in description for EnumStrings ([#a3dafbf7](https://github.com/GatoGraphQL/GatoGraphQL/commit/a3dafbf7213a4d0464af7315992f7ab17c84fdd2))
 - Allow returning null values in field connections of type List ([#3212](https://github.com/GatoGraphQL/GatoGraphQL/pull/3212))
+
+## Fixed
+
+- Cast post ID to int (for if 3rd-party CPT returns it as string) ([#3213](https://github.com/GatoGraphQL/GatoGraphQL/pull/3213))

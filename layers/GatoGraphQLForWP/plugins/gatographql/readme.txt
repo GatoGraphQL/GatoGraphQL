@@ -228,6 +228,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Print descriptions in introspection for EnumStringScalarTypes (#3211)
 * Show "No values available" in description for EnumStrings (#a3dafbf7)
 * Allow returning null values in field connections of type List (#3212)
+* Fixed - Cast post ID to int (for if 3rd-party CPT returns it as string) (#3213)
 
 = 15.0.0 =
 * Breaking change: Removed the BasicService trait (#3208)
