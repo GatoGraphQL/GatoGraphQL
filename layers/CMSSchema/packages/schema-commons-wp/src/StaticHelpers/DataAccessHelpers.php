@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\SchemaCommonsWP;
+namespace PoPCMSSchema\SchemaCommonsWP\StaticHelpers;
 
 use WP_Comment;
 

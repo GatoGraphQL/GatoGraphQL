@@ -11,7 +11,7 @@ use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\SchemaCommonsWP\DataAccessHelpers;
+use PoPCMSSchema\SchemaCommonsWP\StaticHelpers\DataAccessHelpers;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 use WP_Post;
