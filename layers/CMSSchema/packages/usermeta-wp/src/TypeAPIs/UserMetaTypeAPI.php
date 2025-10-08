@@ -7,6 +7,8 @@ namespace PoPCMSSchema\UserMetaWP\TypeAPIs;
 use PoPCMSSchema\UserMeta\TypeAPIs\AbstractUserMetaTypeAPI;
 use WP_User;
 
+use function get_user_meta;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -32,7 +34,7 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
          *
          * So if empty, treat it as non-existent and return null.
          */
-        $value = \get_user_meta((int)$userID, $key, $single);
+        $value = get_user_meta((int)$userID, $key, $single);
         if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }
@@ -63,7 +65,7 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
                     $items
                 );
             },
-            \get_user_meta((int)$userID) ?? []
+            get_user_meta((int)$userID) ?? []
         );
     }
 

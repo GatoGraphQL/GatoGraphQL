@@ -7,6 +7,8 @@ namespace PoPCMSSchema\CustomPostMetaWP\TypeAPIs;
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\AbstractCustomPostMetaTypeAPI;
 use WP_Post;
 
+use function get_post_meta;
+
 class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
 {
     /**
@@ -56,7 +58,7 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
                     $items
                 );
             },
-            \get_post_meta((int)$customPostID) ?? []
+            get_post_meta((int)$customPostID) ?? []
         );
     }
 

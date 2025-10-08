@@ -7,6 +7,8 @@ namespace PoPCMSSchema\TaxonomyMetaWP\TypeAPIs;
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\AbstractTaxonomyMetaTypeAPI;
 use WP_Term;
 
+use function get_term_meta;
+
 class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
 {
     /**
@@ -25,7 +27,7 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
 
         // This function does not differentiate between a stored empty value,
         // and a non-existing key! So if empty, treat it as non-existent and return null
-        $value = \get_term_meta((int)$termID, $key, $single);
+        $value = get_term_meta((int)$termID, $key, $single);
         if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }
@@ -56,7 +58,7 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
                     $items
                 );
             },
-            \get_term_meta((int)$termID) ?? []
+            get_term_meta((int)$termID) ?? []
         );
     }
 
