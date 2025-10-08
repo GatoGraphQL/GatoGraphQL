@@ -230,6 +230,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Allow returning null values in field connections of type List (#3212)
 * Fixed - Cast post ID to int (for if 3rd-party CPT returns it as string) (#3213)
 * Fixed - Meta not returned as array (#3214)
+* Fixed - QueryableInterface adapter (#3215)
 
 = 15.0.0 =
 * Breaking change: Removed the BasicService trait (#3208)
