@@ -23,6 +23,7 @@ extend-exclude = [
     "layers/GatoGraphQLForWP/plugins/gatographql/bundle-extensions/translation/docs/modules/translation/en.md",
     "layers/GatoGraphQLForWP/plugins/gatographql/extensions/translation/docs/modules/translation/en.md",
     "layers/GatoGraphQLForWP/plugins/gatographql/setup/persisted-queries/admin/sync/import-posts-from-csv.gql",
+    "layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Integration/fixture-schema/post-tags.gql",
     "**/input-object-inner-validations.json",
 ]
 ignore-hidden = false
@@ -35,6 +36,7 @@ extend-ignore-re = [
     "X-Github-Access-Token",
     "Symplify",
     "Automattic",
+    "getTransferrableToEndpointRequestParams",
 ]
 
 [default.extend-words]
