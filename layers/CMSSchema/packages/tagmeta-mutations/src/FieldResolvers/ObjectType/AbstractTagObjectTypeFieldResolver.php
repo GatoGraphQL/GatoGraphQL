@@ -182,7 +182,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         return match ($fieldName) {
             'addMeta' => $this->__('Add a tag term meta entry', 'tagmeta-mutations'),
             'deleteMeta' => $this->__('Delete a tag term meta entry', 'tagmeta-mutations'),
-            'setMeta' => $this->__('Set meta entries to a a tag term', 'tagmeta-mutations'),
+            'setMeta' => $this->__('Set meta entries to a tag term', 'tagmeta-mutations'),
             'updateMeta' => $this->__('Update a tag term meta entry', 'tagmeta-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };

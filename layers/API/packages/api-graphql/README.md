@@ -94,7 +94,7 @@ Please refer to the [Field Query](https://github.com/getpop/field-query) documen
 
 ## Fast speed, robust security
 
-Resolving the query is fast: Wheareas the <a href="https://blog.acolyer.org/2018/05/21/semantics-and-complexity-of-graphql/">typical GraphQL implementation</a> has [complexity time](https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/) of `O(2^n)` in worst case, and `O(n^c)` to find out the query complexity, GraphQL API for PoP has complexity of `O(n^2)` in worst case, and `O(n)` in average case (where `n` is the number of nodes, both branches and leaves). 
+Resolving the query is fast: Whereas the <a href="https://blog.acolyer.org/2018/05/21/semantics-and-complexity-of-graphql/">typical GraphQL implementation</a> has [complexity time](https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/) of `O(2^n)` in worst case, and `O(n^c)` to find out the query complexity, GraphQL API for PoP has complexity of `O(n^2)` in worst case, and `O(n)` in average case (where `n` is the number of nodes, both branches and leaves). 
 
 As a consequence of this increased speed to resolve the query, DoS (Denial of Service) attacks are less effective, allowing to avoid having to spend time and energy in analyzing the query complexity.
 
