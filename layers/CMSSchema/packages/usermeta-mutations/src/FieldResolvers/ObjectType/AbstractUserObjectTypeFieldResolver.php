@@ -182,7 +182,7 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractObjectTypeFie
         return match ($fieldName) {
             'addMeta' => $this->__('Add a user meta entry', 'usermeta-mutations'),
             'deleteMeta' => $this->__('Delete a user meta entry', 'usermeta-mutations'),
-            'setMeta' => $this->__('Set meta entries to a a user', 'usermeta-mutations'),
+            'setMeta' => $this->__('Set meta entries to a user', 'usermeta-mutations'),
             'updateMeta' => $this->__('Update a user meta entry', 'usermeta-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };

@@ -182,7 +182,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         return match ($fieldName) {
             'addMeta' => $this->__('Add a custom post meta entry', 'custompostmeta-mutations'),
             'deleteMeta' => $this->__('Delete a custom post meta entry', 'custompostmeta-mutations'),
-            'setMeta' => $this->__('Set meta entries to a a custom post', 'custompostmeta-mutations'),
+            'setMeta' => $this->__('Set meta entries to a custom post', 'custompostmeta-mutations'),
             'updateMeta' => $this->__('Update a custom post meta entry', 'custompostmeta-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };

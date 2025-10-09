@@ -182,7 +182,7 @@ abstract class AbstractCommentObjectTypeFieldResolver extends AbstractObjectType
         return match ($fieldName) {
             'addMeta' => $this->__('Add a comment meta entry', 'commentmeta-mutations'),
             'deleteMeta' => $this->__('Delete a comment meta entry', 'commentmeta-mutations'),
-            'setMeta' => $this->__('Set meta entries to a a comment', 'commentmeta-mutations'),
+            'setMeta' => $this->__('Set meta entries to a comment', 'commentmeta-mutations'),
             'updateMeta' => $this->__('Update a comment meta entry', 'commentmeta-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
