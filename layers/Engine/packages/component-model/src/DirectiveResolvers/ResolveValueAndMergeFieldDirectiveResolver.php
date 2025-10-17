@@ -100,7 +100,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
-     * @param array<string|int,object> $idObjects
+     * @param array<string|int,object|null> $idObjects The object can be null if returning a null value in a field connection of type List
      * @param array<string,mixed> $messages
      */
     protected function resolveValueForObjects(
@@ -118,6 +118,15 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
         foreach ($idFieldSet as $id => $fieldSet) {
             // Obtain its ID and the required data-fields for that ID
             $object = $idObjects[$id];
+
+            /**
+             * If the object is null, then skip.
+             * It may be null if returning a null value
+             * in a field connection of type List
+             */
+            if ($object === null) {
+                continue;
+            }
             $this->resolveValuesForObject(
                 $relationalTypeResolver,
                 $id,

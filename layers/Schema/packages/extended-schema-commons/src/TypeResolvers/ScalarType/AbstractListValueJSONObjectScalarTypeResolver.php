@@ -8,17 +8,12 @@ use PoPSchema\ExtendedSchemaCommons\FeedbackItemProviders\InputValueCoercionErro
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\AbstractJSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
-abstract class AbstractListValueJSONObjectScalarTypeResolver extends JSONObjectScalarTypeResolver
+abstract class AbstractListValueJSONObjectScalarTypeResolver extends AbstractJSONObjectScalarTypeResolver
 {
-    public function getSpecifiedByURL(): ?string
-    {
-        return null;
-    }
-
     public function getTypeDescription(): ?string
     {
         return sprintf(

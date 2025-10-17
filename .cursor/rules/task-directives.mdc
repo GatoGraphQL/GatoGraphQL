@@ -15,6 +15,18 @@ Check what's the latest PR number in the repo (https://github.com/GatoGraphQL/Ga
 
 Add the log entry on the latest version number in the file.
 
+
+# PHPSTAN: Directive Handler
+
+When a user request is "PHPSTAN", run the phpstan command, and fix all the errors.
+
+To run phpstan, execute:
+
+```bash
+composer analyse
+```
+
+
 # TASK: Directive Handler
 
 When a user request begins with "TASK:", follow this structured workflow:

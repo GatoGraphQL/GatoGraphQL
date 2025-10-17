@@ -4,6 +4,26 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 15.1.0 - 17/10/2025
+
+### Added
+
+- Added `CodeNameJSONObject` input type (#3210)
+
+### Improvements
+
+- Added WooCommerce extension to docs (#3195)
+- Print descriptions in introspection for EnumStringScalarTypes (#3211)
+- Show "No values available" in description for EnumStrings (#a3dafbf7)
+- Allow returning null values in field connections of type List (#3212)
+
+### Fixed
+
+- Cast post ID to int (for if 3rd-party CPT returns it as string) (#3213)
+- Meta not returned as array (#3214)
+- QueryableInterface adapter (#3215)
+- CustomPostMeta module depends on Meta module (#3216)
+
 ## 15.0.0 - 23/09/2025
 
 ### Breaking changes

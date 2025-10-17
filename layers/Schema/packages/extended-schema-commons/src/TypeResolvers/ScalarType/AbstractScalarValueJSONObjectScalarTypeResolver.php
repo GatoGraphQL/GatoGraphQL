@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType;
 
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoP\Engine\TypeResolvers\ScalarType\AbstractJSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use stdClass;
 
@@ -15,13 +15,8 @@ use stdClass;
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars
  */
-abstract class AbstractScalarValueJSONObjectScalarTypeResolver extends JSONObjectScalarTypeResolver
+abstract class AbstractScalarValueJSONObjectScalarTypeResolver extends AbstractJSONObjectScalarTypeResolver
 {
-    public function getSpecifiedByURL(): ?string
-    {
-        return null;
-    }
-
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
         AstInterface $astNode,

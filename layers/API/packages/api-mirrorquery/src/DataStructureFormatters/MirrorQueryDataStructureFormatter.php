@@ -148,11 +148,11 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
     /**
      * @param array<string,mixed> $sourceRet
-     * @param array<string,mixed>|null $ret
+     * @param array<string|int,mixed>|null $ret
      * @param FieldInterface[] $fields
      * @param array<string,array<string|int,array<string,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
-     * @param array<string|int>|string|integer $objectIDorIDs
+     * @param array<string|int|null>|string|integer $objectIDorIDs The object ID inside a list of IDs can be null if returning a null value in a field connection of type List
      * @param array<string> $typeOutputKeyPaths
      */
     private function addData(array &$sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
@@ -160,8 +160,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         // The results can be a single ID or value, or an array of IDs
         if (is_array($objectIDorIDs)) {
             foreach ($objectIDorIDs as $objectID) {
+                /**
+                 * If the object ID is null, then add a null to the result
+                 * (eg: Allow returning null values in field connection of type List)
+                 */
+                if ($objectID === null) {
+                    $ret[] = null;
+                    continue;
+                }
                 // Add a new array for this DB object, where to return all its properties
-                // @phpstan-ignore-next-line
                 $ret[] = [];
                 $resolvedObjectRet = &$ret[count($ret) - 1];
                 // @phpstan-ignore-next-line

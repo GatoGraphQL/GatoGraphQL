@@ -11,12 +11,9 @@ use PoP\ComponentModel\App;
 
 abstract class AbstractTagTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
-    public function getTypeDescription(): string
+    public function getEnumStringTypeDescription(): ?string
     {
-        return sprintf(
-            $this->__('Tag taxonomies (available for querying via the API), with possible values: `"%s"`.', 'tags'),
-            implode('"`, `"', $this->getConsolidatedPossibleValues())
-        );
+        return $this->__('Tag taxonomies (available for querying via the API)', 'tags');
     }
 
     /**

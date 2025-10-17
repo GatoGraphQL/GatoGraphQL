@@ -25,6 +25,13 @@ class PageBuilderProvidersEnumStringTypeResolver extends AbstractEnumStringScala
     {
         return 'PageBuilderProvidersEnumString';
     }
+
+
+    public function getEnumStringTypeDescription(): ?string
+    {
+        return $this->__('Page builder providers', 'pagebuilder');
+    }
+
     /**
      * @return string[]
      */

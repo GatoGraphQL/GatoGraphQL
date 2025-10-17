@@ -78,6 +78,8 @@ The available premium extensions are:
 
 [Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, DeepSeek, Mistral AI, DeepL, and Google Translate.
 
+[WooCommerce](https://gatographql.com/extensions/woocommerce): Integration with WooCommerce, to fetch product data.
+
 == Built with Gato GraphQL ==
 
 All the plugins by [Gato Plugins](https://gatoplugins.com) use Gato GraphQL under the hook.
@@ -220,7 +222,18 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 14.1.0 =
+= 15.1.0 =
+* Added WooCommerce extension to docs (#3195)
+* Added `CodeNameJSONObject` input type (#3210)
+* Print descriptions in introspection for EnumStringScalarTypes (#3211)
+* Show "No values available" in description for EnumStrings (#a3dafbf7)
+* Allow returning null values in field connections of type List (#3212)
+* Fixed - Cast post ID to int (for if 3rd-party CPT returns it as string) (#3213)
+* Fixed - Meta not returned as array (#3214)
+* Fixed - QueryableInterface adapter (#3215)
+* Fixed - CustomPostMeta module depends on Meta module (#3216)
+
+= 15.0.0 =
 * Breaking change: Removed the BasicService trait (#3208)
 * Add helper methods to check if requesting public GraphQL API (#3207)
 * Added - Chain defining environment settings across extensions (#3209)

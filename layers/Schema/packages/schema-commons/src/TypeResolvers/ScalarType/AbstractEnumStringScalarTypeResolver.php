@@ -94,16 +94,56 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
         return $this->consolidatedPossibleValuesCache;
     }
 
-    public function getTypeDescription(): string
+    final public function getTypeDescription(): string
     {
-        return sprintf(
-            $this->__('Possible values: `"%s"`.', 'schema-commons'),
-            implode('"`, `"', $this->getConsolidatedPossibleValues())
+        $possibleValues = $this->getConsolidatedPossibleValues();
+        $valueDescriptions = [];
+
+        foreach ($possibleValues as $value) {
+            $valueDesc = $this->getPossibleValueDescription($value);
+            if ($valueDesc) {
+                $valueDescriptions[] = sprintf(
+                    $this->__('`%s`: %s', 'gatographql'),
+                    $value,
+                    $valueDesc
+                );
+            } else {
+                $valueDescriptions[] = sprintf('`%s`', $value);
+            }
+        }
+
+        $enumStringTypeDescription = $this->getEnumStringTypeDescription();
+
+        // If there are no possible values, return the description + "No values available"
+        if ($valueDescriptions === []) {
+            $noValuesMessage = $this->__('No values available', 'gatographql');
+            return $enumStringTypeDescription !== null
+                ? sprintf($this->__('%s. %s', 'gatographql'), $enumStringTypeDescription, $noValuesMessage)
+                : $noValuesMessage;
+        }
+
+        $possibleValuesDescription = sprintf(
+            $this->__('Possible values: %s.', 'gatographql'),
+            implode($this->__(', ', 'gatographql'), $valueDescriptions)
         );
+
+        return $enumStringTypeDescription !== null
+            ? sprintf($this->__('%s. %s', 'gatographql'), $enumStringTypeDescription, $possibleValuesDescription)
+            : $possibleValuesDescription;
+    }
+
+    public function getEnumStringTypeDescription(): ?string
+    {
+        return null;
     }
 
     public function sortPossibleValues(): bool
     {
         return true;
+    }
+
+    public function getPossibleValueDescription(string $possibleValue): ?string
+    {
+        return null;
     }
 }

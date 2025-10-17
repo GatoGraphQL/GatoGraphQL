@@ -115,19 +115,24 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * @param string|int|array<string|int> $objectIDOrIDs
-     * @return string|int|array<string|int>
+     * @return string|int|array<string|int|null> The object ID inside a list of IDs can be null if returning a null value in a field connection of type List
      */
     public function getQualifiedDBObjectIDOrIDs(string|int|array $objectIDOrIDs): string|int|array
     {
         // Add the type before the ID
         $objectIDs = is_array($objectIDOrIDs) ? $objectIDOrIDs : [$objectIDOrIDs];
         $qualifiedDBObjectIDs = array_map(
-            fn (int|string $id) => UnionTypeHelpers::getObjectComposedTypeAndID(
+            /**
+             * If the object is null, then skip.
+             * It may be null if returning a null value in a field connection of type List
+             */
+            fn (int|string|null $id) => $id === null ? null : UnionTypeHelpers::getObjectComposedTypeAndID(
                 $this,
                 $id
             ),
             $objectIDs
         );
+        // @phpstan-ignore-next-line
         return is_array($objectIDOrIDs) ? $qualifiedDBObjectIDs : $qualifiedDBObjectIDs[0];
     }
 
@@ -638,6 +643,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         $resolvedObjectIDs = $this->getResolvedObjectIDs(array_keys($idObjects));
         $unresolvedObjectIDs = [];
         foreach (array_diff($ids, $resolvedObjectIDs) as $unresolvedObjectID) {
+            /**
+             * It may be null if returning a null value
+             * in a field connection of type List.
+             *
+             * However, because the value is taken from the $idFieldSet key,
+             * it's not `null` anymore, but an empty string, hence ask doing `empty`
+             */
+            if (empty($unresolvedObjectID)) {
+                continue;
+            }
             /**
              * If a UnionTypeResolver fails to load an object,
              * the fields will be NULL

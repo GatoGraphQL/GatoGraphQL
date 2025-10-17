@@ -7,6 +7,8 @@ namespace PoPCMSSchema\CommentMetaWP\TypeAPIs;
 use PoPCMSSchema\CommentMeta\TypeAPIs\AbstractCommentMetaTypeAPI;
 use WP_Comment;
 
+use function get_comment_meta;
+
 class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
 {
     /**
@@ -25,7 +27,7 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
 
         // This function does not differentiate between a stored empty value,
         // and a non-existing key! So if empty, treat it as non-existent and return null
-        $value = \get_comment_meta((int)$commentID, $key, $single);
+        $value = get_comment_meta((int)$commentID, $key, $single);
         if (($single && $value === '') || (!$single && $value === [])) {
             return null;
         }
@@ -45,6 +47,11 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
             $commentID = $commentObjectOrID;
         }
 
+        $meta = get_comment_meta((int)$commentID) ?? [];
+        if (!is_array($meta)) {
+            return [];
+        }
+
         return array_map(
             /**
              * @param mixed[] $items
@@ -56,7 +63,7 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
                     $items
                 );
             },
-            \get_comment_meta((int)$commentID) ?? []
+            $meta
         );
     }
 

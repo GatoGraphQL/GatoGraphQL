@@ -2063,7 +2063,11 @@ class Engine extends AbstractBasicService implements EngineInterface
                             // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
-                                fn (string|int $field_id) => $typedSubcomponentIDs[$field_id],
+                                /**
+                                 * It may be null if returning a null value
+                                 * in a field connection of type List
+                                 */
+                                fn (string|int|null $field_id) => $field_id === null ? null : $typedSubcomponentIDs[$field_id],
                                 $database_field_ids
                             );
                             if ($subcomponentIsUnionTypeResolver) {
