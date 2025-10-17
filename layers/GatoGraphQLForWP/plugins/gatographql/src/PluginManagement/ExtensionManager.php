@@ -453,15 +453,7 @@ class ExtensionManager extends AbstractPluginManager
                 default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
             };
 
-            // /**
-            //  * Do not print the warnings in the Settings page
-            //  */
-            // $instanceManager = InstanceManagerFacade::getInstance();
-            // /** @var SettingsMenuPage */
-            // $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-            // if (App::query('page') === $settingsMenuPage->getScreenID()) {
-            //     return;
-            // }
+            
             $moduleRegistry = ModuleRegistryFacade::getInstance();
             $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
             $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
