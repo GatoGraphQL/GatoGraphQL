@@ -453,7 +453,11 @@ class ExtensionManager extends AbstractPluginManager
                 default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
             };
 
-            
+            /**
+             * If "admin_notices" is invoked before the plugin is initialized
+             * (eg: when a license key is missing), then the module will not exist.
+             * Catch it, and default to a simpler message
+             */
             $moduleRegistry = ModuleRegistryFacade::getInstance();
             $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
             $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
