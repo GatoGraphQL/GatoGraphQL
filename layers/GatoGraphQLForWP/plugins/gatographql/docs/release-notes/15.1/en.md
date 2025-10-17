@@ -17,3 +17,4 @@
 - Meta not returned as array ([#3214](https://github.com/GatoGraphQL/GatoGraphQL/pull/3214))
 - QueryableInterface adapter ([#3215](https://github.com/GatoGraphQL/GatoGraphQL/pull/3215))
 - CustomPostMeta module depends on Meta module ([#3216](https://github.com/GatoGraphQL/GatoGraphQL/pull/3216))
+- Exception when printing admin_notices before plugin is initialized ([#3217](https://github.com/GatoGraphQL/GatoGraphQL/pull/3217))
