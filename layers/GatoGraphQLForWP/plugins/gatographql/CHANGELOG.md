@@ -8,11 +8,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Added WooCommerce extension to docs (#3195)
 - Added `CodeNameJSONObject` input type (#3210)
 
 ### Improvements
 
-- Added WooCommerce extension to docs (#3195)
 - Print descriptions in introspection for EnumStringScalarTypes (#3211)
 - Show "No values available" in description for EnumStrings (#a3dafbf7)
 - Allow returning null values in field connections of type List (#3212)
