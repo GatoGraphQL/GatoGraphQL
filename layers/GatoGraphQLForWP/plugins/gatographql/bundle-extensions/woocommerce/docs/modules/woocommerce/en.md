@@ -291,480 +291,9 @@ query FetchWooCommerceData
 # ----------------------------------------------------------------------
 # Fragments
 # ----------------------------------------------------------------------
-fragment CouponFields on WooCommerceCoupon {
-  id
-  code
-  amount
-  amountFormatted
-  dateExpires
-  dateExpiresStr
-  formattedDateExpiresStr: dateExpiresStr(format: "d/m/Y H:i:s")
-  discountType
-  description
-  date
-  modifiedDate
-  dateStr
-  formattedDateStr: dateStr(format: "d/m/Y H:i:s")
-  modifiedDateStr
-  formattedModifiedDateStr: modifiedDateStr(format: "d/m/Y H:i:s")
-  usageCount
-  individualUse
-  productIDs
-  products {
-    id
-    name
-    slug
-  }
-  productsCount
-  excludedProductIDs
-  excludedProducts {
-    id
-    name
-    slug
-  }
-  excludedProductsCount
-  usageLimit
-  usageLimitPerUser
-  limitUsageToXItems
-  freeShipping
-  productCategoryIDs
-  productCategories {
-    id
-    name
-    slug
-  }
-  productCategoriesCount
-  excludedProductCategoryIDs
-  excludedProductCategories {
-    id
-    name
-    slug
-  }
-  excludedProductCategoriesCount
-  productBrandIDs
-  productBrands {
-    id
-    name
-    slug
-  }
-  productBrandsCount
-  excludedProductBrandIDs
-  excludedProductBrands {
-    id
-    name
-    slug
-  }
-  excludedProductBrandsCount
-  excludeSaleItems
-  minimumAmount
-  minimumAmountFormatted
-  maximumAmount
-  maximumAmountFormatted
-  emailRestrictions
-  usedByCustomerIDs
-  usedByCustomers {
-    ...CustomerFields
-  }
-  usedByCustomersCount
-}
 
-fragment CustomerFields on WooCommerceCustomer {
-  id
-  username
-  email
-  firstName
-  lastName
-  displayName
-  description
-  createdDate
-  createdDateStr
-  formattedCreatedDateStr: createdDateStr(format: "d/m/Y H:i:s")
-  modifiedDate
-  modifiedDateStr
-  formattedModifiedDateStr: modifiedDateStr(format: "d/m/Y H:i:s")
-  role
-  billing
-  shipping
-  isPayingCustomer
-  avatarURL
-  totalSpent
-  totalSpentFormatted
-  orderCount
-  lastOrderID
-  lastOrder {
-    id
-    orderNumber
-    status
-    total
-    date
-  }
-  orders {
-    id
-    orderNumber
-    status
-    total
-    date
-  }
-  ordersCount
-}
-
-fragment OrderFields on WooCommerceOrder {
-  id
-  orderNumber
-  orderKey
-  date
-  modifiedDate
-  dateStr
-  formattedDateStr: dateStr(format: "d/m/Y H:i:s")
-  modifiedDateStr
-  formattedModifiedStr: modifiedDateStr(format: "d/m/Y H:i:s")
-  status
-  isPaid
-  currency
-  total
-  totalFormatted
-  subtotal
-  subtotalFormatted
-  totalTax
-  totalTaxFormatted
-  totalShipping
-  totalShippingFormatted
-  totalDiscount
-  totalDiscountFormatted
-  totalDiscountTax
-  totalDiscountTaxFormatted
-  shippingTotal
-  shippingTotalFormatted
-  shippingTax
-  shippingTaxFormatted
-  cartTax
-  cartTaxFormatted
-  totalFee
-  totalFeeFormatted
-  customerID
-  customer {
-    ...CustomerFields
-  }
-  customerNote
-  billingAddress
-  shippingAddress
-  hasCompletedStatus: hasStatus(status: "completed")
-  hasPendingStatus: hasStatus(status: "pending")
-  hasProcessingStatus: hasStatus(status: "processing")
-  hasOnHoldStatus: hasStatus(status: "on-hold")
-  hasCancelledStatus: hasStatus(status: "cancelled")
-  hasRefundedStatus: hasStatus(status: "refunded")
-  hasFailedStatus: hasStatus(status: "failed")
-  hasAnyCompletedOrProcessingStatus: hasAnyStatus(statuses: ["completed", "processing"])
-  hasAnyPendingOrOnHoldStatus: hasAnyStatus(statuses: ["pending", "on-hold"])
-  paymentMethod
-  paymentMethodTitle
-  transactionID
-  datePaid
-  datePaidStr
-  formattedDatePaidStr: datePaidStr(format: "d/m/Y H:i:s")
-  dateCompleted
-  dateCompletedStr
-  formattedDateCompletedStr: dateCompletedStr(format: "d/m/Y H:i:s")
-  cartHash
-  newOrderEmailSent
-  orderCurrency
-  orderVersion
-  pricesIncludeTax
-  discountTotal
-  discountTax
-  refunded
-  remainingRefundAmount
-  itemCount
-  items {
-    ...OrderItemFields
-  }
-  refunds {
-    ...RefundFields
-  }
-  downloadPermissionsGranted
-  needsPayment
-  needsProcessing
-  isDownloadPermitted
-  hasDownloadableItem
-}
-
-fragment OrderItemFields on WooCommerceOrderItem {
-  id
-  name
-  quantity
-  subtotal
-  subtotalFormatted
-  total
-  totalFormatted
-  totalTax
-  totalTaxFormatted
-  productID
-  variationID
-  reducedStockNumber
-  product {
-    id
-    name
-    slug
-    sku
-  }
-  variation {
-    id
-    name
-    slug
-    sku
-  }
-}
-
-fragment ProductCategoryFields on WooCommerceProductCategory {
-  id
-  url
-  urlPath
-  slug
-  name
-  description
-  count
-  slugPath
-  parentID
-  parent {
-    id
-    name
-    slug
-  }
-  thumbnail {
-    id
-    src
-    altText
-    title
-    caption
-  }
-  displayType
-  menuOrder
-  ancestors {
-    id
-    name
-    slug
-  }
-  children {
-    id
-    name
-    slug
-    parent {
-      id
-      name
-      slug
-    }
-  }
-  childrenCount
-  descendants {
-    id
-    name
-    slug
-    ancestors {
-      id
-      name
-      slug
-    }
-  }
-  descendantsCount
-  termGroup
-  termTaxonomyID
-  taxonomy
-}
-
-fragment ProductTagFields on WooCommerceProductTag {
-  id
-  name
-  slug
-  url
-  urlPath
-  description
-  count
-  thumbnail {
-    id
-    src
-    altText
-    title
-    caption
-  }
-  menuOrder
-  termGroup
-  termTaxonomyID
-  taxonomy
-}
-
-fragment RefundFields on WooCommerceRefund {
-  id
-  orderID
-  order {
-    id
-    orderNumber
-    status
-  }
-  amount
-  amountFormatted
-  reason
-  refundedBy {
-    id
-    name
-    email
-  }
-  isPaymentRefundedViaAPI
-  refundType
-  date
-  modifiedDate
-  dateStr
-  formattedDateStr: dateStr(format: "d/m/Y H:i:s")
-  modifiedDateStr
-  formattedModifiedDateStr: modifiedDateStr(format: "d/m/Y H:i:s")
-  status
-}
-
-fragment ReviewFields on WooCommerceReview {
-  id
-  content
-  author
-  authorEmail
-  rating
-  verified
-  approved
-  date
-  dateStr
-  productID
-  product {
-    id
-    name
-  }
-}
-
-fragment ShippingClassFields on WooCommerceShippingClass {
-  id
-  name
-  slug
-  description
-  count
-}
-
-fragment TaxRateFields on WooCommerceTaxRate {
-  id
-  country
-  state
-  postcode
-  city
-  rate
-  name
-  priority
-  compound
-  shipping
-  order
-  class
-}
-
-fragment PaymentGatewayFields on WooCommercePaymentGateway {
-  id
-  title
-  description
-  enabled
-  methodID
-  methodTitle
-  methodDescription
-  icon
-  isAvailable
-  isActive
-}
-
-fragment ProductBrandFields on WooCommerceProductBrand {
-  id
-  url
-  urlPath
-  slug
-  slugPath
-  name
-  description
-  count
-  parentID
-  parent {
-    id
-    name
-    slug
-  }
-  thumbnail {
-    id
-    src
-    altText
-    title
-    caption
-  }
-  menuOrder
-  ancestors {
-    id
-    name
-    slug
-  }
-  children {
-    id
-    name
-    slug
-    parent {
-      id
-      name
-      slug
-    }
-  }
-  childrenCount
-  descendants {
-    id
-    name
-    slug
-    ancestors {
-      id
-      name
-      slug
-    }
-  }
-  descendantsCount
-  termGroup
-  termTaxonomyID
-  taxonomy
-}
-
-fragment AttributeFields on WooCommerceAttribute {
-  id
-  url
-  urlPath
-  slug
-  name
-  description
-  count
-  menuOrder
-  termGroup
-  termTaxonomyID
-  taxonomy
-  taxonomyObject {
-    id
-    name
-    slug
-    type
-    orderBy
-    taxonomy
-    hasArchives
-    public
-  }
-}
-
-fragment AttributeTaxonomyFields on WooCommerceAttributeTaxonomy {
-  id
-  name
-  slug
-  type
-  orderBy
-  taxonomy
-  hasArchives
-  public
-}
-
-# ----------------------------------------------------------------------
 # Product fields
+# ----------------------------------------------------------------------
 
 fragment WooCommerceSimpleProductFields on WooCommerceSimpleProduct {
   # Specific fields for this type
@@ -880,8 +409,8 @@ fragment WooCommerceProductVariationFields on WooCommerceProductVariation {
   ...WooCommerceWithStockManagementProductOrProductVariationInterfaceFields
 }
 
-# ----------------------------------------------------------------------
 # Product Interface fields
+# ----------------------------------------------------------------------
 
 fragment WooCommerceCrossSellableProductInterfaceFields on WooCommerceCrossSellableProduct {
   crossSellIDs
@@ -1054,6 +583,480 @@ fragment WooCommerceProductInterfaceFields on WooCommerceProduct {
     ...ReviewFields
   }
   reviewsCount
+}
+
+# All other fragments
+# ----------------------------------------------------------------------
+fragment ProductCategoryFields on WooCommerceProductCategory {
+  id
+  url
+  urlPath
+  slug
+  name
+  description
+  count
+  slugPath
+  parentID
+  parent {
+    id
+    name
+    slug
+  }
+  thumbnail {
+    id
+    src
+    altText
+    title
+    caption
+  }
+  displayType
+  menuOrder
+  ancestors {
+    id
+    name
+    slug
+  }
+  children {
+    id
+    name
+    slug
+    parent {
+      id
+      name
+      slug
+    }
+  }
+  childrenCount
+  descendants {
+    id
+    name
+    slug
+    ancestors {
+      id
+      name
+      slug
+    }
+  }
+  descendantsCount
+  termGroup
+  termTaxonomyID
+  taxonomy
+}
+
+fragment ProductTagFields on WooCommerceProductTag {
+  id
+  name
+  slug
+  url
+  urlPath
+  description
+  count
+  thumbnail {
+    id
+    src
+    altText
+    title
+    caption
+  }
+  menuOrder
+  termGroup
+  termTaxonomyID
+  taxonomy
+}
+
+fragment ProductBrandFields on WooCommerceProductBrand {
+  id
+  url
+  urlPath
+  slug
+  slugPath
+  name
+  description
+  count
+  parentID
+  parent {
+    id
+    name
+    slug
+  }
+  thumbnail {
+    id
+    src
+    altText
+    title
+    caption
+  }
+  menuOrder
+  ancestors {
+    id
+    name
+    slug
+  }
+  children {
+    id
+    name
+    slug
+    parent {
+      id
+      name
+      slug
+    }
+  }
+  childrenCount
+  descendants {
+    id
+    name
+    slug
+    ancestors {
+      id
+      name
+      slug
+    }
+  }
+  descendantsCount
+  termGroup
+  termTaxonomyID
+  taxonomy
+}
+
+fragment AttributeFields on WooCommerceAttribute {
+  id
+  url
+  urlPath
+  slug
+  name
+  description
+  count
+  menuOrder
+  termGroup
+  termTaxonomyID
+  taxonomy
+  taxonomyObject {
+    id
+    name
+    slug
+    type
+    orderBy
+    taxonomy
+    hasArchives
+    public
+  }
+}
+
+fragment AttributeTaxonomyFields on WooCommerceAttributeTaxonomy {
+  id
+  name
+  slug
+  type
+  orderBy
+  taxonomy
+  hasArchives
+  public
+}
+
+fragment CustomerFields on WooCommerceCustomer {
+  id
+  username
+  email
+  firstName
+  lastName
+  displayName
+  description
+  createdDate
+  createdDateStr
+  formattedCreatedDateStr: createdDateStr(format: "d/m/Y H:i:s")
+  modifiedDate
+  modifiedDateStr
+  formattedModifiedDateStr: modifiedDateStr(format: "d/m/Y H:i:s")
+  role
+  billing
+  shipping
+  isPayingCustomer
+  avatarURL
+  totalSpent
+  totalSpentFormatted
+  orderCount
+  lastOrderID
+  lastOrder {
+    id
+    orderNumber
+    status
+    total
+    date
+  }
+  orders {
+    id
+    orderNumber
+    status
+    total
+    date
+  }
+  ordersCount
+}
+
+fragment OrderFields on WooCommerceOrder {
+  id
+  orderNumber
+  orderKey
+  date
+  modifiedDate
+  dateStr
+  formattedDateStr: dateStr(format: "d/m/Y H:i:s")
+  modifiedDateStr
+  formattedModifiedStr: modifiedDateStr(format: "d/m/Y H:i:s")
+  status
+  isPaid
+  currency
+  total
+  totalFormatted
+  subtotal
+  subtotalFormatted
+  totalTax
+  totalTaxFormatted
+  totalShipping
+  totalShippingFormatted
+  totalDiscount
+  totalDiscountFormatted
+  totalDiscountTax
+  totalDiscountTaxFormatted
+  shippingTotal
+  shippingTotalFormatted
+  shippingTax
+  shippingTaxFormatted
+  cartTax
+  cartTaxFormatted
+  totalFee
+  totalFeeFormatted
+  customerID
+  customer {
+    ...CustomerFields
+  }
+  customerNote
+  billingAddress
+  shippingAddress
+  hasCompletedStatus: hasStatus(status: "completed")
+  hasPendingStatus: hasStatus(status: "pending")
+  hasProcessingStatus: hasStatus(status: "processing")
+  hasOnHoldStatus: hasStatus(status: "on-hold")
+  hasCancelledStatus: hasStatus(status: "cancelled")
+  hasRefundedStatus: hasStatus(status: "refunded")
+  hasFailedStatus: hasStatus(status: "failed")
+  hasAnyCompletedOrProcessingStatus: hasAnyStatus(statuses: ["completed", "processing"])
+  hasAnyPendingOrOnHoldStatus: hasAnyStatus(statuses: ["pending", "on-hold"])
+  paymentMethod
+  paymentMethodTitle
+  transactionID
+  datePaid
+  datePaidStr
+  formattedDatePaidStr: datePaidStr(format: "d/m/Y H:i:s")
+  dateCompleted
+  dateCompletedStr
+  formattedDateCompletedStr: dateCompletedStr(format: "d/m/Y H:i:s")
+  cartHash
+  newOrderEmailSent
+  orderCurrency
+  orderVersion
+  pricesIncludeTax
+  discountTotal
+  discountTax
+  refunded
+  remainingRefundAmount
+  itemCount
+  items {
+    ...OrderItemFields
+  }
+  refunds {
+    ...RefundFields
+  }
+  downloadPermissionsGranted
+  needsPayment
+  needsProcessing
+  isDownloadPermitted
+  hasDownloadableItem
+}
+
+fragment OrderItemFields on WooCommerceOrderItem {
+  id
+  name
+  quantity
+  subtotal
+  subtotalFormatted
+  total
+  totalFormatted
+  totalTax
+  totalTaxFormatted
+  productID
+  variationID
+  reducedStockNumber
+  product {
+    id
+    name
+    slug
+    sku
+  }
+  variation {
+    id
+    name
+    slug
+    sku
+  }
+}
+
+fragment RefundFields on WooCommerceRefund {
+  id
+  orderID
+  order {
+    id
+    orderNumber
+    status
+  }
+  amount
+  amountFormatted
+  reason
+  refundedBy {
+    id
+    name
+    email
+  }
+  isPaymentRefundedViaAPI
+  refundType
+  date
+  modifiedDate
+  dateStr
+  formattedDateStr: dateStr(format: "d/m/Y H:i:s")
+  modifiedDateStr
+  formattedModifiedDateStr: modifiedDateStr(format: "d/m/Y H:i:s")
+  status
+}
+
+fragment ReviewFields on WooCommerceReview {
+  id
+  content
+  author
+  authorEmail
+  rating
+  verified
+  approved
+  date
+  dateStr
+  productID
+  product {
+    id
+    name
+  }
+}
+
+fragment CouponFields on WooCommerceCoupon {
+  id
+  code
+  amount
+  amountFormatted
+  dateExpires
+  dateExpiresStr
+  formattedDateExpiresStr: dateExpiresStr(format: "d/m/Y H:i:s")
+  discountType
+  description
+  date
+  modifiedDate
+  dateStr
+  formattedDateStr: dateStr(format: "d/m/Y H:i:s")
+  modifiedDateStr
+  formattedModifiedDateStr: modifiedDateStr(format: "d/m/Y H:i:s")
+  usageCount
+  individualUse
+  productIDs
+  products {
+    id
+    name
+    slug
+  }
+  productsCount
+  excludedProductIDs
+  excludedProducts {
+    id
+    name
+    slug
+  }
+  excludedProductsCount
+  usageLimit
+  usageLimitPerUser
+  limitUsageToXItems
+  freeShipping
+  productCategoryIDs
+  productCategories {
+    id
+    name
+    slug
+  }
+  productCategoriesCount
+  excludedProductCategoryIDs
+  excludedProductCategories {
+    id
+    name
+    slug
+  }
+  excludedProductCategoriesCount
+  productBrandIDs
+  productBrands {
+    id
+    name
+    slug
+  }
+  productBrandsCount
+  excludedProductBrandIDs
+  excludedProductBrands {
+    id
+    name
+    slug
+  }
+  excludedProductBrandsCount
+  excludeSaleItems
+  minimumAmount
+  minimumAmountFormatted
+  maximumAmount
+  maximumAmountFormatted
+  emailRestrictions
+  usedByCustomerIDs
+  usedByCustomers {
+    ...CustomerFields
+  }
+  usedByCustomersCount
+}
+
+fragment ShippingClassFields on WooCommerceShippingClass {
+  id
+  name
+  slug
+  description
+  count
+}
+
+fragment TaxRateFields on WooCommerceTaxRate {
+  id
+  country
+  state
+  postcode
+  city
+  rate
+  name
+  priority
+  compound
+  shipping
+  order
+  class
+}
+
+fragment PaymentGatewayFields on WooCommercePaymentGateway {
+  id
+  title
+  description
+  enabled
+  methodID
+  methodTitle
+  methodDescription
+  icon
+  isAvailable
+  isActive
 }
 ```
 
