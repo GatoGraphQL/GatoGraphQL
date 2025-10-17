@@ -1,6 +1,6 @@
 # WooCommerce
 
-Integration with <a href="https://woocommerce.com" target="_blank" rel="nofollow">WooCommerce</a>.
+Integration with <a href="https://wordpress.org/plugins/woocommerce/" target="_blank" rel="nofollow">WooCommerce</a>.
 
 <!-- [Watch “How to use the WooCommerce extension” on YouTube](https://www.youtube.com/watch?v=@todo) -->
 

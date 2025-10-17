@@ -1,6 +1,6 @@
 # WooCommerce
 
-Integration with <a href="https://woocommerce.com" target="_blank" rel="nofollow">WooCommerce</a>.
+Integration with <a href="https://wordpress.org/plugins/woocommerce/" target="_blank" rel="nofollow">WooCommerce</a>.
 
 The GraphQL schema is provided with fields to fetch WooCommerce data.
 
