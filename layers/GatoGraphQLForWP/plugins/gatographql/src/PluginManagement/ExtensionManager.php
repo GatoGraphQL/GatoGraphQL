@@ -8,6 +8,7 @@ use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Constants\ExtensionDataOptions;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
+use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
@@ -447,49 +448,57 @@ class ExtensionManager extends AbstractPluginManager
         ?string $messagePlaceholderCode = null,
     ): void {
         \add_action('admin_notices', function () use ($extensionName, $messagePlaceholderCode) {
-            $messagePlaceholder = match ($messagePlaceholderCode) {
-                'invalid' => __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql'),
-                'unmatching' => __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql'),
-                default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
-            };
+            /**
+             * If "admin_notices" is invoked before the plugin is initialized
+             * (eg: when activating WooCommerce for first time, so it goes to
+             * its wizard, and the license key for an extention is missing),
+             * then the module will not exist.
+             *
+             * Catch it, and default to a predefined string.
+             */
+            try {
+                $messagePlaceholder = match ($messagePlaceholderCode) {
+                    'invalid' => __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql'),
+                    'unmatching' => __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql'),
+                    default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
+                };
 
-            // /**
-            //  * Do not print the warnings in the Settings page
-            //  */
-            // $instanceManager = InstanceManagerFacade::getInstance();
-            // /** @var SettingsMenuPage */
-            // $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-            // if (App::query('page') === $settingsMenuPage->getScreenID()) {
-            //     return;
-            // }
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
-            $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
-            $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
-            $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
-            $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var SettingsMenuPage */
-            $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-            $adminNotice_safe = sprintf(
-                '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
-                sprintf(
-                    __('<strong>%s</strong>: %s.', 'gatographql'),
-                    PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
-                        ? __('Gato GraphQL PRO', 'gatographql')
-                        : $extensionName,
+                $moduleRegistry = ModuleRegistryFacade::getInstance();
+                $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
+                $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
+                $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
+                $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
+                $instanceManager = InstanceManagerFacade::getInstance();
+                /** @var SettingsMenuPage */
+                $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
+                $message = sprintf(
+                    $messagePlaceholder,
+                    AdminHelpers::getSettingsPageTabURL($activateExtensionsModule),
                     sprintf(
-                        $messagePlaceholder,
-                        AdminHelpers::getSettingsPageTabURL($activateExtensionsModule),
-                        sprintf(
-                            '<code>%s > %s > %s</code>',
-                            $settingsMenuPage->getMenuPageTitle(),
-                            $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
-                            $activateExtensionsModuleResolver->getName($activateExtensionsModule),
-                        )
+                        '<code>%s > %s > %s</code>',
+                        $settingsMenuPage->getMenuPageTitle(),
+                        $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
+                        $activateExtensionsModuleResolver->getName($activateExtensionsModule),
                     )
-                )
+                );
+            } catch (ModuleNotExistsException) {
+                $message = match ($messagePlaceholderCode) {
+                    'invalid' => __('The license is invalid. Please enter a new license key to enable it', 'gatographql'),
+                    'unmatching' => __('The provided license key belongs to a different extension. Please enter the right license key to enable it', 'gatographql'),
+                    default => __('Please enter the license key to enable it', 'gatographql')
+                };
+            }
+            $adminNotice_safe = sprintf(
+                __('<strong>%s</strong>: %s.', 'gatographql'),
+                PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                    ? __('Gato GraphQL PRO', 'gatographql')
+                    : $extensionName,
+                $message
             );
-            echo $adminNotice_safe;
+            printf(
+                '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+                $adminNotice_safe
+            );
         });
     }
 

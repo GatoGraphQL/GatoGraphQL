@@ -232,6 +232,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - Meta not returned as array (#3214)
 * Fixed - QueryableInterface adapter (#3215)
 * Fixed - CustomPostMeta module depends on Meta module (#3216)
+* Fixed - Exception when printing admin_notices before plugin is initialized (#3217)
 
 = 15.0.0 =
 * Breaking change: Removed the BasicService trait (#3208)

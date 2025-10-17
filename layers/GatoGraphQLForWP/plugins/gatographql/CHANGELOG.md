@@ -23,6 +23,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Meta not returned as array (#3214)
 - QueryableInterface adapter (#3215)
 - CustomPostMeta module depends on Meta module (#3216)
+- Exception when printing admin_notices before plugin is initialized (#3217)
 
 ## 15.0.0 - 23/09/2025
 
