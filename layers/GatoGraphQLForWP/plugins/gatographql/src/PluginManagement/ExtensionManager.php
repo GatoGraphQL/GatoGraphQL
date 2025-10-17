@@ -480,13 +480,13 @@ class ExtensionManager extends AbstractPluginManager
                         $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
                         $activateExtensionsModuleResolver->getName($activateExtensionsModule),
                     )
-                );            
+                );
             } catch (ModuleNotExistsException) {
                 $message = match ($messagePlaceholderCode) {
                     'invalid' => __('The license is invalid. Please enter a new license key to enable it', 'gatographql'),
                     'unmatching' => __('The provided license key belongs to a different extension. Please enter the right license key to enable it', 'gatographql'),
                     default => __('Please enter the license key to enable it', 'gatographql')
-                };                
+                };
             }
             $adminNotice_safe = sprintf(
                 __('<strong>%s</strong>: %s.', 'gatographql'),
