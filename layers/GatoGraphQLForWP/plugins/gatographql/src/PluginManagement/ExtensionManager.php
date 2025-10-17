@@ -471,22 +471,19 @@ class ExtensionManager extends AbstractPluginManager
                 $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var SettingsMenuPage */
                 $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-                $adminNotice_safe = sprintf(
-                    '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+                $adminNoticeContent = sprintf(
+                    __('<strong>%s</strong>: %s.', 'gatographql'),
+                    PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                        ? __('Gato GraphQL PRO', 'gatographql')
+                        : $extensionName,
                     sprintf(
-                        __('<strong>%s</strong>: %s.', 'gatographql'),
-                        PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
-                            ? __('Gato GraphQL PRO', 'gatographql')
-                            : $extensionName,
+                        $messagePlaceholder,
+                        AdminHelpers::getSettingsPageTabURL($activateExtensionsModule),
                         sprintf(
-                            $messagePlaceholder,
-                            AdminHelpers::getSettingsPageTabURL($activateExtensionsModule),
-                            sprintf(
-                                '<code>%s > %s > %s</code>',
-                                $settingsMenuPage->getMenuPageTitle(),
-                                $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
-                                $activateExtensionsModuleResolver->getName($activateExtensionsModule),
-                            )
+                            '<code>%s > %s > %s</code>',
+                            $settingsMenuPage->getMenuPageTitle(),
+                            $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
+                            $activateExtensionsModuleResolver->getName($activateExtensionsModule),
                         )
                     )
                 );            
@@ -497,17 +494,18 @@ class ExtensionManager extends AbstractPluginManager
                     default => __('Please enter the license key to enable it', 'gatographql')
                 };
 
-                $adminNotice_safe = sprintf(
-                    '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
-                    sprintf(
-                        __('<strong>%s</strong>: %s.', 'gatographql'),
-                        PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
-                            ? __('Gato GraphQL PRO', 'gatographql')
-                            : $extensionName,
-                        $message
-                    )
+                $adminNoticeContent = sprintf(
+                    __('<strong>%s</strong>: %s.', 'gatographql'),
+                    PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                        ? __('Gato GraphQL PRO', 'gatographql')
+                        : $extensionName,
+                    $message
                 );
             }
+            $adminNotice_safe = sprintf(
+                '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+                $adminNoticeContent
+            );
             echo $adminNotice_safe;
         });
     }
