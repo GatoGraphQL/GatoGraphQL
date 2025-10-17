@@ -448,12 +448,6 @@ class ExtensionManager extends AbstractPluginManager
         ?string $messagePlaceholderCode = null,
     ): void {
         \add_action('admin_notices', function () use ($extensionName, $messagePlaceholderCode) {
-            $messagePlaceholder = match ($messagePlaceholderCode) {
-                'invalid' => __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql'),
-                'unmatching' => __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql'),
-                default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
-            };
-
             /**
              * If "admin_notices" is invoked before the plugin is initialized
              * (eg: when activating WooCommerce for first time, so it goes to
@@ -462,15 +456,19 @@ class ExtensionManager extends AbstractPluginManager
              *
              * Catch it, and default to a predefined string.
              */
+            $messagePlaceholder = match ($messagePlaceholderCode) {
+                'invalid' => __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql'),
+                'unmatching' => __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql'),
+                default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
+            };
+
             $moduleRegistry = ModuleRegistryFacade::getInstance();
             $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
             $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
             $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
             try {
                 $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
-                $activateExtensionsTabName = $activateExtensionsModuleResolver->getName($activateExtensionsModule);
             } catch (ModuleNotExistsException) {
-                $activateExtensionsTabName = __('Activate Extensions', 'gatographql');
             }
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsMenuPage */
@@ -489,7 +487,7 @@ class ExtensionManager extends AbstractPluginManager
                             '<code>%s > %s > %s</code>',
                             $settingsMenuPage->getMenuPageTitle(),
                             $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
-                            $activateExtensionsTabName,
+                            $activateExtensionsModuleResolver->getName($activateExtensionsModule),
                         )
                     )
                 )
