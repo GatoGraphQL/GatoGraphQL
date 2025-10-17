@@ -8,6 +8,7 @@ use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Constants\ExtensionDataOptions;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
+use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
@@ -462,8 +463,12 @@ class ExtensionManager extends AbstractPluginManager
             $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
             $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
             $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
-            $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
-            $activateExtensionsTabName = $activateExtensionsModuleResolver->getName($activateExtensionsModule);
+            try {
+                $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
+                $activateExtensionsTabName = $activateExtensionsModuleResolver->getName($activateExtensionsModule);
+            } catch (ModuleNotExistsException) {
+                $activateExtensionsTabName = __('Activate Extensions', 'gatographql');
+            }
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsMenuPage */
             $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
