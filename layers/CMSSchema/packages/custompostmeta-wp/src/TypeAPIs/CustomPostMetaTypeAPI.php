@@ -27,7 +27,7 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
         }
         return $value;
     }
-    
+
     /**
      * Extract the custom post ID from either a WP_Post object or ID
      */

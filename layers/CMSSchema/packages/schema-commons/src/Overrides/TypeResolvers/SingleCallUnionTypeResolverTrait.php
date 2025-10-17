@@ -23,7 +23,7 @@ trait SingleCallUnionTypeResolverTrait
         if ($ids === []) {
             return [];
         }
-        
+
         $objectIDTargetTypeResolvers = [];
         /**
          * We retrieve the original service, which must also be
