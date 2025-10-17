@@ -456,42 +456,58 @@ class ExtensionManager extends AbstractPluginManager
              *
              * Catch it, and default to a predefined string.
              */
-            $messagePlaceholder = match ($messagePlaceholderCode) {
-                'invalid' => __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql'),
-                'unmatching' => __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql'),
-                default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
-            };
-
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
-            $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
-            $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
-            $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
             try {
+                $messagePlaceholder = match ($messagePlaceholderCode) {
+                    'invalid' => __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql'),
+                    'unmatching' => __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql'),
+                    default => __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql')
+                };
+
+                $moduleRegistry = ModuleRegistryFacade::getInstance();
+                $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
+                $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
+                $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
                 $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
-            } catch (ModuleNotExistsException) {
-            }
-            $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var SettingsMenuPage */
-            $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-            $adminNotice_safe = sprintf(
-                '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
-                sprintf(
-                    __('<strong>%s</strong>: %s.', 'gatographql'),
-                    PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
-                        ? __('Gato GraphQL PRO', 'gatographql')
-                        : $extensionName,
+                $instanceManager = InstanceManagerFacade::getInstance();
+                /** @var SettingsMenuPage */
+                $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
+                $adminNotice_safe = sprintf(
+                    '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                     sprintf(
-                        $messagePlaceholder,
-                        AdminHelpers::getSettingsPageTabURL($activateExtensionsModule),
+                        __('<strong>%s</strong>: %s.', 'gatographql'),
+                        PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                            ? __('Gato GraphQL PRO', 'gatographql')
+                            : $extensionName,
                         sprintf(
-                            '<code>%s > %s > %s</code>',
-                            $settingsMenuPage->getMenuPageTitle(),
-                            $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
-                            $activateExtensionsModuleResolver->getName($activateExtensionsModule),
+                            $messagePlaceholder,
+                            AdminHelpers::getSettingsPageTabURL($activateExtensionsModule),
+                            sprintf(
+                                '<code>%s > %s > %s</code>',
+                                $settingsMenuPage->getMenuPageTitle(),
+                                $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
+                                $activateExtensionsModuleResolver->getName($activateExtensionsModule),
+                            )
                         )
                     )
-                )
-            );
+                );            
+            } catch (ModuleNotExistsException) {
+                $message = match ($messagePlaceholderCode) {
+                    'invalid' => __('The license is invalid. Please enter a new license key to enable it', 'gatographql'),
+                    'unmatching' => __('The provided license key belongs to a different extension. Please enter the right license key to enable it', 'gatographql'),
+                    default => __('Please enter the license key to enable it', 'gatographql')
+                };
+
+                $adminNotice_safe = sprintf(
+                    '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+                    sprintf(
+                        __('<strong>%s</strong>: %s.', 'gatographql'),
+                        PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
+                            ? __('Gato GraphQL PRO', 'gatographql')
+                            : $extensionName,
+                        $message
+                    )
+                );
+            }
             echo $adminNotice_safe;
         });
     }
