@@ -463,6 +463,7 @@ class ExtensionManager extends AbstractPluginManager
             $activateExtensionsModule = PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS;
             $pluginManagementSettingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
             $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver($activateExtensionsModule);
+            $activateExtensionsTabName = $activateExtensionsModuleResolver->getName($activateExtensionsModule);
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var SettingsMenuPage */
             $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
@@ -480,7 +481,7 @@ class ExtensionManager extends AbstractPluginManager
                             '<code>%s > %s > %s</code>',
                             $settingsMenuPage->getMenuPageTitle(),
                             $settingsCategoryRegistry->getSettingsCategoryResolver($pluginManagementSettingsCategory)->getName($pluginManagementSettingsCategory),
-                            $activateExtensionsModuleResolver->getName($activateExtensionsModule),
+                            $activateExtensionsTabName,
                         )
                     )
                 )
