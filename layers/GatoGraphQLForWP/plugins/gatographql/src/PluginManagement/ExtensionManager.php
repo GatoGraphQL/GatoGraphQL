@@ -456,8 +456,11 @@ class ExtensionManager extends AbstractPluginManager
 
             /**
              * If "admin_notices" is invoked before the plugin is initialized
-             * (eg: when a license key is missing), then the module will not exist.
-             * Catch it, and default to a simpler message
+             * (eg: when activating WooCommerce for first time, so it goes to
+             * its wizard, and the license key for an extention is missing),
+             * then the module will not exist.
+             *
+             * Catch it, and default to a predefined string.
              */
             $moduleRegistry = ModuleRegistryFacade::getInstance();
             $settingsCategoryRegistry = SettingsCategoryRegistryFacade::getInstance();
