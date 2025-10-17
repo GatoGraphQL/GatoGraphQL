@@ -20,6 +20,10 @@ trait SingleCallUnionTypeResolverTrait
      */
     public function getObjectIDTargetTypeResolvers(array $ids): array
     {
+        if ($ids === []) {
+            return [];
+        }
+        
         $objectIDTargetTypeResolvers = [];
         /**
          * We retrieve the original service, which must also be
