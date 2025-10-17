@@ -488,18 +488,17 @@ class ExtensionManager extends AbstractPluginManager
                     default => __('Please enter the license key to enable it', 'gatographql')
                 };                
             }
-            $adminNoticeContent = sprintf(
+            $adminNotice_safe = sprintf(
                 __('<strong>%s</strong>: %s.', 'gatographql'),
                 PluginStaticModuleConfiguration::displayGatoGraphQLPROBundleOnExtensionsPage() && !PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage()
                     ? __('Gato GraphQL PRO', 'gatographql')
                     : $extensionName,
                 $message
             );
-            $adminNotice_safe = sprintf(
+            printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
-                $adminNoticeContent
+                $adminNotice_safe
             );
-            echo $adminNotice_safe;
         });
     }
 
