@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 15.1.1 - DATE
+
+### Fixed
+
+- Check slugPath is not empty when adding page parent by slugPath (#3218)
+
 ## 15.1.0 - 17/10/2025
 
 ### Added
