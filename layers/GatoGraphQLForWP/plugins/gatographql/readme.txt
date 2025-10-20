@@ -222,6 +222,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 15.1.1 =
+* Fixed - Check slugPath is not empty when adding page parent by slugPath (#3218)
+
 = 15.1.0 =
 * Added WooCommerce extension to docs (#3195)
 * Added `CodeNameJSONObject` input type (#3210)

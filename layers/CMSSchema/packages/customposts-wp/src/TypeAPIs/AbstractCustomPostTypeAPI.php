@@ -580,6 +580,13 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getCustomPostBySlugPath(string $slugPath, string $customPostType): ?object
     {
+        $slugPath = trim($slugPath);
+
+        // If passing an empty string for $slugPath, return null
+        if ($slugPath === '' || $slugPath === '/') {
+            return null;
+        }
+
         // If no custom post types specified, use all available types
         $customPostTypes = empty($customPostType) ? $this->getCustomPostTypes() : [$customPostType];
 
