@@ -12,6 +12,11 @@ trait LoggerTrait
      */
     protected function sendCustomHeader(string $message, string $headerName): void
     {
+        // If the header is already set, don't send it again
+        if (headers_sent()) {
+            return;
+        }
+
         header(sprintf(
             '%s: %s',
             $headerName,
