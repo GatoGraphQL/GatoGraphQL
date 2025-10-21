@@ -203,7 +203,7 @@ abstract class AbstractWPCLICommand
      */
     protected function maybePrintLogsMessage(array $logCountBySeverityDelta): void
     {
-        $severitiesWithLogCountDelta = array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
+        $severitiesWithLogCountDelta = $this->getSeveritiesWithLogCountDelta($logCountBySeverityDelta);
         if ($severitiesWithLogCountDelta === []) {
             return;
         }
@@ -245,5 +245,14 @@ abstract class AbstractWPCLICommand
             return;
         }
         $this->log($message);
+    }
+
+    /**
+     * @param array<string,int> $logCountBySeverityDelta
+     * @return string[]
+     */
+    protected function getSeveritiesWithLogCountDelta(array $logCountBySeverityDelta): array
+    {
+        return array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
     }
 }

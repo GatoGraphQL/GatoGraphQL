@@ -222,7 +222,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 15.1.1 =
+= 15.2.0 =
+* Support `--fail-if-logs` param to WP-CLI commands, to print IDs only when a log entry was added during the execution ([#3221](https://github.com/GatoGraphQL/GatoGraphQL/pull/3221))
 * Fixed - Check slugPath is not empty when adding page parent by slugPath (#3218)
 
 = 15.1.0 =
