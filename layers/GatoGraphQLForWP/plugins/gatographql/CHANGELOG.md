@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Check slugPath is not empty when adding page parent by slugPath (#3218)
+- Exception when passing field arg with value null (#3222)
 
 ## 15.1.0 - 17/10/2025
 
