@@ -225,6 +225,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 15.2.0 =
 * Support `--fail-if-logs` param to WP-CLI commands, to print IDs only when a log entry was added during the execution ([#3221](https://github.com/GatoGraphQL/GatoGraphQL/pull/3221))
 * Fixed - Check slugPath is not empty when adding page parent by slugPath (#3218)
+* Fixed - Exception when passing field arg with value null ([#3222](https://github.com/GatoGraphQL/GatoGraphQL/pull/3222))
 
 = 15.1.0 =
 * Added WooCommerce extension to docs (#3195)
