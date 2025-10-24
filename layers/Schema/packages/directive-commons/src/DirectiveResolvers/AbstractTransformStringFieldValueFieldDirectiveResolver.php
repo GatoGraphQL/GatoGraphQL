@@ -61,10 +61,15 @@ abstract class AbstractTransformStringFieldValueFieldDirectiveResolver extends A
      */
     final protected function validateTypeData(mixed $value): ?TypedDataValidationPayload
     {
-        return $this->validateStringData($value);
+        return $this->validateParams() ?? $this->validateStringData($value);
     }
 
     protected function validateStringData(string $value): ?TypedDataValidationPayload
+    {
+        return null;
+    }
+
+    protected function validateParams(): ?TypedDataValidationPayload
     {
         return null;
     }
