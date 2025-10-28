@@ -156,7 +156,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
 
-                $options = [];
+                $options = [
+                    'include-inner-content' => true,
+                ];
 
                 /**
                  * Add the filtering options.
@@ -186,10 +188,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                         $filterOptions['exclude'] = $filterBy->exclude;
                     }
                     $options['filter'] = $filterOptions;
-
-                    if ($fieldName === 'blocks') {
-                        $options['include-inner-content'] = true;
-                    }
                 }
 
                 $blockContentParserPayload = null;
