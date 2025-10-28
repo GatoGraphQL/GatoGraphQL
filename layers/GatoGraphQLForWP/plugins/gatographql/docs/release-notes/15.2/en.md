@@ -4,6 +4,10 @@
 
 - Support `--fail-if-logs` param to WP-CLI commands, to print IDs only when a log entry was added during the execution ([#3221](https://github.com/GatoGraphQL/GatoGraphQL/pull/3221))
 
+### Improvements
+
+- Include block's `innerContent` property for `blockDataItems` and `blockFlattenedDataItems` fields ([#3224](https://github.com/GatoGraphQL/GatoGraphQL/pull/3224))
+
 ## Fixed
 
 - Nested meta directives not triggering errors ([#3223](https://github.com/GatoGraphQL/GatoGraphQL/pull/3223))

@@ -359,8 +359,11 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         /**
          * Gato GraphQL addition
          */
-        if ($this->includeInnerContent) {
-            $sourced_block['innerContent'] = $block['innerContent'];
+        if ($this->includeInnerContent && isset($block['innerContent'])) {
+            $sourced_block['innerContent'] = array_map(
+                fn (?string $innerContent) => $innerContent ? trim($innerContent) : null,
+                $block['innerContent']
+            );
         }
 
         if (isset($block['innerBlocks'])) {
