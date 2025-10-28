@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Support `--fail-if-logs` param to WP-CLI commands, to print IDs only when a log entry was added during the execution (#3221)
 
+### Improvements
+
+- Include block's `innerContent` property for `blockDataItems` and `blockFlattenedDataItems` fields (#3224)
+
 ### Fixed
 
 - Nested meta directives not triggering errors (#3223)
