@@ -16,8 +16,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Nested meta directives not triggering errors (#3223)
-
 - Check slugPath is not empty when adding page parent by slugPath (#3218)
 - Exception when passing field arg with value null (#3222)
 - Querying taxonomy that is assigned to more than 1 CPT (#3225)
