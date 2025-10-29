@@ -2007,7 +2007,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Pointing to <a href="https://gatographql.lndo.site/single-post-with-a-lot-of-blocks/funny-dog/">media item</a>.</p>
+<p>Pointing to <a href="https://gatographql.lndo.site/funny-dog/">media item</a>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -2080,7 +2080,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[internal_link_url_media]]></wp:meta_key>
-		<wp:meta_value><![CDATA[https://gatographql.lndo.site/single-post-with-a-lot-of-blocks/funny-dog/]]></wp:meta_value>
+		<wp:meta_value><![CDATA[https://gatographql.lndo.site/funny-dog/]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[internal_link_url_relative]]></wp:meta_key>
