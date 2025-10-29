@@ -25,6 +25,7 @@ use PoPWPSchema\Blocks\Constants\HookNames;
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
 use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
 use PoPWPSchema\Blocks\TypeHelpers\BlockUnionTypeHelpers;
+use PoPWPSchema\Blocks\TypeResolvers\InputObjectType\IncludeBlockPropertiesInputObjectTypeResolver;
 use stdClass;
 use WP_Post;
 
@@ -33,6 +34,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     private ?BlockContentParserInterface $blockContentParser = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?IncludeExcludeFilterInputObjectTypeResolver $includeExcludeFilterInputObjectTypeResolver = null;
+    private ?IncludeBlockPropertiesInputObjectTypeResolver $includeBlockPropertiesInputObjectTypeResolver = null;
 
     final protected function getBlockContentParser(): BlockContentParserInterface
     {
@@ -60,6 +62,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $this->includeExcludeFilterInputObjectTypeResolver = $includeExcludeFilterInputObjectTypeResolver;
         }
         return $this->includeExcludeFilterInputObjectTypeResolver;
+    }
+    final protected function getIncludeBlockPropertiesInputObjectTypeResolver(): IncludeBlockPropertiesInputObjectTypeResolver
+    {
+        if ($this->includeBlockPropertiesInputObjectTypeResolver === null) {
+            /** @var IncludeBlockPropertiesInputObjectTypeResolver */
+            $includeBlockPropertiesInputObjectTypeResolver = $this->instanceManager->getInstance(IncludeBlockPropertiesInputObjectTypeResolver::class);
+            $this->includeBlockPropertiesInputObjectTypeResolver = $includeBlockPropertiesInputObjectTypeResolver;
+        }
+        return $this->includeBlockPropertiesInputObjectTypeResolver;
     }
 
     /**
@@ -126,13 +137,20 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'blocks',
+            'blocks'
+                => array_merge(
+                    $fieldArgNameTypeResolvers,
+                    [
+                        'filterBy' => $this->getIncludeExcludeFilterInputObjectTypeResolver(),
+                    ]
+                ),
             'blockDataItems',
             'blockFlattenedDataItems'
                 => array_merge(
                     $fieldArgNameTypeResolvers,
                     [
                         'filterBy' => $this->getIncludeExcludeFilterInputObjectTypeResolver(),
+                        'includeProperties' => $this->getIncludeBlockPropertiesInputObjectTypeResolver(),
                     ]
                 ),
             default
@@ -156,8 +174,16 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 /** @var stdClass|null */
                 $filterBy = $fieldDataAccessor->getValue('filterBy');
 
+                $includeInnerContent = false;
+                if ($fieldName === 'blocks') {
+                    $includeInnerContent = true;
+                } else {
+                    /** @var stdClass|null */
+                    $includeProperties = $fieldDataAccessor->getValue('includeProperties');
+                    $includeInnerContent = $includeProperties?->innerContent ?? false;
+                }
                 $options = [
-                    'include-inner-content' => true,
+                    'include-inner-content' => $includeInnerContent,
                 ];
 
                 /**
