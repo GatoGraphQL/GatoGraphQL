@@ -180,7 +180,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 } else {
                     /** @var stdClass|null */
                     $includeProperties = $fieldDataAccessor->getValue('includeProperties');
-                    $includeInnerContent = $includeProperties?->innerContent ?? false;
+                    $includeInnerContent = $includeProperties->innerContent ?? false;
                 }
                 $options = [
                     'include-inner-content' => $includeInnerContent,
