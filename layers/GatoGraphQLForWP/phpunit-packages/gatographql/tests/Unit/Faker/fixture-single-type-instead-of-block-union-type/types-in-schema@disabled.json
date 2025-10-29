@@ -1082,6 +1082,11 @@
                     "fields": null
                 },
                 {
+                    "name": "IncludeBlockPropertiesInput",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
                     "name": "IncludeExcludeFilterInput",
                     "possibleTypes": null,
                     "fields": null
