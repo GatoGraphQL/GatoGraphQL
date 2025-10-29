@@ -473,7 +473,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
 
             // If any item fails, set the whole response field as null
             if (
-                !$nestErrorsInMetaDirectives
+                $nestErrorsInMetaDirectives
                 && ($objectResolutionFeedbackStoreErrors !== [] || $schemaFeedbackStoreErrors !== [])
             ) {
                 // // Transfer the error to the composable directive
