@@ -228,6 +228,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - Nested meta directives not triggering errors ([#3223](https://github.com/GatoGraphQL/GatoGraphQL/pull/3223))
 * Fixed - Check slugPath is not empty when adding page parent by slugPath (#3218)
 * Fixed - Exception when passing field arg with value null ([#3222](https://github.com/GatoGraphQL/GatoGraphQL/pull/3222))
+* Fixed - Querying taxonomy that is assigned to more than 1 CPT ([#3225](https://github.com/GatoGraphQL/GatoGraphQL/pull/3225))
 
 = 15.1.0 =
 * Added WooCommerce extension to docs (#3195)
