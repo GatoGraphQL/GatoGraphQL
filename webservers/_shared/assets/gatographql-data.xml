@@ -2071,6 +2071,18 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:meta_value><![CDATA[https://gatographql.lndo.site/hello-world/]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
+		<wp:meta_key><![CDATA[internal_link_url_category]]></wp:meta_key>
+		<wp:meta_value><![CDATA[https://gatographql.lndo.site/category/blog/resource/special-topic/most-special-topic/]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[internal_link_url_tag]]></wp:meta_key>
+		<wp:meta_value><![CDATA[https://gatographql.lndo.site/tag/release/]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[internal_link_url_media]]></wp:meta_key>
+		<wp:meta_value><![CDATA[https://gatographql.lndo.site/single-post-with-a-lot-of-blocks/funny-dog/]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
 		<wp:meta_key><![CDATA[internal_link_url_relative]]></wp:meta_key>
 		<wp:meta_value><![CDATA[/hello-world/]]></wp:meta_value>
 		</wp:postmeta>
