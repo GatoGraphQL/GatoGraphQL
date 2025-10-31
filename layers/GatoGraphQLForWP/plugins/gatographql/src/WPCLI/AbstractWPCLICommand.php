@@ -258,17 +258,28 @@ abstract class AbstractWPCLICommand
      */
     protected function getSeveritiesWithLogCountDelta(array $logCountBySeverityDelta, bool $onlyIncludeLogNotificationsSeverities): array
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableLogCountBadges()) {
-            return [];
-        }
+        if ($onlyIncludeLogNotificationsSeverities) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if (!$moduleConfiguration->enableLogCountBadges()) {
+                return [];
+            }
 
-        $severities = $moduleConfiguration->enableLogCountBadgesBySeverity();
+            $severities = $moduleConfiguration->enableLogCountBadgesBySeverity();
+            if ($severities === []) {
+                return [];
+            }
+            
+            $logCountBySeverityDelta = array_filter(
+                $logCountBySeverityDelta,
+                fn (string $severity): bool => in_array($severity, $severities),
+                ARRAY_FILTER_USE_KEY
+            );
+        }
+        
         return array_keys(array_filter(
             $logCountBySeverityDelta,
-            fn (int $logCountDelta, string $severity): bool => in_array($severity, $severities) && $logCountDelta > 0,
-            ARRAY_FILTER_USE_BOTH
+            fn (int $logCountDelta): bool => $logCountDelta > 0
         ));
     }
 }
