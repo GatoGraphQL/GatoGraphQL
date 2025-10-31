@@ -265,19 +265,10 @@ abstract class AbstractWPCLICommand
         }
 
         $severities = $moduleConfiguration->enableLogCountBadgesBySeverity();
-        if ($severities === []) {
-            return [];
-        }
-
-        $logCountBySeverityDelta = array_filter(
-            $logCountBySeverityDelta,
-            fn (string $severity): bool => in_array($severity, $severities),
-            ARRAY_FILTER_USE_KEY
-        );
-        
         return array_keys(array_filter(
             $logCountBySeverityDelta,
-            fn (int $logCountDelta): bool => $logCountDelta > 0
+            fn (int $logCountDelta, string $severity): bool => in_array($severity, $severities) && $logCountDelta > 0,
+            ARRAY_FILTER_USE_BOTH
         ));
     }
 }
