@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\WPCLI;
 
 use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\LogsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoPSchema\Logger\Constants\LoggerSeverity;
-use WP_CLI;
+use PoP\ComponentModel\App;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
+use WP_CLI;
 use function __;
 
 abstract class AbstractWPCLICommand
@@ -248,11 +251,28 @@ abstract class AbstractWPCLICommand
     }
 
     /**
+     * Use the severities enabled for the LogCountBadge if enabled,
+     * otherwise use all severities.
+     *
      * @param array<string,int> $logCountBySeverityDelta
      * @return string[]
      */
     protected function getSeveritiesWithLogCountDelta(array $logCountBySeverityDelta): array
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableLogCountBadges()) {
+            $severities = $moduleConfiguration->enableLogCountBadgesBySeverity();
+            if ($severities === []) {
+                return [];
+            }
+            $logCountBySeverityDelta = array_filter(
+                $logCountBySeverityDelta,
+                fn (string $severity): bool => in_array($severity, $severities),
+                ARRAY_FILTER_USE_KEY
+            );
+        }
+        
         return array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
     }
 }
