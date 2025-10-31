@@ -251,8 +251,7 @@ abstract class AbstractWPCLICommand
     }
 
     /**
-     * Use the severities enabled for the LogCountBadge if enabled,
-     * otherwise use all severities.
+     * Use the severities enabled for the LogCountBadge.
      *
      * @param array<string,int> $logCountBySeverityDelta
      * @return string[]
@@ -261,17 +260,20 @@ abstract class AbstractWPCLICommand
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->enableLogCountBadges()) {
-            $severities = $moduleConfiguration->enableLogCountBadgesBySeverity();
-            if ($severities === []) {
-                return [];
-            }
-            $logCountBySeverityDelta = array_filter(
-                $logCountBySeverityDelta,
-                fn (string $severity): bool => in_array($severity, $severities),
-                ARRAY_FILTER_USE_KEY
-            );
+        if (!$moduleConfiguration->enableLogCountBadges()) {
+            return [];
         }
+
+        $severities = $moduleConfiguration->enableLogCountBadgesBySeverity();
+        if ($severities === []) {
+            return [];
+        }
+
+        $logCountBySeverityDelta = array_filter(
+            $logCountBySeverityDelta,
+            fn (string $severity): bool => in_array($severity, $severities),
+            ARRAY_FILTER_USE_KEY
+        );
         
         return array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
     }
