@@ -13,3 +13,4 @@
 - Check slugPath is not empty when adding page parent by slugPath ([#3218](https://github.com/GatoGraphQL/GatoGraphQL/pull/3218))
 - Exception when passing field arg with value null ([#3222](https://github.com/GatoGraphQL/GatoGraphQL/pull/3222))
 - Querying taxonomy that is assigned to more than 1 CPT ([#3225](https://github.com/GatoGraphQL/GatoGraphQL/pull/3225))
+- Errors inside nested directives not passing the fields upwards when `nestErrorsInMetaDirectives` is false ([#3226](https://github.com/GatoGraphQL/GatoGraphQL/pull/3226))
