@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Support `--fail-if-logs` param to WP-CLI commands, to print IDs only when a log entry was added during the execution (#3221)
+- Support `--fail-if-log-notifications` param to WP-CLI commands, to print IDs only when a log entry was added during the execution (#3221)
 
 ### Improvements
 
