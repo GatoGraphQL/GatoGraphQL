@@ -268,13 +268,11 @@ abstract class AbstractWPCLICommand
         if ($severities === []) {
             return [];
         }
-
-        $logCountBySeverityDelta = array_filter(
-            $logCountBySeverityDelta,
-            fn (string $severity): bool => in_array($severity, $severities),
-            ARRAY_FILTER_USE_KEY
-        );
         
-        return array_keys(array_filter($logCountBySeverityDelta, fn (int $logCountDelta): bool => $logCountDelta > 0));
+        return array_keys(array_filter(
+            $logCountBySeverityDelta,
+            fn (string $severity, int $logCountDelta): bool => in_array($severity, $severities) && $logCountDelta > 0,
+            ARRAY_FILTER_USE_BOTH
+        ));
     }
 }
