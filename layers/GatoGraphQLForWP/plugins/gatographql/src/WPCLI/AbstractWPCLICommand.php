@@ -206,7 +206,7 @@ abstract class AbstractWPCLICommand
      */
     protected function maybePrintLogsMessage(array $logCountBySeverityDelta): void
     {
-        $severitiesWithLogCountDelta = $this->getSeveritiesWithLogCountDelta($logCountBySeverityDelta);
+        $severitiesWithLogCountDelta = $this->getSeveritiesWithLogCountDelta($logCountBySeverityDelta, false);
         if ($severitiesWithLogCountDelta === []) {
             return;
         }
@@ -256,7 +256,7 @@ abstract class AbstractWPCLICommand
      * @param array<string,int> $logCountBySeverityDelta
      * @return string[]
      */
-    protected function getSeveritiesWithLogCountDelta(array $logCountBySeverityDelta): array
+    protected function getSeveritiesWithLogCountDelta(array $logCountBySeverityDelta, bool $onlyIncludeLogNotificationsSeverities): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
