@@ -229,6 +229,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - Exception when passing field arg with value null ([#3222](https://github.com/GatoGraphQL/GatoGraphQL/pull/3222))
 * Fixed - Querying taxonomy that is assigned to more than 1 CPT ([#3225](https://github.com/GatoGraphQL/GatoGraphQL/pull/3225))
 * Fixed - Errors inside nested directives not passing the fields upwards when `nestErrorsInMetaDirectives` is false ([#3226](https://github.com/GatoGraphQL/GatoGraphQL/pull/3226))
+* Fixed - The link on the `wpAdminEditURL` field to print `&` as `&` (not `&amp`) ([#3227](https://github.com/GatoGraphQL/GatoGraphQL/pull/3227))
 
 = 15.1.0 =
 * Added WooCommerce extension to docs (#3195)
