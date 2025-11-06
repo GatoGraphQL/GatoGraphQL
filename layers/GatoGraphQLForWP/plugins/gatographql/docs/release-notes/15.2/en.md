@@ -7,6 +7,7 @@
 ### Improvements
 
 - Include block's `innerContent` property for `blockDataItems` and `blockFlattenedDataItems` fields ([#3224](https://github.com/GatoGraphQL/GatoGraphQL/pull/3224))
+- `CustomPost.slug` can return empty string if not yet set ([#3228](https://github.com/GatoGraphQL/GatoGraphQL/pull/3228))
 
 ## Fixed
 
