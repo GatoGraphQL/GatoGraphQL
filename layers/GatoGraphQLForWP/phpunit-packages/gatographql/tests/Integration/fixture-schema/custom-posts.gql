@@ -25,10 +25,11 @@ query {
     differentDomain: _urlToCustomPostID(url: "https://example.com/hello-world/")
     externalDomain: _urlToCustomPostID(url: "https://wordpress.org/some-post/")
     
-    # No domain (relative URLs)
-    relativeURLWithTrailingSlash: _urlToCustomPostID(url: "/hello-world/")
-    relativeURLWithoutTrailingSlash: _urlToCustomPostID(url: "/hello-world")
-    relativeURLNonExisting: _urlToCustomPostID(url: "/non-existing-path")
+    # No need to test these, because input type URL doesn't support relative URLs
+    # # No domain (relative URLs)
+    # relativeURLWithTrailingSlash: _urlToCustomPostID(url: "/hello-world/")
+    # relativeURLWithoutTrailingSlash: _urlToCustomPostID(url: "/hello-world")
+    # relativeURLNonExisting: _urlToCustomPostID(url: "/non-existing-path")
     
     # Category Page
     categoryPageWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/category/uncategorized/")

@@ -1,72 +1,4 @@
 {
-    "errors": [
-        {
-            "message": "The format for '\/hello-world\/' is not correct for type 'URL'",
-            "locations": [
-                {
-                    "line": 29,
-                    "column": 60
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "\"\/hello-world\/\"",
-                    "(url: \"\/hello-world\/\")",
-                    "relativeURLWithTrailingSlash: _urlToCustomPostID(url: \"\/hello-world\/\")",
-                    "urlToCustomPostIDFields: self { ... }",
-                    "query { ... }"
-                ],
-                "type": "QueryRoot",
-                "field": "relativeURLWithTrailingSlash: _urlToCustomPostID(url: \"\/hello-world\/\")",
-                "code": "gql@5.6.1[2]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
-            }
-        },
-        {
-            "message": "The format for '\/hello-world' is not correct for type 'URL'",
-            "locations": [
-                {
-                    "line": 30,
-                    "column": 63
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "\"\/hello-world\"",
-                    "(url: \"\/hello-world\")",
-                    "relativeURLWithoutTrailingSlash: _urlToCustomPostID(url: \"\/hello-world\")",
-                    "urlToCustomPostIDFields: self { ... }",
-                    "query { ... }"
-                ],
-                "type": "QueryRoot",
-                "field": "relativeURLWithoutTrailingSlash: _urlToCustomPostID(url: \"\/hello-world\")",
-                "code": "gql@5.6.1[2]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
-            }
-        },
-        {
-            "message": "The format for '\/non-existing-path' is not correct for type 'URL'",
-            "locations": [
-                {
-                    "line": 31,
-                    "column": 54
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "\"\/non-existing-path\"",
-                    "(url: \"\/non-existing-path\")",
-                    "relativeURLNonExisting: _urlToCustomPostID(url: \"\/non-existing-path\")",
-                    "urlToCustomPostIDFields: self { ... }",
-                    "query { ... }"
-                ],
-                "type": "QueryRoot",
-                "field": "relativeURLNonExisting: _urlToCustomPostID(url: \"\/non-existing-path\")",
-                "code": "gql@5.6.1[2]",
-                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
-            }
-        }
-    ],
     "data": {
         "urlToCustomPostIDFields": {
             "existingPostWithTrailingSlash": 1,
@@ -81,9 +13,6 @@
             "nonExistingPage": null,
             "differentDomain": null,
             "externalDomain": null,
-            "relativeURLWithTrailingSlash": null,
-            "relativeURLWithoutTrailingSlash": null,
-            "relativeURLNonExisting": null,
             "categoryPageWithTrailingSlash": null,
             "categoryPageWithoutTrailingSlash": null
         },
