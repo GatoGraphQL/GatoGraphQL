@@ -12,13 +12,13 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -30,14 +30,14 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         return $this->idScalarTypeResolver;
     }
 
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
     {
-        if ($this->stringScalarTypeResolver === null) {
-            /** @var StringScalarTypeResolver */
-            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
         }
-        return $this->stringScalarTypeResolver;
+        return $this->urlScalarTypeResolver;
     }
 
     /**
@@ -73,7 +73,7 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     {
         return match ($fieldName) {
             '_urlToCustomPostID' => [
-                'url' => $this->getStringScalarTypeResolver(),
+                'url' => $this->getURLScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
