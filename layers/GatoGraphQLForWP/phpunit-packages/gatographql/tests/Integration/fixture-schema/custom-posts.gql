@@ -13,6 +13,10 @@ query {
     existingDummyCPTWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/dummy-cpt/dolor-facilis-repellat-pariatur-veniam-at/")
     existingDummyCPTWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/dummy-cpt/dolor-facilis-repellat-pariatur-veniam-at")
     
+    # Attachment Page
+    attachmentPageWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/graphql-api-search-results/")
+    attachmentPageWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/graphql-api-search-results")
+    
     # Non-existing URLs
     nonExistingPost: _urlToCustomPostID(url: "https://gatographql.lndo.site/non-existing-post/")
     nonExistingPage: _urlToCustomPostID(url: "https://gatographql.lndo.site/this-page-does-not-exist")
@@ -25,10 +29,6 @@ query {
     relativeURLWithTrailingSlash: _urlToCustomPostID(url: "/hello-world/")
     relativeURLWithoutTrailingSlash: _urlToCustomPostID(url: "/hello-world")
     relativeURLNonExisting: _urlToCustomPostID(url: "/non-existing-path")
-    
-    # Attachment Page
-    attachmentPageWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/graphql-api-search-results/")
-    attachmentPageWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/graphql-api-search-results")
     
     # Category Page
     categoryPageWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/category/uncategorized/")
