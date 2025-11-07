@@ -2,6 +2,7 @@
 
 ## Added
 
+- Added field `_urlToCustomPostID` to get the custom post ID from a URL ([#3229](https://github.com/GatoGraphQL/GatoGraphQL/pull/3229))
 - Support `--fail-if-log-notifications` param to WP-CLI commands, to print IDs only when a log entry was added during the execution ([#3221](https://github.com/GatoGraphQL/GatoGraphQL/pull/3221))
 
 ### Improvements
