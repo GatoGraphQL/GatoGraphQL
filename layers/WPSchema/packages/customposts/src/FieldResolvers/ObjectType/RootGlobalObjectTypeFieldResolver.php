@@ -109,7 +109,7 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 if ($postID === 0) {
                     return null;
                 }
-                return (string) $postID;
+                return (int) $postID;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
