@@ -126,4 +126,3 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         return false;
     }
 }
-
