@@ -13,8 +13,8 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
 use PoPSchema\Logger\Constants\LoggerSeverity;
 use PoP\ComponentModel\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-
 use WP_CLI;
+
 use function __;
 
 abstract class AbstractWPCLICommand
@@ -269,14 +269,14 @@ abstract class AbstractWPCLICommand
             if ($severities === []) {
                 return [];
             }
-            
+
             $logCountBySeverityDelta = array_filter(
                 $logCountBySeverityDelta,
                 fn (string $severity): bool => in_array($severity, $severities),
                 ARRAY_FILTER_USE_KEY
             );
         }
-        
+
         return array_keys(array_filter(
             $logCountBySeverityDelta,
             fn (int $logCountDelta): bool => $logCountDelta > 0

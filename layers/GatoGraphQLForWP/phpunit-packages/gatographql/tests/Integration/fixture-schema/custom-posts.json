@@ -1,5 +1,21 @@
 {
     "data": {
+        "urlToCustomPostIDFields": {
+            "existingPostWithTrailingSlash": 1,
+            "existingPostWithoutTrailingSlash": 1,
+            "existingPageWithTrailingSlash": 2,
+            "existingPageWithoutTrailingSlash": 2,
+            "existingDummyCPTWithTrailingSlash": 1613,
+            "existingDummyCPTWithoutTrailingSlash": 1613,
+            "attachmentPageWithTrailingSlash": 1362,
+            "attachmentPageWithoutTrailingSlash": 1362,
+            "nonExistingPost": null,
+            "nonExistingPage": null,
+            "differentDomain": null,
+            "externalDomain": null,
+            "categoryPageWithTrailingSlash": null,
+            "categoryPageWithoutTrailingSlash": null
+        },
         "customPosts": [
             {
                 "__typename": "Post",
