@@ -14,7 +14,9 @@
             "differentDomain": null,
             "externalDomain": null,
             "categoryPageWithTrailingSlash": null,
-            "categoryPageWithoutTrailingSlash": null
+            "categoryPageWithoutTrailingSlash": null,
+            "userURLWithTrailingSlash": null,
+            "userURLWithoutTrailingSlash": null
         },
         "customPosts": [
             {

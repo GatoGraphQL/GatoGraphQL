@@ -34,6 +34,10 @@ query {
     # Category Page
     categoryPageWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/category/uncategorized/")
     categoryPageWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/category/uncategorized")
+
+    # User URLs
+    userURLWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/author/blogger/")
+    userURLWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/author/blogger")
   }
   customPosts(filter: { ids: [1, 2, 1113] }, sort: { by: ID, order: ASC }) {
     __typename
