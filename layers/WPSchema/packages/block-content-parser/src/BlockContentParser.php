@@ -67,7 +67,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             );
         }
         $this->includeInnerContent = $options['include-inner-content'] ?? false;
-        $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $options['filter'] ?? []);
+        $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $options['filter'] ?? [], $options);
         return $this->processParsedBlockData($parsedBlockData);
     }
 
@@ -143,7 +143,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         array $options = [],
     ): BlockContentParserPayload {
         $this->includeInnerContent = $options['include-inner-content'] ?? false;
-        $parsedBlockData = $this->parse($customPostContent, null, $options['filter'] ?? []);
+        $parsedBlockData = $this->parse($customPostContent, null, $options['filter'] ?? [], $options);
         return $this->processParsedBlockData($parsedBlockData);
     }
 
@@ -206,10 +206,11 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      * @param array<string,mixed> $filter_options An associative array of options for filtering blocks. Can contain keys:
      *              'exclude': An array of block names to block from the response.
      *              'include': An array of block names that are allowed in the response.
+     * @param array<string,mixed> $options An associative array of options.
      *
      * @return mixed[]|WP_Error
      */
-    protected function parse(string $post_content, ?int $post_id = null, array $filter_options = []): array|WP_Error
+    protected function parse(string $post_content, ?int $post_id = null, array $filter_options = [], array $options = []): array|WP_Error
     {
         if (isset($filter_options['exclude']) && isset($filter_options['include'])) {
             // return new WP_Error('vip-block-data-api-invalid-params', 'Cannot provide blocks to exclude and include at the same time', [ 'status' => 400 ]);
@@ -254,8 +255,8 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
 
             $registered_blocks = $this->block_registry->get_all_registered();
 
-            $sourced_blocks = array_map(function ($block) use ($registered_blocks, $filter_options) {
-                return $this->source_block($block, $registered_blocks, $filter_options);
+            $sourced_blocks = array_map(function ($block) use ($registered_blocks, $filter_options, $options) {
+                return $this->source_block($block, $registered_blocks, $filter_options, $options);
             }, $blocks);
 
             $sourced_blocks = array_values(array_filter($sourced_blocks));
@@ -301,7 +302,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_block(array $block, array $registered_blocks, array $filter_options): ?array
+    protected function source_block(array $block, array $registered_blocks, array $filter_options, array $options = []): ?array
     {
         $block_name = $block['blockName'];
 
@@ -312,6 +313,8 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         if (! isset($registered_blocks[ $block_name ])) {
             $this->add_missing_block_warning($block_name);
         }
+
+        $useHtml5Parser = $options['use-html5-parser'] ?? true;
 
         $block_definition            = $registered_blocks[ $block_name ] ?? null;
         $block_definition_attributes = $block_definition->attributes ?? [];
@@ -339,7 +342,15 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             }
 
             // Specify a manual doctype so that the parser will use the HTML5 parser
-            $crawler = new Crawler(sprintf('<!doctype html><html><body>%s</body></html>', $block['innerHTML']));
+            $crawler = new Crawler(
+                sprintf('<!doctype html><html><body>%s</body></html>', $block['innerHTML']),
+                null,
+                null,
+                // Parsing HTML5 will convert non-breaking space "U+00A0" to "&nbsp;" entities,
+                // and then the search/replace in "rawContent" will fail.
+                // Then allow to disable the HTML5 parser.
+                $useHtml5Parser,
+            );
 
             // Enter the <body> tag for block parsing
             $crawler = $crawler->filter('body');
@@ -367,8 +378,8 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         }
 
         if (isset($block['innerBlocks'])) {
-            $inner_blocks = array_map(function ($block) use ($registered_blocks, $filter_options) {
-                return $this->source_block($block, $registered_blocks, $filter_options);
+            $inner_blocks = array_map(function ($block) use ($registered_blocks, $filter_options, $options) {
+                return $this->source_block($block, $registered_blocks, $filter_options, $options);
             }, $block['innerBlocks']);
 
             $inner_blocks = array_values(array_filter($inner_blocks));
@@ -507,6 +518,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
 
             if (null === $multiline_selector) {
                 $attribute_value = $crawler->html();
+                // $attribute_value = $crawler->text();
             } else {
                 $multiline_parts = $crawler->filter($multiline_selector)->each(function ($node) {
                     return $node->outerHtml();
@@ -545,6 +557,9 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
 
         if ($crawler->count() > 0) {
             $attribute_value = $crawler->html();
+            // $attribute_value = $crawler->text();
+            // $attribute_value = $crawler->outerHtml();
+            // $attribute_value = $crawler->text();
         }
 
         return $attribute_value;
