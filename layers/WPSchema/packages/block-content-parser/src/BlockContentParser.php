@@ -523,7 +523,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
 
             if (null === $multiline_selector) {
                 $attribute_value = $crawler->html();
-                // $attribute_value = $crawler->text();
             } else {
                 $multiline_parts = $crawler->filter($multiline_selector)->each(function ($node) {
                     return $node->outerHtml();
@@ -562,9 +561,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
 
         if ($crawler->count() > 0) {
             $attribute_value = $crawler->html();
-            // $attribute_value = $crawler->text();
-            // $attribute_value = $crawler->outerHtml();
-            // $attribute_value = $crawler->text();
         }
 
         return $attribute_value;
