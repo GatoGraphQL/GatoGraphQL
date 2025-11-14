@@ -174,7 +174,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'useHTML5Parser' => $this->__('Indicate if to use the HTML5 parser when converting block content. Default: true', 'blocks'),
+            'useHTML5Parser' => $this->__('Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as "U+00A0", to "&nbsp;" entities.', 'blocks'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
