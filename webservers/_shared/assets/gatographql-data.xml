@@ -2112,7 +2112,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		</wp:postmeta>
 							</item>
 							<item>
-		<title><![CDATA[Post with corrupted non-breaking space]]]></title>
+		<title><![CDATA[Post with corrupted non-breaking space]]></title>
 		<link>https://gatographql.lndo.site/post-with-corrupted-non-breaking-space/</link>
 		<pubDate>Tue, 28 Oct 2025 07:15:21 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
@@ -2124,7 +2124,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">👉 The space just after the emoji not a regular space</h3>
-<!-- /wp:heading -->]]>
+<!-- /wp:heading -->
 
 <!-- wp:paragraph -->
 <p>This space: " " and this space: " " are characters with code "U+00A0" (not a regular space). We may want to avoid converting them to "&nbsp;". To do that, avoid using the HTML5 parser when using the `blocks` field.</p>
