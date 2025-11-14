@@ -9989,171 +9989,171 @@
                     "parentBlockPosition": null
                 }
             ]
+        },
+        "blockWithCorruptedNonBreakingSpace": {
+            "id": 1146,
+            "originalBlocks": [
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This is a post with a corrupted non-breaking space.",
+                        "dropCap": false
+                    },
+                    "contentSource": "<!-- wp:paragraph {\"content\":\"This is a post with a corrupted non-breaking space.\",\"dropCap\":false} -->\n<p>This is a post with a corrupted non-breaking space.<\/p>\n<!-- \/wp:paragraph -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "level": 3,
+                        "content": "\ud83d\udc49\u00a0The space just after the emoji not a regular space"
+                    },
+                    "contentSource": "<!-- wp:heading {\"level\":3,\"content\":\"\ud83d\udc49\u00a0The space just after the emoji not a regular space\"} -->\n<h3 class=\"wp-block-heading\">\ud83d\udc49\u00a0The space just after the emoji not a regular space<\/h3>\n<!-- \/wp:heading -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
+                        "dropCap": false
+                    },
+                    "contentSource": "<!-- wp:paragraph {\"content\":\"This space: \\u0022\u00a0\\u0022 and this space: \\u0022\u00a0\\u0022 are characters with code \\u0022U+00A0\\u0022 (not a regular space). We may want to avoid converting them to \\u0022\\u0026amp;nbsp;\\u0022. To do that, avoid using the HTML5 parser when using the `blocks` field.\",\"dropCap\":false} -->\n<p>This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.<\/p>\n<!-- \/wp:paragraph -->",
+                    "innerBlocks": null
+                }
+            ],
+            "replacedBlocks": [
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This is a post with a corrupted non-breaking space.",
+                        "dropCap": false
+                    },
+                    "contentSource": "<!-- wp:paragraph {\"content\":\"This is a post with a corrupted non-breaking space.\",\"dropCap\":false} -->\n<p>This is a post with a corrupted non-breaking space.<\/p>\n<!-- \/wp:paragraph -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "level": 3,
+                        "content": "\ud83d\udc49&nbsp;The space just after the emoji not a regular space"
+                    },
+                    "contentSource": "<!-- wp:heading {\"level\":3,\"content\":\"\ud83d\udc49\\u0026nbsp;The space just after the emoji not a regular space\"} -->\n<h3 class=\"wp-block-heading\">\ud83d\udc49\u00a0The space just after the emoji not a regular space<\/h3>\n<!-- \/wp:heading -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This space: \"&nbsp;\" and this space: \"&nbsp;\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
+                        "dropCap": false
+                    },
+                    "contentSource": "<!-- wp:paragraph {\"content\":\"This space: \\u0022\\u0026nbsp;\\u0022 and this space: \\u0022\\u0026nbsp;\\u0022 are characters with code \\u0022U+00A0\\u0022 (not a regular space). We may want to avoid converting them to \\u0022\\u0026amp;nbsp;\\u0022. To do that, avoid using the HTML5 parser when using the `blocks` field.\",\"dropCap\":false} -->\n<p>This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.<\/p>\n<!-- \/wp:paragraph -->",
+                    "innerBlocks": null
+                }
+            ],
+            "originalBlockDataItems": [
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This is a post with a corrupted non-breaking space.",
+                        "dropCap": false
+                    }
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "level": 3,
+                        "content": "\ud83d\udc49\u00a0The space just after the emoji not a regular space"
+                    }
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
+                        "dropCap": false
+                    }
+                }
+            ],
+            "replacedBlockDataItems": [
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This is a post with a corrupted non-breaking space.",
+                        "dropCap": false
+                    }
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "level": 3,
+                        "content": "\ud83d\udc49&nbsp;The space just after the emoji not a regular space"
+                    }
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This space: \"&nbsp;\" and this space: \"&nbsp;\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
+                        "dropCap": false
+                    }
+                }
+            ],
+            "originalBlockFlattenedDataItems": [
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This is a post with a corrupted non-breaking space.",
+                        "dropCap": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "level": 3,
+                        "content": "\ud83d\udc49\u00a0The space just after the emoji not a regular space"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
+                        "dropCap": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                }
+            ],
+            "replacedBlockFlattenedDataItems": [
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This is a post with a corrupted non-breaking space.",
+                        "dropCap": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "level": 3,
+                        "content": "\ud83d\udc49&nbsp;The space just after the emoji not a regular space"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "This space: \"&nbsp;\" and this space: \"&nbsp;\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
+                        "dropCap": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                }
+            ]
         }
-    },
-    "blockWithCorruptedNonBreakingSpace": {
-        "id": 1146,
-        "originalBlocks": [
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This is a post with a corrupted non-breaking space.",
-                    "dropCap": false
-                },
-                "contentSource": "<!-- wp:paragraph {\"content\":\"This is a post with a corrupted non-breaking space.\",\"dropCap\":false} --><p>This is a post with a corrupted non-breaking space.<\/p><!-- \/wp:paragraph -->",
-                "innerBlocks": null
-            },
-            {
-                "name": "core\/heading",
-                "attributes": {
-                    "level": 3,
-                    "content": "\ud83d\udc49\u00a0The space just after the emoji not a regular space"
-                },
-                "contentSource": "<!-- wp:heading {\"level\":3,\"content\":\"\ud83d\udc49\u00a0The space just after the emoji not a regular space\"} --><h3 class=\"wp-block-heading\">\ud83d\udc49\u00a0The space just after the emoji not a regular space<\/h3><!-- \/wp:heading -->",
-                "innerBlocks": null
-            },
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
-                    "dropCap": false
-                },
-                "contentSource": "<!-- wp:paragraph {\"content\":\"This space: \\u0022\u00a0\\u0022 and this space: \\u0022\u00a0\\u0022 are characters with code \\u0022U+00A0\\u0022 (not a regular space). We may want to avoid converting them to \\u0022\\u0026amp;nbsp;\\u0022. To do that, avoid using the HTML5 parser when using the `blocks` field.\",\"dropCap\":false} --><p>This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.<\/p><!-- \/wp:paragraph -->",
-                "innerBlocks": null
-            }
-        ],
-        "replacedBlocks": [
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This is a post with a corrupted non-breaking space.",
-                    "dropCap": false
-                },
-                "contentSource": "<!-- wp:paragraph {\"content\":\"This is a post with a corrupted non-breaking space.\",\"dropCap\":false} --><p>This is a post with a corrupted non-breaking space.<\/p><!-- \/wp:paragraph -->",
-                "innerBlocks": null
-            },
-            {
-                "name": "core\/heading",
-                "attributes": {
-                    "level": 3,
-                    "content": "\ud83d\udc49&nbsp;The space just after the emoji not a regular space"
-                },
-                "contentSource": "<!-- wp:heading {\"level\":3,\"content\":\"\ud83d\udc49\\u0026nbsp;The space just after the emoji not a regular space\"} --><h3 class=\"wp-block-heading\">\ud83d\udc49\u00a0The space just after the emoji not a regular space<\/h3><!-- \/wp:heading -->",
-                "innerBlocks": null
-            },
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This space: \"&nbsp;\" and this space: \"&nbsp;\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
-                    "dropCap": false
-                },
-                "contentSource": "<!-- wp:paragraph {\"content\":\"This space: \\u0022\\u0026nbsp;\\u0022 and this space: \\u0022\\u0026nbsp;\\u0022 are characters with code \\u0022U+00A0\\u0022 (not a regular space). We may want to avoid converting them to \\u0022\\u0026amp;nbsp;\\u0022. To do that, avoid using the HTML5 parser when using the `blocks` field.\",\"dropCap\":false} --><p>This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.<\/p><!-- \/wp:paragraph -->",
-                "innerBlocks": null
-            }
-        ],
-        "originalBlockDataItems": [
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This is a post with a corrupted non-breaking space.",
-                    "dropCap": false
-                }
-            },
-            {
-                "name": "core\/heading",
-                "attributes": {
-                    "level": 3,
-                    "content": "\ud83d\udc49\u00a0The space just after the emoji not a regular space"
-                }
-            },
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
-                    "dropCap": false
-                }
-            }
-        ],
-        "replacedBlockDataItems": [
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This is a post with a corrupted non-breaking space.",
-                    "dropCap": false
-                }
-            },
-            {
-                "name": "core\/heading",
-                "attributes": {
-                    "level": 3,
-                    "content": "\ud83d\udc49&nbsp;The space just after the emoji not a regular space"
-                }
-            },
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This space: \"&nbsp;\" and this space: \"&nbsp;\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
-                    "dropCap": false
-                }
-            }
-        ],
-        "originalBlockFlattenedDataItems": [
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This is a post with a corrupted non-breaking space.",
-                    "dropCap": false
-                },
-                "innerBlockPositions": null,
-                "parentBlockPosition": null
-            },
-            {
-                "name": "core\/heading",
-                "attributes": {
-                    "level": 3,
-                    "content": "\ud83d\udc49\u00a0The space just after the emoji not a regular space"
-                },
-                "innerBlockPositions": null,
-                "parentBlockPosition": null
-            },
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This space: \"\u00a0\" and this space: \"\u00a0\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
-                    "dropCap": false
-                },
-                "innerBlockPositions": null,
-                "parentBlockPosition": null
-            }
-        ],
-        "replacedBlockFlattenedDataItems": [
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This is a post with a corrupted non-breaking space.",
-                    "dropCap": false
-                },
-                "innerBlockPositions": null,
-                "parentBlockPosition": null
-            },
-            {
-                "name": "core\/heading",
-                "attributes": {
-                    "level": 3,
-                    "content": "\ud83d\udc49&nbsp;The space just after the emoji not a regular space"
-                },
-                "innerBlockPositions": null,
-                "parentBlockPosition": null
-            },
-            {
-                "name": "core\/paragraph",
-                "attributes": {
-                    "content": "This space: \"&nbsp;\" and this space: \"&nbsp;\" are characters with code \"U+00A0\" (not a regular space). We may want to avoid converting them to \"&amp;nbsp;\". To do that, avoid using the HTML5 parser when using the `blocks` field.",
-                    "dropCap": false
-                },
-                "innerBlockPositions": null,
-                "parentBlockPosition": null
-            }
-        ]
     }
 }
