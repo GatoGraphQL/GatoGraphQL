@@ -267,18 +267,10 @@
     replacedBlocks: blocks {
       ...BlockData
     }
-    originalBlockDataItems: blockDataItems(useHTML5Parser: false) {
-      ...BlockData
-    }
-    replacedBlockDataItems: blockDataItems {
-      ...BlockData
-    }
-    originalBlockFlattenedDataItems: blockFlattenedDataItems(useHTML5Parser: false) {
-      ...BlockData
-    }
-    replacedBlockFlattenedDataItems: blockFlattenedDataItems {
-      ...BlockData
-    }
+    originalBlockDataItems: blockDataItems(useHTML5Parser: false)
+    replacedBlockDataItems: blockDataItems
+    originalBlockFlattenedDataItems: blockFlattenedDataItems(useHTML5Parser: false)
+    replacedBlockFlattenedDataItems: blockFlattenedDataItems
   }
 
   reusableBlocks: customPosts(filter: { ids: [1132, 1136], customPostTypes: "wp_block", status: any }) {
