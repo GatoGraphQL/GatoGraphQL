@@ -216,12 +216,10 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                  * When parsing HTML5, the parser will convert non-breaking space "U+00A0" to "&nbsp;" entities,
                  * and then the search/replace in "rawContent" will fail.
                  * Then allow to disable the HTML5 parser.
-                 * @var bool|null
+                 *
+                 * @var bool
                  */
-                $useHTML5Parser = $fieldDataAccessor->getValue('useHTML5Parser');
-                if ($useHTML5Parser === null) {
-                    $useHTML5Parser = true;
-                }
+                $useHTML5Parser = $fieldDataAccessor->getValue('useHTML5Parser') ?? true;
 
                 $options = [
                     'include-inner-content' => $includeInnerContent,
