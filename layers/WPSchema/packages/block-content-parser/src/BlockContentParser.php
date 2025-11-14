@@ -319,7 +319,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             $this->add_missing_block_warning($block_name);
         }
 
-        $useHtml5Parser = $options['use-html5-parser'] ?? true;
+        $useHTML5Parser = $options['use-html5-parser'] ?? true;
 
         $block_definition            = $registered_blocks[ $block_name ] ?? null;
         $block_definition_attributes = $block_definition->attributes ?? [];
@@ -354,7 +354,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
                 // Parsing HTML5 will convert non-breaking space "U+00A0" to "&nbsp;" entities,
                 // and then the search/replace in "rawContent" will fail.
                 // Then allow to disable the HTML5 parser.
-                $useHtml5Parser,
+                $useHTML5Parser,
             );
 
             // Enter the <body> tag for block parsing

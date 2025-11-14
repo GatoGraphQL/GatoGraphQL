@@ -261,19 +261,19 @@
   # Test converting the "U+00A0" character to "&nbsp;" entity or not.
   blockWithCorruptedNonBreakingSpace: post(by: { id: 1119 }) {
     id
-    originalBlocks: blocks(useHtml5Parser: false) {
+    originalBlocks: blocks(useHTML5Parser: false) {
       ...BlockData
     }
     replacedBlocks: blocks {
       ...BlockData
     }
-    originalBlockDataItems: blockDataItems(useHtml5Parser: false) {
+    originalBlockDataItems: blockDataItems(useHTML5Parser: false) {
       ...BlockData
     }
     replacedBlockDataItems: blockDataItems {
       ...BlockData
     }
-    originalBlockFlattenedDataItems: blockFlattenedDataItems(useHtml5Parser: false) {
+    originalBlockFlattenedDataItems: blockFlattenedDataItems(useHTML5Parser: false) {
       ...BlockData
     }
     replacedBlockFlattenedDataItems: blockFlattenedDataItems {
