@@ -211,7 +211,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $includeProperties = $fieldDataAccessor->getValue('includeProperties');
                     $includeInnerContent = $includeProperties->innerContent ?? false;
                 }
-                
+
                 /**
                  * When parsing HTML5, the parser will convert non-breaking space "U+00A0" to "&nbsp;" entities,
                  * and then the search/replace in "rawContent" will fail.
