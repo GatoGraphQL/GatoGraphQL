@@ -1,5 +1,5 @@
 {
-  posts(pagination: { limit: 6, offset: 1 }, sort: { by: ID, order: DESC }) {
+  posts(pagination: { limit: 6 }, sort: { by: ID, order: DESC }, filter: { dateQuery: { before: "2025-01-01" } }) {
     id
     title
     blocks {
