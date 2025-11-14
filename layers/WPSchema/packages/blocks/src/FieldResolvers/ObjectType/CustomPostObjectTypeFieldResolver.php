@@ -182,8 +182,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $includeProperties = $fieldDataAccessor->getValue('includeProperties');
                     $includeInnerContent = $includeProperties->innerContent ?? false;
                 }
+                
+                /** @var bool */
+                $useHtml5Parser = $fieldDataAccessor->getValue('useHtml5Parser');
+
                 $options = [
                     'include-inner-content' => $includeInnerContent,
+                    'use-html5-parser' => $useHtml5Parser,
                 ];
 
                 /**
