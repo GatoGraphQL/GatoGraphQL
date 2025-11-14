@@ -67,7 +67,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             );
         }
         $this->includeInnerContent = $options['include-inner-content'] ?? false;
-        $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $options['filter'] ?? [], $options);
+        $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $options);
         return $this->processParsedBlockData($parsedBlockData);
     }
 
@@ -148,7 +148,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         array $options = [],
     ): BlockContentParserPayload {
         $this->includeInnerContent = $options['include-inner-content'] ?? false;
-        $parsedBlockData = $this->parse($customPostContent, null, $options['filter'] ?? [], $options);
+        $parsedBlockData = $this->parse($customPostContent, null, $options);
         return $this->processParsedBlockData($parsedBlockData);
     }
 
@@ -208,15 +208,20 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param string $post_content HTML content of a post.
      * @param int|null $post_id ID of the post being parsed. Required for blocks containing meta-sourced attributes and some block filters.
-     * @param array<string,mixed> $filter_options An associative array of options for filtering blocks. Can contain keys:
-     *              'exclude': An array of block names to block from the response.
-     *              'include': An array of block names that are allowed in the response.
      * @param array<string,mixed> $options An associative array of options.
      *
      * @return mixed[]|WP_Error
      */
-    protected function parse(string $post_content, ?int $post_id = null, array $filter_options = [], array $options = []): array|WP_Error
+    protected function parse(string $post_content, ?int $post_id = null, array $options = []): array|WP_Error
     {
+        /**
+         * $filter_options An associative array of options for filtering blocks. Can contain keys:
+         *  'exclude': An array of block names to block from the response.
+         *  'include': An array of block names that are allowed in the response.
+         *
+         * @var array<string,mixed>
+         */
+        $filter_options = $options['filter'] ?? [];
         if (isset($filter_options['exclude']) && isset($filter_options['include'])) {
             // return new WP_Error('vip-block-data-api-invalid-params', 'Cannot provide blocks to exclude and include at the same time', [ 'status' => 400 ]);
             return new WP_Error(
