@@ -15,6 +15,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
@@ -35,6 +36,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?IncludeExcludeFilterInputObjectTypeResolver $includeExcludeFilterInputObjectTypeResolver = null;
     private ?IncludeBlockPropertiesInputObjectTypeResolver $includeBlockPropertiesInputObjectTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     final protected function getBlockContentParser(): BlockContentParserInterface
     {
@@ -71,6 +73,15 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
             $this->includeBlockPropertiesInputObjectTypeResolver = $includeBlockPropertiesInputObjectTypeResolver;
         }
         return $this->includeBlockPropertiesInputObjectTypeResolver;
+    }
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
     }
 
     /**
@@ -142,6 +153,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $fieldArgNameTypeResolvers,
                     [
                         'filterBy' => $this->getIncludeExcludeFilterInputObjectTypeResolver(),
+                        'useHTML5Parser' => $this->getBooleanScalarTypeResolver(),
                     ]
                 ),
             'blockDataItems',
@@ -151,10 +163,27 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     [
                         'filterBy' => $this->getIncludeExcludeFilterInputObjectTypeResolver(),
                         'includeProperties' => $this->getIncludeBlockPropertiesInputObjectTypeResolver(),
+                        'useHTML5Parser' => $this->getBooleanScalarTypeResolver(),
                     ]
                 ),
             default
                 => $fieldArgNameTypeResolvers,
+        };
+    }
+
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        return match ($fieldArgName) {
+            'useHTML5Parser' => $this->__('Indicate if to use the HTML5 parser when converting block content. Default: true', 'blocks'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        return match ($fieldArgName) {
+            'useHTML5Parser' => true,
+            default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
@@ -182,8 +211,19 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $includeProperties = $fieldDataAccessor->getValue('includeProperties');
                     $includeInnerContent = $includeProperties->innerContent ?? false;
                 }
+
+                /**
+                 * When parsing HTML5, the parser will convert non-breaking space "U+00A0" to "&nbsp;" entities,
+                 * and then the search/replace in "rawContent" will fail.
+                 * Then allow to disable the HTML5 parser.
+                 *
+                 * @var bool
+                 */
+                $useHTML5Parser = $fieldDataAccessor->getValue('useHTML5Parser') ?? true;
+
                 $options = [
                     'include-inner-content' => $includeInnerContent,
+                    'use-html5-parser' => $useHTML5Parser,
                 ];
 
                 /**
