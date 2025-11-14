@@ -258,6 +258,29 @@
     )
   }
 
+  # Test converting the "U+00A0" character to "&nbsp;" entity or not.
+  blockWithCorruptedNonBreakingSpace: post(by: { id: 1119 }) {
+    id
+    originalBlocks: blocks(useHtml5Parser: false) {
+      ...BlockData
+    }
+    replacedBlocks: blocks {
+      ...BlockData
+    }
+    originalBlockDataItems: blockDataItems(useHtml5Parser: false) {
+      ...BlockData
+    }
+    replacedBlockDataItems: blockDataItems {
+      ...BlockData
+    }
+    originalBlockFlattenedDataItems: blockFlattenedDataItems(useHtml5Parser: false) {
+      ...BlockData
+    }
+    replacedBlockFlattenedDataItems: blockFlattenedDataItems {
+      ...BlockData
+    }
+  }
+
   reusableBlocks: customPosts(filter: { ids: [1132, 1136], customPostTypes: "wp_block", status: any }) {
     id
     blocks {
