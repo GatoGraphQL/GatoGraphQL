@@ -2119,7 +2119,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1146</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
-<p>This is a post with a corrupted non-breaking space: &#xA0;.</p>
+<p>This is a post with a corrupted non-breaking space.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
@@ -2127,7 +2127,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>This space: " " and this space: " " are characters with code "U+00A0" (not a regular space). We may want to avoid converting them to "&nbsp;". To do that, avoid using the HTML5 parser when using the `blocks` field.</p>
+<p>This space: " " and this space: " " are characters with code "U+00A0" (not a regular space). We may want to avoid converting them to "&amp;nbsp;". To do that, avoid using the HTML5 parser when using the `blocks` field.</p>
 <!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1146</wp:post_id>
