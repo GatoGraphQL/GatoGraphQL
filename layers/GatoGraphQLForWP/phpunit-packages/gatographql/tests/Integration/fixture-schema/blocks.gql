@@ -1,5 +1,5 @@
 {
-  posts(pagination: { limit: 6 }, sort: { by: ID, order: ASC }) {
+  posts(pagination: { limit: 6, offset: 1 }, sort: { by: ID, order: DESC }) {
     id
     title
     blocks {
