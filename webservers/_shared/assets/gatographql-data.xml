@@ -2123,8 +2123,12 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">👉 Découvrir The space just before is "U+00A0" (not a regular space), we may want to avoid converting to &nbsp; when using the HTML5 parser.</h3>
-<!-- /wp:heading -->]]></content:encoded>
+<h3 class="wp-block-heading">👉 The space just after the emoji not a regular space</h3>
+<!-- /wp:heading -->]]>
+
+<!-- wp:paragraph -->
+<p>This space: " " and this space: " " are characters with code "U+00A0" (not a regular space). We may want to avoid converting them to "&nbsp;". To do that, avoid using the HTML5 parser when using the `blocks` field.</p>
+<!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1146</wp:post_id>
 		<wp:post_date><![CDATA[2025-10-28 07:15:21]]></wp:post_date>
