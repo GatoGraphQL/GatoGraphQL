@@ -33,6 +33,10 @@ might produce:
 }
 ```
 
+### `_htmlParseHTML5`
+
+Parse HTML using HTML5 parser and return the parsed HTML.
+
 ### `_objectConvertToNameValueEntryList`
 
 Retrieve the properties from a JSON object to create a list of JSON entries.
