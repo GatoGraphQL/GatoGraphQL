@@ -392,6 +392,19 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
 
         $taxonomyTermID = $this->executeUpdateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
 
+        App::doAction(
+            TaxonomyCRUDHookNames::BEFORE_EXECUTE_CREATE_OR_UPDATE,
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(
+            TaxonomyCRUDHookNames::BEFORE_EXECUTE_UPDATE,
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 
         App::doAction(
@@ -432,6 +445,9 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         $taxonomyData = $this->getCreateTaxonomyTermData($fieldDataAccessor);
         $taxonomyTermID = $this->executeCreateTaxonomyTerm($taxonomyName, $taxonomyData);
+
+        App::doAction(TaxonomyCRUDHookNames::BEFORE_EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        App::doAction(TaxonomyCRUDHookNames::BEFORE_EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 

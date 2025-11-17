@@ -9,6 +9,9 @@ class TaxonomyCRUDHookNames
     public final const VALIDATE_CREATE_OR_UPDATE = __CLASS__ . ':validate-create-or-update';
     public final const VALIDATE_CREATE = __CLASS__ . ':validate-create';
     public final const VALIDATE_UPDATE = __CLASS__ . ':validate-update';
+    public final const BEFORE_EXECUTE_CREATE_OR_UPDATE = __CLASS__ . ':before-execute-create-or-update';
+    public final const BEFORE_EXECUTE_CREATE = __CLASS__ . ':before-execute-create';
+    public final const BEFORE_EXECUTE_UPDATE = __CLASS__ . ':before-execute-update';
     public final const EXECUTE_CREATE_OR_UPDATE = __CLASS__ . ':execute-create-or-update';
     public final const EXECUTE_CREATE = __CLASS__ . ':execute-create';
     public final const EXECUTE_UPDATE = __CLASS__ . ':execute-update';
