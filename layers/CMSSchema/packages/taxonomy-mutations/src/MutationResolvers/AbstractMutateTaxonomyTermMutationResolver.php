@@ -390,8 +390,19 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         $taxonomyData = $this->getUpdateTaxonomyTermData($fieldDataAccessor);
 
-        $taxonomyTermID = $this->executeUpdateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
+        App::doAction(
+            TaxonomyCRUDHookNames::BEFORE_EXECUTE_CREATE_OR_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(
+            TaxonomyCRUDHookNames::BEFORE_EXECUTE_UPDATE,
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
+        $taxonomyTermID = $this->executeUpdateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 
         App::doAction(
@@ -431,12 +442,29 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         /** @var string */
         $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         $taxonomyData = $this->getCreateTaxonomyTermData($fieldDataAccessor);
+        
+        App::doAction(TaxonomyCRUDHookNames::BEFORE_EXECUTE_CREATE_OR_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(TaxonomyCRUDHookNames::BEFORE_EXECUTE_CREATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        
         $taxonomyTermID = $this->executeCreateTaxonomyTerm($taxonomyName, $taxonomyData);
-
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 
-        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE,
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
         return $taxonomyTermID;
     }
