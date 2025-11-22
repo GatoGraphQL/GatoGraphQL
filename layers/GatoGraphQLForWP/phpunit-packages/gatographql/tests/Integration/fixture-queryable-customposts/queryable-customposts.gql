@@ -9,10 +9,13 @@
         "custom_css",
         "revision"
       ],
-      status:[
+      status: [
         publish,
         inherit
-      ]
+      ],
+      dateQuery: {
+        before: "2024-01-01"
+      }
     },
     pagination: {
       limit: 13
