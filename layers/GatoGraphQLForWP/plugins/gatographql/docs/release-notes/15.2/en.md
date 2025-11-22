@@ -11,6 +11,7 @@
 - Include block's `innerContent` property for `blockDataItems` and `blockFlattenedDataItems` fields ([#3224](https://github.com/GatoGraphQL/GatoGraphQL/pull/3224))
 - `CustomPost.slug` can return empty string if not yet set ([#3228](https://github.com/GatoGraphQL/GatoGraphQL/pull/3228))
 - In fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, allow to not convert block content using HTML5 parser ([#3230](https://github.com/GatoGraphQL/GatoGraphQL/pull/3230))
+- Tested up to WordPress 6.9 ([#3238](https://github.com/GatoGraphQL/GatoGraphQL/pull/3238))
 
 ## Fixed
 

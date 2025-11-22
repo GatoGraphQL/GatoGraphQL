@@ -576,10 +576,6 @@
         },
         {
           "kind": "SCALAR",
-          "name": "NonEmptyString"
-        },
-        {
-          "kind": "SCALAR",
           "name": "NullableListValueJSONObject"
         },
         {
@@ -793,6 +789,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "FilterPostsByTagsInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "IncludeBlockPropertiesInput"
         },
         {
           "kind": "INPUT_OBJECT",

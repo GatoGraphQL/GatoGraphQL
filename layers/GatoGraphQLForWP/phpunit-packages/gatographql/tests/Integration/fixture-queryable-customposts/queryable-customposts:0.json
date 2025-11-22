@@ -10,13 +10,13 @@
       ],
       "extensions": {
         "path": [
-          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}",
-          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]})",
-          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
+          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}",
+          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}})",
+          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
+        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
@@ -30,13 +30,13 @@
       ],
       "extensions": {
         "path": [
-          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}",
-          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]})",
-          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
+          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}",
+          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}})",
+          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
+        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
@@ -50,13 +50,13 @@
       ],
       "extensions": {
         "path": [
-          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}",
-          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]})",
-          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
+          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}",
+          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}})",
+          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
+        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
@@ -70,13 +70,13 @@
       ],
       "extensions": {
         "path": [
-          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}",
-          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]})",
-          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
+          "{customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}",
+          "(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}})",
+          "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit]}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
+        "field": "customPosts(filter: {customPostTypes: [\"post\", \"page\", \"attachment\", \"nav_menu_item\", \"custom_css\", \"revision\"], status: [publish, inherit], dateQuery: {before: \"2024-01-01\"}}, pagination: {limit: 13}, sort: {by: ID, order: ASC}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     }

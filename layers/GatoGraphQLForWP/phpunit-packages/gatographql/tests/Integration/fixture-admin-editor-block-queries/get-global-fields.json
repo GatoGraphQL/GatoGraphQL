@@ -1,7 +1,11 @@
 {
   "data": {
     "__schema": {
-      "globalFields": []
+      "globalFields": [
+        {
+          "name": "_urlToCustomPostID"
+        }
+      ]
     }
   }
 }
