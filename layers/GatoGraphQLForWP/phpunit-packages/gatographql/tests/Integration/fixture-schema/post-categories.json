@@ -1999,8 +1999,8 @@
         },
         "postsByCategoryIDs": [
             {
-                "id": 1142,
-                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space",
                 "categories": [
                     {
                         "id": 1
@@ -2008,8 +2008,8 @@
                 ]
             },
             {
-                "id": 1146,
-                "title": "Post with corrupted non-breaking space",
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
                 "categories": [
                     {
                         "id": 1
@@ -2106,8 +2106,8 @@
         ],
         "postsByCategoryIDsWithTaxonomy": [
             {
-                "id": 1142,
-                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space",
                 "categories": [
                     {
                         "id": 1
@@ -2115,8 +2115,8 @@
                 ]
             },
             {
-                "id": 1146,
-                "title": "Post with corrupted non-breaking space",
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
                 "categories": [
                     {
                         "id": 1
