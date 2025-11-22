@@ -199,7 +199,7 @@ fragment PostCategoryData on PostCategory {
     name
   }
   postCount
-  posts {
+  posts(sort: { by: ID, order: DESC }) {
     id
     title
   }
