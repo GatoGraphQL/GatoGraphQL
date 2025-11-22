@@ -1083,7 +1083,7 @@
         "categoriesWithoutTaxonomy": [
             {
                 "__typename": "PostCategory",
-                "postCount": 4,
+                "postCount": 6,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1136,10 +1136,36 @@
                                 "taxonomy": "category"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1142,
+                        "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 1,
+                                "name": "Uncategorized",
+                                "taxonomy": "category"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1146,
+                        "title": "Post with corrupted non-breaking space",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 1,
+                                "name": "Uncategorized",
+                                "taxonomy": "category"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "category",
-                "count": 4,
+                "count": 6,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -3047,6 +3073,38 @@
                 ]
             },
             {
+                "__typename": "Post",
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 1,
+                        "name": "Uncategorized",
+                        "taxonomy": "category",
+                        "slug": "uncategorized",
+                        "slugPath": "uncategorized"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 1,
+                        "name": "Uncategorized",
+                        "taxonomy": "category",
+                        "slug": "uncategorized",
+                        "slugPath": "uncategorized"
+                    }
+                ]
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -3649,22 +3707,6 @@
                         "taxonomy": "dummy-category"
                     }
                 ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1660,
-                "title": "Dummy CPT with non server-side-registered block",
-                "customPostType": "dummy-cpt",
-                "categories": [],
-                "categoriesWithoutTaxonomy": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1680,
-                "title": "Dummy CPT with server-side-registered block",
-                "customPostType": "dummy-cpt",
-                "categories": [],
-                "categoriesWithoutTaxonomy": []
             }
         ],
         "customPostsByCategoryIDs": [
@@ -3704,6 +3746,14 @@
         ],
         "customPostsExcludeByCategoryIDs": [
             {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+            },
+            {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space"
+            },
+            {
                 "id": 1705,
                 "title": "Page with parent only"
             },
@@ -3738,15 +3788,6 @@
             {
                 "id": 1136,
                 "title": "Global synced pattern",
-                "categories": []
-            },
-            {
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "id": 1649,
-                "title": "Nulla numquam totam eaque",
                 "categories": []
             }
         ],
@@ -3838,6 +3879,14 @@
         ],
         "customPostsExcludeByCategorySlugs": [
             {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+            },
+            {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space"
+            },
+            {
                 "id": 1705,
                 "title": "Page with parent only"
             },
@@ -3872,15 +3921,6 @@
             {
                 "id": 1136,
                 "title": "Global synced pattern",
-                "categories": []
-            },
-            {
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "id": 1649,
-                "title": "Nulla numquam totam eaque",
                 "categories": []
             }
         ],
@@ -3964,7 +4004,7 @@
         "postCategories": [
             {
                 "taxonomy": "category",
-                "count": 4,
+                "count": 6,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -4084,7 +4124,7 @@
         ],
         "postCategoryByID": {
             "taxonomy": "category",
-            "count": 4,
+            "count": 6,
             "description": "",
             "id": 1,
             "metaValue": null,

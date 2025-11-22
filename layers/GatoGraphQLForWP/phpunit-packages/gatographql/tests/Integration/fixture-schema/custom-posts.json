@@ -67,7 +67,7 @@
                 "customPostType": "page",
                 "date": "2020-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2020",
-                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gatographql.lndo.site\/single-post-with-a-lot-of-blocks\/\">Continue reading <span class=\"screen-reader-text\">Welcome to a single post full of blocks!<\/span><\/a>",
+                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gatographql.lndo.site\/post-with-corrupted-non-breaking-space\/\">Continue reading <span class=\"screen-reader-text\">Post with corrupted non-breaking space<\/span><\/a>",
                 "featuredImage": null,
                 "hasComments": false,
                 "hasFeaturedImage": false,
@@ -475,6 +475,11 @@
                 "__typename": "Post",
                 "id": 1,
                 "title": "Hello world!"
+            },
+            {
+                "__typename": "Post",
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
             },
             {
                 "__typename": "GenericCustomPost",
