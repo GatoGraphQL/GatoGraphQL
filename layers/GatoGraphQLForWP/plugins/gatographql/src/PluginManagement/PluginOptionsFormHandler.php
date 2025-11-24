@@ -137,7 +137,7 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
 
         // Return the specific value to this module/option
         $optionName = $moduleResolver->getSettingOptionName($module, $option);
-        return $moduleOptionValues[$optionName] ?? null;
+        return $moduleOptionValues[$optionName] ?? $value;
     }
 
     /**
