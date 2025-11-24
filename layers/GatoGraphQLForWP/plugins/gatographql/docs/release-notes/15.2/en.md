@@ -20,3 +20,4 @@
 - Querying taxonomy that is assigned to more than 1 CPT ([#3225](https://github.com/GatoGraphQL/GatoGraphQL/pull/3225))
 - Errors inside nested directives not passing the fields upwards when `nestErrorsInMetaDirectives` is false ([#3226](https://github.com/GatoGraphQL/GatoGraphQL/pull/3226))
 - The link on the `wpAdminEditURL` field to print `&` as `&` (not `&amp`) ([#3227](https://github.com/GatoGraphQL/GatoGraphQL/pull/3227))
+- Undefined array key warning ([#3239](https://github.com/GatoGraphQL/GatoGraphQL/pull/3239))

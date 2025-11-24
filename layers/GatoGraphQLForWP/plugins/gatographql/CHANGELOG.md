@@ -26,6 +26,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Querying taxonomy that is assigned to more than 1 CPT (#3225)
 - Errors inside nested directives not passing the fields upwards when `nestErrorsInMetaDirectives` is false (#3226)
 - The link on the `wpAdminEditURL` field to print `&` as `&` (not `&amp`) (#3227)
+- Undefined array key warning (#3239)
 
 ## 15.1.0 - 17/10/2025
 

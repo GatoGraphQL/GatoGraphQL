@@ -235,6 +235,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - Querying taxonomy that is assigned to more than 1 CPT (#3225)
 * Fixed - Errors inside nested directives not passing the fields upwards when `nestErrorsInMetaDirectives` is false (#3226)
 * Fixed - The link on the `wpAdminEditURL` field to print `&` as `&` (not `&amp`) (#3227)
+* Fixed - Undefined array key warning (#3239)
 
 = 15.1.0 =
 * Added WooCommerce extension to docs (#3195)
