@@ -130,14 +130,14 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $settingsCategory = $moduleResolver->getSettingsCategory($module);
 
-        $value = $this->getNormalizedModuleOptionValues(
+        $moduleOptionValues = $this->getNormalizedModuleOptionValues(
             $settingsCategory,
             $module,
         );
 
         // Return the specific value to this module/option
         $optionName = $moduleResolver->getSettingOptionName($module, $option);
-        return $value[$optionName];
+        return $moduleOptionValues[$optionName] ?? $value;
     }
 
     /**
