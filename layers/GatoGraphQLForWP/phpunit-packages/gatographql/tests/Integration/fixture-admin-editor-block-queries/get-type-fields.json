@@ -1894,6 +1894,9 @@
             },
             {
               "name": "users"
+            },
+            {
+              "name": "_urlToCustomPostID"
             }
           ],
           "kind": "OBJECT",
@@ -2463,6 +2466,9 @@
             },
             {
               "name": "users"
+            },
+            {
+              "name": "_urlToCustomPostID"
             }
           ],
           "kind": "OBJECT",
@@ -4240,13 +4246,6 @@
           "description": "Menu Locations. Possible values: `footer`, `primary`."
         },
         {
-          "name": "NonEmptyString",
-          "namespacedName": "NonEmptyString",
-          "fields": null,
-          "kind": "SCALAR",
-          "description": "A non-empty string scalar type that validates the string is not empty."
-        },
-        {
           "name": "NullableListValueJSONObject",
           "namespacedName": "NullableListValueJSONObject",
           "fields": null,
@@ -4766,6 +4765,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter custom posts by tags"
+        },
+        {
+          "name": "IncludeBlockPropertiesInput",
+          "namespacedName": "IncludeBlockPropertiesInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to configure which properties to include in the block data"
         },
         {
           "name": "IncludeExcludeFilterInput",

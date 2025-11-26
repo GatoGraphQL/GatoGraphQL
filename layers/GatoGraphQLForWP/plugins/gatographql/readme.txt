@@ -2,7 +2,7 @@
 Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
 Requires at least: 6.1
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 15.1.1
 Requires PHP: 8.1
 License: GPLv2 or later
@@ -222,8 +222,20 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 15.1.1 =
+= 15.2.0 =
+* Added - Field `_urlToCustomPostID` to get the custom post ID from a URL (#3229)
+* Include block's `innerContent` property for `blockDataItems` and `blockFlattenedDataItems` fields (#3224)
+* Support `--fail-if-log-notifications` param to WP-CLI commands, to print IDs only when a log entry was added during the execution (#3221)
+* Added documentation for new field `_htmlParseHTML5` in the Helper Function Collection extension (#3237)
+* `CustomPost.slug` can return empty string if not yet set (#3228)
+* In fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, allow to not convert block content using HTML5 parser (#3230)
+* Tested up to WordPress 6.9 (#3238)
 * Fixed - Check slugPath is not empty when adding page parent by slugPath (#3218)
+* Fixed - Exception when passing field arg with value null (#3222)
+* Fixed - Querying taxonomy that is assigned to more than 1 CPT (#3225)
+* Fixed - Errors inside nested directives not passing the fields upwards when `nestErrorsInMetaDirectives` is false (#3226)
+* Fixed - The link on the `wpAdminEditURL` field to print `&` as `&` (not `&amp`) (#3227)
+* Fixed - "Undefined array key" warning (#3239)
 
 = 15.1.0 =
 * Added WooCommerce extension to docs (#3195)

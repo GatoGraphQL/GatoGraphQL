@@ -38,6 +38,9 @@
                     },
                     {
                         "name": "_typeName"
+                    },
+                    {
+                        "name": "_urlToCustomPostID"
                     }
                 ]
             },
@@ -120,6 +123,9 @@
                     },
                     {
                         "name": "_typeName"
+                    },
+                    {
+                        "name": "_urlToCustomPostID"
                     }
                 ]
             }

@@ -411,17 +411,24 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPost === null) {
             return null;
         }
-        /** @var WP_Post $customPost */
-        if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
-            return $customPost->post_name;
-        }
 
-        // Function get_sample_permalink comes from the file below, so it must be included
-        // Code below copied from `function get_sample_permalink_html`
-        // @phpstan-ignore-next-line
-        include_once ABSPATH . 'wp-admin/includes/post.php';
-        list($permalink, $post_name) = get_sample_permalink((int)$customPostID, null, null);
-        return $post_name;
+        // If a post still has no slug, then return it as empty
+        return $customPost->post_name;
+
+        /**
+         * The commented-out code below will generate the slug from the title,
+         * but it's not a given that will be the actual slug, then avoid.
+         */
+        // /** @var WP_Post $customPost */
+        // if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
+        //     return $customPost->post_name;
+        // }
+
+        // // Function get_sample_permalink comes from the file below, so it must be included
+        // // Code below copied from `function get_sample_permalink_html`
+        // include_once ABSPATH . 'wp-admin/includes/post.php';
+        // list($permalink, $post_name) = get_sample_permalink((int)$customPostID, null, null);
+        // return $post_name;
     }
 
     public function getExcerpt(string|int|object $customPostObjectOrID): ?string

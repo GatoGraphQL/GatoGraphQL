@@ -917,6 +917,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -932,6 +944,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -944,6 +968,12 @@
                             "args": [
                                 {
                                     "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -4706,6 +4736,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -4721,6 +4763,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -4733,6 +4787,12 @@
                             "args": [
                                 {
                                     "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -5206,6 +5266,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -5221,6 +5293,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -5233,6 +5317,12 @@
                             "args": [
                                 {
                                     "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "useHTML5Parser",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -7659,6 +7749,21 @@
                                 },
                                 {
                                     "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "_urlToCustomPostID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "url",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -11096,6 +11201,21 @@
                                 },
                                 {
                                     "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "_urlToCustomPostID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "url",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -15142,17 +15262,6 @@
                     "enumValues": null
                 },
                 {
-                    "name": "NonEmptyString",
-                    "extensions": {
-                        "elementName": "NonEmptyString",
-                        "namespacedName": "NonEmptyString",
-                        "possibleValues": null
-                    },
-                    "fields": null,
-                    "inputFields": null,
-                    "enumValues": null
-                },
-                {
                     "name": "NullableListValueJSONObject",
                     "extensions": {
                         "elementName": "NullableListValueJSONObject",
@@ -16903,6 +17012,24 @@
                         },
                         {
                             "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "IncludeBlockPropertiesInput",
+                    "extensions": {
+                        "elementName": "IncludeBlockPropertiesInput",
+                        "namespacedName": "IncludeBlockPropertiesInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "innerContent",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

@@ -1,5 +1,5 @@
 {
-  posts(pagination: { limit: 6 }) {
+  posts(pagination: { limit: 6 }, sort: { by: ID, order: DESC }, filter: { dateQuery: { before: "2025-01-01" } }) {
     id
     title
     blocks {
@@ -389,6 +389,21 @@
     }
     blockDataItems
     blockFlattenedDataItems
+  }
+
+  # Test converting the "U+00A0" character to "&nbsp;" entity or not.
+  blockWithCorruptedNonBreakingSpace: post(by: { id: 1146 }) {
+    id
+    originalBlocks: blocks(useHTML5Parser: false) {
+      ...BlockData
+    }
+    replacedBlocks: blocks {
+      ...BlockData
+    }
+    originalBlockDataItems: blockDataItems(useHTML5Parser: false)
+    replacedBlockDataItems: blockDataItems
+    originalBlockFlattenedDataItems: blockFlattenedDataItems(useHTML5Parser: false)
+    replacedBlockFlattenedDataItems: blockFlattenedDataItems
   }
 }
 

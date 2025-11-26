@@ -5,7 +5,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 4,
+                "count": 6,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -17,8 +17,16 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 4,
+                "postCount": 6,
                 "posts": [
+                    {
+                        "id": 1146,
+                        "title": "Post with corrupted non-breaking space"
+                    },
+                    {
+                        "id": 1142,
+                        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+                    },
                     {
                         "id": 1140,
                         "title": "Welcome to a single post full of blocks!"
@@ -432,7 +440,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 4,
+                "count": 6,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -444,8 +452,16 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 4,
+                "postCount": 6,
                 "posts": [
+                    {
+                        "id": 1146,
+                        "title": "Post with corrupted non-breaking space"
+                    },
+                    {
+                        "id": 1142,
+                        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+                    },
                     {
                         "id": 1140,
                         "title": "Welcome to a single post full of blocks!"
@@ -991,7 +1007,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 4,
+                "count": 6,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -1003,8 +1019,16 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 4,
+                "postCount": 6,
                 "posts": [
+                    {
+                        "id": 1146,
+                        "title": "Post with corrupted non-breaking space"
+                    },
+                    {
+                        "id": 1142,
+                        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+                    },
                     {
                         "id": 1140,
                         "title": "Welcome to a single post full of blocks!"
@@ -1975,6 +1999,24 @@
         },
         "postsByCategoryIDs": [
             {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "categories": [
@@ -2063,6 +2105,24 @@
             }
         ],
         "postsByCategoryIDsWithTaxonomy": [
+            {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
             {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
@@ -2270,6 +2330,24 @@
         ],
         "postsExcludeByCategorySlugs": [
             {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "categories": [
@@ -2319,7 +2397,7 @@
             "taxonomy": "category",
             "childCount": 0,
             "childNames": [],
-            "count": 4,
+            "count": 6,
             "description": "",
             "id": 1,
             "metaValue": null,
@@ -2331,8 +2409,16 @@
             "name": "Uncategorized",
             "parent": null,
             "ancestors": [],
-            "postCount": 4,
+            "postCount": 6,
             "posts": [
+                {
+                    "id": 1146,
+                    "title": "Post with corrupted non-breaking space"
+                },
+                {
+                    "id": 1142,
+                    "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+                },
                 {
                     "id": 1140,
                     "title": "Welcome to a single post full of blocks!"

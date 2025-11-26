@@ -298,6 +298,14 @@
         ],
         "postsByCategoryIDs": [
             {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+            },
+            {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space"
+            },
+            {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
@@ -321,6 +329,14 @@
             }
         ],
         "postsByExcludeAuthorIDs": [
+            {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+            },
+            {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space"
+            },
             {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
@@ -355,6 +371,14 @@
             }
         ],
         "postsByExcludeIDs": [
+            {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space"
+            },
+            {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+            },
             {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
@@ -413,6 +437,10 @@
         ],
         "postsByPassword": [],
         "postsBySearch": [
+            {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+            },
             {
                 "id": 1,
                 "title": "Hello world!"

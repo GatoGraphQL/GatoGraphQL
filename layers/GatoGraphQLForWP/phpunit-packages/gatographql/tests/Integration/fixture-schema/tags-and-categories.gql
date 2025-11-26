@@ -14,6 +14,7 @@
         taxonomy: "dummy-category"
       }
     }
+    sort: { by: ID, order: DESC }
   ) {
     id
     title
@@ -45,6 +46,7 @@
         taxonomy: "dummy-category"
       }
     }
+    sort: { by: ID, order: DESC }
   ) {
     id
     title

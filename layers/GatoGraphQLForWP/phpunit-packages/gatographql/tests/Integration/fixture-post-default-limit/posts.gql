@@ -1,5 +1,5 @@
 {
-  posts {
+  posts(filter: { dateQuery: { before: "2024-01-01" } }) {
     id
     title
   }

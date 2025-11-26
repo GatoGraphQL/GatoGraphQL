@@ -1,4 +1,44 @@
 query {
+  # Test the _urlToCustomPostID field
+  urlToCustomPostIDFields: self {
+    # Existing post URLs (with and without trailing slash)
+    existingPostWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/hello-world/")
+    existingPostWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/hello-world")
+    
+    # Existing page URLs (with and without trailing slash)
+    existingPageWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/sample-page/")
+    existingPageWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/sample-page")
+    
+    # Existing dummy CPT URLs (with and without trailing slash)
+    existingDummyCPTWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/dummy-cpt/dolor-facilis-repellat-pariatur-veniam-at/")
+    existingDummyCPTWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/dummy-cpt/dolor-facilis-repellat-pariatur-veniam-at")
+    
+    # Attachment Page
+    attachmentPageWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/graphql-api-search-results/")
+    attachmentPageWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/graphql-api-search-results")
+    
+    # Non-existing URLs
+    nonExistingPost: _urlToCustomPostID(url: "https://gatographql.lndo.site/non-existing-post/")
+    nonExistingPage: _urlToCustomPostID(url: "https://gatographql.lndo.site/this-page-does-not-exist")
+    
+    # Different domain
+    differentDomain: _urlToCustomPostID(url: "https://example.com/hello-world/")
+    externalDomain: _urlToCustomPostID(url: "https://wordpress.org/some-post/")
+    
+    # No need to test these, because input type URL doesn't support relative URLs
+    # # No domain (relative URLs)
+    # relativeURLWithTrailingSlash: _urlToCustomPostID(url: "/hello-world/")
+    # relativeURLWithoutTrailingSlash: _urlToCustomPostID(url: "/hello-world")
+    # relativeURLNonExisting: _urlToCustomPostID(url: "/non-existing-path")
+    
+    # Category Page
+    categoryPageWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/category/uncategorized/")
+    categoryPageWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/category/uncategorized")
+
+    # User URLs
+    userURLWithTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/author/blogger/")
+    userURLWithoutTrailingSlash: _urlToCustomPostID(url: "https://gatographql.lndo.site/author/blogger")
+  }
   customPosts(filter: { ids: [1, 2, 1113] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {

@@ -3725,6 +3725,20 @@
                 "tags": []
             },
             {
+                "__typename": "Post",
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                "customPostType": "post",
+                "tags": []
+            },
+            {
+                "__typename": "Post",
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space",
+                "customPostType": "post",
+                "tags": []
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -4549,22 +4563,6 @@
                         "taxonomy": "dummy-tag"
                     }
                 ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1660,
-                "title": "Dummy CPT with non server-side-registered block",
-                "customPostType": "dummy-cpt",
-                "tags": [],
-                "tagsWithoutTaxonomy": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1680,
-                "title": "Dummy CPT with server-side-registered block",
-                "customPostType": "dummy-cpt",
-                "tags": [],
-                "tagsWithoutTaxonomy": []
             }
         ],
         "customPostsByTagIDs": [
@@ -4819,6 +4817,14 @@
                 "title": "Welcome to a single post full of blocks!"
             },
             {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+            },
+            {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space"
+            },
+            {
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
                 "tags": [
@@ -4889,15 +4895,6 @@
                         "id": 30
                     }
                 ]
-            },
-            {
-                "id": 1660,
-                "title": "Dummy CPT with non server-side-registered block",
-                "tags": []
-            },
-            {
-                "id": 1666,
-                "title": "Another Page"
             }
         ],
         "customPostsByTagSlugs": [
@@ -5215,6 +5212,14 @@
                 "title": "Welcome to a single post full of blocks!"
             },
             {
+                "id": 1142,
+                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+            },
+            {
+                "id": 1146,
+                "title": "Post with corrupted non-breaking space"
+            },
+            {
                 "id": 1619,
                 "title": "Error debitis nulla vel est",
                 "tags": [
@@ -5246,15 +5251,6 @@
                 "id": 1684,
                 "title": "Dummy CPT with parent and children",
                 "tags": []
-            },
-            {
-                "id": 1688,
-                "title": "Dummy CPT with parent only",
-                "tags": []
-            },
-            {
-                "id": 1701,
-                "title": "Page with several levels of children"
             }
         ],
         "customPostsExcludeByTagSlugsOnCPT": [

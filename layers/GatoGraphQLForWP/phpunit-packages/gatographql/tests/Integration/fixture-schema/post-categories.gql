@@ -86,6 +86,7 @@
 
   postsByCategoryIDs: posts(
     filter: { categories: { includeBy: { ids: [1, 4] } } }
+    sort: { by: ID, order: DESC }
   ) {
     id
     title
@@ -98,6 +99,7 @@
     filter: {
       categories: { includeBy: { ids: [1, 4] }, taxonomy: category }
     }
+    sort: { by: ID, order: DESC }
   ) {
     id
     title
@@ -108,6 +110,7 @@
 
   postsExcludeByCategoryIDs: posts(
     filter: { categories: { excludeBy: { ids: [1, 4] } } }
+    sort: { by: ID, order: DESC }
   ) {
     id
     title
@@ -118,6 +121,7 @@
 
   postsByCategorySlugs: posts(
     filter: { categories: { includeBy: { slugs: ["resource"] } } }
+    sort: { by: ID, order: DESC }
   ) {
     id
     title
@@ -130,6 +134,7 @@
     filter: {
       categories: { includeBy: { slugs: ["resource"] }, taxonomy: category }
     }
+    sort: { by: ID, order: DESC }
   ) {
     id
     title
@@ -140,6 +145,7 @@
 
   postsExcludeByCategorySlugs: posts(
     filter: { categories: { excludeBy: { slugs: ["resource"] } } }
+    sort: { by: ID, order: DESC }
   ) {
     id
     title
@@ -199,7 +205,7 @@ fragment PostCategoryData on PostCategory {
     name
   }
   postCount
-  posts {
+  posts(sort: { by: ID, order: DESC }) {
     id
     title
   }

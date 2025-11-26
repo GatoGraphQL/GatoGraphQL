@@ -18,4 +18,3 @@
 - QueryableInterface adapter ([#3215](https://github.com/GatoGraphQL/GatoGraphQL/pull/3215))
 - CustomPostMeta module depends on Meta module ([#3216](https://github.com/GatoGraphQL/GatoGraphQL/pull/3216))
 - Exception when printing admin_notices before plugin is initialized ([#3217](https://github.com/GatoGraphQL/GatoGraphQL/pull/3217))
-- Check slugPath is not empty when adding page parent by slugPath ([#3218](https://github.com/GatoGraphQL/GatoGraphQL/pull/3218)) (`v15.1.1`)

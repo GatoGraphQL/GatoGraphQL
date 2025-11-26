@@ -1863,6 +1863,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "description": "Input to configure which properties to include in the block data",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeBlockPropertiesInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -1898,6 +1920,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "description": "Input to configure which properties to include in the block data",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeBlockPropertiesInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -1933,6 +1977,17 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -11587,6 +11642,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "description": "Input to configure which properties to include in the block data",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeBlockPropertiesInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -11622,6 +11699,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "description": "Input to configure which properties to include in the block data",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeBlockPropertiesInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -11657,6 +11756,17 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -12730,6 +12840,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "description": "Input to configure which properties to include in the block data",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeBlockPropertiesInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -12765,6 +12897,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "includeProperties",
+                                    "description": "Input to configure which properties to include in the block data",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeBlockPropertiesInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -12800,6 +12954,17 @@
                                         "ofType": null
                                     },
                                     "defaultValue": null
+                                },
+                                {
+                                    "name": "useHTML5Parser",
+                                    "description": "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities.",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "true"
                                 }
                             ],
                             "type": {
@@ -18348,6 +18513,36 @@
                                         }
                                     }
                                 }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_urlToCustomPostID",
+                            "description": "Get the custom post ID from a URL",
+                            "args": [
+                                {
+                                    "name": "url",
+                                    "description": "The URL to convert to a custom post ID",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "URL!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "URL",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -27499,6 +27694,36 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
+                        },
+                        {
+                            "name": "_urlToCustomPostID",
+                            "description": "Get the custom post ID from a URL",
+                            "args": [
+                                {
+                                    "name": "url",
+                                    "description": "The URL to convert to a custom post ID",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "URL!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "URL",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -34977,16 +35202,6 @@
                 },
                 {
                     "kind": "SCALAR",
-                    "name": "NonEmptyString",
-                    "description": "A non-empty string scalar type that validates the string is not empty.",
-                    "fields": null,
-                    "inputFields": null,
-                    "interfaces": null,
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "SCALAR",
                     "name": "NullableListValueJSONObject",
                     "description": "Custom scalar representing a JSON Object where values are lists (of anything) or null",
                     "fields": null,
@@ -38794,6 +39009,33 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
+                    "name": "IncludeBlockPropertiesInput",
+                    "description": "Input to configure which properties to include in the block data",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "innerContent",
+                            "description": "Include the innerContent property in the block data",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": "false"
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
                     "name": "IncludeExcludeFilterInput",
                     "description": "Oneof input to filter by including or excluding items",
                     "fields": null,
@@ -40649,7 +40891,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "NonEmptyString",
+                                "name": "String",
                                 "isOneOf": false,
                                 "ofType": null
                             },
@@ -41114,7 +41356,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "NonEmptyString",
+                                "name": "String",
                                 "isOneOf": false,
                                 "ofType": null
                             },
@@ -41355,7 +41597,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "NonEmptyString",
+                                "name": "String",
                                 "isOneOf": false,
                                 "ofType": null
                             },
@@ -45203,7 +45445,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "NonEmptyString",
+                                "name": "String",
                                 "isOneOf": false,
                                 "ofType": null
                             },
@@ -45766,7 +46008,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "NonEmptyString",
+                                "name": "String",
                                 "isOneOf": false,
                                 "ofType": null
                             },
@@ -46029,7 +46271,7 @@
                             "description": "The slug of the custom post",
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "NonEmptyString",
+                                "name": "String",
                                 "isOneOf": false,
                                 "ofType": null
                             },

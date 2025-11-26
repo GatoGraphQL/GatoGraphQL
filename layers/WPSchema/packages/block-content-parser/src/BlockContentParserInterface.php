@@ -16,6 +16,11 @@ interface BlockContentParserInterface
      *                      'exclude': An array of block names to block from the response.
      *                      'include': An array of block names that are allowed in the response.
      *              'include-inner-content': Indicate if to include the "innerContent" property
+     *              'use-html5-parser': Indicate if to use the HTML5 parser.
+     *                  Default: true.
+     *                  When parsing HTML5, the parser will convert non-breaking space "U+00A0" to "&nbsp;" entities,
+     *                  and then the search/replace in "rawContent" will fail.
+     *                  Then allow to disable the HTML5 parser.
      *
      * @return BlockContentParserPayload|null `null` if the custom post does not exist
      * @throws BlockContentParserException If there is any error processing the content
