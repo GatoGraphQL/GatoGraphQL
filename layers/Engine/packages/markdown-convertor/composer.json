@@ -184,7 +184,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^15.2",
+        "getpop/component-model": "^15.3",
         "michelf/php-markdown": "^2.0"
     },
     "require-dev": {
@@ -211,7 +211,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "15.2-dev"
+            "dev-master": "15.3-dev"
         }
     },
     "config": {

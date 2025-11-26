@@ -184,11 +184,11 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^15.2",
+        "getpop/component-model": "^15.3",
         "psr/cache": "^3.0"
     },
     "require-dev": {
-        "getpop/cache-control": "^15.2",
+        "getpop/cache-control": "^15.3",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^2.1",
@@ -212,7 +212,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "15.2-dev"
+            "dev-master": "15.3-dev"
         }
     },
     "config": {
