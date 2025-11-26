@@ -6,7 +6,7 @@
 - Support `--fail-if-log-notifications` param to WP-CLI commands, to print IDs only when a log entry was added during the execution ([#3221](https://github.com/GatoGraphQL/GatoGraphQL/pull/3221))
 - Documentation for new field `_htmlParseHTML5` in the Helper Function Collection extension ([#3237](https://github.com/GatoGraphQL/GatoGraphQL/pull/3237))
 
-### Improvements
+## Improvements
 
 - Include block's `innerContent` property for `blockDataItems` and `blockFlattenedDataItems` fields ([#3224](https://github.com/GatoGraphQL/GatoGraphQL/pull/3224))
 - `CustomPost.slug` can return empty string if not yet set ([#3228](https://github.com/GatoGraphQL/GatoGraphQL/pull/3228))
