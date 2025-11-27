@@ -222,6 +222,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 15.3.0 =
+
 = 15.2.0 =
 * Added - Field `_urlToCustomPostID` to get the custom post ID from a URL (#3229)
 * Include block's `innerContent` property for `blockDataItems` and `blockFlattenedDataItems` fields (#3224)
