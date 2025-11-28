@@ -43,6 +43,9 @@ services:
     GatoGraphQL\GatoGraphQL\PluginDataSetup\PluginDataSetupServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\PluginDataSetup\PluginDataSetupService
 
+    GatoGraphQL\GatoGraphQL\Meta\MetaNamespacerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Meta\MetaNamespacer
+
     GatoGraphQL\GatoGraphQL\Services\:
         resource: ../src/Services/*
 
