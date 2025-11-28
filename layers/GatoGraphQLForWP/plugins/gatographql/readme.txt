@@ -223,6 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 15.3.0 =
+* Pass extensions to the response error via FeedbackItemResolution (#3240)
 
 = 15.2.0 =
 * Added - Field `_urlToCustomPostID` to get the custom post ID from a URL (#3229)
