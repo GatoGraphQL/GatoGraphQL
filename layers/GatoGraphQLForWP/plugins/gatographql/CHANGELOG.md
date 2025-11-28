@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 15.3.0 - DATE
 
+### Added
+
+- MetaNamespacer service (#3241)
+
 ### Improvements
 
 - Pass extensions to the response error via FeedbackItemResolution (#3240)
