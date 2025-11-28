@@ -15,6 +15,11 @@ abstract class AbstractFeedback implements FeedbackInterface
         protected FeedbackItemResolution $feedbackItemResolution,
         protected array $extensions = [],
     ) {
+        // Merge the extensions from the feedback item resolution with the ones from the feedback
+        $this->extensions = [
+            ...$this->feedbackItemResolution->getExtensions(),
+            ...$this->extensions,
+        ];
     }
 
     public function getFeedbackItemResolution(): FeedbackItemResolution
