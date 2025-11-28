@@ -21,6 +21,8 @@ class FeedbackItemResolution
         protected string $code,
         /** @var array<string|int|float|bool> */
         protected array $messageParams = [],
+        /** @var array<string,mixed> */
+        protected array $extensions = [],
     ) {
     }
 
@@ -35,6 +37,14 @@ class FeedbackItemResolution
     public function getCode(): string
     {
         return $this->code;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getExtensions(): array
+    {
+        return $this->extensions;
     }
 
     /**

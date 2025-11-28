@@ -23,11 +23,14 @@ class FeedbackItemResolution extends UpstreamFeedbackItemResolution
          * @see https://github.com/graphql/graphql-spec/issues/893
          */
         protected array $causes = [],
+        /** @var array<string,mixed> */
+        array $extensions = [],
     ) {
         parent::__construct(
             $feedbackProviderServiceClass,
             $code,
             $messageParams,
+            $extensions,
         );
     }
 
@@ -38,6 +41,7 @@ class FeedbackItemResolution extends UpstreamFeedbackItemResolution
             $upstreamFeedbackItemResolution->getFeedbackProviderServiceClass(),
             $upstreamFeedbackItemResolution->getCode(),
             $upstreamFeedbackItemResolution->getMessageParams(),
+            $upstreamFeedbackItemResolution->getExtensions(),
         );
     }
 
