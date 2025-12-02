@@ -18,7 +18,6 @@ use PoP\Root\Services\StandaloneServiceTrait;
 use WP_Error;
 
 use function wp_insert_post;
-use function serialize_blocks;
 use function wp_insert_term;
 
 class PluginDataSetupService implements PluginDataSetupServiceInterface
