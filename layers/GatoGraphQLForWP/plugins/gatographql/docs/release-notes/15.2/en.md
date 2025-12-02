@@ -21,3 +21,4 @@
 - Errors inside nested directives not passing the fields upwards when `nestErrorsInMetaDirectives` is false ([#3226](https://github.com/GatoGraphQL/GatoGraphQL/pull/3226))
 - The link on the `wpAdminEditURL` field to print `&` as `&` (not `&amp`) ([#3227](https://github.com/GatoGraphQL/GatoGraphQL/pull/3227))
 - "Undefined array key" warning ([#3239](https://github.com/GatoGraphQL/GatoGraphQL/pull/3239))
+- Issue in WordPress 6.9 where "\\" in blocks is not serialized properly (`v15.2.1`) ([#3240](https://github.com/GatoGraphQL/GatoGraphQL/pull/3240))
