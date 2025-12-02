@@ -74,7 +74,7 @@ class PluginDataSetupService implements PluginDataSetupServiceInterface
             'post_name' => $slug,
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             'post_title' => $title,
-            'post_content' => serialize_blocks(BlockUtils::addInnerContentToBlockAttrs($blockDataItems))
+            'post_content' => BlockUtils::serializeBlocksContent($blockDataItems)
         ]);
         if ($schemaConfigurationCustomPostID === 0) {
             return null;
