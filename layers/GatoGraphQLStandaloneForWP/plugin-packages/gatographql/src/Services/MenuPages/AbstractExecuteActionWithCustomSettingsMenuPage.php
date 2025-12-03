@@ -45,6 +45,11 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             '_wp_http_referer',
             'action',
             'action2',
+            
+            // When filtering entries, if this input is present in the request, the bulk action will not be executed
+            'filter_action',
+            'bulk_action',
+            
             self::FORM_ORIGIN,
         ];
         $inputNamesPattern = implode('|', array_map('preg_quote', $inputNamesToRemove));
@@ -56,9 +61,6 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
 
         /** @var string */
         $bulkActionOriginURL = App::request(Params::BULK_ACTION_ORIGIN_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_URL) ?? '';
-        if ($bulkActionOriginURL) {
-            $bulkActionOriginURL = rawurldecode($bulkActionOriginURL);
-        }
 
         /** @var string */
         $originRequestParamsAsString = App::request(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? App::query(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? '';
@@ -67,6 +69,11 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         }
 
         $originRequestParams = GeneralUtils::getURLQueryParams($originRequestParamsAsString);
+
+        // When filtering entries, if this input is present in the request, the bulk action will not be executed
+        unset($originRequestParams['filter_action']);
+        unset($originRequestParams['bulk_action']);
+        
         $bulkActionSelectedIdsString = App::request(Params::BULK_ACTION_SELECTED_IDS) ?? App::query(Params::BULK_ACTION_SELECTED_IDS) ?? '';
         $bulkActionSelectedIds = empty($bulkActionSelectedIdsString)
             ? []
