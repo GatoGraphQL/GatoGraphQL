@@ -7,3 +7,4 @@
 ## Improvements
 
 - Pass extensions to the response error via FeedbackItemResolution ([#3240](https://github.com/GatoGraphQL/GatoGraphQL/pull/3240))
+- Allow to execute custom settings after filtering posts ([#3242](https://github.com/GatoGraphQL/GatoGraphQL/pull/3242))
