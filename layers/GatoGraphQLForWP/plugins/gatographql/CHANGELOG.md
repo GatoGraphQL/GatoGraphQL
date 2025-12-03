@@ -14,6 +14,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Pass extensions to the response error via FeedbackItemResolution (#3240)
 
+## 15.2.1 - 03/12/2025
+
+### Fixed
+
+- Issue in WordPress 6.9 where "\\" in blocks is not serialized properly (#3240)
+
 ## 15.2.0 - 26/11/2025
 
 ### Added

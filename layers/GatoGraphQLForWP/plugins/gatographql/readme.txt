@@ -3,7 +3,7 @@ Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
 Requires at least: 6.1
 Tested up to: 6.9
-Stable tag: 15.2.0
+Stable tag: 15.2.1
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -225,6 +225,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 15.3.0 =
 * Added - MetaNamespacer service (#3241)
 * Pass extensions to the response error via FeedbackItemResolution (#3240)
+
+= 15.2.1 =
+* Fixed - Issue in WordPress 6.9 where "\\" in blocks is not serialized properly (#3240)
 
 = 15.2.0 =
 * Added - Field `_urlToCustomPostID` to get the custom post ID from a URL (#3229)
