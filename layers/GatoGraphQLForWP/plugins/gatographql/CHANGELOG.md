@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Pass extensions to the response error via FeedbackItemResolution (#3240)
+- Allow to execute Custom Settings bulk action after filtering posts (for standalone plugins) (#3242)
 
 ## 15.2.1 - 03/12/2025
 
