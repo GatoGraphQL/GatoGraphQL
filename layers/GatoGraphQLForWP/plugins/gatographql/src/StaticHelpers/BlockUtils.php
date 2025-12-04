@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
-use function get_bloginfo;
 use function serialize_blocks;
 use function version_compare;
 
@@ -58,8 +57,10 @@ class BlockUtils
         /**
          * Bug in WordPress 6.9: All "\\" characters are encoded as "\u005c" during JSON encoding
          * in serialize_blocks. Fix by converting them back to "\\".
+         *
+         * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
          */
-        if (version_compare(get_bloginfo('version'), '6.9', '>=')) {
+        if (version_compare($GLOBALS['wp_version'], '6.9', '>=')) {
             $serializedContent = str_replace('\\u005c', '\\\\', $serializedContent);
         }
 
