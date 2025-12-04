@@ -54,7 +54,7 @@ class BlockUtils
     public static function serializeBlocksContent(array $blockDataItems): string
     {
         $serializedContent = serialize_blocks(self::addInnerContentToBlockAttrs($blockDataItems));
-        
+
         /**
          * Bug in WordPress 6.9: All "\\" characters are encoded as "\u005c" during JSON encoding
          * in serialize_blocks. Fix by converting them back to "\\".
@@ -62,7 +62,7 @@ class BlockUtils
         if (version_compare(get_bloginfo('version'), '6.9', '>=')) {
             $serializedContent = str_replace('\\u005c', '\\\\', $serializedContent);
         }
-        
+
         return $serializedContent;
     }
 }
