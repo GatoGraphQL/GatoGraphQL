@@ -13,17 +13,16 @@ class FeedbackItemResolution extends UpstreamFeedbackItemResolution
      * @phpstan-param class-string<FeedbackItemProviderInterface> $feedbackProviderServiceClass
      * @param array<string|int|float|bool> $messageParams
      * @param array<FeedbackItemResolution|SchemaFeedbackInterface|ObjectResolutionFeedbackInterface> $causes
+     * @param array<string,mixed> $extensions
      */
     public function __construct(
         string $feedbackProviderServiceClass,
         string $code,
-        /** @var array<string|int|float|bool> */
         array $messageParams = [],
         /**
          * @see https://github.com/graphql/graphql-spec/issues/893
          */
         protected array $causes = [],
-        /** @var array<string,mixed> */
         array $extensions = [],
     ) {
         parent::__construct(
