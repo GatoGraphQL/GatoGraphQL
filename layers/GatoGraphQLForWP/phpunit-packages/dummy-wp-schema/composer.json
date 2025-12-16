@@ -184,7 +184,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-wp-schema/posts": "^15.3"
+        "pop-wp-schema/posts": "^15.4"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
@@ -214,7 +214,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "15.3-dev"
+            "dev-master": "15.4-dev"
         }
     },
     "config": {
