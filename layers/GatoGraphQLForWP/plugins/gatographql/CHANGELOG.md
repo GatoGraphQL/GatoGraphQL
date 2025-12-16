@@ -4,6 +4,17 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 15.3.0 - 16/12/2025
+
+### Added
+
+- MetaNamespacer service (#3241)
+
+### Improvements
+
+- Pass extensions to the response error via FeedbackItemResolution (#3240)
+- Allow to execute Custom Settings bulk action after filtering posts (for standalone plugins) (#3242)
+
 ## 15.2.1 - 03/12/2025
 
 ### Fixed
