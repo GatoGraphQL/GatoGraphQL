@@ -45,7 +45,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E6 => $this->__('There is no menu with ID \'%s\'', 'menu-mutations'),
             self::E7 => $this->__('There is no menu with slug \'%s\'', 'menu-mutations'),
             self::E8 => $this->__('You don\'t have permission to edit menu with id \'%s\'', 'menu-mutations'),
-            self::E9 => $this->__('You don\'t have permission to edit menus', 'polylang-mutations'),
+            self::E9 => $this->__('You don\'t have permission to edit menus', 'menu-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }
