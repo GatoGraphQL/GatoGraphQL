@@ -62,7 +62,6 @@ class CreateMenuMutationResolver extends AbstractCreateOrUpdateMenuMutationResol
         array $menuData,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int|null {
-        /** @var stdClass */
         return $this->getMenuTypeMutationAPI()->createMenu($menuData);
     }
 
