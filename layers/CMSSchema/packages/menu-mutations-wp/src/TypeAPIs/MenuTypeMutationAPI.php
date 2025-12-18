@@ -60,7 +60,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         $menuName = trim($menuName);
         if ($menuName === '') {
             throw new MenuCRUDMutationException(
-                $this->__('The menu title cannot be empty', 'menu-mutations')
+                $this->__('The menu name cannot be empty', 'menu-mutations')
             );
         }
         $menuName = sanitize_text_field($menuName);
@@ -103,11 +103,11 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
          */
         $termArgs = [];
 
-        $title = $menuData['title'] ?? null;
-        if ($title !== null) {
-            $title = trim((string) $title);
-            if ($title !== '') {
-                $termArgs['name'] = sanitize_text_field($title);
+        $name = $menuData['name'] ?? null;
+        if ($name !== null) {
+            $name = trim((string) $name);
+            if ($name !== '') {
+                $termArgs['name'] = sanitize_text_field($name);
             }
         }
 
