@@ -13,7 +13,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     {
         $this->getNameResolver()->implementNames([
             LooseContractSet::NAME_CREATE_MENUS_CAPABILITY => 'upload_files',
-            LooseContractSet::NAME_CREATE_MENUS_FOR_OTHER_USERS_CAPABILITY => 'edit_others_posts',
         ]);
     }
 }

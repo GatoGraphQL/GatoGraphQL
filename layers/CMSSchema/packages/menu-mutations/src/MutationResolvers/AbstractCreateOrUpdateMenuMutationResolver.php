@@ -178,25 +178,6 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
                         $fieldDataAccessor->getField(),
                     )
                 );
-            } elseif ($authorID !== null && $authorID !== $currentUserID) {
-                // Validate the logged-in user has the capability to create menus for other people
-                $createMenusForOtherUsersCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_CREATE_MENUS_FOR_OTHER_USERS_CAPABILITY);
-                if (
-                    !$this->getUserRoleTypeAPI()->userCan(
-                        $currentUserID,
-                        $createMenusForOtherUsersCapability
-                    )
-                ) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                MutationErrorFeedbackItemProvider::class,
-                                MutationErrorFeedbackItemProvider::E4,
-                            ),
-                            $fieldDataAccessor->getField(),
-                        )
-                    );
-                }
             }
 
             // If providing an existing menu, check that it exists

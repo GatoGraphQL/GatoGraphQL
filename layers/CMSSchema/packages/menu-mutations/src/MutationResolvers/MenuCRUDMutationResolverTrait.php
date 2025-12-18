@@ -10,7 +10,6 @@ use PoPCMSSchema\MenuMutations\ObjectModels\LoggedInUserHasNoPermissionToEditMen
 use PoPCMSSchema\MenuMutations\ObjectModels\MenuDoesNotExistErrorPayload;
 use PoPCMSSchema\MenuMutations\ObjectModels\UserDoesNotExistErrorPayload;
 use PoPCMSSchema\MenuMutations\ObjectModels\UserHasNoPermissionToCreateMenusErrorPayload;
-use PoPCMSSchema\MenuMutations\ObjectModels\UserHasNoPermissionToCreateMenusForOtherUsersErrorPayload;
 use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
@@ -90,12 +89,6 @@ trait MenuCRUDMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new UserHasNoPermissionToCreateMenusErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E4,
-            ] => new UserHasNoPermissionToCreateMenusForOtherUsersErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
