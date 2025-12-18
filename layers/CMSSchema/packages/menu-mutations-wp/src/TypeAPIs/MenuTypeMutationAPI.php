@@ -12,8 +12,11 @@ use WP_Error;
 use function get_taxonomy;
 use function get_term;
 use function is_wp_error;
+use function sanitize_text_field;
+use function sanitize_title;
 use function user_can;
-use function wp_slash;
+use function wp_insert_term;
+use function wp_update_term;
 
 class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutationAPIInterface
 {
@@ -25,17 +28,17 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         string|int $menuID,
         array $menuData,
     ): void {
-        $menuData = $this->convertMenuCreationArgs($menuData);
-        $menuData['ID'] = $menuID;
+        $termArgs = $this->convertMenuCreationArgs($menuData);
 
-        $menuIDOrError = wp_update_post(
-            wp_slash($menuData), // @phpstan-ignore-line
-            true
+        $termIDOrError = wp_update_term(
+            (int) $menuID,
+            'nav_menu',
+            $termArgs,
         );
 
-        if (is_wp_error($menuIDOrError)) {
+        if (is_wp_error($termIDOrError)) {
             /** @var WP_Error */
-            $wpError = $menuIDOrError;
+            $wpError = $termIDOrError;
             throw new MenuCRUDMutationException(
                 $wpError->get_error_message()
             );
@@ -51,9 +54,44 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         string $filename,
         array $menuData,
     ): string|int {
-        
-        // @todo Implement this method
-        return 0;
+        /**
+         * `$body` and `$filename` are legacy inputs from when this mutation
+         * was used to upload media. For menus, we only need the term data.
+         */
+        $termArgs = $this->convertMenuCreationArgs($menuData);
+
+        $menuName = $termArgs['name'] ?? '';
+        if ($menuName === '') {
+            $menuName = (string) pathinfo($filename, PATHINFO_FILENAME);
+        }
+        $menuName = trim($menuName);
+        if ($menuName === '') {
+            throw new MenuCRUDMutationException(
+                $this->__('The menu title cannot be empty', 'menu-mutations')
+            );
+        }
+        $menuName = sanitize_text_field($menuName);
+
+        // `wp_insert_term` expects the term name separately from the args.
+        unset($termArgs['name']);
+
+        $termOrError = wp_insert_term(
+            $menuName,
+            'nav_menu',
+            $termArgs,
+        );
+
+        if (is_wp_error($termOrError)) {
+            /** @var WP_Error */
+            $wpError = $termOrError;
+            throw new MenuCRUDMutationException(
+                $wpError->get_error_message()
+            );
+        }
+
+        /** @var array{term_id:int,term_taxonomy_id:int} $termData */
+        $termData = $termOrError;
+        return $termData['term_id'];
     }
 
     /**
@@ -62,47 +100,48 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
      */
     protected function convertMenuCreationArgs(array $menuData): array
     {
-        if (isset($menuData['authorID'])) {
-            $menuData['post_author'] = $menuData['authorID'];
-            unset($menuData['authorID']);
+        /**
+         * Nav menus are stored as terms in the `nav_menu` taxonomy.
+         *
+         * Map the mutation input properties to the supported term args.
+         *
+         * @see wp_insert_term()
+         * @see wp_update_term()
+         */
+        $termArgs = [];
+
+        $title = $menuData['title'] ?? null;
+        if ($title !== null) {
+            $title = trim((string) $title);
+            if ($title !== '') {
+                $termArgs['name'] = sanitize_text_field($title);
+            }
         }
-        if (isset($menuData['title'])) {
-            $menuData['post_title'] = $menuData['title'];
-            unset($menuData['title']);
+
+        $slug = $menuData['slug'] ?? null;
+        if ($slug !== null) {
+            $slug = trim((string) $slug);
+            if ($slug !== '') {
+                $termArgs['slug'] = sanitize_title($slug);
+            }
         }
-        if (isset($menuData['slug'])) {
-            $menuData['post_name'] = $menuData['slug'];
-            unset($menuData['slug']);
+
+        /**
+         * Menus only have a single `description` field; if `description` is not
+         * provided, use `caption` as a fallback (legacy from the media mutation).
+         */
+        $description = $menuData['description'] ?? null;
+        if ($description === null) {
+            $description = $menuData['caption'] ?? null;
         }
-        if (isset($menuData['caption'])) {
-            $menuData['post_excerpt'] = $menuData['caption'];
-            unset($menuData['caption']);
+        if ($description !== null) {
+            $description = (string) $description;
+            if ($description !== '') {
+                $termArgs['description'] = $description;
+            }
         }
-        if (isset($menuData['description'])) {
-            $menuData['post_content'] = $menuData['description'];
-            unset($menuData['description']);
-        }
-        if (isset($menuData['mimeType'])) {
-            $menuData['post_mime_type'] = $menuData['mimeType'];
-            unset($menuData['mimeType']);
-        }
-        if (isset($menuData['date'])) {
-            $menuData['post_date'] = $menuData['date'];
-            unset($menuData['date']);
-        }
-        if (isset($menuData['gmtDate'])) {
-            $menuData['post_date_gmt'] = $menuData['gmtDate'];
-            unset($menuData['gmtDate']);
-        }
-        if (isset($menuData['customPostID'])) {
-            $menuData['post_parent'] = $menuData['customPostID'];
-            unset($menuData['customPostID']);
-        } elseif (array_key_exists('customPostID', $menuData)) {
-            // `customPostID` = `null` => Set as `0`
-            $menuData['post_parent'] = 0;
-            unset($menuData['customPostID']);
-        }
-        return $menuData;
+
+        return $termArgs;
     }
 
     public function canUserEditMenus(
