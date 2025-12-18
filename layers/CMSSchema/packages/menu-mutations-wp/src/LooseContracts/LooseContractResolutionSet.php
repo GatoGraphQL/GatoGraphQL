@@ -12,8 +12,8 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         $this->getNameResolver()->implementNames([
-            LooseContractSet::NAME_UPLOAD_FILES_CAPABILITY => 'upload_files',
-            LooseContractSet::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY => 'edit_others_posts',
+            LooseContractSet::NAME_CREATE_MENUS_CAPABILITY => 'upload_files',
+            LooseContractSet::NAME_CREATE_MENUS_FOR_OTHER_USERS_CAPABILITY => 'edit_others_posts',
         ]);
     }
 }

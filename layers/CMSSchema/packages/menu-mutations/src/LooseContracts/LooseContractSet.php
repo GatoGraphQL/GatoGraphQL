@@ -8,16 +8,16 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class LooseContractSet extends AbstractLooseContractSet
 {
-    public final const NAME_UPLOAD_FILES_CAPABILITY = 'popcms:capability:uploadFiles';
-    public final const NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY = 'popcms:capability:uploadFilesForOtherUsers';
+    public final const NAME_CREATE_MENUS_CAPABILITY = 'popcms:capability:uploadFiles';
+    public final const NAME_CREATE_MENUS_FOR_OTHER_USERS_CAPABILITY = 'popcms:capability:uploadFilesForOtherUsers';
     /**
      * @return string[]
      */
     public function getRequiredNames(): array
     {
         return [
-            self::NAME_UPLOAD_FILES_CAPABILITY,
-            self::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY,
+            self::NAME_CREATE_MENUS_CAPABILITY,
+            self::NAME_CREATE_MENUS_FOR_OTHER_USERS_CAPABILITY,
         ];
     }
 }
