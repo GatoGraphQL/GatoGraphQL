@@ -11,7 +11,6 @@ use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use WP_Error;
-use WP_Term;
 
 use function esc_url_raw;
 use function get_taxonomy;
@@ -466,7 +465,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         string|int $userID
     ): bool {
         $navMenuTaxonomy = get_taxonomy('nav_menu');
-        if ($navMenuTaxonomy === null) {
+        if (!$navMenuTaxonomy) {
             return false;
         }
 
@@ -486,7 +485,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         if (
             $menuTerm === null
             || is_wp_error($menuTerm)
-            || !($menuTerm instanceof WP_Term)
+            // || !($menuTerm instanceof WP_Term)
             || $menuTerm->taxonomy !== 'nav_menu'
         ) {
             return false;
