@@ -45,29 +45,6 @@ trait MenuCRUDMutationResolverTrait
         }
     }
 
-    protected function validateMenuBySlugExists(
-        string $menuSlug,
-        string $fieldInputName,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        if (!$this->getMenuTypeAPI()->menuBySlugExists($menuSlug)) {
-            $field = $fieldDataAccessor->getField();
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E7,
-                        [
-                            $menuSlug,
-                        ]
-                    ),
-                    $field->getArgument($fieldInputName) ?? $field,
-                )
-            );
-        }
-    }
-
     public function createOrUpdateMenuErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ?ErrorPayloadInterface {
