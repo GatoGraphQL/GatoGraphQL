@@ -258,6 +258,9 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              */
             if (
                 $inputFieldTypeResolver instanceof InputObjectTypeResolverInterface
+                // If an input includes itself (eg: MenuItemInputObjectTypeResolver),
+                // then can't initialize or it generates an infinite loop
+                && get_class($inputFieldTypeResolver) !== get_class($this)
                 && $this->initializeInputFieldInputObjectValue()
             ) {
                 $inputObjectTypeResolver = $inputFieldTypeResolver;
