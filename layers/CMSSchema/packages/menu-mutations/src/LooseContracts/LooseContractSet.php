@@ -8,7 +8,7 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 
 class LooseContractSet extends AbstractLooseContractSet
 {
-    public final const NAME_CREATE_MENUS_CAPABILITY = 'popcms:capability:uploadFiles';
+    public final const NAME_CREATE_MENUS_CAPABILITY = 'popcms:capability:createMenus';
     /**
      * @return string[]
      */
