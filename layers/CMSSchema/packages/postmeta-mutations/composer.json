@@ -75,7 +75,6 @@
         "pop-cms-schema/customposts-wp": "<15.3.0",
         "pop-cms-schema/categorymeta-mutations-wp": "<15.3.0",
         "pop-cms-schema/taxonomies-wp": "<15.3.0",
-        "pop-cms-schema/media-mutations": "<15.3.0",
         "pop-cms-schema/comment-mutations-wp": "<15.3.0",
         "pop-cms-schema/custompost-categorymeta-mutations": "<15.3.0",
         "pop-cms-schema/custompostmedia-wp": "<15.3.0",
