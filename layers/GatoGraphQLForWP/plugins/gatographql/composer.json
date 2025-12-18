@@ -36,6 +36,7 @@
         "pop-cms-schema/custompostmedia-wp": "^15.4",
         "pop-cms-schema/custompostmeta-mutations-wp": "^15.4",
         "pop-cms-schema/media-mutations-wp": "^15.4",
+        "pop-cms-schema/menu-mutations-wp": "^15.4",
         "pop-cms-schema/page-mutations-wp": "^15.4",
         "pop-cms-schema/pagemedia-mutations": "^15.4",
         "pop-cms-schema/pagemeta-mutations": "^15.4",
