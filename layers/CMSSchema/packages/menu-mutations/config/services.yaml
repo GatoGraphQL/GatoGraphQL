@@ -6,6 +6,3 @@ services:
 
     PoPCMSSchema\MenuMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
-
-    PoPCMSSchema\MenuMutations\LooseContracts\:
-        resource: '../src/LooseContracts/*'

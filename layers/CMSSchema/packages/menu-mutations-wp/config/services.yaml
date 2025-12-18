@@ -6,6 +6,3 @@ services:
 
     PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface:
         class: \PoPCMSSchema\MenuMutationsWP\TypeAPIs\MenuTypeMutationAPI
-
-    PoPCMSSchema\MenuMutationsWP\LooseContracts\:
-        resource: '../src/LooseContracts/*'
