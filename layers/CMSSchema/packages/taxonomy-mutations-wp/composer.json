@@ -121,8 +121,6 @@
         "pop-wp-schema/block-content-parser": "<15.3.0",
         "pop-wp-schema/custompostmeta": "<15.3.0",
         "pop-wp-schema/media": "<15.3.0",
-        "pop-cms-schema/media-mutations-wp": "<15.3.0",
-        "pop-cms-schema/media-mutations": "<15.3.0",
         "pop-cms-schema/user-state-wp": "<15.3.0",
         "pop-cms-schema/page-mutations": "<15.3.0",
         "pop-cms-schema/page-mutations-wp": "<15.3.0",
