@@ -50,17 +50,5 @@ class Module extends AbstractModule
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
-
-        try {
-            if (class_exists(CustomPostMutationsModule::class) && App::getModule(CustomPostMutationsModule::class)->isEnabled()) {
-                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPostMutations');
-                $this->initSchemaServices(
-                    dirname(__DIR__),
-                    $skipSchema || in_array(CustomPostMutationsModule::class, $skipSchemaModuleClasses),
-                    '/ConditionalOnModule/CustomPostMutations'
-                );
-            }
-        } catch (ComponentNotExistsException) {
-        }
     }
 }
