@@ -1186,6 +1186,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 \PoPCMSSchema\MenusWP\Module::class,
                 \PoPWPSchema\Menus\Module::class,
             ],
+            MutationSchemaTypeModuleResolver::SCHEMA_MENU_MUTATIONS => [
+                \PoPCMSSchema\MenuMutations\Module::class,
+                \PoPCMSSchema\MenuMutationsWP\Module::class,
+            ],
             SchemaTypeModuleResolver::SCHEMA_SETTINGS => [
                 SettingsModule::class,
                 \PoPCMSSchema\SettingsWP\Module::class,
