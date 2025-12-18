@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\MenuMutations\ObjectTypeResolverPickers;
+
+use PoPCMSSchema\MenuMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
+use PoPCMSSchema\MenuMutations\TypeResolvers\ObjectType\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractErrorPayloadObjectTypeResolverPicker;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+
+abstract class AbstractUserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolverPicker extends AbstractErrorPayloadObjectTypeResolverPicker
+{
+    private ?UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver = null;
+
+    final protected function getUserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver(): UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver
+    {
+        if ($this->userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver === null) {
+            /** @var UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver */
+            $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver = $this->instanceManager->getInstance(UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver::class);
+            $this->userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver = $userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver;
+        }
+        return $this->userHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver;
+    }
+
+    public function getObjectTypeResolver(): ObjectTypeResolverInterface
+    {
+        return $this->getUserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolver();
+    }
+
+    protected function getTargetObjectClass(): string
+    {
+        return UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload::class;
+    }
+}

@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\MenuMutations\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
+
+    PoPCMSSchema\MenuMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
+
+    PoPCMSSchema\MenuMutations\LooseContracts\:
+        resource: '../src/LooseContracts/*'
