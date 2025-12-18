@@ -71,12 +71,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
                 $wpError->get_error_message()
             );
         }
-
-        /** @var string|null */
-        $altText = $menuData['altText'] ?? null;
-        if ($altText !== null) {
-            $this->updateImageAltText($menuID, $altText);
-        }
     }
 
     /**
@@ -321,19 +315,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
 
         $menuMetaData = \wp_generate_attachment_metadata((int) $menuID, $filename);
         wp_update_attachment_metadata((int) $menuID, $menuMetaData);
-
-        /** @var string|null */
-        $altText = $menuData['altText'] ?? null;
-        if (!empty($altText)) {
-            $this->updateImageAltText($menuID, $altText);
-        }
-    }
-
-    protected function updateImageAltText(
-        string|int $menuID,
-        string $altText,
-    ): void {
-        update_post_meta((int) $menuID, '_wp_attachment_image_alt', $altText);
     }
 
     public function canUserEditMenus(
