@@ -119,14 +119,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             }
         }
 
-        $description = $menuData['description'] ?? null;
-        if ($description !== null) {
-            $description = (string) $description;
-            if ($description !== '') {
-                $termArgs['description'] = $description;
-            }
-        }
-
         return $termArgs;
     }
 
