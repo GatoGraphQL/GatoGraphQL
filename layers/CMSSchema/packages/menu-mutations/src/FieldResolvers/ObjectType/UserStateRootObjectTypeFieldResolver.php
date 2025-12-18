@@ -6,7 +6,7 @@ namespace PoPCMSSchema\MenuMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\MenuMutations\TypeResolvers\InputObjectType\RootMyMenusFilterInputObjectTypeResolver;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
-use PoPCMSSchema\Menus\TypeResolvers\InputObjectType\MenuByOneofInputObjectTypeResolver;
+use PoPCMSSchema\Menus\TypeResolvers\InputObjectType\MenuByInputObjectTypeResolver;
 use PoPCMSSchema\Menus\TypeResolvers\InputObjectType\MenuSortInputObjectTypeResolver;
 use PoPCMSSchema\Menus\TypeResolvers\InputObjectType\RootMenuPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
@@ -34,7 +34,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?MenuTypeAPIInterface $menuTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?MenuObjectTypeResolver $menuObjectTypeResolver = null;
-    private ?MenuByOneofInputObjectTypeResolver $menuByOneofInputObjectTypeResolver = null;
+    private ?MenuByInputObjectTypeResolver $menuByInputObjectTypeResolver = null;
     private ?RootMyMenusFilterInputObjectTypeResolver $rootMyMenusFilterInputObjectTypeResolver = null;
     private ?RootMenuPaginationInputObjectTypeResolver $rootMenuPaginationInputObjectTypeResolver = null;
     private ?MenuSortInputObjectTypeResolver $menuSortInputObjectTypeResolver = null;
@@ -67,14 +67,14 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->menuObjectTypeResolver;
     }
-    final protected function getMenuByOneofInputObjectTypeResolver(): MenuByOneofInputObjectTypeResolver
+    final protected function getMenuByInputObjectTypeResolver(): MenuByInputObjectTypeResolver
     {
-        if ($this->menuByOneofInputObjectTypeResolver === null) {
-            /** @var MenuByOneofInputObjectTypeResolver */
-            $menuByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(MenuByOneofInputObjectTypeResolver::class);
-            $this->menuByOneofInputObjectTypeResolver = $menuByOneofInputObjectTypeResolver;
+        if ($this->menuByInputObjectTypeResolver === null) {
+            /** @var MenuByInputObjectTypeResolver */
+            $menuByInputObjectTypeResolver = $this->instanceManager->getInstance(MenuByInputObjectTypeResolver::class);
+            $this->menuByInputObjectTypeResolver = $menuByInputObjectTypeResolver;
         }
-        return $this->menuByOneofInputObjectTypeResolver;
+        return $this->menuByInputObjectTypeResolver;
     }
     final protected function getRootMyMenusFilterInputObjectTypeResolver(): RootMyMenusFilterInputObjectTypeResolver
     {
@@ -180,7 +180,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myMenu' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getMenuByOneofInputObjectTypeResolver(),
+                    'by' => $this->getMenuByInputObjectTypeResolver(),
                 ]
             ),
             'myMenus' => array_merge(
