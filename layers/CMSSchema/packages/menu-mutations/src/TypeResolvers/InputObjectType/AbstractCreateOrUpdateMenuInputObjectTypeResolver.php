@@ -68,15 +68,8 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::AUTHOR_ID => $this->getIDScalarTypeResolver(),
-                MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::NAME => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::CAPTION => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::ALT_TEXT => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::MIME_TYPE => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::DATE => $this->getDateScalarTypeResolver(),
-                MutationInputProperties::GMT_DATE => $this->getDateScalarTypeResolver(),
             ]
         );
 
@@ -96,16 +89,8 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
     {
         $inputFieldDescription = match ($inputFieldName) {
             MutationInputProperties::ID => $this->__('Menu item ID', 'menu-mutations'),
-            MutationInputProperties::FROM => $this->__('Source for the file', 'menu-mutations'),
-            MutationInputProperties::AUTHOR_ID => $this->__('The ID of the author', 'menu-mutations'),
-            MutationInputProperties::TITLE => $this->__('Attachment title', 'menu-mutations'),
-            MutationInputProperties::SLUG => $this->__('Attachment slug', 'menu-mutations'),
-            MutationInputProperties::CAPTION => $this->__('Attachment caption', 'menu-mutations'),
-            MutationInputProperties::DESCRIPTION => $this->__('Attachment description', 'menu-mutations'),
-            MutationInputProperties::ALT_TEXT => $this->__('Image alternative information', 'menu-mutations'),
-            MutationInputProperties::MIME_TYPE => $this->__('Mime type to use for the attachment, when this information can\'t be deduced from the filename (because it has no extension)', 'menu-mutations'),
-            MutationInputProperties::DATE => $this->__('Date to use for the attachment', 'menu-mutations'),
-            MutationInputProperties::GMT_DATE => $this->__('GMT date to use for the attachment', 'menu-mutations'),
+            MutationInputProperties::NAME => $this->__('Menu name', 'menu-mutations'),
+            MutationInputProperties::SLUG => $this->__('Menu slug', 'menu-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 
@@ -124,7 +109,7 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
     {
         $inputFieldTypeModifiers = match ($inputFieldName) {
             MutationInputProperties::ID => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::FROM => SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::NAME => SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
 
