@@ -114,7 +114,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'update' => $this->__('Update the menu item', 'menu-mutations'),
+            'update' => $this->__('Update the menu', 'menu-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

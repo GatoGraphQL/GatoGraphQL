@@ -164,7 +164,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     {
         return match ($fieldName) {
             'myMenu' => $this->__('Menu item by the logged-in user on the site with a specific ID', 'menu-mutations'),
-            'myMenuCount' => $this->__('Number of menu items by the logged-in user on the site', 'menu-mutations'),
+            'myMenuCount' => $this->__('Number of menus by the logged-in user on the site', 'menu-mutations'),
             'myMenus' => $this->__('Menu items by the logged-in user on the site', 'menu-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };

@@ -29,7 +29,7 @@ class MenuDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPayloa
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested menu item does not exist"', 'custompostmenu-mutations');
+        return $this->__('Error payload for: "The requested menu does not exist"', 'custompostmenu-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

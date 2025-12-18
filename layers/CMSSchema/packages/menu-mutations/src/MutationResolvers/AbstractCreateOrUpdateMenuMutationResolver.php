@@ -91,7 +91,7 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         if ($this->addMenuInputField()) {
-            // If updating a menu item, check that it exists
+            // If updating a menu, check that it exists
             /** @var string|int */
             $menuID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
             $this->validateMenuByIDExists(
@@ -199,7 +199,7 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
                 }
             }
 
-            // If providing an existing menu item, check that it exists
+            // If providing an existing menu, check that it exists
             /** @var stdClass */
             $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
 

@@ -29,7 +29,7 @@ class LoggedInUserHasNoEditingMenuCapabilityErrorPayloadObjectTypeResolver exten
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user cannot edit menu items"', 'polylang-mutations');
+        return $this->__('Error payload for: "The user cannot edit menus"', 'polylang-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

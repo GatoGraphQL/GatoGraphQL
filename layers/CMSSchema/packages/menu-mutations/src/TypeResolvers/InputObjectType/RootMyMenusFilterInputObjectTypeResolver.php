@@ -15,6 +15,6 @@ class RootMyMenusFilterInputObjectTypeResolver extends AbstractMenusFilterInputO
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter the logged-in user\'s menu items', 'menu-mutations');
+        return $this->__('Input to filter the logged-in user\'s menus', 'menu-mutations');
     }
 }
