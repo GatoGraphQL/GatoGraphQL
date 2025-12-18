@@ -136,57 +136,6 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
             );
         }
 
-        if ($this->canUploadAttachment()) {
-            $currentUserID = App::getState('current-user-id');
-
-            // Validate the user has the needed capability to create menus
-            $createMenusCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_CREATE_MENUS_CAPABILITY);
-            if (
-                !$this->getUserRoleTypeAPI()->userCan(
-                    $currentUserID,
-                    $createMenusCapability
-                )
-            ) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E2,
-                        ),
-                        $fieldDataAccessor->getField(),
-                    )
-                );
-            }
-
-            // If providing an existing menu, check that it exists
-            /** @var stdClass */
-            $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
-
-            if (isset($from->{MutationInputProperties::MENU_BY})) {
-                /** @var stdClass */
-                $menuBy = $from->{MutationInputProperties::MENU_BY};
-                if (isset($menuBy->{MutationInputProperties::ID})) {
-                    /** @var string|int */
-                    $menuID = $menuBy->{MutationInputProperties::ID};
-                    $this->validateMenuByIDExists(
-                        $menuID,
-                        MutationInputProperties::FROM,
-                        $fieldDataAccessor,
-                        $objectTypeFieldResolutionFeedbackStore,
-                    );
-                } elseif (isset($menuBy->{MutationInputProperties::SLUG})) {
-                    /** @var string */
-                    $menuSlug = $menuBy->{MutationInputProperties::SLUG};
-                    $this->validateMenuBySlugExists(
-                        $menuSlug,
-                        MutationInputProperties::FROM,
-                        $fieldDataAccessor,
-                        $objectTypeFieldResolutionFeedbackStore,
-                    );
-                }
-            }
-        }
-
         // Allow components to inject their own validations
         App::doAction(
             MenuCRUDHookNames::VALIDATE_CREATE_OR_UPDATE_MENU_ITEM,
@@ -196,8 +145,6 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
     }
 
     abstract protected function addMenuInputField(): bool;
-
-    abstract protected function canUploadAttachment(): bool;
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {

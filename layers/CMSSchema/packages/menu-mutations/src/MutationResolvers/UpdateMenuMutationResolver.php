@@ -18,11 +18,6 @@ class UpdateMenuMutationResolver extends AbstractCreateOrUpdateMenuMutationResol
         return true;
     }
 
-    protected function canUploadAttachment(): bool
-    {
-        return false;
-    }
-
     public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
