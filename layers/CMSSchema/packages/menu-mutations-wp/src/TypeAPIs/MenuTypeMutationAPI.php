@@ -54,16 +54,9 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         string $filename,
         array $menuData,
     ): string|int {
-        /**
-         * `$body` and `$filename` are legacy inputs from when this mutation
-         * was used to upload media. For menus, we only need the term data.
-         */
         $termArgs = $this->convertMenuCreationArgs($menuData);
 
         $menuName = $termArgs['name'] ?? '';
-        if ($menuName === '') {
-            $menuName = (string) pathinfo($filename, PATHINFO_FILENAME);
-        }
         $menuName = trim($menuName);
         if ($menuName === '') {
             throw new MenuCRUDMutationException(
@@ -126,14 +119,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             }
         }
 
-        /**
-         * Menus only have a single `description` field; if `description` is not
-         * provided, use `caption` as a fallback (legacy from the media mutation).
-         */
         $description = $menuData['description'] ?? null;
-        if ($description === null) {
-            $description = $menuData['caption'] ?? null;
-        }
         if ($description !== null) {
             $description = (string) $description;
             if ($description !== '') {
