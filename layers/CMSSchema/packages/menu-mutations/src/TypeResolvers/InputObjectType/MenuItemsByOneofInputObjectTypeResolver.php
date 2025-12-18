@@ -43,6 +43,11 @@ class MenuItemsByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
         ];
     }
 
+    protected function isOneInputValueMandatory(): bool
+    {
+        return false;
+    }
+
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
