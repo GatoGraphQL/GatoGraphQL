@@ -15,11 +15,6 @@ abstract class AbstractCreateMenuInputObjectTypeResolver extends AbstractCreateO
         return false;
     }
 
-    protected function canUploadAttachment(): bool
-    {
-        return true;
-    }
-
     /**
      * @return array<string,InputTypeResolverInterface>
      */

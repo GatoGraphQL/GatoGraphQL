@@ -67,9 +67,6 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
             $this->addMenuInputField() ? [
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
-            $this->canUploadAttachment() ? [
-                MutationInputProperties::FROM => $this->getCreateMenuFromOneofInputObjectTypeResolver(),
-            ] : [],
             [
                 MutationInputProperties::AUTHOR_ID => $this->getIDScalarTypeResolver(),
                 MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
@@ -94,8 +91,6 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
     }
 
     abstract protected function addMenuInputField(): bool;
-
-    abstract protected function canUploadAttachment(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
