@@ -118,12 +118,12 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         array $menuData,
         bool $replaceExistingMenuItems,
     ): void {
-        if (!array_key_exists(MutationInputProperties::MENU_ITEMS, $menuData)) {
+        if (!array_key_exists('json-items', $menuData)) {
             return;
         }
 
         $menuItemsData = $this->normalizeMenuItemsData(
-            $menuData[MutationInputProperties::MENU_ITEMS],
+            $menuData['json-items'],
         );
 
         if ($replaceExistingMenuItems) {
