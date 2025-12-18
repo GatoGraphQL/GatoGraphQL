@@ -8,6 +8,7 @@ use PoPCMSSchema\MenuMutations\Exception\MenuCRUDMutationException;
 use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
+use WP_Term;
 
 use function get_taxonomy;
 use function get_term;
@@ -146,7 +147,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         if (
             $menuTerm === null
             || is_wp_error($menuTerm)
-            || !($menuTerm instanceof \WP_Term)
+            || !($menuTerm instanceof WP_Term)
             || $menuTerm->taxonomy !== 'nav_menu'
         ) {
             return false;
