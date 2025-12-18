@@ -92,34 +92,9 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         string $filename,
         array $menuData,
     ): string|int {
-        $filename = $this->maybeAddExtensionToFilename(
-            $filename,
-            $menuData['mimeType'] ?? null,
-        );
-        $mimeType = $this->getFileMimeTypeOrThrowError($filename);
-
-        $uploadedFileOrError = \wp_upload_bits($filename, null, $body);
-        if ($uploadedFileOrError['error']) {
-            /** @var string */
-            $errorMessage = $uploadedFileOrError['error'];
-            throw new MenuCRUDMutationException(
-                $errorMessage
-            );
-        }
-        $uploadedFile = $uploadedFileOrError;
-
-        if (empty($menuData['title'])) {
-            $menuData['title'] = $filename;
-        }
-
-        /** @var string */
-        $file = $uploadedFile['file'];
-        return $this->createMenuFromLocalFile(
-            $file,
-            $filename,
-            $mimeType,
-            $menuData,
-        );
+        
+        // @todo Implement this method
+        return 0;
     }
 
     /**
@@ -148,89 +123,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         }
 
         return $filename . '.' . $extension;
-    }
-
-    /**
-     * @throws MenuCRUDMutationException In case of error
-     * @param array<string,mixed> $menuData
-     */
-    protected function createMenuFromLocalFile(
-        string $file,
-        string $filename,
-        string $mimeType,
-        array $menuData
-    ): string|int {
-        // @phpstan-ignore-next-line
-        require_once ABSPATH . 'wp-admin/includes/file.php';
-
-        $filesize = filesize($file);
-        if ($filesize === false) {
-            $filesize = 0;
-        }
-        $fileData = [
-            'name' => \sanitize_file_name($filename),
-            'type' => $mimeType,
-            'tmp_name' => $file,
-            'error' => 0,
-            'size' => $filesize,
-        ];
-
-        $uploadedFile = \wp_handle_sideload(
-            $fileData,
-            [
-                'test_form' => false,
-            ]
-        );
-
-        if (isset($uploadedFile['error'])) {
-            /** @var string */
-            $errorMessage = $uploadedFile['error'];
-            throw new MenuCRUDMutationException(
-                $errorMessage
-            );
-        }
-
-        /** @var string */
-        $uploadedFilename = $uploadedFile['file'];
-
-        $customPostID = 0;
-        if (isset($menuData['customPostID'])) {
-            $customPostID = $menuData['customPostID'];
-            unset($menuData['customPostID']);
-        }
-
-        if (empty($menuData['title'])) {
-            $menuData['title'] = sanitize_file_name(basename($uploadedFilename));
-        }
-
-        $menuData['mimeType'] = $mimeType;
-
-        $menuData = $this->convertMenuCreationArgs($menuData);
-
-        $menuIDOrError = wp_insert_attachment(
-            $menuData,
-            $uploadedFilename,
-            $customPostID,
-            true
-        );
-
-        if (is_wp_error($menuIDOrError)) {
-            /** @var WP_Error */
-            $wpError = $menuIDOrError;
-            throw new MenuCRUDMutationException(
-                $wpError->get_error_message()
-            );
-        }
-
-        $menuID = $menuIDOrError;
-
-        $this->addImageMetaData(
-            $menuID,
-            $uploadedFilename,
-            $menuData,
-        );
-
-        return $menuID;
     }
 
     /**
@@ -297,24 +189,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             unset($menuData['customPostID']);
         }
         return $menuData;
-    }
-
-    /**
-     * Update the image metadata, including the dimensions
-     * to generate the thumbnails
-     *
-     * @param array<string,mixed> $menuData
-     */
-    protected function addImageMetaData(
-        string|int $menuID,
-        string $filename,
-        array $menuData
-    ): void {
-        // @phpstan-ignore-next-line
-        require_once ABSPATH . 'wp-admin/includes/image.php';
-
-        $menuMetaData = \wp_generate_attachment_metadata((int) $menuID, $filename);
-        wp_update_attachment_metadata((int) $menuID, $menuMetaData);
     }
 
     public function canUserEditMenus(
