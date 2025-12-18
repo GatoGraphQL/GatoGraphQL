@@ -11,7 +11,6 @@ use PoPCMSSchema\MenuMutations\FeedbackItemProviders\MutationErrorFeedbackItemPr
 use PoPCMSSchema\MenuMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\MenuMutations\MutationResolvers\MenuCRUDMutationResolverTrait;
 use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
-use PoPCMSSchema\Menus\Constants\InputProperties;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
@@ -96,7 +95,7 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
             $menuID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
             $this->validateMenuByIDExists(
                 $menuID,
-                InputProperties::ID,
+                MutationInputProperties::ID,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -187,18 +186,18 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
             if (isset($from->{MutationInputProperties::MENU_BY})) {
                 /** @var stdClass */
                 $menuBy = $from->{MutationInputProperties::MENU_BY};
-                if (isset($menuBy->{InputProperties::ID})) {
+                if (isset($menuBy->{MutationInputProperties::ID})) {
                     /** @var string|int */
-                    $menuID = $menuBy->{InputProperties::ID};
+                    $menuID = $menuBy->{MutationInputProperties::ID};
                     $this->validateMenuByIDExists(
                         $menuID,
                         MutationInputProperties::FROM,
                         $fieldDataAccessor,
                         $objectTypeFieldResolutionFeedbackStore,
                     );
-                } elseif (isset($menuBy->{InputProperties::SLUG})) {
+                } elseif (isset($menuBy->{MutationInputProperties::SLUG})) {
                     /** @var string */
-                    $menuSlug = $menuBy->{InputProperties::SLUG};
+                    $menuSlug = $menuBy->{MutationInputProperties::SLUG};
                     $this->validateMenuBySlugExists(
                         $menuSlug,
                         MutationInputProperties::FROM,
