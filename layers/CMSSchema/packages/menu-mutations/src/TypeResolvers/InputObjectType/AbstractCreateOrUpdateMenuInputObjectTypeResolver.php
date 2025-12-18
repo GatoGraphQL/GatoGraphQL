@@ -6,7 +6,6 @@ namespace PoPCMSSchema\MenuMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MenuMutations\Constants\MenuCRUDHookNames;
 use PoPCMSSchema\MenuMutations\Constants\MutationInputProperties;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateScalarTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
@@ -18,8 +17,6 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?CreateMenuFromOneofInputObjectTypeResolver $createMenuFromOneofInputObjectTypeResolver = null;
-    private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -38,24 +35,6 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final protected function getCreateMenuFromOneofInputObjectTypeResolver(): CreateMenuFromOneofInputObjectTypeResolver
-    {
-        if ($this->createMenuFromOneofInputObjectTypeResolver === null) {
-            /** @var CreateMenuFromOneofInputObjectTypeResolver */
-            $createMenuFromOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CreateMenuFromOneofInputObjectTypeResolver::class);
-            $this->createMenuFromOneofInputObjectTypeResolver = $createMenuFromOneofInputObjectTypeResolver;
-        }
-        return $this->createMenuFromOneofInputObjectTypeResolver;
-    }
-    final protected function getDateScalarTypeResolver(): DateScalarTypeResolver
-    {
-        if ($this->dateScalarTypeResolver === null) {
-            /** @var DateScalarTypeResolver */
-            $dateScalarTypeResolver = $this->instanceManager->getInstance(DateScalarTypeResolver::class);
-            $this->dateScalarTypeResolver = $dateScalarTypeResolver;
-        }
-        return $this->dateScalarTypeResolver;
     }
 
     /**
