@@ -21,11 +21,6 @@ interface MenuTypeMutationAPIInterface
      * @param string|null $filename Override the filename from the URL, or pass `null` to use filename from URL
      * @param array<string,mixed> $menuData
      */
-    public function createMenuFromURL(
-        string $url,
-        ?string $filename,
-        array $menuData,
-    ): string|int;
     /**
      * @throws MenuCRUDMutationException In case of error
      * @param array<string,mixed> $menuData

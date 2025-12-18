@@ -12,7 +12,6 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 class CreateMenuFromOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
     private ?CreateMenuFromContentInputObjectTypeResolver $createMenuFromContentInputObjectTypeResolver = null;
-    private ?CreateMenuFromURLInputObjectTypeResolver $createMenuFromURLInputObjectTypeResolver = null;
     private ?MenuByOneofInputObjectTypeResolver $menuByOneofInputObjectTypeResolver = null;
 
     final protected function getCreateMenuFromContentInputObjectTypeResolver(): CreateMenuFromContentInputObjectTypeResolver
@@ -23,15 +22,6 @@ class CreateMenuFromOneofInputObjectTypeResolver extends AbstractOneofInputObjec
             $this->createMenuFromContentInputObjectTypeResolver = $createMenuFromContentInputObjectTypeResolver;
         }
         return $this->createMenuFromContentInputObjectTypeResolver;
-    }
-    final protected function getCreateMenuFromURLInputObjectTypeResolver(): CreateMenuFromURLInputObjectTypeResolver
-    {
-        if ($this->createMenuFromURLInputObjectTypeResolver === null) {
-            /** @var CreateMenuFromURLInputObjectTypeResolver */
-            $createMenuFromURLInputObjectTypeResolver = $this->instanceManager->getInstance(CreateMenuFromURLInputObjectTypeResolver::class);
-            $this->createMenuFromURLInputObjectTypeResolver = $createMenuFromURLInputObjectTypeResolver;
-        }
-        return $this->createMenuFromURLInputObjectTypeResolver;
     }
     final protected function getMenuByOneofInputObjectTypeResolver(): MenuByOneofInputObjectTypeResolver
     {
@@ -55,7 +45,6 @@ class CreateMenuFromOneofInputObjectTypeResolver extends AbstractOneofInputObjec
     {
         return [
             MutationInputProperties::MENU_BY => $this->getMenuByOneofInputObjectTypeResolver(),
-            MutationInputProperties::URL => $this->getCreateMenuFromURLInputObjectTypeResolver(),
             MutationInputProperties::CONTENTS => $this->getCreateMenuFromContentInputObjectTypeResolver(),
         ];
     }
@@ -64,7 +53,6 @@ class CreateMenuFromOneofInputObjectTypeResolver extends AbstractOneofInputObjec
     {
         return match ($inputFieldName) {
             MutationInputProperties::MENU_BY => $this->__('Use the attachment from an existing menu', 'menu-mutations'),
-            MutationInputProperties::URL => $this->__('Upload the attachment from a URL', 'menu-mutations'),
             MutationInputProperties::CONTENTS => $this->__('Create the attachment by passing the file name and body', 'menu-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };

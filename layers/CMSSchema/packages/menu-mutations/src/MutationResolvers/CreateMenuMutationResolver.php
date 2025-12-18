@@ -72,16 +72,6 @@ class CreateMenuMutationResolver extends AbstractCreateOrUpdateMenuMutationResol
         /** @var stdClass */
         $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
 
-        if (isset($from->{MutationInputProperties::URL})) {
-            /** @var stdClass */
-            $url = $from->{MutationInputProperties::URL};
-            return $this->getMenuTypeMutationAPI()->createMenuFromURL(
-                $url->{MutationInputProperties::SOURCE},
-                $url->{MutationInputProperties::FILENAME} ?? null,
-                $menuData,
-            );
-        }
-
         if (isset($from->{MutationInputProperties::MENU_BY})) {
             /** @var string|int|null */
             $menuID = null;
