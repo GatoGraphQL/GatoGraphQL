@@ -9,7 +9,6 @@ use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 
-use function get_allowed_mime_types;
 use function get_taxonomy;
 use function get_term;
 use function is_wp_error;
