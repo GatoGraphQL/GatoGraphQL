@@ -13,6 +13,6 @@ class RootCreateMenuInputObjectTypeResolver extends AbstractCreateMenuInputObjec
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to upload an attachment', 'menu-mutations');
+        return $this->__('Input to create a menu', 'menu-mutations');
     }
 }
