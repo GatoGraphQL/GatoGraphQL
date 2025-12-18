@@ -6,7 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 15.4.0 - DATE
 
+### Fixed
 
+- Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)
 
 ## 15.3.0 - 16/12/2025
 
