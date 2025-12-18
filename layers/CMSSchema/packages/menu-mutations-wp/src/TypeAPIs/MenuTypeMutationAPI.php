@@ -90,7 +90,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
      * @throws MenuCRUDMutationException In case of error
      * @param array<string,mixed> $menuData
      */
-    public function createMenuFromContents(
+    public function createMenu(
         string $body,
         string $filename,
         array $menuData,

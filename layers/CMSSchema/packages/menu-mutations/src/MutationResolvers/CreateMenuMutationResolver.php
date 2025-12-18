@@ -75,7 +75,7 @@ class CreateMenuMutationResolver extends AbstractCreateOrUpdateMenuMutationResol
         /** @var stdClass */
         $contents = $from->{MutationInputProperties::CONTENTS};
 
-        return $this->getMenuTypeMutationAPI()->createMenuFromContents(
+        return $this->getMenuTypeMutationAPI()->createMenu(
             $contents->{MutationInputProperties::BODY},
             $contents->{MutationInputProperties::FILENAME},
             $menuData,
