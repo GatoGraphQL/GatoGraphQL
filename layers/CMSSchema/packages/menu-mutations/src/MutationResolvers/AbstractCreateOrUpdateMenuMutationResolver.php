@@ -125,27 +125,6 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
             return;
         }
 
-        /** @var int|string|null */
-        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
-
-        if ($authorID !== null) {
-            // If providing the author, check that the user exists
-            if ($this->getUserTypeAPI()->getUserByID($authorID) === null) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E5,
-                            [
-                                $authorID,
-                            ]
-                        ),
-                        $field,
-                    )
-                );
-            }
-        }
-
         // Validate the user can edit the attachment
         if ($this->addMenuInputField()) {
             /** @var string|int */

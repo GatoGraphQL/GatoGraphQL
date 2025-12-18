@@ -8,7 +8,6 @@ use PoPCMSSchema\MenuMutations\FeedbackItemProviders\MutationErrorFeedbackItemPr
 use PoPCMSSchema\MenuMutations\ObjectModels\LoggedInUserHasNoEditingMenuCapabilityErrorPayload;
 use PoPCMSSchema\MenuMutations\ObjectModels\LoggedInUserHasNoPermissionToEditMenuErrorPayload;
 use PoPCMSSchema\MenuMutations\ObjectModels\MenuDoesNotExistErrorPayload;
-use PoPCMSSchema\MenuMutations\ObjectModels\UserDoesNotExistErrorPayload;
 use PoPCMSSchema\MenuMutations\ObjectModels\UserHasNoPermissionToCreateMenusErrorPayload;
 use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -89,12 +88,6 @@ trait MenuCRUDMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new UserHasNoPermissionToCreateMenusErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
-            ] => new UserDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
