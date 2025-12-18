@@ -222,6 +222,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 15.4.0 =
+* Fixed - Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)
+
 = 15.3.0 =
 * Added - MetaNamespacer service (#3241)
 * Pass extensions to the response error via FeedbackItemResolution (#3240)
