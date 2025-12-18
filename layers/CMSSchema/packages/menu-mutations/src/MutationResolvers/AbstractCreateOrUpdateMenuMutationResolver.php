@@ -184,9 +184,9 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
             /** @var stdClass */
             $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
 
-            if (isset($from->{MutationInputProperties::MENUITEM_BY})) {
+            if (isset($from->{MutationInputProperties::MENU_BY})) {
                 /** @var stdClass */
-                $menuBy = $from->{MutationInputProperties::MENUITEM_BY};
+                $menuBy = $from->{MutationInputProperties::MENU_BY};
                 if (isset($menuBy->{InputProperties::ID})) {
                     /** @var string|int */
                     $menuID = $menuBy->{InputProperties::ID};

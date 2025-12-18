@@ -20,7 +20,7 @@ class MutationInputProperties
 
     public final const ID = 'id';
 
-    public final const MENUITEM_BY = 'menuBy';
+    public final const MENU_BY = 'menuBy';
     public final const URL = 'url';
     public final const CONTENTS = 'contents';
 

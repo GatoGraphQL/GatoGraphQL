@@ -54,7 +54,7 @@ class CreateMenuFromOneofInputObjectTypeResolver extends AbstractOneofInputObjec
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            MutationInputProperties::MENUITEM_BY => $this->getMenuByOneofInputObjectTypeResolver(),
+            MutationInputProperties::MENU_BY => $this->getMenuByOneofInputObjectTypeResolver(),
             MutationInputProperties::URL => $this->getCreateMenuFromURLInputObjectTypeResolver(),
             MutationInputProperties::CONTENTS => $this->getCreateMenuFromContentInputObjectTypeResolver(),
         ];
@@ -63,7 +63,7 @@ class CreateMenuFromOneofInputObjectTypeResolver extends AbstractOneofInputObjec
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::MENUITEM_BY => $this->__('Use the attachment from an existing menu', 'menu-mutations'),
+            MutationInputProperties::MENU_BY => $this->__('Use the attachment from an existing menu', 'menu-mutations'),
             MutationInputProperties::URL => $this->__('Upload the attachment from a URL', 'menu-mutations'),
             MutationInputProperties::CONTENTS => $this->__('Create the attachment by passing the file name and body', 'menu-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),

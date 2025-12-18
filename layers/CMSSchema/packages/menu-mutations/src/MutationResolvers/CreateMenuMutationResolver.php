@@ -82,11 +82,11 @@ class CreateMenuMutationResolver extends AbstractCreateOrUpdateMenuMutationResol
             );
         }
 
-        if (isset($from->{MutationInputProperties::MENUITEM_BY})) {
+        if (isset($from->{MutationInputProperties::MENU_BY})) {
             /** @var string|int|null */
             $menuID = null;
             /** @var stdClass */
-            $menuBy = $from->{MutationInputProperties::MENUITEM_BY};
+            $menuBy = $from->{MutationInputProperties::MENU_BY};
             if (isset($menuBy->{InputProperties::ID})) {
                 $menuID = $menuBy->{InputProperties::ID};
             } elseif (isset($menuBy->{InputProperties::SLUG})) {
