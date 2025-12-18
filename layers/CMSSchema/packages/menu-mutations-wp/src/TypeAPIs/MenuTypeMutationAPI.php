@@ -5,33 +5,16 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MenuMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\MenuMutations\Exception\MenuCRUDMutationException;
-use PoPCMSSchema\MenuMutations\Module;
-use PoPCMSSchema\MenuMutations\ModuleConfiguration;
 use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
-use PoP\ComponentModel\App;
-use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
 
-use function add_filter;
-use function add_post_meta;
-use function download_url;
 use function get_allowed_mime_types;
-use function get_attached_file;
 use function get_taxonomy;
 use function get_term;
-use function get_post;
-use function get_post_meta;
 use function is_wp_error;
-use function remove_filter;
-use function update_attached_file;
-use function update_post_meta;
 use function user_can;
-use function wp_check_filetype;
-use function wp_get_attachment_metadata;
-use function wp_insert_attachment;
 use function wp_slash;
-use function wp_update_attachment_metadata;
 
 class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutationAPIInterface
 {
@@ -43,19 +26,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         string|int $menuID,
         array $menuData,
     ): void {
-        $mimeType = $menuData['mimeType'] ?? null;
-        if ($mimeType !== null) {
-            $mimes = get_allowed_mime_types();
-            if (!in_array($mimeType, $mimes)) {
-                throw new MenuCRUDMutationException(
-                    sprintf(
-                        $this->__('Mime type \'%s\' is not allowed', 'menu-mutations'),
-                        $mimeType
-                    )
-                );
-            }
-        }
-
         $menuData = $this->convertMenuCreationArgs($menuData);
         $menuData['ID'] = $menuID;
 
@@ -74,16 +44,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
     }
 
     /**
-     * @param array<string,mixed> $args
-     * @return array<string,mixed>
-     */
-    public function customizeHTTPRequestArgsDoNotRejectUnsafeURLs(array $args): array
-    {
-        $args['reject_unsafe_urls'] = false;
-        return $args;
-    }
-
-    /**
      * @throws MenuCRUDMutationException In case of error
      * @param array<string,mixed> $menuData
      */
@@ -95,51 +55,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         
         // @todo Implement this method
         return 0;
-    }
-
-    /**
-     * If the file doesn't contain an extension (even when we are
-     * providing the mime type), we will get an error:
-     *
-     *   > Sorry, you are not allowed to upload this file type.
-     *
-     * Then, append the extension if missing.
-     */
-    protected function maybeAddExtensionToFilename(
-        string $filename,
-        ?string $explicitMimeType,
-    ): string {
-        if ($explicitMimeType === null || $explicitMimeType === '') {
-            return $filename;
-        }
-
-        if (strrpos($filename, '.') !== false) {
-            return $filename;
-        }
-
-        $extension = \wp_get_default_extension_for_mime_type($explicitMimeType);
-        if ($extension === false) {
-            return $filename;
-        }
-
-        return $filename . '.' . $extension;
-    }
-
-    /**
-     * @throws MenuCRUDMutationException If the mime type is not allowed
-     */
-    protected function getFileMimeTypeOrThrowError(string $filename): string
-    {
-        // Get the mime type from the file, and check it's allowed
-        $mimeTypeCheck = wp_check_filetype(sanitize_file_name(basename($filename)));
-        if (!$mimeTypeCheck['type']) {
-            throw new MenuCRUDMutationException(
-                $this->__('The file\'s mime type is not allowed', 'menu-mutations')
-            );
-        }
-        /** @var string */
-        $mimeType = $mimeTypeCheck['type'];
-        return $mimeType;
     }
 
     /**
