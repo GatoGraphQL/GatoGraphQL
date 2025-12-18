@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MenuMutations\MutationResolvers;
 
-use DateTime;
 use PoPCMSSchema\MenuMutations\Constants\MenuCRUDHookNames;
 use PoPCMSSchema\MenuMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MenuMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\MenuMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\MenuMutations\MutationResolvers\MenuCRUDMutationResolverTrait;
 use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
@@ -22,7 +20,6 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
-use stdClass;
 
 abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutationResolver
 {
@@ -165,29 +162,9 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
     protected function getMenuData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $menuData = [
-            'authorID' => $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID),
-            'title' => $fieldDataAccessor->getValue(MutationInputProperties::TITLE),
+            'name' => $fieldDataAccessor->getValue(MutationInputProperties::NAME),
             'slug' => $fieldDataAccessor->getValue(MutationInputProperties::SLUG),
-            'caption' => $fieldDataAccessor->getValue(MutationInputProperties::CAPTION),
-            'description' => $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION),
-            'altText' => $fieldDataAccessor->getValue(MutationInputProperties::ALT_TEXT),
-            'mimeType' => $fieldDataAccessor->getValue(MutationInputProperties::MIME_TYPE),
         ];
-
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::DATE)) {
-            /** @var DateTime|null */
-            $dateTime = $fieldDataAccessor->getValue(MutationInputProperties::DATE);
-            if ($dateTime !== null) {
-                $menuData['date'] = $dateTime->format('Y-m-d H:i:s');
-            }
-        }
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::GMT_DATE)) {
-            /** @var DateTime|null */
-            $gmtDateTime = $fieldDataAccessor->getValue(MutationInputProperties::GMT_DATE);
-            if ($gmtDateTime !== null) {
-                $menuData['gmtDate'] = $gmtDateTime->format('Y-m-d H:i:s');
-            }
-        }
 
         if ($this->addMenuInputField()) {
             $menuData['id'] = $fieldDataAccessor->getValue(MutationInputProperties::ID);
