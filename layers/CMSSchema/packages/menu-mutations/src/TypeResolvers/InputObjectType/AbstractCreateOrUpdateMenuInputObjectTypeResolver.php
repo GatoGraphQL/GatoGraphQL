@@ -71,7 +71,7 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
             [
                 MutationInputProperties::NAME => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::MENU_ITEMS_BY => $this->getMenuItemsByOneofInputObjectTypeResolver(),
+                MutationInputProperties::ITEMS_BY => $this->getMenuItemsByOneofInputObjectTypeResolver(),
             ]
         );
 
@@ -93,7 +93,7 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
             MutationInputProperties::ID => $this->__('Menu item ID', 'menu-mutations'),
             MutationInputProperties::NAME => $this->__('Menu name', 'menu-mutations'),
             MutationInputProperties::SLUG => $this->__('Menu slug', 'menu-mutations'),
-            MutationInputProperties::MENU_ITEMS_BY => $this->__('Menu items', 'menu-mutations'),
+            MutationInputProperties::ITEMS_BY => $this->__('Menu items', 'menu-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 

@@ -15,7 +15,7 @@ class MutationInputProperties
      *
      * @since x.x.x
      */
-    public final const MENU_ITEMS_BY = 'itemsBy';
+    public final const ITEMS_BY = 'itemsBy';
     public final const JSON = 'json';
 
     /**
