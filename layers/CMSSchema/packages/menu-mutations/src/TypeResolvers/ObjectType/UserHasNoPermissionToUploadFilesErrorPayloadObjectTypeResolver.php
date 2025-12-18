@@ -29,7 +29,7 @@ class UserHasNoPermissionToUploadFilesErrorPayloadObjectTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user has no permission to upload files"', 'menu-mutations');
+        return $this->__('Error payload for: "The user has no permission to create menus"', 'menu-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

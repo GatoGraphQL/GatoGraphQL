@@ -29,7 +29,7 @@ class UserHasNoPermissionToUploadFilesForOtherUsersErrorPayloadObjectTypeResolve
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user has no permission to upload files for other users"', 'menu-mutations');
+        return $this->__('Error payload for: "The user has no permission to create menus for other users"', 'menu-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

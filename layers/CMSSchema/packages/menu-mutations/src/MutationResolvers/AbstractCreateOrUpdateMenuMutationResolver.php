@@ -161,7 +161,7 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
         if ($this->canUploadAttachment()) {
             $currentUserID = App::getState('current-user-id');
 
-            // Validate the user has the needed capability to upload files
+            // Validate the user has the needed capability to create menus
             $uploadFilesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_CAPABILITY);
             if (
                 !$this->getUserRoleTypeAPI()->userCan(
@@ -179,7 +179,7 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
                     )
                 );
             } elseif ($authorID !== null && $authorID !== $currentUserID) {
-                // Validate the logged-in user has the capability to upload files for other people
+                // Validate the logged-in user has the capability to create menus for other people
                 $uploadFilesForOtherUsersCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY);
                 if (
                     !$this->getUserRoleTypeAPI()->userCan(

@@ -38,9 +38,9 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must be logged in to upload files or edit menus', 'menu-mutations'),
-            self::E2 => $this->__('You don\'t have permission to upload files', 'menu-mutations'),
-            self::E4 => $this->__('You don\'t have permission to upload files for other users', 'menu-mutations'),
+            self::E1 => $this->__('You must be logged in to create menus or edit menus', 'menu-mutations'),
+            self::E2 => $this->__('You don\'t have permission to create menus', 'menu-mutations'),
+            self::E4 => $this->__('You don\'t have permission to create menus for other users', 'menu-mutations'),
             self::E5 => $this->__('There is no user with ID \'%s\'', 'menu-mutations'),
             self::E6 => $this->__('There is no menu with ID \'%s\'', 'menu-mutations'),
             self::E7 => $this->__('There is no menu with slug \'%s\'', 'menu-mutations'),
