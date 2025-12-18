@@ -9,8 +9,8 @@ use PoPCMSSchema\MenuMutations\ObjectModels\LoggedInUserHasNoEditingMenuCapabili
 use PoPCMSSchema\MenuMutations\ObjectModels\LoggedInUserHasNoPermissionToEditMenuErrorPayload;
 use PoPCMSSchema\MenuMutations\ObjectModels\MenuDoesNotExistErrorPayload;
 use PoPCMSSchema\MenuMutations\ObjectModels\UserDoesNotExistErrorPayload;
-use PoPCMSSchema\MenuMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
-use PoPCMSSchema\MenuMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
+use PoPCMSSchema\MenuMutations\ObjectModels\UserHasNoPermissionToCreateMenusErrorPayload;
+use PoPCMSSchema\MenuMutations\ObjectModels\UserHasNoPermissionToCreateMenusForOtherUsersErrorPayload;
 use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
@@ -89,13 +89,13 @@ trait MenuCRUDMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
-            ] => new UserHasNoPermissionToUploadFilesErrorPayload(
+            ] => new UserHasNoPermissionToCreateMenusErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
-            ] => new UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload(
+            ] => new UserHasNoPermissionToCreateMenusForOtherUsersErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [

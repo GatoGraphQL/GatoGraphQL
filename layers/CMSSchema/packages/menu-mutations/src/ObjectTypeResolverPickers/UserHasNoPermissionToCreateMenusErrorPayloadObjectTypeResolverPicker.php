@@ -7,7 +7,7 @@ namespace PoPCMSSchema\MenuMutations\ObjectTypeResolverPickers;
 use PoPCMSSchema\MenuMutations\TypeResolvers\UnionType\AbstractCreateMenuMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class UserHasNoPermissionToUploadFilesErrorPayloadObjectTypeResolverPicker extends AbstractUserHasNoPermissionToUploadFilesErrorPayloadObjectTypeResolverPicker
+class UserHasNoPermissionToCreateMenusErrorPayloadObjectTypeResolverPicker extends AbstractUserHasNoPermissionToCreateMenusErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

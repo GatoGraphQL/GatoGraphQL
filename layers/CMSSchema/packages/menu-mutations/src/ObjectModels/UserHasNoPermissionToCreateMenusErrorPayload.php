@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MenuMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload extends AbstractErrorPayload
+final class UserHasNoPermissionToCreateMenusErrorPayload extends AbstractErrorPayload
 {
 }
