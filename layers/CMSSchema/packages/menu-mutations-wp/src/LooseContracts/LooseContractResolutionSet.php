@@ -12,7 +12,7 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         $this->getNameResolver()->implementNames([
-            LooseContractSet::NAME_CREATE_MENUS_CAPABILITY => 'upload_files',
+            LooseContractSet::NAME_CREATE_MENUS_CAPABILITY => 'edit_theme_options',
         ]);
     }
 }
