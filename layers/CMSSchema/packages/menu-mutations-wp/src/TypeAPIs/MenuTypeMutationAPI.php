@@ -19,6 +19,7 @@ use function download_url;
 use function get_allowed_mime_types;
 use function get_attached_file;
 use function get_taxonomy;
+use function get_term;
 use function get_post;
 use function get_post_meta;
 use function is_wp_error;
@@ -355,6 +356,16 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         string|int $userID,
         string|int $menuID,
     ): bool {
-        return user_can((int)$userID, 'edit_post', $menuID);
+        $menuTerm = get_term((int) $menuID, 'nav_menu');
+        if (
+            $menuTerm === null
+            || is_wp_error($menuTerm)
+            || !($menuTerm instanceof \WP_Term)
+            || $menuTerm->taxonomy !== 'nav_menu'
+        ) {
+            return false;
+        }
+
+        return user_can((int) $userID, 'edit_term', (int) $menuID);
     }
 }
