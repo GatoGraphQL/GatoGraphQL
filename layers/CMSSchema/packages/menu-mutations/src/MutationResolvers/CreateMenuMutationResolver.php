@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MenuMutations\MutationResolvers;
 
 use PoPCMSSchema\MenuMutations\Constants\MenuCRUDHookNames;
-use PoPCMSSchema\MenuMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MenuMutations\Exception\MenuCRUDMutationException;
-use PoPCMSSchema\Menus\Constants\InputProperties;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
@@ -65,16 +63,7 @@ class CreateMenuMutationResolver extends AbstractCreateOrUpdateMenuMutationResol
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int|null {
         /** @var stdClass */
-        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
-
-        /** @var stdClass */
-        $contents = $from->{MutationInputProperties::CONTENTS};
-
-        return $this->getMenuTypeMutationAPI()->createMenu(
-            $contents->{MutationInputProperties::BODY},
-            $contents->{MutationInputProperties::FILENAME},
-            $menuData,
-        );
+        return $this->getMenuTypeMutationAPI()->createMenu($menuData);
     }
 
     /**

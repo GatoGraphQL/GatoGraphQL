@@ -51,8 +51,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
      * @param array<string,mixed> $menuData
      */
     public function createMenu(
-        string $body,
-        string $filename,
         array $menuData,
     ): string|int {
         $termArgs = $this->convertMenuCreationArgs($menuData);

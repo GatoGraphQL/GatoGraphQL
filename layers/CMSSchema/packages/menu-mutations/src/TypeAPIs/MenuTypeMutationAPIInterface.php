@@ -18,8 +18,6 @@ interface MenuTypeMutationAPIInterface
      * @param array<string,mixed> $menuData
      */
     public function createMenu(
-        string $body,
-        string $filename,
         array $menuData,
     ): string|int;
     /**
