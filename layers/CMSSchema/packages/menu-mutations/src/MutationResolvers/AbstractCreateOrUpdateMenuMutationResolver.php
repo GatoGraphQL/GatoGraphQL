@@ -122,7 +122,7 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
             return;
         }
 
-        // Validate the user can edit the attachment
+        // Validate the user can edit the menu
         if ($this->addMenuInputField()) {
             /** @var string|int */
             $menuID = $fieldDataAccessor->getValue(MutationInputProperties::ID);

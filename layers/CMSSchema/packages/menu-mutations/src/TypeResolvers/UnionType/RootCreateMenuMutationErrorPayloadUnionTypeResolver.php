@@ -28,7 +28,7 @@ class RootCreateMenuMutationErrorPayloadUnionTypeResolver extends AbstractCreate
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when uploading an attachment', 'menu-mutations');
+        return $this->__('Union of \'Error Payload\' types when creating a menu', 'menu-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

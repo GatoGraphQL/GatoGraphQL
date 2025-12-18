@@ -225,10 +225,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createMenu' => $this->__('Upload an attachment', 'menu-mutations'),
-            'createMenus' => $this->__('Upload attachments', 'menu-mutations'),
-            'updateMenu' => $this->__('Update the metadata for an attachment', 'menu-mutations'),
-            'updateMenus' => $this->__('Update the metadata for attachments', 'menu-mutations'),
+            'createMenu' => $this->__('Create a menu', 'menu-mutations'),
+            'createMenus' => $this->__('Create menus', 'menu-mutations'),
+            'updateMenu' => $this->__('Update a menu', 'menu-mutations'),
+            'updateMenus' => $this->__('Update menus', 'menu-mutations'),
             'createMenuMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createMenu` mutation', 'menu-mutations'),
             'updateMenuMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateMenu` mutation', 'menu-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),

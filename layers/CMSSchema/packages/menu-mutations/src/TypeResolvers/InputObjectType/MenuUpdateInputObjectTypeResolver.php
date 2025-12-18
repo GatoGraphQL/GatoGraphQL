@@ -18,6 +18,6 @@ class MenuUpdateInputObjectTypeResolver extends AbstractUpdateMenuInputObjectTyp
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update the metadata for an attachment (nested mutations)', 'menu-mutations');
+        return $this->__('Input to update a menu (nested mutations)', 'menu-mutations');
     }
 }

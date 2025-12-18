@@ -28,7 +28,7 @@ class MenuUpdateMutationErrorPayloadUnionTypeResolver extends AbstractUpdateMenu
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating the metadata for an attachment (nested mutations)', 'menu-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating a menu (nested mutations)', 'menu-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

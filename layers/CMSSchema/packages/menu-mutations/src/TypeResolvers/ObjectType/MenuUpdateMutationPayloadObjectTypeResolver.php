@@ -13,6 +13,6 @@ class MenuUpdateMutationPayloadObjectTypeResolver extends AbstractMenuMutationPa
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of updating the metadata for an attachment (nested mutations)', 'menu-mutations');
+        return $this->__('Payload of updating a menu (nested mutations)', 'menu-mutations');
     }
 }
