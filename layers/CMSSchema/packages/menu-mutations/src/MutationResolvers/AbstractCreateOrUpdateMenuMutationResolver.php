@@ -166,6 +166,10 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
             'slug' => $fieldDataAccessor->getValue(MutationInputProperties::SLUG),
         ];
 
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::MENU_ITEMS)) {
+            $menuData[MutationInputProperties::MENU_ITEMS] = $fieldDataAccessor->getValue(MutationInputProperties::MENU_ITEMS);
+        }
+
         if ($this->addMenuInputField()) {
             $menuData['id'] = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         }

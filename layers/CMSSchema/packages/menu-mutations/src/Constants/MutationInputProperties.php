@@ -10,4 +10,28 @@ class MutationInputProperties
     public final const SLUG = 'slug';
     public final const ID = 'id';
     public final const MENU_BY = 'menuBy';
+
+    /**
+     * Menu items to create/update on the menu.
+     *
+     * @since x.x.x
+     */
+    public final const MENU_ITEMS = 'menuItems';
+
+    /**
+     * Menu item input properties.
+     *
+     * @since x.x.x
+     */
+    public final const ITEM_TYPE = 'itemType';
+    public final const OBJECT_TYPE = 'objectType';
+    public final const OBJECT_ID = 'objectID';
+    public final const LABEL = 'label';
+    public final const TITLE_ATTRIBUTE = 'titleAttribute';
+    public final const URL = 'url';
+    public final const DESCRIPTION = 'description';
+    public final const CLASSES = 'classes';
+    public final const TARGET = 'target';
+    public final const LINK_RELATIONSHIP = 'linkRelationship';
+    public final const CHILDREN = 'children';
 }

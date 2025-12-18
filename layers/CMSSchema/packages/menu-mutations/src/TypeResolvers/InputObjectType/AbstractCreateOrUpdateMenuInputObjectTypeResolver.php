@@ -17,6 +17,7 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?MenuItemInputObjectTypeResolver $menuItemInputObjectTypeResolver = null;
 
     final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
     {
@@ -37,6 +38,16 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
         return $this->stringScalarTypeResolver;
     }
 
+    final protected function getMenuItemInputObjectTypeResolver(): MenuItemInputObjectTypeResolver
+    {
+        if ($this->menuItemInputObjectTypeResolver === null) {
+            /** @var MenuItemInputObjectTypeResolver */
+            $menuItemInputObjectTypeResolver = $this->instanceManager->getInstance(MenuItemInputObjectTypeResolver::class);
+            $this->menuItemInputObjectTypeResolver = $menuItemInputObjectTypeResolver;
+        }
+        return $this->menuItemInputObjectTypeResolver;
+    }
+
     /**
      * @return array<string,InputTypeResolverInterface>
      */
@@ -49,6 +60,7 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
             [
                 MutationInputProperties::NAME => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::MENU_ITEMS => $this->getMenuItemInputObjectTypeResolver(),
             ]
         );
 
@@ -70,6 +82,7 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
             MutationInputProperties::ID => $this->__('Menu item ID', 'menu-mutations'),
             MutationInputProperties::NAME => $this->__('Menu name', 'menu-mutations'),
             MutationInputProperties::SLUG => $this->__('Menu slug', 'menu-mutations'),
+            MutationInputProperties::MENU_ITEMS => $this->__('Menu items', 'menu-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 
@@ -89,6 +102,7 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
         $inputFieldTypeModifiers = match ($inputFieldName) {
             MutationInputProperties::ID => SchemaTypeModifiers::MANDATORY,
             MutationInputProperties::NAME => SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::MENU_ITEMS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
 
