@@ -18,12 +18,14 @@ use function add_post_meta;
 use function download_url;
 use function get_allowed_mime_types;
 use function get_attached_file;
+use function get_taxonomy;
 use function get_post;
 use function get_post_meta;
 use function is_wp_error;
 use function remove_filter;
 use function update_attached_file;
 use function update_post_meta;
+use function user_can;
 use function wp_check_filetype;
 use function wp_get_attachment_metadata;
 use function wp_insert_attachment;
@@ -336,12 +338,17 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
     public function canUserEditMenus(
         string|int $userID
     ): bool {
-        $attachmentObject = get_post_type_object('attachment');
-        if ($attachmentObject === null) {
+        $navMenuTaxonomy = get_taxonomy('nav_menu');
+        if ($navMenuTaxonomy === null) {
             return false;
         }
 
-        return isset($attachmentObject->cap->edit_posts) && user_can((int)$userID, $attachmentObject->cap->edit_posts);
+        if (isset($navMenuTaxonomy->cap->manage_terms)) {
+            return user_can((int) $userID, $navMenuTaxonomy->cap->manage_terms);
+        }
+
+        // Fallback: `nav_menu` taxonomy capabilities map to `edit_theme_options`.
+        return user_can((int) $userID, 'edit_theme_options');
     }
 
     public function canUserEditMenu(
