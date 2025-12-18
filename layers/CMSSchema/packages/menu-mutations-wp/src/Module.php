@@ -26,7 +26,7 @@ class Module extends AbstractModule
     {
         return [
             \PoPCMSSchema\MenuMutations\Module::class,
-            \PoPCMSSchema\MenuWP\Module::class,
+            \PoPCMSSchema\MenusWP\Module::class,
             \PoPCMSSchema\UserRolesWP\Module::class,
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
