@@ -28,7 +28,7 @@ trait MenuCRUDMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$this->getMenuTypeAPI()->menuByIDExists($menuID)) {
+        if ($this->getMenuTypeAPI()->getMenu($menuID) === null) {
             $field = $fieldDataAccessor->getField();
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
