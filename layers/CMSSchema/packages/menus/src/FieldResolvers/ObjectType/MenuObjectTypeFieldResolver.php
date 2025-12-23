@@ -310,7 +310,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 // Convert to array if it's an object
                 $entryArray = is_array($entry) ? $entry : (array) $entry;
                 $filteredEntry = $this->filterMenuItemProperties($entryArray, $propertiesBy);
-                
+
                 // If entry has children, filter them recursively
                 $children = null;
                 if (is_array($entry) && isset($entry['children']) && is_array($entry['children'])) {
@@ -318,11 +318,11 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 } elseif ($entry instanceof stdClass && isset($entry->children) && is_array($entry->children)) {
                     $children = $entry->children;
                 }
-                
+
                 if ($children !== null) {
                     $filteredEntry['children'] = $this->filterMenuItemPropertiesRecursively($children, $propertiesBy);
                 }
-                
+
                 return (object) $filteredEntry;
             },
             $entries
