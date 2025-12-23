@@ -6,6 +6,8 @@
 
 ## Improvements
 
+- Include/exclude properties in MenuItem.itemDataEntries ([#3250](https://github.com/GatoGraphQL/GatoGraphQL/pull/3250))
+
 ## Fixed
 
 - Don't initialize an input that includes itself (eg: MenuItemInput)([#3248](https://github.com/GatoGraphQL/GatoGraphQL/pull/3242))
