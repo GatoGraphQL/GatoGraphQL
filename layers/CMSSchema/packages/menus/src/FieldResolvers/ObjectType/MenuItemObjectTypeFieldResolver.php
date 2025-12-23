@@ -110,7 +110,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'rawLabel',
             'titleAttribute',
             'url',
-            'classes',
+            'cssClasses',
             'target',
             'description',
             'objectID',
@@ -144,7 +144,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'rawLabel' => $this->getStringScalarTypeResolver(),
             'titleAttribute' => $this->getStringScalarTypeResolver(),
             'url' => $this->getURLScalarTypeResolver(),
-            'classes' => $this->getStringScalarTypeResolver(),
+            'cssClasses' => $this->getStringScalarTypeResolver(),
             'target' => $this->getStringScalarTypeResolver(),
             'description' => $this->getStringScalarTypeResolver(),
             'objectID' => $this->getIDScalarTypeResolver(),
@@ -160,7 +160,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'children',
-            'classes'
+            'cssClasses'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -175,7 +175,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'titleAttribute' => $this->__('Menu item attribute title', 'menus'),
             'localURLPath' => $this->__('Path of a local URL, or null if external URL', 'menus'),
             'url' => $this->__('Menu item URL', 'menus'),
-            'classes' => $this->__('Menu item classes', 'menus'),
+            'cssClasses' => $this->__('Menu item classes', 'menus'),
             'target' => $this->__('Menu item target', 'menus'),
             'description' => $this->__('Menu item additional attributes', 'menus'),
             'objectID' => $this->__('ID of the object linked to by the menu item ', 'menus'),
@@ -207,7 +207,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             // case 'rawLabel':
             // case 'titleAttribute':
             // case 'url':
-            // case 'classes':
+            // case 'cssClasses':
             // case 'target':
             // case 'description':
             // case 'objectID':
