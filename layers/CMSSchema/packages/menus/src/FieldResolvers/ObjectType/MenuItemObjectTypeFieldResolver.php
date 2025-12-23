@@ -130,7 +130,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatMenuItemRawTitleFieldsAsSensitiveData()) {
-            $sensitiveFieldArgNames[] = 'attributeTitle';
+            $sensitiveFieldArgNames[] = 'rawLabel';
         }
         return $sensitiveFieldArgNames;
     }
