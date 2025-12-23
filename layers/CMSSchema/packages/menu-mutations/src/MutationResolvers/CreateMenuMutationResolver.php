@@ -10,7 +10,6 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
-use stdClass;
 
 class CreateMenuMutationResolver extends AbstractCreateOrUpdateMenuMutationResolver
 {

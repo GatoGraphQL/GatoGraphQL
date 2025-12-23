@@ -10,5 +10,3 @@ class MenuItemType
     public final const POST_TYPE = 'post_type';
     public final const TAXONOMY = 'taxonomy';
 }
-
-

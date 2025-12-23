@@ -117,5 +117,3 @@ class MenuItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
         };
     }
 }
-
-

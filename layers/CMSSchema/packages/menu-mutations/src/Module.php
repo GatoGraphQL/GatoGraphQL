@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MenuMutations;
 
 use PoPCMSSchema\CustomPostMutations\Module as CustomPostMutationsModule;
-use PoP\ComponentModel\App;
-use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ModuleInterface;
 

@@ -36,5 +36,3 @@ class MenuItemTypeEnumTypeResolver extends AbstractEnumTypeResolver
         };
     }
 }
-
-
