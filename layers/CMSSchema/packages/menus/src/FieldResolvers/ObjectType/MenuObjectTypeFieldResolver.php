@@ -9,6 +9,7 @@ use PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\IncludeExcludeFilterInputObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -19,6 +20,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use stdClass;
 
 class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -27,6 +29,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?MenuItemObjectTypeResolver $menuItemObjectTypeResolver = null;
     private ?MenuTypeAPIInterface $menuTypeAPI = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?IncludeExcludeFilterInputObjectTypeResolver $includeExcludeFilterInputObjectTypeResolver = null;
 
     final protected function getMenuItemRuntimeRegistry(): MenuItemRuntimeRegistryInterface
     {
@@ -72,6 +75,15 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
         return $this->booleanScalarTypeResolver;
+    }
+    final protected function getIncludeExcludeFilterInputObjectTypeResolver(): IncludeExcludeFilterInputObjectTypeResolver
+    {
+        if ($this->includeExcludeFilterInputObjectTypeResolver === null) {
+            /** @var IncludeExcludeFilterInputObjectTypeResolver */
+            $includeExcludeFilterInputObjectTypeResolver = $this->instanceManager->getInstance(IncludeExcludeFilterInputObjectTypeResolver::class);
+            $this->includeExcludeFilterInputObjectTypeResolver = $includeExcludeFilterInputObjectTypeResolver;
+        }
+        return $this->includeExcludeFilterInputObjectTypeResolver;
     }
 
     /**
@@ -122,6 +134,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'itemDataEntries' => [
                 'flat' => $this->getBooleanScalarTypeResolver(),
+                'propertiesBy' => $this->getIncludeExcludeFilterInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -131,6 +144,7 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ([$fieldName => $fieldArgName]) {
             ['itemDataEntries' => 'flat'] => $this->__('Flatten the items', 'menus'),
+            ['itemDataEntries' => 'propertiesBy'] => $this->__('Filter properties to include or exclude in the menu item data entries', 'menus'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -170,6 +184,8 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldDataAccessor->getFieldName()) {
             case 'itemDataEntries':
                 $isFlat = $fieldDataAccessor->getValue('flat');
+                /** @var stdClass|null */
+                $propertiesBy = $fieldDataAccessor->getValue('propertiesBy');
                 $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
                 $entries = array();
                 if ($menuItems) {
@@ -185,11 +201,16 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     }
                 }
                 if ($isFlat) {
-                    return array_map(
+                    $result = array_map(
                         /** @param mixed[] $entry */
                         fn (array $entry) => (object) $entry,
                         $entries
                     );
+                    // Filter properties if requested
+                    if ($propertiesBy !== null) {
+                        $result = $this->filterMenuItemPropertiesRecursively($result, $propertiesBy);
+                    }
+                    return $result;
                 }
                 /**
                  * Reproduce the menu layout in the array
@@ -213,11 +234,16 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     }
                     $arrangedEntriesPointer[] = $menuItemData;
                 }
-                return array_map(
+                $result = array_map(
                     /** @param mixed[] $entry */
                     fn (array $entry) => (object) $entry,
                     $arrangedEntries
                 );
+                // Filter properties in nested children if requested
+                if ($propertiesBy !== null) {
+                    $result = $this->filterMenuItemPropertiesRecursively($result, $propertiesBy);
+                }
+                return $result;
             case 'items':
                 $menuItems = $this->getMenuTypeAPI()->getMenuItems($menu);
 
@@ -250,6 +276,57 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldInterface $field,
     ): bool {
         return false;
+    }
+
+    /**
+     * @param array<string,mixed> $itemValue
+     * @param stdClass $propertiesBy
+     * @return array<string,mixed>
+     */
+    protected function filterMenuItemProperties(array $itemValue, stdClass $propertiesBy): array
+    {
+        if (isset($propertiesBy->include)) {
+            /** @var string[] */
+            $includeProperties = $propertiesBy->include;
+            return array_intersect_key($itemValue, array_flip($includeProperties));
+        }
+        if (isset($propertiesBy->exclude)) {
+            /** @var string[] */
+            $excludeProperties = $propertiesBy->exclude;
+            return array_diff_key($itemValue, array_flip($excludeProperties));
+        }
+        return $itemValue;
+    }
+
+    /**
+     * @param array<int,stdClass|array<string,mixed>> $entries
+     * @param stdClass $propertiesBy
+     * @return array<int,stdClass>
+     */
+    protected function filterMenuItemPropertiesRecursively(array $entries, stdClass $propertiesBy): array
+    {
+        return array_map(
+            function (stdClass|array $entry) use ($propertiesBy): stdClass {
+                // Convert to array if it's an object
+                $entryArray = is_array($entry) ? $entry : (array) $entry;
+                $filteredEntry = $this->filterMenuItemProperties($entryArray, $propertiesBy);
+
+                // If entry has children, filter them recursively
+                $children = null;
+                if (is_array($entry) && isset($entry['children']) && is_array($entry['children'])) {
+                    $children = $entry['children'];
+                } elseif ($entry instanceof stdClass && isset($entry->children) && is_array($entry->children)) {
+                    $children = $entry->children;
+                }
+
+                if ($children !== null) {
+                    $filteredEntry['children'] = $this->filterMenuItemPropertiesRecursively($children, $propertiesBy);
+                }
+
+                return (object) $filteredEntry;
+            },
+            $entries
+        );
     }
 
     /**

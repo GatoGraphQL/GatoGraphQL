@@ -21,6 +21,10 @@ fragment MenuData on Menu {
   locations
   itemDataEntries
   flatItemDataEntries: itemDataEntries(flat: true)
+  itemDataEntriesByInclude: itemDataEntries(propertiesBy: {include: ["label", "title", "rawTitle", "url", "classes", "target", "description", "linkRelationship"]})
+  itemDataEntriesByExclude: itemDataEntries(propertiesBy: {exclude: ["label", "title", "rawTitle", "url", "classes", "target", "description", "linkRelationship"]})
+  flatItemDataEntriesByInclude: itemDataEntries(flat: true, propertiesBy: {include: ["label", "title", "rawTitle", "url", "classes", "target", "description", "linkRelationship"]})
+  flatItemDataEntriesByExclude: itemDataEntries(flat: true, propertiesBy: {exclude: ["label", "title", "rawTitle", "url", "classes", "target", "description", "linkRelationship"]})
   items {
     ...MenuItemData
     children {
