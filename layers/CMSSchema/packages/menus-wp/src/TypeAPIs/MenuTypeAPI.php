@@ -45,6 +45,8 @@ class MenuTypeAPI extends AbstractBasicService implements MenuTypeAPIInterface
             function (object $menuItem): MenuItem {
                 return new MenuItem(
                     $menuItem->ID,
+                    $menuItem->type ?? '',
+                    $menuItem->object ?? '',
                     (int) $menuItem->object_id,
                     $menuItem->menu_item_parent === "0" ? null : (int) $menuItem->menu_item_parent,
                     \apply_filters('the_title', $menuItem->title, $menuItem->object_id),
@@ -55,8 +57,6 @@ class MenuTypeAPI extends AbstractBasicService implements MenuTypeAPIInterface
                     array_filter($menuItem->classes),
                     $menuItem->target,
                     $menuItem->xfn,
-                    $menuItem->type ?? '',
-                    $menuItem->object ?? '',
                 );
             },
             $menuItems

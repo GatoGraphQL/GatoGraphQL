@@ -14,6 +14,8 @@ class MenuItem
      */
     public function __construct(
         public readonly string|int $id,
+        public readonly string $itemType,
+        public readonly string $objectType,
         public readonly string|int $objectID,
         public readonly string|int|null $parentID,
         public readonly string $label,
@@ -24,8 +26,6 @@ class MenuItem
         public readonly array $classes,
         public readonly string $target,
         public readonly string $linkRelationship,
-        public readonly string $itemType,
-        public readonly string $objectType,
     ) {
     }
 }
