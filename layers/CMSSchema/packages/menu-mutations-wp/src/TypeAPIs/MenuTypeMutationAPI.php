@@ -256,11 +256,11 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             $description = sanitize_textarea_field($description);
         }
 
-        $classes = $menuItemData[MutationInputProperties::CSS_CLASSES] ?? [];
-        $classes = is_array($classes) ? $classes : [];
-        $classes = array_values(array_filter(array_map(
+        $cssClasses = $menuItemData[MutationInputProperties::CSS_CLASSES] ?? [];
+        $cssClasses = is_array($cssClasses) ? $cssClasses : [];
+        $cssClasses = array_values(array_filter(array_map(
             static fn (mixed $className): string => sanitize_html_class((string) $className),
-            $classes
+            $cssClasses
         )));
 
         $target = (string) ($menuItemData[MutationInputProperties::TARGET] ?? '');
@@ -327,8 +327,8 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             $args['menu-item-description'] = $description;
         }
 
-        if ($classes !== []) {
-            $args['menu-item-classes'] = $classes;
+        if ($cssClasses !== []) {
+            $args['menu-item-classes'] = $cssClasses;
         }
 
         if ($target !== '') {
