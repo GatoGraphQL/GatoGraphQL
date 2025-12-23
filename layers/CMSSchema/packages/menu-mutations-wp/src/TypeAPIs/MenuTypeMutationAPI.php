@@ -256,7 +256,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             $description = sanitize_textarea_field($description);
         }
 
-        $classes = $menuItemData[MutationInputProperties::CLASSES] ?? [];
+        $classes = $menuItemData[MutationInputProperties::CSS_CLASSES] ?? [];
         $classes = is_array($classes) ? $classes : [];
         $classes = array_values(array_filter(array_map(
             static fn (mixed $className): string => sanitize_html_class((string) $className),

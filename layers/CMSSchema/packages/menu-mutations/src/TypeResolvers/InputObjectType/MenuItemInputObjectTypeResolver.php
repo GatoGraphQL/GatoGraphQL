@@ -79,7 +79,7 @@ class MenuItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
             MutationInputProperties::TITLE_ATTRIBUTE => $this->getStringScalarTypeResolver(),
             MutationInputProperties::URL => $this->getStringScalarTypeResolver(),
             MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
-            MutationInputProperties::CLASSES => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::CSS_CLASSES => $this->getStringScalarTypeResolver(),
             MutationInputProperties::TARGET => $this->getStringScalarTypeResolver(),
             MutationInputProperties::LINK_RELATIONSHIP => $this->getStringScalarTypeResolver(),
             MutationInputProperties::OBJECT_ID => $this->getIDScalarTypeResolver(),
@@ -96,7 +96,7 @@ class MenuItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
             MutationInputProperties::TITLE_ATTRIBUTE => $this->__('Menu item title attribute (attr-title)', 'menu-mutations'),
             MutationInputProperties::URL => $this->__('Menu item URL', 'menu-mutations'),
             MutationInputProperties::DESCRIPTION => $this->__('Menu item description', 'menu-mutations'),
-            MutationInputProperties::CLASSES => $this->__('Menu item CSS classes', 'menu-mutations'),
+            MutationInputProperties::CSS_CLASSES => $this->__('Menu item CSS classes', 'menu-mutations'),
             MutationInputProperties::TARGET => $this->__('Menu item target', 'menu-mutations'),
             MutationInputProperties::LINK_RELATIONSHIP => $this->__('Menu item link relationship (rel/xfn)', 'menu-mutations'),
             MutationInputProperties::OBJECT_ID => $this->__('The ID of the linked object (eg: post ID)', 'menu-mutations'),
@@ -110,7 +110,6 @@ class MenuItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CLASSES,
             MutationInputProperties::CHILDREN
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),

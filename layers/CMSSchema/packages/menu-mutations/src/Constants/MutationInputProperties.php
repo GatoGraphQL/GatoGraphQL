@@ -30,7 +30,7 @@ class MutationInputProperties
     public final const TITLE_ATTRIBUTE = 'titleAttribute';
     public final const URL = 'url';
     public final const DESCRIPTION = 'description';
-    public final const CLASSES = 'classes';
+    public final const CSS_CLASSES = 'cssClasses';
     public final const TARGET = 'target';
     public final const LINK_RELATIONSHIP = 'linkRelationship';
     public final const CHILDREN = 'children';
