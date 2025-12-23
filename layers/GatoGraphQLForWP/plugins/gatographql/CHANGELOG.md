@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - MenuItem.itemType and MenuItem.objectType fields (#3249)
 
+### Improvements
+
+- Include/exclude properties in MenuItem.itemDataEntries (#3250)
+
 ### Fixed
 
 - Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)
