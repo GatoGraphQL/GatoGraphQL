@@ -55,6 +55,8 @@ class MenuTypeAPI extends AbstractBasicService implements MenuTypeAPIInterface
                     array_filter($menuItem->classes),
                     $menuItem->target,
                     $menuItem->xfn,
+                    $menuItem->type ?? '',
+                    $menuItem->object ?? '',
                 );
             },
             $menuItems

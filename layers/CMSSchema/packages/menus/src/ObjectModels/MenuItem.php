@@ -24,6 +24,8 @@ class MenuItem
         public readonly array $classes,
         public readonly string $target,
         public readonly string $linkRelationship,
+        public readonly string $itemType,
+        public readonly string $objectType,
     ) {
     }
 }
