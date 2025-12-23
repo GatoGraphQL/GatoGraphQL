@@ -6,11 +6,11 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
 
-abstract class AbstractTreatMenuItemRawTitleAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+abstract class AbstractTreatMenuItemRawLabelAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getSettingsKey(): string
     {
-        return SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
+        return SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_LABEL_AS_SENSITIVE_DATA;
     }
 
     protected function getModuleID(string $dataName): string

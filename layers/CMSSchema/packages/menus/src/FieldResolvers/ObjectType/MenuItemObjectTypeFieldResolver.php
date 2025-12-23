@@ -107,8 +107,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'localURLPath',
             // All other fields are properties in the object
             'label',
-            'title',
-            'rawTitle',
+            'rawLabel',
+            'attributeTitle',
             'url',
             'classes',
             'target',
@@ -129,8 +129,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->treatMenuItemRawTitleFieldsAsSensitiveData()) {
-            $sensitiveFieldArgNames[] = 'rawTitle';
+        if ($moduleConfiguration->treatMenuItemRawLabelFieldsAsSensitiveData()) {
+            $sensitiveFieldArgNames[] = 'rawLabel';
         }
         return $sensitiveFieldArgNames;
     }
@@ -141,8 +141,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'children' => $this->getMenuItemObjectTypeResolver(),
             'localURLPath' => $this->getStringScalarTypeResolver(),
             'label' => $this->getStringScalarTypeResolver(),
-            'title' => $this->getStringScalarTypeResolver(),
-            'rawTitle' => $this->getStringScalarTypeResolver(),
+            'rawLabel' => $this->getStringScalarTypeResolver(),
+            'attributeTitle' => $this->getStringScalarTypeResolver(),
             'url' => $this->getURLScalarTypeResolver(),
             'classes' => $this->getStringScalarTypeResolver(),
             'target' => $this->getStringScalarTypeResolver(),
@@ -171,8 +171,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'children' => $this->__('Menu item children items', 'menus'),
             'label' => $this->__('Menu item label', 'menus'),
-            'title' => $this->__('Menu item title', 'menus'),
-            'rawTitle' => $this->__('Menu item title in raw format (as it exists in the database)', 'menus'),
+            'rawLabel' => $this->__('Menu item label in raw format (as it exists in the database)', 'menus'),
+            'attributeTitle' => $this->__('Menu item attribute title', 'menus'),
             'localURLPath' => $this->__('Path of a local URL, or null if external URL', 'menus'),
             'url' => $this->__('Menu item URL', 'menus'),
             'classes' => $this->__('Menu item classes', 'menus'),
@@ -204,8 +204,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             // These are all properties of MenuItem
             // Commented out since this is the default FieldResolver's response
             // case 'label':
-            // case 'title':
-            // case 'rawTitle':
+            // case 'rawLabel':
+            // case 'attributeTitle':
             // case 'url':
             // case 'classes':
             // case 'target':
