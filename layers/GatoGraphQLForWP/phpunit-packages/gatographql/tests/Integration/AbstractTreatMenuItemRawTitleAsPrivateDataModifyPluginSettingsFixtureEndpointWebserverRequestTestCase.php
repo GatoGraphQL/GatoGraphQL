@@ -10,7 +10,7 @@ abstract class AbstractTreatMenuItemRawTitleAsPrivateDataModifyPluginSettingsFix
 {
     protected function getSettingsKey(): string
     {
-        return SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
+        return SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_LABEL_AS_SENSITIVE_DATA;
     }
 
     protected function getModuleID(string $dataName): string
