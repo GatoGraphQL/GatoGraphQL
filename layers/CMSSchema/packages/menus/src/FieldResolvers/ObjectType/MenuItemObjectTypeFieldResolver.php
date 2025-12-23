@@ -116,6 +116,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'objectID',
             'parentID',
             'linkRelationship',
+            'itemType',
+            'objectType',
         ];
     }
 
@@ -148,6 +150,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'objectID' => $this->getIDScalarTypeResolver(),
             'parentID' => $this->getIDScalarTypeResolver(),
             'linkRelationship' => $this->getStringScalarTypeResolver(),
+            'itemType' => $this->getStringScalarTypeResolver(),
+            'objectType' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -177,6 +181,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'objectID' => $this->__('ID of the object linked to by the menu item ', 'menus'),
             'parentID' => $this->__('Menu item\'s parent ID', 'menus'),
             'linkRelationship' => $this->__('Link relationship (XFN)', 'menus'),
+            'itemType' => $this->__('The type of menu item (e.g., "post_type", "taxonomy", "custom")', 'menus'),
+            'objectType' => $this->__('The type of object linked to by the menu item (e.g., "post", "page", "category")', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

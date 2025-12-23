@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 15.4.0 - DATE
 
+### Added
+
+- MenuItem.itemType and MenuItem.objectType fields (#3249)
+
 ### Fixed
 
 - Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)
