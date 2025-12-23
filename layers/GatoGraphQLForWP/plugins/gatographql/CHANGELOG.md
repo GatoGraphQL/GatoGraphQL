@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
-- Renamed MenuItem fields: title => rawLabel, and rawTitle => attributeTitle (#3251)
+- Renamed MenuItem fields: title => rawLabel, and rawTitle => titleAttribute (#3251)
 
 ### Added
 

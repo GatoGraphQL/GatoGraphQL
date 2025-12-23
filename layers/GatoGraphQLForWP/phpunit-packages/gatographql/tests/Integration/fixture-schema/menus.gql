@@ -48,7 +48,7 @@ fragment MenuItemData on MenuItem {
   localURLPath
   label
   rawLabel
-  attributeTitle
+  titleAttribute
   url
   classes
   target
