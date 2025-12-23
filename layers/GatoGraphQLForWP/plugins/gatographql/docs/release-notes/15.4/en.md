@@ -1,5 +1,9 @@
 # Release Notes: 15.4
 
+## Breaking changes
+
+- Renamed MenuItem fields: title => rawLabel, and rawTitle => attributeTitle ([#3251](https://github.com/GatoGraphQL/GatoGraphQL/pull/3251))
+
 ## Added
 
 - MenuItem.itemType and MenuItem.objectType fields ([#3249](https://github.com/GatoGraphQL/GatoGraphQL/pull/3249))

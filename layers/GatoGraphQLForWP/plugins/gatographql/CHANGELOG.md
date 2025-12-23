@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 15.4.0 - DATE
 
+### Breaking changes
+
+- Renamed MenuItem fields: title => rawLabel, and rawTitle => attributeTitle (#3251)
+
 ### Added
 
 - MenuItem.itemType and MenuItem.objectType fields (#3249)

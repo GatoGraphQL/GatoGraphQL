@@ -379,9 +379,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => MenusModule::class,
-                'envVariable' => MenusEnvironment::TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA,
+                'envVariable' => MenusEnvironment::TREAT_MENUITEM_RAW_LABEL_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_MENUS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_LABEL_AS_SENSITIVE_DATA,
             ],
             // Tag default/max limits
             [
