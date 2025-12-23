@@ -48,4 +48,6 @@ fragment MenuItemData on MenuItem {
   objectID
   parentID
   linkRelationship
+  itemType
+  objectType
 }
