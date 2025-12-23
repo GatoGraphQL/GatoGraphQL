@@ -168,7 +168,7 @@ abstract class AbstractCreateOrUpdateMenuMutationResolver extends AbstractMutati
 
         $itemsBy = $fieldDataAccessor->getValue(MutationInputProperties::ITEMS_BY);
         if ($itemsBy?->{MutationInputProperties::JSON} !== null) {
-            $menuData['json-items'] = $itemsBy?->{MutationInputProperties::JSON};
+            $menuData['json-items'] = $itemsBy->{MutationInputProperties::JSON};
         }
 
         if ($this->addMenuInputField()) {
