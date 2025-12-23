@@ -2,6 +2,8 @@
 
 ## Added
 
+- Menu.itemType and Menu.objectType fields ([#3249](https://github.com/GatoGraphQL/GatoGraphQL/pull/3249))
+
 ## Improvements
 
 ## Fixed
