@@ -299,22 +299,27 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     }
 
     /**
-     * @param array<int,stdClass> $entries
+     * @param array<int,stdClass|array<string,mixed>> $entries
      * @param stdClass $propertiesBy
      * @return array<int,stdClass>
      */
     protected function filterMenuItemPropertiesRecursively(array $entries, stdClass $propertiesBy): array
     {
         return array_map(
-            function (stdClass $entry) use ($propertiesBy): stdClass {
-                // Filter properties of the entry itself
-                $entryArray = (array) $entry;
+            function (stdClass|array $entry) use ($propertiesBy): stdClass {
+                // Convert to array if it's an object
+                $entryArray = is_array($entry) ? $entry : (array) $entry;
                 $filteredEntry = $this->filterMenuItemProperties($entryArray, $propertiesBy);
                 
                 // If entry has children, filter them recursively
-                if (isset($entry->children) && is_array($entry->children)) {
-                    /** @var array<int,stdClass> */
+                $children = null;
+                if (is_array($entry) && isset($entry['children']) && is_array($entry['children'])) {
+                    $children = $entry['children'];
+                } elseif ($entry instanceof stdClass && isset($entry->children) && is_array($entry->children)) {
                     $children = $entry->children;
+                }
+                
+                if ($children !== null) {
                     $filteredEntry['children'] = $this->filterMenuItemPropertiesRecursively($children, $propertiesBy);
                 }
                 
