@@ -328,7 +328,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         }
 
         if ($cssClasses !== []) {
-            $args['menu-item-classes'] = $cssClasses;
+            $args['menu-item-classes'] = implode(' ', $cssClasses);
         }
 
         if ($target !== '') {
