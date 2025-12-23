@@ -37,6 +37,10 @@ fragment MenuData on Menu {
 
 fragment MenuItemData on MenuItem {
   id
+  itemType
+  objectType
+  objectID
+  parentID
   localURLPath
   label
   title
@@ -45,7 +49,5 @@ fragment MenuItemData on MenuItem {
   classes
   target
   description
-  objectID
-  parentID
   linkRelationship
 }

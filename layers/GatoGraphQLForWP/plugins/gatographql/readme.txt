@@ -223,6 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 15.4.0 =
+* Added - MenuItem.itemType and MenuItem.objectType fields (#3249)
 * Fixed - Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)
 
 = 15.3.0 =
