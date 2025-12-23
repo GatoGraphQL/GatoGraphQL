@@ -167,7 +167,6 @@
         "pop-cms-schema/pagemeta-mutations": "<15.3.0",
         "pop-cms-schema/postmeta-mutations": "<15.3.0",
         "pop-schema/logger": "<15.3.0",
-        "pop-cms-schema/media-mutations-wp": "<15.3.0",
         "pop-cms-schema/media-mutations": "<15.3.0"
     },
     "type": "library",

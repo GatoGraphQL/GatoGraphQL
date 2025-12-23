@@ -141,6 +141,10 @@ services:
         - >-
           ../../layers/CMSSchema/packages/menus-wp:/app/vendor/pop-cms-schema/menus-wp
         - '../../layers/CMSSchema/packages/menus:/app/vendor/pop-cms-schema/menus'
+        - >-
+          ../../layers/CMSSchema/packages/menu-mutations-wp:/app/vendor/pop-cms-schema/menu-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/menu-mutations:/app/vendor/pop-cms-schema/menu-mutations
         - '../../layers/CMSSchema/packages/meta:/app/vendor/pop-cms-schema/meta'
         - >-
           ../../layers/CMSSchema/packages/meta-mutations:/app/vendor/pop-cms-schema/meta-mutations

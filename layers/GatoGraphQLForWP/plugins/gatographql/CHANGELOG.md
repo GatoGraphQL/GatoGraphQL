@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Menu mutations Root.createMenu, Root.updateMenu and Menu.update (#3253)
 - MenuItem.itemType and MenuItem.objectType fields (#3249)
 
 ### Improvements

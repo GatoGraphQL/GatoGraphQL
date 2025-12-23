@@ -41,6 +41,7 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\CustomPostMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMetaMutationsWP\Module::class,
             \PoPCMSSchema\MediaMutationsWP\Module::class,
+            \PoPCMSSchema\MenuMutationsWP\Module::class,
             \PoPCMSSchema\PageMutationsWP\Module::class,
             \PoPCMSSchema\PageMetaMutations\Module::class,
             \PoPCMSSchema\PostCategoriesWP\Module::class,
