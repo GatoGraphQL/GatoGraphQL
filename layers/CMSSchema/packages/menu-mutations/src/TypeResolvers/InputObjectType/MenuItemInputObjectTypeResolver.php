@@ -110,6 +110,7 @@ class MenuItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
+            MutationInputProperties::CSS_CLASSES,
             MutationInputProperties::CHILDREN
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
