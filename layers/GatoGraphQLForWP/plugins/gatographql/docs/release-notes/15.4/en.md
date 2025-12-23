@@ -2,7 +2,7 @@
 
 ## Breaking changes
 
-- Renamed MenuItem fields: title => rawLabel, and rawTitle => attributeTitle ([#3251](https://github.com/GatoGraphQL/GatoGraphQL/pull/3251))
+- Renamed MenuItem fields: title => rawLabel, and rawTitle => titleAttribute ([#3251](https://github.com/GatoGraphQL/GatoGraphQL/pull/3251))
 
 ## Added
 

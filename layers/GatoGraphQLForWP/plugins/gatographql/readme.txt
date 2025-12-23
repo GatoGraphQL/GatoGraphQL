@@ -223,7 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 15.4.0 =
-* Breaking change - Renamed MenuItem fields: title => rawLabel, and rawTitle => attributeTitle (#3251)
+* Breaking change - Renamed MenuItem fields: title => rawLabel, and rawTitle => titleAttribute (#3251)
 * Added - MenuItem.itemType and MenuItem.objectType fields (#3249)
 * Improved - Include/exclude properties in MenuItem.itemDataEntries (#3250)
 * Fixed - Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)

@@ -108,7 +108,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             // All other fields are properties in the object
             'label',
             'rawLabel',
-            'attributeTitle',
+            'titleAttribute',
             'url',
             'classes',
             'target',
@@ -142,7 +142,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'localURLPath' => $this->getStringScalarTypeResolver(),
             'label' => $this->getStringScalarTypeResolver(),
             'rawLabel' => $this->getStringScalarTypeResolver(),
-            'attributeTitle' => $this->getStringScalarTypeResolver(),
+            'titleAttribute' => $this->getStringScalarTypeResolver(),
             'url' => $this->getURLScalarTypeResolver(),
             'classes' => $this->getStringScalarTypeResolver(),
             'target' => $this->getStringScalarTypeResolver(),
@@ -172,7 +172,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'children' => $this->__('Menu item children items', 'menus'),
             'label' => $this->__('Menu item label', 'menus'),
             'rawLabel' => $this->__('Menu item label in raw format (as it exists in the database)', 'menus'),
-            'attributeTitle' => $this->__('Menu item attribute title', 'menus'),
+            'titleAttribute' => $this->__('Menu item attribute title', 'menus'),
             'localURLPath' => $this->__('Path of a local URL, or null if external URL', 'menus'),
             'url' => $this->__('Menu item URL', 'menus'),
             'classes' => $this->__('Menu item classes', 'menus'),
@@ -205,7 +205,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             // Commented out since this is the default FieldResolver's response
             // case 'label':
             // case 'rawLabel':
-            // case 'attributeTitle':
+            // case 'titleAttribute':
             // case 'url':
             // case 'classes':
             // case 'target':
