@@ -13,6 +13,7 @@
 ## Improvements
 
 - Include/exclude properties in MenuItem.itemDataEntries ([#3250](https://github.com/GatoGraphQL/GatoGraphQL/pull/3250))
+- Trigger a hook action before initializing enum string possible values ([#3254](https://github.com/GatoGraphQL/GatoGraphQL/pull/3254))
 
 ## Fixed
 
