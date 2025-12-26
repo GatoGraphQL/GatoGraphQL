@@ -19,6 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Include/exclude properties in MenuItem.itemDataEntries (#3250)
+- Trigger a hook action before initializing enum string possible values (#3254)
 
 ### Fixed
 
