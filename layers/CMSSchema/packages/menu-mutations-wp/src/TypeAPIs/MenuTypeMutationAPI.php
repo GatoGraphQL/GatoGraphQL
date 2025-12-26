@@ -526,7 +526,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         // Remove menu from all locations where it's currently assigned
         foreach ($navMenuLocations as $location => $assignedMenuID) {
             if ((int) $assignedMenuID === $menuID) {
-                unset($navMenuLocations[$location]);
+                $navMenuLocations[$location] = 0;
             }
         }
 
