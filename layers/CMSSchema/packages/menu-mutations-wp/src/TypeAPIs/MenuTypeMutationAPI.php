@@ -4,18 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MenuMutationsWP\TypeAPIs;
 
+use PoPCMSSchema\MenuMutationsWP\Constants\HookNames;
 use PoPCMSSchema\MenuMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MenuMutations\Exception\MenuCRUDMutationException;
 use PoPCMSSchema\MenuMutations\Enums\MenuItemType;
+use PoPCMSSchema\MenuMutations\Exception\MenuCRUDMutationException;
 use PoPCMSSchema\MenuMutations\TypeAPIs\MenuTypeMutationAPIInterface;
+use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use WP_Error;
 
 use function esc_url_raw;
+use function get_post_type;
 use function get_taxonomy;
 use function get_term;
-use function get_post_type;
 use function get_theme_mod;
 use function is_wp_error;
 use function sanitize_html_class;
@@ -25,10 +27,10 @@ use function sanitize_title;
 use function set_theme_mod;
 use function user_can;
 use function wp_delete_post;
+use function wp_get_nav_menu_items;
 use function wp_insert_term;
 use function wp_update_nav_menu_item;
 use function wp_update_term;
-use function wp_get_nav_menu_items;
 
 class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutationAPIInterface
 {
@@ -540,5 +542,10 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
 
         // Save menu locations
         set_theme_mod('nav_menu_locations', $navMenuLocations);
+
+        /**
+         * Allow Polylang to update the menu locations
+         */
+        App::doAction(HookNames::MENU_LOCATIONS_UPDATED, $menuID, $navMenuLocations);
     }
 }
