@@ -16,11 +16,13 @@ use function esc_url_raw;
 use function get_taxonomy;
 use function get_term;
 use function get_post_type;
+use function get_theme_mod;
 use function is_wp_error;
 use function sanitize_html_class;
 use function sanitize_text_field;
 use function sanitize_textarea_field;
 use function sanitize_title;
+use function set_theme_mod;
 use function user_can;
 use function wp_delete_post;
 use function wp_insert_term;
@@ -58,6 +60,11 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             (int) $menuID,
             $menuData,
             true,
+        );
+
+        $this->maybeAssignMenuLocations(
+            (int) $menuID,
+            $menuData,
         );
     }
 
@@ -104,6 +111,11 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             $menuID,
             $menuData,
             false,
+        );
+
+        $this->maybeAssignMenuLocations(
+            $menuID,
+            $menuData,
         );
 
         return $menuID;
@@ -491,5 +503,42 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         }
 
         return user_can((int) $userID, 'edit_term', (int) $menuID);
+    }
+
+    /**
+     * @param array<string,mixed> $menuData
+     */
+    protected function maybeAssignMenuLocations(
+        int $menuID,
+        array $menuData,
+    ): void {
+        $locations = $menuData['locations'] ?? null;
+        if ($locations === null || !is_array($locations)) {
+            return;
+        }
+
+        // Get current menu locations
+        $navMenuLocations = get_theme_mod('nav_menu_locations', []);
+        if (!is_array($navMenuLocations)) {
+            $navMenuLocations = [];
+        }
+
+        // Remove menu from all locations where it's currently assigned
+        foreach ($navMenuLocations as $location => $assignedMenuID) {
+            if ((int) $assignedMenuID === $menuID) {
+                unset($navMenuLocations[$location]);
+            }
+        }
+
+        // Assign menu to specified locations
+        foreach ($locations as $location) {
+            if (!is_string($location)) {
+                continue;
+            }
+            $navMenuLocations[$location] = $menuID;
+        }
+
+        // Save menu locations
+        set_theme_mod('nav_menu_locations', $navMenuLocations);
     }
 }
