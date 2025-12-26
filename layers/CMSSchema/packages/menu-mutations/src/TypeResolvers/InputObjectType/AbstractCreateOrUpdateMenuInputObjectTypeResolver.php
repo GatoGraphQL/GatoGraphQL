@@ -125,7 +125,6 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
     {
         $inputFieldTypeModifiers = match ($inputFieldName) {
             MutationInputProperties::ID => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::NAME => SchemaTypeModifiers::MANDATORY,
             MutationInputProperties::LOCATIONS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
