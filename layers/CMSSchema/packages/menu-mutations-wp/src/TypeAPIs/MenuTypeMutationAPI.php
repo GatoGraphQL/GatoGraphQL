@@ -546,6 +546,6 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         /**
          * Allow Polylang to update the menu locations
          */
-        App::doAction(HookNames::MENU_LOCATIONS_UPDATED, $menuID, $navMenuLocations);
+        App::doAction(HookNames::MENU_LOCATIONS_UPDATED, $navMenuLocations, $menuID);
     }
 }
