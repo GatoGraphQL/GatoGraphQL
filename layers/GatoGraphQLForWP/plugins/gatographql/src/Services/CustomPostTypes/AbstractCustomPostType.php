@@ -241,6 +241,39 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 2
             );
         }
+
+        /**
+         * Configure text-only editor if enabled
+         */
+        if ($this->useTextOnlyEditorForCustomPostType()) {
+            // Disable visual editor (WYSIWYG) - use text-only editor
+            add_filter(
+                'user_can_richedit',
+                $this->disableVisualEditor(...),
+                10,
+                1
+            );
+
+            // Remove "Add Media" button from editor
+            add_action(
+                'admin_head',
+                $this->removeMediaButtons(...)
+            );
+            add_filter(
+                'media_buttons_context',
+                $this->removeMediaButtonsContext(...),
+                10,
+                1
+            );
+
+            // Remove HTML formatting buttons (Quicktags) from editor
+            add_filter(
+                'quicktags_settings',
+                $this->removeQuicktagsButtons(...),
+                10,
+                2
+            );
+        }
     }
 
     public function useBlockEditorForCustomPostType(
@@ -256,6 +289,100 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     protected function doUseBlockEditorForCustomPostType(): bool
     {
         return true;
+    }
+
+    /**
+     * Indicate if to use text-only editor (no visual editor, no media buttons, no quicktags)
+     */
+    protected function useTextOnlyEditorForCustomPostType(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Disable visual editor for this CPT
+     */
+    protected function disableVisualEditor(bool $canRichEdit): bool
+    {
+        if ($this->isEditingThisPostType()) {
+            return false;
+        }
+        return $canRichEdit;
+    }
+
+    /**
+     * Remove "Add Media" button from editor using CSS
+     */
+    protected function removeMediaButtons(): void
+    {
+        if (!$this->isEditingThisPostType()) {
+            return;
+        }
+
+        // Hide media buttons and quicktags toolbar with CSS
+        echo '<style>
+            #post-body-content .wp-media-buttons {
+                display: none !important;
+            }
+            #wp-content-editor-container .wp-editor-tools,
+            #wp-content-editor-container .quicktags-toolbar {
+                display: none !important;
+            }
+        </style>';
+    }
+
+    /**
+     * Remove "Add Media" button from editor using filter
+     */
+    protected function removeMediaButtonsContext(string $context): string
+    {
+        if ($this->isEditingThisPostType()) {
+            return '';
+        }
+        return $context;
+    }
+
+    /**
+     * Remove HTML formatting buttons (Quicktags) from editor
+     *
+     * @param array<string,mixed> $qtInit
+     * @param string $editorId
+     * @return array<string,mixed>
+     */
+    protected function removeQuicktagsButtons(array $qtInit, string $editorId): array
+    {
+        if (!$this->isEditingThisPostType()) {
+            return $qtInit;
+        }
+
+        // Disable all quicktags buttons
+        $qtInit['buttons'] = '';
+        return $qtInit;
+    }
+
+    /**
+     * Check if we're currently editing this post type
+     */
+    protected function isEditingThisPostType(): bool
+    {
+        $screen = \get_current_screen();
+        if ($screen && isset($screen->post_type) && $screen->post_type === $this->getCustomPostType()) {
+            return true;
+        }
+
+        // Fallback: check global $post
+        global $post;
+        if ($post && isset($post->post_type) && $post->post_type === $this->getCustomPostType()) {
+            return true;
+        }
+
+        // Fallback: check global $typenow
+        global $typenow;
+        if ($typenow && $typenow === $this->getCustomPostType()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
