@@ -248,9 +248,14 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         string $customPostType,
     ): bool {
         if ($this->getCustomPostType() === $customPostType) {
-            return true;
+            return $this->doUseBlockEditorForCustomPostType();
         }
         return $useBlockEditorForCustomPostType;
+    }
+
+    protected function doUseBlockEditorForCustomPostType(): bool
+    {
+        return true;
     }
 
     /**
