@@ -274,6 +274,14 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 2
             );
         }
+
+        if (!$this->doUseBlockEditorForCustomPostType()) {
+            // Set default content in editor for new posts
+            add_action(
+                'admin_head',
+                $this->setDefaultEditorContent(...)
+            );
+        }
     }
 
     public function useBlockEditorForCustomPostType(
@@ -383,6 +391,58 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
 
         return false;
+    }
+
+    /**
+     * Set default content in editor for new posts
+     */
+    protected function setDefaultEditorContent(): void
+    {
+        if (!$this->isEditingThisPostType()) {
+            return;
+        }
+
+        // Only set default content for new posts (auto-draft status)
+        global $post;
+        if ($post && isset($post->post_status) && $post->post_status !== 'auto-draft') {
+            return;
+        }
+
+        // Check if content is already set
+        if ($post && isset($post->post_content) && $post->post_content !== '') {
+            return;
+        }
+
+        $initialContent = $this->getInitialEditorContent();
+        if ($initialContent === '') {
+            return;
+        }
+
+        // Set default content in the textarea
+        echo '<script>
+            (function() {
+                function setDefaultContent() {
+                    var contentTextarea = document.getElementById("content");
+                    if (contentTextarea && !contentTextarea.value.trim()) {
+                        contentTextarea.value = ' . \json_encode($initialContent, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . ';
+                    }
+                }
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", setDefaultContent);
+                } else {
+                    setDefaultContent();
+                }
+            })();
+        </script>';
+    }
+
+    /**
+     * Get the initial content for the editor
+     * Override this method to provide default content for new posts
+     */
+    protected function getInitialEditorContent(): string
+    {
+        return '';
     }
 
     /**
