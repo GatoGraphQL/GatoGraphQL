@@ -414,7 +414,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
 
         $initialContent = $this->getInitialEditorContent();
-        if ($initialContent === '') {
+        if ($initialContent === null || $initialContent === '') {
             return;
         }
 
@@ -439,10 +439,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     /**
      * Get the initial content for the editor
      * Override this method to provide default content for new posts
+     * Return null to skip setting default content
      */
-    protected function getInitialEditorContent(): string
+    protected function getInitialEditorContent(): ?string
     {
-        return '';
+        return null;
     }
 
     /**
