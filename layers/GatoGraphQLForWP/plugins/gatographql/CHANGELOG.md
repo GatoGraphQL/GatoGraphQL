@@ -20,6 +20,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Include/exclude properties in MenuItem.itemDataEntries (#3250)
 - Trigger a hook action before initializing enum string possible values (#3254)
+- Support text-only classic-editor CPT for the plugin (#3255)
 
 ### Fixed
 

@@ -229,6 +229,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - MenuItem.itemType and MenuItem.objectType fields (#3249)
 * Improved - Include/exclude properties in MenuItem.itemDataEntries (#3250)
 * Improved - Trigger a hook action before initializing enum string possible values (#3254)
+* Improved - Support text-only classic-editor CPT for the plugin (#3255)
 * Fixed - Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)
 
 = 15.4.0 =
