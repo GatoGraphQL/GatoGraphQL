@@ -1916,6 +1916,26 @@
                     "enumValues": null
                 },
                 {
+                    "name": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
@@ -2000,6 +2020,26 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
                         "namespacedName": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToEditMenuErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToEditMenuErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToEditMenuErrorPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -2462,6 +2502,12 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "propertiesBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -2510,6 +2556,26 @@
                     "enumValues": null
                 },
                 {
+                    "name": "MenuDoesNotExistErrorPayload",
+                    "extensions": {
+                        "elementName": "MenuDoesNotExistErrorPayload",
+                        "namespacedName": "MenuDoesNotExistErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "MenuItem",
                     "extensions": {
                         "elementName": "MenuItem",
@@ -2526,7 +2592,7 @@
                             "args": []
                         },
                         {
-                            "name": "classes",
+                            "name": "cssClasses",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -2551,6 +2617,14 @@
                         },
                         {
                             "name": "id",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "itemType",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -2590,6 +2664,14 @@
                             "args": []
                         },
                         {
+                            "name": "objectType",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "parentID",
                             "extensions": {
                                 "isMutation": false,
@@ -2598,7 +2680,7 @@
                             "args": []
                         },
                         {
-                            "name": "rawTitle",
+                            "name": "rawLabel",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": true
@@ -2622,7 +2704,7 @@
                             "args": []
                         },
                         {
-                            "name": "title",
+                            "name": "titleAttribute",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -3026,6 +3108,42 @@
                         },
                         {
                             "name": "createMediaItems",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createMenu",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createMenus",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -4345,6 +4463,42 @@
                         },
                         {
                             "name": "updateMediaItems",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateMenu",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateMenus",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -8358,6 +8512,42 @@
                             ]
                         },
                         {
+                            "name": "createMenu",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createMenus",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPage",
                             "extensions": {
                                 "isMutation": true,
@@ -10797,6 +10987,42 @@
                             ]
                         },
                         {
+                            "name": "updateMenu",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateMenus",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePage",
                             "extensions": {
                                 "isMutation": true,
@@ -11736,6 +11962,50 @@
                         },
                         {
                             "name": "mediaItemID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateMenuMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreateMenuMutationPayload",
+                        "namespacedName": "RootCreateMenuMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "menu",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "menuID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -13407,6 +13677,50 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdateMenuMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdateMenuMutationPayload",
+                        "namespacedName": "RootUpdateMenuMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "menu",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "menuID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdatePageMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdatePageMutationPayload",
@@ -14225,6 +14539,26 @@
                     "extensions": {
                         "elementName": "UserDoesNotExistErrorPayload",
                         "namespacedName": "UserDoesNotExistErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "UserHasNoPermissionToCreateMenusErrorPayload",
+                    "extensions": {
+                        "elementName": "UserHasNoPermissionToCreateMenusErrorPayload",
+                        "namespacedName": "UserHasNoPermissionToCreateMenusErrorPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -15254,7 +15588,8 @@
                         "namespacedName": "MenuLocationEnumString",
                         "possibleValues": [
                             "footer",
-                            "primary"
+                            "primary",
+                            "secondary"
                         ]
                     },
                     "fields": null,
@@ -15912,7 +16247,7 @@
                             "name": "metaKeys",
                             "extensions": {
                                 "isMutation": false,
-                                "isSensitiveDataElement": true
+                                "isSensitiveDataElement": false
                             },
                             "args": [
                                 {
@@ -17182,6 +17517,102 @@
                     "enumValues": null
                 },
                 {
+                    "name": "MenuItemInput",
+                    "extensions": {
+                        "elementName": "MenuItemInput",
+                        "namespacedName": "MenuItemInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "children",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "cssClasses",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "itemType",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "label",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "linkRelationship",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "objectID",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "objectType",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "target",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "titleAttribute",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "url",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "MenuItemsByInput",
+                    "extensions": {
+                        "elementName": "MenuItemsByInput",
+                        "namespacedName": "MenuItemsByInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "json",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "MenuSortInput",
                     "extensions": {
                         "elementName": "MenuSortInput",
@@ -18236,6 +18667,42 @@
                         },
                         {
                             "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateMenuInput",
+                    "extensions": {
+                        "elementName": "RootCreateMenuInput",
+                        "namespacedName": "RootCreateMenuInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "itemsBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "locations",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -20452,6 +20919,48 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdateMenuInput",
+                    "extensions": {
+                        "elementName": "RootUpdateMenuInput",
+                        "namespacedName": "RootUpdateMenuInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "itemsBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "locations",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdatePageInput",
                     "extensions": {
                         "elementName": "RootUpdatePageInput",
@@ -22036,6 +22545,36 @@
                     ]
                 },
                 {
+                    "name": "MenuItemTypeEnum",
+                    "extensions": {
+                        "elementName": "MenuItemTypeEnum",
+                        "namespacedName": "MenuItemTypeEnum",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": [
+                        {
+                            "name": "custom",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "post_type",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ]
+                },
+                {
                     "name": "MenuOrderByEnum",
                     "extensions": {
                         "elementName": "MenuOrderByEnum",
@@ -22741,6 +23280,17 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateMenuMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreateMenuMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreateMenuMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreatePageMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootCreatePageMutationErrorPayloadUnion",
@@ -23163,6 +23713,17 @@
                     "extensions": {
                         "elementName": "RootUpdateMediaItemMutationErrorPayloadUnion",
                         "namespacedName": "RootUpdateMediaItemMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateMenuMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdateMenuMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateMenuMutationErrorPayloadUnion",
                         "possibleValues": null
                     },
                     "fields": null,

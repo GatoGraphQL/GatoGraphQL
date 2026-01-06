@@ -3739,6 +3739,13 @@
                 "tags": []
             },
             {
+                "__typename": "Post",
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block",
+                "customPostType": "post",
+                "tags": []
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -4529,40 +4536,6 @@
                         "taxonomy": "dummy-tag"
                     }
                 ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1658,
-                "title": "Dummy CPT with no content",
-                "customPostType": "dummy-cpt",
-                "tags": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 24,
-                        "name": "Hip Hop",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 30,
-                        "name": "Tango",
-                        "taxonomy": "dummy-tag"
-                    }
-                ],
-                "tagsWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 24,
-                        "name": "Hip Hop",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 30,
-                        "name": "Tango",
-                        "taxonomy": "dummy-tag"
-                    }
-                ]
             }
         ],
         "customPostsByTagIDs": [
@@ -4825,6 +4798,10 @@
                 "title": "Post with corrupted non-breaking space"
             },
             {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block"
+            },
+            {
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
                 "tags": [
@@ -4875,18 +4852,6 @@
             {
                 "id": 1656,
                 "title": "Dummy CPT with non-existing block",
-                "tags": [
-                    {
-                        "id": 24
-                    },
-                    {
-                        "id": 30
-                    }
-                ]
-            },
-            {
-                "id": 1658,
-                "title": "Dummy CPT with no content",
                 "tags": [
                     {
                         "id": 24
@@ -5220,6 +5185,10 @@
                 "title": "Post with corrupted non-breaking space"
             },
             {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block"
+            },
+            {
                 "id": 1619,
                 "title": "Error debitis nulla vel est",
                 "tags": [
@@ -5245,11 +5214,6 @@
             {
                 "id": 1682,
                 "title": "Dummy CPT with several levels of children",
-                "tags": []
-            },
-            {
-                "id": 1684,
-                "title": "Dummy CPT with parent and children",
                 "tags": []
             }
         ],

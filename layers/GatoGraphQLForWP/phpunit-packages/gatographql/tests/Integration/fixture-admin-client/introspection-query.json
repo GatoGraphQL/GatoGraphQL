@@ -4067,6 +4067,42 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+                    "description": "Error payload for: \"The user cannot edit menus\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit pages\"",
                     "fields": [
@@ -4213,6 +4249,42 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
                     "description": "Error payload for: \"The user has no permission to edit the media item\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoPermissionToEditMenuErrorPayload",
+                    "description": "Error payload for: \"The user has no permission to edit the menu\"",
                     "fields": [
                         {
                             "name": "message",
@@ -5177,6 +5249,17 @@
                                         }
                                     },
                                     "defaultValue": "false"
+                                },
+                                {
+                                    "name": "propertiesBy",
+                                    "description": "Filter properties to include or exclude in the menu item data entries",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeExcludeFilterInput",
+                                        "isOneOf": true,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
                                 }
                             ],
                             "type": {
@@ -5318,6 +5401,42 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "MenuDoesNotExistErrorPayload",
+                    "description": "Error payload for: \"The requested menu does not exist\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "MenuItem",
                     "description": "Items (links, pages, etc) added to a menu",
                     "fields": [
@@ -5345,7 +5464,7 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "classes",
+                            "name": "cssClasses",
                             "description": "Menu item classes",
                             "args": [],
                             "type": {
@@ -5417,6 +5536,19 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "itemType",
+                            "description": "The type of menu item (e.g., \"post_type\", \"taxonomy\", \"custom\")",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "label",
                             "description": "Menu item label",
                             "args": [],
@@ -5469,6 +5601,19 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "objectType",
+                            "description": "The type of object linked to by the menu item (e.g., \"post\", \"page\", \"category\")",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "parentID",
                             "description": "Menu item's parent ID",
                             "args": [],
@@ -5482,8 +5627,8 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "rawTitle",
-                            "description": "Menu item title in raw format (as it exists in the database)",
+                            "name": "rawLabel",
+                            "description": "Menu item label in raw format (as it exists in the database)",
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
@@ -5526,8 +5671,8 @@
                             "deprecationReason": null
                         },
                         {
-                            "name": "title",
-                            "description": "Menu item title",
+                            "name": "titleAttribute",
+                            "description": "Menu item attribute title",
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
@@ -6726,6 +6871,112 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootCreateMediaItemMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "createMenu",
+                            "description": "Create a menu",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to create a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootCreateMenuInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootCreateMenuInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootCreateMenuMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootCreateMenuMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "createMenus",
+                            "description": "Create menus",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to create a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootCreateMenuInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootCreateMenuInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootCreateMenuInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootCreateMenuInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootCreateMenuMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootCreateMenuMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootCreateMenuMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootCreateMenuMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -10595,6 +10846,112 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootUpdateMediaItemMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "updateMenu",
+                            "description": "Update a menu",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to update a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateMenuInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootUpdateMenuInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootUpdateMenuMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootUpdateMenuMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "updateMenus",
+                            "description": "Update menus",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to update a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootUpdateMenuInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootUpdateMenuInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootUpdateMenuInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootUpdateMenuInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootUpdateMenuMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootUpdateMenuMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateMenuMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootUpdateMenuMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -20136,6 +20493,112 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "createMenu",
+                            "description": "Create a menu",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to create a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootCreateMenuInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootCreateMenuInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootCreateMenuMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootCreateMenuMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "createMenus",
+                            "description": "Create menus",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to create a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootCreateMenuInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootCreateMenuInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootCreateMenuInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootCreateMenuInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootCreateMenuMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootCreateMenuMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootCreateMenuMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootCreateMenuMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "createPage",
                             "description": "Create a page",
                             "args": [
@@ -26555,6 +27018,112 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "updateMenu",
+                            "description": "Update a menu",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to update a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateMenuInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootUpdateMenuInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootUpdateMenuMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootUpdateMenuMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "updateMenus",
+                            "description": "Update menus",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to update a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootUpdateMenuInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootUpdateMenuInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootUpdateMenuInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootUpdateMenuInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootUpdateMenuMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootUpdateMenuMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateMenuMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootUpdateMenuMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "updatePage",
                             "description": "Update a page",
                             "args": [
@@ -28639,6 +29208,84 @@
                         },
                         {
                             "name": "mediaItemID",
+                            "description": "ID of the entity, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "RootCreateMenuMutationPayload",
+                    "description": "Payload of creating a menu",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootCreateMenuMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootCreateMenuMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootCreateMenuMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "menu",
+                            "description": "Object affected by the mutation, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "OBJECT",
+                                "name": "Menu",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "menuID",
                             "description": "ID of the entity, if the operation was successful",
                             "args": [],
                             "type": {
@@ -31614,6 +32261,84 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "RootUpdateMenuMutationPayload",
+                    "description": "Payload of updating a menu",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootUpdateMenuMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootUpdateMenuMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootUpdateMenuMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "menu",
+                            "description": "Object affected by the mutation, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "OBJECT",
+                                "name": "Menu",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "menuID",
+                            "description": "ID of the entity, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "RootUpdatePageMutationPayload",
                     "description": "Payload of executing an update mutation on a page",
                     "fields": [
@@ -33299,6 +34024,42 @@
                     "kind": "OBJECT",
                     "name": "UserDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The user does not exist\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "UserHasNoPermissionToCreateMenusErrorPayload",
+                    "description": "Error payload for: \"The user has no permission to create menus\"",
                     "fields": [
                         {
                             "name": "message",
@@ -35193,7 +35954,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "MenuLocationEnumString",
-                    "description": "Menu Locations. Possible values: `footer`, `primary`.",
+                    "description": "Menu Locations. Possible values: `footer`, `primary`, `secondary`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -36239,6 +37000,12 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
                             "isOneOf": false,
                             "ofType": null
@@ -36269,6 +37036,12 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToEditMenuErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
                             "isOneOf": false,
                             "ofType": null
@@ -36293,6 +37066,12 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "MenuDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "PasswordIsIncorrectErrorPayload",
                             "isOneOf": false,
                             "ofType": null
@@ -36312,6 +37091,12 @@
                         {
                             "kind": "OBJECT",
                             "name": "UserDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserHasNoPermissionToCreateMenusErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -39042,7 +39827,7 @@
                     "inputFields": [
                         {
                             "name": "exclude",
-                            "description": "Names to be excluded",
+                            "description": "Items to be excluded",
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String!]",
@@ -39063,7 +39848,7 @@
                         },
                         {
                             "name": "include",
-                            "description": "Names to be included",
+                            "description": "Items to be included",
                             "type": {
                                 "kind": "LIST",
                                 "name": "[String!]",
@@ -39254,6 +40039,190 @@
                                 "name": "String",
                                 "isOneOf": false,
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "MenuItemInput",
+                    "description": "Input for a Menu Item",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "children",
+                            "description": "Child menu items",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[MenuItemInput!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "MenuItemInput!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MenuItemInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "cssClasses",
+                            "description": "Menu item CSS classes",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "description",
+                            "description": "Menu item description",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "itemType",
+                            "description": "The menu item type",
+                            "type": {
+                                "kind": "ENUM",
+                                "name": "MenuItemTypeEnum",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "label",
+                            "description": "Menu item label",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "linkRelationship",
+                            "description": "Menu item link relationship (rel\/xfn)",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "objectID",
+                            "description": "The ID of the linked object (eg: post ID)",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "objectType",
+                            "description": "The type of the linked object (post type or taxonomy)",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "target",
+                            "description": "Menu item target",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "titleAttribute",
+                            "description": "Menu item title attribute (attr-title)",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "url",
+                            "description": "Menu item URL",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "MenuItemsByInput",
+                    "description": "Input to select how to provide the menu items",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "json",
+                            "description": "Input the menu items list",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[MenuItemInput!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "MenuItemInput!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "MenuItemInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
                             },
                             "defaultValue": null
                         }
@@ -41233,6 +42202,71 @@
                         {
                             "name": "title",
                             "description": "Attachment title",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootCreateMenuInput",
+                    "description": "Input to create a menu",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "itemsBy",
+                            "description": "Menu items",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "MenuItemsByInput",
+                                "isOneOf": true,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "locations",
+                            "description": "Menu locations to assign the menu to",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[MenuLocationEnumString!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "MenuLocationEnumString!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "MenuLocationEnumString",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "name",
+                            "description": "Menu name",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slug",
+                            "description": "Menu slug",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
@@ -45884,6 +46918,87 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
+                    "name": "RootUpdateMenuInput",
+                    "description": "Input to update a menu",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "description": "Menu item ID",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "itemsBy",
+                            "description": "Menu items",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "MenuItemsByInput",
+                                "isOneOf": true,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "locations",
+                            "description": "Menu locations to assign the menu to",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[MenuLocationEnumString!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "MenuLocationEnumString!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "MenuLocationEnumString",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "name",
+                            "description": "Menu name",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slug",
+                            "description": "Menu slug",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
                     "name": "RootUpdatePageInput",
                     "description": "Input to update a custom post",
                     "fields": null,
@@ -48452,6 +49567,35 @@
                 },
                 {
                     "kind": "ENUM",
+                    "name": "MenuItemTypeEnum",
+                    "description": null,
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": [
+                        {
+                            "name": "custom",
+                            "description": "Custom link menu item",
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "post_type",
+                            "description": "Menu item linking to a post type object",
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "taxonomy",
+                            "description": "Menu item linking to a taxonomy term",
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "ENUM",
                     "name": "MenuOrderByEnum",
                     "description": null,
                     "fields": null,
@@ -49684,6 +50828,53 @@
                         {
                             "kind": "OBJECT",
                             "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootCreateMenuMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when creating a menu",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "MenuDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserHasNoPermissionToCreateMenusErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -51679,6 +52870,53 @@
                         {
                             "kind": "OBJECT",
                             "name": "UserDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootUpdateMenuMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when updating a menu",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToEditMenuErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "MenuDoesNotExistErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
