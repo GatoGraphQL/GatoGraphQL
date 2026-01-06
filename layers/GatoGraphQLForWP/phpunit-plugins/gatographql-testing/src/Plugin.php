@@ -18,6 +18,7 @@ use function add_action;
 use function delete_option;
 use function flush_rewrite_rules;
 use function get_option;
+use function register_nav_menus;
 
 class Plugin
 {
@@ -63,6 +64,7 @@ class Plugin
 
         add_action('init', $this->registerTestingTaxonomies(...));
         add_action('init', $this->registerRESTFields(...));
+        add_action('after_setup_theme', $this->registerMenuLocations(...));
     }
 
     /**
@@ -524,5 +526,16 @@ class Plugin
             'not_found_in_trash' => sprintf(\__('No %s found in Trash', 'gatographql'), $names_lc),
             'parent_item_colon'  => sprintf(\__('Parent %s:', 'gatographql'), $name_uc),
         );
+    }
+
+    /**
+     * Register theme menu locations
+     */
+    protected function registerMenuLocations(): void
+    {
+        register_nav_menus( [
+            'primary' => __( 'Header', 'bricks-child-playground' ),
+            'secondary' => __( 'Footer', 'bricks-child-playground' ),
+        ] );
     }
 }
