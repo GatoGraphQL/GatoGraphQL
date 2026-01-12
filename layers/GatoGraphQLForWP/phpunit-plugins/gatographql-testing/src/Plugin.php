@@ -533,9 +533,9 @@ class Plugin
      */
     protected function registerMenuLocations(): void
     {
-        register_nav_menus( [
-            'primary' => __( 'Header', 'bricks-child-playground' ),
-            'secondary' => __( 'Footer', 'bricks-child-playground' ),
-        ] );
+        register_nav_menus([
+            'primary' => __('Header', 'bricks-child-playground'),
+            'secondary' => __('Footer', 'bricks-child-playground'),
+        ]);
     }
 }
