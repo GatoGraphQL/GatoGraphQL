@@ -4,6 +4,28 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 16.0.0 - 12/01/2026
+
+### Breaking changes
+
+- Renamed MenuItem fields: title to rawLabel, and rawTitle to titleAttribute (#3251)
+- Renamed MenuItem.classes to cssClasses (#3252)
+
+### Added
+
+- Menu mutations Root.createMenu, Root.updateMenu and Menu.update (#3253)
+- MenuItem.itemType and MenuItem.objectType fields (#3249)
+
+### Improvements
+
+- Include/exclude properties in MenuItem.itemDataEntries (#3250)
+- Trigger a hook action before initializing enum string possible values (#3254)
+- Support text-only classic-editor CPT for the plugin (#3255)
+
+### Fixed
+
+- Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)
+
 ## 15.3.0 - 16/12/2025
 
 ### Added

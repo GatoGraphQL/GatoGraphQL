@@ -116,6 +116,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload"
         },
         {
@@ -133,6 +137,10 @@
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToEditMenuErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -157,6 +165,10 @@
         {
           "kind": "OBJECT",
           "name": "Menu"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "MenuDoesNotExistErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -241,6 +253,10 @@
         {
           "kind": "OBJECT",
           "name": "RootCreateMediaItemMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreateMenuMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -400,6 +416,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdateMenuMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootUpdatePageMutationPayload"
         },
         {
@@ -445,6 +465,10 @@
         {
           "kind": "OBJECT",
           "name": "UserDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserHasNoPermissionToCreateMenusErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -820,6 +844,14 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "MenuItemInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "MenuItemsByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "MenuSortInput"
         },
         {
@@ -929,6 +961,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootCreateMediaItemInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCreateMenuInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -1120,6 +1156,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootUpdateMenuInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootUpdatePageInput"
         },
         {
@@ -1244,6 +1284,10 @@
         },
         {
           "kind": "ENUM",
+          "name": "MenuItemTypeEnum"
+        },
+        {
+          "kind": "ENUM",
           "name": "MenuOrderByEnum"
         },
         {
@@ -1349,6 +1393,10 @@
         {
           "kind": "UNION",
           "name": "RootCreateMediaItemMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootCreateMenuMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
@@ -1505,6 +1553,10 @@
         {
           "kind": "UNION",
           "name": "RootUpdateMediaItemMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateMenuMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",

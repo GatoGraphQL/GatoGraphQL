@@ -241,6 +241,47 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 2
             );
         }
+
+        /**
+         * Configure text-only editor if enabled
+         */
+        if ($this->useTextOnlyEditorForCustomPostType()) {
+            // Disable visual editor (WYSIWYG) - use text-only editor
+            add_filter(
+                'user_can_richedit',
+                $this->disableVisualEditor(...),
+                10,
+                1
+            );
+
+            // Remove "Add Media" button from editor
+            add_action(
+                'admin_head',
+                $this->removeMediaButtons(...)
+            );
+            add_filter(
+                'media_buttons_context',
+                $this->removeMediaButtonsContext(...),
+                10,
+                1
+            );
+
+            // Remove HTML formatting buttons (Quicktags) from editor
+            add_filter(
+                'quicktags_settings',
+                $this->removeQuicktagsButtons(...),
+                10,
+                2
+            );
+        }
+
+        if (!$this->doUseBlockEditorForCustomPostType()) {
+            // Set default content in editor for new posts
+            add_action(
+                'admin_head',
+                $this->setDefaultEditorContent(...)
+            );
+        }
     }
 
     public function useBlockEditorForCustomPostType(
@@ -248,9 +289,161 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         string $customPostType,
     ): bool {
         if ($this->getCustomPostType() === $customPostType) {
-            return true;
+            return $this->doUseBlockEditorForCustomPostType();
         }
         return $useBlockEditorForCustomPostType;
+    }
+
+    protected function doUseBlockEditorForCustomPostType(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Indicate if to use text-only editor (no visual editor, no media buttons, no quicktags)
+     */
+    protected function useTextOnlyEditorForCustomPostType(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Disable visual editor for this CPT
+     */
+    protected function disableVisualEditor(bool $canRichEdit): bool
+    {
+        if ($this->isEditingThisCustomPostType()) {
+            return false;
+        }
+        return $canRichEdit;
+    }
+
+    /**
+     * Remove "Add Media" button from editor using CSS
+     */
+    protected function removeMediaButtons(): void
+    {
+        if (!$this->isEditingThisCustomPostType()) {
+            return;
+        }
+
+        // Hide media buttons and quicktags toolbar with CSS
+        echo '<style>
+            #post-body-content .wp-media-buttons {
+                display: none !important;
+            }
+            #wp-content-editor-container .wp-editor-tools,
+            #wp-content-editor-container .quicktags-toolbar {
+                display: none !important;
+            }
+        </style>';
+    }
+
+    /**
+     * Remove "Add Media" button from editor using filter
+     */
+    protected function removeMediaButtonsContext(string $context): string
+    {
+        if ($this->isEditingThisCustomPostType()) {
+            return '';
+        }
+        return $context;
+    }
+
+    /**
+     * Remove HTML formatting buttons (Quicktags) from editor
+     *
+     * @param array<string,mixed> $qtInit
+     * @param string $editorId
+     * @return array<string,mixed>
+     */
+    protected function removeQuicktagsButtons(array $qtInit, string $editorId): array
+    {
+        if (!$this->isEditingThisCustomPostType()) {
+            return $qtInit;
+        }
+
+        // Disable all quicktags buttons
+        $qtInit['buttons'] = '';
+        return $qtInit;
+    }
+
+    /**
+     * Check if we're currently editing this custom post type
+     */
+    protected function isEditingThisCustomPostType(): bool
+    {
+        $screen = \get_current_screen();
+        if ($screen !== null && $screen->post_type === $this->getCustomPostType()) {
+            return true;
+        }
+
+        // Fallback: check global $post
+        global $post;
+        if ($post && isset($post->post_type) && $post->post_type === $this->getCustomPostType()) {
+            return true;
+        }
+
+        // Fallback: check global $typenow
+        global $typenow;
+        if ($typenow && $typenow === $this->getCustomPostType()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Set default content in editor for new posts
+     */
+    protected function setDefaultEditorContent(): void
+    {
+        if (!$this->isEditingThisCustomPostType()) {
+            return;
+        }
+
+        // Only set default content for new posts (auto-draft status)
+        global $post;
+        if ($post && isset($post->post_status) && $post->post_status !== 'auto-draft') {
+            return;
+        }
+
+        // Check if content is already set
+        if ($post && isset($post->post_content) && $post->post_content !== '') {
+            return;
+        }
+
+        $initialContent = $this->getInitialEditorContent();
+        if ($initialContent === null || $initialContent === '') {
+            return;
+        }
+
+        // Set default content in the textarea
+        echo '<script>
+            (function() {
+                function setDefaultContent() {
+                    var contentTextarea = document.getElementById("content");
+                    if (contentTextarea && !contentTextarea.value.trim()) {
+                        contentTextarea.value = ' . \json_encode($initialContent, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . ';
+                    }
+                }
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", setDefaultContent);
+                } else {
+                    setDefaultContent();
+                }
+            })();
+        </script>';
+    }
+
+    /**
+     * Get the initial content for the editor
+     * Override this method to provide default content for new posts
+     * Return null to skip setting default content
+     */
+    protected function getInitialEditorContent(): ?string
+    {
+        return null;
     }
 
     /**

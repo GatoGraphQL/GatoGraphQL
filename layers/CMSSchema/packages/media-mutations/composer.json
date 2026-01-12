@@ -56,7 +56,6 @@
         "pop-cms-schema/custompost-user-mutations": "<15.3.0",
         "pop-cms-schema/customposts-wp": "<15.3.0",
         "pop-cms-schema/taxonomies-wp": "<15.3.0",
-        "pop-cms-schema/media-mutations-wp": "<15.3.0",
         "pop-cms-schema/custompostmedia-wp": "<15.3.0",
         "pop-cms-schema/menus": "<15.3.0",
         "pop-cms-schema/post-categories": "<15.3.0",

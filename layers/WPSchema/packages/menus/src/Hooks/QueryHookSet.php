@@ -44,7 +44,7 @@ class QueryHookSet extends AbstractHookSet
                     // If no menu was found with the location, then return no results
                     // via ID '-1', which does not exist
                     $query['include'] = -1;
-                } elseif ($query['include']) {
+                } elseif ($query['include'] ?? null) {
                     // If other IDs had been requested already, do the intersection among them
                     $intersectedMenuIDs = array_intersect(
                         explode(',', $query['include']),

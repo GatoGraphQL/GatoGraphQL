@@ -75,6 +75,8 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPCMSSchema\CustomPostsWP\Module::class,
             \PoPCMSSchema\Media\Module::class,
             \PoPCMSSchema\Menus\Module::class,
+            \PoPCMSSchema\MenuMutations\Module::class,
+            \PoPCMSSchema\MenuMutationsWP\Module::class,
             \PoPCMSSchema\Meta\Module::class,
             \PoPCMSSchema\MetaMutations\Module::class,
             \PoPCMSSchema\MetaMutationsWP\Module::class,

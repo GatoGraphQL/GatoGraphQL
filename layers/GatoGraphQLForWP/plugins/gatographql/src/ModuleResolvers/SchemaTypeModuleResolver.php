@@ -75,7 +75,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public final const OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA = 'treat-user-email-as-sensitive-data';
     public final const OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA = 'treat-user-role-as-sensitive-data';
     public final const OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA = 'treat-user-capability-as-sensitive-data';
-    public final const OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA = 'treat-menuitem-raw-title-as-sensitive-data';
+    public final const OPTION_TREAT_MENUITEM_RAW_LABEL_AS_SENSITIVE_DATA = 'treat-menuitem-raw-title-as-sensitive-data'; // Keep this name ("title" instead of "label") for backwards compatibility
 
     /**
      * This comment used to be valid when using `autowire` functions
@@ -646,7 +646,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_MENUS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
-                self::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA => true,
+                self::OPTION_TREAT_MENUITEM_RAW_LABEL_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_TAGS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -979,7 +979,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::IS_MULTIPLE => true,
                 ];
             } elseif ($module === self::SCHEMA_MENUS) {
-                $option = self::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
+                $option = self::OPTION_TREAT_MENUITEM_RAW_LABEL_AS_SENSITIVE_DATA;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
                     Properties::NAME => $this->getSettingOptionName(

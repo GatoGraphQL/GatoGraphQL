@@ -78,6 +78,11 @@
                 "id": 1146,
                 "title": "Post with corrupted non-breaking space",
                 "featuredImage": null
+            },
+            {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block",
+                "featuredImage": null
             }
         ],
         "spanishLocaleUsers": [

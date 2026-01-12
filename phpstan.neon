@@ -87,6 +87,8 @@ includes:
     - layers/CMSSchema/packages/media-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/media-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/media-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/menu-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/menu-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/menus/phpstan.neon.dist
     - layers/WPSchema/packages/menus/phpstan.neon.dist
     - layers/CMSSchema/packages/menus-wp/phpstan.neon.dist

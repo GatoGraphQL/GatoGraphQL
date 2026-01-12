@@ -31,6 +31,7 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
     protected ?array $consolidatedPossibleValuesCache = null;
 
     public final const HOOK_POSSIBLE_VALUES = __CLASS__ . ':possible-values';
+    public final const HOOK_BEFORE_POSSIBLE_VALUES = __CLASS__ . ':before-possible-values';
 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
@@ -77,6 +78,14 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
         if ($this->consolidatedPossibleValuesCache !== null) {
             return $this->consolidatedPossibleValuesCache;
         }
+
+        /**
+         * Allow to initialize the possible values
+         */
+        App::doAction(
+            self::HOOK_BEFORE_POSSIBLE_VALUES,
+            $this,
+        );
 
         /**
          * Allow to override/extend the enum values

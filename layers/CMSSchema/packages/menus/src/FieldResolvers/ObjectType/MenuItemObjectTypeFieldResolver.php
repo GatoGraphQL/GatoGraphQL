@@ -107,15 +107,17 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'localURLPath',
             // All other fields are properties in the object
             'label',
-            'title',
-            'rawTitle',
+            'rawLabel',
+            'titleAttribute',
             'url',
-            'classes',
+            'cssClasses',
             'target',
             'description',
             'objectID',
             'parentID',
             'linkRelationship',
+            'itemType',
+            'objectType',
         ];
     }
 
@@ -127,8 +129,8 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->treatMenuItemRawTitleFieldsAsSensitiveData()) {
-            $sensitiveFieldArgNames[] = 'rawTitle';
+        if ($moduleConfiguration->treatMenuItemRawLabelFieldsAsSensitiveData()) {
+            $sensitiveFieldArgNames[] = 'rawLabel';
         }
         return $sensitiveFieldArgNames;
     }
@@ -139,15 +141,17 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'children' => $this->getMenuItemObjectTypeResolver(),
             'localURLPath' => $this->getStringScalarTypeResolver(),
             'label' => $this->getStringScalarTypeResolver(),
-            'title' => $this->getStringScalarTypeResolver(),
-            'rawTitle' => $this->getStringScalarTypeResolver(),
+            'rawLabel' => $this->getStringScalarTypeResolver(),
+            'titleAttribute' => $this->getStringScalarTypeResolver(),
             'url' => $this->getURLScalarTypeResolver(),
-            'classes' => $this->getStringScalarTypeResolver(),
+            'cssClasses' => $this->getStringScalarTypeResolver(),
             'target' => $this->getStringScalarTypeResolver(),
             'description' => $this->getStringScalarTypeResolver(),
             'objectID' => $this->getIDScalarTypeResolver(),
             'parentID' => $this->getIDScalarTypeResolver(),
             'linkRelationship' => $this->getStringScalarTypeResolver(),
+            'itemType' => $this->getStringScalarTypeResolver(),
+            'objectType' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -156,7 +160,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'children',
-            'classes'
+            'cssClasses'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -167,16 +171,18 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'children' => $this->__('Menu item children items', 'menus'),
             'label' => $this->__('Menu item label', 'menus'),
-            'title' => $this->__('Menu item title', 'menus'),
-            'rawTitle' => $this->__('Menu item title in raw format (as it exists in the database)', 'menus'),
+            'rawLabel' => $this->__('Menu item label in raw format (as it exists in the database)', 'menus'),
+            'titleAttribute' => $this->__('Menu item attribute title', 'menus'),
             'localURLPath' => $this->__('Path of a local URL, or null if external URL', 'menus'),
             'url' => $this->__('Menu item URL', 'menus'),
-            'classes' => $this->__('Menu item classes', 'menus'),
+            'cssClasses' => $this->__('Menu item classes', 'menus'),
             'target' => $this->__('Menu item target', 'menus'),
             'description' => $this->__('Menu item additional attributes', 'menus'),
             'objectID' => $this->__('ID of the object linked to by the menu item ', 'menus'),
             'parentID' => $this->__('Menu item\'s parent ID', 'menus'),
             'linkRelationship' => $this->__('Link relationship (XFN)', 'menus'),
+            'itemType' => $this->__('The type of menu item (e.g., "post_type", "taxonomy", "custom")', 'menus'),
+            'objectType' => $this->__('The type of object linked to by the menu item (e.g., "post", "page", "category")', 'menus'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -198,10 +204,10 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             // These are all properties of MenuItem
             // Commented out since this is the default FieldResolver's response
             // case 'label':
-            // case 'title':
-            // case 'rawTitle':
+            // case 'rawLabel':
+            // case 'titleAttribute':
             // case 'url':
-            // case 'classes':
+            // case 'cssClasses':
             // case 'target':
             // case 'description':
             // case 'objectID':

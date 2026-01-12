@@ -5,7 +5,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 6,
+                "count": 7,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -17,8 +17,12 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 6,
+                "postCount": 7,
                 "posts": [
+                    {
+                        "id": 1150,
+                        "title": "Post with old format of the Gutenberg `core\/list` block"
+                    },
                     {
                         "id": 1146,
                         "title": "Post with corrupted non-breaking space"
@@ -440,7 +444,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 6,
+                "count": 7,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -452,8 +456,12 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 6,
+                "postCount": 7,
                 "posts": [
+                    {
+                        "id": 1150,
+                        "title": "Post with old format of the Gutenberg `core\/list` block"
+                    },
                     {
                         "id": 1146,
                         "title": "Post with corrupted non-breaking space"
@@ -1007,7 +1015,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 6,
+                "count": 7,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -1019,8 +1027,12 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 6,
+                "postCount": 7,
                 "posts": [
+                    {
+                        "id": 1150,
+                        "title": "Post with old format of the Gutenberg `core\/list` block"
+                    },
                     {
                         "id": 1146,
                         "title": "Post with corrupted non-breaking space"
@@ -1999,6 +2011,15 @@
         },
         "postsByCategoryIDs": [
             {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
                 "id": 1146,
                 "title": "Post with corrupted non-breaking space",
                 "categories": [
@@ -2088,15 +2109,6 @@
             {
                 "id": 1116,
                 "title": "Working on flat chain syntax next",
-                "categories": [
-                    {
-                        "id": 1
-                    }
-                ]
-            },
-            {
-                "id": 1,
-                "title": "Hello world!",
                 "categories": [
                     {
                         "id": 1
@@ -2106,6 +2118,15 @@
         ],
         "postsByCategoryIDsWithTaxonomy": [
             {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
                 "id": 1146,
                 "title": "Post with corrupted non-breaking space",
                 "categories": [
@@ -2195,15 +2216,6 @@
             {
                 "id": 1116,
                 "title": "Working on flat chain syntax next",
-                "categories": [
-                    {
-                        "id": 1
-                    }
-                ]
-            },
-            {
-                "id": 1,
-                "title": "Hello world!",
                 "categories": [
                     {
                         "id": 1
@@ -2330,6 +2342,15 @@
         ],
         "postsExcludeByCategorySlugs": [
             {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
                 "id": 1146,
                 "title": "Post with corrupted non-breaking space",
                 "categories": [
@@ -2397,7 +2418,7 @@
             "taxonomy": "category",
             "childCount": 0,
             "childNames": [],
-            "count": 6,
+            "count": 7,
             "description": "",
             "id": 1,
             "metaValue": null,
@@ -2409,8 +2430,12 @@
             "name": "Uncategorized",
             "parent": null,
             "ancestors": [],
-            "postCount": 6,
+            "postCount": 7,
             "posts": [
+                {
+                    "id": 1150,
+                    "title": "Post with old format of the Gutenberg `core\/list` block"
+                },
                 {
                     "id": 1146,
                     "title": "Post with corrupted non-breaking space"

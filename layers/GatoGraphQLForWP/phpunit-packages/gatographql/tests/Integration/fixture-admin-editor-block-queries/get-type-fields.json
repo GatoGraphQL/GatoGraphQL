@@ -635,6 +635,17 @@
           "description": "Error payload for: \"The user cannot edit media items\""
         },
         {
+          "name": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoEditingMenuCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user cannot edit menus\""
+        },
+        {
           "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
           "namespacedName": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
           "fields": [
@@ -688,6 +699,17 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The user has no permission to edit the media item\""
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToEditMenuErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToEditMenuErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user has no permission to edit the menu\""
         },
         {
           "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
@@ -855,6 +877,17 @@
           "description": "Representation of a navigation menu"
         },
         {
+          "name": "MenuDoesNotExistErrorPayload",
+          "namespacedName": "MenuDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested menu does not exist\""
+        },
+        {
           "name": "MenuItem",
           "namespacedName": "MenuItem",
           "fields": [
@@ -862,7 +895,7 @@
               "name": "children"
             },
             {
-              "name": "classes"
+              "name": "cssClasses"
             },
             {
               "name": "description"
@@ -872,6 +905,9 @@
             },
             {
               "name": "id"
+            },
+            {
+              "name": "itemType"
             },
             {
               "name": "label"
@@ -886,10 +922,13 @@
               "name": "objectID"
             },
             {
+              "name": "objectType"
+            },
+            {
               "name": "parentID"
             },
             {
-              "name": "rawTitle"
+              "name": "rawLabel"
             },
             {
               "name": "self"
@@ -898,7 +937,7 @@
               "name": "target"
             },
             {
-              "name": "title"
+              "name": "titleAttribute"
             },
             {
               "name": "url"
@@ -976,6 +1015,12 @@
             },
             {
               "name": "createMediaItems"
+            },
+            {
+              "name": "createMenu"
+            },
+            {
+              "name": "createMenus"
             },
             {
               "name": "createPage"
@@ -1198,6 +1243,12 @@
             },
             {
               "name": "updateMediaItems"
+            },
+            {
+              "name": "updateMenu"
+            },
+            {
+              "name": "updateMenus"
             },
             {
               "name": "updatePage"
@@ -1997,6 +2048,12 @@
               "name": "createMediaItems"
             },
             {
+              "name": "createMenu"
+            },
+            {
+              "name": "createMenus"
+            },
+            {
               "name": "createPage"
             },
             {
@@ -2399,6 +2456,12 @@
               "name": "updateMediaItems"
             },
             {
+              "name": "updateMenu"
+            },
+            {
+              "name": "updateMenus"
+            },
+            {
               "name": "updatePage"
             },
             {
@@ -2713,6 +2776,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of uploading an attachment"
+        },
+        {
+          "name": "RootCreateMenuMutationPayload",
+          "namespacedName": "RootCreateMenuMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "menu"
+            },
+            {
+              "name": "menuID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a menu"
         },
         {
           "name": "RootCreatePageMutationPayload",
@@ -3471,6 +3554,26 @@
           "description": "Payload of updating the metadata for an attachment"
         },
         {
+          "name": "RootUpdateMenuMutationPayload",
+          "namespacedName": "RootUpdateMenuMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "menu"
+            },
+            {
+              "name": "menuID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of updating a menu"
+        },
+        {
           "name": "RootUpdatePageMutationPayload",
           "namespacedName": "RootUpdatePageMutationPayload",
           "fields": [
@@ -3778,6 +3881,17 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The user does not exist\""
+        },
+        {
+          "name": "UserHasNoPermissionToCreateMenusErrorPayload",
+          "namespacedName": "UserHasNoPermissionToCreateMenusErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user has no permission to create menus\""
         },
         {
           "name": "UserHasNoPermissionToUploadFilesErrorPayload",
@@ -4243,7 +4357,7 @@
           "namespacedName": "MenuLocationEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Menu Locations. Possible values: `footer`, `primary`."
+          "description": "Menu Locations. Possible values: `footer`, `primary`, `secondary`."
         },
         {
           "name": "NullableListValueJSONObject",
@@ -4816,6 +4930,20 @@
           "description": "Oneof input to specify the property and data to fetch a menu"
         },
         {
+          "name": "MenuItemInput",
+          "namespacedName": "MenuItemInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input for a Menu Item"
+        },
+        {
+          "name": "MenuItemsByInput",
+          "namespacedName": "MenuItemsByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to select how to provide the menu items"
+        },
+        {
           "name": "MenuSortInput",
           "namespacedName": "MenuSortInput",
           "fields": null,
@@ -5010,6 +5138,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to upload an attachment"
+        },
+        {
+          "name": "RootCreateMenuInput",
+          "namespacedName": "RootCreateMenuInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to create a menu"
         },
         {
           "name": "RootCreatePageInput",
@@ -5341,6 +5476,13 @@
           "description": "Input to update the metadata for an attachment"
         },
         {
+          "name": "RootUpdateMenuInput",
+          "namespacedName": "RootUpdateMenuInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a menu"
+        },
+        {
           "name": "RootUpdatePageInput",
           "namespacedName": "RootUpdatePageInput",
           "fields": null,
@@ -5558,6 +5700,13 @@
           "description": null
         },
         {
+          "name": "MenuItemTypeEnum",
+          "namespacedName": "MenuItemTypeEnum",
+          "fields": null,
+          "kind": "ENUM",
+          "description": null
+        },
+        {
           "name": "MenuOrderByEnum",
           "namespacedName": "MenuOrderByEnum",
           "fields": null,
@@ -5745,6 +5894,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when uploading an attachment"
+        },
+        {
+          "name": "RootCreateMenuMutationErrorPayloadUnion",
+          "namespacedName": "RootCreateMenuMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a menu"
         },
         {
           "name": "RootCreatePageMutationErrorPayloadUnion",
@@ -6018,6 +6174,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating the metadata for an attachment"
+        },
+        {
+          "name": "RootUpdateMenuMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateMenuMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a menu"
         },
         {
           "name": "RootUpdatePageMutationErrorPayloadUnion",

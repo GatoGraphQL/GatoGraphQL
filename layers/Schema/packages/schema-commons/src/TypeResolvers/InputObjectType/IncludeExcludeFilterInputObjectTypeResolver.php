@@ -75,8 +75,8 @@ class IncludeExcludeFilterInputObjectTypeResolver extends AbstractOneofQueryable
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'include' => $this->__('Names to be included', 'schema-commons'),
-            'exclude' => $this->__('Names to be excluded', 'schema-commons'),
+            'include' => $this->__('Items to be included', 'schema-commons'),
+            'exclude' => $this->__('Items to be excluded', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

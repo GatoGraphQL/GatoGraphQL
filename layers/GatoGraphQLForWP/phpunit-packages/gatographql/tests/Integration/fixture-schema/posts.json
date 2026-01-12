@@ -306,6 +306,10 @@
                 "title": "Post with corrupted non-breaking space"
             },
             {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block"
+            },
+            {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
@@ -338,6 +342,10 @@
                 "title": "Post with corrupted non-breaking space"
             },
             {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block"
+            },
+            {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
@@ -364,13 +372,13 @@
             {
                 "id": 1113,
                 "title": "Released v0.6, check it out"
-            },
-            {
-                "id": 1,
-                "title": "Hello world!"
             }
         ],
         "postsByExcludeIDs": [
+            {
+                "id": 1150,
+                "title": "Post with old format of the Gutenberg `core\/list` block"
+            },
             {
                 "id": 1146,
                 "title": "Post with corrupted non-breaking space"
