@@ -232,8 +232,6 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - Support text-only classic-editor CPT for the plugin (#3255)
 * Fixed - Don't initialize an input that includes itself (eg: MenuItemInput) (#3248)
 
-= 15.4.0 =
-
 = 15.3.0 =
 * Added - MetaNamespacer service (#3241)
 * Pass extensions to the response error via FeedbackItemResolution (#3240)
