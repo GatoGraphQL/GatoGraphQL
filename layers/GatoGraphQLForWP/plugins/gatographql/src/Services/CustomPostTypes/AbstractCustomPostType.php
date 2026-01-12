@@ -374,7 +374,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     protected function isEditingThisPostType(): bool
     {
         $screen = \get_current_screen();
-        if ($screen && isset($screen->post_type) && $screen->post_type === $this->getCustomPostType()) {
+        if ($screen !== null && $screen->post_type === $this->getCustomPostType()) {
             return true;
         }
 
