@@ -369,7 +369,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
 
     /**
-     * Check if we're currently editing this post type
+     * Check if we're currently editing this custom post type
      */
     protected function isEditingThisCustomPostType(): bool
     {
