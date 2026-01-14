@@ -12,12 +12,12 @@ Here are docs explaining how Gato GraphQL was built.
 
 ## PHP Architecture
 
-Articles explaining how the plugin is "downgraded", using PHP 8.1 for development but deployable to PHP 7.4 for production:
+<!-- Articles explaining how the plugin is "downgraded", using PHP 8.1 for development but deployable to PHP 7.4 for production:
 
 1. [Transpiling PHP code from 8.0 to 7.x via Rector](https://blog.logrocket.com/transpiling-php-code-from-8-0-to-7-x-via-rector/)
 2. [Coding in PHP 7.4 and deploying to 7.1 via Rector and GitHub Actions](https://blog.logrocket.com/coding-in-php-7-4-and-deploying-to-7-1-via-rector-and-github-actions/)
 3. [Tips for transpiling code from PHP 8.0 down to 7.1](https://blog.logrocket.com/tips-transpiling-code-from-php-8-0-to-7-1/)
-4. [Including both PHP 7.1 and 8.0 code in the same plugin … or not?](https://blog.logrocket.com/including-php-7-1-and-8-0-code-same-plugin-or-not/)
+4. [Including both PHP 7.1 and 8.0 code in the same plugin … or not?](https://blog.logrocket.com/including-php-7-1-and-8-0-code-same-plugin-or-not/) -->
 
 Service container implementation:
 
