@@ -1,11 +1,3 @@
-<p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/master/assets/GatoGraphQL-logo.webp"/></p>
-
-![Unit tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2253 --><!-- ![Integration tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/integration_tests.yml/badge.svg) -->
-![Downgrade PHP tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/downgrade_php_tests.yml/badge.svg)
-![Scoping tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/scoping_tests.yml/badge.svg)
-![Generate plugins](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/generate_plugins.yml/badge.svg)
-<!-- ![PHPStan](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/phpstan.yml/badge.svg) -->
-
 # Gato GraphQL - Architectural resources
 
 Here are docs explaining how Gato GraphQL was built.
