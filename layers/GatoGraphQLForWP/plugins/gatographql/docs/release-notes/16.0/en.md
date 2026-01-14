@@ -20,3 +20,4 @@
 
 - Don't initialize an input that includes itself (eg: MenuItemInput)([#3248](https://github.com/GatoGraphQL/GatoGraphQL/pull/3248))
 - Revalidate commercial license ([#3258](https://github.com/GatoGraphQL/GatoGraphQL/pull/3258)) (`v16.0.1`)
+- Own Plugin CPT editor: Check that `get_current_screen` exists (eg: it doesn't when editing Bricks templates) ([#3259](https://github.com/GatoGraphQL/GatoGraphQL/pull/3259)) (`v16.0.2`)

@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 16.0.2 - DATE
+
+### Fixed
+
+- Own Plugin CPT editor: Check that `get_current_screen` exists (eg: it doesn't when editing Bricks templates) (#3259)
+
 ## 16.0.1 - 14/01/2026
 
 ### Fixed
