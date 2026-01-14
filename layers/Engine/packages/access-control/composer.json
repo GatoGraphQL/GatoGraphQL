@@ -14,10 +14,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/mandatory-directives-by-configuration": "^16.0.1"
+        "getpop/mandatory-directives-by-configuration": "^16.1"
     },
     "require-dev": {
-        "getpop/cache-control": "^16.0.1",
+        "getpop/cache-control": "^16.1",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^2.1",
@@ -216,7 +216,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "16.0-dev"
+            "dev-master": "16.1-dev"
         }
     },
     "config": {
