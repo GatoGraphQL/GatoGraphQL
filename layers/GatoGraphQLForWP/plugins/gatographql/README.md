@@ -16,9 +16,9 @@ This plugin is the implementation for WordPress of [GraphQL by PoP](https://grap
 
 👀 Instructions: [Setting-up the development environment](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/docs/development-environment.md).
 
-### Supported PHP features
+<!-- ### Supported PHP features
 
-Check the list of [Supported PHP features](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/docs/supported-php-features.md)
+Check the list of [Supported PHP features](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/docs/supported-php-features.md) -->
 
 ### Gutenberg JS builds
 

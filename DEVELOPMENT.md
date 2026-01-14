@@ -541,9 +541,9 @@ Create an extension for Gato GraphQL using [`GatoGraphQL/ExtensionStarter`](http
 <!-- - [Setting-up the development environment](docs/development-environment.md)
 - [Running tests](docs/running-tests.md) -->
 
-### Supported PHP features
+<!-- ### Supported PHP features
 
-Check the list of [Supported PHP features](docs/supported-php-features.md).
+Check the list of [Supported PHP features](docs/supported-php-features.md). -->
 
 ### Gutenberg JS builds
 
