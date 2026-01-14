@@ -30,6 +30,14 @@ With Gato GraphQL, you can:
 
 Check out the [Tutorial section in gatographql.com](https://gatographql.com/tutorial/intro) which demonstrates how to implement these use cases using the plugin.
 
+## Development
+
+Please see [DEVELOPMENT](DEVELOPMENT.md).
+
+## Monorepo documentation
+
+`GatoGraphQL/GatoGraphQL` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README.md](Monorepo_README.md) for documentation of the different projects.
+
 ## Screenshots
 
 GraphiQL client to execute queries in the wp-admin:
@@ -95,14 +103,6 @@ Augment the plugin functionality and GraphQL schema via extensions:
 The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema:
 
 ![The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-16.png)
-
-## Development
-
-Please see [DEVELOPMENT](DEVELOPMENT.md).
-
-## Monorepo documentation
-
-`GatoGraphQL/GatoGraphQL` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README.md](Monorepo_README.md) for documentation of the different projects.
 
 ## Standards
 
