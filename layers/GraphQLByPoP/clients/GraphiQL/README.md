@@ -41,13 +41,6 @@ Then, add package type `"graphiql-client"` in section `"extra.installer-types"`,
 }
 ```
 
-<!--
-## Usage
-
-``` php
-```
--->
-
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
