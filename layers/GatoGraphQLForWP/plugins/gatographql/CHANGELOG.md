@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 16.0.1 - 14/01/2026
+
+### Fixed
+
+- Revalidate commercial license (#3258)
+
 ## 16.0.0 - 12/01/2026
 
 ### Breaking changes

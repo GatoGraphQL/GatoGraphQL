@@ -18,4 +18,5 @@
 
 ## Fixed
 
-- Don't initialize an input that includes itself (eg: MenuItemInput)([#3248](https://github.com/GatoGraphQL/GatoGraphQL/pull/3242))
+- Don't initialize an input that includes itself (eg: MenuItemInput)([#3248](https://github.com/GatoGraphQL/GatoGraphQL/pull/3248))
+- Revalidate commercial license ([#3258](https://github.com/GatoGraphQL/GatoGraphQL/pull/3258)) (`v16.0.1`)

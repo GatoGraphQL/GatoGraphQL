@@ -841,7 +841,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function getNumberOfDaysToRevalidateCommercialExtensionActivatedLicenses(): ?int
     {
-        return null;
+        return RootEnvironment::isApplicationEnvironmentDev() ? 7 : 3;
     }
 
     /**
