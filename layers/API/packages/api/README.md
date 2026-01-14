@@ -1670,7 +1670,7 @@ query=
 
 [leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/](https://leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/) -->
 
-## PHP versions
+<!-- ## PHP versions
 
 Requirements:
 
@@ -1687,7 +1687,7 @@ Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
 composer preview-code-downgrade
-```
+``` -->
 
 ## Standards
 

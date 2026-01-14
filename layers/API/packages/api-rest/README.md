@@ -111,7 +111,7 @@ _**Collection of posts, custom fields**_:<br/>
 
 Please refer to package [API](https://github.com/PoP-PoPAPI/api), on which the REST API is based, and which contains plenty of extra documentation. -->
 
-## PHP versions
+<!-- ## PHP versions
 
 Requirements:
 
@@ -128,7 +128,7 @@ Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
 composer preview-code-downgrade
-```
+``` -->
 
 ## Standards
 

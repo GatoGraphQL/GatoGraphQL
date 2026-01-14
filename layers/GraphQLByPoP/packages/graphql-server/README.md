@@ -113,7 +113,7 @@ You can play with it through the following clients:
 - GraphiQL: https://newapi.getpop.org/graphiql/
 - GraphQL Voyager: https://newapi.getpop.org/graphql-interactive/
 
-## PHP versions
+<!-- ## PHP versions
 
 Requirements:
 
@@ -130,7 +130,7 @@ Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
 composer preview-code-downgrade
-```
+``` -->
 
 ## Standards
 

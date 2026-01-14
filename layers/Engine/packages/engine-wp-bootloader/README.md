@@ -27,7 +27,7 @@ The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoG
 
 Install file `pop-engine-wp-bootloader.php` as a WordPress must-use plugin, by copying it under folder `/mu-plugins`.
 
-## PHP versions
+<!-- ## PHP versions
 
 Requirements:
 
@@ -44,7 +44,7 @@ Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
 composer preview-code-downgrade
-```
+``` -->
 
 ## Standards
 

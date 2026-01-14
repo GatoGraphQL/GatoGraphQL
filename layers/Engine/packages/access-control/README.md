@@ -55,7 +55,7 @@ In addition, whenever a validation must be performed to know if the user can acc
 1. `NoCache` for Fields in Private schema mode
 2. `NoCache` for Directives in Private schema mode
 
-## PHP versions
+<!-- ## PHP versions
 
 Requirements:
 
@@ -72,7 +72,7 @@ Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
 composer preview-code-downgrade
-```
+``` -->
 
 ## Standards
 

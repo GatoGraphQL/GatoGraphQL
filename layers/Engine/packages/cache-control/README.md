@@ -106,7 +106,7 @@ b. Override the default `maxAge` configuration for a field, by adding argument `
 
 [<a href="https://newapi.getpop.org/api/graphql/?query=echo(Hello+world!)|posts.title<cacheControl(maxAge:0)>">View query results</a>] -->
 
-## PHP versions
+<!-- ## PHP versions
 
 Requirements:
 
@@ -123,7 +123,7 @@ Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
 composer preview-code-downgrade
-```
+``` -->
 
 ## Standards
 

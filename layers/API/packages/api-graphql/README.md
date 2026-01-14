@@ -177,7 +177,7 @@ Adding the `versionConstraint` parameter in the <a href='https://newapi.getpop.o
 
 ![Overriding a default version constraint](https://raw.githubusercontent.com/pop-api/api-graphql/master/assets/images/versioning-field-directives-4.jpg) -->
 
-## PHP versions
+<!-- ## PHP versions
 
 Requirements:
 
@@ -194,7 +194,7 @@ Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 
 ```bash
 composer preview-code-downgrade
-```
+``` -->
 
 ## Standards
 
