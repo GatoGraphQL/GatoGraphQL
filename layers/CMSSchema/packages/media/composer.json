@@ -14,13 +14,13 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^16.0.2",
-        "pop-cms-schema/schema-commons": "^16.0.2"
+        "getpop/engine": "^16.1",
+        "pop-cms-schema/schema-commons": "^16.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
-        "pop-cms-schema/users": "^16.0.2",
+        "pop-cms-schema/users": "^16.1",
         "rector/rector": "^2.1",
         "squizlabs/php_codesniffer": "^3.6"
     },
@@ -216,7 +216,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "16.0-dev"
+            "dev-master": "16.1-dev"
         }
     },
     "config": {
