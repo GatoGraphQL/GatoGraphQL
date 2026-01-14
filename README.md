@@ -122,6 +122,10 @@ composer fix-style
 
 ## Release notes
 
+<summary>Click to expand the Release notes</summary>
+
+<details>
+
 - **[16.0](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/16.0/en.md)** (current)
 - [15.3](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/15.3/en.md)
 - [15.2](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/15.2/en.md)
@@ -171,6 +175,8 @@ composer fix-style
 - [0.8](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/0.8/en.md)
 - [0.7](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/0.7/en.md)
 - [0.6](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/0.6/en.md)
+
+</details>
 
 ## Change log
 
