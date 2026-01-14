@@ -223,7 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 16.0.2 =
-* Fixed - Check that `get_current_screen` exists (eg: it doesn't when editing Bricks templates) (#3259)
+* Fixed - Own Plugin CPT editor: Check that `get_current_screen` exists (eg: it doesn't when editing Bricks templates) (#3259)
 
 = 16.0.1 =
 * Fixed - Revalidate commercial license (#3258)

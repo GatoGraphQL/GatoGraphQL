@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Check that `get_current_screen` exists (eg: it doesn't when editing Bricks templates) (#3259)
+- Own Plugin CPT editor: Check that `get_current_screen` exists (eg: it doesn't when editing Bricks templates) (#3259)
 
 ## 16.0.1 - 14/01/2026
 
