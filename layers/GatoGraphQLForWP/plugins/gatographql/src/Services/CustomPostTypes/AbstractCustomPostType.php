@@ -380,23 +380,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         }
 
         $screen = get_current_screen();
-        if ($screen !== null && $screen->post_type === $this->getCustomPostType()) {
-            return true;
+        if ($screen === null) {
+            return false;
         }
 
-        // Fallback: check global $post
-        global $post;
-        if ($post && isset($post->post_type) && $post->post_type === $this->getCustomPostType()) {
-            return true;
-        }
-
-        // Fallback: check global $typenow
-        global $typenow;
-        if ($typenow && $typenow === $this->getCustomPostType()) {
-            return true;
-        }
-
-        return false;
+        return $screen->post_type === $this->getCustomPostType();
     }
 
     /**
