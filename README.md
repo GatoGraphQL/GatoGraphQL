@@ -122,9 +122,9 @@ composer fix-style
 
 ## Release notes
 
-<summary>Click to expand the Release notes</summary>
-
 <details>
+
+<summary>Click to expand the Release notes</summary>
 
 - **[16.0](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/16.0/en.md)** (current)
 - [15.3](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/15.3/en.md)
