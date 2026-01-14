@@ -36,7 +36,7 @@ Please see [DEVELOPMENT](DEVELOPMENT.md).
 
 ## Monorepo documentation
 
-`GatoGraphQL/GatoGraphQL` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README.md](Monorepo_README.md) for documentation of the different projects.
+`GatoGraphQL/GatoGraphQL` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README](Monorepo_README.md) for documentation of the different projects.
 
 ## Screenshots
 
