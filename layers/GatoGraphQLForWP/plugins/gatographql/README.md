@@ -243,13 +243,13 @@ To execute [PHPStan](https://github.com/phpstan/phpstan), run:
 composer analyse
 ```
 
-## Downgrading code
+<!-- ## Downgrading code
 
 To visualize how [Rector](https://github.com/rectorphp/rector) will downgrade the code to PHP 7.4:
 
 ```bash
 composer preview-code-downgrade
-```
+``` -->
 
 ## Report issues
 
