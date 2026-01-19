@@ -320,8 +320,12 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             }
         }
 
-        // Reverse the array so newer entries appear first
-        $lines = array_reverse($lines);
+        // Reverse the array so newer entries appear first (if enabled)
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableReverseLogOrder()) {
+            $lines = array_reverse($lines);
+        }
 
         ?>
         <header id="logs-header" class="gatogql-logs-header">
