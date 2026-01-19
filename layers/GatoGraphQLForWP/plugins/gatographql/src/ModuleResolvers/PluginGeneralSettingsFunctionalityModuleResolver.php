@@ -308,6 +308,18 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
             ];
 
+            $option = self::OPTION_ENABLE_REVERSE_LOG_ORDER;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Reverse log order?', 'gatographql'),
+                Properties::DESCRIPTION => \__('Display newer log entries first when viewing a log file', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
@@ -353,18 +365,6 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 ),
                 Properties::DESCRIPTION => '<hr/>',
                 Properties::TYPE => Properties::TYPE_NULL,
-            ];
-
-            $option = self::OPTION_ENABLE_REVERSE_LOG_ORDER;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Reverse log order?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Display newer log entries first when viewing a log file', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
