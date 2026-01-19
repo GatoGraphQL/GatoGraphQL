@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 16.1.0 - DATE
 
+### Improvements
+
+- Print logs in reverse order (#3260)
+
 ## 16.0.2 - 15/01/2026
 
 ### Fixed

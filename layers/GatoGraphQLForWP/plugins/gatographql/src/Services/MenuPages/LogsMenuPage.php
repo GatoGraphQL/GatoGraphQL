@@ -305,7 +305,27 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
         );
 
         $stream      = $file->get_stream();
+        $lines       = array();
         $line_number = 1;
+
+        // Read all lines into an array
+        while (! feof($stream)) { // @phpstan-ignore-line
+            $line = fgets($stream); // @phpstan-ignore-line
+            if (is_string($line)) {
+                $lines[] = array(
+                    'content' => $line,
+                    'number'  => $line_number,
+                );
+                ++$line_number;
+            }
+        }
+
+        // Reverse the array so newer entries appear first (if enabled)
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableReverseLogOrder()) {
+            $lines = array_reverse($lines);
+        }
 
         ?>
         <header id="logs-header" class="gatogql-logs-header">
@@ -370,15 +390,12 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             </div>
         </header>
         <section id="logs-entries" class="gatogql-logs-entries">
-            <?php while (! feof($stream)) : // @phpstan-ignore-line
-                $line = fgets($stream); // @phpstan-ignore-line
-                if (is_string($line)) {
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format_line does the escaping.
-                    echo $this->format_line($line, $line_number);
-                    ++$line_number;
-                }
+            <?php foreach ($lines as $line_data) : ?>
+                <?php
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- format_line does the escaping.
+                echo $this->format_line($line_data['content'], $line_data['number']);
                 ?>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </section>
         <script>
             // Clear the line number hash and highlight with a click.

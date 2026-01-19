@@ -152,6 +152,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOG_COUNT_BADGES_BY_SEVERITY,
                 'callback' => fn (array $value) => array_keys(array_filter($value)),
             ],
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::ENABLE_REVERSE_LOG_ORDER,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::LOGS,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_REVERSE_LOG_ORDER,
+            ],
             // Install Plugin Setup Data
             [
                 'class' => Module::class,
