@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 16.1.0 - DATE
 
+### Added
+
+- Support executing bulk actions on users page (#3261)
+
 ### Improvements
 
 - Print logs in reverse order (#3260)

@@ -223,6 +223,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 16.1.0 =
+* Added - Support executing bulk actions on users page (#3261)
 * Improved - Print logs in reverse order (#3260)
 
 = 16.0.2 =
