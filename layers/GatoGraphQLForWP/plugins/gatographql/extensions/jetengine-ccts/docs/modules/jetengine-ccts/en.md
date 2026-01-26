@@ -1,6 +1,6 @@
 # JetEngine Custom Content Types
 
-Integration with the [JetEngine](https://crocoblock.com/plugins/jetengine/) plugin, to fetch Custom Content Type data.
+Integration with Crocoblock's [JetEngine](https://crocoblock.com/plugins/jetengine/) plugin, to fetch Custom Content Type data.
 
 <!-- @Fix CCT docs! -->
 
