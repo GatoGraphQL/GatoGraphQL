@@ -89,7 +89,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::BRICKS => $imagePathURL . '/bricks.svg',
             self::ELEMENTOR => $imagePathURL . '/elementor.svg',
             self::EVENTS_MANAGER => $imagePathURL . '/events-manager.webp',
-            self::JETENGINE => $imagePathURL . '/JetEngine.webp',
+            self::JETENGINE => $imagePathURL . '/jetengine.svg',
             self::MULTILINGUALPRESS => $imagePathURL . '/multilingualpress.webp',
             self::POLYLANG => $imagePathURL . '/polylang.webp',
             self::TRANSLATION => $imagePathURL . '/translation.svg',
