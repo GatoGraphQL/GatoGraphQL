@@ -28,19 +28,19 @@ class Startup {
         if ($phpMemoryLimitInBytes !== -1) {
             $minRequiredPHPMemoryLimitInBytes = wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
             if ($phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
-                add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName) {
+                add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName, $url) {
                     printf(
-                        '<div class="notice notice-error"><p>%s</p>%s</div>',
+                        '<div class="notice notice-error"><p>%s%s</p></div>',
                         sprintf(
-                            __('Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of memory, however the server\'s PHP memory limit is set to <strong>%3$s</strong>. Please increase the memory limit to load %1$s.', 'gatographql'),
+                            __('Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of memory, however the server\'s PHP memory limit is set to <strong>%3$s</strong>. Please increase the memory limit to load the plugin.', 'gatographql'),
                             $pluginName,
                             $minRequiredPHPMemoryLimit,
                             $phpMemoryLimit
                         ),
                         $url ? sprintf(
-                            '<p><a href="%s">%s</a></p>',
+                            __(' <a href="%s" target="_blank">%s</a>', 'gatographql'),
                             $url,
-                            __('Browse documentation', 'gatographql')
+                            __('Browse documentation&#x2197;', 'gatographql')
                         ) : ''
                     );
                 });
