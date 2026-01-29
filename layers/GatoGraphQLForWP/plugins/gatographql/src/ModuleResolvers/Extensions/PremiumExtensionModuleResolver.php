@@ -19,6 +19,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const ELEMENTOR = Plugin::NAMESPACE . '\\extensions\\elementor';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
     public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
+    public const JETENGINE_CCTS = Plugin::NAMESPACE . '\\extensions\\jetengine-ccts';
     public const MISTRALAI_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\mistralai-translation';
     public const MULTILINGUALPRESS = Plugin::NAMESPACE . '\\extensions\\multilingualpress';
     public const OPENROUTER_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\openrouter-translation';
@@ -41,6 +42,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::ELEMENTOR,
             self::EVENTS_MANAGER,
             self::GOOGLE_TRANSLATE,
+            self::JETENGINE_CCTS,
             self::MISTRALAI_TRANSLATION,
             self::MULTILINGUALPRESS,
             self::OPENROUTER_TRANSLATION,
@@ -62,6 +64,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::ELEMENTOR => \__('Elementor', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gatographql'),
+            self::JETENGINE_CCTS => \__('JetEngine Custom Content Types', 'gatographql'),
             self::MISTRALAI_TRANSLATION => \__('Mistral AI Translation', 'gatographql'),
             self::MULTILINGUALPRESS => \__('MultilingualPress', 'gatographql'),
             self::OPENROUTER_TRANSLATION => \__('OpenRouter Translation', 'gatographql'),
@@ -84,6 +87,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::ELEMENTOR => \__('Integration with plugin "Elementor", adding fields to parse and update data in Elementor pages and templates.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gatographql'),
+            self::JETENGINE_CCTS => \__('Integration with plugin "JetEngine", adding fields to the schema to fetch Custom Content Type data.', 'gatographql'),
             self::MISTRALAI_TRANSLATION => \__('Translate content to multiple languages using the Mistral AI API.', 'gatographql'),
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::OPENROUTER_TRANSLATION => \__('Translate content to multiple languages using the OpenRouter API.', 'gatographql'),
