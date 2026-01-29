@@ -2,7 +2,8 @@
 
 ### Added
 
--Support executing bulk actions on users page ([#3261](https://github.com/GatoGraphQL/GatoGraphQL/pull/3261))
+- JetEngine extension for Gato GraphQL ([#3264](https://github.com/GatoGraphQL/GatoGraphQL/pull/3264))
+- Support executing bulk actions on users page ([#3261](https://github.com/GatoGraphQL/GatoGraphQL/pull/3261))
 
 ### Improvements
 

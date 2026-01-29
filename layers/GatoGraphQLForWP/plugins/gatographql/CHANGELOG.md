@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- JetEngine extension for Gato GraphQL (#3264)
 - Support executing bulk actions on users page (#3261)
 
 ### Improvements
