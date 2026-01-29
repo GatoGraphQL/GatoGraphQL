@@ -40,7 +40,7 @@ class Startup {
                         $url ? sprintf(
                             '<p><a href="%s" target="_blank">%s</a></p>',
                             $url,
-                            __('Browse documentation', 'gatographql')
+                            __('Browse documentation&#x2197;', 'gatographql')
                         ) : ''
                     );
                 });
