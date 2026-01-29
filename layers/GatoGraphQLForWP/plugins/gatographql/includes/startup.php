@@ -28,7 +28,7 @@ class Startup {
         if ($phpMemoryLimitInBytes !== -1) {
             $minRequiredPHPMemoryLimitInBytes = wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
             if ($phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
-                add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName) {
+                add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName, $url) {
                     printf(
                         '<div class="notice notice-error"><p>%s</p>%s</div>',
                         sprintf(
