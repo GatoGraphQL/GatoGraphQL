@@ -21,6 +21,7 @@ class Startup {
     public static function checkGatoGraphQLMemoryRequirements(
         string $pluginName,
         string $minRequiredPHPMemoryLimit = '64M',
+        ?string $url = null,
     ): bool {
         $phpMemoryLimit = \ini_get('memory_limit');
         $phpMemoryLimitInBytes = wp_convert_hr_to_bytes($phpMemoryLimit);
@@ -29,13 +30,18 @@ class Startup {
             if ($phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
                 add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName) {
                     printf(
-                        '<div class="notice notice-error"><p>%s</p></div>',
+                        '<div class="notice notice-error"><p>%s</p>%s</div>',
                         sprintf(
                             __('Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of memory, however the server\'s PHP memory limit is set to <strong>%3$s</strong>. Please increase the memory limit to load %1$s.', 'gatographql'),
                             $pluginName,
                             $minRequiredPHPMemoryLimit,
                             $phpMemoryLimit
-                        )
+                        ),
+                        $url ? sprintf(
+                            '<p><a href="%s">%s</a></p>',
+                            $url,
+                            __('Browse documentation', 'gatographql')
+                        ) : ''
                     );
                 });
                 return false;

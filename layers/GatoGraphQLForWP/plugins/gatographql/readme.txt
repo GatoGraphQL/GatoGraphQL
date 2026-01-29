@@ -226,6 +226,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Support executing bulk actions on users page (#3261)
 * Improved - Print logs in reverse order (#3260)
 * Improved - Allow indicating minimum memory needed by plugin (#3262)
+* Improved - Allow linking to documentation URL to increase memory for plugin (#3263)
 
 = 16.0.2 =
 * Fixed - Own Plugin CPT editor: Check that `get_current_screen` exists (eg: it doesn't when editing Bricks templates) (#3259)
