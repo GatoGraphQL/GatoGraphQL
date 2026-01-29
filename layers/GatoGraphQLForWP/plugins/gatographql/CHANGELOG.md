@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Print logs in reverse order (#3260)
 - Allow indicating minimum memory needed by plugin (#3262)
+- Allow linking to documentation URL to increase memory for plugin (#3263)
 
 ## 16.0.2 - 15/01/2026
 
