@@ -38,7 +38,7 @@ class Startup {
                             $phpMemoryLimit
                         ),
                         $url ? sprintf(
-                            '<p><a href="%s">%s</a></p>',
+                            '<p><a href="%s" target="_blank">%s</a></p>',
                             $url,
                             __('Browse documentation', 'gatographql')
                         ) : ''
