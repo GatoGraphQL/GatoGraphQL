@@ -18,13 +18,13 @@ class Startup {
      *
      * @see https://www.php.net/manual/en/ini.core.php#ini.sect.resource-limits
      */
-    public static function checkGatoGraphQLMemoryRequirements(string $pluginName): bool
-    {
+    public static function checkGatoGraphQLMemoryRequirements(
+        string $pluginName,
+        string $minRequiredPHPMemoryLimit = '64M',
+    ): bool {
         $phpMemoryLimit = \ini_get('memory_limit');
         $phpMemoryLimitInBytes = wp_convert_hr_to_bytes($phpMemoryLimit);
         if ($phpMemoryLimitInBytes !== -1) {
-            // Minimum: 64MB
-            $minRequiredPHPMemoryLimit = '64M';
             $minRequiredPHPMemoryLimitInBytes = wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
             if ($phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
                 add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName) {
