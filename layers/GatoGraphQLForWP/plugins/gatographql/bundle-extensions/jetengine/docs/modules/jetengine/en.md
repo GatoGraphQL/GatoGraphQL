@@ -14,7 +14,7 @@ Pass the CCT slug via the `slug` argument (the CCT must be set as queryable in t
 
 ```graphql
 query {
-  jetengineCCTEntries(slug: "sample_cct") {
+  jetengineCCTEntries(slug: "some_cct_slug") {
     id
     uniqueID
     cctSlug

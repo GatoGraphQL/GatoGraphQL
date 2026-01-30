@@ -23,7 +23,7 @@ The values are cast to the corresponding type (`text` => string, `number` => int
 
 ```graphql
 query {
-  jetengineCCTEntries(slug: "sample_cct") {
+  jetengineCCTEntries(slug: "some_cct_slug") {
     id
     uniqueID
     cctSlug
@@ -50,7 +50,7 @@ query {
 
 ```graphql
 query {
-  jetengineCCTEntry(slug: "sample_cct", id: 1) {
+  jetengineCCTEntry(slug: "some_cct_slug", id: 1) {
     id
     uniqueID
     cctSlug
@@ -75,7 +75,7 @@ query {
 
 ```graphql
 query {
-  jetengineCCTEntryCount(slug: "sample_cct")
+  jetengineCCTEntryCount(slug: "some_cct_slug")
 }
 ```
 
@@ -86,7 +86,7 @@ List queries support `filter`, `pagination`, and `sort` args.
 ```graphql
 query {
   jetengineCCTEntries(
-    slug: "sample_cct"
+    slug: "some_cct_slug"
     filter: { search: [{ field: "cct_author_id", value: 1, operator: EQUALS }] }
     pagination: { limit: 10, offset: 0 }
     sort: { by: "cct_created", order: DESC }
