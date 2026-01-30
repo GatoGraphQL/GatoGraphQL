@@ -15,7 +15,7 @@ On `JetEngineCCTEntry`, we query field values via:
 - `fieldValues` is a JSON object with all CCT fields for that entry
 - `fieldValue(slug)` to query a single field by slug
 
-Values are cast to the field type: `fieldValue(slug)` and each key in `fieldValues` return the right shape (e.g. text → string, number → int, media ID → int, gallery → array of IDs).
+Values are cast to the [field type defined in the CCT](https://crocoblock.com/knowledge-base/features/meta-field-types-overview/): `fieldValue(slug)` and each key in `fieldValues` return the right shape (e.g. text → string, number → int, media ID → int, gallery → array of IDs).
 
 ## Examples
 
