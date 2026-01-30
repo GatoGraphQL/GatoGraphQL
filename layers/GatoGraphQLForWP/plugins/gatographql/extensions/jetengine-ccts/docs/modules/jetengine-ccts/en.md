@@ -8,12 +8,16 @@ The schema exposes the following Root fields:
 - `jetengineCCTEntryCount(slug: String!): Int`
 - `jetengineCCTEntry(slug: String!, id: ID!): JetEngineCCTEntry`
 
+---
+
 On `JetEngineCCTEntry`, we query field values via:
 
 - `fieldValues` is a JSON object with all CCT fields for that entry
 - `fieldValue(slug)` to query a single field by slug
 
 The values are cast to the corresponding type (`text` => string, `number` => int, `media ID` => int, `gallery` => array of ints, etc).
+
+## Examples
 
 **List entries:**
 
