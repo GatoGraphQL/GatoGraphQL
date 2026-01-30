@@ -4,7 +4,7 @@ Integration with Crocoblock's [JetEngine](https://crocoblock.com/plugins/jetengi
 
 The schema exposes the following Root fields:
 
-- `jetengineCCTEntries(slug: String!): [JetEngineCCTEntry]!`
+- `jetengineCCTEntries(slug: String!): [JetEngineCCTEntry!]!`
 - `jetengineCCTEntryCount(slug: String!): Int`
 - `jetengineCCTEntry(slug: String!, id: ID!): JetEngineCCTEntry`
 
