@@ -71,20 +71,16 @@ query {
 }
 ```
 
-**Count entries (optionally with filter):**
+**List and count with filter, pagination, and sort:**
+
+List queries accept `filter`, `pagination`, and `sort`; count accepts `filter`.
 
 ```graphql
 query {
-  jetengineCCTEntryCount(slug: "some_cct_slug")
-}
-```
-
-**List with filter, pagination, and sort:**
-
-List queries support `filter`, `pagination`, and `sort` args.
-
-```graphql
-query {
+  jetengineCCTEntryCount(
+    slug: "some_cct_slug"
+    filter: { search: [{ field: "cct_author_id", value: 1, operator: EQUALS }] }
+  )
   jetengineCCTEntries(
     slug: "some_cct_slug"
     filter: { search: [{ field: "cct_author_id", value: 1, operator: EQUALS }] }
