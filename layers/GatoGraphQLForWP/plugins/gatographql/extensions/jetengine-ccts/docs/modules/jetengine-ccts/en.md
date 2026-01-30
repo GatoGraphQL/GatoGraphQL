@@ -1,6 +1,6 @@
 # JetEngine Custom Content Types (CCTs)
 
-Integration with Crocoblock's [JetEngine](https://crocoblock.com/plugins/jetengine/) plugin, to fetch Custom Content Type (CCT) data.
+Integration with Crocoblock's [JetEngine](https://crocoblock.com/plugins/jetengine/) plugin, to fetch [Custom Content Type (CCT)](https://crocoblock.com/knowledge-base/features/custom-content-type/) data.
 
 The schema exposes the following Root fields:
 

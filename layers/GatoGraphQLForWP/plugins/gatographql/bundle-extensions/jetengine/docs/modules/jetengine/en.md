@@ -4,7 +4,7 @@ Integration with Crocoblock's <a href="https://crocoblock.com/plugins/jetengine/
 
 ---
 
-The schema exposes fields to query Custom Content Type (CCT) data:
+The schema exposes fields to query<a href="https://crocoblock.com/knowledge-base/features/custom-content-type/" target="_blank">Custom Content Type (CCT)</a> data:
 
 - `jetengineCCTEntries: [JetEngineCCTEntry!]!`
 - `jetengineCCTEntryCount: Int!`
