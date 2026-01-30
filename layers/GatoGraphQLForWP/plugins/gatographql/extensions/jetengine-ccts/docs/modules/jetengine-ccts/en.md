@@ -41,7 +41,7 @@ query {
       title
     }
     fieldValues
-    someField: fieldValue(slug: "your_field_slug")
+    someField: fieldValue(slug: "some_field_slug")
   }
 }
 ```
@@ -66,7 +66,7 @@ query {
       title
     }
     fieldValues
-    someField: fieldValue(slug: "your_field_slug")
+    someField: fieldValue(slug: "some_field_slug")
   }
 }
 ```
