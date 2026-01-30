@@ -89,7 +89,7 @@ query {
     slug: "sample_cct"
     filter: { search: [{ field: "cct_author_id", value: 1, operator: EQUALS }] }
     pagination: { limit: 10, offset: 0 }
-    sort: { orderBy: "cct_created", order: DESC }
+    sort: { by: "cct_created", order: DESC }
   ) {
     id
     authorID
