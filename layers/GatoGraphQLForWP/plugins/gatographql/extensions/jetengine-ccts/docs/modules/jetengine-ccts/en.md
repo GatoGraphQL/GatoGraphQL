@@ -4,18 +4,14 @@ Integration with Crocoblock's [JetEngine](https://crocoblock.com/plugins/jetengi
 
 The schema exposes the following Root fields:
 
-- **`jetengineCCTEntries`** (list)
-- **`jetengineCCTEntryCount`** (count)
-- **`jetengineCCTEntry`** (single entry by ID)
+- `jetengineCCTEntries(slug: String!): [JetEngineCCTEntry]!`
+- `jetengineCCTEntryCount(slug: String!): Int`
+- `jetengineCCTEntry(slug: String!, id: ID!): JetEngineCCTEntry`
 
-Pass the CCT slug via the `slug` argument (the CCT must be queryable in JetEngine settings).
+On `JetEngineCCTEntry`, we query field values via:
 
-List queries support `filter`, `pagination`, and `sort` args.
-
-On **`JetEngineCCTEntry`**, we query field values via:
-
-- **`fieldValues`** is a JSON object with all CCT fields for that entry
-- **`fieldValue(slug)`** to query a single field by slug
+- `fieldValues` is a JSON object with all CCT fields for that entry
+- `fieldValue(slug)` to query a single field by slug
 
 The values are cast to the corresponding type (`text` => string, `number` => int, `media ID` => int, `gallery` => array of ints, etc).
 
@@ -80,6 +76,8 @@ query {
 ```
 
 **List with filter, pagination, and sort:**
+
+List queries support `filter`, `pagination`, and `sort` args.
 
 ```graphql
 query {
