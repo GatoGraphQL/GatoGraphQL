@@ -12,7 +12,7 @@ Pass the CCT slug via the `slug` argument (the CCT must be queryable in JetEngin
 
 List queries support `filter`, `pagination`, and `sort` args.
 
-On **`JetEngineCCTEntry`**, **`fieldValues`** is a JSON object with all CCT fields for that entry. Use **`fieldValue(slug)`** to query a single field by slug; it returns the value cast to the field type (text, number, media, gallery, etc).
+On **`JetEngineCCTEntry`**, **`fieldValues`** is a JSON object with all CCT fields for that entry. Use **`fieldValue(slug)`** to query a single field by slug; it returns the value cast to the field type (text, number, media ID, gallery (array of IDs), etc).
 
 **List entries:**
 
