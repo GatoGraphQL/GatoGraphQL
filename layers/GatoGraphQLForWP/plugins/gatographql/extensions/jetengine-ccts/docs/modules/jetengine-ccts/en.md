@@ -27,6 +27,7 @@ query {
     id
     uniqueID
     cctSlug
+    slug
     status
     createdDate
     modifiedDate
@@ -54,6 +55,7 @@ query {
     id
     uniqueID
     cctSlug
+    slug
     status
     createdDate
     modifiedDate

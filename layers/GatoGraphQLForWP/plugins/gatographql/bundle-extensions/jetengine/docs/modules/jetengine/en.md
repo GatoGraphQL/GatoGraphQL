@@ -18,6 +18,7 @@ query {
     id
     uniqueID
     cctSlug
+    slug
     status
     createdDate
     modifiedDate
