@@ -8,9 +8,11 @@ The schema exposes the following Root fields:
 - **`jetengineCCTEntryCount`** (count)
 - **`jetengineCCTEntry`** (single entry by ID)
 
-These fields receive a `slug` argument to indicate the CCT slug, which must be set as queryable in the Settings.
+Pass the CCT slug via the `slug` argument (the CCT must be queryable in JetEngine settings).
 
-List queries support `filter`, `pagination`, and `sort`.
+List queries support `filter`, `pagination`, and `sort` args.
+
+On **`JetEngineCCTEntry`**, **`fieldValues`** is a JSON object with all CCT fields for that entry. Use **`fieldValue(slug)`** to query a single field by slug; it returns the value cast to the field type (text, number, media, gallery, etc).
 
 **List entries:**
 
@@ -87,3 +89,4 @@ query {
   }
 }
 ```
+
