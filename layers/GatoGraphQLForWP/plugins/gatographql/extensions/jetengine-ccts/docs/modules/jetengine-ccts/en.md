@@ -15,7 +15,7 @@ On `JetEngineCCTEntry`, we query field values via:
 - `fieldValues` is a JSON object with all CCT fields for that entry
 - `fieldValue(slug)` to query a single field by slug
 
-The values are cast to the corresponding type (`text` => string, `number` => int, `media ID` => int, `gallery` => array of ints, etc).
+Values are cast to the field type: `fieldValue(slug)` and each key in `fieldValues` return the right shape (e.g. text → string, number → int, media ID → int, gallery → array of IDs).
 
 ## Examples
 
