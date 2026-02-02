@@ -10,7 +10,6 @@ use PoPCMSSchema\PostTags\TypeResolvers\InputObjectType\PostTagByOneofInputObjec
 use PoPCMSSchema\PostTags\TypeResolvers\InputObjectType\RootPostTagsFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -28,8 +27,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    use WithLimitFieldArgResolverTrait;
-
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
