@@ -18,7 +18,6 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\CommonFilterInputContainerComponentProcessor;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface;
-use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
@@ -41,8 +40,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    use WithLimitFieldArgResolverTrait;
-
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?HTMLScalarTypeResolver $htmlScalarTypeResolver = null;

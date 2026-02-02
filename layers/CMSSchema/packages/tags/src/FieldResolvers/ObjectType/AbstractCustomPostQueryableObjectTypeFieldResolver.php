@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Tags\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPCMSSchema\Tags\ModuleContracts\TagAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\CustomPostTagsFilterInputObjectTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagPaginationInputObjectTypeResolver;
@@ -24,8 +23,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements TagAPIRequestedContractObjectTypeFieldResolverInterface
 {
-    use WithLimitFieldArgResolverTrait;
-
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver = null;
