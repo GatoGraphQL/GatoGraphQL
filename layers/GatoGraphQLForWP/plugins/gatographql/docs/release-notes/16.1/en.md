@@ -13,4 +13,4 @@
 
 ### Fixed
 
-- Applying `objectRemoveProperties` on fields with type `StringValueJSONObject` ([#3268](https://github.com/GatoGraphQL/GatoGraphQL/pull/3268))
+- Applying `@objectRemoveProperties` on fields with type `StringValueJSONObject` ([#3268](https://github.com/GatoGraphQL/GatoGraphQL/pull/3268))

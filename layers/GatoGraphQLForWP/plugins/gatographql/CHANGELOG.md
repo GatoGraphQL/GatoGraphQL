@@ -19,7 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Applying `objectRemoveProperties` on fields with type `StringValueJSONObject` (#3268)
+- Applying `@objectRemoveProperties` on fields with type `StringValueJSONObject` (#3268)
 
 ## 16.0.2 - 15/01/2026
 
