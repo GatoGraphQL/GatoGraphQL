@@ -23,7 +23,6 @@ On `JetEngineCCTEntry` type, we can query field values via:
 | `id` | The entry's database ID. |
 | `uniqueID` | A unique identifier for the entry, composed by the CCT slug and the entry's ID. |
 | `cctSlug` | The slug of the CCT this entry belongs to. |
-| `slug` | The entry's slug. |
 | `status` | The entry's status (e.g. `publish`, `draft`). |
 | `createdDate` | When the entry was created. |
 | `createdDateStr` | The entry's creation date, formatted as a string. |
@@ -373,7 +372,6 @@ query {
     id
     uniqueID
     cctSlug
-    slug
     status
     createdDate
     modifiedDate
@@ -393,7 +391,7 @@ query {
 }
 ```
 
-Single CCT entry by id or slug (oneof `by`):
+Single CCT entry by id (oneof `by`):
 
 ```graphql
 query {
@@ -401,7 +399,6 @@ query {
     id
     uniqueID
     cctSlug
-    slug
     status
     createdDate
     modifiedDate
