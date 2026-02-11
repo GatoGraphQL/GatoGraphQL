@@ -10,15 +10,14 @@ The schema exposes fields to query<a href="https://crocoblock.com/knowledge-base
 - `jetengineCCTEntryCount: Int!`
 - `jetengineCCTEntry: JetEngineCCTEntry`
 
-Pass the CCT slug via the `slug` argument (the CCT must be set as queryable in the plugin Settings).
+Pass the CCT slug via the `cctSlug` argument (the CCT must be set as queryable in the plugin Settings).
 
 ```graphql
 query {
-  jetengineCCTEntries(slug: "some_cct_slug") {
+  jetengineCCTEntries(cctSlug: "some_cct_slug") {
     id
     uniqueID
     cctSlug
-    slug
     status
     createdDate
     modifiedDate

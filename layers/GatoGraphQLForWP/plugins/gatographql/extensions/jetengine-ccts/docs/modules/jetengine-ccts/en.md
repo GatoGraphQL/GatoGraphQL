@@ -12,7 +12,7 @@ The GraphQL schema is provided fields to query <a href="https://crocoblock.com/k
 | `jetengineCCTEntryCount` | Returns the number of CCT entries. |
 | `jetengineCCTEntry` | Returns a single CCT entry (`JetEngineCCTEntry` type). |
 
-The CCT slug must be provided via the `slug` argument (the CCT must be set as queryable in the plugin Settings, see below).
+The CCT slug must be provided via the `cctSlug` argument (the CCT must be set as queryable in the plugin Settings, see below).
 
 ## JetEngineCCTEntry type
 
@@ -23,7 +23,6 @@ On `JetEngineCCTEntry` type, we can query field values via:
 | `id` | The entry's database ID. |
 | `uniqueID` | A unique identifier for the entry, composed by the CCT slug and the entry's ID. |
 | `cctSlug` | The slug of the CCT this entry belongs to. |
-| `slug` | The entry's slug. |
 | `status` | The entry's status (e.g. `publish`, `draft`). |
 | `createdDate` | When the entry was created. |
 | `createdDateStr` | The entry's creation date, formatted as a string. |
@@ -63,7 +62,7 @@ Executing the following query:
 
 ```graphql
 query JetEngineCCTEntries {
-  jetengineCCTEntry(slug: "sample_cct", id: 1) {
+  jetengineCCTEntry(cctSlug: "sample_cct", by: { id: 1 }) {
     label_text: fieldValue(slug: "label_text")
     textarea: fieldValue(slug: "textarea")
     date: fieldValue(slug: "date")
@@ -215,7 +214,7 @@ The same type casting applies to every field in the JSON returned by `fieldValue
 
 ```graphql
 query JetEngineCCTEntries {
-  jetengineCCTEntry(slug: "sample_cct", id: 1) {
+  jetengineCCTEntry(cctSlug: "sample_cct", by: { id: 1 }) {
     fieldValues
   }
 }
@@ -369,11 +368,10 @@ List CCT entries:
 
 ```graphql
 query {
-  jetengineCCTEntries(slug: "sample_cct") {
+  jetengineCCTEntries(cctSlug: "sample_cct") {
     id
     uniqueID
     cctSlug
-    slug
     status
     createdDate
     modifiedDate
@@ -393,15 +391,14 @@ query {
 }
 ```
 
-Single CCT entry by slug and ID:
+Single CCT entry by id (oneof `by`):
 
 ```graphql
 query {
-  jetengineCCTEntry(slug: "sample_cct", id: 1) {
+  jetengineCCTEntry(cctSlug: "sample_cct", by: { id: 1 }) {
     id
     uniqueID
     cctSlug
-    slug
     status
     createdDate
     modifiedDate
@@ -424,11 +421,11 @@ List and count CCT entries with filter, pagination, and sort:
 ```graphql
 query {
   jetengineCCTEntryCount(
-    slug: "sample_cct"
+    cctSlug: "sample_cct"
     filter: { search: [{ field: "cct_author_id", value: 1, operator: EQUALS }] }
   )
   jetengineCCTEntries(
-    slug: "sample_cct"
+    cctSlug: "sample_cct"
     filter: { search: [{ field: "cct_author_id", value: 1, operator: EQUALS }] }
     pagination: { limit: 10, offset: 0 }
     sort: { by: "cct_created", order: DESC }
