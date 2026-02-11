@@ -17,6 +17,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow indicating minimum memory needed by plugin (#3262)
 - Allow linking to documentation URL to increase memory for plugin (#3263)
 
+### Fixed
+
+- Applying `@objectRemoveProperties` on fields with type `StringValueJSONObject` (#3268)
+
 ## 16.0.2 - 15/01/2026
 
 ### Fixed
