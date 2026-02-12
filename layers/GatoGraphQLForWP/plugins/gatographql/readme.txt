@@ -225,6 +225,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 16.1.0 =
+* Added - The new "All Inclusive" bundle to Extensions (#3269)
 * Added - JetEngine extension for Gato GraphQL (#3264)
 * Added - Support executing bulk actions on users page (#3261)
 * Improved - Print logs in reverse order (#3260)

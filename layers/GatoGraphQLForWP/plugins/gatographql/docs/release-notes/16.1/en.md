@@ -2,6 +2,7 @@
 
 ### Added
 
+- Added the new "All Inclusive" bundle to Extensions ([#3269](https://github.com/GatoGraphQL/GatoGraphQL/pull/3269))
 - JetEngine extension for Gato GraphQL ([#3264](https://github.com/GatoGraphQL/GatoGraphQL/pull/3264))
 - Support executing bulk actions on users page ([#3261](https://github.com/GatoGraphQL/GatoGraphQL/pull/3261))
 

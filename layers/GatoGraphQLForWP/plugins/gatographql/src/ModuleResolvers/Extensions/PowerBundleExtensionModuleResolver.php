@@ -15,7 +15,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
 {
     // public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
 
-    // public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
+    public const ALL_INCLUSIVE = Plugin::NAMESPACE . '\\bundle-extensions\\all-inclusive';
     public const POWER_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\power-extensions';
 
     public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\bundle-extensions\\access-control';
@@ -39,8 +39,8 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             //     self::PRO,
             // ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
-                // // self::ALL_EXTENSIONS,
-                self::POWER_EXTENSIONS,
+                self::ALL_INCLUSIVE,
+                // self::POWER_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage() ? [
                 self::ACCESS_CONTROL,
@@ -63,7 +63,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         $extensionPlaceholder = \__('%s', 'gatographql');
         return match ($module) {
             // self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
-            // self::ALL_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
+            self::ALL_INCLUSIVE => sprintf($bundlePlaceholder, \__('All Inclusive', 'gatographql')),
             self::POWER_EXTENSIONS => sprintf($bundlePlaceholder, \__('Power Extensions', 'gatographql')),
 
             self::ACCESS_CONTROL => sprintf($extensionPlaceholder, \__('Access Control', 'gatographql')),
@@ -84,7 +84,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
     {
         return match ($module) {
             // self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
-            // self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
+            self::ALL_INCLUSIVE => \__('All Gato GraphQL PRO extensions (including upcoming ones): All the “Power Extensions”, plus all the “Premium Extensions”', 'gatographql'),
             self::POWER_EXTENSIONS => \__('All of Gato GraphQL\'s power extensions, in a single plugin', 'gatographql'),
 
             self::ACCESS_CONTROL => \__('Define Access Control Lists to manage granular access to the API for your users', 'gatographql'),
@@ -112,9 +112,9 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
             // self::PRO,
-            // self::ALL_EXTENSIONS,
+            self::ALL_INCLUSIVE,
             self::POWER_EXTENSIONS =>
-                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+                $moduleConfiguration->getGatoGraphQLPricingPageURL(),
             default
                 => parent::getWebsiteURL($module),
         };
@@ -125,7 +125,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
         return match ($module) {
             // self::PRO,
-            // self::ALL_EXTENSIONS,
+            self::ALL_INCLUSIVE,
             self::POWER_EXTENSIONS
                 => $pluginURL . 'assets/img/logos/GatoGraphQL-logo-face.webp',
             self::ACCESS_CONTROL
@@ -189,33 +189,48 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             //     PremiumExtensionModuleResolver::POLYLANG,
             //     PowerExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             // ],
-            // self::ALL_EXTENSIONS => [
-            //     PowerExtensionModuleResolver::ACCESS_CONTROL,
-            //     PowerExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
-            //     PowerExtensionModuleResolver::CACHE_CONTROL,
-            //     PowerExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
-            //     PowerExtensionModuleResolver::CUSTOM_ENDPOINTS,
-            //     PowerExtensionModuleResolver::DEPRECATION_NOTIFIER,
-            //     PowerExtensionModuleResolver::EMAIL_SENDER,
-            //     PowerExtensionModuleResolver::FIELD_DEFAULT_VALUE,
-            //     PowerExtensionModuleResolver::FIELD_DEPRECATION,
-            //     PowerExtensionModuleResolver::FIELD_ON_FIELD,
-            //     PowerExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
-            //     PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-            //     PowerExtensionModuleResolver::FIELD_TO_INPUT,
-            //     PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
-            //     PowerExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-            //     PowerExtensionModuleResolver::HTTP_CLIENT,
-            //     PowerExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
-            //     PowerExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-            //     PowerExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
-            //     PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-            //     PowerExtensionModuleResolver::PERSISTED_QUERIES,
-            //     PowerExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-            //     PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-            //     PremiumExtensionModuleResolver::POLYLANG,
-            //     PowerExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-            // ],
+            self::ALL_INCLUSIVE => [
+                PowerExtensionModuleResolver::ACCESS_CONTROL,
+                PowerExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                PowerExtensionModuleResolver::CACHE_CONTROL,
+                PowerExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                PowerExtensionModuleResolver::CUSTOM_ENDPOINTS,
+                PowerExtensionModuleResolver::DEPRECATION_NOTIFIER,
+                PowerExtensionModuleResolver::EMAIL_SENDER,
+                PowerExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                PowerExtensionModuleResolver::FIELD_DEPRECATION,
+                PowerExtensionModuleResolver::FIELD_ON_FIELD,
+                PowerExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
+                PowerExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                PowerExtensionModuleResolver::FIELD_TO_INPUT,
+                PowerExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                PowerExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                PowerExtensionModuleResolver::HTTP_CLIENT,
+                PowerExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                PowerExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                PowerExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
+                PowerExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                PowerExtensionModuleResolver::PERSISTED_QUERIES,
+                PowerExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                PowerExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                PowerExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                PremiumExtensionModuleResolver::AUTOMATION,
+                PremiumExtensionModuleResolver::BRICKS,
+                PremiumExtensionModuleResolver::CHATGPT_TRANSLATION,
+                PremiumExtensionModuleResolver::CLAUDE_TRANSLATION,
+                PremiumExtensionModuleResolver::DEEPL,
+                PremiumExtensionModuleResolver::DEEPSEEK_TRANSLATION,
+                PremiumExtensionModuleResolver::ELEMENTOR,
+                PremiumExtensionModuleResolver::EVENTS_MANAGER,
+                PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
+                PremiumExtensionModuleResolver::JETENGINE_CCTS,
+                PremiumExtensionModuleResolver::MISTRALAI_TRANSLATION,
+                PremiumExtensionModuleResolver::MULTILINGUALPRESS,
+                PremiumExtensionModuleResolver::OPENROUTER_TRANSLATION,
+                PremiumExtensionModuleResolver::POLYLANG,
+                PremiumExtensionModuleResolver::TRANSLATION,
+                PremiumExtensionModuleResolver::WOOCOMMERCE,
+            ],
             self::POWER_EXTENSIONS => [
                 PowerExtensionModuleResolver::ACCESS_CONTROL,
                 PowerExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
@@ -301,19 +316,27 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             //     $this->getModulesToResolve(),
             //     [$module]
             // ),
-            // self::ALL_EXTENSIONS => [
-            //     self::ACCESS_CONTROL,
-            //     self::CACHING,
-            //     self::CUSTOM_ENDPOINTS,
-            //     self::DEPRECATION,
-            //     self::HTTP_CLIENT,
-            //     self::INTERNAL_GRAPHQL_SERVER,
-            //     self::MULTIPLE_QUERY_EXECUTION,
-            //     self::PERSISTED_QUERIES,
-            //     PremiumBundleExtensionModuleResolver::POLYLANG,
-            //     self::QUERY_FUNCTIONS,
-            //     self::SCHEMA_FUNCTIONS,
-            // ],
+            self::ALL_INCLUSIVE => [
+                self::ACCESS_CONTROL,
+                self::CACHING,
+                self::CUSTOM_ENDPOINTS,
+                self::DEPRECATION,
+                self::HTTP_CLIENT,
+                self::INTERNAL_GRAPHQL_SERVER,
+                self::MULTIPLE_QUERY_EXECUTION,
+                self::PERSISTED_QUERIES,
+                self::QUERY_FUNCTIONS,
+                self::SCHEMA_FUNCTIONS,
+                PremiumBundleExtensionModuleResolver::AUTOMATION,
+                PremiumBundleExtensionModuleResolver::BRICKS,
+                PremiumBundleExtensionModuleResolver::ELEMENTOR,
+                PremiumBundleExtensionModuleResolver::EVENTS_MANAGER,
+                PremiumBundleExtensionModuleResolver::JETENGINE,
+                PremiumBundleExtensionModuleResolver::MULTILINGUALPRESS,
+                PremiumBundleExtensionModuleResolver::POLYLANG,
+                PremiumBundleExtensionModuleResolver::TRANSLATION,
+                PremiumBundleExtensionModuleResolver::WOOCOMMERCE,
+            ],
             self::POWER_EXTENSIONS => [
                 self::ACCESS_CONTROL,
                 self::CACHING,
