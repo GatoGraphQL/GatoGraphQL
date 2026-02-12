@@ -40,7 +40,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             // ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
                 self::ALL_INCLUSIVE,
-                self::POWER_EXTENSIONS,
+                // self::POWER_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage() ? [
                 self::ACCESS_CONTROL,
