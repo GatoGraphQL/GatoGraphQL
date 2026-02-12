@@ -15,7 +15,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
 {
     // public const PRO = Plugin::NAMESPACE . '\\bundle-extensions\\pro';
 
-    public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
+    public const ALL_INCLUSIVE = Plugin::NAMESPACE . '\\bundle-extensions\\all-inclusive';
     public const POWER_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\power-extensions';
 
     public const ACCESS_CONTROL = Plugin::NAMESPACE . '\\bundle-extensions\\access-control';
@@ -39,7 +39,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             //     self::PRO,
             // ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROAllExtensionsBundleOnExtensionsPage() ? [
-                self::ALL_EXTENSIONS,
+                self::ALL_INCLUSIVE,
                 self::POWER_EXTENSIONS,
             ] : [],
             PluginStaticModuleConfiguration::displayGatoGraphQLPROFeatureBundlesOnExtensionsPage() ? [
@@ -63,7 +63,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         $extensionPlaceholder = \__('%s', 'gatographql');
         return match ($module) {
             // self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
-            self::ALL_EXTENSIONS => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
+            self::ALL_INCLUSIVE => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
             self::POWER_EXTENSIONS => sprintf($bundlePlaceholder, \__('Power Extensions', 'gatographql')),
 
             self::ACCESS_CONTROL => sprintf($extensionPlaceholder, \__('Access Control', 'gatographql')),
@@ -84,7 +84,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
     {
         return match ($module) {
             // self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
-            self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
+            self::ALL_INCLUSIVE => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
             self::POWER_EXTENSIONS => \__('All of Gato GraphQL\'s power extensions, in a single plugin', 'gatographql'),
 
             self::ACCESS_CONTROL => \__('Define Access Control Lists to manage granular access to the API for your users', 'gatographql'),
@@ -112,7 +112,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ($module) {
             // self::PRO,
-            self::ALL_EXTENSIONS,
+            self::ALL_INCLUSIVE,
             self::POWER_EXTENSIONS =>
                 $moduleConfiguration->getGatoGraphQLWebsiteURL(),
             default
@@ -125,7 +125,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         $pluginURL = PluginApp::getMainPlugin()->getPluginURL();
         return match ($module) {
             // self::PRO,
-            self::ALL_EXTENSIONS,
+            self::ALL_INCLUSIVE,
             self::POWER_EXTENSIONS
                 => $pluginURL . 'assets/img/logos/GatoGraphQL-logo-face.webp',
             self::ACCESS_CONTROL
@@ -189,7 +189,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             //     PremiumExtensionModuleResolver::POLYLANG,
             //     PowerExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             // ],
-            self::ALL_EXTENSIONS => [
+            self::ALL_INCLUSIVE => [
                 PowerExtensionModuleResolver::ACCESS_CONTROL,
                 PowerExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                 PowerExtensionModuleResolver::CACHE_CONTROL,
@@ -301,7 +301,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             //     $this->getModulesToResolve(),
             //     [$module]
             // ),
-            self::ALL_EXTENSIONS => [
+            self::ALL_INCLUSIVE => [
                 self::ACCESS_CONTROL,
                 self::CACHING,
                 self::CUSTOM_ENDPOINTS,
