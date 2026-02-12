@@ -114,7 +114,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
             // self::PRO,
             self::ALL_INCLUSIVE,
             self::POWER_EXTENSIONS =>
-                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+                $moduleConfiguration->getGatoGraphQLPricingPageURL(),
             default
                 => parent::getWebsiteURL($module),
         };
