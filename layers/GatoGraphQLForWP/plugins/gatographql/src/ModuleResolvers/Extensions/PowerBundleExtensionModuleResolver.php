@@ -63,7 +63,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         $extensionPlaceholder = \__('%s', 'gatographql');
         return match ($module) {
             // self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
-            self::ALL_INCLUSIVE => sprintf($bundlePlaceholder, \__('All Extensions', 'gatographql')),
+            self::ALL_INCLUSIVE => sprintf($bundlePlaceholder, \__('All Inclusive', 'gatographql')),
             self::POWER_EXTENSIONS => sprintf($bundlePlaceholder, \__('Power Extensions', 'gatographql')),
 
             self::ACCESS_CONTROL => sprintf($extensionPlaceholder, \__('Access Control', 'gatographql')),
@@ -84,7 +84,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
     {
         return match ($module) {
             // self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
-            self::ALL_INCLUSIVE => \__('All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
+            self::ALL_INCLUSIVE => \__('All Gato GraphQL PRO extensions (including upcoming ones): All the “Power Extensions”, plus all the “Premium Extensions”', 'gatographql'),
             self::POWER_EXTENSIONS => \__('All of Gato GraphQL\'s power extensions, in a single plugin', 'gatographql'),
 
             self::ACCESS_CONTROL => \__('Define Access Control Lists to manage granular access to the API for your users', 'gatographql'),
