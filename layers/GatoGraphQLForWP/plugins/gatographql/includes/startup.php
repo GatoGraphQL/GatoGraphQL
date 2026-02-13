@@ -18,24 +18,30 @@ class Startup {
      *
      * @see https://www.php.net/manual/en/ini.core.php#ini.sect.resource-limits
      */
-    public static function checkGatoGraphQLMemoryRequirements(string $pluginName): bool
-    {
+    public static function checkGatoGraphQLMemoryRequirements(
+        string $pluginName,
+        string $minRequiredPHPMemoryLimit = '64M',
+        ?string $url = null,
+    ): bool {
         $phpMemoryLimit = \ini_get('memory_limit');
         $phpMemoryLimitInBytes = wp_convert_hr_to_bytes($phpMemoryLimit);
         if ($phpMemoryLimitInBytes !== -1) {
-            // Minimum: 64MB
-            $minRequiredPHPMemoryLimit = '64M';
             $minRequiredPHPMemoryLimitInBytes = wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
             if ($phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
-                add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName) {
+                add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit, $pluginName, $url) {
                     printf(
-                        '<div class="notice notice-error"><p>%s</p></div>',
+                        '<div class="notice notice-error"><p>%s%s</p></div>',
                         sprintf(
-                            __('Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of memory, however the server\'s PHP memory limit is set to <strong>%3$s</strong>. Please increase the memory limit to load %1$s.', 'gatographql'),
+                            __('Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of memory, however the server\'s PHP memory limit is set to <strong>%3$s</strong>. Please increase the memory limit to load the plugin.', 'gatographql'),
                             $pluginName,
                             $minRequiredPHPMemoryLimit,
                             $phpMemoryLimit
-                        )
+                        ),
+                        $url ? sprintf(
+                            __(' <a href="%s" target="_blank">%s</a>', 'gatographql'),
+                            $url,
+                            __('Browse documentation&#x2197;', 'gatographql')
+                        ) : ''
                     );
                 });
                 return false;

@@ -120,8 +120,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function getGatoGraphQLExtensionsReferencePageURL(): string
     {
-        $envVariable = Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL;
+        $envVariable = Environment::GATOGRAPHQL_EXTENSIONS_REFERENCE_PAGE_URL;
         $defaultValue = 'https://gatographql.com/extensions-reference';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+
+    public function getGatoGraphQLPricingPageURL(): string
+    {
+        $envVariable = Environment::GATOGRAPHQL_PRICING_PAGE_URL;
+        $defaultValue = 'https://gatographql.com/pricing';
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -132,7 +143,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getGatoGraphQLRequestExtensionPageURL(): string
     {
         $envVariable = Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL;
-        $defaultValue = 'https://gatographql.com/contact/';
+        $defaultValue = 'https://gatographql.com/contact';
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -275,6 +286,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             LoggerSeverity::WARNING,
         ];
         $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    public function enableReverseLogOrder(): bool
+    {
+        $envVariable = Environment::ENABLE_REVERSE_LOG_ORDER;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

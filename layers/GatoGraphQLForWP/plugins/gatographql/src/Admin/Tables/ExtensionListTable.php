@@ -160,7 +160,7 @@ class ExtensionListTable extends AbstractExtensionListTable
             if (
                 in_array($plugin['gato_extension_module'], [
                 // PowerBundleExtensionModuleResolver::PRO,
-                // PowerBundleExtensionModuleResolver::ALL_EXTENSIONS,
+                PowerBundleExtensionModuleResolver::ALL_INCLUSIVE,
                 PowerBundleExtensionModuleResolver::POWER_EXTENSIONS,
                 ])
             ) {

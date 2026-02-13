@@ -4,7 +4,25 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 16.0.2 - DATE
+## 16.1.0 - 13/02/2026
+
+### Added
+
+- Added the new "All Inclusive" bundle to Extensions (#3269)
+- JetEngine extension for Gato GraphQL (#3264)
+- Support executing bulk actions on users page (#3261)
+
+### Improvements
+
+- Print logs in reverse order (#3260)
+- Allow indicating minimum memory needed by plugin (#3262)
+- Allow linking to documentation URL to increase memory for plugin (#3263)
+
+### Fixed
+
+- Applying `@objectRemoveProperties` on fields with type `StringValueJSONObject` (#3268)
+
+## 16.0.2 - 15/01/2026
 
 ### Fixed
 

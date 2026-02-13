@@ -72,6 +72,8 @@ The available premium extensions are:
 
 [Events Manager](https://gatographql.com/extensions/events-manager): Integration with the Events Manager plugin, to fetch event data.
 
+[JetEngine](https://gatographql.com/extensions/jetengine): Integration with the JetEngine plugin, to fetch custom content types and related data.
+
 [MultilingualPress](https://gatographql.com/extensions/multilingualpress): Integration with the MultilingualPress plugin, to fetch multilingual data.
 
 [Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
@@ -221,6 +223,15 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 16.1.0 =
+* Added - The new "All Inclusive" bundle to Extensions (#3269)
+* Added - JetEngine extension for Gato GraphQL (#3264)
+* Added - Support executing bulk actions on users page (#3261)
+* Improved - Print logs in reverse order (#3260)
+* Improved - Allow indicating minimum memory needed by plugin (#3262)
+* Improved - Allow linking to documentation URL to increase memory for plugin (#3263)
+* Fixed - Applying `@objectRemoveProperties` on fields with type `StringValueJSONObject` (#3268)
 
 = 16.0.2 =
 * Fixed - Own Plugin CPT editor: Check that `get_current_screen` exists (eg: it doesn't when editing Bricks templates) (#3259)

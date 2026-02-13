@@ -128,7 +128,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
                 HTMLCodes::OPEN_IN_NEW_WINDOW,
             );
         }
-        $headerMessage = __('Extensions add functionality and expand the GraphQL schema.', 'gatographql');
+        $headerMessage = __('Extensions add functionality and expand the GraphQL schema with Power and Premium Extensions.', 'gatographql');
         if ($displayGatoGraphQLPROFeatureBundlesOnExtensionsPage && !$displayGatoGraphQLPROExtensionsOnExtensionsPage) {
             return sprintf(
                 __('%1$s Browse them on the <a href="%2$s" target="%3$s">Gato GraphQL website%4$s</a>.', 'gatographql'),

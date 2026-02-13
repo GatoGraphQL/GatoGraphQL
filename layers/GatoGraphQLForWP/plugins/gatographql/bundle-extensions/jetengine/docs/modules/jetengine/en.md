@@ -1,0 +1,38 @@
+# JetEngine
+
+Integration with Crocoblock's <a href="https://crocoblock.com/plugins/jetengine/" target="_blank">JetEngine</a> plugin.
+
+---
+
+The schema exposes fields to query<a href="https://crocoblock.com/knowledge-base/features/custom-content-type/" target="_blank">Custom Content Type (CCT)</a> data:
+
+- `jetengineCCTEntries: [JetEngineCCTEntry!]!`
+- `jetengineCCTEntryCount: Int!`
+- `jetengineCCTEntry: JetEngineCCTEntry`
+
+Pass the CCT slug via the `cctSlug` argument (the CCT must be set as queryable in the plugin Settings).
+
+```graphql
+query {
+  jetengineCCTEntries(cctSlug: "some_cct_slug") {
+    id
+    uniqueID
+    cctSlug
+    status
+    createdDate
+    modifiedDate
+    authorID
+    author {
+      id
+      name
+    }
+    singleCustomPostID
+    singleCustomPost {
+      id
+      title
+    }
+    fieldValues
+    someField: fieldValue(slug: "some_field_slug")
+  }
+}
+```

@@ -89,6 +89,10 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
             $pages[] = 'edit-tags.php'; // Taxonomies
         }
 
+        if ($this->supportBulkActionsOnUsers()) {
+            $pages[] = 'users.php'; // Users
+        }
+
         return $pages;
     }
 
@@ -103,6 +107,11 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
     }
 
     protected function supportBulkActionsOnTaxonomies(): bool
+    {
+        return true;
+    }
+
+    protected function supportBulkActionsOnUsers(): bool
     {
         return true;
     }

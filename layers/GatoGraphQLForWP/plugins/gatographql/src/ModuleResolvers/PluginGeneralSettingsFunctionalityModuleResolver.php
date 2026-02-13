@@ -39,6 +39,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public final const OPTION_ENABLE_LOGS_BY_SEVERITY = 'enable-logs-by-severity';
     public final const OPTION_ENABLE_LOG_COUNT_BADGES = 'enable-log-count-badges';
     public final const OPTION_ENABLE_LOG_COUNT_BADGES_BY_SEVERITY = 'enable-log-count-badges-by-severity';
+    public final const OPTION_ENABLE_REVERSE_LOG_ORDER = 'enable-reverse-log-order';
     public final const OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME = 'client-ip-address-server-property-name';
     public final const OPTION_EDITING_ACCESS_SCHEME = 'editing-access-scheme';
 
@@ -155,6 +156,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     LoggerSeverity::INFO => false,
                     LoggerSeverity::DEBUG => false,
                 ],
+                self::OPTION_ENABLE_REVERSE_LOG_ORDER => false,
             ],
             self::SERVER_IP_CONFIGURATION => [
                 self::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME => 'REMOTE_ADDR',
@@ -306,6 +308,18 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
             ];
 
+            $option = self::OPTION_ENABLE_REVERSE_LOG_ORDER;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Reverse log order?', 'gatographql'),
+                Properties::DESCRIPTION => \__('Display newer log entries first when viewing a log file', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
@@ -342,6 +356,15 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                 Properties::KEY_LABELS => $severityKeyLabels,
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
+            ];
+
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'divider'
+                ),
+                Properties::DESCRIPTION => '<hr/>',
+                Properties::TYPE => Properties::TYPE_NULL,
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
