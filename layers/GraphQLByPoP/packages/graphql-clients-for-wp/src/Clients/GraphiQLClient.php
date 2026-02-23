@@ -22,7 +22,7 @@ class GraphiQLClient extends AbstractGraphiQLClient
      */
     protected function getGraphiQLAppBuildBaseURL(): ?string
     {
-        return null;
+        return $this->getModuleBaseURL() . '/clients/graphiql-app/build/';
     }
 
     /**
