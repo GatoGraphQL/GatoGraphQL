@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
+use GraphQLByPoP\GraphQLClientsForWP\Module;
+use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration;
 use PoP\ComponentModel\Configuration\RequestHelpers;
+use PoP\Root\App;
 
 /**
  * GraphiQL client for the single endpoint.
@@ -98,9 +101,14 @@ class GraphiQLClient extends AbstractGraphiQLClient
         $endpoint = RequestHelpers::addRequestParamsToEndpoint($endpoint);
         $endpoint = (string) preg_replace('#^https?:#', '', $endpoint);
 
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+
         $settings = [
-            'defaultQuery' => $this->getGraphiQLDefaultQuery(),
             'endpoint' => $endpoint,
+            'defaultQuery' => $moduleConfiguration->printGraphiQLDefaultQuery()
+                ? $this->getGraphiQLDefaultQuery()
+                : '',
             'response' => $this->__('Click the "Execute Query" button, or press Ctrl+Enter (Command+Enter in Mac)', 'default'),
             'workerChunks' => $workerChunks,
             'buildBaseURL' => $buildBaseURL,

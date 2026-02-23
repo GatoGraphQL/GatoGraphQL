@@ -76,6 +76,22 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
+     * Print a default query in the GraphiQL editor?
+     */
+    public function printGraphiQLDefaultQuery(): bool
+    {
+        $envVariable = Environment::PRINT_GRAPHIQL_DEFAULT_QUERY;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
      * Is the Voyager client disabled?
      */
     public function isVoyagerClientEndpointDisabled(): bool

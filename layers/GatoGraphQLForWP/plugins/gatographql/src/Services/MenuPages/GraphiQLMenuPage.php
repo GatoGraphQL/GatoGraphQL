@@ -7,6 +7,9 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
+use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPModuleConfiguration;
+use PoP\Root\App;
 
 /**
  * GraphiQL page
@@ -154,13 +157,18 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             }
         }
 
+        /** @var GraphQLClientsForWPModuleConfiguration */
+        $graphQLClientsForWPModuleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
+
         // Localize to the main script (last JS enqueued)
         \wp_localize_script(
             'gatographql-graphiql-app',
             'graphQLByPoPGraphiQLSettings',
             array_merge(
                 [
-                    'defaultQuery' => $this->getDefaultQuery(),
+                    'defaultQuery' => $graphQLClientsForWPModuleConfiguration->printGraphiQLDefaultQuery()
+                        ? $this->getDefaultQuery()
+                        : '',
                     'endpoint' => $this->getEndpointHelpers()->getAdminGraphQLEndpoint(),
                     'workerChunks' => $workerChunks,
                     'buildBaseURL' => $buildBaseURL,
@@ -199,12 +207,17 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             true
         );
 
+        /** @var GraphQLClientsForWPModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
+
         \wp_localize_script(
             'gatographql-graphiql-client',
             'graphQLByPoPGraphiQLSettings',
             array_merge(
                 [
-                    'defaultQuery' => $this->getDefaultQuery(),
+                    'defaultQuery' => $moduleConfiguration->printGraphiQLDefaultQuery()
+                        ? $this->getDefaultQuery()
+                        : '',
                     'endpoint' => $this->getEndpointHelpers()->getAdminGraphQLEndpoint(),
                 ],
                 $scriptSettings
