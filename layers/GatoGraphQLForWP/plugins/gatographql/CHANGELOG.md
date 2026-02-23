@@ -12,7 +12,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-(No entries yet)
+- Update GraphiQL to v5 (#3270)
 
 ### Fixed
 

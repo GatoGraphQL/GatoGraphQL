@@ -1,0 +1,24 @@
+{
+  "name": "graphiql-app-for-wp",
+  "version": "5.0.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "graphiql": "^5.2.0",
+    "graphql": "^16.0.0",
+    "graphql-ws": "^5.16.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "build": "react-scripts build",
+    "start": "react-scripts start"
+  },
+  "devDependencies": {
+    "react-scripts": "5.0.1"
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not ie 11"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  }
+}

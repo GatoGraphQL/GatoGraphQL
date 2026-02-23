@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgraphiql_app_for_wp=self.webpackChunkgraphiql_app_for_wp||[]).push([[7542],{7542(e,r,s){s.r(r),s.d(r,{DraggedTreeItemsIdentifier:()=>a,TreeViewsDnDService:()=>t});class t{constructor(){this._dragOperations=new Map}removeDragOperationTransfer(e){if(e&&this._dragOperations.has(e)){const r=this._dragOperations.get(e);return this._dragOperations.delete(e),r}}}class a{constructor(e){this.identifier=e}}}}]);
+//# sourceMappingURL=7542.5d68816a.chunk.js.map

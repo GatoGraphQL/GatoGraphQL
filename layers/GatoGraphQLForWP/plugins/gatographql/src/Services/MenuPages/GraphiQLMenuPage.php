@@ -98,7 +98,83 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         $mainPlugin = PluginApp::getMainPlugin();
         $mainPluginURL = $mainPlugin->getPluginURL();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
+        $mainPluginPath = $mainPlugin->getPluginDir();
 
+        $manifestPath = $mainPluginPath . '/vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/asset-manifest.json';
+        $buildBaseURL = $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build';
+
+        if (!is_file($manifestPath)) {
+            // Fallback to legacy GraphiQL 1.5.7 if graphiql-app build is missing
+            $this->enqueueGraphiQLLegacyAssets($mainPluginURL, $mainPluginVersion, $scriptSettings);
+            return;
+        }
+
+        $manifest = json_decode((string) file_get_contents($manifestPath), true);
+        $entrypoints = $manifest['entrypoints'] ?? array_values(array_intersect_key(
+            $manifest['files'] ?? [],
+            array_flip(['main.js', 'main.css'])
+        ));
+
+        // Monaco worker chunk paths (graphiql/setup-workers: 5914=editor, 5997=json, 8378=graphql).
+        // Pass to the app so workers can be loaded with correct __webpack_public_path__ via fetch+blob.
+        $workerChunks = [];
+        $files = $manifest['files'] ?? [];
+        foreach (array_keys($files) as $key) {
+            if (preg_match('#^static/js/(5914|5997|8378)\.[a-f0-9]+\.chunk\.js$#', $key, $m)) {
+                $workerChunks[(string) $m[1]] = $files[$key];
+            }
+        }
+        $buildBaseURL = rtrim($buildBaseURL, '/') . '/';
+
+        foreach ($entrypoints as $assetPath) {
+            $url = $buildBaseURL . (str_starts_with($assetPath, '/') ? $assetPath : '/' . $assetPath);
+            if (str_contains($assetPath, '.css')) {
+                \wp_enqueue_style(
+                    'gatographql-graphiql-app-css',
+                    $url,
+                    array(),
+                    $mainPluginVersion
+                );
+            } else {
+                \wp_enqueue_script(
+                    'gatographql-graphiql-app',
+                    $url,
+                    array(),
+                    $mainPluginVersion,
+                    true
+                );
+                // So chunk URLs resolve to the build folder (fixes 404s when plugin URL varies).
+                // Set __webpack_public_path__ before the bundle runs so the runtime uses it (not script dir).
+                \wp_add_inline_script(
+                    'gatographql-graphiql-app',
+                    'window.graphqlclientsforwpGraphiQLBuildURL="' . \esc_js($buildBaseURL) . '";'
+                    . 'var __webpack_public_path__=window.graphqlclientsforwpGraphiQLBuildURL;',
+                    'before'
+                );
+            }
+        }
+
+        // Localize to the main script (last JS enqueued)
+        \wp_localize_script(
+            'gatographql-graphiql-app',
+            'graphQLByPoPGraphiQLSettings',
+            array_merge(
+                [
+                    'defaultQuery' => $this->getDefaultQuery(),
+                    'endpoint' => $this->getEndpointHelpers()->getAdminGraphQLEndpoint(),
+                    'workerChunks' => $workerChunks,
+                    'buildBaseURL' => $buildBaseURL,
+                ],
+                $scriptSettings
+            )
+        );
+    }
+
+    /**
+     * Legacy GraphiQL 1.5.7 assets (used when graphiql-app build is not present).
+     */
+    protected function enqueueGraphiQLLegacyAssets(string $mainPluginURL, string $mainPluginVersion, array $scriptSettings): void
+    {
         \wp_enqueue_style(
             'gatographql-graphiql',
             $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.css',
@@ -106,7 +182,6 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             $mainPluginVersion
         );
 
-        // JS: execute them all in the footer
         $this->enqueueReactAssets(true);
 
         \wp_enqueue_script(
@@ -124,7 +199,6 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             true
         );
 
-        // Load data into the script
         \wp_localize_script(
             'gatographql-graphiql-client',
             'graphQLByPoPGraphiQLSettings',

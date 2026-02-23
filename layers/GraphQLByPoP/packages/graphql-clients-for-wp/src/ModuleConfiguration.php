@@ -48,6 +48,8 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     {
         $envVariable = Environment::USE_GRAPHIQL_EXPLORER;
         $defaultValue = true;
+        // @todo Remove temporary code to disable GraphiQL Explorer
+        $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
