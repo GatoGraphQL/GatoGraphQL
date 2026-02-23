@@ -8,6 +8,7 @@ import './public-path';
  * Must be imported before any graphiql usage in Webpack builds.
  */
 import 'graphiql/setup-workers/webpack';
+import './monaco-worker-public-path';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';

@@ -115,6 +115,17 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             array_flip(['main.js', 'main.css'])
         ));
 
+        // Monaco worker chunk paths (graphiql/setup-workers: 5914=editor, 5997=json, 8378=graphql).
+        // Pass to the app so workers can be loaded with correct __webpack_public_path__ via fetch+blob.
+        $workerChunks = [];
+        $files = $manifest['files'] ?? [];
+        foreach (array_keys($files) as $key) {
+            if (preg_match('#^static/js/(5914|5997|8378)\.[a-f0-9]+\.chunk\.js$#', $key, $m)) {
+                $workerChunks[(string) $m[1]] = $files[$key];
+            }
+        }
+        $buildBaseURL = rtrim($buildBaseURL, '/') . '/';
+
         foreach ($entrypoints as $assetPath) {
             $url = $buildBaseURL . (str_starts_with($assetPath, '/') ? $assetPath : '/' . $assetPath);
             if (str_contains($assetPath, '.css')) {
@@ -133,9 +144,11 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
                     true
                 );
                 // So chunk URLs resolve to the build folder (fixes 404s when plugin URL varies).
+                // Set __webpack_public_path__ before the bundle runs so the runtime uses it (not script dir).
                 \wp_add_inline_script(
                     'gatographql-graphiql-app',
-                    'window.gatographqlGraphiQLBuildURL="' . \esc_js(\rtrim($buildBaseURL, '/') . '/') . '";',
+                    'window.gatographqlGraphiQLBuildURL="' . \esc_js($buildBaseURL) . '";'
+                    . 'var __webpack_public_path__=window.gatographqlGraphiQLBuildURL;',
                     'before'
                 );
             }
@@ -149,6 +162,8 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
                 [
                     'defaultQuery' => $this->getDefaultQuery(),
                     'endpoint' => $this->getEndpointHelpers()->getAdminGraphQLEndpoint(),
+                    'workerChunks' => $workerChunks,
+                    'buildBaseURL' => $buildBaseURL,
                 ],
                 $scriptSettings
             )
