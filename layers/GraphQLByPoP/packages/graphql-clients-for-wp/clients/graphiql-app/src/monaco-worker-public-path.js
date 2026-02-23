@@ -1,7 +1,7 @@
 /**
  * Wrap Monaco worker creation so workers run with the correct __webpack_public_path__
- * (build base URL). Otherwise workers use their script directory and request chunks
- * at .../build/static/js/static/js/xxx.chunk.js (double path).
+ * (build base URL). Worker bundles have s.p="./" hardcoded and use importScripts(s.p + chunk).
+ * We fetch the worker script and replace the public path so chunk URLs resolve correctly.
  *
  * Must run after graphiql/setup-workers/webpack sets MonacoEnvironment.getWorker.
  * Uses settings.workerChunks (from PHP manifest) and settings.buildBaseURL.
@@ -21,10 +21,25 @@ if (typeof globalThis.MonacoEnvironment !== 'undefined' && globalThis.MonacoEnvi
       }
       const workerUrl = base + path.replace(/^\.\//, '');
       return fetch(workerUrl)
-        .then((res) => res.text())
+        .then((res) => {
+          if (!res.ok) throw new Error('Worker fetch ' + res.status);
+          return res.text();
+        })
         .then((code) => {
-          const bootstrap = "var __webpack_public_path__='" + base.replace(/'/g, "\\'") + "';";
-          const blob = new Blob([bootstrap + code], { type: 'application/javascript' });
+          // Worker bundles have s.p="./" or r.p="./" hardcoded (webpack uses different names).
+          // Replace with full build URL so importScripts(x.p + chunk) resolves correctly.
+          const escapedBase = base.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+          const replacement = (letter) => letter + '.p="' + escapedBase + '"';
+          let patched = code
+            .replace('s.p="./"', replacement('s'))
+            .replace('r.p="./"', replacement('r'));
+          if (patched === code) {
+            patched = code.replace(
+              /([a-z])\.p\s*=\s*["']([^"']*)["']/gi,
+              (match, letter, val) => (val.startsWith('http') ? match : replacement(letter))
+            );
+          }
+          const blob = new Blob([patched], { type: 'application/javascript' });
           return new Worker(URL.createObjectURL(blob));
         });
     };
