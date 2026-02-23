@@ -109,7 +109,6 @@ class GraphiQLClient extends AbstractGraphiQLClient
             'defaultQuery' => $moduleConfiguration->printGraphiQLDefaultQuery()
                 ? $this->getGraphiQLDefaultQuery()
                 : '',
-            'response' => $this->__('Click the "Execute Query" button, or press Ctrl+Enter (Command+Enter in Mac)', 'default'),
             'workerChunks' => $workerChunks,
             'buildBaseURL' => $buildBaseURL,
         ];
