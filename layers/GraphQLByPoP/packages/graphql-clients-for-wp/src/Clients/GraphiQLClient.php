@@ -20,7 +20,7 @@ class GraphiQLClient extends AbstractGraphiQLClient
      * Base URL for the graphiql-app build (with trailing slash).
      * Return null to use legacy client.
      */
-    protected function getGraphiQLAppBuildBaseURL(): ?string
+    protected function getGraphiQLAppBuildBaseURL(): string
     {
         return $this->getModuleBaseURL() . '/clients/graphiql-app/build/';
     }
@@ -61,7 +61,7 @@ class GraphiQLClient extends AbstractGraphiQLClient
         $buildBaseURL = $this->getGraphiQLAppBuildBaseURL();
         $manifestPath = $this->getGraphiQLAppBuildManifestPath();
 
-        if ($buildBaseURL !== null && $buildBaseURL !== '' && is_file($manifestPath)) {
+        if (is_file($manifestPath)) {
             if ($this->graphiQLV5HTMLCache !== null) {
                 return $this->graphiQLV5HTMLCache;
             }
