@@ -7,12 +7,9 @@ services:
     PoPSchema\Logger\Log\LoggerInterface:
         class: \GatoGraphQL\GatoGraphQL\Overrides\Logger\Log\Logger
 
-    # Make sure the GraphiQL client is used, without the Explorer
-    # Because if isGraphiQLExplorerEnabled might be true, the explorer is enabled
-    # but if disabled for the single endpoint, then it must not
-    # (for that case, it will be overridden once again by another ConditionalOnContext)
+    # Use GraphiQL v5 (graphiql-app) for the public single endpoint at /graphiql/ when build exists.
     GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
-        class: \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient
+        class: \GatoGraphQL\GatoGraphQL\Overrides\Clients\SingleEndpointGraphiQLClient
 
     # Override to configure the cache with dynamic values
     PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
