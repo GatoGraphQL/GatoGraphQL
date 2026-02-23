@@ -8,7 +8,7 @@
  */
 if (typeof globalThis.MonacoEnvironment !== 'undefined' && globalThis.MonacoEnvironment.getWorker) {
   const settings = window.graphQLByPoPGraphiQLSettings || {};
-  const base = settings.buildBaseURL || window.gatographqlGraphiQLBuildURL || '';
+  const base = settings.buildBaseURL || window.graphqlclientsforwpGraphiQLBuildURL || '';
   const workerChunks = settings.workerChunks || {};
   if (base && Object.keys(workerChunks).length > 0) {
     const labelToChunkId = { json: '5997', graphql: '8378' };

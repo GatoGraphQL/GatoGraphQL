@@ -117,8 +117,8 @@ class GraphiQLClient extends AbstractGraphiQLClient
             }
         }
 
-        $inlineBuildUrl = 'window.gatographqlGraphiQLBuildURL="' . \esc_js($buildBaseURL) . '";'
-            . 'var __webpack_public_path__=window.gatographqlGraphiQLBuildURL;';
+        $inlineBuildUrl = 'window.graphqlclientsforwpGraphiQLBuildURL="' . \esc_js($buildBaseURL) . '";'
+            . 'var __webpack_public_path__=window.graphqlclientsforwpGraphiQLBuildURL;';
         $settingsJson = json_encode($settings, \JSON_HEX_TAG | \JSON_HEX_APOS | \JSON_HEX_QUOT | \JSON_HEX_AMP);
         $inlineSettings = 'window.graphQLByPoPGraphiQLSettings=' . $settingsJson . ';';
 

@@ -147,8 +147,8 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
                 // Set __webpack_public_path__ before the bundle runs so the runtime uses it (not script dir).
                 \wp_add_inline_script(
                     'gatographql-graphiql-app',
-                    'window.gatographqlGraphiQLBuildURL="' . \esc_js($buildBaseURL) . '";'
-                    . 'var __webpack_public_path__=window.gatographqlGraphiQLBuildURL;',
+                    'window.graphqlclientsforwpGraphiQLBuildURL="' . \esc_js($buildBaseURL) . '";'
+                    . 'var __webpack_public_path__=window.graphqlclientsforwpGraphiQLBuildURL;',
                     'before'
                 );
             }
