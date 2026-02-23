@@ -9,7 +9,7 @@ services:
 
     # Use GraphiQL v5 (graphiql-app) for the public single endpoint at /graphiql/ when build exists.
     GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
-        class: \GatoGraphQL\GatoGraphQL\Overrides\Clients\SingleEndpointGraphiQLClient
+        class: \GatoGraphQL\GatoGraphQL\Overrides\Clients\GraphiQLClient
         # Use this class to use the legacy GraphiQL 1.5.7
         # class: \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient
 
