@@ -90,6 +90,15 @@ class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityM
         };
     }
 
+    // @todo Remove temporary code to disable GraphiQL Explorer
+    public function isPredefinedEnabledOrDisabled(string $module): bool
+    {
+        return match ($module) {
+            self::GRAPHIQL_EXPLORER => false,
+            default => parent::isPredefinedEnabledOrDisabled($module),
+        };
+    }
+
     /**
      * Because GraphiQL v2.0 (yet to be integrated) has the
      * Explorer already built-in, there's no need to have a
