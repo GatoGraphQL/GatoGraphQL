@@ -224,6 +224,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 16.2.0 =
+* Improved - Update GraphiQL to v5 (#3270)
+
 = 16.1.0 =
 * Added - The new "All Inclusive" bundle to Extensions (#3269)
 * Added - JetEngine extension for Gato GraphQL (#3264)
