@@ -10,6 +10,8 @@ services:
     # Use GraphiQL v5 (graphiql-app) for the public single endpoint at /graphiql/ when build exists.
     GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient:
         class: \GatoGraphQL\GatoGraphQL\Overrides\Clients\SingleEndpointGraphiQLClient
+        # Use this class to use the legacy GraphiQL 1.5.7
+        # class: \GraphQLByPoP\GraphQLClientsForWP\Clients\GraphiQLClient
 
     # Override to configure the cache with dynamic values
     PoP\ComponentModel\Cache\CacheConfigurationManagerInterface:
