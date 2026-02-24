@@ -11,9 +11,6 @@ use PoP\Root\App;
 
 /**
  * GraphiQL client for the single endpoint.
- * When getGraphiQLAppBuildBaseURL() returns a URL and the graphiql-app build exists
- * (manifest at path from getGraphiQLAppBuildManifestPath()), serves GraphiQL v5;
- * otherwise falls back to legacy GraphiQL 1.5.7.
  */
 class GraphiQLClient extends AbstractGraphiQLClient
 {
@@ -61,21 +58,18 @@ class GraphiQLClient extends AbstractGraphiQLClient
 
     public function getClientHTML(): string
     {
+        if ($this->graphiQLV5HTMLCache !== null) {
+            return $this->graphiQLV5HTMLCache;
+        }
+        
         $buildBaseURL = $this->getGraphiQLAppBuildBaseURL();
         $manifestPath = $this->getGraphiQLAppBuildManifestPath();
 
-        if (is_file($manifestPath)) {
-            if ($this->graphiQLV5HTMLCache !== null) {
-                return $this->graphiQLV5HTMLCache;
-            }
-            $this->graphiQLV5HTMLCache = $this->buildGraphiQLV5HTML(
-                rtrim($buildBaseURL, '/') . '/',
-                $manifestPath
-            );
-            return $this->graphiQLV5HTMLCache;
-        }
-
-        return parent::getClientHTML();
+        $this->graphiQLV5HTMLCache = $this->buildGraphiQLV5HTML(
+            rtrim($buildBaseURL, '/') . '/',
+            $manifestPath
+        );
+        return $this->graphiQLV5HTMLCache;
     }
 
     protected function buildGraphiQLV5HTML(string $buildBaseURL, string $manifestPath): string

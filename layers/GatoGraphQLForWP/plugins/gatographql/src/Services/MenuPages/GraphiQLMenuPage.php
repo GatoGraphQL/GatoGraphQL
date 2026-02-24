@@ -103,14 +103,9 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         $mainPluginVersion = $mainPlugin->getPluginVersion();
         $mainPluginPath = $mainPlugin->getPluginDir();
 
-        $manifestPath = $mainPluginPath . '/vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/asset-manifest.json';
-        $buildBaseURL = $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build';
-
-        if (!is_file($manifestPath)) {
-            // Fallback to legacy GraphiQL 1.5.7 if graphiql-app build is missing
-            $this->enqueueGraphiQLLegacyAssets($mainPluginURL, $mainPluginVersion, $scriptSettings);
-            return;
-        }
+        $graphiqlAppBuildRelativePath = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build';
+        $manifestPath = $mainPluginPath . '/' . $graphiqlAppBuildRelativePath . '/asset-manifest.json';
+        $buildBaseURL = $mainPluginURL . $graphiqlAppBuildRelativePath;
 
         $manifest = json_decode((string) file_get_contents($manifestPath), true);
         $entrypoints = $manifest['entrypoints'] ?? array_values(array_intersect_key(
@@ -177,54 +172,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             )
         );
     }
-
-    /**
-     * Legacy GraphiQL 1.5.7 assets (used when graphiql-app build is not present).
-     */
-    protected function enqueueGraphiQLLegacyAssets(string $mainPluginURL, string $mainPluginVersion, array $scriptSettings): void
-    {
-        \wp_enqueue_style(
-            'gatographql-graphiql',
-            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.css',
-            array(),
-            $mainPluginVersion
-        );
-
-        $this->enqueueReactAssets(true);
-
-        \wp_enqueue_script(
-            'gatographql-graphiql',
-            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.js',
-            array('gatographql-react-dom'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'gatographql-graphiql-client',
-            $mainPluginURL . 'assets/js/graphiql-client.js',
-            array('gatographql-graphiql'),
-            $mainPluginVersion,
-            true
-        );
-
-        /** @var GraphQLClientsForWPModuleConfiguration */
-        $moduleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
-
-        \wp_localize_script(
-            'gatographql-graphiql-client',
-            'graphQLByPoPGraphiQLSettings',
-            array_merge(
-                [
-                    'defaultQuery' => $moduleConfiguration->printGraphiQLDefaultQuery()
-                        ? $this->getDefaultQuery()
-                        : '',
-                    'endpoint' => $this->getEndpointHelpers()->getAdminGraphQLEndpoint(),
-                ],
-                $scriptSettings
-            )
-        );
-    }
-
+    
     /**
      * Enqueue the required assets and initialize the localized scripts
      */
