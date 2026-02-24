@@ -7,8 +7,6 @@ namespace GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\Container\CompilerPasses\RegisterUserAuthorizationSchemeCompilerPass;
 use GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\RegisterSettingsCategoryResolverCompilerPass;
-use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractPluginModule;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
@@ -151,17 +149,6 @@ class Module extends AbstractPluginModule
                 !$endpointHelpers->isRequestingAdminPluginOwnUseGraphQLEndpoint(),
                 '/ConditionalOnContext/Admin/ConditionalOnContext/PluginOwnUse'
             );
-        }
-        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $isGraphiQLExplorerEnabled = $moduleRegistry->isModuleEnabled(DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER);
-        if (
-            \is_admin()
-            && $isGraphiQLExplorerEnabled
-        ) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/Admin/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
-        }
-        if ($isGraphiQLExplorerEnabled) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
         }
     }
 }
