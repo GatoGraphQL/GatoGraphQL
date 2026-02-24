@@ -1097,11 +1097,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::DISABLE_VOYAGER_CLIENT_ENDPOINT,
                 'callback' => $this->opposite(...),
             ],
-            [
-                'module' => DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                'class' => GraphQLClientsForWPModule::class,
-                'envVariable' => GraphQLClientsForWPEnvironment::USE_GRAPHIQL_EXPLORER,
-            ],
         ];
     }
 
