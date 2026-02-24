@@ -42,24 +42,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * Use the GraphiQL explorer?
-     */
-    public function useGraphiQLExplorer(): bool
-    {
-        $envVariable = Environment::USE_GRAPHIQL_EXPLORER;
-        $defaultValue = true;
-        // @todo Remove temporary code to disable GraphiQL Explorer
-        $defaultValue = false;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
-    /**
      * GraphiQL client endpoint, to be executed against the GraphQL single endpoint
      */
     public function getGraphiQLClientEndpoint(): string
