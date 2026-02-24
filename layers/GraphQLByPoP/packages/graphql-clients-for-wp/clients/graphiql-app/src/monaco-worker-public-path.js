@@ -39,6 +39,9 @@ if (typeof globalThis.MonacoEnvironment !== 'undefined' && globalThis.MonacoEnvi
               (match, letter, val) => (val.startsWith('http') ? match : replacement(letter))
             );
           }
+          // Strip sourceMappingURL so the browser doesn't try to load .map from blob context
+          // (resolving relative URL against blob: produces invalid URLs and console errors).
+          patched = patched.replace(/\/\/# sourceMappingURL=[^\n]*\n?/g, '');
           const blob = new Blob([patched], { type: 'application/javascript' });
           return new Worker(URL.createObjectURL(blob));
         });
