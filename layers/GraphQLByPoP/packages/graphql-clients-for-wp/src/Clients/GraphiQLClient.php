@@ -58,21 +58,18 @@ class GraphiQLClient extends AbstractGraphiQLClient
 
     public function getClientHTML(): string
     {
+        if ($this->graphiQLV5HTMLCache !== null) {
+            return $this->graphiQLV5HTMLCache;
+        }
+        
         $buildBaseURL = $this->getGraphiQLAppBuildBaseURL();
         $manifestPath = $this->getGraphiQLAppBuildManifestPath();
 
-        if (is_file($manifestPath)) {
-            if ($this->graphiQLV5HTMLCache !== null) {
-                return $this->graphiQLV5HTMLCache;
-            }
-            $this->graphiQLV5HTMLCache = $this->buildGraphiQLV5HTML(
-                rtrim($buildBaseURL, '/') . '/',
-                $manifestPath
-            );
-            return $this->graphiQLV5HTMLCache;
-        }
-
-        return parent::getClientHTML();
+        $this->graphiQLV5HTMLCache = $this->buildGraphiQLV5HTML(
+            rtrim($buildBaseURL, '/') . '/',
+            $manifestPath
+        );
+        return $this->graphiQLV5HTMLCache;
     }
 
     protected function buildGraphiQLV5HTML(string $buildBaseURL, string $manifestPath): string
