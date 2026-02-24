@@ -103,8 +103,9 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         $mainPluginVersion = $mainPlugin->getPluginVersion();
         $mainPluginPath = $mainPlugin->getPluginDir();
 
-        $manifestPath = $mainPluginPath . '/vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/asset-manifest.json';
-        $buildBaseURL = $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build';
+        $graphiqlAppBuildRelativePath = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build';
+        $manifestPath = $mainPluginPath . '/' . $graphiqlAppBuildRelativePath . '/asset-manifest.json';
+        $buildBaseURL = $mainPluginURL . $graphiqlAppBuildRelativePath;
 
         $manifest = json_decode((string) file_get_contents($manifestPath), true);
         $entrypoints = $manifest['entrypoints'] ?? array_values(array_intersect_key(
