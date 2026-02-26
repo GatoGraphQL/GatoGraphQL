@@ -23,6 +23,21 @@ class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProv
 {
     protected string $apiURL;
 
+    public function getPriority(): int
+    {
+        return 10;
+    }
+
+    /**
+     * LemonSqueezy is the legacy marketplace provider,
+     * so if no other provider can process the license,
+     * then we can process it.
+     */
+    public function canProcessLicense(string $licenseKey): bool
+    {
+        return true;
+    }
+
     /**
      * Use the Marketplace provider's service to
      * update the active commercial extensions

@@ -7,8 +7,11 @@ services:
     GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistry
 
-    GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialPluginUpdaterServiceInterface:
-        class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialPluginUpdaterService
+    GatoGraphQL\GatoGraphQL\Registries\CommercialPluginUpdaterServiceRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\CommercialPluginUpdaterServiceRegistry
+
+    GatoGraphQL\GatoGraphQL\Marketplace\DelegatingCommercialPluginUpdaterServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\Marketplace\DelegatingCommercialPluginUpdaterService
 
     GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface:
         class: \GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParser

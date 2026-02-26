@@ -4,19 +4,13 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
-use PoP\Root\Exception\ShouldNotHappenException;
-
-interface MarketplaceProviderCommercialPluginUpdaterServiceInterface
+/**
+ * Provider interface for plugin updater services that can be
+ * registered and selected by license key (e.g. LemonSqueezy, FluentCart).
+ */
+interface MarketplaceProviderCommercialPluginUpdaterServiceInterface extends CommercialPluginUpdaterServiceInterface
 {
-    /**
-     * Use the Marketplace provider's service to
-     * update the active commercial extensions
-     *
-     * @param array<string,string> $licenseKeys Key: Extension Slug, Value: License Key
-     *
-     * @throws ShouldNotHappenException If initializing the service more than once
-     */
-    public function setupMarketplacePluginUpdaterForExtensions(
-        array $licenseKeys,
-    ): void;
+    public function getPriority(): int;
+
+    public function canProcessLicense(string $licenseKey): bool;
 }
