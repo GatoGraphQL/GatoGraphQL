@@ -13,7 +13,7 @@ use function usort;
 class MarketplaceProviderCommercialPluginUpdaterServiceRegistry implements MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface
 {
     /**
-     * @var MarketplaceProviderCommercialPluginUpdaterServiceInterface[]
+     * @var array<int,MarketplaceProviderCommercialPluginUpdaterServiceInterface>
      */
     protected array $marketplaceProviderCommercialPluginUpdaterServices = [];
 

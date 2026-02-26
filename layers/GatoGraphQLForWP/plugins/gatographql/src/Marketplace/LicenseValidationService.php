@@ -38,7 +38,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     final protected function getMarketplaceProviderCommercialExtensionActivationServiceRegistry(): MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface
     {
         if ($this->marketplaceProviderCommercialExtensionActivationServiceRegistry === null) {
-            /** @var MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface $registry */
+            /** @var MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface */
             $marketplaceProviderCommercialExtensionActivationServiceRegistry = $this->instanceManager->getInstance(MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface::class);
             $this->marketplaceProviderCommercialExtensionActivationServiceRegistry = $marketplaceProviderCommercialExtensionActivationServiceRegistry;
         }
