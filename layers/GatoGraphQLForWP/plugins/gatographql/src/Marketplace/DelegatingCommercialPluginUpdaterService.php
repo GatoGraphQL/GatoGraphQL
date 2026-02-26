@@ -15,9 +15,16 @@ use PoP\Root\Services\AbstractBasicService;
  */
 class DelegatingCommercialPluginUpdaterService extends AbstractBasicService implements DelegatingCommercialPluginUpdaterServiceInterface
 {
-    public function __construct(
-        protected MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface $marketplaceProviderCommercialPluginUpdaterServiceRegistry
-    ) {
+    private ?MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface $marketplaceProviderCommercialPluginUpdaterServiceRegistry = null;
+
+    final protected function getMarketplaceProviderCommercialPluginUpdaterServiceRegistry(): MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface
+    {
+        if ($this->marketplaceProviderCommercialPluginUpdaterServiceRegistry === null) {
+            /** @var MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface $registry */
+            $registry = $this->instanceManager->getInstance(MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface::class);
+            $this->marketplaceProviderCommercialPluginUpdaterServiceRegistry = $registry;
+        }
+        return $this->marketplaceProviderCommercialPluginUpdaterServiceRegistry;
     }
 
     /**
@@ -32,9 +39,11 @@ class DelegatingCommercialPluginUpdaterService extends AbstractBasicService impl
             return;
         }
 
+        $marketplaceProviderCommercialPluginUpdaterServiceRegistry = $this->getMarketplaceProviderCommercialPluginUpdaterServiceRegistry();
+
         $byProvider = [];
         foreach ($licenseKeys as $extensionSlug => $licenseKey) {
-            $provider = $this->marketplaceProviderCommercialPluginUpdaterServiceRegistry->getMarketplaceProviderCommercialPluginUpdaterServiceForLicense($licenseKey);
+            $provider = $marketplaceProviderCommercialPluginUpdaterServiceRegistry->getMarketplaceProviderCommercialPluginUpdaterServiceForLicense($licenseKey);
             $key = $provider::class;
             if (!isset($byProvider[$key])) {
                 $byProvider[$key] = ['provider' => $provider, 'licenseKeys' => []];
