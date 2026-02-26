@@ -8,7 +8,7 @@ trait LemonSqueezyMarketplaceProviderServiceTrait
 {
     public function getPriority(): int
     {
-        return 10;
+        return PHP_INT_MAX;
     }
 
     /**
