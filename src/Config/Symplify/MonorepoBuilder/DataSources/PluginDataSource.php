@@ -37,7 +37,7 @@ class PluginDataSource
                     'block-helpers/\*',
                     'docs/images/\*',
                     'extensions/*/docs/images/\*',
-                    'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/static/js/\*.js.map',
+                    ...$this->getExcludeGraphiQLAppFiles(),
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
@@ -113,6 +113,18 @@ class PluginDataSource
         }
 
         return $pluginConfigEntries;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getExcludeGraphiQLAppFiles(): array
+    {
+        $placeholder = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/static/js/%s';
+        return [
+            sprintf($placeholder, '\*.js.map'),
+            sprintf($placeholder, '\*.chunk.js.LICENSE.txt'),
+        ];
     }
 
     protected function getExcludeJSBlockFilesPlaceholder(): string
