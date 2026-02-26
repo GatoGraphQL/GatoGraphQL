@@ -50,7 +50,7 @@ services:
         class: \GatoGraphQL\GatoGraphQL\Meta\MetaNamespacer
 
     GatoGraphQL\GatoGraphQL\Services\:
-        resource: '../src/Services/*'
+        resource: ../src/Services/*
 
     GatoGraphQL\GatoGraphQL\State\:
         resource: '../src/State/*'
