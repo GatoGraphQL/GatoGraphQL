@@ -52,9 +52,6 @@ services:
     GatoGraphQL\GatoGraphQL\Services\:
         resource: '../src/Services/*'
 
-    GatoGraphQL\GatoGraphQL\Marketplace\:
-        resource: '../src/Marketplace/*'
-
     GatoGraphQL\GatoGraphQL\State\:
         resource: '../src/State/*'
 
