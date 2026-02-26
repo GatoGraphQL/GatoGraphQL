@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Container\CompilerPasses;
 
 use GatoGraphQL\GatoGraphQL\MarketplaceProviders\MarketplaceProviderCommercialExtensionActivationServiceInterface;
-use GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
 class RegisterCommercialExtensionActivationServiceCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
-        return CommercialExtensionActivationServiceRegistryInterface::class;
+        return MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface::class;
     }
 
     protected function getServiceClass(): string
@@ -22,7 +22,7 @@ class RegisterCommercialExtensionActivationServiceCompilerPass extends AbstractI
 
     protected function getRegistryMethodCallName(): string
     {
-        return 'addCommercialExtensionActivationService';
+        return 'addMarketplaceProviderCommercialExtensionActivationService';
     }
 }
 

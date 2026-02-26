@@ -10,14 +10,14 @@ use RuntimeException;
 use function sprintf;
 use function usort;
 
-class CommercialExtensionActivationServiceRegistry implements CommercialExtensionActivationServiceRegistryInterface
+class MarketplaceProviderCommercialExtensionActivationServiceRegistry implements MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface
 {
     /**
      * @var array<string,MarketplaceProviderCommercialExtensionActivationServiceInterface>
      */
     protected array $marketplaceProviderCommercialExtensionActivationServices = [];
 
-    public function addCommercialExtensionActivationService(
+    public function addMarketplaceProviderCommercialExtensionActivationService(
         MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService
     ): void {
         $this->marketplaceProviderCommercialExtensionActivationServices[] = $marketplaceProviderCommercialExtensionActivationService;
@@ -26,7 +26,7 @@ class CommercialExtensionActivationServiceRegistry implements CommercialExtensio
     /**
      * @return MarketplaceProviderCommercialExtensionActivationServiceInterface[]
      */
-    public function getCommercialExtensionActivationServices(): array
+    public function getMarketplaceProviderCommercialExtensionActivationServices(): array
     {
         $marketplaceProviderCommercialExtensionActivationServices = $this->marketplaceProviderCommercialExtensionActivationServices;
         usort(
@@ -39,10 +39,10 @@ class CommercialExtensionActivationServiceRegistry implements CommercialExtensio
         return $marketplaceProviderCommercialExtensionActivationServices;
     }
 
-    public function getCommercialExtensionActivationServiceForLicense(
+    public function getMarketplaceProviderCommercialExtensionActivationServiceForLicense(
         string $licenseKey
     ): MarketplaceProviderCommercialExtensionActivationServiceInterface {
-        $services = $this->getCommercialExtensionActivationServices();
+        $services = $this->getMarketplaceProviderCommercialExtensionActivationServices();
 
         foreach ($services as $service) {
             if ($service->canProcessLicense($licenseKey)) {
@@ -51,7 +51,7 @@ class CommercialExtensionActivationServiceRegistry implements CommercialExtensio
         }
 
         throw new RuntimeException(sprintf(
-            'No CommercialExtensionActivationService is registered to process license "%s"',
+            'No MarketplaceProviderCommercialExtensionActivationService is registered to process license "%s"',
             $licenseKey
         ));
     }

@@ -15,7 +15,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivate
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
-use GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\AbstractBasicService;
@@ -31,14 +31,14 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     private ?ContainerManagerInterface $containerManager = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
-    private ?CommercialExtensionActivationServiceRegistryInterface $commercialExtensionActivationServiceRegistry = null;
+    private ?MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface $commercialExtensionActivationServiceRegistry = null;
 
 
-    final protected function getCommercialExtensionActivationServiceRegistry(): CommercialExtensionActivationServiceRegistryInterface
+    final protected function getCommercialExtensionActivationServiceRegistry(): MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface
     {
         if ($this->commercialExtensionActivationServiceRegistry === null) {
-            /** @var CommercialExtensionActivationServiceRegistryInterface $registry */
-            $registry = $this->instanceManager->getInstance(CommercialExtensionActivationServiceRegistryInterface::class);
+            /** @var MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface $registry */
+            $registry = $this->instanceManager->getInstance(MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface::class);
             $this->commercialExtensionActivationServiceRegistry = $registry;
         }
         return $this->commercialExtensionActivationServiceRegistry;
@@ -331,7 +331,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
     final protected function getMarketplaceProviderCommercialExtensionActivationService(
         string $licenseKey
     ): MarketplaceProviderCommercialExtensionActivationServiceInterface {
-        return $this->getCommercialExtensionActivationServiceRegistry()->getCommercialExtensionActivationServiceForLicense($licenseKey);
+        return $this->getCommercialExtensionActivationServiceRegistry()->getMarketplaceProviderCommercialExtensionActivationServiceForLicense($licenseKey);
     }
 
     /**

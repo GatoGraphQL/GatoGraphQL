@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistry
+    GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistry
 
     GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialPluginUpdaterServiceRegistry
