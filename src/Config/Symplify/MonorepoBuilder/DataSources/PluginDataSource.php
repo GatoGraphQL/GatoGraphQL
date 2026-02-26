@@ -37,6 +37,7 @@ class PluginDataSource
                     'block-helpers/\*',
                     'docs/images/\*',
                     'extensions/*/docs/images/\*',
+                    'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/static/js/\*.js.map',
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
