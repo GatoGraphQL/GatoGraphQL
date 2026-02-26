@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Marketplace;
+namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
 use GatoGraphQL\GatoGraphQL\Module;
