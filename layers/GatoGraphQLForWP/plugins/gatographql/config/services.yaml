@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface:
-        class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialExtensionActivationService
+    GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistry
 
     GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialPluginUpdaterServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialPluginUpdaterService
@@ -47,7 +47,10 @@ services:
         class: \GatoGraphQL\GatoGraphQL\Meta\MetaNamespacer
 
     GatoGraphQL\GatoGraphQL\Services\:
-        resource: ../src/Services/*
+        resource: '../src/Services/*'
+
+    GatoGraphQL\GatoGraphQL\Marketplace\:
+        resource: '../src/Marketplace/*'
 
     GatoGraphQL\GatoGraphQL\State\:
         resource: '../src/State/*'

@@ -18,6 +18,21 @@ use function wp_remote_post;
 
 class LemonSqueezyCommercialExtensionActivationService extends AbstractBasicService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
+    public function getPriority(): int
+    {
+        return 10;
+    }
+
+    /**
+     * LemonSqueezy is the legacy marketplace provider,
+     * so if no other provider can process the license,
+     * then we can process it.
+     */
+    public function canProcessLicense(string $licenseKey): bool
+    {
+        return true;
+    }
+
     /**
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
