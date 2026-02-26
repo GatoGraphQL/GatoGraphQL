@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\MarketplaceProviders\MarketplaceProviderCommercialEx
 use GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
-class RegisterCommercialExtensionActivationServiceCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
+class RegisterMarketplaceProviderCommercialExtensionActivationServiceCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
