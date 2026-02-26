@@ -23,6 +23,7 @@ class PluginDataSource
     public function getPluginConfigEntries(): array
     {
         $excludeJSBlockFilesPlaceholder = $this->getExcludeJSBlockFilesPlaceholder();
+        $excludeGraphiQLAppFilesPlaceholder = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/static/js/%s';
         $pluginConfigEntries = [
             // Gato GraphQL
             [
@@ -37,7 +38,8 @@ class PluginDataSource
                     'block-helpers/\*',
                     'docs/images/\*',
                     'extensions/*/docs/images/\*',
-                    'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/static/js/\*.js.map',
+                    sprintf($excludeGraphiQLAppFilesPlaceholder, '\*.js.map'),
+                    sprintf($excludeGraphiQLAppFilesPlaceholder, '\*.chunk.js.LICENSE.txt'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
