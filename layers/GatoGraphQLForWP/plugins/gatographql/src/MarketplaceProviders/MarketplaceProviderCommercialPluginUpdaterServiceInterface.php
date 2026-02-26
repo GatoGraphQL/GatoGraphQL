@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Marketplace;
+namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 /**
  * Provider interface for plugin updater services that can be
