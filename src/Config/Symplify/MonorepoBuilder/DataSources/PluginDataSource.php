@@ -23,7 +23,6 @@ class PluginDataSource
     public function getPluginConfigEntries(): array
     {
         $excludeJSBlockFilesPlaceholder = $this->getExcludeJSBlockFilesPlaceholder();
-        $excludeGraphiQLAppFilesPlaceholder = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/static/js/%s';
         $pluginConfigEntries = [
             // Gato GraphQL
             [
@@ -38,8 +37,7 @@ class PluginDataSource
                     'block-helpers/\*',
                     'docs/images/\*',
                     'extensions/*/docs/images/\*',
-                    sprintf($excludeGraphiQLAppFilesPlaceholder, '\*.js.map'),
-                    sprintf($excludeGraphiQLAppFilesPlaceholder, '\*.chunk.js.LICENSE.txt'),
+                    ...$this->getExcludeGraphiQLAppFiles(),
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
@@ -115,6 +113,18 @@ class PluginDataSource
         }
 
         return $pluginConfigEntries;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getExcludeGraphiQLAppFiles(): array
+    {
+        $placeholder = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/static/js/%s';
+        return [
+            sprintf($placeholder, '\*.js.map'),
+            sprintf($placeholder, '\*.chunk.js.LICENSE.txt'),
+        ];
     }
 
     protected function getExcludeJSBlockFilesPlaceholder(): string
