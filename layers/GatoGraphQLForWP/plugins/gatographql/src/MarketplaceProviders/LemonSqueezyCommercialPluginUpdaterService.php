@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Marketplace;
+namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
 use GatoGraphQL\GatoGraphQL\Module;
@@ -21,6 +21,8 @@ use function wp_remote_get;
  */
 class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProviderCommercialPluginUpdaterService
 {
+    use LemonSqueezyMarketplaceProviderServiceTrait;
+
     protected string $apiURL;
 
     /**

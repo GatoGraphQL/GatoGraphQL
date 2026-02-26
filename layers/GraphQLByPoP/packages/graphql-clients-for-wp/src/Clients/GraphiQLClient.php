@@ -61,7 +61,7 @@ class GraphiQLClient extends AbstractGraphiQLClient
         if ($this->graphiQLV5HTMLCache !== null) {
             return $this->graphiQLV5HTMLCache;
         }
-        
+
         $buildBaseURL = $this->getGraphiQLAppBuildBaseURL();
         $manifestPath = $this->getGraphiQLAppBuildManifestPath();
 
@@ -83,7 +83,7 @@ class GraphiQLClient extends AbstractGraphiQLClient
 
         $workerChunks = [];
         foreach (array_keys($files) as $key) {
-            if (preg_match('#^static/js/(5914|5997|8378)\.[a-f0-9]+\.chunk\.js$#', $key, $m)) {
+            if (preg_match('#^static/js/(5914|5997|8378)\.[a-f0-9]+\.chunk\.js$#', (string) $key, $m)) {
                 $workerChunks[(string) $m[1]] = $files[$key];
             }
         }

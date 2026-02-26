@@ -16,7 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-(No entries yet)
+- Support multiple e-commerce providers to validate plugin license (#3271)
 
 ### Fixed
 

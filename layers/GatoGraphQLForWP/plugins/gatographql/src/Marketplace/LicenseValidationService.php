@@ -11,9 +11,10 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseDomainNotValidException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
-use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
+use GatoGraphQL\GatoGraphQL\MarketplaceProviders\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
@@ -28,19 +29,20 @@ use function update_option;
 
 class LicenseValidationService extends AbstractBasicService implements LicenseValidationServiceInterface
 {
-    private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?ContainerManagerInterface $containerManager = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
+    private ?MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface $marketplaceProviderCommercialExtensionActivationServiceRegistry = null;
 
-    final protected function getMarketplaceProviderCommercialExtensionActivationService(): MarketplaceProviderCommercialExtensionActivationServiceInterface
+
+    final protected function getMarketplaceProviderCommercialExtensionActivationServiceRegistry(): MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface
     {
-        if ($this->marketplaceProviderCommercialExtensionActivationService === null) {
-            /** @var MarketplaceProviderCommercialExtensionActivationServiceInterface */
-            $marketplaceProviderCommercialExtensionActivationService = $this->instanceManager->getInstance(MarketplaceProviderCommercialExtensionActivationServiceInterface::class);
-            $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
+        if ($this->marketplaceProviderCommercialExtensionActivationServiceRegistry === null) {
+            /** @var MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface */
+            $marketplaceProviderCommercialExtensionActivationServiceRegistry = $this->instanceManager->getInstance(MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface::class);
+            $this->marketplaceProviderCommercialExtensionActivationServiceRegistry = $marketplaceProviderCommercialExtensionActivationServiceRegistry;
         }
-        return $this->marketplaceProviderCommercialExtensionActivationService;
+        return $this->marketplaceProviderCommercialExtensionActivationServiceRegistry;
     }
     final protected function getContainerManager(): ContainerManagerInterface
     {
@@ -105,7 +107,6 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
 
         $extensionManager = PluginApp::getExtensionManager();
         $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
-        $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
         $commercialExtensionActivatedLicenseObjectProperties = null;
 
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
@@ -127,6 +128,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             /** @var string */
             $instanceName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME];
             try {
+                $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService($licenseKey);
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                     $licenseKey,
                     $instanceID,
@@ -195,6 +197,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             /** @var string */
             $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
             try {
+                $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService($licenseKey);
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
                     $licenseKey,
                     $instanceID,
@@ -251,6 +254,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             }
             $instanceName = $this->getInstanceName($extensionSlug);
             try {
+                $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService($licenseKey);
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
@@ -323,6 +327,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
          * why we use a timestamp as a flag to indicate this state.
          */
         $this->getUserSettingsManager()->storeJustActivatedLicenseTransient($justActivatedCommercialExtensionSlugs);
+    }
+
+    final protected function getMarketplaceProviderCommercialExtensionActivationService(
+        string $licenseKey
+    ): MarketplaceProviderCommercialExtensionActivationServiceInterface {
+        return $this->getMarketplaceProviderCommercialExtensionActivationServiceRegistry()->getMarketplaceProviderCommercialExtensionActivationServiceForLicense($licenseKey);
     }
 
     /**

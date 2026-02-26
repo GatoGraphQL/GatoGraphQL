@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Marketplace;
+namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
@@ -10,6 +10,10 @@ use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivate
 
 interface MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
+    public function getPriority(): int;
+
+    public function canProcessLicense(string $licenseKey): bool;
+
     /**
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data

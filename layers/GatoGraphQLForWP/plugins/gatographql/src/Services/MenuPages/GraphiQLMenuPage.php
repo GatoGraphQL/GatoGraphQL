@@ -118,7 +118,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         $workerChunks = [];
         $files = $manifest['files'] ?? [];
         foreach (array_keys($files) as $key) {
-            if (preg_match('#^static/js/(5914|5997|8378)\.[a-f0-9]+\.chunk\.js$#', $key, $m)) {
+            if (preg_match('#^static/js/(5914|5997|8378)\.[a-f0-9]+\.chunk\.js$#', (string) $key, $m)) {
                 $workerChunks[(string) $m[1]] = $files[$key];
             }
         }
@@ -172,7 +172,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             )
         );
     }
-    
+
     /**
      * Enqueue the required assets and initialize the localized scripts
      */

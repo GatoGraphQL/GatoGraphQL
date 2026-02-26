@@ -226,6 +226,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 16.2.0 =
 * Breaking changes - Update GraphiQL to v5 (#3270)
+* Improved - Support multiple e-commerce providers to validate plugin license (#3271)
 
 = 16.1.0 =
 * Added - The new "All Inclusive" bundle to Extensions (#3269)

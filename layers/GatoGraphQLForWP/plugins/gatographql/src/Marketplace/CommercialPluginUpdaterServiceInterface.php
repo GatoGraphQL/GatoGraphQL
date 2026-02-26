@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use PoP\Root\Exception\ShouldNotHappenException;
 
-interface MarketplaceProviderCommercialPluginUpdaterServiceInterface
+interface CommercialPluginUpdaterServiceInterface
 {
     /**
      * Use the Marketplace provider's service to
