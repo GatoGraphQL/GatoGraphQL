@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
-use GatoGraphQL\GatoGraphQL\Registries\CommercialPluginUpdaterServiceRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\AbstractBasicService;
 
@@ -16,7 +16,7 @@ use PoP\Root\Services\AbstractBasicService;
 class DelegatingCommercialPluginUpdaterService extends AbstractBasicService implements DelegatingCommercialPluginUpdaterServiceInterface
 {
     public function __construct(
-        protected CommercialPluginUpdaterServiceRegistryInterface $commercialPluginUpdaterServiceRegistry
+        protected MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface $marketplaceProviderCommercialPluginUpdaterServiceRegistry
     ) {
     }
 
@@ -34,7 +34,7 @@ class DelegatingCommercialPluginUpdaterService extends AbstractBasicService impl
 
         $byProvider = [];
         foreach ($licenseKeys as $extensionSlug => $licenseKey) {
-            $provider = $this->commercialPluginUpdaterServiceRegistry->getCommercialPluginUpdaterServiceForLicense($licenseKey);
+            $provider = $this->marketplaceProviderCommercialPluginUpdaterServiceRegistry->getMarketplaceProviderCommercialPluginUpdaterServiceForLicense($licenseKey);
             $key = $provider::class;
             if (!isset($byProvider[$key])) {
                 $byProvider[$key] = ['provider' => $provider, 'licenseKeys' => []];

@@ -10,14 +10,14 @@ use RuntimeException;
 use function sprintf;
 use function usort;
 
-class CommercialPluginUpdaterServiceRegistry implements CommercialPluginUpdaterServiceRegistryInterface
+class MarketplaceProviderCommercialPluginUpdaterServiceRegistry implements MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface
 {
     /**
      * @var MarketplaceProviderCommercialPluginUpdaterServiceInterface[]
      */
     protected array $marketplaceProviderCommercialPluginUpdaterServices = [];
 
-    public function addCommercialPluginUpdaterService(
+    public function addMarketplaceProviderCommercialPluginUpdaterService(
         MarketplaceProviderCommercialPluginUpdaterServiceInterface $marketplaceProviderCommercialPluginUpdaterService
     ): void {
         $this->marketplaceProviderCommercialPluginUpdaterServices[] = $marketplaceProviderCommercialPluginUpdaterService;
@@ -26,7 +26,7 @@ class CommercialPluginUpdaterServiceRegistry implements CommercialPluginUpdaterS
     /**
      * @return MarketplaceProviderCommercialPluginUpdaterServiceInterface[]
      */
-    public function getCommercialPluginUpdaterServices(): array
+    public function getMarketplaceProviderCommercialPluginUpdaterServices(): array
     {
         $services = $this->marketplaceProviderCommercialPluginUpdaterServices;
         usort(
@@ -39,10 +39,10 @@ class CommercialPluginUpdaterServiceRegistry implements CommercialPluginUpdaterS
         return $services;
     }
 
-    public function getCommercialPluginUpdaterServiceForLicense(
+    public function getMarketplaceProviderCommercialPluginUpdaterServiceForLicense(
         string $licenseKey
     ): MarketplaceProviderCommercialPluginUpdaterServiceInterface {
-        $services = $this->getCommercialPluginUpdaterServices();
+        $services = $this->getMarketplaceProviderCommercialPluginUpdaterServices();
 
         foreach ($services as $service) {
             if ($service->canProcessLicense($licenseKey)) {
@@ -51,7 +51,7 @@ class CommercialPluginUpdaterServiceRegistry implements CommercialPluginUpdaterS
         }
 
         throw new RuntimeException(sprintf(
-            'No CommercialPluginUpdaterService is registered to process license "%s"',
+            'No MarketplaceProviderCommercialPluginUpdaterService is registered to process license "%s"',
             $licenseKey
         ));
     }

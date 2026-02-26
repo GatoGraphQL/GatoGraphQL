@@ -6,18 +6,18 @@ namespace GatoGraphQL\GatoGraphQL\Registries;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialPluginUpdaterServiceInterface;
 
-interface CommercialPluginUpdaterServiceRegistryInterface
+interface MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface
 {
-    public function addCommercialPluginUpdaterService(
+    public function addMarketplaceProviderCommercialPluginUpdaterService(
         MarketplaceProviderCommercialPluginUpdaterServiceInterface $service
     ): void;
 
     /**
      * @return MarketplaceProviderCommercialPluginUpdaterServiceInterface[]
      */
-    public function getCommercialPluginUpdaterServices(): array;
+    public function getMarketplaceProviderCommercialPluginUpdaterServices(): array;
 
-    public function getCommercialPluginUpdaterServiceForLicense(
+    public function getMarketplaceProviderCommercialPluginUpdaterServiceForLicense(
         string $licenseKey
     ): MarketplaceProviderCommercialPluginUpdaterServiceInterface;
 }

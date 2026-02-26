@@ -7,8 +7,8 @@ services:
     GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\CommercialExtensionActivationServiceRegistry
 
-    GatoGraphQL\GatoGraphQL\Registries\CommercialPluginUpdaterServiceRegistryInterface:
-        class: \GatoGraphQL\GatoGraphQL\Registries\CommercialPluginUpdaterServiceRegistry
+    GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialPluginUpdaterServiceRegistry
 
     GatoGraphQL\GatoGraphQL\Marketplace\DelegatingCommercialPluginUpdaterServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Marketplace\DelegatingCommercialPluginUpdaterService
