@@ -1,5 +1,5 @@
-# Release Notes: 16.2
+# Release Notes: 17.0
 
-### Improvements
+### Breaking changes
 
 - Update GraphiQL to v5 ([#3270](https://github.com/GatoGraphQL/GatoGraphQL/pull/3270))

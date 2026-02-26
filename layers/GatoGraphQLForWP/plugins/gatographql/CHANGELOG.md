@@ -4,7 +4,11 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 16.2.0 - DATE
+## 17.0.0 - DATE
+
+### Breaking changes
+
+- Update GraphiQL to v5 (#3270)
 
 ### Added
 
@@ -12,7 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Update GraphiQL to v5 (#3270)
+(No entries yet)
 
 ### Fixed
 
