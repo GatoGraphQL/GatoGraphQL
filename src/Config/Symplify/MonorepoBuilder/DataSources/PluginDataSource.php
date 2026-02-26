@@ -120,11 +120,15 @@ class PluginDataSource
      */
     protected function getExcludeGraphiQLAppFiles(): array
     {
-        $placeholder = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build/static/%s';
+        $placeholder = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/%s';
         return [
-            sprintf($placeholder, 'css/\*.css.map'),
-            sprintf($placeholder, 'js/\*.js.map'),
-            sprintf($placeholder, 'js/\*.LICENSE.txt'),
+            sprintf($placeholder, 'package-lock.json'),
+            sprintf($placeholder, 'package.json'),
+            sprintf($placeholder, 'public/\*'),
+            sprintf($placeholder, 'src/\*'),
+            sprintf($placeholder, 'build/static/css/\*.css.map'),
+            sprintf($placeholder, 'build/static/js/\*.js.map'),
+            sprintf($placeholder, 'build/static/js/\*.LICENSE.txt'),
         ];
     }
 
