@@ -60,3 +60,6 @@ services:
 
     GatoGraphQL\GatoGraphQL\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
+
+    GatoGraphQL\GatoGraphQL\MarketplaceProviders\:
+        resource: '../src/MarketplaceProviders/*'
