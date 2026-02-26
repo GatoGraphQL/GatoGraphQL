@@ -61,7 +61,7 @@ class GraphiQLClient extends AbstractGraphiQLClient
         if ($this->graphiQLV5HTMLCache !== null) {
             return $this->graphiQLV5HTMLCache;
         }
-        
+
         $buildBaseURL = $this->getGraphiQLAppBuildBaseURL();
         $manifestPath = $this->getGraphiQLAppBuildManifestPath();
 

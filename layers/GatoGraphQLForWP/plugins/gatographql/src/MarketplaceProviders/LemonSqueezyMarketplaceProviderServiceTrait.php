@@ -21,4 +21,3 @@ trait LemonSqueezyMarketplaceProviderServiceTrait
         return true;
     }
 }
-

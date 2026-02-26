@@ -172,7 +172,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
             )
         );
     }
-    
+
     /**
      * Enqueue the required assets and initialize the localized scripts
      */

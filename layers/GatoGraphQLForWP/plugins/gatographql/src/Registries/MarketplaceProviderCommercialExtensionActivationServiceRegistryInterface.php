@@ -21,4 +21,3 @@ interface MarketplaceProviderCommercialExtensionActivationServiceRegistryInterfa
         string $licenseKey
     ): MarketplaceProviderCommercialExtensionActivationServiceInterface;
 }
-
