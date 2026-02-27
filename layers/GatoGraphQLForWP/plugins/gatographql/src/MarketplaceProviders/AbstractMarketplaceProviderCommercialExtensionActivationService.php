@@ -21,33 +21,30 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
     /**
      * Process the API response for the /activate, /deactivate and /validate endpoints.
      *
+     * @param array<string,mixed> $extraRequestArgs Additional request args merged into the base args (e.g. POST body)
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     protected function handleLicenseOperation(
         string $endpoint,
         string $licenseKey,
-        ?string $instanceID
+        ?string $instanceID,
+        array $extraRequestArgs = [],
     ): CommercialExtensionActivatedLicenseObjectProperties {
+        $requestArgs = array_merge_recursive(
+            $this->getLicenseOperationRequestArgs(),
+            $extraRequestArgs,
+        );
         $response = wp_remote_post(
             $endpoint,
-            $this->getLicenseOperationRequestArgs()
+            $requestArgs,
         );
 
         if ($response instanceof WP_Error) {
             throw new HTTPRequestNotSuccessfulException($response->get_error_message());
         }
 
-        /**
-         * Skip this check, because the Marketplace Provider might return a 400 when
-         * the activation is not successful, but we want to capture the
-         * error message below.
-         */
-        // $responseCode = wp_remote_retrieve_response_code($response);
-        // if ($responseCode !== 200) {
-        //     $errorMessage = wp_remote_retrieve_response_message($response);
-        //     throw new HTTPRequestNotSuccessfulException($errorMessage);
-        // }
+        $this->validateResponseStatusCode($response);
 
         /** @var array<string,mixed> $body */
         $body = json_decode($response['body'], true);
@@ -217,5 +214,18 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
      * @param array<string,mixed> $body
      */
     abstract protected function getCustomerEmailFromResponseBody(array $body): string;
+
+    /**
+     * Override to validate the HTTP response status code.
+     *
+     * By default, the check is skipped because some providers (e.g. LemonSqueezy)
+     * return non-200 responses with useful error data in the body.
+     *
+     * @param array<string,mixed>|WP_Error $response
+     * @throws HTTPRequestNotSuccessfulException
+     */
+    protected function validateResponseStatusCode(array|WP_Error $response): void
+    {
+    }
 }
 
