@@ -20,7 +20,7 @@ class FluentCartCommercialPluginUpdaterService extends AbstractMarketplaceProvid
     use FluentCartMarketplaceProviderServiceTrait;
 
     /**
-     * Fetch the update info from the remote server running the Lemon Squeezy plugin.
+     * Fetch the update info from the remote server running the FluentCart plugin.
      */
     protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error
     {
