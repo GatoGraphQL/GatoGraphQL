@@ -25,310 +25,273 @@ class FluentCartCommercialExtensionActivationService extends AbstractBasicServic
 {
     use FluentCartMarketplaceProviderServiceTrait;
 
-
     /**
-     * All code below copied (and adapted) from FluentCart's `FluentLicensing` class
-     *
-     * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/FluentLicensing.php
-     *
-     * ------------------------------------------------------------
+     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
+     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
-
-
-    private static $instance;
-
-    private $config = [];
-
-    public $settingsKey = '';
-
-    public function register($config = [])
+    public function activateLicense(string $licenseKey, string $instanceName): CommercialExtensionActivatedLicenseObjectProperties
     {
-        if (self::$instance) {
-            return self::$instance; // Return existing instance if already set.
-        }
-
-        if (empty($config['basename']) || empty($config['version']) || empty($config['api_url'])) {
-            throw new \Exception('Invalid configuration provided for FluentLicensing. Please provide basename, version, and api_url.');
-        }
-
-        $this->config = $config;
-        $baseName = isset($config['basename']) ? $config['basename'] : plugin_basename(__FILE__);
-
-        $slug = isset($config['slug']) ? $config['slug'] : explode('/', $baseName)[0];
-        $this->config['slug'] = (string)$slug;
-
-        $this->settingsKey = isset($config['settings_key']) ? $config['settings_key'] : '__' . $this->config['slug'] . '_sl_info';
-
-        if (empty($config['store_url'])) {
-            $this->config['store_url'] = $this->config['api_url'];
-        }
-
-        if (empty($config['purchase_url'])) {
-            $this->config['purchase_url'] = $this->config['store_url'];
-        }
-
-        $config = $this->config;
-
-        if (empty($config['license_key']) && empty($config['license_key_callback'])) {
-            $config['license_key_callback'] = function () {
-                return $this->getCurrentLicenseKey();
-            };
-        }
-
-        if (!class_exists('\\' . __NAMESPACE__ . '\PluginUpdater')) {
-            require_once __DIR__ . '/PluginUpdater.php';
-        }
-
-        // Initialize the updater with the provided configuration.
-        new PluginUpdater($config);
-
-        self::$instance = $this; // Set the instance for future use.
-
-        return self::$instance;
-    }
-
-    public function getConfig($key)
-    {
-        if (isset($this->config[$key])) {
-            return $this->config[$key]; // Return the requested configuration value.
-        }
-
-        return '';
+        $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
+        return $this->handleLicenseOperation($endpoint, $licenseKey, null);
     }
 
     /**
-     * @return self
-     * @throws \Exception
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
      */
-    public static function getInstance()
+    protected function getActivateLicenseEndpoint(string $licenseKey, string $instanceName): string
     {
-        if (!self::$instance) {
-            throw new \Exception('Licensing is not registered. Please call register() method first.');
-        }
-
-        return self::$instance; // Return the singleton instance.
+        return sprintf(
+            '%s/v1/licenses/activate?license_key=%s&instance_name=%s',
+            $this->getFluentCartAPIBaseURL(),
+            $licenseKey,
+            $instanceName
+        );
     }
 
-    public function activate($licenseKey = '')
+    protected function getFluentCartAPIBaseURL(): string
     {
-        if (!$licenseKey) {
-            return new \WP_Error('license_key_missing', 'License key is required for activation.');
-        }
+        return 'https://api.lemonsqueezy.com';
+    }
 
-        $response = $this->apiRequest('activate_license', [
-            'license_key'      => $licenseKey,
-            'platform_version' => get_bloginfo('version'),
-            'server_version'   => PHP_VERSION,
-        ]);
-
-        if (is_wp_error($response)) {
-            return $response; // Return the error response if there is an error.
-        }
-
-        $saveData = [
-            'license_key'     => $licenseKey,
-            'status'          => $response['status'] ?? 'valid',
-            'variation_id'    => $response['variation_id'] ?? '',
-            'variation_title' => $response['variation_title'] ?? '',
-            'expires'         => $response['expiration_date'] ?? '',
-            'activation_hash' => $response['activation_hash'] ?? ''
+    /**
+     * @return array<string,string>
+     */
+    protected function getFluentCartAPIBaseHeaders(): array
+    {
+        return [
+            'Accept' => 'application/json',
         ];
-
-        // Save the license data to the database.
-        update_option($this->settingsKey, $saveData, false);
-
-        return $saveData; // Return the saved data.
     }
 
-    public function deactivate()
-    {
-        $deactivated = $this->apiRequest('deactivate_license', [
-            'license_key' => $this->getCurrentLicenseKey()
-        ]);
+    /**
+     * Process the API response for the /activate, /deactivate and /validate endpoints.
+     *
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
+     *
+     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
+     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     */
+    protected function handleLicenseOperation(
+        string $endpoint,
+        string $licenseKey,
+        ?string $instanceID
+    ): CommercialExtensionActivatedLicenseObjectProperties {
+        $response = wp_remote_post(
+            $endpoint,
+            [
+                'headers' => $this->getFluentCartAPIBaseHeaders(),
+            ]
+        );
 
-        delete_option($this->settingsKey); // Remove the license data from the database.
+        if ($response instanceof WP_Error) {
+            throw new HTTPRequestNotSuccessfulException($response->get_error_message());
+        }
 
-        return $deactivated;
+        /**
+         * Skip this check, because FluentCart might return a 400 when
+         * the activation is not successful, but we want to capture the
+         * error message below.
+         */
+        // $responseCode = wp_remote_retrieve_response_code($response);
+        // if ($responseCode !== 200) {
+        //     $errorMessage = wp_remote_retrieve_response_message($response);
+        //     throw new HTTPRequestNotSuccessfulException($errorMessage);
+        // }
+
+        $body = json_decode($response['body'], true);
+
+        /**
+         * Check the "status" first, and only then the "error",
+         * because "expired" is a valid state for Gato GraphQL,
+         * but this also produces an error in FluentCart
+         *
+         * @var string|null
+         */
+        $status = $body['license_key']['status'] ?? null;
+        /** @var string|null */
+        $error = $body['error'] ?? null;
+        if ($status === null) {
+            throw new LicenseOperationNotSuccessfulException($error ?? $this->__('Unknown error', 'gatographql'));
+        }
+
+        $status = $this->convertStatus($status);
+
+        /**
+         * Deactivating the license may bring status "inactive"
+         * and no error, then don't throw error. When status is
+         * "disabled" it will also bring an error, then throw it.
+         */
+        if (
+            $error !== null
+            && !in_array($status, [
+            LicenseStatus::ACTIVE,
+            LicenseStatus::EXPIRED,
+            ])
+        ) {
+            /** @var string $error */
+            throw new LicenseOperationNotSuccessfulException($error);
+        }
+
+        /**
+         * Throw an "error" from the response, unless:
+         *
+         * - The license is "expired", and
+         * - The license had been previously activated (i.e. there's an instance ID)
+         *
+         * The last item is important as ["instance"]["id"] is not sent in case of error
+         */
+        if (
+            $error !== null
+            && (
+                $status !== LicenseStatus::EXPIRED
+                || $instanceID === null
+            )
+        ) {
+            throw new LicenseOperationNotSuccessfulException($error);
+        }
+
+        /**
+         * By now, either $error is null, or it's for the "expired" status.
+         * In either case, all properties below will be set in the response,
+         * so no need to do ?? null.
+         *
+         * If the license is on the Gato Shop on Test mode,
+         * then only enable it for the extension in DEV.
+         *
+         * @var bool
+         */
+        $isTestMode = $body['license_key']['test_mode'] ?? false;
+        /**
+         * Notice that we validate "-dev" against the main Gato GraphQL
+         * plugin and not against the extension, but it still works
+         * because these are the same.
+         *
+         * @see method `assertIsSameEnvironmentAsMainPlugin` in `ExtensionManager`
+         */
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+        $isExtensionOnDevelopmentMode = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion);
+        if ($isTestMode && !$isExtensionOnDevelopmentMode) {
+            throw new LicenseOperationNotSuccessfulException(
+                $this->__('The license is for test mode, but the extension is not on development mode', 'gatographql'),
+            );
+        } elseif (
+            !PluginStaticModuleConfiguration::canDevModePluginUseProdModeLicense()
+            && !$isTestMode
+            && $isExtensionOnDevelopmentMode
+        ) {
+            throw new LicenseOperationNotSuccessfulException(
+                $this->__('The license is not for test mode, but the extension is on development mode', 'gatographql'),
+            );
+        }
+
+        /**
+         * For the /activate endpoint, retrieve the instance ID from the response.         *
+         * For the /deactivate endpoint, there will be no "instance" entry.
+         *
+         * @var string|null
+         */
+        $instanceID = $body['instance']['id'] ?? null;
+        /** @var string|null */
+        $instanceName = $body['instance']['name'] ?? null;
+
+        /**
+         * These should always be provided, but just in case there's
+         * no "license_key" in the response, default it to `0`.
+         */
+        $activationUsage = (int) ($body['license_key']['activation_usage'] ?? 0);
+        $activationLimit = (int) ($body['license_key']['activation_limit'] ?? 0);
+
+        /** @var string */
+        $productName = $body['meta']['product_name'];
+        /** @var string */
+        $customerName = $body['meta']['customer_name'];
+        /** @var string */
+        $customerEmail = $body['meta']['customer_email'];
+
+        return new CommercialExtensionActivatedLicenseObjectProperties(
+            $licenseKey,
+            $body,
+            $status,
+            $instanceID,
+            $instanceName,
+            $activationUsage,
+            $activationLimit,
+            $productName,
+            $customerName,
+            $customerEmail,
+        );
     }
 
-    public function getStatus($remoteFetch = false)
+    /**
+     * Convert the status: from the value used by FluentCart,
+     * to the constants used by Gato GraphQL
+     *
+     * @see https://docs.lemonsqueezy.com/guides/tutorials/license-keys#license-key-statuses
+     */
+    protected function convertStatus(string $status): string
     {
-        $currentLicense = get_option($this->settingsKey, []);
-        if (!$currentLicense || !is_array($currentLicense) || empty($currentLicense['license_key'])) {
-            $currentLicense = [
-                'license_key'     => '',
-                'status'          => 'unregistered',
-                'variation_id'    => '',
-                'variation_title' => '',
-                'expires'         => '',
-                'activation_hash' => ''
-            ];
-
-            return $currentLicense;
-        }
-
-        if (!$remoteFetch) {
-            return $currentLicense; // Return the current license status without fetching from the API.
-        }
-
-        $remoteStatus = $this->apiRequest('check_license', [
-            'license_key'     => $currentLicense['license_key'] ?? '',
-            'activation_hash' => $currentLicense['activation_hash'] ?? '',
-            'item_id'         => $this->getConfig('item_id'),
-            'site_url'        => home_url()
-        ]);
-
-        if (is_wp_error($remoteStatus)) {
-            return $remoteStatus; // Return the error response if there is an error.
-        }
-
-        $status = isset($remoteStatus['status']) ? $remoteStatus['status'] : 'unregistered';
-        $errorType = isset($remoteStatus['error_type']) ? $remoteStatus['error_type'] : '';
-
-        if (!empty($currentLicense['status'])) {
-            $currentLicense['status'] = $status;
-            if (!empty($remoteStatus['expiration_date'])) {
-                $currentLicense['expires'] = sanitize_text_field($currentLicense['expires']);
-            }
-
-            if (!empty($remoteStatus['variation_id'])) {
-                $currentLicense['variation_id'] = sanitize_text_field($remoteStatus['variation_id']);
-            }
-
-            if (!empty($remoteStatus['variation_title'])) {
-                $currentLicense['variation_title'] = sanitize_text_field($remoteStatus['variation_title']);
-            }
-
-            update_option($this->settingsKey, $currentLicense, false); // Save the updated license status.
-        } else {
-            $currentLicense['status'] = 'error';
-        }
-
-        $currentLicense['renew_url'] = isset($remoteStatus['renew_url']) ? $remoteStatus['renew_url'] : '';
-        $currentLicense['is_expired'] = isset($remoteStatus['is_expired']) ? $remoteStatus['is_expired'] : false;
-
-        if ($errorType) {
-            $currentLicense['error_type'] = $errorType;
-            $currentLicense['error_message'] = $remoteStatus['message'];
-        }
-
-        return $currentLicense;
+        return match ($status) {
+            'active' => LicenseStatus::ACTIVE,
+            'expired' => LicenseStatus::EXPIRED,
+            'inactive' => LicenseStatus::INACTIVE,
+            'disabled' => LicenseStatus::DISABLED,
+            default => LicenseStatus::OTHER,
+        };
     }
 
-    public function getCurrentLicenseKey()
-    {
-        $status = $this->getStatus();
-        return isset($status['license_key']) ? $status['license_key'] : ''; // Return the current license key.
+    /**
+     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
+     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     */
+    public function deactivateLicense(
+        string $licenseKey,
+        string $instanceID
+    ): CommercialExtensionActivatedLicenseObjectProperties {
+        $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
+        return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID);
     }
 
-    public function getLicenseMessages()
-    {
-        $licenseDetails = $this->getStatus();
-        $status = $licenseDetails['status'];
-
-        if ($status == 'expired') {
-            return [
-                'message'         => $this->getExpireMessage($licenseDetails),
-                'type'            => 'in_app',
-                'license_details' => $licenseDetails
-            ];
-        }
-
-        if ($status === 'disabled') {
-            return [
-                'message'         => 'The license for ' . $this->getConfig('plugin_title') . ' has been disabled. Please contact support for assistance.',
-                'type'            => 'global',
-                'license_details' => $licenseDetails
-            ];
-        }
-
-        if ($status != 'valid') {
-            return [
-                'message'         => \sprintf(
-                    'The %1$s license needs to be activated. %2$s',
-                    $this->getConfig('plugin_title'),
-                    '<a href="' . $this->getConfig('activate_url') . '">' . 'Click here to activate' . '</a>'
-                ),
-                'type'            => 'global',
-                'license_details' => $licenseDetails
-            ];
-        }
-
-        return false;
+    /**
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
+     */
+    protected function getDeactivateLicenseEndpoint(
+        string $licenseKey,
+        string $instanceID
+    ): string {
+        return sprintf(
+            '%s/v1/licenses/deactivate?license_key=%s&instance_id=%s',
+            $this->getFluentCartAPIBaseURL(),
+            $licenseKey,
+            $instanceID
+        );
     }
 
-    private function getExpireMessage($licenseData, $scope = 'global')
-    {
-        if ($scope == 'global') {
-            $renewUrl = $this->getConfig('activate_url');
-        } else {
-            $renewUrl = $this->getRenewUrl();
-        }
-
-        return '<p>Your ' . $this->getConfig('plugin_title') . ' ' . __('license has been', 'fluent-community-pro') . ' <b>' . __('expired at', 'fluent-community-pro') . ' ' . gmdate('d M Y', strtotime($licenseData['expires'])) . '</b>, Please ' .
-            '<a href="' . $renewUrl . '"><b>' . __('Click Here to Renew Your License', 'fluent-community-pro') . '</b></a>' . '</p>';
+    /**
+     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
+     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     */
+    public function validateLicense(
+        string $licenseKey,
+        string $instanceID
+    ): CommercialExtensionActivatedLicenseObjectProperties {
+        $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
+        return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID);
     }
 
-    private function apiRequest($action, $data = [])
-    {
-        $url = $this->config['api_url'];
-        $fullUrl = add_query_arg(array(
-            'fluent-cart' => $action,
-        ), $url);
-
-        $defaults = [
-            'item_id'         => $this->config['item_id'],
-            'current_version' => $this->config['version'],
-            'site_url'        => home_url(),
-        ];
-
-        $payload = wp_parse_args($data, $defaults);
-
-        // send the post request to the API.
-        $response = wp_remote_post($fullUrl, array(
-            'timeout'   => 15,
-            'body'      => $payload
-        ));
-
-        if (is_wp_error($response)) {
-            return $response; // Return the error response if there is an error.
-        }
-
-        if (200 !== wp_remote_retrieve_response_code($response)) {
-            $errorData = wp_remote_retrieve_body($response);
-            $message = 'API request failed with status code: ' . wp_remote_retrieve_response_code($response);
-            if (!empty($errorData)) {
-                $decodedData = json_decode($errorData, true);
-                if ($decodedData) {
-                    $errorData = $decodedData;
-                }
-
-                if (!empty($errorData['message'])) {
-                    $message = (string)$errorData['message'];
-                }
-            }
-            return new \WP_Error('api_error', $message, $errorData);
-        }
-
-        $responseData = json_decode(wp_remote_retrieve_body($response), true); // Return the decoded response body.
-
-        if ($responseData) {
-            return $responseData;
-        }
-
-        return new \WP_Error('api_error', 'API request returned an empty or not JSON response.', []);
-    }
-
-    public function getRenewUrl()
-    {
-        $licenseKey = $this->getCurrentLicenseKey();
-        if (empty($licenseKey)) {
-            return $this->getConfig('purchase_url');
-        }
-
-        return add_query_arg(array(
-            'license_key' => $licenseKey,
-            'fluent-cart' => 'renew_license'
-        ), $this->getConfig('store_url'));
+    /**
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
+     */
+    protected function getValidateLicenseEndpoint(
+        string $licenseKey,
+        string $instanceID
+    ): string {
+        return sprintf(
+            '%s/v1/licenses/validate?license_key=%s&instance_id=%s',
+            $this->getFluentCartAPIBaseURL(),
+            $licenseKey,
+            $instanceID
+        );
     }
 }
