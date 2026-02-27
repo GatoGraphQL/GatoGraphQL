@@ -165,6 +165,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
             'expired' => LicenseStatus::EXPIRED,
             'inactive' => LicenseStatus::INACTIVE,
             'disabled' => LicenseStatus::DISABLED,
+            'unregistered' => LicenseStatus::UNREGISTERED,
             default => LicenseStatus::OTHER,
         };
     }
