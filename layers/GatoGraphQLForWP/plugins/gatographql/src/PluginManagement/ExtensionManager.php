@@ -382,6 +382,7 @@ class ExtensionManager extends AbstractPluginManager
             $extensionBaseName,
             $extensionVersion,
             $options[ExtensionDataOptions::CHANGELOG_URL] ?? '',
+            $options[ExtensionDataOptions::MARKETPLACE_PRODUCT_IDS] ?? [],
         );
 
         /**
