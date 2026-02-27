@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulExcept
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketplaceProviderCommercialExtensionActivationService
 {
@@ -21,10 +22,21 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
     public function activateLicense(
         ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
-        string $instanceName,
     ): CommercialExtensionActivatedLicenseObjectProperties {
+        $instanceName = $this->getInstanceName($extensionData);
         $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
         return $this->handleLicenseOperation($endpoint, $licenseKey, null);
+    }
+
+    /**
+     * Use the site's domain + extension slug as instance name,
+     * to identify on what domain and for which extension the license was activated.
+     */
+    protected function getInstanceName(?ActiveLicenseCommercialExtensionData $extensionData): string
+    {
+        $siteDomain = GeneralUtils::getHost(home_url());
+        $extensionSlug = $extensionData?->slug ?? '';
+        return sprintf('%s (%s)', $siteDomain, $extensionSlug);
     }
 
     /**

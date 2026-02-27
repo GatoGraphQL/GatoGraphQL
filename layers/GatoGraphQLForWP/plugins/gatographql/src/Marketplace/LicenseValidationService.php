@@ -267,14 +267,12 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             if ($extensionName === '') {
                 continue;
             }
-            $instanceName = $this->getInstanceName($extensionSlug);
             try {
                 $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService($licenseKey);
                 $extensionData = $commercialExtensionSlugDataEntries[$extensionSlug] ?? null;
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense(
                     $extensionData,
                     $licenseKey,
-                    $instanceName,
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
@@ -586,27 +584,6 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         ];
     }
 
-    /**
-     * Use as the instance name:
-     *
-     * - The site's domain: to understand on what domain it was installed
-     * - Extension slug: to make sure the right license key was provided
-     */
-    protected function getInstanceName(string $extensionSlug): string
-    {
-        return sprintf(
-            '%s (%s)',
-            $this->getSiteDomain(),
-            $extensionSlug
-        );
-    }
-
-    /**
-     * Use as the instance name:
-     *
-     * - The site's domain: to understand on what domain it was installed
-     * - Extension slug: to make sure the right license key was provided
-     */
     protected function getSiteDomain(): string
     {
         return GeneralUtils::getHost(home_url());

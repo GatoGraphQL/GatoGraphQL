@@ -24,7 +24,6 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
     public function activateLicense(
         ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
-        string $instanceName,
     ): CommercialExtensionActivatedLicenseObjectProperties;
 
     /**

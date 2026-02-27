@@ -30,7 +30,6 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     public function activateLicense(
         ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
-        string $instanceName,
     ): CommercialExtensionActivatedLicenseObjectProperties {
         $endpoint = $this->getFluentCartAPIEndpoint('activate_license');
         return $this->handleLicenseOperation($endpoint, $licenseKey, null, [
