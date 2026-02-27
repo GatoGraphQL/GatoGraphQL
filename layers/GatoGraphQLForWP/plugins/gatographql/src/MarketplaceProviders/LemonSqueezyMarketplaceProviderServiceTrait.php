@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\MarketplaceVersion;
+
 trait LemonSqueezyMarketplaceProviderServiceTrait
 {
     public function getPriority(): int
@@ -19,5 +21,10 @@ trait LemonSqueezyMarketplaceProviderServiceTrait
     public function canProcessLicense(string $licenseKey): bool
     {
         return true;
+    }
+
+    public function getMarketplaceVersion(): string
+    {
+        return MarketplaceVersion::V1_LEMONSQUEEZY;
     }
 }

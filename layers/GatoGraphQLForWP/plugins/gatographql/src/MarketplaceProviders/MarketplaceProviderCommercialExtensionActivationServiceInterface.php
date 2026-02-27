@@ -14,6 +14,8 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
 
     public function canProcessLicense(string $licenseKey): bool;
 
+    public function getMarketplaceVersion(): string;
+
     /**
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
