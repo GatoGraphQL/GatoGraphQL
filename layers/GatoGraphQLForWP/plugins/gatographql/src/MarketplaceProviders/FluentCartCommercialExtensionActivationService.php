@@ -6,11 +6,16 @@ namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
-use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use WP_Error;
+
+use function wp_remote_retrieve_body;
+use function wp_remote_retrieve_response_code;
+use function wp_remote_retrieve_response_message;
 
 /**
- * Based on code from FluentCart's `FluentLicensing` class
+ * Based on code from FluentCart's `FluentLicensing` class.
  *
  * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/FluentLicensing.php
  */
@@ -19,117 +24,93 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     use FluentCartMarketplaceProviderServiceTrait;
 
     /**
-     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
-     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     * @throws HTTPRequestNotSuccessfulException
+     * @throws \GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException
      */
     public function activateLicense(
         string|int|null $marketplaceProductID,
         string $licenseKey,
         string $instanceName,
     ): CommercialExtensionActivatedLicenseObjectProperties {
-        $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
-        return $this->handleLicenseOperation($endpoint, $licenseKey, null);
+        $endpoint = $this->getFluentCartAPIEndpoint('activate_license');
+        return $this->handleLicenseOperation($endpoint, $licenseKey, null, [
+            'body' => array_merge(
+                $this->getFluentCartDefaultPayload($marketplaceProductID),
+                [
+                    'license_key'      => $licenseKey,
+                    'platform_version' => get_bloginfo('version'),
+                    'server_version'   => PHP_VERSION,
+                ],
+            ),
+        ]);
     }
 
     /**
-     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-     */
-    protected function getActivateLicenseEndpoint(string $licenseKey, string $instanceName): string
-    {
-        return sprintf(
-            '%s/v1/licenses/activate?license_key=%s&instance_name=%s',
-            $this->getFluentCartAPIBaseURL(),
-            $licenseKey,
-            $instanceName
-        );
-    }
-
-    protected function getFluentCartAPIBaseURL(): string
-    {
-        return 'https://api.lemonsqueezy.com';
-    }
-
-    /**
-     * @return array<string,string>
-     */
-    protected function getFluentCartAPIBaseHeaders(): array
-    {
-        return [
-            'Accept' => 'application/json',
-        ];
-    }
-
-    /**
-     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
-     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     * @throws HTTPRequestNotSuccessfulException
+     * @throws \GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException
      */
     public function deactivateLicense(
         string|int|null $marketplaceProductID,
         string $licenseKey,
         string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties {
-        $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
-        return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID);
+        $endpoint = $this->getFluentCartAPIEndpoint('deactivate_license');
+        return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID, [
+            'body' => array_merge(
+                $this->getFluentCartDefaultPayload($marketplaceProductID),
+                [
+                    'license_key' => $licenseKey,
+                ],
+            ),
+        ]);
     }
 
     /**
-     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
-     */
-    protected function getDeactivateLicenseEndpoint(
-        string $licenseKey,
-        string $instanceID
-    ): string {
-        return sprintf(
-            '%s/v1/licenses/deactivate?license_key=%s&instance_id=%s',
-            $this->getFluentCartAPIBaseURL(),
-            $licenseKey,
-            $instanceID
-        );
-    }
-
-    /**
-     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
-     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     * Maps to FluentCart's `check_license` action.
+     *
+     * @throws HTTPRequestNotSuccessfulException
+     * @throws \GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException
      */
     public function validateLicense(
         string|int|null $marketplaceProductID,
         string $licenseKey,
         string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties {
-        $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
-        return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID);
+        $endpoint = $this->getFluentCartAPIEndpoint('check_license');
+        return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID, [
+            'body' => array_merge(
+                $this->getFluentCartDefaultPayload($marketplaceProductID),
+                [
+                    'license_key'     => $licenseKey,
+                    'activation_hash' => $instanceID,
+                ],
+            ),
+        ]);
     }
 
-    /**
-     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
-     */
-    protected function getValidateLicenseEndpoint(
-        string $licenseKey,
-        string $instanceID
-    ): string {
-        return sprintf(
-            '%s/v1/licenses/validate?license_key=%s&instance_id=%s',
+    protected function getFluentCartAPIEndpoint(string $action): string
+    {
+        return add_query_arg(
+            ['fluent-cart' => $action],
             $this->getFluentCartAPIBaseURL(),
-            $licenseKey,
-            $instanceID
         );
     }
 
-    /**
-     * Convert the status: from the value used by FluentCart,
-     * to the constants used by Gato GraphQL
-     *
-     * @see https://docs.lemonsqueezy.com/guides/tutorials/license-keys#license-key-statuses
-     */
-    protected function convertStatus(string $status): string
+    protected function getFluentCartAPIBaseURL(): string
     {
-        return match ($status) {
-            'active' => LicenseStatus::ACTIVE,
-            'expired' => LicenseStatus::EXPIRED,
-            'inactive' => LicenseStatus::INACTIVE,
-            'disabled' => LicenseStatus::DISABLED,
-            default => LicenseStatus::OTHER,
-        };
+        return 'https://store.gatoplugins.com';
+    }
+
+    /**
+     * @return array<string,string|int|null>
+     */
+    protected function getFluentCartDefaultPayload(string|int|null $marketplaceProductID): array
+    {
+        return [
+            'item_id'         => $marketplaceProductID,
+            'current_version' => PluginApp::getMainPlugin()->getPluginVersion(),
+            'site_url'        => home_url(),
+        ];
     }
 
     /**
@@ -138,8 +119,44 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     protected function getLicenseOperationRequestArgs(): array
     {
         return [
-            'headers' => $this->getFluentCartAPIBaseHeaders(),
+            'timeout' => 15,
         ];
+    }
+
+    /**
+     * FluentCart returns non-200 only on actual errors
+     * (unlike LemonSqueezy which can return 400 with useful data).
+     *
+     * @param array<string,mixed>|WP_Error $response
+     * @throws HTTPRequestNotSuccessfulException
+     */
+    protected function validateResponseStatusCode(array|WP_Error $response): void
+    {
+        $responseCode = wp_remote_retrieve_response_code($response);
+        if ($responseCode === 200) {
+            return;
+        }
+
+        $body = wp_remote_retrieve_body($response);
+        $decoded = json_decode($body, true);
+        $message = is_array($decoded) && !empty($decoded['message'])
+            ? (string) $decoded['message']
+            : wp_remote_retrieve_response_message($response);
+        throw new HTTPRequestNotSuccessfulException($message);
+    }
+
+    /**
+     * FluentCart uses 'valid' for active licenses.
+     */
+    protected function convertStatus(string $status): string
+    {
+        return match ($status) {
+            'valid' => LicenseStatus::ACTIVE,
+            'expired' => LicenseStatus::EXPIRED,
+            'inactive' => LicenseStatus::INACTIVE,
+            'disabled' => LicenseStatus::DISABLED,
+            default => LicenseStatus::OTHER,
+        };
     }
 
     /**
@@ -148,48 +165,55 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     protected function getLicenseStatusFromResponseBody(array $body): ?string
     {
         /** @var string|null */
-        $status = $body['license_key']['status'] ?? null;
+        $status = $body['status'] ?? null;
         return $status;
     }
 
     /**
+     * FluentCart returns errors via `error_type` + `message`.
+     *
      * @param array<string,mixed> $body
      */
     protected function getErrorFromResponseBody(array $body): ?string
     {
-        /** @var string|null */
-        $error = $body['error'] ?? null;
-        return $error;
+        if (empty($body['error_type'])) {
+            return null;
+        }
+        /** @var string */
+        $message = $body['message'] ?? $this->__('Unknown error', 'gatographql');
+        return $message;
     }
 
     /**
+     * FluentCart does not have a test mode concept.
+     *
      * @param array<string,mixed> $body
      */
     protected function getIsTestModeFromResponseBody(array $body): bool
     {
-        /** @var bool */
-        $isTestMode = $body['license_key']['test_mode'] ?? false;
-        return $isTestMode;
+        return false;
     }
 
     /**
+     * FluentCart uses `activation_hash` as the instance identifier.
+     *
      * @param array<string,mixed> $body
      */
     protected function getInstanceIDFromResponseBody(array $body): ?string
     {
         /** @var string|null */
-        $instanceID = $body['instance']['id'] ?? null;
-        return $instanceID;
+        $activationHash = $body['activation_hash'] ?? null;
+        return $activationHash;
     }
 
     /**
+     * FluentCart identifies instances by site URL.
+     *
      * @param array<string,mixed> $body
      */
     protected function getInstanceNameFromResponseBody(array $body): ?string
     {
-        /** @var string|null */
-        $instanceName = $body['instance']['name'] ?? null;
-        return $instanceName;
+        return home_url();
     }
 
     /**
@@ -197,7 +221,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      */
     protected function getActivationUsageFromResponseBody(array $body): int
     {
-        return (int) ($body['license_key']['activation_usage'] ?? 0);
+        return (int) ($body['activation_usage'] ?? 0);
     }
 
     /**
@@ -205,7 +229,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      */
     protected function getActivationLimitFromResponseBody(array $body): int
     {
-        return (int) ($body['license_key']['activation_limit'] ?? 0);
+        return (int) ($body['activation_limit'] ?? 0);
     }
 
     /**
@@ -213,9 +237,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      */
     protected function getProductNameFromResponseBody(array $body): string
     {
-        /** @var string */
-        $productName = $body['meta']['product_name'];
-        return $productName;
+        return (string) ($body['variation_title'] ?? $body['product_name'] ?? '');
     }
 
     /**
@@ -223,9 +245,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      */
     protected function getCustomerNameFromResponseBody(array $body): string
     {
-        /** @var string */
-        $customerName = $body['meta']['customer_name'];
-        return $customerName;
+        return (string) ($body['customer_name'] ?? '');
     }
 
     /**
@@ -233,8 +253,6 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      */
     protected function getCustomerEmailFromResponseBody(array $body): string
     {
-        /** @var string */
-        $customerEmail = $body['meta']['customer_email'];
-        return $customerEmail;
+        return (string) ($body['customer_email'] ?? '');
     }
 }
