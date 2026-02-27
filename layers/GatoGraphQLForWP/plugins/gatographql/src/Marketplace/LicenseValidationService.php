@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
-use GatoGraphQL\GatoGraphQL\Marketplace\Enums\MarketplaceVersion;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\MarketplaceVersion;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderManagerInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseDomainNotValidException;
@@ -383,8 +383,8 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         $marketplaceVersion = $this->getMarketplaceProviderManager()->getMarketplaceProviderFromLicenseKey($licenseKey);
 
         return match ($marketplaceVersion) {
-            MarketplaceVersion::V2_FluentCart => $marketplaceProductIDs[MarketplaceVersion::V2_FluentCart->name] ?? null,
-            MarketplaceVersion::V1_LemonSqueezy => $marketplaceProductIDs[MarketplaceVersion::V1_LemonSqueezy->name] ?? null,
+            MarketplaceVersion::V2_FLUENT_CART => $marketplaceProductIDs[MarketplaceVersion::V2_FLUENT_CART] ?? null,
+            MarketplaceVersion::V1_LEMON_SQUEEZY => $marketplaceProductIDs[MarketplaceVersion::V1_LEMON_SQUEEZY] ?? null,
             default => null,
         };
     }
