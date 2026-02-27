@@ -83,6 +83,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 $activeExtensionData->baseName,
                 $activeExtensionData->version,
                 $activeExtensionData->changelogURL,
+                $activeExtensionData->marketplaceProductIDs,
                 $pluginLicenseKey,
                 str_replace('-', '_', $pluginSlug) . '_updater',
             );
