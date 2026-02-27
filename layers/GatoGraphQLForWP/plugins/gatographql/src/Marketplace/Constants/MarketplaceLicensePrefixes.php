@@ -6,5 +6,5 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace\Constants;
 
 class MarketplaceLicensePrefixes
 {
-    public final const GATOV2_FLUENTCART = 'gatov2-';
+    public final const V2_FLUENTCART = 'gatov2-';
 }

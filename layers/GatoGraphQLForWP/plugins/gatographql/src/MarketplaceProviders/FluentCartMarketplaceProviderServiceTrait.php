@@ -16,7 +16,7 @@ trait FluentCartMarketplaceProviderServiceTrait
 
     public function canProcessLicense(string $licenseKey): bool
     {
-        return str_starts_with($licenseKey, MarketplaceLicensePrefixes::GATOV2_FLUENTCART);
+        return str_starts_with($licenseKey, MarketplaceLicensePrefixes::V2_FLUENTCART);
     }
 
     public function getMarketplaceVersion(): string
