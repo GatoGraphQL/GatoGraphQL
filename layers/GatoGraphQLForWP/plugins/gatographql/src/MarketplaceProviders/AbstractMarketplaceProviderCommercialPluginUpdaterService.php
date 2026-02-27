@@ -93,8 +93,6 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         add_action('upgrader_process_complete', $this->overridePluginPurge(...), 10, 2);
     }
 
-    abstract protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string;
-
     /**
      * Override the WordPress request to return the correct plugin info.
      *

@@ -151,17 +151,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function getMarketplaceProviderPluginUpdatesServerURL(): string
-    {
-        $envVariable = Environment::MARKETPLACE_PROVIDER_PLUGIN_UPDATES_SERVER_URL;
-        $defaultValue = 'https://updates.gatoplugins.com';
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-        );
-    }
-
     /**
      * This function is not expected to be configured,
      * but it's mainly to help identify all related
