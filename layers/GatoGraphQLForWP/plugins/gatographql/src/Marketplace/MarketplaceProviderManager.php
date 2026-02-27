@@ -13,10 +13,10 @@ class MarketplaceProviderManager extends AbstractBasicService implements Marketp
     public function getMarketplaceProviderFromLicenseKey(string $licenseKey): string
     {
         if (str_starts_with($licenseKey, LicensePrefixes::GATOV2_FLUENTCART)) {
-            return MarketplaceVersion::V2_FLUENT_CART;
+            return MarketplaceVersion::V2_FLUENTCART;
         }
 
-        return MarketplaceVersion::V1_LEMON_SQUEEZY;
+        return MarketplaceVersion::V1_LEMONSQUEEZY;
     }
 }
 

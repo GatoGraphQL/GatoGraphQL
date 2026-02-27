@@ -383,8 +383,8 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         $marketplaceVersion = $this->getMarketplaceProviderManager()->getMarketplaceProviderFromLicenseKey($licenseKey);
 
         return match ($marketplaceVersion) {
-            MarketplaceVersion::V2_FLUENT_CART => $marketplaceProductIDs[MarketplaceVersion::V2_FLUENT_CART] ?? null,
-            MarketplaceVersion::V1_LEMON_SQUEEZY => $marketplaceProductIDs[MarketplaceVersion::V1_LEMON_SQUEEZY] ?? null,
+            MarketplaceVersion::V2_FLUENTCART => $marketplaceProductIDs[MarketplaceVersion::V2_FLUENTCART] ?? null,
+            MarketplaceVersion::V1_LEMONSQUEEZY => $marketplaceProductIDs[MarketplaceVersion::V1_LEMONSQUEEZY] ?? null,
             default => null,
         };
     }

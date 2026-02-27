@@ -31,7 +31,7 @@ class FluentCartCommercialPluginUpdaterService extends AbstractMarketplaceProvid
         ], $url);
 
         $payload = [
-            'item_id'          => $pluginData->marketplaceProductIDs[MarketplaceVersion::V2_FLUENT_CART] ?? null,
+            'item_id'          => $pluginData->marketplaceProductIDs[MarketplaceVersion::V2_FLUENTCART] ?? null,
             'current_version'  => $pluginData->pluginVersion,
             'site_url'         => home_url(),
             'platform_version' => get_bloginfo('version'),
