@@ -381,12 +381,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         $marketplaceProductIDs = $extensionData->marketplaceProductIDs;
 
         $marketplaceVersion = $this->getMarketplaceProviderManager()->getMarketplaceProviderFromLicenseKey($licenseKey);
-
-        return match ($marketplaceVersion) {
-            MarketplaceVersion::V2_FLUENTCART => $marketplaceProductIDs[MarketplaceVersion::V2_FLUENTCART] ?? null,
-            MarketplaceVersion::V1_LEMONSQUEEZY => $marketplaceProductIDs[MarketplaceVersion::V1_LEMONSQUEEZY] ?? null,
-            default => null,
-        };
+        return $marketplaceProductIDs[$marketplaceVersion] ?? null;
     }
 
     /**
