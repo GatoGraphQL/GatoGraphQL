@@ -16,7 +16,7 @@ use WP_Error;
 
 use function wp_remote_post;
 
-abstract class AbstractCommercialExtensionActivationService extends AbstractBasicService
+abstract class AbstractMarketplaceProviderCommercialExtensionActivationService extends AbstractBasicService
 {
     /**
      * Process the API response for the /activate, /deactivate and /validate endpoints.
