@@ -21,20 +21,20 @@ use function wp_remote_post;
  *
  * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/FluentLicensing.php
  */
-class FuentCartCommercialExtensionActivationService extends AbstractBasicService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
+class FluentCartCommercialExtensionActivationService extends AbstractBasicService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
-    use FuentCartMarketplaceProviderServiceTrait;
+    use FluentCartMarketplaceProviderServiceTrait;
 
 
     /**
-     * All code below copied from FluentCart's `FluentLicensing` class
+     * All code below copied (and adapted) from FluentCart's `FluentLicensing` class
      *
      * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/FluentLicensing.php
      *
      * ------------------------------------------------------------
      */
 
-     
+
     private static $instance;
 
     private $config = [];

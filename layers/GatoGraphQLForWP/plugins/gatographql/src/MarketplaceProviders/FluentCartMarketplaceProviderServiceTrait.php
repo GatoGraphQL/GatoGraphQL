@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicensePrefixes;
 
-trait FuentCartMarketplaceProviderServiceTrait
+trait FluentCartMarketplaceProviderServiceTrait
 {
     public function getPriority(): int
     {
