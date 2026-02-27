@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
+use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
 
 class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketplaceProviderCommercialExtensionActivationService
 {
@@ -18,7 +19,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function activateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceName,
     ): CommercialExtensionActivatedLicenseObjectProperties {
@@ -59,7 +60,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function deactivateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties {
@@ -87,7 +88,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function validateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties {

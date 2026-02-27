@@ -8,7 +8,6 @@ use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\MarketplaceVersion;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderManagerInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseDomainNotValidException;
@@ -141,13 +140,9 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             $instanceName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME];
             try {
                 $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService($licenseKey);
-                $marketplaceProductID = $this->getMarketplaceProductID(
-                    $extensionSlug,
-                    $licenseKey,
-                    $commercialExtensionSlugDataEntries,
-                );
+                $extensionData = $commercialExtensionSlugDataEntries[$extensionSlug] ?? null;
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
-                    $marketplaceProductID,
+                    $extensionData,
                     $licenseKey,
                     $instanceID,
                 );
@@ -216,13 +211,9 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
             try {
                 $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService($licenseKey);
-                $marketplaceProductID = $this->getMarketplaceProductID(
-                    $extensionSlug,
-                    $licenseKey,
-                    $commercialExtensionSlugDataEntries,
-                );
+                $extensionData = $commercialExtensionSlugDataEntries[$extensionSlug] ?? null;
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
-                    $marketplaceProductID,
+                    $extensionData,
                     $licenseKey,
                     $instanceID,
                 );
@@ -279,13 +270,9 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             $instanceName = $this->getInstanceName($extensionSlug);
             try {
                 $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService($licenseKey);
-                $marketplaceProductID = $this->getMarketplaceProductID(
-                    $extensionSlug,
-                    $licenseKey,
-                    $commercialExtensionSlugDataEntries,
-                );
+                $extensionData = $commercialExtensionSlugDataEntries[$extensionSlug] ?? null;
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense(
-                    $marketplaceProductID,
+                    $extensionData,
                     $licenseKey,
                     $instanceName,
                 );
@@ -366,22 +353,6 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         string $licenseKey
     ): MarketplaceProviderCommercialExtensionActivationServiceInterface {
         return $this->getMarketplaceProviderCommercialExtensionActivationServiceRegistry()->getMarketplaceProviderCommercialExtensionActivationServiceForLicense($licenseKey);
-    }
-
-    protected function getMarketplaceProductID(
-        string $extensionSlug,
-        string $licenseKey,
-        array $commercialExtensionSlugDataEntries,
-    ): string|int|null {
-        $extensionData = $commercialExtensionSlugDataEntries[$extensionSlug] ?? null;
-        if ($extensionData === null) {
-            return null;
-        }
-
-        $marketplaceProductIDs = $extensionData->marketplaceProductIDs;
-
-        $marketplaceProvider = $this->getMarketplaceProviderManager()->getMarketplaceProviderFromLicenseKey($licenseKey);
-        return $marketplaceProductIDs[$marketplaceProvider->getMarketplaceVersion()] ?? null;
     }
 
     /**

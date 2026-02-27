@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
-use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
 use WP_Error;
 
 use function wp_remote_retrieve_body;
@@ -28,14 +28,14 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      * @throws \GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException
      */
     public function activateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceName,
     ): CommercialExtensionActivatedLicenseObjectProperties {
         $endpoint = $this->getFluentCartAPIEndpoint('activate_license');
         return $this->handleLicenseOperation($endpoint, $licenseKey, null, [
             'body' => array_merge(
-                $this->getFluentCartDefaultPayload($marketplaceProductID),
+                $this->getFluentCartDefaultPayload($extensionData),
                 [
                     'license_key'      => $licenseKey,
                     'platform_version' => get_bloginfo('version'),
@@ -50,14 +50,14 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      * @throws \GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException
      */
     public function deactivateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties {
         $endpoint = $this->getFluentCartAPIEndpoint('deactivate_license');
         return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID, [
             'body' => array_merge(
-                $this->getFluentCartDefaultPayload($marketplaceProductID),
+                $this->getFluentCartDefaultPayload($extensionData),
                 [
                     'license_key' => $licenseKey,
                 ],
@@ -72,14 +72,14 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      * @throws \GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException
      */
     public function validateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties {
         $endpoint = $this->getFluentCartAPIEndpoint('check_license');
         return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID, [
             'body' => array_merge(
-                $this->getFluentCartDefaultPayload($marketplaceProductID),
+                $this->getFluentCartDefaultPayload($extensionData),
                 [
                     'license_key'     => $licenseKey,
                     'activation_hash' => $instanceID,
@@ -104,11 +104,13 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     /**
      * @return array<string,string|int|null>
      */
-    protected function getFluentCartDefaultPayload(string|int|null $marketplaceProductID): array
-    {
+    protected function getFluentCartDefaultPayload(
+        ?ActiveLicenseCommercialExtensionData $extensionData,
+    ): array {
+        $marketplaceProductID = $extensionData?->marketplaceProductIDs[$this->getMarketplaceVersion()] ?? null;
         return [
             'item_id'         => $marketplaceProductID,
-            'current_version' => PluginApp::getMainPlugin()->getPluginVersion(),
+            'current_version' => $extensionData?->version ?? '',
             'site_url'        => home_url(),
         ];
     }

@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
+use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
 
 interface MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
@@ -21,7 +22,7 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function activateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceName,
     ): CommercialExtensionActivatedLicenseObjectProperties;
@@ -31,7 +32,7 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function deactivateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties;
@@ -41,7 +42,7 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function validateLicense(
-        string|int|null $marketplaceProductID,
+        ?ActiveLicenseCommercialExtensionData $extensionData,
         string $licenseKey,
         string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties;
