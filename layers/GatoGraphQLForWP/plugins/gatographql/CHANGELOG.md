@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Support multiple e-commerce providers to validate plugin license (#3271)
+- Validate plugin license against Gato's new FluentCart-powered shop (#3278)
 
 ### Fixed
 
