@@ -19,8 +19,9 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function activateLicense(
+        string|int|null $marketplaceProductID,
         string $licenseKey,
-        string $instanceName
+        string $instanceName,
     ): CommercialExtensionActivatedLicenseObjectProperties;
 
     /**
@@ -28,8 +29,9 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function deactivateLicense(
+        string|int|null $marketplaceProductID,
         string $licenseKey,
-        string $instanceID
+        string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties;
 
     /**
@@ -37,7 +39,8 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function validateLicense(
+        string|int|null $marketplaceProductID,
         string $licenseKey,
-        string $instanceID
+        string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties;
 }

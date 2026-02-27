@@ -17,8 +17,11 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
-    public function activateLicense(string $licenseKey, string $instanceName): CommercialExtensionActivatedLicenseObjectProperties
-    {
+    public function activateLicense(
+        string|int|null $marketplaceProductID,
+        string $licenseKey,
+        string $instanceName,
+    ): CommercialExtensionActivatedLicenseObjectProperties {
         $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
         return $this->handleLicenseOperation($endpoint, $licenseKey, null);
     }
@@ -56,8 +59,9 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function deactivateLicense(
+        string|int|null $marketplaceProductID,
         string $licenseKey,
-        string $instanceID
+        string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties {
         $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
         return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID);
@@ -83,8 +87,9 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     public function validateLicense(
+        string|int|null $marketplaceProductID,
         string $licenseKey,
-        string $instanceID
+        string $instanceID,
     ): CommercialExtensionActivatedLicenseObjectProperties {
         $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
         return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID);
