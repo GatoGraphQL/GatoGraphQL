@@ -24,7 +24,24 @@ class FluentCartCommercialPluginUpdaterService extends AbstractMarketplaceProvid
      */
     protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error
     {
-        $url = "https://updates.gatoplugins.com/wp-json/lsq/v1/update?license_key={$pluginData->licenseKey}";
-        return wp_remote_get($url, ['timeout' => 10]);
+        $url = 'https://store.gatoplugins.com';
+        $fullUrl = add_query_arg([
+            'fluent-cart' => 'get_license_version',
+        ], $url);
+
+        $payload = [
+            // @todo Fix passing ID here
+            'item_id'          => 14,//$pluginData->itemID,
+            'current_version'  => $pluginData->pluginVersion,
+            'site_url'         => home_url(),
+            'platform_version' => get_bloginfo('version'),
+            'server_version'   => PHP_VERSION,
+            'license_key'      => $pluginData->licenseKey,
+        ];
+
+        return wp_remote_post($fullUrl, [
+            'timeout'   => 15,
+            'body'      => $payload
+        ]);
     }
 }
