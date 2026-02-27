@@ -15,7 +15,23 @@ use WP_Error;
 
 use function wp_remote_get;
 
+/**
+ * Based on code from FluentCart's `PluginUpdater` class
+ *
+ * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/PluginUpdater.php
+ */
 class FuentCartCommercialPluginUpdaterService extends AbstractBasicService implements MarketplaceProviderCommercialPluginUpdaterServiceInterface
 {
     use FuentCartMarketplaceProviderServiceTrait;
+
+
+    /**
+     * All code below copied from FluentCart's `PluginUpdater` class
+     *
+     * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/PluginUpdater.php
+     *
+     * ------------------------------------------------------------
+     */
+
+
 }

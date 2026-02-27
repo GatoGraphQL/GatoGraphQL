@@ -16,7 +16,21 @@ use WP_Error;
 
 use function wp_remote_post;
 
+/**
+ * Based on code from FluentCart's `FluentLicensing` class
+ *
+ * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/FluentLicensing.php
+ */
 class FuentCartCommercialExtensionActivationService extends AbstractBasicService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
     use FuentCartMarketplaceProviderServiceTrait;
+
+
+    /**
+     * All code below copied from FluentCart's `FluentLicensing` class
+     *
+     * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/FluentLicensing.php
+     *
+     * ------------------------------------------------------------
+     */
 }
