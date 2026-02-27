@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels;
 class CommercialPluginUpdatedPluginData
 {
     /**
-     * @param array<string, string> $marketplaceProductIDs
+     * @param array<string,string|int> $marketplaceProductIDs Key: marketplaceVersion, value: ID
      */
     public function __construct(
         public readonly string $pluginName,

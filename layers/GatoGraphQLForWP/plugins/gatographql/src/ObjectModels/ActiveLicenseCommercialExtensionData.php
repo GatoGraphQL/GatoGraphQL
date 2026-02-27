@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\ObjectModels;
 class ActiveLicenseCommercialExtensionData
 {
     /**
-     * @param array<string, string> $marketplaceProductIDs Key: marketplaceVersion, value: ID
+     * @param array<string,string|int> $marketplaceProductIDs Key: marketplaceVersion, value: ID
      */
     public function __construct(
         public readonly string $productName,
