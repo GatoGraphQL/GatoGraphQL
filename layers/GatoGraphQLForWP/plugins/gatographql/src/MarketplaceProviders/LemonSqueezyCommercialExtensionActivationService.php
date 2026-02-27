@@ -34,9 +34,35 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      */
     protected function getInstanceName(?ActiveLicenseCommercialExtensionData $extensionData): string
     {
-        $siteDomain = GeneralUtils::getHost(home_url());
         $extensionSlug = $extensionData?->slug ?? '';
-        return sprintf('%s (%s)', $siteDomain, $extensionSlug);
+        return sprintf('%s (%s)', $this->getSiteDomain(), $extensionSlug);
+    }
+
+    protected function getSiteDomain(): string
+    {
+        return GeneralUtils::getHost(home_url());
+    }
+
+    /**
+     * The instance name format is "domain (slug)".
+     * Extract the domain and compare with the current site.
+     */
+    public function isInstanceNameValid(string $instanceName): bool
+    {
+        return $this->getSiteDomain() === $this->getLicenseDomain($instanceName);
+    }
+
+    /**
+     * The instance name is composed by:
+     *
+     * - The site's domain
+     * - The extension slug
+     *
+     * These two are separated by a space. Therefore, the license domain is the site's domain
+     */
+    protected function getLicenseDomain(string $instanceName): string
+    {
+        return explode(' ', $instanceName)[0];
     }
 
     /**

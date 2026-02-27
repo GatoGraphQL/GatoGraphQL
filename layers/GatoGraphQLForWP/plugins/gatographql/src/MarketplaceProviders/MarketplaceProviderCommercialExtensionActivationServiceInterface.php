@@ -18,6 +18,12 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
     public function getMarketplaceVersion(): string;
 
     /**
+     * Check if the instance name from the API response
+     * matches the current site.
+     */
+    public function isInstanceNameValid(string $instanceName): bool;
+
+    /**
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */

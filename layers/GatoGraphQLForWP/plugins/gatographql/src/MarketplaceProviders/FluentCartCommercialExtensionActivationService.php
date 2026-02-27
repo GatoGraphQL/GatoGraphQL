@@ -24,6 +24,15 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     use FluentCartMarketplaceProviderServiceTrait;
 
     /**
+     * FluentCart identifies instances by site URL,
+     * so compare directly against home_url().
+     */
+    public function isInstanceNameValid(string $instanceName): bool
+    {
+        return home_url() === $instanceName;
+    }
+
+    /**
      * @throws HTTPRequestNotSuccessfulException
      * @throws \GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException
      */
