@@ -24,16 +24,18 @@ class MarketplaceProviderCommercialPluginUpdaterServiceRegistry implements Marke
     /**
      * @return MarketplaceProviderCommercialPluginUpdaterServiceInterface[]
      */
-    public function getMarketplaceProviderCommercialPluginUpdaterServices(): array
+    public function getMarketplaceProviderCommercialPluginUpdaterServices(bool $sortByPriority = true): array
     {
         $services = $this->marketplaceProviderCommercialPluginUpdaterServices;
-        usort(
-            $services,
-            static fn (
-                MarketplaceProviderCommercialPluginUpdaterServiceInterface $a,
-                MarketplaceProviderCommercialPluginUpdaterServiceInterface $b
-            ): int => $a->getPriority() <=> $b->getPriority()
-        );
+        if ($sortByPriority) {
+            usort(
+                $services,
+                static fn (
+                    MarketplaceProviderCommercialPluginUpdaterServiceInterface $a,
+                    MarketplaceProviderCommercialPluginUpdaterServiceInterface $b
+                ): int => $a->getPriority() <=> $b->getPriority()
+            );
+        }
         return $services;
     }
 }
