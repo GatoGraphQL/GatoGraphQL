@@ -136,8 +136,6 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
             $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
-            /** @var string */
-            $instanceName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME];
             try {
                 $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService($licenseKey);
                 $extensionData = $commercialExtensionSlugDataEntries[$extensionSlug] ?? null;
