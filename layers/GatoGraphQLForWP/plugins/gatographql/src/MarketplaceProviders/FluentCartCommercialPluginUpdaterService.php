@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
 use GatoGraphQL\GatoGraphQL\MarketplaceProviders\AbstractMarketplaceProviderCommercialPluginUpdaterService;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\MarketplaceVersion;
 use WP_Error;
 
 use function wp_remote_get;
@@ -30,8 +31,7 @@ class FluentCartCommercialPluginUpdaterService extends AbstractMarketplaceProvid
         ], $url);
 
         $payload = [
-            // @todo Fix passing ID here
-            'item_id'          => 14,//$pluginData->itemID,
+            'item_id'          => $pluginData->marketplaceProductIDs[MarketplaceVersion::V2_FluentCart->name] ?? null,
             'current_version'  => $pluginData->pluginVersion,
             'site_url'         => home_url(),
             'platform_version' => get_bloginfo('version'),
