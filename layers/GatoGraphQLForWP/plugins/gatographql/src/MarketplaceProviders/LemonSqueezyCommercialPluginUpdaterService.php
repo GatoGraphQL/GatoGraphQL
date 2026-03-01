@@ -18,6 +18,7 @@ use function wp_remote_get;
 class LemonSqueezyCommercialPluginUpdaterService extends AbstractMarketplaceProviderCommercialPluginUpdaterService
 {
     use LemonSqueezyMarketplaceProviderServiceTrait;
+
     /**
      * Fetch the update info from the remote server running the Lemon Squeezy plugin.
      */

@@ -10,8 +10,6 @@ use GatoGraphQL\GatoGraphQL\MarketplaceProviders\AbstractMarketplaceProviderComm
 use stdClass;
 use WP_Error;
 
-use function wp_remote_get;
-
 /**
  * Based on code from FluentCart's `PluginUpdater` class
  *

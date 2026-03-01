@@ -17,7 +17,7 @@ use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
  * These are the responses that FluentCart returns:
  *
  * - Activation successful ("https://store.gatoplugins.com?fluent-cart=activate_license"):
- * 
+ *
  * ```json
  *  {
  *      "status": "valid",
@@ -43,9 +43,9 @@ use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
  *      "success": true
  *  }
  * ```
- * 
+ *
  * - Activation failed ("https://store.gatoplugins.com?fluent-cart=activate_license"):
- * 
+ *
  * ```json
  *  {
  *      "message": "License not found",
@@ -53,9 +53,9 @@ use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
  *      "success": false
  *  }
  * ```
- * 
+ *
  * - Deactivation successful ("https://store.gatoplugins.com?fluent-cart=deactivate_license"):
- * 
+ *
  * ```json
  * {
  *     "status": "deactivated",
@@ -79,11 +79,11 @@ use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
  *     "success": true
  * }
  * ```
- * 
+ *
  * - License check successful ("https://store.gatoplugins.com?fluent-cart=check_license")
  *
  * ```json
- * 
+ *
  *    "status": "valid",
  *    "activation_limit": "10",
  *    "activation_hash": "6f4409896201278f7c305584d06edc1d",
@@ -105,11 +105,11 @@ use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
  *        "timezone": "UTC"
  *    },
  *    "success": true
- * 
+ *
  * ```
- * 
+ *
  * - License check failed ("https://store.gatoplugins.com?fluent-cart=check_license")
- * 
+ *
  * ```json
  *  {
  *      "status": "invalid",

@@ -221,4 +221,3 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
      */
     abstract protected function getCustomerEmailFromResponseBody(array $body): ?string;
 }
-

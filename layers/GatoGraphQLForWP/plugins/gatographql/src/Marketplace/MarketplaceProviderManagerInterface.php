@@ -10,4 +10,3 @@ interface MarketplaceProviderManagerInterface
 {
     public function getMarketplaceProviderFromLicenseKey(string $licenseKey): MarketplaceProviderCommercialPluginUpdaterServiceInterface;
 }
-
