@@ -16,6 +16,7 @@ class ActiveLicenseCommercialExtensionData
         public readonly string $baseName,
         public readonly string $version,
         public readonly string $changelogURL,
+        public readonly string $homepageURL,
         public readonly array $marketplaceProductIDs,
     ) {
     }
