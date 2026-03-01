@@ -228,6 +228,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking changes - Update GraphiQL to v5 (#3270)
 * Improved - Support multiple e-commerce providers to validate plugin license (#3271)
 * Improved - Validate plugin license against Gato's new FluentCart-powered shop (#3278)
+* Fixed - Show new version updates when clicking on the Show details link in Plugin updates (#0be1eb0)
 
 = 16.1.0 =
 * Added - The new "All Inclusive" bundle to Extensions (#3269)

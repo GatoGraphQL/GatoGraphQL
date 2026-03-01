@@ -21,7 +21,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-(No entries yet)
+- Show new version updates when clicking on the Show details link in Plugin updates (#0be1eb0)
 
 ## 16.1.0 - 13/02/2026
 
