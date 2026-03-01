@@ -224,6 +224,13 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 $res->new_version = $remote->update->version;
                 $res->package     = $remote->update->download_link;
 
+                $properties = ['sections', 'banners', 'icons'];
+                foreach ($properties as $property) {
+                    if (isset($remote->update->$property)) {
+                        $res->$property = (array) $remote->update->$property;
+                    }
+                }
+
                 $transient->response ??= [];
                 $transient->response[$res->plugin] = $res;
             } else {
