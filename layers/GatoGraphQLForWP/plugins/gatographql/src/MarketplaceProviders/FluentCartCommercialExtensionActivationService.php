@@ -15,6 +15,100 @@ use function wp_remote_retrieve_response_code;
  * Based on code from FluentCart's `FluentLicensing` class.
  *
  * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/FluentLicensing.php
+ *
+ * These are the responses that FluentCart returns:
+ *
+ * - Activation successful ("https://store.gatoplugins.com?fluent-cart=activate_license"):
+ * 
+ * ```json
+ *  {
+ *      "status": "valid",
+ *      "activation_limit": "10",
+ *      "activation_hash": "d6fb7f0ed19237f49639ff7c93f5c501",
+ *      "activations_count": 0,
+ *      "license_key": "v2-...",
+ *      "expiration_date": "2027-03-01 08:29:13",
+ *      "product_id": "14",
+ *      "variation_id": "3",
+ *      "variation_title": "10 domains",
+ *      "product_title": "Gato AI Translations for Polylang",
+ *      "created_at": {
+ *          "date": "2026-03-01 08:29:18.000000",
+ *          "timezone_type": 3,
+ *          "timezone": "UTC"
+ *      },
+ *      "updated_at": {
+ *          "date": "2026-03-01 08:30:18.000000",
+ *          "timezone_type": 3,
+ *          "timezone": "UTC"
+ *      },
+ *      "success": true
+ *  }
+ * ```
+ * 
+ * - Activation failed ("https://store.gatoplugins.com?fluent-cart=activate_license"):
+ * 
+ * ```json
+ *  {
+ *      "message": "License not found",
+ *      "error_type": "license_not_found",
+ *      "success": false
+ *  }
+ * ```
+ * 
+ * - Deactivation successful ("https://store.gatoplugins.com?fluent-cart=deactivate_license"):
+ * 
+ * ```json
+ * {
+ *     "status": "deactivated",
+ *     "activation_limit": "10",
+ *     "activations_count": 0,
+ *     "expiration_date": "2027-03-01 08:29:13",
+ *     "product_id": "14",
+ *     "variation_id": "3",
+ *     "product_title": "Gato AI Translations for Polylang",
+ *     "variation_title": "10 domains",
+ *     "created_at": {
+ *         "date": "2026-03-01 08:29:18.000000",
+ *         "timezone_type": 3,
+ *         "timezone": "UTC"
+ *     },
+ *     "updated_at": {
+ *         "date": "2026-03-01 08:30:18.000000",
+ *         "timezone_type": 3,
+ *         "timezone": "UTC"
+ *     },
+ *     "success": true
+ * }
+ * ```
+ * 
+ * - License check ("https://store.gatoplugins.com?fluent-cart=check_license")
+ *
+ * ```json
+ * 
+ *    "status": "valid",
+ *    "activation_limit": "10",
+ *    "activation_hash": "6f4409896201278f7c305584d06edc1d",
+ *    "activations_count": "0",
+ *    "license_key": "v2-...",
+ *    "expiration_date": "2027-03-01 08:29:13",
+ *    "product_id": "14",
+ *    "variation_id": "3",
+ *    "variation_title": "10 domains",
+ *    "product_title": "Gato AI Translations for Polylang",
+ *    "created_at": {
+ *        "date": "2026-03-01 08:29:18.000000",
+ *        "timezone_type": 3,
+ *        "timezone": "UTC"
+ *    },
+ *    "updated_at": {
+ *        "date": "2026-03-01 08:30:18.000000",
+ *        "timezone_type": 3,
+ *        "timezone": "UTC"
+ *    },
+ *    "success": true
+ * 
+ * ```
  */
 class FluentCartCommercialExtensionActivationService extends AbstractMarketplaceProviderCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
