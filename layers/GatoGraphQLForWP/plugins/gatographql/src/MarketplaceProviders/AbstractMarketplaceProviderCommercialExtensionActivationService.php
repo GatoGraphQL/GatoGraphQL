@@ -207,11 +207,11 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
     /**
      * @param array<string,mixed> $body
      */
-    abstract protected function getCustomerNameFromResponseBody(array $body): string;
+    abstract protected function getCustomerNameFromResponseBody(array $body): ?string;
 
     /**
      * @param array<string,mixed> $body
      */
-    abstract protected function getCustomerEmailFromResponseBody(array $body): string;
+    abstract protected function getCustomerEmailFromResponseBody(array $body): ?string;
 }
 

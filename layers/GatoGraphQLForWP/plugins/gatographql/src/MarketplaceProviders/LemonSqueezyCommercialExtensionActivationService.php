@@ -256,7 +256,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
     /**
      * @param array<string,mixed> $body
      */
-    protected function getCustomerNameFromResponseBody(array $body): string
+    protected function getCustomerNameFromResponseBody(array $body): ?string
     {
         /** @var string */
         $customerName = $body['meta']['customer_name'];
@@ -266,7 +266,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
     /**
      * @param array<string,mixed> $body
      */
-    protected function getCustomerEmailFromResponseBody(array $body): string
+    protected function getCustomerEmailFromResponseBody(array $body): ?string
     {
         /** @var string */
         $customerEmail = $body['meta']['customer_email'];

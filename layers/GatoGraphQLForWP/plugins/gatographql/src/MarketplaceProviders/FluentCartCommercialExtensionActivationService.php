@@ -330,16 +330,16 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     /**
      * @param array<string,mixed> $body
      */
-    protected function getCustomerNameFromResponseBody(array $body): string
+    protected function getCustomerNameFromResponseBody(array $body): ?string
     {
-        return (string) ($body['customer_name'] ?? '');
+        return null;
     }
 
     /**
      * @param array<string,mixed> $body
      */
-    protected function getCustomerEmailFromResponseBody(array $body): string
+    protected function getCustomerEmailFromResponseBody(array $body): ?string
     {
-        return (string) ($body['customer_email'] ?? '');
+        return null;
     }
 }
