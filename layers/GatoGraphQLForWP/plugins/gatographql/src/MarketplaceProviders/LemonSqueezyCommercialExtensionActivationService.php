@@ -256,6 +256,14 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
     /**
      * @param array<string,mixed> $body
      */
+    protected function getProductIDFromResponseBody(array $body): string|int|null
+    {
+        return null;
+    }
+
+    /**
+     * @param array<string,mixed> $body
+     */
     protected function getCustomerNameFromResponseBody(array $body): ?string
     {
         /** @var string */

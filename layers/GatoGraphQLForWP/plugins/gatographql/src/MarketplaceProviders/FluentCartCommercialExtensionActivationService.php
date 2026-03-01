@@ -330,6 +330,14 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     /**
      * @param array<string,mixed> $body
      */
+    protected function getProductIDFromResponseBody(array $body): string|int|null
+    {
+        return $body['product_id'] ?? null;
+    }
+
+    /**
+     * @param array<string,mixed> $body
+     */
     protected function getCustomerNameFromResponseBody(array $body): ?string
     {
         return null;

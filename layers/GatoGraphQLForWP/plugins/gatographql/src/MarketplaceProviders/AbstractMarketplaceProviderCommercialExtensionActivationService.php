@@ -135,6 +135,7 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
         $activationLimit = $this->getActivationLimitFromResponseBody($body);
 
         $productName = $this->getProductNameFromResponseBody($body);
+        $productID = $this->getProductIDFromResponseBody($body);
         $customerName = $this->getCustomerNameFromResponseBody($body);
         $customerEmail = $this->getCustomerEmailFromResponseBody($body);
 
@@ -147,6 +148,7 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
             $activationUsage,
             $activationLimit,
             $productName,
+            $productID,
             $customerName,
             $customerEmail,
         );
@@ -203,6 +205,11 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
      * @param array<string,mixed> $body
      */
     abstract protected function getProductNameFromResponseBody(array $body): string;
+
+    /**
+     * @param array<string,mixed> $body
+     */
+    abstract protected function getProductIDFromResponseBody(array $body): string|int|null;
 
     /**
      * @param array<string,mixed> $body

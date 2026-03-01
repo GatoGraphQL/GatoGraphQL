@@ -451,6 +451,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
              * @see `assertCommercialLicenseHasBeenActivated` in class `ExtensionManager`
              */
             LicenseProperties::PRODUCT_NAME => $commercialExtensionActivatedLicenseObjectProperties->productName,
+            LicenseProperties::PRODUCT_ID => $commercialExtensionActivatedLicenseObjectProperties->productID,
             /**
              * The customer name and email are stored as to pre-populate
              * the "Support" form
