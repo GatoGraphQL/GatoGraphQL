@@ -9,8 +9,6 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulExcept
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
 
-use function wp_remote_retrieve_response_code;
-
 /**
  * Based on code from FluentCart's `FluentLicensing` class.
  *
@@ -269,11 +267,6 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      */
     protected function getErrorFromResponseBody(array $body, array $response): ?string
     {
-        $responseCode = wp_remote_retrieve_response_code($response);
-        if ($responseCode === 200) {
-            return null;
-        }
-
         if (empty($body['error_type'])) {
             return null;
         }
