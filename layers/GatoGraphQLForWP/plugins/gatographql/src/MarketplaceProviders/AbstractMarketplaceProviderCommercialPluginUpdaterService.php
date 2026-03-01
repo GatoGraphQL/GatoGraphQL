@@ -129,7 +129,9 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         $result       = $remote->update;
         $result->name = $pluginData->pluginName;
         $result->slug = $pluginData->pluginSlug;
-        $result->sections = (array) $result->sections;
+        $result->sections = (array) ($result->sections ?? []);
+        $result->banners  = (array) ($result->banners ?? []);
+        $result->icons    = (array) ($result->icons ?? []);
 
         return $result;
     }
@@ -224,7 +226,14 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 $res->new_version = $remote->update->version;
                 $res->package     = $remote->update->download_link;
 
-                $properties = ['sections', 'banners', 'icons'];
+                $properties = ['slug', 'tested', 'requires_php', 'compatibility'];
+                foreach ($properties as $property) {
+                    if (isset($remote->update->$property)) {
+                        $res->$property = $remote->update->$property;
+                    }
+                }
+
+                $properties = ['sections', 'banners', 'banners_rtl', 'icons'];
                 foreach ($properties as $property) {
                     if (isset($remote->update->$property)) {
                         $res->$property = (array) $remote->update->$property;
