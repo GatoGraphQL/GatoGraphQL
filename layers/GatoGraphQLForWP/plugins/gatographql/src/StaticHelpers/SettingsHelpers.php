@@ -38,6 +38,7 @@ class SettingsHelpers
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::ACTIVATION_USAGE],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::ACTIVATION_LIMIT],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME],
+                    $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_ID],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::CUSTOMER_NAME],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::CUSTOMER_EMAIL],
                 );
