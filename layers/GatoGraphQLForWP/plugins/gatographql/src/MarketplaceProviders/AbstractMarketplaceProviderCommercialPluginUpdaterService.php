@@ -133,6 +133,9 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         $result->banners  = (array) ($result->banners ?? []);
         $result->icons    = (array) ($result->icons ?? []);
 
+        // Set/Override the homepage URL
+        $result->homepage = $pluginData->pluginChangelogURL;
+
         return $result;
     }
 
