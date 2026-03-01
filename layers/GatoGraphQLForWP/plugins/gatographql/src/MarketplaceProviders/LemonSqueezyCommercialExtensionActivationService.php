@@ -188,8 +188,9 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
 
     /**
      * @param array<string,mixed> $body
+     * @param array<string,mixed> $response
      */
-    protected function getErrorFromResponseBody(array $body): ?string
+    protected function getErrorFromResponseBody(array $body, array $response): ?string
     {
         /** @var string|null */
         $error = $body['error'] ?? null;

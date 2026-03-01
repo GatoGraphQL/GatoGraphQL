@@ -134,28 +134,6 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     }
 
     /**
-     * FluentCart returns non-200 only on actual errors
-     * (unlike LemonSqueezy which can return 400 with useful data).
-     *
-     * @param array<string,mixed>|WP_Error $response
-     * @throws HTTPRequestNotSuccessfulException
-     */
-    protected function validateResponseStatusCode(array|WP_Error $response): void
-    {
-        $responseCode = wp_remote_retrieve_response_code($response);
-        if ($responseCode === 200) {
-            return;
-        }
-
-        $body = wp_remote_retrieve_body($response);
-        $decoded = json_decode($body, true);
-        $message = is_array($decoded) && !empty($decoded['message'])
-            ? (string) $decoded['message']
-            : wp_remote_retrieve_response_message($response);
-        throw new HTTPRequestNotSuccessfulException($message);
-    }
-
-    /**
      * FluentCart uses 'valid' for active licenses.
      */
     protected function convertStatus(string $status): string
@@ -184,12 +162,19 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      * FluentCart returns errors via `error_type` + `message`.
      *
      * @param array<string,mixed> $body
+     * @param array<string,mixed> $response
      */
-    protected function getErrorFromResponseBody(array $body): ?string
+    protected function getErrorFromResponseBody(array $body, array $response): ?string
     {
+        $responseCode = wp_remote_retrieve_response_code($response);
+        if ($responseCode === 200) {
+            return null;
+        }
+
         if (empty($body['error_type'])) {
             return null;
         }
+
         /** @var string */
         $message = $body['message'] ?? $this->__('Unknown error', 'gatographql');
         return $message;

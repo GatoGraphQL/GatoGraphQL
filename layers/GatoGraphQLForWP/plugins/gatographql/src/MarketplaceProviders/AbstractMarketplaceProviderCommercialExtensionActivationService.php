@@ -44,8 +44,6 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
             throw new HTTPRequestNotSuccessfulException($response->get_error_message());
         }
 
-        $this->validateResponseStatusCode($response);
-
         /** @var array<string,mixed> $body */
         $body = json_decode($response['body'], true);
 
@@ -55,7 +53,7 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
          * but this may also produce an error in the Marketplace Provider.
          */
         $status = $this->getLicenseStatusFromResponseBody($body);
-        $error = $this->getErrorFromResponseBody($body);
+        $error = $this->getErrorFromResponseBody($body, $response);
         if ($status === null) {
             throw new LicenseOperationNotSuccessfulException($error ?? $this->__('Unknown error', 'gatographql'));
         }
@@ -172,8 +170,9 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
 
     /**
      * @param array<string,mixed> $body
+     * @param array<string,mixed> $response
      */
-    abstract protected function getErrorFromResponseBody(array $body): ?string;
+    abstract protected function getErrorFromResponseBody(array $body, array $response): ?string;
 
     /**
      * @param array<string,mixed> $body
@@ -214,18 +213,5 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
      * @param array<string,mixed> $body
      */
     abstract protected function getCustomerEmailFromResponseBody(array $body): string;
-
-    /**
-     * Override to validate the HTTP response status code.
-     *
-     * By default, the check is skipped because some providers (e.g. LemonSqueezy)
-     * return non-200 responses with useful error data in the body.
-     *
-     * @param array<string,mixed>|WP_Error $response
-     * @throws HTTPRequestNotSuccessfulException
-     */
-    protected function validateResponseStatusCode(array|WP_Error $response): void
-    {
-    }
 }
 
