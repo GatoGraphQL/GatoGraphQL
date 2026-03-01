@@ -232,7 +232,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      */
     protected function getActivationUsageFromResponseBody(array $body): int
     {
-        return (int) ($body['activation_usage'] ?? 0);
+        return (int) ($body['activations_count'] ?? 0);
     }
 
     /**
@@ -248,7 +248,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
      */
     protected function getProductNameFromResponseBody(array $body): string
     {
-        return (string) ($body['variation_title'] ?? $body['product_name'] ?? '');
+        return (string) ($body['product_title'] ?? '');
     }
 
     /**
