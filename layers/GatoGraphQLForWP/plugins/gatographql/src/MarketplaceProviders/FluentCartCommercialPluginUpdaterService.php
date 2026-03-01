@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\MarketplaceVersion;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
 use GatoGraphQL\GatoGraphQL\MarketplaceProviders\AbstractMarketplaceProviderCommercialPluginUpdaterService;
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\MarketplaceVersion;
+use stdClass;
 use WP_Error;
 
 use function wp_remote_get;
@@ -43,5 +44,21 @@ class FluentCartCommercialPluginUpdaterService extends AbstractMarketplaceProvid
             'timeout'   => 15,
             'body'      => $payload
         ]);
+    }
+
+    protected function maybeAdaptPayload(string $payload): string
+    {
+        $decodedPayload = json_decode($payload);
+        if ($decodedPayload instanceof stdClass && isset($decodedPayload->new_version)) {
+            $adaptedResponse = new stdClass();
+            $adaptedResponse->success = true;
+            $adaptedResponse->error = '';
+            $adaptedResponse->error_code = '';
+            $adaptedResponse->update = $decodedPayload;
+            $adaptedResponse->update->version = $decodedPayload->new_version ?? '';
+            $decodedPayload = $adaptedResponse;
+            $payload = json_encode($decodedPayload);
+        }
+        return $payload;
     }
 }

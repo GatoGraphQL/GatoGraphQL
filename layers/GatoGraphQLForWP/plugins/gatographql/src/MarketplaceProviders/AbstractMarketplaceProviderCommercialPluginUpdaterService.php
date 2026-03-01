@@ -9,8 +9,8 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
-use WP_Upgrader;
 use WP_Error;
+use WP_Upgrader;
 
 use function add_action;
 use function add_filter;
@@ -160,8 +160,17 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         }
 
         $payload = wp_remote_retrieve_body($remote);
+
+        // Allow the Marketplace provider to adapt the payload
+        $payload = $this->maybeAdaptPayload($payload);
+
         set_transient($pluginData->cacheKey, $payload, DAY_IN_SECONDS);
         return json_decode($payload);
+    }
+
+    protected function maybeAdaptPayload(string $payload): string
+    {
+        return $payload;
     }
 
     /**
