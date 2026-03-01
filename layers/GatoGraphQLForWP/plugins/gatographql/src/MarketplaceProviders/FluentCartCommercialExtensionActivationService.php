@@ -8,11 +8,8 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
-use WP_Error;
 
-use function wp_remote_retrieve_body;
 use function wp_remote_retrieve_response_code;
-use function wp_remote_retrieve_response_message;
 
 /**
  * Based on code from FluentCart's `FluentLicensing` class.
