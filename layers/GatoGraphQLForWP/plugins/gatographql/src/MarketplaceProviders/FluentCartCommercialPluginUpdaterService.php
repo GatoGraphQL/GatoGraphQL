@@ -16,7 +16,7 @@ use WP_Error;
  * @see wp-content/plugins/fluent-cart-pro/app/Services/PluginManager/PluginUpdater.php
  *
  * Response by FluentCart API:
- * 
+ *
  * ```json
  * {
  *     "new_version": "16.1.0",

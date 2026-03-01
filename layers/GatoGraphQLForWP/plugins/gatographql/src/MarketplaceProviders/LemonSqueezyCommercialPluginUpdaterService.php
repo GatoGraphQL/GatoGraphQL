@@ -16,7 +16,7 @@ use function wp_remote_get;
  * @see https://github.com/Make-Lemonade/lemonsqueezy-wp-updater-example/blob/7c0c71876309939b07d96e270f4db8568f3148cb/includes/class-plugin-updater.php
  *
  * Response by LemonSqueezy API:
- * 
+ *
  * ```json
  * {
  *     "success": true,

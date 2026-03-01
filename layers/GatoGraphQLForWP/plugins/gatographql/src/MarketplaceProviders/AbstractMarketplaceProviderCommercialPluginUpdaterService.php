@@ -83,6 +83,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 $activeExtensionData->baseName,
                 $activeExtensionData->version,
                 $activeExtensionData->changelogURL,
+                $activeExtensionData->homepageURL,
                 $activeExtensionData->marketplaceProductIDs,
                 $pluginLicenseKey,
                 str_replace('-', '_', $pluginSlug) . '_updater',
@@ -134,7 +135,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         $result->icons    = (array) ($result->icons ?? []);
 
         // Set/Override the homepage URL
-        $result->homepage = $pluginData->pluginChangelogURL;
+        $result->homepage = $pluginData->pluginHomepageURL;
 
         return $result;
     }
