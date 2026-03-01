@@ -11,4 +11,4 @@
 
 ### Fixed
 
-- Show new version updates when clicking on the Show details link in Plugin updates ([#0be1eb0](https://github.com/GatoGraphQL/GatoGraphQL/commit/0be1eb027ceffbf5f38fe725d398b340b495a3ce))
+- Extensions: Show new version updates when clicking on the Show details link in Plugin updates ([#0be1eb0](https://github.com/GatoGraphQL/GatoGraphQL/commit/0be1eb027ceffbf5f38fe725d398b340b495a3ce))
