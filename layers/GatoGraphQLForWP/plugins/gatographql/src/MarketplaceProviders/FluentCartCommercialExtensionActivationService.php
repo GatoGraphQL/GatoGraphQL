@@ -218,7 +218,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
         $marketplaceProductID = $extensionData?->marketplaceProductIDs[$this->getMarketplaceVersion()] ?? null;
         return [
             'item_id'         => $marketplaceProductID,
-            'current_version' => $extensionData?->version ?? '',
+            'current_version' => $extensionData->version ?? '',
             'site_url'        => home_url(),
         ];
     }

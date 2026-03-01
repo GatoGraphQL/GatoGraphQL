@@ -34,7 +34,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      */
     protected function getInstanceName(?ActiveLicenseCommercialExtensionData $extensionData): string
     {
-        $extensionSlug = $extensionData?->slug ?? '';
+        $extensionSlug = $extensionData->slug ?? '';
         return sprintf('%s (%s)', $this->getSiteDomain(), $extensionSlug);
     }
 

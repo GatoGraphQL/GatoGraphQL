@@ -56,6 +56,9 @@ class FluentCartCommercialPluginUpdaterService extends AbstractMarketplaceProvid
             $adaptedResponse->update->version = $decodedPayload->new_version ?? '';
             $decodedPayload = $adaptedResponse;
             $payload = json_encode($decodedPayload);
+            if ($payload === false) {
+                return '';
+            }
         }
         return $payload;
     }
