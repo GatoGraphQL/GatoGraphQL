@@ -82,7 +82,7 @@ use function wp_remote_retrieve_response_code;
  * }
  * ```
  * 
- * - License check ("https://store.gatoplugins.com?fluent-cart=check_license")
+ * - License check successful ("https://store.gatoplugins.com?fluent-cart=check_license")
  *
  * ```json
  * 
@@ -108,6 +108,17 @@ use function wp_remote_retrieve_response_code;
  *    },
  *    "success": true
  * 
+ * ```
+ * 
+ * - License check failed ("https://store.gatoplugins.com?fluent-cart=check_license")
+ * 
+ * ```json
+ *  {
+ *      "status": "invalid",
+ *      "error_type": "invalid_activation",
+ *      "message": "License activation could not be found",
+ *      "success": true
+ *  }
  * ```
  */
 class FluentCartCommercialExtensionActivationService extends AbstractMarketplaceProviderCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
