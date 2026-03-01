@@ -30,6 +30,9 @@ class LicenseProperties
     /** The name of the product for the license */
     public final const PRODUCT_NAME = 'productName';
 
+    /** The ID of the product in the marketplace provider */
+    public final const PRODUCT_ID = 'productID';
+
     /** The name of the customer who purchased for the license */
     public final const CUSTOMER_NAME = 'customerName';
 

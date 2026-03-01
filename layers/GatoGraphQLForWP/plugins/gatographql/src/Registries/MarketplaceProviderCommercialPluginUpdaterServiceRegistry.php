@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Registries;
 
 use GatoGraphQL\GatoGraphQL\MarketplaceProviders\MarketplaceProviderCommercialPluginUpdaterServiceInterface;
-use RuntimeException;
 
-use function sprintf;
 use function usort;
 
 class MarketplaceProviderCommercialPluginUpdaterServiceRegistry implements MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface
@@ -26,33 +24,18 @@ class MarketplaceProviderCommercialPluginUpdaterServiceRegistry implements Marke
     /**
      * @return MarketplaceProviderCommercialPluginUpdaterServiceInterface[]
      */
-    public function getMarketplaceProviderCommercialPluginUpdaterServices(): array
+    public function getMarketplaceProviderCommercialPluginUpdaterServices(bool $sortByPriority = true): array
     {
         $services = $this->marketplaceProviderCommercialPluginUpdaterServices;
-        usort(
-            $services,
-            static fn (
-                MarketplaceProviderCommercialPluginUpdaterServiceInterface $a,
-                MarketplaceProviderCommercialPluginUpdaterServiceInterface $b
-            ): int => $a->getPriority() <=> $b->getPriority()
-        );
-        return $services;
-    }
-
-    public function getMarketplaceProviderCommercialPluginUpdaterServiceForLicense(
-        string $licenseKey
-    ): MarketplaceProviderCommercialPluginUpdaterServiceInterface {
-        $services = $this->getMarketplaceProviderCommercialPluginUpdaterServices();
-
-        foreach ($services as $service) {
-            if ($service->canProcessLicense($licenseKey)) {
-                return $service;
-            }
+        if ($sortByPriority) {
+            usort(
+                $services,
+                static fn (
+                    MarketplaceProviderCommercialPluginUpdaterServiceInterface $a,
+                    MarketplaceProviderCommercialPluginUpdaterServiceInterface $b
+                ): int => $a->getPriority() <=> $b->getPriority()
+            );
         }
-
-        throw new RuntimeException(sprintf(
-            'No MarketplaceProviderCommercialPluginUpdaterService is registered to process license "%s"',
-            $licenseKey
-        ));
+        return $services;
     }
 }

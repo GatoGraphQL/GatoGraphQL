@@ -9,8 +9,8 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
-use WP_Upgrader;
 use WP_Error;
+use WP_Upgrader;
 
 use function add_action;
 use function add_filter;
@@ -83,6 +83,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 $activeExtensionData->baseName,
                 $activeExtensionData->version,
                 $activeExtensionData->changelogURL,
+                $activeExtensionData->marketplaceProductIDs,
                 $pluginLicenseKey,
                 str_replace('-', '_', $pluginSlug) . '_updater',
             );
@@ -92,8 +93,6 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         add_filter('site_transient_update_plugins', $this->overridePluginUpdate(...));
         add_action('upgrader_process_complete', $this->overridePluginPurge(...), 10, 2);
     }
-
-    abstract protected function providePluginUpdatesAPIURL(string $pluginUpdatesServerURL): string;
 
     /**
      * Override the WordPress request to return the correct plugin info.
@@ -130,7 +129,12 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         $result       = $remote->update;
         $result->name = $pluginData->pluginName;
         $result->slug = $pluginData->pluginSlug;
-        $result->sections = (array) $result->sections;
+        $result->sections = (array) ($result->sections ?? []);
+        $result->banners  = (array) ($result->banners ?? []);
+        $result->icons    = (array) ($result->icons ?? []);
+
+        // Set/Override the homepage URL
+        $result->homepage = $pluginData->pluginChangelogURL;
 
         return $result;
     }
@@ -161,8 +165,17 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         }
 
         $payload = wp_remote_retrieve_body($remote);
+
+        // Allow the Marketplace provider to adapt the payload
+        $payload = $this->maybeAdaptPayload($payload);
+
         set_transient($pluginData->cacheKey, $payload, DAY_IN_SECONDS);
         return json_decode($payload);
+    }
+
+    protected function maybeAdaptPayload(string $payload): string
+    {
+        return $payload;
     }
 
     /**
@@ -215,6 +228,20 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
             ) {
                 $res->new_version = $remote->update->version;
                 $res->package     = $remote->update->download_link;
+
+                $properties = ['slug', 'tested', 'requires_php', 'compatibility'];
+                foreach ($properties as $property) {
+                    if (isset($remote->update->$property)) {
+                        $res->$property = $remote->update->$property;
+                    }
+                }
+
+                $properties = ['sections', 'banners', 'banners_rtl', 'icons'];
+                foreach ($properties as $property) {
+                    if (isset($remote->update->$property)) {
+                        $res->$property = (array) $remote->update->$property;
+                    }
+                }
 
                 $transient->response ??= [];
                 $transient->response[$res->plugin] = $res;

@@ -38,6 +38,7 @@ class SettingsHelpers
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::ACTIVATION_USAGE],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::ACTIVATION_LIMIT],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME],
+                    $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_ID] ?? null, // nullable because V1-LemonSqueezy does not provide this value, and that JSON is already stored in the DB
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::CUSTOMER_NAME],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::CUSTOMER_EMAIL],
                 );

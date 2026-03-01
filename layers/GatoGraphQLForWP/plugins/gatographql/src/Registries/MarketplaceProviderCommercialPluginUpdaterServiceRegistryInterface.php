@@ -15,9 +15,5 @@ interface MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface
     /**
      * @return MarketplaceProviderCommercialPluginUpdaterServiceInterface[]
      */
-    public function getMarketplaceProviderCommercialPluginUpdaterServices(): array;
-
-    public function getMarketplaceProviderCommercialPluginUpdaterServiceForLicense(
-        string $licenseKey
-    ): MarketplaceProviderCommercialPluginUpdaterServiceInterface;
+    public function getMarketplaceProviderCommercialPluginUpdaterServices(bool $sortByPriority = true): array;
 }

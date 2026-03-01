@@ -741,7 +741,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      */
     protected function source_block_children(Crawler $crawler, array $block_attribute_definition): ?array
     {
-        // 'children' attribute usage was removed from core in 2018, but not officically deprecated until WordPress 6.1:
+        // 'children' attribute usage was removed from core in 2018, but not officially deprecated until WordPress 6.1:
         // https://github.com/WordPress/gutenberg/pull/44265
         // Parsing code for 'children' sources can be found here:
         // https://github.com/WordPress/gutenberg/blob/dd0504b/packages/blocks/src/api/children.js#L149
@@ -793,7 +793,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      */
     protected function source_block_node(Crawler $crawler, array $block_attribute_definition): array|string|null
     {
-        // 'node' attribute usage was removed from core in 2018, but not officically deprecated until WordPress 6.1:
+        // 'node' attribute usage was removed from core in 2018, but not officially deprecated until WordPress 6.1:
         // https://github.com/WordPress/gutenberg/pull/44265
         // Parsing code for 'node' sources can be found here:
         // https://github.com/WordPress/gutenberg/blob/dd0504bd34c29b5b2824d82c8d2bb3a8d0f071ec/packages/blocks/src/api/node.js#L125

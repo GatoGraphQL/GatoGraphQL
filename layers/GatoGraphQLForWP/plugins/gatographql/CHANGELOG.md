@@ -17,10 +17,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Support multiple e-commerce providers to validate plugin license (#3271)
+- Validate plugin license against Gato's new FluentCart-powered shop (#3278)
 
 ### Fixed
 
-(No entries yet)
+- Extensions: Show new version updates when clicking on the Show details link in Plugin updates (#0be1eb0)
 
 ## 16.1.0 - 13/02/2026
 

@@ -5,26 +5,22 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\MarketplaceVersion;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\MarketplaceLicensePrefixes;
 
-trait LemonSqueezyMarketplaceProviderServiceTrait
+trait FluentCartMarketplaceProviderServiceTrait
 {
     public function getPriority(): int
     {
-        return PHP_INT_MAX;
+        return 100;
     }
 
-    /**
-     * LemonSqueezy is the legacy marketplace provider,
-     * so if no other provider can process the license,
-     * then we can process it.
-     */
     public function canProcessLicense(string $licenseKey): bool
     {
-        return true;
+        return str_starts_with($licenseKey, MarketplaceLicensePrefixes::V2_FLUENTCART);
     }
 
     public function getMarketplaceVersion(): string
     {
-        return MarketplaceVersion::V1_LEMONSQUEEZY;
+        return MarketplaceVersion::V2_FLUENTCART;
     }
 }

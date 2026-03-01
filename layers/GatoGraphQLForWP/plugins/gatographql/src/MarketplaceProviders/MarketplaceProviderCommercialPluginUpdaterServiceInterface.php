@@ -15,4 +15,6 @@ interface MarketplaceProviderCommercialPluginUpdaterServiceInterface extends Com
     public function getPriority(): int;
 
     public function canProcessLicense(string $licenseKey): bool;
+
+    public function getMarketplaceVersion(): string;
 }

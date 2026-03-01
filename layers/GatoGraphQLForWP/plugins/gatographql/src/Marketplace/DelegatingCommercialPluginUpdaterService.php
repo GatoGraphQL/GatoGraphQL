@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
-use GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\AbstractBasicService;
 
@@ -15,16 +14,16 @@ use PoP\Root\Services\AbstractBasicService;
  */
 class DelegatingCommercialPluginUpdaterService extends AbstractBasicService implements DelegatingCommercialPluginUpdaterServiceInterface
 {
-    private ?MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface $marketplaceProviderCommercialPluginUpdaterServiceRegistry = null;
+    private ?MarketplaceProviderManagerInterface $marketplaceProviderManager = null;
 
-    final protected function getMarketplaceProviderCommercialPluginUpdaterServiceRegistry(): MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface
+    final protected function getMarketplaceProviderManager(): MarketplaceProviderManagerInterface
     {
-        if ($this->marketplaceProviderCommercialPluginUpdaterServiceRegistry === null) {
-            /** @var MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface $registry */
-            $registry = $this->instanceManager->getInstance(MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface::class);
-            $this->marketplaceProviderCommercialPluginUpdaterServiceRegistry = $registry;
+        if ($this->marketplaceProviderManager === null) {
+            /** @var MarketplaceProviderManagerInterface $registry */
+            $registry = $this->instanceManager->getInstance(MarketplaceProviderManagerInterface::class);
+            $this->marketplaceProviderManager = $registry;
         }
-        return $this->marketplaceProviderCommercialPluginUpdaterServiceRegistry;
+        return $this->marketplaceProviderManager;
     }
 
     /**
@@ -39,20 +38,20 @@ class DelegatingCommercialPluginUpdaterService extends AbstractBasicService impl
             return;
         }
 
-        $marketplaceProviderCommercialPluginUpdaterServiceRegistry = $this->getMarketplaceProviderCommercialPluginUpdaterServiceRegistry();
+        $marketplaceProviderManager = $this->getMarketplaceProviderManager();
 
         $byProvider = [];
         foreach ($licenseKeys as $extensionSlug => $licenseKey) {
-            $provider = $marketplaceProviderCommercialPluginUpdaterServiceRegistry->getMarketplaceProviderCommercialPluginUpdaterServiceForLicense($licenseKey);
-            $key = $provider::class;
+            $marketplaceProvider = $marketplaceProviderManager->getMarketplaceProviderFromLicenseKey($licenseKey);
+            $key = $marketplaceProvider->getMarketplaceVersion();
             if (!isset($byProvider[$key])) {
-                $byProvider[$key] = ['provider' => $provider, 'licenseKeys' => []];
+                $byProvider[$key] = ['marketplaceProvider' => $marketplaceProvider, 'licenseKeys' => []];
             }
             $byProvider[$key]['licenseKeys'][$extensionSlug] = $licenseKey;
         }
 
-        foreach ($byProvider as ['provider' => $provider, 'licenseKeys' => $subset]) {
-            $provider->setupMarketplacePluginUpdaterForExtensions($subset);
+        foreach ($byProvider as ['marketplaceProvider' => $marketplaceProvider, 'licenseKeys' => $subset]) {
+            $marketplaceProvider->setupMarketplacePluginUpdaterForExtensions($subset);
         }
     }
 }
