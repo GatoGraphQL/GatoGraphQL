@@ -112,7 +112,7 @@ class GraphiQLClient extends AbstractGraphiQLClient
         foreach ($entrypoints as $assetPath) {
             $url = $buildBaseURL . (str_starts_with($assetPath, '/') ? $assetPath : '/' . $assetPath);
             if (str_contains($assetPath, '.css')) {
-                $cssLinks[] = '<link href="' . \esc_attr($url) . '" rel="stylesheet">';
+                $cssLinks[] = '<link href="' . \esc_attr($url) . '" rel="stylesheet">'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet
             } else {
                 $jsScripts[] = $url;
             }
@@ -135,7 +135,7 @@ class GraphiQLClient extends AbstractGraphiQLClient
         $html .= '</head><body><noscript>You need to enable JavaScript to run this app.</noscript>';
         $html .= '<div id="graphiql"></div>';
         foreach ($jsScripts as $src) {
-            $html .= '<script defer src="' . \esc_attr($src) . '"></script>';
+            $html .= '<script defer src="' . \esc_attr($src) . '"></script>'; // phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript
         }
         $html .= '</body></html>';
 
