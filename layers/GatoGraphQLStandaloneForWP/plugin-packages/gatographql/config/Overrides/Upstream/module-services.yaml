@@ -7,9 +7,6 @@ services:
     GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver:
         class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\ClientFunctionalityModuleResolver
 
-    GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver:
-        class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver
-
     GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver:
         class: \GatoGraphQLStandalone\GatoGraphQL\Overrides\Upstream\ModuleResolvers\EndpointConfigurationFunctionalityModuleResolver
 

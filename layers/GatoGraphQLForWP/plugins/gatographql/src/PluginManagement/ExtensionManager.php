@@ -382,6 +382,8 @@ class ExtensionManager extends AbstractPluginManager
             $extensionBaseName,
             $extensionVersion,
             $options[ExtensionDataOptions::CHANGELOG_URL] ?? '',
+            $options[ExtensionDataOptions::HOMEPAGE_URL] ?? '',
+            $options[ExtensionDataOptions::MARKETPLACE_PRODUCT_IDS] ?? [],
         );
 
         /**
@@ -519,6 +521,17 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
+     * @return array<string,ActiveLicenseCommercialExtensionData> Extension Slug => ActiveLicenseCommercialExtensionData
+     */
+    public function getAllLicenseCommercialExtensionSlugDataEntries(): array
+    {
+        return array_merge(
+            $this->getNonActivatedLicenseCommercialExtensionSlugDataEntries(),
+            $this->getActivatedLicenseCommercialExtensionSlugDataEntries()
+        );
+    }
+
+    /**
      * Call this method only after calling `assertCommercialLicenseHasBeenActivated`
      */
     public function isExtensionLicenseActive(string $extensionSlug): bool
@@ -534,10 +547,7 @@ class ExtensionManager extends AbstractPluginManager
         if ($this->commercialExtensionSlugProductNames === null) {
             $this->commercialExtensionSlugProductNames = array_map(
                 fn (ActiveLicenseCommercialExtensionData $extensionData) => $extensionData->productName,
-                array_merge(
-                    $this->getNonActivatedLicenseCommercialExtensionSlugDataEntries(),
-                    $this->getActivatedLicenseCommercialExtensionSlugDataEntries()
-                ),
+                $this->getAllLicenseCommercialExtensionSlugDataEntries(),
             );
             ksort($this->commercialExtensionSlugProductNames);
         }

@@ -4,6 +4,21 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 17.0.0 - 03/03/2026
+
+### Breaking changes
+
+- Update GraphiQL to v5 (#3270)
+
+### Improvements
+
+- Support multiple e-commerce providers to validate plugin license (#3271)
+- Validate plugin license against Gato's new FluentCart-powered shop (#3278)
+
+### Fixed
+
+- Extensions: Show new version updates when clicking on the Show details link in Plugin updates (#0be1eb0)
+
 ## 16.1.0 - 13/02/2026
 
 ### Added

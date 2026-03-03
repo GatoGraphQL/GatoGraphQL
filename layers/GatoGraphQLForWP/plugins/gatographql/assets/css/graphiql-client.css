@@ -14,25 +14,3 @@
         margin-left: -20px;
     }
 }
-/**
- * The spinner in the WP Admin and in GraphiQL have both class "spinner", so they conflict,
- * and the GraphiQL spinner is not visible.
- * To fix it, undo all the .spinner WP Admin styles for within the GraphiQL container
- */
- .graphiql-container .spinner {
-    background: none;
-    visibility: visible;
-    float: none;
-    opacity: initial;
-    filter: initial;
-    margin: initial;
-}
-/**
- * Checkboxes in the GraphiQL Explorer are clipped,
- * so move them a bit to the right
- *
- * @todo Remove when upgrading to GraphiQL v3
- */
-.graphiql-container .graphiql-explorer-node {
-    margin-left: 3px;
-}

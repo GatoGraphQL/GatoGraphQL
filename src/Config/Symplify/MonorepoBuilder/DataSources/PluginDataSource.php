@@ -37,6 +37,7 @@ class PluginDataSource
                     'block-helpers/\*',
                     'docs/images/\*',
                     'extensions/*/docs/images/\*',
+                    ...$this->getExcludeGraphiQLAppFiles(),
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
@@ -112,6 +113,23 @@ class PluginDataSource
         }
 
         return $pluginConfigEntries;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getExcludeGraphiQLAppFiles(): array
+    {
+        $placeholder = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/%s';
+        return [
+            sprintf($placeholder, 'package-lock.json'),
+            sprintf($placeholder, 'package.json'),
+            sprintf($placeholder, 'public/\*'),
+            sprintf($placeholder, 'src/\*'),
+            sprintf($placeholder, 'build/static/css/\*.css.map'),
+            sprintf($placeholder, 'build/static/js/\*.js.map'),
+            sprintf($placeholder, 'build/static/js/\*.LICENSE.txt'),
+        ];
     }
 
     protected function getExcludeJSBlockFilesPlaceholder(): string

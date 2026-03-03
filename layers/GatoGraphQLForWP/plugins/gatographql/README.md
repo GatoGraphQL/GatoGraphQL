@@ -48,7 +48,6 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 <tr><th colspan="2"><br/>Clients</th></tr>
 <tr><td><a href="docs/modules/graphiql-for-single-endpoint/en.md">GraphiQL for Single Endpoint</a></td><td>Make a public GraphiQL client available under <code>/graphiql/</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled</td></tr>
 <tr><td><a href="docs/modules/interactive-schema-for-single-endpoint/en.md">Interactive Schema for Single Endpoint</a></td><td>Make a public Interactive Schema client available under <code>/schema/</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled</td></tr>
-<tr><td><a href="docs/modules/graphiql-explorer/en.md">GraphiQL Explorer</a></td><td>Add the Explorer widget to the GraphiQL client, to simplify coding the query (by point-and-clicking on the fields)</td></tr>
 <tr><th colspan="2"><br/>Schema Type</th></tr>
 <tr><td><a href="docs/modules/schema-expose-sensitive-data/en.md">Expose Sensitive Data in the Schema</a></td><td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data</td></tr>
 <tr><td><a href="docs/modules/schema-self-fields/en.md">Self Fields</a></td><td>Expose "self" fields in the GraphQL schema (such as <code>Post.self</code> and <code>User.self</code>), which can help give a particular shape to the GraphQL response</td></tr>
@@ -172,7 +171,8 @@ composer fix-style
 
 ## Release notes
 
-- **[16.1](docs/release-notes/16.1/en.md)** (current)
+- **[17.0](docs/release-notes/17.0/en.md)** (current)
+- [16.1](docs/release-notes/16.1/en.md)
 - [16.0](docs/release-notes/16.0/en.md)
 - [15.3](docs/release-notes/15.3/en.md)
 - [15.2](docs/release-notes/15.2/en.md)

@@ -7,6 +7,9 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
+use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPModuleConfiguration;
+use PoP\Root\App;
 
 /**
  * GraphiQL page
@@ -98,40 +101,72 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         $mainPlugin = PluginApp::getMainPlugin();
         $mainPluginURL = $mainPlugin->getPluginURL();
         $mainPluginVersion = $mainPlugin->getPluginVersion();
+        $mainPluginPath = $mainPlugin->getPluginDir();
 
-        \wp_enqueue_style(
-            'gatographql-graphiql',
-            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.css',
-            array(),
-            $mainPluginVersion
-        );
+        $graphiqlAppBuildRelativePath = 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql-app/build';
+        $manifestPath = $mainPluginPath . '/' . $graphiqlAppBuildRelativePath . '/asset-manifest.json';
+        $buildBaseURL = $mainPluginURL . $graphiqlAppBuildRelativePath;
 
-        // JS: execute them all in the footer
-        $this->enqueueReactAssets(true);
+        $manifest = json_decode((string) file_get_contents($manifestPath), true);
+        $entrypoints = $manifest['entrypoints'] ?? array_values(array_intersect_key(
+            $manifest['files'] ?? [],
+            array_flip(['main.js', 'main.css'])
+        ));
 
-        \wp_enqueue_script(
-            'gatographql-graphiql',
-            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.js',
-            array('gatographql-react-dom'),
-            $mainPluginVersion,
-            true
-        );
-        \wp_enqueue_script(
-            'gatographql-graphiql-client',
-            $mainPluginURL . 'assets/js/graphiql-client.js',
-            array('gatographql-graphiql'),
-            $mainPluginVersion,
-            true
-        );
+        // Monaco worker chunk paths (graphiql/setup-workers: 5914=editor, 5997=json, 8378=graphql).
+        // Pass to the app so workers can be loaded with correct __webpack_public_path__ via fetch+blob.
+        $workerChunks = [];
+        $files = $manifest['files'] ?? [];
+        foreach (array_keys($files) as $key) {
+            if (preg_match('#^static/js/(5914|5997|8378)\.[a-f0-9]+\.chunk\.js$#', (string) $key, $m)) {
+                $workerChunks[(string) $m[1]] = $files[$key];
+            }
+        }
+        $buildBaseURL = rtrim($buildBaseURL, '/') . '/';
 
-        // Load data into the script
+        foreach ($entrypoints as $assetPath) {
+            $url = $buildBaseURL . (str_starts_with($assetPath, '/') ? $assetPath : '/' . $assetPath);
+            if (str_contains($assetPath, '.css')) {
+                \wp_enqueue_style(
+                    'gatographql-graphiql-app-css',
+                    $url,
+                    array(),
+                    $mainPluginVersion
+                );
+            } else {
+                \wp_enqueue_script(
+                    'gatographql-graphiql-app',
+                    $url,
+                    array(),
+                    $mainPluginVersion,
+                    true
+                );
+                // So chunk URLs resolve to the build folder (fixes 404s when plugin URL varies).
+                // Set __webpack_public_path__ before the bundle runs so the runtime uses it (not script dir).
+                \wp_add_inline_script(
+                    'gatographql-graphiql-app',
+                    'window.graphqlclientsforwpGraphiQLBuildURL="' . \esc_js($buildBaseURL) . '";'
+                    . 'var __webpack_public_path__=window.graphqlclientsforwpGraphiQLBuildURL;',
+                    'before'
+                );
+            }
+        }
+
+        /** @var GraphQLClientsForWPModuleConfiguration */
+        $graphQLClientsForWPModuleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
+
+        // Localize to the main script (last JS enqueued)
         \wp_localize_script(
-            'gatographql-graphiql-client',
+            'gatographql-graphiql-app',
             'graphQLByPoPGraphiQLSettings',
             array_merge(
                 [
-                    'defaultQuery' => $this->getDefaultQuery(),
+                    'defaultQuery' => $graphQLClientsForWPModuleConfiguration->printGraphiQLDefaultQuery()
+                        ? $this->getDefaultQuery()
+                        : '',
                     'endpoint' => $this->getEndpointHelpers()->getAdminGraphQLEndpoint(),
+                    'workerChunks' => $workerChunks,
+                    'buildBaseURL' => $buildBaseURL,
                 ],
                 $scriptSettings
             )

@@ -18,6 +18,9 @@ class LicenseStatus
     /** The license key has been manually disabled */
     public final const DISABLED = 'disabled';
 
+    /** The license key has not been registered/activated on this site */
+    public final const UNREGISTERED = 'unregistered';
+
     /** The license is "inactive", "disabled", or any other */
     public final const OTHER = 'other';
 }

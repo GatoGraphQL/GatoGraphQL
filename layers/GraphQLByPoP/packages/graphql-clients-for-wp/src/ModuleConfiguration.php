@@ -42,13 +42,13 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * Use the GraphiQL explorer?
+     * GraphiQL client endpoint, to be executed against the GraphQL single endpoint
      */
-    public function useGraphiQLExplorer(): bool
+    public function getGraphiQLClientEndpoint(): string
     {
-        $envVariable = Environment::USE_GRAPHIQL_EXPLORER;
-        $defaultValue = true;
-        $callback = EnvironmentValueHelpers::toBool(...);
+        $envVariable = Environment::GRAPHIQL_CLIENT_ENDPOINT;
+        $defaultValue = '/graphiql/';
+        $callback = EndpointUtils::slashURI(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -58,13 +58,13 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * GraphiQL client endpoint, to be executed against the GraphQL single endpoint
+     * Print a default query in the GraphiQL editor?
      */
-    public function getGraphiQLClientEndpoint(): string
+    public function printGraphiQLDefaultQuery(): bool
     {
-        $envVariable = Environment::GRAPHIQL_CLIENT_ENDPOINT;
-        $defaultValue = '/graphiql/';
-        $callback = EndpointUtils::slashURI(...);
+        $envVariable = Environment::PRINT_GRAPHIQL_DEFAULT_QUERY;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

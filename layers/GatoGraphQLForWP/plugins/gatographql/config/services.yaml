@@ -4,11 +4,14 @@ services:
         autowire: true
         autoconfigure: true
 
-    GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface:
-        class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialExtensionActivationService
+    GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistry
 
-    GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialPluginUpdaterServiceInterface:
-        class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialPluginUpdaterService
+    GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialPluginUpdaterServiceRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialPluginUpdaterServiceRegistry
+
+    GatoGraphQL\GatoGraphQL\Marketplace\DelegatingCommercialPluginUpdaterServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\Marketplace\DelegatingCommercialPluginUpdaterService
 
     GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface:
         class: \GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParser
@@ -34,6 +37,9 @@ services:
     GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationService
 
+    GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderManagerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderManager
+
     GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Request\PrematureRequestService
 
@@ -57,3 +63,6 @@ services:
 
     GatoGraphQL\GatoGraphQL\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
+
+    GatoGraphQL\GatoGraphQL\MarketplaceProviders\:
+        resource: '../src/MarketplaceProviders/*'

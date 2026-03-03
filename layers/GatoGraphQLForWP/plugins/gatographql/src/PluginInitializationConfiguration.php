@@ -11,7 +11,6 @@ use GatoGraphQL\GatoGraphQL\Facades\Instances\PluginOptionsFormHandlerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\MetaSchemaTypeModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\MutationSchemaTypeModuleResolver;
@@ -1096,11 +1095,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::DISABLE_VOYAGER_CLIENT_ENDPOINT,
                 'callback' => $this->opposite(...),
-            ],
-            [
-                'module' => DeprecatedClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                'class' => GraphQLClientsForWPModule::class,
-                'envVariable' => GraphQLClientsForWPEnvironment::USE_GRAPHIQL_EXPLORER,
             ],
         ];
     }
