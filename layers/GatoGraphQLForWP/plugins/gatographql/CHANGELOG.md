@@ -10,10 +10,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Update GraphiQL to v5 (#3270)
 
-### Added
-
-(No entries yet)
-
 ### Improvements
 
 - Support multiple e-commerce providers to validate plugin license (#3271)
