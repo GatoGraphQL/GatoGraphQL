@@ -6,7 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 17.1.0 - DATE
 
-### (placeholder for release notes)
+### Fixed
+
+- JetEngine: Fix missing images in docs (#3279)
 
 ## 17.0.0 - 03/03/2026
 

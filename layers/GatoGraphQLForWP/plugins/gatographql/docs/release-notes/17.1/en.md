@@ -1,3 +1,5 @@
 # Release Notes: 17.1
 
-(Content to be added.)
+### Fixed
+
+- JetEngine: Fix missing images in docs ([#3279](https://github.com/GatoGraphQL/GatoGraphQL/pull/3279))
