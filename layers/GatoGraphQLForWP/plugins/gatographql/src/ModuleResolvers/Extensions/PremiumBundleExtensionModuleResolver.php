@@ -128,6 +128,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::TRANSLATION => [
                 PremiumExtensionModuleResolver::CHATGPT_TRANSLATION,
                 PremiumExtensionModuleResolver::CLAUDE_TRANSLATION,
+                PremiumExtensionModuleResolver::CUSTOM_AI_TRANSLATION,
                 PremiumExtensionModuleResolver::DEEPL,
                 PremiumExtensionModuleResolver::DEEPSEEK_TRANSLATION,
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
