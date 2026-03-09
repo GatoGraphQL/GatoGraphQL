@@ -117,7 +117,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
                 PremiumExtensionModuleResolver::EVENTS_MANAGER,
             ],
             self::JETENGINE => [
-                PremiumExtensionModuleResolver::JETENGINE_CCTS,
+                PremiumExtensionModuleResolver::JETENGINE,
             ],
             self::MULTILINGUALPRESS => [
                 PremiumExtensionModuleResolver::MULTILINGUALPRESS,

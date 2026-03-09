@@ -223,7 +223,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
                 PremiumExtensionModuleResolver::ELEMENTOR,
                 PremiumExtensionModuleResolver::EVENTS_MANAGER,
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
-                PremiumExtensionModuleResolver::JETENGINE_CCTS,
+                PremiumExtensionModuleResolver::JETENGINE,
                 PremiumExtensionModuleResolver::MISTRALAI_TRANSLATION,
                 PremiumExtensionModuleResolver::MULTILINGUALPRESS,
                 PremiumExtensionModuleResolver::OPENROUTER_TRANSLATION,
