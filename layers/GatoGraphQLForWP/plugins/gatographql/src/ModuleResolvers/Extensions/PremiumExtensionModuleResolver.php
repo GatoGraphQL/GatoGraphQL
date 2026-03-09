@@ -64,7 +64,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::ELEMENTOR => \__('Elementor', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gatographql'),
-            self::JETENGINE_CCTS => \__('JetEngine Custom Content Types', 'gatographql'),
+            self::JETENGINE_CCTS => \__('JetEngine CCTs', 'gatographql'),
             self::MISTRALAI_TRANSLATION => \__('Mistral AI Translation', 'gatographql'),
             self::MULTILINGUALPRESS => \__('MultilingualPress', 'gatographql'),
             self::OPENROUTER_TRANSLATION => \__('OpenRouter Translation', 'gatographql'),

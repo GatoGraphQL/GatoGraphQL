@@ -1,4 +1,4 @@
-# JetEngine Custom Content Types (CCTs)
+# JetEngine CCTs
 
 Integration with Crocoblock's [JetEngine](https://crocoblock.com/plugins/jetengine/) plugin, to fetch [Custom Content Type (CCT)](https://crocoblock.com/knowledge-base/features/custom-content-type/) data.
 
