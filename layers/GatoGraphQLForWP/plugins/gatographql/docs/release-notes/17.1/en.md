@@ -2,7 +2,7 @@
 
 ### Improvements
 
-- Updated Translation extension docs for selecting a self-hosted LLM translation provider ([#3280](https://github.com/GatoGraphQL/GatoGraphQL/pull/3280))
+- Updated Translation extension docs on using a self-hosted LLM ([#3280](https://github.com/GatoGraphQL/GatoGraphQL/pull/3280))
 
 ### Fixed
 
