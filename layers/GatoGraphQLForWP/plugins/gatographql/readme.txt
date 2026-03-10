@@ -225,7 +225,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 17.1.0 =
-* Improved - Updated Translation extension docs for selecting a custom AI translation provider (#3280)
+* Improved - Updated Translation extension docs for selecting a self-hosted LLM translation provider (#3280)
 * Fixed - Fix missing images in JetEngine docs (#3279)
 
 = 17.0.0 =
