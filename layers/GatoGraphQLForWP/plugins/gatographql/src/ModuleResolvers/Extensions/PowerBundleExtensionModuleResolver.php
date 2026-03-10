@@ -218,7 +218,7 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
                 PremiumExtensionModuleResolver::BRICKS,
                 PremiumExtensionModuleResolver::CHATGPT_TRANSLATION,
                 PremiumExtensionModuleResolver::CLAUDE_TRANSLATION,
-                PremiumExtensionModuleResolver::CUSTOM_AI_TRANSLATION,
+                PremiumExtensionModuleResolver::SELF_HOSTED_LLM_TRANSLATION,
                 PremiumExtensionModuleResolver::DEEPL,
                 PremiumExtensionModuleResolver::DEEPSEEK_TRANSLATION,
                 PremiumExtensionModuleResolver::ELEMENTOR,
