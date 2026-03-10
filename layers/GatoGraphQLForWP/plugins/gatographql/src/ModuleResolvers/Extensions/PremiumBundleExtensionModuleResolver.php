@@ -128,12 +128,12 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::TRANSLATION => [
                 PremiumExtensionModuleResolver::CHATGPT_TRANSLATION,
                 PremiumExtensionModuleResolver::CLAUDE_TRANSLATION,
-                PremiumExtensionModuleResolver::SELF_HOSTED_LLM_TRANSLATION,
                 PremiumExtensionModuleResolver::DEEPL,
                 PremiumExtensionModuleResolver::DEEPSEEK_TRANSLATION,
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
                 PremiumExtensionModuleResolver::MISTRALAI_TRANSLATION,
                 PremiumExtensionModuleResolver::OPENROUTER_TRANSLATION,
+                PremiumExtensionModuleResolver::SELF_HOSTED_LLM_TRANSLATION,
                 PremiumExtensionModuleResolver::TRANSLATION,
             ],
             self::WOOCOMMERCE => [
