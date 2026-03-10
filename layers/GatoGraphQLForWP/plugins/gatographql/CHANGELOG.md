@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Updated Translation extension docs on using a self-hosted LLM (#3280)
+- Updated Translation extension docs on using a self-hosted LLM (#3282)
 
 ### Fixed
 
