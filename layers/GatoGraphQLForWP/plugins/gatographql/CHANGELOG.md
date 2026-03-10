@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 17.1.0 - DATE
 
+### Improvements
+
+- Updated Translation extension docs on using a self-hosted LLM (#3282)
+
 ### Fixed
 
 - JetEngine: Fix missing images in docs (#3279)
