@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Webserver;
 
 use GatoGraphQL\GatoGraphQL\Facades\Request\PrematureRequestServiceFacade;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineHookNames;
+use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
 use function add_filter;
 use function remove_filter;
@@ -26,7 +28,11 @@ class LandoAdapter
             'init',
             function (): void {
                 $applicationStateHelperService = PrematureRequestServiceFacade::getInstance();
-                if (!$applicationStateHelperService->isPubliclyExposedGraphQLAPIRequest()) {
+                /** @var EndpointHelpers */
+                $endpointHelpers = SystemInstanceManagerFacade::getInstance()->getInstance(EndpointHelpers::class);
+                if (!$applicationStateHelperService->isPubliclyExposedGraphQLAPIRequest()
+                    && !$endpointHelpers->isRequestingAdminGraphQLEndpoint()
+                ) {
                     return;
                 }
 
