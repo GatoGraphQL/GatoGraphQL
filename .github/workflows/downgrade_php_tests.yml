@@ -124,7 +124,7 @@ jobs:
                 run: zip -X -r build/downgraded-code.zip . -x *.git* build/\* php-parallel-lint/\*
                 if: ${{ needs.provide_data.outputs.generate_artifact }}
             -   name: Upload artifact
-                uses: actions/upload-artifact@v4
+                uses: actions/upload-artifact@v7
                 if: ${{ needs.provide_data.outputs.generate_artifact }}
                 with:
                     name: downgraded-code
