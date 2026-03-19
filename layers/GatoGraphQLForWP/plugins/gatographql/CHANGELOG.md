@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Conflict with the "All In One Security" plugin (#3283)
 - JetEngine: Fix missing images in docs (#3279)
+- Issues with WordPress 7.0 (#3284)
 
 ## 17.0.0 - 03/03/2026
 
