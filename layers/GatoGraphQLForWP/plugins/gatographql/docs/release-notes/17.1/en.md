@@ -7,3 +7,4 @@
 ### Fixed
 
 - JetEngine: Fix missing images in docs ([#3279](https://github.com/GatoGraphQL/GatoGraphQL/pull/3279))
+- Conflict with the "All In One Security" plugin ([#3283](https://github.com/GatoGraphQL/GatoGraphQL/pull/3283))
