@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Updated Translation extension docs on using a self-hosted LLM (#3282)
+- Tested up to WordPress 7.0 (#3284)
 
 ### Fixed
 

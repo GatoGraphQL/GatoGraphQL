@@ -3,6 +3,7 @@
 ### Improvements
 
 - Updated Translation extension docs on using a self-hosted LLM ([#3282](https://github.com/GatoGraphQL/GatoGraphQL/pull/3282))
+- Tested up to WordPress 7.0 ([#3284](https://github.com/GatoGraphQL/GatoGraphQL/pull/3284))
 
 ### Fixed
 

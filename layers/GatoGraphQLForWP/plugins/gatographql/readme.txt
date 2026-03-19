@@ -2,7 +2,7 @@
 Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
 Requires at least: 6.1
-Tested up to: 6.9
+Tested up to: 7.0
 Stable tag: 17.0.1
 Requires PHP: 8.1
 License: GPLv2 or later
@@ -225,6 +225,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 17.1.0 =
+* Tested up to WordPress 7.0 (#3284)
 * Improved - Updated Translation extension docs on using a self-hosted LLM (#3282)
 * Fixed - Fix missing images in JetEngine docs (#3279)
 * Fixed - Conflict with the "All In One Security" plugin (#3283)
