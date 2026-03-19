@@ -6,6 +6,7 @@ namespace PoP\EngineWP\Hooks;
 
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class TemplateHookSet extends AbstractHookSet
@@ -43,6 +44,14 @@ class TemplateHookSet extends AbstractHookSet
 
     public function getTemplate(?string $template): ?string
     {
+        /**
+         * `App::isInitialized()` is needed to avoid conflicts with other plugins,
+         * such as the "All In One Security" plugin.
+         * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/3283
+         */
+        if (!App::isInitialized()) {
+            return $template;
+        }
         if ($this->useTemplate()) {
             return $this->getTemplateHelpers()->getGenerateDataAndPrepareAndSendResponseTemplateFile();
         }
