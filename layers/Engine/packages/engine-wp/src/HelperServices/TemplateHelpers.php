@@ -32,7 +32,11 @@ class TemplateHelpers implements TemplateHelpersInterface
     }
 
     /**
-     * Add a hook to send the Response to the client
+     * Add a hook to send the Response to the client.
+     * 
+     * `App::isInitialized()` is needed to avoid conflicts with other plugins,
+     * such as the "All In One Security" plugin.
+     * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/3283
      */
     public function sendResponseToClient(): void
     {
