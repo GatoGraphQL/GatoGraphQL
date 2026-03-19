@@ -45,7 +45,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: ramsey/composer-install@v3
+            -   uses: ramsey/composer-install@v4
 
             -   id: output_data
                 run: |
@@ -98,7 +98,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install root dependencies
-                uses: ramsey/composer-install@v3
+                uses: ramsey/composer-install@v4
 
     ###########################################################################
     # Downgrade plugin
