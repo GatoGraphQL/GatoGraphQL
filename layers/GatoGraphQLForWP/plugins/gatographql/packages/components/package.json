@@ -30,6 +30,6 @@
         "@wordpress/scripts": "^27.9.0",
         "prettier": "npm:wp-prettier@2.0.5",
         "raw-loader": "^4.0.2",
-        "react-select": "^3.0.8"
+        "react-select": "^5.10.2"
     }
 }

@@ -73,13 +73,13 @@ const EditableSelect = ( props ) => {
 					options={ options }
 					isMulti={ isMulti }
 					closeMenuOnSelect={ closeMenuOnSelect }
-					onChange={ selected =>
+					onChange={ ( selected ) => {
 						setAttributes( {
-							[ attributeName ]: isMulti ?
-								(selected || []).map(option => option.value) :
-								selected.value
-						} )
-					}
+							[ attributeName ]: isMulti
+								? ( selected || [] ).map( ( option ) => option.value )
+								: ( selected ? selected.value : null ),
+						} );
+					} }
 				/>
 			}
 			{ !isSelected && !!value.length && (
