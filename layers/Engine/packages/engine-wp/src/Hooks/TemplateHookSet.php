@@ -6,6 +6,7 @@ namespace PoP\EngineWP\Hooks;
 
 use PoP\ComponentModel\HelperServices\ApplicationStateHelperServiceInterface;
 use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class TemplateHookSet extends AbstractHookSet
@@ -43,6 +44,9 @@ class TemplateHookSet extends AbstractHookSet
 
     public function getTemplate(?string $template): ?string
     {
+        if (!App::isInitialized()) {
+            return $template;
+        }
         if ($this->useTemplate()) {
             return $this->getTemplateHelpers()->getGenerateDataAndPrepareAndSendResponseTemplateFile();
         }
