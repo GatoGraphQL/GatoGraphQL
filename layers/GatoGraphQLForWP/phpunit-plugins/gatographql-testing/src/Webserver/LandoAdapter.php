@@ -30,7 +30,8 @@ class LandoAdapter
                 $applicationStateHelperService = PrematureRequestServiceFacade::getInstance();
                 /** @var EndpointHelpers */
                 $endpointHelpers = SystemInstanceManagerFacade::getInstance()->getInstance(EndpointHelpers::class);
-                if (!$applicationStateHelperService->isPubliclyExposedGraphQLAPIRequest()
+                if (
+                    !$applicationStateHelperService->isPubliclyExposedGraphQLAPIRequest()
                     && !$endpointHelpers->isRequestingAdminGraphQLEndpoint()
                 ) {
                     return;
