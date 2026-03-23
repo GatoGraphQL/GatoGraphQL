@@ -24,7 +24,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            -   uses: ramsey/composer-install@v3
+            -   uses: ramsey/composer-install@v4
 
             -   id: output_data
                 run: |
@@ -65,7 +65,7 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             -   name: Install Composer dependencies
-                uses: ramsey/composer-install@v3
+                uses: ramsey/composer-install@v4
 
             -   name: Local packages - Downgrade PHP code via Rector
                 run: vendor/bin/rector process ${{ needs.provide_data.outputs.package_srcs }} --config=config/rector/downgrade/monorepo/rector.php --ansi
@@ -109,7 +109,7 @@ jobs:
             # Only PROD dependencies must be tested
             # --ignore-platform-reqs to avoid Composer checking the PHP 8.1 requirement
             -   name: Keep dependencies for PROD only (for testing)
-                uses: ramsey/composer-install@v3
+                uses: ramsey/composer-install@v4
                 with:
                     composer-options: "--no-dev --ignore-platform-reqs"
 
@@ -124,7 +124,7 @@ jobs:
                 run: zip -X -r build/downgraded-code.zip . -x *.git* build/\* php-parallel-lint/\*
                 if: ${{ needs.provide_data.outputs.generate_artifact }}
             -   name: Upload artifact
-                uses: actions/upload-artifact@v4
+                uses: actions/upload-artifact@v7
                 if: ${{ needs.provide_data.outputs.generate_artifact }}
                 with:
                     name: downgraded-code

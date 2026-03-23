@@ -1,4 +1,4 @@
-# JetEngine Custom Content Types (CCTs)
+# JetEngine CCTs
 
 Integration with Crocoblock's [JetEngine](https://crocoblock.com/plugins/jetengine/) plugin, to fetch [Custom Content Type (CCT)](https://crocoblock.com/knowledge-base/features/custom-content-type/) data.
 
@@ -56,7 +56,11 @@ How each CCT field type is cast in the GraphQL response:
 
 The example below uses a CCT with slug `"sample_cct"` and fields of different types (`text`, `number`, `gallery`, etc).
 
+<div class="img-width-1024" markdown=1>
+
 ![Fields of a CCT](../../images/jetengine-cct-fields.webp "Fields of a CCT")
+
+</div>
 
 Executing the following query:
 
@@ -356,11 +360,19 @@ There are 2 places where this configuration can take place, in order of priority
 
 In the Schema Configuration applied to the endpoint, select option **Use custom configuration** and then input the desired entries:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the queryable CCTs in the Schema Configuration](../../images/jetengine-ccts-schema-configuration-queryable-ccts.webp "Defining the queryable CCTs in the Schema Configuration")
+
+</div>
 
 Otherwise, the entries defined in the **Queryable JetEngine CCTS** option under the **JetEngine CCTS** section from the Settings will be used:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the queryable CCTs in the Settings](../../images/jetengine-ccts-settings-queryable-ccts.webp "Defining the queryable CCTs in the Settings")
+
+</div>
 
 ## Example Queries
 

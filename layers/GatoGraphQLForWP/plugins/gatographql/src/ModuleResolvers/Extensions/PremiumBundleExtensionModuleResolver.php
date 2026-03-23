@@ -133,6 +133,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
                 PremiumExtensionModuleResolver::MISTRALAI_TRANSLATION,
                 PremiumExtensionModuleResolver::OPENROUTER_TRANSLATION,
+                PremiumExtensionModuleResolver::SELF_HOSTED_LLM_TRANSLATION,
                 PremiumExtensionModuleResolver::TRANSLATION,
             ],
             self::WOOCOMMERCE => [
