@@ -34,7 +34,7 @@ interface AppInterface
      * Also it allows to set a new AppThread instance at
      * any time, to initiate a new context.
      */
-    public static function setAppThread(AppThreadInterface $appThread): void;
+    public static function setAppThread(AppThreadInterface $appThread, ?bool $isInitialized = null): void;
 
     /**
      * Allow to get the current AppThread, to store

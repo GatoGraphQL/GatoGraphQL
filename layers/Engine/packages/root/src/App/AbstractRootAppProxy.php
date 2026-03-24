@@ -37,9 +37,9 @@ abstract class AbstractRootAppProxy implements RootAppInterface
      * Allow to set and get the AppThread,
      * to initiate a new context.
      */
-    public static function setAppThread(AppThreadInterface $appThread): void
+    public static function setAppThread(AppThreadInterface $appThread, ?bool $isInitialized = null): void
     {
-        RootApp::setAppThread($appThread);
+        RootApp::setAppThread($appThread, $isInitialized);
     }
 
     public static function isInitialized(): bool

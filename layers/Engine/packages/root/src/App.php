@@ -35,9 +35,12 @@ class App implements AppInterface
      * Also it allows to set a new AppThread instance at
      * any time, to initiate a new context.
      */
-    public static function setAppThread(AppThreadInterface $appThread): void
+    public static function setAppThread(AppThreadInterface $appThread, ?bool $isInitialized = null): void
     {
         self::$appThread = $appThread;
+        if ($isInitialized !== null) {
+            self::$initialized = $isInitialized;
+        }
     }
 
     /**
