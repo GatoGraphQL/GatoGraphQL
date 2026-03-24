@@ -63,6 +63,8 @@ interface AppStateManagerInterface
      */
     public function getUnder(array $path): mixed;
 
+    public function isStateInitialized(): bool;
+
     public function has(string $key): bool;
 
     /**
