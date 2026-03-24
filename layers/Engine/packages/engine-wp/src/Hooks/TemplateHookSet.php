@@ -45,11 +45,11 @@ class TemplateHookSet extends AbstractHookSet
     public function getTemplate(?string $template): ?string
     {
         /**
-         * `App::isInitialized()` is needed to avoid conflicts with other plugins,
+         * `App::isStateInitialized()` is needed to avoid conflicts with other plugins,
          * such as the "All In One Security" plugin.
          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/3283
          */
-        if (!App::isInitialized()) {
+        if (!App::isInitialized() || !App::isStateInitialized()) {
             return $template;
         }
         if ($this->useTemplate()) {

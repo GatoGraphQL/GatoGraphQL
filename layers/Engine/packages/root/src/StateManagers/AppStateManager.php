@@ -24,10 +24,16 @@ class AppStateManager implements AppStateManagerInterface
      * @var array<string,mixed>
      */
     protected array $state;
+    protected bool $isStateInitialized = false;
 
     final protected function getTranslationAPI(): TranslationAPIInterface
     {
         return TranslationAPIFacade::getInstance();
+    }
+
+    public function isStateInitialized(): bool
+    {
+        return $this->isStateInitialized;
     }
 
     /**
@@ -41,6 +47,7 @@ class AppStateManager implements AppStateManagerInterface
     {
         App::doAction(HookNames::BEFORE_INITIALIZING_APP_STATE);
 
+        $this->isStateInitialized = true;
         $this->state = [];
         $appStateProviderRegistry = AppStateProviderRegistryFacade::getInstance();
         $appStateProviders = $appStateProviderRegistry->getEnabledAppStateProviders();
@@ -150,6 +157,7 @@ class AppStateManager implements AppStateManagerInterface
      */
     public function setAppState(array $appState): void
     {
+        $this->isStateInitialized = true;
         $this->state = $appState;
     }
 

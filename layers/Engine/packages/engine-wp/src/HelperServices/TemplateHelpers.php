@@ -34,7 +34,7 @@ class TemplateHelpers implements TemplateHelpersInterface
     /**
      * Add a hook to send the Response to the client.
      *
-     * `App::isInitialized()` is needed to avoid conflicts with other plugins,
+     * `App::isStateInitialized()` is needed to avoid conflicts with other plugins,
      * such as the "All In One Security" plugin.
      * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/3283
      */
@@ -42,7 +42,7 @@ class TemplateHelpers implements TemplateHelpersInterface
     {
         \add_filter(
             'template_include',
-            fn (?string $template) => !App::isInitialized() ? $template : $this->getSendResponseTemplateFile(),
+            fn (?string $template) => !App::isInitialized() || !App::isStateInitialized() ? $template : $this->getSendResponseTemplateFile(),
             PHP_INT_MAX // Execute last
         );
     }
