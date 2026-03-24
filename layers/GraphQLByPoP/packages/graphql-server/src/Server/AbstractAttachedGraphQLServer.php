@@ -28,8 +28,9 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
          * 3. Restore the current AppThread
          */
         $currentAppThread = App::getAppThread();
+        $currentAppInitialized = App::isInitialized();
         $this->appThread = $this->initializeApp();
-        App::setAppThread($currentAppThread);
+        App::setAppThread($currentAppThread, $currentAppInitialized);
     }
 
     abstract protected function initializeApp(): AppThreadInterface;
@@ -51,7 +52,8 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
          * one, resolve the query, and then restore the current AppThread.
          */
         $currentAppThread = App::getAppThread();
-        App::setAppThread($this->appThread);
+        $currentAppInitialized = App::isInitialized();
+        App::setAppThread($this->appThread, true);
 
         /**
          * Because an "internal" request may be triggered
@@ -71,7 +73,7 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
         $appStateManager->setAppState($appState);
 
         // Restore the original AppThread
-        App::setAppThread($currentAppThread);
+        App::setAppThread($currentAppThread, $currentAppInitialized);
 
         return $response;
     }
