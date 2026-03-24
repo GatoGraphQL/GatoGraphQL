@@ -23,7 +23,7 @@ if (!class_exists(App::class)) {
  * or not based on their required plugins being active.
  */
 \add_action('after_setup_theme', function(): void {
-    App::setAppThread(new AppThread());
+    App::setAppThread(new AppThread(), false);
     App::initialize(
         new AppLoader(),
         new HookManager()

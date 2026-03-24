@@ -920,7 +920,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
-                App::setAppThread(new AppThread($pluginAppGraphQLServerName, $pluginAppGraphQLServerContext));
+                App::setAppThread(new AppThread($pluginAppGraphQLServerName, $pluginAppGraphQLServerContext), false);
                 $hookManager = new HookManager();
                 /**
                  * Boot the external GraphQL server only after the

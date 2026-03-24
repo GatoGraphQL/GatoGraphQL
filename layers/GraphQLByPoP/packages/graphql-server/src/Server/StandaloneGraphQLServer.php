@@ -77,7 +77,7 @@ class StandaloneGraphQLServer extends AbstractGraphQLServer
             ]
         );
 
-        App::setAppThread(new AppThread());
+        App::setAppThread(new AppThread(), false);
         App::initialize(
             $this->getAppLoader(),
             $this->getHookManager(),
