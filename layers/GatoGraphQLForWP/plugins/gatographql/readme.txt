@@ -224,6 +224,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 17.1.1 =
+* Fixed - Conflict with the "All In One Security" plugin (#3287)
+
 = 17.1.0 =
 * Improved - Updated Translation extension docs on using a self-hosted LLM (#3282)
 * Fixed - Fix missing images in JetEngine docs (#3279)
