@@ -90,7 +90,7 @@ You can use Gato GraphQL to do everything offered by Gato Plugins!
 
 The plugins are:
 
-[Gato AI Translations for Polylang](https://gatoplugins.com/plugins/ai-translations-for-polylang): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, DeepSeek, Mistral AI, DeepL, and Google Translate.
+[Gato AI Translations for Polylang](https://gatoaitranslations.com): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, DeepSeek, Mistral AI, DeepL, and Google Translate.
 
 == Frequently Asked Questions ==
 
