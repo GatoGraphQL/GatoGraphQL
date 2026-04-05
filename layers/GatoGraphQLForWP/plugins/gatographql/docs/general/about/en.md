@@ -76,6 +76,15 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
 <form action="https://store.gatoplugins.com/?fluentcrm=1&route=contact&hash=7e623bde-a144-4e96-b0f3-0ed52034c5f9" method="POST" target="_blank">
   <p markdown=1>
+    <label for="field-name">Name:</label>
+    <input
+      type="text"
+      name="full_name"
+      id="field-name"
+      required=""
+      aria-required="true"
+      placeholder="John Doe"
+    >
     <label for="field-email">Email:</label>
     <input
       type="email"
