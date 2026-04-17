@@ -48,7 +48,12 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
         $body = json_decode($response['body'], true);
 
         if ($body === null) {
-            throw new LicenseOperationNotSuccessfulException($this->__('The response from the license API could not be decoded as JSON', 'gatographql'));
+            throw new LicenseOperationNotSuccessfulException(
+                sprintf(
+                    $this->__('The response from the license API (endpoint: "%s") could not be decoded as JSON', 'gatographql'),
+                    $endpoint
+                )
+            );
         }
 
         /**
