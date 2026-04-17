@@ -44,8 +44,12 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
             throw new HTTPRequestNotSuccessfulException($response->get_error_message());
         }
 
-        /** @var array<string,mixed> $body */
+        /** @var array<string,mixed>|null $body */
         $body = json_decode($response['body'], true);
+
+        if ($body === null) {
+            throw new LicenseOperationNotSuccessfulException($this->__('Unknown error', 'gatographql'));
+        }
 
         /**
          * Check the "status" first, and only then the "error",
