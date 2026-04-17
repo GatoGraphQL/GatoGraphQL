@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 17.2.0 - DATE
 
+### Fixed
+
+- Handle null response from license API (eg: when access is forbidden via network) (#3288)
+
 ## 17.1.1 - 24/03/2026
 
 ### Fixed

@@ -44,8 +44,29 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
             throw new HTTPRequestNotSuccessfulException($response->get_error_message());
         }
 
-        /** @var array<string,mixed> $body */
+        $statusCode = (int) wp_remote_retrieve_response_code($response);
+        if ($statusCode < 200 || $statusCode >= 300) {
+            throw new HTTPRequestNotSuccessfulException(
+                sprintf(
+                    $this->__('Request to "%s" failed with HTTP status code %d: %s', 'gatographql'),
+                    $endpoint,
+                    $statusCode,
+                    wp_remote_retrieve_response_message($response)
+                )
+            );
+        }
+
+        /** @var array<string,mixed>|null $body */
         $body = json_decode($response['body'], true);
+
+        if ($body === null) {
+            throw new LicenseOperationNotSuccessfulException(
+                sprintf(
+                    $this->__('The response from the license API (endpoint: "%s") could not be decoded as JSON', 'gatographql'),
+                    $endpoint
+                )
+            );
+        }
 
         /**
          * Check the "status" first, and only then the "error",
