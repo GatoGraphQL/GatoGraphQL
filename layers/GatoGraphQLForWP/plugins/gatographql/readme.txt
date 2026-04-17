@@ -224,6 +224,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 17.2.0 =
+* Fixed - Handle null response from license API (eg: when access is forbidden via network) (#3288)
+
 = 17.1.1 =
 * Fixed - Conflict with the "All In One Security" plugin (#3287)
 
