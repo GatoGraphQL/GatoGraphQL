@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Enums;
+namespace PoPWPSchema\SchemaCommons\Enums;
 
 /**
  * Provider IDs used by the WordPress 7.0+ Connectors API.
