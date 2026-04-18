@@ -62,7 +62,8 @@
         "show_welcome_panel",
         "_application_passwords",
         "app_password",
-        "session_tokens"
+        "session_tokens",
+        "community-events-location"
       ]
     }
   }
