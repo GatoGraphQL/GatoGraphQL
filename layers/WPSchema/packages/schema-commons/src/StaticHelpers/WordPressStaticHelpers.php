@@ -119,8 +119,7 @@ class WordPressStaticHelpers
      */
     public static function getWPConnectorAIProviderAPIKey(WordPressAIConnectorProvider $provider): ?string
     {
-        // Detect WP 7.0+: `wp_get_connectors()` is the public entry-point for the Connectors API.
-        if (!function_exists('wp_get_connectors')) {
+        if (!static::isAIConnectorsAvailable()) {
             return null;
         }
 
@@ -145,5 +144,16 @@ class WordPressStaticHelpers
         }
 
         return null;
+    }
+
+    /**
+     * Whether the WordPress 7.0+ AI Connectors API is available on this site.
+     *
+     * `wp_get_connectors()` is the public entry-point for the Connectors API,
+     * introduced in WP 7.0.
+     */
+    public static function isAIConnectorsAvailable(): bool
+    {
+        return function_exists('wp_get_connectors');
     }
 }
