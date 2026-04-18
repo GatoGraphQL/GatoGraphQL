@@ -226,6 +226,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 17.2.0 =
 * Improved - Tested up to WordPress 7.0 (#3289)
+* Improved - Support AI Connectors from WordPress 7.0 (#3290)
 * Fixed - Handle null response from license API (eg: when access is forbidden via network) (#3288)
 
 = 17.1.1 =

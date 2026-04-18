@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Tested up to WordPress 7.0 (#3289)
+- Support AI Connectors from WordPress 7.0 (#3290)
 
 ### Fixed
 
