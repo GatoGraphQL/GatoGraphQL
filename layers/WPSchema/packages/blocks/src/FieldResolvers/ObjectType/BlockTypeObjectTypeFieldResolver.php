@@ -92,7 +92,6 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
     {
         return [
             'name',
-            'blockName',
             'supports',
             'hasRenderCallback',
             'attributes',
@@ -102,8 +101,7 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name',
-            'blockName' => $this->__('Block name (e.g. "core/paragraph")', 'blocks'),
+            'name' => $this->__('Block name (e.g. "core/paragraph")', 'blocks'),
             'supports' => $this->__('Block "supports" configuration as registered in `block.json`, returned as a JSON object', 'blocks'),
             'hasRenderCallback' => $this->__('Whether this block has a registered `render_callback` (i.e. is a dynamic/PHP-rendered block)', 'blocks'),
             'attributes' => $this->__('The block\'s registered attributes', 'blocks'),
@@ -114,8 +112,7 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name',
-            'blockName' => $this->getStringScalarTypeResolver(),
+            'name' => $this->getStringScalarTypeResolver(),
             'supports' => $this->getJSONObjectScalarTypeResolver(),
             'hasRenderCallback' => $this->getBooleanScalarTypeResolver(),
             'attributes' => $this->getBlockTypeAttributeObjectTypeResolver(),
@@ -127,7 +124,6 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
     {
         return match ($fieldName) {
             'name',
-            'blockName',
             'supports',
             'hasRenderCallback'
                 => SchemaTypeModifiers::NON_NULLABLE,
@@ -165,7 +161,6 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
         $blockType = $object;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'name':
-            case 'blockName':
                 return $blockType->getName();
 
             case 'supports':

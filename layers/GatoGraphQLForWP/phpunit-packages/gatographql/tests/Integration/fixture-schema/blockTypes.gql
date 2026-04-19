@@ -140,7 +140,6 @@
     filter: { names: "gatographql-testing/alert" }
   ) {
     name
-    blockName
     hasRenderCallback
     supports
     attributes {
@@ -335,7 +334,6 @@ fragment BlockTypeSummary on BlockType {
 
 fragment BlockTypeFull on BlockType {
   name
-  blockName
   hasRenderCallback
   supports
   attributes {

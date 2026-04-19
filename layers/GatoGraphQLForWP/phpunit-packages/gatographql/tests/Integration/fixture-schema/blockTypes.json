@@ -457,7 +457,6 @@
         "phpOnlyBlockTypes": [
             {
                 "name": "gatographql-testing\/alert",
-                "blockName": "gatographql-testing\/alert",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -584,7 +583,6 @@
             },
             {
                 "name": "gatographql-testing\/marquee",
-                "blockName": "gatographql-testing\/marquee",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -744,7 +742,6 @@
             },
             {
                 "name": "gatographql-testing\/author-box",
-                "blockName": "gatographql-testing\/author-box",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -1374,7 +1371,6 @@
         "testingBlockTypesByName": [
             {
                 "name": "gatographql-testing\/alert",
-                "blockName": "gatographql-testing\/alert",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -1501,7 +1497,6 @@
             },
             {
                 "name": "gatographql-testing\/marquee",
-                "blockName": "gatographql-testing\/marquee",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -1661,7 +1656,6 @@
             },
             {
                 "name": "gatographql-testing\/author-box",
-                "blockName": "gatographql-testing\/author-box",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -1835,7 +1829,6 @@
         "testingPhpOnlyBlockTypes": [
             {
                 "name": "gatographql-testing\/alert",
-                "blockName": "gatographql-testing\/alert",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -1962,7 +1955,6 @@
             },
             {
                 "name": "gatographql-testing\/marquee",
-                "blockName": "gatographql-testing\/marquee",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -2122,7 +2114,6 @@
             },
             {
                 "name": "gatographql-testing\/author-box",
-                "blockName": "gatographql-testing\/author-box",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
@@ -2293,7 +2284,6 @@
         "alertAllAttributes": [
             {
                 "name": "gatographql-testing\/alert",
-                "blockName": "gatographql-testing\/alert",
                 "hasRenderCallback": true,
                 "supports": {
                     "autoRegister": true,
