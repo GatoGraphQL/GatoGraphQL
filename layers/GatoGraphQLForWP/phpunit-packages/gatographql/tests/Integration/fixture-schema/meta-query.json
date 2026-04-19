@@ -83,6 +83,11 @@
                 "id": 1150,
                 "title": "Post with old format of the Gutenberg `core\/list` block",
                 "featuredImage": null
+            },
+            {
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "featuredImage": null
             }
         ],
         "spanishLocaleUsers": [

@@ -1195,7 +1195,7 @@
             },
             {
                 "__typename": "PostCategory",
-                "postCount": 3,
+                "postCount": 4,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1265,10 +1265,23 @@
                                 "taxonomy": "category"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1200,
+                        "title": "PHP-only blocks",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 2,
+                                "name": "Advanced",
+                                "taxonomy": "category"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "category",
-                "count": 3,
+                "count": 4,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -3134,6 +3147,22 @@
                 ]
             },
             {
+                "__typename": "Post",
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "taxonomy": "category",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
+                    }
+                ]
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -3668,40 +3697,6 @@
                         "taxonomy": "dummy-category"
                     }
                 ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1656,
-                "title": "Dummy CPT with non-existing block",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 19,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ],
-                "categoriesWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 19,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
             }
         ],
         "customPostsByCategoryIDs": [
@@ -3741,6 +3736,10 @@
         ],
         "customPostsExcludeByCategoryIDs": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1142,
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
             },
@@ -3777,11 +3776,6 @@
             {
                 "id": 1682,
                 "title": "Dummy CPT with several levels of children",
-                "categories": []
-            },
-            {
-                "id": 1132,
-                "title": "Synced pattern with nested blocks",
                 "categories": []
             }
         ],
@@ -3873,6 +3867,10 @@
         ],
         "customPostsExcludeByCategorySlugs": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1142,
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
             },
@@ -3909,11 +3907,6 @@
             {
                 "id": 1682,
                 "title": "Dummy CPT with several levels of children",
-                "categories": []
-            },
-            {
-                "id": 1132,
-                "title": "Synced pattern with nested blocks",
                 "categories": []
             }
         ],
@@ -4014,7 +4007,7 @@
             },
             {
                 "taxonomy": "category",
-                "count": 3,
+                "count": 4,
                 "description": "",
                 "id": 2,
                 "metaValue": null,

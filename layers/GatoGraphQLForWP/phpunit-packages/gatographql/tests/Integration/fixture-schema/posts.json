@@ -280,6 +280,10 @@
         ],
         "postsByAuthorSlug": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1125,
                 "title": "Public or Private API mode, for extra security"
             },
@@ -334,6 +338,10 @@
         ],
         "postsByExcludeAuthorIDs": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1142,
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
             },
@@ -368,14 +376,14 @@
             {
                 "id": 1116,
                 "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out"
             }
         ],
         "postsByExcludeIDs": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1150,
                 "title": "Post with old format of the Gutenberg `core\/list` block"
             },
@@ -410,10 +418,6 @@
             {
                 "id": 1116,
                 "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out"
             }
         ],
         "postsByHasPassword": [],
@@ -457,6 +461,10 @@
         "postsByStatus": [],
         "postsByTagIDs": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1125,
                 "title": "Public or Private API mode, for extra security"
             },
@@ -474,6 +482,10 @@
             }
         ],
         "postsByTagSlugs": [
+            {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
             {
                 "id": 1119,
                 "title": "Nested mutations are a must have"

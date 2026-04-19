@@ -112,7 +112,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 3,
+                "count": 4,
                 "description": "",
                 "id": 12,
                 "metaValue": null,
@@ -122,8 +122,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "plugin",
-                "postCount": 3,
+                "postCount": 4,
                 "posts": [
+                    {
+                        "id": 1200,
+                        "title": "PHP-only blocks"
+                    },
                     {
                         "id": 1119,
                         "title": "Nested mutations are a must have"
@@ -189,7 +193,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 9,
                 "metaValue": null,
@@ -199,8 +203,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "features",
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 1200,
+                        "title": "PHP-only blocks"
+                    },
                     {
                         "id": 1125,
                         "title": "Public or Private API mode, for extra security"
@@ -353,7 +361,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 3,
+                "count": 4,
                 "description": "",
                 "id": 12,
                 "metaValue": null,
@@ -363,8 +371,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "plugin",
-                "postCount": 3,
+                "postCount": 4,
                 "posts": [
+                    {
+                        "id": 1200,
+                        "title": "PHP-only blocks"
+                    },
                     {
                         "id": 1119,
                         "title": "Nested mutations are a must have"
@@ -430,7 +442,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 9,
                 "metaValue": null,
@@ -440,8 +452,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "features",
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 1200,
+                        "title": "PHP-only blocks"
+                    },
                     {
                         "id": 1125,
                         "title": "Public or Private API mode, for extra security"
@@ -665,7 +681,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 3,
+                "count": 4,
                 "description": "",
                 "id": 12,
                 "metaValue": null,
@@ -675,8 +691,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "plugin",
-                "postCount": 3,
+                "postCount": 4,
                 "posts": [
+                    {
+                        "id": 1200,
+                        "title": "PHP-only blocks"
+                    },
                     {
                         "id": 1119,
                         "title": "Nested mutations are a must have"
@@ -825,7 +845,7 @@
                 },
                 {
                     "taxonomy": "post_tag",
-                    "count": 4,
+                    "count": 5,
                     "description": "",
                     "id": 9,
                     "metaValue": null,
@@ -835,8 +855,12 @@
                     "includingMetaKeys": [],
                     "excludingMetaKeys": [],
                     "name": "features",
-                    "postCount": 4,
+                    "postCount": 5,
                     "posts": [
+                        {
+                            "id": 1200,
+                            "title": "PHP-only blocks"
+                        },
                         {
                             "id": 1125,
                             "title": "Public or Private API mode, for extra security"
@@ -1029,6 +1053,18 @@
         ],
         "postsExcludeByTagIDs": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "tags": [
+                    {
+                        "id": 12
+                    },
+                    {
+                        "id": 9
+                    }
+                ]
+            },
+            {
                 "id": 1150,
                 "title": "Post with old format of the Gutenberg `core\/list` block",
                 "tags": []
@@ -1093,6 +1129,18 @@
         ],
         "postsByTagSlugs": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "tags": [
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
+            {
                 "id": 1119,
                 "title": "Nested mutations are a must have",
                 "tags": [
@@ -1139,6 +1187,18 @@
             }
         ],
         "postsByTagSlugsWithTaxonomy": [
+            {
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "tags": [
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
             {
                 "id": 1119,
                 "title": "Nested mutations are a must have",

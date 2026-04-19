@@ -10081,41 +10081,45 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Heads up",
                         "message": "Heads up \u2014 this is an informational notice.",
                         "severity": "Info",
                         "dismissible": false
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Heads up\",\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Deprecation warning",
                         "message": "Be careful: deprecated API in use.",
                         "severity": "Warning",
                         "dismissible": true
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Deprecation warning\",\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Request failed",
                         "message": "Something went wrong while processing your request.",
                         "severity": "Error",
                         "dismissible": true
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Request failed\",\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Saved",
                         "message": "Your changes have been saved successfully.",
                         "severity": "Success",
                         "dismissible": false
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Saved\",\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
                     "innerBlocks": null
                 },
                 {
@@ -10218,6 +10222,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Heads up",
                         "message": "Heads up \u2014 this is an informational notice.",
                         "severity": "Info",
                         "dismissible": false
@@ -10226,6 +10231,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Deprecation warning",
                         "message": "Be careful: deprecated API in use.",
                         "severity": "Warning",
                         "dismissible": true
@@ -10234,6 +10240,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Request failed",
                         "message": "Something went wrong while processing your request.",
                         "severity": "Error",
                         "dismissible": true
@@ -10242,6 +10249,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Saved",
                         "message": "Your changes have been saved successfully.",
                         "severity": "Success",
                         "dismissible": false
@@ -10335,6 +10343,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Heads up",
                         "message": "Heads up \u2014 this is an informational notice.",
                         "severity": "Info",
                         "dismissible": false
@@ -10345,6 +10354,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Deprecation warning",
                         "message": "Be careful: deprecated API in use.",
                         "severity": "Warning",
                         "dismissible": true
@@ -10355,6 +10365,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Request failed",
                         "message": "Something went wrong while processing your request.",
                         "severity": "Error",
                         "dismissible": true
@@ -10365,6 +10376,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Saved",
                         "message": "Your changes have been saved successfully.",
                         "severity": "Success",
                         "dismissible": false
@@ -10462,41 +10474,45 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Heads up",
                         "message": "Heads up \u2014 this is an informational notice.",
                         "severity": "Info",
                         "dismissible": false
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Heads up\",\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Deprecation warning",
                         "message": "Be careful: deprecated API in use.",
                         "severity": "Warning",
                         "dismissible": true
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Deprecation warning\",\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Request failed",
                         "message": "Something went wrong while processing your request.",
                         "severity": "Error",
                         "dismissible": true
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Request failed\",\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Saved",
                         "message": "Your changes have been saved successfully.",
                         "severity": "Success",
                         "dismissible": false
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Saved\",\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
                     "innerBlocks": null
                 },
                 {
@@ -10567,6 +10583,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Heads up",
                         "message": "Heads up \u2014 this is an informational notice.",
                         "severity": "Info",
                         "dismissible": false
@@ -10575,6 +10592,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Deprecation warning",
                         "message": "Be careful: deprecated API in use.",
                         "severity": "Warning",
                         "dismissible": true
@@ -10583,6 +10601,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Request failed",
                         "message": "Something went wrong while processing your request.",
                         "severity": "Error",
                         "dismissible": true
@@ -10591,6 +10610,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Saved",
                         "message": "Your changes have been saved successfully.",
                         "severity": "Success",
                         "dismissible": false
@@ -10652,6 +10672,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Heads up",
                         "message": "Heads up \u2014 this is an informational notice.",
                         "severity": "Info",
                         "dismissible": false
@@ -10660,6 +10681,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Deprecation warning",
                         "message": "Be careful: deprecated API in use.",
                         "severity": "Warning",
                         "dismissible": true
@@ -10668,6 +10690,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Request failed",
                         "message": "Something went wrong while processing your request.",
                         "severity": "Error",
                         "dismissible": true
@@ -10676,6 +10699,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Saved",
                         "message": "Your changes have been saved successfully.",
                         "severity": "Success",
                         "dismissible": false
@@ -10740,41 +10764,45 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Heads up",
                         "message": "Heads up \u2014 this is an informational notice.",
                         "severity": "Info",
                         "dismissible": false
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Heads up\",\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Deprecation warning",
                         "message": "Be careful: deprecated API in use.",
                         "severity": "Warning",
                         "dismissible": true
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Deprecation warning\",\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Request failed",
                         "message": "Something went wrong while processing your request.",
                         "severity": "Error",
                         "dismissible": true
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Request failed\",\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Saved",
                         "message": "Your changes have been saved successfully.",
                         "severity": "Success",
                         "dismissible": false
                     },
-                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Saved\",\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
                     "innerBlocks": null
                 }
             ],
@@ -10782,6 +10810,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Heads up",
                         "message": "Heads up \u2014 this is an informational notice.",
                         "severity": "Info",
                         "dismissible": false
@@ -10790,6 +10819,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Deprecation warning",
                         "message": "Be careful: deprecated API in use.",
                         "severity": "Warning",
                         "dismissible": true
@@ -10798,6 +10828,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Request failed",
                         "message": "Something went wrong while processing your request.",
                         "severity": "Error",
                         "dismissible": true
@@ -10806,6 +10837,7 @@
                 {
                     "name": "gatographql-testing\/alert",
                     "attributes": {
+                        "header": "Saved",
                         "message": "Your changes have been saved successfully.",
                         "severity": "Success",
                         "dismissible": false
