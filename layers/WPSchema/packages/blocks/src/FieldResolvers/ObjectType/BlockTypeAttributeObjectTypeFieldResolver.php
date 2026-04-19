@@ -175,7 +175,18 @@ class BlockTypeAttributeObjectTypeFieldResolver extends AbstractObjectTypeFieldR
                 return $schema['default'] ?? null;
 
             case 'enum':
-                return $schema['enum'] ?? null;
+                $enum = $schema['enum'] ?? null;
+                if (!is_array($enum)) {
+                    return null;
+                }
+                $enum = array_values(array_filter(
+                    array_map(
+                        static fn (mixed $value): mixed => is_string($value) ? trim($value) : $value,
+                        $enum,
+                    ),
+                    static fn (mixed $value): bool => $value !== null && $value !== '',
+                ));
+                return $enum === [] ? null : $enum;
 
             case 'source':
                 return $schema['source'] ?? null;
