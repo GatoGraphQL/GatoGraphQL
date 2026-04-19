@@ -2224,13 +2224,13 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <p>The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister</code> support flag.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:gatographql-testing/alert {"message":"Heads up — this is an informational notice.","severity":"Info","dismissible":false} /-->
+<!-- wp:gatographql-testing/alert {"header":"Heads up","message":"Heads up — this is an informational notice.","severity":"Info","dismissible":false} /-->
 
-<!-- wp:gatographql-testing/alert {"message":"Be careful: deprecated API in use.","severity":"Warning","dismissible":true} /-->
+<!-- wp:gatographql-testing/alert {"header":"Deprecation warning","message":"Be careful: deprecated API in use.","severity":"Warning","dismissible":true} /-->
 
-<!-- wp:gatographql-testing/alert {"message":"Something went wrong while processing your request.","severity":"Error","dismissible":true} /-->
+<!-- wp:gatographql-testing/alert {"header":"Request failed","message":"Something went wrong while processing your request.","severity":"Error","dismissible":true} /-->
 
-<!-- wp:gatographql-testing/alert {"message":"Your changes have been saved successfully.","severity":"Success","dismissible":false} /-->
+<!-- wp:gatographql-testing/alert {"header":"Saved","message":"Your changes have been saved successfully.","severity":"Success","dismissible":false} /-->
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Marquee blocks</h2>

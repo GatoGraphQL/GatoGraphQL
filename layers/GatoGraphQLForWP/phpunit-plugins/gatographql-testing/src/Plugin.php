@@ -569,6 +569,11 @@ class Plugin
                 'category' => 'text',
                 'icon' => 'warning',
                 'attributes' => [
+                    'header' => [
+                        'type' => 'string',
+                        'default' => 'Notice',
+                        'label' => 'Header',
+                    ],
                     'message' => [
                         'type' => 'string',
                         'default' => 'This is an important notice.',
@@ -618,10 +623,16 @@ class Plugin
             ? '<button class="gatographql-alert__dismiss" aria-label="Dismiss">&times;</button>'
             : '';
 
+        $header = (string) ($attributes['header'] ?? '');
+        $headerHTML = $header !== ''
+            ? sprintf('<h4 class="gatographql-alert__header">%s</h4>', \esc_html($header))
+            : '';
+
         return sprintf(
-            '<div %s>%s<p class="gatographql-alert__message">%s</p></div>',
+            '<div %s>%s%s<p class="gatographql-alert__message">%s</p></div>',
             $wrapper,
             $dismiss,
+            $headerHTML,
             \esc_html((string) ($attributes['message'] ?? ''))
         );
     }
