@@ -10,12 +10,12 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPWPSchema\Blocks\FilterInputs\BlockTypeAttributeAutoGenerateControlFilterInput;
 use PoPWPSchema\Blocks\FilterInputs\BlockTypeAttributeFieldTypeFilterInput;
-use PoPWPSchema\Blocks\TypeResolvers\EnumType\BlockTypeAttributeFieldTypeEnumTypeResolver;
+use PoPWPSchema\Blocks\TypeResolvers\ScalarType\BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver;
 
 class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?BlockTypeAttributeFieldTypeEnumTypeResolver $blockTypeAttributeFieldTypeEnumTypeResolver = null;
+    private ?BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver $blockTypeAttributeFieldTypeEnumStringScalarTypeResolver = null;
     private ?BlockTypeAttributeFieldTypeFilterInput $blockTypeAttributeFieldTypeFilterInput = null;
     private ?BlockTypeAttributeAutoGenerateControlFilterInput $blockTypeAttributeAutoGenerateControlFilterInput = null;
 
@@ -28,14 +28,14 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
         }
         return $this->booleanScalarTypeResolver;
     }
-    final protected function getBlockTypeAttributeFieldTypeEnumTypeResolver(): BlockTypeAttributeFieldTypeEnumTypeResolver
+    final protected function getBlockTypeAttributeFieldTypeEnumStringScalarTypeResolver(): BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver
     {
-        if ($this->blockTypeAttributeFieldTypeEnumTypeResolver === null) {
-            /** @var BlockTypeAttributeFieldTypeEnumTypeResolver */
-            $blockTypeAttributeFieldTypeEnumTypeResolver = $this->instanceManager->getInstance(BlockTypeAttributeFieldTypeEnumTypeResolver::class);
-            $this->blockTypeAttributeFieldTypeEnumTypeResolver = $blockTypeAttributeFieldTypeEnumTypeResolver;
+        if ($this->blockTypeAttributeFieldTypeEnumStringScalarTypeResolver === null) {
+            /** @var BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver */
+            $blockTypeAttributeFieldTypeEnumStringScalarTypeResolver = $this->instanceManager->getInstance(BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver::class);
+            $this->blockTypeAttributeFieldTypeEnumStringScalarTypeResolver = $blockTypeAttributeFieldTypeEnumStringScalarTypeResolver;
         }
-        return $this->blockTypeAttributeFieldTypeEnumTypeResolver;
+        return $this->blockTypeAttributeFieldTypeEnumStringScalarTypeResolver;
     }
     final protected function getBlockTypeAttributeFieldTypeFilterInput(): BlockTypeAttributeFieldTypeFilterInput
     {
@@ -72,7 +72,7 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'fieldType' => $this->getBlockTypeAttributeFieldTypeEnumTypeResolver(),
+            'fieldType' => $this->getBlockTypeAttributeFieldTypeEnumStringScalarTypeResolver(),
             'autoGenerateControl' => $this->getBooleanScalarTypeResolver(),
         ];
     }

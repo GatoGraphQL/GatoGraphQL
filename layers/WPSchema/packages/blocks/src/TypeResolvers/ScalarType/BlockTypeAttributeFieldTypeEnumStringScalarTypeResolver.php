@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Blocks\TypeResolvers\EnumType;
+namespace PoPWPSchema\Blocks\TypeResolvers\ScalarType;
 
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
 use PoPWPSchema\Blocks\Enums\BlockTypeAttributeFieldType;
-use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
 
-class BlockTypeAttributeFieldTypeEnumTypeResolver extends AbstractEnumTypeResolver
+class BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'BlockTypeAttributeFieldTypeEnum';
+        return 'BlockTypeAttributeFieldTypeEnumString';
     }
 
-    public function getTypeDescription(): ?string
+    public function getEnumStringTypeDescription(): ?string
     {
-        return $this->__('JSON-Schema "type" of a block attribute', 'blocks');
+        return $this->__('JSON-Schema "type" of a block attribute. Includes `null`, so it can\'t be a GraphQL Enum (which disallows that name).', 'blocks');
     }
 
     /**
      * @return string[]
      */
-    public function getEnumValues(): array
+    public function getPossibleValues(): array
     {
         return [
             BlockTypeAttributeFieldType::STRING,

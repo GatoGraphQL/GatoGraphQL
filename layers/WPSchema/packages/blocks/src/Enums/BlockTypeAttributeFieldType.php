@@ -10,11 +10,11 @@ namespace PoPWPSchema\Blocks\Enums;
  */
 class BlockTypeAttributeFieldType
 {
-    public final const STRING = 'STRING';
-    public final const INTEGER = 'INTEGER';
-    public final const NUMBER = 'NUMBER';
-    public final const BOOLEAN = 'BOOLEAN';
-    public final const ARRAY = 'ARRAY';
-    public final const OBJECT = 'OBJECT';
-    public final const NULL = 'NULL';
+    public final const STRING = 'string';
+    public final const INTEGER = 'integer';
+    public final const NUMBER = 'number';
+    public final const BOOLEAN = 'boolean';
+    public final const ARRAY = 'array';
+    public final const OBJECT = 'object';
+    public final const NULL = 'null';
 }

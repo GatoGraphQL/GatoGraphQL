@@ -155,7 +155,7 @@
     filter: { names: "gatographql-testing/alert" }
   ) {
     name
-    attributes(filter: { fieldType: STRING }) {
+    attributes(filter: { fieldType: "string" }) {
       name
       fieldType
       default
@@ -171,7 +171,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
-    attributes(filter: { fieldType: STRING }) {
+    attributes(filter: { fieldType: "string" }) {
       name
       fieldType
       default
@@ -186,7 +186,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
-    attributes(filter: { fieldType: BOOLEAN }) {
+    attributes(filter: { fieldType: "boolean" }) {
       name
       fieldType
       default
@@ -200,7 +200,7 @@
     filter: { names: "gatographql-testing/author-box" }
   ) {
     name
-    attributes(filter: { fieldType: BOOLEAN }) {
+    attributes(filter: { fieldType: "boolean" }) {
       name
       fieldType
       default
@@ -215,7 +215,7 @@
     filter: { names: "gatographql-testing/author-box" }
   ) {
     name
-    attributes(filter: { fieldType: STRING }) {
+    attributes(filter: { fieldType: "string" }) {
       name
       fieldType
       default
@@ -232,7 +232,7 @@
     name
     attributes(
       filter: {
-        fieldType: STRING
+        fieldType: "string"
         autoGenerateControl: true
       }
     ) {
@@ -266,7 +266,7 @@
     }
   ) {
     name
-    attributes(filter: { fieldType: BOOLEAN }) {
+    attributes(filter: { fieldType: "boolean" }) {
       name
       fieldType
       default
@@ -283,7 +283,7 @@
     }
   ) {
     name
-    attributes(filter: { fieldType: STRING }) {
+    attributes(filter: { fieldType: "string" }) {
       name
       fieldType
       default

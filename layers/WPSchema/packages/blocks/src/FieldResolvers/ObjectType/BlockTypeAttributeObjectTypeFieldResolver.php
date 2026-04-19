@@ -15,15 +15,15 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPWPSchema\Blocks\ObjectModels\BlockTypeAttribute;
-use PoPWPSchema\Blocks\TypeResolvers\EnumType\BlockTypeAttributeFieldTypeEnumTypeResolver;
 use PoPWPSchema\Blocks\TypeResolvers\ObjectType\BlockTypeAttributeObjectTypeResolver;
+use PoPWPSchema\Blocks\TypeResolvers\ScalarType\BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver;
 
 class BlockTypeAttributeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
-    private ?BlockTypeAttributeFieldTypeEnumTypeResolver $blockTypeAttributeFieldTypeEnumTypeResolver = null;
+    private ?BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver $blockTypeAttributeFieldTypeEnumStringScalarTypeResolver = null;
 
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -52,14 +52,14 @@ class BlockTypeAttributeObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         }
         return $this->jsonObjectScalarTypeResolver;
     }
-    final protected function getBlockTypeAttributeFieldTypeEnumTypeResolver(): BlockTypeAttributeFieldTypeEnumTypeResolver
+    final protected function getBlockTypeAttributeFieldTypeEnumStringScalarTypeResolver(): BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver
     {
-        if ($this->blockTypeAttributeFieldTypeEnumTypeResolver === null) {
-            /** @var BlockTypeAttributeFieldTypeEnumTypeResolver */
-            $blockTypeAttributeFieldTypeEnumTypeResolver = $this->instanceManager->getInstance(BlockTypeAttributeFieldTypeEnumTypeResolver::class);
-            $this->blockTypeAttributeFieldTypeEnumTypeResolver = $blockTypeAttributeFieldTypeEnumTypeResolver;
+        if ($this->blockTypeAttributeFieldTypeEnumStringScalarTypeResolver === null) {
+            /** @var BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver */
+            $blockTypeAttributeFieldTypeEnumStringScalarTypeResolver = $this->instanceManager->getInstance(BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver::class);
+            $this->blockTypeAttributeFieldTypeEnumStringScalarTypeResolver = $blockTypeAttributeFieldTypeEnumStringScalarTypeResolver;
         }
-        return $this->blockTypeAttributeFieldTypeEnumTypeResolver;
+        return $this->blockTypeAttributeFieldTypeEnumStringScalarTypeResolver;
     }
 
     /**
@@ -120,7 +120,7 @@ class BlockTypeAttributeObjectTypeFieldResolver extends AbstractObjectTypeFieldR
             'autoGenerateControl'
                 => $this->getBooleanScalarTypeResolver(),
             'fieldType'
-                => $this->getBlockTypeAttributeFieldTypeEnumTypeResolver(),
+                => $this->getBlockTypeAttributeFieldTypeEnumStringScalarTypeResolver(),
             'default',
             'enum',
             'schema'
