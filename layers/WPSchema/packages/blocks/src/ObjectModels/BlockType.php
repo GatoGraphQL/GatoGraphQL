@@ -34,6 +34,11 @@ class BlockType extends AbstractTransientObject
 
     public function hasRenderCallback(): bool
     {
+        /**
+         * WP_Block_Type::$render_callback is stub-typed as non-nullable callable,
+         * but it can actually be null for blocks without a dynamic renderer.
+         * @phpstan-ignore function.alreadyNarrowedType
+         */
         return is_callable($this->blockType->render_callback);
     }
 

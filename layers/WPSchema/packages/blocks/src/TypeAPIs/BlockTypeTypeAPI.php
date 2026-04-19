@@ -72,6 +72,11 @@ class BlockTypeTypeAPI implements BlockTypeTypeAPIInterface
             $expected = (bool) $query['hasRenderCallback'];
             $registered = array_filter(
                 $registered,
+                /**
+                 * WP_Block_Type::$render_callback is stub-typed as non-nullable callable,
+                 * but it can actually be null for blocks without a dynamic renderer.
+                 * @phpstan-ignore function.alreadyNarrowedType
+                 */
                 static fn (WP_Block_Type $blockType): bool => is_callable($blockType->render_callback) === $expected,
             );
         }
