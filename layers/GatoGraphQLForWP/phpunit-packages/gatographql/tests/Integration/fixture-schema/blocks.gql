@@ -391,6 +391,98 @@
     blockFlattenedDataItems
   }
 
+  # Post containing several instances of PHP-only blocks (WP 7.0+),
+  # registered in PHP via `supports.autoRegister = true` and a `render_callback`:
+  #   - gatographql-testing/alert
+  #   - gatographql-testing/marquee
+  #   - gatographql-testing/author-box
+  phpOnlyBlocksPost: post(by: { id: 1200 }) {
+    id
+    title
+    blocks {
+      ...BlockData
+    }
+    blockDataItems
+    blockFlattenedDataItems
+  }
+
+  # Same post, only PHP-only block instances
+  phpOnlyBlocksPostFiltered: post(by: { id: 1200 }) {
+    id
+    title
+    blocks(
+      filterBy: {
+        include: [
+          "gatographql-testing/alert",
+          "gatographql-testing/marquee",
+          "gatographql-testing/author-box"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+    blockDataItems(
+      filterBy: {
+        include: [
+          "gatographql-testing/alert",
+          "gatographql-testing/marquee",
+          "gatographql-testing/author-box"
+        ]
+      }
+    )
+    blockFlattenedDataItems(
+      filterBy: {
+        include: [
+          "gatographql-testing/alert",
+          "gatographql-testing/marquee",
+          "gatographql-testing/author-box"
+        ]
+      }
+    )
+  }
+
+  # Same post, only the alert blocks
+  phpOnlyBlocksPostAlertsOnly: post(by: { id: 1200 }) {
+    id
+    blocks(
+      filterBy: {
+        include: "gatographql-testing/alert"
+      }
+    ) {
+      ...BlockData
+    }
+    blockDataItems(
+      filterBy: {
+        include: "gatographql-testing/alert"
+      }
+    )
+  }
+
+  # Same post, excluding all PHP-only blocks (only headings/paragraphs remain)
+  phpOnlyBlocksPostExcludingPhpOnly: post(by: { id: 1200 }) {
+    id
+    blocks(
+      filterBy: {
+        exclude: [
+          "gatographql-testing/alert",
+          "gatographql-testing/marquee",
+          "gatographql-testing/author-box"
+        ]
+      }
+    ) {
+      ...BlockData
+    }
+    blockDataItems(
+      filterBy: {
+        exclude: [
+          "gatographql-testing/alert",
+          "gatographql-testing/marquee",
+          "gatographql-testing/author-box"
+        ]
+      }
+    )
+  }
+
   # Test converting the "U+00A0" character to "&nbsp;" entity or not.
   blockWithCorruptedNonBreakingSpace: post(by: { id: 1146 }) {
     id
