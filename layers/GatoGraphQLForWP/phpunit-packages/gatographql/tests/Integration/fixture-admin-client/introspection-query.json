@@ -47,6 +47,317 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "BlockType",
+                    "description": "A block type registered in the WordPress block registry",
+                    "fields": [
+                        {
+                            "name": "attributeNames",
+                            "description": "The names of the block's registered attributes",
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter the attributes of a block type",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "BlockTypeAttributesFilterInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[String!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[String!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "attributes",
+                            "description": "The block's registered attributes",
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter the attributes of a block type",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "BlockTypeAttributesFilterInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[BlockTypeAttribute!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[BlockTypeAttribute!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "BlockTypeAttribute!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "BlockTypeAttribute",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "hasRenderCallback",
+                            "description": "Whether this block has a registered `render_callback` (i.e. is a dynamic\/PHP-rendered block)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "name",
+                            "description": "Block name (e.g. \"core\/paragraph\")",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "supports",
+                            "description": "Block \"supports\" configuration as registered in `block.json`, returned as a JSON object",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "JSONObject!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "BlockTypeAttribute",
+                    "description": "A registered attribute of a block type, as defined in its block.json schema",
+                    "fields": [
+                        {
+                            "name": "autoGenerateControl",
+                            "description": "Whether WordPress auto-generates an editor control for this attribute (PHP-only blocks, WP 7.0+)",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "blockTypeName",
+                            "description": "Name of the block type owning this attribute",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "default",
+                            "description": "Default value of the attribute",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "JSONObject",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "enum",
+                            "description": "Allowed values, if the attribute is restricted to an enum",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[JSONObject]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "fieldType",
+                            "description": "JSON-Schema \"type\" of the attribute (e.g. \"string\", \"boolean\"). Returns the first type if it's a union.",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "BlockTypeAttributeFieldTypeEnumString",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "label",
+                            "description": "Human-readable label for the attribute (used by auto-generated controls in WP 7.0+)",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "name",
+                            "description": "Attribute name",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "role",
+                            "description": "Attribute role (e.g. \"local\", \"content\")",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "schema",
+                            "description": "Full attribute schema as a JSON object",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "JSONObject!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "source",
+                            "description": "Where the attribute value is parsed from (e.g. \"attribute\", \"html\", \"text\"); null when stored in block-comment delimiters",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "CategoryTermDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested category does not exist\"",
                     "fields": [
@@ -15734,6 +16045,46 @@
                     "description": "Query type, starting from which the query is executed",
                     "fields": [
                         {
+                            "name": "blockTypes",
+                            "description": "All registered block types in the WordPress block registry",
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter the registered block types",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "RootBlockTypesFilterInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[BlockType!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[BlockType!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "BlockType!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "BlockType",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "capabilities",
                             "description": "All user capabilities",
                             "args": [],
@@ -19761,6 +20112,46 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootAddUserMetaMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "blockTypes",
+                            "description": "All registered block types in the WordPress block registry",
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "description": "Input to filter the registered block types",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "RootBlockTypesFilterInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[BlockType!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[BlockType!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "BlockType!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "BlockType",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -35833,6 +36224,16 @@
                 },
                 {
                     "kind": "SCALAR",
+                    "name": "BlockTypeAttributeFieldTypeEnumString",
+                    "description": "JSON-Schema \"type\" of a block attribute. Includes `null`, so it can't be a GraphQL Enum (which disallows that name).. Possible values: `array`, `boolean`, `integer`, `null`, `number`, `object`, `string`.",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
                     "name": "Boolean",
                     "description": "The Boolean scalar type represents `true` or `false`.",
                     "fields": null,
@@ -37848,6 +38249,170 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockTypeAttributesFilterInput",
+                    "description": "Input to filter the attributes of a block type",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "autoGenerateControl",
+                            "description": "Filter attributes that have (or do not have) an auto-generated editor control. Available since WordPress 7.0.",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "fieldTypes",
+                            "description": "Filter attributes by their JSON-Schema \"type\" property. An attribute matches if any of its declared types is in the provided list.",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[BlockTypeAttributeFieldTypeEnumString!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "BlockTypeAttributeFieldTypeEnumString!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "BlockTypeAttributeFieldTypeEnumString",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "hasEnum",
+                            "description": "Filter attributes that are (or are not) restricted to a list of allowed values via the `enum` schema property",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockTypeSupportsFilterInput",
+                    "description": "Filter block types by their `supports` configuration",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "align",
+                            "description": "Filter blocks supporting alignment",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "anchor",
+                            "description": "Filter blocks supporting the `anchor` attribute",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "autoRegister",
+                            "description": "Filter blocks registered fully in PHP (PHP-only blocks). Available since WordPress 7.0.",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "className",
+                            "description": "Filter blocks supporting the auto-generated className",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "customClassName",
+                            "description": "Filter blocks supporting a custom className",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "html",
+                            "description": "Filter blocks supporting direct HTML editing",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "inserter",
+                            "description": "Filter blocks shown in the inserter",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "multiple",
+                            "description": "Filter blocks that may be inserted multiple times in a post",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "reusable",
+                            "description": "Filter blocks that can be converted into reusable blocks",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
                                 "isOneOf": false,
                                 "ofType": null
                             },
@@ -41231,6 +41796,92 @@
                                     "isOneOf": false,
                                     "ofType": null
                                 }
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootBlockTypesFilterInput",
+                    "description": "Input to filter the registered block types",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "excludeNames",
+                            "description": "Exclude block types with these names",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "hasRenderCallback",
+                            "description": "Filter blocks that do (or do not) have a registered `render_callback`",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "nameSearch",
+                            "description": "Filter block types whose name contains the given substring",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "names",
+                            "description": "Limit results to block types with these names (e.g. \"core\/paragraph\")",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "supports",
+                            "description": "Filter by `supports` configuration. e.g. `{ autoRegister: true }` returns PHP-only blocks (WP 7.0+)",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "BlockTypeSupportsFilterInput",
+                                "isOneOf": false,
+                                "ofType": null
                             },
                             "defaultValue": null
                         }

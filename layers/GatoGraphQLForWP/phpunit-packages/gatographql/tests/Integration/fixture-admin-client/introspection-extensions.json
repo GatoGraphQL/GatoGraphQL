@@ -26,6 +26,164 @@
                     "enumValues": null
                 },
                 {
+                    "name": "BlockType",
+                    "extensions": {
+                        "elementName": "BlockType",
+                        "namespacedName": "BlockType",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "attributeNames",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "attributes",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "hasRenderCallback",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "supports",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "BlockTypeAttribute",
+                    "extensions": {
+                        "elementName": "BlockTypeAttribute",
+                        "namespacedName": "BlockTypeAttribute",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "autoGenerateControl",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "blockTypeName",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "default",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "enum",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "fieldType",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "label",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "role",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "schema",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "source",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "CategoryTermDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "CategoryTermDoesNotExistErrorPayload",
@@ -6524,6 +6682,21 @@
                     },
                     "fields": [
                         {
+                            "name": "blockTypes",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "capabilities",
                             "extensions": {
                                 "isMutation": false,
@@ -8218,6 +8391,21 @@
                                 },
                                 {
                                     "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "blockTypes",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -15436,6 +15624,25 @@
                     "enumValues": null
                 },
                 {
+                    "name": "BlockTypeAttributeFieldTypeEnumString",
+                    "extensions": {
+                        "elementName": "BlockTypeAttributeFieldTypeEnumString",
+                        "namespacedName": "BlockTypeAttributeFieldTypeEnumString",
+                        "possibleValues": [
+                            "array",
+                            "boolean",
+                            "integer",
+                            "null",
+                            "number",
+                            "object",
+                            "string"
+                        ]
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "Boolean",
                     "extensions": {
                         "elementName": "Boolean",
@@ -16315,6 +16522,102 @@
                         },
                         {
                             "name": "username",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "BlockTypeAttributesFilterInput",
+                    "extensions": {
+                        "elementName": "BlockTypeAttributesFilterInput",
+                        "namespacedName": "BlockTypeAttributesFilterInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "autoGenerateControl",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "fieldTypes",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "hasEnum",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "BlockTypeSupportsFilterInput",
+                    "extensions": {
+                        "elementName": "BlockTypeSupportsFilterInput",
+                        "namespacedName": "BlockTypeSupportsFilterInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "align",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "anchor",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "autoRegister",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "className",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "customClassName",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "html",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "inserter",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "multiple",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "reusable",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -18199,6 +18502,48 @@
                         },
                         {
                             "name": "value",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootBlockTypesFilterInput",
+                    "extensions": {
+                        "elementName": "RootBlockTypesFilterInput",
+                        "namespacedName": "RootBlockTypesFilterInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "excludeNames",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "hasRenderCallback",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "nameSearch",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "names",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "supports",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
