@@ -10,6 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoPWPSchema\Blocks\FilterInputs\BlockTypeAttributeAutoGenerateControlFilterInput;
 use PoPWPSchema\Blocks\FilterInputs\BlockTypeAttributeFieldTypeFilterInput;
+use PoPWPSchema\Blocks\FilterInputs\BlockTypeAttributeHasEnumFilterInput;
 use PoPWPSchema\Blocks\TypeResolvers\ScalarType\BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver;
 
 class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
@@ -18,6 +19,7 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
     private ?BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver $blockTypeAttributeFieldTypeEnumStringScalarTypeResolver = null;
     private ?BlockTypeAttributeFieldTypeFilterInput $blockTypeAttributeFieldTypeFilterInput = null;
     private ?BlockTypeAttributeAutoGenerateControlFilterInput $blockTypeAttributeAutoGenerateControlFilterInput = null;
+    private ?BlockTypeAttributeHasEnumFilterInput $blockTypeAttributeHasEnumFilterInput = null;
 
     final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
@@ -55,6 +57,15 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
         }
         return $this->blockTypeAttributeAutoGenerateControlFilterInput;
     }
+    final protected function getBlockTypeAttributeHasEnumFilterInput(): BlockTypeAttributeHasEnumFilterInput
+    {
+        if ($this->blockTypeAttributeHasEnumFilterInput === null) {
+            /** @var BlockTypeAttributeHasEnumFilterInput */
+            $blockTypeAttributeHasEnumFilterInput = $this->instanceManager->getInstance(BlockTypeAttributeHasEnumFilterInput::class);
+            $this->blockTypeAttributeHasEnumFilterInput = $blockTypeAttributeHasEnumFilterInput;
+        }
+        return $this->blockTypeAttributeHasEnumFilterInput;
+    }
 
     public function getTypeName(): string
     {
@@ -74,6 +85,7 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
         return [
             'fieldType' => $this->getBlockTypeAttributeFieldTypeEnumStringScalarTypeResolver(),
             'autoGenerateControl' => $this->getBooleanScalarTypeResolver(),
+            'hasEnum' => $this->getBooleanScalarTypeResolver(),
         ];
     }
 
@@ -82,6 +94,7 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
         return match ($inputFieldName) {
             'fieldType' => $this->__('Filter attributes by their JSON-Schema "type" property', 'blocks'),
             'autoGenerateControl' => $this->__('Filter attributes that have (or do not have) an auto-generated editor control. Available since WordPress 7.0.', 'blocks'),
+            'hasEnum' => $this->__('Filter attributes that are (or are not) restricted to a list of allowed values via the `enum` schema property', 'blocks'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -91,6 +104,7 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
         return match ($inputFieldName) {
             'fieldType' => $this->getBlockTypeAttributeFieldTypeFilterInput(),
             'autoGenerateControl' => $this->getBlockTypeAttributeAutoGenerateControlFilterInput(),
+            'hasEnum' => $this->getBlockTypeAttributeHasEnumFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

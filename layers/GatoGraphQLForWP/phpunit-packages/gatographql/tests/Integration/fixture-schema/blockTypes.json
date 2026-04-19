@@ -2524,6 +2524,81 @@
                 ]
             }
         ],
+        "marqueeStringNonEnumAttributes": [
+            {
+                "name": "gatographql-testing\/marquee",
+                "attributes": [
+                    {
+                        "name": "text",
+                        "fieldType": "string",
+                        "default": "Your scrolling text here \u2014",
+                        "enum": null
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "fontSize",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    }
+                ]
+            }
+        ],
+        "marqueeStringEnumAttributes": [
+            {
+                "name": "gatographql-testing\/marquee",
+                "attributes": [
+                    {
+                        "name": "speed",
+                        "fieldType": "string",
+                        "default": "Medium",
+                        "enum": [
+                            "Slow",
+                            "Medium",
+                            "Fast"
+                        ]
+                    },
+                    {
+                        "name": "direction",
+                        "fieldType": "string",
+                        "default": "Left",
+                        "enum": [
+                            "Left",
+                            "Right"
+                        ]
+                    },
+                    {
+                        "name": "align",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ]
+                    }
+                ]
+            }
+        ],
         "marqueeBooleanAttributes": [
             {
                 "name": "gatographql-testing\/marquee",

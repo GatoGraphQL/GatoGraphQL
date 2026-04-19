@@ -196,6 +196,18 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
                     );
                 }
 
+                if (array_key_exists('hasEnum', $query)) {
+                    $expected = (bool) $query['hasEnum'];
+                    $attributes = array_filter(
+                        $attributes,
+                        static function (array $schema) use ($expected): bool {
+                            $enum = $schema['enum'] ?? null;
+                            $hasEnum = is_array($enum) && $enum !== [];
+                            return $hasEnum === $expected;
+                        },
+                    );
+                }
+
                 /**
                  * BlockTypeAttribute is a Transient Object: instantiating it
                  * auto-registers it in the Object Dictionary, so the DataLoader

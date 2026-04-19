@@ -178,6 +178,32 @@
     }
   }
 
+  # Marquee: string attributes that are NOT restricted to an enum (`text`)
+  marqueeStringNonEnumAttributes: blockTypes(
+    filter: { names: "gatographql-testing/marquee" }
+  ) {
+    name
+    attributes(filter: { fieldType: "string", hasEnum: false }) {
+      name
+      fieldType
+      default
+      enum
+    }
+  }
+
+  # Marquee: string attributes that ARE restricted to an enum (`speed`, `direction`)
+  marqueeStringEnumAttributes: blockTypes(
+    filter: { names: "gatographql-testing/marquee" }
+  ) {
+    name
+    attributes(filter: { fieldType: "string", hasEnum: true }) {
+      name
+      fieldType
+      default
+      enum
+    }
+  }
+
   # ----------------------------------------------------------------
   # Marquee: only BOOLEAN attributes (none expected)
   # ----------------------------------------------------------------
