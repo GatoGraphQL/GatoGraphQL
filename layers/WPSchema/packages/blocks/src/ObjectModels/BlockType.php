@@ -11,8 +11,8 @@ use WP_Block_Type;
  * Wraps a WP_Block_Type instance from `WP_Block_Type_Registry`,
  * exposing its registered properties to the GraphQL schema.
  *
- * Block types have no DB ID, so they're handled as Transient Objects:
- * the parent auto-generates a counter-based ID and the instance is
+ * Block types have no DB ID, so they're handled as Transient Objects,
+ * using the (globally unique) block name as ID. The instance is
  * auto-registered in the Object Dictionary upon construction
  * (see AbstractTransientObject).
  */
@@ -21,7 +21,7 @@ class BlockType extends AbstractTransientObject
     public function __construct(
         public readonly WP_Block_Type $blockType,
     ) {
-        parent::__construct();
+        parent::__construct($blockType->name);
     }
 
     /**
