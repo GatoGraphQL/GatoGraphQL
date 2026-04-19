@@ -475,6 +475,7 @@
                     }
                 },
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity",
                     "dismissible",
@@ -486,6 +487,17 @@
                     "textColor"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
                     {
                         "name": "message",
                         "blockTypeName": "gatographql-testing\/alert",
@@ -1426,6 +1438,7 @@
                     }
                 },
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity",
                     "dismissible",
@@ -1437,6 +1450,17 @@
                     "textColor"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
                     {
                         "name": "message",
                         "blockTypeName": "gatographql-testing\/alert",
@@ -1921,6 +1945,7 @@
                     }
                 },
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity",
                     "dismissible",
@@ -1932,6 +1957,17 @@
                     "textColor"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
                     {
                         "name": "message",
                         "blockTypeName": "gatographql-testing\/alert",
@@ -2413,6 +2449,7 @@
                     }
                 },
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity",
                     "dismissible",
@@ -2424,6 +2461,17 @@
                     "textColor"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
                     {
                         "name": "message",
                         "blockTypeName": "gatographql-testing\/alert",
@@ -2535,6 +2583,7 @@
             {
                 "name": "gatographql-testing\/alert",
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity",
                     "className",
@@ -2542,6 +2591,13 @@
                     "textColor"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "default": "Notice",
+                        "label": "Header",
+                        "enum": null
+                    },
                     {
                         "name": "message",
                         "fieldType": "string",
@@ -2754,6 +2810,7 @@
             {
                 "name": "gatographql-testing\/alert",
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity",
                     "dismissible",
@@ -2762,6 +2819,11 @@
                     "textColor"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "default": "Notice"
+                    },
                     {
                         "name": "message",
                         "fieldType": "string",
@@ -2893,10 +2955,18 @@
             {
                 "name": "gatographql-testing\/alert",
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "autoGenerateControl": true,
+                        "default": "Notice",
+                        "label": "Header"
+                    },
                     {
                         "name": "message",
                         "fieldType": "string",
@@ -3008,6 +3078,7 @@
             {
                 "name": "gatographql-testing\/alert",
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity",
                     "className",
@@ -3015,6 +3086,12 @@
                     "textColor"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "default": "Notice",
+                        "enum": null
+                    },
                     {
                         "name": "message",
                         "fieldType": "string",
@@ -3188,6 +3265,7 @@
             {
                 "name": "gatographql-testing\/alert",
                 "attributeNames": [
+                    "header",
                     "message",
                     "severity",
                     "dismissible",
@@ -3199,6 +3277,23 @@
                     "textColor"
                 ],
                 "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Notice",
+                            "label": "Header",
+                            "autoGenerateControl": true
+                        }
+                    },
                     {
                         "name": "message",
                         "blockTypeName": "gatographql-testing\/alert",
