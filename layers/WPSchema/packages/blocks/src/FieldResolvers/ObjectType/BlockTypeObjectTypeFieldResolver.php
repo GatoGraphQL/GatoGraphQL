@@ -95,6 +95,7 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
             'supports',
             'hasRenderCallback',
             'attributes',
+            'attributeNames',
         ];
     }
 
@@ -105,6 +106,7 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
             'supports' => $this->__('Block "supports" configuration as registered in `block.json`, returned as a JSON object', 'blocks'),
             'hasRenderCallback' => $this->__('Whether this block has a registered `render_callback` (i.e. is a dynamic/PHP-rendered block)', 'blocks'),
             'attributes' => $this->__('The block\'s registered attributes', 'blocks'),
+            'attributeNames' => $this->__('The names of the block\'s registered attributes', 'blocks'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -112,7 +114,9 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'name' => $this->getStringScalarTypeResolver(),
+            'name',
+            'attributeNames'
+                => $this->getStringScalarTypeResolver(),
             'supports' => $this->getJSONObjectScalarTypeResolver(),
             'hasRenderCallback' => $this->getBooleanScalarTypeResolver(),
             'attributes' => $this->getBlockTypeAttributeObjectTypeResolver(),
@@ -127,7 +131,8 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
             'supports',
             'hasRenderCallback'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'attributes'
+            'attributes',
+            'attributeNames'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -141,12 +146,14 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'attributes' => array_merge(
-                $fieldArgNameTypeResolvers,
-                [
-                    'filter' => $this->getBlockTypeAttributesFilterInputObjectTypeResolver(),
-                ],
-            ),
+            'attributes',
+            'attributeNames'
+                => array_merge(
+                    $fieldArgNameTypeResolvers,
+                    [
+                        'filter' => $this->getBlockTypeAttributesFilterInputObjectTypeResolver(),
+                    ],
+                ),
             default => $fieldArgNameTypeResolvers,
         };
     }
@@ -170,44 +177,7 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
                 return $blockType->hasRenderCallback();
 
             case 'attributes':
-                $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
-                $attributes = $blockType->getAttributes();
-
-                /** @var string[]|null */
-                $expectedFieldTypes = $query['fieldTypes'] ?? null;
-                if ($expectedFieldTypes !== null && $expectedFieldTypes !== []) {
-                    $attributes = array_filter(
-                        $attributes,
-                        static function (array $schema) use ($expectedFieldTypes): bool {
-                            $type = $schema['type'] ?? null;
-                            if (is_array($type)) {
-                                return array_intersect($expectedFieldTypes, $type) !== [];
-                            }
-                            return in_array($type, $expectedFieldTypes, true);
-                        },
-                    );
-                }
-
-                if (array_key_exists('autoGenerateControl', $query)) {
-                    $expected = (bool) $query['autoGenerateControl'];
-                    $attributes = array_filter(
-                        $attributes,
-                        static fn (array $schema): bool => !empty($schema['autoGenerateControl']) === $expected,
-                    );
-                }
-
-                if (array_key_exists('hasEnum', $query)) {
-                    $expected = (bool) $query['hasEnum'];
-                    $attributes = array_filter(
-                        $attributes,
-                        static function (array $schema) use ($expected): bool {
-                            $enum = $schema['enum'] ?? null;
-                            $hasEnum = is_array($enum) && $enum !== [];
-                            return $hasEnum === $expected;
-                        },
-                    );
-                }
-
+                $attributes = $this->getFilteredAttributes($blockType, $objectTypeResolver, $fieldDataAccessor);
                 /**
                  * BlockTypeAttribute is a Transient Object: instantiating it
                  * auto-registers it in the Object Dictionary, so the DataLoader
@@ -219,9 +189,68 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
                     $ids[] = $attribute->getID();
                 }
                 return $ids;
+
+            case 'attributeNames':
+                $attributes = $this->getFilteredAttributes($blockType, $objectTypeResolver, $fieldDataAccessor);
+                return array_map(
+                    static fn (int|string $attributeName): string => (string) $attributeName,
+                    array_keys($attributes),
+                );
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * Apply the `filter` input arg shared by `attributes` and `attributeNames`
+     * against the BlockType's raw attribute schemas.
+     *
+     * @return array<string,array<string,mixed>>
+     */
+    protected function getFilteredAttributes(
+        BlockType $blockType,
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array {
+        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
+        $attributes = $blockType->getAttributes();
+
+        /** @var string[]|null */
+        $expectedFieldTypes = $query['fieldTypes'] ?? null;
+        if ($expectedFieldTypes !== null && $expectedFieldTypes !== []) {
+            $attributes = array_filter(
+                $attributes,
+                static function (array $schema) use ($expectedFieldTypes): bool {
+                    $type = $schema['type'] ?? null;
+                    if (is_array($type)) {
+                        return array_intersect($expectedFieldTypes, $type) !== [];
+                    }
+                    return in_array($type, $expectedFieldTypes, true);
+                },
+            );
+        }
+
+        if (array_key_exists('autoGenerateControl', $query)) {
+            $expected = (bool) $query['autoGenerateControl'];
+            $attributes = array_filter(
+                $attributes,
+                static fn (array $schema): bool => !empty($schema['autoGenerateControl']) === $expected,
+            );
+        }
+
+        if (array_key_exists('hasEnum', $query)) {
+            $expected = (bool) $query['hasEnum'];
+            $attributes = array_filter(
+                $attributes,
+                static function (array $schema) use ($expected): bool {
+                    $enum = $schema['enum'] ?? null;
+                    $hasEnum = is_array($enum) && $enum !== [];
+                    return $hasEnum === $expected;
+                },
+            );
+        }
+
+        return $attributes;
     }
 
     /**
