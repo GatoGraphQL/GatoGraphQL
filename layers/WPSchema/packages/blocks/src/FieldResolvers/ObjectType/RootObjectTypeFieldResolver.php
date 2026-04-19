@@ -13,6 +13,9 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\Root\App;
+use PoPWPSchema\Blocks\Module;
+use PoPWPSchema\Blocks\ModuleConfiguration;
 use PoPWPSchema\Blocks\ObjectModels\BlockType;
 use PoPWPSchema\Blocks\TypeAPIs\BlockTypeTypeAPIInterface;
 use PoPWPSchema\Blocks\TypeResolvers\InputObjectType\RootBlockTypesFilterInputObjectTypeResolver;
@@ -70,6 +73,20 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return [
             'blockTypes',
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldNames = parent::getSensitiveFieldNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatBlockTypesAsSensitiveData()) {
+            $sensitiveFieldNames[] = 'blockTypes';
+        }
+        return $sensitiveFieldNames;
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
