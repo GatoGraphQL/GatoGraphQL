@@ -10056,6 +10056,866 @@
                 }
             ]
         },
+        "phpOnlyBlocksPost": {
+            "id": 1200,
+            "title": "PHP-only blocks",
+            "blocks": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Alert blocks",
+                        "level": 2
+                    },
+                    "contentSource": "<!-- wp:heading {\"content\":\"Alert blocks\",\"level\":2} -->\n<h2 class=\"wp-block-heading\">Alert blocks<\/h2>\n<!-- \/wp:heading -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister<\/code> support flag.",
+                        "dropCap": false
+                    },
+                    "contentSource": "<!-- wp:paragraph {\"content\":\"The three blocks below are registered fully in PHP via WordPress 7.0's \\u003ccode\\u003eautoRegister\\u003c\/code\\u003e support flag.\",\"dropCap\":false} -->\n<p>The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister<\/code> support flag.<\/p>\n<!-- \/wp:paragraph -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Heads up",
+                        "message": "Heads up \u2014 this is an informational notice.",
+                        "severity": "Info",
+                        "dismissible": false
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Heads up\",\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Deprecation warning",
+                        "message": "Be careful: deprecated API in use.",
+                        "severity": "Warning",
+                        "dismissible": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Deprecation warning\",\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Request failed",
+                        "message": "Something went wrong while processing your request.",
+                        "severity": "Error",
+                        "dismissible": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Request failed\",\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Saved",
+                        "message": "Your changes have been saved successfully.",
+                        "severity": "Success",
+                        "dismissible": false
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Saved\",\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Marquee blocks",
+                        "level": 2
+                    },
+                    "contentSource": "<!-- wp:heading {\"content\":\"Marquee blocks\",\"level\":2} -->\n<h2 class=\"wp-block-heading\">Marquee blocks<\/h2>\n<!-- \/wp:heading -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Welcome to Gato GraphQL \u2014 the GraphQL server for WordPress",
+                        "speed": "Slow",
+                        "direction": "Left"
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/marquee {\"text\":\"Welcome to Gato GraphQL \u2014 the GraphQL server for WordPress\",\"speed\":\"Slow\",\"direction\":\"Left\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Breaking news scrolling fast to the right",
+                        "speed": "Fast",
+                        "direction": "Right"
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/marquee {\"text\":\"Breaking news scrolling fast to the right\",\"speed\":\"Fast\",\"direction\":\"Right\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Default speed marquee",
+                        "speed": "Medium",
+                        "direction": "Left"
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/marquee {\"text\":\"Default speed marquee\",\"speed\":\"Medium\",\"direction\":\"Left\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Author Box blocks",
+                        "level": 2
+                    },
+                    "contentSource": "<!-- wp:heading {\"content\":\"Author Box blocks\",\"level\":2} -->\n<h2 class=\"wp-block-heading\">Author Box blocks<\/h2>\n<!-- \/wp:heading -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "blogger",
+                        "showAvatar": true,
+                        "showBio": true,
+                        "showEmail": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/author-box {\"userLogin\":\"blogger\",\"showAvatar\":true,\"showBio\":true,\"showEmail\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "editor",
+                        "showAvatar": true,
+                        "showBio": false,
+                        "showEmail": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/author-box {\"userLogin\":\"editor\",\"showAvatar\":true,\"showBio\":false,\"showEmail\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "author",
+                        "showAvatar": false,
+                        "showBio": true,
+                        "showEmail": false
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/author-box {\"userLogin\":\"author\",\"showAvatar\":false,\"showBio\":true,\"showEmail\":false} \/-->",
+                    "innerBlocks": null
+                }
+            ],
+            "blockDataItems": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Alert blocks",
+                        "level": 2
+                    }
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister<\/code> support flag.",
+                        "dropCap": false
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Heads up",
+                        "message": "Heads up \u2014 this is an informational notice.",
+                        "severity": "Info",
+                        "dismissible": false
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Deprecation warning",
+                        "message": "Be careful: deprecated API in use.",
+                        "severity": "Warning",
+                        "dismissible": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Request failed",
+                        "message": "Something went wrong while processing your request.",
+                        "severity": "Error",
+                        "dismissible": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Saved",
+                        "message": "Your changes have been saved successfully.",
+                        "severity": "Success",
+                        "dismissible": false
+                    }
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Marquee blocks",
+                        "level": 2
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Welcome to Gato GraphQL \u2014 the GraphQL server for WordPress",
+                        "speed": "Slow",
+                        "direction": "Left"
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Breaking news scrolling fast to the right",
+                        "speed": "Fast",
+                        "direction": "Right"
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Default speed marquee",
+                        "speed": "Medium",
+                        "direction": "Left"
+                    }
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Author Box blocks",
+                        "level": 2
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "blogger",
+                        "showAvatar": true,
+                        "showBio": true,
+                        "showEmail": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "editor",
+                        "showAvatar": true,
+                        "showBio": false,
+                        "showEmail": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "author",
+                        "showAvatar": false,
+                        "showBio": true,
+                        "showEmail": false
+                    }
+                }
+            ],
+            "blockFlattenedDataItems": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Alert blocks",
+                        "level": 2
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister<\/code> support flag.",
+                        "dropCap": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Heads up",
+                        "message": "Heads up \u2014 this is an informational notice.",
+                        "severity": "Info",
+                        "dismissible": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Deprecation warning",
+                        "message": "Be careful: deprecated API in use.",
+                        "severity": "Warning",
+                        "dismissible": true
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Request failed",
+                        "message": "Something went wrong while processing your request.",
+                        "severity": "Error",
+                        "dismissible": true
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Saved",
+                        "message": "Your changes have been saved successfully.",
+                        "severity": "Success",
+                        "dismissible": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Marquee blocks",
+                        "level": 2
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Welcome to Gato GraphQL \u2014 the GraphQL server for WordPress",
+                        "speed": "Slow",
+                        "direction": "Left"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Breaking news scrolling fast to the right",
+                        "speed": "Fast",
+                        "direction": "Right"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Default speed marquee",
+                        "speed": "Medium",
+                        "direction": "Left"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Author Box blocks",
+                        "level": 2
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "blogger",
+                        "showAvatar": true,
+                        "showBio": true,
+                        "showEmail": true
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "editor",
+                        "showAvatar": true,
+                        "showBio": false,
+                        "showEmail": true
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "author",
+                        "showAvatar": false,
+                        "showBio": true,
+                        "showEmail": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                }
+            ]
+        },
+        "phpOnlyBlocksPostFiltered": {
+            "id": 1200,
+            "title": "PHP-only blocks",
+            "blocks": [
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Heads up",
+                        "message": "Heads up \u2014 this is an informational notice.",
+                        "severity": "Info",
+                        "dismissible": false
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Heads up\",\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Deprecation warning",
+                        "message": "Be careful: deprecated API in use.",
+                        "severity": "Warning",
+                        "dismissible": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Deprecation warning\",\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Request failed",
+                        "message": "Something went wrong while processing your request.",
+                        "severity": "Error",
+                        "dismissible": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Request failed\",\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Saved",
+                        "message": "Your changes have been saved successfully.",
+                        "severity": "Success",
+                        "dismissible": false
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Saved\",\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Welcome to Gato GraphQL \u2014 the GraphQL server for WordPress",
+                        "speed": "Slow",
+                        "direction": "Left"
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/marquee {\"text\":\"Welcome to Gato GraphQL \u2014 the GraphQL server for WordPress\",\"speed\":\"Slow\",\"direction\":\"Left\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Breaking news scrolling fast to the right",
+                        "speed": "Fast",
+                        "direction": "Right"
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/marquee {\"text\":\"Breaking news scrolling fast to the right\",\"speed\":\"Fast\",\"direction\":\"Right\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Default speed marquee",
+                        "speed": "Medium",
+                        "direction": "Left"
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/marquee {\"text\":\"Default speed marquee\",\"speed\":\"Medium\",\"direction\":\"Left\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "blogger",
+                        "showAvatar": true,
+                        "showBio": true,
+                        "showEmail": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/author-box {\"userLogin\":\"blogger\",\"showAvatar\":true,\"showBio\":true,\"showEmail\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "editor",
+                        "showAvatar": true,
+                        "showBio": false,
+                        "showEmail": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/author-box {\"userLogin\":\"editor\",\"showAvatar\":true,\"showBio\":false,\"showEmail\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "author",
+                        "showAvatar": false,
+                        "showBio": true,
+                        "showEmail": false
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/author-box {\"userLogin\":\"author\",\"showAvatar\":false,\"showBio\":true,\"showEmail\":false} \/-->",
+                    "innerBlocks": null
+                }
+            ],
+            "blockDataItems": [
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Heads up",
+                        "message": "Heads up \u2014 this is an informational notice.",
+                        "severity": "Info",
+                        "dismissible": false
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Deprecation warning",
+                        "message": "Be careful: deprecated API in use.",
+                        "severity": "Warning",
+                        "dismissible": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Request failed",
+                        "message": "Something went wrong while processing your request.",
+                        "severity": "Error",
+                        "dismissible": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Saved",
+                        "message": "Your changes have been saved successfully.",
+                        "severity": "Success",
+                        "dismissible": false
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Welcome to Gato GraphQL \u2014 the GraphQL server for WordPress",
+                        "speed": "Slow",
+                        "direction": "Left"
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Breaking news scrolling fast to the right",
+                        "speed": "Fast",
+                        "direction": "Right"
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Default speed marquee",
+                        "speed": "Medium",
+                        "direction": "Left"
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "blogger",
+                        "showAvatar": true,
+                        "showBio": true,
+                        "showEmail": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "editor",
+                        "showAvatar": true,
+                        "showBio": false,
+                        "showEmail": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "author",
+                        "showAvatar": false,
+                        "showBio": true,
+                        "showEmail": false
+                    }
+                }
+            ],
+            "blockFlattenedDataItems": [
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Heads up",
+                        "message": "Heads up \u2014 this is an informational notice.",
+                        "severity": "Info",
+                        "dismissible": false
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Deprecation warning",
+                        "message": "Be careful: deprecated API in use.",
+                        "severity": "Warning",
+                        "dismissible": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Request failed",
+                        "message": "Something went wrong while processing your request.",
+                        "severity": "Error",
+                        "dismissible": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Saved",
+                        "message": "Your changes have been saved successfully.",
+                        "severity": "Success",
+                        "dismissible": false
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Welcome to Gato GraphQL \u2014 the GraphQL server for WordPress",
+                        "speed": "Slow",
+                        "direction": "Left"
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Breaking news scrolling fast to the right",
+                        "speed": "Fast",
+                        "direction": "Right"
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/marquee",
+                    "attributes": {
+                        "text": "Default speed marquee",
+                        "speed": "Medium",
+                        "direction": "Left"
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "blogger",
+                        "showAvatar": true,
+                        "showBio": true,
+                        "showEmail": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "editor",
+                        "showAvatar": true,
+                        "showBio": false,
+                        "showEmail": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/author-box",
+                    "attributes": {
+                        "userLogin": "author",
+                        "showAvatar": false,
+                        "showBio": true,
+                        "showEmail": false
+                    }
+                }
+            ]
+        },
+        "phpOnlyBlocksPostAlertsOnly": {
+            "id": 1200,
+            "blocks": [
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Heads up",
+                        "message": "Heads up \u2014 this is an informational notice.",
+                        "severity": "Info",
+                        "dismissible": false
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Heads up\",\"message\":\"Heads up \u2014 this is an informational notice.\",\"severity\":\"Info\",\"dismissible\":false} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Deprecation warning",
+                        "message": "Be careful: deprecated API in use.",
+                        "severity": "Warning",
+                        "dismissible": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Deprecation warning\",\"message\":\"Be careful: deprecated API in use.\",\"severity\":\"Warning\",\"dismissible\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Request failed",
+                        "message": "Something went wrong while processing your request.",
+                        "severity": "Error",
+                        "dismissible": true
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Request failed\",\"message\":\"Something went wrong while processing your request.\",\"severity\":\"Error\",\"dismissible\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Saved",
+                        "message": "Your changes have been saved successfully.",
+                        "severity": "Success",
+                        "dismissible": false
+                    },
+                    "contentSource": "<!-- wp:gatographql-testing\/alert {\"header\":\"Saved\",\"message\":\"Your changes have been saved successfully.\",\"severity\":\"Success\",\"dismissible\":false} \/-->",
+                    "innerBlocks": null
+                }
+            ],
+            "blockDataItems": [
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Heads up",
+                        "message": "Heads up \u2014 this is an informational notice.",
+                        "severity": "Info",
+                        "dismissible": false
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Deprecation warning",
+                        "message": "Be careful: deprecated API in use.",
+                        "severity": "Warning",
+                        "dismissible": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Request failed",
+                        "message": "Something went wrong while processing your request.",
+                        "severity": "Error",
+                        "dismissible": true
+                    }
+                },
+                {
+                    "name": "gatographql-testing\/alert",
+                    "attributes": {
+                        "header": "Saved",
+                        "message": "Your changes have been saved successfully.",
+                        "severity": "Success",
+                        "dismissible": false
+                    }
+                }
+            ]
+        },
+        "phpOnlyBlocksPostExcludingPhpOnly": {
+            "id": 1200,
+            "blocks": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Alert blocks",
+                        "level": 2
+                    },
+                    "contentSource": "<!-- wp:heading {\"content\":\"Alert blocks\",\"level\":2} -->\n<h2 class=\"wp-block-heading\">Alert blocks<\/h2>\n<!-- \/wp:heading -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister<\/code> support flag.",
+                        "dropCap": false
+                    },
+                    "contentSource": "<!-- wp:paragraph {\"content\":\"The three blocks below are registered fully in PHP via WordPress 7.0's \\u003ccode\\u003eautoRegister\\u003c\/code\\u003e support flag.\",\"dropCap\":false} -->\n<p>The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister<\/code> support flag.<\/p>\n<!-- \/wp:paragraph -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Marquee blocks",
+                        "level": 2
+                    },
+                    "contentSource": "<!-- wp:heading {\"content\":\"Marquee blocks\",\"level\":2} -->\n<h2 class=\"wp-block-heading\">Marquee blocks<\/h2>\n<!-- \/wp:heading -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Author Box blocks",
+                        "level": 2
+                    },
+                    "contentSource": "<!-- wp:heading {\"content\":\"Author Box blocks\",\"level\":2} -->\n<h2 class=\"wp-block-heading\">Author Box blocks<\/h2>\n<!-- \/wp:heading -->",
+                    "innerBlocks": null
+                }
+            ],
+            "blockDataItems": [
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Alert blocks",
+                        "level": 2
+                    }
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister<\/code> support flag.",
+                        "dropCap": false
+                    }
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Marquee blocks",
+                        "level": 2
+                    }
+                },
+                {
+                    "name": "core\/heading",
+                    "attributes": {
+                        "content": "Author Box blocks",
+                        "level": 2
+                    }
+                }
+            ]
+        },
         "blockWithCorruptedNonBreakingSpace": {
             "id": 1146,
             "originalBlocks": [

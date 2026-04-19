@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 17.2.0 - DATE
 
+### Added
+
+- Field `Root.blockTypes` to query data from the Block Type Registry (#3291)
+
 ### Improvements
 
 - Tested up to WordPress 7.0 (#3289)

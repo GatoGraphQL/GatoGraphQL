@@ -64,6 +64,7 @@ class Plugin
 
         add_action('init', $this->registerTestingTaxonomies(...));
         add_action('init', $this->registerRESTFields(...));
+        add_action('init', $this->registerTestingPHPOnlyBlocks(...));
         add_action('after_setup_theme', $this->registerMenuLocations(...));
     }
 
@@ -537,5 +538,262 @@ class Plugin
             'primary' => __('Header', 'bricks-child-playground'),
             'secondary' => __('Footer', 'bricks-child-playground'),
         ]);
+    }
+
+    /**
+     * Register PHP-only Gutenberg blocks for testing.
+     *
+     * Requires WordPress 7.0+ (or the Gutenberg plugin >= 21.9), which
+     * introduced the `supports.autoRegister` flag for fully PHP-registered blocks.
+     *
+     * @see https://make.wordpress.org/core/2026/03/03/php-only-block-registration/
+     * @see https://getbutterfly.com/php-only-block-registration-in-wordpress/
+     */
+    protected function registerTestingPHPOnlyBlocks(): void
+    {
+        $this->registerAlertBlock();
+        $this->registerMarqueeBlock();
+        $this->registerAuthorBoxBlock();
+    }
+
+    /**
+     * Example 1 — Alert / Notice Block
+     */
+    protected function registerAlertBlock(): void
+    {
+        \register_block_type(
+            'gatographql-testing/alert',
+            [
+                'title' => 'Alert',
+                'description' => 'A notice or alert message.',
+                'category' => 'text',
+                'icon' => 'warning',
+                'attributes' => [
+                    'header' => [
+                        'type' => 'string',
+                        'default' => 'Notice',
+                        'label' => 'Header',
+                    ],
+                    'message' => [
+                        'type' => 'string',
+                        'default' => 'This is an important notice.',
+                        'label' => 'Message',
+                    ],
+                    'severity' => [
+                        'type' => 'string',
+                        'enum' => ['Info', 'Warning', 'Error', 'Success'],
+                        'default' => 'Info',
+                        'label' => 'Severity',
+                    ],
+                    'dismissible' => [
+                        'type' => 'boolean',
+                        'default' => false,
+                        'label' => 'Dismissible',
+                    ],
+                ],
+                'supports' => [
+                    'autoRegister' => true,
+                    'color' => ['text' => true, 'background' => true],
+                    'spacing' => ['padding' => true],
+                    'border' => [
+                        'color' => true,
+                        'radius' => true,
+                        'style' => true,
+                        'width' => true,
+                    ],
+                ],
+                'render_callback' => $this->renderAlertBlock(...),
+            ]
+        );
+    }
+
+    /**
+     * @param array<string,mixed> $attributes
+     */
+    public function renderAlertBlock(array $attributes): string
+    {
+        $severity = strtolower((string) ($attributes['severity'] ?? 'info'));
+        $wrapper = \get_block_wrapper_attributes([
+            'class' => 'gatographql-alert gatographql-alert--' . $severity,
+            'role' => 'alert',
+            'aria-label' => (string) ($attributes['severity'] ?? 'Info'),
+        ]);
+
+        $dismiss = !empty($attributes['dismissible'])
+            ? '<button class="gatographql-alert__dismiss" aria-label="Dismiss">&times;</button>'
+            : '';
+
+        $header = (string) ($attributes['header'] ?? '');
+        $headerHTML = $header !== ''
+            ? sprintf('<h4 class="gatographql-alert__header">%s</h4>', \esc_html($header))
+            : '';
+
+        return sprintf(
+            '<div %s>%s%s<p class="gatographql-alert__message">%s</p></div>',
+            $wrapper,
+            $dismiss,
+            $headerHTML,
+            \esc_html((string) ($attributes['message'] ?? ''))
+        );
+    }
+
+    /**
+     * Example 2 — Scrolling Marquee Block
+     */
+    protected function registerMarqueeBlock(): void
+    {
+        \register_block_type(
+            'gatographql-testing/marquee',
+            [
+                'title' => 'Marquee',
+                'description' => 'A single scrolling text row.',
+                'category' => 'text',
+                'icon' => 'leftright',
+                'attributes' => [
+                    'text' => [
+                        'type' => 'string',
+                        'default' => 'Your scrolling text here —',
+                        'label' => 'Text',
+                    ],
+                    'speed' => [
+                        'type' => 'string',
+                        'enum' => ['Slow', 'Medium', 'Fast'],
+                        'default' => 'Medium',
+                        'label' => 'Speed',
+                    ],
+                    'direction' => [
+                        'type' => 'string',
+                        'enum' => ['Left', 'Right'],
+                        'default' => 'Left',
+                        'label' => 'Direction',
+                    ],
+                ],
+                'supports' => [
+                    'autoRegister' => true,
+                    'align' => ['wide', 'full'],
+                    'color' => ['text' => true, 'background' => true],
+                    'spacing' => ['padding' => true],
+                    'typography' => [
+                        'fontSize' => true,
+                        'fontWeight' => true,
+                        'fontStyle' => true,
+                    ],
+                ],
+                'render_callback' => $this->renderMarqueeBlock(...),
+            ]
+        );
+    }
+
+    /**
+     * @param array<string,mixed> $attributes
+     */
+    public function renderMarqueeBlock(array $attributes): string
+    {
+        $speedMap = ['Slow' => 0.5, 'Medium' => 1.0, 'Fast' => 2.0];
+        $step = $speedMap[$attributes['speed'] ?? 'Medium'] ?? 1.0;
+        $direction = (($attributes['direction'] ?? 'Left') === 'Right') ? 'right' : 'left';
+
+        $wrapper = \get_block_wrapper_attributes(['class' => 'gatographql-marquee']);
+
+        return sprintf(
+            '<div %s><div class="gatographql-marquee__row" data-step="%s" data-repeat="16" data-direction="%s">%s</div></div>',
+            $wrapper,
+            \esc_attr((string) $step),
+            \esc_attr($direction),
+            \esc_html((string) ($attributes['text'] ?? ''))
+        );
+    }
+
+    /**
+     * Example 3 — Author Box Block
+     *
+     * Demonstrates a dynamically-built `enum` populated from `get_users()`
+     * at registration time.
+     */
+    protected function registerAuthorBoxBlock(): void
+    {
+        $users = \get_users(['number' => -1, 'fields' => ['user_login']]);
+        $userEnum = array_values(array_map(
+            static fn ($u): string => (string) $u->user_login,
+            $users
+        ));
+
+        // Avoid registering with an empty enum (would break the SelectControl)
+        if ($userEnum === []) {
+            return;
+        }
+
+        \register_block_type(
+            'gatographql-testing/author-box',
+            [
+                'title' => 'Author Box',
+                'description' => 'A server-rendered author card.',
+                'category' => 'text',
+                'icon' => 'admin-users',
+                'attributes' => [
+                    'userLogin' => [
+                        'type' => 'string',
+                        'enum' => $userEnum,
+                        'default' => $userEnum[0],
+                        'label' => 'User',
+                    ],
+                    'showAvatar' => [
+                        'type' => 'boolean',
+                        'default' => true,
+                        'label' => 'Show Avatar',
+                    ],
+                    'showBio' => [
+                        'type' => 'boolean',
+                        'default' => true,
+                        'label' => 'Show Bio',
+                    ],
+                    'showEmail' => [
+                        'type' => 'boolean',
+                        'default' => true,
+                        'label' => 'Show Email',
+                    ],
+                ],
+                'supports' => [
+                    'autoRegister' => true,
+                    'align' => ['wide', 'full'],
+                    'color' => ['text' => true, 'background' => true],
+                    'spacing' => ['padding' => true],
+                    'border' => ['radius' => true],
+                ],
+                'render_callback' => $this->renderAuthorBoxBlock(...),
+            ]
+        );
+    }
+
+    /**
+     * @param array<string,mixed> $attributes
+     */
+    public function renderAuthorBoxBlock(array $attributes): string
+    {
+        $user = \get_user_by('login', (string) ($attributes['userLogin'] ?? ''));
+        if (!$user) {
+            return '';
+        }
+
+        $wrapper = \get_block_wrapper_attributes(['class' => 'gatographql-author-box']);
+
+        $avatar = !empty($attributes['showAvatar'])
+            ? \get_avatar($user->ID, 80, '', '', ['class' => 'gatographql-author-box__avatar'])
+            : '';
+        $bio = !empty($attributes['showBio']) && $user->description !== ''
+            ? '<p class="gatographql-author-box__bio">' . \esc_html($user->description) . '</p>'
+            : '';
+        $email = !empty($attributes['showEmail'])
+            ? '<a href="mailto:' . \esc_attr($user->user_email) . '">' . \esc_html($user->user_email) . '</a>'
+            : '';
+
+        return sprintf(
+            '<div %s>%s<div class="gatographql-author-box__body"><h3 class="gatographql-author-box__name">%s</h3>%s<div class="gatographql-author-box__links">%s</div></div></div>',
+            $wrapper,
+            $avatar,
+            \esc_html($user->display_name),
+            $bio,
+            $email
+        );
     }
 }

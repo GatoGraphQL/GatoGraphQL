@@ -1,0 +1,3449 @@
+{
+    "data": {
+        "allBlockTypes": [
+            {
+                "name": "core\/legacy-widget",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/widget-group",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/accordion",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/accordion-item",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/archives",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/avatar",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/block",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/breadcrumbs",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/button",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/calendar",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/categories",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-author-name",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-content",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-date",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-edit-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-reply-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-template",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-pagination",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-pagination-next",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-pagination-numbers",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-pagination-previous",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-title",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/cover",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/details",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/file",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/footnotes",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/gallery",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/heading",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/home-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/icon",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/image",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/latest-comments",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/latest-posts",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/list",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/loginout",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/media-text",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/navigation",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/navigation-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/navigation-overlay-close",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/navigation-submenu",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/page-list",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/page-list-item",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/paragraph",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/pattern",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-author",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-author-biography",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-author-name",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-comments-count",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-comments-form",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-comments-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-content",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-date",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-excerpt",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-featured-image",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-navigation-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-template",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-terms",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-time-to-read",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-title",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-no-results",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-pagination",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-pagination-next",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-pagination-numbers",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-pagination-previous",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-title",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-total",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/read-more",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/rss",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/search",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/shortcode",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/site-logo",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/site-tagline",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/site-title",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/social-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/tag-cloud",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/template-part",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/term-count",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/term-description",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/term-name",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/term-template",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/video",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/accordion-heading",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/accordion-panel",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/audio",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/buttons",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/code",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/column",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/columns",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/embed",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/freeform",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/group",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/html",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/list-item",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/math",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/missing",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/more",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/nextpage",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/preformatted",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/pullquote",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/quote",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/separator",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/social-links",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/spacer",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/table",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/terms-query",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/text-columns",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/verse",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-comments",
+                "hasRenderCallback": true
+            }
+        ],
+        "phpOnlyBlockTypes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "color": true,
+                        "radius": true,
+                        "style": true,
+                        "width": true
+                    }
+                },
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "message",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Message",
+                        "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "severity",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Severity",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "dismissible",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "boolean",
+                        "label": "Dismissible",
+                        "default": false,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "align": [
+                        "wide",
+                        "full"
+                    ],
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "typography": {
+                        "fontSize": true,
+                        "fontWeight": true,
+                        "fontStyle": true
+                    }
+                },
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
+                "attributes": [
+                    {
+                        "name": "text",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Text",
+                        "default": "Your scrolling text here \u2014",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "speed",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Speed",
+                        "default": "Medium",
+                        "enum": [
+                            "Slow",
+                            "Medium",
+                            "Fast"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "direction",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Direction",
+                        "default": "Left",
+                        "enum": [
+                            "Left",
+                            "Right"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "align",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "fontSize",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "align": [
+                        "wide",
+                        "full"
+                    ],
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "radius": true
+                    }
+                },
+                "attributeNames": [
+                    "userLogin",
+                    "showAvatar",
+                    "showBio",
+                    "showEmail",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "userLogin",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": "User",
+                        "default": "admin",
+                        "enum": [
+                            "admin",
+                            "author",
+                            "blogger",
+                            "contributor",
+                            "editor",
+                            "subscriber"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showAvatar",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Avatar",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showBio",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Bio",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showEmail",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Email",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "align",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            }
+        ],
+        "autoRegisterOnly": [
+            {
+                "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "hasRenderCallback": true
+            }
+        ],
+        "staticBlockTypes": [
+            {
+                "name": "core\/details",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/page-list-item",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/paragraph",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/accordion-heading",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/accordion-panel",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/audio",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/buttons",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/code",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/column",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/columns",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/embed",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/freeform",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/group",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/html",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/list-item",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/math",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/missing",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/more",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/nextpage",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/preformatted",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/pullquote",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/quote",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/separator",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/social-links",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/spacer",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/table",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/terms-query",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/text-columns",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/verse",
+                "hasRenderCallback": false
+            }
+        ],
+        "dynamicBlockTypes": [
+            {
+                "name": "core\/legacy-widget",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/widget-group",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/accordion",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/accordion-item",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/archives",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/avatar",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/block",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/breadcrumbs",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/button",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/calendar",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/categories",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-author-name",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-content",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-date",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-edit-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-reply-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comment-template",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-pagination",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-pagination-next",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-pagination-numbers",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-pagination-previous",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/comments-title",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/cover",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/file",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/footnotes",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/gallery",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/heading",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/home-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/icon",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/image",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/latest-comments",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/latest-posts",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/list",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/loginout",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/media-text",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/navigation",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/navigation-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/navigation-overlay-close",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/navigation-submenu",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/page-list",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/pattern",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-author",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-author-biography",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-author-name",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-comments-count",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-comments-form",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-comments-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-content",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-date",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-excerpt",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-featured-image",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-navigation-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-template",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-terms",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-time-to-read",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-title",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-no-results",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-pagination",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-pagination-next",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-pagination-numbers",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-pagination-previous",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-title",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/query-total",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/read-more",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/rss",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/search",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/shortcode",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/site-logo",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/site-tagline",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/site-title",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/social-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/tag-cloud",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/template-part",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/term-count",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/term-description",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/term-name",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/term-template",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/video",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/post-comments",
+                "hasRenderCallback": true
+            }
+        ],
+        "testingBlockTypesByName": [
+            {
+                "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "color": true,
+                        "radius": true,
+                        "style": true,
+                        "width": true
+                    }
+                },
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "message",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Message",
+                        "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "severity",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Severity",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "dismissible",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "boolean",
+                        "label": "Dismissible",
+                        "default": false,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "align": [
+                        "wide",
+                        "full"
+                    ],
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "typography": {
+                        "fontSize": true,
+                        "fontWeight": true,
+                        "fontStyle": true
+                    }
+                },
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
+                "attributes": [
+                    {
+                        "name": "text",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Text",
+                        "default": "Your scrolling text here \u2014",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "speed",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Speed",
+                        "default": "Medium",
+                        "enum": [
+                            "Slow",
+                            "Medium",
+                            "Fast"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "direction",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Direction",
+                        "default": "Left",
+                        "enum": [
+                            "Left",
+                            "Right"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "align",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "fontSize",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "align": [
+                        "wide",
+                        "full"
+                    ],
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "radius": true
+                    }
+                },
+                "attributeNames": [
+                    "userLogin",
+                    "showAvatar",
+                    "showBio",
+                    "showEmail",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "userLogin",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": "User",
+                        "default": "admin",
+                        "enum": [
+                            "admin",
+                            "author",
+                            "blogger",
+                            "contributor",
+                            "editor",
+                            "subscriber"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showAvatar",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Avatar",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showBio",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Bio",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showEmail",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Email",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "align",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            }
+        ],
+        "testingBlockTypesByNameSearch": [
+            {
+                "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "hasRenderCallback": true
+            }
+        ],
+        "testingPhpOnlyBlockTypes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "color": true,
+                        "radius": true,
+                        "style": true,
+                        "width": true
+                    }
+                },
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "message",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Message",
+                        "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "severity",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Severity",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "dismissible",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "boolean",
+                        "label": "Dismissible",
+                        "default": false,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "align": [
+                        "wide",
+                        "full"
+                    ],
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "typography": {
+                        "fontSize": true,
+                        "fontWeight": true,
+                        "fontStyle": true
+                    }
+                },
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
+                "attributes": [
+                    {
+                        "name": "text",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Text",
+                        "default": "Your scrolling text here \u2014",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "speed",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Speed",
+                        "default": "Medium",
+                        "enum": [
+                            "Slow",
+                            "Medium",
+                            "Fast"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "direction",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": "Direction",
+                        "default": "Left",
+                        "enum": [
+                            "Left",
+                            "Right"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "align",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "fontSize",
+                        "blockTypeName": "gatographql-testing\/marquee",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "align": [
+                        "wide",
+                        "full"
+                    ],
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "radius": true
+                    }
+                },
+                "attributeNames": [
+                    "userLogin",
+                    "showAvatar",
+                    "showBio",
+                    "showEmail",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "userLogin",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": "User",
+                        "default": "admin",
+                        "enum": [
+                            "admin",
+                            "author",
+                            "blogger",
+                            "contributor",
+                            "editor",
+                            "subscriber"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showAvatar",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Avatar",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showBio",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Bio",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "showEmail",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "boolean",
+                        "label": "Show Email",
+                        "default": true,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "align",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/author-box",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            }
+        ],
+        "excludeAlert": [
+            {
+                "name": "gatographql-testing\/marquee"
+            },
+            {
+                "name": "gatographql-testing\/author-box"
+            }
+        ],
+        "blocksSupportingAlign": [],
+        "blocksNotSupportingHTML": [],
+        "blocksSupportingAlignAndMultiple": [],
+        "alertAllAttributes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "color": true,
+                        "radius": true,
+                        "style": true,
+                        "width": true
+                    }
+                },
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "message",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Message",
+                        "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "severity",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Severity",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "dismissible",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "boolean",
+                        "label": "Dismissible",
+                        "default": false,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            }
+        ],
+        "alertStringAttributes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "default": "Notice",
+                        "label": "Header",
+                        "enum": null
+                    },
+                    {
+                        "name": "message",
+                        "fieldType": "string",
+                        "default": "This is an important notice.",
+                        "label": "Message",
+                        "enum": null
+                    },
+                    {
+                        "name": "severity",
+                        "fieldType": "string",
+                        "default": "Info",
+                        "label": "Severity",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ]
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "label": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "label": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "label": null,
+                        "enum": null
+                    }
+                ]
+            }
+        ],
+        "marqueeStringAttributes": [
+            {
+                "name": "gatographql-testing\/marquee",
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "align",
+                    "className",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
+                "attributes": [
+                    {
+                        "name": "text",
+                        "fieldType": "string",
+                        "default": "Your scrolling text here \u2014",
+                        "enum": null
+                    },
+                    {
+                        "name": "speed",
+                        "fieldType": "string",
+                        "default": "Medium",
+                        "enum": [
+                            "Slow",
+                            "Medium",
+                            "Fast"
+                        ]
+                    },
+                    {
+                        "name": "direction",
+                        "fieldType": "string",
+                        "default": "Left",
+                        "enum": [
+                            "Left",
+                            "Right"
+                        ]
+                    },
+                    {
+                        "name": "align",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ]
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "fontSize",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    }
+                ]
+            }
+        ],
+        "marqueeStringNonEnumAttributes": [
+            {
+                "name": "gatographql-testing\/marquee",
+                "attributeNames": [
+                    "text",
+                    "className",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
+                "attributes": [
+                    {
+                        "name": "text",
+                        "fieldType": "string",
+                        "default": "Your scrolling text here \u2014",
+                        "enum": null
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "fontSize",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    }
+                ]
+            }
+        ],
+        "marqueeStringEnumAttributes": [
+            {
+                "name": "gatographql-testing\/marquee",
+                "attributeNames": [
+                    "speed",
+                    "direction",
+                    "align"
+                ],
+                "attributes": [
+                    {
+                        "name": "speed",
+                        "fieldType": "string",
+                        "default": "Medium",
+                        "enum": [
+                            "Slow",
+                            "Medium",
+                            "Fast"
+                        ]
+                    },
+                    {
+                        "name": "direction",
+                        "fieldType": "string",
+                        "default": "Left",
+                        "enum": [
+                            "Left",
+                            "Right"
+                        ]
+                    },
+                    {
+                        "name": "align",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "alertStringOrBooleanAttributes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "default": "Notice"
+                    },
+                    {
+                        "name": "message",
+                        "fieldType": "string",
+                        "default": "This is an important notice."
+                    },
+                    {
+                        "name": "severity",
+                        "fieldType": "string",
+                        "default": "Info"
+                    },
+                    {
+                        "name": "dismissible",
+                        "fieldType": "boolean",
+                        "default": false
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null
+                    }
+                ]
+            }
+        ],
+        "marqueeBooleanAttributes": [
+            {
+                "name": "gatographql-testing\/marquee",
+                "attributeNames": [],
+                "attributes": []
+            }
+        ],
+        "authorBoxBooleanAttributes": [
+            {
+                "name": "gatographql-testing\/author-box",
+                "attributeNames": [
+                    "showAvatar",
+                    "showBio",
+                    "showEmail"
+                ],
+                "attributes": [
+                    {
+                        "name": "showAvatar",
+                        "fieldType": "boolean",
+                        "default": true,
+                        "label": "Show Avatar"
+                    },
+                    {
+                        "name": "showBio",
+                        "fieldType": "boolean",
+                        "default": true,
+                        "label": "Show Bio"
+                    },
+                    {
+                        "name": "showEmail",
+                        "fieldType": "boolean",
+                        "default": true,
+                        "label": "Show Email"
+                    }
+                ]
+            }
+        ],
+        "authorBoxStringAttributes": [
+            {
+                "name": "gatographql-testing\/author-box",
+                "attributeNames": [
+                    "userLogin",
+                    "align",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "userLogin",
+                        "fieldType": "string",
+                        "default": "admin",
+                        "enum": [
+                            "admin",
+                            "author",
+                            "blogger",
+                            "contributor",
+                            "editor",
+                            "subscriber"
+                        ]
+                    },
+                    {
+                        "name": "align",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ]
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    }
+                ]
+            }
+        ],
+        "alertEditableStringAttributes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "autoGenerateControl": true,
+                        "default": "Notice",
+                        "label": "Header"
+                    },
+                    {
+                        "name": "message",
+                        "fieldType": "string",
+                        "autoGenerateControl": true,
+                        "default": "This is an important notice.",
+                        "label": "Message"
+                    },
+                    {
+                        "name": "severity",
+                        "fieldType": "string",
+                        "autoGenerateControl": true,
+                        "default": "Info",
+                        "label": "Severity"
+                    }
+                ]
+            }
+        ],
+        "alertNonEditableAttributes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "lock",
+                        "fieldType": "object",
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "fieldType": "object",
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "fieldType": "object",
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "autoGenerateControl": false
+                    }
+                ]
+            }
+        ],
+        "testingPhpOnlyBooleanAttributes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "dismissible"
+                ],
+                "attributes": [
+                    {
+                        "name": "dismissible",
+                        "fieldType": "boolean",
+                        "default": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "attributeNames": [],
+                "attributes": []
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "attributeNames": [
+                    "showAvatar",
+                    "showBio",
+                    "showEmail"
+                ],
+                "attributes": [
+                    {
+                        "name": "showAvatar",
+                        "fieldType": "boolean",
+                        "default": true
+                    },
+                    {
+                        "name": "showBio",
+                        "fieldType": "boolean",
+                        "default": true
+                    },
+                    {
+                        "name": "showEmail",
+                        "fieldType": "boolean",
+                        "default": true
+                    }
+                ]
+            }
+        ],
+        "testingPhpOnlyStringAttributes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "default": "Notice",
+                        "enum": null
+                    },
+                    {
+                        "name": "message",
+                        "fieldType": "string",
+                        "default": "This is an important notice.",
+                        "enum": null
+                    },
+                    {
+                        "name": "severity",
+                        "fieldType": "string",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ]
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/marquee",
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "align",
+                    "className",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
+                "attributes": [
+                    {
+                        "name": "text",
+                        "fieldType": "string",
+                        "default": "Your scrolling text here \u2014",
+                        "enum": null
+                    },
+                    {
+                        "name": "speed",
+                        "fieldType": "string",
+                        "default": "Medium",
+                        "enum": [
+                            "Slow",
+                            "Medium",
+                            "Fast"
+                        ]
+                    },
+                    {
+                        "name": "direction",
+                        "fieldType": "string",
+                        "default": "Left",
+                        "enum": [
+                            "Left",
+                            "Right"
+                        ]
+                    },
+                    {
+                        "name": "align",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ]
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "fontSize",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/author-box",
+                "attributeNames": [
+                    "userLogin",
+                    "align",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "userLogin",
+                        "fieldType": "string",
+                        "default": "admin",
+                        "enum": [
+                            "admin",
+                            "author",
+                            "blogger",
+                            "contributor",
+                            "editor",
+                            "subscriber"
+                        ]
+                    },
+                    {
+                        "name": "align",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": [
+                            "left",
+                            "center",
+                            "right",
+                            "wide",
+                            "full"
+                        ]
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    }
+                ]
+            }
+        ],
+        "alertAttributeSchemas": [
+            {
+                "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Notice",
+                            "label": "Header",
+                            "autoGenerateControl": true
+                        }
+                    },
+                    {
+                        "name": "message",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Message",
+                        "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "This is an important notice.",
+                            "label": "Message",
+                            "autoGenerateControl": true
+                        }
+                    },
+                    {
+                        "name": "severity",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Severity",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "Info",
+                                "Warning",
+                                "Error",
+                                "Success"
+                            ],
+                            "default": "Info",
+                            "label": "Severity",
+                            "autoGenerateControl": true
+                        }
+                    },
+                    {
+                        "name": "dismissible",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "boolean",
+                        "label": "Dismissible",
+                        "default": false,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false,
+                            "label": "Dismissible",
+                            "autoGenerateControl": true
+                        }
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false,
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        ],
+        "unknownBlockTypeByName": [],
+        "unknownBlockTypeBySearch": []
+    }
+}

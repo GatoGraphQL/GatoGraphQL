@@ -406,7 +406,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 3,
+                "count": 4,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -418,8 +418,12 @@
                 "name": "Advanced",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 3,
+                "postCount": 4,
                 "posts": [
+                    {
+                        "id": 1200,
+                        "title": "PHP-only blocks"
+                    },
                     {
                         "id": 1128,
                         "title": "HTTP caching improves performance"
@@ -845,7 +849,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 3,
+                "count": 4,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -857,8 +861,12 @@
                 "name": "Advanced",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 3,
+                "postCount": 4,
                 "posts": [
+                    {
+                        "id": 1200,
+                        "title": "PHP-only blocks"
+                    },
                     {
                         "id": 1128,
                         "title": "HTTP caching improves performance"
@@ -1546,7 +1554,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 3,
+                "count": 4,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -1558,8 +1566,12 @@
                 "name": "Advanced",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 3,
+                "postCount": 4,
                 "posts": [
+                    {
+                        "id": 1200,
+                        "title": "PHP-only blocks"
+                    },
                     {
                         "id": 1128,
                         "title": "HTTP caching improves performance"
@@ -1803,7 +1815,7 @@
                     "taxonomy": "category",
                     "childCount": 0,
                     "childNames": [],
-                    "count": 3,
+                    "count": 4,
                     "description": "",
                     "id": 2,
                     "metaValue": null,
@@ -1815,8 +1827,12 @@
                     "name": "Advanced",
                     "parent": null,
                     "ancestors": [],
-                    "postCount": 3,
+                    "postCount": 4,
                     "posts": [
+                        {
+                            "id": 1200,
+                            "title": "PHP-only blocks"
+                        },
                         {
                             "id": 1128,
                             "title": "HTTP caching improves performance"
@@ -2225,6 +2241,15 @@
         ],
         "postsExcludeByCategoryIDs": [
             {
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "categories": [
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
                 "id": 1113,
                 "title": "Released v0.6, check it out",
                 "categories": [
@@ -2341,6 +2366,15 @@
             }
         ],
         "postsExcludeByCategorySlugs": [
+            {
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "categories": [
+                    {
+                        "id": 2
+                    }
+                ]
+            },
             {
                 "id": 1150,
                 "title": "Post with old format of the Gutenberg `core\/list` block",

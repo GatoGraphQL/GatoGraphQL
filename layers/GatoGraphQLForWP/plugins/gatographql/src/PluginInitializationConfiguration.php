@@ -498,6 +498,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_BLOCKS,
                 'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,
             ],
+            // Blocks: treat the block type registry as sensitive data
+            [
+                'class' => BlocksModule::class,
+                'envVariable' => BlocksEnvironment::TREAT_BLOCK_TYPES_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_BLOCKS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_BLOCK_TYPES_AS_SENSITIVE_DATA,
+            ],
             // White/Blacklisted entries to Root.optionValue
             [
                 'class' => SettingsModule::class,

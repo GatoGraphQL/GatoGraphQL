@@ -1,0 +1,26 @@
+{
+  "errors": [
+    {
+      "message": "There is no field 'blockTypes' on type 'Root'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "type": "Root",
+        "field": "blockTypes",
+        "path": [
+          "blockTypes",
+          "query { ... }"
+        ],
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    }
+  ],
+  "data": {
+    "blockTypes": null
+  }
+}
