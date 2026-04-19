@@ -2599,6 +2599,43 @@
                 ]
             }
         ],
+        "alertStringOrBooleanAttributes": [
+            {
+                "name": "gatographql-testing\/alert",
+                "attributes": [
+                    {
+                        "name": "message",
+                        "fieldType": "string",
+                        "default": "This is an important notice."
+                    },
+                    {
+                        "name": "severity",
+                        "fieldType": "string",
+                        "default": "Info"
+                    },
+                    {
+                        "name": "dismissible",
+                        "fieldType": "boolean",
+                        "default": false
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null
+                    }
+                ]
+            }
+        ],
         "marqueeBooleanAttributes": [
             {
                 "name": "gatographql-testing\/marquee",

@@ -10,6 +10,6 @@ class BlockTypeAttributeFieldTypeFilterInput extends AbstractValueToQueryFilterI
 {
     protected function getQueryArgKey(): string
     {
-        return 'fieldType';
+        return 'fieldTypes';
     }
 }

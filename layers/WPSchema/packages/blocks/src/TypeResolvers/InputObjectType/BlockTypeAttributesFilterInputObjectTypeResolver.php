@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\Blocks\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
@@ -83,7 +84,7 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'fieldType' => $this->getBlockTypeAttributeFieldTypeEnumStringScalarTypeResolver(),
+            'fieldTypes' => $this->getBlockTypeAttributeFieldTypeEnumStringScalarTypeResolver(),
             'autoGenerateControl' => $this->getBooleanScalarTypeResolver(),
             'hasEnum' => $this->getBooleanScalarTypeResolver(),
         ];
@@ -92,17 +93,27 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'fieldType' => $this->__('Filter attributes by their JSON-Schema "type" property', 'blocks'),
+            'fieldTypes' => $this->__('Filter attributes by their JSON-Schema "type" property. An attribute matches if any of its declared types is in the provided list.', 'blocks'),
             'autoGenerateControl' => $this->__('Filter attributes that have (or do not have) an auto-generated editor control. Available since WordPress 7.0.', 'blocks'),
             'hasEnum' => $this->__('Filter attributes that are (or are not) restricted to a list of allowed values via the `enum` schema property', 'blocks'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
 
+    public function getInputFieldTypeModifiers(string $inputFieldName): int
+    {
+        return match ($inputFieldName) {
+            'fieldTypes'
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getInputFieldTypeModifiers($inputFieldName),
+        };
+    }
+
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'fieldType' => $this->getBlockTypeAttributeFieldTypeFilterInput(),
+            'fieldTypes' => $this->getBlockTypeAttributeFieldTypeFilterInput(),
             'autoGenerateControl' => $this->getBlockTypeAttributeAutoGenerateControlFilterInput(),
             'hasEnum' => $this->getBlockTypeAttributeHasEnumFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),

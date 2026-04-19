@@ -154,7 +154,7 @@
     filter: { names: "gatographql-testing/alert" }
   ) {
     name
-    attributes(filter: { fieldType: "string" }) {
+    attributes(filter: { fieldTypes: ["string"] }) {
       name
       fieldType
       default
@@ -170,7 +170,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
-    attributes(filter: { fieldType: "string" }) {
+    attributes(filter: { fieldTypes: ["string"] }) {
       name
       fieldType
       default
@@ -183,7 +183,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
-    attributes(filter: { fieldType: "string", hasEnum: false }) {
+    attributes(filter: { fieldTypes: ["string"], hasEnum: false }) {
       name
       fieldType
       default
@@ -196,11 +196,24 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
-    attributes(filter: { fieldType: "string", hasEnum: true }) {
+    attributes(filter: { fieldTypes: ["string"], hasEnum: true }) {
       name
       fieldType
       default
       enum
+    }
+  }
+
+  # Alert: multi-type filter — STRING or BOOLEAN attributes in one shot
+  # (alert has both: e.g. `message`/`type` as string, `dismissible` as boolean)
+  alertStringOrBooleanAttributes: blockTypes(
+    filter: { names: "gatographql-testing/alert" }
+  ) {
+    name
+    attributes(filter: { fieldTypes: ["string", "boolean"] }) {
+      name
+      fieldType
+      default
     }
   }
 
@@ -211,7 +224,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
-    attributes(filter: { fieldType: "boolean" }) {
+    attributes(filter: { fieldTypes: ["boolean"] }) {
       name
       fieldType
       default
@@ -225,7 +238,7 @@
     filter: { names: "gatographql-testing/author-box" }
   ) {
     name
-    attributes(filter: { fieldType: "boolean" }) {
+    attributes(filter: { fieldTypes: ["boolean"] }) {
       name
       fieldType
       default
@@ -240,7 +253,7 @@
     filter: { names: "gatographql-testing/author-box" }
   ) {
     name
-    attributes(filter: { fieldType: "string" }) {
+    attributes(filter: { fieldTypes: ["string"] }) {
       name
       fieldType
       default
@@ -257,7 +270,7 @@
     name
     attributes(
       filter: {
-        fieldType: "string"
+        fieldTypes: ["string"]
         autoGenerateControl: true
       }
     ) {
@@ -291,7 +304,7 @@
     }
   ) {
     name
-    attributes(filter: { fieldType: "boolean" }) {
+    attributes(filter: { fieldTypes: ["boolean"] }) {
       name
       fieldType
       default
@@ -308,7 +321,7 @@
     }
   ) {
     name
-    attributes(filter: { fieldType: "string" }) {
+    attributes(filter: { fieldTypes: ["string"] }) {
       name
       fieldType
       default

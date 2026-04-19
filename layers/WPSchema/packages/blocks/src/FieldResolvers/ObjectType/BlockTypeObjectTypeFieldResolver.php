@@ -173,17 +173,17 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
                 $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
                 $attributes = $blockType->getAttributes();
 
-                /** @var string|null */
-                $expectedFieldType = $query['fieldType'] ?? null;
-                if ($expectedFieldType !== null) {
+                /** @var string[]|null */
+                $expectedFieldTypes = $query['fieldTypes'] ?? null;
+                if ($expectedFieldTypes !== null && $expectedFieldTypes !== []) {
                     $attributes = array_filter(
                         $attributes,
-                        static function (array $schema) use ($expectedFieldType): bool {
+                        static function (array $schema) use ($expectedFieldTypes): bool {
                             $type = $schema['type'] ?? null;
                             if (is_array($type)) {
-                                return in_array($expectedFieldType, $type, true);
+                                return array_intersect($expectedFieldTypes, $type) !== [];
                             }
-                            return $type === $expectedFieldType;
+                            return in_array($type, $expectedFieldTypes, true);
                         },
                     );
                 }
