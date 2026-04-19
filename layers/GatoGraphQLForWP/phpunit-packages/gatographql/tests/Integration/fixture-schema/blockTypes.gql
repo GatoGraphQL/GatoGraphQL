@@ -142,6 +142,7 @@
     name
     hasRenderCallback
     supports
+    attributeNames
     attributes {
       ...BlockTypeAttributeFull
     }
@@ -154,6 +155,7 @@
     filter: { names: "gatographql-testing/alert" }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["string"] })
     attributes(filter: { fieldTypes: ["string"] }) {
       name
       fieldType
@@ -170,6 +172,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["string"] })
     attributes(filter: { fieldTypes: ["string"] }) {
       name
       fieldType
@@ -183,6 +186,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["string"], hasEnum: false })
     attributes(filter: { fieldTypes: ["string"], hasEnum: false }) {
       name
       fieldType
@@ -196,6 +200,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["string"], hasEnum: true })
     attributes(filter: { fieldTypes: ["string"], hasEnum: true }) {
       name
       fieldType
@@ -210,6 +215,7 @@
     filter: { names: "gatographql-testing/alert" }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["string", "boolean"] })
     attributes(filter: { fieldTypes: ["string", "boolean"] }) {
       name
       fieldType
@@ -224,6 +230,7 @@
     filter: { names: "gatographql-testing/marquee" }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["boolean"] })
     attributes(filter: { fieldTypes: ["boolean"] }) {
       name
       fieldType
@@ -238,6 +245,7 @@
     filter: { names: "gatographql-testing/author-box" }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["boolean"] })
     attributes(filter: { fieldTypes: ["boolean"] }) {
       name
       fieldType
@@ -253,6 +261,7 @@
     filter: { names: "gatographql-testing/author-box" }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["string"] })
     attributes(filter: { fieldTypes: ["string"] }) {
       name
       fieldType
@@ -268,6 +277,12 @@
     filter: { names: "gatographql-testing/alert" }
   ) {
     name
+    attributeNames(
+      filter: {
+        fieldTypes: ["string"]
+        autoGenerateControl: true
+      }
+    )
     attributes(
       filter: {
         fieldTypes: ["string"]
@@ -287,6 +302,7 @@
     filter: { names: "gatographql-testing/alert" }
   ) {
     name
+    attributeNames(filter: { autoGenerateControl: false })
     attributes(filter: { autoGenerateControl: false }) {
       name
       fieldType
@@ -304,6 +320,7 @@
     }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["boolean"] })
     attributes(filter: { fieldTypes: ["boolean"] }) {
       name
       fieldType
@@ -321,6 +338,7 @@
     }
   ) {
     name
+    attributeNames(filter: { fieldTypes: ["string"] })
     attributes(filter: { fieldTypes: ["string"] }) {
       name
       fieldType
@@ -336,6 +354,7 @@
     filter: { names: "gatographql-testing/alert" }
   ) {
     name
+    attributeNames
     attributes {
       name
       blockTypeName
@@ -375,6 +394,7 @@ fragment BlockTypeFull on BlockType {
   name
   hasRenderCallback
   supports
+  attributeNames
   attributes {
     ...BlockTypeAttributeFull
   }

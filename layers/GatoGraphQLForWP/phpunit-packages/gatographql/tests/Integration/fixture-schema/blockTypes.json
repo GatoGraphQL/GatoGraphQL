@@ -474,6 +474,17 @@
                         "width": true
                     }
                 },
+                "attributeNames": [
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "message",
@@ -603,6 +614,19 @@
                         "fontStyle": true
                     }
                 },
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
                 "attributes": [
                     {
                         "name": "text",
@@ -760,6 +784,19 @@
                         "radius": true
                     }
                 },
+                "attributeNames": [
+                    "userLogin",
+                    "showAvatar",
+                    "showBio",
+                    "showEmail",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "userLogin",
@@ -1388,6 +1425,17 @@
                         "width": true
                     }
                 },
+                "attributeNames": [
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "message",
@@ -1517,6 +1565,19 @@
                         "fontStyle": true
                     }
                 },
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
                 "attributes": [
                     {
                         "name": "text",
@@ -1674,6 +1735,19 @@
                         "radius": true
                     }
                 },
+                "attributeNames": [
+                    "userLogin",
+                    "showAvatar",
+                    "showBio",
+                    "showEmail",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "userLogin",
@@ -1846,6 +1920,17 @@
                         "width": true
                     }
                 },
+                "attributeNames": [
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "message",
@@ -1975,6 +2060,19 @@
                         "fontStyle": true
                     }
                 },
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
                 "attributes": [
                     {
                         "name": "text",
@@ -2132,6 +2230,19 @@
                         "radius": true
                     }
                 },
+                "attributeNames": [
+                    "userLogin",
+                    "showAvatar",
+                    "showBio",
+                    "showEmail",
+                    "lock",
+                    "metadata",
+                    "align",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "userLogin",
@@ -2301,6 +2412,17 @@
                         "width": true
                     }
                 },
+                "attributeNames": [
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "message",
@@ -2412,6 +2534,13 @@
         "alertStringAttributes": [
             {
                 "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "message",
+                    "severity",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "message",
@@ -2459,6 +2588,16 @@
         "marqueeStringAttributes": [
             {
                 "name": "gatographql-testing\/marquee",
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "align",
+                    "className",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
                 "attributes": [
                     {
                         "name": "text",
@@ -2527,6 +2666,13 @@
         "marqueeStringNonEnumAttributes": [
             {
                 "name": "gatographql-testing\/marquee",
+                "attributeNames": [
+                    "text",
+                    "className",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
                 "attributes": [
                     {
                         "name": "text",
@@ -2564,6 +2710,11 @@
         "marqueeStringEnumAttributes": [
             {
                 "name": "gatographql-testing\/marquee",
+                "attributeNames": [
+                    "speed",
+                    "direction",
+                    "align"
+                ],
                 "attributes": [
                     {
                         "name": "speed",
@@ -2602,6 +2753,14 @@
         "alertStringOrBooleanAttributes": [
             {
                 "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "message",
@@ -2639,12 +2798,18 @@
         "marqueeBooleanAttributes": [
             {
                 "name": "gatographql-testing\/marquee",
+                "attributeNames": [],
                 "attributes": []
             }
         ],
         "authorBoxBooleanAttributes": [
             {
                 "name": "gatographql-testing\/author-box",
+                "attributeNames": [
+                    "showAvatar",
+                    "showBio",
+                    "showEmail"
+                ],
                 "attributes": [
                     {
                         "name": "showAvatar",
@@ -2670,6 +2835,13 @@
         "authorBoxStringAttributes": [
             {
                 "name": "gatographql-testing\/author-box",
+                "attributeNames": [
+                    "userLogin",
+                    "align",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "userLogin",
@@ -2720,6 +2892,10 @@
         "alertEditableStringAttributes": [
             {
                 "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "message",
+                    "severity"
+                ],
                 "attributes": [
                     {
                         "name": "message",
@@ -2741,6 +2917,14 @@
         "alertNonEditableAttributes": [
             {
                 "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "lock",
@@ -2778,6 +2962,9 @@
         "testingPhpOnlyBooleanAttributes": [
             {
                 "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "dismissible"
+                ],
                 "attributes": [
                     {
                         "name": "dismissible",
@@ -2788,10 +2975,16 @@
             },
             {
                 "name": "gatographql-testing\/marquee",
+                "attributeNames": [],
                 "attributes": []
             },
             {
                 "name": "gatographql-testing\/author-box",
+                "attributeNames": [
+                    "showAvatar",
+                    "showBio",
+                    "showEmail"
+                ],
                 "attributes": [
                     {
                         "name": "showAvatar",
@@ -2814,6 +3007,13 @@
         "testingPhpOnlyStringAttributes": [
             {
                 "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "message",
+                    "severity",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "message",
@@ -2854,6 +3054,16 @@
             },
             {
                 "name": "gatographql-testing\/marquee",
+                "attributeNames": [
+                    "text",
+                    "speed",
+                    "direction",
+                    "align",
+                    "className",
+                    "backgroundColor",
+                    "textColor",
+                    "fontSize"
+                ],
                 "attributes": [
                     {
                         "name": "text",
@@ -2920,6 +3130,13 @@
             },
             {
                 "name": "gatographql-testing\/author-box",
+                "attributeNames": [
+                    "userLogin",
+                    "align",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "userLogin",
@@ -2970,6 +3187,17 @@
         "alertAttributeSchemas": [
             {
                 "name": "gatographql-testing\/alert",
+                "attributeNames": [
+                    "message",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
                 "attributes": [
                     {
                         "name": "message",
