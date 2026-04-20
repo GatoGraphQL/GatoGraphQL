@@ -3,11 +3,11 @@
 ### Added
 
 - Field `Root.blockTypes` to query data from the Block Type Registry ([#3291](https://github.com/GatoGraphQL/GatoGraphQL/pull/3291))
-
 ### Improvements
 
 - Tested up to WordPress 7.0 ([#3289](https://github.com/GatoGraphQL/GatoGraphQL/pull/3289))
 - Support AI Connectors from WordPress 7.0 ([#3290](https://github.com/GatoGraphQL/GatoGraphQL/pull/3290))
+- Updated documentation for Translation extension, now supporting Gemini as a translation service provider ([#3292](https://github.com/GatoGraphQL/GatoGraphQL/pull/3292))
 
 ### Fixed
 
