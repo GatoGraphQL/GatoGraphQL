@@ -14,4 +14,13 @@ enum WordPressAIConnectorProvider: string
     case OPENAI = 'openai';
     case ANTHROPIC = 'anthropic';
     case GOOGLE = 'google';
+
+    public function getServiceName(): string
+    {
+        return match ($this) {
+            self::OPENAI => 'chatgpt',
+            self::ANTHROPIC => 'claude',
+            self::GOOGLE => 'gemini',
+        };
+    }
 }
