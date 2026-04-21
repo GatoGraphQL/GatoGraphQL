@@ -579,6 +579,11 @@ class Plugin
                         'default' => 'This is an important notice.',
                         'label' => 'Message',
                     ],
+                    'implications' => [
+                        'type' => 'string',
+                        'default' => 'Review the details and take action if needed.',
+                        'label' => 'Implications',
+                    ],
                     'severity' => [
                         'type' => 'string',
                         'enum' => ['Info', 'Warning', 'Error', 'Success'],
