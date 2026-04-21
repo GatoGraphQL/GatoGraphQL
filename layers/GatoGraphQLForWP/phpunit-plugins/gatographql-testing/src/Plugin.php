@@ -632,13 +632,18 @@ class Plugin
         $headerHTML = $header !== ''
             ? sprintf('<h4 class="gatographql-alert__header">%s</h4>', \esc_html($header))
             : '';
+        $implications = (string) ($attributes['implications'] ?? '');
+        $implicationsHTML = $implications !== ''
+            ? sprintf('<p class="gatographql-alert__implications">%s</p>', \esc_html($implications))
+            : '';
 
         return sprintf(
-            '<div %s>%s%s<p class="gatographql-alert__message">%s</p></div>',
+            '<div %s>%s%s<p class="gatographql-alert__message">%s</p>%s</div>',
             $wrapper,
             $dismiss,
             $headerHTML,
-            \esc_html((string) ($attributes['message'] ?? ''))
+            \esc_html((string) ($attributes['message'] ?? '')),
+            $implicationsHTML
         );
     }
 
