@@ -551,8 +551,8 @@ class Plugin
      */
     protected function registerTestingPHPOnlyBlocks(): void
     {
-        $this->registerAlertBlock('gatographql-testing/alert');
-        $this->registerAlertBlock('gatographql-testing/duplicate-alert');
+        $this->registerAlertBlock('gatographql-testing/alert', 'Alert');
+        $this->registerAlertBlock('gatographql-testing/duplicate-alert', 'Alert (Duplicate)');
         $this->registerMarqueeBlock();
         $this->registerAuthorBoxBlock();
     }
@@ -560,12 +560,12 @@ class Plugin
     /**
      * Example 1 — Alert / Notice Block
      */
-    protected function registerAlertBlock(string $blockName): void
+    protected function registerAlertBlock(string $blockName, string $title): void
     {
         \register_block_type(
             $blockName,
             [
-                'title' => 'Alert',
+                'title' => $title,
                 'description' => 'A notice or alert message.',
                 'category' => 'text',
                 'icon' => 'warning',
