@@ -2233,6 +2233,18 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- wp:gatographql-testing/alert {"header":"Saved","message":"Your changes have been saved successfully.","implications":"The new configuration is now active.","severity":"Success","dismissible":false} /-->
 
 <!-- wp:heading -->
+<h2 class="wp-block-heading">Duplicate Alert blocks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Heads up (duplicate)","message":"Heads up — this is an informational notice.","implications":"No immediate action required; this is for awareness.","severity":"Info","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Deprecation warning (duplicate)","message":"Be careful: deprecated API in use.","implications":"Plan migration to the replacement API before the next major release.","severity":"Warning","dismissible":true} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Request failed (duplicate)","message":"Something went wrong while processing your request.","implications":"Your changes were not applied; retry after checking logs and permissions.","severity":"Error","dismissible":true} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Saved (duplicate)","message":"Your changes have been saved successfully.","implications":"The new configuration is now active.","severity":"Success","dismissible":false} /-->
+
+<!-- wp:heading -->
 <h2 class="wp-block-heading">Marquee blocks</h2>
 <!-- /wp:heading -->
 
