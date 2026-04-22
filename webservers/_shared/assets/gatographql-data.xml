@@ -2232,6 +2232,8 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 
 <!-- wp:gatographql-testing/alert {"header":"Saved","message":"Your changes have been saved successfully.","implications":"The new configuration is now active.","severity":"Success","dismissible":false} /-->
 
+<!-- wp:gatographql-testing/alert {"header":"(Empty)","message":"","implications":"","severity":"Success","dismissible":false} /-->
+
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Duplicate Alert blocks</h2>
 <!-- /wp:heading -->
@@ -2243,6 +2245,8 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- wp:gatographql-testing/duplicate-alert {"header":"Request failed (duplicate)","message":"Something went wrong while processing your request.","implications":"Your changes were not applied; retry after checking logs and permissions.","severity":"Error","dismissible":true} /-->
 
 <!-- wp:gatographql-testing/duplicate-alert {"header":"Saved (duplicate)","message":"Your changes have been saved successfully.","implications":"The new configuration is now active.","severity":"Success","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"(Empty duplicate)","message":"","implications":"","severity":"Success","dismissible":false} /-->
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Marquee blocks</h2>
