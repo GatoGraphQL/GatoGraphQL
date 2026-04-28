@@ -10,9 +10,9 @@ use PoP\ComponentModel\ObjectModels\AbstractTransientObject;
  * A single registered attribute of a block type, as defined in
  * `block.json` (or via `register_block_type()` in PHP).
  *
- * Attributes have no DB ID, so they're handled as Transient Objects:
- * the parent auto-generates a counter-based ID and the instance is
- * auto-registered in the Object Dictionary upon construction
+ * Attributes have no DB ID, so they're handled as Transient Objects,
+ * using the (globally unique) block name + attribute name as ID.
+ * The instance is auto-registered in the Object Dictionary upon construction
  * (see AbstractTransientObject).
  */
 class BlockTypeAttribute extends AbstractTransientObject
@@ -25,7 +25,7 @@ class BlockTypeAttribute extends AbstractTransientObject
         public readonly string $attributeName,
         public readonly array $schema,
     ) {
-        parent::__construct();
+        parent::__construct($blockType->getName() . ':' . $attributeName);
     }
 
     public function getBlockType(): BlockType
