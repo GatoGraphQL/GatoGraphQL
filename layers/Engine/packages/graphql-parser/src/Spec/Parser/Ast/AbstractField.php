@@ -14,6 +14,14 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
 
     protected ?string $uniqueID = null;
     protected ?string $fieldOutputQueryString = null;
+    /**
+     * Memoized result of `getOutputKey()` (= `$alias ?? $name`).
+     * `getOutputKey` shows up at ~60M ticks self-cost on the
+     * AI-translation profile (62K calls × 3 method dispatches per call:
+     * `getOutputKey → getAlias → getName`); with `name` and `alias`
+     * both `readonly`, the result never changes after construction.
+     */
+    protected ?string $outputKey = null;
 
     /**
      * @param Argument[] $arguments
@@ -43,7 +51,7 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
 
     public function getOutputKey(): string
     {
-        return $this->getAlias() ?? $this->getName();
+        return $this->outputKey ??= ($this->alias ?? $this->name);
     }
 
     /**
