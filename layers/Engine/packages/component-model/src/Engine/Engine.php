@@ -2100,10 +2100,23 @@ class Engine extends AbstractBasicService implements EngineInterface
                     foreach ($field_ids as $field_id) {
                         // Do not add again the IDs/Fields already loaded
                         if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null) {
+                            /**
+                             * Build a uniqueID-keyed set of already-loaded fields once
+                             * per $field_id, then use `isset` (O(1)) for membership.
+                             * Replaces two `in_array($field, $already_loaded)` scans
+                             * — each O(N), called per direct field and per conditional
+                             * field on a recursive subcomponent path.
+                             *
+                             * @var array<string,true>
+                             */
+                            $alreadyLoadedFieldUniqueIDs = [];
+                            foreach ($subcomponent_already_loaded_data_fields as $alreadyLoadedField) {
+                                $alreadyLoadedFieldUniqueIDs[$alreadyLoadedField->getUniqueID()] = true;
+                            }
                             $id_subcomponent_direct_fields = array_values(
                                 array_filter(
                                     $subcomponent_direct_fields,
-                                    fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
+                                    static fn (ComponentFieldNodeInterface $componentFieldNode): bool => !isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])
                                 )
                             );
                             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
@@ -2116,7 +2129,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                                 $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
                                 foreach ($conditionComponentFieldNodes as $componentFieldNode) {
                                     /** @var ComponentFieldNodeInterface $componentFieldNode */
-                                    if (in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)) {
+                                    if (isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])) {
                                         continue;
                                     }
                                     $id_subcomponent_conditional_data_fields_storage[] = $componentFieldNode;

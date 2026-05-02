@@ -1035,6 +1035,17 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
      */
     protected function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string|int $id, EngineIterationFieldSet $fieldSet): void
     {
+        /**
+         * Pre-compute the uniqueID set of `$fieldSet->fields` once so that
+         * the per-(field × directive) `in_array($field, $fieldSet->fields)`
+         * check below is O(1) instead of O(N) per call.
+         *
+         * @var array<string,true>
+         */
+        $fieldSetFieldUniqueIDs = [];
+        foreach ($fieldSet->fields as $fieldSetField) {
+            $fieldSetFieldUniqueIDs[$fieldSetField->getUniqueID()] = true;
+        }
         foreach ($fields as $field) {
             if (!$this->fieldDirectives->contains($field)) {
                 $directives = $field->getDirectives();
@@ -1069,11 +1080,12 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // Store which fields do the directives process
             /** @var Directive[] */
             $directives = $this->fieldDirectives[$field];
+            $fieldUniqueID = $field->getUniqueID();
             foreach ($directives as $directive) {
                 $idFieldSet = $this->directiveIDFieldSet[$directive] ?? [];
                 $idFieldSet[$id] ??= new EngineIterationFieldSet();
                 // Store which ID/field this directive must process
-                if (in_array($field, $fieldSet->fields)) {
+                if (isset($fieldSetFieldUniqueIDs[$fieldUniqueID])) {
                     $idFieldSet[$id]->fields[] = $field;
                 }
                 /** @var FieldInterface[]|null */
@@ -1208,6 +1220,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              */
             /** @var array<string|int,FieldInterface[]> */
             $errorIDFields = [];
+            /**
+             * Parallel `[id => [fieldUniqueID => true]]` set, kept in lock-step
+             * with `$errorIDFields` so the per-(directive × field × id)
+             * `in_array($field, $errorIDFields[$id])` check below is O(1).
+             *
+             * @var array<string|int,array<string,true>>
+             */
+            $errorIDFieldUniqueIDs = [];
             if ($separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors() !== []) {
                 foreach ($separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors() as $objectResolutionFeedback) {
                     foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
@@ -1215,6 +1235,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             $errorIDFields[$id] ?? [],
                             $fieldSet->fields
                         );
+                        foreach ($fieldSet->fields as $errorField) {
+                            $errorIDFieldUniqueIDs[$id][$errorField->getUniqueID()] = true;
+                        }
                     }
                 }
             }
@@ -1252,6 +1275,9 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             $errorIDFields[$id] ?? [],
                             $failingFields
                         );
+                        foreach ($failingFields as $failingField) {
+                            $errorIDFieldUniqueIDs[$id][$failingField->getUniqueID()] = true;
+                        }
                     }
                 }
             }
@@ -1315,16 +1341,18 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $idFieldSet = [];
                 foreach ($directiveDirectFieldsToProcess as $field) {
                     $ids = $directiveFieldIDs[$directive][$field];
+                    $fieldUniqueID = $field->getUniqueID();
                     // Skip fields that already produced some error
                     if (!$fieldObjectTypeResolverObjectFieldData->contains($field)) {
                         foreach ($ids as $id) {
                             $errorIDFields[$id][] = $field;
+                            $errorIDFieldUniqueIDs[$id][$fieldUniqueID] = true;
                         }
                         continue;
                     }
                     foreach ($ids as $id) {
                         // If the $id/$field had an error, skip
-                        if (isset($errorIDFields[$id]) && in_array($field, $errorIDFields[$id])) {
+                        if (isset($errorIDFieldUniqueIDs[$id][$fieldUniqueID])) {
                             continue;
                         }
                         $idFieldSet[$id] ??= new EngineIterationFieldSet();

@@ -264,15 +264,23 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
 
         /**
          * Optimization: Check if the field was referenced in the query,
-         * otherwise can skip
+         * otherwise can skip. Build a uniqueID-keyed set so the membership
+         * test is O(1) and uses string comparison, instead of `in_array`'s
+         * default loose `==` which does recursive property-equality on
+         * `FieldInterface` objects.
          */
         /** @var FieldInterface[] */
         $documentObjectResolvedFieldValueReferencedFields = App::getState('document-object-resolved-field-value-referenced-fields');
+        /** @var array<string,true> */
+        $documentObjectResolvedFieldValueReferencedFieldUniqueIDs = [];
+        foreach ($documentObjectResolvedFieldValueReferencedFields as $referencedField) {
+            $documentObjectResolvedFieldValueReferencedFieldUniqueIDs[$referencedField->getUniqueID()] = true;
+        }
         if (
-            !in_array($field, $documentObjectResolvedFieldValueReferencedFields)
+            !isset($documentObjectResolvedFieldValueReferencedFieldUniqueIDs[$field->getUniqueID()])
             && (
                 $staticField === null
-                || !in_array($staticField, $documentObjectResolvedFieldValueReferencedFields)
+                || !isset($documentObjectResolvedFieldValueReferencedFieldUniqueIDs[$staticField->getUniqueID()])
             )
         ) {
             return;

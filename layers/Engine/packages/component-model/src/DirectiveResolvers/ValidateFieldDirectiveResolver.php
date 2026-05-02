@@ -87,20 +87,27 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
             /** @var UnionTypeResolverInterface */
             $unionTypeResolver = $relationalTypeResolver;
-            /** @var SplObjectStorage<ObjectTypeResolverInterface,FieldInterface[]> */
-            $processedObjectTypeResolverFields = new SplObjectStorage();
+            /**
+             * Per-target-resolver uniqueID set used to dedup already-validated
+             * fields in O(1), instead of `in_array($field, $processedFields)`
+             * (O(N) per element).
+             *
+             * @var SplObjectStorage<ObjectTypeResolverInterface,array<string,true>>
+             */
+            $processedObjectTypeResolverFieldUniqueIDs = new SplObjectStorage();
             foreach ($idFieldSet as $id => $fieldSet) {
                 $object = $idObjects[$id];
                 $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
                 if ($targetObjectTypeResolver === null) {
                     continue;
                 }
-                $processedFields = $processedObjectTypeResolverFields[$targetObjectTypeResolver] ?? [];
+                $processedFieldUniqueIDs = $processedObjectTypeResolverFieldUniqueIDs[$targetObjectTypeResolver] ?? [];
                 foreach ($fieldSet->fields as $field) {
-                    if (in_array($field, $processedFields)) {
+                    $fieldUniqueID = $field->getUniqueID();
+                    if (isset($processedFieldUniqueIDs[$fieldUniqueID])) {
                         continue;
                     }
-                    $processedFields[] = $field;
+                    $processedFieldUniqueIDs[$fieldUniqueID] = true;
                     $this->executeValidationForField(
                         $targetObjectTypeResolver,
                         $field,
@@ -110,7 +117,7 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
                         $engineIterationFeedbackStore,
                     );
                 }
-                $processedObjectTypeResolverFields[$targetObjectTypeResolver] = $processedFields;
+                $processedObjectTypeResolverFieldUniqueIDs[$targetObjectTypeResolver] = $processedFieldUniqueIDs;
             }
             return;
         }
