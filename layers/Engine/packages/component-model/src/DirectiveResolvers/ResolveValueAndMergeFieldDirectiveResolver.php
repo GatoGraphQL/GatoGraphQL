@@ -268,9 +268,17 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
          * test is O(1) and uses string comparison, instead of `in_array`'s
          * default loose `==` which does recursive property-equality on
          * `FieldInterface` objects.
+         *
+         * Fast-path the (extremely common) case where the query has no
+         * field-value references at all: skip the foreach + isset checks
+         * entirely. The function is called per (field, object) so even
+         * a few ticks shaved per call adds up over 22K calls.
          */
         /** @var FieldInterface[] */
         $documentObjectResolvedFieldValueReferencedFields = App::getState('document-object-resolved-field-value-referenced-fields');
+        if ($documentObjectResolvedFieldValueReferencedFields === []) {
+            return;
+        }
         /** @var array<string,true> */
         $documentObjectResolvedFieldValueReferencedFieldUniqueIDs = [];
         foreach ($documentObjectResolvedFieldValueReferencedFields as $referencedField) {
