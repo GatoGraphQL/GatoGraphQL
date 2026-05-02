@@ -59,6 +59,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected array $objectTypeFieldResolversForFieldOrFieldNameCache = [];
     /**
+     * Per-field-name cache of the *candidate* resolvers — those whose
+     * `getFieldNamesResolvedByObjectTypeFieldResolver()` includes the
+     * field name, sorted by priority and deduped. Built by walking the
+     * class hierarchy once per field name; the per-field-instance
+     * `resolveCanProcessField` filter happens later in
+     * `calculateObjectTypeFieldResolversForFieldOrFieldName`.
+     *
+     * Splitting the work this way avoids re-walking the class hierarchy
+     * for every distinct `FieldInterface` instance (the previous cache
+     * was keyed by `spl_object_id($field)`, so two AST occurrences of
+     * the same field paid the structural cost twice).
+     *
+     * @var array<string,ObjectTypeFieldResolverInterface[]>
+     */
+    protected array $candidateObjectTypeFieldResolversByFieldNameCache = [];
+    /**
      * @var array<string,Directive[]>|null
      */
     protected ?array $mandatoryDirectivesForFields = null;
@@ -1179,9 +1195,45 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             );
         }
 
+        /**
+         * Apply the per-field-instance `resolveCanProcessField` filter on
+         * top of the cached candidate list (which already encodes the full
+         * class-hierarchy walk + priority sort + class-dedup, all of which
+         * depend only on `$fieldName` and the type resolver's class).
+         */
+        $objectTypeFieldResolvers = [];
+        foreach ($this->getCandidateObjectTypeFieldResolversByFieldName($fieldName) as $objectTypeFieldResolver) {
+            if (!$objectTypeFieldResolver->resolveCanProcessField($this, $field)) {
+                continue;
+            }
+            $objectTypeFieldResolvers[] = $objectTypeFieldResolver;
+        }
+        return $objectTypeFieldResolvers;
+    }
+
+    /**
+     * Resolvers attached to this ObjectTypeResolver (via the attachable-
+     * extension manager and the class hierarchy) that declare they handle
+     * `$fieldName`, sorted by priority within each hierarchy level and
+     * deduped across levels by resolver class. Excludes the per-field-
+     * instance `resolveCanProcessField` filter — that's applied by the
+     * caller, since it depends on field args.
+     *
+     * Cached per `$fieldName` for the lifetime of the type resolver
+     * instance: the result depends only on `$fieldName`, the (stable)
+     * class hierarchy, and the (request-stable) attached extensions.
+     *
+     * @return ObjectTypeFieldResolverInterface[]
+     */
+    protected function getCandidateObjectTypeFieldResolversByFieldName(string $fieldName): array
+    {
+        if (isset($this->candidateObjectTypeFieldResolversByFieldNameCache[$fieldName])) {
+            return $this->candidateObjectTypeFieldResolversByFieldNameCache[$fieldName];
+        }
+
         $attachableExtensionManager = $this->getAttachableExtensionManager();
 
-        $objectTypeFieldResolvers = [];
+        $candidateObjectTypeFieldResolvers = [];
         // Get the ObjectTypeFieldResolvers attached to this ObjectTypeResolver
         $class = get_class($this->getTypeResolverToCalculateSchema());
         // Iterate classes from the current class towards the parent classes until finding typeResolver that satisfies processing this field
@@ -1198,10 +1250,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 if (!in_array($fieldName, $extensionFieldNames)) {
                     continue;
                 }
-                // Check that the fieldResolver can handle the field based on other parameters (eg: "version" in the fieldArgs)
-                if (!$objectTypeFieldResolver->resolveCanProcessField($this, $field)) {
-                    continue;
-                }
                 $extensionPriority = $objectTypeFieldResolver->getPriorityToAttachToClasses();
                 $classTypeResolverPriorities[] = $extensionPriority;
                 $classObjectTypeFieldResolvers[] = $objectTypeFieldResolver;
@@ -1211,13 +1259,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             array_multisort($classTypeResolverPriorities, SORT_DESC, SORT_NUMERIC, $classObjectTypeFieldResolvers);
             // Add under class as to mimic `array_unique` for object
             foreach ($classObjectTypeFieldResolvers as $classObjectTypeFieldResolver) {
-                $objectTypeFieldResolvers[get_class($classObjectTypeFieldResolver)] = $classObjectTypeFieldResolver;
+                $candidateObjectTypeFieldResolvers[get_class($classObjectTypeFieldResolver)] = $classObjectTypeFieldResolver;
             }
             // Continue iterating for the class parents
         } while ($class = get_parent_class($class));
 
-        // Return all the units that resolve the fieldName
-        return array_values($objectTypeFieldResolvers);
+        return $this->candidateObjectTypeFieldResolversByFieldNameCache[$fieldName] = array_values($candidateObjectTypeFieldResolvers);
     }
 
     protected function getSchemaGenerationLocation(): Location
