@@ -1430,6 +1430,30 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
             $conditionalRelationalComponentFieldNodes = $this->getConditionalRelationalComponentFieldNodes($component);
             if ($conditionalLeafComponentFieldNodes !== [] || $conditionalRelationalComponentFieldNodes !== []) {
                 $directSubcomponents = $this->getSubcomponents($component);
+                /**
+                 * `Component` is a `final readonly` value object: the same logical
+                 * component may be produced as distinct instances along different code
+                 * paths, so equality must be by property value (matching PHP's loose
+                 * `==`, which `in_array`/`array_search` use by default), not by identity.
+                 *
+                 * Build a value-based key once per component and use a `[key => true]`
+                 * map for O(1) membership checks. This replaces the previous nested
+                 * `in_array` / `array_search` scans (O(N × M) per recursive call) and
+                 * is a primary hot path during multi-query execution.
+                 */
+                $componentKey = static fn (Component $c): string => $c->processorClass . '|' . $c->name . '|' . serialize($c->atts);
+                $directSubcomponentKeys = [];
+                foreach ($directSubcomponents as $directSubcomponent) {
+                    $directSubcomponentKeys[$componentKey($directSubcomponent)] = true;
+                }
+                /**
+                 * Keys of conditional subcomponents to drop from `$subcomponents`,
+                 * accumulated across the outer loop and applied in a single filter
+                 * pass after it (replacing per-iteration `array_search` + `array_splice`).
+                 *
+                 * @var array<string,true>
+                 */
+                $conditionalSubcomponentKeysToRemoveFromSubcomponents = [];
                 $conditionalComponentFieldNodes = new SplObjectStorage();
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'direct-component-field-nodes' with 'conditional-component-field-nodes' before merging to $ret
                 foreach ($conditionalLeafComponentFieldNodes as $conditionalLeafComponentFieldNode) {
@@ -1450,14 +1474,12 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                 foreach ($conditionalComponentFieldNodes as $conditionComponentFieldNode) {
                     /** @var Component[] */
                     $conditionalSubcomponents = $conditionalComponentFieldNodes[$conditionComponentFieldNode];
-                    // Calculate those fields which are certainly to be propagated, and not part of the direct subcomponents
-                    // Using this really ugly way because, for comparing components, using `array_diff` and `intersect` fail
-                    for ($i = count($conditionalSubcomponents) - 1; $i >= 0; $i--) {
-                        // If this subcomponent is also in the direct ones, then it's not conditional anymore
-                        if (in_array($conditionalSubcomponents[$i], $directSubcomponents)) {
-                            array_splice($conditionalSubcomponents, $i, 1);
-                        }
-                    }
+                    // Drop conditional subcomponents that are also direct subcomponents
+                    // (they aren't conditional anymore).
+                    $conditionalSubcomponents = array_values(array_filter(
+                        $conditionalSubcomponents,
+                        static fn (Component $c): bool => !isset($directSubcomponentKeys[$componentKey($c)])
+                    ));
                     foreach ($conditionalSubcomponents as $subcomponent) {
                         $subcomponent_processor = $this->getComponentProcessorManager()->getComponentProcessor($subcomponent);
 
@@ -1510,15 +1532,18 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                         }
                     }
 
-                    // Extract the conditional subcomponents from the rest of the subcomponents, which will be processed below
+                    // Track the conditional subcomponents to remove from $subcomponents.
+                    // The actual removal happens once, after the outer loop, as a single
+                    // filter pass over $subcomponents.
                     foreach ($conditionalSubcomponents as $conditionalSubcomponent) {
-                        $pos = array_search($conditionalSubcomponent, $subcomponents);
-                        if ($pos === false) {
-                            continue;
-                        }
-                        /** @var int $pos  */
-                        array_splice($subcomponents, $pos, 1);
+                        $conditionalSubcomponentKeysToRemoveFromSubcomponents[$componentKey($conditionalSubcomponent)] = true;
                     }
+                }
+                if ($conditionalSubcomponentKeysToRemoveFromSubcomponents !== []) {
+                    $subcomponents = array_values(array_filter(
+                        $subcomponents,
+                        static fn (Component $c): bool => !isset($conditionalSubcomponentKeysToRemoveFromSubcomponents[$componentKey($c)])
+                    ));
                 }
             }
 
