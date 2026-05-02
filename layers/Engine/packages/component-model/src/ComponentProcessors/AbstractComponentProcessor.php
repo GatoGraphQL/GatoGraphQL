@@ -1056,12 +1056,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
 
         $this->addDatasetcomponentTreeSectionFlattenedComponents($ret, $component);
 
-        return array_values(
-            array_unique(
-                $ret,
-                SORT_REGULAR
-            )
-        );
+        return self::dedupComponents($ret);
     }
 
     /**
@@ -1577,8 +1572,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
 
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
             if ($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
-                // @phpstan-ignore-next-line
-                $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES]));
+                $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
             }
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
@@ -1660,10 +1654,10 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
             $ret[DataProperties::SUBCOMPONENTS][$subcomponentComponentFieldNode] ??= [];
             $subcomponentsSubcomponentFieldNode = $ret[DataProperties::SUBCOMPONENTS][$subcomponentComponentFieldNode];
             if ($subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES]) {
-                $subcomponentsSubcomponentFieldNode[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique(array_merge(
+                $subcomponentsSubcomponentFieldNode[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(array_merge(
                     $subcomponentsSubcomponentFieldNode[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [],
                     $subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES]
-                )));
+                ));
             }
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
             // @phpstan-ignore-next-line
@@ -1784,6 +1778,48 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
             }
         }
 
-        return array_values(array_unique($components, SORT_REGULAR));
+        return self::dedupComponents($components);
+    }
+
+    /**
+     * Deduplicate a `ComponentFieldNodeInterface[]` list by `__toString`
+     * (= the underlying field's `getUniqueID()`), via a `[uniqueID => node]`
+     * map. Equivalent in semantics to `array_values(array_unique($nodes))`
+     * but avoids `array_unique`'s repeated string casts on a hot path.
+     *
+     * @param ComponentFieldNodeInterface[] $componentFieldNodes
+     * @return ComponentFieldNodeInterface[]
+     */
+    private static function dedupComponentFieldNodes(array $componentFieldNodes): array
+    {
+        $componentFieldNodesByUniqueID = [];
+        foreach ($componentFieldNodes as $componentFieldNode) {
+            $uniqueID = $componentFieldNode->getField()->getUniqueID();
+            if (!isset($componentFieldNodesByUniqueID[$uniqueID])) {
+                $componentFieldNodesByUniqueID[$uniqueID] = $componentFieldNode;
+            }
+        }
+        return array_values($componentFieldNodesByUniqueID);
+    }
+
+    /**
+     * Deduplicate a `Component[]` list by value equality (matching
+     * `array_unique(..., SORT_REGULAR)` semantics, which the original
+     * code relied on for `final readonly` Component value objects), via a
+     * value-key map. Avoids `SORT_REGULAR`'s recursive `==` comparisons.
+     *
+     * @param Component[] $components
+     * @return Component[]
+     */
+    private static function dedupComponents(array $components): array
+    {
+        $componentsByKey = [];
+        foreach ($components as $component) {
+            $key = $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
+            if (!isset($componentsByKey[$key])) {
+                $componentsByKey[$key] = $component;
+            }
+        }
+        return array_values($componentsByKey);
     }
 }

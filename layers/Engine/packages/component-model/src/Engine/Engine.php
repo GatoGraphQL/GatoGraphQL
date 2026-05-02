@@ -1998,8 +1998,12 @@ class Engine extends AbstractBasicService implements EngineInterface
                 continue;
             }
             $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();
-            // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
-            $subcomponent_direct_fields = array_unique($subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []);
+            // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now.
+            // Dedup `ComponentFieldNodeInterface[]` by `__toString` (= field uniqueID)
+            // via a `[uniqueID => node]` map, avoiding `array_unique`'s repeated string casts.
+            $subcomponent_direct_fields = self::dedupComponentFieldNodes(
+                $subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []
+            );
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
             $subcomponent_conditional_fields_storage = $subcomponent_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
             if ($subcomponent_direct_fields || $subcomponent_conditional_fields_storage->count() > 0) {
@@ -2152,7 +2156,9 @@ class Engine extends AbstractBasicService implements EngineInterface
 
                 if ($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key] ?? null) {
                     $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS]);
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(
+                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]
+                    );
                 }
             }
         }
@@ -2296,10 +2302,10 @@ class Engine extends AbstractBasicService implements EngineInterface
                 $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] ??= [];
                 $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentFieldNode];
                 if (isset($componentFieldNodeData[DataProperties::DIRECT_COMPONENT_FIELD_NODES])) {
-                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique(array_merge(
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(array_merge(
                         $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [],
                         $componentFieldNodeData[DataProperties::DIRECT_COMPONENT_FIELD_NODES]
-                    )));
+                    ));
                 }
                 if (isset($componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES])) {
                     $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();
@@ -2325,5 +2331,26 @@ class Engine extends AbstractBasicService implements EngineInterface
             }
             $dbdata[$relationalTypeOutputKey][$component_path_key][DataProperties::SUBCOMPONENTS] = $dbDataSubcomponentsSplObjectStorage;
         }
+    }
+
+    /**
+     * Deduplicate a `ComponentFieldNodeInterface[]` list by `__toString`
+     * (= underlying field's `getUniqueID()`), via a `[uniqueID => node]`
+     * map. Equivalent in semantics to `array_values(array_unique($nodes))`
+     * but avoids `array_unique`'s repeated string casts on a hot path.
+     *
+     * @param ComponentFieldNodeInterface[] $componentFieldNodes
+     * @return ComponentFieldNodeInterface[]
+     */
+    private static function dedupComponentFieldNodes(array $componentFieldNodes): array
+    {
+        $componentFieldNodesByUniqueID = [];
+        foreach ($componentFieldNodes as $componentFieldNode) {
+            $uniqueID = $componentFieldNode->getField()->getUniqueID();
+            if (!isset($componentFieldNodesByUniqueID[$uniqueID])) {
+                $componentFieldNodesByUniqueID[$uniqueID] = $componentFieldNode;
+            }
+        }
+        return array_values($componentFieldNodesByUniqueID);
     }
 }

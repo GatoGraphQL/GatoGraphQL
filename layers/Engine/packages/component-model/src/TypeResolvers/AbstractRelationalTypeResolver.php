@@ -1219,24 +1219,35 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 }
             }
             if ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() !== []) {
-                // Extract the failing fields from the errors
-                $schemaErrorFailingFields = [];
+                /**
+                 * Extract the failing fields from the errors as a uniqueID-keyed
+                 * map; that lets the per-directive intersection below use `isset`
+                 * (O(1)) instead of `array_intersect`'s implicit `__toString`
+                 * comparison.
+                 *
+                 * @var array<string,FieldInterface>
+                 */
+                $schemaErrorFailingFieldsByUniqueID = [];
                 foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
-                    $schemaErrorFailingFields = array_merge(
-                        $schemaErrorFailingFields,
-                        $schemaFeedback->getFields()
-                    );
+                    foreach ($schemaFeedback->getFields() as $field) {
+                        $fieldUniqueID = $field->getUniqueID();
+                        if (!isset($schemaErrorFailingFieldsByUniqueID[$fieldUniqueID])) {
+                            $schemaErrorFailingFieldsByUniqueID[$fieldUniqueID] = $field;
+                        }
+                    }
                 }
-                // @phpstan-ignore-next-line
-                $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
                 foreach ($directives as $directive) {
                     foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
-                        // @phpstan-ignore-next-line
-                        $failingFields = array_intersect(
-                            $fieldSet->fields,
-                            $schemaErrorFailingFields
-                        );
+                        $failingFields = [];
+                        foreach ($fieldSet->fields as $field) {
+                            if (isset($schemaErrorFailingFieldsByUniqueID[$field->getUniqueID()])) {
+                                $failingFields[] = $field;
+                            }
+                        }
+                        if ($failingFields === []) {
+                            continue;
+                        }
                         $errorIDFields[$id] = array_merge(
                             $errorIDFields[$id] ?? [],
                             $failingFields
