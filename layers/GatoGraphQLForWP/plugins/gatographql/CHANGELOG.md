@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Tested up to WordPress 7.0 (#3289)
 - Support AI Connectors from WordPress 7.0 (#3290)
 - Updated documentation for Translation extension, now supporting Gemini as a translation service provider (#3292)
+- Allow the custom post `author` to be null (e.g. when the post has no assigned user / author ID 0) (#3293)
 
 ### Fixed
 
