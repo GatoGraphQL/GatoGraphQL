@@ -58,6 +58,27 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
     private ?ComponentPaths $componentPaths = null;
     private ?ComponentHelpersInterface $componentHelpers = null;
 
+    /**
+     * Value-keyed memoization for `getAllSubcomponents` and
+     * `getComponentsToPropagateDataProperties`. The translation profile
+     * shows `getSubcomponentsByGroup` (the private worker behind both)
+     * at ~290M / 78K calls / ~3.7K ticks each — ample room for a
+     * cache hit to short-circuit the merge + dedup.
+     *
+     * Keyed by `processorClass | name | serialize(atts)` (same shape
+     * as `dedupComponents`), with `$cacheForExecutableDocumentAST` as
+     * an invalidator so long-running PHP processes don't return stale
+     * results when the request's executable document changes.
+     *
+     * @var array<string,Component[]>
+     */
+    private array $allSubcomponentsCache = [];
+    /**
+     * @var array<string,Component[]>
+     */
+    private array $componentsToPropagateDataPropertiesCache = [];
+    private ?object $cacheForExecutableDocumentAST = null;
+
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
         if ($this->componentPathHelpers === null) {
@@ -144,7 +165,32 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      */
     final public function getAllSubcomponents(Component $component): array
     {
-        return $this->getSubcomponentsByGroup($component);
+        $cacheKey = $this->getSubcomponentCacheKeyForComponent($component);
+        if (isset($this->allSubcomponentsCache[$cacheKey])) {
+            return $this->allSubcomponentsCache[$cacheKey];
+        }
+        return $this->allSubcomponentsCache[$cacheKey] = $this->getSubcomponentsByGroup($component);
+    }
+
+    /**
+     * Compute the value-key for a `Component`, resetting the
+     * subcomponent caches if the executable-document AST instance has
+     * changed (i.e. a new request in a long-running PHP process).
+     */
+    private function getSubcomponentCacheKeyForComponent(Component $component): string
+    {
+        // `App::getState` throws when the key isn't set — but the
+        // `executable-document-ast` state is only populated during real
+        // engine requests, not in every unit test that exercises a
+        // processor. Use `hasState` to guard.
+        /** @var object|null */
+        $executableDocument = App::hasState('executable-document-ast') ? App::getState('executable-document-ast') : null;
+        if ($this->cacheForExecutableDocumentAST !== $executableDocument) {
+            $this->allSubcomponentsCache = [];
+            $this->componentsToPropagateDataPropertiesCache = [];
+            $this->cacheForExecutableDocumentAST = $executableDocument;
+        }
+        return $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
     }
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
@@ -1399,7 +1445,11 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      */
     public function getComponentsToPropagateDataProperties(Component $component): array
     {
-        return $this->getSubcomponentsByGroup(
+        $cacheKey = $this->getSubcomponentCacheKeyForComponent($component);
+        if (isset($this->componentsToPropagateDataPropertiesCache[$cacheKey])) {
+            return $this->componentsToPropagateDataPropertiesCache[$cacheKey];
+        }
+        return $this->componentsToPropagateDataPropertiesCache[$cacheKey] = $this->getSubcomponentsByGroup(
             $component,
             array(
                 self::COMPONENTELEMENT_SUBCOMPONENTS,
