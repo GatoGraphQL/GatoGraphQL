@@ -2019,7 +2019,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbName => $database) {
-                        $database_field_ids = $database[$targetTypeOutputKey][$id][$componentFieldNode->getField()] ?? null;
+                        $database_field_ids = $database[$targetTypeOutputKey][$id][$field] ?? null;
                         if (!$database_field_ids) {
                             continue;
                         }
@@ -2052,7 +2052,8 @@ class Engine extends AbstractBasicService implements EngineInterface
                 /** @var array<string|int> */
                 $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
                 // Create a map, from ID to TypedID
-                for ($i = 0; $i < count($allSubcomponentIDs); $i++) {
+                $allSubcomponentIDsCount = count($allSubcomponentIDs);
+                for ($i = 0; $i < $allSubcomponentIDsCount; $i++) {
                     $typedSubcomponentIDs[$allSubcomponentIDs[$i]] = $qualifiedSubcomponentIDs[$i];
                 }
 
@@ -2078,15 +2079,15 @@ class Engine extends AbstractBasicService implements EngineInterface
                                 $database_field_ids = $typed_database_field_ids;
                             }
                             // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($componentFieldNode->getField()) && is_array($databases[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()]);
+                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($field) && is_array($databases[$dbName][$typeOutputKey][$id][$field]);
                             // @phpstan-ignore-next-line
                             $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id] ??= new SplObjectStorage();
                             // @phpstan-ignore-next-line
-                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$field] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
                             // @phpstan-ignore-next-line
                             $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id] ??= new SplObjectStorage();
                             // @phpstan-ignore-next-line
-                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$field] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
                             $field_ids = array_merge(
