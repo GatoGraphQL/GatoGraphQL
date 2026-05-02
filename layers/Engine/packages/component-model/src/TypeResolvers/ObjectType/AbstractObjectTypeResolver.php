@@ -46,6 +46,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Exception\AbstractClientException;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
+use WeakMap;
 use stdClass;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
@@ -1125,15 +1126,45 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     }
 
     /**
+     * Per-FieldInterface cache for `getExecutableObjectTypeFieldResolverForField`.
+     * Hit ~88K times per request on the AI-translation workload — pre-cache,
+     * each call paid the wrapper's `getName() . ' #' . spl_object_id($field)`
+     * key construction even though the result was already cached. WeakMap
+     * keyed by the field instance skips that cost entirely and side-steps
+     * `spl_object_id` reuse across long-running processes / tests.
+     *
+     * @var WeakMap<FieldInterface,ObjectTypeFieldResolverInterface|null>|null
+     */
+    private ?WeakMap $executableObjectTypeFieldResolverForFieldCache = null;
+    /**
+     * Mirror cache for the rare string-keyed case. `array_key_exists` (not
+     * `isset`) is required so a cached `null` result is not treated as a
+     * miss.
+     *
+     * @var array<string,ObjectTypeFieldResolverInterface|null>
+     */
+    private array $executableObjectTypeFieldResolverForFieldNameCache = [];
+
+    /**
      * Get the first FieldResolver that resolves the field
      */
     final public function getExecutableObjectTypeFieldResolverForField(FieldInterface|string $fieldOrFieldName): ?ObjectTypeFieldResolverInterface
     {
-        $objectTypeFieldResolversForFieldOrFieldName = $this->getObjectTypeFieldResolversForFieldOrFieldName($fieldOrFieldName);
-        if ($objectTypeFieldResolversForFieldOrFieldName === []) {
-            return null;
+        if ($fieldOrFieldName instanceof FieldInterface) {
+            $cache = $this->executableObjectTypeFieldResolverForFieldCache ??= new WeakMap();
+            // `offsetExists` (not `isset`) so a legitimately cached `null`
+            // result is not treated as a miss.
+            if ($cache->offsetExists($fieldOrFieldName)) {
+                return $cache[$fieldOrFieldName];
+            }
+            $resolvers = $this->getObjectTypeFieldResolversForFieldOrFieldName($fieldOrFieldName);
+            return $cache[$fieldOrFieldName] = ($resolvers === [] ? null : $resolvers[0]);
         }
-        return $objectTypeFieldResolversForFieldOrFieldName[0];
+        if (array_key_exists($fieldOrFieldName, $this->executableObjectTypeFieldResolverForFieldNameCache)) {
+            return $this->executableObjectTypeFieldResolverForFieldNameCache[$fieldOrFieldName];
+        }
+        $resolvers = $this->getObjectTypeFieldResolversForFieldOrFieldName($fieldOrFieldName);
+        return $this->executableObjectTypeFieldResolverForFieldNameCache[$fieldOrFieldName] = ($resolvers === [] ? null : $resolvers[0]);
     }
 
     /**
