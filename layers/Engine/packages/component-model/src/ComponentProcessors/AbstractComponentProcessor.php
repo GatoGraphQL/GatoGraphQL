@@ -841,29 +841,36 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      */
     protected function addFieldsToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
+        /**
+         * Pre-compute the path-prefix once. Three call sites below each
+         * append a single field to `$pathFields`; rather than
+         * `array_merge` + `array_map(closure)` + `implode` per iteration
+         * (which the translation profile shows at ~3M closure invocations
+         * + ~120K `array_map` calls), build the prefix string up-front and
+         * concatenate the per-iteration field's output key directly.
+         */
+        $pathPrefix = '';
+        foreach ($pathFields as $pathField) {
+            if ($pathPrefix !== '') {
+                $pathPrefix .= Constants::RELATIONAL_FIELD_PATH_SEPARATOR;
+            }
+            $pathPrefix .= $pathField->getOutputKey();
+        }
+        $pathPrefixWithSep = $pathPrefix === ''
+            ? ''
+            : $pathPrefix . Constants::RELATIONAL_FIELD_PATH_SEPARATOR;
+
         if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             /**
              * Place it under "id" because it is for fetching the current object
              * from the DB, which is found through resolvedObject.id
              */
-            $field = new LeafField(
-                FieldOutputKeys::ID,
-                null,
-                [],
-                [],
-                ASTNodesFactory::getNonSpecificLocation(),
-            );
-            /** @var FieldInterface[] */
-            $selfPathFields = array_merge($pathFields, [$field]);
-            $selfPathFieldOutputKeys = array_map(
-                fn (FieldInterface $field) => $field->getOutputKey(),
-                $selfPathFields
-            );
-            $ret[implode(Constants::RELATIONAL_FIELD_PATH_SEPARATOR, $selfPathFieldOutputKeys)] = $relationalTypeResolver->getTypeOutputKey();
+            $ret[$pathPrefixWithSep . FieldOutputKeys::ID] = $relationalTypeResolver->getTypeOutputKey();
         }
 
         // This prop is set for both dataloading and non-dataloading components
         if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
+            $dataloadHelperService = $this->getDataloadHelperService();
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
                 /**
                  * If passing a subcomponent fieldname that doesn't exist to the API,
@@ -872,20 +879,15 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                  * If there is an error in the query, eg: `{ id { id } }`,
                  * it was already added in `initModelProps`
                  */
-                $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                $relationalField = $relationalComponentFieldNode->getField();
+                $typeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentField(
                     $relationalTypeResolver,
-                    $relationalComponentFieldNode->getField(),
+                    $relationalField,
                 );
                 if ($typeResolver === null) {
                     continue;
                 }
-                /** @var FieldInterface[] */
-                $relationalPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
-                $relationalPathFieldOutputKeys = array_map(
-                    fn (FieldInterface $field) => $field->getOutputKey(),
-                    $relationalPathFields
-                );
-                $ret[implode(Constants::RELATIONAL_FIELD_PATH_SEPARATOR, $relationalPathFieldOutputKeys)] = $typeResolver->getTypeOutputKey();
+                $ret[$pathPrefixWithSep . $relationalField->getOutputKey()] = $typeResolver->getTypeOutputKey();
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
@@ -896,9 +898,10 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                      * If there is an error in the query, eg: `{ id { id } }`,
                      * it was already added in `initModelProps`
                      */
-                    $typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentField(
+                    $relationalField = $relationalComponentFieldNode->getField();
+                    $typeResolver = $dataloadHelperService->getTypeResolverFromSubcomponentField(
                         $relationalTypeResolver,
-                        $relationalComponentFieldNode->getField(),
+                        $relationalField,
                     );
                     if ($typeResolver === null) {
                         /**
@@ -907,13 +910,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                          */
                         continue;
                     }
-                    /** @var FieldInterface[] */
-                    $relationalPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
-                    $relationalPathFieldOutputKeys = array_map(
-                        fn (FieldInterface $field) => $field->getOutputKey(),
-                        $relationalPathFields
-                    );
-                    $ret[implode(Constants::RELATIONAL_FIELD_PATH_SEPARATOR, $relationalPathFieldOutputKeys)] = $typeResolver->getTypeOutputKey();
+                    $ret[$pathPrefixWithSep . $relationalField->getOutputKey()] = $typeResolver->getTypeOutputKey();
                 }
             }
         }
