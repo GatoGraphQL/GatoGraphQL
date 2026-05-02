@@ -128,6 +128,9 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
 
         /** @var int|string|null */
         $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
+        if ((string) $authorID === "0") {
+            $authorID = null;
+        }
 
         if ($authorID !== null) {
             // If providing the author, check that the user exists
