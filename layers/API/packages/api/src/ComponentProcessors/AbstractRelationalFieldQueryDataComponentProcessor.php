@@ -28,6 +28,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use SplObjectStorage;
+use WeakMap;
 
 abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
 {
@@ -42,6 +43,37 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * @var array<string,array<string,LeafField>>
      */
     private array $fieldInstanceContainer = [];
+
+    /**
+     * Per-`Component`-instance memoization for the field-node getters
+     * below. These getters are pure functions of `$component->atts` plus
+     * the request-scoped `App::getState('executable-document-ast')` (which
+     * is frozen for the request); but each call also allocates fresh
+     * `new Component(...)` virtual sub-components. They are invoked
+     * repeatedly per node by 5+ tree walkers (prop init, dataloading
+     * paths, flattening, subcomponent grouping) — without memoization,
+     * every walker pays the full computation, and downstream
+     * `dedupComponents`/`spl_object_id` keys diverge across walks.
+     *
+     * Use `WeakMap` (not an `spl_object_id`-keyed array) so cache entries
+     * are released when the `Component` is garbage-collected, avoiding
+     * stale hits when PHP reuses object IDs across tests / long-running
+     * processes. The cache is bypassed entirely when
+     * `does-api-query-have-errors` is true (the getters return `[]`
+     * unconditionally in that case, and the flag may flip from null/false
+     * to true between requests in a long-running process).
+     *
+     * @var WeakMap<Component,LeafComponentFieldNode[]>|null
+     */
+    private ?WeakMap $leafComponentFieldNodesCache = null;
+    /**
+     * @var WeakMap<Component,RelationalComponentFieldNode[]>|null
+     */
+    private ?WeakMap $relationalComponentFieldNodesCache = null;
+    /**
+     * @var WeakMap<Component,ConditionalLeafComponentFieldNode[]>|null
+     */
+    private ?WeakMap $conditionalLeafComponentFieldNodesCache = null;
 
     private ?QueryASTTransformationServiceInterface $queryASTTransformationService = null;
     private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
@@ -271,6 +303,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return [];
         }
 
+        $cache = $this->leafComponentFieldNodesCache ??= new WeakMap();
+        if (isset($cache[$component])) {
+            return $cache[$component];
+        }
+
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($component->atts);
 
         if ($this->ignoreConditionalFields($component->atts)) {
@@ -290,7 +327,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $leafFieldFragmentModelsTuples
         );
 
-        return array_map(
+        return $cache[$component] = array_map(
             LeafComponentFieldNode::fromLeafField(...),
             $leafFields
         );
@@ -327,6 +364,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return [];
         }
 
+        $cache = $this->relationalComponentFieldNodesCache ??= new WeakMap();
+        if (isset($cache[$component])) {
+            return $cache[$component];
+        }
+
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($component->atts);
 
         if ($this->ignoreConditionalFields($component->atts)) {
@@ -348,7 +390,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
 
         $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
-            return [];
+            return $cache[$component] = [];
         }
 
         /** @var ExecutableDocument $executableDocument */
@@ -387,7 +429,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 ]
             );
         }
-        return $ret;
+        return $cache[$component] = $ret;
     }
 
     /**
@@ -427,8 +469,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return [];
         }
 
+        $cache = $this->conditionalLeafComponentFieldNodesCache ??= new WeakMap();
+        if (isset($cache[$component])) {
+            return $cache[$component];
+        }
+
         if (!$this->ignoreConditionalFields($component->atts)) {
-            return [];
+            return $cache[$component] = [];
         }
 
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($component->atts);
@@ -556,7 +603,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 ],
             );
         }
-        return $conditionalLeafComponentFieldNodes;
+        return $cache[$component] = $conditionalLeafComponentFieldNodes;
     }
 
     /**
