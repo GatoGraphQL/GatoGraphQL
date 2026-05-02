@@ -9,7 +9,7 @@
 - Support AI Connectors from WordPress 7.0 ([#3290](https://github.com/GatoGraphQL/GatoGraphQL/pull/3290))
 - Updated documentation for Translation extension, now supporting Gemini as a translation service provider ([#3292](https://github.com/GatoGraphQL/GatoGraphQL/pull/3292))
 - Allow the custom post `author` to be null (e.g. when the post has no assigned user / author ID 0) ([#3293](https://github.com/GatoGraphQL/GatoGraphQL/pull/3293))
-- Improve performance of parsing and compiling GraphQL query ([#3294](https://github.com/GatoGraphQL/GatoGraphQL/pull/3294))
+- Improve performance of parsing, compiling and executing GraphQL query ([#3294](https://github.com/GatoGraphQL/GatoGraphQL/pull/3294), [#3295](https://github.com/GatoGraphQL/GatoGraphQL/pull/3295))
 
 ### Fixed
 
