@@ -21,6 +21,25 @@ class ObjectTypeFieldResolutionFeedbackStore
     /** @var ObjectTypeFieldResolutionFeedbackInterface[] */
     private array $logs = [];
 
+    /**
+     * Fast check for "no feedback at all" — used by callers
+     * (notably `resolveValueForObject`) to skip the per-(field,object)
+     * `incorporateFromObjectTypeFieldResolutionFeedbackStore` call and
+     * its `[$id => new EngineIterationFieldSet([$field])]` allocation
+     * on the common path where resolution succeeds without producing
+     * any errors/warnings/notices/etc.
+     */
+    public function isEmpty(): bool
+    {
+        return $this->errors === []
+            && $this->partialErrors === []
+            && $this->warnings === []
+            && $this->deprecations === []
+            && $this->notices === []
+            && $this->suggestions === []
+            && $this->logs === [];
+    }
+
     public function incorporate(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {

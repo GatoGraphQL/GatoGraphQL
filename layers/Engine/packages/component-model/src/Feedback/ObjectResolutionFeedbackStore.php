@@ -67,6 +67,11 @@ class ObjectResolutionFeedbackStore
         Directive $directive,
         array $idFieldSet,
     ): void {
+        // Fast-path the common case: no feedback at all means none of the
+        // seven foreach loops below would do anything.
+        if ($objectTypeFieldResolutionFeedbackStore->isEmpty()) {
+            return;
+        }
         foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
             $this->errors[] = ObjectResolutionFeedback::fromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedbackError,

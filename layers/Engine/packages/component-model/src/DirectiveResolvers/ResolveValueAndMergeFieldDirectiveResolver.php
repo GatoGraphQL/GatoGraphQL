@@ -443,13 +443,18 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        // 2. Transfer the feedback
-        $engineIterationFeedbackStore->objectResolutionFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-            $objectTypeFieldResolutionFeedbackStore,
-            $relationalTypeResolver,
-            $this->directive,
-            [$id => new EngineIterationFieldSet([$field])]
-        );
+        // 2. Transfer the feedback. On the common path (resolution
+        //    succeeded with no errors/warnings/notices/etc.) the store
+        //    is empty — skip the call and its `[$id => new
+        //    EngineIterationFieldSet([$field])]` allocation entirely.
+        if (!$objectTypeFieldResolutionFeedbackStore->isEmpty()) {
+            $engineIterationFeedbackStore->objectResolutionFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                $objectTypeFieldResolutionFeedbackStore,
+                $relationalTypeResolver,
+                $this->directive,
+                [$id => new EngineIterationFieldSet([$field])]
+            );
+        }
 
         /**
          * 3. Add the output in the DB
