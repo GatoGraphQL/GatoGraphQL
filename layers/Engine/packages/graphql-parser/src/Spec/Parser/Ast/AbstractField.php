@@ -69,13 +69,13 @@ abstract class AbstractField extends AbstractAst implements FieldInterface
         if ($this->uniqueID === null) {
             $location = $this->getLocation();
             $locationComment = ' # Location: ' . $location->getLine() . 'x' . $location->getColumn();
-            $objectHash = ' #Hash: ' . spl_object_hash($this);
+            $objectID = ' #ID: ' . spl_object_id($this);
             /**
              * Watch out! Use ->getName() instead of ->asFieldOutputQueryString()
              * as the latter may be a very expensive operation (eg: when printing
              * a very big JSON)
              */
-            $this->uniqueID = $this->getName() . $locationComment . $objectHash;
+            $this->uniqueID = $this->getName() . $locationComment . $objectID;
         }
         return $this->uniqueID;
     }

@@ -884,11 +884,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($classes as $class) {
             $relationalTypeResolverDecorators = $this->calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass($class);
             foreach ($relationalTypeResolverDecorators as $relationalTypeResolverDecorator) {
-                $relationalTypeResolverDecoratorObjectHash = spl_object_hash($relationalTypeResolverDecorator);
-                if (isset($typeResolverDecorators[$relationalTypeResolverDecoratorObjectHash])) {
+                $relationalTypeResolverDecoratorObjectID = spl_object_id($relationalTypeResolverDecorator);
+                if (isset($typeResolverDecorators[$relationalTypeResolverDecoratorObjectID])) {
                     continue;
                 }
-                $typeResolverDecorators[$relationalTypeResolverDecoratorObjectHash] = $relationalTypeResolverDecorator;
+                $typeResolverDecorators[$relationalTypeResolverDecoratorObjectID] = $relationalTypeResolverDecorator;
             }
         }
 
@@ -927,11 +927,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * same decorator, then do array_unique
              */
             foreach ($attachedRelationalTypeResolverDecorators as $attachedRelationalTypeResolverDecorator) {
-                $attachedRelationalTypeResolverDecoratorObjectHash = spl_object_hash($attachedRelationalTypeResolverDecorator);
-                if (isset($typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectHash])) {
+                $attachedRelationalTypeResolverDecoratorObjectID = spl_object_id($attachedRelationalTypeResolverDecorator);
+                if (isset($typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectID])) {
                     continue;
                 }
-                $typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectHash] = $attachedRelationalTypeResolverDecorator;
+                $typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectID] = $attachedRelationalTypeResolverDecorator;
             }
 
             // Continue iterating for the class parents

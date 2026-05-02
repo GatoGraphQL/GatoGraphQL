@@ -255,7 +255,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return sprintf(
                 '%s #%s',
                 $fieldUniqueID,
-                spl_object_hash($field)
+                spl_object_id($field)
             );
         }
         return $fieldUniqueID;

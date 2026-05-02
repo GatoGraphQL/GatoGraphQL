@@ -509,8 +509,8 @@ class PHPHooks
 
     if (is_object($function[0]) ) {
       // Object Class Calling
-      if ( function_exists('spl_object_hash') ) {
-        return spl_object_hash($function[0]) . $function[1];
+      if ( function_exists('spl_object_id') ) {
+        return spl_object_id($function[0]) . $function[1];
       } else {
         $obj_idx = get_class($function[0]).$function[1];
         if ( !isset($function[0]->filter_id) ) {
