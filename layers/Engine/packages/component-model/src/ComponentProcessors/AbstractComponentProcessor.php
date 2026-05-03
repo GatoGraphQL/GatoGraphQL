@@ -792,43 +792,47 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         if ($this->getProp($component, $props, 'succeeding-typeResolver') !== null) {
+            /**
+             * Hoist the manager lookup once: the inline merged-loop below
+             * calls `getComponentProcessor` once per subcomponent (instead
+             * of twice — once in `array_filter`'s closure and once in the
+             * recursive call). The translation profile shows this function
+             * at 1.36G / 22K calls / 61K per call.
+             */
+            $componentProcessorManager = $this->getComponentProcessorManager();
+            $subProps = &$props[$componentFullName][Props::SUBCOMPONENTS];
             $this->getComponentFilterManager()->prepareForPropagation($component, $props);
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-                // Only components which do not load data
-                $subcomponent_components = array_filter(
-                    $relationalComponentFieldNode->getNestedComponents(),
-                    function ($subcomponent): bool {
-                        return !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent);
-                    }
-                );
                 /** @var FieldInterface[] */
                 $subcomponentPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
-                foreach ($subcomponent_components as $subcomponent_component) {
-                    $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], $subcomponentPathFields, $ret);
+                foreach ($relationalComponentFieldNode->getNestedComponents() as $subcomponent_component) {
+                    $subcomponentProcessor = $componentProcessorManager->getComponentProcessor($subcomponent_component);
+                    if ($subcomponentProcessor->startDataloadingSection($subcomponent_component)) {
+                        continue;
+                    }
+                    $subcomponentProcessor->addToDatasetOutputKeys($subcomponent_component, $subProps, $subcomponentPathFields, $ret);
                 }
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                    // Only components which do not load data
-                    $subcomponent_components = array_filter(
-                        $relationalComponentFieldNode->getNestedComponents(),
-                        fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
-                    );
                     /** @var FieldInterface[] */
                     $subcomponentPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
-                    foreach ($subcomponent_components as $subcomponent_component) {
-                        $this->getComponentProcessorManager()->getComponentProcessor($subcomponent_component)->addToDatasetOutputKeys($subcomponent_component, $props[$componentFullName][Props::SUBCOMPONENTS], $subcomponentPathFields, $ret);
+                    foreach ($relationalComponentFieldNode->getNestedComponents() as $subcomponent_component) {
+                        $subcomponentProcessor = $componentProcessorManager->getComponentProcessor($subcomponent_component);
+                        if ($subcomponentProcessor->startDataloadingSection($subcomponent_component)) {
+                            continue;
+                        }
+                        $subcomponentProcessor->addToDatasetOutputKeys($subcomponent_component, $subProps, $subcomponentPathFields, $ret);
                     }
                 }
             }
 
-            // Only components which do not load data
-            $subcomponents = array_filter(
-                $this->getSubcomponents($component),
-                fn (Component $subcomponent) => !$this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->startDataloadingSection($subcomponent)
-            );
-            foreach ($subcomponents as $subcomponent) {
-                $this->getComponentProcessorManager()->getComponentProcessor($subcomponent)->addToDatasetOutputKeys($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $pathFields, $ret);
+            foreach ($this->getSubcomponents($component) as $subcomponent) {
+                $subcomponentProcessor = $componentProcessorManager->getComponentProcessor($subcomponent);
+                if ($subcomponentProcessor->startDataloadingSection($subcomponent)) {
+                    continue;
+                }
+                $subcomponentProcessor->addToDatasetOutputKeys($subcomponent, $subProps, $pathFields, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
