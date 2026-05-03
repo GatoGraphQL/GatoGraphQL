@@ -150,14 +150,23 @@ trait ComponentPathProcessorTrait
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no subcomponents
         $componentFilterManager->prepareForPropagation($component, $props);
-        $subcomponents_ret = array();
         $subProps = &$props[$componentFullName][Props::SUBCOMPONENTS];
+        /**
+         * Collect each subcomponent's result and merge once at the end
+         * via variadic spread, instead of `array_merge` *inside* the loop
+         * which reallocates an O(current accumulator) buffer per iteration
+         * (quadratic). With 88K calls/request this was a primary hotspot.
+         *
+         * @var array<array<string,mixed>>
+         */
+        $subResults = [];
         foreach ($subcomponents as $subcomponent) {
-            $subcomponents_ret = array_merge(
-                $subcomponents_ret,
-                $componentProcessorManager->getComponentProcessor($subcomponent)->$propagate_fn($subcomponent, $subProps)
-            );
+            $subResult = $componentProcessorManager->getComponentProcessor($subcomponent)->$propagate_fn($subcomponent, $subProps);
+            if ($subResult) {
+                $subResults[] = $subResult;
+            }
         }
+        $subcomponents_ret = $subResults === [] ? [] : array_merge(...$subResults);
         if ($subcomponents_ret) {
             /** @var ModuleInfo */
             $moduleInfo = App::getModule(Module::class)->getInfo();
