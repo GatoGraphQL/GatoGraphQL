@@ -2023,10 +2023,17 @@ class Engine extends AbstractBasicService implements EngineInterface
                         if (!$database_field_ids) {
                             continue;
                         }
-                        $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] = array_merge(
-                            $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] ?? [],
-                            is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
-                        );
+                        // In-place append rather than `array_merge(... ?? [], ...)`,
+                        // which allocates a fresh array on every iteration and is
+                        // a primary memory hotspot in this function.
+                        $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] ??= [];
+                        if (is_array($database_field_ids)) {
+                            foreach ($database_field_ids as $database_field_id) {
+                                $subcomponentIDs[$dbName][$targetTypeOutputKey][$id][] = $database_field_id;
+                            }
+                        } else {
+                            $subcomponentIDs[$dbName][$targetTypeOutputKey][$id][] = $database_field_ids;
+                        }
                     }
                 }
                 /**
@@ -2041,14 +2048,26 @@ class Engine extends AbstractBasicService implements EngineInterface
                 /** @var array<string|int,string> */
                 $typedSubcomponentIDs = [];
                 /**
-                 * Get the types for all of the IDs all at once.
-                 * Flatten 3 levels: dbName => typeOutputKey => id => ...
+                 * Collect the unique IDs across the 3-level nested
+                 * `$subcomponentIDs` structure. The previous form chained
+                 * three `arrayFlatten` calls plus `array_unique` — each
+                 * step allocated a fresh intermediate array. Walk the
+                 * nesting once and dedup via an `[id => true]` set.
                  *
-                 * @var array<string|int>
+                 * @var array<string|int,bool>
                  */
-                $allSubcomponentIDs = array_values(array_unique(
-                    GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
-                ));
+                $allSubcomponentIDsSet = [];
+                foreach ($subcomponentIDs as $dbNameSubcomponentIDs) {
+                    foreach ($dbNameSubcomponentIDs as $typeOutputKeySubcomponentIDs) {
+                        foreach ($typeOutputKeySubcomponentIDs as $idSubcomponentIDs) {
+                            foreach ($idSubcomponentIDs as $database_field_id) {
+                                $allSubcomponentIDsSet[$database_field_id] = true;
+                            }
+                        }
+                    }
+                }
+                /** @var array<string|int> */
+                $allSubcomponentIDs = array_keys($allSubcomponentIDsSet);
                 /** @var array<string|int> */
                 $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
                 // Create a map, from ID to TypedID
@@ -2067,14 +2086,21 @@ class Engine extends AbstractBasicService implements EngineInterface
                             // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
                             // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
-                            $typed_database_field_ids = array_map(
-                                /**
-                                 * It may be null if returning a null value
-                                 * in a field connection of type List
-                                 */
-                                fn (string|int|null $field_id) => $field_id === null ? null : $typedSubcomponentIDs[$field_id],
-                                $database_field_ids
-                            );
+                            /**
+                             * Inline the typed-IDs build with `foreach` instead
+                             * of `array_map` + closure. `array_map` is invoked
+                             * per (dbName, typeOutputKey, id) — three-level
+                             * nested in this hot path — so the per-call closure
+                             * context plus result-array allocation adds up.
+                             *
+                             * The closure body just looks up `$typedSubcomponentIDs`
+                             * (passing through `null` unchanged for List-type
+                             * connections returning null).
+                             */
+                            $typed_database_field_ids = [];
+                            foreach ($database_field_ids as $database_field_id) {
+                                $typed_database_field_ids[] = $database_field_id === null ? null : $typedSubcomponentIDs[$database_field_id];
+                            }
                             if ($subcomponentIsUnionTypeResolver) {
                                 $database_field_ids = $typed_database_field_ids;
                             }
@@ -2089,11 +2115,11 @@ class Engine extends AbstractBasicService implements EngineInterface
                             // @phpstan-ignore-next-line
                             $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$field] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
-                            // Merge, after adding their type!
-                            $field_ids = array_merge(
-                                $field_ids,
-                                $database_field_ids
-                            );
+                            // In-place append rather than `array_merge` — same reason
+                            // as the per-`(typeResolverID, dbName)` accumulator above.
+                            foreach ($database_field_ids as $database_field_id) {
+                                $field_ids[] = $database_field_id;
+                            }
                         }
                     }
                 }
@@ -2161,15 +2187,34 @@ class Engine extends AbstractBasicService implements EngineInterface
                         );
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(
-                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] ?? [],
-                        $field_ids
-                    );
+                    /**
+                     * Dedup-on-insert: avoids the previous
+                     * `array_merge(... ?? [], $field_ids)` + later
+                     * `array_unique` pair, which allocated *two*
+                     * fresh arrays of size O(existing + field_ids)
+                     * per outer iteration on a quadratic accumulator
+                     * — a primary memory hotspot in this function.
+                     *
+                     * Build a `<id,true>` set once from the existing
+                     * IDs and append-in-place only previously-unseen
+                     * IDs. Preserves first-occurrence order, which
+                     * `array_unique` also did.
+                     */
+                    $existingIDs = $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS];
+                    /** @var array<string|int,true> */
+                    $seenIDs = $existingIDs === [] ? [] : array_flip($existingIDs);
+                    foreach ($field_ids as $field_id) {
+                        if (isset($seenIDs[$field_id])) {
+                            continue;
+                        }
+                        $seenIDs[$field_id] = true;
+                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS][] = $field_id;
+                    }
                     $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputKey, $component_path_key);
                 }
 
                 if ($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key] ?? null) {
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS]);
+                    // IDS are already deduped on insert above — no `array_unique` needed.
                     $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(
                         $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]
                     );

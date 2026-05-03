@@ -360,7 +360,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             // Refresh the manager cache too on request boundaries.
             $this->cachedAppStateManager = App::getAppStateManager();
         }
-        return $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
+        return $component->getCacheKey();
     }
 
     /**

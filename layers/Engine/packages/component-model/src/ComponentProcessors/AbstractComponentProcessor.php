@@ -210,7 +210,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
             // request (the `AST` change is our request-boundary signal).
             $this->cachedAppStateManager = App::getAppStateManager();
         }
-        return $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
+        return $component->getCacheKey();
     }
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
@@ -235,10 +235,23 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
         // 1st element to merge: the general props for this component passed down the line
         // 2nd element to merge: the props set exactly to the path. They have more priority, that's why they are 2nd
         // It may contain more than one group (\PoP\ComponentModel\Constants\Props::ATTRIBUTES). Eg: maybe also POP_PROPS_JSMETHODS
-        $props[$componentFullName] = array_merge_recursive(
-            $targeted_props_to_propagate[$componentFullName] ?? array(),
-            $props[$componentFullName] ?? array()
-        );
+        //
+        // Skip the (deep, allocating) `array_merge_recursive` whenever
+        // either side is empty — the common case for fresh components.
+        // `array_merge_recursive([], $x)` and `array_merge_recursive($x, [])`
+        // both still copy `$x` into a fresh array.
+        $targetedPropsForComponent = $targeted_props_to_propagate[$componentFullName] ?? array();
+        $existingPropsForComponent = $props[$componentFullName] ?? array();
+        if ($targetedPropsForComponent === []) {
+            $props[$componentFullName] = $existingPropsForComponent;
+        } elseif ($existingPropsForComponent === []) {
+            $props[$componentFullName] = $targetedPropsForComponent;
+        } else {
+            $props[$componentFullName] = array_merge_recursive(
+                $targetedPropsForComponent,
+                $existingPropsForComponent
+            );
+        }
 
         // The component must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadComponent` can work
         $component_props = array(
@@ -845,44 +858,67 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      */
     public function addToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
+        // Build the path prefix string once on entry, then recurse with
+        // a string instead of an array. The previous form
+        // `array_merge($pathFields, [$x])` per recursion level allocated
+        // a fresh `FieldInterface[]` array on every iteration of every
+        // subcomponent loop — the dominant memory consumer for this
+        // function on the schema-fetch profile (620 MB / 22K calls).
+        $pathPrefix = '';
+        foreach ($pathFields as $pathField) {
+            if ($pathPrefix !== '') {
+                $pathPrefix .= Constants::RELATIONAL_FIELD_PATH_SEPARATOR;
+            }
+            $pathPrefix .= $pathField->getOutputKey();
+        }
+        $this->addToDatasetOutputKeysWithPrefix($component, $props, $pathPrefix, $ret);
+    }
+
+    /**
+     * Recursive worker for `addToDatasetOutputKeys` that carries the
+     * path as a pre-built string prefix instead of as an
+     * `FieldInterface[]` array. Each recursion level extends the string
+     * by exactly one segment (one allocation), rather than allocating a
+     * full new array via `array_merge`.
+     *
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $ret
+     */
+    public function addToDatasetOutputKeysWithPrefix(Component $component, array &$props, string $pathPrefix, array &$ret): void
+    {
         // Add the current component's outputKeys
-        $this->addFieldsToDatasetOutputKeys($component, $props, $pathFields, $ret);
+        $this->addFieldsToDatasetOutputKeysWithPrefix($component, $props, $pathPrefix, $ret);
 
         // Propagate to all subcomponents which have no typeResolver
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
 
         if ($this->getProp($component, $props, 'succeeding-typeResolver') !== null) {
-            /**
-             * Hoist the manager lookup once: the inline merged-loop below
-             * calls `getComponentProcessor` once per subcomponent (instead
-             * of twice — once in `array_filter`'s closure and once in the
-             * recursive call). The translation profile shows this function
-             * at 1.36G / 22K calls / 61K per call.
-             */
             $componentProcessorManager = $this->getComponentProcessorManager();
             $subProps = &$props[$componentFullName][Props::SUBCOMPONENTS];
             $this->getComponentFilterManager()->prepareForPropagation($component, $props);
             foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-                /** @var FieldInterface[] */
-                $subcomponentPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
+                $subPathPrefix = $pathPrefix === ''
+                    ? $relationalComponentFieldNode->getField()->getOutputKey()
+                    : $pathPrefix . Constants::RELATIONAL_FIELD_PATH_SEPARATOR . $relationalComponentFieldNode->getField()->getOutputKey();
                 foreach ($relationalComponentFieldNode->getNestedComponents() as $subcomponent_component) {
                     $subcomponentProcessor = $componentProcessorManager->getComponentProcessor($subcomponent_component);
                     if ($subcomponentProcessor->startDataloadingSection($subcomponent_component)) {
                         continue;
                     }
-                    $subcomponentProcessor->addToDatasetOutputKeys($subcomponent_component, $subProps, $subcomponentPathFields, $ret);
+                    $subcomponentProcessor->addToDatasetOutputKeysWithPrefix($subcomponent_component, $subProps, $subPathPrefix, $ret);
                 }
             }
             foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
                 foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                    /** @var FieldInterface[] */
-                    $subcomponentPathFields = array_merge($pathFields, [$relationalComponentFieldNode->getField()]);
+                    $subPathPrefix = $pathPrefix === ''
+                        ? $relationalComponentFieldNode->getField()->getOutputKey()
+                        : $pathPrefix . Constants::RELATIONAL_FIELD_PATH_SEPARATOR . $relationalComponentFieldNode->getField()->getOutputKey();
                     foreach ($relationalComponentFieldNode->getNestedComponents() as $subcomponent_component) {
                         $subcomponentProcessor = $componentProcessorManager->getComponentProcessor($subcomponent_component);
                         if ($subcomponentProcessor->startDataloadingSection($subcomponent_component)) {
                             continue;
                         }
-                        $subcomponentProcessor->addToDatasetOutputKeys($subcomponent_component, $subProps, $subcomponentPathFields, $ret);
+                        $subcomponentProcessor->addToDatasetOutputKeysWithPrefix($subcomponent_component, $subProps, $subPathPrefix, $ret);
                     }
                 }
             }
@@ -892,7 +928,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                 if ($subcomponentProcessor->startDataloadingSection($subcomponent)) {
                     continue;
                 }
-                $subcomponentProcessor->addToDatasetOutputKeys($subcomponent, $subProps, $pathFields, $ret);
+                $subcomponentProcessor->addToDatasetOutputKeysWithPrefix($subcomponent, $subProps, $pathPrefix, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
@@ -902,17 +938,12 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      * @param FieldInterface[] $pathFields
      * @param array<string,mixed> $props
      * @param array<string,mixed> $ret
+     * @deprecated Use `addFieldsToDatasetOutputKeysWithPrefix` to skip
+     *             the per-call rebuild of the prefix string from
+     *             `$pathFields`.
      */
     protected function addFieldsToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void
     {
-        /**
-         * Pre-compute the path-prefix once. Three call sites below each
-         * append a single field to `$pathFields`; rather than
-         * `array_merge` + `array_map(closure)` + `implode` per iteration
-         * (which the translation profile shows at ~3M closure invocations
-         * + ~120K `array_map` calls), build the prefix string up-front and
-         * concatenate the per-iteration field's output key directly.
-         */
         $pathPrefix = '';
         foreach ($pathFields as $pathField) {
             if ($pathPrefix !== '') {
@@ -920,6 +951,15 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
             }
             $pathPrefix .= $pathField->getOutputKey();
         }
+        $this->addFieldsToDatasetOutputKeysWithPrefix($component, $props, $pathPrefix, $ret);
+    }
+
+    /**
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $ret
+     */
+    protected function addFieldsToDatasetOutputKeysWithPrefix(Component $component, array &$props, string $pathPrefix, array &$ret): void
+    {
         $pathPrefixWithSep = $pathPrefix === ''
             ? ''
             : $pathPrefix . Constants::RELATIONAL_FIELD_PATH_SEPARATOR;
@@ -1547,7 +1587,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                  * `in_array` / `array_search` scans (O(N × M) per recursive call) and
                  * is a primary hot path during multi-query execution.
                  */
-                $componentKey = static fn (Component $c): string => $c->processorClass . '|' . $c->name . '|' . serialize($c->atts);
+                $componentKey = static fn (Component $c): string => $c->getCacheKey();
                 $directSubcomponentKeys = [];
                 foreach ($directSubcomponents as $directSubcomponent) {
                     $directSubcomponentKeys[$componentKey($directSubcomponent)] = true;
@@ -1927,7 +1967,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
     {
         $componentsByKey = [];
         foreach ($components as $component) {
-            $key = $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
+            $key = $component->getCacheKey();
             if (!isset($componentsByKey[$key])) {
                 $componentsByKey[$key] = $component;
             }
