@@ -231,6 +231,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
     {
         // Convert the component to its string representation to access it in the array
         $componentFullName = $this->getComponentHelpers()->getComponentFullName($component);
+        $componentFilterManager = $this->getComponentFilterManager();
 
         // Initialize. If this component had been added props, then use them already
         // 1st element to merge: the general props for this component passed down the line
@@ -267,36 +268,49 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
         // But because components can't repeat themselves down the line (or it would generate an infinite loop), then can remove the current component from the targeted props
         unset($targeted_props_to_propagate[$componentFullName]);
 
-        // Allow the $component to add general props for all its descendant components
-        $wildcard_props_to_propagate = array_merge(
-            $wildcard_props_to_propagate,
-            $get_props_for_descendant_components_fn($component, $component_props)
-        );
+        // Allow the $component to add general props for all its descendant components.
+        // Skip the `array_merge` when nothing was returned — `$get_props_for_descendant_components_fn`
+        // very often returns `[]`, and a no-op merge would still copy the
+        // (potentially large) `$wildcard_props_to_propagate` array.
+        $descendantWildcardProps = $get_props_for_descendant_components_fn($component, $component_props);
+        if ($descendantWildcardProps !== []) {
+            $wildcard_props_to_propagate = array_merge(
+                $wildcard_props_to_propagate,
+                $descendantWildcardProps
+            );
+        }
 
         // Propagate
-        $subcomponents = $this->getAllSubcomponents($component);
-        $subcomponents = $this->getComponentFilterManager()->removeExcludedSubcomponents($component, $subcomponents);
+        $subcomponents = $componentFilterManager->removeExcludedSubcomponents($component, $this->getAllSubcomponents($component));
 
         // This function must be called always, to register matching components into requestmeta.filtercomponents even when the component has no subcomponents
-        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        $componentFilterManager->prepareForPropagation($component, $props);
         if ($subcomponents) {
-            $props[$componentFullName][Props::SUBCOMPONENTS] = $props[$componentFullName][Props::SUBCOMPONENTS] ?? array();
+            $props[$componentFullName][Props::SUBCOMPONENTS] ??= array();
+            $subProps = &$props[$componentFullName][Props::SUBCOMPONENTS];
+            $componentProcessorManager = $this->getComponentProcessorManager();
             foreach ($subcomponents as $subcomponent) {
-                $subcomponent_processor = $this->getComponentProcessorManager()->getComponentProcessor($subcomponent);
+                $subcomponent_processor = $componentProcessorManager->getComponentProcessor($subcomponent);
                 $subcomponent_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
-                // If the subcomponent belongs to the same dataset, then set the shared attributies for the same-dataset components
+                // If the subcomponent belongs to the same dataset, then set the shared attributies for the same-dataset components.
+                // The descendant-props function must be called per-iteration: `$component_props` holds a reference into `$props`
+                // which is mutated by the recursive `$propagate_fn` between iterations, so the function's return value can
+                // legitimately differ across iterations.
                 if (!$subcomponent_processor->startDataloadingSection($subcomponent)) {
-                    $subcomponent_wildcard_props_to_propagate = array_merge(
-                        $subcomponent_wildcard_props_to_propagate,
-                        $get_props_for_descendant_datasetcomponents_fn($component, $component_props)
-                    );
+                    $datasetDescendantProps = $get_props_for_descendant_datasetcomponents_fn($component, $component_props);
+                    if ($datasetDescendantProps !== []) {
+                        $subcomponent_wildcard_props_to_propagate = array_merge(
+                            $subcomponent_wildcard_props_to_propagate,
+                            $datasetDescendantProps
+                        );
+                    }
                 }
 
-                $subcomponent_processor->$propagate_fn($subcomponent, $props[$componentFullName][Props::SUBCOMPONENTS], $subcomponent_wildcard_props_to_propagate, $targeted_props_to_propagate);
+                $subcomponent_processor->$propagate_fn($subcomponent, $subProps, $subcomponent_wildcard_props_to_propagate, $targeted_props_to_propagate);
             }
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
+        $componentFilterManager->restoreFromPropagation($component, $props);
     }
 
     /**
