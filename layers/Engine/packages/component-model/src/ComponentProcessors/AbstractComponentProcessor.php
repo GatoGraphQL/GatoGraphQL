@@ -210,7 +210,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
             // request (the `AST` change is our request-boundary signal).
             $this->cachedAppStateManager = App::getAppStateManager();
         }
-        return $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
+        return $component->getCacheKey();
     }
 
     // public function getNature(\PoP\ComponentModel\Component\Component $component)
@@ -235,10 +235,23 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
         // 1st element to merge: the general props for this component passed down the line
         // 2nd element to merge: the props set exactly to the path. They have more priority, that's why they are 2nd
         // It may contain more than one group (\PoP\ComponentModel\Constants\Props::ATTRIBUTES). Eg: maybe also POP_PROPS_JSMETHODS
-        $props[$componentFullName] = array_merge_recursive(
-            $targeted_props_to_propagate[$componentFullName] ?? array(),
-            $props[$componentFullName] ?? array()
-        );
+        //
+        // Skip the (deep, allocating) `array_merge_recursive` whenever
+        // either side is empty — the common case for fresh components.
+        // `array_merge_recursive([], $x)` and `array_merge_recursive($x, [])`
+        // both still copy `$x` into a fresh array.
+        $targetedPropsForComponent = $targeted_props_to_propagate[$componentFullName] ?? array();
+        $existingPropsForComponent = $props[$componentFullName] ?? array();
+        if ($targetedPropsForComponent === []) {
+            $props[$componentFullName] = $existingPropsForComponent;
+        } elseif ($existingPropsForComponent === []) {
+            $props[$componentFullName] = $targetedPropsForComponent;
+        } else {
+            $props[$componentFullName] = array_merge_recursive(
+                $targetedPropsForComponent,
+                $existingPropsForComponent
+            );
+        }
 
         // The component must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadComponent` can work
         $component_props = array(
@@ -1547,7 +1560,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                  * `in_array` / `array_search` scans (O(N × M) per recursive call) and
                  * is a primary hot path during multi-query execution.
                  */
-                $componentKey = static fn (Component $c): string => $c->processorClass . '|' . $c->name . '|' . serialize($c->atts);
+                $componentKey = static fn (Component $c): string => $c->getCacheKey();
                 $directSubcomponentKeys = [];
                 foreach ($directSubcomponents as $directSubcomponent) {
                     $directSubcomponentKeys[$componentKey($directSubcomponent)] = true;
@@ -1927,7 +1940,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
     {
         $componentsByKey = [];
         foreach ($components as $component) {
-            $key = $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
+            $key = $component->getCacheKey();
             if (!isset($componentsByKey[$key])) {
                 $componentsByKey[$key] = $component;
             }
