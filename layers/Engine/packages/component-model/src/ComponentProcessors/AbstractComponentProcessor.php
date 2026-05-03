@@ -31,9 +31,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Exception\AppStateNotExistsException;
 use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\Services\AbstractBasicService;
+use PoP\Root\StateManagers\AppStateManagerInterface;
 use SplObjectStorage;
 
 abstract class AbstractComponentProcessor extends AbstractBasicService implements ComponentProcessorInterface
@@ -78,6 +80,14 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      */
     private array $componentsToPropagateDataPropertiesCache = [];
     private ?object $cacheForExecutableDocumentAST = null;
+    /**
+     * Cached `AppStateManager` so the per-call AST lookup in
+     * `getSubcomponentCacheKeyForComponent` skips the three-level
+     * `App::hasState` / `App::getState` facade dispatch
+     * (`App` → `AbstractRootAppProxy` → `AppThread` → `AppStateManager`).
+     * Refreshed when the AST changes.
+     */
+    private ?AppStateManagerInterface $cachedAppStateManager = null;
 
     final protected function getComponentPathHelpers(): ComponentPathHelpersInterface
     {
@@ -176,19 +186,31 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      * Compute the value-key for a `Component`, resetting the
      * subcomponent caches if the executable-document AST instance has
      * changed (i.e. a new request in a long-running PHP process).
+     *
+     * Calls `AppStateManager::get` directly (via a cached manager
+     * reference) instead of going through `App::hasState` + `App::getState`
+     * — that pair was costing ~600M ticks across 287K calls in the
+     * translation profile, mostly dispatch overhead through the
+     * three-level `App` facade. `try/catch` replaces the `has` round-trip
+     * (the state-not-set case is rare; only some tests exercise it).
      */
     private function getSubcomponentCacheKeyForComponent(Component $component): string
     {
-        // `App::getState` throws when the key isn't set — but the
-        // `executable-document-ast` state is only populated during real
-        // engine requests, not in every unit test that exercises a
-        // processor. Use `hasState` to guard.
-        /** @var object|null */
-        $executableDocument = App::hasState('executable-document-ast') ? App::getState('executable-document-ast') : null;
+        $manager = $this->cachedAppStateManager ??= App::getAppStateManager();
+        try {
+            /** @var object|null */
+            $executableDocument = $manager->get('executable-document-ast');
+        } catch (AppStateNotExistsException) {
+            $executableDocument = null;
+        }
         if ($this->cacheForExecutableDocumentAST !== $executableDocument) {
             $this->allSubcomponentsCache = [];
             $this->componentsToPropagateDataPropertiesCache = [];
             $this->cacheForExecutableDocumentAST = $executableDocument;
+            // Refresh the manager cache too so a long-running process
+            // picks up a new `AppThread`'s manager when it starts a new
+            // request (the `AST` change is our request-boundary signal).
+            $this->cachedAppStateManager = App::getAppStateManager();
         }
         return $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
     }

@@ -27,6 +27,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\Root\StateManagers\AppStateManagerInterface;
 use SplObjectStorage;
 use WeakMap;
 
@@ -81,6 +82,12 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      */
     private array $conditionalLeafComponentFieldNodesCache = [];
     private ?ExecutableDocument $cacheForExecutableDocumentAST = null;
+    /**
+     * Cached `AppStateManager` so the per-call AST lookup in
+     * `getFieldNodeCacheKeyForComponent` skips the three-level
+     * `App::getState` facade dispatch.
+     */
+    private ?AppStateManagerInterface $cachedAppStateManager = null;
     /**
      * Memoization for `getFieldUniqueID` keyed by field instance. This
      * shows up at ~1G self-cost, 348K calls in the translation profile
@@ -321,16 +328,24 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * caches if the executable-document AST instance has changed
      * (i.e. a new request in a long-running PHP process). Returns the
      * value-key for use as cache index.
+     *
+     * Goes via a cached `AppStateManager` reference rather than the
+     * `App::getState` facade — the three-level `App → AbstractRootAppProxy
+     * → AppThread → AppStateManager` dispatch shows up at ~150M ticks
+     * across 242K calls otherwise.
      */
     private function getFieldNodeCacheKeyForComponent(Component $component): string
     {
+        $manager = $this->cachedAppStateManager ??= App::getAppStateManager();
         /** @var ExecutableDocument|null */
-        $executableDocument = App::getState('executable-document-ast');
+        $executableDocument = $manager->get('executable-document-ast');
         if ($this->cacheForExecutableDocumentAST !== $executableDocument) {
             $this->leafComponentFieldNodesCache = [];
             $this->relationalComponentFieldNodesCache = [];
             $this->conditionalLeafComponentFieldNodesCache = [];
             $this->cacheForExecutableDocumentAST = $executableDocument;
+            // Refresh the manager cache too on request boundaries.
+            $this->cachedAppStateManager = App::getAppStateManager();
         }
         return $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
     }
