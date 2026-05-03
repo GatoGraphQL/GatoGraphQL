@@ -344,6 +344,11 @@ interface ComponentProcessorInterface
      */
     public function addToDatasetOutputKeys(Component $component, array &$props, array $pathFields, array &$ret): void;
     /**
+     * @param array<string,mixed> $props
+     * @param array<string,mixed> $ret
+     */
+    public function addToDatasetOutputKeysWithPrefix(Component $component, array &$props, string $pathPrefix, array &$ret): void;
+    /**
      * @param array<string,mixed> $ret
      */
     public function addDatasetcomponentTreeSectionFlattenedComponents(array &$ret, Component $component): void;

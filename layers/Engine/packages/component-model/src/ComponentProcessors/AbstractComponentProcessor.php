@@ -884,7 +884,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      * @param array<string,mixed> $props
      * @param array<string,mixed> $ret
      */
-    protected function addToDatasetOutputKeysWithPrefix(Component $component, array &$props, string $pathPrefix, array &$ret): void
+    public function addToDatasetOutputKeysWithPrefix(Component $component, array &$props, string $pathPrefix, array &$ret): void
     {
         // Add the current component's outputKeys
         $this->addFieldsToDatasetOutputKeysWithPrefix($component, $props, $pathPrefix, $ret);
