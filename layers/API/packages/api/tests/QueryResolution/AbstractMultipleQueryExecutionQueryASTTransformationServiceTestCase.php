@@ -30,10 +30,22 @@ abstract class AbstractMultipleQueryExecutionQueryASTTransformationServiceTestCa
     {
         $moduleClassConfiguration = parent::getModuleClassConfiguration();
         $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = static::enabled();
+        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_SEQUENTIAL_MULTIPLE_QUERY_EXECUTION] = static::sequential();
         return $moduleClassConfiguration;
     }
 
     abstract protected static function enabled(): bool;
+
+    /**
+     * Whether the "Sequential Pass" Multiple Query Execution strategy is
+     * active. When `true`, no self-wrapping is applied — the engine drives
+     * one operation at a time, so the expected fields-per-operation match
+     * the MQE-disabled output. Concrete tests opt in by overriding.
+     */
+    protected static function sequential(): bool
+    {
+        return false;
+    }
 
     protected function getQueryASTTransformationService(): QueryASTTransformationServiceInterface
     {
@@ -170,7 +182,11 @@ abstract class AbstractMultipleQueryExecutionQueryASTTransformationServiceTestCa
             $relationalField1
         ];
 
-        if (!static::enabled()) {
+        if (!static::enabled() || static::sequential()) {
+            // No self-wrapping in two cases:
+            //   1. MQE disabled: each operation's fields are returned as-is.
+            //   2. MQE enabled in "Sequential Pass" mode: ordering is enforced
+            //      by the engine's per-operation drain loop, not by self-nesting.
             $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
                 $relationalField2,
             ];

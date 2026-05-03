@@ -101,7 +101,17 @@ class QueryASTTransformationService extends AbstractBasicService implements Quer
          * @var GraphQLParserModuleConfiguration
          */
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
-        if ($operationsCount === 1 || !$moduleConfiguration->enableMultipleQueryExecution()) {
+        // Skip self-wrapping in three cases:
+        //   1. There's only one operation (nothing to wrap).
+        //   2. Multiple Query Execution is disabled.
+        //   3. Multiple Query Execution is using the "Sequential Pass" strategy
+        //      (operations are drained one-at-a-time in `Engine::generateData()`,
+        //      so ordering is enforced at the engine level, not via nested `self`).
+        if (
+            $operationsCount === 1
+            || !$moduleConfiguration->enableMultipleQueryExecution()
+            || $moduleConfiguration->enableSequentialMultipleQueryExecution()
+        ) {
             foreach ($operations as $operation) {
                 /**
                  * Allow to override the original fields from the operation,

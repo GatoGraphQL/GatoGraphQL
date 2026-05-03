@@ -79,6 +79,16 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
     private array $componentsToPropagateDataPropertiesCache = [];
     private ?object $cacheForExecutableDocumentAST = null;
     /**
+     * Tracks the current "Sequential Pass" MQE operation paired with the
+     * cached subcomponents. Under SEQUENTIAL_PASS, each engine drain
+     * processes a different operation, so the same Component can have
+     * different subcomponent expansions across iterations — invalidate
+     * when the operation changes.
+     *
+     * @var object|null
+     */
+    private ?object $cacheForMultipleQueryExecutionCurrentOperation = null;
+    /**
      * Cached `AppStateManager` so the per-call AST lookup in
      * `getSubcomponentCacheKeyForComponent` skips the three-level
      * `App::hasState` / `App::getState` facade dispatch
@@ -201,10 +211,25 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
         } catch (AppStateNotExistsException) {
             $executableDocument = null;
         }
-        if ($this->cacheForExecutableDocumentAST !== $executableDocument) {
+        try {
+            /** @var object|null */
+            $currentMQEOperation = $manager->get('multiple-query-execution-current-operation');
+        } catch (AppStateNotExistsException) {
+            $currentMQEOperation = null;
+        }
+        if (
+            $this->cacheForExecutableDocumentAST !== $executableDocument
+            || $this->cacheForMultipleQueryExecutionCurrentOperation !== $currentMQEOperation
+        ) {
+            // Reset on either: a new executable document (a fresh request
+            // in a long-running PHP process), or a new MQE current
+            // operation (the engine moved to the next per-op drain in
+            // "Sequential Pass" mode). Subcomponent expansion depends on
+            // the current operation's field tree, which differs per op.
             $this->allSubcomponentsCache = [];
             $this->componentsToPropagateDataPropertiesCache = [];
             $this->cacheForExecutableDocumentAST = $executableDocument;
+            $this->cacheForMultipleQueryExecutionCurrentOperation = $currentMQEOperation;
             // Refresh the manager cache too so a long-running process
             // picks up a new `AppThread`'s manager when it starts a new
             // request (the `AST` change is our request-boundary signal).

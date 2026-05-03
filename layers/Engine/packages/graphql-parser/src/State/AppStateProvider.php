@@ -21,5 +21,15 @@ class AppStateProvider extends AbstractAppStateProvider
          */
         $documentDynamicVariables = [];
         $state['document-dynamic-variables'] = $documentDynamicVariables;
+
+        /**
+         * The current operation being processed under the "Sequential Pass"
+         * Multiple Query Execution strategy, or `null` outside of that loop.
+         * Set by the engine inside its per-operation drain loop and read by
+         * the API/GraphQL component processor to scope field collection to
+         * that operation only. Initialized to `null` so the default
+         * single-pass execution is unaffected.
+         */
+        $state['multiple-query-execution-current-operation'] = null;
     }
 }

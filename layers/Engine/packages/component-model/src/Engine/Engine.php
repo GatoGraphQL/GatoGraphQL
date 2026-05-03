@@ -486,8 +486,52 @@ class Engine extends AbstractBasicService implements EngineInterface
     {
         App::doAction(EngineHookNames::GENERATE_DATA_BEGINNING);
 
-        // Process the request and obtain the results
-        $this->processAndGenerateData();
+        // Reset the drain accumulators once per generateData() invocation.
+        // They persist across the (one or many) processAndGenerateData()
+        // calls in this loop so:
+        //   - "Sequential Pass" MQE per-operation drains feed into the
+        //     same accumulators (each op contributes new fields under
+        //     existing object IDs without overwriting previous ops).
+        //   - The cross-iteration `already_loaded_id_fields` cache spans
+        //     all per-op drains so subsequent ops skip re-fetching IDs
+        //     that an earlier op already loaded.
+        $engineState = App::getEngineState();
+        $engineState->already_loaded_id_fields = [];
+        $engineState->databases = [];
+        $engineState->unionTypeOutputKeyIDs = [];
+        $engineState->combinedUnionTypeOutputKeyIDs = [];
+        $engineState->previouslyResolvedIDFieldValues = [];
+        $engineState->messages = [];
+
+        // Process the request and obtain the results.
+        //
+        // When the "Sequential Pass" Multiple Query Execution strategy is
+        // active, the API/GraphQL layer hooks the
+        // MULTIPLE_QUERY_EXECUTION_SEQUENTIAL_OPERATIONS filter to provide
+        // a list of operations to drain one-by-one, in topological order
+        // — instead of wrapping subsequent operations in nested `self`
+        // fields. Each iteration overrides the
+        // `multiple-query-execution-current-operation` app-state key with
+        // the operation to process, and the API processor reads it to
+        // scope field collection to that operation only. The shared
+        // engine state (`$engineState->data`, etc.) accumulates across
+        // calls via the existing `array_replace_recursive` merge in
+        // `processAndGenerateData()`.
+        /** @var mixed[]|null */
+        $sequentialMQEOperations = App::applyFilters(
+            EngineHookNames::MULTIPLE_QUERY_EXECUTION_SEQUENTIAL_OPERATIONS,
+            null
+        );
+        if ($sequentialMQEOperations !== null && $sequentialMQEOperations !== []) {
+            $appStateManager = App::getAppStateManager();
+            foreach ($sequentialMQEOperations as $sequentialMQEOperation) {
+                $appStateManager->override('multiple-query-execution-current-operation', $sequentialMQEOperation);
+                $this->processAndGenerateData();
+            }
+            $appStateManager->override('multiple-query-execution-current-operation', null);
+        } else {
+            $this->processAndGenerateData();
+        }
 
         /**
          * See if there are extra URIs to be processed in this same request.
@@ -668,39 +712,43 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
 
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
-                // Allocate the accumulators that generateDatabases() drains into.
-                // They live here (not on EngineState) because they are written into
-                // the response and discarded; the only state that needs to persist
-                // across multiple drain calls (already_loaded_id_fields) lives on
-                // EngineState.
-                /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
-                $databases = [];
-                /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> */
-                $unionTypeOutputKeyIDs = [];
-                /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> */
-                $combinedUnionTypeOutputKeyIDs = [];
-                /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
-                $previouslyResolvedIDFieldValues = [];
-                $messages = [];
+                // The drain accumulators live on EngineState so that multiple
+                // `processAndGenerateData()` calls within one `generateData()`
+                // (under the "Sequential Pass" Multiple Query Execution
+                // strategy) accumulate into the SAME store. They are
+                // initialized in `getComponentData()` alongside the other
+                // per-pass state that resets at request start.
+                //
+                // We CANNOT use locals here and merge per-call into
+                // `engineState->data` via `array_replace_recursive`, because
+                // the database structure has SplObjectStorage at its leaves
+                // (one per object id), and `array_replace_recursive` treats
+                // objects as leaves — replacing instead of merging the per-op
+                // contributions.
 
                 // Reset $nocache_fields once per pass; generateDatabases() may
-                // be called multiple times (future MQE per-operation drains)
-                // and must not reset between drains.
+                // be called multiple times (MQE per-operation drains) and must
+                // not reset between drains.
                 $engineState->nocache_fields = [];
 
                 $this->generateDatabases(
                     $schemaFeedbackEntries,
                     $objectFeedbackEntries,
-                    $databases,
-                    $unionTypeOutputKeyIDs,
-                    $combinedUnionTypeOutputKeyIDs,
-                    $previouslyResolvedIDFieldValues,
-                    $messages,
+                    $engineState->databases,
+                    $engineState->unionTypeOutputKeyIDs,
+                    $engineState->combinedUnionTypeOutputKeyIDs,
+                    $engineState->previouslyResolvedIDFieldValues,
+                    $engineState->messages,
                 );
 
+                // Re-format the (cumulative) accumulator on every call. The
+                // formatter is idempotent: each call produces the most-complete
+                // view so far. The subsequent `array_replace_recursive` into
+                // `engineState->data` writes the full snapshot, replacing the
+                // previous (less-complete) snapshot at the `databases` key.
                 $data = array_merge(
                     $data,
-                    $this->formatAccumulatedDatabasesForOutput($databases, $unionTypeOutputKeyIDs)
+                    $this->formatAccumulatedDatabasesForOutput($engineState->databases, $engineState->unionTypeOutputKeyIDs)
                 );
             }
         }
@@ -1306,11 +1354,15 @@ class Engine extends AbstractBasicService implements EngineInterface
         // Load under global key (shared by all pagesections / blocks)
         $engineState->relationalTypeOutputKeyIDFieldSets = [];
 
-        // Reset the cross-drain "already loaded" cache. It accumulates across
-        // multiple drains of $relationalTypeOutputKeyIDFieldSets within a single
-        // generateData() pass (eg: future Multiple Query Execution per-operation
-        // drains), but a fresh getComponentData() pass starts with an empty cache.
-        $engineState->already_loaded_id_fields = [];
+        // Note: the drain accumulators (already_loaded_id_fields, databases,
+        // unionTypeOutputKeyIDs, etc.) are NOT reset here — they reset once
+        // per `generateData()` call, so they persist across:
+        //   - the per-operation processAndGenerateData() calls under MQE
+        //     "Sequential Pass" (where accumulation across ops is required
+        //     for correct response merging),
+        //   - the extra-routes processAndGenerateData() calls (where it's
+        //     also harmless because each call's `array_replace_recursive`
+        //     into `engineState->data` writes the complete snapshot).
 
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(

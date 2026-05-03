@@ -83,6 +83,17 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     private array $conditionalLeafComponentFieldNodesCache = [];
     private ?ExecutableDocument $cacheForExecutableDocumentAST = null;
     /**
+     * Tracks the current "Sequential Pass" MQE operation paired with
+     * the cached field-nodes. Under SEQUENTIAL_PASS, the engine drives
+     * one operation at a time and `getOperationFieldOrFragmentBonds()`
+     * returns DIFFERENT fields for the same Component on different
+     * iterations — so the cache must invalidate when the current
+     * operation changes, not just when the executable document does.
+     *
+     * @var object|null
+     */
+    private ?object $cacheForMultipleQueryExecutionCurrentOperation = null;
+    /**
      * Cached `AppStateManager` so the per-call AST lookup in
      * `getFieldNodeCacheKeyForComponent` skips the three-level
      * `App::getState` facade dispatch.
@@ -224,7 +235,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return;
         }
 
-        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuplesFromExecutableDocument($executableDocument, true);
+        // Cache must contain fields from ALL operations of the document, not
+        // just the currently-executing one — otherwise under "Sequential
+        // Pass" MQE the second-and-later operations' fields would never
+        // make it into the cache (the first call seeds the cache, and on
+        // subsequent calls `isset(...)` short-circuits this method). Pass
+        // `forAllOperations=true` to bypass the per-op filter.
+        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuplesFromExecutableDocument($executableDocument, true, true);
         $appStateFieldFragmentModelsTuples[$query] = [];
         foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $appStateFieldFragmentModelsTuples[$query][$this->getFieldUniqueID($fieldFragmentModelsTuple->getField())] = $fieldFragmentModelsTuple;
@@ -238,10 +255,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     protected function getFieldFragmentModelsTuplesFromExecutableDocument(
         ExecutableDocument $executableDocument,
         bool $recursive,
+        bool $forAllOperations = false,
     ): array {
         $fieldFragmentModelsTuples = [];
         $fragments = $executableDocument->getDocument()->getFragments();
-        $operationFieldOrFragmentBonds = $this->getOperationFieldOrFragmentBonds($executableDocument);
+        $operationFieldOrFragmentBonds = $this->getOperationFieldOrFragmentBonds($executableDocument, $forAllOperations);
 
         /** @var OperationInterface $operation */
         foreach ($operationFieldOrFragmentBonds as $operation) {
@@ -266,21 +284,47 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * - Addition of the SuperRoot fields for GraphQL
      * - Wrapping operations in `self` for Multiple Query Execution
+     *   (only under the SELF_WRAP strategy)
+     *
+     * Under the "Sequential Pass" Multiple Query Execution strategy, the
+     * engine drives one operation at a time via the
+     * `multiple-query-execution-current-operation` app-state key. When
+     * that key is set we restrict the operation list to that single
+     * operation, so each engine pass builds and drains the tree for one
+     * operation only.
+     *
+     * Pass `$forAllOperations=true` to bypass that per-op filter — used
+     * for cache-population paths that need to visit every operation
+     * (eg: pre-populating the AST field-fragment-models cache).
      *
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
     protected function getOperationFieldOrFragmentBonds(
         ExecutableDocument $executableDocument,
+        bool $forAllOperations = false,
     ): SplObjectStorage {
         $document = $executableDocument->getDocument();
-        /** @var OperationInterface[] */
-        $operations = $executableDocument->getMultipleOperationsToExecute();
+
+        if ($forAllOperations) {
+            /** @var OperationInterface[] */
+            $operations = $executableDocument->getMultipleOperationsToExecute();
+        } else {
+            /** @var OperationInterface|null */
+            $currentMQEOperation = App::getState('multiple-query-execution-current-operation');
+            if ($currentMQEOperation !== null) {
+                $operations = [$currentMQEOperation];
+            } else {
+                /** @var OperationInterface[] */
+                $operations = $executableDocument->getMultipleOperationsToExecute();
+            }
+        }
 
         /**
          * Multiple Query Execution: In order to have the fields
          * of the subsequent operations be resolved in the same
          * order as the operations (which is necessary for `@export`
-         * to work), then wrap them on a "self" field.
+         * to work), then wrap them on a "self" field — except when
+         * the engine drives the operations sequentially (see above).
          */
         return $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
             $document,
@@ -352,11 +396,25 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         $manager = $this->cachedAppStateManager ??= App::getAppStateManager();
         /** @var ExecutableDocument|null */
         $executableDocument = $manager->get('executable-document-ast');
-        if ($this->cacheForExecutableDocumentAST !== $executableDocument) {
+        /** @var object|null */
+        $currentMQEOperation = $manager->get('multiple-query-execution-current-operation');
+        if (
+            $this->cacheForExecutableDocumentAST !== $executableDocument
+            || $this->cacheForMultipleQueryExecutionCurrentOperation !== $currentMQEOperation
+        ) {
+            // Reset caches on either: a new executable document (a fresh
+            // request in a long-running PHP process), or a new MQE
+            // current-operation (the engine moved to the next per-op
+            // drain in "Sequential Pass" mode). The latter matters
+            // because `getOperationFieldOrFragmentBonds()` returns
+            // different fields per operation under that mode, so the
+            // same Component cannot share field-node entries across
+            // operations.
             $this->leafComponentFieldNodesCache = [];
             $this->relationalComponentFieldNodesCache = [];
             $this->conditionalLeafComponentFieldNodesCache = [];
             $this->cacheForExecutableDocumentAST = $executableDocument;
+            $this->cacheForMultipleQueryExecutionCurrentOperation = $currentMQEOperation;
             // Refresh the manager cache too on request boundaries.
             $this->cachedAppStateManager = App::getAppStateManager();
         }
