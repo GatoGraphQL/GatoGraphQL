@@ -10,6 +10,30 @@ use SplObjectStorage;
 class EngineIterationFieldSet
 {
     /**
+     * Cached `<uniqueID,true>` set for `$fields`, paired with the
+     * `count` at the time the set was last refreshed.
+     *
+     * `$fields` is a public property so callers can append directly
+     * (e.g. `AbstractRelationalTypeResolver` does
+     * `$idFieldSet[$id]->fields[] = $field`). The count check picks
+     * up any such external append on the next `addFields` call.
+     * It does not catch a delete-and-replace at the same length, but
+     * `$fields` is append-only across the codebase.
+     *
+     * @var array<string,true>
+     */
+    private array $cachedFieldUniqueIDsSet = [];
+    private int $cachedFieldsCount = -1;
+
+    /**
+     * Per-condition-field cache for `$conditionalFields`, keyed by the
+     * condition `FieldInterface`.
+     *
+     * @var SplObjectStorage<FieldInterface,array{0:array<string,true>,1:int}>|null
+     */
+    private ?SplObjectStorage $cachedConditionalFieldUniqueIDsByConditionField = null;
+
+    /**
      * @param FieldInterface[] $fields
      * @param SplObjectStorage<FieldInterface,FieldInterface[]> $conditionalFields
      */
@@ -24,7 +48,23 @@ class EngineIterationFieldSet
      */
     public function addFields(array $fields): void
     {
-        $this->fields = $this->mergeFieldListsByUniqueID($this->fields, $fields);
+        if ($this->cachedFieldsCount !== count($this->fields)) {
+            $set = [];
+            foreach ($this->fields as $existingField) {
+                $set[$existingField->getUniqueID()] = true;
+            }
+            $this->cachedFieldUniqueIDsSet = $set;
+            $this->cachedFieldsCount = count($this->fields);
+        }
+        foreach ($fields as $field) {
+            $uniqueID = $field->getUniqueID();
+            if (isset($this->cachedFieldUniqueIDsSet[$uniqueID])) {
+                continue;
+            }
+            $this->cachedFieldUniqueIDsSet[$uniqueID] = true;
+            $this->fields[] = $field;
+            $this->cachedFieldsCount++;
+        }
     }
 
     /**
@@ -32,37 +72,38 @@ class EngineIterationFieldSet
      */
     public function addConditionalFields(FieldInterface $conditionField, array $conditionalFields): void
     {
-        $this->conditionalFields[$conditionField] = $this->mergeFieldListsByUniqueID(
-            $this->conditionalFields[$conditionField] ?? [],
-            $conditionalFields
-        );
-    }
-
-    /**
-     * Deduplicated union of two `FieldInterface` lists, keyed by
-     * `getUniqueID()`. Avoids `array_unique`'s implicit `__toString`
-     * cast (which calls `getUniqueID()` per comparison) on a hot path.
-     * Preserves first-occurrence-wins semantic.
-     *
-     * @param FieldInterface[] $existing
-     * @param FieldInterface[] $additional
-     * @return FieldInterface[]
-     */
-    private function mergeFieldListsByUniqueID(array $existing, array $additional): array
-    {
-        $fieldsByUniqueID = [];
-        foreach ($existing as $field) {
-            $fieldUniqueID = $field->getUniqueID();
-            if (!isset($fieldsByUniqueID[$fieldUniqueID])) {
-                $fieldsByUniqueID[$fieldUniqueID] = $field;
-            }
+        if ($this->cachedConditionalFieldUniqueIDsByConditionField === null) {
+            /** @var SplObjectStorage<FieldInterface,array{0:array<string,true>,1:int}> */
+            $cache = new SplObjectStorage();
+            $this->cachedConditionalFieldUniqueIDsByConditionField = $cache;
         }
-        foreach ($additional as $field) {
-            $fieldUniqueID = $field->getUniqueID();
-            if (!isset($fieldsByUniqueID[$fieldUniqueID])) {
-                $fieldsByUniqueID[$fieldUniqueID] = $field;
+        $cache = $this->cachedConditionalFieldUniqueIDsByConditionField;
+        /** @var FieldInterface[] */
+        $existing = $this->conditionalFields[$conditionField] ?? [];
+        /** @var array{0:array<string,true>,1:int}|null */
+        $cached = $cache[$conditionField] ?? null;
+        if ($cached === null || $cached[1] !== count($existing)) {
+            $set = [];
+            foreach ($existing as $existingField) {
+                $set[$existingField->getUniqueID()] = true;
             }
+        } else {
+            $set = $cached[0];
         }
-        return array_values($fieldsByUniqueID);
+        $merged = $existing;
+        $countAdded = 0;
+        foreach ($conditionalFields as $field) {
+            $uniqueID = $field->getUniqueID();
+            if (isset($set[$uniqueID])) {
+                continue;
+            }
+            $set[$uniqueID] = true;
+            $merged[] = $field;
+            $countAdded++;
+        }
+        if ($countAdded > 0) {
+            $this->conditionalFields[$conditionField] = $merged;
+        }
+        $cache[$conditionField] = [$set, count($merged)];
     }
 }
