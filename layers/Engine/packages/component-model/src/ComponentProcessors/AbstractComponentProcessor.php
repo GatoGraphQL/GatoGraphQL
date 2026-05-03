@@ -1741,19 +1741,17 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
         // Combine the direct and conditionalOnDataField components all together to iterate below
         $relationalSubcomponents = new SplObjectStorage();
         foreach ($this->getRelationalComponentFieldNodes($component) as $relationalComponentFieldNode) {
-            $existingNestedComponents = $relationalSubcomponents[$relationalComponentFieldNode] ?? [];
-            foreach ($relationalComponentFieldNode->getNestedComponents() as $nestedComponent) {
-                $existingNestedComponents[] = $nestedComponent;
-            }
-            $relationalSubcomponents[$relationalComponentFieldNode] = $existingNestedComponents;
+            $relationalSubcomponents[$relationalComponentFieldNode] = array_merge(
+                $relationalSubcomponents[$relationalComponentFieldNode] ?? [],
+                $relationalComponentFieldNode->getNestedComponents()
+            );
         }
         foreach ($this->getConditionalRelationalComponentFieldNodes($component) as $conditionalRelationalComponentFieldNode) {
             foreach ($conditionalRelationalComponentFieldNode->getRelationalComponentFieldNodes() as $relationalComponentFieldNode) {
-                $existingNestedComponents = $relationalSubcomponents[$relationalComponentFieldNode] ?? [];
-                foreach ($relationalComponentFieldNode->getNestedComponents() as $nestedComponent) {
-                    $existingNestedComponents[] = $nestedComponent;
-                }
-                $relationalSubcomponents[$relationalComponentFieldNode] = $existingNestedComponents;
+                $relationalSubcomponents[$relationalComponentFieldNode] = array_merge(
+                    $relationalSubcomponents[$relationalComponentFieldNode] ?? [],
+                    $relationalComponentFieldNode->getNestedComponents()
+                );
             }
         }
 
@@ -1776,9 +1774,10 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                 }
 
                 if ($subcomponent_component_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
-                    foreach ($subcomponent_component_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] as $directComponentFieldNode) {
-                        $subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES][] = $directComponentFieldNode;
-                    }
+                    $subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_merge(
+                        $subcomponent_components_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES],
+                        $subcomponent_component_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES]
+                    );
                 }
                 /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]>|null */
                 $subcomponentConditionalFields = $subcomponent_component_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? null;
@@ -1787,11 +1786,10 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
                     foreach ($subcomponentConditionalFields as $conditionComponentFieldNode) {
                         /** @var ComponentFieldNodeInterface[] */
                         $conditionalComponentFieldSplObjectStorage = $subcomponentConditionalFields[$conditionComponentFieldNode];
-                        $existingConditionalFields = $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] ?? [];
-                        foreach ($conditionalComponentFieldSplObjectStorage as $conditionalComponentFieldNode) {
-                            $existingConditionalFields[] = $conditionalComponentFieldNode;
-                        }
-                        $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] = $existingConditionalFields;
+                        $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] = array_merge(
+                            $subcomponent_components_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES][$conditionComponentFieldNode] ?? [],
+                            $conditionalComponentFieldSplObjectStorage
+                        );
                     }
                 }
                 /** @var SplObjectStorage<ComponentFieldNodeInterface,array<string,mixed>>|null */
