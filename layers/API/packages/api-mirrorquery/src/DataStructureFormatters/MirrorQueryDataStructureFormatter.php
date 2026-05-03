@@ -17,6 +17,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\App;
+use PoPAPI\APIMirrorQuery\State\PreviouslyResolvedFieldsForObjectsStore;
 use SplObjectStorage;
 
 class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatter
@@ -119,10 +120,15 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
 
         /**
          * Allow GraphQL to validate that 2 different fields cannot
-         * have the same alias
+         * have the same alias.
+         *
+         * Use a stateful store object (rather than a deep array) so the
+         * per-(field,object) `add(...)` calls in `addObjectData` mutate
+         * shared state without triggering PHP's copy-on-write deep copy
+         * — the dominant memory consumer in the previous implementation.
          */
         $appStateManager = App::getAppStateManager();
-        $appStateManager->override('previously-resolved-fields-for-objects', []);
+        $appStateManager->override('previously-resolved-fields-for-objects', new PreviouslyResolvedFieldsForObjectsStore());
 
         /**
          * Re-create the shape of the query by iterating through all objectIDs
@@ -264,10 +270,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             if (!$validObjectData) {
                 continue;
             }
-            /** @var array<string,array<string|int,FieldInterface[]>> */
-            $previouslyResolvedFieldsForObjects = App::getState('previously-resolved-fields-for-objects');
-            $previouslyResolvedFieldsForObjects[$typeOutputKey][$objectID][] = $field;
-            $appStateManager->override('previously-resolved-fields-for-objects', $previouslyResolvedFieldsForObjects);
+            /** @var PreviouslyResolvedFieldsForObjectsStore */
+            $previouslyResolvedFieldsForObjectsStore = App::getState('previously-resolved-fields-for-objects');
+            $previouslyResolvedFieldsForObjectsStore->add($typeOutputKey, $objectID, $field);
 
             if ($field instanceof LeafField) {
                 /** @var LeafField */
