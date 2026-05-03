@@ -33,6 +33,21 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
      */
     private ?ObjectTypeFieldResolutionFeedbackStore $pooledObjectTypeFieldResolutionFeedbackStore = null;
 
+    /**
+     * Cached `<uniqueID,true>` lookup for the AST list at App state
+     * `document-object-resolved-field-value-referenced-fields`. The
+     * list is determined from the AST and stable for the whole
+     * request, but `setAppStateForFieldValuePromises` is called per
+     * (field, object) — without caching, the lookup map is rebuilt
+     * 14K+ times. Fingerprinted by `count + spl_object_id(first)` so
+     * the cache invalidates safely when a different request reuses
+     * this resolver instance from the container.
+     *
+     * @var array<string,true>
+     */
+    private array $cachedReferencedFieldUniqueIDs = [];
+    private int $cachedReferencedFieldsFingerprint = 0;
+
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
         if ($this->typeSerializationService === null) {
@@ -41,6 +56,42 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             $this->typeSerializationService = $typeSerializationService;
         }
         return $this->typeSerializationService;
+    }
+
+    /**
+     * @return array<string,true>
+     */
+    private function getDocumentObjectResolvedFieldValueReferencedFieldUniqueIDs(): array
+    {
+        /** @var FieldInterface[] */
+        $referencedFields = App::getState('document-object-resolved-field-value-referenced-fields');
+        if ($referencedFields === []) {
+            // Empty fingerprint == 0 matches initial state; reset cache so
+            // a transition non-empty -> empty -> non-empty rebuilds.
+            if ($this->cachedReferencedFieldsFingerprint !== 0) {
+                $this->cachedReferencedFieldUniqueIDs = [];
+                $this->cachedReferencedFieldsFingerprint = 0;
+            }
+            return [];
+        }
+        /** @var FieldInterface */
+        $first = $referencedFields[array_key_first($referencedFields)];
+        // Combine count and first-element identity into a single int.
+        // Within one request the field list is stable and built from
+        // request-scoped AST nodes, so this fingerprint stays put;
+        // across requests, the spl_object_id of the new first field
+        // will (overwhelmingly) differ.
+        $fingerprint = (count($referencedFields) << 24) ^ spl_object_id($first);
+        if ($this->cachedReferencedFieldsFingerprint === $fingerprint) {
+            return $this->cachedReferencedFieldUniqueIDs;
+        }
+        $set = [];
+        foreach ($referencedFields as $referencedField) {
+            $set[$referencedField->getUniqueID()] = true;
+        }
+        $this->cachedReferencedFieldUniqueIDs = $set;
+        $this->cachedReferencedFieldsFingerprint = $fingerprint;
+        return $set;
     }
 
     public function getDirectiveName(): string
@@ -283,16 +334,13 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
          * field-value references at all: skip the foreach + isset checks
          * entirely. The function is called per (field, object) so even
          * a few ticks shaved per call adds up over 22K calls.
+         *
+         * The lookup set is memoized per-request — see the property
+         * docblock for why this is safe.
          */
-        /** @var FieldInterface[] */
-        $documentObjectResolvedFieldValueReferencedFields = App::getState('document-object-resolved-field-value-referenced-fields');
-        if ($documentObjectResolvedFieldValueReferencedFields === []) {
+        $documentObjectResolvedFieldValueReferencedFieldUniqueIDs = $this->getDocumentObjectResolvedFieldValueReferencedFieldUniqueIDs();
+        if ($documentObjectResolvedFieldValueReferencedFieldUniqueIDs === []) {
             return;
-        }
-        /** @var array<string,true> */
-        $documentObjectResolvedFieldValueReferencedFieldUniqueIDs = [];
-        foreach ($documentObjectResolvedFieldValueReferencedFields as $referencedField) {
-            $documentObjectResolvedFieldValueReferencedFieldUniqueIDs[$referencedField->getUniqueID()] = true;
         }
         if (
             !isset($documentObjectResolvedFieldValueReferencedFieldUniqueIDs[$field->getUniqueID()])
