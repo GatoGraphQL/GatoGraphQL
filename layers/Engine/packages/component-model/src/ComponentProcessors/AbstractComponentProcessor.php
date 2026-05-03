@@ -27,8 +27,6 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AppStateNotExistsException;
