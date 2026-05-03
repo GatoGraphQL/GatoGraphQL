@@ -298,11 +298,20 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      */
     protected function getFieldUniqueID(FieldInterface $field, bool $aliasFriendly = false): string
     {
-        $cache = $this->fieldUniqueIDCache ??= new WeakMap();
+        if ($this->fieldUniqueIDCache === null) {
+            /** @var WeakMap<FieldInterface,array{0?:string,1?:string}> $cache */
+            $cache = new WeakMap();
+            $this->fieldUniqueIDCache = $cache;
+        }
+        $cache = $this->fieldUniqueIDCache;
+        /** @var array{0?:string,1?:string} */
         $entry = $cache[$field] ?? [];
-        $idx = $aliasFriendly ? 1 : 0;
-        if (isset($entry[$idx])) {
-            return $entry[$idx];
+        if ($aliasFriendly) {
+            if (isset($entry[1])) {
+                return $entry[1];
+            }
+        } elseif (isset($entry[0])) {
+            return $entry[0];
         }
         $location = $field->getLocation();
         $fieldUniqueID = sprintf(
@@ -318,7 +327,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 spl_object_id($field)
             );
         }
-        $entry[$idx] = $fieldUniqueID;
+        if ($aliasFriendly) {
+            $entry[1] = $fieldUniqueID;
+        } else {
+            $entry[0] = $fieldUniqueID;
+        }
         $cache[$field] = $entry;
         return $fieldUniqueID;
     }

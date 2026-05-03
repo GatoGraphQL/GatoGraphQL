@@ -43,7 +43,12 @@ class ComponentHelpers extends AbstractBasicService implements ComponentHelpersI
 
     public function getComponentFullName(Component $component): string
     {
-        $cache = $this->componentFullNameCache ??= new WeakMap();
+        if ($this->componentFullNameCache === null) {
+            /** @var WeakMap<Component,string> $cache */
+            $cache = new WeakMap();
+            $this->componentFullNameCache = $cache;
+        }
+        $cache = $this->componentFullNameCache;
         if (isset($cache[$component])) {
             return $cache[$component];
         }

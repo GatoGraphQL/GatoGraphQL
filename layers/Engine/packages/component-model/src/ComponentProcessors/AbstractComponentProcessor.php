@@ -1685,6 +1685,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
 
             // Array Merge appends values when under numeric keys, so we gotta filter duplicates out
             if ($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? null) {
+                // @phpstan-ignore-next-line parameterByRef.type — `array_merge_recursive` above is `@phpstan-ignore`d and broadens `$ret`'s tracked type.
                 $ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes($ret[DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
             }
         }

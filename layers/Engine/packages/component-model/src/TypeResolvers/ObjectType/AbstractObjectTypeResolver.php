@@ -1151,7 +1151,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final public function getExecutableObjectTypeFieldResolverForField(FieldInterface|string $fieldOrFieldName): ?ObjectTypeFieldResolverInterface
     {
         if ($fieldOrFieldName instanceof FieldInterface) {
-            $cache = $this->executableObjectTypeFieldResolverForFieldCache ??= new WeakMap();
+            if ($this->executableObjectTypeFieldResolverForFieldCache === null) {
+                /** @var WeakMap<FieldInterface,ObjectTypeFieldResolverInterface|null> $cache */
+                $cache = new WeakMap();
+                $this->executableObjectTypeFieldResolverForFieldCache = $cache;
+            }
+            $cache = $this->executableObjectTypeFieldResolverForFieldCache;
             // `offsetExists` (not `isset`) so a legitimately cached `null`
             // result is not treated as a miss.
             if ($cache->offsetExists($fieldOrFieldName)) {
