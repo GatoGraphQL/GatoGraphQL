@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Engine;
 
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class EngineState
 {
@@ -21,6 +22,7 @@ class EngineState
      * @param string[]|null $extra_routes
      * @param array<string,mixed> $outputData
      * @param array<string,array<string,RelationalTypeResolverInterface|array<string|int,EngineIterationFieldSet>>> $relationalTypeOutputKeyIDFieldSets `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
+     * @param array<string,array<string|int,FieldInterface[]>> $already_loaded_id_fields Map of typeOutputKey => ID => already-loaded fields. Persists across drains of the relational queue so subsequent drains do not re-fetch fields already loaded.
      */
     public function __construct(
         public array $data = [],
@@ -36,6 +38,7 @@ class EngineState
         public array $outputData = [],
         public ?Component $entryComponent = null,
         public array $relationalTypeOutputKeyIDFieldSets = [],
+        public array $already_loaded_id_fields = [],
     ) {
     }
 }

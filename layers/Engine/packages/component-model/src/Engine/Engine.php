@@ -668,9 +668,39 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
 
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
+                // Allocate the accumulators that generateDatabases() drains into.
+                // They live here (not on EngineState) because they are written into
+                // the response and discarded; the only state that needs to persist
+                // across multiple drain calls (already_loaded_id_fields) lives on
+                // EngineState.
+                /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
+                $databases = [];
+                /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> */
+                $unionTypeOutputKeyIDs = [];
+                /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> */
+                $combinedUnionTypeOutputKeyIDs = [];
+                /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
+                $previouslyResolvedIDFieldValues = [];
+                $messages = [];
+
+                // Reset $nocache_fields once per pass; generateDatabases() may
+                // be called multiple times (future MQE per-operation drains)
+                // and must not reset between drains.
+                $engineState->nocache_fields = [];
+
+                $this->generateDatabases(
+                    $schemaFeedbackEntries,
+                    $objectFeedbackEntries,
+                    $databases,
+                    $unionTypeOutputKeyIDs,
+                    $combinedUnionTypeOutputKeyIDs,
+                    $previouslyResolvedIDFieldValues,
+                    $messages,
+                );
+
                 $data = array_merge(
                     $data,
-                    $this->generateDatabases($schemaFeedbackEntries, $objectFeedbackEntries)
+                    $this->formatAccumulatedDatabasesForOutput($databases, $unionTypeOutputKeyIDs)
                 );
             }
         }
@@ -1276,6 +1306,12 @@ class Engine extends AbstractBasicService implements EngineInterface
         // Load under global key (shared by all pagesections / blocks)
         $engineState->relationalTypeOutputKeyIDFieldSets = [];
 
+        // Reset the cross-drain "already loaded" cache. It accumulates across
+        // multiple drains of $relationalTypeOutputKeyIDFieldSets within a single
+        // generateData() pass (eg: future Multiple Query Execution per-operation
+        // drains), but a fresh getComponentData() pass starts with an empty cache.
+        $engineState->already_loaded_id_fields = [];
+
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
             EngineHookNames::ENGINE_ITERATION_START,
@@ -1707,34 +1743,40 @@ class Engine extends AbstractBasicService implements EngineInterface
     }
 
     /**
-     * @return array<string,mixed>
+     * Drain $engineState->relationalTypeOutputKeyIDFieldSets into the supplied
+     * accumulators. The drain runs to completion (i.e. continues until the queue
+     * is empty *at this moment*), but does NOT reset any accumulator. Callers
+     * may invoke this method multiple times within a single request — each call
+     * processes whatever has been queued since the previous call. This is the
+     * primitive that future Multiple Query Execution per-operation drains will
+     * be built on; today there is a single caller in processAndGenerateData()
+     * that drains once and then formats.
+     *
+     * The "already loaded id fields" cache lives on EngineState so that
+     * subsequent drains within the same pass do not re-fetch fields already
+     * loaded by an earlier drain.
+     *
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string,mixed> $messages
      */
     protected function generateDatabases(
         array &$schemaFeedbackEntries,
         array &$objectFeedbackEntries,
-    ): array {
+        array &$databases,
+        array &$unionTypeOutputKeyIDs,
+        array &$combinedUnionTypeOutputKeyIDs,
+        array &$previouslyResolvedIDFieldValues,
+        array &$messages,
+    ): void {
         $engineState = App::getEngineState();
-
-        // Save all database elements here, under typeResolver
-        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
-        $databases = [];
-        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> */
-        $unionTypeOutputKeyIDs = [];
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> */
-        $combinedUnionTypeOutputKeyIDs = [];
-
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
-        $previouslyResolvedIDFieldValues = [];
-        $engineState->nocache_fields = [];
-
-        // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
-        // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
-        $already_loaded_id_fields = [];
-
-        // Initiate a new $messages interchange across directives
-        $messages = [];
+        // Cross-drain cache of already-fetched typeOutputKey/ID/fields,
+        // so subsequent drains do not re-fetch fields already loaded.
+        $already_loaded_id_fields = &$engineState->already_loaded_id_fields;
 
         $databaseEntryManager = $this->getDatabaseEntryManager();
 
@@ -1901,8 +1943,21 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
             // }
         }
+    }
 
-        // Print data into the output
+    /**
+     * Format the accumulated databases (built up across one or more
+     * generateDatabases() drains) into the output-shaped array merged
+     * into the engine response.
+     *
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @return array<string,mixed>
+     */
+    protected function formatAccumulatedDatabasesForOutput(
+        array $databases,
+        array $unionTypeOutputKeyIDs,
+    ): array {
         $ret = [];
         $this->maybeCombineAndAddDatabaseEntries($ret, 'databases', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionTypeOutputKeyIDs', $unionTypeOutputKeyIDs);
