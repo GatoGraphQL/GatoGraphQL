@@ -2086,14 +2086,21 @@ class Engine extends AbstractBasicService implements EngineInterface
                             // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
                             // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
-                            $typed_database_field_ids = array_map(
-                                /**
-                                 * It may be null if returning a null value
-                                 * in a field connection of type List
-                                 */
-                                fn (string|int|null $field_id) => $field_id === null ? null : $typedSubcomponentIDs[$field_id],
-                                $database_field_ids
-                            );
+                            /**
+                             * Inline the typed-IDs build with `foreach` instead
+                             * of `array_map` + closure. `array_map` is invoked
+                             * per (dbName, typeOutputKey, id) — three-level
+                             * nested in this hot path — so the per-call closure
+                             * context plus result-array allocation adds up.
+                             *
+                             * The closure body just looks up `$typedSubcomponentIDs`
+                             * (passing through `null` unchanged for List-type
+                             * connections returning null).
+                             */
+                            $typed_database_field_ids = [];
+                            foreach ($database_field_ids as $database_field_id) {
+                                $typed_database_field_ids[] = $database_field_id === null ? null : $typedSubcomponentIDs[$database_field_id];
+                            }
                             if ($subcomponentIsUnionTypeResolver) {
                                 $database_field_ids = $typed_database_field_ids;
                             }
