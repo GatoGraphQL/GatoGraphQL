@@ -30,6 +30,7 @@ abstract class AbstractPrepareGraphQLForExecutionQueryASTTransformationServiceTe
     protected static function getModuleClassConfiguration(): array
     {
         $moduleClassConfiguration = parent::getModuleClassConfiguration();
+        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_SEQUENTIAL_MULTIPLE_QUERY_EXECUTION] = false;
         $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = static::isMultipleQueryExecutionEnabled();
         $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][\GraphQLByPoP\GraphQLServer\Environment::ENABLE_NESTED_MUTATIONS] = static::isNestedMutationsEnabled();
         return $moduleClassConfiguration;
