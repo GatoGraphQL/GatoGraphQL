@@ -746,7 +746,21 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      */
     public function getGroupProp(string $group, Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
-        return $this->getPropGroupField($group, $component, $props, $property, $starting_from_componentPath);
+        // Inlined: was `$this->getPropGroupField($group, $component, $props, $property, $starting_from_componentPath)`
+        // which delegated to `getPropGroup`. The chain `getProp` → `getGroupProp`
+        // → `getPropGroupField` → `getPropGroup` showed up as 4 method
+        // dispatches per prop lookup; with `getProp` called 110K+ times per
+        // request that's ~330K wasted dispatches. Skip the wrappers and do
+        // the lookup in one method body.
+        if (!$props) {
+            return null;
+        }
+        $component_props = &$props;
+        $componentHelpers = $this->getComponentHelpers();
+        foreach ($starting_from_componentPath as $pathlevelComponent) {
+            $component_props = &$component_props[$componentHelpers->getComponentFullName($pathlevelComponent)][Props::SUBCOMPONENTS];
+        }
+        return $component_props[$componentHelpers->getComponentFullName($component)][$group][$property] ?? null;
     }
     /**
      * @param array<string,mixed> $props
@@ -754,7 +768,19 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
      */
     public function getProp(Component $component, array &$props, string $property, array $starting_from_componentPath = array()): mixed
     {
-        return $this->getGroupProp(Props::ATTRIBUTES, $component, $props, $property, $starting_from_componentPath);
+        // Inlined for the same reason as `getGroupProp`. `getProp` is the
+        // hottest entry point — every prop read in `initModelProps`,
+        // `addToDatasetOutputKeys`, the propagation walkers, etc. goes
+        // through here.
+        if (!$props) {
+            return null;
+        }
+        $component_props = &$props;
+        $componentHelpers = $this->getComponentHelpers();
+        foreach ($starting_from_componentPath as $pathlevelComponent) {
+            $component_props = &$component_props[$componentHelpers->getComponentFullName($pathlevelComponent)][Props::SUBCOMPONENTS];
+        }
+        return $component_props[$componentHelpers->getComponentFullName($component)][Props::ATTRIBUTES][$property] ?? null;
     }
     /**
      * @param Component[]|Component $component_or_componentPath
