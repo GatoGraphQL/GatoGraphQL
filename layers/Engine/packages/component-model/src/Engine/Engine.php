@@ -2112,48 +2112,70 @@ class Engine extends AbstractBasicService implements EngineInterface
                     }
                 }
                 if ($field_ids) {
+                    /**
+                     * Group `$field_ids` by the direct/conditional fields they
+                     * end up needing, so `combineIDsDatafields` can be called
+                     * once per group instead of once per ID.
+                     *
+                     * - IDs without an `$subcomponent_already_loaded_id_fields`
+                     *   entry all share `$subcomponent_direct_fields` /
+                     *   `$subcomponent_conditional_fields_storage` — collect
+                     *   them and dispatch a single `combineIDsDatafields` call.
+                     * - IDs *with* an already-loaded entry have the shared
+                     *   fields filtered against that entry, producing
+                     *   per-ID arrays. They get their own (filtered) call.
+                     *
+                     * `combineIDsDatafields` does the same per-ID work
+                     * inside its `foreach ($ids as $id)` loop regardless
+                     * of how the IDs are grouped — the grouping is purely
+                     * for amortizing per-call overhead and (in the common
+                     * "no already-loaded" case) skipping the per-ID
+                     * filter+rebuild work entirely.
+                     *
+                     * @var list<string|int>
+                     */
+                    $idsWithoutAlreadyLoaded = [];
                     foreach ($field_ids as $field_id) {
                         // Do not add again the IDs/Fields already loaded
-                        if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null) {
-                            /**
-                             * Build a uniqueID-keyed set of already-loaded fields once
-                             * per $field_id, then use `isset` (O(1)) for membership.
-                             * Replaces two `in_array($field, $already_loaded)` scans
-                             * — each O(N), called per direct field and per conditional
-                             * field on a recursive subcomponent path.
-                             *
-                             * @var array<string,true>
-                             */
-                            $alreadyLoadedFieldUniqueIDs = [];
-                            foreach ($subcomponent_already_loaded_data_fields as $alreadyLoadedField) {
-                                $alreadyLoadedFieldUniqueIDs[$alreadyLoadedField->getUniqueID()] = true;
+                        $subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null;
+                        if ($subcomponent_already_loaded_data_fields === null) {
+                            $idsWithoutAlreadyLoaded[] = $field_id;
+                            continue;
+                        }
+                        /**
+                         * Build a uniqueID-keyed set of already-loaded fields once
+                         * per $field_id, then use `isset` (O(1)) for membership.
+                         *
+                         * @var array<string,true>
+                         */
+                        $alreadyLoadedFieldUniqueIDs = [];
+                        foreach ($subcomponent_already_loaded_data_fields as $alreadyLoadedField) {
+                            $alreadyLoadedFieldUniqueIDs[$alreadyLoadedField->getUniqueID()] = true;
+                        }
+                        // Filter direct fields with an explicit foreach instead
+                        // of `array_filter` + closure (no per-call closure ctx).
+                        $id_subcomponent_direct_fields = [];
+                        foreach ($subcomponent_direct_fields as $componentFieldNode) {
+                            if (isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])) {
+                                continue;
                             }
-                            $id_subcomponent_direct_fields = array_values(
-                                array_filter(
-                                    $subcomponent_direct_fields,
-                                    static fn (ComponentFieldNodeInterface $componentFieldNode): bool => !isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])
-                                )
-                            );
-                            /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
-                            $id_subcomponent_conditional_fields_storage = new SplObjectStorage();
-                            foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
-                                /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
-                                $conditionComponentFieldNodes = $subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
-                                /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
-                                $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] ??= [];
-                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
-                                foreach ($conditionComponentFieldNodes as $componentFieldNode) {
-                                    /** @var ComponentFieldNodeInterface $componentFieldNode */
-                                    if (isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])) {
-                                        continue;
-                                    }
-                                    $id_subcomponent_conditional_data_fields_storage[] = $componentFieldNode;
+                            $id_subcomponent_direct_fields[] = $componentFieldNode;
+                        }
+                        /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
+                        $id_subcomponent_conditional_fields_storage = new SplObjectStorage();
+                        foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
+                            /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
+                            $conditionComponentFieldNodes = $subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
+                            /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
+                            $id_subcomponent_conditional_data_fields_storage = [];
+                            foreach ($conditionComponentFieldNodes as $componentFieldNode) {
+                                /** @var ComponentFieldNodeInterface $componentFieldNode */
+                                if (isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])) {
+                                    continue;
                                 }
-                                $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
+                                $id_subcomponent_conditional_data_fields_storage[] = $componentFieldNode;
                             }
-                        } else {
-                            $id_subcomponent_direct_fields = $subcomponent_direct_fields;
-                            $id_subcomponent_conditional_fields_storage = $subcomponent_conditional_fields_storage;
+                            $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
                         }
 
                         /**
@@ -2169,9 +2191,25 @@ class Engine extends AbstractBasicService implements EngineInterface
                             $engineState->relationalTypeOutputKeyIDFieldSets, // @phpstan-ignore-line
                             $subcomponentTypeResolver,
                             $subcomponentTypeOutputKey,
-                            array($field_id),
+                            [$field_id],
                             $id_subcomponent_direct_fields,
                             $id_subcomponent_conditional_fields_storage,
+                        );
+                    }
+                    /**
+                     * Common-case batched dispatch: all IDs without an
+                     * already-loaded entry share the same direct/conditional
+                     * fields, so a single `combineIDsDatafields` call covers
+                     * them all. (See block comment above for rationale.)
+                     */
+                    if ($idsWithoutAlreadyLoaded !== []) {
+                        $this->combineIDsDatafields(
+                            $engineState->relationalTypeOutputKeyIDFieldSets, // @phpstan-ignore-line
+                            $subcomponentTypeResolver,
+                            $subcomponentTypeOutputKey,
+                            $idsWithoutAlreadyLoaded,
+                            $subcomponent_direct_fields,
+                            $subcomponent_conditional_fields_storage,
                         );
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
