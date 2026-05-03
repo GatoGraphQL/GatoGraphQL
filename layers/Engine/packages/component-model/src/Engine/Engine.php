@@ -2180,15 +2180,34 @@ class Engine extends AbstractBasicService implements EngineInterface
                         );
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(
-                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] ?? [],
-                        $field_ids
-                    );
+                    /**
+                     * Dedup-on-insert: avoids the previous
+                     * `array_merge(... ?? [], $field_ids)` + later
+                     * `array_unique` pair, which allocated *two*
+                     * fresh arrays of size O(existing + field_ids)
+                     * per outer iteration on a quadratic accumulator
+                     * — a primary memory hotspot in this function.
+                     *
+                     * Build a `<id,true>` set once from the existing
+                     * IDs and append-in-place only previously-unseen
+                     * IDs. Preserves first-occurrence order, which
+                     * `array_unique` also did.
+                     */
+                    $existingIDs = $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS];
+                    /** @var array<string|int,true> */
+                    $seenIDs = $existingIDs === [] ? [] : array_flip($existingIDs);
+                    foreach ($field_ids as $field_id) {
+                        if (isset($seenIDs[$field_id])) {
+                            continue;
+                        }
+                        $seenIDs[$field_id] = true;
+                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS][] = $field_id;
+                    }
                     $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputKey, $component_path_key);
                 }
 
                 if ($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key] ?? null) {
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS]);
+                    // IDS are already deduped on insert above — no `array_unique` needed.
                     $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(
                         $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]
                     );
