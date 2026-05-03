@@ -2014,26 +2014,50 @@ class Engine extends AbstractBasicService implements EngineInterface
                 if ($already_loaded_id_fields && ($already_loaded_id_fields[$subcomponentTypeOutputKey] ?? null)) {
                     $subcomponent_already_loaded_id_fields = $already_loaded_id_fields[$subcomponentTypeOutputKey];
                 }
-                $subcomponentIDs = [];
+                /**
+                 * Walk `$typeResolverIDs × $databases` once and collect a flat
+                 * list of entries `[$dbName, $id, $idsList, $isArray]`, plus
+                 * the unique-IDs set used to build `$typedSubcomponentIDs`.
+                 *
+                 * Replaces the previous design which:
+                 *   - Built a 3-level nested `$subcomponentIDs[$dbName][$typeOutputKey][$id]`
+                 *     scratch structure (three array-of-array nesting levels of
+                 *     overhead per entry).
+                 *   - Then walked it 4-deep just to collect the unique-IDs set.
+                 *   - Then walked it 3-deep again to do the typed-IDs lookup
+                 *     and per-entry writes.
+                 *
+                 * The flat-entries form does the work in a single collection
+                 * pass + single processing pass. `$targetTypeOutputKey` is
+                 * loop-invariant within this call so it doesn't need to be
+                 * repeated per entry.
+                 *
+                 * @var list<array{0:string,1:string|int,2:array<int,string|int|null>,3:bool}>
+                 */
+                $entries = [];
+                /** @var array<string|int,bool> */
+                $allSubcomponentIDsSet = [];
                 foreach ($typeResolverIDs as $id) {
-                    // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
+                    // $databases may contain more than 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbName => $database) {
                         $database_field_ids = $database[$targetTypeOutputKey][$id][$field] ?? null;
                         if (!$database_field_ids) {
                             continue;
                         }
-                        // In-place append rather than `array_merge(... ?? [], ...)`,
-                        // which allocates a fresh array on every iteration and is
-                        // a primary memory hotspot in this function.
-                        $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] ??= [];
                         if (is_array($database_field_ids)) {
-                            foreach ($database_field_ids as $database_field_id) {
-                                $subcomponentIDs[$dbName][$targetTypeOutputKey][$id][] = $database_field_id;
-                            }
+                            $idsList = $database_field_ids;
+                            $isArray = true;
                         } else {
-                            $subcomponentIDs[$dbName][$targetTypeOutputKey][$id][] = $database_field_ids;
+                            $idsList = [$database_field_ids];
+                            $isArray = false;
                         }
+                        foreach ($idsList as $database_field_id) {
+                            if ($database_field_id !== null) {
+                                $allSubcomponentIDsSet[$database_field_id] = true;
+                            }
+                        }
+                        $entries[] = [$dbName, $id, $idsList, $isArray];
                     }
                 }
                 /**
@@ -2047,25 +2071,6 @@ class Engine extends AbstractBasicService implements EngineInterface
                  */
                 /** @var array<string|int,string> */
                 $typedSubcomponentIDs = [];
-                /**
-                 * Collect the unique IDs across the 3-level nested
-                 * `$subcomponentIDs` structure. The previous form chained
-                 * three `arrayFlatten` calls plus `array_unique` — each
-                 * step allocated a fresh intermediate array. Walk the
-                 * nesting once and dedup via an `[id => true]` set.
-                 *
-                 * @var array<string|int,bool>
-                 */
-                $allSubcomponentIDsSet = [];
-                foreach ($subcomponentIDs as $dbNameSubcomponentIDs) {
-                    foreach ($dbNameSubcomponentIDs as $typeOutputKeySubcomponentIDs) {
-                        foreach ($typeOutputKeySubcomponentIDs as $idSubcomponentIDs) {
-                            foreach ($idSubcomponentIDs as $database_field_id) {
-                                $allSubcomponentIDsSet[$database_field_id] = true;
-                            }
-                        }
-                    }
-                }
                 /** @var array<string|int> */
                 $allSubcomponentIDs = array_keys($allSubcomponentIDsSet);
                 /** @var array<string|int> */
@@ -2078,49 +2083,32 @@ class Engine extends AbstractBasicService implements EngineInterface
 
                 /** @var array<string|int> */
                 $field_ids = [];
-                foreach ($subcomponentIDs as $dbName => $typeOutputKey_id_database_field_ids) {
-                    foreach ($typeOutputKey_id_database_field_ids as $typeOutputKey => $id_database_field_ids) {
-                        foreach ($id_database_field_ids as $id => $database_field_ids) {
-                            // Transform the IDs, adding their type
-                            // Do it always, for UnionTypeResolvers and non-union ones.
-                            // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
-                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
-                            // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
-                            /**
-                             * Inline the typed-IDs build with `foreach` instead
-                             * of `array_map` + closure. `array_map` is invoked
-                             * per (dbName, typeOutputKey, id) — three-level
-                             * nested in this hot path — so the per-call closure
-                             * context plus result-array allocation adds up.
-                             *
-                             * The closure body just looks up `$typedSubcomponentIDs`
-                             * (passing through `null` unchanged for List-type
-                             * connections returning null).
-                             */
-                            $typed_database_field_ids = [];
-                            foreach ($database_field_ids as $database_field_id) {
-                                $typed_database_field_ids[] = $database_field_id === null ? null : $typedSubcomponentIDs[$database_field_id];
-                            }
-                            if ($subcomponentIsUnionTypeResolver) {
-                                $database_field_ids = $typed_database_field_ids;
-                            }
-                            // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($field) && is_array($databases[$dbName][$typeOutputKey][$id][$field]);
-                            // @phpstan-ignore-next-line
-                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id] ??= new SplObjectStorage();
-                            // @phpstan-ignore-next-line
-                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$field] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                            // @phpstan-ignore-next-line
-                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id] ??= new SplObjectStorage();
-                            // @phpstan-ignore-next-line
-                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$field] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                foreach ($entries as [$dbName, $id, $idsList, $isArray]) {
+                    // Transform the IDs, adding their type
+                    // Do it always, for UnionTypeResolvers and non-union ones.
+                    // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+                    // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
+                    // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
+                    $typed_database_field_ids = [];
+                    foreach ($idsList as $database_field_id) {
+                        $typed_database_field_ids[] = $database_field_id === null ? null : $typedSubcomponentIDs[$database_field_id];
+                    }
+                    // `$isArray` was determined when collecting; no need to re-check
+                    // `databases[]->contains($field) && is_array(...)` here.
+                    $unionEntryValue = $isArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                    // @phpstan-ignore-next-line
+                    $unionTypeOutputKeyIDs[$dbName][$targetTypeOutputKey][$id] ??= new SplObjectStorage();
+                    // @phpstan-ignore-next-line
+                    $unionTypeOutputKeyIDs[$dbName][$targetTypeOutputKey][$id][$field] = $unionEntryValue;
+                    // @phpstan-ignore-next-line
+                    $combinedUnionTypeOutputKeyIDs[$targetTypeOutputKey][$id] ??= new SplObjectStorage();
+                    // @phpstan-ignore-next-line
+                    $combinedUnionTypeOutputKeyIDs[$targetTypeOutputKey][$id][$field] = $unionEntryValue;
 
-                            // In-place append rather than `array_merge` — same reason
-                            // as the per-`(typeResolverID, dbName)` accumulator above.
-                            foreach ($database_field_ids as $database_field_id) {
-                                $field_ids[] = $database_field_id;
-                            }
-                        }
+                    // For union resolvers, append the typed IDs; otherwise append raw.
+                    $idsToAppend = $subcomponentIsUnionTypeResolver ? $typed_database_field_ids : $idsList;
+                    foreach ($idsToAppend as $database_field_id) {
+                        $field_ids[] = $database_field_id;
                     }
                 }
                 if ($field_ids) {
