@@ -1492,7 +1492,7 @@
             },
             {
                 "__typename": "PostTag",
-                "postCount": 5,
+                "postCount": 6,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1612,10 +1612,29 @@
                                 "taxonomy": "post_tag"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "post_tag",
-                "count": 5,
+                "count": 6,
                 "description": "",
                 "id": 9,
                 "metaValue": null,
@@ -1727,7 +1746,7 @@
             },
             {
                 "__typename": "PostTag",
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1822,10 +1841,29 @@
                                 "taxonomy": "post_tag"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "post_tag",
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 12,
                 "metaValue": null,
@@ -3804,6 +3842,26 @@
                 ]
             },
             {
+                "__typename": "Post",
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "customPostType": "post",
+                "tags": [
+                    {
+                        "__typename": "PostTag",
+                        "id": 12,
+                        "name": "plugin",
+                        "taxonomy": "post_tag"
+                    },
+                    {
+                        "__typename": "PostTag",
+                        "id": 9,
+                        "name": "features",
+                        "taxonomy": "post_tag"
+                    }
+                ]
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -4526,40 +4584,6 @@
                         "taxonomy": "dummy-tag"
                     }
                 ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "customPostType": "dummy-cpt",
-                "tags": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 24,
-                        "name": "Hip Hop",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 30,
-                        "name": "Tango",
-                        "taxonomy": "dummy-tag"
-                    }
-                ],
-                "tagsWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 24,
-                        "name": "Hip Hop",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 30,
-                        "name": "Tango",
-                        "taxonomy": "dummy-tag"
-                    }
-                ]
             }
         ],
         "customPostsByTagIDs": [
@@ -4830,6 +4854,10 @@
                 "title": "PHP-only blocks"
             },
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
                 "tags": [
@@ -4856,18 +4884,6 @@
             {
                 "id": 1634,
                 "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "tags": [
-                    {
-                        "id": 24
-                    },
-                    {
-                        "id": 30
-                    }
-                ]
-            },
-            {
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
                 "tags": [
                     {
                         "id": 24
@@ -5209,6 +5225,10 @@
                 "title": "PHP-only blocks"
             },
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
                 "id": 1619,
                 "title": "Error debitis nulla vel est",
                 "tags": [
@@ -5225,11 +5245,6 @@
             {
                 "id": 1666,
                 "title": "Another Page"
-            },
-            {
-                "id": 1680,
-                "title": "Dummy CPT with server-side-registered block",
-                "tags": []
             }
         ],
         "customPostsExcludeByTagSlugsOnCPT": [
