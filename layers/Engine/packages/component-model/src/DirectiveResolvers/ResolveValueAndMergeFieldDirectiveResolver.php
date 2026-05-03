@@ -23,6 +23,16 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
 {
     private ?TypeSerializationServiceInterface $typeSerializationService = null;
 
+    /**
+     * Pooled `ObjectTypeFieldResolutionFeedbackStore` reused across
+     * `resolveValueForObject` calls. Each invocation `reset()`s the
+     * store before use, so per-(field,object) allocations of a fresh
+     * store are eliminated (one allocation per request instead of
+     * 12K–22K). Safe because `incorporate*` callers iterate-and-copy
+     * the store's collections — they don't retain references.
+     */
+    private ?ObjectTypeFieldResolutionFeedbackStore $pooledObjectTypeFieldResolutionFeedbackStore = null;
+
     final protected function getTypeSerializationService(): TypeSerializationServiceInterface
     {
         if ($this->typeSerializationService === null) {
@@ -421,8 +431,11 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             $objectTypeResolver = $relationalTypeResolver;
         }
 
-        // 1. Resolve the value against the TypeResolver
-        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        // 1. Resolve the value against the TypeResolver. Reuse a pooled
+        //    feedback store across iterations rather than allocating a
+        //    fresh one per (field, object).
+        $objectTypeFieldResolutionFeedbackStore = $this->pooledObjectTypeFieldResolutionFeedbackStore ??= new ObjectTypeFieldResolutionFeedbackStore();
+        $objectTypeFieldResolutionFeedbackStore->reset();
         $fieldArgs = $fieldDataAccessProvider->getFieldArgs(
             $field,
             $objectTypeResolver,

@@ -40,6 +40,24 @@ class ObjectTypeFieldResolutionFeedbackStore
             && $this->logs === [];
     }
 
+    /**
+     * Clear all collections so the same store can be reused across
+     * iterations of `resolveValueForObject`, avoiding per-(field,object)
+     * `new ObjectTypeFieldResolutionFeedbackStore()` allocations. Safe
+     * because `incorporate*` callers iterate-and-copy (they don't
+     * retain references to the source store's internal arrays).
+     */
+    public function reset(): void
+    {
+        $this->errors = [];
+        $this->partialErrors = [];
+        $this->warnings = [];
+        $this->deprecations = [];
+        $this->notices = [];
+        $this->suggestions = [];
+        $this->logs = [];
+    }
+
     public function incorporate(
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
