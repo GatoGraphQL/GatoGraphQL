@@ -2023,10 +2023,17 @@ class Engine extends AbstractBasicService implements EngineInterface
                         if (!$database_field_ids) {
                             continue;
                         }
-                        $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] = array_merge(
-                            $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] ?? [],
-                            is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
-                        );
+                        // In-place append rather than `array_merge(... ?? [], ...)`,
+                        // which allocates a fresh array on every iteration and is
+                        // a primary memory hotspot in this function.
+                        $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] ??= [];
+                        if (is_array($database_field_ids)) {
+                            foreach ($database_field_ids as $database_field_id) {
+                                $subcomponentIDs[$dbName][$targetTypeOutputKey][$id][] = $database_field_id;
+                            }
+                        } else {
+                            $subcomponentIDs[$dbName][$targetTypeOutputKey][$id][] = $database_field_ids;
+                        }
                     }
                 }
                 /**
@@ -2041,14 +2048,26 @@ class Engine extends AbstractBasicService implements EngineInterface
                 /** @var array<string|int,string> */
                 $typedSubcomponentIDs = [];
                 /**
-                 * Get the types for all of the IDs all at once.
-                 * Flatten 3 levels: dbName => typeOutputKey => id => ...
+                 * Collect the unique IDs across the 3-level nested
+                 * `$subcomponentIDs` structure. The previous form chained
+                 * three `arrayFlatten` calls plus `array_unique` — each
+                 * step allocated a fresh intermediate array. Walk the
+                 * nesting once and dedup via an `[id => true]` set.
                  *
-                 * @var array<string|int>
+                 * @var array<string|int,bool>
                  */
-                $allSubcomponentIDs = array_values(array_unique(
-                    GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
-                ));
+                $allSubcomponentIDsSet = [];
+                foreach ($subcomponentIDs as $dbNameSubcomponentIDs) {
+                    foreach ($dbNameSubcomponentIDs as $typeOutputKeySubcomponentIDs) {
+                        foreach ($typeOutputKeySubcomponentIDs as $idSubcomponentIDs) {
+                            foreach ($idSubcomponentIDs as $database_field_id) {
+                                $allSubcomponentIDsSet[$database_field_id] = true;
+                            }
+                        }
+                    }
+                }
+                /** @var array<string|int> */
+                $allSubcomponentIDs = array_keys($allSubcomponentIDsSet);
                 /** @var array<string|int> */
                 $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
                 // Create a map, from ID to TypedID
@@ -2089,11 +2108,11 @@ class Engine extends AbstractBasicService implements EngineInterface
                             // @phpstan-ignore-next-line
                             $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$field] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
-                            // Merge, after adding their type!
-                            $field_ids = array_merge(
-                                $field_ids,
-                                $database_field_ids
-                            );
+                            // In-place append rather than `array_merge` — same reason
+                            // as the per-`(typeResolverID, dbName)` accumulator above.
+                            foreach ($database_field_ids as $database_field_id) {
+                                $field_ids[] = $database_field_id;
+                            }
                         }
                     }
                 }
