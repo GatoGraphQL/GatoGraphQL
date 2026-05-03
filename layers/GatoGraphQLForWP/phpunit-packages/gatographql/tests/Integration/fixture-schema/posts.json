@@ -280,6 +280,10 @@
         ],
         "postsByAuthorSlug": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks"
             },
@@ -338,6 +342,10 @@
         ],
         "postsByExcludeAuthorIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks"
             },
@@ -372,14 +380,14 @@
             {
                 "id": 1119,
                 "title": "Nested mutations are a must have"
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
             }
         ],
         "postsByExcludeIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks"
             },
@@ -414,10 +422,6 @@
             {
                 "id": 1119,
                 "title": "Nested mutations are a must have"
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
             }
         ],
         "postsByHasPassword": [],
@@ -461,6 +465,10 @@
         "postsByStatus": [],
         "postsByTagIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks"
             },
@@ -482,6 +490,10 @@
             }
         ],
         "postsByTagSlugs": [
+            {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
             {
                 "id": 1200,
                 "title": "PHP-only blocks"

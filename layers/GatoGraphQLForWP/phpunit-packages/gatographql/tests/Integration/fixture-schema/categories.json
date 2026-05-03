@@ -1195,7 +1195,7 @@
             },
             {
                 "__typename": "PostCategory",
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1278,10 +1278,23 @@
                                 "taxonomy": "category"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 2,
+                                "name": "Advanced",
+                                "taxonomy": "category"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "category",
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -3163,6 +3176,22 @@
                 ]
             },
             {
+                "__typename": "Post",
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "taxonomy": "category",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
+                    }
+                ]
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -3663,40 +3692,6 @@
                 "customPostType": "dummy-cpt",
                 "categories": [],
                 "categoriesWithoutTaxonomy": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 19,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ],
-                "categoriesWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 19,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
             }
         ],
         "customPostsByCategoryIDs": [
@@ -3736,6 +3731,10 @@
         ],
         "customPostsExcludeByCategoryIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks"
             },
@@ -3771,11 +3770,6 @@
             {
                 "id": 1684,
                 "title": "Dummy CPT with parent and children",
-                "categories": []
-            },
-            {
-                "id": 1682,
-                "title": "Dummy CPT with several levels of children",
                 "categories": []
             }
         ],
@@ -3867,6 +3861,10 @@
         ],
         "customPostsExcludeByCategorySlugs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks"
             },
@@ -3902,11 +3900,6 @@
             {
                 "id": 1684,
                 "title": "Dummy CPT with parent and children",
-                "categories": []
-            },
-            {
-                "id": 1682,
-                "title": "Dummy CPT with several levels of children",
                 "categories": []
             }
         ],
@@ -4007,7 +4000,7 @@
             },
             {
                 "taxonomy": "category",
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 2,
                 "metaValue": null,

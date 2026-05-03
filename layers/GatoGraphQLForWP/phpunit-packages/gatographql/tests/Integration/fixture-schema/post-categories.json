@@ -406,7 +406,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -418,8 +418,12 @@
                 "name": "Advanced",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)"
+                    },
                     {
                         "id": 1200,
                         "title": "PHP-only blocks"
@@ -849,7 +853,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -861,8 +865,12 @@
                 "name": "Advanced",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)"
+                    },
                     {
                         "id": 1200,
                         "title": "PHP-only blocks"
@@ -1554,7 +1562,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -1566,8 +1574,12 @@
                 "name": "Advanced",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)"
+                    },
                     {
                         "id": 1200,
                         "title": "PHP-only blocks"
@@ -1815,7 +1827,7 @@
                     "taxonomy": "category",
                     "childCount": 0,
                     "childNames": [],
-                    "count": 4,
+                    "count": 5,
                     "description": "",
                     "id": 2,
                     "metaValue": null,
@@ -1827,8 +1839,12 @@
                     "name": "Advanced",
                     "parent": null,
                     "ancestors": [],
-                    "postCount": 4,
+                    "postCount": 5,
                     "posts": [
+                        {
+                            "id": 1210,
+                            "title": "PHP-only blocks (combinations)"
+                        },
                         {
                             "id": 1200,
                             "title": "PHP-only blocks"
@@ -2241,6 +2257,15 @@
         ],
         "postsExcludeByCategoryIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "categories": [
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks",
                 "categories": [
@@ -2366,6 +2391,15 @@
             }
         ],
         "postsExcludeByCategorySlugs": [
+            {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "categories": [
+                    {
+                        "id": 2
+                    }
+                ]
+            },
             {
                 "id": 1200,
                 "title": "PHP-only blocks",

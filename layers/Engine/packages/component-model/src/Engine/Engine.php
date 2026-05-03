@@ -1998,8 +1998,12 @@ class Engine extends AbstractBasicService implements EngineInterface
                 continue;
             }
             $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();
-            // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
-            $subcomponent_direct_fields = array_unique($subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []);
+            // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now.
+            // Dedup `ComponentFieldNodeInterface[]` by `__toString` (= field uniqueID)
+            // via a `[uniqueID => node]` map, avoiding `array_unique`'s repeated string casts.
+            $subcomponent_direct_fields = self::dedupComponentFieldNodes(
+                $subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []
+            );
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
             $subcomponent_conditional_fields_storage = $subcomponent_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
             if ($subcomponent_direct_fields || $subcomponent_conditional_fields_storage->count() > 0) {
@@ -2015,7 +2019,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                     // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbName => $database) {
-                        $database_field_ids = $database[$targetTypeOutputKey][$id][$componentFieldNode->getField()] ?? null;
+                        $database_field_ids = $database[$targetTypeOutputKey][$id][$field] ?? null;
                         if (!$database_field_ids) {
                             continue;
                         }
@@ -2048,7 +2052,8 @@ class Engine extends AbstractBasicService implements EngineInterface
                 /** @var array<string|int> */
                 $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
                 // Create a map, from ID to TypedID
-                for ($i = 0; $i < count($allSubcomponentIDs); $i++) {
+                $allSubcomponentIDsCount = count($allSubcomponentIDs);
+                for ($i = 0; $i < $allSubcomponentIDsCount; $i++) {
                     $typedSubcomponentIDs[$allSubcomponentIDs[$i]] = $qualifiedSubcomponentIDs[$i];
                 }
 
@@ -2074,15 +2079,15 @@ class Engine extends AbstractBasicService implements EngineInterface
                                 $database_field_ids = $typed_database_field_ids;
                             }
                             // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($componentFieldNode->getField()) && is_array($databases[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()]);
+                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($field) && is_array($databases[$dbName][$typeOutputKey][$id][$field]);
                             // @phpstan-ignore-next-line
                             $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id] ??= new SplObjectStorage();
                             // @phpstan-ignore-next-line
-                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$field] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
                             // @phpstan-ignore-next-line
                             $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id] ??= new SplObjectStorage();
                             // @phpstan-ignore-next-line
-                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$field] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
 
                             // Merge, after adding their type!
                             $field_ids = array_merge(
@@ -2096,10 +2101,23 @@ class Engine extends AbstractBasicService implements EngineInterface
                     foreach ($field_ids as $field_id) {
                         // Do not add again the IDs/Fields already loaded
                         if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null) {
+                            /**
+                             * Build a uniqueID-keyed set of already-loaded fields once
+                             * per $field_id, then use `isset` (O(1)) for membership.
+                             * Replaces two `in_array($field, $already_loaded)` scans
+                             * — each O(N), called per direct field and per conditional
+                             * field on a recursive subcomponent path.
+                             *
+                             * @var array<string,true>
+                             */
+                            $alreadyLoadedFieldUniqueIDs = [];
+                            foreach ($subcomponent_already_loaded_data_fields as $alreadyLoadedField) {
+                                $alreadyLoadedFieldUniqueIDs[$alreadyLoadedField->getUniqueID()] = true;
+                            }
                             $id_subcomponent_direct_fields = array_values(
                                 array_filter(
                                     $subcomponent_direct_fields,
-                                    fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
+                                    static fn (ComponentFieldNodeInterface $componentFieldNode): bool => !isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])
                                 )
                             );
                             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
@@ -2112,7 +2130,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                                 $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
                                 foreach ($conditionComponentFieldNodes as $componentFieldNode) {
                                     /** @var ComponentFieldNodeInterface $componentFieldNode */
-                                    if (in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)) {
+                                    if (isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])) {
                                         continue;
                                     }
                                     $id_subcomponent_conditional_data_fields_storage[] = $componentFieldNode;
@@ -2152,7 +2170,9 @@ class Engine extends AbstractBasicService implements EngineInterface
 
                 if ($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key] ?? null) {
                     $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS]);
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(
+                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]
+                    );
                 }
             }
         }
@@ -2296,10 +2316,10 @@ class Engine extends AbstractBasicService implements EngineInterface
                 $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] ??= [];
                 $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentFieldNode];
                 if (isset($componentFieldNodeData[DataProperties::DIRECT_COMPONENT_FIELD_NODES])) {
-                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique(array_merge(
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(array_merge(
                         $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [],
                         $componentFieldNodeData[DataProperties::DIRECT_COMPONENT_FIELD_NODES]
-                    )));
+                    ));
                 }
                 if (isset($componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES])) {
                     $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();
@@ -2325,5 +2345,26 @@ class Engine extends AbstractBasicService implements EngineInterface
             }
             $dbdata[$relationalTypeOutputKey][$component_path_key][DataProperties::SUBCOMPONENTS] = $dbDataSubcomponentsSplObjectStorage;
         }
+    }
+
+    /**
+     * Deduplicate a `ComponentFieldNodeInterface[]` list by `__toString`
+     * (= underlying field's `getUniqueID()`), via a `[uniqueID => node]`
+     * map. Equivalent in semantics to `array_values(array_unique($nodes))`
+     * but avoids `array_unique`'s repeated string casts on a hot path.
+     *
+     * @param ComponentFieldNodeInterface[] $componentFieldNodes
+     * @return ComponentFieldNodeInterface[]
+     */
+    private static function dedupComponentFieldNodes(array $componentFieldNodes): array
+    {
+        $componentFieldNodesByUniqueID = [];
+        foreach ($componentFieldNodes as $componentFieldNode) {
+            $uniqueID = $componentFieldNode->getField()->getUniqueID();
+            if (!isset($componentFieldNodesByUniqueID[$uniqueID])) {
+                $componentFieldNodesByUniqueID[$uniqueID] = $componentFieldNode;
+            }
+        }
+        return array_values($componentFieldNodesByUniqueID);
     }
 }

@@ -27,7 +27,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\Root\StateManagers\AppStateManagerInterface;
 use SplObjectStorage;
+use WeakMap;
 
 abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
 {
@@ -42,6 +44,58 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * @var array<string,array<string,LeafField>>
      */
     private array $fieldInstanceContainer = [];
+
+    /**
+     * Memoization for the field-node getters below. These getters are
+     * pure functions of `$component->atts` plus the request-scoped
+     * `App::getState('executable-document-ast')` (frozen for the
+     * request); but each call also allocates fresh `new Component(...)`
+     * virtual sub-components. They are invoked repeatedly per node by
+     * 5+ tree walkers (prop init, dataloading paths, flattening,
+     * subcomponent grouping).
+     *
+     * The translation-execution profile shows this getter being called
+     * ~375K times per request — with `Component` being a `final readonly`
+     * value object, many of those calls receive different instances
+     * representing the *same* logical sub-component (built via different
+     * tree-walking paths). An identity-keyed cache (e.g. WeakMap) misses
+     * those equivalent instances. Use a **value-keyed** cache instead
+     * (`processorClass | name | serialize(atts)`), with an AST-instance
+     * tracker that clears the cache automatically when the request's
+     * executable document changes.
+     *
+     * Invalidated by `executable-document-ast` instance change (via
+     * `$cacheForExecutableDocumentAST`), so long-running PHP processes
+     * (FrankenPHP/Swoole/etc.) see a fresh cache per request without an
+     * explicit reset hook. The cache is bypassed entirely when
+     * `does-api-query-have-errors` is true.
+     *
+     * @var array<string,LeafComponentFieldNode[]>
+     */
+    private array $leafComponentFieldNodesCache = [];
+    /**
+     * @var array<string,RelationalComponentFieldNode[]>
+     */
+    private array $relationalComponentFieldNodesCache = [];
+    /**
+     * @var array<string,ConditionalLeafComponentFieldNode[]>
+     */
+    private array $conditionalLeafComponentFieldNodesCache = [];
+    private ?ExecutableDocument $cacheForExecutableDocumentAST = null;
+    /**
+     * Cached `AppStateManager` so the per-call AST lookup in
+     * `getFieldNodeCacheKeyForComponent` skips the three-level
+     * `App::getState` facade dispatch.
+     */
+    private ?AppStateManagerInterface $cachedAppStateManager = null;
+    /**
+     * Memoization for `getFieldUniqueID` keyed by field instance. This
+     * shows up at ~1G self-cost, 348K calls in the translation profile
+     * — a string-id generator that's pure on (field, aliasFriendly).
+     *
+     * @var WeakMap<FieldInterface,array{0?:string,1?:string}>|null
+     */
+    private ?WeakMap $fieldUniqueIDCache = null;
 
     private ?QueryASTTransformationServiceInterface $queryASTTransformationService = null;
     private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
@@ -244,6 +298,21 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      */
     protected function getFieldUniqueID(FieldInterface $field, bool $aliasFriendly = false): string
     {
+        if ($this->fieldUniqueIDCache === null) {
+            /** @var WeakMap<FieldInterface,array{0?:string,1?:string}> $cache */
+            $cache = new WeakMap();
+            $this->fieldUniqueIDCache = $cache;
+        }
+        $cache = $this->fieldUniqueIDCache;
+        /** @var array{0?:string,1?:string} */
+        $entry = $cache[$field] ?? [];
+        if ($aliasFriendly) {
+            if (isset($entry[1])) {
+                return $entry[1];
+            }
+        } elseif (isset($entry[0])) {
+            return $entry[0];
+        }
         $location = $field->getLocation();
         $fieldUniqueID = sprintf(
             $aliasFriendly ? '%s%sx%s' : '%s([%s,%s])',
@@ -252,13 +321,46 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $location->getColumn()
         );
         if ($location instanceof RuntimeLocation) {
-            return sprintf(
+            $fieldUniqueID = sprintf(
                 '%s #%s',
                 $fieldUniqueID,
-                spl_object_hash($field)
+                spl_object_id($field)
             );
         }
+        if ($aliasFriendly) {
+            $entry[1] = $fieldUniqueID;
+        } else {
+            $entry[0] = $fieldUniqueID;
+        }
+        $cache[$field] = $entry;
         return $fieldUniqueID;
+    }
+
+    /**
+     * Compute the value-key for a `Component` and reset the field-node
+     * caches if the executable-document AST instance has changed
+     * (i.e. a new request in a long-running PHP process). Returns the
+     * value-key for use as cache index.
+     *
+     * Goes via a cached `AppStateManager` reference rather than the
+     * `App::getState` facade — the three-level `App → AbstractRootAppProxy
+     * → AppThread → AppStateManager` dispatch shows up at ~150M ticks
+     * across 242K calls otherwise.
+     */
+    private function getFieldNodeCacheKeyForComponent(Component $component): string
+    {
+        $manager = $this->cachedAppStateManager ??= App::getAppStateManager();
+        /** @var ExecutableDocument|null */
+        $executableDocument = $manager->get('executable-document-ast');
+        if ($this->cacheForExecutableDocumentAST !== $executableDocument) {
+            $this->leafComponentFieldNodesCache = [];
+            $this->relationalComponentFieldNodesCache = [];
+            $this->conditionalLeafComponentFieldNodesCache = [];
+            $this->cacheForExecutableDocumentAST = $executableDocument;
+            // Refresh the manager cache too on request boundaries.
+            $this->cachedAppStateManager = App::getAppStateManager();
+        }
+        return $component->processorClass . '|' . $component->name . '|' . serialize($component->atts);
     }
 
     /**
@@ -269,6 +371,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
+        }
+
+        $cacheKey = $this->getFieldNodeCacheKeyForComponent($component);
+        if (isset($this->leafComponentFieldNodesCache[$cacheKey])) {
+            return $this->leafComponentFieldNodesCache[$cacheKey];
         }
 
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($component->atts);
@@ -290,7 +397,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $leafFieldFragmentModelsTuples
         );
 
-        return array_map(
+        return $this->leafComponentFieldNodesCache[$cacheKey] = array_map(
             LeafComponentFieldNode::fromLeafField(...),
             $leafFields
         );
@@ -327,6 +434,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return [];
         }
 
+        $cacheKey = $this->getFieldNodeCacheKeyForComponent($component);
+        if (isset($this->relationalComponentFieldNodesCache[$cacheKey])) {
+            return $this->relationalComponentFieldNodesCache[$cacheKey];
+        }
+
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($component->atts);
 
         if ($this->ignoreConditionalFields($component->atts)) {
@@ -348,7 +460,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
 
         $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
-            return [];
+            return $this->relationalComponentFieldNodesCache[$cacheKey] = [];
         }
 
         /** @var ExecutableDocument $executableDocument */
@@ -387,7 +499,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 ]
             );
         }
-        return $ret;
+        return $this->relationalComponentFieldNodesCache[$cacheKey] = $ret;
     }
 
     /**
@@ -427,8 +539,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return [];
         }
 
+        $cacheKey = $this->getFieldNodeCacheKeyForComponent($component);
+        if (isset($this->conditionalLeafComponentFieldNodesCache[$cacheKey])) {
+            return $this->conditionalLeafComponentFieldNodesCache[$cacheKey];
+        }
+
         if (!$this->ignoreConditionalFields($component->atts)) {
-            return [];
+            return $this->conditionalLeafComponentFieldNodesCache[$cacheKey] = [];
         }
 
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($component->atts);
@@ -556,7 +673,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 ],
             );
         }
-        return $conditionalLeafComponentFieldNodes;
+        return $this->conditionalLeafComponentFieldNodesCache[$cacheKey] = $conditionalLeafComponentFieldNodes;
     }
 
     /**

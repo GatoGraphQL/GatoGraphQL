@@ -112,7 +112,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 12,
                 "metaValue": null,
@@ -122,8 +122,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "plugin",
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)"
+                    },
                     {
                         "id": 1200,
                         "title": "PHP-only blocks"
@@ -193,7 +197,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 5,
+                "count": 6,
                 "description": "",
                 "id": 9,
                 "metaValue": null,
@@ -203,8 +207,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "features",
-                "postCount": 5,
+                "postCount": 6,
                 "posts": [
+                    {
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)"
+                    },
                     {
                         "id": 1200,
                         "title": "PHP-only blocks"
@@ -361,7 +369,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 12,
                 "metaValue": null,
@@ -371,8 +379,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "plugin",
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)"
+                    },
                     {
                         "id": 1200,
                         "title": "PHP-only blocks"
@@ -442,7 +454,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 5,
+                "count": 6,
                 "description": "",
                 "id": 9,
                 "metaValue": null,
@@ -452,8 +464,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "features",
-                "postCount": 5,
+                "postCount": 6,
                 "posts": [
+                    {
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)"
+                    },
                     {
                         "id": 1200,
                         "title": "PHP-only blocks"
@@ -681,7 +697,7 @@
             },
             {
                 "taxonomy": "post_tag",
-                "count": 4,
+                "count": 5,
                 "description": "",
                 "id": 12,
                 "metaValue": null,
@@ -691,8 +707,12 @@
                 "includingMetaKeys": [],
                 "excludingMetaKeys": [],
                 "name": "plugin",
-                "postCount": 4,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)"
+                    },
                     {
                         "id": 1200,
                         "title": "PHP-only blocks"
@@ -845,7 +865,7 @@
                 },
                 {
                     "taxonomy": "post_tag",
-                    "count": 5,
+                    "count": 6,
                     "description": "",
                     "id": 9,
                     "metaValue": null,
@@ -855,8 +875,12 @@
                     "includingMetaKeys": [],
                     "excludingMetaKeys": [],
                     "name": "features",
-                    "postCount": 5,
+                    "postCount": 6,
                     "posts": [
+                        {
+                            "id": 1210,
+                            "title": "PHP-only blocks (combinations)"
+                        },
                         {
                             "id": 1200,
                             "title": "PHP-only blocks"
@@ -1053,6 +1077,18 @@
         ],
         "postsExcludeByTagIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "tags": [
+                    {
+                        "id": 12
+                    },
+                    {
+                        "id": 9
+                    }
+                ]
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks",
                 "tags": [
@@ -1120,14 +1156,21 @@
                         "id": 12
                     }
                 ]
-            },
-            {
-                "id": 1,
-                "title": "Hello world!",
-                "tags": []
             }
         ],
         "postsByTagSlugs": [
+            {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "tags": [
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
             {
                 "id": 1200,
                 "title": "PHP-only blocks",
@@ -1187,6 +1230,18 @@
             }
         ],
         "postsByTagSlugsWithTaxonomy": [
+            {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "tags": [
+                    {
+                        "slug": "plugin"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
             {
                 "id": 1200,
                 "title": "PHP-only blocks",

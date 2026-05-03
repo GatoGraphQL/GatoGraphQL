@@ -230,7 +230,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - Support AI Connectors from WordPress 7.0 (#3290)
 * Improved - Updated documentation for Translation extension, now supporting Gemini as a translation service provider (#3292)
 * Improved - Allow the custom post `author` to be null (e.g. when the post has no assigned user / author ID 0) (#3293)
-* Improved - Performance of parsing and compiling GraphQL query (#3294)
+* Improved - Performance of compiling and executing GraphQL query (#3294, #3295)
 * Fixed - Handle null response from license API (eg: when access is forbidden via network) (#3288)
 
 = 17.1.1 =

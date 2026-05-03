@@ -302,8 +302,16 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     ): SplObjectStorage {
         /** @var SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]> */
         $instances = new SplObjectStorage();
-        // Count how many times each directive is added
-        /** @var array<string,FieldInterface[]> */
+        /**
+         * Per directive name, the set of `FieldInterface` instances that have
+         * already been seen across iterations, keyed by `getUniqueID()` for O(1)
+         * intersection / dedup. Replaces the previous list-of-fields-plus-
+         * `array_intersect`/`array_unique`/`array_diff` pattern, which relied on
+         * implicit string conversion via `__toString()` and was O(N × M) per
+         * directive iteration on a hot path.
+         *
+         * @var array<string,array<string,FieldInterface>>
+         */
         $directiveFieldTrack = [];
         /** @var SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]> */
         $directiveResolverInstanceFields = new SplObjectStorage();
@@ -427,46 +435,47 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
             // Validate if the directive can be executed multiple times on each field
             if (!$directiveResolver->isRepeatable()) {
-                // Check if the directive is already processing any of the fields
-                // @phpstan-ignore-next-line
-                $alreadyProcessingFields = array_intersect(
-                    $directiveFieldTrack[$directiveName] ?? [],
-                    $directiveResolverFields
-                );
-                // @phpstan-ignore-next-line
-                $directiveFieldTrack[$directiveName] = array_unique(array_merge(
-                    $directiveFieldTrack[$directiveName] ?? [],
-                    $directiveResolverFields
-                ));
-                if ($alreadyProcessingFields) {
-                    // Remove the fields from this iteration, and add an error
-                    // @phpstan-ignore-next-line
-                    $directiveResolverFields = array_diff(
-                        $directiveResolverFields,
-                        $alreadyProcessingFields
-                    );
-                    // @phpstan-ignore-next-line
-                    if ($alreadyProcessingFields !== []) {
-                        $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                            new SchemaFeedback(
-                                new FeedbackItemResolution(
-                                    GraphQLSpecErrorFeedbackItemProvider::class,
-                                    GraphQLSpecErrorFeedbackItemProvider::E_5_7_3,
-                                    [
-                                        $directive->getName(),
-                                    ]
-                                ),
-                                $directive,
-                                $this,
-                                $alreadyProcessingFields,
-                            )
-                        );
-                    }
-                    // If after removing the duplicated fields there are still others, process them
-                    // Otherwise, skip
-                    if (!$directiveResolverFields) {
+                /**
+                 * Single pass: classify each field as already-processing or new,
+                 * and grow the per-directive tracking set. Avoids the previous
+                 * `array_intersect` + `array_unique` + `array_diff` triple, each
+                 * of which casts every `FieldInterface` to its uniqueID string
+                 * during comparison.
+                 */
+                $trackedFieldsByUniqueID = $directiveFieldTrack[$directiveName] ?? [];
+                $alreadyProcessingFields = [];
+                $remainingDirectiveResolverFields = [];
+                foreach ($directiveResolverFields as $directiveResolverField) {
+                    $fieldUniqueID = $directiveResolverField->getUniqueID();
+                    if (isset($trackedFieldsByUniqueID[$fieldUniqueID])) {
+                        $alreadyProcessingFields[] = $trackedFieldsByUniqueID[$fieldUniqueID];
                         continue;
                     }
+                    $trackedFieldsByUniqueID[$fieldUniqueID] = $directiveResolverField;
+                    $remainingDirectiveResolverFields[] = $directiveResolverField;
+                }
+                $directiveFieldTrack[$directiveName] = $trackedFieldsByUniqueID;
+                if ($alreadyProcessingFields !== []) {
+                    $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                        new SchemaFeedback(
+                            new FeedbackItemResolution(
+                                GraphQLSpecErrorFeedbackItemProvider::class,
+                                GraphQLSpecErrorFeedbackItemProvider::E_5_7_3,
+                                [
+                                    $directive->getName(),
+                                ]
+                            ),
+                            $directive,
+                            $this,
+                            $alreadyProcessingFields,
+                        )
+                    );
+                    // If after removing the duplicated fields there are still others, process them
+                    // Otherwise, skip
+                    if ($remainingDirectiveResolverFields === []) {
+                        continue;
+                    }
+                    $directiveResolverFields = $remainingDirectiveResolverFields;
                 }
             }
 
@@ -884,11 +893,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
         foreach ($classes as $class) {
             $relationalTypeResolverDecorators = $this->calculateAllRelationalTypeResolverDecoratorsForRelationalTypeOrInterfaceTypeResolverClass($class);
             foreach ($relationalTypeResolverDecorators as $relationalTypeResolverDecorator) {
-                $relationalTypeResolverDecoratorObjectHash = spl_object_hash($relationalTypeResolverDecorator);
-                if (isset($typeResolverDecorators[$relationalTypeResolverDecoratorObjectHash])) {
+                $relationalTypeResolverDecoratorObjectID = spl_object_id($relationalTypeResolverDecorator);
+                if (isset($typeResolverDecorators[$relationalTypeResolverDecoratorObjectID])) {
                     continue;
                 }
-                $typeResolverDecorators[$relationalTypeResolverDecoratorObjectHash] = $relationalTypeResolverDecorator;
+                $typeResolverDecorators[$relationalTypeResolverDecoratorObjectID] = $relationalTypeResolverDecorator;
             }
         }
 
@@ -927,11 +936,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              * same decorator, then do array_unique
              */
             foreach ($attachedRelationalTypeResolverDecorators as $attachedRelationalTypeResolverDecorator) {
-                $attachedRelationalTypeResolverDecoratorObjectHash = spl_object_hash($attachedRelationalTypeResolverDecorator);
-                if (isset($typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectHash])) {
+                $attachedRelationalTypeResolverDecoratorObjectID = spl_object_id($attachedRelationalTypeResolverDecorator);
+                if (isset($typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectID])) {
                     continue;
                 }
-                $typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectHash] = $attachedRelationalTypeResolverDecorator;
+                $typeResolverDecorators[$attachedRelationalTypeResolverDecoratorObjectID] = $attachedRelationalTypeResolverDecorator;
             }
 
             // Continue iterating for the class parents
@@ -993,19 +1002,28 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
          * Hence, collect all these fields, and add them
          * as if they were direct
          */
-        $allConditionalFields = [];
-        foreach ($engineIterationFieldSet->conditionalFields as $conditionField) {
-            $conditionalFields = $engineIterationFieldSet->conditionalFields[$conditionField];
-            $allConditionalFields = array_merge(
-                $allConditionalFields,
-                $conditionalFields
-            );
+        /**
+         * Accumulate into a `[uniqueID => FieldInterface]` map, then return
+         * its values. Avoids `array_unique`'s implicit `__toString` cast for
+         * dedup, which is significant on this per-directive hot path. Uses
+         * `isset` to preserve first-occurrence-wins (matching `array_unique`).
+         */
+        $fieldsByUniqueID = [];
+        foreach ($engineIterationFieldSet->fields as $field) {
+            $fieldUniqueID = $field->getUniqueID();
+            if (!isset($fieldsByUniqueID[$fieldUniqueID])) {
+                $fieldsByUniqueID[$fieldUniqueID] = $field;
+            }
         }
-        // @phpstan-ignore-next-line
-        return array_unique(array_merge(
-            $engineIterationFieldSet->fields,
-            $allConditionalFields
-        ));
+        foreach ($engineIterationFieldSet->conditionalFields as $conditionField) {
+            foreach ($engineIterationFieldSet->conditionalFields[$conditionField] as $field) {
+                $fieldUniqueID = $field->getUniqueID();
+                if (!isset($fieldsByUniqueID[$fieldUniqueID])) {
+                    $fieldsByUniqueID[$fieldUniqueID] = $field;
+                }
+            }
+        }
+        return array_values($fieldsByUniqueID);
     }
 
     /**
@@ -1115,47 +1133,63 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             $directiveFields = new SplObjectStorage();
             /** @var SplObjectStorage<Directive,SplObjectStorage<FieldInterface,array<string|int>>> */
             $directiveFieldIDs = new SplObjectStorage();
-            /** @var FieldInterface[] */
-            $directiveDirectFields = [];
+            /**
+             * Maintained as a `[uniqueID => FieldInterface]` map for O(1)
+             * dedup; converted to a list with `array_values` after the loop.
+             *
+             * @var array<string,FieldInterface>
+             */
+            $directiveDirectFieldsByUniqueID = [];
             foreach ($directives as $directive) {
                 /** @var SplObjectStorage<FieldInterface,array<string|int>> */
                 $fieldIDsSplObjectStorage = $directiveFieldIDs[$directive] ?? new SplObjectStorage();
-                /** @var FieldInterface[] */
-                $fields = [];
+                /**
+                 * Per-directive accumulator, also as a `[uniqueID => Field]` map.
+                 *
+                 * @var array<string,FieldInterface>
+                 */
+                $fieldsByUniqueID = [];
                 foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
-                    $directiveDirectFields = array_merge(
-                        $directiveDirectFields,
-                        $fieldSet->fields
-                    );
-                    $conditionalFields = [];
-                    foreach ($fieldSet->conditionalFields as $conditionField) {
-                        $conditionalFields = array_merge(
-                            $conditionalFields,
-                            $fieldSet->conditionalFields[$conditionField]
-                        );
+                    /**
+                     * Per-(directive,id) deduped union of direct + conditional
+                     * fields. Built as a `[uniqueID => Field]` map directly,
+                     * which both dedupes and lets the transposition below
+                     * iterate each unique field exactly once.
+                     *
+                     * @var array<string,FieldInterface>
+                     */
+                    $idFieldDirectiveIDFieldsByUniqueID = [];
+                    foreach ($fieldSet->fields as $field) {
+                        $fieldUniqueID = $field->getUniqueID();
+                        if (!isset($idFieldDirectiveIDFieldsByUniqueID[$fieldUniqueID])) {
+                            $idFieldDirectiveIDFieldsByUniqueID[$fieldUniqueID] = $field;
+                        }
+                        if (!isset($directiveDirectFieldsByUniqueID[$fieldUniqueID])) {
+                            $directiveDirectFieldsByUniqueID[$fieldUniqueID] = $field;
+                        }
                     }
-                    // @phpstan-ignore-next-line
-                    $idFieldDirectiveIDFields = array_unique(array_merge(
-                        $fieldSet->fields,
-                        $conditionalFields
-                    ));
-                    $fields = array_merge(
-                        $fields,
-                        $idFieldDirectiveIDFields
-                    );
-                    // Also transpose the array to match field to IDs later on
-                    foreach ($idFieldDirectiveIDFields as $field) {
+                    foreach ($fieldSet->conditionalFields as $conditionField) {
+                        foreach ($fieldSet->conditionalFields[$conditionField] as $field) {
+                            $fieldUniqueID = $field->getUniqueID();
+                            if (!isset($idFieldDirectiveIDFieldsByUniqueID[$fieldUniqueID])) {
+                                $idFieldDirectiveIDFieldsByUniqueID[$fieldUniqueID] = $field;
+                            }
+                        }
+                    }
+                    foreach ($idFieldDirectiveIDFieldsByUniqueID as $fieldUniqueID => $field) {
+                        if (!isset($fieldsByUniqueID[$fieldUniqueID])) {
+                            $fieldsByUniqueID[$fieldUniqueID] = $field;
+                        }
+                        // Also transpose the array to match field to IDs later on
                         $ids = $fieldIDsSplObjectStorage[$field] ?? [];
                         $ids[] = $id;
                         $fieldIDsSplObjectStorage[$field] = $ids;
                     }
                 }
                 $directiveFieldIDs[$directive] = $fieldIDsSplObjectStorage;
-                // @phpstan-ignore-next-line
-                $directiveFields[$directive] = array_unique($fields);
+                $directiveFields[$directive] = array_values($fieldsByUniqueID);
             }
-            // @phpstan-ignore-next-line
-            $directiveDirectFields = array_unique($directiveDirectFields);
+            $directiveDirectFields = array_values($directiveDirectFieldsByUniqueID);
 
             // Validate and resolve the directives into instances and fields they operate on
             $separateEngineIterationFeedbackStore = new EngineIterationFeedbackStore();
@@ -1174,6 +1208,14 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
              */
             /** @var array<string|int,FieldInterface[]> */
             $errorIDFields = [];
+            /**
+             * Parallel `[id => [fieldUniqueID => true]]` set, kept in lock-step
+             * with `$errorIDFields` so the per-(directive × field × id)
+             * `in_array($field, $errorIDFields[$id])` check below is O(1).
+             *
+             * @var array<string|int,array<string,true>>
+             */
+            $errorIDFieldUniqueIDs = [];
             if ($separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors() !== []) {
                 foreach ($separateEngineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors() as $objectResolutionFeedback) {
                     foreach ($objectResolutionFeedback->getIDFieldSet() as $id => $fieldSet) {
@@ -1181,32 +1223,49 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                             $errorIDFields[$id] ?? [],
                             $fieldSet->fields
                         );
+                        foreach ($fieldSet->fields as $errorField) {
+                            $errorIDFieldUniqueIDs[$id][$errorField->getUniqueID()] = true;
+                        }
                     }
                 }
             }
             if ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() !== []) {
-                // Extract the failing fields from the errors
-                $schemaErrorFailingFields = [];
+                /**
+                 * Extract the failing fields from the errors as a uniqueID-keyed
+                 * map; that lets the per-directive intersection below use `isset`
+                 * (O(1)) instead of `array_intersect`'s implicit `__toString`
+                 * comparison.
+                 *
+                 * @var array<string,FieldInterface>
+                 */
+                $schemaErrorFailingFieldsByUniqueID = [];
                 foreach ($separateEngineIterationFeedbackStore->schemaFeedbackStore->getErrors() as $schemaFeedback) {
-                    $schemaErrorFailingFields = array_merge(
-                        $schemaErrorFailingFields,
-                        $schemaFeedback->getFields()
-                    );
+                    foreach ($schemaFeedback->getFields() as $field) {
+                        $fieldUniqueID = $field->getUniqueID();
+                        if (!isset($schemaErrorFailingFieldsByUniqueID[$fieldUniqueID])) {
+                            $schemaErrorFailingFieldsByUniqueID[$fieldUniqueID] = $field;
+                        }
+                    }
                 }
-                // @phpstan-ignore-next-line
-                $schemaErrorFailingFields = array_unique($schemaErrorFailingFields);
                 // Set those fields as null
                 foreach ($directives as $directive) {
                     foreach ($directiveIDFieldSet[$directive] as $id => $fieldSet) {
-                        // @phpstan-ignore-next-line
-                        $failingFields = array_intersect(
-                            $fieldSet->fields,
-                            $schemaErrorFailingFields
-                        );
+                        $failingFields = [];
+                        foreach ($fieldSet->fields as $field) {
+                            if (isset($schemaErrorFailingFieldsByUniqueID[$field->getUniqueID()])) {
+                                $failingFields[] = $field;
+                            }
+                        }
+                        if ($failingFields === []) {
+                            continue;
+                        }
                         $errorIDFields[$id] = array_merge(
                             $errorIDFields[$id] ?? [],
                             $failingFields
                         );
+                        foreach ($failingFields as $failingField) {
+                            $errorIDFieldUniqueIDs[$id][$failingField->getUniqueID()] = true;
+                        }
                     }
                 }
             }
@@ -1270,16 +1329,18 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 $idFieldSet = [];
                 foreach ($directiveDirectFieldsToProcess as $field) {
                     $ids = $directiveFieldIDs[$directive][$field];
+                    $fieldUniqueID = $field->getUniqueID();
                     // Skip fields that already produced some error
                     if (!$fieldObjectTypeResolverObjectFieldData->contains($field)) {
                         foreach ($ids as $id) {
                             $errorIDFields[$id][] = $field;
+                            $errorIDFieldUniqueIDs[$id][$fieldUniqueID] = true;
                         }
                         continue;
                     }
                     foreach ($ids as $id) {
                         // If the $id/$field had an error, skip
-                        if (isset($errorIDFields[$id]) && in_array($field, $errorIDFields[$id])) {
+                        if (isset($errorIDFieldUniqueIDs[$id][$fieldUniqueID])) {
                             continue;
                         }
                         $idFieldSet[$id] ??= new EngineIterationFieldSet();

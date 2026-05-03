@@ -442,6 +442,10 @@
                 "hasRenderCallback": true
             },
             {
+                "name": "gatographql-testing\/duplicate-alert",
+                "hasRenderCallback": true
+            },
+            {
                 "name": "gatographql-testing\/marquee",
                 "hasRenderCallback": true
             },
@@ -477,6 +481,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity",
                     "dismissible",
                     "lock",
@@ -504,6 +509,17 @@
                         "fieldType": "string",
                         "label": "Message",
                         "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "implications",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Implications",
+                        "default": "Review the details and take action if needed.",
                         "enum": null,
                         "source": null,
                         "role": null,
@@ -594,6 +610,167 @@
                     {
                         "name": "textColor",
                         "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/duplicate-alert",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "color": true,
+                        "radius": true,
+                        "style": true,
+                        "width": true
+                    }
+                },
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "implications",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "message",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": "Message",
+                        "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "implications",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": "Implications",
+                        "default": "Review the details and take action if needed.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "severity",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": "Severity",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "dismissible",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "boolean",
+                        "label": "Dismissible",
+                        "default": false,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
                         "fieldType": "string",
                         "label": null,
                         "default": null,
@@ -950,6 +1127,10 @@
         "autoRegisterOnly": [
             {
                 "name": "gatographql-testing\/alert",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "gatographql-testing\/duplicate-alert",
                 "hasRenderCallback": true
             },
             {
@@ -1405,6 +1586,10 @@
                 "hasRenderCallback": true
             },
             {
+                "name": "gatographql-testing\/duplicate-alert",
+                "hasRenderCallback": true
+            },
+            {
                 "name": "gatographql-testing\/marquee",
                 "hasRenderCallback": true
             },
@@ -1440,6 +1625,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity",
                     "dismissible",
                     "lock",
@@ -1467,6 +1653,17 @@
                         "fieldType": "string",
                         "label": "Message",
                         "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "implications",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Implications",
+                        "default": "Review the details and take action if needed.",
                         "enum": null,
                         "source": null,
                         "role": null,
@@ -1916,6 +2113,10 @@
                 "hasRenderCallback": true
             },
             {
+                "name": "gatographql-testing\/duplicate-alert",
+                "hasRenderCallback": true
+            },
+            {
                 "name": "gatographql-testing\/marquee",
                 "hasRenderCallback": true
             },
@@ -1947,6 +2148,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity",
                     "dismissible",
                     "lock",
@@ -1974,6 +2176,17 @@
                         "fieldType": "string",
                         "label": "Message",
                         "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "implications",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Implications",
+                        "default": "Review the details and take action if needed.",
                         "enum": null,
                         "source": null,
                         "role": null,
@@ -2064,6 +2277,167 @@
                     {
                         "name": "textColor",
                         "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/duplicate-alert",
+                "hasRenderCallback": true,
+                "supports": {
+                    "autoRegister": true,
+                    "color": {
+                        "text": true,
+                        "background": true
+                    },
+                    "spacing": {
+                        "padding": true
+                    },
+                    "border": {
+                        "color": true,
+                        "radius": true,
+                        "style": true,
+                        "width": true
+                    }
+                },
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "implications",
+                    "severity",
+                    "dismissible",
+                    "lock",
+                    "metadata",
+                    "className",
+                    "style",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": "Header",
+                        "default": "Notice",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "message",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": "Message",
+                        "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "implications",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": "Implications",
+                        "default": "Review the details and take action if needed.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "severity",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": "Severity",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ],
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "dismissible",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "boolean",
+                        "label": "Dismissible",
+                        "default": false,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "lock",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "metadata",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "className",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "style",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "object",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
+                        "fieldType": "string",
+                        "label": null,
+                        "default": null,
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": false
+                    },
+                    {
+                        "name": "textColor",
+                        "blockTypeName": "gatographql-testing\/duplicate-alert",
                         "fieldType": "string",
                         "label": null,
                         "default": null,
@@ -2419,6 +2793,9 @@
         ],
         "excludeAlert": [
             {
+                "name": "gatographql-testing\/duplicate-alert"
+            },
+            {
                 "name": "gatographql-testing\/marquee"
             },
             {
@@ -2451,6 +2828,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity",
                     "dismissible",
                     "lock",
@@ -2478,6 +2856,17 @@
                         "fieldType": "string",
                         "label": "Message",
                         "default": "This is an important notice.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true
+                    },
+                    {
+                        "name": "implications",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Implications",
+                        "default": "Review the details and take action if needed.",
                         "enum": null,
                         "source": null,
                         "role": null,
@@ -2585,6 +2974,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity",
                     "className",
                     "backgroundColor",
@@ -2603,6 +2993,13 @@
                         "fieldType": "string",
                         "default": "This is an important notice.",
                         "label": "Message",
+                        "enum": null
+                    },
+                    {
+                        "name": "implications",
+                        "fieldType": "string",
+                        "default": "Review the details and take action if needed.",
+                        "label": "Implications",
                         "enum": null
                     },
                     {
@@ -2812,6 +3209,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity",
                     "dismissible",
                     "className",
@@ -2828,6 +3226,11 @@
                         "name": "message",
                         "fieldType": "string",
                         "default": "This is an important notice."
+                    },
+                    {
+                        "name": "implications",
+                        "fieldType": "string",
+                        "default": "Review the details and take action if needed."
                     },
                     {
                         "name": "severity",
@@ -2957,6 +3360,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity"
                 ],
                 "attributes": [
@@ -2973,6 +3377,13 @@
                         "autoGenerateControl": true,
                         "default": "This is an important notice.",
                         "label": "Message"
+                    },
+                    {
+                        "name": "implications",
+                        "fieldType": "string",
+                        "autoGenerateControl": true,
+                        "default": "Review the details and take action if needed.",
+                        "label": "Implications"
                     },
                     {
                         "name": "severity",
@@ -3044,6 +3455,19 @@
                 ]
             },
             {
+                "name": "gatographql-testing\/duplicate-alert",
+                "attributeNames": [
+                    "dismissible"
+                ],
+                "attributes": [
+                    {
+                        "name": "dismissible",
+                        "fieldType": "boolean",
+                        "default": false
+                    }
+                ]
+            },
+            {
                 "name": "gatographql-testing\/marquee",
                 "attributeNames": [],
                 "attributes": []
@@ -3080,6 +3504,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity",
                     "className",
                     "backgroundColor",
@@ -3096,6 +3521,73 @@
                         "name": "message",
                         "fieldType": "string",
                         "default": "This is an important notice.",
+                        "enum": null
+                    },
+                    {
+                        "name": "implications",
+                        "fieldType": "string",
+                        "default": "Review the details and take action if needed.",
+                        "enum": null
+                    },
+                    {
+                        "name": "severity",
+                        "fieldType": "string",
+                        "default": "Info",
+                        "enum": [
+                            "Info",
+                            "Warning",
+                            "Error",
+                            "Success"
+                        ]
+                    },
+                    {
+                        "name": "className",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "backgroundColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    },
+                    {
+                        "name": "textColor",
+                        "fieldType": "string",
+                        "default": null,
+                        "enum": null
+                    }
+                ]
+            },
+            {
+                "name": "gatographql-testing\/duplicate-alert",
+                "attributeNames": [
+                    "header",
+                    "message",
+                    "implications",
+                    "severity",
+                    "className",
+                    "backgroundColor",
+                    "textColor"
+                ],
+                "attributes": [
+                    {
+                        "name": "header",
+                        "fieldType": "string",
+                        "default": "Notice",
+                        "enum": null
+                    },
+                    {
+                        "name": "message",
+                        "fieldType": "string",
+                        "default": "This is an important notice.",
+                        "enum": null
+                    },
+                    {
+                        "name": "implications",
+                        "fieldType": "string",
+                        "default": "Review the details and take action if needed.",
                         "enum": null
                     },
                     {
@@ -3267,6 +3759,7 @@
                 "attributeNames": [
                     "header",
                     "message",
+                    "implications",
                     "severity",
                     "dismissible",
                     "lock",
@@ -3308,6 +3801,23 @@
                             "type": "string",
                             "default": "This is an important notice.",
                             "label": "Message",
+                            "autoGenerateControl": true
+                        }
+                    },
+                    {
+                        "name": "implications",
+                        "blockTypeName": "gatographql-testing\/alert",
+                        "fieldType": "string",
+                        "label": "Implications",
+                        "default": "Review the details and take action if needed.",
+                        "enum": null,
+                        "source": null,
+                        "role": null,
+                        "autoGenerateControl": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "Review the details and take action if needed.",
+                            "label": "Implications",
                             "autoGenerateControl": true
                         }
                     },

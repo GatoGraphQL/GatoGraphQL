@@ -2147,15 +2147,10 @@
                             "description": "The post's author",
                             "args": [],
                             "type": {
-                                "kind": "NON_NULL",
-                                "name": "User!",
+                                "kind": "OBJECT",
+                                "name": "User",
                                 "isOneOf": false,
-                                "ofType": {
-                                    "kind": "OBJECT",
-                                    "name": "User",
-                                    "isOneOf": false,
-                                    "ofType": null
-                                }
+                                "ofType": null
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -12283,15 +12278,10 @@
                             "description": "The post's author",
                             "args": [],
                             "type": {
-                                "kind": "NON_NULL",
-                                "name": "User!",
+                                "kind": "OBJECT",
+                                "name": "User",
                                 "isOneOf": false,
-                                "ofType": {
-                                    "kind": "OBJECT",
-                                    "name": "User",
-                                    "isOneOf": false,
-                                    "ofType": null
-                                }
+                                "ofType": null
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -13481,15 +13471,10 @@
                             "description": "The post's author",
                             "args": [],
                             "type": {
-                                "kind": "NON_NULL",
-                                "name": "User!",
+                                "kind": "OBJECT",
+                                "name": "User",
                                 "isOneOf": false,
-                                "ofType": {
-                                    "kind": "OBJECT",
-                                    "name": "User",
-                                    "isOneOf": false,
-                                    "ofType": null
-                                }
+                                "ofType": null
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -37910,15 +37895,10 @@
                             "description": "The entity's author",
                             "args": [],
                             "type": {
-                                "kind": "NON_NULL",
-                                "name": "User!",
+                                "kind": "OBJECT",
+                                "name": "User",
                                 "isOneOf": false,
-                                "ofType": {
-                                    "kind": "OBJECT",
-                                    "name": "User",
-                                    "isOneOf": false,
-                                    "ofType": null
-                                }
+                                "ofType": null
                             },
                             "isDeprecated": false,
                             "deprecationReason": null

@@ -264,15 +264,31 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
 
         /**
          * Optimization: Check if the field was referenced in the query,
-         * otherwise can skip
+         * otherwise can skip. Build a uniqueID-keyed set so the membership
+         * test is O(1) and uses string comparison, instead of `in_array`'s
+         * default loose `==` which does recursive property-equality on
+         * `FieldInterface` objects.
+         *
+         * Fast-path the (extremely common) case where the query has no
+         * field-value references at all: skip the foreach + isset checks
+         * entirely. The function is called per (field, object) so even
+         * a few ticks shaved per call adds up over 22K calls.
          */
         /** @var FieldInterface[] */
         $documentObjectResolvedFieldValueReferencedFields = App::getState('document-object-resolved-field-value-referenced-fields');
+        if ($documentObjectResolvedFieldValueReferencedFields === []) {
+            return;
+        }
+        /** @var array<string,true> */
+        $documentObjectResolvedFieldValueReferencedFieldUniqueIDs = [];
+        foreach ($documentObjectResolvedFieldValueReferencedFields as $referencedField) {
+            $documentObjectResolvedFieldValueReferencedFieldUniqueIDs[$referencedField->getUniqueID()] = true;
+        }
         if (
-            !in_array($field, $documentObjectResolvedFieldValueReferencedFields)
+            !isset($documentObjectResolvedFieldValueReferencedFieldUniqueIDs[$field->getUniqueID()])
             && (
                 $staticField === null
-                || !in_array($staticField, $documentObjectResolvedFieldValueReferencedFields)
+                || !isset($documentObjectResolvedFieldValueReferencedFieldUniqueIDs[$staticField->getUniqueID()])
             )
         ) {
             return;
@@ -435,13 +451,18 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        // 2. Transfer the feedback
-        $engineIterationFeedbackStore->objectResolutionFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
-            $objectTypeFieldResolutionFeedbackStore,
-            $relationalTypeResolver,
-            $this->directive,
-            [$id => new EngineIterationFieldSet([$field])]
-        );
+        // 2. Transfer the feedback. On the common path (resolution
+        //    succeeded with no errors/warnings/notices/etc.) the store
+        //    is empty — skip the call and its `[$id => new
+        //    EngineIterationFieldSet([$field])]` allocation entirely.
+        if (!$objectTypeFieldResolutionFeedbackStore->isEmpty()) {
+            $engineIterationFeedbackStore->objectResolutionFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                $objectTypeFieldResolutionFeedbackStore,
+                $relationalTypeResolver,
+                $this->directive,
+                [$id => new EngineIterationFieldSet([$field])]
+            );
+        }
 
         /**
          * 3. Add the output in the DB
