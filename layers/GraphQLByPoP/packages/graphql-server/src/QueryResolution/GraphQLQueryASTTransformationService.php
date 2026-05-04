@@ -147,5 +147,4 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
         /** @var FieldInterface */
         return $documentFieldInstanceContainer[$alias];
     }
-
 }
