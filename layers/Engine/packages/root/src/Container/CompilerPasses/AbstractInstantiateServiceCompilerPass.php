@@ -16,19 +16,22 @@ abstract class AbstractInstantiateServiceCompilerPass extends AbstractCompilerPa
         $serviceInstantiatorDefinition = $containerBuilderWrapper->getDefinition(ServiceInstantiatorInterface::class);
         $serviceClass = $this->getServiceClass();
         $definitions = $containerBuilderWrapper->getDefinitions();
-        $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null || !is_a($definitionClass, $serviceClass, true)) {
                 continue;
             }
-            if ($onlyProcessAutoconfiguredServices && !$definition->isAutoconfigured()) {
-                continue;
+
+            $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
+            if (
+                !$onlyProcessAutoconfiguredServices
+                || $definition->isAutoconfigured()
+            ) {
+                $serviceInstantiatorDefinition->addMethodCall(
+                    'addService',
+                    [$this->createReference($definitionID)]
+                );
             }
-            $serviceInstantiatorDefinition->addMethodCall(
-                'addService',
-                [$this->createReference($definitionID)]
-            );
         }
     }
 

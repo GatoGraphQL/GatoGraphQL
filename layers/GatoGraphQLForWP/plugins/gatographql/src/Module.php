@@ -7,23 +7,8 @@ namespace GatoGraphQL\GatoGraphQL;
 use GatoGraphQL\GatoGraphQL\Container\CompilerPasses\RegisterUserAuthorizationSchemeCompilerPass;
 use GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\RegisterModuleResolverCompilerPass;
 use GatoGraphQL\GatoGraphQL\Container\HybridCompilerPasses\RegisterSettingsCategoryResolverCompilerPass;
-use GatoGraphQL\GatoGraphQL\MarketplaceProviders\MarketplaceProviderCommercialExtensionActivationServiceInterface;
-use GatoGraphQL\GatoGraphQL\MarketplaceProviders\MarketplaceProviderCommercialPluginUpdaterServiceInterface;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractPluginModule;
-use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes\UserAuthorizationSchemeInterface;
-use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointEditorBlockServiceTagInterface;
-use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointEditorBlockServiceTagInterface;
-use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigEditorBlockServiceTagInterface;
-use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
-use GatoGraphQL\GatoGraphQL\Services\EndpointExecuters\EndpointExecuterServiceTagInterface;
-use GatoGraphQL\GatoGraphQL\Services\GraphQLEndpointPathProviders\GraphQLEndpointPathProviderInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
-use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolverInterface;
-use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\EndpointSchemaConfigurationExecuterServiceTagInterface;
-use GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters\PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface;
-use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
-use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolverInterface;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -116,36 +101,6 @@ class Module extends AbstractPluginModule
             RegisterModuleResolverCompilerPass::class,
             RegisterSettingsCategoryResolverCompilerPass::class,
             RegisterUserAuthorizationSchemeCompilerPass::class,
-        ];
-    }
-
-    /**
-     * The trailing `PersistedQueryEndpoint*` interfaces are declared here
-     * even though they are implemented in the persisted-queries extension:
-     * the interfaces themselves live in this plugin's namespace, and the
-     * autoconfiguration must be registered before the extension's services
-     * are loaded.
-     *
-     * @return array<class-string>
-     */
-    public function getServiceAutoconfigurations(): array
-    {
-        return [
-            CustomPostTypeInterface::class,
-            EndpointEditorBlockServiceTagInterface::class,
-            EndpointExecuterServiceTagInterface::class,
-            EndpointSchemaConfigurationExecuterServiceTagInterface::class,
-            GraphQLEndpointPathProviderInterface::class,
-            MarketplaceProviderCommercialExtensionActivationServiceInterface::class,
-            MarketplaceProviderCommercialPluginUpdaterServiceInterface::class,
-            ModuleResolverInterface::class,
-            ModuleTypeResolverInterface::class,
-            PersistedQueryEndpointEditorBlockServiceTagInterface::class,
-            PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface::class,
-            SchemaConfigEditorBlockServiceTagInterface::class,
-            SettingsCategoryResolverInterface::class,
-            TaxonomyInterface::class,
-            UserAuthorizationSchemeInterface::class,
         ];
     }
 

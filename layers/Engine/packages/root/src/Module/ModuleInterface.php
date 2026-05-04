@@ -116,15 +116,6 @@ interface ModuleInterface
      */
     public function getSystemContainerCompilerPassClasses(): array;
 
-    /**
-     * Service interfaces that should be auto-tagged on every service
-     * implementing them, used by registry-style compiler passes to
-     * find their targets without scanning all definitions.
-     *
-     * @return array<class-string>
-     */
-    public function getServiceAutoconfigurations(): array;
-
      /**
      * Enable each module to set default configuration for
      * itself and its depended modules

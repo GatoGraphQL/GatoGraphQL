@@ -22,4 +22,8 @@ class RegisterCategoryObjectTypeResolverPickerCompilerPass extends AbstractInjec
     {
         return 'addCategoryObjectTypeResolverPicker';
     }
+    protected function onlyProcessAutoconfiguredServices(): bool
+    {
+        return true;
+    }
 }

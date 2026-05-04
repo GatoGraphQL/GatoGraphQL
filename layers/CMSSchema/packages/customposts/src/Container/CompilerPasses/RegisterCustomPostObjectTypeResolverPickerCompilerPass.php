@@ -22,4 +22,8 @@ class RegisterCustomPostObjectTypeResolverPickerCompilerPass extends AbstractInj
     {
         return 'addCustomPostObjectTypeResolverPicker';
     }
+    protected function onlyProcessAutoconfiguredServices(): bool
+    {
+        return true;
+    }
 }

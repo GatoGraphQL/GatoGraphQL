@@ -6,13 +6,11 @@ namespace PoP\Root;
 
 use PoP\Root\Constants\HookNamePlaceholders;
 use PoP\Root\Constants\HookNames;
-use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 use PoP\Root\Container\ContainerCacheConfiguration;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 use PoP\Root\Module\ModuleInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Application Loader
@@ -401,19 +399,6 @@ class AppLoader implements AppLoaderInterface
         );
 
         /**
-         * Register interface→tag autoconfigurations BEFORE any module
-         * loads its services.yaml — Symfony only applies an autoconfiguration
-         * to definitions loaded after it was registered.
-         */
-        $systemContainerBuilder = App::getSystemContainerBuilderFactory()->getInstance();
-        if (
-            !App::getSystemContainerBuilderFactory()->isCached()
-            && $systemContainerBuilder instanceof ContainerBuilder
-        ) {
-            $this->applyServiceAutoconfigurations($systemContainerBuilder);
-        }
-
-        /**
          * Have all Components register their Container services,
          * and already compile the container.
          * This way, these services become available for initializing
@@ -507,18 +492,6 @@ class AppLoader implements AppLoaderInterface
         );
 
         /**
-         * Register interface→tag autoconfigurations BEFORE any module
-         * loads its services.yaml. See `bootSystem()` for rationale.
-         */
-        $applicationContainerBuilder = App::getContainerBuilderFactory()->getInstance();
-        if (
-            !App::getContainerBuilderFactory()->isCached()
-            && $applicationContainerBuilder instanceof ContainerBuilder
-        ) {
-            $this->applyServiceAutoconfigurations($applicationContainerBuilder);
-        }
-
-        /**
          * Initialize the container services by the Components
          */
         foreach ($this->orderedModuleClasses as $moduleClass) {
@@ -559,40 +532,6 @@ class AppLoader implements AppLoaderInterface
 
         // Initialize the modules
         App::getModuleManager()->moduleLoaded();
-    }
-
-    /**
-     * Collect every enabled module's interface→tag autoconfiguration
-     * declarations and apply them to the given (uncompiled) ContainerBuilder.
-     *
-     * Each declared interface becomes a tag rule: any service whose class
-     * implements that interface is auto-tagged with the deterministic name
-     * produced by `AbstractInjectServiceIntoRegistryCompilerPass::tagForInterface()`.
-     *
-     * Must run AFTER the ContainerBuilder has been created and BEFORE any
-     * module loads its YAML — Symfony only applies an autoconfiguration to
-     * definitions registered after the rule is added.
-     */
-    private function applyServiceAutoconfigurations(ContainerBuilder $containerBuilder): void
-    {
-        /** @var array<class-string,bool> */
-        $registered = [];
-        foreach ($this->orderedModuleClasses as $moduleClass) {
-            $module = App::getModule($moduleClass);
-            if (!$module->isEnabled()) {
-                continue;
-            }
-            foreach ($module->getServiceAutoconfigurations() as $interfaceClass) {
-                if (isset($registered[$interfaceClass])) {
-                    continue;
-                }
-                $registered[$interfaceClass] = true;
-                $tag = AbstractInjectServiceIntoRegistryCompilerPass::tagForInterface($interfaceClass);
-                $containerBuilder
-                    ->registerForAutoconfiguration($interfaceClass)
-                    ->addTag($tag);
-            }
-        }
     }
 
     public function skipSchemaForModule(ModuleInterface $module): bool

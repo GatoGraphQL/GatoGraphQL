@@ -8,29 +8,40 @@ use PoP\Root\Container\ContainerBuilderWrapperInterface;
 
 abstract class AbstractInjectServiceIntoRegistryCompilerPass extends AbstractCompilerPass
 {
-    /**
-     * Build the deterministic tag name for a service interface.
-     * Modules registering autoconfigurations and compiler passes looking
-     * services up MUST agree on this derivation.
-     */
-    final public static function tagForInterface(string $interfaceClass): string
-    {
-        return 'pop.auto.' . strtr($interfaceClass, ['\\' => '.']);
-    }
+    use AutoconfigurableServicesCompilerPassTrait;
 
     protected function doProcess(ContainerBuilderWrapperInterface $containerBuilderWrapper): void
     {
         $registryDefinition = $containerBuilderWrapper->getDefinition($this->getRegistryServiceDefinition());
-        $methodName = $this->getRegistryMethodCallName();
-        $tag = self::tagForInterface($this->getServiceClass());
-        foreach ($containerBuilderWrapper->findTaggedServiceIds($tag) as $definitionID => $_attributes) {
-            $registryDefinition->addMethodCall(
-                $methodName,
-                [
-                    $this->createReference($definitionID),
-                    $definitionID,
-                ]
-            );
+        $definitions = $containerBuilderWrapper->getDefinitions();
+        $serviceClass = $this->getServiceClass();
+        foreach ($definitions as $definitionID => $definition) {
+            $definitionClass = $definition->getClass();
+            if (
+                $definitionClass === null
+                || !is_a(
+                    $definitionClass,
+                    $serviceClass,
+                    true
+                )
+            ) {
+                continue;
+            }
+
+            $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
+            if (
+                !$onlyProcessAutoconfiguredServices
+                || $definition->isAutoconfigured()
+            ) {
+                // Register the service in the corresponding registry
+                $registryDefinition->addMethodCall(
+                    $this->getRegistryMethodCallName(),
+                    [
+                        $this->createReference($definitionID),
+                        $definitionID
+                    ]
+                );
+            }
         }
     }
 

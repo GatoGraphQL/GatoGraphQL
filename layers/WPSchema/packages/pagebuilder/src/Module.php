@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPWPSchema\PageBuilder;
 
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
-use PoPWPSchema\PageBuilder\PageBuilderProviders\PageBuilderProviderInterface;
 use PoP\ComponentModel\App;
 use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
@@ -20,16 +19,6 @@ class Module extends AbstractModule
     {
         return [
             \PoPWPSchema\CustomPosts\Module::class,
-        ];
-    }
-
-    /**
-     * @return array<class-string>
-     */
-    public function getServiceAutoconfigurations(): array
-    {
-        return [
-            PageBuilderProviderInterface::class,
         ];
     }
 
