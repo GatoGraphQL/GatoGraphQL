@@ -8,11 +8,9 @@ use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceComp
 use PoP\Root\Container\HybridCompilerPasses\SetInstanceManagerOnBasicServiceCompilerPass;
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
-use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ApplicationEvents;
 use PoP\Root\Module\ModuleInterface;
-use PoP\Root\State\AppStateProviderInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class Module extends AbstractModule
@@ -37,20 +35,6 @@ class Module extends AbstractModule
             SetInstanceManagerOnBasicServiceCompilerPass::class,
             // Needed to initialize ModuleListTableAction
             AutomaticallyInstantiatedServiceCompilerPass::class,
-        ];
-    }
-
-    /**
-     * @return array<class-string>
-     */
-    public function getServiceAutoconfigurations(): array
-    {
-        return [
-            AppStateProviderInterface::class,
-            // Symfony's `CompilerPassInterface` — used by the system
-            // container's `RegisterSystemCompilerPassServiceCompilerPass`.
-            CompilerPassInterface::class,
-            FeedbackItemProviderInterface::class,
         ];
     }
 

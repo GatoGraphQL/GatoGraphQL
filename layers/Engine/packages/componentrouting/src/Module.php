@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
-use PoP\ComponentRouting\ComponentRoutingProcessorInterface;
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
 
@@ -17,16 +16,6 @@ class Module extends AbstractModule
     {
         return [
             \PoP\Root\Module::class,
-        ];
-    }
-
-    /**
-     * @return array<class-string>
-     */
-    public function getServiceAutoconfigurations(): array
-    {
-        return [
-            ComponentRoutingProcessorInterface::class,
         ];
     }
 

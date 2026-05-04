@@ -15,8 +15,4 @@ interface ContainerBuilderWrapperInterface
      * @return array<string,Definition> An array of Definition instances
      */
     public function getDefinitions(): array;
-    /**
-     * @return array<string,array<array<string,mixed>>> Map of service id => list of tag attributes
-     */
-    public function findTaggedServiceIds(string $tag): array;
 }

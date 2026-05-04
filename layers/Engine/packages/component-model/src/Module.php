@@ -4,19 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\ComponentModel\ComponentFilters\ComponentFilterInterface;
-use PoP\ComponentModel\Container\ServiceTags\MandatoryFieldDirectiveServiceTagInterface;
-use PoP\ComponentModel\DataStructureFormatters\DataStructureFormatterInterface;
-use PoP\ComponentModel\DirectiveResolvers\DynamicVariableDefinerFieldDirectiveResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\MetaFieldDirectiveResolverInterface;
-use PoP\ComponentModel\DirectiveResolvers\OperationDependencyDefinerFieldDirectiveResolverInterface;
+use PoP\Root\Module\ModuleInterface;
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
-use PoP\ComponentModel\ObjectSerialization\ObjectSerializerInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ApplicationEvents;
-use PoP\Root\Module\ModuleInterface;
 
 class Module extends AbstractModule
 {
@@ -30,24 +21,6 @@ class Module extends AbstractModule
             \PoP\GraphQLParser\Module::class,
             \PoP\LooseContracts\Module::class,
             \PoP\ComponentRouting\Module::class,
-        ];
-    }
-
-    /**
-     * @return array<class-string>
-     */
-    public function getServiceAutoconfigurations(): array
-    {
-        return [
-            ComponentFilterInterface::class,
-            DataStructureFormatterInterface::class,
-            DynamicVariableDefinerFieldDirectiveResolverInterface::class,
-            FieldDirectiveResolverInterface::class,
-            MandatoryFieldDirectiveServiceTagInterface::class,
-            MetaFieldDirectiveResolverInterface::class,
-            ObjectSerializerInterface::class,
-            OperationDependencyDefinerFieldDirectiveResolverInterface::class,
-            TypeResolverInterface::class,
         ];
     }
 
