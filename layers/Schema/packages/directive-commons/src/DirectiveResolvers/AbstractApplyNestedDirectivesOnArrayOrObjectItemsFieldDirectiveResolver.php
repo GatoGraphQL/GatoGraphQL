@@ -188,9 +188,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         $execute = false;
 
         /**
-         * Append fieldArgs for the array item fields
+         * Append fieldArgs for the array item fields.
+         *
+         * Lazy: only clone on the first ID with non-empty array items.
+         * If validation drops every ID before then, the clone is skipped.
          */
-        $nestedFieldDataAccessProvider = clone $fieldDataAccessProvider;
+        $nestedFieldDataAccessProvider = null;
 
         /**
          * Argument "if" can receive a Promise
@@ -336,6 +339,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                 );
                 if ($arrayItems !== []) {
                     $execute = true;
+                    $nestedFieldDataAccessProvider ??= clone $fieldDataAccessProvider;
 
                     if (
                         $decreaseFieldTypeModifiersCardinalityForSerialization
@@ -385,6 +389,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                      * @var list<array{0:FieldInterface,1:int|string}>
                      */
                     $arrayItemEntriesForField = [];
+                    /**
+                     * `getOutputKey()` is constant for the duration of
+                     * this loop — read once.
+                     */
+                    $fieldOutputKey = $field->getOutputKey();
                     foreach ($arrayItems as $key => &$value) {
                         /**
                          * Add into the $idFieldSet object for the array items.
@@ -394,7 +403,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          * so then re-create the "field" assigning a new alias.
                          * If it has an alias, use it. If not, use the fieldName
                          */
-                        $arrayItemAlias = $this->createPropertyForArrayItem($field->getOutputKey(), (string) $key);
+                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldOutputKey, (string) $key);
                         $arrayItemField = $this->getArrayItemField($field, $arrayItemAlias);
                         $nestedFieldDataAccessProvider->duplicateFieldData($field, $arrayItemField);
                         // Place into the current object
@@ -490,6 +499,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
          */
 
         if ($execute) {
+            /**
+             * `$execute = true` implies the inner loop above ran for
+             * at least one (id, field) with non-empty arrayItems, which
+             * triggered the lazy clone of $nestedFieldDataAccessProvider.
+             */
+            assert($nestedFieldDataAccessProvider !== null);
             // Build the directive pipeline
             /** @var FieldDirectiveResolverInterface[] */
             $nestedDirectiveResolvers = $this->getCachedNestedDirectiveResolvers();
