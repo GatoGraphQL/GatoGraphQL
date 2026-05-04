@@ -217,6 +217,16 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         // `$this` from the prior call, so consumers reading it via
         // `hasValidationErrors()` see the right value without re-running
         // the schema-arg validation and casting.
+        //
+        // Hit rate on the polylang fixture is modest (~10%) because the
+        // `$fields` array tends to differ across calls — fields accumulate
+        // per directive across the BFS, and a single-slot cache can't
+        // catch the alternating patterns. A multi-slot cache keyed by
+        // `(typeResolver, fields-fingerprint)` was considered but the
+        // fingerprint cost would offset most of the gain. The simple
+        // single-slot cache pays for itself on the calls that DO repeat
+        // (eg: validation directives revisited multiple times within an
+        // iteration with stable args).
         if (
             $this->prepareDirectiveCacheTypeResolver === $relationalTypeResolver
             && $this->prepareDirectiveCacheFields === $fields
