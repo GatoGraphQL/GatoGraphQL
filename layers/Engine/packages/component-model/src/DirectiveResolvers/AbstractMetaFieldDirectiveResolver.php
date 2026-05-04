@@ -25,23 +25,6 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
 {
     /** @var SplObjectStorage<FieldDirectiveResolverInterface,FieldInterface[]> */
     protected SplObjectStorage $nestedDirectivePipelineData;
-    /**
-     * Memoization key for Meta `prepareDirective()`. The Meta wrapper
-     * adds a heavy `getNestedDirectivePipelineData()` step on top of
-     * what the parent does — building a directive pipeline for the
-     * nested directives. That work is pure-functional in
-     * `(typeResolver, fields)` for a clone bound to one directive AST
-     * node, and the same clone is hit repeatedly across per-op MQE
-     * iterations (435 calls / ~50 unique clones in the polylang
-     * profile). On a hit we return early, leaving
-     * `$this->nestedDirectivePipelineData` (set by the previous call)
-     * intact for downstream consumers.
-     */
-    private ?RelationalTypeResolverInterface $metaPrepareDirectiveCacheTypeResolver = null;
-    /**
-     * @var FieldInterface[]|null
-     */
-    private ?array $metaPrepareDirectiveCacheFields = null;
 
     public function isDirectiveEnabled(): bool
     {
@@ -64,26 +47,19 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        // Memoize the whole prepare sequence (parent's arg validation +
-        // Meta's nested-pipeline build). See the field doccomment for
-        // the rationale.
-        if (
-            $this->metaPrepareDirectiveCacheTypeResolver === $relationalTypeResolver
-            && $this->metaPrepareDirectiveCacheFields === $fields
-        ) {
-            return;
-        }
-
+        // Note: an outer Meta-level memoization was attempted, but profiling
+        // showed every Meta clone in the polylang fixture is invoked exactly
+        // once (50 calls / 50 unique clones, 1 call per clone) — each
+        // `@underArrayItem` / `@underJSONObjectProperty` AST node in the
+        // query is unique, so the Meta-level cache could never hit.
+        // Parent::prepareDirective() does have its own memoization that
+        // *does* land hits (most of the savings come from there).
         parent::prepareDirective(
             $relationalTypeResolver,
             $fields,
             $engineIterationFeedbackStore,
         );
         if ($this->hasValidationErrors) {
-            // Cache the failed state too — same args produce the same
-            // failure, so future calls short-circuit immediately.
-            $this->metaPrepareDirectiveCacheTypeResolver = $relationalTypeResolver;
-            $this->metaPrepareDirectiveCacheFields = $fields;
             return;
         }
 
@@ -94,13 +70,9 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
         );
         if ($nestedDirectivePipelineData === null) {
             $this->setHasValidationErrors(true);
-            $this->metaPrepareDirectiveCacheTypeResolver = $relationalTypeResolver;
-            $this->metaPrepareDirectiveCacheFields = $fields;
             return;
         }
         $this->nestedDirectivePipelineData = $nestedDirectivePipelineData;
-        $this->metaPrepareDirectiveCacheTypeResolver = $relationalTypeResolver;
-        $this->metaPrepareDirectiveCacheFields = $fields;
     }
 
     /**
