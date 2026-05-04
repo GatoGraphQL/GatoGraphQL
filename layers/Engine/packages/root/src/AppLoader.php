@@ -569,10 +569,9 @@ class AppLoader implements AppLoaderInterface
      * implements that interface is auto-tagged with the deterministic name
      * produced by `AbstractInjectServiceIntoRegistryCompilerPass::tagForInterface()`.
      *
-     * The resulting set is also stored as a container parameter so that
-     * `AbstractInjectServiceIntoRegistryCompilerPass` can detect, at compile
-     * time, whether to use the fast `findTaggedServiceIds` path or fall back
-     * to the legacy class scan for un-migrated subclasses.
+     * Must run AFTER the ContainerBuilder has been created and BEFORE any
+     * module loads its YAML — Symfony only applies an autoconfiguration to
+     * definitions registered after the rule is added.
      */
     private function applyServiceAutoconfigurations(ContainerBuilder $containerBuilder): void
     {
@@ -594,10 +593,6 @@ class AppLoader implements AppLoaderInterface
                     ->addTag($tag);
             }
         }
-        $containerBuilder->setParameter(
-            AbstractInjectServiceIntoRegistryCompilerPass::PARAM_REGISTERED_AUTOCONFIGURATIONS,
-            $registered
-        );
     }
 
     public function skipSchemaForModule(ModuleInterface $module): bool
