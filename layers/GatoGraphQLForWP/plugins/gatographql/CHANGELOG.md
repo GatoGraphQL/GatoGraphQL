@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Field `Root.blockTypes` to query data from the Block Type Registry (#3291)
+- Cache compiled queries to disk (#3303)
 
 ### Improvements
 

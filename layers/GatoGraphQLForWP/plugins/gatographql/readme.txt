@@ -226,6 +226,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 17.2.0 =
 * Added - Field `Root.blockTypes` to query data from the Block Type Registry (#3291)
+* Added - Cache compiled queries to disk (#3303)
 * Improved - Tested up to WordPress 7.0 (#3289)
 * Improved - Support AI Connectors from WordPress 7.0 (#3290)
 * Improved - Updated documentation for Translation extension, now supporting Gemini as a translation service provider (#3292)
