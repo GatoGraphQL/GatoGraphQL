@@ -19,6 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Allow the custom post `author` to be null (e.g. when the post has no assigned user / author ID 0) (#3293)
 - Execute GraphQL queries much faster (#3294, #3295, #3298)
 - Consume less memory (#3296, #3297)
+- Faster generation of service container (#3304)
 
 ### Fixed
 
