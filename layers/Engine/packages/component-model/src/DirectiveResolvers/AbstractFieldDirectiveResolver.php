@@ -96,6 +96,33 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
      * validated. Cache the validation result.
      */
     protected ?bool $validatedDirectiveArgsHaveErrors = null;
+    /**
+     * Memoization for `prepareDirective()`. Each (FieldDirectiveResolver
+     * clone) is bound to a single directive AST node and is reused
+     * across the per-operation Multiple Query Execution drains and the
+     * drain's BFS iterations — calling `prepareDirective()` over and
+     * over with the same `$relationalTypeResolver` and `$fields`. The
+     * actual work (`getDirectiveArgs`, schema casting, validation, and
+     * for Meta directives building the nested pipeline) is pure-
+     * functional in those inputs, so we memoize: skip the body when
+     * the previous call's args match the current call.
+     *
+     * Side-effects on cache hit:
+     *  - The accumulated `$engineIterationFeedbackStore` is NOT
+     *    re-populated. That's a positive: prior to caching, identical
+     *    validation errors were appended N times (once per iteration)
+     *    and would have appeared as duplicates if each call produced
+     *    distinct entries — caching de-duplicates correctly.
+     *  - The instance state set by the body (`$this->hasValidationErrors`
+     *    `$this->directiveDataAccessor`, plus subclass state) is left
+     *    intact from the prior call, which is exactly what consumers
+     *    read via `hasValidationErrors()` etc.
+     */
+    private ?RelationalTypeResolverInterface $prepareDirectiveCacheTypeResolver = null;
+    /**
+     * @var FieldInterface[]|null
+     */
+    private ?array $prepareDirectiveCacheFields = null;
 
     /**
      * @var array<string,array<string,mixed>>
@@ -184,6 +211,28 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        // Memoize: if (typeResolver, fields) match the last call, the
+        // result is identical. The state set by the body
+        // (`hasValidationErrors`, `directiveDataAccessor`) is still on
+        // `$this` from the prior call, so consumers reading it via
+        // `hasValidationErrors()` see the right value without re-running
+        // the schema-arg validation and casting.
+        //
+        // Hit rate on the polylang fixture is modest (~10%) because the
+        // `$fields` array tends to differ across calls — fields accumulate
+        // per directive across the BFS, and a single-slot cache can't
+        // catch the alternating patterns. A multi-slot cache keyed by
+        // `(typeResolver, fields-fingerprint)` was considered but the
+        // fingerprint cost would offset most of the gain. The simple
+        // single-slot cache pays for itself on the calls that DO repeat
+        // (eg: validation directives revisited multiple times within an
+        // iteration with stable args).
+        if (
+            $this->prepareDirectiveCacheTypeResolver === $relationalTypeResolver
+            && $this->prepareDirectiveCacheFields === $fields
+        ) {
+            return;
+        }
         $directiveArgs = $this->getDirectiveArgs(
             $relationalTypeResolver,
             $fields,
@@ -191,9 +240,15 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         );
         $this->setHasValidationErrors($directiveArgs === null);
         if ($directiveArgs === null) {
+            // Cache the failed-state too: same inputs → same failure,
+            // no need to re-append the same feedback on every iteration.
+            $this->prepareDirectiveCacheTypeResolver = $relationalTypeResolver;
+            $this->prepareDirectiveCacheFields = $fields;
             return;
         }
         $this->directiveDataAccessor = $this->createDirectiveDataAccessor($directiveArgs);
+        $this->prepareDirectiveCacheTypeResolver = $relationalTypeResolver;
+        $this->prepareDirectiveCacheFields = $fields;
     }
 
     /**
