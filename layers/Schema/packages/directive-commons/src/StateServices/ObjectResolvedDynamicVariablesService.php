@@ -178,6 +178,23 @@ class ObjectResolvedDynamicVariablesService extends AbstractBasicService impleme
         FieldInterface $fromField,
         FieldInterface $toField,
     ): void {
+        $this->copyObjectResolvedDynamicVariablesFromFieldToFieldsInAppState(
+            $fromField,
+            [$toField],
+        );
+    }
+
+    /**
+     * @param FieldInterface[] $toFields
+     */
+    public function copyObjectResolvedDynamicVariablesFromFieldToFieldsInAppState(
+        FieldInterface $fromField,
+        array $toFields,
+    ): void {
+        if ($toFields === []) {
+            return;
+        }
+
         /** @var SplObjectStorage<FieldInterface,array<string|int,array<string,mixed>>> SplObjectStorage<Field, [objectID => [dynamicVariableName => value]]> */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
 
@@ -188,10 +205,14 @@ class ObjectResolvedDynamicVariablesService extends AbstractBasicService impleme
         /** @var array<string|int,array<string,mixed>> */
         $fromObjectDynamicVariableNameValues = $objectResolvedDynamicVariables[$fromField];
 
-        /**
-         * Watch out! Do not override any state set in the toField!
-         */
-        if ($objectResolvedDynamicVariables->contains($toField)) {
+        foreach ($toFields as $toField) {
+            /**
+             * Watch out! Do not override any state set in the toField!
+             */
+            if (!$objectResolvedDynamicVariables->contains($toField)) {
+                $objectResolvedDynamicVariables[$toField] = $fromObjectDynamicVariableNameValues;
+                continue;
+            }
             /** @var array<string|int,array<string,mixed>> */
             $toObjectDynamicVariableNameValues = $objectResolvedDynamicVariables[$toField];
             /** @var string|int $objectID */
@@ -209,8 +230,6 @@ class ObjectResolvedDynamicVariablesService extends AbstractBasicService impleme
                 }
             }
             $objectResolvedDynamicVariables[$toField] = $toObjectDynamicVariableNameValues;
-        } else {
-            $objectResolvedDynamicVariables[$toField] = $objectResolvedDynamicVariables[$fromField];
         }
 
         /**

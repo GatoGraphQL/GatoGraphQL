@@ -158,11 +158,28 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         $setFieldAsNullIfDirectiveFailed = $moduleConfiguration->setFieldAsNullIfDirectiveFailed();
 
         /**
+         * Reset the arrayItemField instance cache per resolveDirective
+         * call, so it doesn't accumulate entries across requests when
+         * the resolver is held as a singleton (e.g. in long-running PHP
+         * workers like Swoole/RoadRunner). The cache only needs to span
+         * step 1 below — step 3 reads the captured map instead.
+         */
+        $this->arrayItemFieldInstanceContainer = new SplObjectStorage();
+
+        /**
          * Collect all ID => dataFields for the arrayItems
          *
          * @var array<string|int,EngineIterationFieldSet>
          */
         $arrayItemIDsProperties = [];
+        /**
+         * Capture the (arrayItemField, key) pairs produced in step 1,
+         * grouped by (id, parent field), so step 3 can iterate them
+         * directly instead of re-validating and re-running getArrayItems.
+         *
+         * @var array<string|int,SplObjectStorage<FieldInterface,list<array{0:FieldInterface,1:int|string}>>>
+         */
+        $arrayItemEntriesByIDField = [];
         $typeOutputKey = $relationalTypeResolver->getTypeOutputKey();
 
         /**
@@ -357,6 +374,17 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                     $parentFieldTypeModifiers = $hasParentFieldTypeModifiers
                         ? $fieldTypeModifiersByField[$field]
                         : null;
+                    $passKeyOnwardsAsVariable = $this->passKeyOnwardsAsVariable();
+                    /**
+                     * Collected per parent (id, $field): list of
+                     * [arrayItemField, key] pairs. Reused below to:
+                     *  - batch the parent-to-arrayItem dynamic-variable copy.
+                     *  - drive step 3 directly, without redoing
+                     *    validateInputValueType / getArrayItems / getArrayItemField.
+                     *
+                     * @var list<array{0:FieldInterface,1:int|string}>
+                     */
+                    $arrayItemEntriesForField = [];
                     foreach ($arrayItems as $key => &$value) {
                         /**
                          * Add into the $idFieldSet object for the array items.
@@ -373,6 +401,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                         $resolvedIDFieldValues[$id][$arrayItemField] = $value;
                         // Place it into list of fields to process
                         $arrayItemIDsProperties[$id]->fields[] = $arrayItemField;
+                        $arrayItemEntriesForField[] = [$arrayItemField, $key];
 
                         /**
                          * Indicate the cardinality for the array item.
@@ -417,7 +446,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 $engineIterationFeedbackStore,
                             );
                         }
-                        if ($this->passKeyOnwardsAsVariable() && !empty($passKeyOnwardsAs)) {
+                        if ($passKeyOnwardsAsVariable && !empty($passKeyOnwardsAs)) {
                             /** @var Argument $keyArgument */
                             $objectResolvedDynamicVariablesService->setObjectResolvedDynamicVariableInAppState(
                                 $relationalTypeResolver,
@@ -433,15 +462,22 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 $engineIterationFeedbackStore,
                             );
                         }
-                        /**
-                         * Allow the Field created by @underJSONObjectProperty
-                         * to read the state defined at that previous level
-                         */
-                        $objectResolvedDynamicVariablesService->copyObjectResolvedDynamicVariablesFromFieldToFieldInAppState(
-                            $field,
-                            $arrayItemField,
-                        );
                     }
+                    unset($value);
+                    /**
+                     * Allow the Field created by @underJSONObjectProperty
+                     * to read the state defined at that previous level.
+                     *
+                     * Batched: $field's state is constant across the loop
+                     * above, so do the AppState lookup + source `contains`
+                     * check once, then assign to all arrayItemFields.
+                     */
+                    $objectResolvedDynamicVariablesService->copyObjectResolvedDynamicVariablesFromFieldToFieldsInAppState(
+                        $field,
+                        array_column($arrayItemEntriesForField, 0),
+                    );
+                    $arrayItemEntriesByIDField[$id] ??= new SplObjectStorage();
+                    $arrayItemEntriesByIDField[$id][$field] = $arrayItemEntriesForField;
                 }
             }
         }
@@ -564,47 +600,22 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                 return;
             }
 
-            // 3. Compose the array from the results for each array item
-            foreach ($idFieldSet as $id => $fieldSet) {
-                $object = $idObjects[$id];
-                foreach ($fieldSet->fields as $field) {
-                    $hasIDFieldBeenResolved = isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->contains($field);
-                    $value = $hasIDFieldBeenResolved ?
-                        $resolvedIDFieldValues[$id][$field] :
-                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field];
-
-                    // If the array is null or empty, nothing to do
-                    if (!$value) {
-                        continue;
-                    }
-                    if (!$this->validateInputValueType($value)) {
-                        continue;
-                    }
-
+            /**
+             * 3. Compose the array from the results for each array item.
+             *
+             * Drive this from the (id, field) → [arrayItemField, key]
+             * map captured during step 1, so we don't redo
+             * validateInputValueType / getArrayItems / getArrayItemField.
+             */
+            foreach ($arrayItemEntriesByIDField as $id => $fieldEntries) {
+                /** @var FieldInterface $field */
+                foreach ($fieldEntries as $field) {
                     if ($resolveDirectiveArgsOnObject) {
                         $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
                         $this->directiveDataAccessor->resetDirectiveArgs();
                     }
-
-                    // If there are errors, it will return null. Don't add the errors again
-                    $arrayOrObject = $value;
-                    $arrayItems = $this->getArrayItems(
-                        $arrayOrObject,
-                        $object,
-                        $id,
-                        $field,
-                        $relationalTypeResolver,
-                        $idObjects,
-                        $previouslyResolvedIDFieldValues,
-                        $succeedingPipelineIDFieldSet,
-                        $resolvedIDFieldValues,
-                        $messages,
-                        $engineIterationFeedbackStore,
-                    );
-                    // The value is an array. Unpack all the elements into their own property
-                    foreach (array_keys($arrayItems) as $key) {
-                        $arrayItemAlias = $this->createPropertyForArrayItem($field->getOutputKey(), (string) $key);
-                        $arrayItemField = $this->getArrayItemField($field, $arrayItemAlias);
+                    $entries = $fieldEntries[$field];
+                    foreach ($entries as [$arrayItemField, $key]) {
                         // Place the result of executing the function on the array item
                         $arrayItemValue = $resolvedIDFieldValues[$id][$arrayItemField];
                         // Remove this temporary property from $resolvedIDFieldValues
