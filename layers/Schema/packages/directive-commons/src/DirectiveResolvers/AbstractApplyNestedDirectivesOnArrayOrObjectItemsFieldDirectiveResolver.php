@@ -644,7 +644,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                         // Place the result of executing the function on the array item
                         $arrayItemKeyValues[] = [$key, $resolvedIDFieldValues[$id][$arrayItemField]];
                         // Remove this temporary property from $resolvedIDFieldValues
-                        $resolvedIDFieldValues[$id]->detach($arrayItemField);
+                        $resolvedIDFieldValues[$id]->offsetUnset($arrayItemField);
                     }
                     // Place the results for the array in the original property
                     $this->addProcessedItemsBackToResolvedIDFieldValues(
