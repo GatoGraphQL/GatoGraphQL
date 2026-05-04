@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags;
 
+use PoPCMSSchema\Tags\ObjectTypeResolverPickers\TagObjectTypeResolverPickerInterface;
 use PoPCMSSchema\Users\Module as UsersModule;
 use PoP\Root\App;
 use PoP\Root\Exception\ComponentNotExistsException;
@@ -34,6 +35,16 @@ class Module extends AbstractModule
     {
         return [
             \PoPAPI\API\Module::class,
+        ];
+    }
+
+    /**
+     * @return array<class-string>
+     */
+    public function getServiceAutoconfigurations(): array
+    {
+        return [
+            TagObjectTypeResolverPickerInterface::class,
         ];
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl;
 
+use PoP\AccessControl\Container\ServiceTags\AccessControlValidationDirectiveResolverInterface;
 use PoP\CacheControl\Module as CacheControlModule;
 use PoP\Root\App;
 use PoP\Root\Exception\ComponentNotExistsException;
@@ -29,6 +30,16 @@ class Module extends AbstractModule
     {
         return [
             CacheControlModule::class,
+        ];
+    }
+
+    /**
+     * @return array<class-string>
+     */
+    public function getServiceAutoconfigurations(): array
+    {
+        return [
+            AccessControlValidationDirectiveResolverInterface::class,
         ];
     }
 

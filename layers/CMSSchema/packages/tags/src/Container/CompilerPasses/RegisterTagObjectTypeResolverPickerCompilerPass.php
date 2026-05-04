@@ -22,8 +22,4 @@ class RegisterTagObjectTypeResolverPickerCompilerPass extends AbstractInjectServ
     {
         return 'addTagObjectTypeResolverPicker';
     }
-    protected function onlyProcessAutoconfiguredServices(): bool
-    {
-        return true;
-    }
 }

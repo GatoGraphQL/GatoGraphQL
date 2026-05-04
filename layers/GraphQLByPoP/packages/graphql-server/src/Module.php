@@ -6,6 +6,7 @@ namespace GraphQLByPoP\GraphQLServer;
 
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
+use GraphQLByPoP\GraphQLServer\Container\ServiceTags\MandatoryOperationDirectiveServiceTagInterface;
 use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\ModuleConfiguration as AccessControlModuleConfiguration;
 use PoP\CacheControl\Module as CacheControlModule;
@@ -36,6 +37,16 @@ class Module extends AbstractModule
         return [
             AccessControlModule::class,
             CacheControlModule::class,
+        ];
+    }
+
+    /**
+     * @return array<class-string>
+     */
+    public function getServiceAutoconfigurations(): array
+    {
+        return [
+            MandatoryOperationDirectiveServiceTagInterface::class,
         ];
     }
 

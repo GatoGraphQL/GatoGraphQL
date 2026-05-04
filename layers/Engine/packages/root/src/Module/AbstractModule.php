@@ -158,6 +158,22 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
+     * Service interfaces that should be auto-tagged on every service
+     * implementing them, used by registry-style compiler passes to
+     * find their targets without scanning all definitions.
+     *
+     * Pairs with `AbstractInjectServiceIntoRegistryCompilerPass`:
+     * declaring an interface here lets that pass switch from O(N×P)
+     * class-scanning to an O(1) `findTaggedServiceIds` lookup.
+     *
+     * @return array<class-string>
+     */
+    public function getServiceAutoconfigurations(): array
+    {
+        return [];
+    }
+
+    /**
      * Initialize services
      *
      * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
