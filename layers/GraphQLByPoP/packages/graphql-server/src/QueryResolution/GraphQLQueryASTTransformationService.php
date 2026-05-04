@@ -32,8 +32,6 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
 
     public function __construct()
     {
-        parent::__construct();
-
         /**
          * @var SplObjectStorage<Document,array<string,RelationalField>>
          */
@@ -148,15 +146,5 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
         $this->fieldInstanceContainer[$document] = $documentFieldInstanceContainer;
         /** @var FieldInterface */
         return $documentFieldInstanceContainer[$alias];
-    }
-
-    /**
-     * Added 2 extra fields, these must be taken into account
-     * when generating the "self" fields for Multiple Query
-     * Execution.
-     */
-    protected function getOperationInitialDepth(): int
-    {
-        return 2;
     }
 }

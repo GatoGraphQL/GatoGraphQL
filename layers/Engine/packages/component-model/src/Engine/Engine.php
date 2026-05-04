@@ -486,8 +486,63 @@ class Engine extends AbstractBasicService implements EngineInterface
     {
         App::doAction(EngineHookNames::GENERATE_DATA_BEGINNING);
 
-        // Process the request and obtain the results
-        $this->processAndGenerateData();
+        // Reset the drain accumulators once per generateData() invocation.
+        // They persist across the (one or many) processAndGenerateData()
+        // calls in this loop so:
+        //   - "Sequential Pass" MQE per-operation drains feed into the
+        //     same accumulators (each op contributes new fields under
+        //     existing object IDs without overwriting previous ops).
+        //   - The cross-iteration `already_loaded_id_fields` cache spans
+        //     all per-op drains so subsequent ops skip re-fetching IDs
+        //     that an earlier op already loaded.
+        //   - Schema/object feedback accumulates across ops so per-op
+        //     errors don't get clobbered by `array_replace_recursive`'s
+        //     leaf-replace semantics on `SplObjectStorage` values.
+        $engineState = App::getEngineState();
+        $engineState->already_loaded_id_fields = [];
+        $engineState->databases = [];
+        $engineState->unionTypeOutputKeyIDs = [];
+        $engineState->combinedUnionTypeOutputKeyIDs = [];
+        $engineState->previouslyResolvedIDFieldValues = [];
+        $engineState->messages = [];
+        $engineState->schemaFeedbackEntries = $engineState->objectFeedbackEntries = [
+            FeedbackCategories::ERROR => [],
+            FeedbackCategories::WARNING => [],
+            FeedbackCategories::DEPRECATION => [],
+            FeedbackCategories::NOTICE => [],
+            FeedbackCategories::SUGGESTION => [],
+            FeedbackCategories::LOG => [],
+        ];
+
+        // Process the request and obtain the results.
+        //
+        // When the "Sequential Pass" Multiple Query Execution strategy is
+        // active, the API/GraphQL layer hooks the
+        // MULTIPLE_QUERY_EXECUTION_SEQUENTIAL_OPERATIONS filter to provide
+        // a list of operations to drain one-by-one, in topological order
+        // — instead of wrapping subsequent operations in nested `self`
+        // fields. Each iteration overrides the
+        // `multiple-query-execution-current-operation` app-state key with
+        // the operation to process, and the API processor reads it to
+        // scope field collection to that operation only. The shared
+        // engine state (`$engineState->data`, etc.) accumulates across
+        // calls via the existing `array_replace_recursive` merge in
+        // `processAndGenerateData()`.
+        /** @var mixed[]|null */
+        $sequentialMQEOperations = App::applyFilters(
+            EngineHookNames::MULTIPLE_QUERY_EXECUTION_SEQUENTIAL_OPERATIONS,
+            null
+        );
+        if ($sequentialMQEOperations !== null && $sequentialMQEOperations !== []) {
+            $appStateManager = App::getAppStateManager();
+            foreach ($sequentialMQEOperations as $sequentialMQEOperation) {
+                $appStateManager->override('multiple-query-execution-current-operation', $sequentialMQEOperation);
+                $this->processAndGenerateData();
+            }
+            $appStateManager->override('multiple-query-execution-current-operation', null);
+        } else {
+            $this->processAndGenerateData();
+        }
 
         /**
          * See if there are extra URIs to be processed in this same request.
@@ -644,14 +699,18 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
         }
 
-        $schemaFeedbackEntries = $objectFeedbackEntries = [
-            FeedbackCategories::ERROR => [],
-            FeedbackCategories::WARNING => [],
-            FeedbackCategories::DEPRECATION => [],
-            FeedbackCategories::NOTICE => [],
-            FeedbackCategories::SUGGESTION => [],
-            FeedbackCategories::LOG => [],
-        ];
+        // Use the EngineState-resident feedback accumulators (initialized
+        // by-reference here so the rest of this method can use the same
+        // local-variable names as before). They live on EngineState rather
+        // than as locals because they are shared across the (one or many)
+        // processAndGenerateData() calls within a single generateData() —
+        // notably under "Sequential Pass" MQE, where each op's feedback
+        // contributes to the same response. The leaves are SplObjectStorage,
+        // which `array_replace_recursive` would otherwise clobber instead
+        // of merging across calls. (The initial reset happens once per
+        // generateData() — not per call — see generateData().)
+        $schemaFeedbackEntries = &$engineState->schemaFeedbackEntries;
+        $objectFeedbackEntries = &$engineState->objectFeedbackEntries;
 
         // Comment Leo 20/01/2018: we must first initialize all the settings, and only later add the data.
         // That is because calculating the data may need the values from the settings. Eg: for the resourceLoader,
@@ -668,9 +727,43 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
 
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
+                // The drain accumulators live on EngineState so that multiple
+                // `processAndGenerateData()` calls within one `generateData()`
+                // (under the "Sequential Pass" Multiple Query Execution
+                // strategy) accumulate into the SAME store. They are
+                // initialized in `getComponentData()` alongside the other
+                // per-pass state that resets at request start.
+                //
+                // We CANNOT use locals here and merge per-call into
+                // `engineState->data` via `array_replace_recursive`, because
+                // the database structure has SplObjectStorage at its leaves
+                // (one per object id), and `array_replace_recursive` treats
+                // objects as leaves — replacing instead of merging the per-op
+                // contributions.
+
+                // Reset $nocache_fields once per pass; generateDatabases() may
+                // be called multiple times (MQE per-operation drains) and must
+                // not reset between drains.
+                $engineState->nocache_fields = [];
+
+                $this->generateDatabases(
+                    $schemaFeedbackEntries,
+                    $objectFeedbackEntries,
+                    $engineState->databases,
+                    $engineState->unionTypeOutputKeyIDs,
+                    $engineState->combinedUnionTypeOutputKeyIDs,
+                    $engineState->previouslyResolvedIDFieldValues,
+                    $engineState->messages,
+                );
+
+                // Re-format the (cumulative) accumulator on every call. The
+                // formatter is idempotent: each call produces the most-complete
+                // view so far. The subsequent `array_replace_recursive` into
+                // `engineState->data` writes the full snapshot, replacing the
+                // previous (less-complete) snapshot at the `databases` key.
                 $data = array_merge(
                     $data,
-                    $this->generateDatabases($schemaFeedbackEntries, $objectFeedbackEntries)
+                    $this->formatAccumulatedDatabasesForOutput($engineState->databases, $engineState->unionTypeOutputKeyIDs)
                 );
             }
         }
@@ -1276,6 +1369,16 @@ class Engine extends AbstractBasicService implements EngineInterface
         // Load under global key (shared by all pagesections / blocks)
         $engineState->relationalTypeOutputKeyIDFieldSets = [];
 
+        // Note: the drain accumulators (already_loaded_id_fields, databases,
+        // unionTypeOutputKeyIDs, etc.) are NOT reset here — they reset once
+        // per `generateData()` call, so they persist across:
+        //   - the per-operation processAndGenerateData() calls under MQE
+        //     "Sequential Pass" (where accumulation across ops is required
+        //     for correct response merging),
+        //   - the extra-routes processAndGenerateData() calls (where it's
+        //     also harmless because each call's `array_replace_recursive`
+        //     into `engineState->data` writes the complete snapshot).
+
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
             EngineHookNames::ENGINE_ITERATION_START,
@@ -1707,34 +1810,40 @@ class Engine extends AbstractBasicService implements EngineInterface
     }
 
     /**
-     * @return array<string,mixed>
+     * Drain $engineState->relationalTypeOutputKeyIDFieldSets into the supplied
+     * accumulators. The drain runs to completion (i.e. continues until the queue
+     * is empty *at this moment*), but does NOT reset any accumulator. Callers
+     * may invoke this method multiple times within a single request — each call
+     * processes whatever has been queued since the previous call. This is the
+     * primitive that future Multiple Query Execution per-operation drains will
+     * be built on; today there is a single caller in processAndGenerateData()
+     * that drains once and then formats.
+     *
+     * The "already loaded id fields" cache lives on EngineState so that
+     * subsequent drains within the same pass do not re-fetch fields already
+     * loaded by an earlier drain.
+     *
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string,mixed> $messages
      */
     protected function generateDatabases(
         array &$schemaFeedbackEntries,
         array &$objectFeedbackEntries,
-    ): array {
+        array &$databases,
+        array &$unionTypeOutputKeyIDs,
+        array &$combinedUnionTypeOutputKeyIDs,
+        array &$previouslyResolvedIDFieldValues,
+        array &$messages,
+    ): void {
         $engineState = App::getEngineState();
-
-        // Save all database elements here, under typeResolver
-        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
-        $databases = [];
-        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> */
-        $unionTypeOutputKeyIDs = [];
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> */
-        $combinedUnionTypeOutputKeyIDs = [];
-
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
-        $previouslyResolvedIDFieldValues = [];
-        $engineState->nocache_fields = [];
-
-        // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
-        // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
-        $already_loaded_id_fields = [];
-
-        // Initiate a new $messages interchange across directives
-        $messages = [];
+        // Cross-drain cache of already-fetched typeOutputKey/ID/fields,
+        // so subsequent drains do not re-fetch fields already loaded.
+        $already_loaded_id_fields = &$engineState->already_loaded_id_fields;
 
         $databaseEntryManager = $this->getDatabaseEntryManager();
 
@@ -1901,8 +2010,21 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
             // }
         }
+    }
 
-        // Print data into the output
+    /**
+     * Format the accumulated databases (built up across one or more
+     * generateDatabases() drains) into the output-shaped array merged
+     * into the engine response.
+     *
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @return array<string,mixed>
+     */
+    protected function formatAccumulatedDatabasesForOutput(
+        array $databases,
+        array $unionTypeOutputKeyIDs,
+    ): array {
         $ret = [];
         $this->maybeCombineAndAddDatabaseEntries($ret, 'databases', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionTypeOutputKeyIDs', $unionTypeOutputKeyIDs);

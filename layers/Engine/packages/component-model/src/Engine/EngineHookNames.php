@@ -16,6 +16,17 @@ class EngineHookNames
     public final const ADD_ETAG_HEADER = __CLASS__ . ':add-etag-header';
     public final const ETAG_HEADER_COMMON_CODE = __CLASS__ . ':etag-header:common-code';
     public final const EXTRA_ROUTES = __CLASS__ . ':extra-routes';
+    /**
+     * Filter that returns the list of "execution iteration" values to
+     * drive sequentially through `processAndGenerateData()`, or `null`
+     * for the default single pass. The component-model engine treats
+     * each value as opaque — it just overrides the
+     * `multiple-query-execution-current-operation` app-state key with
+     * each value before each call. The API/GraphQL layer hooks this
+     * filter to provide its `OperationInterface` list when sequential
+     * Multiple Query Execution is enabled.
+     */
+    public final const MULTIPLE_QUERY_EXECUTION_SEQUENTIAL_OPERATIONS = __CLASS__ . ':multiple-query-execution:sequential-operations';
     public final const REQUEST_META = __CLASS__ . ':request-meta';
     public final const SESSION_META = __CLASS__ . ':session-meta';
     public final const SITE_META = __CLASS__ . ':site-meta';
