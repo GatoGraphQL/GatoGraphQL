@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPosts;
 
 use PoPAPI\API\Module as APIModule;
+use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
@@ -35,6 +36,16 @@ class Module extends AbstractModule
         return [
             APIModule::class,
             \PoPAPI\RESTAPI\Module::class,
+        ];
+    }
+
+    /**
+     * @return array<class-string>
+     */
+    public function getServiceAutoconfigurations(): array
+    {
+        return [
+            CustomPostObjectTypeResolverPickerInterface::class,
         ];
     }
 
