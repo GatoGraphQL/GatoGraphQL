@@ -40,12 +40,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      */
     public function useParsedASTCache(): bool
     {
-        /** @var ComponentModelModuleConfiguration */
-        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        if (!$moduleConfiguration->enableComponentModelCache()) {
-            return false;
-        }
-
         $envVariable = Environment::USE_PARSED_AST_CACHE;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
