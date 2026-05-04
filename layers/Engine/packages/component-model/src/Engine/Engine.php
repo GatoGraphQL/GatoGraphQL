@@ -573,6 +573,22 @@ class Engine extends AbstractBasicService implements EngineInterface
             $appStateManager->override('route', $currentRoute);
         }
 
+        // Format the accumulated databases/unionTypeOutputKeyIDs ONCE here.
+        // Per-op processAndGenerateData() calls under SEQUENTIAL_PASS MQE
+        // skip this step (otherwise they'd redo it N times, walking
+        // SplObjectStorage entries that grow with each call). The
+        // `array_replace_recursive` into engineState->data merges the
+        // formatted output alongside whatever processAndGenerateData()
+        // already wrote (componentdata, feedback, requestmeta, etc.).
+        $dataoutputitems = App::getState('dataoutputitems');
+        if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
+            $engineState = App::getEngineState();
+            $engineState->data = array_replace_recursive(
+                $engineState->data,
+                $this->formatAccumulatedDatabasesForOutput($engineState->databases, $engineState->unionTypeOutputKeyIDs)
+            );
+        }
+
         // Add session/site meta
         $this->addSharedMeta();
 
@@ -672,15 +688,51 @@ class Engine extends AbstractBasicService implements EngineInterface
 
         $engineState = App::getEngineState();
 
-        // Save it to be used by the children class
-        // Static props are needed for both static/mutableonrequest operations, so build it always
-        $engineState->model_props = $this->getModelPropsComponentTree($component);
-
-        // If only getting static content, then no need to add the mutableonrequest props
-        if ($datasourceselector === DataSourceSelectors::ONLYMODEL) {
-            $engineState->props = $engineState->model_props;
-        } else {
-            $engineState->props = $this->addRequestPropsComponentTree($component, $engineState->model_props);
+        // model_props/props are functions of (entry component, route) only — they
+        // do NOT depend on the current Multiple Query Execution operation. Under
+        // SEQUENTIAL_PASS MQE this method runs once per operation (often 100+);
+        // walking the component tree to build model_props/props for each op is
+        // pure waste. Compute once per route, reuse for every op in that route's
+        // per-op loop. The cache is also valid across the extra-routes loop
+        // because the route is the invalidation key.
+        //
+        // To make the cached values cover the *union* of all ops' fields (so
+        // every per-op call finds its components in the cached map), we
+        // temporarily clear the `multiple-query-execution-current-operation`
+        // app-state key so the API/GraphQL component processor's
+        // per-op filter falls back to "all ops". The cached values are then
+        // a superset of any single op's needs.
+        $currentRoute = App::getState('route');
+        $needToComputeProps = !$engineState->propsHaveBeenComputed || $engineState->propsComputedForRoute !== $currentRoute;
+        if ($needToComputeProps) {
+            $appStateManager = App::getAppStateManager();
+            $savedMQEOperation = $appStateManager->has('multiple-query-execution-current-operation')
+                ? $appStateManager->get('multiple-query-execution-current-operation')
+                : null;
+            try {
+                $appStateManager->override('multiple-query-execution-current-operation', null);
+                // Static props are needed for both static/mutableonrequest operations, so build it always
+                $engineState->model_props = $this->getModelPropsComponentTree($component);
+                // If only getting static content, then no need to add the mutableonrequest props
+                if ($datasourceselector === DataSourceSelectors::ONLYMODEL) {
+                    $engineState->props = $engineState->model_props;
+                } else {
+                    $engineState->props = $this->addRequestPropsComponentTree($component, $engineState->model_props);
+                }
+                // Same lifetime as props: dataset settings are a pure function
+                // of (component tree, model_props), so they're stable across
+                // per-op MQE iterations within the same route. Compute once
+                // for the union tree (with the per-op filter cleared above).
+                if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems)) {
+                    $engineState->componentDatasetSettings = $this->getComponentDatasetSettings($component, $engineState->model_props, $engineState->props);
+                } else {
+                    $engineState->componentDatasetSettings = [];
+                }
+            } finally {
+                $appStateManager->override('multiple-query-execution-current-operation', $savedMQEOperation);
+            }
+            $engineState->propsHaveBeenComputed = true;
+            $engineState->propsComputedForRoute = $currentRoute;
         }
 
         // Allow for extra operations (eg: calculate resources)
@@ -693,10 +745,10 @@ class Engine extends AbstractBasicService implements EngineInterface
 
         $data = [];
         if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems)) {
-            $data = array_merge(
-                $data,
-                $this->getComponentDatasetSettings($component, $engineState->model_props, $engineState->props)
-            );
+            // Reuse the route-cached dataset settings from the props block
+            // above. Each per-op call writes the same union snapshot here;
+            // `array_replace_recursive` into `engineState->data` is idempotent.
+            $data = array_merge($data, $engineState->componentDatasetSettings);
         }
 
         // Use the EngineState-resident feedback accumulators (initialized
@@ -756,15 +808,14 @@ class Engine extends AbstractBasicService implements EngineInterface
                     $engineState->messages,
                 );
 
-                // Re-format the (cumulative) accumulator on every call. The
-                // formatter is idempotent: each call produces the most-complete
-                // view so far. The subsequent `array_replace_recursive` into
-                // `engineState->data` writes the full snapshot, replacing the
-                // previous (less-complete) snapshot at the `databases` key.
-                $data = array_merge(
-                    $data,
-                    $this->formatAccumulatedDatabasesForOutput($engineState->databases, $engineState->unionTypeOutputKeyIDs)
-                );
+                // The databases/unionTypeOutputKeyIDs aren't formatted into
+                // `$data` here. Each per-op MQE drain would otherwise re-walk
+                // the cumulative accumulators and produce only the LAST
+                // call's output as part of the response. Instead,
+                // `generateData()` formats once after every per-op /
+                // extra-routes call has finished (see the
+                // `formatAccumulatedDatabasesForOutput()` call there),
+                // saving ~N redundant format passes for an N-op query.
             }
         }
 
@@ -1344,10 +1395,6 @@ class Engine extends AbstractBasicService implements EngineInterface
      */
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $useCache = $moduleConfiguration->useComponentModelCache();
-        $root_processor = $this->getComponentProcessorManager()->getComponentProcessor($root_component);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -1388,6 +1435,11 @@ class Engine extends AbstractBasicService implements EngineInterface
             array(&$engineState->helperCalculations),
             $this
         );
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
+        $root_processor = $this->getComponentProcessorManager()->getComponentProcessor($root_component);
 
         // First check if there's a cache stored
         $immutable_data_properties = $mutableonmodel_data_properties = null;
