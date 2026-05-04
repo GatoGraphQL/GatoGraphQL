@@ -58,6 +58,7 @@ class ApplicationStateFillerService extends AbstractBasicService implements Appl
         $appStateManager->override('operation-name', $operationName);
         $appStateManager->override('does-api-query-have-errors', null);
         $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', null);
+        $appStateManager->override('multiple-query-execution-current-operation', null);
 
         // Convert the GraphQL query to AST
         $executableDocument = null;

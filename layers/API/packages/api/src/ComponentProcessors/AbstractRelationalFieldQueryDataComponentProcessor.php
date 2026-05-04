@@ -93,11 +93,6 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * @var object|null
      */
     private ?object $cacheForMultipleQueryExecutionCurrentOperation = null;
-    /**
-     * Cached `AppStateManager` so the per-call AST lookup in
-     * `getFieldNodeCacheKeyForComponent` skips the three-level
-     * `App::getState` facade dispatch.
-     */
     private ?AppStateManagerInterface $cachedAppStateManager = null;
     /**
      * Memoization for `getFieldUniqueID` keyed by field instance. This
@@ -380,43 +375,24 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         return $fieldUniqueID;
     }
 
-    /**
-     * Compute the value-key for a `Component` and reset the field-node
-     * caches if the executable-document AST instance has changed
-     * (i.e. a new request in a long-running PHP process). Returns the
-     * value-key for use as cache index.
-     *
-     * Goes via a cached `AppStateManager` reference rather than the
-     * `App::getState` facade — the three-level `App → AbstractRootAppProxy
-     * → AppThread → AppStateManager` dispatch shows up at ~150M ticks
-     * across 242K calls otherwise.
-     */
     private function getFieldNodeCacheKeyForComponent(Component $component): string
     {
-        $manager = $this->cachedAppStateManager ??= App::getAppStateManager();
+        $manager = App::getAppStateManager();
         /** @var ExecutableDocument|null */
         $executableDocument = $manager->get('executable-document-ast');
         /** @var object|null */
         $currentMQEOperation = $manager->get('multiple-query-execution-current-operation');
         if (
-            $this->cacheForExecutableDocumentAST !== $executableDocument
+            $this->cachedAppStateManager !== $manager
+            || $this->cacheForExecutableDocumentAST !== $executableDocument
             || $this->cacheForMultipleQueryExecutionCurrentOperation !== $currentMQEOperation
         ) {
-            // Reset caches on either: a new executable document (a fresh
-            // request in a long-running PHP process), or a new MQE
-            // current-operation (the engine moved to the next per-op
-            // drain in "Sequential Pass" mode). The latter matters
-            // because `getOperationFieldOrFragmentBonds()` returns
-            // different fields per operation under that mode, so the
-            // same Component cannot share field-node entries across
-            // operations.
             $this->leafComponentFieldNodesCache = [];
             $this->relationalComponentFieldNodesCache = [];
             $this->conditionalLeafComponentFieldNodesCache = [];
             $this->cacheForExecutableDocumentAST = $executableDocument;
             $this->cacheForMultipleQueryExecutionCurrentOperation = $currentMQEOperation;
-            // Refresh the manager cache too on request boundaries.
-            $this->cachedAppStateManager = App::getAppStateManager();
+            $this->cachedAppStateManager = $manager;
         }
         return $component->getCacheKey();
     }
