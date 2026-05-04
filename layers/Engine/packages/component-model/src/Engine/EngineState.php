@@ -31,6 +31,9 @@ class EngineState
      * @param array<string,mixed> $messages Per-request inter-directive message bag, accumulated across drains.
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries Drain accumulator for schema-level feedback (errors/warnings/etc.) keyed by `FeedbackCategory => dbName => typeOutputKey => SplObjectStorage(FieldInterface => entry)`. Lives on EngineState because the leaf SplObjectStorage would otherwise be replaced (not merged) by `array_replace_recursive` between successive `processAndGenerateData()` calls under "Sequential Pass" MQE — meaning earlier ops' feedback would be clobbered by later ops writing empty stores at the same path.
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries Same shape and reasoning as `$schemaFeedbackEntries`, but for object-level feedback.
+     * @param bool $propsHaveBeenComputed `false` until `model_props`/`props`/`componentDatasetSettings` have been computed at least once in this engine state's lifetime. Together with `$propsComputedForRoute` it determines whether the cached values are still valid for the current request iteration. A separate flag is used (rather than relying on `null` as a sentinel) because `null` is also a valid value for `'route'` app state.
+     * @param string|null $propsComputedForRoute Tracks the route value for which `$model_props`/`$props`/`$componentDatasetSettings` were last computed. Used by `processAndGenerateData()` to skip re-walking the (union) component tree on every per-operation MQE drain — under SEQUENTIAL_PASS the route doesn't change across the 100+ ops in one generateData(), so these are stable. Invalidates if the route changes (eg: across the extra-routes loop).
+     * @param array<string,mixed> $componentDatasetSettings Cached return value of `Engine::getComponentDatasetSettings()` for the current route (ditto). The computed tree-walk is identical for every per-op call, so it lives on EngineState and is reused.
      */
     public function __construct(
         public array $data = [],
@@ -54,6 +57,9 @@ class EngineState
         public array $messages = [],
         public array $schemaFeedbackEntries = [],
         public array $objectFeedbackEntries = [],
+        public bool $propsHaveBeenComputed = false,
+        public ?string $propsComputedForRoute = null,
+        public array $componentDatasetSettings = [],
     ) {
     }
 }
