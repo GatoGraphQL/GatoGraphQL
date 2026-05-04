@@ -18,22 +18,19 @@ class SetInstanceManagerOnBasicServiceCompilerPass extends AbstractCompilerPass
     {
         $serviceClass = BasicServiceInterface::class;
         $definitions = $containerBuilderWrapper->getDefinitions();
+        $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
         foreach ($definitions as $definitionID => $definition) {
             $definitionClass = $definition->getClass();
             if ($definitionClass === null || !is_a($definitionClass, $serviceClass, true)) {
                 continue;
             }
-
-            $onlyProcessAutoconfiguredServices = $this->onlyProcessAutoconfiguredServices();
-            if (
-                !$onlyProcessAutoconfiguredServices
-                || $definition->isAutoconfigured()
-            ) {
-                $definition->addMethodCall(
-                    'setInstanceManager',
-                    [$this->createReference(InstanceManagerInterface::class)]
-                );
+            if ($onlyProcessAutoconfiguredServices && !$definition->isAutoconfigured()) {
+                continue;
             }
+            $definition->addMethodCall(
+                'setInstanceManager',
+                [$this->createReference(InstanceManagerInterface::class)]
+            );
         }
     }
 }
