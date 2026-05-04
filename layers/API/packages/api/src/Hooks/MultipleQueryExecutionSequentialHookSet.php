@@ -13,13 +13,13 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\Hooks\AbstractHookSet;
 
 /**
- * Provide the per-operation iteration list to the engine when the
- * "Sequential Pass" Multiple Query Execution strategy is enabled.
- *
- * The component-model engine doesn't know about GraphQL operations; it
- * just iterates whatever opaque values this filter returns. We pull the
- * operation list from the executable document (which has already
- * topologically sorted them via `@depends`).
+ * Provide the per-operation iteration list to the engine for Multiple
+ * Query Execution. The component-model engine doesn't know about GraphQL
+ * operations; it just iterates whatever opaque values this filter
+ * returns. We pull the operation list from the executable document
+ * (already topologically sorted via `@depends`) so the engine can drain
+ * one operation at a time — this is what makes `@export` ordering work
+ * across operations without needing AST self-wrapping.
  */
 class MultipleQueryExecutionSequentialHookSet extends AbstractHookSet
 {
@@ -35,7 +35,7 @@ class MultipleQueryExecutionSequentialHookSet extends AbstractHookSet
 
     /**
      * Returns the list of operations to drain sequentially, or `$current`
-     * (typically null) when the strategy is not active.
+     * (typically null) when there's nothing to interleave.
      *
      * @param mixed[]|null $current
      * @return mixed[]|null
@@ -44,10 +44,7 @@ class MultipleQueryExecutionSequentialHookSet extends AbstractHookSet
     {
         /** @var GraphQLParserModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
-        if (
-            !$moduleConfiguration->enableMultipleQueryExecution()
-            || !$moduleConfiguration->enableSequentialMultipleQueryExecution()
-        ) {
+        if (!$moduleConfiguration->enableMultipleQueryExecution()) {
             return $current;
         }
 

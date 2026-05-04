@@ -22,26 +22,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    /**
-     * Use the "Sequential Pass" execution strategy for Multiple Query
-     * Execution: drain the engine queue once per operation in topological
-     * order, instead of wrapping subsequent operations in nested `self`
-     * fields. Has no effect unless `enableMultipleQueryExecution()` is
-     * also true. Default is false (the SELF_WRAP strategy).
-     */
-    public function enableSequentialMultipleQueryExecution(): bool
-    {
-        $envVariable = Environment::ENABLE_SEQUENTIAL_MULTIPLE_QUERY_EXECUTION;
-        $defaultValue = true;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function enableMultiFieldDirectives(): bool
     {
         $envVariable = Environment::ENABLE_MULTIFIELD_DIRECTIVES;
