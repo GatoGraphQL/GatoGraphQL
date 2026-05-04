@@ -30,6 +30,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider as EngineErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
@@ -47,6 +48,16 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?ObjectResolvedDynamicVariablesServiceInterface $objectResolvedDynamicVariablesService = null;
+
+    /**
+     * Cache the iterator_to_array conversion of $nestedDirectivePipelineData,
+     * keyed by directive identity so it is rebuilt only when the directive
+     * bound to this resolver changes (i.e. on a new prepareDirective cycle).
+     *
+     * @var FieldDirectiveResolverInterface[]
+     */
+    private array $cachedNestedDirectiveResolvers = [];
+    private ?Directive $cachedNestedDirectiveResolversForDirective = null;
 
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
@@ -203,7 +214,13 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         $decreaseFieldTypeModifiersCardinalityForSerialization = $this->decreaseFieldTypeModifiersCardinalityForSerialization();
         /** @var SplObjectStorage<FieldInterface,int|null> */
         $fieldTypeModifiersByField = App::getState('field-type-modifiers-for-serialization');
-        $originalFieldTypeModifiersByField = clone $fieldTypeModifiersByField;
+        /**
+         * The clone is only needed to restore state at the end (see below),
+         * which only happens when decreasing the cardinality.
+         */
+        $originalFieldTypeModifiersByField = $decreaseFieldTypeModifiersCardinalityForSerialization
+            ? clone $fieldTypeModifiersByField
+            : null;
 
         /** @var SplObjectStorage<FieldInterface,int|null> */
         $currentFieldTypeModifiersByField = new SplObjectStorage();
@@ -323,10 +340,23 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                             $targetObjectTypeResolver,
                             $field,
                         );
-                        $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
+                        /**
+                         * No `override(...)` call needed here:
+                         * `$fieldTypeModifiersByField` IS the SplObjectStorage
+                         * already stored in AppState (retrieved by reference
+                         * above), so the in-place mutation is already visible.
+                         */
                     }
 
                     $arrayItemIDsProperties[$id] ??= new EngineIterationFieldSet();
+                    /**
+                     * Hoist the parent-field's modifiers lookup out of the
+                     * per-item loop — the value is constant for this $field.
+                     */
+                    $hasParentFieldTypeModifiers = isset($fieldTypeModifiersByField[$field]);
+                    $parentFieldTypeModifiers = $hasParentFieldTypeModifiers
+                        ? $fieldTypeModifiersByField[$field]
+                        : null;
                     foreach ($arrayItems as $key => &$value) {
                         /**
                          * Add into the $idFieldSet object for the array items.
@@ -362,9 +392,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          *     }
                          *   }
                          */
-                        if (isset($fieldTypeModifiersByField[$field])) {
-                            $fieldTypeModifiersByField[$arrayItemField] = $fieldTypeModifiersByField[$field];
-                            $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
+                        if ($hasParentFieldTypeModifiers) {
+                            $fieldTypeModifiersByField[$arrayItemField] = $parentFieldTypeModifiers;
+                            /**
+                             * No `override(...)` call needed: the SplObjectStorage
+                             * is the same instance already stored in AppState.
+                             */
                         }
 
                         // Export the array item value into the dynamic variable
@@ -413,14 +446,17 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             }
         }
 
-        if ($decreaseFieldTypeModifiersCardinalityForSerialization) {
-            $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
-        }
+        /**
+         * No `override(...)` call needed here:
+         * `$fieldTypeModifiersByField` IS the SplObjectStorage instance
+         * already stored in AppState, and was mutated in place by the
+         * inner loop above.
+         */
 
         if ($execute) {
             // Build the directive pipeline
             /** @var FieldDirectiveResolverInterface[] */
-            $nestedDirectiveResolvers = iterator_to_array($this->nestedDirectivePipelineData);
+            $nestedDirectiveResolvers = $this->getCachedNestedDirectiveResolvers();
             $nestedDirectivePipeline = $this->getDirectivePipelineService()->getDirectivePipeline($nestedDirectiveResolvers);
             // Fill the idFieldSet for each directive in the pipeline
             /** @var array<array<string|int,EngineIterationFieldSet>> */
@@ -596,6 +632,28 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     protected function validateInputValueType(mixed $value): bool
     {
         return is_array($value) || ($value instanceof stdClass);
+    }
+
+    /**
+     * Cache `iterator_to_array($this->nestedDirectivePipelineData)`,
+     * keyed by the currently-bound directive instance so the cache is
+     * naturally invalidated when `prepareDirective` rebinds the resolver
+     * to a different directive.
+     *
+     * @return FieldDirectiveResolverInterface[]
+     */
+    private function getCachedNestedDirectiveResolvers(): array
+    {
+        if ($this->cachedNestedDirectiveResolversForDirective !== $this->directive) {
+            $nestedDirectiveResolvers = [];
+            /** @var FieldDirectiveResolverInterface $nestedDirectiveResolver */
+            foreach ($this->nestedDirectivePipelineData as $nestedDirectiveResolver) {
+                $nestedDirectiveResolvers[] = $nestedDirectiveResolver;
+            }
+            $this->cachedNestedDirectiveResolvers = $nestedDirectiveResolvers;
+            $this->cachedNestedDirectiveResolversForDirective = $this->directive;
+        }
+        return $this->cachedNestedDirectiveResolvers;
     }
 
     /**

@@ -133,9 +133,12 @@ class ObjectResolvedDynamicVariablesService extends AbstractBasicService impleme
             $objectResolvedDynamicVariables[$targetField] = $targetFieldObjectResolvedDynamicVariables;
         }
 
-        // Override the state
-        $appStateManager = App::getAppStateManager();
-        $appStateManager->override('object-resolved-dynamic-variables', $objectResolvedDynamicVariables);
+        /**
+         * No `override(...)` call needed: `$objectResolvedDynamicVariables`
+         * IS the SplObjectStorage instance already stored in AppState
+         * (retrieved by reference above), so the in-place mutation is
+         * already visible.
+         */
     }
 
     protected function addDynamicVariableAlreadySetWarningFeedback(
@@ -193,18 +196,28 @@ class ObjectResolvedDynamicVariablesService extends AbstractBasicService impleme
             $toObjectDynamicVariableNameValues = $objectResolvedDynamicVariables[$toField];
             /** @var string|int $objectID */
             foreach ($fromObjectDynamicVariableNameValues as $objectID => $dynamicVariableNameValues) {
-                $toObjectDynamicVariableNameValues[$objectID] = array_merge(
-                    $toObjectDynamicVariableNameValues[$objectID] ?? [],
-                    $dynamicVariableNameValues
-                );
+                /**
+                 * Avoid array_merge: assign in place to skip the
+                 * intermediate-array allocation per object ID.
+                 */
+                if (!isset($toObjectDynamicVariableNameValues[$objectID])) {
+                    $toObjectDynamicVariableNameValues[$objectID] = $dynamicVariableNameValues;
+                    continue;
+                }
+                foreach ($dynamicVariableNameValues as $dynamicVariableName => $dynamicVariableValue) {
+                    $toObjectDynamicVariableNameValues[$objectID][$dynamicVariableName] = $dynamicVariableValue;
+                }
             }
             $objectResolvedDynamicVariables[$toField] = $toObjectDynamicVariableNameValues;
         } else {
             $objectResolvedDynamicVariables[$toField] = $objectResolvedDynamicVariables[$fromField];
         }
 
-        // Override the state
-        $appStateManager = App::getAppStateManager();
-        $appStateManager->override('object-resolved-dynamic-variables', $objectResolvedDynamicVariables);
+        /**
+         * No `override(...)` call needed: `$objectResolvedDynamicVariables`
+         * IS the SplObjectStorage instance already stored in AppState
+         * (retrieved by reference above), so the in-place mutation is
+         * already visible.
+         */
     }
 }
