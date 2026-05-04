@@ -11,7 +11,6 @@ use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\AbstractExecutableDocument;
@@ -177,17 +176,6 @@ class ExecutableDocument extends AbstractExecutableDocument
             ),
             $astNode
         );
-    }
-
-    /**
-     * @throws InvalidRequestException
-     */
-    protected function isTypeResolverForType(
-        string $typeName,
-        TypeResolverInterface $typeResolver
-    ): bool {
-        return $typeResolver->getTypeName() === $typeName
-            || $typeResolver->getNamespacedTypeName() === $typeName;
     }
 
     /**
