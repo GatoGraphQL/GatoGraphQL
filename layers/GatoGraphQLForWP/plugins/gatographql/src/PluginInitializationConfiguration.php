@@ -119,6 +119,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => CachingFunctionalityModuleResolver::CACHING,
                 'option' => CachingFunctionalityModuleResolver::OPTION_USE_PARSED_AST_CACHE,
             ],
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::ENABLE_COMPONENT_MODEL_CACHE,
+                'module' => CachingFunctionalityModuleResolver::CACHING,
+                'option' => CachingFunctionalityModuleResolver::OPTION_USE_PARSED_AST_CACHE,
+            ],
             // Editing Access Scheme
             [
                 'class' => Module::class,
