@@ -32,7 +32,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function enableSequentialMultipleQueryExecution(): bool
     {
         $envVariable = Environment::ENABLE_SEQUENTIAL_MULTIPLE_QUERY_EXECUTION;
-        $defaultValue = false;
+        $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
