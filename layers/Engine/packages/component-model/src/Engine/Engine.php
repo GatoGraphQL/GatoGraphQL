@@ -495,6 +495,9 @@ class Engine extends AbstractBasicService implements EngineInterface
         //   - The cross-iteration `already_loaded_id_fields` cache spans
         //     all per-op drains so subsequent ops skip re-fetching IDs
         //     that an earlier op already loaded.
+        //   - Schema/object feedback accumulates across ops so per-op
+        //     errors don't get clobbered by `array_replace_recursive`'s
+        //     leaf-replace semantics on `SplObjectStorage` values.
         $engineState = App::getEngineState();
         $engineState->already_loaded_id_fields = [];
         $engineState->databases = [];
@@ -502,6 +505,14 @@ class Engine extends AbstractBasicService implements EngineInterface
         $engineState->combinedUnionTypeOutputKeyIDs = [];
         $engineState->previouslyResolvedIDFieldValues = [];
         $engineState->messages = [];
+        $engineState->schemaFeedbackEntries = $engineState->objectFeedbackEntries = [
+            FeedbackCategories::ERROR => [],
+            FeedbackCategories::WARNING => [],
+            FeedbackCategories::DEPRECATION => [],
+            FeedbackCategories::NOTICE => [],
+            FeedbackCategories::SUGGESTION => [],
+            FeedbackCategories::LOG => [],
+        ];
 
         // Process the request and obtain the results.
         //
@@ -688,14 +699,18 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
         }
 
-        $schemaFeedbackEntries = $objectFeedbackEntries = [
-            FeedbackCategories::ERROR => [],
-            FeedbackCategories::WARNING => [],
-            FeedbackCategories::DEPRECATION => [],
-            FeedbackCategories::NOTICE => [],
-            FeedbackCategories::SUGGESTION => [],
-            FeedbackCategories::LOG => [],
-        ];
+        // Use the EngineState-resident feedback accumulators (initialized
+        // by-reference here so the rest of this method can use the same
+        // local-variable names as before). They live on EngineState rather
+        // than as locals because they are shared across the (one or many)
+        // processAndGenerateData() calls within a single generateData() —
+        // notably under "Sequential Pass" MQE, where each op's feedback
+        // contributes to the same response. The leaves are SplObjectStorage,
+        // which `array_replace_recursive` would otherwise clobber instead
+        // of merging across calls. (The initial reset happens once per
+        // generateData() — not per call — see generateData().)
+        $schemaFeedbackEntries = &$engineState->schemaFeedbackEntries;
+        $objectFeedbackEntries = &$engineState->objectFeedbackEntries;
 
         // Comment Leo 20/01/2018: we must first initialize all the settings, and only later add the data.
         // That is because calculating the data may need the values from the settings. Eg: for the resourceLoader,

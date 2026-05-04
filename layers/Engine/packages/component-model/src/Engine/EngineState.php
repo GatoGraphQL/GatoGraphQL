@@ -29,6 +29,8 @@ class EngineState
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs Drain accumulator (combined view) for union-typed entries.
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues Read-only view of resolved values, exposed to directives.
      * @param array<string,mixed> $messages Per-request inter-directive message bag, accumulated across drains.
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries Drain accumulator for schema-level feedback (errors/warnings/etc.) keyed by `FeedbackCategory => dbName => typeOutputKey => SplObjectStorage(FieldInterface => entry)`. Lives on EngineState because the leaf SplObjectStorage would otherwise be replaced (not merged) by `array_replace_recursive` between successive `processAndGenerateData()` calls under "Sequential Pass" MQE — meaning earlier ops' feedback would be clobbered by later ops writing empty stores at the same path.
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries Same shape and reasoning as `$schemaFeedbackEntries`, but for object-level feedback.
      */
     public function __construct(
         public array $data = [],
@@ -50,6 +52,8 @@ class EngineState
         public array $combinedUnionTypeOutputKeyIDs = [],
         public array $previouslyResolvedIDFieldValues = [],
         public array $messages = [],
+        public array $schemaFeedbackEntries = [],
+        public array $objectFeedbackEntries = [],
     ) {
     }
 }
