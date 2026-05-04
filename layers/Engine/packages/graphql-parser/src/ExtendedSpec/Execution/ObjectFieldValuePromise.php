@@ -25,7 +25,7 @@ class ObjectFieldValuePromise implements ValueResolutionPromiseInterface
     {
         /** @var SplObjectStorage<FieldInterface,mixed> */
         $objectResolvedFieldValues = App::getState('engine-iteration-object-resolved-field-values');
-        if (!$objectResolvedFieldValues->contains($this->field)) {
+        if (!$objectResolvedFieldValues->offsetExists($this->field)) {
             throw new ObjectFieldValuePromiseException(
                 new FeedbackItemResolution(
                     GraphQLExtendedSpecErrorFeedbackItemProvider::class,

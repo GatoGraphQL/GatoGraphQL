@@ -2274,7 +2274,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                         $typed_database_field_ids[] = $database_field_id === null ? null : $typedSubcomponentIDs[$database_field_id];
                     }
                     // `$isArray` was determined when collecting; no need to re-check
-                    // `databases[]->contains($field) && is_array(...)` here.
+                    // `databases[]->offsetExists($field) && is_array(...)` here.
                     $unionEntryValue = $isArray ? $typed_database_field_ids : $typed_database_field_ids[0];
                     // @phpstan-ignore-next-line
                     $unionTypeOutputKeyIDs[$dbName][$targetTypeOutputKey][$id] ??= new SplObjectStorage();

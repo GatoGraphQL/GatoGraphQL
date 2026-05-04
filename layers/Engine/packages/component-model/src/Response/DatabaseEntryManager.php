@@ -46,7 +46,7 @@ class DatabaseEntryManager extends AbstractBasicService implements DatabaseEntry
                 $idDBNameEntries = $dbNameEntries[$dbName][$id] ?? new SplObjectStorage();
                 foreach ($fields_to_move as $field) {
                     $idDBNameEntries[$field] = $dbNameEntries[self::PRIMARY_DBNAME][$id][$field];
-                    $dbNameEntries[self::PRIMARY_DBNAME][$id]->detach($field);
+                    $dbNameEntries[self::PRIMARY_DBNAME][$id]->offsetUnset($field);
                 }
                 $dbNameEntries[$dbName][$id] = $idDBNameEntries;
             }
@@ -113,7 +113,7 @@ class DatabaseEntryManager extends AbstractBasicService implements DatabaseEntry
                 /** @var SplObjectStorage<FieldInterface,mixed> */
                 $dbEntries = $dbNameEntries[$dbName] ?? new SplObjectStorage();
                 $dbEntries[$field] = $dbNameEntries[self::PRIMARY_DBNAME][$field];
-                $dbNameEntries[self::PRIMARY_DBNAME]->detach($field);
+                $dbNameEntries[self::PRIMARY_DBNAME]->offsetUnset($field);
                 $dbNameEntries[$dbName] = $dbEntries;
             }
         }

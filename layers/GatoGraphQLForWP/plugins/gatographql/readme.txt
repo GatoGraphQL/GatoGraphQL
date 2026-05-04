@@ -233,6 +233,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - Allow the custom post `author` to be null (e.g. when the post has no assigned user / author ID 0) (#3293)
 * Improved - Execute GraphQL queries much faster (#3294, #3295, #3298)
 * Improved - Consume less memory (#3296, #3297)
+* Improved - Replace deprecations in PHP 8.5 (#3306)
 * Fixed - Handle null response from license API (eg: when access is forbidden via network) (#3288)
 
 = 17.1.1 =

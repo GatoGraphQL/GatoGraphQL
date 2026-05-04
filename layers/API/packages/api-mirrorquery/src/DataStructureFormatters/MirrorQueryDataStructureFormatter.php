@@ -252,7 +252,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
              * to the current object (eg: it's on a Fragment
              * to be applied on a different model)
              */
-            if (!$resolvedObject->contains($field)) {
+            if (!$resolvedObject->offsetExists($field)) {
                 continue;
             }
 

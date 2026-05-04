@@ -254,8 +254,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             $object = $idObjects[$id];
             foreach ($fieldSet->fields as $field) {
                 // Validate that the property exists
-                $hasIDFieldBeenResolved = isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->contains($field);
-                if (!$hasIDFieldBeenResolved && !(isset($previouslyResolvedIDFieldValues[$typeOutputKey][$id]) && $previouslyResolvedIDFieldValues[$typeOutputKey][$id]->contains($field))) {
+                $hasIDFieldBeenResolved = isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->offsetExists($field);
+                if (!$hasIDFieldBeenResolved && !(isset($previouslyResolvedIDFieldValues[$typeOutputKey][$id]) && $previouslyResolvedIDFieldValues[$typeOutputKey][$id]->offsetExists($field))) {
                     $this->processObjectFailure(
                         $relationalTypeResolver,
                         new FeedbackItemResolution(
@@ -344,7 +344,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                     if (
                         $decreaseFieldTypeModifiersCardinalityForSerialization
                         // Execute only once per field (i.e. avoid recalculating for different objects)
-                        && !$currentFieldTypeModifiersByField->contains($field)
+                        && !$currentFieldTypeModifiersByField->offsetExists($field)
                     ) {
                         $targetObjectTypeResolver = null;
                         if ($isUnionTypeResolver) {
@@ -644,7 +644,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                         // Place the result of executing the function on the array item
                         $arrayItemKeyValues[] = [$key, $resolvedIDFieldValues[$id][$arrayItemField]];
                         // Remove this temporary property from $resolvedIDFieldValues
-                        $resolvedIDFieldValues[$id]->detach($arrayItemField);
+                        $resolvedIDFieldValues[$id]->offsetUnset($arrayItemField);
                     }
                     // Place the results for the array in the original property
                     $this->addProcessedItemsBackToResolvedIDFieldValues(
@@ -786,7 +786,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         FieldInterface $field,
         string $arrayItemAlias,
     ): FieldInterface {
-        if (!$this->arrayItemFieldInstanceContainer->contains($field) || !isset($this->arrayItemFieldInstanceContainer[$field][$arrayItemAlias])) {
+        if (!$this->arrayItemFieldInstanceContainer->offsetExists($field) || !isset($this->arrayItemFieldInstanceContainer[$field][$arrayItemAlias])) {
             $arrayItemFieldInstanceContainerSplObjectStorage = $this->arrayItemFieldInstanceContainer[$field] ?? [];
             $arrayItemFieldInstanceContainerSplObjectStorage[$arrayItemAlias] = ($field instanceof RelationalField)
                 ? new RelationalField(
