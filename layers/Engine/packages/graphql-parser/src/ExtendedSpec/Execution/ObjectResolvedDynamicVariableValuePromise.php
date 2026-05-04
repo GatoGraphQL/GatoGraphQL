@@ -84,7 +84,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
         $currentField = App::getState('object-resolved-dynamic-variables-current-field');
         if (
             $currentField !== null
-            && $objectResolvedDynamicVariables->contains($currentField)
+            && $objectResolvedDynamicVariables->offsetExists($currentField)
             && isset($objectResolvedDynamicVariables[$currentField][$currentObjectID])
             && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$currentField][$currentObjectID])
         ) {
@@ -98,7 +98,7 @@ class ObjectResolvedDynamicVariableValuePromise implements ValueResolutionPromis
          */
         $wildcardField = ASTNodesFactory::getWildcardField();
         if (
-            $objectResolvedDynamicVariables->contains($wildcardField)
+            $objectResolvedDynamicVariables->offsetExists($wildcardField)
             && isset($objectResolvedDynamicVariables[$wildcardField][$currentObjectID])
             && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$wildcardField][$currentObjectID])
         ) {

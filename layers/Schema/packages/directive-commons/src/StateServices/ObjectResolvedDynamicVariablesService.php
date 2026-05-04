@@ -111,7 +111,7 @@ class ObjectResolvedDynamicVariablesService extends AbstractBasicService impleme
                     || $targetField !== $wildcardField;
                 if (
                     $addDynamicVariableAlreadySetWarningFeedback
-                    && $objectResolvedDynamicVariables->contains($targetField)
+                    && $objectResolvedDynamicVariables->offsetExists($targetField)
                     && isset($objectResolvedDynamicVariables[$targetField][$id])
                     && array_key_exists($dynamicVariableName, $objectResolvedDynamicVariables[$targetField][$id])
                 ) {
@@ -198,7 +198,7 @@ class ObjectResolvedDynamicVariablesService extends AbstractBasicService impleme
         /** @var SplObjectStorage<FieldInterface,array<string|int,array<string,mixed>>> SplObjectStorage<Field, [objectID => [dynamicVariableName => value]]> */
         $objectResolvedDynamicVariables = App::getState('object-resolved-dynamic-variables');
 
-        if (!$objectResolvedDynamicVariables->contains($fromField)) {
+        if (!$objectResolvedDynamicVariables->offsetExists($fromField)) {
             return;
         }
 
@@ -209,7 +209,7 @@ class ObjectResolvedDynamicVariablesService extends AbstractBasicService impleme
             /**
              * Watch out! Do not override any state set in the toField!
              */
-            if (!$objectResolvedDynamicVariables->contains($toField)) {
+            if (!$objectResolvedDynamicVariables->offsetExists($toField)) {
                 $objectResolvedDynamicVariables[$toField] = $fromObjectDynamicVariableNameValues;
                 continue;
             }

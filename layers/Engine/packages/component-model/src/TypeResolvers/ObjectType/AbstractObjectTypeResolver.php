@@ -736,7 +736,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          */
         if (
             !$field->hasArgumentReferencingResolvedOnObjectPromise()
-            && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->contains($field)
+            && $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache->offsetExists($field)
         ) {
             return $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache[$field];
         }
@@ -1370,7 +1370,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * time, and retrieve it from the cache from then on, so the error is
              * not added more than once to the response.
              */
-            if (!$this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
+            if (!$this->fieldObjectTypeResolverObjectFieldDataCache->offsetExists($field)) {
                 $this->fieldObjectTypeResolverObjectFieldDataCache[$field] = null;
                 $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                     new SchemaFeedback(
@@ -1415,13 +1415,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * Check if can retrieve the values from the cache.
          * First for the case where all objects are handled all together.
          */
-        if ($this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
+        if ($this->fieldObjectTypeResolverObjectFieldDataCache->offsetExists($field)) {
             if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field] === null) {
                 return null;
             }
             if (
-                $this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)
-                && $this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->contains($wildcardObject)
+                $this->fieldObjectTypeResolverObjectFieldDataCache[$field]->offsetExists($this)
+                && $this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->offsetExists($wildcardObject)
             ) {
                 return $this->fieldObjectTypeResolverObjectFieldDataCache[$field];
             }
@@ -1490,15 +1490,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * the objects, for when each of them has its own FieldArgs
          */
         $remainingObjectIDs = $objectIDs;
-        if ($this->fieldObjectTypeResolverObjectFieldDataCache->contains($field)) {
+        if ($this->fieldObjectTypeResolverObjectFieldDataCache->offsetExists($field)) {
             if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field] === null) {
                 return null;
             }
-            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field]->contains($this)) {
+            if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field]->offsetExists($this)) {
                 $remainingObjectIDs = [];
                 foreach ($objectIDs as $id) {
                     $object = $idObjects[$id];
-                    if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->contains($object)) {
+                    if ($this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this]->offsetExists($object)) {
                         $objectFieldData[$object] = $this->fieldObjectTypeResolverObjectFieldDataCache[$field][$this][$object];
                         continue;
                     }
@@ -1565,7 +1565,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        if (!$this->fieldArgsCache->contains($field)) {
+        if (!$this->fieldArgsCache->offsetExists($field)) {
             $this->fieldArgsCache[$field] = $this->doGetFieldArgs(
                 $field,
                 $objectTypeFieldResolutionFeedbackStore,
@@ -2072,7 +2072,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     public function getFieldDataAccessorForMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): FieldDataAccessorInterface {
-        if (!$this->fieldDataAccessorForMutationCache->contains($fieldDataAccessor)) {
+        if (!$this->fieldDataAccessorForMutationCache->offsetExists($fieldDataAccessor)) {
             $fieldDataAccessorForMutation = $fieldDataAccessor;
             /** @var ObjectTypeFieldResolverInterface */
             $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($fieldDataAccessor->getField());

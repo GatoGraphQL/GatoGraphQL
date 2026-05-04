@@ -578,7 +578,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     ): FieldDirectiveResolverInterface {
         $directiveResolverClass = get_class($directiveResolver);
         // Get the instance from the cache if it exists, or create it if not
-        if (!isset($this->directiveResolverClassDirectivesCache[$directiveResolverClass]) || !$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->contains($directive)) {
+        if (!isset($this->directiveResolverClassDirectivesCache[$directiveResolverClass]) || !$this->directiveResolverClassDirectivesCache[$directiveResolverClass]->offsetExists($directive)) {
             $uniqueFieldDirectiveResolver = clone $directiveResolver;
             $uniqueFieldDirectiveResolver->setDirective(
                 $directive,
@@ -1036,7 +1036,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     protected function doEnqueueFillingObjectsFromIDs(array $fields, array $mandatoryDirectivesForFields, array $mandatorySystemDirectives, string|int $id, EngineIterationFieldSet $fieldSet): void
     {
         foreach ($fields as $field) {
-            if (!$this->fieldDirectives->contains($field)) {
+            if (!$this->fieldDirectives->offsetExists($field)) {
                 $directives = $field->getDirectives();
 
                 // Add the mandatory directives defined for this field or for any field in this typeResolver
@@ -1331,7 +1331,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $ids = $directiveFieldIDs[$directive][$field];
                     $fieldUniqueID = $field->getUniqueID();
                     // Skip fields that already produced some error
-                    if (!$fieldObjectTypeResolverObjectFieldData->contains($field)) {
+                    if (!$fieldObjectTypeResolverObjectFieldData->offsetExists($field)) {
                         foreach ($ids as $id) {
                             $errorIDFields[$id][] = $field;
                             $errorIDFieldUniqueIDs[$id][$fieldUniqueID] = true;
@@ -1448,7 +1448,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
     ): ?SplObjectStorage {
         $cacheKey = implode('|', $ids);
         if (
-            $this->objectTypeResolverObjectFieldDataCache->contains($field)
+            $this->objectTypeResolverObjectFieldDataCache->offsetExists($field)
             // The cached value can be `null` (in case of error), so can't use `isset`
             && array_key_exists($cacheKey, $this->objectTypeResolverObjectFieldDataCache[$field])
         ) {

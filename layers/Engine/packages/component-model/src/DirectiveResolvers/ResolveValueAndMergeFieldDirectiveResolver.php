@@ -211,7 +211,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
 
                 // Check if the condition field has value `true`
                 // All 'conditional' fields must have their own key as 'direct', then simply look for this element on $resolvedIDFieldValues
-                if (isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->contains($conditionField)) {
+                if (isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->offsetExists($conditionField)) {
                     $conditionSatisfied = (bool)$resolvedIDFieldValues[$id][$conditionField];
                 } else {
                     $conditionSatisfied = false;
@@ -376,7 +376,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
             /**
              * If the value was not serialized, it will not be included in the response
              */
-            if (!isset($serializedIDFieldValues[$id]) || !$serializedIDFieldValues[$id]->contains($field)) {
+            if (!isset($serializedIDFieldValues[$id]) || !$serializedIDFieldValues[$id]->offsetExists($field)) {
                 return;
             }
         }

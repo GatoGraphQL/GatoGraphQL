@@ -559,7 +559,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                  * @var SplObjectStorage<FieldInterface,SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>>|null>
                  */
                 $fieldObjectTypeResolverObjectFieldData = $this->fieldObjectTypeResolverObjectFieldDataCache[$targetObjectTypeResolver] ?? new SplObjectStorage();
-                if (!$fieldObjectTypeResolverObjectFieldData->contains($field)) {
+                if (!$fieldObjectTypeResolverObjectFieldData->offsetExists($field)) {
                     $fieldObjectTypeResolverObjectFieldData[$field] = null;
                     $engineIterationFeedbackStore->schemaFeedbackStore->addError(
                         new SchemaFeedback(
