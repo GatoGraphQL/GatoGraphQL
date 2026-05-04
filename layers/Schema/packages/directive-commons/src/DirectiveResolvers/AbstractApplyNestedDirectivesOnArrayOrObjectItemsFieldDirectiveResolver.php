@@ -630,14 +630,31 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                         $this->directiveDataAccessor->resetDirectiveArgs();
                     }
                     $entries = $fieldEntries[$field];
+                    /**
+                     * Collect [key, processedValue] pairs and detach the
+                     * temporary arrayItemField slots; then a single
+                     * batched call composes all items back, doing one
+                     * read+write of the (id, field) container instead
+                     * of N.
+                     *
+                     * @var list<array{0:int|string,1:mixed}>
+                     */
+                    $arrayItemKeyValues = [];
                     foreach ($entries as [$arrayItemField, $key]) {
                         // Place the result of executing the function on the array item
-                        $arrayItemValue = $resolvedIDFieldValues[$id][$arrayItemField];
+                        $arrayItemKeyValues[] = [$key, $resolvedIDFieldValues[$id][$arrayItemField]];
                         // Remove this temporary property from $resolvedIDFieldValues
                         $resolvedIDFieldValues[$id]->detach($arrayItemField);
-                        // Place the result for the array in the original property
-                        $this->addProcessedItemBackToResolvedIDFieldValues($relationalTypeResolver, $resolvedIDFieldValues, $engineIterationFeedbackStore, $id, $field, $key, $arrayItemValue);
                     }
+                    // Place the results for the array in the original property
+                    $this->addProcessedItemsBackToResolvedIDFieldValues(
+                        $relationalTypeResolver,
+                        $resolvedIDFieldValues,
+                        $engineIterationFeedbackStore,
+                        $id,
+                        $field,
+                        $arrayItemKeyValues,
+                    );
                 }
             }
         }
@@ -834,7 +851,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     }
 
     /**
-     * Place the result for the array in the original property
+     * Place the result for the array in the original property.
+     *
+     * Backward-compat wrapper: delegates to the batched form, which
+     * does the actual mutation via setProcessedArrayItemValue().
+     * Internal callers in this package use the batched form directly.
      *
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
@@ -847,14 +868,79 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         int|string $arrayItemKey,
         mixed $arrayItemValue,
     ): void {
+        $this->addProcessedItemsBackToResolvedIDFieldValues(
+            $relationalTypeResolver,
+            $resolvedIDFieldValues,
+            $engineIterationFeedbackStore,
+            $id,
+            $field,
+            [[$arrayItemKey, $arrayItemValue]],
+        );
+    }
+
+    /**
+     * Batched compose: read the (id, field) container once, mutate it
+     * in place for every array item via setProcessedArrayItemValue(),
+     * then write it back once.
+     *
+     * For PHP arrays this changes per-(id, field) compose-back from
+     * O(N²) (each per-item assignment triggers a copy-on-write of an
+     * N-element array) to O(N) — one COW + N in-place writes.
+     *
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param list<array{0:int|string,1:mixed}> $arrayItemKeyValues
+     */
+    protected function addProcessedItemsBackToResolvedIDFieldValues(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array &$resolvedIDFieldValues,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        string|int $id,
+        FieldInterface $field,
+        array $arrayItemKeyValues,
+    ): void {
+        if ($arrayItemKeyValues === []) {
+            return;
+        }
+        /** @var array<string|int,mixed>|stdClass */
         $value = $resolvedIDFieldValues[$id][$field];
+        foreach ($arrayItemKeyValues as [$arrayItemKey, $arrayItemValue]) {
+            $this->setProcessedArrayItemValue(
+                $relationalTypeResolver,
+                $engineIterationFeedbackStore,
+                $id,
+                $field,
+                $arrayItemKey,
+                $arrayItemValue,
+                $value,
+            );
+        }
+        $resolvedIDFieldValues[$id][$field] = $value;
+    }
+
+    /**
+     * Mutate `$value` in place to record the processed item at
+     * `$arrayItemKey`. Subclasses override this hook to customize how
+     * the result is placed back (e.g. path-based traversion for
+     * `@underJSONObjectProperty`) without having to handle the
+     * read/write of the outer container.
+     *
+     * @param array<string|int,mixed>|stdClass &$value
+     */
+    protected function setProcessedArrayItemValue(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        string|int $id,
+        FieldInterface $field,
+        int|string $arrayItemKey,
+        mixed $arrayItemValue,
+        array|stdClass &$value,
+    ): void {
         if (is_array($value)) {
             $value[$arrayItemKey] = $arrayItemValue;
         } else {
             // stdClass
             $value->$arrayItemKey = $arrayItemValue;
         }
-        $resolvedIDFieldValues[$id][$field] = $value;
     }
 
     /**
