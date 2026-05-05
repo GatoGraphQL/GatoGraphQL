@@ -1,4 +1,4 @@
-# Release Notes: 17.2
+# Release Notes: 18.0
 
 ### Added
 
