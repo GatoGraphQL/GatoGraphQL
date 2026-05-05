@@ -224,7 +224,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 17.2.0 =
+= 18.0.0 =
+* Breaking changes - Changed namespace for packages in Gato GraphQL extensions (HTTP Client/PHP Constants and Environment Variables via Schema)
 * Added - Field `Root.blockTypes` to query data from the Block Type Registry (#3291)
 * Added - Cache compiled queries to disk (#3303)
 * Improved - Tested up to WordPress 7.0 (#3289)

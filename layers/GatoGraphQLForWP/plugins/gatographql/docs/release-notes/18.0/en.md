@@ -1,5 +1,9 @@
 # Release Notes: 18.0
 
+### Breaking changes
+
+- Changed namespace for packages in Gato GraphQL extensions (HTTP Client/PHP Constants and Environment Variables via Schema)
+
 ### Added
 
 - Field `Root.blockTypes` to query data from the Block Type Registry ([#3291](https://github.com/GatoGraphQL/GatoGraphQL/pull/3291))

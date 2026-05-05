@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 18.0.0 - DATE
 
+### Breaking changes
+
+- Changed namespace for packages in Gato GraphQL extensions (HTTP Client/PHP Constants and Environment Variables via Schema)
+
 ### Added
 
 - Field `Root.blockTypes` to query data from the Block Type Registry (#3291)
