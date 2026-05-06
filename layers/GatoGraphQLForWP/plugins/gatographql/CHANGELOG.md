@@ -24,6 +24,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Execute GraphQL queries much faster (#3294, #3295, #3298)
 - Consume less memory (#3296, #3297)
 - Replace deprecations in PHP 8.5 (#3306)
+- Allow disabling the "Block type '...' is not server-side registered" warning (#3307)
 
 ### Fixed
 
