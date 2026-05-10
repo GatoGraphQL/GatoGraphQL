@@ -237,6 +237,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - Replace deprecations in PHP 8.5 (#3306)
 * Improved - Allow disabling the "Block type '...' is not server-side registered" warning (#3307)
 * Fixed - Handle null response from license API (eg: when access is forbidden via network) (#3288)
+* Fixed - Non-nullable parameter in method definition (#0cbe33e2)
 
 = 17.1.1 =
 * Fixed - Conflict with the "All In One Security" plugin (#3287)

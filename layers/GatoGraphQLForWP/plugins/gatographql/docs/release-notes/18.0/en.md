@@ -23,3 +23,4 @@
 ### Fixed
 
 - Handle null response from license API (eg: when access is forbidden via network) ([#3288](https://github.com/GatoGraphQL/GatoGraphQL/pull/3288))
+- Non-nullable parameter in method definition ([#0cbe33e2](https://github.com/GatoGraphQL/GatoGraphQL/pull/0cbe33e2))
