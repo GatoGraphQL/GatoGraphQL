@@ -12,7 +12,7 @@ interface ComponentRoutingProcessorManagerInterface
     /**
      * @return ComponentRoutingProcessorInterface[]
      */
-    public function getComponentRoutingProcessors(string $group = null): array;
+    public function getComponentRoutingProcessors(?string $group = null): array;
     public function getDefaultGroup(): string;
-    public function getRoutingComponentByMostAllMatchingStateProperties(string $group = null): ?Component;
+    public function getRoutingComponentByMostAllMatchingStateProperties(?string $group = null): ?Component;
 }
