@@ -1,5 +1,6 @@
 {
     "name": "pop/graphql-by-pop-demo-site",
+    "version": "1.0.0",
     "description": "GraphQL by PoP Demo Site",
     "homepage": "https://newapi.getpop.org",
     "license": "GPL-2.0-or-later",
