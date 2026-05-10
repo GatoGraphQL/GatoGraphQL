@@ -2376,6 +2376,170 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
 		<category domain="post_tag" nicename="plugin"><![CDATA[plugin]]></category>
 							</item>
+					<item>
+		<title><![CDATA[All blocks with entity references]]></title>
+		<link>https://gatographql.lndo.site/all-blocks-with-entity-references/</link>
+		<pubDate>Fri, 03 Apr 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1212</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+<p>This post is a fixture covering every WP-core block whose attributes hold an entity-reference ID (post, media or taxonomy term). IDs used: media 1361/1362/1380, posts 1121/1123/1125/1140, pages 1/2/1705, categories 2/3/4, tags 9/11/13. Sections marked <em>(no media available)</em> use placeholder IDs because the dev DB has no entries of that media type.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Media references — single ID</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":1361,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo.webp" alt="" class="wp-image-1361"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:cover {"url":"https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp","id":1362,"dimRatio":50,"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover"><img class="wp-block-cover__image-background wp-image-1362" alt="" src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"placeholder":"Write title…","style":{"typography":{"textAlign":"center"}},"fontSize":"large"} -->
+<p class="has-text-align-center has-large-font-size">Cover with media id 1362</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:cover -->
+
+<!-- wp:media-text {"align":"wide","mediaId":1380,"mediaType":"image"} -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://localhost:50666/wp-content/uploads/Funny-Dog.jpg" alt="" class="wp-image-1380 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
+<p>Media-Text uses <code>mediaId</code> (here 1380).</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:media-text -->
+
+<!-- wp:audio {"id":99001} -->
+<figure class="wp-block-audio"><audio controls src="https://localhost:50666/wp-content/uploads/placeholder.mp3"></audio><figcaption class="wp-element-caption">Audio block — placeholder id 99001 (no audio available in dev DB).</figcaption></figure>
+<!-- /wp:audio -->
+
+<!-- wp:video {"id":99002} -->
+<figure class="wp-block-video"><video controls src="https://localhost:50666/wp-content/uploads/placeholder.mp4"></video><figcaption class="wp-element-caption">Video block — placeholder id 99002 (no video available in dev DB).</figcaption></figure>
+<!-- /wp:video -->
+
+<!-- wp:file {"id":99003,"href":"https://localhost:50666/wp-content/uploads/placeholder.pdf"} -->
+<div class="wp-block-file"><a href="https://localhost:50666/wp-content/uploads/placeholder.pdf">placeholder.pdf</a><a href="https://localhost:50666/wp-content/uploads/placeholder.pdf" class="wp-block-file__button wp-element-button" download>Download</a></div>
+<!-- /wp:file -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Media references — list of IDs</h2>
+<!-- /wp:heading -->
+
+<!-- wp:gallery {"ids":[1361,1362,1380],"linkTo":"none"} -->
+<figure class="wp-block-gallery has-nested-images columns-default is-cropped"><!-- wp:image {"id":1361,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo.webp" alt="" class="wp-image-1361"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1362,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp" alt="" class="wp-image-1362"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1380,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/Funny-Dog.jpg" alt="" class="wp-image-1380"/></figure>
+<!-- /wp:image --></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Post / page / CPT references</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Stand-alone <code>core/navigation-link</code> blocks pointing at posts and pages (note: page id 1 does not exist in the dev DB; included as-is to fixture the attribute):</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:navigation-link {"label":"Customize the schema for each client","type":"post","id":1121,"url":"https://localhost:50666/customize-the-schema-for-each-client/","kind":"post-type"} /-->
+
+<!-- wp:navigation-link {"label":"GraphQL or REST? Why not both?","type":"post","id":1123,"url":"https://localhost:50666/graphql-or-rest-you-can-have-both/","kind":"post-type"} /-->
+
+<!-- wp:navigation-link {"label":"Sample Page","type":"page","id":2,"url":"https://localhost:50666/sample-page/","kind":"post-type"} /-->
+
+<!-- wp:navigation-link {"label":"Page id 1 (404)","type":"page","id":1,"url":"https://localhost:50666/?page_id=1","kind":"post-type"} /-->
+
+<!-- wp:paragraph -->
+<p><code>core/navigation-submenu</code> referencing page 1705, with a child link to post 1125:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:navigation-submenu {"label":"Page with parent only","type":"page","id":1705,"url":"https://localhost:50666/page-with-several-levels-of-children/page-with-parent-and-children/page-with-parent-only/","kind":"post-type"} -->
+<!-- wp:navigation-link {"label":"Public or Private API mode, for extra security","type":"post","id":1125,"url":"https://localhost:50666/public-or-private-api-mode-for-extra-security/","kind":"post-type"} /-->
+<!-- /wp:navigation-submenu -->
+
+<!-- wp:paragraph -->
+<p><code>core/page-list</code> rendering only the descendants of page 1705 ("Page with parent only"):</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:page-list {"parentPageID":1705} /-->
+
+<!-- wp:paragraph -->
+<p><code>core/navigation</code> with a placeholder <code>ref</code>; no <code>wp_navigation</code> matches in the dev DB at this id, but the attribute itself is the entity-reference target:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:navigation {"ref":99100} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reusable block reference (already handled separately)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>core/block</code> (reusable block) is intentionally NOT in the new entity-reference map: it has its own dedicated extraction in the GraphQL query (<code>originGutenbergCoreBlock</code>) feeding <code>referenceGutenbergCoreBlockPatternIDs</code>. Included here as a fixture; no <code>wp_block</code> posts exist in the dev DB.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:block {"ref":99999} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Taxonomy term references — categories</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>core/latest-posts</code> filtered by categories 2 (Advanced), 3 (Blog) and 4 (Resource):</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:latest-posts {"categories":[2,3,4],"postsToShow":3,"displayPostDate":true} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Query loop — parents / include / exclude (post IDs)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This <code>core/query</code> filters by <code>parents</code> [1705], <code>include</code> [1121, 1123, 1125] and <code>exclude</code> [1140], so all three post-ID entity-reference attribute paths inside the nested <code>query</code> object are exercised at once.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:query {"queryId":1,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[1140],"include":[1121,1123,1125],"parents":[1705],"sticky":""}} -->
+<div class="wp-block-query"><!-- wp:post-template -->
+<!-- wp:post-title {"isLink":true} /-->
+
+<!-- wp:post-excerpt /-->
+<!-- /wp:post-template --></div>
+<!-- /wp:query -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Query loop — taxQuery (categories + tags)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This <code>core/query</code> uses <code>taxQuery</code> to filter by categories [2, 3] AND tags [9, 11, 13]. <strong>Note:</strong> <code>taxQuery</code> has a per-taxonomy nested shape (<code>{category: [...], post_tag: [...]}</code>) that doesn't fit the current "attribute path → IDs" map — it's intentionally excluded from <code>BlockTypeAttributeValues</code>. Included here as a fixture for the tag IDs and so future work can decide how to extract it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","taxQuery":{"include":{"category":[2,3],"post_tag":[9,11,13]}}}} -->
+<div class="wp-block-query"><!-- wp:post-template -->
+<!-- wp:post-title {"isLink":true} /-->
+
+<!-- wp:post-excerpt /-->
+<!-- /wp:post-template --></div>
+<!-- /wp:query -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>1212</wp:post_id>
+		<wp:post_date><![CDATA[2026-04-03 10:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2026-04-03 10:00:00]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2026-04-03 10:00:00]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2026-04-03 10:00:00]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[all-blocks-with-entity-references]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[post]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+							</item>
 				</channel>
 </rss>
 	
