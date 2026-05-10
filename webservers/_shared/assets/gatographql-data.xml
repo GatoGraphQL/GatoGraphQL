@@ -2462,10 +2462,10 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:navigation-submenu -->
 
 <!-- wp:paragraph -->
-<p><code>core/page-list</code> rendering only the descendants of page 1705 ("Page with parent only"):</p>
+<p><code>core/page-list</code> rendering only the descendants of page 1701 ("Page with several layers of children"):</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:page-list {"parentPageID":1705} /-->
+<!-- wp:page-list {"parentPageID":1701} /-->
 
 <!-- wp:paragraph -->
 <p><code>core/navigation</code> with a placeholder <code>ref</code>; no <code>wp_navigation</code> matches in the dev DB at this id, but the attribute itself is the entity-reference target:</p>
@@ -2481,7 +2481,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <p><code>core/block</code> (reusable block) is intentionally NOT in the new entity-reference map: it has its own dedicated extraction in the GraphQL query (<code>originGutenbergCoreBlock</code>) feeding <code>referenceGutenbergCoreBlockPatternIDs</code>. Included here as a fixture; no <code>wp_block</code> posts exist in the dev DB.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:block {"ref":99999} /-->
+<!-- wp:block {"ref":1136} /-->
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Taxonomy term references — categories</h2>
