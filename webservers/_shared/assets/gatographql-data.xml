@@ -1661,7 +1661,6 @@ https://wordpress.org/about/
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 						<wp:attachment_url><![CDATA[https://upload.wikimedia.org/wikipedia/commons/0/09/Wordpress-Logo.svg]]></wp:attachment_url>
-							<category domain="language" nicename="en"><![CDATA[English]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
 		<wp:meta_value><![CDATA[Wordpress-Logo.svg]]></wp:meta_value>
@@ -1762,7 +1761,6 @@ https://wordpress.org/about/
 		<wp:post_type><![CDATA[wp_block]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 						</item>
 					<item>
 		<title><![CDATA[Welcome to a single post full of blocks!]]></title>
@@ -2094,7 +2092,6 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
@@ -2190,7 +2187,6 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
 							</item>
 							<item>
@@ -2244,7 +2240,6 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
 							</item>
 					<item>
@@ -2320,7 +2315,6 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
 		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
 		<category domain="post_tag" nicename="plugin"><![CDATA[plugin]]></category>
@@ -2378,7 +2372,6 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
 		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
 		<category domain="post_tag" nicename="plugin"><![CDATA[plugin]]></category>
