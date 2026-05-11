@@ -2517,7 +2517,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <p>This <code>core/query</code> uses <code>taxQuery</code> to filter by categories [2, 3] AND tags [9, 11, 13]. <strong>Note:</strong> <code>taxQuery</code> has a per-taxonomy nested shape (<code>{category: [...], post_tag: [...]}</code>) that doesn't fit the current "attribute path → IDs" map — it's intentionally excluded from <code>BlockTypeAttributeValues</code>. Included here as a fixture for the tag IDs and so future work can decide how to extract it.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","taxQuery":{"include":{"category":[2,3],"post_tag":[9,11,13]}}}} -->
+<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","taxQuery":{"include":{"category":[2,3],"post_tag":[9,11,13]},"exclude":{"additional-post-category":[33, 41],"additional-post-tag":[36]}}}} -->
 <div class="wp-block-query"><!-- wp:post-template -->
 <!-- wp:post-title {"isLink":true} /-->
 
