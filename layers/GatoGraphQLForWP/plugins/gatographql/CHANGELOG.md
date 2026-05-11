@@ -29,6 +29,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Handle null response from license API (eg: when access is forbidden via network) (#3288)
+- In field `menus`, return no results when passing empty `filter.slugs` (#8773b1b)
 - Non-nullable parameter in method definition (#0cbe33e2)
 
 ## 17.1.1 - 24/03/2026

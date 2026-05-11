@@ -23,4 +23,5 @@
 ### Fixed
 
 - Handle null response from license API (eg: when access is forbidden via network) ([#3288](https://github.com/GatoGraphQL/GatoGraphQL/pull/3288))
-- Non-nullable parameter in method definition ([#0cbe33e2](https://github.com/GatoGraphQL/GatoGraphQL/pull/0cbe33e2))
+- In field `menus`, return no results when passing empty `filter.slugs` ([#8773b1b](https://github.com/GatoGraphQL/GatoGraphQL/commit/8773b1b))
+- Non-nullable parameter in method definition ([#0cbe33e2](https://github.com/GatoGraphQL/GatoGraphQL/commit/0cbe33e2))
