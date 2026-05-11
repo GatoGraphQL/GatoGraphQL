@@ -1710,7 +1710,7 @@ https://wordpress.org/about/
 	<!-- wp:group -->
 	<div class="wp-block-group">
 		<!-- wp:paragraph -->
-		<p>p1</p>
+		<p>I want to translate this content, which is inside some nested block (it seems)</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
