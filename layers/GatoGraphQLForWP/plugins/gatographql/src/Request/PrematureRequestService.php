@@ -56,7 +56,7 @@ class PrematureRequestService extends AbstractBasicService implements PrematureR
      * path (even if that specific endpoint is disabled).
      *
      * Notice this checks only for the publicly-exposed GraphQL
-     * endpoints (i.e. not for `wp-admin/edit.php?page=gatographql&action=execute_query`
+     * endpoints (i.e. not for `wp-admin/edit.php?page=gatographql&action=run_query`
      * or any of those).
      */
     public function isPubliclyExposedGraphQLAPIRequest(): bool

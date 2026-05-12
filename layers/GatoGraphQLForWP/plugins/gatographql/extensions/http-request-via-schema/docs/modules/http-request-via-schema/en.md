@@ -234,12 +234,12 @@ query {
     "_httpRequestScheme": "https",
     "_httpRequestHost": "gatographql-pro.lndo.site",
     "_httpRequestURL": "https://gatographql-pro.lndo.site/wp-admin/edit.php",
-    "_httpRequestFullURL": "https://gatographql-pro.lndo.site/wp-admin/edit.php?page=gatographql&action=execute_query",
+    "_httpRequestFullURL": "https://gatographql-pro.lndo.site/wp-admin/edit.php?page=gatographql&action=run_query",
     "_httpRequestURLPath": "/wp-admin/edit.php",
-    "_httpRequestQuery": "page=gatographql&action=execute_query",
+    "_httpRequestQuery": "page=gatographql&action=run_query",
     "_httpRequestParams": {
       "page": "gatographql",
-      "action": "execute_query"
+      "action": "run_query"
     },
     "existingParam": "gatographql",
     "caseInsensitiveExistingParam": null,

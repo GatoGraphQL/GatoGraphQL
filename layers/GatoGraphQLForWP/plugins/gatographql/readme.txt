@@ -238,6 +238,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - Allow disabling the "Block type '...' is not server-side registered" warning (#3307)
 * Fixed - Handle null response from license API (eg: when access is forbidden via network) (#3288)
 * Fixed - In field `menus`, return no results when passing empty `filter.slugs` (#8773b1b)
+* Fixed - Avoid conflict with BBQ Firewall plugin (#3308)
 * Fixed - Non-nullable parameter in method definition (#0cbe33e2)
 
 = 17.1.1 =

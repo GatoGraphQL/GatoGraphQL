@@ -6,7 +6,6 @@ namespace PHPUnitForGatoGraphQL\WPFakerSchema\Unit;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
-use GraphQLByPoP\GraphQLServer\Unit\AbstractFixtureQueryExecutionGraphQLServerTestCase;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnitForGatoGraphQL\WPFakerSchema\DataParsing\WordPressDataParser;

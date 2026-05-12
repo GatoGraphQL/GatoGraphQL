@@ -415,7 +415,7 @@ Activate XDebug for a request by appending parameter `?XDEBUG_TRIGGER=1` to the 
 
 For instance:
 
-- `https://gatographql.lndo.site/wp-admin/edit.php?page=gatographql&action=execute_query&XDEBUG_TRIGGER=1`
+- `https://gatographql.lndo.site/wp-admin/edit.php?page=gatographql&action=run_query&XDEBUG_TRIGGER=1`
 - `https://gatographql.lndo.site/graphiql/?XDEBUG_TRIGGER=1`
 
 ### Debugging PHPUnit tests
