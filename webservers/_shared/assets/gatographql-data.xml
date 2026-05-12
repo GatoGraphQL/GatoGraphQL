@@ -1638,11 +1638,11 @@ https://wordpress.org/about/
 		</wp:postmeta>
 														</item>
 					<item>
-		<title><![CDATA[Wordpress-Logo]]></title>
+		<title><![CDATA[WordPress-Logo]]></title>
 		<link>https://gatographql-pro.lndo.site/wordpress-logo/</link>
 		<pubDate>Thu, 07 May 2026 06:14:35 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql-pro.lndo.site/wp-content/uploads/Wordpress-Logo.svg</guid>
+		<guid isPermaLink="false">https://gatographql-pro.lndo.site/wp-content/uploads/WordPress-Logo.svg</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1660,10 +1660,10 @@ https://wordpress.org/about/
 		<wp:post_type><![CDATA[attachment]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-						<wp:attachment_url><![CDATA[https://upload.wikimedia.org/wikipedia/commons/0/09/Wordpress-Logo.svg]]></wp:attachment_url>
+						<wp:attachment_url><![CDATA[https://upload.wikimedia.org/wikipedia/commons/0/09/WordPress-Logo.svg]]></wp:attachment_url>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Wordpress-Logo.svg]]></wp:meta_value>
+		<wp:meta_value><![CDATA[WordPress-Logo.svg]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
