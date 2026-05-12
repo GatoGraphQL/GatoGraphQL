@@ -37,7 +37,7 @@ class EndpointHelpers extends AbstractBasicService
      * by 3rd-party plugins and developers to fetch data for their
      * blocks on the WordPress editor, under:
      *
-     *   /wp-admin/edit.php?page=gatographql&action=execute_query
+     *   /wp-admin/edit.php?page=gatographql&action=run_query
      */
     public function isRequestingAdminGraphQLEndpoint(): bool
     {
@@ -52,7 +52,7 @@ class EndpointHelpers extends AbstractBasicService
      * used on the WordPress editor to power this plugin's blocks
      * (for the different CPTs: SchemaConfig, ACLs, CCLs, etc), under:
      *
-     *   /wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=pluginOwnUse
+     *   /wp-admin/edit.php?page=gatographql&action=run_query&endpoint_group=pluginOwnUse
      */
     public function isRequestingAdminPluginOwnUseGraphQLEndpoint(): bool
     {
@@ -65,7 +65,7 @@ class EndpointHelpers extends AbstractBasicService
      * used on the WordPress editor to power developer's blocks
      * for their own sites, under:
      *
-     *   /wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=blockEditor
+     *   /wp-admin/edit.php?page=gatographql&action=run_query&endpoint_group=blockEditor
      */
     public function isRequestingAdminBlockEditorGraphQLEndpoint(): bool
     {
@@ -77,7 +77,7 @@ class EndpointHelpers extends AbstractBasicService
      * Indicate if we are requesting the wp-admin endpoint that
      * fetches data for Persisted Queries, under:
      *
-     *   /wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=persistedQuery&persisted_query_id=...
+     *   /wp-admin/edit.php?page=gatographql&action=run_query&endpoint_group=persistedQuery&persisted_query_id=...
      */
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
