@@ -3,6 +3,7 @@
 ### Breaking changes
 
 - Changed namespace for packages in Gato GraphQL extensions (HTTP Client/PHP Constants and Environment Variables via Schema)
+- Changed the admin endpoint URL (from `wp-admin/edit.php?page=gatographql&action=execute_query` to `wp-admin/edit.php?page=gatographql&action=run_query`) ([#3308](https://github.com/GatoGraphQL/GatoGraphQL/pull/3308))
 
 ### Added
 
