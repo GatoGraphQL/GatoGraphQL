@@ -241,6 +241,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - In field `menus`, return no results when passing empty `filter.slugs` (#8773b1b)
 * Fixed - Avoid conflict with BBQ Firewall plugin (#3308)
 * Fixed - Non-nullable parameter in method definition (#0cbe33e2)
+* Fixed - Make sure query from request is a string (#3309)
 
 = 17.1.1 =
 * Fixed - Conflict with the "All In One Security" plugin (#3287)

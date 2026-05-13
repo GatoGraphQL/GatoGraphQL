@@ -27,3 +27,4 @@
 - In field `menus`, return no results when passing empty `filter.slugs` ([#8773b1b](https://github.com/GatoGraphQL/GatoGraphQL/commit/8773b1b))
 - Avoid conflict with BBQ Firewall plugin ([#3308](https://github.com/GatoGraphQL/GatoGraphQL/pull/3308))
 - Non-nullable parameter in method definition ([#0cbe33e2](https://github.com/GatoGraphQL/GatoGraphQL/commit/0cbe33e2))
+- Make sure query from request is a string ([#3309](https://github.com/GatoGraphQL/GatoGraphQL/pull/3309))

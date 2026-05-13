@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLRequest\State;
 
 use GraphQLByPoP\GraphQLRequest\StaticHelpers\GraphQLQueryPayloadRetriever;
+use PoP\ComponentModel\Configuration\RequestHelpers;
+use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
@@ -43,8 +44,9 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         // Set state with the GraphQL query from the body
-        $state['query'] = $payload['query'] ?? null;
-        $state['variables'] = $payload['variables'] ?? [];
-        $state['operation-name'] = $payload['operationName'] ?? null;
+        // Make sure the query is a string, and not an array (as it could be set as array via POST body)
+        $state['query'] = RequestHelpers::getStringOrNullRequestParamValue($payload['query'] ?? null);
+        $state['variables'] = RequestHelpers::getArrayOrNullRequestParamValue($payload['variables'] ?? null);
+        $state['operation-name'] = RequestHelpers::getStringOrNullRequestParamValue($payload['operationName'] ?? null);
     }
 }
