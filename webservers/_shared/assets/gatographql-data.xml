@@ -1773,8 +1773,8 @@ https://wordpress.org/about/
 <p>When I look back on my past and think how much time I wasted on nothing, how much time has been lost in futilities, errors, laziness, incapacity to live; how little I appreciated it, how many times I sinned against my heart and soul-then my heart bleeds. <strong>Life is a gift, life is happiness, every minute can be an eternity of happiness</strong>. (<a href="https://www.azquotes.com/author/4085-Fyodor_Dostoevsky" target="_blank" rel="noopener">Quote by Fyodor Dostoevsky</a>)<br></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">This blog post will be transformed...</h2>
+<!-- wp:heading {"anchor":"this-blog-post-will-be-transformed"} -->
+<h2 id="this-blog-post-will-be-transformed" class="wp-block-heading">This blog post will be transformed...</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"color":{"text":"#ffffff","background":"#709372"}}} -->
@@ -1785,16 +1785,16 @@ https://wordpress.org/about/
 <hr class="wp-block-separator has-css-opacity"/>
 <!-- /wp:separator -->
 
-<!-- wp:image {"align":"wide","id":33} -->
+<!-- wp:image {"id":33,"align":"wide"} -->
 <figure class="wp-block-image alignwide"><img src="https://i.ytimg.com/vi/z4KKd2nGlEM/maxresdefault.jpg" alt="Ooops, I got stuck" class="wp-image-33"/><figcaption class="wp-element-caption">My owner doesn't give me a hat, so I gotta do a hack</figcaption></figure>
 <!-- /wp:image -->
 
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><mark style="background-color:#D1D1E4" class="has-inline-color">I love these veggies!!!</mark></h3>
+<!-- wp:heading {"level":3,"anchor":"i-love-these-veggies"} -->
+<h3 id="i-love-these-veggies" class="wp-block-heading"><mark style="background-color:#D1D1E4" class="has-inline-color">I love these veggies!!!</mark></h3>
 <!-- /wp:heading -->
 
 <!-- wp:list -->
-<ul><!-- wp:list-item -->
+<ul class="wp-block-list"><!-- wp:list-item -->
 <li>Eggplant</li>
 <!-- /wp:list-item -->
 
@@ -1811,18 +1811,18 @@ https://wordpress.org/about/
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg","id":1380,"alt":"Dog not caring about anything","dimRatio":50,"isDark":false} -->
-<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
+<!-- wp:cover {"url":"https://localhost:59610/wp-content/uploads/Funny-Dog.jpg","id":1380,"alt":"Dog not caring about anything","dimRatio":50,"isDark":false} -->
+<div class="wp-block-cover is-light"><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://localhost:59610/wp-content/uploads/Funny-Dog.jpg" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"placeholder":"Write title…","style":{"typography":{"textAlign":"center"}},"fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">See if I care</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">When going to eat out, I normally go for one of these:</h3>
+<!-- wp:heading {"level":3,"anchor":"when-going-to-eat-out-i-normally-go-for-one-of-these"} -->
+<h3 id="when-going-to-eat-out-i-normally-go-for-one-of-these" class="wp-block-heading">When going to eat out, I normally go for one of these:</h3>
 <!-- /wp:heading -->
 
 <!-- wp:list {"ordered":true} -->
-<ol><!-- wp:list-item -->
+<ol class="wp-block-list"><!-- wp:list-item -->
 <li>Vegetarian</li>
 <!-- /wp:list-item -->
 
@@ -1851,7 +1851,7 @@ https://wordpress.org/about/
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:media-text {"mediaId":1362,"mediaLink":"https://gatographql.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
+<div class="wp-block-column"><!-- wp:media-text {"align":"wide","mediaId":1362,"mediaLink":"https://gatographql.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
 <div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.webp" alt="In red are the entities with a transformed name" class="wp-image-1362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
 <p>This is the schema</p>
 <!-- /wp:paragraph --></div></div>
@@ -1877,8 +1877,8 @@ https://wordpress.org/about/
 <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://duckduckgo.com/">Do some duck duck search online</a></div>
 <!-- /wp:button -->
 
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">This heading (H3) is boring (Regex test: $1 #1), but these guys are not</h3>
+<!-- wp:heading {"level":3,"anchor":"this-heading-h3-is-boring-regex-test-1-1-but-these-guys-are-not"} -->
+<h3 id="this-heading-h3-is-boring-regex-test-1-1-but-these-guys-are-not" class="wp-block-heading">This heading (H3) is boring (Regex test: $1 #1), but these guys are not</h3>
 <!-- /wp:heading -->
 
 <!-- wp:gallery {"columns":3,"linkTo":"none","align":"wide","className":"alignnone"} -->
@@ -1907,7 +1907,7 @@ https://wordpress.org/about/
 <!-- /wp:button -->
 
 <!-- wp:button {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","right":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|60"}},"color":{"background":"#382998"}},"fontSize":"extra-large"} -->
-<div class="wp-block-button has-custom-font-size has-extra-large-font-size"><a class="wp-block-button__link has-background wp-element-button" style="background-color:#382998;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)">Keep your soul satiated 🙏</a></div>
+<div class="wp-block-button"><a class="wp-block-button__link has-background has-extra-large-font-size has-custom-font-size wp-element-button" style="background-color:#382998;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)">Keep your soul satiated 🙏</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 
@@ -1919,7 +1919,7 @@ https://wordpress.org/about/
 <figure class="wp-block-audio"><audio controls src="https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3"></audio><figcaption class="wp-element-caption">"Broke for free" song</figcaption></figure>
 <!-- /wp:audio -->
 
-<!-- wp:video {"id":132,"tracks":[]} -->
+<!-- wp:video {"id":132} -->
 <figure class="wp-block-video"><video controls src="https://download.samplelib.com/mp4/sample-5s.mp4"></video><figcaption class="wp-element-caption">Test video of a road in a city</figcaption></figure>
 <!-- /wp:video -->
 
@@ -1931,7 +1931,7 @@ https://wordpress.org/about/
 <pre class="wp-block-verse">Nothing exists except atoms and empty space; everything else is opinion.<br><br>The man enslaved to wealth can never be honest.<br><br>–Democritus</pre>
 <!-- /wp:verse -->
 
-<!-- wp:table {"hasFixedLayout":true,"align":"wide","className":"has-fixed-layout"} -->
+<!-- wp:table {"align":"wide","className":"has-fixed-layout"} -->
 <figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><tbody><tr><td><strong>What I like</strong></td><td>Petting my 3 cats 😺😺😺 in the morning ☀️</td><td>Riding my bike in the mountain</td></tr><tr><td><strong>What I have</strong></td><td>Not much, just enough to <a href="https://keepmegoing.com">keep me going on</a></td><td>A <mark style="background-color:rgba(0, 0, 0, 0);color:#c22a2a" class="has-inline-color">balcony with plants</mark></td></tr><tr><td><strong>What I desire</strong></td><td>Attending <strong>conferences</strong> and meeting plenty of <strong>interesting folks</strong> from the community</td><td>To be able to focus on the important things of life</td></tr></tbody></table><figcaption class="wp-element-caption">Some items to consider for new year's resolution?</figcaption></figure>
 <!-- /wp:table -->
 
@@ -1945,7 +1945,9 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <p>Custom HTML here, maybe need to process, maybe not</p>
 <!-- /wp:html -->
 
-<!-- wp:block {"ref":1136} /-->]]></content:encoded>
+<!-- wp:block {"ref":1136} /-->
+
+<!-- wp:breadcrumbs {"separator":"::"} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
 		<wp:post_date><![CDATA[2023-06-12 09:20:44]]></wp:post_date>
