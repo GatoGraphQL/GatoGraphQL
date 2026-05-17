@@ -64,9 +64,15 @@ class UserSettingsManager extends AbstractSettingsManager implements UserSetting
     public function storeOperationalTimestamp(): void
     {
         $timestamps = [
-            self::TIMESTAMP_CONTAINER => $this->getContainerUniqueTimestamp(),
             self::TIMESTAMP_OPERATIONAL => $this->getUniqueIdentifier(),
         ];
+        // Preserve the container timestamp only when it already exists in
+        // the DB; otherwise the auto-generated fallback would silently get
+        // persisted as the container timestamp.
+        $existingContainerTimestamp = $this->getTimestampSettingsManager()->getTimestamp(self::TIMESTAMP_CONTAINER);
+        if ($existingContainerTimestamp !== null) {
+            $timestamps[self::TIMESTAMP_CONTAINER] = (string) $existingContainerTimestamp;
+        }
         $this->getTimestampSettingsManager()->storeTimestamps($timestamps);
     }
     /**
