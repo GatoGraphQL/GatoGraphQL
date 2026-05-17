@@ -151,7 +151,8 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 return false;
             }
 
-            return json_decode($remote);
+            $decoded = json_decode($remote);
+            return is_object($decoded) ? $decoded : false;
         }
 
         $remote = $this->getRemotePluginData($pluginData);
@@ -171,7 +172,8 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
         $payload = $this->maybeAdaptPayload($payload);
 
         set_transient($pluginData->cacheKey, $payload, DAY_IN_SECONDS);
-        return json_decode($payload);
+        $decoded = json_decode($payload);
+        return is_object($decoded) ? $decoded : false;
     }
 
     protected function maybeAdaptPayload(string $payload): string
