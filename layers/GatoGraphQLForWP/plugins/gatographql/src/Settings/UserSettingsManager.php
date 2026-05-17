@@ -238,7 +238,11 @@ class UserSettingsManager extends AbstractSettingsManager implements UserSetting
 
     public function isModuleEnabled(string $moduleID): bool
     {
-        return (bool) $this->getItem($this->namespaceOption(Options::MODULES), $moduleID);
+        $optionName = $this->namespaceOption(Options::MODULES);
+        if (!$this->hasItem($optionName, $moduleID)) {
+            return false;
+        }
+        return (bool) $this->getItem($optionName, $moduleID);
     }
 
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void
