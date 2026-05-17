@@ -46,7 +46,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Set state with the GraphQL query from the body
         // Make sure the query is a string, and not an array (as it could be set as array via POST body)
         $state['query'] = RequestHelpers::getStringOrNullRequestParamValue($payload['query'] ?? null);
-        $state['variables'] = RequestHelpers::getArrayOrNullRequestParamValue($payload['variables'] ?? null);
+        $state['variables'] = RequestHelpers::getArrayOrEmptyArrayRequestParamValue($payload['variables'] ?? []);
         $state['operation-name'] = RequestHelpers::getStringOrNullRequestParamValue($payload['operationName'] ?? null);
     }
 }
