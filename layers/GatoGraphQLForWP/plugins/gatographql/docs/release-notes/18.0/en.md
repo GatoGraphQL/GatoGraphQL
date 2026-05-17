@@ -28,3 +28,4 @@
 - Avoid conflict with BBQ Firewall plugin ([#3308](https://github.com/GatoGraphQL/GatoGraphQL/pull/3308))
 - Non-nullable parameter in method definition ([#0cbe33e2](https://github.com/GatoGraphQL/GatoGraphQL/commit/0cbe33e2))
 - Make sure query from request is a string ([#3309](https://github.com/GatoGraphQL/GatoGraphQL/pull/3309))
+- Several bug fixes ([#3310](https://github.com/GatoGraphQL/GatoGraphQL/pull/3310))

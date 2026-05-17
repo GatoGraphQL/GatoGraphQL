@@ -34,6 +34,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Avoid conflict with BBQ Firewall plugin (#3308)
 - Non-nullable parameter in method definition (#0cbe33e2)
 - Make sure query from request is a string (#3309)
+- Several bug fixes (#3310)
 
 ## 17.1.1 - 24/03/2026
 
