@@ -106,7 +106,8 @@ class UserSettingsManager extends AbstractSettingsManager implements UserSetting
      */
     public function getJustActivatedLicenseTransientExtensionNames(): ?array
     {
-        return $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_LICENSE_ACTIVATION);
+        $value = $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_LICENSE_ACTIVATION);
+        return is_array($value) ? $value : null;
     }
 
     /**
@@ -141,7 +142,8 @@ class UserSettingsManager extends AbstractSettingsManager implements UserSetting
      */
     public function getPluginOrThemeStatusChangeTransient(): ?array
     {
-        return $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_PLUGIN_OR_THEME_STATUS_CHANGE);
+        $value = $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_PLUGIN_OR_THEME_STATUS_CHANGE);
+        return is_array($value) ? $value : null;
     }
 
     /**
