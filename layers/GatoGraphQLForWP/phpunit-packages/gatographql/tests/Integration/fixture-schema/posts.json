@@ -284,6 +284,10 @@
                 "title": "PHP-only blocks (combinations)"
             },
             {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks"
             },
@@ -305,6 +309,10 @@
             }
         ],
         "postsByCategoryIDs": [
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
             {
                 "id": 1142,
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
@@ -346,6 +354,10 @@
                 "title": "PHP-only blocks (combinations)"
             },
             {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "id": 1200,
                 "title": "PHP-only blocks"
             },
@@ -376,13 +388,13 @@
             {
                 "id": 1121,
                 "title": "Customize the schema for each client"
-            },
-            {
-                "id": 1119,
-                "title": "Nested mutations are a must have"
             }
         ],
         "postsByExcludeIDs": [
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
             {
                 "id": 1210,
                 "title": "PHP-only blocks (combinations)"
@@ -418,10 +430,6 @@
             {
                 "id": 1121,
                 "title": "Customize the schema for each client"
-            },
-            {
-                "id": 1119,
-                "title": "Nested mutations are a must have"
             }
         ],
         "postsByHasPassword": [],
@@ -525,16 +533,16 @@
         ],
         "postsSortedASC": [
             {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "id": 1121,
                 "title": "Customize the schema for each client"
             },
             {
                 "id": 1123,
                 "title": "GraphQL or REST? Why not both?"
-            },
-            {
-                "id": 1,
-                "title": "Hello world!"
             }
         ],
         "postsSortedDESC": [

@@ -472,12 +472,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => CustomPostsModule::class,
-                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
-            ],
-            [
-                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA,

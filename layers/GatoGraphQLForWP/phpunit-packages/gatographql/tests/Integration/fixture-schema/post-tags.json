@@ -1077,6 +1077,11 @@
         ],
         "postsExcludeByTagIDs": [
             {
+                "id": 1212,
+                "title": "All blocks with entity references",
+                "tags": []
+            },
+            {
                 "id": 1210,
                 "title": "PHP-only blocks (combinations)",
                 "tags": [
@@ -1142,18 +1147,6 @@
                     },
                     {
                         "id": 8
-                    }
-                ]
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out",
-                "tags": [
-                    {
-                        "id": 13
-                    },
-                    {
-                        "id": 12
                     }
                 ]
             }
@@ -1301,6 +1294,11 @@
             }
         ],
         "postsExcludeByTagSlugs": [
+            {
+                "id": 1212,
+                "title": "All blocks with entity references",
+                "tags": []
+            },
             {
                 "id": 1150,
                 "title": "Post with old format of the Gutenberg `core\/list` block",

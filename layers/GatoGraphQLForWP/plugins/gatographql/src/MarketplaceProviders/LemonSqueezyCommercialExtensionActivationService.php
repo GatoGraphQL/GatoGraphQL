@@ -73,8 +73,8 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
         return sprintf(
             '%s/v1/licenses/activate?license_key=%s&instance_name=%s',
             $this->getLemonSqueezyAPIBaseURL(),
-            $licenseKey,
-            $instanceName
+            rawurlencode($licenseKey),
+            rawurlencode($instanceName)
         );
     }
 
@@ -116,8 +116,8 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
         return sprintf(
             '%s/v1/licenses/deactivate?license_key=%s&instance_id=%s',
             $this->getLemonSqueezyAPIBaseURL(),
-            $licenseKey,
-            $instanceID
+            rawurlencode($licenseKey),
+            rawurlencode($instanceID)
         );
     }
 
@@ -144,8 +144,8 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
         return sprintf(
             '%s/v1/licenses/validate?license_key=%s&instance_id=%s',
             $this->getLemonSqueezyAPIBaseURL(),
-            $licenseKey,
-            $instanceID
+            rawurlencode($licenseKey),
+            rawurlencode($instanceID)
         );
     }
 
@@ -248,9 +248,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      */
     protected function getProductNameFromResponseBody(array $body): string
     {
-        /** @var string */
-        $productName = $body['meta']['product_name'];
-        return $productName;
+        return (string) ($body['meta']['product_name'] ?? '');
     }
 
     /**
@@ -266,9 +264,8 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      */
     protected function getCustomerNameFromResponseBody(array $body): ?string
     {
-        /** @var string */
-        $customerName = $body['meta']['customer_name'];
-        return $customerName;
+        $customerName = $body['meta']['customer_name'] ?? null;
+        return is_string($customerName) ? $customerName : null;
     }
 
     /**
@@ -276,8 +273,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      */
     protected function getCustomerEmailFromResponseBody(array $body): ?string
     {
-        /** @var string */
-        $customerEmail = $body['meta']['customer_email'];
-        return $customerEmail;
+        $customerEmail = $body['meta']['customer_email'] ?? null;
+        return is_string($customerEmail) ? $customerEmail : null;
     }
 }

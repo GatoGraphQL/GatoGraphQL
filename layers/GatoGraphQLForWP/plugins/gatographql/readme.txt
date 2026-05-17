@@ -242,6 +242,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - Avoid conflict with BBQ Firewall plugin (#3308)
 * Fixed - Non-nullable parameter in method definition (#0cbe33e2)
 * Fixed - Make sure query from request is a string (#3309)
+* Fixed - Several bug fixes (#3310)
 
 = 17.1.1 =
 * Fixed - Conflict with the "All In One Security" plugin (#3287)

@@ -67,7 +67,7 @@
                 "customPostType": "page",
                 "date": "2020-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2020",
-                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gatographql.lndo.site\/php-only-blocks-combinations\/\">Continue reading <span class=\"screen-reader-text\">PHP-only blocks (combinations)<\/span><\/a>",
+                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gatographql.lndo.site\/all-blocks-with-entity-references\/\">Continue reading <span class=\"screen-reader-text\">All blocks with entity references<\/span><\/a>",
                 "featuredImage": null,
                 "hasComments": false,
                 "hasFeaturedImage": false,
@@ -245,6 +245,11 @@
                 "title": "PHP-only blocks (combinations)"
             },
             {
+                "__typename": "Post",
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1620,
                 "title": "Dignissimos sed dolore aut"
@@ -253,11 +258,6 @@
                 "__typename": "GenericCustomPost",
                 "id": 1634,
                 "title": "Recusandae vel deleniti est expedita dolores quasi"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1636,
-                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus"
             }
         ],
         "customPostsByCustomPostTypes": [
@@ -518,14 +518,14 @@
                 "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus"
             },
             {
+                "__typename": "Post",
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "__typename": "Page",
                 "id": 1666,
                 "title": "Another Page"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
             }
         ],
         "customPostsSortedDESC": [
