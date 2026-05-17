@@ -5,7 +5,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 7,
+                "count": 8,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -17,8 +17,12 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 7,
+                "postCount": 8,
                 "posts": [
+                    {
+                        "id": 1212,
+                        "title": "All blocks with entity references"
+                    },
                     {
                         "id": 1150,
                         "title": "Post with old format of the Gutenberg `core\/list` block"
@@ -452,7 +456,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 7,
+                "count": 8,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -464,8 +468,12 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 7,
+                "postCount": 8,
                 "posts": [
+                    {
+                        "id": 1212,
+                        "title": "All blocks with entity references"
+                    },
                     {
                         "id": 1150,
                         "title": "Post with old format of the Gutenberg `core\/list` block"
@@ -1031,7 +1039,7 @@
                 "taxonomy": "category",
                 "childCount": 0,
                 "childNames": [],
-                "count": 7,
+                "count": 8,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -1043,8 +1051,12 @@
                 "name": "Uncategorized",
                 "parent": null,
                 "ancestors": [],
-                "postCount": 7,
+                "postCount": 8,
                 "posts": [
+                    {
+                        "id": 1212,
+                        "title": "All blocks with entity references"
+                    },
                     {
                         "id": 1150,
                         "title": "Post with old format of the Gutenberg `core\/list` block"
@@ -2043,6 +2055,15 @@
         },
         "postsByCategoryIDs": [
             {
+                "id": 1212,
+                "title": "All blocks with entity references",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
                 "id": 1150,
                 "title": "Post with old format of the Gutenberg `core\/list` block",
                 "categories": [
@@ -2135,21 +2156,21 @@
                     },
                     {
                         "id": 2
-                    }
-                ]
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next",
-                "categories": [
-                    {
-                        "id": 1
                     }
                 ]
             }
         ],
         "postsByCategoryIDsWithTaxonomy": [
             {
+                "id": 1212,
+                "title": "All blocks with entity references",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
                 "id": 1150,
                 "title": "Post with old format of the Gutenberg `core\/list` block",
                 "categories": [
@@ -2242,15 +2263,6 @@
                     },
                     {
                         "id": 2
-                    }
-                ]
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next",
-                "categories": [
-                    {
-                        "id": 1
                     }
                 ]
             }
@@ -2392,6 +2404,15 @@
         ],
         "postsExcludeByCategorySlugs": [
             {
+                "id": 1212,
+                "title": "All blocks with entity references",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
                 "id": 1210,
                 "title": "PHP-only blocks (combinations)",
                 "categories": [
@@ -2471,22 +2492,13 @@
                         "id": 3
                     }
                 ]
-            },
-            {
-                "id": 1,
-                "title": "Hello world!",
-                "categories": [
-                    {
-                        "id": 1
-                    }
-                ]
             }
         ],
         "postsByCategoryByID": {
             "taxonomy": "category",
             "childCount": 0,
             "childNames": [],
-            "count": 7,
+            "count": 8,
             "description": "",
             "id": 1,
             "metaValue": null,
@@ -2498,8 +2510,12 @@
             "name": "Uncategorized",
             "parent": null,
             "ancestors": [],
-            "postCount": 7,
+            "postCount": 8,
             "posts": [
+                {
+                    "id": 1212,
+                    "title": "All blocks with entity references"
+                },
                 {
                     "id": 1150,
                     "title": "Post with old format of the Gutenberg `core\/list` block"
