@@ -124,11 +124,11 @@ class ModuleListTableAction extends AbstractListTableAction
             if (!\wp_verify_nonce($nonce, 'gatographql_enable_or_disable_module')) {
                 $noParamsCurrentURL = \admin_url(sprintf(
                     'admin.php?page=%s',
-                    App::query('page', '')
+                    \sanitize_key(App::query('page', ''))
                 ));
                 \wp_die(sprintf(
                     __('This URL is either stale or not valid. Please <a href="%s">click here to reload the page</a>, and try again', 'gatographql'),
-                    $noParamsCurrentURL
+                    \esc_url($noParamsCurrentURL)
                 ));
             }
             if ($moduleID = App::query('item')) {
