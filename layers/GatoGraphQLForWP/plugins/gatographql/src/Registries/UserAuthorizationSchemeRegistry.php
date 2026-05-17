@@ -55,6 +55,11 @@ class UserAuthorizationSchemeRegistry implements UserAuthorizationSchemeRegistry
         if ($this->defaultUserAuthorizationScheme === null) {
             // They are ordered by priority => get the first item
             $userAuthorizationSchemes = $this->getUserAuthorizationSchemes();
+            if ($userAuthorizationSchemes === []) {
+                throw new UserAuthorizationException(
+                    \__('No user authorization scheme has been registered', 'gatographql')
+                );
+            }
             $this->defaultUserAuthorizationScheme = $userAuthorizationSchemes[0];
         }
         return $this->defaultUserAuthorizationScheme;
