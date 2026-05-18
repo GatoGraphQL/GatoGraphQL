@@ -27,7 +27,7 @@ class UserStateTypeAPI implements UserStateTypeAPIInterface
     }
     public function currentUserCan(string $capability): bool
     {
-        if ($capability === '') {
+        if ($capability === '' || !is_user_logged_in()) {
             return false;
         }
         return current_user_can($capability);
