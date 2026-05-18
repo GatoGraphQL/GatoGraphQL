@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
+use function wp_roles;
+
 class CapabilityHelpers
 {
     public static function getSettingsMenuPageRequiredCapability(): string
@@ -33,7 +35,7 @@ class CapabilityHelpers
         }
         if (function_exists('wp_roles')) {
             $capabilityNames = [];
-            foreach (\wp_roles()->roles as $role) {
+            foreach (wp_roles()->roles as $role) {
                 if (!is_array($role['capabilities'] ?? null)) {
                     continue;
                 }
