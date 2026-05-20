@@ -195,7 +195,7 @@ jobs:
                 if: ${{ matrix.pluginConfig.dist_source_enabled && matrix.pluginConfig.dist_source_repo_organization && matrix.pluginConfig.dist_source_repo_name }}
 
             -   name: Upload to release
-                uses: softprops/action-gh-release@v2
+                uses: softprops/action-gh-release@v3
                 with:
                     files: build/release-plugin/${{ matrix.pluginConfig.zip_file }}-source.zip
                 env:
