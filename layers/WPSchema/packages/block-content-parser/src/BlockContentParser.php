@@ -9,6 +9,7 @@ use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
 use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\DOMCrawler\Crawler;
+use PoP\Root\App;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use Throwable;
@@ -329,7 +330,11 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         }
 
         if (! isset($registered_blocks[ $block_name ])) {
-            $this->add_missing_block_warning($block_name);
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->addMissingBlockWarning()) {
+                $this->add_missing_block_warning($block_name);
+            }
         }
 
         $useHTML5Parser = $options['use-html5-parser'] ?? true;

@@ -35,16 +35,24 @@ class MethodHelpers
      */
     public static function getFieldsFromIDFieldSet(array $idFieldSet): array
     {
-        /** @var FieldInterface[] */
-        $fields = [];
-        foreach ($idFieldSet as $id => $fieldSet) {
-            $fields = array_merge(
-                $fields,
-                $fieldSet->fields
-            );
+        /**
+         * Deduplicate while building, keyed by `getUniqueID()`. Avoids the
+         * previous `array_merge(...)` accumulator + final
+         * `array_unique` (which casts each `FieldInterface` to its uniqueID
+         * string for comparison).
+         *
+         * @var array<string,FieldInterface>
+         */
+        $fieldsByUniqueID = [];
+        foreach ($idFieldSet as $fieldSet) {
+            foreach ($fieldSet->fields as $field) {
+                $fieldUniqueID = $field->getUniqueID();
+                if (!isset($fieldsByUniqueID[$fieldUniqueID])) {
+                    $fieldsByUniqueID[$fieldUniqueID] = $field;
+                }
+            }
         }
-        // @phpstan-ignore-next-line
-        return array_values(array_unique($fields));
+        return array_values($fieldsByUniqueID);
     }
 
     /**

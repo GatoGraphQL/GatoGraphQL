@@ -159,11 +159,12 @@ class SettingsNormalizer extends AbstractBasicService implements SettingsNormali
                 } elseif (
                     $type === Properties::TYPE_ARRAY
                     && $subtype === Properties::TYPE_INT
+                    && is_array($values[$name] ?? null)
                 ) {
                     /** @var mixed[] */
                     $arrayValue = $values[$name];
                     $values[$name] = array_map(
-                        fn (int|string $value) => (int) $value,
+                        fn (mixed $value) => (int) $value,
                         $arrayValue
                     );
                 }

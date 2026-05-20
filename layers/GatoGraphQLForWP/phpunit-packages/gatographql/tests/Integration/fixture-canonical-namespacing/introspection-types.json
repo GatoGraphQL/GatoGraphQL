@@ -8,6 +8,14 @@
         },
         {
           "kind": "OBJECT",
+          "name": "BlockType"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "BlockTypeAttribute"
+        },
+        {
+          "kind": "OBJECT",
           "name": "CategoryTermDoesNotExistErrorPayload"
         },
         {
@@ -548,6 +556,10 @@
         },
         {
           "kind": "SCALAR",
+          "name": "BlockTypeAttributeFieldTypeEnumString"
+        },
+        {
+          "kind": "SCALAR",
           "name": "Boolean"
         },
         {
@@ -681,6 +693,14 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "AuthorByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "BlockTypeAttributesFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "BlockTypeSupportsFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -933,6 +953,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootAddUserMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootBlockTypesFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",

@@ -28,7 +28,7 @@
                 },
                 "commentCount": 0,
                 "comments": [],
-                "content": "\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n",
+                "content": "\n<p class=\"wp-block-paragraph\">Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n",
                 "customPostType": "post",
                 "date": "2020-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2020",
@@ -63,11 +63,11 @@
                 },
                 "commentCount": 0,
                 "comments": [],
-                "content": "\n<p>This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n\n\n\n<blockquote class=\"wp-block-quote is-layout-flow wp-block-quote-is-layout-flow\"><p>Hi there! I&#8217;m a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin&#8217; caught in the rain.)<\/p><\/blockquote>\n\n\n\n<p>&#8230;or something like this:<\/p>\n\n\n\n<blockquote class=\"wp-block-quote is-layout-flow wp-block-quote-is-layout-flow\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n\n\n\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gatographql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n",
+                "content": "\n<p class=\"wp-block-paragraph\">This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n\n\n\n<blockquote class=\"wp-block-quote is-layout-flow wp-block-quote-is-layout-flow\"><p>Hi there! I&#8217;m a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin&#8217; caught in the rain.)<\/p><\/blockquote>\n\n\n\n<p class=\"wp-block-paragraph\">&#8230;or something like this:<\/p>\n\n\n\n<blockquote class=\"wp-block-quote is-layout-flow wp-block-quote-is-layout-flow\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n\n\n\n<p class=\"wp-block-paragraph\">As a new WordPress user, you should go to <a href=\"https:\/\/gatographql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n",
                 "customPostType": "page",
                 "date": "2020-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2020",
-                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gatographql.lndo.site\/post-with-old-format-of-the-gutenberg-core-list-block\/\">Continue reading <span class=\"screen-reader-text\">Post with old format of the Gutenberg `core\/list` block<\/span><\/a>",
+                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gatographql.lndo.site\/all-blocks-with-entity-references\/\">Continue reading <span class=\"screen-reader-text\">All blocks with entity references<\/span><\/a>",
                 "featuredImage": null,
                 "hasComments": false,
                 "hasFeaturedImage": false,
@@ -110,7 +110,7 @@
                         "id": 2
                     }
                 ],
-                "content": "\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Standard)<\/h2>\n\n\n\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
+                "content": "\n<p class=\"wp-block-paragraph\">This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Standard)<\/h2>\n\n\n\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
                 "customPostType": "post",
                 "date": "2020-12-12T03:56:13+00:00",
                 "dateStr": "December 12, 2020",
@@ -235,6 +235,21 @@
                 "title": "Public or Private API mode, for extra security"
             },
             {
+                "__typename": "Post",
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
+                "__typename": "Post",
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "__typename": "Post",
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1620,
                 "title": "Dignissimos sed dolore aut"
@@ -243,21 +258,6 @@
                 "__typename": "GenericCustomPost",
                 "id": 1634,
                 "title": "Recusandae vel deleniti est expedita dolores quasi"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1636,
-                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1644,
-                "title": "Impedit eaque numquam quas inventore"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1649,
-                "title": "Nulla numquam totam eaque"
             }
         ],
         "customPostsByCustomPostTypes": [
@@ -518,14 +518,14 @@
                 "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus"
             },
             {
+                "__typename": "Post",
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "__typename": "Page",
                 "id": 1666,
                 "title": "Another Page"
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt"
             }
         ],
         "customPostsSortedDESC": [

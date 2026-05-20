@@ -81,7 +81,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
 
     /**
      * Execute the GraphQL query when posting to:
-     * /wp-admin/edit.php?page=gatographql&action=execute_query
+     * /wp-admin/edit.php?page=gatographql&action=run_query
      */
     public function isEndpointBeingRequested(): bool
     {

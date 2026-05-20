@@ -2,7 +2,7 @@
 Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
 Requires at least: 6.1
-Tested up to: 6.9
+Tested up to: 7.0
 Stable tag: 17.1.2
 Requires PHP: 8.1
 License: GPLv2 or later
@@ -78,7 +78,7 @@ The available premium extensions are:
 
 [Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
 
-[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, DeepSeek, Mistral AI, DeepL, and Google Translate.
+[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and Google Translate.
 
 [WooCommerce](https://gatographql.com/extensions/woocommerce): Integration with WooCommerce, to fetch product data.
 
@@ -90,7 +90,7 @@ You can use Gato GraphQL to do everything offered by Gato Plugins!
 
 The plugins are:
 
-[Gato AI Translations for Polylang](https://gatoaitranslations.com): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, DeepSeek, Mistral AI, DeepL, and Google Translate.
+[Gato AI Translations for Polylang](https://gatoaitranslations.com): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and Google Translate.
 
 == Frequently Asked Questions ==
 
@@ -223,6 +223,26 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 18.0.0 =
+* Breaking changes - Changed namespace for packages in Gato GraphQL extensions (HTTP Client/PHP Constants and Environment Variables via Schema)
+* Breaking changes - Changed the admin endpoint URL (from `wp-admin/edit.php?page=gatographql&action=execute_query` to `wp-admin/edit.php?page=gatographql&action=run_query`) (#3308)
+* Added - Field `Root.blockTypes` to query data from the Block Type Registry (#3291)
+* Added - Cache compiled queries to disk (#3303)
+* Improved - Tested up to WordPress 7.0 (#3289)
+* Improved - Support AI Connectors from WordPress 7.0 (#3290)
+* Improved - Updated documentation for Translation extension, now supporting Gemini as a translation service provider (#3292)
+* Improved - Allow the custom post `author` to be null (e.g. when the post has no assigned user / author ID 0) (#3293)
+* Improved - Execute GraphQL queries much faster (#3294, #3295, #3298)
+* Improved - Consume less memory (#3296, #3297)
+* Improved - Replace deprecations in PHP 8.5 (#3306)
+* Improved - Allow disabling the "Block type '...' is not server-side registered" warning (#3307)
+* Fixed - Handle null response from license API (eg: when access is forbidden via network) (#3288)
+* Fixed - In field `menus`, return no results when passing empty `filter.slugs` (#8773b1b)
+* Fixed - Avoid conflict with BBQ Firewall plugin (#3308)
+* Fixed - Non-nullable parameter in method definition (#0cbe33e2)
+* Fixed - Make sure query from request is a string (#3309)
+* Fixed - Several bug fixes (#3310)
 
 = 17.1.1 =
 * Fixed - Conflict with the "All In One Security" plugin (#3287)

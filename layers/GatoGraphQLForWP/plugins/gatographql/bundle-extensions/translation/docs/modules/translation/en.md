@@ -4,6 +4,7 @@ Add a directive `@strTranslate` to translate a field value using your selected s
 
 - <a href="https://openai.com/api/" target="_blank">ChatGPT API</a>
 - <a href="https://www.anthropic.com/claude" target="_blank">Claude API</a>
+- <a href="https://ai.google.dev/gemini-api" target="_blank">Gemini API</a>
 - <a href="https://www.deepseek.com/" target="_blank">DeepSeek API</a>
 - <a href="https://mistral.ai/" target="_blank">Mistral API</a>
 - <a href="https://openrouter.ai" target="_blank">OpenRouter</a>
@@ -20,6 +21,7 @@ Use directive `@strTranslate` to translate the field values in your GraphQL quer
 - `claude`
 - `deepl`
 - `deepseek`
+- `gemini`
 - `google_translate`
 - `mistral`
 - `openrouter`

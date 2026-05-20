@@ -27,7 +27,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\Root\StateManagers\AppStateManagerInterface;
 use SplObjectStorage;
+use WeakMap;
 
 abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
 {
@@ -42,6 +44,64 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * @var array<string,array<string,LeafField>>
      */
     private array $fieldInstanceContainer = [];
+
+    /**
+     * Memoization for the field-node getters below. These getters are
+     * pure functions of `$component->atts` plus the request-scoped
+     * `App::getState('executable-document-ast')` (frozen for the
+     * request); but each call also allocates fresh `new Component(...)`
+     * virtual sub-components. They are invoked repeatedly per node by
+     * 5+ tree walkers (prop init, dataloading paths, flattening,
+     * subcomponent grouping).
+     *
+     * The translation-execution profile shows this getter being called
+     * ~375K times per request — with `Component` being a `final readonly`
+     * value object, many of those calls receive different instances
+     * representing the *same* logical sub-component (built via different
+     * tree-walking paths). An identity-keyed cache (e.g. WeakMap) misses
+     * those equivalent instances. Use a **value-keyed** cache instead
+     * (`processorClass | name | serialize(atts)`), with an AST-instance
+     * tracker that clears the cache automatically when the request's
+     * executable document changes.
+     *
+     * Invalidated by `executable-document-ast` instance change (via
+     * `$cacheForExecutableDocumentAST`), so long-running PHP processes
+     * (FrankenPHP/Swoole/etc.) see a fresh cache per request without an
+     * explicit reset hook. The cache is bypassed entirely when
+     * `does-api-query-have-errors` is true.
+     *
+     * @var array<string,LeafComponentFieldNode[]>
+     */
+    private array $leafComponentFieldNodesCache = [];
+    /**
+     * @var array<string,RelationalComponentFieldNode[]>
+     */
+    private array $relationalComponentFieldNodesCache = [];
+    /**
+     * @var array<string,ConditionalLeafComponentFieldNode[]>
+     */
+    private array $conditionalLeafComponentFieldNodesCache = [];
+    private ?ExecutableDocument $cacheForExecutableDocumentAST = null;
+    /**
+     * Tracks the current "Sequential Pass" MQE operation paired with
+     * the cached field-nodes. Under SEQUENTIAL_PASS, the engine drives
+     * one operation at a time and `getOperationFieldOrFragmentBonds()`
+     * returns DIFFERENT fields for the same Component on different
+     * iterations — so the cache must invalidate when the current
+     * operation changes, not just when the executable document does.
+     *
+     * @var object|null
+     */
+    private ?object $cacheForMultipleQueryExecutionCurrentOperation = null;
+    private ?AppStateManagerInterface $cachedAppStateManager = null;
+    /**
+     * Memoization for `getFieldUniqueID` keyed by field instance. This
+     * shows up at ~1G self-cost, 348K calls in the translation profile
+     * — a string-id generator that's pure on (field, aliasFriendly).
+     *
+     * @var WeakMap<FieldInterface,array{0?:string,1?:string}>|null
+     */
+    private ?WeakMap $fieldUniqueIDCache = null;
 
     private ?QueryASTTransformationServiceInterface $queryASTTransformationService = null;
     private ?ASTNodeDuplicatorServiceInterface $astNodeDuplicatorService = null;
@@ -170,7 +230,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return;
         }
 
-        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuplesFromExecutableDocument($executableDocument, true);
+        // Cache must contain fields from ALL operations of the document, not
+        // just the currently-executing one — otherwise under "Sequential
+        // Pass" MQE the second-and-later operations' fields would never
+        // make it into the cache (the first call seeds the cache, and on
+        // subsequent calls `isset(...)` short-circuits this method). Pass
+        // `forAllOperations=true` to bypass the per-op filter.
+        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuplesFromExecutableDocument($executableDocument, true, true);
         $appStateFieldFragmentModelsTuples[$query] = [];
         foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $appStateFieldFragmentModelsTuples[$query][$this->getFieldUniqueID($fieldFragmentModelsTuple->getField())] = $fieldFragmentModelsTuple;
@@ -184,10 +250,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     protected function getFieldFragmentModelsTuplesFromExecutableDocument(
         ExecutableDocument $executableDocument,
         bool $recursive,
+        bool $forAllOperations = false,
     ): array {
         $fieldFragmentModelsTuples = [];
         $fragments = $executableDocument->getDocument()->getFragments();
-        $operationFieldOrFragmentBonds = $this->getOperationFieldOrFragmentBonds($executableDocument);
+        $operationFieldOrFragmentBonds = $this->getOperationFieldOrFragmentBonds($executableDocument, $forAllOperations);
 
         /** @var OperationInterface $operation */
         foreach ($operationFieldOrFragmentBonds as $operation) {
@@ -212,21 +279,47 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * - Addition of the SuperRoot fields for GraphQL
      * - Wrapping operations in `self` for Multiple Query Execution
+     *   (only under the SELF_WRAP strategy)
+     *
+     * Under the "Sequential Pass" Multiple Query Execution strategy, the
+     * engine drives one operation at a time via the
+     * `multiple-query-execution-current-operation` app-state key. When
+     * that key is set we restrict the operation list to that single
+     * operation, so each engine pass builds and drains the tree for one
+     * operation only.
+     *
+     * Pass `$forAllOperations=true` to bypass that per-op filter — used
+     * for cache-population paths that need to visit every operation
+     * (eg: pre-populating the AST field-fragment-models cache).
      *
      * @return SplObjectStorage<OperationInterface,array<FieldInterface|FragmentBondInterface>>
      */
     protected function getOperationFieldOrFragmentBonds(
         ExecutableDocument $executableDocument,
+        bool $forAllOperations = false,
     ): SplObjectStorage {
         $document = $executableDocument->getDocument();
-        /** @var OperationInterface[] */
-        $operations = $executableDocument->getMultipleOperationsToExecute();
+
+        if ($forAllOperations) {
+            /** @var OperationInterface[] */
+            $operations = $executableDocument->getMultipleOperationsToExecute();
+        } else {
+            /** @var OperationInterface|null */
+            $currentMQEOperation = App::getState('multiple-query-execution-current-operation');
+            if ($currentMQEOperation !== null) {
+                $operations = [$currentMQEOperation];
+            } else {
+                /** @var OperationInterface[] */
+                $operations = $executableDocument->getMultipleOperationsToExecute();
+            }
+        }
 
         /**
          * Multiple Query Execution: In order to have the fields
          * of the subsequent operations be resolved in the same
          * order as the operations (which is necessary for `@export`
-         * to work), then wrap them on a "self" field.
+         * to work), then wrap them on a "self" field — except when
+         * the engine drives the operations sequentially (see above).
          */
         return $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution(
             $document,
@@ -244,6 +337,21 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      */
     protected function getFieldUniqueID(FieldInterface $field, bool $aliasFriendly = false): string
     {
+        if ($this->fieldUniqueIDCache === null) {
+            /** @var WeakMap<FieldInterface,array{0?:string,1?:string}> $cache */
+            $cache = new WeakMap();
+            $this->fieldUniqueIDCache = $cache;
+        }
+        $cache = $this->fieldUniqueIDCache;
+        /** @var array{0?:string,1?:string} */
+        $entry = $cache[$field] ?? [];
+        if ($aliasFriendly) {
+            if (isset($entry[1])) {
+                return $entry[1];
+            }
+        } elseif (isset($entry[0])) {
+            return $entry[0];
+        }
         $location = $field->getLocation();
         $fieldUniqueID = sprintf(
             $aliasFriendly ? '%s%sx%s' : '%s([%s,%s])',
@@ -252,13 +360,41 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $location->getColumn()
         );
         if ($location instanceof RuntimeLocation) {
-            return sprintf(
+            $fieldUniqueID = sprintf(
                 '%s #%s',
                 $fieldUniqueID,
-                spl_object_hash($field)
+                spl_object_id($field)
             );
         }
+        if ($aliasFriendly) {
+            $entry[1] = $fieldUniqueID;
+        } else {
+            $entry[0] = $fieldUniqueID;
+        }
+        $cache[$field] = $entry;
         return $fieldUniqueID;
+    }
+
+    private function getFieldNodeCacheKeyForComponent(Component $component): string
+    {
+        $manager = App::getAppStateManager();
+        /** @var ExecutableDocument|null */
+        $executableDocument = $manager->get('executable-document-ast');
+        /** @var object|null */
+        $currentMQEOperation = $manager->get('multiple-query-execution-current-operation');
+        if (
+            $this->cachedAppStateManager !== $manager
+            || $this->cacheForExecutableDocumentAST !== $executableDocument
+            || $this->cacheForMultipleQueryExecutionCurrentOperation !== $currentMQEOperation
+        ) {
+            $this->leafComponentFieldNodesCache = [];
+            $this->relationalComponentFieldNodesCache = [];
+            $this->conditionalLeafComponentFieldNodesCache = [];
+            $this->cacheForExecutableDocumentAST = $executableDocument;
+            $this->cacheForMultipleQueryExecutionCurrentOperation = $currentMQEOperation;
+            $this->cachedAppStateManager = $manager;
+        }
+        return $component->getCacheKey();
     }
 
     /**
@@ -269,6 +405,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
+        }
+
+        $cacheKey = $this->getFieldNodeCacheKeyForComponent($component);
+        if (isset($this->leafComponentFieldNodesCache[$cacheKey])) {
+            return $this->leafComponentFieldNodesCache[$cacheKey];
         }
 
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($component->atts);
@@ -290,7 +431,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             $leafFieldFragmentModelsTuples
         );
 
-        return array_map(
+        return $this->leafComponentFieldNodesCache[$cacheKey] = array_map(
             LeafComponentFieldNode::fromLeafField(...),
             $leafFields
         );
@@ -327,6 +468,11 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return [];
         }
 
+        $cacheKey = $this->getFieldNodeCacheKeyForComponent($component);
+        if (isset($this->relationalComponentFieldNodesCache[$cacheKey])) {
+            return $this->relationalComponentFieldNodesCache[$cacheKey];
+        }
+
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($component->atts);
 
         if ($this->ignoreConditionalFields($component->atts)) {
@@ -348,7 +494,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
 
         $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
-            return [];
+            return $this->relationalComponentFieldNodesCache[$cacheKey] = [];
         }
 
         /** @var ExecutableDocument $executableDocument */
@@ -387,7 +533,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 ]
             );
         }
-        return $ret;
+        return $this->relationalComponentFieldNodesCache[$cacheKey] = $ret;
     }
 
     /**
@@ -427,8 +573,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
             return [];
         }
 
+        $cacheKey = $this->getFieldNodeCacheKeyForComponent($component);
+        if (isset($this->conditionalLeafComponentFieldNodesCache[$cacheKey])) {
+            return $this->conditionalLeafComponentFieldNodesCache[$cacheKey];
+        }
+
         if (!$this->ignoreConditionalFields($component->atts)) {
-            return [];
+            return $this->conditionalLeafComponentFieldNodesCache[$cacheKey] = [];
         }
 
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($component->atts);
@@ -556,7 +707,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 ],
             );
         }
-        return $conditionalLeafComponentFieldNodes;
+        return $this->conditionalLeafComponentFieldNodesCache[$cacheKey] = $conditionalLeafComponentFieldNodes;
     }
 
     /**

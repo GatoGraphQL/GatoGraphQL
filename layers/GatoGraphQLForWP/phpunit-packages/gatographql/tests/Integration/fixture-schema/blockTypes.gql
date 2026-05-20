@@ -1,0 +1,413 @@
+{
+  # ----------------------------------------------------------------
+  # All registered block types (no filter): pull a compact summary
+  # ----------------------------------------------------------------
+  allBlockTypes: blockTypes {
+    ...BlockTypeSummary
+  }
+
+  # ----------------------------------------------------------------
+  # PHP-only blocks (WP 7.0+):
+  #   `supports.autoRegister = true` AND has a `render_callback`
+  # ----------------------------------------------------------------
+  phpOnlyBlockTypes: blockTypes(
+    filter: {
+      supports: { autoRegister: true }
+      hasRenderCallback: true
+    }
+  ) {
+    ...BlockTypeFull
+  }
+
+  # PHP-only blocks via `autoRegister` only (no hasRenderCallback gate)
+  autoRegisterOnly: blockTypes(
+    filter: {
+      supports: { autoRegister: true }
+    }
+  ) {
+    ...BlockTypeSummary
+  }
+
+  # Blocks WITHOUT a render_callback (i.e. purely save()-rendered blocks)
+  staticBlockTypes: blockTypes(
+    filter: {
+      hasRenderCallback: false
+    }
+  ) {
+    name
+    hasRenderCallback
+  }
+
+  # Blocks WITH a render_callback (dynamic blocks, both core and PHP-only)
+  dynamicBlockTypes: blockTypes(
+    filter: {
+      hasRenderCallback: true
+    }
+  ) {
+    name
+    hasRenderCallback
+  }
+
+  # ----------------------------------------------------------------
+  # Filter by exact names — the 3 PHP-only blocks registered for testing
+  # ----------------------------------------------------------------
+  testingBlockTypesByName: blockTypes(
+    filter: {
+      names: [
+        "gatographql-testing/alert",
+        "gatographql-testing/marquee",
+        "gatographql-testing/author-box"
+      ]
+    }
+  ) {
+    ...BlockTypeFull
+  }
+
+  # ----------------------------------------------------------------
+  # Filter by name substring (testing namespace)
+  # ----------------------------------------------------------------
+  testingBlockTypesByNameSearch: blockTypes(
+    filter: {
+      nameSearch: "gatographql-testing/"
+    }
+  ) {
+    ...BlockTypeSummary
+  }
+
+  # ----------------------------------------------------------------
+  # Combine: PHP-only blocks restricted to the testing namespace
+  # ----------------------------------------------------------------
+  testingPhpOnlyBlockTypes: blockTypes(
+    filter: {
+      nameSearch: "gatographql-testing/"
+      supports: { autoRegister: true }
+      hasRenderCallback: true
+    }
+  ) {
+    ...BlockTypeFull
+  }
+
+  # ----------------------------------------------------------------
+  # Exclude specific blocks
+  # ----------------------------------------------------------------
+  excludeAlert: blockTypes(
+    filter: {
+      nameSearch: "gatographql-testing/"
+      excludeNames: ["gatographql-testing/alert"]
+    }
+  ) {
+    name
+  }
+
+  # ----------------------------------------------------------------
+  # `supports` combinations (other than autoRegister)
+  # ----------------------------------------------------------------
+  blocksSupportingAlign: blockTypes(
+    filter: {
+      nameSearch: "gatographql-testing/"
+      supports: { align: true }
+    }
+  ) {
+    name
+    supports
+  }
+
+  blocksNotSupportingHTML: blockTypes(
+    filter: {
+      nameSearch: "gatographql-testing/"
+      supports: { html: false }
+    }
+  ) {
+    name
+    supports
+  }
+
+  # Blocks supporting both align AND being multiple-allowed (typical defaults)
+  blocksSupportingAlignAndMultiple: blockTypes(
+    filter: {
+      nameSearch: "gatographql-testing/"
+      supports: { align: true, multiple: true }
+    }
+  ) {
+    name
+    supports
+  }
+
+  # ----------------------------------------------------------------
+  # Single PHP-only block, with ALL attributes (no attributes filter)
+  # ----------------------------------------------------------------
+  alertAllAttributes: blockTypes(
+    filter: { names: "gatographql-testing/alert" }
+  ) {
+    name
+    hasRenderCallback
+    supports
+    attributeNames
+    attributes {
+      ...BlockTypeAttributeFull
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Same block, only STRING attributes
+  # ----------------------------------------------------------------
+  alertStringAttributes: blockTypes(
+    filter: { names: "gatographql-testing/alert" }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["string"] })
+    attributes(filter: { fieldTypes: ["string"] }) {
+      name
+      fieldType
+      default
+      label
+      enum
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Marquee: only STRING attributes (text, speed, direction)
+  # ----------------------------------------------------------------
+  marqueeStringAttributes: blockTypes(
+    filter: { names: "gatographql-testing/marquee" }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["string"] })
+    attributes(filter: { fieldTypes: ["string"] }) {
+      name
+      fieldType
+      default
+      enum
+    }
+  }
+
+  # Marquee: string attributes that are NOT restricted to an enum (`text`)
+  marqueeStringNonEnumAttributes: blockTypes(
+    filter: { names: "gatographql-testing/marquee" }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["string"], hasEnum: false })
+    attributes(filter: { fieldTypes: ["string"], hasEnum: false }) {
+      name
+      fieldType
+      default
+      enum
+    }
+  }
+
+  # Marquee: string attributes that ARE restricted to an enum (`speed`, `direction`)
+  marqueeStringEnumAttributes: blockTypes(
+    filter: { names: "gatographql-testing/marquee" }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["string"], hasEnum: true })
+    attributes(filter: { fieldTypes: ["string"], hasEnum: true }) {
+      name
+      fieldType
+      default
+      enum
+    }
+  }
+
+  # Alert: multi-type filter — STRING or BOOLEAN attributes in one shot
+  # (alert has both: e.g. `message`/`type` as string, `dismissible` as boolean)
+  alertStringOrBooleanAttributes: blockTypes(
+    filter: { names: "gatographql-testing/alert" }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["string", "boolean"] })
+    attributes(filter: { fieldTypes: ["string", "boolean"] }) {
+      name
+      fieldType
+      default
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Marquee: only BOOLEAN attributes (none expected)
+  # ----------------------------------------------------------------
+  marqueeBooleanAttributes: blockTypes(
+    filter: { names: "gatographql-testing/marquee" }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["boolean"] })
+    attributes(filter: { fieldTypes: ["boolean"] }) {
+      name
+      fieldType
+      default
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Author-Box: BOOLEAN attributes (showAvatar, showBio, showEmail)
+  # ----------------------------------------------------------------
+  authorBoxBooleanAttributes: blockTypes(
+    filter: { names: "gatographql-testing/author-box" }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["boolean"] })
+    attributes(filter: { fieldTypes: ["boolean"] }) {
+      name
+      fieldType
+      default
+      label
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Author-Box: STRING attributes (userLogin, with dynamic enum)
+  # ----------------------------------------------------------------
+  authorBoxStringAttributes: blockTypes(
+    filter: { names: "gatographql-testing/author-box" }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["string"] })
+    attributes(filter: { fieldTypes: ["string"] }) {
+      name
+      fieldType
+      default
+      enum
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Combined attributes filter: STRING + autoGenerateControl=true
+  # ----------------------------------------------------------------
+  alertEditableStringAttributes: blockTypes(
+    filter: { names: "gatographql-testing/alert" }
+  ) {
+    name
+    attributeNames(
+      filter: {
+        fieldTypes: ["string"]
+        autoGenerateControl: true
+      }
+    )
+    attributes(
+      filter: {
+        fieldTypes: ["string"]
+        autoGenerateControl: true
+      }
+    ) {
+      name
+      fieldType
+      autoGenerateControl
+      default
+      label
+    }
+  }
+
+  # Attributes with autoGenerateControl=false
+  alertNonEditableAttributes: blockTypes(
+    filter: { names: "gatographql-testing/alert" }
+  ) {
+    name
+    attributeNames(filter: { autoGenerateControl: false })
+    attributes(filter: { autoGenerateControl: false }) {
+      name
+      fieldType
+      autoGenerateControl
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Across ALL PHP-only testing blocks: list their boolean attributes
+  # ----------------------------------------------------------------
+  testingPhpOnlyBooleanAttributes: blockTypes(
+    filter: {
+      nameSearch: "gatographql-testing/"
+      supports: { autoRegister: true }
+    }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["boolean"] })
+    attributes(filter: { fieldTypes: ["boolean"] }) {
+      name
+      fieldType
+      default
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Across ALL PHP-only testing blocks: list their string attributes
+  # ----------------------------------------------------------------
+  testingPhpOnlyStringAttributes: blockTypes(
+    filter: {
+      nameSearch: "gatographql-testing/"
+      supports: { autoRegister: true }
+    }
+  ) {
+    name
+    attributeNames(filter: { fieldTypes: ["string"] })
+    attributes(filter: { fieldTypes: ["string"] }) {
+      name
+      fieldType
+      default
+      enum
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Full attribute schema dump for the alert block
+  # ----------------------------------------------------------------
+  alertAttributeSchemas: blockTypes(
+    filter: { names: "gatographql-testing/alert" }
+  ) {
+    name
+    attributeNames
+    attributes {
+      name
+      blockTypeName
+      fieldType
+      label
+      default
+      enum
+      source
+      role
+      autoGenerateControl
+      schema
+    }
+  }
+
+  # ----------------------------------------------------------------
+  # Edge cases
+  # ----------------------------------------------------------------
+  unknownBlockTypeByName: blockTypes(
+    filter: { names: "gatographql-testing/this-block-does-not-exist" }
+  ) {
+    name
+  }
+
+  unknownBlockTypeBySearch: blockTypes(
+    filter: { nameSearch: "this-substring-should-not-match-anything" }
+  ) {
+    name
+  }
+}
+
+fragment BlockTypeSummary on BlockType {
+  name
+  hasRenderCallback
+}
+
+fragment BlockTypeFull on BlockType {
+  name
+  hasRenderCallback
+  supports
+  attributeNames
+  attributes {
+    ...BlockTypeAttributeFull
+  }
+}
+
+fragment BlockTypeAttributeFull on BlockTypeAttribute {
+  name
+  blockTypeName
+  fieldType
+  label
+  default
+  enum
+  source
+  role
+  autoGenerateControl
+}

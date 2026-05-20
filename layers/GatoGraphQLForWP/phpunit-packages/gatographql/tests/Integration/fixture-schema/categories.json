@@ -1083,7 +1083,7 @@
         "categoriesWithoutTaxonomy": [
             {
                 "__typename": "PostCategory",
-                "postCount": 7,
+                "postCount": 8,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1175,10 +1175,23 @@
                                 "taxonomy": "category"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1212,
+                        "title": "All blocks with entity references",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 1,
+                                "name": "Uncategorized",
+                                "taxonomy": "category"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "category",
-                "count": 7,
+                "count": 8,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -1195,7 +1208,7 @@
             },
             {
                 "__typename": "PostCategory",
-                "postCount": 3,
+                "postCount": 5,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1265,10 +1278,36 @@
                                 "taxonomy": "category"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1200,
+                        "title": "PHP-only blocks",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 2,
+                                "name": "Advanced",
+                                "taxonomy": "category"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)",
+                        "categories": [
+                            {
+                                "__typename": "PostCategory",
+                                "id": 2,
+                                "name": "Advanced",
+                                "taxonomy": "category"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "category",
-                "count": 3,
+                "count": 5,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -3134,6 +3173,54 @@
                 ]
             },
             {
+                "__typename": "Post",
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "taxonomy": "category",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "taxonomy": "category",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1212,
+                "title": "All blocks with entity references",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 1,
+                        "name": "Uncategorized",
+                        "taxonomy": "category",
+                        "slug": "uncategorized",
+                        "slugPath": "uncategorized"
+                    }
+                ]
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -3626,82 +3713,6 @@
                         "taxonomy": "dummy-category"
                     }
                 ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1649,
-                "title": "Nulla numquam totam eaque",
-                "customPostType": "dummy-cpt",
-                "categories": [],
-                "categoriesWithoutTaxonomy": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 19,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ],
-                "categoriesWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 19,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1656,
-                "title": "Dummy CPT with non-existing block",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 19,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ],
-                "categoriesWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 19,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
             }
         ],
         "customPostsByCategoryIDs": [
@@ -3741,6 +3752,18 @@
         ],
         "customPostsExcludeByCategoryIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1142,
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
             },
@@ -3767,21 +3790,6 @@
             {
                 "id": 1688,
                 "title": "Dummy CPT with parent only",
-                "categories": []
-            },
-            {
-                "id": 1684,
-                "title": "Dummy CPT with parent and children",
-                "categories": []
-            },
-            {
-                "id": 1682,
-                "title": "Dummy CPT with several levels of children",
-                "categories": []
-            },
-            {
-                "id": 1132,
-                "title": "Synced pattern with nested blocks",
                 "categories": []
             }
         ],
@@ -3873,6 +3881,18 @@
         ],
         "customPostsExcludeByCategorySlugs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1142,
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
             },
@@ -3899,21 +3919,6 @@
             {
                 "id": 1688,
                 "title": "Dummy CPT with parent only",
-                "categories": []
-            },
-            {
-                "id": 1684,
-                "title": "Dummy CPT with parent and children",
-                "categories": []
-            },
-            {
-                "id": 1682,
-                "title": "Dummy CPT with several levels of children",
-                "categories": []
-            },
-            {
-                "id": 1132,
-                "title": "Synced pattern with nested blocks",
                 "categories": []
             }
         ],
@@ -3997,7 +4002,7 @@
         "postCategories": [
             {
                 "taxonomy": "category",
-                "count": 7,
+                "count": 8,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
@@ -4014,7 +4019,7 @@
             },
             {
                 "taxonomy": "category",
-                "count": 3,
+                "count": 5,
                 "description": "",
                 "id": 2,
                 "metaValue": null,
@@ -4117,7 +4122,7 @@
         ],
         "postCategoryByID": {
             "taxonomy": "category",
-            "count": 7,
+            "count": 8,
             "description": "",
             "id": 1,
             "metaValue": null,

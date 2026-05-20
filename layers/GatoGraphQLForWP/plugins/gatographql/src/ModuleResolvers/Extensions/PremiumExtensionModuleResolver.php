@@ -18,6 +18,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const DEEPSEEK_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\deepseek-translation';
     public const ELEMENTOR = Plugin::NAMESPACE . '\\extensions\\elementor';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\extensions\\events-manager';
+    public const GEMINI_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\gemini-translation';
     public const GOOGLE_TRANSLATE = Plugin::NAMESPACE . '\\extensions\\google-translate';
     public const JETENGINE_CCTS = Plugin::NAMESPACE . '\\extensions\\jetengine-ccts';
     public const MISTRALAI_TRANSLATION = Plugin::NAMESPACE . '\\extensions\\mistralai-translation';
@@ -42,6 +43,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::DEEPSEEK_TRANSLATION,
             self::ELEMENTOR,
             self::EVENTS_MANAGER,
+            self::GEMINI_TRANSLATION,
             self::GOOGLE_TRANSLATE,
             self::JETENGINE_CCTS,
             self::MISTRALAI_TRANSLATION,
@@ -65,6 +67,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::DEEPSEEK_TRANSLATION => \__('DeepSeek', 'gatographql'),
             self::ELEMENTOR => \__('Elementor', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
+            self::GEMINI_TRANSLATION => \__('Gemini Translation', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Google Translate', 'gatographql'),
             self::JETENGINE_CCTS => \__('JetEngine CCTs', 'gatographql'),
             self::MISTRALAI_TRANSLATION => \__('Mistral AI Translation', 'gatographql'),
@@ -89,6 +92,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::DEEPSEEK_TRANSLATION => \__('Translate content to multiple languages using the DeepSeek API.', 'gatographql'),
             self::ELEMENTOR => \__('Integration with plugin "Elementor", adding fields to parse and update data in Elementor pages and templates.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
+            self::GEMINI_TRANSLATION => \__('Translate content to multiple languages using the Gemini API.', 'gatographql'),
             self::GOOGLE_TRANSLATE => \__('Translate content to multiple languages using the Google Translate API.', 'gatographql'),
             self::JETENGINE_CCTS => \__('Integration with plugin "JetEngine", adding fields to the schema to fetch Custom Content Type data.', 'gatographql'),
             self::MISTRALAI_TRANSLATION => \__('Translate content to multiple languages using the Mistral AI API.', 'gatographql'),

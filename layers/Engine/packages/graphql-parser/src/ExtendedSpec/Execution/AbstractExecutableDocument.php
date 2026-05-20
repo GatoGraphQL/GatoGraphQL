@@ -133,7 +133,16 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
     }
 
     /**
-     * Accumulate all operations defined via @depends(on: ...)
+     * Accumulate all operations defined via @depends(on: ...) in
+     * dependency order (depended-upon operations appear before the
+     * operations that depend on them).
+     *
+     * Implemented as a post-order DFS topological sort: each operation
+     * is appended to the result only after all of its depended-upon
+     * operations have been visited. A visited-set keyed by object
+     * identity ensures each operation is visited at most once, so the
+     * total work is O(V + E) over the dependency graph (N operations,
+     * E `@depends(on:...)` edges).
      *
      * @param OperationInterface[] $multipleQueryExecutionOperations
      * @param OperationInterface[] $operations
@@ -144,72 +153,50 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         OperationInterface $operation,
         array $operations,
     ): array {
-        /**
-         * Add the operation at the beginning of the list,
-         * as it must be processed before its depending one
-         */
-        array_unshift($multipleQueryExecutionOperations, $operation);
+        $visitedOperationIDs = [];
+        foreach ($multipleQueryExecutionOperations as $alreadyAccumulatedOperation) {
+            $visitedOperationIDs[spl_object_id($alreadyAccumulatedOperation)] = true;
+        }
+        $this->collectMultipleQueryExecutionOperationsInTopologicalOrder(
+            $operation,
+            $operations,
+            $visitedOperationIDs,
+            $multipleQueryExecutionOperations,
+        );
+        return $multipleQueryExecutionOperations;
+    }
 
-        $dependedUponOperations = $this->getDependedUponOperations($operation, $operations);
+    /**
+     * Post-order DFS visitor: recurse into the operation's dependencies
+     * first, then append the operation itself. This guarantees the
+     * resulting list is in topological order.
+     *
+     * @param OperationInterface[] $operations
+     * @param array<int,bool> $visitedOperationIDs spl_object_id-keyed map of already-visited operations
+     * @param OperationInterface[] $multipleQueryExecutionOperations
+     */
+    protected function collectMultipleQueryExecutionOperationsInTopologicalOrder(
+        OperationInterface $operation,
+        array $operations,
+        array &$visitedOperationIDs,
+        array &$multipleQueryExecutionOperations,
+    ): void {
+        $operationID = spl_object_id($operation);
+        if (isset($visitedOperationIDs[$operationID])) {
+            return;
+        }
+        $visitedOperationIDs[$operationID] = true;
 
-        /**
-         * If multiple operations are depended-upon,
-         * when re-ordering them, then must inject the new one
-         * right before the upcoming one (which is processed first,
-         * as they are iterated from right to left)
-         *
-         * @var OperationInterface|null
-         */
-        $upcomingDependedUponOperation = null;
-
-        /**
-         * Because the new operation is added at the beginning of the array,
-         * then iterate them from right to left
-         */
-        foreach (array_reverse($dependedUponOperations) as $dependedUponOperation) {
-            /**
-             * If some operation is depended-upon by more than
-             * 1 operation, then avoid processing it twice.
-             */
-            if (in_array($dependedUponOperation, $multipleQueryExecutionOperations)) {
-                /**
-                 * Also place the current operation behind it,
-                 * to respect the execution/dependency order
-                 * (there are no existing loops, or ->validate
-                 * will already have failed).
-                 *
-                 * Also move the dependencies of the depended-upon operation
-                 */
-                $multipleQueryExecutionOperations = $this->moveDependedUponOperationBeforeOperation(
-                    $multipleQueryExecutionOperations,
-                    $operation,
-                    $dependedUponOperation,
-                    $upcomingDependedUponOperation,
-                    $operations,
-                );
-            } else {
-                $multipleQueryExecutionOperations = $this->retrieveAndAccumulateMultipleQueryExecutionOperations(
-                    $multipleQueryExecutionOperations,
-                    $dependedUponOperation,
-                    $operations
-                );
-            }
-
-            $upcomingDependedUponOperation = $dependedUponOperation;
+        foreach ($this->getDependedUponOperations($operation, $operations) as $dependedUponOperation) {
+            $this->collectMultipleQueryExecutionOperationsInTopologicalOrder(
+                $dependedUponOperation,
+                $operations,
+                $visitedOperationIDs,
+                $multipleQueryExecutionOperations,
+            );
         }
 
-        /**
-         * 2 Operations could've loaded the same dependency.
-         * By doing `array_unique` we will return only 1 instance of each,
-         * while already with the right dependency order,
-         * so that the depended-upon Operation appears before
-         * all of its depending Operations.
-         */
-        $multipleQueryExecutionOperationsByName = [];
-        foreach ($multipleQueryExecutionOperations as $multipleQueryExecutionOperation) {
-            $multipleQueryExecutionOperationsByName[$multipleQueryExecutionOperation->getName()] = $multipleQueryExecutionOperation;
-        }
-        return array_values($multipleQueryExecutionOperationsByName);
+        $multipleQueryExecutionOperations[] = $operation;
     }
 
     /**
@@ -274,80 +261,6 @@ abstract class AbstractExecutableDocument extends ExecutableDocument implements 
         }
 
         return $dependedUponOperations;
-    }
-
-    /**
-     * Place the depended-upon operation right before the current
-     * operation, to respect the execution/dependency order (there are
-     * no existing loops, or ->validate will already have failed).
-     *
-     * Don't assume this operation is on the first position,
-     * since it could've been moved already by yet another dependency!
-     * So search for its position, and place it to the rightmost place.
-     *
-     * @param OperationInterface[] $multipleQueryExecutionOperations
-     * @param OperationInterface[] $operations
-     * @return OperationInterface[]
-     */
-    protected function moveDependedUponOperationBeforeOperation(
-        array $multipleQueryExecutionOperations,
-        OperationInterface $operation,
-        OperationInterface $dependedUponOperation,
-        ?OperationInterface $upcomingDependedUponOperation,
-        array $operations,
-    ): array {
-        /**
-         * Must also move the dependencies of the depended-upon
-         * directive. Start with them first, as to ensure that,
-         * after the final loop, all operations still have
-         * the right order of dependencies
-         */
-        foreach ($this->getDependedUponOperations($dependedUponOperation, $operations) as $dependedUponOperationDependedUponOperation) {
-            $multipleQueryExecutionOperations = $this->moveDependedUponOperationBeforeOperation(
-                $multipleQueryExecutionOperations,
-                $operation,
-                $dependedUponOperationDependedUponOperation,
-                $upcomingDependedUponOperation,
-                $operations,
-            );
-        }
-
-        /** @var int */
-        $dependedUponOperationPos = array_search(
-            $dependedUponOperation,
-            $multipleQueryExecutionOperations
-        );
-        /**
-         * If multiple operations are depended-upon,
-         * then must inject the new one right before
-         * the upcoming one (which has already been processed).
-         * Otherwise, right before the depending operation.
-         *
-         * @var int
-         */
-        $operationPos = array_search(
-            $upcomingDependedUponOperation ?? $operation,
-            $multipleQueryExecutionOperations
-        );
-
-        /**
-         * If the depended-upon directive is already to the left,
-         * then nothing to do.
-         */
-        if ($dependedUponOperationPos <= $operationPos) {
-            return $multipleQueryExecutionOperations;
-        }
-
-        /**
-         * To reorder:
-         *
-         *   1. Remove the depended-upon operation from wherever it is
-         *   2. Place it again right before its depending operation
-         */
-        array_splice($multipleQueryExecutionOperations, $dependedUponOperationPos, 1);
-        array_splice($multipleQueryExecutionOperations, $operationPos, 0, [$dependedUponOperation]);
-
-        return $multipleQueryExecutionOperations;
     }
 
     abstract protected function isOperationDependencyDefinerDirective(Directive $directive): bool;

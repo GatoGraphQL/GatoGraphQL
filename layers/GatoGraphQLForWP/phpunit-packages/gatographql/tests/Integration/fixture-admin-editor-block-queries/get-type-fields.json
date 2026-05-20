@@ -14,6 +14,67 @@
           "description": "Error payload for: \"Access to the meta key is not allowed\""
         },
         {
+          "name": "BlockType",
+          "namespacedName": "BlockType",
+          "fields": [
+            {
+              "name": "attributeNames"
+            },
+            {
+              "name": "attributes"
+            },
+            {
+              "name": "hasRenderCallback"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "supports"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "A block type registered in the WordPress block registry"
+        },
+        {
+          "name": "BlockTypeAttribute",
+          "namespacedName": "BlockTypeAttribute",
+          "fields": [
+            {
+              "name": "autoGenerateControl"
+            },
+            {
+              "name": "blockTypeName"
+            },
+            {
+              "name": "default"
+            },
+            {
+              "name": "enum"
+            },
+            {
+              "name": "fieldType"
+            },
+            {
+              "name": "label"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "role"
+            },
+            {
+              "name": "schema"
+            },
+            {
+              "name": "source"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "A registered attribute of a block type, as defined in its block.json schema"
+        },
+        {
           "name": "CategoryTermDoesNotExistErrorPayload",
           "namespacedName": "CategoryTermDoesNotExistErrorPayload",
           "fields": [
@@ -1728,6 +1789,9 @@
           "namespacedName": "QueryRoot",
           "fields": [
             {
+              "name": "blockTypes"
+            },
+            {
               "name": "capabilities"
             },
             {
@@ -2004,6 +2068,9 @@
             },
             {
               "name": "addUserMetas"
+            },
+            {
+              "name": "blockTypes"
             },
             {
               "name": "capabilities"
@@ -4269,6 +4336,13 @@
           "description": "Wildcard type representing any of GraphQL's scalar types, including built-in types (String, Int, Boolean, Float or ID) and custom types"
         },
         {
+          "name": "BlockTypeAttributeFieldTypeEnumString",
+          "namespacedName": "BlockTypeAttributeFieldTypeEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "JSON-Schema \"type\" of a block attribute. Includes `null`, so it can't be a GraphQL Enum (which disallows that name).. Possible values: `array`, `boolean`, `integer`, `null`, `number`, `object`, `string`."
+        },
+        {
           "name": "Boolean",
           "namespacedName": "Boolean",
           "fields": null,
@@ -4648,6 +4722,20 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Oneof input to specify the custom post author"
+        },
+        {
+          "name": "BlockTypeAttributesFilterInput",
+          "namespacedName": "BlockTypeAttributesFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter the attributes of a block type"
+        },
+        {
+          "name": "BlockTypeSupportsFilterInput",
+          "namespacedName": "BlockTypeSupportsFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Filter block types by their `supports` configuration"
         },
         {
           "name": "CategoriesByInput",
@@ -5089,6 +5177,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to add meta to a user"
+        },
+        {
+          "name": "RootBlockTypesFilterInput",
+          "namespacedName": "RootBlockTypesFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter the registered block types"
         },
         {
           "name": "RootCategoriesFilterInput",

@@ -9,7 +9,7 @@ abstract class AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEnd
     protected static function getEndpoint(): string
     {
         return sprintf(
-            'wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=%s',
+            'wp-admin/edit.php?page=gatographql&action=run_query&endpoint_group=%s',
             static::getAdminEndpointGroup()
         );
     }

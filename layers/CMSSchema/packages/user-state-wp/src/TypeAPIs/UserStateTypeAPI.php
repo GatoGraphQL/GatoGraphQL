@@ -6,6 +6,7 @@ namespace PoPCMSSchema\UserStateWP\TypeAPIs;
 
 use PoPCMSSchema\UserState\TypeAPIs\UserStateTypeAPIInterface;
 
+use function current_user_can;
 use function get_current_user_id;
 use function is_user_logged_in;
 use function wp_get_current_user;
@@ -23,5 +24,12 @@ class UserStateTypeAPI implements UserStateTypeAPIInterface
     public function getCurrentUserID(): string|int|null
     {
         return get_current_user_id();
+    }
+    public function currentUserCan(string $capability): bool
+    {
+        if ($capability === '' || !is_user_logged_in()) {
+            return false;
+        }
+        return current_user_can($capability);
     }
 }

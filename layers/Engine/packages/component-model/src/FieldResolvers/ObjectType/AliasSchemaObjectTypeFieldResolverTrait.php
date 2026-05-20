@@ -84,7 +84,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     ): FieldInterface {
         /** @var SplObjectStorage<FieldInterface,FieldInterface> */
         $this->aliasedFieldCache ??= new SplObjectStorage();
-        if (!$this->aliasedFieldCache->contains($field)) {
+        if (!$this->aliasedFieldCache->offsetExists($field)) {
             $this->aliasedFieldCache[$field] = ($field instanceof RelationalField)
                 ? new RelationalField(
                     $field->getName(),
@@ -111,7 +111,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     ): FieldDataAccessorInterface {
         /** @var SplObjectStorage<FieldDataAccessorInterface,FieldDataAccessorInterface> */
         $this->aliasedFieldDataAccessorCache ??= new SplObjectStorage();
-        if (!$this->aliasedFieldDataAccessorCache->contains($fieldDataAccessor)) {
+        if (!$this->aliasedFieldDataAccessorCache->offsetExists($fieldDataAccessor)) {
             $this->aliasedFieldDataAccessorCache[$fieldDataAccessor] = $objectTypeResolver->createFieldDataAccessor(
                 $this->getAliasedField($fieldDataAccessor->getField()),
                 $fieldDataAccessor->getFieldArgs()

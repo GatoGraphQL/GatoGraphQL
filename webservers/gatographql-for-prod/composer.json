@@ -1,5 +1,6 @@
 {
     "name": "leoloso/gatographql-for-prod-dev",
+    "version": "1.0.0",
     "description": "Gato GraphQL for PROD",
     "homepage": "https://gatographql.com",
     "license": "GPL-2.0-or-later",

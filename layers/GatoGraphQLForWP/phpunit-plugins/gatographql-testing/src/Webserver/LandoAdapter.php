@@ -67,11 +67,21 @@ class LandoAdapter
      */
     public function maybeRemovePortFromLocalhostURL(string $url): string
     {
-        if (\preg_match('#^(https?)://localhost:(\d+)(/.*)?$#', $url, $matches) === 1) {
-            $scheme = $matches[1];
-            $port = $matches[2];
-            $path = $matches[3] ?? '';
-            return \sprintf('%s://host.docker.internal:%s%s', $scheme, $port, $path);
+        $convertToHostDockerInternal = false;
+        if ($convertToHostDockerInternal) { // @phpstan-ignore-line
+            if (\preg_match('#^(https?)://localhost:(\d+)(/.*)?$#', $url, $matches) === 1) {
+                $scheme = $matches[1];
+                $port = $matches[2];
+                $path = $matches[3] ?? '';
+                return \sprintf('%s://host.docker.internal:%s%s', $scheme, $port, $path);
+            }
+        } else {
+            if (str_starts_with($url, 'https://localhost:')) {
+                return 'https://localhost';
+            }
+            if (str_starts_with($url, 'http://localhost:')) {
+                return 'http://localhost';
+            }
         }
         return $url;
     }

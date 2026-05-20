@@ -1492,7 +1492,7 @@
             },
             {
                 "__typename": "PostTag",
-                "postCount": 4,
+                "postCount": 6,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1593,10 +1593,48 @@
                                 "taxonomy": "post_tag"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1200,
+                        "title": "PHP-only blocks",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "post_tag",
-                "count": 4,
+                "count": 6,
                 "description": "",
                 "id": 9,
                 "metaValue": null,
@@ -1708,7 +1746,7 @@
             },
             {
                 "__typename": "PostTag",
-                "postCount": 3,
+                "postCount": 5,
                 "posts": [
                     {
                         "__typename": "Post",
@@ -1784,10 +1822,48 @@
                                 "taxonomy": "post_tag"
                             }
                         ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1200,
+                        "title": "PHP-only blocks",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "Post",
+                        "id": 1210,
+                        "title": "PHP-only blocks (combinations)",
+                        "tags": [
+                            {
+                                "__typename": "PostTag",
+                                "id": 9,
+                                "name": "features",
+                                "taxonomy": "post_tag"
+                            },
+                            {
+                                "__typename": "PostTag",
+                                "id": 12,
+                                "name": "plugin",
+                                "taxonomy": "post_tag"
+                            }
+                        ]
                     }
                 ],
                 "taxonomy": "post_tag",
-                "count": 3,
+                "count": 5,
                 "description": "",
                 "id": 12,
                 "metaValue": null,
@@ -3746,6 +3822,53 @@
                 "tags": []
             },
             {
+                "__typename": "Post",
+                "id": 1200,
+                "title": "PHP-only blocks",
+                "customPostType": "post",
+                "tags": [
+                    {
+                        "__typename": "PostTag",
+                        "id": 12,
+                        "name": "plugin",
+                        "taxonomy": "post_tag"
+                    },
+                    {
+                        "__typename": "PostTag",
+                        "id": 9,
+                        "name": "features",
+                        "taxonomy": "post_tag"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)",
+                "customPostType": "post",
+                "tags": [
+                    {
+                        "__typename": "PostTag",
+                        "id": 12,
+                        "name": "plugin",
+                        "taxonomy": "post_tag"
+                    },
+                    {
+                        "__typename": "PostTag",
+                        "id": 9,
+                        "name": "features",
+                        "taxonomy": "post_tag"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1212,
+                "title": "All blocks with entity references",
+                "customPostType": "post",
+                "tags": []
+            },
+            {
                 "__typename": "GenericCustomPost",
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -4410,132 +4533,6 @@
                         "taxonomy": "dummy-tag"
                     }
                 ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1649,
-                "title": "Nulla numquam totam eaque",
-                "customPostType": "dummy-cpt",
-                "tags": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 22,
-                        "name": "Classical",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 23,
-                        "name": "Heavy metal",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 25,
-                        "name": "Jazz",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 29,
-                        "name": "Rock",
-                        "taxonomy": "dummy-tag"
-                    }
-                ],
-                "tagsWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 22,
-                        "name": "Classical",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 23,
-                        "name": "Heavy metal",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 25,
-                        "name": "Jazz",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 29,
-                        "name": "Rock",
-                        "taxonomy": "dummy-tag"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "customPostType": "dummy-cpt",
-                "tags": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 24,
-                        "name": "Hip Hop",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 30,
-                        "name": "Tango",
-                        "taxonomy": "dummy-tag"
-                    }
-                ],
-                "tagsWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 24,
-                        "name": "Hip Hop",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 30,
-                        "name": "Tango",
-                        "taxonomy": "dummy-tag"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 1656,
-                "title": "Dummy CPT with non-existing block",
-                "customPostType": "dummy-cpt",
-                "tags": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 24,
-                        "name": "Hip Hop",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 30,
-                        "name": "Tango",
-                        "taxonomy": "dummy-tag"
-                    }
-                ],
-                "tagsWithoutTaxonomy": [
-                    {
-                        "__typename": "GenericTag",
-                        "id": 24,
-                        "name": "Hip Hop",
-                        "taxonomy": "dummy-tag"
-                    },
-                    {
-                        "__typename": "GenericTag",
-                        "id": 30,
-                        "name": "Tango",
-                        "taxonomy": "dummy-tag"
-                    }
-                ]
             }
         ],
         "customPostsByTagIDs": [
@@ -4802,6 +4799,18 @@
                 "title": "Post with old format of the Gutenberg `core\/list` block"
             },
             {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
                 "tags": [
@@ -4820,42 +4829,6 @@
                 "id": 1622,
                 "title": "Dolore ex et deleniti mollitia",
                 "tags": [
-                    {
-                        "id": 30
-                    }
-                ]
-            },
-            {
-                "id": 1634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "tags": [
-                    {
-                        "id": 24
-                    },
-                    {
-                        "id": 30
-                    }
-                ]
-            },
-            {
-                "id": 1654,
-                "title": "Dummy CPT with blocks",
-                "tags": [
-                    {
-                        "id": 24
-                    },
-                    {
-                        "id": 30
-                    }
-                ]
-            },
-            {
-                "id": 1656,
-                "title": "Dummy CPT with non-existing block",
-                "tags": [
-                    {
-                        "id": 24
-                    },
                     {
                         "id": 30
                     }
@@ -5189,6 +5162,18 @@
                 "title": "Post with old format of the Gutenberg `core\/list` block"
             },
             {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "id": 1619,
                 "title": "Error debitis nulla vel est",
                 "tags": [
@@ -5200,20 +5185,6 @@
             {
                 "id": 1660,
                 "title": "Dummy CPT with non server-side-registered block",
-                "tags": []
-            },
-            {
-                "id": 1666,
-                "title": "Another Page"
-            },
-            {
-                "id": 1680,
-                "title": "Dummy CPT with server-side-registered block",
-                "tags": []
-            },
-            {
-                "id": 1682,
-                "title": "Dummy CPT with several levels of children",
                 "tags": []
             }
         ],

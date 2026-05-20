@@ -7,7 +7,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 class WordPressAuthenticatedUserEndpoints
 {
     public const ENDPOINTS = [
-        'admin-client' => 'wp-admin/edit.php?page=gatographql&action=execute_query',
-        'admin-unrestricted-client' => 'wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=pluginOwnUse',
+        'admin-client' => 'wp-admin/edit.php?page=gatographql&action=run_query',
+        'admin-unrestricted-client' => 'wp-admin/edit.php?page=gatographql&action=run_query&endpoint_group=pluginOwnUse',
     ];
 }

@@ -10,6 +10,6 @@ class DisableSchemaModulesOnPrivateEndpointTestOnAdminEndpointsFixtureEndpointWe
 
     protected static function getEndpoint(): string
     {
-        return 'wp-admin/edit.php?page=gatographql&action=execute_query';
+        return 'wp-admin/edit.php?page=gatographql&action=run_query';
     }
 }

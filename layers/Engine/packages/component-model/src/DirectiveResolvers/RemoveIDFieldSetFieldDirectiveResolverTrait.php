@@ -29,7 +29,7 @@ trait RemoveIDFieldSetFieldDirectiveResolverTrait
                     $fieldSet->fields
                 ));
                 foreach ($fieldSet->fields as $removeField) {
-                    $pipelineStageIDFieldSet[$id]->conditionalFields->detach($removeField);
+                    $pipelineStageIDFieldSet[$id]->conditionalFields->offsetUnset($removeField);
                 }
                 if ($pipelineStageIDFieldSet[$id]->fields === []) {
                     unset($pipelineStageIDFieldSet[$id]);

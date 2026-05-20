@@ -42,14 +42,24 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
     public function getFilterInputComponents(array $filterInputComponents): array
     {
         $components = $this->getUserCustomPostFilterInputHookSet()->getAuthorFilterInputComponents();
-        foreach ($components as $component) {
-            $pos = array_search($component, $filterInputComponents);
-            if ($pos === false) {
-                continue;
-            }
-            /** @var int $pos */
-            array_splice($filterInputComponents, $pos, 1);
+        if ($components === []) {
+            return $filterInputComponents;
         }
-        return $filterInputComponents;
+        /**
+         * `Component` is a `final readonly` value object: equality is by
+         * property value, not identity. Build a value-key set of components
+         * to remove, then filter `$filterInputComponents` in one O(N+M)
+         * pass instead of N × `array_search` (each O(M)) plus N `array_splice`.
+         *
+         * @var array<string,true>
+         */
+        $removeComponentKeys = [];
+        foreach ($components as $component) {
+            $removeComponentKeys[$component->processorClass . '|' . $component->name . '|' . serialize($component->atts)] = true;
+        }
+        return array_values(array_filter(
+            $filterInputComponents,
+            static fn (Component $c): bool => !isset($removeComponentKeys[$c->processorClass . '|' . $c->name . '|' . serialize($c->atts)])
+        ));
     }
 }

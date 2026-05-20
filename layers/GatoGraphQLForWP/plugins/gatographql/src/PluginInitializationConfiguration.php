@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\Instances\PluginOptionsFormHandlerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\CachingFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\MetaSchemaTypeModuleResolver;
@@ -60,6 +61,8 @@ use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
 use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
 use PoPCMSSchema\Users\Module as UsersModule;
+use PoPAPI\API\Environment as APIEnvironment;
+use PoPAPI\API\Module as APIModule;
 use PoPSchema\Logger\Environment as LoggerEnvironment;
 use PoPSchema\Logger\Module as LoggerModule;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
@@ -108,6 +111,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => ComponentModelEnvironment::CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::SERVER_IP_CONFIGURATION,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
+            ],
+            // Cache parsed GraphQL queries?
+            [
+                'class' => APIModule::class,
+                'envVariable' => APIEnvironment::USE_PARSED_AST_CACHE,
+                'module' => CachingFunctionalityModuleResolver::CACHING,
+                'option' => CachingFunctionalityModuleResolver::OPTION_USE_PARSED_AST_CACHE,
             ],
             // Editing Access Scheme
             [
@@ -462,12 +472,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => CustomPostsModule::class,
-                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
-                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
-            ],
-            [
-                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA,
@@ -497,6 +501,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => BlocksEnvironment::USE_SINGLE_TYPE_INSTEAD_OF_BLOCK_UNION_TYPE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_BLOCKS,
                 'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,
+            ],
+            // Blocks: treat the block type registry as sensitive data
+            [
+                'class' => BlocksModule::class,
+                'envVariable' => BlocksEnvironment::TREAT_BLOCK_TYPES_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_BLOCKS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_BLOCK_TYPES_AS_SENSITIVE_DATA,
             ],
             // White/Blacklisted entries to Root.optionValue
             [

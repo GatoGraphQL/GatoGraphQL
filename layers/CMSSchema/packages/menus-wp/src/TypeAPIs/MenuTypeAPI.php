@@ -112,7 +112,9 @@ class MenuTypeAPI extends AbstractBasicService implements MenuTypeAPIInterface
      */
     protected function isFilteringByEmptyArray(array $query): bool
     {
-        return isset($query['include']) && ($query['include'] === '' || $query['include'] === []);
+        return isset($query['include']) && ($query['include'] === '' || $query['include'] === [])
+            || isset($query['slug']) && ($query['slug'] === '' || $query['slug'] === [])
+        ;
     }
 
     /**

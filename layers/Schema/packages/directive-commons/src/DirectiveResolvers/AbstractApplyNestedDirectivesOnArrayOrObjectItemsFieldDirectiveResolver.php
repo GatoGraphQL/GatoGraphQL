@@ -30,6 +30,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider as EngineErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
@@ -47,6 +48,16 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?ObjectResolvedDynamicVariablesServiceInterface $objectResolvedDynamicVariablesService = null;
+
+    /**
+     * Cache the iterator_to_array conversion of $nestedDirectivePipelineData,
+     * keyed by directive identity so it is rebuilt only when the directive
+     * bound to this resolver changes (i.e. on a new prepareDirective cycle).
+     *
+     * @var FieldDirectiveResolverInterface[]
+     */
+    private array $cachedNestedDirectiveResolvers = [];
+    private ?Directive $cachedNestedDirectiveResolversForDirective = null;
 
     final protected function getDirectivePipelineService(): DirectivePipelineServiceInterface
     {
@@ -147,11 +158,28 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         $setFieldAsNullIfDirectiveFailed = $moduleConfiguration->setFieldAsNullIfDirectiveFailed();
 
         /**
+         * Reset the arrayItemField instance cache per resolveDirective
+         * call, so it doesn't accumulate entries across requests when
+         * the resolver is held as a singleton (e.g. in long-running PHP
+         * workers like Swoole/RoadRunner). The cache only needs to span
+         * step 1 below — step 3 reads the captured map instead.
+         */
+        $this->arrayItemFieldInstanceContainer = new SplObjectStorage();
+
+        /**
          * Collect all ID => dataFields for the arrayItems
          *
          * @var array<string|int,EngineIterationFieldSet>
          */
         $arrayItemIDsProperties = [];
+        /**
+         * Capture the (arrayItemField, key) pairs produced in step 1,
+         * grouped by (id, parent field), so step 3 can iterate them
+         * directly instead of re-validating and re-running getArrayItems.
+         *
+         * @var array<string|int,SplObjectStorage<FieldInterface,list<array{0:FieldInterface,1:int|string}>>>
+         */
+        $arrayItemEntriesByIDField = [];
         $typeOutputKey = $relationalTypeResolver->getTypeOutputKey();
 
         /**
@@ -160,9 +188,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         $execute = false;
 
         /**
-         * Append fieldArgs for the array item fields
+         * Append fieldArgs for the array item fields.
+         *
+         * Lazy: only clone on the first ID with non-empty array items.
+         * If validation drops every ID before then, the clone is skipped.
          */
-        $nestedFieldDataAccessProvider = clone $fieldDataAccessProvider;
+        $nestedFieldDataAccessProvider = null;
 
         /**
          * Argument "if" can receive a Promise
@@ -203,7 +234,13 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         $decreaseFieldTypeModifiersCardinalityForSerialization = $this->decreaseFieldTypeModifiersCardinalityForSerialization();
         /** @var SplObjectStorage<FieldInterface,int|null> */
         $fieldTypeModifiersByField = App::getState('field-type-modifiers-for-serialization');
-        $originalFieldTypeModifiersByField = clone $fieldTypeModifiersByField;
+        /**
+         * The clone is only needed to restore state at the end (see below),
+         * which only happens when decreasing the cardinality.
+         */
+        $originalFieldTypeModifiersByField = $decreaseFieldTypeModifiersCardinalityForSerialization
+            ? clone $fieldTypeModifiersByField
+            : null;
 
         /** @var SplObjectStorage<FieldInterface,int|null> */
         $currentFieldTypeModifiersByField = new SplObjectStorage();
@@ -217,8 +254,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
             $object = $idObjects[$id];
             foreach ($fieldSet->fields as $field) {
                 // Validate that the property exists
-                $hasIDFieldBeenResolved = isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->contains($field);
-                if (!$hasIDFieldBeenResolved && !(isset($previouslyResolvedIDFieldValues[$typeOutputKey][$id]) && $previouslyResolvedIDFieldValues[$typeOutputKey][$id]->contains($field))) {
+                $hasIDFieldBeenResolved = isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->offsetExists($field);
+                if (!$hasIDFieldBeenResolved && !(isset($previouslyResolvedIDFieldValues[$typeOutputKey][$id]) && $previouslyResolvedIDFieldValues[$typeOutputKey][$id]->offsetExists($field))) {
                     $this->processObjectFailure(
                         $relationalTypeResolver,
                         new FeedbackItemResolution(
@@ -302,11 +339,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                 );
                 if ($arrayItems !== []) {
                     $execute = true;
+                    $nestedFieldDataAccessProvider ??= clone $fieldDataAccessProvider;
 
                     if (
                         $decreaseFieldTypeModifiersCardinalityForSerialization
                         // Execute only once per field (i.e. avoid recalculating for different objects)
-                        && !$currentFieldTypeModifiersByField->contains($field)
+                        && !$currentFieldTypeModifiersByField->offsetExists($field)
                     ) {
                         $targetObjectTypeResolver = null;
                         if ($isUnionTypeResolver) {
@@ -323,10 +361,39 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                             $targetObjectTypeResolver,
                             $field,
                         );
-                        $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
+                        /**
+                         * No `override(...)` call needed here:
+                         * `$fieldTypeModifiersByField` IS the SplObjectStorage
+                         * already stored in AppState (retrieved by reference
+                         * above), so the in-place mutation is already visible.
+                         */
                     }
 
                     $arrayItemIDsProperties[$id] ??= new EngineIterationFieldSet();
+                    /**
+                     * Hoist the parent-field's modifiers lookup out of the
+                     * per-item loop — the value is constant for this $field.
+                     */
+                    $hasParentFieldTypeModifiers = isset($fieldTypeModifiersByField[$field]);
+                    $parentFieldTypeModifiers = $hasParentFieldTypeModifiers
+                        ? $fieldTypeModifiersByField[$field]
+                        : null;
+                    $passKeyOnwardsAsVariable = $this->passKeyOnwardsAsVariable();
+                    /**
+                     * Collected per parent (id, $field): list of
+                     * [arrayItemField, key] pairs. Reused below to:
+                     *  - batch the parent-to-arrayItem dynamic-variable copy.
+                     *  - drive step 3 directly, without redoing
+                     *    validateInputValueType / getArrayItems / getArrayItemField.
+                     *
+                     * @var list<array{0:FieldInterface,1:int|string}>
+                     */
+                    $arrayItemEntriesForField = [];
+                    /**
+                     * `getOutputKey()` is constant for the duration of
+                     * this loop — read once.
+                     */
+                    $fieldOutputKey = $field->getOutputKey();
                     foreach ($arrayItems as $key => &$value) {
                         /**
                          * Add into the $idFieldSet object for the array items.
@@ -336,13 +403,14 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          * so then re-create the "field" assigning a new alias.
                          * If it has an alias, use it. If not, use the fieldName
                          */
-                        $arrayItemAlias = $this->createPropertyForArrayItem($field->getOutputKey(), (string) $key);
+                        $arrayItemAlias = $this->createPropertyForArrayItem($fieldOutputKey, (string) $key);
                         $arrayItemField = $this->getArrayItemField($field, $arrayItemAlias);
                         $nestedFieldDataAccessProvider->duplicateFieldData($field, $arrayItemField);
                         // Place into the current object
                         $resolvedIDFieldValues[$id][$arrayItemField] = $value;
                         // Place it into list of fields to process
                         $arrayItemIDsProperties[$id]->fields[] = $arrayItemField;
+                        $arrayItemEntriesForField[] = [$arrayItemField, $key];
 
                         /**
                          * Indicate the cardinality for the array item.
@@ -362,9 +430,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                          *     }
                          *   }
                          */
-                        if (isset($fieldTypeModifiersByField[$field])) {
-                            $fieldTypeModifiersByField[$arrayItemField] = $fieldTypeModifiersByField[$field];
-                            $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
+                        if ($hasParentFieldTypeModifiers) {
+                            $fieldTypeModifiersByField[$arrayItemField] = $parentFieldTypeModifiers;
+                            /**
+                             * No `override(...)` call needed: the SplObjectStorage
+                             * is the same instance already stored in AppState.
+                             */
                         }
 
                         // Export the array item value into the dynamic variable
@@ -384,7 +455,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 $engineIterationFeedbackStore,
                             );
                         }
-                        if ($this->passKeyOnwardsAsVariable() && !empty($passKeyOnwardsAs)) {
+                        if ($passKeyOnwardsAsVariable && !empty($passKeyOnwardsAs)) {
                             /** @var Argument $keyArgument */
                             $objectResolvedDynamicVariablesService->setObjectResolvedDynamicVariableInAppState(
                                 $relationalTypeResolver,
@@ -400,27 +471,43 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 $engineIterationFeedbackStore,
                             );
                         }
-                        /**
-                         * Allow the Field created by @underJSONObjectProperty
-                         * to read the state defined at that previous level
-                         */
-                        $objectResolvedDynamicVariablesService->copyObjectResolvedDynamicVariablesFromFieldToFieldInAppState(
-                            $field,
-                            $arrayItemField,
-                        );
                     }
+                    unset($value);
+                    /**
+                     * Allow the Field created by @underJSONObjectProperty
+                     * to read the state defined at that previous level.
+                     *
+                     * Batched: $field's state is constant across the loop
+                     * above, so do the AppState lookup + source `contains`
+                     * check once, then assign to all arrayItemFields.
+                     */
+                    $objectResolvedDynamicVariablesService->copyObjectResolvedDynamicVariablesFromFieldToFieldsInAppState(
+                        $field,
+                        array_column($arrayItemEntriesForField, 0),
+                    );
+                    $arrayItemEntriesByIDField[$id] ??= new SplObjectStorage();
+                    $arrayItemEntriesByIDField[$id][$field] = $arrayItemEntriesForField;
                 }
             }
         }
 
-        if ($decreaseFieldTypeModifiersCardinalityForSerialization) {
-            $appStateManager->override('field-type-modifiers-for-serialization', $fieldTypeModifiersByField);
-        }
+        /**
+         * No `override(...)` call needed here:
+         * `$fieldTypeModifiersByField` IS the SplObjectStorage instance
+         * already stored in AppState, and was mutated in place by the
+         * inner loop above.
+         */
 
         if ($execute) {
+            /**
+             * `$execute = true` implies the inner loop above ran for
+             * at least one (id, field) with non-empty arrayItems, which
+             * triggered the lazy clone of $nestedFieldDataAccessProvider.
+             */
+            assert($nestedFieldDataAccessProvider !== null);
             // Build the directive pipeline
             /** @var FieldDirectiveResolverInterface[] */
-            $nestedDirectiveResolvers = iterator_to_array($this->nestedDirectivePipelineData);
+            $nestedDirectiveResolvers = $this->getCachedNestedDirectiveResolvers();
             $nestedDirectivePipeline = $this->getDirectivePipelineService()->getDirectivePipeline($nestedDirectiveResolvers);
             // Fill the idFieldSet for each directive in the pipeline
             /** @var array<array<string|int,EngineIterationFieldSet>> */
@@ -528,54 +615,46 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                 return;
             }
 
-            // 3. Compose the array from the results for each array item
-            foreach ($idFieldSet as $id => $fieldSet) {
-                $object = $idObjects[$id];
-                foreach ($fieldSet->fields as $field) {
-                    $hasIDFieldBeenResolved = isset($resolvedIDFieldValues[$id]) && $resolvedIDFieldValues[$id]->contains($field);
-                    $value = $hasIDFieldBeenResolved ?
-                        $resolvedIDFieldValues[$id][$field] :
-                        $previouslyResolvedIDFieldValues[$typeOutputKey][$id][$field];
-
-                    // If the array is null or empty, nothing to do
-                    if (!$value) {
-                        continue;
-                    }
-                    if (!$this->validateInputValueType($value)) {
-                        continue;
-                    }
-
+            /**
+             * 3. Compose the array from the results for each array item.
+             *
+             * Drive this from the (id, field) → [arrayItemField, key]
+             * map captured during step 1, so we don't redo
+             * validateInputValueType / getArrayItems / getArrayItemField.
+             */
+            foreach ($arrayItemEntriesByIDField as $id => $fieldEntries) {
+                /** @var FieldInterface $field */
+                foreach ($fieldEntries as $field) {
                     if ($resolveDirectiveArgsOnObject) {
                         $this->loadObjectResolvedDynamicVariablesInAppState($field, $id);
                         $this->directiveDataAccessor->resetDirectiveArgs();
                     }
-
-                    // If there are errors, it will return null. Don't add the errors again
-                    $arrayOrObject = $value;
-                    $arrayItems = $this->getArrayItems(
-                        $arrayOrObject,
-                        $object,
+                    $entries = $fieldEntries[$field];
+                    /**
+                     * Collect [key, processedValue] pairs and detach the
+                     * temporary arrayItemField slots; then a single
+                     * batched call composes all items back, doing one
+                     * read+write of the (id, field) container instead
+                     * of N.
+                     *
+                     * @var list<array{0:int|string,1:mixed}>
+                     */
+                    $arrayItemKeyValues = [];
+                    foreach ($entries as [$arrayItemField, $key]) {
+                        // Place the result of executing the function on the array item
+                        $arrayItemKeyValues[] = [$key, $resolvedIDFieldValues[$id][$arrayItemField]];
+                        // Remove this temporary property from $resolvedIDFieldValues
+                        $resolvedIDFieldValues[$id]->offsetUnset($arrayItemField);
+                    }
+                    // Place the results for the array in the original property
+                    $this->addProcessedItemsBackToResolvedIDFieldValues(
+                        $relationalTypeResolver,
+                        $resolvedIDFieldValues,
+                        $engineIterationFeedbackStore,
                         $id,
                         $field,
-                        $relationalTypeResolver,
-                        $idObjects,
-                        $previouslyResolvedIDFieldValues,
-                        $succeedingPipelineIDFieldSet,
-                        $resolvedIDFieldValues,
-                        $messages,
-                        $engineIterationFeedbackStore,
+                        $arrayItemKeyValues,
                     );
-                    // The value is an array. Unpack all the elements into their own property
-                    foreach (array_keys($arrayItems) as $key) {
-                        $arrayItemAlias = $this->createPropertyForArrayItem($field->getOutputKey(), (string) $key);
-                        $arrayItemField = $this->getArrayItemField($field, $arrayItemAlias);
-                        // Place the result of executing the function on the array item
-                        $arrayItemValue = $resolvedIDFieldValues[$id][$arrayItemField];
-                        // Remove this temporary property from $resolvedIDFieldValues
-                        $resolvedIDFieldValues[$id]->detach($arrayItemField);
-                        // Place the result for the array in the original property
-                        $this->addProcessedItemBackToResolvedIDFieldValues($relationalTypeResolver, $resolvedIDFieldValues, $engineIterationFeedbackStore, $id, $field, $key, $arrayItemValue);
-                    }
                 }
             }
         }
@@ -596,6 +675,28 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     protected function validateInputValueType(mixed $value): bool
     {
         return is_array($value) || ($value instanceof stdClass);
+    }
+
+    /**
+     * Cache `iterator_to_array($this->nestedDirectivePipelineData)`,
+     * keyed by the currently-bound directive instance so the cache is
+     * naturally invalidated when `prepareDirective` rebinds the resolver
+     * to a different directive.
+     *
+     * @return FieldDirectiveResolverInterface[]
+     */
+    private function getCachedNestedDirectiveResolvers(): array
+    {
+        if ($this->cachedNestedDirectiveResolversForDirective !== $this->directive) {
+            $nestedDirectiveResolvers = [];
+            /** @var FieldDirectiveResolverInterface $nestedDirectiveResolver */
+            foreach ($this->nestedDirectivePipelineData as $nestedDirectiveResolver) {
+                $nestedDirectiveResolvers[] = $nestedDirectiveResolver;
+            }
+            $this->cachedNestedDirectiveResolvers = $nestedDirectiveResolvers;
+            $this->cachedNestedDirectiveResolversForDirective = $this->directive;
+        }
+        return $this->cachedNestedDirectiveResolvers;
     }
 
     /**
@@ -685,7 +786,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         FieldInterface $field,
         string $arrayItemAlias,
     ): FieldInterface {
-        if (!$this->arrayItemFieldInstanceContainer->contains($field) || !isset($this->arrayItemFieldInstanceContainer[$field][$arrayItemAlias])) {
+        if (!$this->arrayItemFieldInstanceContainer->offsetExists($field) || !isset($this->arrayItemFieldInstanceContainer[$field][$arrayItemAlias])) {
             $arrayItemFieldInstanceContainerSplObjectStorage = $this->arrayItemFieldInstanceContainer[$field] ?? [];
             $arrayItemFieldInstanceContainerSplObjectStorage[$arrayItemAlias] = ($field instanceof RelationalField)
                 ? new RelationalField(
@@ -750,7 +851,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
     }
 
     /**
-     * Place the result for the array in the original property
+     * Place the result for the array in the original property.
+     *
+     * Backward-compat wrapper: delegates to the batched form, which
+     * does the actual mutation via setProcessedArrayItemValue().
+     * Internal callers in this package use the batched form directly.
      *
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
@@ -763,14 +868,79 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
         int|string $arrayItemKey,
         mixed $arrayItemValue,
     ): void {
+        $this->addProcessedItemsBackToResolvedIDFieldValues(
+            $relationalTypeResolver,
+            $resolvedIDFieldValues,
+            $engineIterationFeedbackStore,
+            $id,
+            $field,
+            [[$arrayItemKey, $arrayItemValue]],
+        );
+    }
+
+    /**
+     * Batched compose: read the (id, field) container once, mutate it
+     * in place for every array item via setProcessedArrayItemValue(),
+     * then write it back once.
+     *
+     * For PHP arrays this changes per-(id, field) compose-back from
+     * O(N²) (each per-item assignment triggers a copy-on-write of an
+     * N-element array) to O(N) — one COW + N in-place writes.
+     *
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     * @param list<array{0:int|string,1:mixed}> $arrayItemKeyValues
+     */
+    protected function addProcessedItemsBackToResolvedIDFieldValues(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array &$resolvedIDFieldValues,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        string|int $id,
+        FieldInterface $field,
+        array $arrayItemKeyValues,
+    ): void {
+        if ($arrayItemKeyValues === []) {
+            return;
+        }
+        /** @var array<string|int,mixed>|stdClass */
         $value = $resolvedIDFieldValues[$id][$field];
+        foreach ($arrayItemKeyValues as [$arrayItemKey, $arrayItemValue]) {
+            $this->setProcessedArrayItemValue(
+                $relationalTypeResolver,
+                $engineIterationFeedbackStore,
+                $id,
+                $field,
+                $arrayItemKey,
+                $arrayItemValue,
+                $value,
+            );
+        }
+        $resolvedIDFieldValues[$id][$field] = $value;
+    }
+
+    /**
+     * Mutate `$value` in place to record the processed item at
+     * `$arrayItemKey`. Subclasses override this hook to customize how
+     * the result is placed back (e.g. path-based traversion for
+     * `@underJSONObjectProperty`) without having to handle the
+     * read/write of the outer container.
+     *
+     * @param array<string|int,mixed>|stdClass &$value
+     */
+    protected function setProcessedArrayItemValue(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        string|int $id,
+        FieldInterface $field,
+        int|string $arrayItemKey,
+        mixed $arrayItemValue,
+        array|stdClass &$value,
+    ): void {
         if (is_array($value)) {
             $value[$arrayItemKey] = $arrayItemValue;
         } else {
             // stdClass
             $value->$arrayItemKey = $arrayItemValue;
         }
-        $resolvedIDFieldValues[$id][$field] = $value;
     }
 
     /**

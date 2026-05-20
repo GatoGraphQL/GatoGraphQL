@@ -486,8 +486,63 @@ class Engine extends AbstractBasicService implements EngineInterface
     {
         App::doAction(EngineHookNames::GENERATE_DATA_BEGINNING);
 
-        // Process the request and obtain the results
-        $this->processAndGenerateData();
+        // Reset the drain accumulators once per generateData() invocation.
+        // They persist across the (one or many) processAndGenerateData()
+        // calls in this loop so:
+        //   - "Sequential Pass" MQE per-operation drains feed into the
+        //     same accumulators (each op contributes new fields under
+        //     existing object IDs without overwriting previous ops).
+        //   - The cross-iteration `already_loaded_id_fields` cache spans
+        //     all per-op drains so subsequent ops skip re-fetching IDs
+        //     that an earlier op already loaded.
+        //   - Schema/object feedback accumulates across ops so per-op
+        //     errors don't get clobbered by `array_replace_recursive`'s
+        //     leaf-replace semantics on `SplObjectStorage` values.
+        $engineState = App::getEngineState();
+        $engineState->already_loaded_id_fields = [];
+        $engineState->databases = [];
+        $engineState->unionTypeOutputKeyIDs = [];
+        $engineState->combinedUnionTypeOutputKeyIDs = [];
+        $engineState->previouslyResolvedIDFieldValues = [];
+        $engineState->messages = [];
+        $engineState->schemaFeedbackEntries = $engineState->objectFeedbackEntries = [
+            FeedbackCategories::ERROR => [],
+            FeedbackCategories::WARNING => [],
+            FeedbackCategories::DEPRECATION => [],
+            FeedbackCategories::NOTICE => [],
+            FeedbackCategories::SUGGESTION => [],
+            FeedbackCategories::LOG => [],
+        ];
+
+        // Process the request and obtain the results.
+        //
+        // When the "Sequential Pass" Multiple Query Execution strategy is
+        // active, the API/GraphQL layer hooks the
+        // MULTIPLE_QUERY_EXECUTION_SEQUENTIAL_OPERATIONS filter to provide
+        // a list of operations to drain one-by-one, in topological order
+        // — instead of wrapping subsequent operations in nested `self`
+        // fields. Each iteration overrides the
+        // `multiple-query-execution-current-operation` app-state key with
+        // the operation to process, and the API processor reads it to
+        // scope field collection to that operation only. The shared
+        // engine state (`$engineState->data`, etc.) accumulates across
+        // calls via the existing `array_replace_recursive` merge in
+        // `processAndGenerateData()`.
+        /** @var mixed[]|null */
+        $sequentialMQEOperations = App::applyFilters(
+            EngineHookNames::MULTIPLE_QUERY_EXECUTION_SEQUENTIAL_OPERATIONS,
+            null
+        );
+        if ($sequentialMQEOperations !== null && $sequentialMQEOperations !== []) {
+            $appStateManager = App::getAppStateManager();
+            foreach ($sequentialMQEOperations as $sequentialMQEOperation) {
+                $appStateManager->override('multiple-query-execution-current-operation', $sequentialMQEOperation);
+                $this->processAndGenerateData();
+            }
+            $appStateManager->override('multiple-query-execution-current-operation', null);
+        } else {
+            $this->processAndGenerateData();
+        }
 
         /**
          * See if there are extra URIs to be processed in this same request.
@@ -516,6 +571,22 @@ class Engine extends AbstractBasicService implements EngineInterface
 
             // Set the previous values back
             $appStateManager->override('route', $currentRoute);
+        }
+
+        // Format the accumulated databases/unionTypeOutputKeyIDs ONCE here.
+        // Per-op processAndGenerateData() calls under SEQUENTIAL_PASS MQE
+        // skip this step (otherwise they'd redo it N times, walking
+        // SplObjectStorage entries that grow with each call). The
+        // `array_replace_recursive` into engineState->data merges the
+        // formatted output alongside whatever processAndGenerateData()
+        // already wrote (componentdata, feedback, requestmeta, etc.).
+        $dataoutputitems = App::getState('dataoutputitems');
+        if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
+            $engineState = App::getEngineState();
+            $engineState->data = array_replace_recursive(
+                $engineState->data,
+                $this->formatAccumulatedDatabasesForOutput($engineState->databases, $engineState->unionTypeOutputKeyIDs)
+            );
         }
 
         // Add session/site meta
@@ -617,15 +688,51 @@ class Engine extends AbstractBasicService implements EngineInterface
 
         $engineState = App::getEngineState();
 
-        // Save it to be used by the children class
-        // Static props are needed for both static/mutableonrequest operations, so build it always
-        $engineState->model_props = $this->getModelPropsComponentTree($component);
-
-        // If only getting static content, then no need to add the mutableonrequest props
-        if ($datasourceselector === DataSourceSelectors::ONLYMODEL) {
-            $engineState->props = $engineState->model_props;
-        } else {
-            $engineState->props = $this->addRequestPropsComponentTree($component, $engineState->model_props);
+        // model_props/props are functions of (entry component, route) only — they
+        // do NOT depend on the current Multiple Query Execution operation. Under
+        // SEQUENTIAL_PASS MQE this method runs once per operation (often 100+);
+        // walking the component tree to build model_props/props for each op is
+        // pure waste. Compute once per route, reuse for every op in that route's
+        // per-op loop. The cache is also valid across the extra-routes loop
+        // because the route is the invalidation key.
+        //
+        // To make the cached values cover the *union* of all ops' fields (so
+        // every per-op call finds its components in the cached map), we
+        // temporarily clear the `multiple-query-execution-current-operation`
+        // app-state key so the API/GraphQL component processor's
+        // per-op filter falls back to "all ops". The cached values are then
+        // a superset of any single op's needs.
+        $currentRoute = App::getState('route');
+        $needToComputeProps = !$engineState->propsHaveBeenComputed || $engineState->propsComputedForRoute !== $currentRoute;
+        if ($needToComputeProps) {
+            $appStateManager = App::getAppStateManager();
+            $savedMQEOperation = $appStateManager->has('multiple-query-execution-current-operation')
+                ? $appStateManager->get('multiple-query-execution-current-operation')
+                : null;
+            try {
+                $appStateManager->override('multiple-query-execution-current-operation', null);
+                // Static props are needed for both static/mutableonrequest operations, so build it always
+                $engineState->model_props = $this->getModelPropsComponentTree($component);
+                // If only getting static content, then no need to add the mutableonrequest props
+                if ($datasourceselector === DataSourceSelectors::ONLYMODEL) {
+                    $engineState->props = $engineState->model_props;
+                } else {
+                    $engineState->props = $this->addRequestPropsComponentTree($component, $engineState->model_props);
+                }
+                // Same lifetime as props: dataset settings are a pure function
+                // of (component tree, model_props), so they're stable across
+                // per-op MQE iterations within the same route. Compute once
+                // for the union tree (with the per-op filter cleared above).
+                if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems)) {
+                    $engineState->componentDatasetSettings = $this->getComponentDatasetSettings($component, $engineState->model_props, $engineState->props);
+                } else {
+                    $engineState->componentDatasetSettings = [];
+                }
+            } finally {
+                $appStateManager->override('multiple-query-execution-current-operation', $savedMQEOperation);
+            }
+            $engineState->propsHaveBeenComputed = true;
+            $engineState->propsComputedForRoute = $currentRoute;
         }
 
         // Allow for extra operations (eg: calculate resources)
@@ -638,20 +745,24 @@ class Engine extends AbstractBasicService implements EngineInterface
 
         $data = [];
         if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems)) {
-            $data = array_merge(
-                $data,
-                $this->getComponentDatasetSettings($component, $engineState->model_props, $engineState->props)
-            );
+            // Reuse the route-cached dataset settings from the props block
+            // above. Each per-op call writes the same union snapshot here;
+            // `array_replace_recursive` into `engineState->data` is idempotent.
+            $data = array_merge($data, $engineState->componentDatasetSettings);
         }
 
-        $schemaFeedbackEntries = $objectFeedbackEntries = [
-            FeedbackCategories::ERROR => [],
-            FeedbackCategories::WARNING => [],
-            FeedbackCategories::DEPRECATION => [],
-            FeedbackCategories::NOTICE => [],
-            FeedbackCategories::SUGGESTION => [],
-            FeedbackCategories::LOG => [],
-        ];
+        // Use the EngineState-resident feedback accumulators (initialized
+        // by-reference here so the rest of this method can use the same
+        // local-variable names as before). They live on EngineState rather
+        // than as locals because they are shared across the (one or many)
+        // processAndGenerateData() calls within a single generateData() —
+        // notably under "Sequential Pass" MQE, where each op's feedback
+        // contributes to the same response. The leaves are SplObjectStorage,
+        // which `array_replace_recursive` would otherwise clobber instead
+        // of merging across calls. (The initial reset happens once per
+        // generateData() — not per call — see generateData().)
+        $schemaFeedbackEntries = &$engineState->schemaFeedbackEntries;
+        $objectFeedbackEntries = &$engineState->objectFeedbackEntries;
 
         // Comment Leo 20/01/2018: we must first initialize all the settings, and only later add the data.
         // That is because calculating the data may need the values from the settings. Eg: for the resourceLoader,
@@ -668,10 +779,43 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
 
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
-                $data = array_merge(
-                    $data,
-                    $this->generateDatabases($schemaFeedbackEntries, $objectFeedbackEntries)
+                // The drain accumulators live on EngineState so that multiple
+                // `processAndGenerateData()` calls within one `generateData()`
+                // (under the "Sequential Pass" Multiple Query Execution
+                // strategy) accumulate into the SAME store. They are
+                // initialized in `getComponentData()` alongside the other
+                // per-pass state that resets at request start.
+                //
+                // We CANNOT use locals here and merge per-call into
+                // `engineState->data` via `array_replace_recursive`, because
+                // the database structure has SplObjectStorage at its leaves
+                // (one per object id), and `array_replace_recursive` treats
+                // objects as leaves — replacing instead of merging the per-op
+                // contributions.
+
+                // Reset $nocache_fields once per pass; generateDatabases() may
+                // be called multiple times (MQE per-operation drains) and must
+                // not reset between drains.
+                $engineState->nocache_fields = [];
+
+                $this->generateDatabases(
+                    $schemaFeedbackEntries,
+                    $objectFeedbackEntries,
+                    $engineState->databases,
+                    $engineState->unionTypeOutputKeyIDs,
+                    $engineState->combinedUnionTypeOutputKeyIDs,
+                    $engineState->previouslyResolvedIDFieldValues,
+                    $engineState->messages,
                 );
+
+                // The databases/unionTypeOutputKeyIDs aren't formatted into
+                // `$data` here. Each per-op MQE drain would otherwise re-walk
+                // the cumulative accumulators and produce only the LAST
+                // call's output as part of the response. Instead,
+                // `generateData()` formats once after every per-op /
+                // extra-routes call has finished (see the
+                // `formatAccumulatedDatabasesForOutput()` call there),
+                // saving ~N redundant format passes for an N-op query.
             }
         }
 
@@ -1251,10 +1395,6 @@ class Engine extends AbstractBasicService implements EngineInterface
      */
     public function getComponentData(Component $root_component, array $root_model_props, array $root_props): array
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $useCache = $moduleConfiguration->useComponentModelCache();
-        $root_processor = $this->getComponentProcessorManager()->getComponentProcessor($root_component);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -1276,6 +1416,16 @@ class Engine extends AbstractBasicService implements EngineInterface
         // Load under global key (shared by all pagesections / blocks)
         $engineState->relationalTypeOutputKeyIDFieldSets = [];
 
+        // Note: the drain accumulators (already_loaded_id_fields, databases,
+        // unionTypeOutputKeyIDs, etc.) are NOT reset here — they reset once
+        // per `generateData()` call, so they persist across:
+        //   - the per-operation processAndGenerateData() calls under MQE
+        //     "Sequential Pass" (where accumulation across ops is required
+        //     for correct response merging),
+        //   - the extra-routes processAndGenerateData() calls (where it's
+        //     also harmless because each call's `array_replace_recursive`
+        //     into `engineState->data` writes the complete snapshot).
+
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
             EngineHookNames::ENGINE_ITERATION_START,
@@ -1285,6 +1435,11 @@ class Engine extends AbstractBasicService implements EngineInterface
             array(&$engineState->helperCalculations),
             $this
         );
+
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
+        $root_processor = $this->getComponentProcessorManager()->getComponentProcessor($root_component);
 
         // First check if there's a cache stored
         $immutable_data_properties = $mutableonmodel_data_properties = null;
@@ -1707,34 +1862,40 @@ class Engine extends AbstractBasicService implements EngineInterface
     }
 
     /**
-     * @return array<string,mixed>
+     * Drain $engineState->relationalTypeOutputKeyIDFieldSets into the supplied
+     * accumulators. The drain runs to completion (i.e. continues until the queue
+     * is empty *at this moment*), but does NOT reset any accumulator. Callers
+     * may invoke this method multiple times within a single request — each call
+     * processes whatever has been queued since the previous call. This is the
+     * primitive that future Multiple Query Execution per-operation drains will
+     * be built on; today there is a single caller in processAndGenerateData()
+     * that drains once and then formats.
+     *
+     * The "already loaded id fields" cache lives on EngineState so that
+     * subsequent drains within the same pass do not re-fetch fields already
+     * loaded by an earlier drain.
+     *
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
      * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $previouslyResolvedIDFieldValues
+     * @param array<string,mixed> $messages
      */
     protected function generateDatabases(
         array &$schemaFeedbackEntries,
         array &$objectFeedbackEntries,
-    ): array {
+        array &$databases,
+        array &$unionTypeOutputKeyIDs,
+        array &$combinedUnionTypeOutputKeyIDs,
+        array &$previouslyResolvedIDFieldValues,
+        array &$messages,
+    ): void {
         $engineState = App::getEngineState();
-
-        // Save all database elements here, under typeResolver
-        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> */
-        $databases = [];
-        /** @var array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> */
-        $unionTypeOutputKeyIDs = [];
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> */
-        $combinedUnionTypeOutputKeyIDs = [];
-
-        /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
-        $previouslyResolvedIDFieldValues = [];
-        $engineState->nocache_fields = [];
-
-        // Keep an object with all fetched IDs/fields for each typeResolver. Then, we can keep using the same typeResolver as subcomponent,
-        // but we need to avoid fetching those DB objects that were already fetched in a previous iteration
-        $already_loaded_id_fields = [];
-
-        // Initiate a new $messages interchange across directives
-        $messages = [];
+        // Cross-drain cache of already-fetched typeOutputKey/ID/fields,
+        // so subsequent drains do not re-fetch fields already loaded.
+        $already_loaded_id_fields = &$engineState->already_loaded_id_fields;
 
         $databaseEntryManager = $this->getDatabaseEntryManager();
 
@@ -1901,8 +2062,21 @@ class Engine extends AbstractBasicService implements EngineInterface
             );
             // }
         }
+    }
 
-        // Print data into the output
+    /**
+     * Format the accumulated databases (built up across one or more
+     * generateDatabases() drains) into the output-shaped array merged
+     * into the engine response.
+     *
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
+     * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
+     * @return array<string,mixed>
+     */
+    protected function formatAccumulatedDatabasesForOutput(
+        array $databases,
+        array $unionTypeOutputKeyIDs,
+    ): array {
         $ret = [];
         $this->maybeCombineAndAddDatabaseEntries($ret, 'databases', $databases);
         $this->maybeCombineAndAddDatabaseEntries($ret, 'unionTypeOutputKeyIDs', $unionTypeOutputKeyIDs);
@@ -1998,8 +2172,12 @@ class Engine extends AbstractBasicService implements EngineInterface
                 continue;
             }
             $subcomponentTypeOutputKey = $subcomponentTypeResolver->getTypeOutputKey();
-            // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
-            $subcomponent_direct_fields = array_unique($subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []);
+            // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now.
+            // Dedup `ComponentFieldNodeInterface[]` by `__toString` (= field uniqueID)
+            // via a `[uniqueID => node]` map, avoiding `array_unique`'s repeated string casts.
+            $subcomponent_direct_fields = self::dedupComponentFieldNodes(
+                $subcomponent_data_properties[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? []
+            );
             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
             $subcomponent_conditional_fields_storage = $subcomponent_data_properties[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ?? new SplObjectStorage();
             if ($subcomponent_direct_fields || $subcomponent_conditional_fields_storage->count() > 0) {
@@ -2010,20 +2188,57 @@ class Engine extends AbstractBasicService implements EngineInterface
                 if ($already_loaded_id_fields && ($already_loaded_id_fields[$subcomponentTypeOutputKey] ?? null)) {
                     $subcomponent_already_loaded_id_fields = $already_loaded_id_fields[$subcomponentTypeOutputKey];
                 }
-                $subcomponentIDs = [];
+                /**
+                 * Walk `$typeResolverIDs × $databases` once and collect a flat
+                 * list of entries `[$dbName, $id, $idsList, $isArray]`, plus
+                 * the unique-IDs set used to build `$typedSubcomponentIDs`.
+                 *
+                 * Replaces the previous design which:
+                 *   - Built a 3-level nested `$subcomponentIDs[$dbName][$typeOutputKey][$id]`
+                 *     scratch structure (three array-of-array nesting levels of
+                 *     overhead per entry).
+                 *   - Then walked it 4-deep just to collect the unique-IDs set.
+                 *   - Then walked it 3-deep again to do the typed-IDs lookup
+                 *     and per-entry writes.
+                 *
+                 * The flat-entries form does the work in a single collection
+                 * pass + single processing pass. `$targetTypeOutputKey` is
+                 * loop-invariant within this call so it doesn't need to be
+                 * repeated per entry.
+                 *
+                 * @var list<array{0:string,1:string|int,2:array<int,string|int|null>,3:bool}>
+                 */
+                $entries = [];
+                /** @var array<string|int,bool> */
+                $allSubcomponentIDsSet = [];
                 foreach ($typeResolverIDs as $id) {
-                    // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
+                    // $databases may contain more than 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
                     // Fetch the field_ids from all these DBs
                     foreach ($databases as $dbName => $database) {
-                        $database_field_ids = $database[$targetTypeOutputKey][$id][$componentFieldNode->getField()] ?? null;
+                        $database_field_ids = $database[$targetTypeOutputKey][$id][$field] ?? null;
                         if (!$database_field_ids) {
                             continue;
                         }
-                        $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] = array_merge(
-                            $subcomponentIDs[$dbName][$targetTypeOutputKey][$id] ?? [],
-                            is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
-                        );
+                        if (is_array($database_field_ids)) {
+                            $idsList = $database_field_ids;
+                            $isArray = true;
+                        } else {
+                            $idsList = [$database_field_ids];
+                            $isArray = false;
+                        }
+                        foreach ($idsList as $database_field_id) {
+                            if ($database_field_id !== null) {
+                                $allSubcomponentIDsSet[$database_field_id] = true;
+                            }
+                        }
+                        $entries[] = [$dbName, $id, $idsList, $isArray];
                     }
+                }
+                if ($entries === []) {
+                    // No subcomponent IDs to process for this field — skip the
+                    // type-qualification call and avoid allocating empty
+                    // intermediate arrays.
+                    continue;
                 }
                 /**
                  * We don't want to store the typeOutputKey/ID inside the relationalID,
@@ -2036,123 +2251,185 @@ class Engine extends AbstractBasicService implements EngineInterface
                  */
                 /** @var array<string|int,string> */
                 $typedSubcomponentIDs = [];
-                /**
-                 * Get the types for all of the IDs all at once.
-                 * Flatten 3 levels: dbName => typeOutputKey => id => ...
-                 *
-                 * @var array<string|int>
-                 */
-                $allSubcomponentIDs = array_values(array_unique(
-                    GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
-                ));
+                /** @var array<string|int> */
+                $allSubcomponentIDs = array_keys($allSubcomponentIDsSet);
                 /** @var array<string|int> */
                 $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
                 // Create a map, from ID to TypedID
-                for ($i = 0; $i < count($allSubcomponentIDs); $i++) {
+                $allSubcomponentIDsCount = count($allSubcomponentIDs);
+                for ($i = 0; $i < $allSubcomponentIDsCount; $i++) {
                     $typedSubcomponentIDs[$allSubcomponentIDs[$i]] = $qualifiedSubcomponentIDs[$i];
                 }
 
                 /** @var array<string|int> */
                 $field_ids = [];
-                foreach ($subcomponentIDs as $dbName => $typeOutputKey_id_database_field_ids) {
-                    foreach ($typeOutputKey_id_database_field_ids as $typeOutputKey => $id_database_field_ids) {
-                        foreach ($id_database_field_ids as $id => $database_field_ids) {
-                            // Transform the IDs, adding their type
-                            // Do it always, for UnionTypeResolvers and non-union ones.
-                            // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
-                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
-                            // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
-                            $typed_database_field_ids = array_map(
-                                /**
-                                 * It may be null if returning a null value
-                                 * in a field connection of type List
-                                 */
-                                fn (string|int|null $field_id) => $field_id === null ? null : $typedSubcomponentIDs[$field_id],
-                                $database_field_ids
-                            );
-                            if ($subcomponentIsUnionTypeResolver) {
-                                $database_field_ids = $typed_database_field_ids;
-                            }
-                            // Set on the `unionTypeOutputKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                            $entryIsArray = $databases[$dbName][$typeOutputKey][$id]->contains($componentFieldNode->getField()) && is_array($databases[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()]);
-                            // @phpstan-ignore-next-line
-                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id] ??= new SplObjectStorage();
-                            // @phpstan-ignore-next-line
-                            $unionTypeOutputKeyIDs[$dbName][$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                            // @phpstan-ignore-next-line
-                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id] ??= new SplObjectStorage();
-                            // @phpstan-ignore-next-line
-                            $combinedUnionTypeOutputKeyIDs[$typeOutputKey][$id][$componentFieldNode->getField()] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                foreach ($entries as [$dbName, $id, $idsList, $isArray]) {
+                    // Transform the IDs, adding their type
+                    // Do it always, for UnionTypeResolvers and non-union ones.
+                    // This is because if it's a relational field that comes after a UnionTypeResolver, its typeOutputKey could not be inferred (since it depends from the resolvedObject, and can't be obtained in the settings, where "outputKeys" is obtained and which doesn't depend on data items)
+                    // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetcomponentsettings.outputKeys", since the component (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its subcomponents
+                    // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
+                    $typed_database_field_ids = [];
+                    foreach ($idsList as $database_field_id) {
+                        $typed_database_field_ids[] = $database_field_id === null ? null : $typedSubcomponentIDs[$database_field_id];
+                    }
+                    // `$isArray` was determined when collecting; no need to re-check
+                    // `databases[]->offsetExists($field) && is_array(...)` here.
+                    $unionEntryValue = $isArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                    // @phpstan-ignore-next-line
+                    $unionTypeOutputKeyIDs[$dbName][$targetTypeOutputKey][$id] ??= new SplObjectStorage();
+                    // @phpstan-ignore-next-line
+                    $unionTypeOutputKeyIDs[$dbName][$targetTypeOutputKey][$id][$field] = $unionEntryValue;
+                    // @phpstan-ignore-next-line
+                    $combinedUnionTypeOutputKeyIDs[$targetTypeOutputKey][$id] ??= new SplObjectStorage();
+                    // @phpstan-ignore-next-line
+                    $combinedUnionTypeOutputKeyIDs[$targetTypeOutputKey][$id][$field] = $unionEntryValue;
 
-                            // Merge, after adding their type!
-                            $field_ids = array_merge(
-                                $field_ids,
-                                $database_field_ids
-                            );
-                        }
+                    // For union resolvers, append the typed IDs; otherwise append raw.
+                    $idsToAppend = $subcomponentIsUnionTypeResolver ? $typed_database_field_ids : $idsList;
+                    foreach ($idsToAppend as $database_field_id) {
+                        $field_ids[] = $database_field_id;
                     }
                 }
                 if ($field_ids) {
-                    foreach ($field_ids as $field_id) {
-                        // Do not add again the IDs/Fields already loaded
-                        if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null) {
-                            $id_subcomponent_direct_fields = array_values(
-                                array_filter(
-                                    $subcomponent_direct_fields,
-                                    fn (ComponentFieldNodeInterface $componentFieldNode) => !in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)
-                                )
-                            );
+                    /**
+                     * Group `$field_ids` by the direct/conditional fields they
+                     * end up needing, so `combineIDsDatafields` can be called
+                     * once per group instead of once per ID.
+                     *
+                     * - IDs without an `$subcomponent_already_loaded_id_fields`
+                     *   entry all share `$subcomponent_direct_fields` /
+                     *   `$subcomponent_conditional_fields_storage` — collect
+                     *   them and dispatch a single `combineIDsDatafields` call.
+                     * - IDs *with* an already-loaded entry have the shared
+                     *   fields filtered against that entry, producing
+                     *   per-ID arrays. They get their own (filtered) call.
+                     *
+                     * `combineIDsDatafields` does the same per-ID work
+                     * inside its `foreach ($ids as $id)` loop regardless
+                     * of how the IDs are grouped — the grouping is purely
+                     * for amortizing per-call overhead and (in the common
+                     * "no already-loaded" case) skipping the per-ID
+                     * filter+rebuild work entirely.
+                     *
+                     * @var list<string|int>
+                     */
+                    $idsWithoutAlreadyLoaded = [];
+                    if ($subcomponent_already_loaded_id_fields === []) {
+                        // Fast path: with no already-loaded data, every
+                        // `$field_id` goes to the batched dispatch.
+                        $idsWithoutAlreadyLoaded = $field_ids;
+                    } else {
+                        foreach ($field_ids as $field_id) {
+                            // Do not add again the IDs/Fields already loaded
+                            $subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_id_fields[$field_id] ?? null;
+                            if ($subcomponent_already_loaded_data_fields === null) {
+                                $idsWithoutAlreadyLoaded[] = $field_id;
+                                continue;
+                            }
+                            /**
+                             * Build a uniqueID-keyed set of already-loaded fields once
+                             * per $field_id, then use `isset` (O(1)) for membership.
+                             *
+                             * @var array<string,true>
+                             */
+                            $alreadyLoadedFieldUniqueIDs = [];
+                            foreach ($subcomponent_already_loaded_data_fields as $alreadyLoadedField) {
+                                $alreadyLoadedFieldUniqueIDs[$alreadyLoadedField->getUniqueID()] = true;
+                            }
+                            // Filter direct fields with an explicit foreach instead
+                            // of `array_filter` + closure (no per-call closure ctx).
+                            $id_subcomponent_direct_fields = [];
+                            foreach ($subcomponent_direct_fields as $componentFieldNode) {
+                                if (isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])) {
+                                    continue;
+                                }
+                                $id_subcomponent_direct_fields[] = $componentFieldNode;
+                            }
                             /** @var SplObjectStorage<ComponentFieldNodeInterface,ComponentFieldNodeInterface[]> */
                             $id_subcomponent_conditional_fields_storage = new SplObjectStorage();
                             foreach ($subcomponent_conditional_fields_storage as $conditionComponentFieldNode) {
                                 /** @var ComponentFieldNodeInterface $conditionComponentFieldNode */
                                 $conditionComponentFieldNodes = $subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
                                 /** @var ComponentFieldNodeInterface[] $conditionComponentFieldNodes */
-                                $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] ??= [];
-                                $id_subcomponent_conditional_data_fields_storage = $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode];
+                                $id_subcomponent_conditional_data_fields_storage = [];
                                 foreach ($conditionComponentFieldNodes as $componentFieldNode) {
                                     /** @var ComponentFieldNodeInterface $componentFieldNode */
-                                    if (in_array($componentFieldNode->getField(), $subcomponent_already_loaded_data_fields)) {
+                                    if (isset($alreadyLoadedFieldUniqueIDs[$componentFieldNode->getField()->getUniqueID()])) {
                                         continue;
                                     }
                                     $id_subcomponent_conditional_data_fields_storage[] = $componentFieldNode;
                                 }
                                 $id_subcomponent_conditional_fields_storage[$conditionComponentFieldNode] = $id_subcomponent_conditional_data_fields_storage;
                             }
-                        } else {
-                            $id_subcomponent_direct_fields = $subcomponent_direct_fields;
-                            $id_subcomponent_conditional_fields_storage = $subcomponent_conditional_fields_storage;
-                        }
 
-                        /**
-                         * Important: do ALWAYS execute the lines below, even if
-                         * $id_subcomponent_direct_fields is empty.
-                         * That is because we can load additional data for an object
-                         * that was already loaded in a previous iteration.
-                         * Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
-                         * In this case, property "title" at the end would not be fetched otherwise
-                         * (that post was already loaded at the beginning)
-                         */
+                            /**
+                             * Important: do ALWAYS execute the lines below, even if
+                             * $id_subcomponent_direct_fields is empty.
+                             * That is because we can load additional data for an object
+                             * that was already loaded in a previous iteration.
+                             * Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
+                             * In this case, property "title" at the end would not be fetched otherwise
+                             * (that post was already loaded at the beginning)
+                             */
+                            $this->combineIDsDatafields(
+                                $engineState->relationalTypeOutputKeyIDFieldSets, // @phpstan-ignore-line
+                                $subcomponentTypeResolver,
+                                $subcomponentTypeOutputKey,
+                                [$field_id],
+                                $id_subcomponent_direct_fields,
+                                $id_subcomponent_conditional_fields_storage,
+                            );
+                        }
+                    }
+                    /**
+                     * Common-case batched dispatch: all IDs without an
+                     * already-loaded entry share the same direct/conditional
+                     * fields, so a single `combineIDsDatafields` call covers
+                     * them all. (See block comment above for rationale.)
+                     */
+                    if ($idsWithoutAlreadyLoaded !== []) {
                         $this->combineIDsDatafields(
                             $engineState->relationalTypeOutputKeyIDFieldSets, // @phpstan-ignore-line
                             $subcomponentTypeResolver,
                             $subcomponentTypeOutputKey,
-                            array($field_id),
-                            $id_subcomponent_direct_fields,
-                            $id_subcomponent_conditional_fields_storage,
+                            $idsWithoutAlreadyLoaded,
+                            $subcomponent_direct_fields,
+                            $subcomponent_conditional_fields_storage,
                         );
                     }
                     $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputKey, $component_path_key);
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_merge(
-                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] ?? [],
-                        $field_ids
-                    );
+                    /**
+                     * Dedup-on-insert: avoids the previous
+                     * `array_merge(... ?? [], $field_ids)` + later
+                     * `array_unique` pair, which allocated *two*
+                     * fresh arrays of size O(existing + field_ids)
+                     * per outer iteration on a quadratic accumulator
+                     * — a primary memory hotspot in this function.
+                     *
+                     * Build a `<id,true>` set once from the existing
+                     * IDs and append-in-place only previously-unseen
+                     * IDs. Preserves first-occurrence order, which
+                     * `array_unique` also did.
+                     */
+                    $existingIDs = $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS];
+                    /** @var array<string|int,true> */
+                    $seenIDs = $existingIDs === [] ? [] : array_flip($existingIDs);
+                    foreach ($field_ids as $field_id) {
+                        if (isset($seenIDs[$field_id])) {
+                            continue;
+                        }
+                        $seenIDs[$field_id] = true;
+                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS][] = $field_id;
+                    }
                     $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputKey, $component_path_key);
                 }
 
                 if ($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key] ?? null) {
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::IDS]);
-                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_unique($engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]);
+                    // IDS are already deduped on insert above — no `array_unique` needed.
+                    $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(
+                        $engineState->dbdata[$subcomponentTypeOutputKey][$component_path_key][DataProperties::DIRECT_COMPONENT_FIELD_NODES]
+                    );
                 }
             }
         }
@@ -2296,10 +2573,10 @@ class Engine extends AbstractBasicService implements EngineInterface
                 $dbDataSubcomponentsSplObjectStorage[$componentFieldNode] ??= [];
                 $dbDataSubcomponentsFieldSplObjectStorage = $dbDataSubcomponentsSplObjectStorage[$componentFieldNode];
                 if (isset($componentFieldNodeData[DataProperties::DIRECT_COMPONENT_FIELD_NODES])) {
-                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = array_values(array_unique(array_merge(
+                    $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] = self::dedupComponentFieldNodes(array_merge(
                         $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::DIRECT_COMPONENT_FIELD_NODES] ?? [],
                         $componentFieldNodeData[DataProperties::DIRECT_COMPONENT_FIELD_NODES]
-                    )));
+                    ));
                 }
                 if (isset($componentFieldNodeData[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES])) {
                     $dbDataSubcomponentsFieldSplObjectStorage[DataProperties::CONDITIONAL_COMPONENT_FIELD_NODES] ??= new SplObjectStorage();
@@ -2325,5 +2602,26 @@ class Engine extends AbstractBasicService implements EngineInterface
             }
             $dbdata[$relationalTypeOutputKey][$component_path_key][DataProperties::SUBCOMPONENTS] = $dbDataSubcomponentsSplObjectStorage;
         }
+    }
+
+    /**
+     * Deduplicate a `ComponentFieldNodeInterface[]` list by `__toString`
+     * (= underlying field's `getUniqueID()`), via a `[uniqueID => node]`
+     * map. Equivalent in semantics to `array_values(array_unique($nodes))`
+     * but avoids `array_unique`'s repeated string casts on a hot path.
+     *
+     * @param ComponentFieldNodeInterface[] $componentFieldNodes
+     * @return ComponentFieldNodeInterface[]
+     */
+    private static function dedupComponentFieldNodes(array $componentFieldNodes): array
+    {
+        $componentFieldNodesByUniqueID = [];
+        foreach ($componentFieldNodes as $componentFieldNode) {
+            $uniqueID = $componentFieldNode->getField()->getUniqueID();
+            if (!isset($componentFieldNodesByUniqueID[$uniqueID])) {
+                $componentFieldNodesByUniqueID[$uniqueID] = $componentFieldNode;
+            }
+        }
+        return array_values($componentFieldNodesByUniqueID);
     }
 }

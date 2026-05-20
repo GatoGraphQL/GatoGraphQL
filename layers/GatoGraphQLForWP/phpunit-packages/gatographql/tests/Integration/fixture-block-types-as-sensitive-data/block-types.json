@@ -1,0 +1,9 @@
+{
+  "data": {
+    "blockTypes": [
+      {
+        "name": "gatographql-testing/alert"
+      }
+    ]
+  }
+}

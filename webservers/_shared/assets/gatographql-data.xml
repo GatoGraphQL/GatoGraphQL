@@ -1638,6 +1638,43 @@ https://wordpress.org/about/
 		</wp:postmeta>
 														</item>
 					<item>
+		<title><![CDATA[WordPress-Logo]]></title>
+		<link>https://gatographql-pro.lndo.site/wordpress-logo/</link>
+		<pubDate>Thu, 07 May 2026 06:14:35 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://gatographql-pro.lndo.site/wp-content/uploads/WordPress-Logo.svg</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>1384</wp:post_id>
+		<wp:post_date><![CDATA[2026-05-07 06:14:35]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2026-05-07 06:14:35]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2026-05-07 06:14:35]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2026-05-07 06:14:35]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[wordpress-logo]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+						<wp:attachment_url><![CDATA[https://upload.wikimedia.org/wikipedia/commons/0/09/WordPress-Logo.svg]]></wp:attachment_url>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+		<wp:meta_value><![CDATA[WordPress-Logo.svg]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:1:{s:8:"filesize";i:1557;}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_elementor_inline_svg]]></wp:meta_key>
+		<wp:meta_value><![CDATA[<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.52 122.523"><g fill="#464342"><path d="m8.708 61.26c0 20.802 12.089 38.779 29.619 47.298l-25.069-68.686c-2.916 6.536-4.55 13.769-4.55 21.388z"></path><path d="m96.74 58.608c0-6.495-2.333-10.993-4.334-14.494-2.664-4.329-5.161-7.995-5.161-12.324 0-4.831 3.664-9.328 8.825-9.328.233 0 .454.029.681.042-9.35-8.566-21.807-13.796-35.489-13.796-18.36 0-34.513 9.42-43.91 23.688 1.233.037 2.395.063 3.382.063 5.497 0 14.006-.667 14.006-.667 2.833-.167 3.167 3.994.337 4.329 0 0-2.847.335-6.015.501l19.138 56.925 11.501-34.493-8.188-22.434c-2.83-.166-5.511-.501-5.511-.501-2.832-.166-2.5-4.496.332-4.329 0 0 8.679.667 13.843.667 5.496 0 14.006-.667 14.006-.667 2.835-.167 3.168 3.994.337 4.329 0 0-2.853.335-6.015.501l18.992 56.494 5.242-17.517c2.272-7.269 4.001-12.49 4.001-16.989z"></path><path d="m62.184 65.857-15.768 45.819c4.708 1.384 9.687 2.141 14.846 2.141 6.12 0 11.989-1.058 17.452-2.979-.141-.225-.269-.464-.374-.724z"></path><path d="m107.376 36.046c.226 1.674.354 3.471.354 5.404 0 5.333-.996 11.328-3.996 18.824l-16.053 46.413c15.624-9.111 26.133-26.038 26.133-45.426.001-9.137-2.333-17.729-6.438-25.215z"></path><path d="m61.262 0c-33.779 0-61.262 27.481-61.262 61.26 0 33.783 27.483 61.263 61.262 61.263 33.778 0 61.265-27.48 61.265-61.263-.001-33.779-27.487-61.26-61.265-61.26zm0 119.715c-32.23 0-58.453-26.223-58.453-58.455 0-32.23 26.222-58.451 58.453-58.451 32.229 0 58.45 26.221 58.45 58.451 0 32.232-26.221 58.455-58.45 58.455z"></path></g></svg>]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
 		<title><![CDATA[With Response Headers]]></title>
 		<link>https://gatographql.lndo.site/graphql-schemaconfig/with-response-headers/</link>
 		<pubDate>Tue, 21 Mar 2023 05:57:33 +0000</pubDate>
@@ -1673,7 +1710,7 @@ https://wordpress.org/about/
 	<!-- wp:group -->
 	<div class="wp-block-group">
 		<!-- wp:paragraph -->
-		<p>p1</p>
+		<p>I want to translate this content, which is inside some nested block (it seems)</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
@@ -1724,7 +1761,6 @@ https://wordpress.org/about/
 		<wp:post_type><![CDATA[wp_block]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 						</item>
 					<item>
 		<title><![CDATA[Welcome to a single post full of blocks!]]></title>
@@ -1737,8 +1773,8 @@ https://wordpress.org/about/
 <p>When I look back on my past and think how much time I wasted on nothing, how much time has been lost in futilities, errors, laziness, incapacity to live; how little I appreciated it, how many times I sinned against my heart and soul-then my heart bleeds. <strong>Life is a gift, life is happiness, every minute can be an eternity of happiness</strong>. (<a href="https://www.azquotes.com/author/4085-Fyodor_Dostoevsky" target="_blank" rel="noopener">Quote by Fyodor Dostoevsky</a>)<br></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">This blog post will be transformed...</h2>
+<!-- wp:heading {"anchor":"this-blog-post-will-be-transformed"} -->
+<h2 id="this-blog-post-will-be-transformed" class="wp-block-heading">This blog post will be transformed...</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"style":{"color":{"text":"#ffffff","background":"#709372"}}} -->
@@ -1749,16 +1785,16 @@ https://wordpress.org/about/
 <hr class="wp-block-separator has-css-opacity"/>
 <!-- /wp:separator -->
 
-<!-- wp:image {"align":"wide","id":33} -->
+<!-- wp:image {"id":33,"align":"wide"} -->
 <figure class="wp-block-image alignwide"><img src="https://i.ytimg.com/vi/z4KKd2nGlEM/maxresdefault.jpg" alt="Ooops, I got stuck" class="wp-image-33"/><figcaption class="wp-element-caption">My owner doesn't give me a hat, so I gotta do a hack</figcaption></figure>
 <!-- /wp:image -->
 
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><mark style="background-color:#D1D1E4" class="has-inline-color">I love these veggies!!!</mark></h3>
+<!-- wp:heading {"level":3,"anchor":"i-love-these-veggies"} -->
+<h3 id="i-love-these-veggies" class="wp-block-heading"><mark style="background-color:#D1D1E4" class="has-inline-color">I love these veggies!!!</mark></h3>
 <!-- /wp:heading -->
 
 <!-- wp:list -->
-<ul><!-- wp:list-item -->
+<ul class="wp-block-list"><!-- wp:list-item -->
 <li>Eggplant</li>
 <!-- /wp:list-item -->
 
@@ -1775,18 +1811,18 @@ https://wordpress.org/about/
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg","id":1380,"alt":"Dog not caring about anything","dimRatio":50,"isDark":false} -->
-<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
+<!-- wp:cover {"url":"https://localhost:59610/wp-content/uploads/Funny-Dog.jpg","id":1380,"alt":"Dog not caring about anything","dimRatio":50,"isDark":false} -->
+<div class="wp-block-cover is-light"><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://localhost:59610/wp-content/uploads/Funny-Dog.jpg" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"placeholder":"Write title…","style":{"typography":{"textAlign":"center"}},"fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">See if I care</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
 
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">When going to eat out, I normally go for one of these:</h3>
+<!-- wp:heading {"level":3,"anchor":"when-going-to-eat-out-i-normally-go-for-one-of-these"} -->
+<h3 id="when-going-to-eat-out-i-normally-go-for-one-of-these" class="wp-block-heading">When going to eat out, I normally go for one of these:</h3>
 <!-- /wp:heading -->
 
 <!-- wp:list {"ordered":true} -->
-<ol><!-- wp:list-item -->
+<ol class="wp-block-list"><!-- wp:list-item -->
 <li>Vegetarian</li>
 <!-- /wp:list-item -->
 
@@ -1815,7 +1851,7 @@ https://wordpress.org/about/
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:media-text {"mediaId":1362,"mediaLink":"https://gatographql.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
+<div class="wp-block-column"><!-- wp:media-text {"align":"wide","mediaId":1362,"mediaLink":"https://gatographql.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
 <div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.webp" alt="In red are the entities with a transformed name" class="wp-image-1362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
 <p>This is the schema</p>
 <!-- /wp:paragraph --></div></div>
@@ -1841,8 +1877,8 @@ https://wordpress.org/about/
 <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://duckduckgo.com/">Do some duck duck search online</a></div>
 <!-- /wp:button -->
 
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">This heading (H3) is boring (Regex test: $1 #1), but these guys are not</h3>
+<!-- wp:heading {"level":3,"anchor":"this-heading-h3-is-boring-regex-test-1-1-but-these-guys-are-not"} -->
+<h3 id="this-heading-h3-is-boring-regex-test-1-1-but-these-guys-are-not" class="wp-block-heading">This heading (H3) is boring (Regex test: $1 #1), but these guys are not</h3>
 <!-- /wp:heading -->
 
 <!-- wp:gallery {"columns":3,"linkTo":"none","align":"wide","className":"alignnone"} -->
@@ -1871,7 +1907,7 @@ https://wordpress.org/about/
 <!-- /wp:button -->
 
 <!-- wp:button {"style":{"spacing":{"padding":{"top":"var:preset|spacing|60","right":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|60"}},"color":{"background":"#382998"}},"fontSize":"extra-large"} -->
-<div class="wp-block-button has-custom-font-size has-extra-large-font-size"><a class="wp-block-button__link has-background wp-element-button" style="background-color:#382998;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)">Keep your soul satiated 🙏</a></div>
+<div class="wp-block-button"><a class="wp-block-button__link has-background has-extra-large-font-size has-custom-font-size wp-element-button" style="background-color:#382998;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)">Keep your soul satiated 🙏</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
 
@@ -1883,7 +1919,7 @@ https://wordpress.org/about/
 <figure class="wp-block-audio"><audio controls src="https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3"></audio><figcaption class="wp-element-caption">"Broke for free" song</figcaption></figure>
 <!-- /wp:audio -->
 
-<!-- wp:video {"id":132,"tracks":[]} -->
+<!-- wp:video {"id":132} -->
 <figure class="wp-block-video"><video controls src="https://download.samplelib.com/mp4/sample-5s.mp4"></video><figcaption class="wp-element-caption">Test video of a road in a city</figcaption></figure>
 <!-- /wp:video -->
 
@@ -1895,7 +1931,7 @@ https://wordpress.org/about/
 <pre class="wp-block-verse">Nothing exists except atoms and empty space; everything else is opinion.<br><br>The man enslaved to wealth can never be honest.<br><br>–Democritus</pre>
 <!-- /wp:verse -->
 
-<!-- wp:table {"hasFixedLayout":true,"align":"wide","className":"has-fixed-layout"} -->
+<!-- wp:table {"align":"wide","className":"has-fixed-layout"} -->
 <figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><tbody><tr><td><strong>What I like</strong></td><td>Petting my 3 cats 😺😺😺 in the morning ☀️</td><td>Riding my bike in the mountain</td></tr><tr><td><strong>What I have</strong></td><td>Not much, just enough to <a href="https://keepmegoing.com">keep me going on</a></td><td>A <mark style="background-color:rgba(0, 0, 0, 0);color:#c22a2a" class="has-inline-color">balcony with plants</mark></td></tr><tr><td><strong>What I desire</strong></td><td>Attending <strong>conferences</strong> and meeting plenty of <strong>interesting folks</strong> from the community</td><td>To be able to focus on the important things of life</td></tr></tbody></table><figcaption class="wp-element-caption">Some items to consider for new year's resolution?</figcaption></figure>
 <!-- /wp:table -->
 
@@ -1909,7 +1945,9 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <p>Custom HTML here, maybe need to process, maybe not</p>
 <!-- /wp:html -->
 
-<!-- wp:block {"ref":1136} /-->]]></content:encoded>
+<!-- wp:block {"ref":1136} /-->
+
+<!-- wp:breadcrumbs {"separator":"::"} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
 		<wp:post_date><![CDATA[2023-06-12 09:20:44]]></wp:post_date>
@@ -2056,7 +2094,6 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
@@ -2152,7 +2189,6 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
 							</item>
 							<item>
@@ -2206,8 +2242,305 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
+							</item>
+					<item>
+		<title><![CDATA[PHP-only blocks]]></title>
+		<link>https://gatographql.lndo.site/php-only-blocks/</link>
+		<pubDate>Thu, 02 Apr 2026 09:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1200</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:heading -->
+<h2 class="wp-block-heading">Alert blocks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The three blocks below are registered fully in PHP via WordPress 7.0's <code>autoRegister</code> support flag.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:gatographql-testing/alert {"header":"Heads up","message":"Heads up — this is an informational notice.","implications":"No immediate action required; this is for awareness.","severity":"Info","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/alert {"header":"Deprecation warning","message":"Be careful: deprecated API in use.","implications":"Plan migration to the replacement API before the next major release.","severity":"Warning","dismissible":true} /-->
+
+<!-- wp:gatographql-testing/alert {"header":"Request failed","message":"Something went wrong while processing your request.","implications":"Your changes were not applied; retry after checking logs and permissions.","severity":"Error","dismissible":true} /-->
+
+<!-- wp:gatographql-testing/alert {"header":"Saved","message":"Your changes have been saved successfully.","implications":"The new configuration is now active.","severity":"Success","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/alert {"header":"(Empty)","message":"","implications":"","severity":"Success","dismissible":false} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Duplicate Alert blocks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Heads up (duplicate)","message":"Heads up — this is an informational notice.","implications":"No immediate action required; this is for awareness.","severity":"Info","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Deprecation warning (duplicate)","message":"Be careful: deprecated API in use.","implications":"Plan migration to the replacement API before the next major release.","severity":"Warning","dismissible":true} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Request failed (duplicate)","message":"Something went wrong while processing your request.","implications":"Your changes were not applied; retry after checking logs and permissions.","severity":"Error","dismissible":true} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Saved (duplicate)","message":"Your changes have been saved successfully.","implications":"The new configuration is now active.","severity":"Success","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"(Empty duplicate)","message":"","implications":"","severity":"Success","dismissible":false} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Marquee blocks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:gatographql-testing/marquee {"text":"Welcome to Gato GraphQL — the GraphQL server for WordPress","speed":"Slow","direction":"Left"} /-->
+
+<!-- wp:gatographql-testing/marquee {"text":"Breaking news scrolling fast to the right","speed":"Fast","direction":"Right"} /-->
+
+<!-- wp:gatographql-testing/marquee {"text":"Default speed marquee","speed":"Medium","direction":"Left"} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Author Box blocks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:gatographql-testing/author-box {"userLogin":"blogger","showAvatar":true,"showBio":true,"showEmail":true} /-->
+
+<!-- wp:gatographql-testing/author-box {"userLogin":"editor","showAvatar":true,"showBio":false,"showEmail":true} /-->
+
+<!-- wp:gatographql-testing/author-box {"userLogin":"author","showAvatar":false,"showBio":true,"showEmail":false} /-->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>1200</wp:post_id>
+		<wp:post_date><![CDATA[2026-04-02 09:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2026-04-02 09:00:00]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2026-04-02 09:00:00]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2026-04-02 09:00:00]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[php-only-blocks]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[post]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
+		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
+		<category domain="post_tag" nicename="plugin"><![CDATA[plugin]]></category>
+							</item>
+					<item>
+		<title><![CDATA[PHP-only blocks (combinations)]]></title>
+		<link>https://gatographql.lndo.site/php-only-blocks-combinations/</link>
+		<pubDate>Fri, 03 Apr 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1210</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:heading -->
+<h2 class="wp-block-heading">Server-rendered block permutations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This fixture combines dynamically rendered blocks and reuses phrases across attributes to validate context-sensitive replacements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:gatographql-testing/alert {"header":"Notice","message":"System notice — informational update available.","implications":"No action needed right now; review when convenient.","severity":"Info","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/marquee {"text":"Notice","speed":"Slow","direction":"Left"} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Applied (duplicate)","message":"Your settings were applied successfully.","implications":"Updated configuration is now in effect.","severity":"Success","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/alert {"header":"Applied","message":"Your settings were applied successfully.","implications":"Updated configuration is now in effect.","severity":"Success","dismissible":false} /-->
+
+<!-- wp:gatographql-testing/marquee {"text":"Standard pace ticker","speed":"Medium","direction":"Left"} /-->
+
+<!-- wp:gatographql-testing/author-box {"userLogin":"editor","showAvatar":true,"showBio":false,"showEmail":true} /-->
+
+<!-- wp:gatographql-testing/duplicate-alert {"header":"Legacy API warning (duplicate)","message":"Caution: legacy endpoint currently active.","implications":"Schedule migration to the new endpoint before the next major rollout.","severity":"Warning","dismissible":true} /-->
+
+<!-- wp:gatographql-testing/alert {"header":"Legacy API warning","message":"Caution: legacy endpoint currently active.","implications":"Schedule migration to the new endpoint before the next major rollout.","severity":"Warning","dismissible":true} /-->
+
+<!-- wp:gatographql-testing/marquee {"text":"Update stream moving quickly to the right","speed":"Fast","direction":"Right"} /-->
+
+<!-- wp:gatographql-testing/author-box {"userLogin":"blogger","showAvatar":true,"showBio":true,"showEmail":true} /-->
+
+<!-- wp:paragraph -->
+<p>End of server-rendered combinations fixture.</p>
+<!-- /wp:paragraph -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>1210</wp:post_id>
+		<wp:post_date><![CDATA[2026-04-03 10:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2026-04-03 10:00:00]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2026-04-03 10:00:00]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2026-04-03 10:00:00]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[php-only-blocks-combinations]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[post]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+		<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
+		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
+		<category domain="post_tag" nicename="plugin"><![CDATA[plugin]]></category>
+							</item>
+					<item>
+		<title><![CDATA[All blocks with entity references]]></title>
+		<link>https://gatographql.lndo.site/all-blocks-with-entity-references/</link>
+		<pubDate>Fri, 03 Apr 2026 10:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[blogger]]></dc:creator>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1212</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:paragraph -->
+<p>This post is a fixture covering every WP-core block whose attributes hold an entity-reference ID (post, media or taxonomy term). IDs used: media 1361/1362/1380, posts 1121/1123/1125/1140, pages 1/2/1705, categories 2/3/4, tags 9/11/13. Sections marked <em>(no media available)</em> use placeholder IDs because the dev DB has no entries of that media type.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Media references — single ID</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":1361,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo.webp" alt="" class="wp-image-1361"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:cover {"url":"https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp","id":1362,"dimRatio":50,"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover"><img class="wp-block-cover__image-background wp-image-1362" alt="" src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"placeholder":"Write title…","style":{"typography":{"textAlign":"center"}},"fontSize":"large"} -->
+<p class="has-text-align-center has-large-font-size">Cover with media id 1362</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:cover -->
+
+<!-- wp:media-text {"align":"wide","mediaId":1380,"mediaType":"image"} -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://localhost:50666/wp-content/uploads/Funny-Dog.jpg" alt="" class="wp-image-1380 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
+<p>Media-Text uses <code>mediaId</code> (here 1380).</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:media-text -->
+
+<!-- wp:audio {"id":99001} -->
+<figure class="wp-block-audio"><audio controls src="https://localhost:50666/wp-content/uploads/placeholder.mp3"></audio><figcaption class="wp-element-caption">Audio block — placeholder id 99001 (no audio available in dev DB).</figcaption></figure>
+<!-- /wp:audio -->
+
+<!-- wp:video {"id":99002} -->
+<figure class="wp-block-video"><video controls src="https://localhost:50666/wp-content/uploads/placeholder.mp4"></video><figcaption class="wp-element-caption">Video block — placeholder id 99002 (no video available in dev DB).</figcaption></figure>
+<!-- /wp:video -->
+
+<!-- wp:file {"id":99003,"href":"https://localhost:50666/wp-content/uploads/placeholder.pdf"} -->
+<div class="wp-block-file"><a href="https://localhost:50666/wp-content/uploads/placeholder.pdf">placeholder.pdf</a><a href="https://localhost:50666/wp-content/uploads/placeholder.pdf" class="wp-block-file__button wp-element-button" download>Download</a></div>
+<!-- /wp:file -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Media references — list of IDs</h2>
+<!-- /wp:heading -->
+
+<!-- wp:gallery {"ids":[1361,1362,1380],"linkTo":"none"} -->
+<figure class="wp-block-gallery has-nested-images columns-default is-cropped"><!-- wp:image {"id":1361,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo.webp" alt="" class="wp-image-1361"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1362,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp" alt="" class="wp-image-1362"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":1380,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/Funny-Dog.jpg" alt="" class="wp-image-1380"/></figure>
+<!-- /wp:image --></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Post / page / CPT references</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Stand-alone <code>core/navigation-link</code> blocks pointing at posts and pages (note: page id 1 does not exist in the dev DB; included as-is to fixture the attribute):</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:navigation-link {"label":"Customize the schema for each client","type":"post","id":1121,"url":"https://localhost:50666/customize-the-schema-for-each-client/","kind":"post-type"} /-->
+
+<!-- wp:navigation-link {"label":"GraphQL or REST? Why not both?","type":"post","id":1123,"url":"https://localhost:50666/graphql-or-rest-you-can-have-both/","kind":"post-type"} /-->
+
+<!-- wp:navigation-link {"label":"Sample Page","type":"page","id":2,"url":"https://localhost:50666/sample-page/","kind":"post-type"} /-->
+
+<!-- wp:navigation-link {"label":"Page id 1 (404)","type":"page","id":1,"url":"https://localhost:50666/?page_id=1","kind":"post-type"} /-->
+
+<!-- wp:paragraph -->
+<p><code>core/navigation-submenu</code> referencing page 1705, with a child link to post 1125:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:navigation-submenu {"label":"Page with parent only","type":"page","id":1705,"url":"https://localhost:50666/page-with-several-levels-of-children/page-with-parent-and-children/page-with-parent-only/","kind":"post-type"} -->
+<!-- wp:navigation-link {"label":"Public or Private API mode, for extra security","type":"post","id":1125,"url":"https://localhost:50666/public-or-private-api-mode-for-extra-security/","kind":"post-type"} /-->
+<!-- /wp:navigation-submenu -->
+
+<!-- wp:paragraph -->
+<p><code>core/page-list</code> rendering only the descendants of page 1701 ("Page with several layers of children"):</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:page-list {"parentPageID":1701} /-->
+
+<!-- wp:paragraph -->
+<p><code>core/navigation</code> with a placeholder <code>ref</code>; no <code>wp_navigation</code> matches in the dev DB at this id, but the attribute itself is the entity-reference target:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:navigation {"ref":99100} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reusable block reference (already handled separately)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>core/block</code> (reusable block) is intentionally NOT in the new entity-reference map: it has its own dedicated extraction in the GraphQL query (<code>originGutenbergCoreBlock</code>) feeding <code>referenceGutenbergCoreBlockPatternIDs</code>. Included here as a fixture; no <code>wp_block</code> posts exist in the dev DB.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:block {"ref":1136} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Taxonomy term references — categories</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>core/latest-posts</code> filtered by categories 2 (Advanced), 3 (Blog) and 4 (Resource):</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:latest-posts {"categories":[2,3,4],"postsToShow":3,"displayPostDate":true} /-->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Query loop — parents / include / exclude (post IDs)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This <code>core/query</code> filters by <code>parents</code> [1705], <code>include</code> [1121, 1123, 1125] and <code>exclude</code> [1140], so all three post-ID entity-reference attribute paths inside the nested <code>query</code> object are exercised at once.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:query {"queryId":1,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[1140],"include":[1121,1123,1125],"parents":[1705],"sticky":""}} -->
+<div class="wp-block-query"><!-- wp:post-template -->
+<!-- wp:post-title {"isLink":true} /-->
+
+<!-- wp:post-excerpt /-->
+<!-- /wp:post-template --></div>
+<!-- /wp:query -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Query loop — taxQuery (categories + tags)</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This <code>core/query</code> uses <code>taxQuery</code> to filter by categories [2, 3] AND tags [9, 11, 13]. <strong>Note:</strong> <code>taxQuery</code> has a per-taxonomy nested shape (<code>{category: [...], post_tag: [...]}</code>) that doesn't fit the current "attribute path → IDs" map — it's intentionally excluded from <code>BlockTypeAttributeValues</code>. Included here as a fixture for the tag IDs and so future work can decide how to extract it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","taxQuery":{"include":{"category":[2,3],"post_tag":[9,11,13]},"exclude":{"additional-post-category":[33, 41],"additional-post-tag":[36]}}}} -->
+<div class="wp-block-query"><!-- wp:post-template -->
+<!-- wp:post-title {"isLink":true} /-->
+
+<!-- wp:post-excerpt /-->
+<!-- /wp:post-template --></div>
+<!-- /wp:query -->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>1212</wp:post_id>
+		<wp:post_date><![CDATA[2026-04-03 10:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2026-04-03 10:00:00]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2026-04-03 10:00:00]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2026-04-03 10:00:00]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[open]]></wp:ping_status>
+		<wp:post_name><![CDATA[all-blocks-with-entity-references]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[post]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
 							</item>
 				</channel>
 </rss>

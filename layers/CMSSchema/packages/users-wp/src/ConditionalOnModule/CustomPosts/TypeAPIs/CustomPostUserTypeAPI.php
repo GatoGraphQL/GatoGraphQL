@@ -17,13 +17,21 @@ class CustomPostUserTypeAPI implements CustomPostUserTypeAPIInterface
         if (is_object($customPostObjectOrID)) {
             /** @var WP_Post */
             $customPost = $customPostObjectOrID;
-            return $customPost->post_author;
+            return $this->getAuthorFromCustomPost($customPost);
         }
 
         $customPostID = $customPostObjectOrID;
         /** @var WP_Post|null */
         $customPost = \get_post((int)$customPostID);
         if ($customPost === null) {
+            return null;
+        }
+        return $this->getAuthorFromCustomPost($customPost);
+    }
+
+    protected function getAuthorFromCustomPost(WP_Post $customPost): string|int|null
+    {
+        if ((string) $customPost->post_author === "0") {
             return null;
         }
         return $customPost->post_author;

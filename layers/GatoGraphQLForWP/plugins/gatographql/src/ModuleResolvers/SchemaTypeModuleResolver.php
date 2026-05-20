@@ -64,6 +64,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      * Setting options
      */
     public final const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
+    public final const OPTION_TREAT_BLOCK_TYPES_AS_SENSITIVE_DATA = 'treat-block-types-as-sensitive-data';
     public final const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
     public final const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public final const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
@@ -625,6 +626,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             ],
             self::SCHEMA_BLOCKS => [
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
+                self::OPTION_TREAT_BLOCK_TYPES_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_PAGES => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -1010,6 +1012,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     \__('If type <code>%s</code> is composed of only one type (<code>%s</code>), then directly return this single type, instead of the union type?', 'gatographql'),
                     $this->getBlockUnionTypeResolver()->getTypeName(),
                     $this->getGeneralBlockObjectTypeResolver()->getTypeName(),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::OPTION_TREAT_BLOCK_TYPES_AS_SENSITIVE_DATA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    $sensitiveDataTitlePlaceholder,
+                    \__('block type registry', 'gatographql'),
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    $sensitiveDataDescPlaceholder,
+                    \__('block type registry', 'gatographql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];

@@ -47,6 +47,13 @@ abstract class AbstractMetaFieldDirectiveResolver extends AbstractFieldDirective
         array $fields,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
+        // Note: an outer Meta-level memoization was attempted, but profiling
+        // showed every Meta clone in the polylang fixture is invoked exactly
+        // once (50 calls / 50 unique clones, 1 call per clone) — each
+        // `@underArrayItem` / `@underJSONObjectProperty` AST node in the
+        // query is unique, so the Meta-level cache could never hit.
+        // Parent::prepareDirective() does have its own memoization that
+        // *does* land hits (most of the savings come from there).
         parent::prepareDirective(
             $relationalTypeResolver,
             $fields,

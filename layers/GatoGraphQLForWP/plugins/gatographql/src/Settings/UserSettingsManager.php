@@ -64,9 +64,15 @@ class UserSettingsManager extends AbstractSettingsManager implements UserSetting
     public function storeOperationalTimestamp(): void
     {
         $timestamps = [
-            self::TIMESTAMP_CONTAINER => $this->getContainerUniqueTimestamp(),
             self::TIMESTAMP_OPERATIONAL => $this->getUniqueIdentifier(),
         ];
+        // Preserve the container timestamp only when it already exists in
+        // the DB; otherwise the auto-generated fallback would silently get
+        // persisted as the container timestamp.
+        $existingContainerTimestamp = $this->getTimestampSettingsManager()->getTimestamp(self::TIMESTAMP_CONTAINER);
+        if ($existingContainerTimestamp !== null) {
+            $timestamps[self::TIMESTAMP_CONTAINER] = (string) $existingContainerTimestamp;
+        }
         $this->getTimestampSettingsManager()->storeTimestamps($timestamps);
     }
     /**
@@ -106,7 +112,8 @@ class UserSettingsManager extends AbstractSettingsManager implements UserSetting
      */
     public function getJustActivatedLicenseTransientExtensionNames(): ?array
     {
-        return $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_LICENSE_ACTIVATION);
+        $value = $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_LICENSE_ACTIVATION);
+        return is_array($value) ? $value : null;
     }
 
     /**
@@ -141,7 +148,8 @@ class UserSettingsManager extends AbstractSettingsManager implements UserSetting
      */
     public function getPluginOrThemeStatusChangeTransient(): ?array
     {
-        return $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_PLUGIN_OR_THEME_STATUS_CHANGE);
+        $value = $this->getTransientSettingsManager()->getTransient(self::TRANSIENT_PLUGIN_OR_THEME_STATUS_CHANGE);
+        return is_array($value) ? $value : null;
     }
 
     /**
@@ -238,7 +246,11 @@ class UserSettingsManager extends AbstractSettingsManager implements UserSetting
 
     public function isModuleEnabled(string $moduleID): bool
     {
-        return (bool) $this->getItem($this->namespaceOption(Options::MODULES), $moduleID);
+        $optionName = $this->namespaceOption(Options::MODULES);
+        if (!$this->hasItem($optionName, $moduleID)) {
+            return false;
+        }
+        return (bool) $this->getItem($optionName, $moduleID);
     }
 
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void

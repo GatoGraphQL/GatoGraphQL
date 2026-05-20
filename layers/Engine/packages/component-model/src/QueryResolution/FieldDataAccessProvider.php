@@ -72,7 +72,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
         ?ObjectTypeResolverInterface $objectTypeResolver = null,
         ?object $object = null,
     ): ?array {
-        if (!$this->fieldObjectTypeResolverObjectFieldData->contains($field)) {
+        if (!$this->fieldObjectTypeResolverObjectFieldData->offsetExists($field)) {
             return null;
         }
         /** @var SplObjectStorage<ObjectTypeResolverInterface,SplObjectStorage<object,array<string,mixed>>> */
@@ -97,7 +97,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
             }
             /** @var ObjectTypeResolverInterface */
             $objectTypeResolver = $objectTypeResolvers[0];
-        } elseif (!$objectTypeResolverObjectFieldData->contains($objectTypeResolver)) {
+        } elseif (!$objectTypeResolverObjectFieldData->offsetExists($objectTypeResolver)) {
             return null;
         }
 
@@ -108,9 +108,9 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
          * which contains data for "all objects"
          */
         $isNullObject = $object === null;
-        if ($isNullObject || !$objectFieldData->contains($object)) {
+        if ($isNullObject || !$objectFieldData->offsetExists($object)) {
             $object = FieldDataAccessWildcardObjectFactory::getWildcardObject();
-            if (!$objectFieldData->contains($object)) {
+            if (!$objectFieldData->offsetExists($object)) {
                 return null;
             }
         }
@@ -126,7 +126,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
         FieldInterface $fromField,
         FieldInterface $toField,
     ): void {
-        if (!$this->fieldObjectTypeResolverObjectFieldData->contains($fromField)) {
+        if (!$this->fieldObjectTypeResolverObjectFieldData->offsetExists($fromField)) {
             return;
         }
         $this->fieldObjectTypeResolverObjectFieldData[$toField] = $this->fieldObjectTypeResolverObjectFieldData[$fromField];

@@ -78,9 +78,12 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
         $capabilities = [];
         foreach ($roles as $roleName) {
             $role = get_role($roleName);
+            if ($role === null) {
+                continue;
+            }
             $capabilities = array_merge(
                 $capabilities,
-                array_keys($role->capabilities ?? [])
+                array_keys($role->capabilities)
             );
         }
         $capabilities = array_values(array_unique($capabilities));

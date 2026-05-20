@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPAPI\API\QueryResolution;
 
 use PoP\ComponentModel\ExtendedSpec\Parser\Ast\Document;
-use PoP\GraphQLParser\ASTNodes\ASTNodesFactory;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -170,82 +169,22 @@ abstract class AbstractMultipleQueryExecutionQueryASTTransformationServiceTestCa
             $relationalField1
         ];
 
-        if (!static::enabled()) {
-            $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
-                $relationalField2,
-            ];
-            $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
-                $leafField31,
-                $inlineFragment3,
-                $relationalField3,
-            ];
-        } else {
-            $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
-                new RelationalField(
-                    'self',
-                    '_dynamicSelf_op1_level1_',
-                    [],
-                    [
-                        new RelationalField(
-                            'self',
-                            '_dynamicSelf_op1_level2_',
-                            [],
-                            [
-                                $relationalField2,
-                            ],
-                            [],
-                            ASTNodesFactory::getNonSpecificLocation()
-                        ),
-                    ],
-                    [],
-                    ASTNodesFactory::getNonSpecificLocation()
-                )
-            ];
-            $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
-                new RelationalField(
-                    'self',
-                    '_dynamicSelf_op2_level1_',
-                    [],
-                    [
-                        new RelationalField(
-                            'self',
-                            '_dynamicSelf_op2_level2_',
-                            [],
-                            [
-                                new RelationalField(
-                                    'self',
-                                    '_dynamicSelf_op2_level3_',
-                                    [],
-                                    [
-                                        new RelationalField(
-                                            'self',
-                                            '_dynamicSelf_op2_level4_',
-                                            [],
-                                            [
-                                                $leafField31,
-                                                $inlineFragment3,
-                                                $relationalField3,
-                                            ],
-                                            [],
-                                            ASTNodesFactory::getNonSpecificLocation()
-                                        ),
-                                    ],
-                                    [],
-                                    ASTNodesFactory::getNonSpecificLocation()
-                                ),
-                            ],
-                            [],
-                            ASTNodesFactory::getNonSpecificLocation()
-                        ),
-                    ],
-                    [],
-                    ASTNodesFactory::getNonSpecificLocation()
-                )
-            ];
-        }
+        // Each operation's fields are returned as-is. Multiple Query
+        // Execution ordering (eg: making `@export` from operation N visible
+        // before operation N+1's variable lookups) is enforced at the
+        // engine level by draining one operation at a time, not via
+        // AST self-wrapping.
+        $expectedOperationFieldAndFragmentBonds[$queryTwoOperation] = [
+            $relationalField2,
+        ];
+        $expectedOperationFieldAndFragmentBonds[$queryThreeOperation] = [
+            $leafField31,
+            $inlineFragment3,
+            $relationalField3,
+        ];
 
         $document = new Document($operations);
-        $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForMultipleQueryExecution($document, $operations, []);
+        $operationFieldAndFragmentBonds = $this->getQueryASTTransformationService()->prepareOperationFieldAndFragmentBondsForExecution($document, $operations, []);
 
         /**
          * Doing `assertEquals` on SplObjectStorage doesn't work!

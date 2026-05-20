@@ -19,7 +19,7 @@
                 ],
                 "commentCount": 0,
                 "comments": [],
-                "content": "\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n",
+                "content": "\n<p class=\"wp-block-paragraph\">Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n",
                 "customPostType": "post",
                 "date": "2020-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2020",
@@ -74,7 +74,7 @@
                         "id": 2
                     }
                 ],
-                "content": "\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Standard)<\/h2>\n\n\n\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
+                "content": "\n<p class=\"wp-block-paragraph\">This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Standard)<\/h2>\n\n\n\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
                 "customPostType": "post",
                 "date": "2020-12-12T03:56:13+00:00",
                 "dateStr": "December 12, 2020",
@@ -156,7 +156,7 @@
                 ],
                 "commentCount": 0,
                 "comments": [],
-                "content": "\n<h2 class=\"wp-block-heading\">Image Block (Wide)<\/h2>\n\n\n\n<figure class=\"wp-block-image alignwide\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Full width)<\/h2>\n\n\n\n<figure class=\"wp-block-image alignfull\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n\n\n\n<h2 class=\"wp-block-heading\">Cover Image Block<\/h2>\n\n\n\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https:\/\/d.pr\/i\/8pTmgY+)\"><div class=\"wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow\">\n<p class=\"has-text-align-center has-large-font-size\">This block can be used for Hero section.<br>Full width\u00c2 has been applied.<\/p>\n<\/div><\/div>\n\n\n\n<h2 class=\"wp-block-heading\">Gallery Block<\/h2>\n",
+                "content": "\n<h2 class=\"wp-block-heading\">Image Block (Wide)<\/h2>\n\n\n\n<figure class=\"wp-block-image alignwide\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Full width)<\/h2>\n\n\n\n<figure class=\"wp-block-image alignfull\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n\n\n\n<h2 class=\"wp-block-heading\">Cover Image Block<\/h2>\n\n\n\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https:\/\/d.pr\/i\/8pTmgY+)\"><div class=\"wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow\">\n<p class=\"has-text-align-center has-large-font-size wp-block-paragraph\">This block can be used for Hero section.<br>Full width\u00c2 has been applied.<\/p>\n<\/div><\/div>\n\n\n\n<h2 class=\"wp-block-heading\">Gallery Block<\/h2>\n",
                 "customPostType": "post",
                 "date": "2020-12-12T03:59:07+00:00",
                 "dateStr": "December 12, 2020",
@@ -280,6 +280,18 @@
         ],
         "postsByAuthorSlug": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1125,
                 "title": "Public or Private API mode, for extra security"
             },
@@ -297,6 +309,10 @@
             }
         ],
         "postsByCategoryIDs": [
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
             {
                 "id": 1142,
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
@@ -334,6 +350,18 @@
         ],
         "postsByExcludeAuthorIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1142,
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
             },
@@ -360,22 +388,22 @@
             {
                 "id": 1121,
                 "title": "Customize the schema for each client"
-            },
-            {
-                "id": 1119,
-                "title": "Nested mutations are a must have"
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out"
             }
         ],
         "postsByExcludeIDs": [
             {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1150,
                 "title": "Post with old format of the Gutenberg `core\/list` block"
             },
@@ -402,18 +430,6 @@
             {
                 "id": 1121,
                 "title": "Customize the schema for each client"
-            },
-            {
-                "id": 1119,
-                "title": "Nested mutations are a must have"
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out"
             }
         ],
         "postsByHasPassword": [],
@@ -457,6 +473,14 @@
         "postsByStatus": [],
         "postsByTagIDs": [
             {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
+            {
                 "id": 1125,
                 "title": "Public or Private API mode, for extra security"
             },
@@ -474,6 +498,14 @@
             }
         ],
         "postsByTagSlugs": [
+            {
+                "id": 1210,
+                "title": "PHP-only blocks (combinations)"
+            },
+            {
+                "id": 1200,
+                "title": "PHP-only blocks"
+            },
             {
                 "id": 1119,
                 "title": "Nested mutations are a must have"
@@ -501,16 +533,16 @@
         ],
         "postsSortedASC": [
             {
+                "id": 1212,
+                "title": "All blocks with entity references"
+            },
+            {
                 "id": 1121,
                 "title": "Customize the schema for each client"
             },
             {
                 "id": 1123,
                 "title": "GraphQL or REST? Why not both?"
-            },
-            {
-                "id": 1,
-                "title": "Hello world!"
             }
         ],
         "postsSortedDESC": [

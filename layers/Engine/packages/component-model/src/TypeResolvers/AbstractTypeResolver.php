@@ -21,6 +21,20 @@ abstract class AbstractTypeResolver extends AbstractBasicService implements Type
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
+    /**
+     * Memoized result of `getNamespacedTypeName()`. The translation
+     * profile shows it at 280M / 140K calls — `final` and depends only
+     * on `$this`'s class (the type-name and namespace are derived from
+     * `get_called_class` plus configuration that's stable for the
+     * lifetime of the type resolver instance).
+     *
+     * Not memoized: `getMaybeNamespacedTypeName()`. It branches on
+     * `App::getState('namespace-types-and-interfaces')` whose value
+     * can differ between test runs (and in principle between requests
+     * in long-running PHP processes); a cache there leaks across tests.
+     */
+    private ?string $namespacedTypeName = null;
+
     final protected function getSchemaNamespacingService(): SchemaNamespacingServiceInterface
     {
         if ($this->schemaNamespacingService === null) {
@@ -61,7 +75,7 @@ abstract class AbstractTypeResolver extends AbstractBasicService implements Type
 
     final public function getNamespacedTypeName(): string
     {
-        return $this->getSchemaNamespacingService()->getSchemaNamespacedName(
+        return $this->namespacedTypeName ??= $this->getSchemaNamespacingService()->getSchemaNamespacedName(
             $this->getNamespace(),
             $this->getTypeName()
         );

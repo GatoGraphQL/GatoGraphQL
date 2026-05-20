@@ -45,4 +45,18 @@ interface ObjectResolvedDynamicVariablesServiceInterface
         FieldInterface $fromField,
         FieldInterface $toField,
     ): void;
+
+    /**
+     * Batched variant of copyObjectResolvedDynamicVariablesFromFieldToFieldInAppState
+     * for the common case where the same `$fromField`'s state must be duplicated
+     * into many target fields (e.g. one per array item produced by
+     * `@underEachArrayItem`). Performs the AppState lookup and the source
+     * `contains($fromField)` check once, then assigns to each target field.
+     *
+     * @param FieldInterface[] $toFields
+     */
+    public function copyObjectResolvedDynamicVariablesFromFieldToFieldsInAppState(
+        FieldInterface $fromField,
+        array $toFields,
+    ): void;
 }

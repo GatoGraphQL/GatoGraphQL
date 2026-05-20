@@ -1,0 +1,26 @@
+{
+  "errors": [
+    {
+      "message": "There is no field 'blockTypes' on type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "blockTypes(filter: {names: \"gatographql-testing\/alert\"}) { ... }",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "blockTypes(filter: {names: \"gatographql-testing\/alert\"}) { ... }",
+        "code": "gql@5.3.1",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+      }
+    }
+  ],
+  "data": {
+    "blockTypes": null
+  }
+}

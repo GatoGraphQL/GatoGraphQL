@@ -21,4 +21,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function treatBlockTypesAsSensitiveData(): bool
+    {
+        $envVariable = Environment::TREAT_BLOCK_TYPES_AS_SENSITIVE_DATA;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

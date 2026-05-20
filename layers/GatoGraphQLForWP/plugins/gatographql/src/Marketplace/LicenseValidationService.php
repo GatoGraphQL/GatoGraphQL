@@ -392,7 +392,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         add_action('admin_notices', function () use ($errorMessage) {
             printf(
                 '<div class="notice notice-error"><p>%s</p></div>',
-                $errorMessage
+                \esc_html($errorMessage)
             );
         });
 
