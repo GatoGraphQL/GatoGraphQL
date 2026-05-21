@@ -15,6 +15,7 @@ use WP_Upgrader;
 use function add_action;
 use function add_filter;
 use function delete_transient;
+use function get_bloginfo;
 use function get_transient;
 use function is_wp_error;
 use function set_transient;
@@ -218,7 +219,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 ],
                 'banners'       => [],
                 'banners_rtl'   => [],
-                'tested'        => '',
+                'tested'        => get_bloginfo('version'),
                 'requires_php'  => '',
                 'compatibility' => new stdClass(),
             );
