@@ -617,6 +617,10 @@ Computes the difference with another array.
 
 Filters out the null or empty elements in the array.
 
+### `@arrayFlatten`
+
+Flatten an array of arrays into an array.
+
 ### `@arrayMerge`
 
 Merge the array with another array.
