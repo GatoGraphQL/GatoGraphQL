@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 18.1.0 - DATE
 
+### Improvements
+
+- Updated docs for the Schema Functions extension
+
 ### Fixed
 
 - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
