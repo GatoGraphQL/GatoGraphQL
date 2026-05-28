@@ -6,8 +6,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 18.1.0 - DATE
 
-## 18.0.1 - 28/05/2026
-
 ### Fixed
 
 - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
