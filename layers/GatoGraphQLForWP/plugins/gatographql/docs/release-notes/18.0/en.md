@@ -29,3 +29,4 @@
 - Non-nullable parameter in method definition ([#0cbe33e2](https://github.com/GatoGraphQL/GatoGraphQL/commit/0cbe33e2))
 - Make sure query from request is a string ([#3309](https://github.com/GatoGraphQL/GatoGraphQL/pull/3309))
 - Several bug fixes ([#3310](https://github.com/GatoGraphQL/GatoGraphQL/pull/3310))
+- Replace non-standard spaces in block attributes when doing useHTML5Parser (`v18.0.1`) ([#3313](https://github.com/GatoGraphQL/GatoGraphQL/pull/3313))

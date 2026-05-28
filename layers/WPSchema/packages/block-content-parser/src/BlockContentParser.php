@@ -385,6 +385,14 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             }
         }
 
+        // Sourced attributes already pass through the HTML5 DOM crawler above (which
+        // converts the non-breaking space "U+00A0" (UTF-8 bytes "\xc2\xa0") to "&nbsp;"),
+        // but unsourced attributes are taken raw from the block-delimiter JSON. Normalize
+        // them here too so all string values are consistent with the HTML5-parsed form.
+        if ($useHTML5Parser) {
+            $block_attributes = $this->normalizeAttributeValueForHTML5Parser($block_attributes);
+        }
+
         $sourced_block = [
             'name'          => $block_name,
             'attributes'    => $block_attributes,
@@ -431,6 +439,29 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         }
 
         return $sourced_block;
+    }
+
+    /**
+     * Recursively replace the non-breaking space "U+00A0" (UTF-8 bytes "\xc2\xa0") with
+     * "&nbsp;" in every string value of an attribute payload (string, list, or stdClass),
+     * to mirror what the HTML5 DOM parser produces for sourced attributes.
+     */
+    protected function normalizeAttributeValueForHTML5Parser(mixed $value): mixed
+    {
+        if (is_string($value)) {
+            return str_replace("\xc2\xa0", '&nbsp;', $value);
+        }
+        if (is_array($value)) {
+            return array_map($this->normalizeAttributeValueForHTML5Parser(...), $value);
+        }
+        if ($value instanceof stdClass) {
+            $clone = clone $value;
+            foreach (get_object_vars($clone) as $key => $val) {
+                $clone->$key = $this->normalizeAttributeValueForHTML5Parser($val);
+            }
+            return $clone;
+        }
+        return $value;
     }
 
     /**

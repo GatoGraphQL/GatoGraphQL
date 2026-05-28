@@ -224,6 +224,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 18.0.1 =
+* Fixed - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
+
 = 18.0.0 =
 * Breaking changes - Changed namespace for packages in Gato GraphQL extensions (HTTP Client/PHP Constants and Environment Variables via Schema)
 * Breaking changes - Changed the admin endpoint URL (from `wp-admin/edit.php?page=gatographql&action=execute_query` to `wp-admin/edit.php?page=gatographql&action=run_query`) (#3308)
