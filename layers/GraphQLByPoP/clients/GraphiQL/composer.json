@@ -14,7 +14,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "18.0-dev"
+            "dev-master": "18.1-dev"
         }
     },
     "config": {
