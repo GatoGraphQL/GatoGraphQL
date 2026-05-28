@@ -224,7 +224,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 18.0.1 =
+= 18.1.0 =
 * Fixed - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
 
 = 18.0.0 =
