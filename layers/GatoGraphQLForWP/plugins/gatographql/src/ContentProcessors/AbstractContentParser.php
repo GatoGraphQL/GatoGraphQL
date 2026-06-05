@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
@@ -207,14 +209,16 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
     /**
      * Notice prepended to English documentation shown to a non-English user,
      * linking to the same docs on the localized website: the user's language as a
-     * subdomain of the configured plugin domain (e.g. https://gatographql.com ->
-     * https://es.gatographql.com), so it works for any website. The notice text is
-     * itself translated to the user's language via the plugin's .mo.
+     * subdomain of the configured Gato GraphQL website (e.g. https://gatographql.com
+     * -> https://es.gatographql.com), so it works for any configured site. The
+     * notice text is itself translated to the user's language via the plugin's .mo.
      */
     protected function getEnglishOnlyDocNotice(string $language): string
     {
-        $domainURL = PluginApp::getMainPlugin()->getPluginDomainURL();
-        $localizedURL = preg_replace('#^(https?://)#', '${1}' . $language . '.', $domainURL) ?? $domainURL;
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $websiteURL = $moduleConfiguration->getGatoGraphQLWebsiteURL();
+        $localizedURL = preg_replace('#^(https?://)#', '${1}' . $language . '.', $websiteURL) ?? $websiteURL;
         $host = (string) parse_url($localizedURL, PHP_URL_HOST);
         $link = sprintf(
             '<a href="%s" target="_blank">%s</a>',

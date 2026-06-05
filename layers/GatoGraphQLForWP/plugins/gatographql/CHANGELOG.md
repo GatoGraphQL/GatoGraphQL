@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Updated docs for the Schema Functions extension
 - The "About" and "Support" admin pages are now translatable (their text is injected from PHP) (#3315)
+- English documentation now shows non-English users a notice linking to the localized website (#3316)
 
 ### Fixed
 
