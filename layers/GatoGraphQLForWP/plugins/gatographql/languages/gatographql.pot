@@ -7,10 +7,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-05T03:56:15+00:00\n"
+"POT-Creation-Date: 2026-06-05T06:25:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: gatographql\n"
+
+#: API/packages/api-clients/src/ClientTrait.php:69
+#, php-format
+msgid "Cannot read the contents of file '%s'"
+msgstr ""
+
+#: API/packages/api-clients/src/ClientTrait.php:96
+msgid "There is no endpoint for the client"
+msgstr ""
 
 #: API/packages/api-rest/src/Hooks/EntryComponentInitializationHookSet.php:64
 msgid "When requesting a REST resource, the GraphQL AST must be built from the entry component's \"query\" string"
@@ -2969,7 +2978,10 @@ msgstr ""
 
 #: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
+#: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
 msgid "', '"
 msgstr ""
 
@@ -5525,6 +5537,10 @@ msgstr ""
 msgid "The object's globally unique identifier"
 msgstr ""
 
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/AbstractReflectionPropertyObjectTypeFieldResolver.php:86
+msgid ". "
+msgstr ""
+
 #: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:146
 msgid "Indicate if the object is of a given type"
 msgstr ""
@@ -5657,6 +5673,31 @@ msgstr ""
 msgid "The object of class '%s' does not support method '__serialize'"
 msgstr ""
 
+#: Engine/packages/component-model/src/QueryResolution/FieldDataAccessProvider.php:93
+#, php-format
+msgid "When not specifying the ObjectTypeResolver, the FieldDataAccessProvider can contain only 1, but %s were set"
+msgstr ""
+
+#: Engine/packages/component-model/src/QueryResolution/InputObjectListItemSubpropertyFieldDataAccessor.php:57
+#, php-format
+msgid "Input value under argument '%s' is not a List type"
+msgstr ""
+
+#: Engine/packages/component-model/src/QueryResolution/InputObjectListItemSubpropertyFieldDataAccessor.php:69
+#, php-format
+msgid "Input list value under argument '%s' has no item on position '%s'"
+msgstr ""
+
+#: Engine/packages/component-model/src/QueryResolution/InputObjectListItemSubpropertyFieldDataAccessor.php:81
+#, php-format
+msgid "Input list value under argument '%s' and position '%s' is not an InputObject type"
+msgstr ""
+
+#: Engine/packages/component-model/src/QueryResolution/InputObjectSubpropertyFieldDataAccessor.php:51
+#, php-format
+msgid "Input value under argument '%s' is not an InputObject type"
+msgstr ""
+
 #: Engine/packages/component-model/src/Resolvers/WithVersionConstraintFieldOrFieldDirectiveResolverTrait.php:15
 msgid "The version to restrict to, using the semantic versioning constraint rules used by Composer (https://getcomposer.org/doc/articles/versions.md)"
 msgstr ""
@@ -5729,6 +5770,17 @@ msgstr ""
 
 #: Engine/packages/engine/src/DirectiveResolvers/SkipFieldDirectiveResolver.php:163
 msgid "Argument that must evaluate to `false` to include the field value in the output"
+msgstr ""
+
+#: Engine/packages/engine/src/Engine/Engine.php:31
+#, php-format
+msgid "The following names have not been implemented by the CMS: \"%s\". Hence, we can't continue."
+msgstr ""
+
+#: Engine/packages/engine/src/Engine/Engine.php:32
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:901
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:948
+msgid "\", \""
 msgstr ""
 
 #: Engine/packages/engine/src/FeedbackItemProviders/CheckpointErrorFeedbackItemProvider.php:27
@@ -6174,6 +6226,13 @@ msgstr ""
 msgid "Browse documentation&#x2197;"
 msgstr ""
 
+#. translators: %s: Plugin name and version.
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:219
+#, php-format
+msgctxt "plugin"
+msgid "Get extension %s"
+msgstr ""
+
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:235
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractModuleDocsMenuPage.php:294
 msgid "Website"
@@ -6195,6 +6254,10 @@ msgstr ""
 msgid "Needing an integration with a 3rd-party plugin? Let us know, and we can work on an extension."
 msgstr ""
 
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:404
+msgid "Contact <strong>Gato GraphQL</strong>"
+msgstr ""
+
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:82
 msgid "No items found."
 msgstr ""
@@ -6205,6 +6268,11 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ExtensionListTable.php:147
 msgid "Active (via Bundle)"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ExtensionListTable.php:227
+msgctxt "plugin"
+msgid "Active"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:48
@@ -7764,6 +7832,14 @@ msgstr ""
 msgid "Enter the license keys for the products purchased on the %s, and click on <strong>Activate licenses (or Deactivate/Validate)</strong>:"
 msgstr ""
 
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
+msgid "When clicking on <strong>Activate licenses (or Deactivate/Validate)</strong>, one of the following actions will take place:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
+msgid "(Show details: When are products activated, deactivated or validated?)"
+msgstr ""
+
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
 msgid "Activate licenses (or Deactivate/Validate)"
 msgstr ""
@@ -8383,11 +8459,6 @@ msgstr ""
 msgid "%s (CPT: \"%s\")"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:901
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:948
-msgid "\", \""
-msgstr ""
-
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:914
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaTagsBlock.php:69
 msgid "Included tag taxonomies"
@@ -8658,7 +8729,7 @@ msgstr ""
 msgid "Schema Configuration for GraphQL"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:408
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:409
 #, php-format
 msgid "You need to run `npm start` or `npm run build` for the \"%s\" block first."
 msgstr ""
@@ -8801,6 +8872,11 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSelfFieldsBlock.php:31
 msgid "Expose self fields in the schema?"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractCustomPostType.php:735
+#, php-format
+msgid "<p class=\"%s\"><strong>Description: </strong>%s</p>"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractCustomPostType.php:940
@@ -9129,6 +9205,10 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractModuleDocsMenuPage.php:295
 msgid "More details"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractModuleDocsMenuPage.php:298
+msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:306
@@ -9820,6 +9900,11 @@ msgstr ""
 #: GraphQLByPoP/packages/graphql-server/src/ObjectModels/Schema.php:93
 #, php-format
 msgid "Unknown type kind '%s'"
+msgstr ""
+
+#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:92
+#, php-format
+msgid "Cannot recognize GraphQL Operation AST object, with class '%s'"
 msgstr ""
 
 #: GraphQLByPoP/packages/graphql-server/src/Registries/SchemaDefinitionReferenceRegistry.php:352

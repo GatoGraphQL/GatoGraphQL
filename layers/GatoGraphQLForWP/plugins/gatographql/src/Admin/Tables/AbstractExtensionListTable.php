@@ -216,7 +216,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_attr($plugin['slug'] ?? ''),
                 esc_url($plugin['homepage'] ?? ''),
                 /* translators: %s: Plugin name and version. */
-                esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'] ?? '')),
+                esc_attr(sprintf(_x('Get extension %s', 'plugin', 'gatographql'), $plugin['name'] ?? '')),
                 esc_attr($plugin['name'] ?? ''),
                 '_blank',
                 $this->getPluginInstallActionLabel($plugin)
@@ -401,7 +401,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
             \__('Request an Extension', 'gatographql'),
             \__('Needing an integration with a 3rd-party plugin? Let us know, and we can work on an extension.', 'gatographql'),
-            \__('Contact <strong>Gato GraphQL</strong>'),
+            \__('Contact <strong>Gato GraphQL</strong>', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }

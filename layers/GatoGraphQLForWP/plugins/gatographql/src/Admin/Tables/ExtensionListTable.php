@@ -224,7 +224,7 @@ class ExtensionListTable extends AbstractExtensionListTable
          */
         $activeButtonHTML = sprintf(
             '<button type="button" class="button button-disabled" disabled="disabled">%s</button>',
-            _x('Active', 'plugin')
+            _x('Active', 'plugin', 'gatographql')
         );
 
         foreach ((array) $this->items as $plugin) {

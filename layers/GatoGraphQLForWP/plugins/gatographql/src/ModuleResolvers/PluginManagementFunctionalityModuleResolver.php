@@ -171,7 +171,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         $this->getCollapsible(
                             sprintf(
                                 '%s%s',
-                                \__('When clicking on <strong>Activate licenses (or Deactivate/Validate)</strong>, one of the following actions will take place:'),
+                                \__('When clicking on <strong>Activate licenses (or Deactivate/Validate)</strong>, one of the following actions will take place:', 'gatographql'),
                                 sprintf(
                                     $ulPlaceholder,
                                     implode(
@@ -180,7 +180,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                     )
                                 ),
                             ),
-                            \__('(Show details: When are products activated, deactivated or validated?)')
+                            \__('(Show details: When are products activated, deactivated or validated?)', 'gatographql')
                         ),
                     ),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,

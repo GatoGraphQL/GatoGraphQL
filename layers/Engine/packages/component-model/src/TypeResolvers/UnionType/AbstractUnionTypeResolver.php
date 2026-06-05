@@ -385,7 +385,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                             $this->getMaybeNamespacedTypeName(),
                             $interfaceTypeResolver->getMaybeNamespacedTypeName(),
                             implode(
-                                $this->__('\', \''),
+                                $this->__('\', \'', 'gatographql'),
                                 array_map(
                                     fn (ObjectTypeResolverInterface $objectTypeResolver) => $objectTypeResolver->getMaybeNamespacedTypeName(),
                                     $notImplementingInterfaceTypeResolvers

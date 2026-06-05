@@ -104,7 +104,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                         [
                             $inputValue,
                             $this->getMaybeNamespacedTypeName(),
-                            implode($this->__('\', \''), $nonDeprecatedEnumValues)
+                            implode($this->__('\', \'', 'gatographql'), $nonDeprecatedEnumValues)
                         ]
                     ),
                     $astNode,

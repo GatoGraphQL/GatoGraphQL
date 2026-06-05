@@ -732,7 +732,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
         // Add the excerpt as description of the GraphQL query
         return \sprintf(
-            \__('<p class="%s"><strong>Description: </strong>%s</p>'),
+            \__('<p class="%s"><strong>Description: </strong>%s</p>', 'gatographql'),
             $this->getAlignClassName(),
             $excerpt
         ) . $content;
