@@ -25,7 +25,7 @@ const getImplicitFeaturesDocMarkdownContent = ( fileName, lang ) => {
 const getImplicitFeaturesDocMarkdownContentOrUseDefault = ( fileName, defaultLang, lang ) => {
 	lang = lang || window.schemaConfigurationAdditionalDocumentation?.localeLang
 	defaultLang = defaultLang || window.schemaConfigurationAdditionalDocumentation?.defaultLang
-	return getImplicitFeaturesDocMarkdownContent( lang )
+	return getImplicitFeaturesDocMarkdownContent( fileName, lang )
 		.catch(err => getImplicitFeaturesDocMarkdownContent( fileName, defaultLang ) )
 }
 export default getImplicitFeaturesDocMarkdownContentOrUseDefault;

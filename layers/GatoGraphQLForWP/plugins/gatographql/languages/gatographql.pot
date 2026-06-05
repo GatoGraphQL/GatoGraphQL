@@ -6424,7 +6424,7 @@ msgid "File '%s' is corrupted"
 msgstr ""
 
 #. translators: %s: link to this documentation on the localized website
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:232
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:236
 #, php-format
 msgid "This documentation is in English. You can read it in your language at %s."
 msgstr ""

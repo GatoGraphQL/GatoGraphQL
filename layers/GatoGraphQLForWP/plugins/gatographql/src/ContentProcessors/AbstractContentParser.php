@@ -201,7 +201,7 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
         }
         $htmlContent = $this->processHTMLContent($htmlContent, $pathURL, $options);
         if ($isEnglishOnlyDoc) {
-            $htmlContent = $this->getEnglishOnlyDocNotice($localeLanguage) . $htmlContent;
+            $htmlContent = $this->getEnglishOnlyDocNotice($localeLanguage, $relativePathDir, $filename) . $htmlContent;
         }
         return $htmlContent;
     }
@@ -210,20 +210,24 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
      * Notice prepended to English documentation shown to a non-English user,
      * linking to the same docs on the localized website: the user's language as a
      * subdomain of the configured Gato GraphQL website (e.g. https://gatographql.com
-     * -> https://es.gatographql.com), so it works for any configured site. The
+     * -> https://es.gatographql.com), so it works for any configured site. When the
+     * doc's website page is derivable (extensions, tutorials) the link points
+     * straight at it (the localized site redirects to the matching slug). The
      * notice text is itself translated to the user's language via the plugin's .mo.
      */
-    protected function getEnglishOnlyDocNotice(string $language): string
+    protected function getEnglishOnlyDocNotice(string $language, string $relativePathDir = '', string $filename = ''): string
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $websiteURL = $moduleConfiguration->getGatoGraphQLWebsiteURL();
         $localizedURL = preg_replace('#^(https?://)#', '${1}' . $language . '.', $websiteURL) ?? $websiteURL;
+        $localizedURL = rtrim($localizedURL, '/') . $this->getWebsiteDocPath($relativePathDir, $filename);
         $host = (string) parse_url($localizedURL, PHP_URL_HOST);
+        $path = (string) parse_url($localizedURL, PHP_URL_PATH);
         $link = sprintf(
             '<a href="%s" target="_blank">%s</a>',
             \esc_url($localizedURL),
-            \esc_html($host !== '' ? $host : $localizedURL)
+            \esc_html($host !== '' ? $host . $path : $localizedURL)
         );
         return sprintf(
             '<div class="doc-config-highlight">%s</div>',
@@ -233,6 +237,28 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
                 $link
             )
         );
+    }
+
+    /**
+     * Best-effort path to a doc's page on the website, derived from the local docs
+     * layout `<category>/<slug>/...` — e.g. extensions/access-control/... maps to
+     * `/extensions/access-control`. Returns '' (link to the site root) when the
+     * doc's website page is not derivable.
+     */
+    protected function getWebsiteDocPath(string $relativePathDir, string $filename): string
+    {
+        $category = basename(rtrim($relativePathDir, '/'));
+        $slug = explode('/', $filename)[0];
+        if ($slug === '') {
+            return '';
+        }
+        if (in_array($category, ['extensions', 'bundle-extensions'], true)) {
+            return '/extensions/' . $slug;
+        }
+        if ($category === 'tutorial') {
+            return '/tutorial/' . $slug;
+        }
+        return '';
     }
 
     /**
