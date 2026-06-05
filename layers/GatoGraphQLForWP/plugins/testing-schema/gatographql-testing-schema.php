@@ -22,12 +22,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-\add_action('init', function (): void {
-    $mofile = __DIR__ . '/languages/' . \basename(__FILE__, '.php') . '-' . \determine_locale() . '.mo';
-    if (\is_readable($mofile)) {
-        \load_textdomain('gatographql', $mofile);
+add_action('init', function (): void {
+    $mofile = __DIR__ . '/languages/' . basename(__FILE__, '.php') . '-' . determine_locale() . '.mo';
+    if (is_readable($mofile)) {
+        load_textdomain('gatographql', $mofile);
     }
-}, \PHP_INT_MIN);
+}, PHP_INT_MIN);
 
 /**
  * Create and set-up the extension
