@@ -6413,12 +6413,12 @@ msgstr ""
 msgid "Show details"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:158
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:168
 #, php-format
 msgid "File '%s' does not exist"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:167
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:179
 #, php-format
 msgid "File '%s' is corrupted"
 msgstr ""
@@ -9173,6 +9173,105 @@ msgstr ""
 msgid "Oops, there was a problem loading the page"
 msgstr ""
 
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:121
+#, php-format
+msgid "About %s"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:122
+msgid "Powerful and flexible GraphQL server for WordPress."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:123
+msgid "Our channels"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:124
+msgid "Website:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:125
+msgid "Plugin in WordPress.org:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:126
+msgid "Source code:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:127
+msgid "YouTube channel:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:128
+msgid "Contact:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:129
+#, php-format
+msgid "<strong>Subscribe to our newsletter</strong> to receive timely updates about %s:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:130
+msgid "Name:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:131
+msgid "Email:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:132
+msgid "Subscribe"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:133
+msgid "Release Notes"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:134
+msgid "New features released on each version:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:135
+msgid "current"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:136
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:35
+msgid "Support"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:137
+msgid "Support is provided to customers of any Gato GraphQL product with an active license."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:138
+msgid "Send your message to the Gato GraphQL Support team:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:139
+msgid "Your name:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:140
+msgid "Your email:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:141
+msgid "Subject:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:142
+msgid "Message:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
+msgid "Send message"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
+msgid "Attached extension license data"
+msgstr ""
+
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractExtensionModuleDocumentationMenuPage.php:31
 #, php-format
 msgid "Oops, extension '%s' does not exist"
@@ -9608,8 +9707,18 @@ msgstr ""
 msgid "Activate licenses"
 msgstr ""
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:35
-msgid "Support"
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:55
+#, php-format
+msgid "%s — Support"
+msgstr ""
+
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:56
+#, php-format
+msgid "Support is provided to customers with an active license of %s."
+msgstr ""
+
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:57
+msgid "Send your message to our support team:"
 msgstr ""
 
 #: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:86

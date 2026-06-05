@@ -154,10 +154,22 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
             $file = \trailingslashit($this->getFileDir()) . $relativePathDir . $filename . '/' . $defaultDocsLanguage . '.' . $extension;
             // Make sure this file exists
             if (!file_exists($file)) {
-                throw new ContentNotExistsException(sprintf(
-                    \__('File \'%s\' does not exist', 'gatographql'),
-                    $file
-                ));
+                /**
+                 * Finally, fall back to a non-localized doc named "all-locales"
+                 * (e.g. about/all-locales.md). This serves every locale by default
+                 * — its visible text is injected and translated from PHP rather
+                 * than from per-language Markdown files. A per-locale
+                 * "<locale>.<ext>" (or "en.<ext>") still wins over it when present,
+                 * so Markdown-level localization remains available if ever wanted.
+                 */
+                $nonLocalizedFile = \trailingslashit($this->getFileDir()) . $relativePathDir . $filename . '/all-locales.' . $extension;
+                if (!file_exists($nonLocalizedFile)) {
+                    throw new ContentNotExistsException(sprintf(
+                        \__('File \'%s\' does not exist', 'gatographql'),
+                        $file
+                    ));
+                }
+                $file = $nonLocalizedFile;
             }
         }
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
