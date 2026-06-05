@@ -23,7 +23,7 @@ class IPScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('IP scalar, including both IPv4 (such as 192.168.0.1) and IPv6 (such as 2001:0db8:85a3:08d3:1319:8a2e:0370:7334)', 'extended-schema-commons');
+        return $this->__('IP scalar, including both IPv4 (such as 192.168.0.1) and IPv6 (such as 2001:0db8:85a3:08d3:1319:8a2e:0370:7334)', 'gatographql');
     }
 
     public function coerceValue(

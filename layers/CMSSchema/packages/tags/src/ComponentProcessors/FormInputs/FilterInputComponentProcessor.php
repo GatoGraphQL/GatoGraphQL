@@ -155,9 +155,9 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
-            self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->__('Limit results to elements with the given tags', 'tags'),
-            self::COMPONENT_FILTERINPUT_TAG_IDS => $this->__('Limit results to elements with the given ids', 'tags'),
-            self::COMPONENT_FILTERINPUT_GENERIC_TAG_TAXONOMY => $this->__('Tag taxonomy', 'tags'),
+            self::COMPONENT_FILTERINPUT_TAG_SLUGS => $this->__('Limit results to elements with the given tags', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_TAG_IDS => $this->__('Limit results to elements with the given ids', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_GENERIC_TAG_TAXONOMY => $this->__('Tag taxonomy', 'gatographql'),
             default => null,
         };
     }

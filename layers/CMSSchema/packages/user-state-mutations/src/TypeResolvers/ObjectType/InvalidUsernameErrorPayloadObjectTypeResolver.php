@@ -29,7 +29,7 @@ class InvalidUsernameErrorPayloadObjectTypeResolver extends AbstractErrorPayload
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "No user is registered with the provided username"', 'user-state-mutations');
+        return $this->__('Error payload for: "No user is registered with the provided username"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -26,8 +26,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('There is no key with name \'%s\'', 'meta'),
-            self::E2 => $this->__('There are no keys with names \'%s\'', 'meta'),
+            self::E1 => $this->__('There is no key with name \'%s\'', 'gatographql'),
+            self::E2 => $this->__('There are no keys with names \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

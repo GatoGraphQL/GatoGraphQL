@@ -11,13 +11,13 @@ abstract class AbstractDeleteCustomPostMetaInputObjectTypeResolver extends Abstr
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete a custom post\'s meta entry', 'custompostmeta-mutations');
+        return $this->__('Input to delete a custom post\'s meta entry', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the custom post', 'custompostmeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the custom post', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

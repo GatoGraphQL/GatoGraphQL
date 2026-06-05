@@ -29,7 +29,7 @@ class UserIsLoggedInErrorPayloadObjectTypeResolver extends AbstractErrorPayloadO
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user is already logged-in"', 'user-state-mutations');
+        return $this->__('Error payload for: "The user is already logged-in"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

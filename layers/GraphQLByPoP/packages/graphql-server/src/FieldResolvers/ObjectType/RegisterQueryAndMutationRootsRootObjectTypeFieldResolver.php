@@ -88,8 +88,8 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'queryRoot' => $this->__('Get the Query Root type', 'graphql-server'),
-            'mutationRoot' => $this->__('Get the Mutation Root type', 'graphql-server'),
+            'queryRoot' => $this->__('Get the Query Root type', 'gatographql'),
+            'mutationRoot' => $this->__('Get the Mutation Root type', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

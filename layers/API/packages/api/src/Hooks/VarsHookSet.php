@@ -30,12 +30,12 @@ class VarsHookSet extends AbstractHookSet
         if (App::getState('scheme') === APISchemes::API) {
             $query = App::getState('query');
             if ($query !== null) {
-                $elements[] = $this->__('query:', 'pop-engine') . $query;
+                $elements[] = $this->__('query:', 'gatographql') . $query;
             }
         }
 
         // Namespaces change the configuration
-        $elements[] = $this->__('namespaced:', 'pop-engine') . (App::getState('namespace-types-and-interfaces') ?? false);
+        $elements[] = $this->__('namespaced:', 'gatographql') . (App::getState('namespace-types-and-interfaces') ?? false);
 
         return $elements;
     }

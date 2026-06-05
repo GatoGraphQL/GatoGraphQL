@@ -60,14 +60,14 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     public function getTypeDescription(): ?string
     {
         return sprintf(
-            $this->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
+            $this->__('Oneof input to specify the property and data to fetch %s', 'gatographql'),
             $this->getTypeDescriptionTaxonomyEntity()
         );
     }
 
     protected function getTypeDescriptionTaxonomyEntity(): string
     {
-        return $this->__('a taxonomy', 'customposts');
+        return $this->__('a taxonomy', 'gatographql');
     }
 
     /**
@@ -84,8 +84,8 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            InputProperties::ID => $this->__('Query by taxonomy ID', 'taxonomies'),
-            InputProperties::SLUG => $this->__('Query by taxonomy slug', 'taxonomies'),
+            InputProperties::ID => $this->__('Query by taxonomy ID', 'gatographql'),
+            InputProperties::SLUG => $this->__('Query by taxonomy slug', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -47,7 +47,7 @@ abstract class AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'errors' => $this->__('List of error data, if the operation failed', 'schema-commons'),
+            'errors' => $this->__('List of error data, if the operation failed', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

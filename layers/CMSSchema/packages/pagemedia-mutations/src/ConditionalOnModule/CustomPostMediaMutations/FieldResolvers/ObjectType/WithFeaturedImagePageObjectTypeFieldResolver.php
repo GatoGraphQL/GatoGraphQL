@@ -41,8 +41,8 @@ class WithFeaturedImagePageObjectTypeFieldResolver extends AbstractWithFeaturedI
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'setFeaturedImage' => $this->__('Set the featured image on the page', 'pagemedia-mutations'),
-            'removeFeaturedImage' => $this->__('Remove the featured image on the page', 'pagemedia-mutations'),
+            'setFeaturedImage' => $this->__('Set the featured image on the page', 'gatographql'),
+            'removeFeaturedImage' => $this->__('Remove the featured image on the page', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

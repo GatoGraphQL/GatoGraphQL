@@ -29,7 +29,7 @@ class RootUpdateCommentMetaMutationErrorPayloadUnionTypeResolver extends Abstrac
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating meta on a comment', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating meta on a comment', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

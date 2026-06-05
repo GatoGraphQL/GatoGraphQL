@@ -85,9 +85,9 @@ class QueryableMediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResol
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->__('Media element URL', 'pop-media'),
-            'urlPath' => $this->__('Media element URL path', 'pop-media'),
-            'slug' => $this->__('Media element slug', 'pop-media'),
+            'url' => $this->__('Media element URL', 'gatographql'),
+            'urlPath' => $this->__('Media element URL path', 'gatographql'),
+            'slug' => $this->__('Media element slug', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -42,7 +42,7 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to specify the custom post parent', 'custompost-mutations');
+        return $this->__('Oneof input to specify the custom post parent', 'gatographql');
     }
 
     protected function isOneInputValueMandatory(): bool
@@ -64,8 +64,8 @@ class CustomPostParentByOneofInputObjectTypeResolver extends AbstractOneofInputO
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('Provide the custom post parent ID', 'custompost-mutations'),
-            MutationInputProperties::SLUG_PATH => $this->__('Provide the custom post parent slug path (including all ancestor slugs, eg: "ancestor-slug/post-slug")', 'custompost-mutations'),
+            MutationInputProperties::ID => $this->__('Provide the custom post parent ID', 'gatographql'),
+            MutationInputProperties::SLUG_PATH => $this->__('Provide the custom post parent slug path (including all ancestor slugs, eg: "ancestor-slug/post-slug")', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

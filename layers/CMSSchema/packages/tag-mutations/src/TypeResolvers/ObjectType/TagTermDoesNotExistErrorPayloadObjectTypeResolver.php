@@ -29,7 +29,7 @@ class TagTermDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPay
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested tag does not exist"', 'tag-mutations');
+        return $this->__('Error payload for: "The requested tag does not exist"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

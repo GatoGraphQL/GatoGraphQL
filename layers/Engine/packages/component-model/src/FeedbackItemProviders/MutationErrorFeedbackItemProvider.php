@@ -24,7 +24,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('Oneof mutation failed, with error: \'%s\'', 'user-state-mutations'),
+            self::E1 => $this->__('Oneof mutation failed, with error: \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

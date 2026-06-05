@@ -40,7 +40,7 @@ class NetworkSiteObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Site in a WordPress multisite network', 'multisite');
+        return $this->__('Site in a WordPress multisite network', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

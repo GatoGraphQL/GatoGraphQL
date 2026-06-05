@@ -410,7 +410,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             return new InputObjectTypeSchemaDefinitionProvider($typeResolver);
         }
         throw new ImpossibleToHappenException(sprintf(
-            $this->__('No type identified for TypeResolver with class \'%s\'', 'api'),
+            $this->__('No type identified for TypeResolver with class \'%s\'', 'gatographql'),
             get_class($typeResolver)
         ));
     }

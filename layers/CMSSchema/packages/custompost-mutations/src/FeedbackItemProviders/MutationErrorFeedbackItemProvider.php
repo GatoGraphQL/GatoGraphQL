@@ -44,17 +44,17 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must be logged in to create or update custom posts', 'custompost-mutations'),
-            self::E2 => $this->__('Your user doesn\'t have permission for editing custom posts.', 'custompost-mutations'),
-            self::E3 => $this->__('Your user doesn\'t have permission for publishing custom posts.', 'custompost-mutations'),
-            self::E5 => $this->__('The custom post with ID \'%s\' is not of type \'%s\'.', 'custompost-mutations'),
-            self::E6 => $this->__('The custom post ID is missing', 'custompost-mutations'),
-            self::E7 => $this->__('There is no custom post with ID \'%s\'', 'custompost-mutations'),
-            self::E8 => $this->__('You don\'t have permission to edit custom post with ID \'%s\'', 'custompost-mutations'),
-            self::E9 => $this->__('You don\'t have permission to edit custom post type \'%s\'', 'custompost-mutations'),
-            self::E10 => $this->__('There is no custom post with slug path \'%s\' of type \'%s\'', 'custompost-mutations'),
-            self::E11 => $this->__('The custom post cannot have itself as parent', 'custompost-mutations'),
-            self::E12 => $this->__('The custom post with ID \'%s\' is an ancestor of the custom post with ID \'%s\'', 'custompost-mutations'),
+            self::E1 => $this->__('You must be logged in to create or update custom posts', 'gatographql'),
+            self::E2 => $this->__('Your user doesn\'t have permission for editing custom posts.', 'gatographql'),
+            self::E3 => $this->__('Your user doesn\'t have permission for publishing custom posts.', 'gatographql'),
+            self::E5 => $this->__('The custom post with ID \'%s\' is not of type \'%s\'.', 'gatographql'),
+            self::E6 => $this->__('The custom post ID is missing', 'gatographql'),
+            self::E7 => $this->__('There is no custom post with ID \'%s\'', 'gatographql'),
+            self::E8 => $this->__('You don\'t have permission to edit custom post with ID \'%s\'', 'gatographql'),
+            self::E9 => $this->__('You don\'t have permission to edit custom post type \'%s\'', 'gatographql'),
+            self::E10 => $this->__('There is no custom post with slug path \'%s\' of type \'%s\'', 'gatographql'),
+            self::E11 => $this->__('The custom post cannot have itself as parent', 'gatographql'),
+            self::E12 => $this->__('The custom post with ID \'%s\' is an ancestor of the custom post with ID \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

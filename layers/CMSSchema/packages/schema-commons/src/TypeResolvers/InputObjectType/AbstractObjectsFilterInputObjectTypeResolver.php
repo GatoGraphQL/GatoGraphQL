@@ -71,8 +71,8 @@ abstract class AbstractObjectsFilterInputObjectTypeResolver extends AbstractQuer
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'ids' => $this->__('Limit results to elements with the given IDs', 'schema-commons'),
-            'excludeIDs' => $this->__('Exclude elements with the given IDs', 'schema-commons'),
+            'ids' => $this->__('Limit results to elements with the given IDs', 'gatographql'),
+            'excludeIDs' => $this->__('Exclude elements with the given IDs', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

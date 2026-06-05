@@ -15,6 +15,6 @@ class CustomPostInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Entities representing a custom post', 'customposts');
+        return $this->__('Entities representing a custom post', 'gatographql');
     }
 }

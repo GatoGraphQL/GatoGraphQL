@@ -26,8 +26,8 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('Type \'%s\' must be provided with format \'%s\'', 'schema-commons'),
-            self::E2 => $this->__('Value \'%1$s\' for type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'schema-commons'),
+            self::E1 => $this->__('Type \'%s\' must be provided with format \'%s\'', 'gatographql'),
+            self::E2 => $this->__('Value \'%1$s\' for type \'%2$s\' is not valid (the only valid values are: \'%3$s\')', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

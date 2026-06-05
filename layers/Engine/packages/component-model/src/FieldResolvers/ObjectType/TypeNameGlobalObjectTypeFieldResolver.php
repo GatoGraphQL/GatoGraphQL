@@ -75,9 +75,9 @@ class TypeNameGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '_typeName' => $this->__('The object\'s type', 'component-model'),
-            '_namespace' => $this->__('The object\'s namespace', 'component-model'),
-            '_qualifiedTypeName' => $this->__('The object\'s namespace + type', 'component-model'),
+            '_typeName' => $this->__('The object\'s type', 'gatographql'),
+            '_namespace' => $this->__('The object\'s namespace', 'gatographql'),
+            '_qualifiedTypeName' => $this->__('The object\'s namespace + type', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

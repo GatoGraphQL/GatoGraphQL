@@ -28,9 +28,9 @@ class CustomPostStatusEnumTypeResolver extends UpstreamCustomPostStatusEnumTypeR
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            CustomPostStatus::FUTURE => $this->__('Future content', 'customposts'),
-            CustomPostStatus::PRIVATE => $this->__('Private content', 'customposts'),
-            CustomPostStatus::INHERIT => $this->__('Inherit content', 'customposts'),
+            CustomPostStatus::FUTURE => $this->__('Future content', 'gatographql'),
+            CustomPostStatus::PRIVATE => $this->__('Private content', 'gatographql'),
+            CustomPostStatus::INHERIT => $this->__('Inherit content', 'gatographql'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

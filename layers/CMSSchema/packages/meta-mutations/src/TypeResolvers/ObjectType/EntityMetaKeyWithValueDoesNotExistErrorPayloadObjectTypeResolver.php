@@ -29,7 +29,7 @@ class EntityMetaKeyWithValueDoesNotExistErrorPayloadObjectTypeResolver extends A
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The taxonomy term doesn\'t have a meta entry with that key"', 'taxonomymeta-mutations');
+        return $this->__('Error payload for: "The taxonomy term doesn\'t have a meta entry with that key"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

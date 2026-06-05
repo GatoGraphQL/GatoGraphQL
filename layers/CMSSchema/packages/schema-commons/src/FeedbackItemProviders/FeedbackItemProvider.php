@@ -26,8 +26,8 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The value for input field \'%s\' in input object \'%s\' cannot be below \'%s\'', 'schema-commons'),
-            self::E2 => $this->__('The value for input field \'%s\' in input object \'%s\' cannot be above \'%s\', but \'%s\' was provided', 'schema-commons'),
+            self::E1 => $this->__('The value for input field \'%s\' in input object \'%s\' cannot be below \'%s\'', 'gatographql'),
+            self::E2 => $this->__('The value for input field \'%s\' in input object \'%s\' cannot be above \'%s\', but \'%s\' was provided', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

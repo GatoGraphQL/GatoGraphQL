@@ -131,13 +131,13 @@ class FieldObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Field\'s name', 'graphql-server'),
-            'description' => $this->__('Field\'s description', 'graphql-server'),
-            'args' => $this->__('Field arguments', 'graphql-server'),
-            'type' => $this->__('Type to which the field belongs', 'graphql-server'),
-            'isDeprecated' => $this->__('Is the field deprecated?', 'graphql-server'),
-            'deprecationReason' => $this->__('Why was the field deprecated?', 'graphql-server'),
-            'extensions' => $this->__('Extensions (custom metadata) added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'name' => $this->__('Field\'s name', 'gatographql'),
+            'description' => $this->__('Field\'s description', 'gatographql'),
+            'args' => $this->__('Field arguments', 'gatographql'),
+            'type' => $this->__('Type to which the field belongs', 'gatographql'),
+            'isDeprecated' => $this->__('Is the field deprecated?', 'gatographql'),
+            'deprecationReason' => $this->__('Why was the field deprecated?', 'gatographql'),
+            'extensions' => $this->__('Extensions (custom metadata) added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

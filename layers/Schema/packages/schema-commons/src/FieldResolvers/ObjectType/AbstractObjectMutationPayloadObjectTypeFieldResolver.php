@@ -31,7 +31,7 @@ abstract class AbstractObjectMutationPayloadObjectTypeFieldResolver extends Abst
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            $this->getObjectFieldName() => $this->__('Object affected by the mutation, if the operation was successful', 'post-mutations'),
+            $this->getObjectFieldName() => $this->__('Object affected by the mutation, if the operation was successful', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

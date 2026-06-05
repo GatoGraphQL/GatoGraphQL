@@ -51,7 +51,7 @@ class RootMeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'me' => $this->__('The logged-in user', 'user-state'),
+            'me' => $this->__('The logged-in user', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

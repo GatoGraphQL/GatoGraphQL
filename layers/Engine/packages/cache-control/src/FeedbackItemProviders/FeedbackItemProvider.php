@@ -24,7 +24,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The value for \'maxAge\' must either be a positive number, or \'0\' to avoid caching', 'cache-control'),
+            self::E1 => $this->__('The value for \'maxAge\' must either be a positive number, or \'0\' to avoid caching', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

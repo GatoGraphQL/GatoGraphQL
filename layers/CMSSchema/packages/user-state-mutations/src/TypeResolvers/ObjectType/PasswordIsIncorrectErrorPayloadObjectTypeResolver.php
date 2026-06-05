@@ -29,7 +29,7 @@ class PasswordIsIncorrectErrorPayloadObjectTypeResolver extends AbstractErrorPay
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The password is incorrect"', 'user-state-mutations');
+        return $this->__('Error payload for: "The password is incorrect"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

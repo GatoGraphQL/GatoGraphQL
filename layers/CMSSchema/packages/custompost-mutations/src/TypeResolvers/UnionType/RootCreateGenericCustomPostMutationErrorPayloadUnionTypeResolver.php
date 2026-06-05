@@ -29,7 +29,7 @@ class RootCreateGenericCustomPostMutationErrorPayloadUnionTypeResolver extends A
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when creating a custom post', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when creating a custom post', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

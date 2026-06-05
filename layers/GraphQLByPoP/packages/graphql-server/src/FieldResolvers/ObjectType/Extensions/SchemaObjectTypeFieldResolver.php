@@ -93,7 +93,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'globalFields' => $this->__('[Custom introspection field] All global fields (i.e. fields which are added to all types in the schema)', 'graphql-server'),
+            'globalFields' => $this->__('[Custom introspection field] All global fields (i.e. fields which are added to all types in the schema)', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -114,7 +114,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['globalFields' => 'includeDeprecated'] => $this->__('Include deprecated fields?', 'graphql-server'),
+            ['globalFields' => 'includeDeprecated'] => $this->__('Include deprecated fields?', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

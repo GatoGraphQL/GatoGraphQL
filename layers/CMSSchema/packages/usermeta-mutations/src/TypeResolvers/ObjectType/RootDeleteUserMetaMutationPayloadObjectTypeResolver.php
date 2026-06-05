@@ -13,6 +13,6 @@ class RootDeleteUserMetaMutationPayloadObjectTypeResolver extends AbstractUserMe
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a delete meta mutation on a user', 'user-mutations');
+        return $this->__('Payload of executing a delete meta mutation on a user', 'gatographql');
     }
 }

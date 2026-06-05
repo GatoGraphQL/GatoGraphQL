@@ -23,7 +23,7 @@ class StrictlyPositiveFloatScalarTypeResolver extends AbstractFloatScalarTypeRes
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('A positive float (> 0).', 'extended-schema-commons');
+        return $this->__('A positive float (> 0).', 'gatographql');
     }
 
     public function coerceValue(

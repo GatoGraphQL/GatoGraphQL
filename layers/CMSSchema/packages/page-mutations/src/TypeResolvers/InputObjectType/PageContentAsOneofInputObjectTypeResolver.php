@@ -17,7 +17,7 @@ class PageContentAsOneofInputObjectTypeResolver extends AbstractCustomPostConten
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::HTML => $this->__('Use HTML as content for the page', 'custompost-mutations'),
+            MutationInputProperties::HTML => $this->__('Use HTML as content for the page', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

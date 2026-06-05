@@ -13,6 +13,6 @@ class RootUpdateGenericTagTermMetaMutationPayloadObjectTypeResolver extends Abst
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update meta mutation on a tag term', 'tag-mutations');
+        return $this->__('Payload of executing an update meta mutation on a tag term', 'gatographql');
     }
 }

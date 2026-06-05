@@ -67,9 +67,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'siteURL' => $this->__('Site\'s URL', 'site'),
-            'siteLocale' => $this->__('Site\'s locale', 'site'),
-            'siteLanguage' => $this->__('Site\'s language', 'site'),
+            'siteURL' => $this->__('Site\'s URL', 'gatographql'),
+            'siteLocale' => $this->__('Site\'s locale', 'gatographql'),
+            'siteLanguage' => $this->__('Site\'s language', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

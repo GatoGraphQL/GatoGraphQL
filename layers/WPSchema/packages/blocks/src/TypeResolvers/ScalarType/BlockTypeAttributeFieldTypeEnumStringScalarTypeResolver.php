@@ -16,7 +16,7 @@ class BlockTypeAttributeFieldTypeEnumStringScalarTypeResolver extends AbstractEn
 
     public function getEnumStringTypeDescription(): ?string
     {
-        return $this->__('JSON-Schema "type" of a block attribute. Includes `null`, so it can\'t be a GraphQL Enum (which disallows that name).', 'blocks');
+        return $this->__('JSON-Schema "type" of a block attribute. Includes `null`, so it can\'t be a GraphQL Enum (which disallows that name).', 'gatographql');
     }
 
     /**

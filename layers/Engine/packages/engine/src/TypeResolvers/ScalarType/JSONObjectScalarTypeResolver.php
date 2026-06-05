@@ -19,7 +19,7 @@ class JSONObjectScalarTypeResolver extends AbstractJSONObjectScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Custom scalar representing a JSON Object of unrestricted shape', 'component-model');
+        return $this->__('Custom scalar representing a JSON Object of unrestricted shape', 'gatographql');
     }
 
     public function getSpecifiedByURL(): ?string

@@ -31,7 +31,7 @@ class RootRemoveFeaturedImageFromCustomPostInputObjectTypeResolver extends Abstr
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to remove the featured image from a custom post', 'custompostmedia-mutations');
+        return $this->__('Input to remove the featured image from a custom post', 'gatographql');
     }
 
     /**
@@ -47,7 +47,7 @@ class RootRemoveFeaturedImageFromCustomPostInputObjectTypeResolver extends Abstr
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post', 'custompostmedia-mutations'),
+            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

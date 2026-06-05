@@ -63,8 +63,8 @@ abstract class AbstractMenusFilterInputObjectTypeResolver extends AbstractObject
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'search' => $this->__('Filter menus that contain a string', 'menus'),
-            'slugs' => $this->__('Filter menus based on slug', 'menus'),
+            'search' => $this->__('Filter menus that contain a string', 'gatographql'),
+            'slugs' => $this->__('Filter menus based on slug', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

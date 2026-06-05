@@ -18,7 +18,7 @@ class UserPaginationInputObjectTypeResolver extends PaginationInputObjectTypeRes
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to paginate users', 'users');
+        return $this->__('Input to paginate users', 'gatographql');
     }
 
     protected function getDefaultLimit(): ?int

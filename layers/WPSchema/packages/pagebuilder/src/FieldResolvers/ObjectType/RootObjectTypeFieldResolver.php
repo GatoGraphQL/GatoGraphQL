@@ -62,7 +62,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'pageBuilders' => $this->__('The Page Builders installed on the site', 'pagebuilder'),
+            'pageBuilders' => $this->__('The Page Builders installed on the site', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

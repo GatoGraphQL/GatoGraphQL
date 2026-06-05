@@ -68,7 +68,7 @@ class TransientOperationPayloadObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'status' => $this->__('Status of the operation', 'schema-commons'),
+            'status' => $this->__('Status of the operation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

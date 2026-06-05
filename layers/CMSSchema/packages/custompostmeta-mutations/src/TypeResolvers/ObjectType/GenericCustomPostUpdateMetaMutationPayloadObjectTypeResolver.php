@@ -13,6 +13,6 @@ class GenericCustomPostUpdateMetaMutationPayloadObjectTypeResolver extends Abstr
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update meta nested mutation on a custom post', 'custompost-mutations');
+        return $this->__('Payload of executing an update meta nested mutation on a custom post', 'gatographql');
     }
 }

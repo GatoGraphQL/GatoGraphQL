@@ -44,7 +44,7 @@ abstract class AbstractCreateOrUpdateGenericCustomPostInputObjectTypeResolver ex
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CUSTOMPOST_TYPE => $this->__('The custom post type', 'custompost-mutations'),
+            MutationInputProperties::CUSTOMPOST_TYPE => $this->__('The custom post type', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

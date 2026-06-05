@@ -123,8 +123,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
-            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => $this->__('Limit results to elements with the given ids', 'categories'),
-            self::COMPONENT_FILTERINPUT_GENERIC_CATEGORY_TAXONOMY => $this->__('Category taxonomy', 'categories'),
+            self::COMPONENT_FILTERINPUT_CATEGORY_IDS => $this->__('Limit results to elements with the given ids', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_GENERIC_CATEGORY_TAXONOMY => $this->__('Category taxonomy', 'gatographql'),
             default => null,
         };
     }

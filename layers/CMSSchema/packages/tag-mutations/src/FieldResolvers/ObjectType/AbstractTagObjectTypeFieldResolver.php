@@ -56,8 +56,8 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'update' => $this->__('Update the tag', 'tag-mutations'),
-            'delete' => $this->__('Delete the tag', 'tag-mutations'),
+            'update' => $this->__('Update the tag', 'gatographql'),
+            'delete' => $this->__('Delete the tag', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

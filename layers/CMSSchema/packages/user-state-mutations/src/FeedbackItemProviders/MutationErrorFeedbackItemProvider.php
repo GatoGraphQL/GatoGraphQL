@@ -38,14 +38,14 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You are not logged in', 'user-state-mutations'),
-            self::E2 => $this->__('Please supply your username or email', 'user-state-mutations'),
-            self::E3 => $this->__('Please supply your password', 'user-state-mutations'),
-            self::E4 => $this->__('You are already logged in', 'user-state-mutations'),
-            self::E5 => $this->__('No user is registered with username \'%s\'', 'user-state-mutations'),
-            self::E6 => $this->__('No user is registered with email \'%s\'', 'user-state-mutations'),
-            self::E7 => $this->__('The password is incorrect', 'user-state-mutations'),
-            self::E8 => $this->__('[%1$s] %2$s', 'user-state-mutations'),
+            self::E1 => $this->__('You are not logged in', 'gatographql'),
+            self::E2 => $this->__('Please supply your username or email', 'gatographql'),
+            self::E3 => $this->__('Please supply your password', 'gatographql'),
+            self::E4 => $this->__('You are already logged in', 'gatographql'),
+            self::E5 => $this->__('No user is registered with username \'%s\'', 'gatographql'),
+            self::E6 => $this->__('No user is registered with email \'%s\'', 'gatographql'),
+            self::E7 => $this->__('The password is incorrect', 'gatographql'),
+            self::E8 => $this->__('[%1$s] %2$s', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

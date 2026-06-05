@@ -30,12 +30,12 @@ class VarsHookSet extends AbstractHookSet
     {
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        $elements[] = $this->__('edit schema:', 'graphql-server') . $moduleConfiguration->includeSchemaTypeDirectivesInSchema();
+        $elements[] = $this->__('edit schema:', 'gatographql') . $moduleConfiguration->includeSchemaTypeDirectivesInSchema();
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $elements[] = $this->__('enable nested mutations:', 'graphql-server') . $moduleConfiguration->enableNestedMutations();
-        $elements[] = $this->__('enable GraphQL introspection:', 'graphql-server') . App::getState('graphql-introspection-enabled');
+        $elements[] = $this->__('enable nested mutations:', 'gatographql') . $moduleConfiguration->enableNestedMutations();
+        $elements[] = $this->__('enable GraphQL introspection:', 'gatographql') . App::getState('graphql-introspection-enabled');
 
         return $elements;
     }

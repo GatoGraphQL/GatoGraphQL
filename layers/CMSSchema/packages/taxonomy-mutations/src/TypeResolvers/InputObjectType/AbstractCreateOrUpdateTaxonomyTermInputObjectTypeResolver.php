@@ -37,7 +37,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to create or update a taxonomy term', 'taxonomy-mutations');
+        return $this->__('Input to create or update a taxonomy term', 'gatographql');
     }
 
     /**
@@ -70,12 +70,12 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the taxonomy to update', 'taxonomy-mutations'),
-            MutationInputProperties::NAME => $this->__('The name of the taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::DESCRIPTION => $this->__('The description of the taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::SLUG => $this->__('The slug of the taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::TAXONOMY => $this->__('The taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::PARENT_BY => $this->__('The taxonomy\'s parent, or `null` to remove it', 'taxonomy-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the taxonomy to update', 'gatographql'),
+            MutationInputProperties::NAME => $this->__('The name of the taxonomy', 'gatographql'),
+            MutationInputProperties::DESCRIPTION => $this->__('The description of the taxonomy', 'gatographql'),
+            MutationInputProperties::SLUG => $this->__('The slug of the taxonomy', 'gatographql'),
+            MutationInputProperties::TAXONOMY => $this->__('The taxonomy', 'gatographql'),
+            MutationInputProperties::PARENT_BY => $this->__('The taxonomy\'s parent, or `null` to remove it', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

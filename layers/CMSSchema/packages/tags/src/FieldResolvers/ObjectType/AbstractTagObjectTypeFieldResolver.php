@@ -129,10 +129,10 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->__('Tag URL', 'pop-tags'),
-            'urlPath' => $this->__('Tag URL path', 'pop-tags'),
-            'slug' => $this->__('Tag slug', 'pop-tags'),
-            'taxonomy' => $this->__('Tag taxonomy', 'pop-tags'),
+            'url' => $this->__('Tag URL', 'gatographql'),
+            'urlPath' => $this->__('Tag URL path', 'gatographql'),
+            'slug' => $this->__('Tag slug', 'gatographql'),
+            'taxonomy' => $this->__('Tag taxonomy', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

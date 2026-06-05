@@ -183,24 +183,24 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'src' => $this->__('Media item URL source', 'pop-media'),
-            'srcs' => $this->__('Media item URL sources for several sizes (returned in the same order as the sizes)', 'pop-media'),
-            'srcPath' => $this->__('Media item URL source path', 'pop-media'),
-            'srcSet' => $this->__('Media item URL srcset', 'pop-media'),
-            'width' => $this->__('Media item\'s width', 'pop-media'),
-            'widths' => $this->__('Media item\'s width for several sizes (returned in the same order as the sizes)', 'pop-media'),
-            'height' => $this->__('Media item\'s height', 'pop-media'),
-            'heights' => $this->__('Media item\'s height for several sizes (returned in the same order as the sizes)', 'pop-media'),
-            'sizes' => $this->__('Media item\'s ‘sizes’ attribute value for an image', 'pop-media'),
-            'title' => $this->__('Media item title', 'pop-media'),
-            'caption' => $this->__('Media item caption', 'pop-media'),
-            'altText' => $this->__('Media item alt text', 'pop-media'),
-            'description' => $this->__('Media item description', 'pop-media'),
-            'date' => $this->__('Media item\'s published date', 'pop-media'),
-            'dateStr' => $this->__('Media item\'s published date, in String format', 'pop-media'),
-            'modifiedDate' => $this->__('Media item\'s modified date', 'pop-media'),
-            'modifiedDateStr' => $this->__('Media item\'s modified date, in String format', 'pop-media'),
-            'mimeType' => $this->__('Media item\'s mime type', 'pop-media'),
+            'src' => $this->__('Media item URL source', 'gatographql'),
+            'srcs' => $this->__('Media item URL sources for several sizes (returned in the same order as the sizes)', 'gatographql'),
+            'srcPath' => $this->__('Media item URL source path', 'gatographql'),
+            'srcSet' => $this->__('Media item URL srcset', 'gatographql'),
+            'width' => $this->__('Media item\'s width', 'gatographql'),
+            'widths' => $this->__('Media item\'s width for several sizes (returned in the same order as the sizes)', 'gatographql'),
+            'height' => $this->__('Media item\'s height', 'gatographql'),
+            'heights' => $this->__('Media item\'s height for several sizes (returned in the same order as the sizes)', 'gatographql'),
+            'sizes' => $this->__('Media item\'s ‘sizes’ attribute value for an image', 'gatographql'),
+            'title' => $this->__('Media item title', 'gatographql'),
+            'caption' => $this->__('Media item caption', 'gatographql'),
+            'altText' => $this->__('Media item alt text', 'gatographql'),
+            'description' => $this->__('Media item description', 'gatographql'),
+            'date' => $this->__('Media item\'s published date', 'gatographql'),
+            'dateStr' => $this->__('Media item\'s published date, in String format', 'gatographql'),
+            'modifiedDate' => $this->__('Media item\'s modified date', 'gatographql'),
+            'modifiedDateStr' => $this->__('Media item\'s modified date, in String format', 'gatographql'),
+            'mimeType' => $this->__('Media item\'s mime type', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -234,8 +234,8 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'size' => $this->__('Size of the image', 'pop-media'),
-            'sizes' => $this->__('Sizes of the image', 'pop-media'),
+            'size' => $this->__('Size of the image', 'gatographql'),
+            'sizes' => $this->__('Sizes of the image', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

@@ -78,7 +78,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return sprintf(
-            $this->__('The categories to set, of type \'%s\'', 'custompost-category-mutations'),
+            $this->__('The categories to set, of type \'%s\'', 'gatographql'),
             $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
         );
     }

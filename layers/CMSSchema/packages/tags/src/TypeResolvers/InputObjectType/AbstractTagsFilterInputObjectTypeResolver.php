@@ -10,7 +10,7 @@ abstract class AbstractTagsFilterInputObjectTypeResolver extends AbstractTaxonom
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter tags', 'tags');
+        return $this->__('Input to filter tags', 'gatographql');
     }
 
     protected function addParentIDInputField(): bool

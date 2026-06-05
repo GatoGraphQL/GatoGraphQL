@@ -71,11 +71,11 @@ class UserStateTypeMutationAPI extends AbstractBasicService implements UserState
          */
         $errorMessage = match ($errorCode) {
             'invalid_username' => sprintf(
-                $this->__('The username \'%s\' is not registered on this site.', 'user-state-mutations'),
+                $this->__('The username \'%s\' is not registered on this site.', 'gatographql'),
                 $credentials['user_login']
             ),
             'incorrect_password' => sprintf(
-                $this->__('The password you entered for the username \'%s\' is incorrect.', 'user-state-mutations'),
+                $this->__('The password you entered for the username \'%s\' is incorrect.', 'gatographql'),
                 $credentials['user_login']
             ),
             default => $errorMessage,

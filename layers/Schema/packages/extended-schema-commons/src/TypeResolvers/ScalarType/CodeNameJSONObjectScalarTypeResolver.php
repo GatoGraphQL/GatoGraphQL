@@ -18,7 +18,7 @@ class CodeNameJSONObjectScalarTypeResolver extends AbstractJSONObjectScalarTypeR
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Custom scalar representing a JSON Object with exactly 2 properties: code (of type Int or String) and name (of type String)', 'extended-schema-commons');
+        return $this->__('Custom scalar representing a JSON Object with exactly 2 properties: code (of type Int or String) and name (of type String)', 'gatographql');
     }
 
     public function getSpecifiedByURL(): ?string

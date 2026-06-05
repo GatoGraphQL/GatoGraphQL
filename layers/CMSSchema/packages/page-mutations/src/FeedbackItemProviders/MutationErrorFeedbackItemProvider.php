@@ -26,8 +26,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E2 => $this->__('Your user doesn\'t have permission for editing pages.', 'page-mutations'),
-            self::E3 => $this->__('Your user doesn\'t have permission for publishing pages.', 'page-mutations'),
+            self::E2 => $this->__('Your user doesn\'t have permission for editing pages.', 'gatographql'),
+            self::E3 => $this->__('Your user doesn\'t have permission for publishing pages.', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

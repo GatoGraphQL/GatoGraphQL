@@ -142,9 +142,9 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
                 => $this->__('Input to filter meta keys', 'gatographql'),
             ['metaValue' => 'key'],
             ['metaValues' => 'key']
-                => $this->__('The meta key', 'meta'),
+                => $this->__('The meta key', 'gatographql'),
             ['meta' => 'keys']
-                => $this->__('The meta keys', 'meta'),
+                => $this->__('The meta keys', 'gatographql'),
             default
                 => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
@@ -166,10 +166,10 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'metaKeys' => $this->__('List of allowed meta keys set on the entity.', 'custompostmeta'),
-            'metaValue' => $this->__('Single meta value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
-            'metaValues' => $this->__('List of meta values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'custompostmeta'),
-            'meta' => $this->__('JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).', 'custompostmeta'),
+            'metaKeys' => $this->__('List of allowed meta keys set on the entity.', 'gatographql'),
+            'metaValue' => $this->__('Single meta value. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'gatographql'),
+            'metaValues' => $this->__('List of meta values. If the key is not allowed, it returns an error; if the key is non-existent, or the value is empty, it returns `null`; otherwise, it returns the meta value.', 'gatographql'),
+            'meta' => $this->__('JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item).', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

@@ -34,12 +34,12 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must be logged in to mutate tag terms', 'tag-mutations'),
-            self::E5 => $this->__('There is no tag taxonomy with name \'%s\'', 'tag-mutations'),
-            self::E6 => $this->__('There is no tag term with ID \'%s\'', 'tag-mutations'),
-            self::E7 => $this->__('On tag \'%s\', there is no term with ID \'%s\'', 'tag-mutations'),
-            self::E8 => $this->__('There is no tag term with slug \'%s\'', 'tag-mutations'),
-            self::E9 => $this->__('On tag \'%s\', there is no term with slug \'%s\'', 'tag-mutations'),
+            self::E1 => $this->__('You must be logged in to mutate tag terms', 'gatographql'),
+            self::E5 => $this->__('There is no tag taxonomy with name \'%s\'', 'gatographql'),
+            self::E6 => $this->__('There is no tag term with ID \'%s\'', 'gatographql'),
+            self::E7 => $this->__('On tag \'%s\', there is no term with ID \'%s\'', 'gatographql'),
+            self::E8 => $this->__('There is no tag term with slug \'%s\'', 'gatographql'),
+            self::E9 => $this->__('On tag \'%s\', there is no term with slug \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

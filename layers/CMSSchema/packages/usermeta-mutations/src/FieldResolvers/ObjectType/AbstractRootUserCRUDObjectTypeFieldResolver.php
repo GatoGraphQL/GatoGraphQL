@@ -303,18 +303,18 @@ abstract class AbstractRootUserCRUDObjectTypeFieldResolver extends AbstractObjec
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addUserMeta' => $this->__('Add meta to user', 'user-mutations'),
-            'addUserMetas' => $this->__('Add meta to users', 'user-mutations'),
-            'updateUserMeta' => $this->__('Update meta from user', 'user-mutations'),
-            'updateUserMetas' => $this->__('Update meta from users', 'user-mutations'),
-            'deleteUserMeta' => $this->__('Delete meta from user', 'user-mutations'),
-            'deleteUserMetas' => $this->__('Delete meta from users', 'user-mutations'),
-            'setUserMeta' => $this->__('Set meta on user', 'user-mutations'),
-            'setUserMetas' => $this->__('Set meta on users', 'user-mutations'),
-            'addUserMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addUserMeta` mutation', 'user-mutations'),
-            'updateUserMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateUserMeta` mutation', 'user-mutations'),
-            'deleteUserMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteUserMeta` mutation', 'user-mutations'),
-            'setUserMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setUserMeta` mutation', 'user-mutations'),
+            'addUserMeta' => $this->__('Add meta to user', 'gatographql'),
+            'addUserMetas' => $this->__('Add meta to users', 'gatographql'),
+            'updateUserMeta' => $this->__('Update meta from user', 'gatographql'),
+            'updateUserMetas' => $this->__('Update meta from users', 'gatographql'),
+            'deleteUserMeta' => $this->__('Delete meta from user', 'gatographql'),
+            'deleteUserMetas' => $this->__('Delete meta from users', 'gatographql'),
+            'setUserMeta' => $this->__('Set meta on user', 'gatographql'),
+            'setUserMetas' => $this->__('Set meta on users', 'gatographql'),
+            'addUserMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addUserMeta` mutation', 'gatographql'),
+            'updateUserMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateUserMeta` mutation', 'gatographql'),
+            'deleteUserMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteUserMeta` mutation', 'gatographql'),
+            'setUserMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setUserMeta` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

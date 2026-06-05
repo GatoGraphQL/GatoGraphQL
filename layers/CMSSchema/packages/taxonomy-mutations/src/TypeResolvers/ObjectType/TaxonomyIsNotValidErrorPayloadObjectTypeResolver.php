@@ -29,7 +29,7 @@ class TaxonomyIsNotValidErrorPayloadObjectTypeResolver extends AbstractErrorPayl
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested taxonomy does not exist"', 'taxonomy-mutations');
+        return $this->__('Error payload for: "The requested taxonomy does not exist"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -200,7 +200,7 @@ trait MutateEntityMetaMutationResolverTrait
                     MutationErrorFeedbackItemProvider::E3,
                     [
                         implode(
-                            $this->__('\', \'', 'taxonomymeta-mutations'),
+                            $this->__('\', \'', 'gatographql'),
                             $metaKeys
                         ),
                     ]

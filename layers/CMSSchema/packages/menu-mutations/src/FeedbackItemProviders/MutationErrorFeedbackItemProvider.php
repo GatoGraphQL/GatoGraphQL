@@ -34,12 +34,12 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must be logged in to create menus or edit menus', 'menu-mutations'),
-            self::E2 => $this->__('You don\'t have permission to create menus', 'menu-mutations'),
-            self::E6 => $this->__('There is no menu with ID \'%s\'', 'menu-mutations'),
-            self::E7 => $this->__('There is no menu with slug \'%s\'', 'menu-mutations'),
-            self::E8 => $this->__('You don\'t have permission to edit menu with id \'%s\'', 'menu-mutations'),
-            self::E9 => $this->__('You don\'t have permission to edit menus', 'menu-mutations'),
+            self::E1 => $this->__('You must be logged in to create menus or edit menus', 'gatographql'),
+            self::E2 => $this->__('You don\'t have permission to create menus', 'gatographql'),
+            self::E6 => $this->__('There is no menu with ID \'%s\'', 'gatographql'),
+            self::E7 => $this->__('There is no menu with slug \'%s\'', 'gatographql'),
+            self::E8 => $this->__('You don\'t have permission to edit menu with id \'%s\'', 'gatographql'),
+            self::E9 => $this->__('You don\'t have permission to edit menus', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

@@ -84,7 +84,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($inputFieldName !== MutationInputProperties::AUTHOR_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The author of the custom post', 'custompost-user-mutations');
+        return $this->__('The author of the custom post', 'gatographql');
     }
 
     /**

@@ -346,10 +346,10 @@ class SchemaDefinitionReferenceRegistry extends AbstractBasicService implements 
             return;
         }
         $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(
-            $this->__('%s %s', 'graphql-server'),
+            $this->__('%s %s', 'gatographql'),
             sprintf(
                 '_%s_', // Make it italic using markdown
-                $this->__('("Schema" type directive)', 'graphql-server')
+                $this->__('("Schema" type directive)', 'gatographql')
             ),
             $directiveSchemaDefinition[SchemaDefinition::DESCRIPTION]
         );
@@ -369,8 +369,8 @@ class SchemaDefinitionReferenceRegistry extends AbstractBasicService implements 
         if ($schemaFieldVersion = $fieldOrDirectiveSchemaDefinition[SchemaDefinition::VERSION] ?? null) {
             $fieldOrDirectiveSchemaDefinition[SchemaDefinition::DESCRIPTION] .= sprintf(
                 sprintf(
-                    $this->__(' _%s_', 'graphql-server'), // Make it italic using markdown
-                    $this->__('(Version: %s)', 'graphql-server')
+                    $this->__(' _%s_', 'gatographql'), // Make it italic using markdown
+                    $this->__('(Version: %s)', 'gatographql')
                 ),
                 $schemaFieldVersion
             );
@@ -390,7 +390,7 @@ class SchemaDefinitionReferenceRegistry extends AbstractBasicService implements 
         $fieldSchemaDefinition = &SchemaDefinitionHelpers::advancePointerToPath($fullSchemaDefinitionForGraphQL, $fieldSchemaDefinitionPath);
         if ($fieldSchemaDefinition[SchemaDefinition::EXTENSIONS][SchemaDefinition::FIELD_IS_MUTATION]) {
             $fieldSchemaDefinition[SchemaDefinition::DESCRIPTION] = sprintf(
-                $this->__('[Mutation] %s', 'graphql-server'),
+                $this->__('[Mutation] %s', 'gatographql'),
                 $fieldSchemaDefinition[SchemaDefinition::DESCRIPTION]
             );
         }
@@ -403,7 +403,7 @@ class SchemaDefinitionReferenceRegistry extends AbstractBasicService implements 
         $schemaDefinitionReferenceObjectID = SchemaDefinitionHelpers::getSchemaDefinitionReferenceObjectID($schemaDefinitionPath);
         if (isset($this->fullSchemaDefinitionReferenceDictionary[$schemaDefinitionReferenceObjectID])) {
             throw new SchemaReferenceException(sprintf(
-                $this->__('A Schema Definition Reference Object with id \'%s\s has already been registered', 'graphql-server'),
+                $this->__('A Schema Definition Reference Object with id \'%s\s has already been registered', 'gatographql'),
                 $schemaDefinitionReferenceObjectID
             ));
         }

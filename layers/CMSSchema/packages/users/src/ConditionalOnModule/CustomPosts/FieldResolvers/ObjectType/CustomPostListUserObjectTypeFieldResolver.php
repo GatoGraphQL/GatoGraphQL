@@ -43,8 +43,8 @@ class CustomPostListUserObjectTypeFieldResolver extends AbstractCustomPostListOb
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPosts' => $this->__('Custom posts by the user', 'pop-users'),
-            'customPostCount' => $this->__('Number of custom posts by the user', 'pop-users'),
+            'customPosts' => $this->__('Custom posts by the user', 'gatographql'),
+            'customPostCount' => $this->__('Number of custom posts by the user', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -103,7 +103,7 @@ trait EntityMetaTypeMutationAPITrait
         $result = $this->executeAddEntityMeta($entityID, $key, $value, $single);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                $this->__('Error adding meta', 'meta-mutations')
+                $this->__('Error adding meta', 'gatographql')
             );
         }
         $this->handleMaybeError($result);
@@ -144,7 +144,7 @@ trait EntityMetaTypeMutationAPITrait
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                $this->__('Error updating meta', 'meta-mutations')
+                $this->__('Error updating meta', 'gatographql')
             );
         }
         /** @var int|true $result */
@@ -170,7 +170,7 @@ trait EntityMetaTypeMutationAPITrait
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
-                $this->__('Error deleting meta', 'meta-mutations')
+                $this->__('Error deleting meta', 'gatographql')
             );
         }
     }

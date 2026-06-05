@@ -24,7 +24,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The query in the body is empty', 'api'),
+            self::E1 => $this->__('The query in the body is empty', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

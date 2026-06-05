@@ -16,6 +16,6 @@ class RootMyPagesFilterInputObjectTypeResolver extends AbstractMyCustomPostsFilt
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter the logged-in user\'s pages', 'page-mutations');
+        return $this->__('Input to filter the logged-in user\'s pages', 'gatographql');
     }
 }

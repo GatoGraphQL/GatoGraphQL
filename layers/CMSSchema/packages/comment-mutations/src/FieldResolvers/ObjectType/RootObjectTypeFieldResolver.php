@@ -168,12 +168,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addCommentToCustomPost' => $this->__('Add a comment to a custom post', 'comment-mutations'),
-            'addCommentToCustomPosts' => $this->__('Add comments to a custom post', 'comment-mutations'),
-            'replyComment' => $this->__('Reply a comment with another comment', 'comment-mutations'),
-            'replyComments' => $this->__('Reply comment with other comments', 'comment-mutations'),
-            'addCommentToCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCommentToCustomPost` mutation', 'comment-mutations'),
-            'replyCommentMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `replyComment` mutation', 'comment-mutations'),
+            'addCommentToCustomPost' => $this->__('Add a comment to a custom post', 'gatographql'),
+            'addCommentToCustomPosts' => $this->__('Add comments to a custom post', 'gatographql'),
+            'replyComment' => $this->__('Reply a comment with another comment', 'gatographql'),
+            'replyComments' => $this->__('Reply comment with other comments', 'gatographql'),
+            'addCommentToCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCommentToCustomPost` mutation', 'gatographql'),
+            'replyCommentMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `replyComment` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -23,7 +23,7 @@ abstract class AbstractCustomPostObjectTypeResolver extends AbstractObjectTypeRe
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of a custom post', 'customposts');
+        return $this->__('Representation of a custom post', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

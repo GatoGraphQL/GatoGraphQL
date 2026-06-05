@@ -38,14 +38,14 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must be logged in to upload files or edit media items', 'media-mutations'),
-            self::E2 => $this->__('You don\'t have permission to upload files', 'media-mutations'),
-            self::E4 => $this->__('You don\'t have permission to upload files for other users', 'media-mutations'),
-            self::E5 => $this->__('There is no user with ID \'%s\'', 'media-mutations'),
-            self::E6 => $this->__('There is no media item with ID \'%s\'', 'media-mutations'),
-            self::E7 => $this->__('There is no media item with slug \'%s\'', 'media-mutations'),
-            self::E8 => $this->__('You don\'t have permission to edit media item with id \'%s\'', 'media-mutations'),
-            self::E9 => $this->__('You don\'t have permission to edit media items', 'polylang-mutations'),
+            self::E1 => $this->__('You must be logged in to upload files or edit media items', 'gatographql'),
+            self::E2 => $this->__('You don\'t have permission to upload files', 'gatographql'),
+            self::E4 => $this->__('You don\'t have permission to upload files for other users', 'gatographql'),
+            self::E5 => $this->__('There is no user with ID \'%s\'', 'gatographql'),
+            self::E6 => $this->__('There is no media item with ID \'%s\'', 'gatographql'),
+            self::E7 => $this->__('There is no media item with slug \'%s\'', 'gatographql'),
+            self::E8 => $this->__('You don\'t have permission to edit media item with id \'%s\'', 'gatographql'),
+            self::E9 => $this->__('You don\'t have permission to edit media items', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

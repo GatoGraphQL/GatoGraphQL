@@ -118,7 +118,7 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
             if (!in_array($mimeType, $mimes)) {
                 throw new MediaItemCRUDMutationException(
                     sprintf(
-                        $this->__('Mime type \'%s\' is not allowed', 'media-mutations'),
+                        $this->__('Mime type \'%s\' is not allowed', 'gatographql'),
                         $mimeType
                     )
                 );
@@ -407,7 +407,7 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         $mimeTypeCheck = wp_check_filetype(sanitize_file_name(basename($filename)));
         if (!$mimeTypeCheck['type']) {
             throw new MediaItemCRUDMutationException(
-                $this->__('The file\'s mime type is not allowed', 'media-mutations')
+                $this->__('The file\'s mime type is not allowed', 'gatographql')
             );
         }
         /** @var string */

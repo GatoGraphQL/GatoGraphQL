@@ -16,7 +16,7 @@ class UserCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFi
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter the user\'s custom posts', 'users');
+        return $this->__('Input to filter the user\'s custom posts', 'gatographql');
     }
 
     protected function addCustomPostInputFields(): bool

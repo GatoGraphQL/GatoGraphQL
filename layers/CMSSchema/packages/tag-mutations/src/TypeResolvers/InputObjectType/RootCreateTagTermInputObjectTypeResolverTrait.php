@@ -8,7 +8,7 @@ trait RootCreateTagTermInputObjectTypeResolverTrait
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to create a tag term', 'tag-mutations');
+        return $this->__('Input to create a tag term', 'gatographql');
     }
 
     protected function addIDInputField(): bool

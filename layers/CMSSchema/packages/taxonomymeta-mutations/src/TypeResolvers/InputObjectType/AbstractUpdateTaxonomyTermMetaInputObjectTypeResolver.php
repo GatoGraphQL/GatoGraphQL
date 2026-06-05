@@ -11,13 +11,13 @@ abstract class AbstractUpdateTaxonomyTermMetaInputObjectTypeResolver extends Abs
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a taxonomy term\'s meta', 'taxonomymeta-mutations');
+        return $this->__('Input to update a taxonomy term\'s meta', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'taxonomymeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

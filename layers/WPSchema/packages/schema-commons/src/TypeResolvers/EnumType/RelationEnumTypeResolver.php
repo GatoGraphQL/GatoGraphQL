@@ -21,7 +21,7 @@ class RelationEnumTypeResolver extends AbstractEnumTypeResolver
 
     public function getTypeDescription(): string
     {
-        return $this->__('The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one', 'schema-commons');
+        return $this->__('The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one', 'gatographql');
     }
 
     /**
@@ -38,8 +38,8 @@ class RelationEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            Relation::AND => $this->__('`AND` relation', 'schema-commons'),
-            Relation::OR => $this->__('`OR` relation', 'schema-commons'),
+            Relation::AND => $this->__('`AND` relation', 'gatographql'),
+            Relation::OR => $this->__('`OR` relation', 'gatographql'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

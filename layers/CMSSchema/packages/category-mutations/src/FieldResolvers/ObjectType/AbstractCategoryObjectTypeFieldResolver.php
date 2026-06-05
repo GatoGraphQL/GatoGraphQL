@@ -56,8 +56,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'update' => $this->__('Update the category', 'category-mutations'),
-            'delete' => $this->__('Delete the category', 'category-mutations'),
+            'update' => $this->__('Update the category', 'gatographql'),
+            'delete' => $this->__('Delete the category', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

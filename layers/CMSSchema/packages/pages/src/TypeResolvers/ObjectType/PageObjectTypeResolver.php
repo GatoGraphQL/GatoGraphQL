@@ -40,7 +40,7 @@ class PageObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of a page', 'pages');
+        return $this->__('Representation of a page', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

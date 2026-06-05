@@ -80,11 +80,11 @@ class NetworkSiteObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'id' => $this->__('Site\'s ID (within the multisite)', 'multisite'),
-            'name' => $this->__('Site\'s name', 'multisite'),
-            'url' => $this->__('Site\'s URL', 'multisite'),
-            'locale' => $this->__('Site\'s locale', 'multisite'),
-            'language' => $this->__('Site\'s language', 'multisite'),
+            'id' => $this->__('Site\'s ID (within the multisite)', 'gatographql'),
+            'name' => $this->__('Site\'s name', 'gatographql'),
+            'url' => $this->__('Site\'s URL', 'gatographql'),
+            'locale' => $this->__('Site\'s locale', 'gatographql'),
+            'language' => $this->__('Site\'s language', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

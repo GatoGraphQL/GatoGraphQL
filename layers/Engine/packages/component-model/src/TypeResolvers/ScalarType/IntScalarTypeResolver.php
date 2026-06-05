@@ -20,6 +20,6 @@ class IntScalarTypeResolver extends AbstractIntScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('The Int scalar type represents non-fractional signed whole numeric values.', 'component-model');
+        return $this->__('The Int scalar type represents non-fractional signed whole numeric values.', 'gatographql');
     }
 }

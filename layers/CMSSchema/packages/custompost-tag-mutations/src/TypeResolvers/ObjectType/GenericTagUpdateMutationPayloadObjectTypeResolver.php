@@ -13,6 +13,6 @@ class GenericTagUpdateMutationPayloadObjectTypeResolver extends AbstractGenericT
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update nested mutation on a tag', 'tag-mutations');
+        return $this->__('Payload of executing an update nested mutation on a tag', 'gatographql');
     }
 }

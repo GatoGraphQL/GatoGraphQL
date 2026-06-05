@@ -10,6 +10,6 @@ abstract class AbstractErrorPayloadObjectTypeResolver extends AbstractTransientO
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload', 'schema-commons');
+        return $this->__('Error payload', 'gatographql');
     }
 }

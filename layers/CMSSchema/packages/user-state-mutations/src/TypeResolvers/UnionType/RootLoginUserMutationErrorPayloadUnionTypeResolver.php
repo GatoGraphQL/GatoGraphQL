@@ -28,7 +28,7 @@ class RootLoginUserMutationErrorPayloadUnionTypeResolver extends AbstractUserSta
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when logging a user in', 'user-state-mutations');
+        return $this->__('Union of \'Error Payload\' types when logging a user in', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -89,7 +89,7 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to specify the property and data to fetch a user', 'users');
+        return $this->__('Oneof input to specify the property and data to fetch a user', 'gatographql');
     }
 
     /**
@@ -121,9 +121,9 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            InputProperties::ID => $this->__('Query by user ID', 'users'),
-            InputProperties::USERNAME => $this->__('Query by username', 'users'),
-            InputProperties::EMAIL => $this->__('Query by email', 'users'),
+            InputProperties::ID => $this->__('Query by user ID', 'gatographql'),
+            InputProperties::USERNAME => $this->__('Query by username', 'gatographql'),
+            InputProperties::EMAIL => $this->__('Query by email', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

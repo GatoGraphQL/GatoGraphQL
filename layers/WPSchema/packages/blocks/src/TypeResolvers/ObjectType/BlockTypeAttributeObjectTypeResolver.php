@@ -29,7 +29,7 @@ class BlockTypeAttributeObjectTypeResolver extends AbstractTransientObjectObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('A registered attribute of a block type, as defined in its block.json schema', 'blocks');
+        return $this->__('A registered attribute of a block type, as defined in its block.json schema', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

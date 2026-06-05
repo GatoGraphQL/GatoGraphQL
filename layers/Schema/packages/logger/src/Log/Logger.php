@@ -82,7 +82,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         $date = date(DateTimeInterface::ATOM);
 
         if ($context !== null && $context !== []) {
-            $message .= $this->__(' ', 'logger') . LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $message .= $this->__(' ', 'gatographql') . LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
 
         error_log(sprintf(

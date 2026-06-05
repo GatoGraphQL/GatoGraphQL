@@ -13,6 +13,6 @@ class RootCreateMediaItemInputObjectTypeResolver extends AbstractCreateMediaItem
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to upload an attachment', 'media-mutations');
+        return $this->__('Input to upload an attachment', 'gatographql');
     }
 }

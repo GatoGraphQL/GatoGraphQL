@@ -146,8 +146,8 @@ abstract class AbstractAddCustomPostPasswordInputFieldsInputObjectTypeHookSet ex
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'hasPassword' => $this->__('Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password', 'customposts'),
-            'password' => $this->__('Include custom posts protected by a specific password', 'customposts'),
+            'hasPassword' => $this->__('Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password', 'gatographql'),
+            'password' => $this->__('Include custom posts protected by a specific password', 'gatographql'),
             default => $inputFieldDescription,
         };
     }

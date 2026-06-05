@@ -29,7 +29,7 @@ class RootAddGenericTagTermMetaMutationErrorPayloadUnionTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when adding meta on a tag term', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when adding meta on a tag term', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

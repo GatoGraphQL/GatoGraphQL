@@ -53,7 +53,7 @@ class IncludeExcludeFilterInputObjectTypeResolver extends AbstractOneofQueryable
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to filter by including or excluding items', 'schema-commons');
+        return $this->__('Oneof input to filter by including or excluding items', 'gatographql');
     }
 
     protected function isOneInputValueMandatory(): bool
@@ -75,8 +75,8 @@ class IncludeExcludeFilterInputObjectTypeResolver extends AbstractOneofQueryable
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'include' => $this->__('Items to be included', 'schema-commons'),
-            'exclude' => $this->__('Items to be excluded', 'schema-commons'),
+            'include' => $this->__('Items to be included', 'gatographql'),
+            'exclude' => $this->__('Items to be excluded', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

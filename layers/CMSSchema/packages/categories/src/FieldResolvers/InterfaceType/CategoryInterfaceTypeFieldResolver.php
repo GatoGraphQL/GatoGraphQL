@@ -23,10 +23,10 @@ class CategoryInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceType
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Category', 'categories'),
-            'description' => $this->__('Category description', 'categories'),
-            'count' => $this->__('Number of custom posts containing this category', 'categories'),
-            'slugPath' => $this->__('Full category slug, from the root ancestor all the way down, separated by \'/\', and not including \'/\' at either end', 'categories'),
+            'name' => $this->__('Category', 'gatographql'),
+            'description' => $this->__('Category description', 'gatographql'),
+            'count' => $this->__('Number of custom posts containing this category', 'gatographql'),
+            'slugPath' => $this->__('Full category slug, from the root ancestor all the way down, separated by \'/\', and not including \'/\' at either end', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

@@ -83,7 +83,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         $menuName = trim($menuName);
         if ($menuName === '') {
             throw new MenuCRUDMutationException(
-                $this->__('The menu name cannot be empty', 'menu-mutations')
+                $this->__('The menu name cannot be empty', 'gatographql')
             );
         }
         $menuName = sanitize_text_field($menuName);
@@ -386,7 +386,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
     {
         if ($postType === '' || $objectID <= 0) {
             throw new MenuCRUDMutationException(
-                $this->__('For menu items of type "post_type", both "objectType" and "objectID" are required', 'menu-mutations')
+                $this->__('For menu items of type "post_type", both "objectType" and "objectID" are required', 'gatographql')
             );
         }
 
@@ -407,7 +407,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
     {
         if ($taxonomyName === '' || $objectID <= 0) {
             throw new MenuCRUDMutationException(
-                $this->__('For menu items of type "taxonomy", both "objectType" and "objectID" are required', 'menu-mutations')
+                $this->__('For menu items of type "taxonomy", both "objectType" and "objectID" are required', 'gatographql')
             );
         }
 

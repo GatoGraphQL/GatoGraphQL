@@ -68,7 +68,7 @@ class ObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isUserLoggedIn' => $this->__('Is the user logged-in?', 'user-state'),
+            'isUserLoggedIn' => $this->__('Is the user logged-in?', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

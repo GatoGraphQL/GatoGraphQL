@@ -11,13 +11,13 @@ abstract class AbstractDeleteUserMetaInputObjectTypeResolver extends AbstractDel
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete a user\'s meta entry', 'usermeta-mutations');
+        return $this->__('Input to delete a user\'s meta entry', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the user', 'usermeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the user', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

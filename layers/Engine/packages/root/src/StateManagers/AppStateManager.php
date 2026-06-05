@@ -185,7 +185,7 @@ class AppStateManager implements AppStateManagerInterface
         if (!array_key_exists($key, $this->state)) {
             throw new AppStateNotExistsException(
                 \sprintf(
-                    $this->getTranslationAPI()->__('There is no application state under key \'%s\'', 'root'),
+                    $this->getTranslationAPI()->__('There is no application state under key \'%s\'', 'gatographql'),
                     $key
                 )
             );
@@ -217,7 +217,7 @@ class AppStateManager implements AppStateManagerInterface
         if (!($stateItem instanceof FieldInterface)) {
             throw new ShouldNotHappenException(
                 sprintf(
-                    $this->getTranslationAPI()->__('In the SplObjectStorage stored in the AppState, cannot process item of class \'%s\'', 'root'),
+                    $this->getTranslationAPI()->__('In the SplObjectStorage stored in the AppState, cannot process item of class \'%s\'', 'gatographql'),
                     get_class($stateItem)
                 )
             );
@@ -232,9 +232,9 @@ class AppStateManager implements AppStateManagerInterface
     {
         throw new AppStateNotExistsException(
             \sprintf(
-                $this->getTranslationAPI()->__('There is no application state under path \'%s\'', 'root'),
+                $this->getTranslationAPI()->__('There is no application state under path \'%s\'', 'gatographql'),
                 implode(
-                    $this->getTranslationAPI()->__(',', 'root'),
+                    $this->getTranslationAPI()->__(',', 'gatographql'),
                     $path
                 )
             )

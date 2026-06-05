@@ -61,7 +61,7 @@ class WithAuthorInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldRes
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'author' => $this->__('The entity\'s author', 'queriedobject'),
+            'author' => $this->__('The entity\'s author', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

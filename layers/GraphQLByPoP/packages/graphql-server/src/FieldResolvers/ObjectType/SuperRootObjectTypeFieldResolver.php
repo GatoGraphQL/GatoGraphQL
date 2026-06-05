@@ -87,10 +87,10 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '_rootForQueryRoot' => $this->__('Get the Root type (as requested by a query operation)', 'engine'),
-            '_rootForMutationRoot' => $this->__('Get the Root type (as requested by a mutation operation)', 'engine'),
-            '_queryRoot' => $this->__('Get the Query Root type', 'engine'),
-            '_mutationRoot' => $this->__('Get the Mutation Root type', 'engine'),
+            '_rootForQueryRoot' => $this->__('Get the Root type (as requested by a query operation)', 'gatographql'),
+            '_rootForMutationRoot' => $this->__('Get the Root type (as requested by a mutation operation)', 'gatographql'),
+            '_queryRoot' => $this->__('Get the Query Root type', 'gatographql'),
+            '_mutationRoot' => $this->__('Get the Mutation Root type', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

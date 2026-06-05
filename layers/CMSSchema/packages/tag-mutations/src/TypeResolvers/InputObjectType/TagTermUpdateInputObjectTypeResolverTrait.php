@@ -8,7 +8,7 @@ trait TagTermUpdateInputObjectTypeResolverTrait
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a tag term', 'tag-mutations');
+        return $this->__('Input to update a tag term', 'gatographql');
     }
 
     protected function addIDInputField(): bool

@@ -1019,7 +1019,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             // Version constraint (possibly enabled)
             SchemaDefinition::VERSION_CONSTRAINT => $this->getVersionConstraintFieldOrDirectiveArgDescription(),
             // Multi-Field Directives (possibly enabled)
-            $this->getAffectAdditionalFieldsUnderPosArgumentName() => $this->__('Positions of the additional fields to be affected by the directive, relative from the directive (as an array of positive integers)', 'graphql-server'),
+            $this->getAffectAdditionalFieldsUnderPosArgumentName() => $this->__('Positions of the additional fields to be affected by the directive, relative from the directive (as an array of positive integers)', 'gatographql'),
             default => null,
         };
     }

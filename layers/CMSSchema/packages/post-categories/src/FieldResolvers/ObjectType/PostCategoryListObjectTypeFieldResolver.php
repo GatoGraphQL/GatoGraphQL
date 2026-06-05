@@ -37,8 +37,8 @@ class PostCategoryListObjectTypeFieldResolver extends AbstractPostObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'posts' => $this->__('Posts which contain this category', 'post-categories'),
-            'postCount' => $this->__('Number of posts which contain this category', 'post-categories'),
+            'posts' => $this->__('Posts which contain this category', 'gatographql'),
+            'postCount' => $this->__('Number of posts which contain this category', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

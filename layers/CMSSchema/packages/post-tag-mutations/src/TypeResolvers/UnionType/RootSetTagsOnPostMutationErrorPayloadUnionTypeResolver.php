@@ -28,7 +28,7 @@ class RootSetTagsOnPostMutationErrorPayloadUnionTypeResolver extends AbstractPos
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when setting tags on a post', 'posttag-mutations');
+        return $this->__('Union of \'Error Payload\' types when setting tags on a post', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

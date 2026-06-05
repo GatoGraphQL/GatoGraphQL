@@ -13,6 +13,6 @@ class RootAddUserMetaMutationPayloadObjectTypeResolver extends AbstractUserMetaM
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of adding meta to a user', 'user-mutations');
+        return $this->__('Payload of adding meta to a user', 'gatographql');
     }
 }

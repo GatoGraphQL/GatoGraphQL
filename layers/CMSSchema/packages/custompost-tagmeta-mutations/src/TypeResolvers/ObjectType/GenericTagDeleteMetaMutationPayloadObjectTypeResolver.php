@@ -13,6 +13,6 @@ class GenericTagDeleteMetaMutationPayloadObjectTypeResolver extends AbstractGene
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a delete meta nested mutation on a tag term', 'tag-mutations');
+        return $this->__('Payload of executing a delete meta nested mutation on a tag term', 'gatographql');
     }
 }

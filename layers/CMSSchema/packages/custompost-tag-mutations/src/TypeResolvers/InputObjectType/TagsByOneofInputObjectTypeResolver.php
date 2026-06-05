@@ -59,8 +59,8 @@ class TagsByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeRes
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::IDS => $this->__('Input the tag IDs', 'custompost-tag-mutations'),
-            MutationInputProperties::SLUGS => $this->__('Input the tag slugs', 'custompost-tag-mutations'),
+            MutationInputProperties::IDS => $this->__('Input the tag IDs', 'gatographql'),
+            MutationInputProperties::SLUGS => $this->__('Input the tag slugs', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

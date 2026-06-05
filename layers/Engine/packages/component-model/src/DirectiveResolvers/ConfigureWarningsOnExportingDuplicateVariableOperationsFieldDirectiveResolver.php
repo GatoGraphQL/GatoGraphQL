@@ -105,7 +105,7 @@ class ConfigureWarningsOnExportingDuplicateVariableOperationsFieldDirectiveResol
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->__('Enable or disable showing warnings when the same dynamic variable name is defined more than once', 'component-model');
+        return $this->__('Enable or disable showing warnings when the same dynamic variable name is defined more than once', 'gatographql');
     }
 
     /**
@@ -124,7 +124,7 @@ class ConfigureWarningsOnExportingDuplicateVariableOperationsFieldDirectiveResol
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'enabled' => $this->__('Raise warnings in the response?', 'component-model'),
+            'enabled' => $this->__('Raise warnings in the response?', 'gatographql'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

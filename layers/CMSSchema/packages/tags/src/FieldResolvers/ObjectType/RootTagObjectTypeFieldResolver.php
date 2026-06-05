@@ -173,10 +173,10 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'tag' => $this->__('Retrieve a single tag', 'tags'),
-            'tags' => $this->__(' tags', 'tags'),
-            'tagCount' => $this->__('Number of tags', 'tags'),
-            'tagNames' => $this->__('Names of the tags', 'tags'),
+            'tag' => $this->__('Retrieve a single tag', 'gatographql'),
+            'tags' => $this->__(' tags', 'gatographql'),
+            'tagCount' => $this->__('Number of tags', 'gatographql'),
+            'tagNames' => $this->__('Names of the tags', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -230,10 +230,10 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         if ($fieldArgName === 'taxonomy') {
-            return $this->__('Taxonomy of the tag', 'tags');
+            return $this->__('Taxonomy of the tag', 'gatographql');
         }
         return match ([$fieldName => $fieldArgName]) {
-            ['tag' => 'by'] => $this->__('Parameter by which to select the tag', 'tags'),
+            ['tag' => 'by'] => $this->__('Parameter by which to select the tag', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

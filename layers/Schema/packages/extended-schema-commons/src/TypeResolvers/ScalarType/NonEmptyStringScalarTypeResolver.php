@@ -23,7 +23,7 @@ class NonEmptyStringScalarTypeResolver extends StringScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('A non-empty string scalar type that validates the string is not empty.', 'extended-schema-commons');
+        return $this->__('A non-empty string scalar type that validates the string is not empty.', 'gatographql');
     }
 
     public function coerceValue(

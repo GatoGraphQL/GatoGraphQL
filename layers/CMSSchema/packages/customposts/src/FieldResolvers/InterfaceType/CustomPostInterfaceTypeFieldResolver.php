@@ -217,23 +217,23 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->__('Custom post URL', 'customposts'),
-            'urlPath' => $this->__('Custom post URL path', 'customposts'),
-            'slug' => $this->__('Custom post slug', 'customposts'),
-            'slugPath' => $this->__('Custom post slug path (comprising all ancestors)', 'customposts'),
-            'content' => $this->__('Custom post content', 'customposts'),
-            'rawContent' => $this->__('Custom post content in raw format (as it exists in the database)', 'customposts'),
-            'status' => $this->__('Custom post status', 'customposts'),
-            'isStatus' => $this->__('Is the custom post in the given status?', 'customposts'),
-            'date' => $this->__('Custom post published date', 'customposts'),
-            'dateStr' => $this->__('Custom post published date, in String format', 'customposts'),
-            'modifiedDate' => $this->__('Custom post modified date', 'customposts'),
-            'modifiedDateStr' => $this->__('Custom post modified date, in String format', 'customposts'),
-            'title' => $this->__('Custom post title', 'customposts'),
-            'rawTitle' => $this->__('Custom post title in raw format (as it exists in the database)', 'customposts'),
-            'excerpt' => $this->__('Custom post excerpt', 'customposts'),
-            'rawExcerpt' => $this->__('Custom post excerpt in raw format (as it exists in the database)', 'customposts'),
-            'customPostType' => $this->__('Custom post type', 'customposts'),
+            'url' => $this->__('Custom post URL', 'gatographql'),
+            'urlPath' => $this->__('Custom post URL path', 'gatographql'),
+            'slug' => $this->__('Custom post slug', 'gatographql'),
+            'slugPath' => $this->__('Custom post slug path (comprising all ancestors)', 'gatographql'),
+            'content' => $this->__('Custom post content', 'gatographql'),
+            'rawContent' => $this->__('Custom post content in raw format (as it exists in the database)', 'gatographql'),
+            'status' => $this->__('Custom post status', 'gatographql'),
+            'isStatus' => $this->__('Is the custom post in the given status?', 'gatographql'),
+            'date' => $this->__('Custom post published date', 'gatographql'),
+            'dateStr' => $this->__('Custom post published date, in String format', 'gatographql'),
+            'modifiedDate' => $this->__('Custom post modified date', 'gatographql'),
+            'modifiedDateStr' => $this->__('Custom post modified date, in String format', 'gatographql'),
+            'title' => $this->__('Custom post title', 'gatographql'),
+            'rawTitle' => $this->__('Custom post title in raw format (as it exists in the database)', 'gatographql'),
+            'excerpt' => $this->__('Custom post excerpt', 'gatographql'),
+            'rawExcerpt' => $this->__('Custom post excerpt in raw format (as it exists in the database)', 'gatographql'),
+            'customPostType' => $this->__('Custom post type', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }
@@ -254,7 +254,7 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     public function getFieldArgDescription(string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isStatus' => 'status'] => $this->__('The status to check if the post has', 'customposts'),
+            ['isStatus' => 'status'] => $this->__('The status to check if the post has', 'gatographql'),
             default => parent::getFieldArgDescription($fieldName, $fieldArgName),
         };
     }

@@ -173,10 +173,10 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postCategory' => $this->__('Retrieve a single post category', 'post-categories'),
-            'postCategories' => $this->__('Post categories', 'post-categories'),
-            'postCategoryCount' => $this->__('Number of post categories', 'post-categories'),
-            'postCategoryNames' => $this->__('Names of the post categories', 'post-categories'),
+            'postCategory' => $this->__('Retrieve a single post category', 'gatographql'),
+            'postCategories' => $this->__('Post categories', 'gatographql'),
+            'postCategoryCount' => $this->__('Number of post categories', 'gatographql'),
+            'postCategoryNames' => $this->__('Names of the post categories', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -230,10 +230,10 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         if ($fieldArgName === 'taxonomy') {
-            return $this->__('Taxonomy of the post category', 'post-categories');
+            return $this->__('Taxonomy of the post category', 'gatographql');
         }
         return match ([$fieldName => $fieldArgName]) {
-            ['postCategory' => 'by'] => $this->__('Parameter by which to select the post category', 'post-categories'),
+            ['postCategory' => 'by'] => $this->__('Parameter by which to select the post category', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

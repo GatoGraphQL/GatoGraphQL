@@ -13,6 +13,6 @@ class RootAddCommentToCustomPostMutationPayloadObjectTypeResolver extends Abstra
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of adding a comment to a custom post', 'comment-mutations');
+        return $this->__('Payload of adding a comment to a custom post', 'gatographql');
     }
 }

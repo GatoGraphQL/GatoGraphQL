@@ -13,6 +13,6 @@ class GenericCategoryDeleteMutationPayloadObjectTypeResolver extends AbstractGen
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a delete nested mutation on a category', 'category-mutations');
+        return $this->__('Payload of executing a delete nested mutation on a category', 'gatographql');
     }
 }

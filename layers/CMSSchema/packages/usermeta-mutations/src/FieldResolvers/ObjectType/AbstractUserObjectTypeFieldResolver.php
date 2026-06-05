@@ -180,10 +180,10 @@ abstract class AbstractUserObjectTypeFieldResolver extends AbstractObjectTypeFie
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addMeta' => $this->__('Add a user meta entry', 'usermeta-mutations'),
-            'deleteMeta' => $this->__('Delete a user meta entry', 'usermeta-mutations'),
-            'setMeta' => $this->__('Set meta entries to a user', 'usermeta-mutations'),
-            'updateMeta' => $this->__('Update a user meta entry', 'usermeta-mutations'),
+            'addMeta' => $this->__('Add a user meta entry', 'gatographql'),
+            'deleteMeta' => $this->__('Delete a user meta entry', 'gatographql'),
+            'setMeta' => $this->__('Set meta entries to a user', 'gatographql'),
+            'updateMeta' => $this->__('Update a user meta entry', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

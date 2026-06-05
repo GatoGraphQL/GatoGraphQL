@@ -30,10 +30,10 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('There is no user with ID \'%s\'', 'user-mutations'),
-            self::E2 => $this->__('There is no user with username \'%s\'', 'user-mutations'),
-            self::E3 => $this->__('There is no user with email \'%s\'', 'user-mutations'),
-            self::E4 => $this->__('The logged-in user doesn\'t have the ability to edit user with ID \'%s\'', 'user-mutations'),
+            self::E1 => $this->__('There is no user with ID \'%s\'', 'gatographql'),
+            self::E2 => $this->__('There is no user with username \'%s\'', 'gatographql'),
+            self::E3 => $this->__('There is no user with email \'%s\'', 'gatographql'),
+            self::E4 => $this->__('The logged-in user doesn\'t have the ability to edit user with ID \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

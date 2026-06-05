@@ -13,6 +13,6 @@ class RootCreatePostMutationPayloadObjectTypeResolver extends AbstractPostMutati
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of creating a post', 'post-mutations');
+        return $this->__('Payload of creating a post', 'gatographql');
     }
 }

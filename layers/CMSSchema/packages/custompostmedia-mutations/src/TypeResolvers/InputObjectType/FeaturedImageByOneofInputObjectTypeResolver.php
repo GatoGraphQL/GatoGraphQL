@@ -17,14 +17,14 @@ class FeaturedImageByOneofInputObjectTypeResolver extends MediaItemByOneofInputO
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to specify the custom post\'s featured image', 'custompostmedia-mutations');
+        return $this->__('Oneof input to specify the custom post\'s featured image', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            InputProperties::ID => $this->__('Provide featured image by ID', 'custompostmedia-mutations'),
-            InputProperties::SLUG => $this->__('Provide featured image by slug', 'custompostmedia-mutations'),
+            InputProperties::ID => $this->__('Provide featured image by ID', 'gatographql'),
+            InputProperties::SLUG => $this->__('Provide featured image by slug', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

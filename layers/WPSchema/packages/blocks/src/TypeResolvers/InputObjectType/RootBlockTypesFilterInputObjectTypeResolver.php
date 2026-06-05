@@ -107,7 +107,7 @@ class RootBlockTypesFilterInputObjectTypeResolver extends AbstractQueryableInput
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter the registered block types', 'blocks');
+        return $this->__('Input to filter the registered block types', 'gatographql');
     }
 
     /**
@@ -127,11 +127,11 @@ class RootBlockTypesFilterInputObjectTypeResolver extends AbstractQueryableInput
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'names' => $this->__('Limit results to block types with these names (e.g. "core/paragraph")', 'blocks'),
-            'excludeNames' => $this->__('Exclude block types with these names', 'blocks'),
-            'nameSearch' => $this->__('Filter block types whose name contains the given substring', 'blocks'),
-            'supports' => $this->__('Filter by `supports` configuration. e.g. `{ autoRegister: true }` returns PHP-only blocks (WP 7.0+)', 'blocks'),
-            'hasRenderCallback' => $this->__('Filter blocks that do (or do not) have a registered `render_callback`', 'blocks'),
+            'names' => $this->__('Limit results to block types with these names (e.g. "core/paragraph")', 'gatographql'),
+            'excludeNames' => $this->__('Exclude block types with these names', 'gatographql'),
+            'nameSearch' => $this->__('Filter block types whose name contains the given substring', 'gatographql'),
+            'supports' => $this->__('Filter by `supports` configuration. e.g. `{ autoRegister: true }` returns PHP-only blocks (WP 7.0+)', 'gatographql'),
+            'hasRenderCallback' => $this->__('Filter blocks that do (or do not) have a registered `render_callback`', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

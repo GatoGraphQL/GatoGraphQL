@@ -29,7 +29,7 @@ class InputValueObjectTypeResolver extends AbstractIntrospectionObjectTypeResolv
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of an input object in GraphQL', 'graphql-server');
+        return $this->__('Representation of an input object in GraphQL', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

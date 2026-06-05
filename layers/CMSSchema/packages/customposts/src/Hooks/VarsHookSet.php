@@ -47,7 +47,7 @@ class VarsHookSet extends AbstractHookSet
                 );
                 if (in_array(ModelInstanceComponentTypes::SINGLE_CUSTOMPOST, $component_types)) {
                     $customPostType = App::getState(['routing', 'queried-object-post-type']);
-                    $elements[] = $this->__('post type:', 'pop-engine') . $customPostType;
+                    $elements[] = $this->__('post type:', 'gatographql') . $customPostType;
                 }
                 break;
         }

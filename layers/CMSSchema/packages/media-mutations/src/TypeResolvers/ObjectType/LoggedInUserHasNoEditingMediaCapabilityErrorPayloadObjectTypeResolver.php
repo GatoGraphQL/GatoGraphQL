@@ -29,7 +29,7 @@ class LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolver exte
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user cannot edit media items"', 'polylang-mutations');
+        return $this->__('Error payload for: "The user cannot edit media items"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

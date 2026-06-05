@@ -151,11 +151,11 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'status' => $this->__('Custom post status', 'customposts'),
-            'search' => $this->__('Search for custom posts containing the given string', 'customposts'),
-            'slugs' => $this->__('Search for custom posts with the given slugs', 'customposts'),
-            'dateQuery' => $this->__('Filter custom posts based on date', 'customposts'),
-            'customPostTypes' => $this->__('Filter custom posts of given types', 'customposts'),
+            'status' => $this->__('Custom post status', 'gatographql'),
+            'search' => $this->__('Search for custom posts containing the given string', 'gatographql'),
+            'slugs' => $this->__('Search for custom posts with the given slugs', 'gatographql'),
+            'dateQuery' => $this->__('Filter custom posts based on date', 'gatographql'),
+            'customPostTypes' => $this->__('Filter custom posts of given types', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

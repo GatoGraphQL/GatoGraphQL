@@ -60,7 +60,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         if ($oneofInputObjectFormDataSize !== 1) {
             throw new QueryResolutionException(
                 sprintf(
-                    $this->__('Only and exactly 1 input field must be provided to the OneofMutationResolver, but %s were provided', 'component-model'),
+                    $this->__('Only and exactly 1 input field must be provided to the OneofMutationResolver, but %s were provided', 'gatographql'),
                     $oneofInputObjectFormDataSize
                 )
             );
@@ -78,7 +78,7 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         if ($inputFieldMutationResolver === null) {
             throw new QueryResolutionException(
                 sprintf(
-                    $this->__('There is no MutationResolver for input field with name \'%s\'', 'component-model'),
+                    $this->__('There is no MutationResolver for input field with name \'%s\'', 'gatographql'),
                     $inputFieldName
                 )
             );
@@ -101,10 +101,10 @@ abstract class AbstractOneofMutationResolver extends AbstractMutationResolver
         if ($formDataSize !== 1) {
             throw new QueryResolutionException(
                 sprintf(
-                    $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'component-model'),
+                    $this->__('The OneofMutationResolver expects only 1 argument is passed to the field executing the mutation, but %s were provided: \'%s\'', 'gatographql'),
                     $formDataSize,
                     implode(
-                        $this->__(', ', 'component-model'),
+                        $this->__(', ', 'gatographql'),
                         $propertyNames
                     )
                 )

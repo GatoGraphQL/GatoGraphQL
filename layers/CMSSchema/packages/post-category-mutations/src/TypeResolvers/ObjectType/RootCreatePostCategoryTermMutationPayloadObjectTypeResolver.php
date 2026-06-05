@@ -13,6 +13,6 @@ class RootCreatePostCategoryTermMutationPayloadObjectTypeResolver extends Abstra
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of creating a post category term', 'category-mutations');
+        return $this->__('Payload of creating a post category term', 'gatographql');
     }
 }

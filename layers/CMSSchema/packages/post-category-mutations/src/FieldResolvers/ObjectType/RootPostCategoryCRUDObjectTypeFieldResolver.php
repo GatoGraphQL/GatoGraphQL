@@ -305,15 +305,15 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createPostCategory' => $this->__('Create a post category', 'category-mutations'),
-            'createPostCategories' => $this->__('Create post categories', 'category-mutations'),
-            'updatePostCategory' => $this->__('Update a post category', 'category-mutations'),
-            'updatePostCategories' => $this->__('Update post categories', 'category-mutations'),
-            'deletePostCategory' => $this->__('Delete a post category', 'category-mutations'),
-            'deletePostCategories' => $this->__('Delete post categories', 'category-mutations'),
-            'createPostCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createPostCategory` mutation', 'category-mutations'),
-            'updatePostCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updatePostCategory` mutation', 'category-mutations'),
-            'deletePostCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deletePostCategory` mutation', 'category-mutations'),
+            'createPostCategory' => $this->__('Create a post category', 'gatographql'),
+            'createPostCategories' => $this->__('Create post categories', 'gatographql'),
+            'updatePostCategory' => $this->__('Update a post category', 'gatographql'),
+            'updatePostCategories' => $this->__('Update post categories', 'gatographql'),
+            'deletePostCategory' => $this->__('Delete a post category', 'gatographql'),
+            'deletePostCategories' => $this->__('Delete post categories', 'gatographql'),
+            'createPostCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createPostCategory` mutation', 'gatographql'),
+            'updatePostCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updatePostCategory` mutation', 'gatographql'),
+            'deletePostCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deletePostCategory` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

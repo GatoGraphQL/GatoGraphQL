@@ -44,7 +44,7 @@ class CommentAsOneofInputObjectTypeResolver extends AbstractOneofInputObjectType
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::HTML => $this->__('Use HTML as content for the comment', 'comment-mutations'),
+            MutationInputProperties::HTML => $this->__('Use HTML as content for the comment', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

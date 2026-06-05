@@ -130,14 +130,14 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     {
         return match ($fieldName) {
             'addComment' => $this->getAddCommentFieldDescription(),
-            'addComments' => $this->__('Add comments to the custom post', 'comment-mutations'),
+            'addComments' => $this->__('Add comments to the custom post', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
     public function getAddCommentFieldDescription(): string
     {
-        return $this->__('Add a comment to the custom post', 'comment-mutations');
+        return $this->__('Add a comment to the custom post', 'gatographql');
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int

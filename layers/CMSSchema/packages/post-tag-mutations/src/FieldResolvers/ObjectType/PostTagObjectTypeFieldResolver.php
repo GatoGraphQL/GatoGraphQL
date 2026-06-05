@@ -129,8 +129,8 @@ class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'update' => $this->__('Update the post tag', 'tag-mutations'),
-            'delete' => $this->__('Delete the post tag', 'tag-mutations'),
+            'update' => $this->__('Update the post tag', 'gatographql'),
+            'delete' => $this->__('Delete the post tag', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

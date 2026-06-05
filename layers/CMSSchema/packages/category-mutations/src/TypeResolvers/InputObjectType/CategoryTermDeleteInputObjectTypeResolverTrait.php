@@ -11,7 +11,7 @@ trait CategoryTermDeleteInputObjectTypeResolverTrait
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete the meta for a category term', 'category-mutations');
+        return $this->__('Input to delete the meta for a category term', 'gatographql');
     }
 
     protected function addIDInputField(): bool

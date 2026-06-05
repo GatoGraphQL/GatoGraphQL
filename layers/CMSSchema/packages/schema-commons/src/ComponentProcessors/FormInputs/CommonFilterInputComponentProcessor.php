@@ -351,27 +351,27 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ((string)$component->name) {
-            self::COMPONENT_FILTERINPUT_SORT => $this->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_LIMIT => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_OFFSET => $this->__('Offset the results by how many positions', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_SEARCH => $this->__('Search for elements containing the given string', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_IDS => $this->__('Limit results to elements with the given IDs', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_ID => $this->__('Fetch the element with the given ID', 'schema-commons'),
+            self::COMPONENT_FILTERINPUT_SORT => $this->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_LIMIT => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_OFFSET => $this->__('Offset the results by how many positions', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_SEARCH => $this->__('Search for elements containing the given string', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_IDS => $this->__('Limit results to elements with the given IDs', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_ID => $this->__('Fetch the element with the given ID', 'gatographql'),
             self::COMPONENT_FILTERINPUT_COMMASEPARATED_IDS => sprintf(
-                $this->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'schema-commons'),
+                $this->__('Limit results to elements with the given ID, or IDs (separated by \'%s\')', 'gatographql'),
                 Param::VALUE_SEPARATOR
             ),
-            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS => $this->__('Exclude elements with the given IDs', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_PARENT_IDS => $this->__('Limit results to elements with the given parent IDs. \'0\' means \'no parent\'', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_PARENT_ID => $this->__('Limit results to elements with the given parent ID. \'0\' means \'no parent\'', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->__('Exclude elements with the given parent IDs', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_SLUGS => $this->__('Limit results to elements with the given slug', 'schema-commons'),
-            self::COMPONENT_FILTERINPUT_SLUGS => $this->__('Limit results to elements with the given slug', 'schema-commons'),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_IDS => $this->__('Exclude elements with the given IDs', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_PARENT_IDS => $this->__('Limit results to elements with the given parent IDs. \'0\' means \'no parent\'', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_PARENT_ID => $this->__('Limit results to elements with the given parent ID. \'0\' means \'no parent\'', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_PARENT_IDS => $this->__('Exclude elements with the given parent IDs', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_SLUGS => $this->__('Limit results to elements with the given slug', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_SLUGS => $this->__('Limit results to elements with the given slug', 'gatographql'),
             self::COMPONENT_FILTERINPUT_DATEFORMAT => sprintf(
-                $this->__('Date format, as defined in %s', 'schema-commons'),
+                $this->__('Date format, as defined in %s', 'gatographql'),
                 'https://www.php.net/manual/en/function.date.php'
             ),
-            self::COMPONENT_FILTERINPUT_GMT => $this->__('Whether to retrieve the date as UTC or GMT timezone', 'schema-commons'),
+            self::COMPONENT_FILTERINPUT_GMT => $this->__('Whether to retrieve the date as UTC or GMT timezone', 'gatographql'),
             default => null,
         };
     }

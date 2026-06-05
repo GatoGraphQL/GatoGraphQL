@@ -23,7 +23,7 @@ class PositiveIntScalarTypeResolver extends AbstractIntScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('A positive integer or 0.', 'extended-schema-commons');
+        return $this->__('A positive integer or 0.', 'gatographql');
     }
 
     public function coerceValue(

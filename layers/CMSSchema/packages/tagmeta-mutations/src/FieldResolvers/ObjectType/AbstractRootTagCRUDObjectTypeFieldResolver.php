@@ -307,18 +307,18 @@ abstract class AbstractRootTagCRUDObjectTypeFieldResolver extends AbstractObject
     {
         $tagEntityName = $this->getTagEntityName();
         return match ($fieldName) {
-            'add' . $tagEntityName . 'Meta' => $this->__('Add meta to tag', 'tag-mutations'),
-            'add' . $tagEntityName . 'Metas' => $this->__('Add meta to tags', 'tag-mutations'),
-            'update' . $tagEntityName . 'Meta' => $this->__('Update meta from tag', 'tag-mutations'),
-            'update' . $tagEntityName . 'Metas' => $this->__('Update meta from tags', 'tag-mutations'),
-            'delete' . $tagEntityName . 'Meta' => $this->__('Delete meta from tag', 'tag-mutations'),
-            'delete' . $tagEntityName . 'Metas' => $this->__('Delete meta from tags', 'tag-mutations'),
-            'set' . $tagEntityName . 'Meta' => $this->__('Set meta on tag', 'tag-mutations'),
-            'set' . $tagEntityName . 'Metas' => $this->__('Set meta on tags', 'tag-mutations'),
-            'add' . $tagEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addTagMeta` mutation', 'tag-mutations'),
-            'update' . $tagEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateTagMeta` mutation', 'tag-mutations'),
-            'delete' . $tagEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteTagMeta` mutation', 'tag-mutations'),
-            'set' . $tagEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setTagMeta` mutation', 'tag-mutations'),
+            'add' . $tagEntityName . 'Meta' => $this->__('Add meta to tag', 'gatographql'),
+            'add' . $tagEntityName . 'Metas' => $this->__('Add meta to tags', 'gatographql'),
+            'update' . $tagEntityName . 'Meta' => $this->__('Update meta from tag', 'gatographql'),
+            'update' . $tagEntityName . 'Metas' => $this->__('Update meta from tags', 'gatographql'),
+            'delete' . $tagEntityName . 'Meta' => $this->__('Delete meta from tag', 'gatographql'),
+            'delete' . $tagEntityName . 'Metas' => $this->__('Delete meta from tags', 'gatographql'),
+            'set' . $tagEntityName . 'Meta' => $this->__('Set meta on tag', 'gatographql'),
+            'set' . $tagEntityName . 'Metas' => $this->__('Set meta on tags', 'gatographql'),
+            'add' . $tagEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addTagMeta` mutation', 'gatographql'),
+            'update' . $tagEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateTagMeta` mutation', 'gatographql'),
+            'delete' . $tagEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteTagMeta` mutation', 'gatographql'),
+            'set' . $tagEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setTagMeta` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

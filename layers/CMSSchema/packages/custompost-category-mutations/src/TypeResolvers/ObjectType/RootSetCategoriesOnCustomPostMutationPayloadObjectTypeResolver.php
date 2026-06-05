@@ -13,6 +13,6 @@ class RootSetCategoriesOnCustomPostMutationPayloadObjectTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of setting categories on a custom post', 'postcategory-mutations');
+        return $this->__('Payload of setting categories on a custom post', 'gatographql');
     }
 }

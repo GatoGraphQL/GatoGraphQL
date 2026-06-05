@@ -13,6 +13,6 @@ class RootReplyCommentMutationPayloadObjectTypeResolver extends AbstractCommentM
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of replying to a comment', 'comment-mutations');
+        return $this->__('Payload of replying to a comment', 'gatographql');
     }
 }

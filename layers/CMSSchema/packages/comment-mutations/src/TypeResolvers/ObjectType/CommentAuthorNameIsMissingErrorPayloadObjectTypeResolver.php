@@ -29,7 +29,7 @@ class CommentAuthorNameIsMissingErrorPayloadObjectTypeResolver extends AbstractE
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The comment\'s author name is missing"', 'comment-mutations');
+        return $this->__('Error payload for: "The comment\'s author name is missing"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

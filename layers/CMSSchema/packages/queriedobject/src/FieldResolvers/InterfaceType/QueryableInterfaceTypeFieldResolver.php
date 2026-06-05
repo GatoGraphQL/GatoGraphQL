@@ -94,9 +94,9 @@ class QueryableInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldReso
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->__('URL to query the object', 'queriedobject'),
-            'urlPath' => $this->__('URL path to query the object', 'queriedobject'),
-            'slug' => $this->__('URL\'s slug', 'queriedobject'),
+            'url' => $this->__('URL to query the object', 'gatographql'),
+            'urlPath' => $this->__('URL path to query the object', 'gatographql'),
+            'slug' => $this->__('URL\'s slug', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

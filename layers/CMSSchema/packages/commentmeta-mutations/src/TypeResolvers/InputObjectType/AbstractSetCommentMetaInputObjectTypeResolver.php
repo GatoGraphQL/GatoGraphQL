@@ -11,13 +11,13 @@ abstract class AbstractSetCommentMetaInputObjectTypeResolver extends AbstractSet
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to set entries on a comment', 'commentmeta-mutations');
+        return $this->__('Input to set entries on a comment', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the comment', 'commentmeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the comment', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

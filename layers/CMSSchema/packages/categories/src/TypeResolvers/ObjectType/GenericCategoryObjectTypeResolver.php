@@ -44,7 +44,7 @@ class GenericCategoryObjectTypeResolver extends AbstractCategoryObjectTypeResolv
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('A category that does not have its own type in the schema', 'customposts');
+        return $this->__('A category that does not have its own type in the schema', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

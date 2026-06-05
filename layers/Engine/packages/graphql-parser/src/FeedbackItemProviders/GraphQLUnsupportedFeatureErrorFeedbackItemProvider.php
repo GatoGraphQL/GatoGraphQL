@@ -35,10 +35,10 @@ class GraphQLUnsupportedFeatureErrorFeedbackItemProvider extends AbstractFeedbac
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E_1 => $this->__('Subscriptions are currently not supported', 'graphql-server'),
-            self::E_2 => $this->__('Fragment Definition Directives are currently not supported', 'graphql-server'),
-            self::E_3 => $this->__('Variable Definition Directives are currently not supported', 'graphql-server'),
-            self::E_4 => $this->__('Only up to 2 levels of List modifiers are supported (eg: `[[String]]`)', 'graphql-server'),
+            self::E_1 => $this->__('Subscriptions are currently not supported', 'gatographql'),
+            self::E_2 => $this->__('Fragment Definition Directives are currently not supported', 'gatographql'),
+            self::E_3 => $this->__('Variable Definition Directives are currently not supported', 'gatographql'),
+            self::E_4 => $this->__('Only up to 2 levels of List modifiers are supported (eg: `[[String]]`)', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

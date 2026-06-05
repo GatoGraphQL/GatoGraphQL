@@ -61,7 +61,7 @@ abstract class AbstractAddCategoryFilterInputObjectTypeHookSet extends AbstractH
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'categories' => $this->__('Filter by categories', 'categories'),
+            'categories' => $this->__('Filter by categories', 'gatographql'),
             default => $inputFieldDescription,
         };
     }

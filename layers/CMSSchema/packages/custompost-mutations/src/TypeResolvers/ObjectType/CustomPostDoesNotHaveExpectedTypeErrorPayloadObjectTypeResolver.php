@@ -29,7 +29,7 @@ class CustomPostDoesNotHaveExpectedTypeErrorPayloadObjectTypeResolver extends Ab
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested custom post does not have the expected type"', 'customposts');
+        return $this->__('Error payload for: "The requested custom post does not have the expected type"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

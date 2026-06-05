@@ -59,7 +59,7 @@ class CommentTypeMutationAPI extends AbstractBasicService implements CommentType
         $commentID = \wp_insert_comment($comment_data);
         if ($commentID === false) {
             throw new CommentCRUDMutationException(
-                $this->__('Could not create the comment', 'comment-mutations-wp')
+                $this->__('Could not create the comment', 'gatographql')
             );
         }
         return $commentID;

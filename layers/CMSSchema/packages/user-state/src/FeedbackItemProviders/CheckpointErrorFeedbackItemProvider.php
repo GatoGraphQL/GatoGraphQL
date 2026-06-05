@@ -26,8 +26,8 @@ class CheckpointErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The user is not logged-in', 'user-state'),
-            self::E2 => $this->__('The user is logged-in', 'user-state'),
+            self::E1 => $this->__('The user is not logged-in', 'gatographql'),
+            self::E2 => $this->__('The user is logged-in', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

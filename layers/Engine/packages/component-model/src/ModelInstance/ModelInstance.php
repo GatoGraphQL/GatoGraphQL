@@ -64,7 +64,7 @@ class ModelInstance extends AbstractBasicService implements ModelInstanceInterfa
             foreach ($definitionResolvers as $group => $resolverInstance) {
                 $resolvers[] = $group . '-' . get_class($resolverInstance);
             }
-            $elements[] = $this->__('definition resolvers:', 'component-model') . implode(',', $resolvers);
+            $elements[] = $this->__('definition resolvers:', 'gatographql') . implode(',', $resolvers);
         }
 
         return $elements;
@@ -80,18 +80,18 @@ class ModelInstance extends AbstractBasicService implements ModelInstanceInterfa
         // There will always be a nature. Add it.
         $nature = App::getState('nature');
         $route = App::getState('route');
-        $elements[] = $this->__('nature:', 'component-model') . $nature;
-        $elements[] = $this->__('route:', 'component-model') . $route;
+        $elements[] = $this->__('nature:', 'gatographql') . $nature;
+        $elements[] = $this->__('route:', 'gatographql') . $route;
 
         // Add the version, because otherwise there may be PHP errors happening from stale configuration that is not deleted, and still served, after a new version is deployed
-        $elements[] = $this->__('version:', 'component-model') . $this->getApplicationInfo()->getVersion();
+        $elements[] = $this->__('version:', 'gatographql') . $this->getApplicationInfo()->getVersion();
 
         // Other properties
         if ($actions = App::getState('actions')) {
-            $elements[] = $this->__('actions:', 'component-model') . implode(';', $actions);
+            $elements[] = $this->__('actions:', 'gatographql') . implode(';', $actions);
         }
         if ($componentFilter = App::getState('componentFilter')) {
-            $elements[] = $this->__('component filter:', 'component-model') . $componentFilter;
+            $elements[] = $this->__('component filter:', 'gatographql') . $componentFilter;
         }
 
         // Can the configuration change when doing a POST or GET?
@@ -101,21 +101,21 @@ class ModelInstance extends AbstractBasicService implements ModelInstanceInterfa
                 false
             )
         ) {
-            $elements[] = $this->__('operation:', 'component-model') . ('POST' === App::server('REQUEST_METHOD') ? 'post' : 'get');
+            $elements[] = $this->__('operation:', 'gatographql') . ('POST' === App::server('REQUEST_METHOD') ? 'post' : 'get');
         }
         if ($mangled = App::getState('mangled')) {
             // By default it is mangled. To make it non-mangled, url must have param "mangled=none",
             // so only in these exceptional cases the identifier will add this parameter
-            $elements[] = $this->__('mangled:', 'component-model') . $mangled;
+            $elements[] = $this->__('mangled:', 'gatographql') . $mangled;
         }
         if ($versionConstraint = App::getState('version-constraint')) {
-            $elements[] = $this->__('version-constraint:', 'component-model') . $versionConstraint;
+            $elements[] = $this->__('version-constraint:', 'gatographql') . $versionConstraint;
         }
         if ($fieldVersionConstraints = App::getState('field-version-constraints')) {
-            $elements[] = $this->__('field-version-constraints:', 'component-model') . json_encode($fieldVersionConstraints);
+            $elements[] = $this->__('field-version-constraints:', 'gatographql') . json_encode($fieldVersionConstraints);
         }
         if ($directiveVersionConstraints = App::getState('directive-version-constraints')) {
-            $elements[] = $this->__('directive-version-constraints:', 'component-model') . json_encode($directiveVersionConstraints);
+            $elements[] = $this->__('directive-version-constraints:', 'gatographql') . json_encode($directiveVersionConstraints);
         }
 
         // Allow for plug-ins to add their own vars. Eg: URE source parameter

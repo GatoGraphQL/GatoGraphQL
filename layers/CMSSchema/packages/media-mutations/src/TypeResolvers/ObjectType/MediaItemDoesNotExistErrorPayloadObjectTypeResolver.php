@@ -29,7 +29,7 @@ class MediaItemDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorP
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested media item does not exist"', 'custompostmedia-mutations');
+        return $this->__('Error payload for: "The requested media item does not exist"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

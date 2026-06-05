@@ -38,7 +38,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
     {
         return App::applyFilters(
             self::HOOK_DESCRIPTION,
-            $this->__('Root type, starting from which the query is executed', 'engine')
+            $this->__('Root type, starting from which the query is executed', 'gatographql')
         );
     }
 
