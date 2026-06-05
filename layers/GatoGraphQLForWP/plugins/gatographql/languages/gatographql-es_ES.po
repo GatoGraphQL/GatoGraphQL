@@ -6415,15 +6415,21 @@ msgstr "Esta URL ha caducado o no es válida. Por favor, <a href=\"%s\">haz clic
 msgid "Show details"
 msgstr "Mostrar detalles"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:168
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:175
 #, php-format
 msgid "File '%s' does not exist"
 msgstr "El archivo '%s' no existe"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:179
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:190
 #, php-format
 msgid "File '%s' is corrupted"
 msgstr "El archivo '%s' está corrupto"
+
+#. translators: %s: link to this documentation on the localized website
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:228
+#, php-format
+msgid "This documentation is in English. You can read it in your language at %s."
+msgstr "Esta documentación está en inglés. Puedes leerla en tu idioma en %s."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/FeedbackItemProviders/ErrorFeedbackItemProvider.php:27
 #, php-format
