@@ -739,8 +739,14 @@
         "propagate-monorepo": "monorepo-builder propagate --config=config/monorepo-builder/propagate.php --ansi",
         "validate-monorepo": "monorepo-builder validate --config=config/monorepo-builder/validate.php --ansi",
         "i18n-extract": "bash ci/i18n/extract.sh",
-        "i18n-translate": "bash ci/i18n/translate.sh",
-        "i18n-compile": "bash ci/i18n/compile.sh",
+        "i18n-translate": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash ci/i18n/translate.sh"
+        ],
+        "i18n-compile": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash ci/i18n/compile.sh"
+        ],
         "i18n-check": "bash ci/i18n/check.sh",
         "release-patch": [
             "@i18n-check",

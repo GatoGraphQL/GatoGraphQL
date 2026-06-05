@@ -58,29 +58,36 @@ function localeToLanguageName(string $locale): string
 /**
  * Call `claude -p` headlessly, piping the prompt via stdin, returning stdout.
  */
-function callClaude(string $prompt, string $model): string
+function callClaude(string $prompt, string $model, int $maxAttempts = 4): string
 {
-    $descriptors = [
-        0 => ['pipe', 'r'],
-        1 => ['pipe', 'w'],
-        2 => ['pipe', 'w'],
-    ];
-    $cmd = sprintf('claude -p --model %s --output-format text', escapeshellarg($model));
-    $process = proc_open($cmd, $descriptors, $pipes);
-    if (!is_resource($process)) {
-        throw new RuntimeException('Failed to start claude');
+    $lastError = 'unknown error';
+    for ($attempt = 1; $attempt <= $maxAttempts; $attempt++) {
+        $descriptors = [
+            0 => ['pipe', 'r'],
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ];
+        $cmd = sprintf('claude -p --model %s --output-format text', escapeshellarg($model));
+        $process = proc_open($cmd, $descriptors, $pipes);
+        if (!is_resource($process)) {
+            $lastError = 'failed to start claude';
+            sleep($attempt * 3);
+            continue;
+        }
+        fwrite($pipes[0], $prompt);
+        fclose($pipes[0]);
+        $stdout = stream_get_contents($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        $exit = proc_close($process);
+        if ($exit === 0 && trim((string) $stdout) !== '') {
+            return (string) $stdout;
+        }
+        $lastError = "exit {$exit}: " . trim((string) $stderr);
+        sleep($attempt * 5); // backoff before retrying a transient failure
     }
-    fwrite($pipes[0], $prompt);
-    fclose($pipes[0]);
-    $stdout = stream_get_contents($pipes[1]);
-    $stderr = stream_get_contents($pipes[2]);
-    fclose($pipes[1]);
-    fclose($pipes[2]);
-    $exit = proc_close($process);
-    if ($exit !== 0) {
-        throw new RuntimeException("claude exited {$exit}: {$stderr}");
-    }
-    return (string) $stdout;
+    throw new RuntimeException("claude failed after {$maxAttempts} attempts: {$lastError}");
 }
 
 /** Extract the first top-level JSON object from arbitrary model output. */
@@ -119,6 +126,22 @@ function buildPrompt(array $batch, string $language, string $locale): string
         PROMPT;
 }
 
+function buildPluralPrompt(array $batch, string $language, string $locale, int $nplurals): string
+{
+    $input = json_encode($batch, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+    return <<<PROMPT
+        You are localizing the "Gato GraphQL" WordPress plugin (a GraphQL server for WordPress) into {$language} (locale {$locale}).
+
+        Each entry below has an English "singular" and "plural" form. Translate them into {$language}, producing exactly {$nplurals} plural form(s) per entry, in the order this locale's gettext Plural-Forms expects.
+
+        Return ONLY a JSON object with the same numeric keys, each mapping to an array of {$nplurals} translated string(s). No commentary, no markdown, no code fences.
+
+        Rules: preserve every placeholder verbatim (%s, %d, %1\$s, ...), HTML tags/entities, the contents of <code>…</code>, and leading/trailing whitespace.
+
+        {$input}
+        PROMPT;
+}
+
 // --- main ---------------------------------------------------------------
 
 $opts = parseArgs($argv);
@@ -141,15 +164,20 @@ $translations = Translations::fromPoFile($poFile);
 
 /** @var \Gettext\Translation[] $pending */
 $pending = [];
+/** @var \Gettext\Translation[] $pendingPlural */
+$pendingPlural = [];
 foreach ($translations as $translation) {
     if ($translation->getOriginal() === '') {
         continue; // header
     }
+    if ($translation->getPlural() !== '') {
+        if (!$translation->hasTranslation()) {
+            $pendingPlural[] = $translation;
+        }
+        continue;
+    }
     if ($translation->hasTranslation()) {
         continue; // already translated — never re-send (DRY)
-    }
-    if ($translation->getPlural() !== '') {
-        continue; // plurals handled in a later pass; skip for now
     }
     $pending[] = $translation;
 }
@@ -159,7 +187,11 @@ if ($limit > 0) {
     $pending = array_slice($pending, 0, $limit);
 }
 
-if ($pending === []) {
+// nplurals for this locale (from the PO's Plural-Forms header; default 2)
+$pluralForms = $translations->getPluralForms();
+$nplurals = is_array($pluralForms) && isset($pluralForms[0]) ? (int) $pluralForms[0] : 2;
+
+if ($pending === [] && $pendingPlural === []) {
     echo "Nothing to translate in {$poFile} ({$locale}).\n";
     exit(0);
 }
@@ -179,7 +211,12 @@ foreach (array_chunk($pending, $batchSize) as $chunkIndex => $chunk) {
     foreach ($chunk as $i => $translation) {
         $batch[(string) ($i + 1)] = $translation->getOriginal();
     }
-    $response = callClaude(buildPrompt($batch, $language, $locale), $model);
+    try {
+        $response = callClaude(buildPrompt($batch, $language, $locale), $model);
+    } catch (\RuntimeException $e) {
+        fwrite(STDERR, "  ! batch {$chunkIndex}: {$e->getMessage()}; skipping (retry next run)\n");
+        continue;
+    }
     $result = extractJsonObject($response);
     if ($result === null) {
         fwrite(STDERR, "  ! batch {$chunkIndex}: could not parse Claude output; skipping\n");
@@ -195,6 +232,43 @@ foreach (array_chunk($pending, $batchSize) as $chunkIndex => $chunk) {
     // persist incrementally so a long run can be resumed
     $translations->toPoFile($poFile);
     printf("  batch %d: %d translated (%d total)\n", $chunkIndex + 1, count($chunk), $done);
+}
+
+// plural entries (skipped by --limit subsets, since they are few)
+if ($limit === 0) {
+    foreach (array_chunk($pendingPlural, $batchSize) as $chunkIndex => $chunk) {
+        $batch = [];
+        foreach ($chunk as $i => $translation) {
+            $batch[(string) ($i + 1)] = [
+                'singular' => $translation->getOriginal(),
+                'plural' => $translation->getPlural(),
+            ];
+        }
+        try {
+            $response = callClaude(buildPluralPrompt($batch, $language, $locale, $nplurals), $model);
+        } catch (\RuntimeException $e) {
+            fwrite(STDERR, "  ! plural batch {$chunkIndex}: {$e->getMessage()}; skipping (retry next run)\n");
+            continue;
+        }
+        $result = extractJsonObject($response);
+        if ($result === null) {
+            fwrite(STDERR, "  ! plural batch {$chunkIndex}: could not parse Claude output; skipping\n");
+            continue;
+        }
+        foreach ($chunk as $i => $translation) {
+            $key = (string) ($i + 1);
+            if (isset($result[$key]) && is_array($result[$key]) && count($result[$key]) >= $nplurals) {
+                $forms = array_values(array_map('strval', $result[$key]));
+                $translation->setTranslation($forms[0]);
+                if ($nplurals > 1) {
+                    $translation->setPluralTranslations(array_slice($forms, 1, $nplurals - 1));
+                }
+                $done++;
+            }
+        }
+        $translations->toPoFile($poFile);
+        printf("  plural batch %d: %d entries (%d total)\n", $chunkIndex + 1, count($chunk), $done);
+    }
 }
 
 printf("Done: %d entries translated in %s\n", $done, basename($poFile));
