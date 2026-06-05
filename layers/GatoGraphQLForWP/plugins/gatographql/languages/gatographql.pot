@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-05T06:25:19+00:00\n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: gatographql\n"
@@ -9475,7 +9475,7 @@ msgstr ""
 msgid "Bundle Extensions"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Scripts/AbstractScript.php:195
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Scripts/AbstractScript.php:196
 #, php-format
 msgid "You need to run `npm start` or `npm run build` for the \"%s\" script first."
 msgstr ""

@@ -38,4 +38,6 @@ while IFS= read -r locale; do
     echo "    $po"
 done < "$LOCALES_FILE"
 
+bash ci/i18n/normalize-dates.sh "$POT" "$LANG_DIR"/gatographql-*.po
+
 echo "==> Base extraction done."

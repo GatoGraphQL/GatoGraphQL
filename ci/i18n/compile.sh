@@ -24,4 +24,6 @@ while IFS= read -r locale; do
     echo "  gatographql-$locale.mo"
 done < "$LOCALES_FILE"
 
+bash ci/i18n/normalize-dates.sh "$LANG_DIR"/gatographql-*.l10n.php 2>/dev/null || true
+
 echo "==> Base compile done."
