@@ -213,6 +213,11 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
             $script_asset['version'],
             true
         );
+        \wp_set_script_translations(
+            $scriptName,
+            'gatographql',
+            $this->getPluginDir() . '/languages'
+        );
         \wp_enqueue_script($scriptName);
 
         /**
