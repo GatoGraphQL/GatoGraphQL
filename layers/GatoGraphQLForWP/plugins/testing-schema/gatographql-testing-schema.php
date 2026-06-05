@@ -27,7 +27,7 @@ if (!defined('ABSPATH')) {
     if (\is_readable($mofile)) {
         \load_textdomain('gatographql', $mofile);
     }
-});
+}, \PHP_INT_MIN);
 
 /**
  * Create and set-up the extension
