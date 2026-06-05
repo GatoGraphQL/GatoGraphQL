@@ -24,14 +24,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Load translations
- * @todo Re-enable when an actual translation (*.po/*.mo) is provided
- * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2051
- */
-// add_action('init', function (): void {
-//     load_plugin_textdomain('gatographql', false, plugin_basename(__FILE__) . '/languages');
-// });
+\add_action('init', function (): void {
+    $mofile = __DIR__ . '/languages/' . \basename(__FILE__, '.php') . '-' . \determine_locale() . '.mo';
+    if (\is_readable($mofile)) {
+        \load_textdomain('gatographql', $mofile);
+    }
+});
 
 /**
  * Plugin's name and version.
