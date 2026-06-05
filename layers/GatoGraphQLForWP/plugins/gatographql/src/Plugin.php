@@ -259,6 +259,30 @@ class Plugin extends AbstractMainPlugin
             'enqueue_block_editor_assets',
             $this->enqueueImageWidthsAssets(...)
         );
+
+        /**
+         * Expose the (configurable) Gato GraphQL website URL to JS, so the
+         * documentation modals can link to the localized website when a doc is
+         * shown in English to a non-English user.
+         */
+        add_action(
+            'enqueue_block_editor_assets',
+            $this->enqueueDocsWebsiteURLData(...)
+        );
+    }
+
+    protected function enqueueDocsWebsiteURLData(): void
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        wp_add_inline_script(
+            'wp-blocks',
+            sprintf(
+                'window.gatoGraphQLDocsWebsiteURL = %s;',
+                (string) wp_json_encode($moduleConfiguration->getGatoGraphQLWebsiteURL())
+            ),
+            'before'
+        );
     }
 
     public function getPluginDomainURL(): string

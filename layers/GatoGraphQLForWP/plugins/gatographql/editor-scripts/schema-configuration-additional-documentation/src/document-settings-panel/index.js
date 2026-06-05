@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 
 /**
@@ -61,7 +61,7 @@ const DocumentSettingsPanel = () => (
                     <div>
                             <MarkdownInfoModalButton
                             text={ entry[0] }
-                            title={ __(`Documentation for: "${ entry[0] }"`, 'gatographql') }
+                            title={ sprintf( __( 'Documentation for: "%s"', 'gatographql' ), entry[0] ) }
                             pageFilename={ entry[1] }
                             getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
                             isSmall={ false }

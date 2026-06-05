@@ -6413,18 +6413,18 @@ msgstr ""
 msgid "Show details"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:175
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:177
 #, php-format
 msgid "File '%s' does not exist"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:190
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:192
 #, php-format
 msgid "File '%s' is corrupted"
 msgstr ""
 
 #. translators: %s: link to this documentation on the localized website
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:228
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:232
 #, php-format
 msgid "This documentation is in English. You can read it in your language at %s."
 msgstr ""
@@ -8610,7 +8610,7 @@ msgstr ""
 msgid "Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</code>. <strong><a href=\"%s\" class=\"%s\">Check out what's new</a></strong> | <a href=\"%s\">Disable this admin notice in the Settings</a>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:289
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:313
 msgid "Go PRO"
 msgstr ""
 
