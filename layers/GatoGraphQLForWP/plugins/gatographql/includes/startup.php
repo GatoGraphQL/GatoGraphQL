@@ -9,7 +9,6 @@ use PoP\Root\Environment as RootEnvironment;
 
 use function wp_convert_hr_to_bytes;
 use function add_action;
-use function add_filter;
 
 class Startup {
     /**
@@ -134,10 +133,3 @@ class Startup {
         return $variants[0] ?? $file;
     }
 }
-
-/**
- * Resolve JS translation packs with the same-base-language locale fallback for the
- * 'gatographql' domain. Registered once here (this file is loaded by the main plugin
- * and by self-contained plugins that bundle it), so extensions need not register it.
- */
-add_filter('load_script_translation_file', [Startup::class, 'resolveScriptTranslationFile'], 10, 3);

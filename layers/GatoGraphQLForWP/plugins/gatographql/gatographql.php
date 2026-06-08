@@ -57,6 +57,9 @@ if (!Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
 }
 
 add_action('init', function (): void {
+    // Global JS-pack resolver for the 'gatographql' domain — registered once by the
+    // main plugin; covers every extension's scripts (they all share the domain).
+    add_filter('load_script_translation_file', [Startup::class, 'resolveScriptTranslationFile'], 10, 3);
     Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
 }, PHP_INT_MIN);
 
