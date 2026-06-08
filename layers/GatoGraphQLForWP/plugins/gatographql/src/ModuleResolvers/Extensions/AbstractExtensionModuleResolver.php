@@ -109,7 +109,7 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
      * The extension's canonical website URL, so the English-doc notice can link
      * straight to this extension's page on the localized website.
      */
-    protected function getDocumentationWebsiteURL(string $module): string
+    protected function getDocumentationWebsiteURL(string $module): ?string
     {
         return $this->getWebsiteURL($module);
     }
