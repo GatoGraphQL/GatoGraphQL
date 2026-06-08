@@ -227,6 +227,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 18.1.0 =
 * Improved - Updated docs for the Schema Functions extension
 * Improved - The plugin is now translated to Spanish (es_ES) (#3314)
+* Improved - The plugin is now translated to French (fr_FR) (#3315)
 * Fixed - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
 
 = 18.0.0 =
