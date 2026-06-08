@@ -7,9 +7,11 @@ import { InfoModalButton } from '../info-modal';
 
 /**
  * These docs are kept in English. When the admin language is not English, prepend
- * a notice (styled with the existing `.doc-config-highlight` class) linking to the
- * same docs on the localized website (the user's language as a subdomain of the
- * configured Gato GraphQL website, e.g. https://es.gatographql.com). The locale is
+ * a notice linking to the same docs on the localized website (the user's language as
+ * a subdomain of the configured Gato GraphQL website, e.g. https://es.gatographql.com).
+ * The notice uses WordPress's own admin `notice notice-warning` classes (the modal
+ * portals to the main admin document, where those styles are loaded) — unlike the
+ * docs menu page, the block editor doesn't enqueue the plugin's `docs.css`. The locale is
  * read from the admin's `<html lang>`, and the website URL from the global set in
  * PHP (Plugin::enqueueDocsWebsiteURLData). The notice text is translated via the
  * .json pack — the same string as the PHP doc notice, so the translation is shared.
@@ -29,10 +31,10 @@ const getEnglishDocNoticeHTML = () => {
 		host = new URL( localizedURL ).host;
 	} catch ( e ) {}
 	const link = `<a href="${ localizedURL }" target="_blank">${ host }</a>`;
-	return `<div class="doc-config-highlight">${ sprintf(
+	return `<div class="notice notice-warning inline" style="margin-bottom: 1.5em;"><p>${ sprintf(
 		__( 'This documentation is in English. You can read it in your language at %s.', 'gatographql' ),
 		link
-	) }</div>`;
+	) }</p></div>`;
 };
 
 const MarkdownInfoModalButton = ( props ) => {
