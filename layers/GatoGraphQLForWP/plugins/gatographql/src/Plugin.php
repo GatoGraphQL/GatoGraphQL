@@ -17,6 +17,7 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\LocaleUtils;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
@@ -278,8 +279,9 @@ class Plugin extends AbstractMainPlugin
         wp_add_inline_script(
             'wp-blocks',
             sprintf(
-                'window.gatoGraphQLDocsWebsiteURL = %s;',
-                (string) wp_json_encode($moduleConfiguration->getGatoGraphQLWebsiteURL())
+                'window.gatoGraphQLDocsWebsiteURL = %s; window.gatoGraphQLDocsTranslatedLanguages = %s;',
+                (string) wp_json_encode($moduleConfiguration->getGatoGraphQLWebsiteURL()),
+                (string) wp_json_encode(LocaleUtils::getWebsiteTranslatedLanguages())
             ),
             'before'
         );

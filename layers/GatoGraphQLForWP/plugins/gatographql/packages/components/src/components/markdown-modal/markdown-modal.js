@@ -6,8 +6,10 @@ import { __, sprintf } from '@wordpress/i18n';
 import { InfoModalButton } from '../info-modal';
 
 /**
- * These docs are kept in English. When the admin language is not English, prepend
- * a notice linking to the same docs on the localized website (the user's language as
+ * These docs are kept in English. When the admin language is not English (and is one
+ * of the languages the website is translated to, exposed from PHP via
+ * window.gatoGraphQLDocsTranslatedLanguages), prepend a notice linking to the same
+ * docs on the localized website (the user's language as
  * a subdomain of the configured Gato GraphQL website, e.g. https://es.gatographql.com).
  * The notice uses WordPress's own admin `notice notice-warning` classes (the modal
  * portals to the main admin document, where those styles are loaded) — unlike the
@@ -21,7 +23,10 @@ const DEFAULT_DOC_LANG = 'en';
 const getEnglishDocNoticeHTML = () => {
 	const lang = ( document.documentElement.lang || '' ).split( '-' )[ 0 ].toLowerCase();
 	const websiteURL = window.gatoGraphQLDocsWebsiteURL;
-	if ( ! lang || lang === DEFAULT_DOC_LANG || ! websiteURL ) {
+	// Only show the notice for languages the website is actually translated to
+	// (the same set the plugin is translated to), exposed from PHP.
+	const translatedLanguages = window.gatoGraphQLDocsTranslatedLanguages || [];
+	if ( ! lang || lang === DEFAULT_DOC_LANG || ! websiteURL || ! translatedLanguages.includes( lang ) ) {
 		return '';
 	}
 	// Prefix the language as a subdomain: https://gatographql.com -> https://es.gatographql.com

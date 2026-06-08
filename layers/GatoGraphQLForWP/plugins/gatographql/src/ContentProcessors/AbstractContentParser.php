@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\LocaleUtils;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -151,7 +152,9 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
          * Whether the doc is shown in English to a non-English user — i.e. it fell
          * back to the default-language file because no localized version exists
          * (and it is not a PHP-translated "all-locales" doc). Used to prepend a
-         * notice pointing to the localized website.
+         * notice pointing to the localized website. Only shown for languages the
+         * website is actually translated to (see getWebsiteTranslatedLanguages),
+         * since linking to a non-existent localized site would be pointless.
          */
         $isEnglishOnlyDoc = false;
         $localizeFile = \trailingslashit($this->getFileDir()) . $relativePathDir . $filename . '/' . $localeLanguage . '.' . $extension;
@@ -181,8 +184,10 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
                 $file = $nonLocalizedFile;
             } else {
                 // Resolved to the default-language (English) file: flag it when the
-                // user's language is not English, to prepend the notice below.
-                $isEnglishOnlyDoc = $localeLanguage !== $defaultDocsLanguage;
+                // user's language is not English AND the website is translated to it,
+                // to prepend the notice below.
+                $isEnglishOnlyDoc = $localeLanguage !== $defaultDocsLanguage
+                    && in_array($localeLanguage, LocaleUtils::getWebsiteTranslatedLanguages(), true);
             }
         }
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
