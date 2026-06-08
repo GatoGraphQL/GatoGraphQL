@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Updated docs for the Schema Functions extension
 - The plugin is now translated to Spanish (`es_ES`) (#3314)
+- The plugin is now translated to French (`fr_FR`) (#3315)
 
 ### Fixed
 
